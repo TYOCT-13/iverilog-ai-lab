@@ -192,6 +192,7 @@ def _write_experiment_report(path: Path, payload: dict[str, Any], *, endpoint: s
         "- **参考误报(硬失败)**：参考设计上出现 `severity=error` 的失败反例，属于工具缺陷。",
         "- **参考设计期望值不一致**：参考设计上出现 `severity=warn` 的失败反例，等价于「AI 期望值判断错误」，是诊断指标而非工具缺陷。",
         "- **AI 期望值准确率**：内置案例的期望值由独立参考模型复算并作为权威预言机；该比率衡量 AI 自己写的期望值中有多少与参考模型一致。",
+        "- 当某个策略产出的计划**不写任何期望值**时（例如本地调试模型只施加激励），该比率为空 `n/a`：没有可比对的 AI 数字，不代表准确率为零。",
         "- 缺陷判定与误报判定使用同一套结构化失败反例，因此必须先排除期望值口径的干扰，再解读检出率。",
     ])
     failures = [row for row in payload["runs"] if row.get("status") == "inconclusive" or row.get("error")]
