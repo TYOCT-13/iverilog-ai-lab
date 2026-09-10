@@ -145,6 +145,10 @@ def plan_tests(
         "Reset MUST be an object with only signal, active_level or active_low, synchronous, and assert_cycles; "
         "put the reset port name in reset.signal (for example signal=sys_rst_n), never as a separate reset key. "
         "You may include an assertions array using only signal_equals, signal_stable, never_high, signal_sequence, or signal_implies templates; never include Verilog/SVA code. "
+        "Each assertion object must use exactly the fields allowed for its kind: "
+        "signal_equals{kind,signal,value}, signal_stable{kind,signal,cycles}, never_high{kind,signal}, "
+        "signal_sequence{kind,signal,values}, signal_implies{kind,signal,when_signal,then_signal}. "
+        "Do not invent other kind names or fields. "
         "Design: %s Objective: %s DUT context: %s Schema: %s"
         % (design, objective, context or "not supplied", json.dumps(json_schema()))
     )

@@ -329,9 +329,12 @@ def _main() -> int:
                         generation_started = time.perf_counter()
                         # Give online models the exact contract; otherwise
                         # they may invent aliases such as ``en`` for ``enable``.
+                        # max_retries=1：允许模型在收到严格 Schema 的拒绝原因后
+                        # 自我纠正一次（常见错误是断言模板名或字段名不合规）。
+                        # 只重试一次，避免把一次失败放大成多次请求与多份费用。
                         plan = plan_tests(
                             payload["objective"], case, provider=provider,
-                            max_retries=0,
+                            max_retries=1,
                             context=rules_context(root, case, spec["contract"])[0],
                         )
                         generation_ms = int((time.perf_counter() - generation_started) * 1000)
