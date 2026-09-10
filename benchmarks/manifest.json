@@ -4,7 +4,15 @@
     "mod10_counter",
     "traffic_light_emergency",
     "simple_alu",
-    "sequence_101_overlap"
+    "sequence_101_overlap",
+    "sync_fifo",
+    "uart_tx",
+    "spi_master",
+    "handshake_stage",
+    "debounce",
+    "pwm",
+    "mux4",
+    "sync_reset"
   ],
   "defects": [
     {
@@ -458,6 +466,206 @@
       "expected": "detected clears",
       "actual": "detected holds high",
       "testbench": "tb/tb_sequence_101_overlap.v"
+    },
+    {
+      "id": "fifo_bug_full_off_by_one",
+      "file": "rtl/sync_fifo_bug_full_off_by_one.v",
+      "type": "sync_fifo",
+      "trigger": "写满 DEPTH 个数据",
+      "expected": "full=1",
+      "actual": "full 提前一拍拉高",
+      "testbench": "tb/tb_sync_fifo_boundary.v",
+      "note": "满标志用 count==DEPTH-1 判定"
+    },
+    {
+      "id": "fifo_bug_write_when_full",
+      "file": "rtl/sync_fifo_bug_write_when_full.v",
+      "type": "sync_fifo",
+      "trigger": "full=1 时继续 wr_en",
+      "expected": "写入被忽略、内容与指针不变",
+      "actual": "覆盖最旧数据并推进写指针",
+      "testbench": "tb/tb_sync_fifo_boundary.v",
+      "note": "去掉 !full 保护"
+    },
+    {
+      "id": "fifo_bug_reset_negedge",
+      "file": "rtl/sync_fifo_bug_reset_negedge.v",
+      "type": "sync_fifo",
+      "trigger": "rst_n 拉低",
+      "expected": "rd_data 清零",
+      "actual": "rd_data=0xFF",
+      "testbench": "tb/tb_sync_fifo_boundary.v",
+      "note": "复位分支未清零 rd_data"
+    },
+    {
+      "id": "uart_bug_msb_first",
+      "file": "rtl/uart_tx_bug_msb_first.v",
+      "type": "uart_tx",
+      "trigger": "发送任意字节",
+      "expected": "LSB 先出",
+      "actual": "MSB 先出",
+      "testbench": "tb/tb_uart_tx_boundary.v",
+      "note": "位选索引方向反了"
+    },
+    {
+      "id": "uart_bug_busy_never_clears",
+      "file": "rtl/uart_tx_bug_busy_never_clears.v",
+      "type": "uart_tx",
+      "trigger": "一帧发送结束",
+      "expected": "busy 释放",
+      "actual": "busy 保持为 1",
+      "testbench": "tb/tb_uart_tx_boundary.v",
+      "note": "结束条件由 bit_idx==9 改成 ==8"
+    },
+    {
+      "id": "spi_bug_sclk_polarity",
+      "file": "rtl/spi_master_bug_sclk_polarity.v",
+      "type": "spi_master",
+      "trigger": "传输进行中",
+      "expected": "sclk 每个时钟翻转",
+      "actual": "sclk 不翻转",
+      "testbench": "tb/tb_spi_master_boundary.v",
+      "note": "sclk 自赋值"
+    },
+    {
+      "id": "spi_bug_done_missing",
+      "file": "rtl/spi_master_bug_done_missing.v",
+      "type": "spi_master",
+      "trigger": "8 位发送完毕",
+      "expected": "done 拉高一个周期",
+      "actual": "done 始终为 0",
+      "testbench": "tb/tb_spi_master_boundary.v",
+      "note": "done<=0 覆盖了 done<=1"
+    },
+    {
+      "id": "spi_bug_extra_bit",
+      "file": "rtl/spi_master_bug_extra_bit.v",
+      "type": "spi_master",
+      "trigger": "一次传输",
+      "expected": "共 8 个 sclk 上升沿",
+      "actual": "共 9 个上升沿",
+      "testbench": "tb/tb_spi_master_boundary.v",
+      "note": "结束条件由 WIDTH-1 改成 WIDTH"
+    },
+    {
+      "id": "hs_bug_ready_ignores_out_ready",
+      "file": "rtl/handshake_stage_bug_ready_ignores_out_ready.v",
+      "type": "handshake_stage",
+      "trigger": "out_valid=1 且 out_ready=0",
+      "expected": "in_ready=0",
+      "actual": "in_ready=1",
+      "testbench": "tb/tb_handshake_stage_boundary.v",
+      "note": "in_ready 未与 out_ready 相或"
+    },
+    {
+      "id": "hs_bug_valid_not_cleared",
+      "file": "rtl/handshake_stage_bug_valid_not_cleared.v",
+      "type": "handshake_stage",
+      "trigger": "下游完成一次握手",
+      "expected": "out_valid 撤销",
+      "actual": "out_valid 保持为 1",
+      "testbench": "tb/tb_handshake_stage_boundary.v",
+      "note": "out_valid 改成自锁"
+    },
+    {
+      "id": "hs_bug_data_captured_always",
+      "file": "rtl/handshake_stage_bug_data_captured_always.v",
+      "type": "handshake_stage",
+      "trigger": "in_valid=0 且 in_data 变化",
+      "expected": "out_data 保持",
+      "actual": "out_data 跟随 in_data",
+      "testbench": "tb/tb_handshake_stage_boundary.v",
+      "note": "去掉 if(in_valid) 保护"
+    },
+    {
+      "id": "deb_bug_threshold_off_by_one",
+      "file": "rtl/debounce_bug_threshold_off_by_one.v",
+      "type": "debounce",
+      "trigger": "输入抖动 2 拍（门限 3）",
+      "expected": "输出保持",
+      "actual": "输出提前跟随",
+      "testbench": "tb/tb_debounce_boundary.v",
+      "note": "门限比较改成 COUNT_MAX-2"
+    },
+    {
+      "id": "deb_bug_counter_not_cleared",
+      "file": "rtl/debounce_bug_counter_not_cleared.v",
+      "type": "debounce",
+      "trigger": "输入短暂回到采样值后再抖动",
+      "expected": "计数清零、不累积",
+      "actual": "计数继续累积并触发",
+      "testbench": "tb/tb_debounce_boundary.v",
+      "note": "匹配分支不再清零计数"
+    },
+    {
+      "id": "deb_bug_reset_state",
+      "file": "rtl/debounce_bug_reset_state.v",
+      "type": "debounce",
+      "trigger": "rst_n 拉低",
+      "expected": "sample=1、key_state=1",
+      "actual": "sample=0、key_state=0",
+      "testbench": "tb/tb_debounce_boundary.v",
+      "note": "复位分支初值反了"
+    },
+    {
+      "id": "pwm_bug_inverted_polarity",
+      "file": "rtl/pwm_bug_inverted_polarity.v",
+      "type": "pwm",
+      "trigger": "任意占空比",
+      "expected": "counter<duty 时输出高",
+      "actual": "输出极性相反",
+      "testbench": "tb/tb_pwm_boundary.v",
+      "note": "比较方向改成 >="
+    },
+    {
+      "id": "pwm_bug_off_by_one",
+      "file": "rtl/pwm_bug_off_by_one.v",
+      "type": "pwm",
+      "trigger": "duty=1 或 duty=255",
+      "expected": "高电平拍数分别为 1 和 255",
+      "actual": "分别变成 0 和 254",
+      "testbench": "tb/tb_pwm_boundary.v",
+      "note": "比较阈值减 1"
+    },
+    {
+      "id": "mux_bug_sel0_sel1_swapped",
+      "file": "rtl/mux4_bug_sel0_sel1_swapped.v",
+      "type": "mux4",
+      "trigger": "sel=0 或 sel=1",
+      "expected": "y 分别等于 d0、d1",
+      "actual": "两者互换",
+      "testbench": "tb/tb_mux4_boundary.v",
+      "note": "case 分支接错"
+    },
+    {
+      "id": "mux_bug_default_is_d0",
+      "file": "rtl/mux4_bug_default_is_d0.v",
+      "type": "mux4",
+      "trigger": "sel=3",
+      "expected": "y=d3",
+      "actual": "y=d0",
+      "testbench": "tb/tb_mux4_boundary.v",
+      "note": "default 分支接到 d0"
+    },
+    {
+      "id": "srst_bug_single_stage",
+      "file": "rtl/sync_reset_bug_single_stage.v",
+      "type": "sync_reset",
+      "trigger": "ext_rst_n 释放",
+      "expected": "两级同步、延迟 2 个时钟",
+      "actual": "立即释放",
+      "testbench": "tb/tb_sync_reset_boundary.v",
+      "note": "第二级直接接常量 1"
+    },
+    {
+      "id": "srst_bug_polarity_inverted",
+      "file": "rtl/sync_reset_bug_polarity_inverted.v",
+      "type": "sync_reset",
+      "trigger": "ext_rst_n 拉低",
+      "expected": "rst_n=0",
+      "actual": "rst_n=1",
+      "testbench": "tb/tb_sync_reset_boundary.v",
+      "note": "复位分支极性反了"
     }
   ]
 }
