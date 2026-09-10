@@ -666,14 +666,18 @@ def compare_waveforms(reference: Mapping[str, Any], candidate: Mapping[str, Any]
                 "message": f"{name}：跳变时刻一致但数值序列不同",
             })
     return {
-        "schema_version": "1.0",
+        "schema_version": "1.1",
         "clock_period_ns": float(clock_period_ns),
         "shared_signals": shared,
         "only_in_reference": only_reference,
         "only_in_candidate": only_candidate,
         "differences": differences,
         "difference_count": len(differences),
-        "status": "identical" if not differences and not only_candidate and not only_reference else "different",
+        # ``status`` 只描述**共有信号**的可观测行为：一侧多出内部辅助变量
+        # （例如组合中间量 next_count）是实现细节，不是行为差异。信号集合
+        # 不一致单独由 only_in_* / same_signal_set 表达。
+        "status": "identical" if not differences else "different",
+        "same_signal_set": not only_reference and not only_candidate,
         "disclaimer": "波形差异只描述可观测行为差异；是否构成缺陷由规格与 Icarus 判定。",
     }
 

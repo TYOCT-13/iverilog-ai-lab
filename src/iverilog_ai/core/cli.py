@@ -13,6 +13,7 @@ from .config import ConfigurationError, ExecutionConfig, SafePathError, SafePath
 from .executor import IcarusExecutor
 from .models import ModelValidationError, ResultStatus, SimulationResult, TestPlan
 from .pipeline import PipelineValidationError, VerificationPipeline
+from .behavior_compare import compare_rtl_behavior
 from .report import write_report
 from ..ai.schema import TestPlan as AITestPlan
 from .contracts import DutContract
@@ -96,6 +97,23 @@ def _build_parser() -> argparse.ArgumentParser:
     pipeline_parser.add_argument("--yosys", dest="yosys", default=None, help="Yosys 可执行文件路径；默认从 PATH 查找")
     pipeline_parser.add_argument("--synth-timeout", dest="synth_timeout", type=float, default=180.0, help="综合超时秒数")
     _add_path_options(pipeline_parser)
+
+    compare_parser = subparsers.add_parser(
+        "compare-rtl",
+        help="行为级对比：同一份 TestPlan 分别仿真用户 RTL 与参考 RTL，比对结果与波形",
+    )
+    compare_parser.add_argument("--plan", required=True, help="AI 测试计划 JSON 文件")
+    compare_parser.add_argument("--contract", required=True, help="显式 DUT 合约 JSON 文件")
+    compare_parser.add_argument("--user-rtl", required=True, help="待评估的 RTL .v/.sv 文件")
+    compare_parser.add_argument("--reference-rtl", required=True, help="参考 RTL .v/.sv 文件")
+    compare_parser.add_argument("--output-dir", "--output", dest="output_dir", default=None, help="工件目录")
+    compare_parser.add_argument("--iverilog", dest="iverilog_path", default=None, help="iverilog 可执行文件路径")
+    compare_parser.add_argument("--vvp", dest="vvp_path", default=None, help="vvp 可执行文件路径")
+    compare_parser.add_argument("--timeout", dest="timeout_seconds", type=float, default=30.0, help="单个进程超时秒数")
+    compare_parser.add_argument("--language", default="2012", help="Icarus generation，默认 2012")
+    compare_parser.add_argument("--print-json", action="store_true", help="将完整对比结果 JSON 打印到标准输出")
+    compare_parser.add_argument("--quiet", action="store_true", help="不输出摘要，只输出退出码")
+    _add_path_options(compare_parser)
 
     report_parser = subparsers.add_parser("report", help="从 result.json 生成 Markdown 或 HTML")
     report_parser.add_argument("--result", required=True, help="SimulationResult JSON 文件")
@@ -297,6 +315,66 @@ def _plan_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def _compare_rtl_command(args: argparse.Namespace) -> int:
+    """行为级对比：同一份 TestPlan 跑两份 RTL，再比对记录与波形。"""
+
+    roots = args.allowed_root or [str(_infer_project_root(args.user_rtl))]
+    policy = SafePathPolicy.from_roots(roots)
+    try:
+        plan_path = policy.input_file(args.plan, extensions=(".json",))
+        contract_path = policy.input_file(args.contract, extensions=(".json",))
+        user_rtl = policy.input_file(args.user_rtl)
+        reference_rtl = policy.input_file(args.reference_rtl)
+        ai_plan = AITestPlan.model_validate_json(plan_path.read_text(encoding="utf-8"))
+        contract = DutContract.from_json(contract_path.read_text(encoding="utf-8"))
+        output_dir = args.output_dir or str(policy.allowed_roots[0] / ".iverilog-ai" / "behavior-compare")
+        outcome = compare_rtl_behavior(
+            ai_plan,
+            contract,
+            user_rtl,
+            reference_rtl,
+            output_dir,
+            allowed_roots=tuple(roots),
+            iverilog_path=args.iverilog_path,
+            vvp_path=args.vvp_path,
+            timeout_seconds=args.timeout_seconds,
+            language=args.language,
+        )
+    except (OSError, SafePathError, PipelineValidationError, ValueError) as exc:
+        print(f"行为对比失败：{exc}", file=sys.stderr)
+        return 2
+    output = Path(output_dir)
+    output.mkdir(parents=True, exist_ok=True)
+    result_path = output / "behavior_compare.json"
+    result_path.write_text(json.dumps(outcome.to_dict(), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    if not args.quiet:
+        if args.print_json:
+            print(json.dumps(outcome.to_dict(), ensure_ascii=False, indent=2))
+        else:
+            summary = outcome.record_summary
+            print(
+                json.dumps(
+                    {
+                        "status": outcome.status,
+                        "identical": outcome.identical,
+                        "module": outcome.module,
+                        "user_status": summary.get("user_status"),
+                        "reference_status": summary.get("reference_status"),
+                        "checks": f"{summary.get('user_checks')} vs {summary.get('reference_checks')}",
+                        "failed": f"{summary.get('user_failed')} vs {summary.get('reference_failed')}",
+                        "mismatched_checks": summary.get("mismatched_checks"),
+                        "waveform": outcome.waveform.get("status"),
+                        "dut_waveform_differences": len(outcome.waveform.get("dut_differences", [])),
+                        "result": str(result_path),
+                    },
+                    ensure_ascii=False,
+                    indent=2,
+                )
+            )
+    # identical → 0；different → 1（便于脚本判断）；其余 → 2
+    return 0 if outcome.status == "identical" else (1 if outcome.status == "different" else 2)
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _build_parser()
     args = parser.parse_args(argv)
@@ -305,6 +383,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             return _run_command(args)
         if args.command in {"plan-run", "pipeline"}:
             return _pipeline_command(args)
+        if args.command == "compare-rtl":
+            return _compare_rtl_command(args)
         if args.command == "report":
             return _report_command(args)
         if args.command in {"validate-plan", "plan"}:

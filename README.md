@@ -15,6 +15,7 @@
 - 阶段九 RTL 静态审查扩展：规则增至 **44 条**，每条规则都有最小反例/正例用例，清单与噪声校准见 [docs/static_rules.md](docs/static_rules.md)。
 - 阶段十参考模型全覆盖：**12 / 12 个内置案例**的参考模型已与 RTL 逐拍对齐（`SUPPORTED == AUTHORITATIVE`），因此每个内置案例的期望值都由确定性模型独立复算；对齐方法、采样口径与踩过的 8 个模型错误见 [docs/reference_model_alignment.md](docs/reference_model_alignment.md)。
 - 阶段十一分层证据：新增 Yosys 综合证据层，把「仿真 / 综合 / 时序 / 比特流 / 上板」五层状态显式写入报告与网页，未做的层级标 `not_run`；综合不参与 PASS/FAIL 裁决，也不做时序签核。口径与实测结果见 [docs/layered_evidence.md](docs/layered_evidence.md)。
+- 阶段十二行为级对比：自定义 RTL 与标准 RTL 跑**同一份** TestPlan，逐检查项与逐波形信号比对，命令行入口 `compare-rtl`；语义等价的重写（即使多出内部辅助变量）判为一致。判据与实测见 [docs/behavior_compare.md](docs/behavior_compare.md)。
 
 ## 快速开始
 
@@ -68,7 +69,6 @@ python -m iverilog_ai plan-run `
 ```
 
 运行完整固定向量基准矩阵并生成 JSON/Markdown 摘要：
-
 ```powershell
 python scripts/run_benchmark_matrix.py --project-root . `
   --iverilog D:\iverilog\bin\iverilog.exe `
@@ -84,6 +84,20 @@ python scripts/run_strategy_experiment.py --project-root . --seeds 5 `
 ```
 
 实验逐次记录输出到 `.iverilog-ai/strategy-experiment/strategy_matrix.json`。
+
+让自定义 RTL 与标准 RTL 跑同一份测试计划并做行为级对比：
+
+```powershell
+python -m iverilog_ai compare-rtl `
+  --plan examples/simple_alu_plan.json `
+  --contract examples/simple_alu_contract.json `
+  --user-rtl rtl/simple_alu.v `
+  --reference-rtl rtl/simple_alu.v `
+  --iverilog D:\iverilog\bin\iverilog.exe `
+  --vvp D:\iverilog\bin\vvp.exe
+```
+
+退出码：`identical` → 0；`different` → 1；无法判定 → 2。详见 [docs/behavior_compare.md](docs/behavior_compare.md)。
 
 ## 开源生态成果
 

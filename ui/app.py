@@ -17,6 +17,7 @@ from iverilog_ai.core.report import write_report
 from iverilog_ai.core.rtl_import import import_rtl_bytes, extract_contract_draft, available_modules, RTLImportError
 from iverilog_ai.core.repair_compare import safe_candidate_copy, compare_simulation_results
 from iverilog_ai.core.rtl_compare import compare_rtl_sources
+from iverilog_ai.core.behavior_compare import compare_rtl_behavior
 from iverilog_ai.core.rules import rules_context, rule_manifest, rules_fingerprint
 from iverilog_ai.core.rule_assertions import assertion_suggestions
 from scripts.create_evidence_pack import create_evidence_pack
@@ -54,6 +55,72 @@ def _open_vcd_with_gtkwave(vcd_path: Path) -> tuple[bool, str]:
     except OSError as exc:
         return False, f"GTKWave 启动失败：{exc}"
     return True, f"已使用 GTKWave 打开：{vcd_path.name}"
+
+
+def _show_behavior_comparison(data: dict) -> None:
+    """展示行为级对比结论：逐检查项结果 + 波形差异 + 口径说明。"""
+
+    st.subheader("行为级对比（同一份 TestPlan，两份 RTL）")
+    status = str(data.get("status", ""))
+    summary = data.get("record_summary", {})
+    if status == "identical":
+        st.success("在本次测试计划覆盖的激励范围内，两份 RTL 的行为没有可观测差异。")
+    elif status == "different":
+        st.warning("两份 RTL 存在行为差异。")
+    else:
+        st.info(f"对比结论：{status}")
+    columns = st.columns(4)
+    columns[0].metric("用户 RTL 状态", str(summary.get("user_status", "-")))
+    columns[1].metric("参考 RTL 状态", str(summary.get("reference_status", "-")))
+    columns[2].metric("检查项差异", summary.get("mismatched_checks", 0))
+    columns[3].metric(
+        "失败项（用户/参考）",
+        f"{summary.get('user_failed', 0)}/{summary.get('reference_failed', 0)}",
+    )
+    mismatches = data.get("mismatches", [])
+    if mismatches:
+        with st.expander(f"逐检查项差异（{len(mismatches)} 处）", expanded=True):
+            st.dataframe(
+                [
+                    {
+                        "测试": item.get("test_id"),
+                        "信号": item.get("signal"),
+                        "类型": item.get("kind"),
+                        "用户 RTL": (item.get("user") or {}).get("actual"),
+                        "参考 RTL": (item.get("reference") or {}).get("actual"),
+                    }
+                    for item in mismatches
+                ],
+                use_container_width=True,
+                hide_index=True,
+            )
+    waveform = data.get("waveform", {})
+    st.markdown("**波形比对**")
+    st.write(
+        f"- 状态：`{waveform.get('status')}`；共有信号差异 {waveform.get('difference_count', 0)} 处"
+        f"（其中 DUT 内部信号 {len(waveform.get('dut_differences', []))} 处）"
+    )
+    dut_differences = waveform.get("dut_differences", [])
+    if dut_differences:
+        for item in dut_differences[:10]:
+            st.write(f"- {item.get('message', '')}")
+    if waveform.get("reference_only_signals") or waveform.get("user_only_signals"):
+        st.caption(
+            "信号集合差异：参考独有 "
+            + (", ".join(waveform.get("reference_only_signals", [])) or "无")
+            + "；用户独有 "
+            + (", ".join(waveform.get("user_only_signals", [])) or "无")
+        )
+    for note in data.get("notes", []):
+        st.caption(note)
+    st.caption(data.get("disclaimer", ""))
+    st.download_button(
+        "下载行为对比 JSON",
+        json.dumps(data, ensure_ascii=False, indent=2),
+        file_name="behavior-comparison.json",
+        mime="application/json",
+        key="download_behavior_comparison",
+    )
 
 
 def _show_synthesis(synthesis: dict | None) -> None:
@@ -455,6 +522,30 @@ if is_custom:
         for index, item in enumerate(comparison["learning_plan"], 1):
             st.write(f"{index}. {item}")
         st.download_button("下载 RTL 对比报告", json.dumps(comparison, ensure_ascii=False, indent=2), file_name="rtl-comparison.json", mime="application/json", key="download_rtl_comparison")
+        st.caption("以上是**结构级**对比（端口、复位、赋值风格等文本特征）。行为是否一致要看下面的行为级对比。")
+        if st.session_state.get("custom_rtl_path") and Path(st.session_state.custom_rtl_path).is_file():
+            if st.button("运行行为级对比（同一份 TestPlan 跑两份 RTL）", key="behavior_compare_button",
+                         help="需要先生成 AI 测试计划；两侧用完全相同的激励与 contract，比对逐检查项结果与波形。"):
+                current_plan = st.session_state.get("ai_plan")
+                if current_plan is None:
+                    st.warning("请先生成 AI 测试计划，再做行为级对比。")
+                else:
+                    try:
+                        outcome = compare_rtl_behavior(
+                            current_plan,
+                            _contract(),
+                            st.session_state.custom_rtl_path,
+                            reference_choice,
+                            ROOT / ".iverilog-ai" / "behavior-compare-ui" / reference_choice.stem,
+                            allowed_roots=(ROOT,),
+                            iverilog_path=os.getenv("IVERILOG_PATH") or r"D:\iverilog\bin\iverilog.exe",
+                            vvp_path=os.getenv("VVP_PATH") or r"D:\iverilog\bin\vvp.exe",
+                        )
+                        st.session_state.behavior_comparison = outcome.to_dict()
+                    except Exception as exc:
+                        st.error(f"行为级对比失败：{exc}")
+    if st.session_state.get("behavior_comparison"):
+        _show_behavior_comparison(st.session_state.behavior_comparison)
 else:
     st.write(f"规格：`{case['spec']}`")
 
