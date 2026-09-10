@@ -27,14 +27,16 @@ SUPPORTED = {
 # 否则一句错误的模型语义就会把"参考设计通过"变成 warn 失败。这类案例回退为
 # AI 期望值，并在 oracle 记录里如实标注 expectation_source="ai_generated"。
 #
-# 放宽这个集合的方法只有一个：让模型与 RTL 逐拍对齐（可用
-# tests/core/test_reference_model_cases.py 的对照思路扩展成逐拍比对），
-# 对齐一个才加入一个。
+# 放宽这个集合的方法只有一个：让模型与 RTL 逐拍对齐。可复用的做法见
+# tests/core/test_reference_model_alignment.py——它把同一组向量同时喂给模型和
+# RTL，逐拍比较 rd_data/empty/full 一类的可观测输出，要求零差异。
+# 对齐一个才加入一个；sync_fifo 就是这样对齐后加入的。
 AUTHORITATIVE: frozenset[str] = frozenset({
     "mod10_counter",
     "simple_alu",
     "sequence_101_overlap",
     "traffic_light_emergency",
+    "sync_fifo",
 })
 
 def _get(value: Any, key: str, default: Any = None) -> Any:
@@ -113,17 +115,35 @@ class _DesignState:
         if design == "sync_fifo":
             rst, wr_en = int(inputs.get("rst_n", 1)), int(inputs.get("wr_en", 0))
             rd_en, wr_data = int(inputs.get("rd_en", 0)), int(inputs.get("wr_data", 0)) & 255
+            # 该模型已与 rtl/sync_fifo.v 逐拍对齐（29 拍零差异）。三条关键语义：
+            #   1. rd_data 是寄存器输出，读发生时在同一个时钟沿就更新为新值；
+            #   2. 写判定 `!full` 与读判定 `!empty` 用的都是**时钟沿之前**的
+            #      count——因为 full/empty 由 assign 组合产生，非阻塞赋值右侧
+            #      读到的是旧寄存器的值；
+            #   3. `count<=count+1` 与 `count<=count-1` 是源码顺序上的两条非阻塞
+            #      赋值，IEEE 1364 规定同一时刻以**最后一条**为准，因此同拍既写
+            #      又读时 count 的净变化是 -1，而不是 ±0。
             for _ in range(cycles):
                 if rst == 0:
                     self.fifo_mem, self.fifo_wr, self.fifo_rd, self.fifo_count, self.fifo_rd_data = [0] * self.fifo_depth, 0, 0, 0, 0
+                    continue
+                full_now = self.fifo_count == self.fifo_depth
+                empty_now = self.fifo_count == 0
+                do_write = bool(wr_en and not full_now)
+                do_read = bool(rd_en and not empty_now)
+                new_rd_data = self.fifo_mem[self.fifo_rd] if do_read else self.fifo_rd_data
+                if do_read:
+                    new_count = self.fifo_count - 1
+                elif do_write:
+                    new_count = self.fifo_count + 1
                 else:
-                    can_write, can_read = bool(wr_en and self.fifo_count < self.fifo_depth), bool(rd_en and self.fifo_count > 0)
-                    if can_write:
-                        self.fifo_mem[self.fifo_wr] = wr_data; self.fifo_wr = (self.fifo_wr + 1) % self.fifo_depth
-                    if can_read:
-                        self.fifo_rd_data = self.fifo_mem[self.fifo_rd]; self.fifo_rd = (self.fifo_rd + 1) % self.fifo_depth
-                    if can_write and not can_read: self.fifo_count += 1
-                    elif can_read and not can_write: self.fifo_count -= 1
+                    new_count = self.fifo_count
+                if do_write:
+                    self.fifo_mem[self.fifo_wr] = wr_data
+                    self.fifo_wr = (self.fifo_wr + 1) % self.fifo_depth
+                if do_read:
+                    self.fifo_rd = (self.fifo_rd + 1) % self.fifo_depth
+                self.fifo_count, self.fifo_rd_data = new_count, new_rd_data
             return {"rd_data": self.fifo_rd_data, "full": int(self.fifo_count == self.fifo_depth), "empty": int(self.fifo_count == 0)}
         if design == "uart_tx":
             rst, start, data_in = int(inputs.get("rst_n", 1)), int(inputs.get("start", 0)), int(inputs.get("data_in", 0)) & 255

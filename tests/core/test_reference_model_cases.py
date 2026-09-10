@@ -85,16 +85,21 @@ def test_authoritative_expectations_only_for_validated_designs():
 
 
 def test_unvalidated_designs_fall_back_to_ai_expectations():
-    """未验证案例回退为 AI 期望值，而不是被模型改写。"""
+    """未验证案例回退为 AI 期望值，而不是被模型改写。
+
+    这里用 ``uart_tx``：它仍在 ``SUPPORTED`` 中但尚未逐拍对齐，因此不得参与裁决。
+    当某个设计对齐后会被加入 ``AUTHORITATIVE``，本测试应改用下一个未对齐的设计。
+    """
 
     from iverilog_ai.ai.schema import TestPlan
     from iverilog_ai.core.reference_model import override_plan_expectations
 
+    assert "uart_tx" not in AUTHORITATIVE, "uart_tx 已对齐，请改用另一个未对齐的设计"
     plan = TestPlan.model_validate({
-        "design": "sync_fifo",
+        "design": "uart_tx",
         "objective": "fallback",
-        "vectors": [{"name": "v", "inputs": {"wr_en": 1, "wr_data": 7}, "expected": {"empty": 0}}],
+        "vectors": [{"name": "v", "inputs": {"rst_n": 1, "start": 1, "data_in": 85}, "expected": {"busy": 1}}],
     })
-    expectations = reference_expectations(plan, "sync_fifo")
+    expectations = reference_expectations(plan, "uart_tx")
     authoritative = override_plan_expectations(plan, expectations)
-    assert authoritative.vectors[0].expected == {"empty": 0}
+    assert authoritative.vectors[0].expected == {"busy": 1}
