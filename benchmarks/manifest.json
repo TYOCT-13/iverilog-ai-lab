@@ -12,7 +12,9 @@
     "debounce",
     "pwm",
     "mux4",
-    "sync_reset"
+    "sync_reset",
+    "johnson_counter",
+    "edge_detector"
   ],
   "defects": [
     {
@@ -666,6 +668,86 @@
       "actual": "rst_n=1",
       "testbench": "tb/tb_sync_reset_boundary.v",
       "note": "复位分支极性反了"
+    },
+    {
+      "id": "johnson_bug_ring_feedback",
+      "file": "rtl/johnson_counter_bug_ring_feedback.v",
+      "type": "johnson_counter",
+      "trigger": "复位后 enable=1 的第一拍（q=0000）",
+      "expected": "q=0001（自启动）",
+      "actual": "q 恒为 0000",
+      "testbench": "tb/tb_johnson_counter.v",
+      "note": "反馈位由 ~q[3] 改成 q[3]，约翰逊计数器退化成环形计数器，0000 成为吸收态"
+    },
+    {
+      "id": "johnson_bug_no_self_start",
+      "file": "rtl/johnson_counter_bug_no_self_start.v",
+      "type": "johnson_counter",
+      "trigger": "复位后 enable=1 的第一拍（q=0000）",
+      "expected": "q=0001（自启动）",
+      "actual": "q 恒为 0000",
+      "testbench": "tb/tb_johnson_counter.v",
+      "note": "显式状态表漏掉 0000 → 0001 的自启动转移。现象与 johnson_bug_ring_feedback 相同（都停在 0000），但根因不同：这里是状态表缺项，反馈极性本身是对的"
+    },
+    {
+      "id": "johnson_bug_reset_ones",
+      "file": "rtl/johnson_counter_bug_reset_ones.v",
+      "type": "johnson_counter",
+      "trigger": "rst_n 拉低",
+      "expected": "q=0",
+      "actual": "q=15",
+      "testbench": "tb/tb_johnson_counter_boundary.v",
+      "note": "复位值写成 4'b1111"
+    },
+    {
+      "id": "johnson_bug_enable_ignored",
+      "file": "rtl/johnson_counter_bug_enable_ignored.v",
+      "type": "johnson_counter",
+      "trigger": "序列中途 enable=0",
+      "expected": "q 保持不变",
+      "actual": "继续移位",
+      "testbench": "tb/tb_johnson_counter_boundary.v",
+      "note": "去掉 if(enable) 保护，暂停请求被忽略"
+    },
+    {
+      "id": "edge_bug_falling_edge",
+      "file": "rtl/edge_detector_bug_falling_edge.v",
+      "type": "edge_detector",
+      "trigger": "signal_in 由 0 变 1",
+      "expected": "rising 出现一个周期脉冲",
+      "actual": "rising=0（脉冲改在下降沿产生）",
+      "testbench": "tb/tb_edge_detector.v",
+      "note": "判决条件由 signal_in & ~signal_d 改成 ~signal_in & signal_d"
+    },
+    {
+      "id": "edge_bug_two_cycle",
+      "file": "rtl/edge_detector_bug_two_cycle.v",
+      "type": "edge_detector",
+      "trigger": "signal_in 持续为高",
+      "expected": "只有一个周期的脉冲",
+      "actual": "脉冲在整个高电平期间保持",
+      "testbench": "tb/tb_edge_detector.v",
+      "note": "漏掉 signal_d <= signal_in，历史寄存器恒为 0"
+    },
+    {
+      "id": "edge_bug_late_pulse",
+      "file": "rtl/edge_detector_bug_late_pulse.v",
+      "type": "edge_detector",
+      "trigger": "signal_in 上升后的第一个时钟沿",
+      "expected": "沿之后立即出现脉冲",
+      "actual": "脉冲晚一个周期",
+      "testbench": "tb/tb_edge_detector.v",
+      "note": "脉冲多打一拍：rising 取的是上一拍算出的 pulse_d"
+    },
+    {
+      "id": "edge_bug_reset_history_missing",
+      "file": "rtl/edge_detector_bug_reset_history_missing.v",
+      "type": "edge_detector",
+      "trigger": "复位期间 signal_in 已为高，复位释放后的第一个时钟沿",
+      "expected": "rising=1",
+      "actual": "rising 为不确定值（历史寄存器未被复位）",
+      "testbench": "tb/tb_edge_detector_boundary.v",
+      "note": "复位分支漏掉 signal_d <= 1'b0；testbench 把 X 记为 unknown，仍按 ok=false 记录"
     }
   ]
 }

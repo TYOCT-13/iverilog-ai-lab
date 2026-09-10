@@ -9,8 +9,8 @@ def test_benchmark_manifest_defects_are_distinct_complete_and_existing():
     manifest = json.loads((root / "benchmarks" / "manifest.json").read_text(encoding="utf-8"))
     defects = manifest["defects"]
 
-    # 规模断言：基准已从 4 案例 50 缺陷扩展到 12 案例 70 缺陷。
-    assert len(defects) >= 70
+    # 规模断言：基准已从 4 案例 50 缺陷扩展到 14 案例 78 缺陷。
+    assert len(defects) >= 78
     assert len({item["id"] for item in defects}) == len(defects)
     assert all((root / item["file"]).is_file() for item in defects)
     assert all(item.get("trigger") and item.get("expected") and item.get("actual") for item in defects)
@@ -38,6 +38,8 @@ def test_benchmark_categories_cover_the_bundled_cases():
         "pwm",
         "mux4",
         "sync_reset",
+        "johnson_counter",
+        "edge_detector",
     ):
         assert case in categories
         assert case in defect_types

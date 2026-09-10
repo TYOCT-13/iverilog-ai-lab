@@ -152,6 +152,24 @@ ALIGNED_CASES: dict[str, dict[str, object]] = {
         "observed": ("y",),
         "combinational": True,
     },
+    "johnson_counter": {
+        "rtl": "rtl/johnson_counter.v",
+        "top": "johnson_counter",
+        "instance": "johnson_counter dut(.clk(clk),.rst_n(rst_n),.enable(enable),.q(q));",
+        "inputs": {"rst_n": "reg", "enable": "reg"},
+        "outputs": {"q": "h"},
+        "declarations": ["wire [3:0] q;"],
+        "observed": ("q",),
+    },
+    "edge_detector": {
+        "rtl": "rtl/edge_detector.v",
+        "top": "edge_detector",
+        "instance": "edge_detector dut(.clk(clk),.rst_n(rst_n),.signal_in(signal_in),.rising(rising));",
+        "inputs": {"rst_n": "reg", "signal_in": "reg"},
+        "outputs": {"rising": "b"},
+        "declarations": ["wire rising;"],
+        "observed": ("rising",),
+    },
 }
 
 

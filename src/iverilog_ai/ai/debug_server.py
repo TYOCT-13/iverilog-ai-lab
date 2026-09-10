@@ -45,6 +45,8 @@ KNOWN_DESIGNS = frozenset(
         "pwm",
         "mux4",
         "sync_reset",
+        "johnson_counter",
+        "edge_detector",
     }
 )
 

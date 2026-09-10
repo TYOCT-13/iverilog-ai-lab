@@ -18,6 +18,7 @@ from ..ai.schema import TestPlan
 SUPPORTED = {
     "mod10_counter", "simple_alu", "sequence_101_overlap", "traffic_light_emergency",
     "sync_fifo", "uart_tx", "spi_master", "handshake_stage", "debounce", "pwm", "mux4", "sync_reset",
+    "johnson_counter", "edge_detector",
 }
 
 # 可作为**权威预言机**的设计：这些模型已逐项对照参考 RTL 的手写 testbench 验证过，
@@ -44,6 +45,8 @@ AUTHORITATIVE: frozenset[str] = frozenset({
     "pwm",
     "sync_reset",
     "mux4",
+    "johnson_counter",
+    "edge_detector",
 })
 
 # 内置案例的**输入端口默认值**：单一事实来源。
@@ -69,6 +72,8 @@ INPUT_DEFAULTS: dict[str, dict[str, Any]] = {
     "pwm": {"rst_n": 1, "duty": 0},
     "sync_reset": {"ext_rst_n": 1},
     "mux4": {"d0": 0, "d1": 0, "d2": 0, "d3": 0, "sel": 0},
+    "johnson_counter": {"rst_n": 1, "enable": 0},
+    "edge_detector": {"rst_n": 1, "signal_in": 0},
 }
 
 
@@ -125,6 +130,8 @@ class _DesignState:
         self.debounce_count, self.debounce_sample, self.debounce_state = 0, 1, 1
         self.pwm_counter, self.pwm_out = 0, 0
         self.sync_ff, self.sync_rst = 0, 0
+        self.johnson_q = 0
+        self.edge_prev, self.edge_rising = 0, 0
 
     def step(self, inputs: Mapping[str, Any], cycles: int) -> dict[str, Any]:
         """把单个向量推进 ``cycles`` 个周期，返回该向量结束时的可观测输出。
@@ -295,6 +302,29 @@ class _DesignState:
                 if ext_rst_n == 0: self.sync_ff, self.sync_rst = 0, 0
                 else: self.sync_ff, self.sync_rst = 1, self.sync_ff
             return {"rst_n": self.sync_rst}
+        if design == "johnson_counter":
+            rst, enable = int(inputs.get("rst_n", 1)), int(inputs.get("enable", 0))
+            # 已与 rtl/johnson_counter.v 逐拍对齐。移位串右端反馈的是最高位的
+            # **反相**，所以 0000 不是吸收态，复位后 8 拍走完
+            # 0000 → 0001 → 0011 → 0111 → 1111 → 1110 → 1100 → 1000 → 0000。
+            for _ in range(cycles):
+                if rst == 0:
+                    self.johnson_q = 0
+                elif enable:
+                    top = (self.johnson_q >> 3) & 1
+                    self.johnson_q = ((self.johnson_q << 1) | (1 - top)) & 0xF
+            return {"q": self.johnson_q}
+        if design == "edge_detector":
+            rst, sig = int(inputs.get("rst_n", 1)), int(inputs.get("signal_in", 0)) & 1
+            # 已与 rtl/edge_detector.v 逐拍对齐。两条非阻塞赋值同拍生效：本拍的
+            # `rising` 用的是**上一拍**的 signal_d，因此必须先用旧的历史位算出
+            # 脉冲，再更新历史位——反过来写就整体晚一拍。
+            for _ in range(cycles):
+                if rst == 0:
+                    self.edge_prev, self.edge_rising = 0, 0
+                else:
+                    self.edge_rising, self.edge_prev = sig & (1 - self.edge_prev), sig
+            return {"rising": self.edge_rising}
         return {}
 
 

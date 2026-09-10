@@ -21,10 +21,122 @@ from iverilog_ai.core.behavior_compare import compare_rtl_behavior
 from iverilog_ai.core.rules import rules_context, rule_manifest, rules_fingerprint
 from iverilog_ai.core.rule_assertions import assertion_suggestions
 from scripts.create_evidence_pack import create_evidence_pack
+# 注意：core.rules 与 core.static_review 各有一个 rule_manifest，签名不同
+# （前者按案例返回规则文本，后者返回静态规则注册表）。必须用别名区分，否则
+# 后导入的会覆盖先导入的：实证面板会静默退化成一排 "—"，而案例规则文本会报错。
 from iverilog_ai.core.static_review import review_rtl_file, render_static_markdown
+from iverilog_ai.core.static_review import rule_manifest as static_rule_manifest
 from iverilog_ai.core.vcd import analyze_vcd_file
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def _count_test_cases(root: Path | None = None) -> int | None:
+    """统计 `tests/` 下真实的测试用例数（函数级），而不是文件数。
+
+    用 AST 数 `def test_*`：这是"测试函数数"，比文件数更接近读者理解的规模。
+    注意它**小于** pytest 实际收集的用例数（`@pytest.mark.parametrize` 会在运行时
+    展开成多条），因此 `tests/core/test_ui_assets.py` 会断言这里的口径与
+    pytest 的收集结果一致，避免页面数字与实际跑的数量脱节。
+    """
+
+    import ast
+
+    base = Path(root) if root is not None else ROOT
+    total = 0
+    try:
+        for path in base.rglob("test_*.py"):
+            tree = ast.parse(path.read_text(encoding="utf-8"))
+            total += sum(
+                1
+                for node in ast.walk(tree)
+                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+                and node.name.startswith("test_")
+            )
+    except (OSError, SyntaxError):
+        return None
+    return total or None
+
+
+def _project_evidence() -> dict:
+    """读取仓库里的真实规模数据，用于页面顶部的"实证状态"面板。
+
+    全部从磁盘现算（基准清单、规则注册表、测试函数数），不写死数字——写死的
+    数字会随时间失真，而这个页面最重要的承诺就是"给的都是可核验的事实"。
+    """
+
+    evidence: dict = {}
+    try:
+        manifest = json.loads((ROOT / "benchmarks" / "manifest.json").read_text(encoding="utf-8"))
+        evidence["cases"] = len(manifest.get("categories", []))
+        evidence["defects"] = len(manifest.get("defects", []))
+    except (OSError, json.JSONDecodeError):
+        evidence["cases"] = evidence["defects"] = None
+    try:
+        rules = static_rule_manifest()
+        evidence["rules"] = len(rules)
+        evidence["rule_errors"] = sum(1 for item in rules if item.get("severity") == "error")
+    except Exception:
+        evidence["rules"] = evidence["rule_errors"] = None
+    evidence["tests"] = _count_test_cases()
+    try:
+        from iverilog_ai.core.reference_model import AUTHORITATIVE, SUPPORTED
+
+        evidence["models_aligned"] = len(AUTHORITATIVE)
+        evidence["models_total"] = len(SUPPORTED)
+    except Exception:
+        evidence["models_aligned"] = evidence["models_total"] = None
+    return evidence
+
+
+def _render_evidence_header() -> None:
+    """先讲清"证据从哪来"，再讲功能——这是本项目与其他 AI 工具最主要的差别。"""
+
+    evidence = _project_evidence()
+    st.caption(
+        "**判决权威**：本页所有 PASS/FAIL 只由本机 Icarus Verilog 编译与仿真结果、"
+        "以及结构化断言决定；AI 只提出测试计划，AI 自评不作为正确性证据。"
+    )
+    columns = st.columns(5)
+    pairs = (
+        ("基准案例", evidence.get("cases")),
+        ("可复现缺陷", evidence.get("defects")),
+        ("静态规则", evidence.get("rules")),
+        ("自动化测试", evidence.get("tests")),
+        ("已对齐参考模型", f"{evidence.get('models_aligned')}/{evidence.get('models_total')}"
+         if evidence.get("models_total") else None),
+    )
+    for column, (label, value) in zip(columns, pairs):
+        column.metric(label, "—" if value is None else value)
+    st.caption(
+        "以上数字由页面实时读取 `benchmarks/manifest.json`、规则注册表与 `tests/` 现算，"
+        "不写死。基准矩阵的实跑结论见 `docs/verification_report.md`。"
+    )
+
+
+def _render_expectation_source(config: dict) -> None:
+    """把"这一轮期望值是谁给的"讲清楚——这是可信度的关键，也是最容易被忽略的信息。"""
+
+    oracle = (config or {}).get("oracle") or {}
+    if not oracle:
+        return
+    source = oracle.get("expectation_source", "unknown")
+    if source == "reference_model":
+        st.success(
+            "期望值来源：**确定性参考模型复算**（已与 RTL 逐拍对齐）。"
+            "AI 给出的数字不参与裁决，偏差只作为诊断指标记录。"
+        )
+    else:
+        st.warning(
+            "期望值来源：**AI 生成**（该设计暂无逐拍对齐的参考模型）。"
+            "这种情况下期望值本身可能有误，结论的可信度低于参考模型复算的情形。"
+        )
+    if oracle.get("ai_expected_mismatch"):
+        st.caption(
+            f"本轮检测到 AI 期望值与参考模型不一致 {oracle.get('mismatched_expected', '若干')} 项——"
+            "这是 AI 的误差，已单独记为诊断指标，不影响 PASS/FAIL。"
+        )
+
 
 def _open_vcd_with_gtkwave(vcd_path: Path) -> tuple[bool, str]:
     """Launch GTKWave directly with a fixed executable (never through a shell)."""
@@ -274,15 +386,18 @@ CASES = {
     "PWM": {"rtl": "rtl/pwm.v", "tb": "tb/tb_pwm.v", "top": "tb_pwm", "spec": "spec/common_cases.md", "contract": "examples/pwm_contract.json"},
     "四选一多路选择器": {"rtl": "rtl/mux4.v", "tb": "tb/tb_mux4.v", "top": "tb_mux4", "spec": "spec/common_cases.md", "contract": "examples/mux4_contract.json"},
     "同步复位模块": {"rtl": "rtl/sync_reset.v", "tb": "tb/tb_sync_reset.v", "top": "tb_sync_reset", "spec": "spec/common_cases.md", "contract": "examples/sync_reset_contract.json"},
+    "约翰逊计数器": {"rtl": "rtl/johnson_counter.v", "tb": "tb/tb_johnson_counter.v", "top": "tb_johnson_counter", "spec": "spec/johnson_counter_spec.md", "contract": "examples/johnson_counter_contract.json"},
 }
 
 RULE_CASE_NAMES = {
-    "交通灯·紧急模式": "traffic_light_emergency", "模十计数器": "mod10_counter", "简单 ALU": "simple_alu", "101 序列检测（允许重叠）": "sequence_101_overlap", "同步上升沿检测器": "edge_detector", "脉冲展宽器": "pulse_stretcher", "单时钟 FIFO": "sync_fifo", "UART 发送器": "uart_tx", "SPI 主机": "spi_master", "Valid-Ready 握手级": "handshake_stage", "按键去抖": "debounce", "PWM": "pwm", "四选一多路选择器": "mux4", "同步复位模块": "sync_reset", "自定义 RTL": "custom_rtl",
+    "交通灯·紧急模式": "traffic_light_emergency", "模十计数器": "mod10_counter", "简单 ALU": "simple_alu", "101 序列检测（允许重叠）": "sequence_101_overlap", "同步上升沿检测器": "edge_detector", "脉冲展宽器": "pulse_stretcher", "单时钟 FIFO": "sync_fifo", "UART 发送器": "uart_tx", "SPI 主机": "spi_master", "Valid-Ready 握手级": "handshake_stage", "按键去抖": "debounce", "PWM": "pwm", "四选一多路选择器": "mux4", "同步复位模块": "sync_reset", "约翰逊计数器": "johnson_counter", "自定义 RTL": "custom_rtl",
 }
 
 st.set_page_config(page_title="Icarus智测", layout="wide")
 st.title("Icarus智测 · 可复现验证演示")
-st.caption("Icarus 是非官方扩展的真实编译/仿真后端；AI 仅生成受校验的测试计划。")
+st.caption("围绕 Icarus Verilog 的非官方 AI 验证扩展：AI 提出测试计划，开源仿真器给出判决。")
+_render_evidence_header()
+st.divider()
 name = st.selectbox("选择案例", ["自定义 RTL"] + list(CASES))
 is_custom = name == "自定义 RTL"
 case = CASES.get(name, {"rtl": None, "tb": None, "top": None, "spec": "自定义 RTL", "contract": None})
@@ -744,7 +859,7 @@ if st.session_state.ai_error:
 if st.session_state.ai_plan is not None:
     st.subheader("已校验的 TestPlan")
     try:
-        _rule_files = rule_manifest(ROOT, RULE_CASE_NAMES.get(name, name))
+        _rule_files = rules_manifest(ROOT, RULE_CASE_NAMES.get(name, name))
         st.caption("本次模型使用规则集：" + rules_fingerprint(_rule_files))
         with st.expander("查看规则文件指纹"):
             st.json(_rule_files)
@@ -793,6 +908,7 @@ if st.session_state.ai_plan is not None and st.button("执行 AI 计划并生成
         write_report(result.simulation, pipeline_report, title="Icarus 智测 AI 流水线报告")
         st.subheader(f"AI 计划流水线结论：{result.status.value}")
         st.metric("结构化记录", f"{sum(r.ok for r in result.records)}/{len(result.records)} 通过")
+        _render_expectation_source(result.simulation.config if isinstance(result.simulation.config, dict) else {})
         _show_synthesis(result.synthesis)
         coverage = result.coverage
         st.subheader("测试覆盖摘要")
@@ -890,6 +1006,8 @@ if st.session_state.get("last_pipeline_result") is not None and st.session_state
     # waveform section disappear.
     st.subheader(f"最近一次 AI 计划流水线结论：{_last.status.value}")
     st.metric("结构化记录", f"{sum(r.ok for r in _last.records)}/{len(_last.records)} 通过")
+    _render_expectation_source(_last.simulation.config if isinstance(_last.simulation.config, dict) else {})
+    _show_synthesis(_last.synthesis)
     _last_vcd = _last.artifacts.get("vcd", "")
     if _last_vcd and Path(_last_vcd).is_file():
         st.subheader("最近一次仿真波形（VCD）")

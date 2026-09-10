@@ -12,6 +12,7 @@
 | Python | 3.12.7 | 运行时 | PSF License Agreement | 运行本项目代码 | ✅ 已核验 |
 | pydantic | 2.8.2 | 测试计划 JSON 校验 | MIT | 库依赖 | ✅ 已核验 |
 | Streamlit | 1.37.1 | 演示页面（可选 `[ui]`） | Apache-2.0 | 库依赖 | ✅ 已核验 |
+| Yosys / YoWASP Yosys | 0.69（`yowasp-yosys` 0.69.0.0.post1233） | 综合证据层（可选） | ISC | 独立进程调用，不修改、不复制、不再分发 | ✅ 已核验 |
 
 ## 可选人工复核
 

@@ -30,6 +30,7 @@ YOSYS = find_yosys()
 REFERENCE_RTL = (
     "mod10_counter", "traffic_light_emergency", "simple_alu", "sequence_101_overlap",
     "sync_fifo", "uart_tx", "spi_master", "handshake_stage", "debounce", "pwm", "mux4", "sync_reset",
+    "johnson_counter", "edge_detector",
 )
 
 # 故意不可综合：变量上界的 while 循环。Yosys 明确拒绝：
@@ -152,7 +153,7 @@ def test_missing_rtl_reports_error(tmp_path):
 
 @pytest.mark.skipif(not YOSYS, reason="未安装 Yosys（pip install yowasp-yosys）")
 def test_every_reference_rtl_is_synthesizable(tmp_path):
-    """12 个参考 RTL 必须全部可综合，且能给出单元统计。"""
+    """14 个参考 RTL 必须全部可综合，且能给出单元统计。"""
 
     for case in REFERENCE_RTL:
         result = YosysSynthRunner(

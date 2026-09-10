@@ -61,6 +61,15 @@ _INPUT_STEPS: dict[str, list[dict[str, list[Any]]]] = {
     "sync_reset": [
         {"ext_rst_n": [1, 1, 0, 0, 1, 1]},
     ],
+    "johnson_counter": [
+        # 连续 8 个使能周期正好走完 0000 → 0001 → … → 1000 → 0000，
+        # 随后两拍拉低 enable 验证暂停保持。
+        {"enable": [1, 1, 1, 1, 1, 1, 1, 1, 0, 0]},
+    ],
+    "edge_detector": [
+        # 含连续高电平（只应有 1 个脉冲）与上升/下降交替。
+        {"signal_in": [1, 1, 0, 1, 0, 0, 1, 1, 0, 1]},
+    ],
 }
 
 # 每类案例的复位后额外稳定周期，用来让状态机推进到可观测状态。
@@ -141,6 +150,20 @@ _TRAILING_STIMULUS: dict[str, list[tuple[dict[str, Any], int]]] = {
     "sync_reset": [
         ({"ext_rst_n": 0}, 4),
         ({"ext_rst_n": 1}, 4),
+    ],
+    "johnson_counter": [
+        # 复位边界 + 复位后重新自启动 + 暂停保持，全部来自 manifest 的 trigger。
+        ({"rst_n": 0, "enable": 1}, 1),
+        ({"rst_n": 1, "enable": 1}, 9),
+        ({"rst_n": 1, "enable": 0}, 2),
+        ({"rst_n": 1, "enable": 1}, 2),
+    ],
+    "edge_detector": [
+        # 低电平 → 上升沿 → 保持高 → 下降沿：覆盖单周期脉冲的四个相位。
+        ({"signal_in": 0}, 2),
+        ({"signal_in": 1}, 1),
+        ({"signal_in": 1}, 3),
+        ({"signal_in": 0}, 2),
     ],
 }
 

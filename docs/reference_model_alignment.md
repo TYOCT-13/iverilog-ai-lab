@@ -3,7 +3,7 @@
 更新日期：2026-09-10
 实现位置：`src/iverilog_ai/core/reference_model.py`
 对齐测试：`tests/core/test_reference_model_alignment.py`
-当前状态：**12 / 12 个内置案例已对齐**，`SUPPORTED == AUTHORITATIVE`
+当前状态：**14 / 14 个内置案例已对齐**，`SUPPORTED == AUTHORITATIVE`
 
 ## 一、为什么必须对齐
 

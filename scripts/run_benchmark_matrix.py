@@ -44,6 +44,8 @@ CASES: dict[str, dict[str, str]] = {
     "pwm": {"rtl": "rtl/pwm.v", "testbench": "tb/tb_pwm.v", "top": "tb_pwm"},
     "mux4": {"rtl": "rtl/mux4.v", "testbench": "tb/tb_mux4.v", "top": "tb_mux4"},
     "sync_reset": {"rtl": "rtl/sync_reset.v", "testbench": "tb/tb_sync_reset.v", "top": "tb_sync_reset"},
+    "johnson_counter": {"rtl": "rtl/johnson_counter.v", "testbench": "tb/tb_johnson_counter.v", "top": "tb_johnson_counter"},
+    "edge_detector": {"rtl": "rtl/edge_detector.v", "testbench": "tb/tb_edge_detector.v", "top": "tb_edge_detector"},
 }
 
 
