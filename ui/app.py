@@ -56,6 +56,58 @@ def _open_vcd_with_gtkwave(vcd_path: Path) -> tuple[bool, str]:
     return True, f"已使用 GTKWave 打开：{vcd_path.name}"
 
 
+def _show_synthesis(synthesis: dict | None) -> None:
+    """展示分层证据：仿真/综合跑过，时序/比特流/上板显式标未运行。
+
+    这张表刻意把"没做的事"写出来，避免把"综合通过"误读成"能上板"。
+    """
+
+    data = synthesis or {}
+    stages = data.get("stages") or []
+    if not stages:
+        return
+    st.subheader("分层证据（仿真 / 综合 / 时序 / 比特流 / 上板）")
+    labels = {
+        "provided_by_pipeline": "本次流水线提供",
+        "passed": "通过",
+        "failed": "失败",
+        "unavailable": "工具不可用",
+        "timeout": "超时",
+        "error": "执行错误",
+        "not_run": "未运行",
+    }
+    st.dataframe(
+        [
+            {
+                "层级": item.get("title", item.get("stage", "")),
+                "状态": labels.get(str(item.get("status")), item.get("status")),
+                "说明": item.get("detail", ""),
+            }
+            for item in stages
+        ],
+        use_container_width=True,
+        hide_index=True,
+    )
+    status = str(data.get("status", "not_run"))
+    if status == "passed":
+        columns = st.columns(4)
+        columns[0].metric("门级单元", data.get("cell_count") or 0)
+        columns[1].metric("单元类型", data.get("cell_kinds") or 0)
+        columns[2].metric("连线", data.get("wire_count") or 0)
+        columns[3].metric("综合耗时", f"{data.get('duration_ms', 0)} ms")
+        if data.get("cells"):
+            with st.expander("门级单元明细"):
+                st.dataframe(data["cells"], use_container_width=True, hide_index=True)
+    elif status == "failed":
+        st.error("综合失败：" + str(data.get("error") or "未知原因"))
+        st.caption("这是强证据——仿真通过也不能说明这份 RTL 可综合。")
+    else:
+        st.info("综合未执行：" + str(data.get("skipped_reason") or data.get("error") or "本次运行未启用综合证据层"))
+    if data.get("warnings"):
+        st.caption(f"综合告警 {len(data['warnings'])} 条；首条：{data['warnings'][0]}")
+    st.caption(data.get("disclaimer", ""))
+
+
 def _verification_rules(case_name: str, contract: DutContract, spec_text: str) -> str:
     """Load bounded repository rules for model guidance; never executes them."""
     return rules_context(ROOT, RULE_CASE_NAMES.get(case_name, case_name), contract.to_json(), spec_text=spec_text)[0]
@@ -432,6 +484,11 @@ assertions_text = st.text_area(
     help='仅支持 signal_equals、signal_stable、never_high 模板；禁止填写 Verilog/SVA 代码。',
 )
 st.session_state.structured_assertions_text = assertions_text
+st.session_state.run_synthesis = st.checkbox(
+    "附加 Yosys 综合证据层（可选）",
+    value=bool(st.session_state.get("run_synthesis", False)),
+    help="多跑一次综合，报告里增加「仿真/综合/时序/比特流/上板」分层证据表。不参与 PASS/FAIL 裁决，也不做时序分析。",
+)
 if not is_custom:
     _suggested_assertions = assertion_suggestions(RULE_CASE_NAMES.get(name, name))
     if _suggested_assertions and st.button("载入本案例推荐结构化断言", key="load_case_assertions"):
@@ -630,7 +687,10 @@ if st.session_state.ai_plan is not None and st.button("执行 AI 计划并生成
     try:
         contract = _contract()
         output = ROOT / ".iverilog-ai" / "pipeline-ui"
-        result = VerificationPipeline().run(
+        result = VerificationPipeline(
+            run_synthesis=st.session_state.get("run_synthesis", False),
+            yosys_path=os.getenv("YOSYS_PATH") or None,
+        ).run(
             st.session_state.ai_plan, contract, ROOT / case["rtl"], output,
             allowed_roots=(ROOT,), iverilog_path=os.getenv("IVERILOG_PATH") or r"D:\iverilog\bin\iverilog.exe",
             vvp_path=os.getenv("VVP_PATH") or r"D:\iverilog\bin\vvp.exe",
@@ -642,6 +702,7 @@ if st.session_state.ai_plan is not None and st.button("执行 AI 计划并生成
         write_report(result.simulation, pipeline_report, title="Icarus 智测 AI 流水线报告")
         st.subheader(f"AI 计划流水线结论：{result.status.value}")
         st.metric("结构化记录", f"{sum(r.ok for r in result.records)}/{len(result.records)} 通过")
+        _show_synthesis(result.synthesis)
         coverage = result.coverage
         st.subheader("测试覆盖摘要")
         st.caption("这是测试计划执行覆盖率，不是 RTL 代码覆盖率。")

@@ -22,6 +22,7 @@ from .models import FailureRecord, SimulationResult, ResultStatus
 from .testbench import DUT_INSTANCE, TestbenchGenerationError, TestbenchGenerator
 from .reference_model import check_plan_consistency, override_plan_expectations, reference_expectations
 from .assertions import build_assertion, evaluate_assertion, AssertionValidationError
+from .synthesis import SynthConfig, YosysSynthRunner
 from .vcd import analyze_vcd_file, analyze_failure_windows, waveform_insights
 
 
@@ -212,6 +213,7 @@ class PipelineResult:
     failure_explanations: tuple[FailureExplanation, ...] = ()
     artifacts: dict[str, str] = field(default_factory=dict)
     created_at: str = field(default_factory=_utc_now)
+    synthesis: dict[str, Any] = field(default_factory=dict)
 
     @property
     def result(self) -> SimulationResult:
@@ -254,6 +256,7 @@ class PipelineResult:
             "plan": self.plan.model_dump(mode="json"),
             "contract": self.contract.to_dict(),
             "simulation": self.simulation.to_dict(),
+            "synthesis": dict(self.synthesis),
         }
 
     def to_json(self, *, indent: int = 2) -> str:
@@ -269,11 +272,18 @@ class VerificationPipeline:
         generator: TestbenchGenerator | None = None,
         executor_factory: type[IcarusExecutor] = IcarusExecutor,
         phase_pairs: Sequence[Mapping[str, Any]] = (),
+        run_synthesis: bool = False,
+        yosys_path: str | None = None,
+        synthesis_timeout_s: float = 180.0,
     ) -> None:
         self.generator = generator or TestbenchGenerator()
         self.executor_factory = executor_factory
         # 相位检查的期望延迟由调用方（contract/规格）显式给出，不从波形反推。
         self.phase_pairs = tuple(phase_pairs)
+        # 综合证据层是可选的：没装 Yosys 时给出 unavailable，绝不影响仿真裁决。
+        self.run_synthesis = run_synthesis
+        self.yosys_path = yosys_path
+        self.synthesis_timeout_s = synthesis_timeout_s
 
     def run(
         self,
@@ -462,6 +472,31 @@ class VerificationPipeline:
             config={**simulation.config, "coverage": coverage_summary(ai_plan, simulation), "oracle": consistency, "structured_assertions": assertion_result, "cross_validation": cross_validation, "verification_status": verification_status, "vcd_analysis": vcd_analysis},
         )
         explanations = tuple(explain_failure_record(failure) for failure in simulation.failures)
+        # 综合证据层：可选、不参与 PASS/FAIL 裁决。它只回答"这份 RTL 能不能被
+        # 综合"，并显式标出时序/比特流/上板三个未做的层级。
+        synthesis: dict[str, Any] = {
+            "status": "not_run",
+            "skipped_reason": "未启用综合证据层（run_synthesis=False）",
+        }
+        artifacts_synth: dict[str, str] = {}
+        if self.run_synthesis:
+            synth_result = YosysSynthRunner(
+                SynthConfig(
+                    rtl_path=rtl,
+                    top=dut_contract.module,
+                    work_dir=artifact_dir / "synthesis",
+                    yosys_path=self.yosys_path,
+                    timeout_s=self.synthesis_timeout_s,
+                )
+            ).run()
+            synthesis = synth_result.to_dict()
+            if synth_result.log_path:
+                artifacts_synth["synthesis_log"] = synth_result.log_path
+            if synth_result.stat_path:
+                artifacts_synth["synthesis_stat"] = synth_result.stat_path
+        # 放进 simulation.config，这样任何只拿到 SimulationResult 的渲染器
+        # （report.py / CLI / 网页）都能直接展示，不必额外传参。
+        simulation = replace(simulation, config={**simulation.config, "synthesis": synthesis})
         artifacts = {
             "output_dir": str(artifact_dir),
             "testbench": str(testbench_path),
@@ -471,6 +506,7 @@ class VerificationPipeline:
             "result_json": simulation.artifacts.get("result_json", ""),
             "vcd": simulation.artifacts.get("vcd", ""),
         }
+        artifacts.update(artifacts_synth)
         if oracle_expectations:
             artifacts["authoritative_plan"] = str(authoritative_plan_path)
         result = PipelineResult(
@@ -480,6 +516,7 @@ class VerificationPipeline:
             simulation=simulation,
             failure_explanations=explanations,
             artifacts=artifacts,
+            synthesis=synthesis,
         )
         artifacts["pipeline_result"] = str(pipeline_result_path)
         result = PipelineResult(
@@ -490,6 +527,7 @@ class VerificationPipeline:
             failure_explanations=result.failure_explanations,
             artifacts=artifacts,
             created_at=result.created_at,
+            synthesis=synthesis,
         )
         pipeline_result_path.write_text(result.to_json() + "\n", encoding="utf-8")
         return result

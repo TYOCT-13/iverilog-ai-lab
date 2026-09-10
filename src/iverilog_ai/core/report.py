@@ -5,7 +5,7 @@ from __future__ import annotations
 from html import escape
 import json
 from pathlib import Path
-from typing import Literal
+from typing import Any, Literal, Mapping
 
 from .models import ProcessResult, SimulationResult
 
@@ -29,6 +29,92 @@ def _cross_validation_for_result(result: SimulationResult) -> dict:
 
 def _vcd_analysis_for_result(result: SimulationResult) -> dict:
     return result.config.get("vcd_analysis", {}) if isinstance(result.config, dict) else {}
+
+
+def _synthesis_for_result(result: SimulationResult, explicit: Mapping[str, Any] | None) -> dict[str, Any]:
+    """综合证据可以显式传入，也可以由流水线写在 config 里。"""
+
+    if explicit:
+        return dict(explicit)
+    config = result.config if isinstance(result.config, dict) else {}
+    value = config.get("synthesis")
+    return dict(value) if isinstance(value, Mapping) else {}
+
+
+_STAGE_LABELS = {
+    "provided_by_pipeline": "本次流水线提供",
+    "passed": "通过",
+    "failed": "失败",
+    "unavailable": "工具不可用",
+    "timeout": "超时",
+    "error": "执行错误",
+    "not_run": "未运行",
+}
+
+
+def _synthesis_section(synthesis: Mapping[str, Any]) -> list[str]:
+    """渲染"仿真→综合→时序→比特流→上板"的分层证据。
+
+    这张表的作用是**把没做的事也写清楚**：只有仿真与综合两行是实际跑过的，
+    其余三行显式标 not_run，避免读者把"综合通过"误读成"能上板"。
+    """
+
+    stages = synthesis.get("stages") or []
+    if not stages:
+        return []
+    lines = ["## 分层证据（仿真 / 综合 / 时序 / 比特流 / 上板）", ""]
+    lines.extend(["| 层级 | 状态 | 说明 |", "|---|---|---|"])
+    for stage in stages:
+        status = str(stage.get("status", "not_run"))
+        lines.append(
+            f"| {_md_cell(stage.get('title', stage.get('stage', '')))} | "
+            f"{_STAGE_LABELS.get(status, status)} | {_md_cell(stage.get('detail', ''))} |"
+        )
+    lines.append("")
+    status = str(synthesis.get("status", "not_run"))
+    if status == "passed":
+        lines.extend(
+            [
+                "### 综合结果",
+                "",
+                f"- 顶层模块：`{_md_cell(synthesis.get('top', ''))}`",
+                f"- 通用门级单元数：{synthesis.get('cell_count')}（{synthesis.get('cell_kinds', 0)} 种类型）",
+                f"- 连线数：{synthesis.get('wire_count')}；端口数：{synthesis.get('port_count')}",
+                f"- 存储块：{synthesis.get('memory_count')}；进程：{synthesis.get('process_count')}",
+                f"- 综合耗时：{synthesis.get('duration_ms', 0)} ms",
+                "",
+            ]
+        )
+        cells = synthesis.get("cells") or []
+        if cells:
+            lines.extend(["| 单元类型 | 数量 |", "|---|---:|"])
+            for item in cells[:20]:
+                lines.append(f"| `{_md_cell(item.get('cell', ''))}` | {item.get('count', 0)} |")
+            lines.append("")
+    elif status == "failed":
+        lines.extend(
+            [
+                "### 综合结果",
+                "",
+                f"- **综合失败**：{_md_cell(synthesis.get('error') or '未知原因')}",
+                "- 这是强证据：仿真通过也不能说明这份 RTL 可综合。",
+                "",
+            ]
+        )
+    else:
+        reason = synthesis.get("skipped_reason") or synthesis.get("error") or "本次运行未启用综合证据层"
+        lines.extend(["### 综合结果", "", f"- 未执行：{_md_cell(reason)}", ""])
+    if synthesis.get("warnings"):
+        lines.extend(
+            [
+                f"- 综合告警：{len(synthesis['warnings'])} 条"
+                f"（首条：{_md_cell(str(synthesis['warnings'][0]))}）",
+                "",
+            ]
+        )
+    if synthesis.get("disclaimer"):
+        lines.extend([f"> {_md_cell(synthesis['disclaimer'])}", ""])
+    return lines
 
 
 ReportFormat = Literal["markdown", "md", "html"]
@@ -64,8 +150,17 @@ def _process_markdown(name: str, process: ProcessResult | None) -> list[str]:
     return lines
 
 
-def render_markdown(result: SimulationResult, *, title: str = "Icarus 智测仿真报告") -> str:
-    """渲染不依赖外部网络资源的 Markdown 报告。"""
+def render_markdown(
+    result: SimulationResult,
+    *,
+    title: str = "Icarus 智测仿真报告",
+    synthesis: Mapping[str, Any] | None = None,
+) -> str:
+    """渲染不依赖外部网络资源的 Markdown 报告。
+
+    ``synthesis`` 是可选的分层证据（见 ``core/synthesis.py``）：它**不参与**
+    PASS/FAIL 结论，只在报告里单独成节，并显式列出未做的层级。
+    """
 
     total = len(result.records)
     passed = sum(1 for record in result.records if record.ok)
@@ -109,6 +204,7 @@ def render_markdown(result: SimulationResult, *, title: str = "Icarus 智测仿�
     cross = _cross_validation_for_result(result)
     if cross:
         lines.extend(["## 多来源交叉验证", "", f"- 来源：{', '.join(cross.get('sources', []))}", f"- 独立来源数：{cross.get('independent_sources', 0)}", f"- 交叉结论：`{cross.get('status', 'unknown')}`", ""])
+    lines.extend(_synthesis_section(_synthesis_for_result(result, synthesis)))
     vcd = _vcd_analysis_for_result(result)
     if vcd and vcd.get("status") == "parsed":
         lines.extend(["## VCD 波形分析", "", f"- 时间精度：`{vcd.get('timescale_ns')} ns`", f"- 时间范围：`{vcd.get('start_ns')} ns` ～ `{vcd.get('end_ns')} ns`", f"- 信号数量：{vcd.get('signal_count', 0)}", f"- 变化总数：{vcd.get('total_changes', 0)}", f"- 变化记录是否截断：`{vcd.get('truncated', False)}`", ""])
@@ -237,7 +333,12 @@ def _process_html(process: ProcessResult | None) -> str:
     return "".join(bits)
 
 
-def render_html(result: SimulationResult, *, title: str = "Icarus 智测仿真报告") -> str:
+def render_html(
+    result: SimulationResult,
+    *,
+    title: str = "Icarus 智测仿真报告",
+    synthesis: Mapping[str, Any] | None = None,
+) -> str:
     """渲染可离线打开的 HTML 报告，并对进程输出做 HTML 转义。"""
 
     rows = []
@@ -276,6 +377,41 @@ def render_html(result: SimulationResult, *, title: str = "Icarus 智测仿真�
             item = coverage.get(key, {})
             coverage_html += f"<p>{escape(label)}：{item.get('covered', 0)}/{item.get('total', 0)} ({item.get('percent', 0)}%)</p>"
     error_html = f"<p class='error'>{escape(result.error)}</p>" if result.error else ""
+    synth_data = _synthesis_for_result(result, synthesis)
+    synth_md = _synthesis_section(synth_data)
+    if synth_md:
+        body_rows = []
+        for stage in synth_data.get("stages", []):
+            st = str(stage.get("status", "not_run"))
+            body_rows.append(
+                "<tr>"
+                f"<td>{escape(str(stage.get('title', '')))}</td>"
+                f"<td>{escape(_STAGE_LABELS.get(st, st))}</td>"
+                f"<td>{escape(str(stage.get('detail', '')))}</td>"
+                "</tr>"
+            )
+        extra = ""
+        if str(synth_data.get("status")) == "passed":
+            extra = (
+                f"<p>通用门级单元数：{synth_data.get('cell_count')}"
+                f"（{synth_data.get('cell_kinds', 0)} 种类型）；"
+                f"连线 {synth_data.get('wire_count')}；端口 {synth_data.get('port_count')}；"
+                f"耗时 {synth_data.get('duration_ms', 0)} ms</p>"
+            )
+        elif str(synth_data.get("status")) == "failed":
+            extra = f"<p class='error'>综合失败：{escape(str(synth_data.get('error') or ''))}</p>"
+        else:
+            extra = f"<p>未执行：{escape(str(synth_data.get('skipped_reason') or synth_data.get('error') or ''))}</p>"
+        synthesis_html = (
+            "<h2>分层证据（仿真 / 综合 / 时序 / 比特流 / 上板）</h2>"
+            "<table><thead><tr><th>层级</th><th>状态</th><th>说明</th></tr></thead><tbody>"
+            + "".join(body_rows)
+            + "</tbody></table>"
+            + extra
+            + f"<p><small>{escape(str(synth_data.get('disclaimer', '')))}</small></p>"
+        )
+    else:
+        synthesis_html = ""
     return f"""<!doctype html>
 <html lang="zh-CN">
 <head>
@@ -300,6 +436,7 @@ th {{ background: #f3f5f7; }}
 结构化记录：{passed}/{total} 通过；运行 ID：<code>{escape(result.run_id)}</code></p>
 {error_html}
 {coverage_html}
+{synthesis_html}
 <h2>进程证据</h2>
 <h3>iverilog 编译</h3>
 {_process_html(result.compile)}
@@ -321,6 +458,7 @@ def write_report(
     *,
     format: ReportFormat | None = None,
     title: str = "Icarus 智测仿真报告",
+    synthesis: Mapping[str, Any] | None = None,
 ) -> Path:
     """写入 Markdown 或 HTML；父目录必须由调用方的路径策略校验。"""
 
@@ -330,7 +468,11 @@ def write_report(
         selected = "html" if target.suffix.lower() in {".html", ".htm"} else "markdown"
     if selected not in {"markdown", "md", "html"}:
         raise ValueError("report format must be markdown, md, or html")
-    content = render_html(result, title=title) if selected == "html" else render_markdown(result, title=title)
+    content = (
+        render_html(result, title=title, synthesis=synthesis)
+        if selected == "html"
+        else render_markdown(result, title=title, synthesis=synthesis)
+    )
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(content, encoding="utf-8")
     return target

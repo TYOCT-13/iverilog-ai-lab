@@ -90,6 +90,11 @@ def _build_parser() -> argparse.ArgumentParser:
     pipeline_parser.add_argument("--report-path", default=None, help="报告目标路径；默认写入流水线工件目录")
     pipeline_parser.add_argument("--print-json", action="store_true", help="将完整流水线结果 JSON 打印到标准输出")
     pipeline_parser.add_argument("--quiet", action="store_true", help="不输出摘要，只输出退出码")
+    # 综合证据层是可选的：开启后额外跑一次 Yosys，报告里多一节分层证据。
+    # 它不参与 PASS/FAIL 结论，也不做时序分析。
+    pipeline_parser.add_argument("--synth", action="store_true", help="附加 Yosys 综合证据层（不参与 PASS/FAIL 裁决）")
+    pipeline_parser.add_argument("--yosys", dest="yosys", default=None, help="Yosys 可执行文件路径；默认从 PATH 查找")
+    pipeline_parser.add_argument("--synth-timeout", dest="synth_timeout", type=float, default=180.0, help="综合超时秒数")
     _add_path_options(pipeline_parser)
 
     report_parser = subparsers.add_parser("report", help="从 result.json 生成 Markdown 或 HTML")
@@ -204,7 +209,11 @@ def _pipeline_command(args: argparse.Namespace) -> int:
         ai_plan = AITestPlan.model_validate_json(plan_path.read_text(encoding="utf-8"))
         contract = DutContract.from_json(contract_path.read_text(encoding="utf-8"))
         output_dir = args.output_dir or str(policy.allowed_roots[0] / ".iverilog-ai" / "pipeline")
-        result = VerificationPipeline().run(
+        result = VerificationPipeline(
+            run_synthesis=args.synth,
+            yosys_path=args.yosys,
+            synthesis_timeout_s=args.synth_timeout,
+        ).run(
             ai_plan,
             contract,
             rtl_path,
@@ -242,6 +251,10 @@ def _pipeline_command(args: argparse.Namespace) -> int:
                         "passed": result.passed,
                         "records": len(result.records),
                         "failures": len(result.failures),
+                        "synthesis": {
+                            "status": result.synthesis.get("status", "not_run"),
+                            "cell_count": result.synthesis.get("cell_count"),
+                        },
                         "pipeline_result": result.artifacts.get("pipeline_result", ""),
                         "report": "" if report_path is None else str(report_path),
                     },

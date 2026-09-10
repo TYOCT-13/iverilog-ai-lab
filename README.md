@@ -14,6 +14,7 @@
 - 阶段八权威预言机与离线调试接口：内置案例的期望值改由参考模型独立复算并覆盖 AI 数值（AI 期望值偏差单列为诊断指标），新增复位前初值观测和本地调试模型服务（无需 API Key、不联网）。
 - 阶段九 RTL 静态审查扩展：规则增至 **44 条**，每条规则都有最小反例/正例用例，清单与噪声校准见 [docs/static_rules.md](docs/static_rules.md)。
 - 阶段十参考模型全覆盖：**12 / 12 个内置案例**的参考模型已与 RTL 逐拍对齐（`SUPPORTED == AUTHORITATIVE`），因此每个内置案例的期望值都由确定性模型独立复算；对齐方法、采样口径与踩过的 8 个模型错误见 [docs/reference_model_alignment.md](docs/reference_model_alignment.md)。
+- 阶段十一分层证据：新增 Yosys 综合证据层，把「仿真 / 综合 / 时序 / 比特流 / 上板」五层状态显式写入报告与网页，未做的层级标 `not_run`；综合不参与 PASS/FAIL 裁决，也不做时序签核。口径与实测结果见 [docs/layered_evidence.md](docs/layered_evidence.md)。
 
 ## 快速开始
 
