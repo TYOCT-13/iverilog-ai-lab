@@ -22,6 +22,11 @@ class TestbenchGenerationError(ValueError):
     """测试计划不能安全地映射到指定 DUT 合约。"""
 
 
+# 生成的 testbench 里 DUT 实例名固定，波形分析据此区分「DUT 内部信号」
+# 与「testbench 记账信号」。改名时必须同步 pipeline 的层次判定。
+DUT_INSTANCE = "dut_i"
+
+
 _INTEGER_RE = re.compile(r"^-?[0-9]+$")
 _BASE_RE = re.compile(r"^(?:(?P<size>[0-9]+))?'(?P<base>[bBoOdDhH])(?P<digits>[0-9a-fA-F_xXzZ]+)$")
 _VERILOG_BINARY_RE = re.compile(r"^[01xXzZ_]+$")
@@ -327,7 +332,7 @@ class TestbenchGenerator:
         parameter_override = ""
         if contract.parameters:
             parameter_override = " #(" + ", ".join(f".{name}({value})" for name, value in contract.parameters.items()) + ")"
-        lines.extend([f"  {contract.module}{parameter_override} dut_i ({connections});", ""])
+        lines.extend([f"  {contract.module}{parameter_override} {DUT_INSTANCE} ({connections});", ""])
         if emit_vcd:
             lines.extend(["  initial begin", f"    $dumpfile({_verilog_string(vcd_filename)});", f"    $dumpvars(0, {top});", "  end", ""])
         if contract.clock is not None:

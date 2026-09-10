@@ -19,10 +19,10 @@ from .config import ExecutionConfig, SafePathPolicy
 from .contracts import ContractValidationError, DutContract
 from .executor import IcarusExecutor
 from .models import FailureRecord, SimulationResult, ResultStatus
-from .testbench import TestbenchGenerationError, TestbenchGenerator
+from .testbench import DUT_INSTANCE, TestbenchGenerationError, TestbenchGenerator
 from .reference_model import check_plan_consistency, override_plan_expectations, reference_expectations
 from .assertions import build_assertion, evaluate_assertion, AssertionValidationError
-from .vcd import analyze_vcd_file, analyze_failure_windows
+from .vcd import analyze_vcd_file, analyze_failure_windows, waveform_insights
 
 
 class PipelineValidationError(ValueError):
@@ -268,9 +268,12 @@ class VerificationPipeline:
         *,
         generator: TestbenchGenerator | None = None,
         executor_factory: type[IcarusExecutor] = IcarusExecutor,
+        phase_pairs: Sequence[Mapping[str, Any]] = (),
     ) -> None:
         self.generator = generator or TestbenchGenerator()
         self.executor_factory = executor_factory
+        # 相位检查的期望延迟由调用方（contract/规格）显式给出，不从波形反推。
+        self.phase_pairs = tuple(phase_pairs)
 
     def run(
         self,
@@ -381,11 +384,35 @@ class VerificationPipeline:
             try:
                 vcd_analysis = analyze_vcd_file(vcd_path_for_analysis, max_changes=5000)
                 vcd_analysis["status"] = "parsed"
+                period = dut_contract.clock.period_ns if dut_contract.clock is not None else 10.0
                 failure_cycles = [item.cycle for item in simulation.failures if isinstance(item.cycle, int)]
                 if failure_cycles:
-                    period = dut_contract.clock.period_ns if dut_contract.clock is not None else 10.0
-                    vcd_analysis["failure_windows"] = analyze_failure_windows(vcd_path_for_analysis, failure_cycles, clock_period_ns=period)
-            except (OSError, ValueError) as exc:
+                    vcd_analysis["failure_windows"] = analyze_failure_windows(
+                        vcd_path_for_analysis, failure_cycles, clock_period_ns=period
+                    )
+                # 波形语义结论：边沿统计、信号稳定性与相位检查。稳定性检查
+                # 排除时钟与复位：时钟每个周期必然翻转两次、复位在复位窗口内
+                # 也会连续跳变，把它们算作"不稳定"只会淹没有用的结论。
+                excluded = (".clk", ".clock", ".rst", ".rst_n", ".reset", ".reset_n", ".arst")
+                data_signals = [
+                    item["name"]
+                    for item in vcd_analysis.get("signals", [])
+                    if not item["name"].lower().endswith(excluded)
+                ][:12]
+                # 生成的 testbench 顶层是 tb_<module>，DUT 实例名固定为 DUT_INSTANCE，
+                # 因此 DUT 内部信号的完整层次前缀是 tb_<module>.dut_i。测试平台自己的
+                # 记账信号（检查任务的 expected/actual 等）不在此前缀下。
+                dut_scope = f"tb_{dut_contract.module}.{DUT_INSTANCE}"
+                vcd_analysis["insights"] = waveform_insights(
+                    vcd_analysis,
+                    clock_period_ns=float(period),
+                    phase_pairs=self.phase_pairs,
+                    stability_signals=data_signals,
+                    dut_scopes=(dut_scope,),
+                )
+            except (OSError, ValueError, AttributeError) as exc:
+                # AttributeError 也要接住：畸形 failure 记录（例如缺少 cycle）
+                # 不应该让整条流水线崩掉，而应留下一份可审计的错误说明。
                 vcd_analysis = {"status": "error", "error": str(exc)}
         # Reference checks explain the plan; the authoritative expectations above
         # already constrained the generated testbench. This block only records

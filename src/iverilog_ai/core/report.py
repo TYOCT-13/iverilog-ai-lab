@@ -114,15 +114,69 @@ def render_markdown(result: SimulationResult, *, title: str = "Icarus 智测仿�
         lines.extend(["## VCD 波形分析", "", f"- 时间精度：`{vcd.get('timescale_ns')} ns`", f"- 时间范围：`{vcd.get('start_ns')} ns` ～ `{vcd.get('end_ns')} ns`", f"- 信号数量：{vcd.get('signal_count', 0)}", f"- 变化总数：{vcd.get('total_changes', 0)}", f"- 变化记录是否截断：`{vcd.get('truncated', False)}`", ""])
         if vcd.get("signals"):
             lines.extend(["| 信号 | 位宽 | 变化次数 |", "|---|---:|---:|"])
-            lines.extend(f"| `{item['name']}` | {item['width']} | {item['changes']} |" for item in vcd["signals"])
-            lines.append("")
-    if vcd and vcd.get("status") == "parsed":
-        lines.extend(["## VCD 波形分析", "", f"- 时间精度：`{vcd.get('timescale_ns')} ns`", f"- 时间范围：`{vcd.get('start_ns')} ns` ～ `{vcd.get('end_ns')} ns`", f"- 信号数量：{vcd.get('signal_count', 0)}", f"- 变化总数：{vcd.get('total_changes', 0)}", f"- 变化记录是否截断：`{vcd.get('truncated', False)}`", ""])
-        if vcd.get("signals"):
-            lines.extend(["| 信号 | 位宽 | 变化次数 |", "|---|---:|---:|"])
             for item in vcd["signals"]:
                 lines.append(f"| `{_md_cell(item.get('name', ''))}` | {item.get('width', 1)} | {item.get('changes', 0)} |")
             lines.append("")
+
+        insights = vcd.get("insights") or {}
+        if insights.get("notes") or insights.get("signal_edges"):
+            lines.extend(["### 波形语义结论", ""])
+            notes = insights.get("notes") or []
+            if notes:
+                lines.extend(f"- {_md_cell(note)}" for note in notes)
+            else:
+                lines.append("- 未发现不稳定信号或相位偏差。")
+            dut_unstable = insights.get("unstable_signals") or []
+            auxiliary_unstable = insights.get("unstable_auxiliary") or []
+            if dut_unstable or auxiliary_unstable:
+                lines.append(
+                    f"- 不稳定信号统计：DUT 内部 {len(dut_unstable)} 个"
+                    f"{('（' + '、'.join(f'`{_md_cell(name)}`' for name in dut_unstable) + '）') if dut_unstable else ''}，"
+                    f"testbench 记账 {len(auxiliary_unstable)} 个"
+                    f"{('（' + '、'.join(f'`{_md_cell(name)}`' for name in auxiliary_unstable) + '）') if auxiliary_unstable else ''}"
+                )
+                lines.append("- 说明：testbench 记账信号（如检查任务的 `expected`/`actual` 寄存器）的跳变节奏由激励脚本决定，不计入电路结论。")
+            lines.append("")
+            lines.extend(["| 信号 | 归属 | 上升沿 | 下降沿 | 首次跳变(ns) | 稳定性 |", "|---|---|---:|---:|---:|---|"])
+            stability = {item.get("signal"): item for item in insights.get("stability", [])}
+            for item in insights["signal_edges"]:
+                entry = stability.get(item.get("signal"), {})
+                status = entry.get("status", "-")
+                if entry.get("status") == "unstable":
+                    status = "不稳定(DUT)" if entry.get("is_dut") else "不稳定(tb记账)"
+                owner = "DUT" if entry.get("is_dut") else ("testbench" if entry else "-")
+                lines.append(
+                    f"| `{_md_cell(item.get('signal', ''))}` | {owner} | {item.get('rises', 0)} | {item.get('falls', 0)} | "
+                    f"{item.get('first_edge_ns', '-')} | {status} |"
+                )
+            lines.append("")
+        if insights.get("phase_checks"):
+            lines.extend(["### 相位检查（输出晚/早一拍）", "", "| 激励 | 响应 | 期望周期 | 实测周期 | 结论 |", "|---|---|---:|---:|---|"])
+            for item in insights["phase_checks"]:
+                observed = item.get("observed_delay_cycles")
+                lines.append(
+                    f"| `{_md_cell(item.get('trigger', ''))}` | `{_md_cell(item.get('response', ''))}` | "
+                    f"{item.get('expected_delay_cycles', '-')} | {observed if observed is not None else '-'} | {item.get('status', '')} |"
+                )
+            lines.append("")
+
+        windows = vcd.get("failure_windows") or {}
+        if windows.get("status") == "parsed" and windows.get("windows"):
+            lines.extend([
+                "### 失败周期对应的波形时间窗",
+                "",
+                f"- 时钟周期：`{windows.get('clock_period_ns')} ns`；窗口半径：`{windows.get('radius')}` 个周期",
+                "",
+                "| 失败周期 | 时间窗(ns) | 窗口内信号数 | 窗口内变化数 |",
+                "|---:|---|---:|---:|",
+            ])
+            for item in windows["windows"]:
+                analysis = item.get("analysis") or {}
+                lines.append(
+                    f"| {item.get('cycle')} | {item.get('start_ns')} ～ {item.get('end_ns')} | "
+                    f"{analysis.get('signal_count', 0)} | {analysis.get('total_changes', 0)} |"
+                )
+            lines.extend(["", f"> {windows.get('disclaimer', '')}", ""])
     if result.error:
         lines.extend(["## 总体错误", "", result.error, ""])
     lines.extend(["## 进程证据", ""])

@@ -69,6 +69,57 @@ def _show_vcd_analysis(vcd_path: Path, *, key_prefix: str, preset: dict | None =
         if data.get("signals"):
             with st.expander("查看 VCD 信号列表"):
                 st.dataframe(data["signals"], use_container_width=True, hide_index=True)
+
+        # 波形语义结论：边沿统计、稳定性与相位检查（来自流水线的 insights）
+        insights = data.get("insights") or {}
+        if insights.get("notes"):
+            st.markdown("**波形语义结论**")
+            for note in insights["notes"]:
+                st.write(f"- {note}")
+        if insights.get("unstable_signals"):
+            st.warning("DUT 信号稳定性存疑：" + "、".join(insights["unstable_signals"]))
+        if insights.get("unstable_auxiliary"):
+            st.info(
+                "testbench 记账信号在窗口内多次翻转（由激励脚本决定，不作为电路结论）："
+                + "、".join(insights["unstable_auxiliary"])
+            )
+        if insights.get("signal_edges"):
+            with st.expander("波形边沿统计（上升沿 / 下降沿 / 稳定性）"):
+                rows = []
+                stability = {item.get("signal"): item for item in insights.get("stability", [])}
+                for item in insights["signal_edges"]:
+                    entry = stability.get(item.get("signal"), {})
+                    status = entry.get("status", "-")
+                    if entry.get("status") == "unstable":
+                        status = "不稳定(DUT)" if entry.get("is_dut") else "不稳定(tb记账)"
+                    rows.append({**item, "归属": "DUT" if entry.get("is_dut") else "testbench", "稳定性": status})
+                st.dataframe(rows, use_container_width=True, hide_index=True)
+        if insights.get("phase_checks"):
+            st.markdown("**相位检查（输出晚/早一拍）**")
+            st.dataframe(insights["phase_checks"], use_container_width=True, hide_index=True)
+
+        # 失败周期对应的波形时间窗（流水线已算好，此前没有展示入口）
+        windows = data.get("failure_windows") or {}
+        if windows.get("status") == "parsed" and windows.get("windows"):
+            with st.expander(f"失败周期对应的波形时间窗（{len(windows['windows'])} 个）"):
+                st.caption(windows.get("disclaimer", ""))
+                rows = [
+                    {
+                        "失败周期": item.get("cycle"),
+                        "时间窗(ns)": f"{item.get('start_ns')} ～ {item.get('end_ns')}",
+                        "窗口内信号数": (item.get("analysis") or {}).get("signal_count", 0),
+                        "窗口内变化数": (item.get("analysis") or {}).get("total_changes", 0),
+                    }
+                    for item in windows["windows"]
+                ]
+                st.dataframe(rows, use_container_width=True, hide_index=True)
+                st.download_button(
+                    "下载失败周期时间窗 JSON",
+                    json.dumps(windows, ensure_ascii=False, indent=2).encode("utf-8"),
+                    file_name="failure-windows.json",
+                    mime="application/json",
+                    key=f"{key_prefix}_failure_windows",
+                )
     if st.button("分析 VCD 时间窗口", key=f"{key_prefix}_analyze", help="按时间范围重新解析波形变化；不依赖 GTKWave"):
         if data.get("start_ns") is None or data.get("end_ns") is None:
             st.warning("VCD 没有可用时间范围")
