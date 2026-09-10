@@ -283,7 +283,10 @@ def _main() -> int:
                             # 本地离线调试模型：回环地址、无密钥、确定性计划。
                             provider = OpenAICompatibleProvider(endpoint=args.debug_endpoint, model="debug-local", wire_api="chat_completions", reasoning_effort=None, allow_network=False, store=False, timeout=30)
                         else:
-                            provider = OpenAICompatibleProvider(endpoint=args.online_endpoint, model=args.online_model, api_key=online_key, wire_api="chat_completions", reasoning_effort=None, allow_network=True, store=False, timeout=120)
+                            # stream="auto"：先非流式，若网关只接受流式（会在返回
+                            # 响应前断连）则自动改用 SSE 重试一次。真实模型实验
+                            # 因此对两类网关都可用。
+                            provider = OpenAICompatibleProvider(endpoint=args.online_endpoint, model=args.online_model, api_key=online_key, wire_api="chat_completions", reasoning_effort=None, allow_network=True, store=False, timeout=180, stream="auto")
                         generation_started = time.perf_counter()
                         # Give online models the exact contract; otherwise
                         # they may invent aliases such as ``en`` for ``enable``.

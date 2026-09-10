@@ -120,6 +120,19 @@ provider = OpenAICompatibleProvider(endpoint="http://127.0.0.1:11434/v1", model=
 - 只服务 `KNOWN_DESIGNS` 中列出的内置案例，未知设计返回 HTTP 400，避免被当成通用模型；
 - `provider._base_url` 仍拒绝非回环的明文 `http` 地址，真实服务商必须使用 `https`。
 
+## 与其他 OpenAI 兼容网关的差异
+
+本地调试服务对**非流式**请求（`stream: false`）正常工作。真实网关并不总是如此：
+
+- 部分 OpenAI 兼容网关**只接受流式请求**，非流式 POST 会被对端在返回响应前直接断连，
+  表现为 `Remote end closed connection without response`。
+- 针对这类网关，`OpenAICompatibleProvider` 支持 `stream="auto"`：先试非流式，只有在
+  连接被关闭时才自动改用 SSE 流式重试一次；认证失败、限流和格式错误**不会**重试。
+- `stream=False`（默认）与 `stream=True` 分别强制单一模式。真实模型实验脚本使用
+  `stream="auto"`，因此对两类网关都可用。
+- SSE 响应会被拼成最终文本；流式响应通常不返回 `usage`，此时逐次记录的
+  token 使用量为空，报告不会据此推断费用。
+
 ## 已知边界
 
 用本地调试激励跑 50 个缺陷变体可以检出 47 个。剩下 3 个不是预言机的问题，而是生成式 testbench 的固有限制：
