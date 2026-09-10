@@ -1,4 +1,5 @@
 // Icarus 智测受控基准：带紧急模式交通灯
+`timescale 1ns/1ps
 module traffic_light_emergency (
     input wire clk, input wire rst_n, input wire emergency,
     output reg [1:0] main_light, output reg [1:0] side_light

@@ -1,4 +1,5 @@
 // Icarus 智测参考设计：四运算简单 ALU。
+`timescale 1ns/1ps
 module simple_alu (
     input wire [7:0] a, input wire [7:0] b, input wire [2:0] op,
     output reg [7:0] result, output reg carry, output reg zero

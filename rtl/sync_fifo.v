@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module sync_fifo #(parameter DATA_WIDTH=8, parameter DEPTH=4)(input wire clk,input wire rst_n,input wire wr_en,input wire [DATA_WIDTH-1:0] wr_data,input wire rd_en,output reg [DATA_WIDTH-1:0] rd_data,output wire full,output wire empty);
  reg [DATA_WIDTH-1:0] mem[0:DEPTH-1]; reg [2:0] count; reg [1:0] wr_ptr,rd_ptr;
  assign full=(count==DEPTH); assign empty=(count==0);

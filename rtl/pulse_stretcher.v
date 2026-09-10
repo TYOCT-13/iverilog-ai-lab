@@ -1,4 +1,5 @@
 // 常用案例：将输入脉冲保持指定周期
+`timescale 1ns/1ps
 module pulse_stretcher #(parameter WIDTH=4)(input wire clk, input wire rst_n, input wire pulse_in, output reg pulse_out);
     reg [WIDTH-1:0] count;
     always @(posedge clk or negedge rst_n) begin

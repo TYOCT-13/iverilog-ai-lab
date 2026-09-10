@@ -1,4 +1,5 @@
 // 缺陷：AND 与 OR 操作码的逻辑被交换。
+`timescale 1ns/1ps
 module simple_alu (input wire [7:0] a, input wire [7:0] b, input wire [2:0] op, output reg [7:0] result, output reg carry, output reg zero);
     always @(*) begin
         result=0; carry=0;

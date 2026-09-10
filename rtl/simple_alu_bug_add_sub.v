@@ -1,4 +1,5 @@
 // 缺陷：加法和减法操作码被交换。
+`timescale 1ns/1ps
 module simple_alu (input wire [7:0] a, input wire [7:0] b, input wire [2:0] op, output reg [7:0] result, output reg carry, output reg zero);
     reg [8:0] tmp;
     always @(*) begin

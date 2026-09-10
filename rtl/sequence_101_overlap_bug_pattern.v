@@ -1,4 +1,5 @@
 // 缺陷：检测成了 110 序列。
+`timescale 1ns/1ps
 module sequence_101_overlap(input wire clk,input wire rst_n,input wire bit_in,output reg detected);
     reg [1:0] history;
     always @(posedge clk or negedge rst_n) begin

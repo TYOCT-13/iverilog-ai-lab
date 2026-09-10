@@ -1,4 +1,5 @@
 // Icarus 智测参考设计：可重叠 101 序列检测器。
+`timescale 1ns/1ps
 module sequence_101_overlap (
     input wire clk, input wire rst_n, input wire bit_in, output reg detected
 );

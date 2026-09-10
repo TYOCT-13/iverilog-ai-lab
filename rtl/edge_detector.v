@@ -1,4 +1,5 @@
 // 常用案例：同步上升沿检测器
+`timescale 1ns/1ps
 module edge_detector(input wire clk, input wire rst_n, input wire signal_in, output reg rising);
     reg signal_d;
     always @(posedge clk or negedge rst_n) begin

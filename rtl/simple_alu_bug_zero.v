@@ -1,4 +1,5 @@
 // 缺陷：zero 标志使用输入 a 判断，而不是最终 result。
+`timescale 1ns/1ps
 module simple_alu (input wire [7:0] a, input wire [7:0] b, input wire [2:0] op, output reg [7:0] result, output reg carry, output reg zero);
     always @(*) begin
         result=0; carry=0;

@@ -1,4 +1,5 @@
 // Icarus 智测受控基准：模十计数器
+`timescale 1ns/1ps
 module mod10_counter (
     input wire clk, input wire rst_n, input wire enable, output reg [3:0] count
 );

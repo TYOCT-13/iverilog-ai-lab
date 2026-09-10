@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module traffic_light_emergency(input wire clk,input wire rst_n,input wire emergency,output reg [1:0] main_light,output reg [1:0] side_light);
 localparam RED=0,YELLOW=1,GREEN=2; localparam MAIN_GREEN=0,MAIN_YELLOW=1,SIDE_GREEN=2,SIDE_YELLOW=3; reg [1:0] state,next_state;
 always @(posedge clk or negedge rst_n) if(!rst_n) state<=MAIN_YELLOW; else state<=next_state;

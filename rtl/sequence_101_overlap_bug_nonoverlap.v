@@ -1,4 +1,5 @@
 // 缺陷：命中后清空历史，无法识别重叠命中。
+`timescale 1ns/1ps
 module sequence_101_overlap(input wire clk,input wire rst_n,input wire bit_in,output reg detected);
     reg [1:0] history;
     always @(posedge clk or negedge rst_n) begin

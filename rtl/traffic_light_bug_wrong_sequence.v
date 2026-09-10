@@ -1,4 +1,5 @@
 // 缺陷：主路黄灯后错误地回到主路绿灯，跳过支路通行。
+`timescale 1ns/1ps
 module traffic_light_emergency(input wire clk,input wire rst_n,input wire emergency,output reg [1:0] main_light,output reg [1:0] side_light);
     localparam RED=0,YELLOW=1,GREEN=2; localparam MG=0,MY=1,SG=2,SY=3;
     reg [1:0] state,next_state;
