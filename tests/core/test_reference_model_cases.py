@@ -87,19 +87,71 @@ def test_authoritative_expectations_only_for_validated_designs():
 def test_unvalidated_designs_fall_back_to_ai_expectations():
     """未验证案例回退为 AI 期望值，而不是被模型改写。
 
-    这里用 ``uart_tx``：它仍在 ``SUPPORTED`` 中但尚未逐拍对齐，因此不得参与裁决。
-    当某个设计对齐后会被加入 ``AUTHORITATIVE``，本测试应改用下一个未对齐的设计。
+    内置案例现已全部逐拍对齐并进入 ``AUTHORITATIVE``，因此"未验证"的情形用
+    尚未建模的自定义设计来验证：它既不在 ``SUPPORTED`` 也不在
+    ``AUTHORITATIVE``，必须原样保留 AI 期望值。
     """
 
     from iverilog_ai.ai.schema import TestPlan
     from iverilog_ai.core.reference_model import override_plan_expectations
 
-    assert "uart_tx" not in AUTHORITATIVE, "uart_tx 已对齐，请改用另一个未对齐的设计"
+    design = "custom_shift_register"
+    assert design not in SUPPORTED and design not in AUTHORITATIVE
     plan = TestPlan.model_validate({
-        "design": "uart_tx",
+        "design": design,
         "objective": "fallback",
-        "vectors": [{"name": "v", "inputs": {"rst_n": 1, "start": 1, "data_in": 85}, "expected": {"busy": 1}}],
+        "vectors": [{"name": "v", "inputs": {"clk_en": 1, "d": 85}, "expected": {"q": 85}}],
     })
-    expectations = reference_expectations(plan, "uart_tx")
+    expectations = reference_expectations(plan, design)
+    assert expectations == {}
     authoritative = override_plan_expectations(plan, expectations)
-    assert authoritative.vectors[0].expected == {"busy": 1}
+    assert authoritative.vectors[0].expected == {"q": 85}
+
+
+def test_every_supported_design_is_authoritative():
+    """建模覆盖与权威集合必须一致：建模了却未对齐的设计只能是"待办"。
+
+    这条断言把"未对齐的设计"变成一个显式的、必须立刻处理的失败，而不是悄悄
+    退回 AI 期望值。新增内置案例时，要么同步完成逐拍对齐，要么先不加进
+    ``SUPPORTED``。
+    """
+
+    assert SUPPORTED == set(AUTHORITATIVE)
+
+
+def test_input_defaults_cover_every_input_port():
+    """每个内置案例的**非时钟输入端口**都必须在默认值表里出现。
+
+    默认值表是"向量未列出某个输入时该取什么值"的唯一事实来源：模型用它复算，
+    实验激励生成器用它补全向量。缺一个端口，模型与测试台就会对同一拍取到不同
+    的值——实测中 debounce 因此产生过 25 条伪失败。时钟端口由测试台自动产生，
+    不需要默认值。
+    """
+
+    import json
+    from pathlib import Path
+
+    from iverilog_ai.core.reference_model import INPUT_DEFAULTS
+
+    root = Path(__file__).parents[2]
+    assert set(INPUT_DEFAULTS) == SUPPORTED
+    for case in sorted(SUPPORTED):
+        contract = json.loads((root / f"examples/{case}_contract.json").read_text(encoding="utf-8"))
+        clock = (contract.get("clock") or {}).get("signal")
+        expected = {
+            port["name"]
+            for port in contract["ports"]
+            if port["direction"] == "input" and port["name"] != clock
+        }
+        assert set(INPUT_DEFAULTS[case]) == expected, case
+
+
+def test_completed_inputs_fills_only_missing_ports():
+    """补全只填空缺，不覆盖向量里已经给出的值。"""
+
+    from iverilog_ai.core.reference_model import completed_inputs
+
+    assert completed_inputs("debounce", {"key_in": 1}) == {"rst_n": 1, "key_in": 1}
+    assert completed_inputs("debounce", {"rst_n": 0}) == {"rst_n": 0, "key_in": 0}
+    # 未建模的设计原样返回，不做猜测
+    assert completed_inputs("custom_dut", {"x": 3}) == {"x": 3}

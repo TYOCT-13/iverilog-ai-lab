@@ -23,6 +23,7 @@ from iverilog_ai.ai.debug_server import build_plan_response
 from iverilog_ai.core.contracts import DutContract
 from iverilog_ai.core.models import ResultStatus
 from iverilog_ai.core.pipeline import VerificationPipeline
+from iverilog_ai.core.reference_model import completed_inputs
 from iverilog_ai.core.rules import rules_context, rules_fingerprint
 
 # 脚本所在仓库根目录；用于按案例定位 examples/<case>_contract.json。
@@ -125,8 +126,21 @@ def _vectors(case: str, seed: int, count: int = 12) -> list[dict[str, Any]]:
             vectors.append({"name": f"traffic_{seed}_{index}", "inputs": {"emergency": emergency}, "expected": {"main_light": main, "side_light": side}})
     else:
         # 其余案例：使用取值表驱动的确定性激励，随机策略用种子区分取值相位。
-        return _contract_stimulus(case, seed, count)
-    return vectors
+        vectors = _contract_stimulus(case, seed, count)
+    return [_complete_inputs(case, vector) for vector in vectors]
+
+
+def _complete_inputs(case: str, vector: dict[str, Any]) -> dict[str, Any]:
+    """按参考模型的输入默认值补全向量里未列出的输入。
+
+    激励常常只写本拍关心的端口，其余端口靠"保持上一次的值"延续。测试台对未
+    赋值的输入端口只有端口初值（0），而模型有自己的默认值——两者不一致时，
+    参考设计上会冒出伪失败。这里统一用 ``reference_model.INPUT_DEFAULTS``
+    把向量补全，使测试台、模型、对齐测试三方口径一致。
+    """
+
+    completed = completed_inputs(case, vector.get("inputs", {}))
+    return {**vector, "inputs": completed}
 
 
 def _fixed(case: str) -> list[dict[str, Any]]:

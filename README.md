@@ -13,6 +13,7 @@
 - 阶段七 VCD 自动分析：已提供本地 VCD 解析、信号列表、时间范围和变化统计；并已扩展到**波形语义结论**（沿统计、毛刺型不稳定、晚/早一拍相位检查）、参考波形与缺陷波形差异对比、失败周期对应时间窗。无需 GTKWave 也能生成波形摘要，GTKWave 作为可选人工复核工具；判据与噪声校准记录见 [docs/vcd_analysis.md](docs/vcd_analysis.md)。
 - 阶段八权威预言机与离线调试接口：内置案例的期望值改由参考模型独立复算并覆盖 AI 数值（AI 期望值偏差单列为诊断指标），新增复位前初值观测和本地调试模型服务（无需 API Key、不联网）。
 - 阶段九 RTL 静态审查扩展：规则增至 **44 条**，每条规则都有最小反例/正例用例，清单与噪声校准见 [docs/static_rules.md](docs/static_rules.md)。
+- 阶段十参考模型全覆盖：**12 / 12 个内置案例**的参考模型已与 RTL 逐拍对齐（`SUPPORTED == AUTHORITATIVE`），因此每个内置案例的期望值都由确定性模型独立复算；对齐方法、采样口径与踩过的 8 个模型错误见 [docs/reference_model_alignment.md](docs/reference_model_alignment.md)。
 
 ## 快速开始
 

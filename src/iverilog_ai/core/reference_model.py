@@ -37,7 +37,54 @@ AUTHORITATIVE: frozenset[str] = frozenset({
     "sequence_101_overlap",
     "traffic_light_emergency",
     "sync_fifo",
+    "uart_tx",
+    "spi_master",
+    "handshake_stage",
+    "debounce",
+    "pwm",
+    "sync_reset",
+    "mux4",
 })
+
+# 内置案例的**输入端口默认值**：单一事实来源。
+#
+# 为什么需要它：测试激励经常只列出本拍关心的输入，其余端口保持上一次的值。
+# 如果模型对"未列出的端口"用一套默认值、而测试台用另一套（端口初值 0），
+# 两边就会算出不同的期望值——实测中 debounce 因此产生了 25 条伪失败。
+# 因此这里显式声明每个输入的默认值：模型用它复算，实验激励生成器用它把
+# 向量补全（见 scripts/run_strategy_experiment.py 的 _complete_inputs），
+# `tests/core/test_reference_model_alignment.py` 校验"补全后的向量"与 RTL 逐拍一致。
+#
+# reset 字段是低有效复位端口的默认（非激活）电平，缺省为 0。
+INPUT_DEFAULTS: dict[str, dict[str, Any]] = {
+    "mod10_counter": {"rst_n": 1, "enable": 0},
+    "simple_alu": {"a": 0, "b": 0, "op": 0},
+    "sequence_101_overlap": {"rst_n": 1, "bit_in": 0},
+    "traffic_light_emergency": {"rst_n": 1, "emergency": 0},
+    "sync_fifo": {"rst_n": 1, "wr_en": 0, "wr_data": 0, "rd_en": 0},
+    "uart_tx": {"rst_n": 1, "start": 0, "data_in": 0},
+    "spi_master": {"rst_n": 1, "start": 0, "data_in": 0},
+    "handshake_stage": {"rst_n": 1, "in_valid": 0, "in_data": 0, "out_ready": 0},
+    "debounce": {"rst_n": 1, "key_in": 0},
+    "pwm": {"rst_n": 1, "duty": 0},
+    "sync_reset": {"ext_rst_n": 1},
+    "mux4": {"d0": 0, "d1": 0, "d2": 0, "d3": 0, "sel": 0},
+}
+
+
+def completed_inputs(design: str, inputs: Mapping[str, Any] | None) -> dict[str, Any]:
+    """把向量里未列出的输入补成该设计的默认值。
+
+    模型与激励生成器共用这一份默认值，避免"同一拍两个默认值"造成伪失败。
+    未建模的设计直接原样返回。
+    """
+
+    defaults = INPUT_DEFAULTS.get(design)
+    if not defaults:
+        return dict(inputs or {})
+    completed = dict(defaults)
+    completed.update({str(key): value for key, value in (inputs or {}).items()})
+    return completed
 
 def _get(value: Any, key: str, default: Any = None) -> Any:
     return value.get(key, default) if isinstance(value, Mapping) else getattr(value, key, default)
@@ -80,8 +127,13 @@ class _DesignState:
         self.sync_ff, self.sync_rst = 0, 0
 
     def step(self, inputs: Mapping[str, Any], cycles: int) -> dict[str, Any]:
-        """把单个向量推进 ``cycles`` 个周期，返回该向量结束时的可观测输出。"""
+        """把单个向量推进 ``cycles`` 个周期，返回该向量结束时的可观测输出。
 
+        未列出的输入按 :data:`INPUT_DEFAULTS` 补全，与实验激励生成器保持同一
+        口径——否则"模型认为的默认值"和"测试台端口初值"会不一致。
+        """
+
+        inputs = completed_inputs(self.design, inputs)
         design = self.design
         if design == "simple_alu":
             a, b, op = int(inputs.get("a", 0)), int(inputs.get("b", 0)), int(inputs.get("op", 0))
@@ -147,6 +199,15 @@ class _DesignState:
             return {"rd_data": self.fifo_rd_data, "full": int(self.fifo_count == self.fifo_depth), "empty": int(self.fifo_count == 0)}
         if design == "uart_tx":
             rst, start, data_in = int(inputs.get("rst_n", 1)), int(inputs.get("start", 0)), int(inputs.get("data_in", 0)) & 255
+            # 已与 rtl/uart_tx.v 逐拍对齐。行尾的终端拍是最容易写错的地方：
+            # RTL 写的是
+            #     if (tick==CLKS_PER_BIT-1) begin tick<=0; bit_idx<=bit_idx+1;
+            #         if (bit_idx==9) ... else tx<=frame[bit_idx+1]; end
+            # `bit_idx<=bit_idx+1` 是非阻塞赋值，因此同一时刻 tx 读到的
+            # `frame[bit_idx+1]` 用的是**旧**的 bit_idx——新位要等下一拍才上线。
+            def frame_bit(position: int) -> int:
+                return (self.uart_frame >> position) & 1 if 0 <= position < 10 else 0
+
             for _ in range(cycles):
                 if rst == 0:
                     self.uart_tx, self.uart_busy, self.uart_bit, self.uart_tick, self.uart_frame = 1, 0, 0, 0, 0
@@ -155,25 +216,46 @@ class _DesignState:
                     if start:
                         self.uart_frame = (1 << 9) | (data_in << 1); self.uart_busy = 1; self.uart_bit = 0; self.uart_tick = 0; self.uart_tx = 0
                 elif self.uart_tick == self.uart_clks_per_bit - 1:
-                    self.uart_tick = 0; self.uart_bit += 1
-                    if self.uart_bit == 9: self.uart_busy = 0; self.uart_tx = 1
-                    else: self.uart_tx = (self.uart_frame >> (self.uart_bit + 1)) & 1
-                else: self.uart_tick += 1
+                    # 用旧 bit_idx 决定这一拍发什么，然后再推进 bit_idx
+                    self.uart_tick = 0
+                    if self.uart_bit == 9:
+                        self.uart_busy = 0; self.uart_tx = 1
+                    else:
+                        self.uart_tx = frame_bit(self.uart_bit + 1)
+                    self.uart_bit += 1
+                else:
+                    self.uart_tick += 1
             return {"tx": self.uart_tx, "busy": self.uart_busy}
         if design == "spi_master":
             rst, start, data_in = int(inputs.get("rst_n", 1)), int(inputs.get("start", 0)), int(inputs.get("data_in", 0)) & 255
+            # 已与 rtl/spi_master.v 逐拍对齐。与 uart_tx 同理，sclk 翻转后同一
+            # 时刻读到的 `!sclk` 是**旧**值，因此 mosi 用的是移位**之前**的
+            # `shift[WIDTH-2]`；模型必须先算好这一拍要用的旧值再更新寄存器。
+            def shift_bit(position: int) -> int:
+                return (self.spi_shift >> position) & 1 if 0 <= position < 32 else 0
+
             for _ in range(cycles):
                 self.spi_done = 0
                 if rst == 0:
                     self.spi_sclk, self.spi_mosi, self.spi_busy, self.spi_done, self.spi_count, self.spi_shift = 0, 0, 0, 0, 0, 0
                 elif not self.spi_busy:
                     self.spi_sclk = 0
-                    if start: self.spi_busy = 1; self.spi_shift = data_in; self.spi_count = 0; self.spi_mosi = (data_in >> 7) & 1
+                    if start:
+                        self.spi_busy = 1
+                        self.spi_shift = data_in
+                        self.spi_count = 0
+                        self.spi_mosi = (data_in >> (self.spi_width - 1)) & 1
                 else:
-                    self.spi_sclk = 0 if self.spi_sclk else 1
-                    if not self.spi_sclk:
-                        if self.spi_count == self.spi_width - 1: self.spi_busy = 0; self.spi_done = 1
-                        else: self.spi_count += 1; self.spi_shift = (self.spi_shift << 1) & 255; self.spi_mosi = (self.spi_shift >> 6) & 1
+                    was_low = self.spi_sclk == 0
+                    self.spi_sclk = 1 if was_low else 0
+                    if was_low:
+                        if self.spi_count == self.spi_width - 1:
+                            self.spi_busy = 0
+                            self.spi_done = 1
+                        else:
+                            self.spi_count += 1
+                            self.spi_mosi = shift_bit(self.spi_width - 2)
+                            self.spi_shift = (self.spi_shift << 1) & 255
             return {"sclk": self.spi_sclk, "mosi": self.spi_mosi, "busy": self.spi_busy, "done": self.spi_done}
         if design == "handshake_stage":
             rst, in_valid, out_ready, in_data = int(inputs.get("rst_n", 1)), int(inputs.get("in_valid", 0)), int(inputs.get("out_ready", 0)), int(inputs.get("in_data", 0)) & 255
@@ -183,12 +265,20 @@ class _DesignState:
                 elif in_ready: self.hs_valid = in_valid; self.hs_data = in_data if in_valid else self.hs_data
             return {"in_ready": int((not self.hs_valid) or bool(out_ready)), "out_valid": self.hs_valid, "out_data": self.hs_data}
         if design == "debounce":
-            rst, key_in = int(inputs.get("rst_n", 1)), int(inputs.get("key_in", 1))
+            rst, key_in = int(inputs.get("rst_n", 1)), int(inputs.get("key_in", 0))
+            # 已与 rtl/debounce.v 逐拍对齐。注意终端拍的 key_state：RTL 写的是
+            #     else if (count==COUNT_MAX-1) begin sample<=key_in; key_state<=key_in; ... end
+            # 三个都是非阻塞赋值，因此采样点上看到的 key_state 是**本拍新写入**的
+            # key_in，而不是旧值。模型若返回赋值前的 state 就会整体晚一拍。
             for _ in range(cycles):
-                if rst == 0: self.debounce_count, self.debounce_sample, self.debounce_state = 0, 1, 1
-                elif key_in == self.debounce_sample: self.debounce_count = 0
-                elif self.debounce_count == self.debounce_max - 1: self.debounce_sample, self.debounce_state, self.debounce_count = key_in, key_in, 0
-                else: self.debounce_count += 1
+                if rst == 0:
+                    self.debounce_count, self.debounce_sample, self.debounce_state = 0, 1, 1
+                elif key_in == self.debounce_sample:
+                    self.debounce_count = 0
+                elif self.debounce_count == self.debounce_max - 1:
+                    self.debounce_sample, self.debounce_state, self.debounce_count = key_in, key_in, 0
+                else:
+                    self.debounce_count += 1
             return {"key_state": self.debounce_state}
         if design == "pwm":
             rst, duty = int(inputs.get("rst_n", 1)), int(inputs.get("duty", 0)) & 255
