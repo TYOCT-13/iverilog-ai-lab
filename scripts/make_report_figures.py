@@ -1,4 +1,4 @@
-"""用 Pillow 生成技术报告插图（确定性、可复现、无第三方素材）。
+﻿"""用 Pillow 生成技术报告插图（确定性、可复现、无第三方素材）。
 
 为什么用代码画而不是找图：
 - 报告插图是**结构示意图与数据图**，属于"代码原生图形"，生成式绘图既不必要
@@ -128,6 +128,23 @@ def _footnote(draw: ImageDraw.ImageDraw, text: str, width: int, height: int) -> 
 # ---------------------------------------------------------------------------
 # 图 1：系统架构与 AI 边界
 # ---------------------------------------------------------------------------
+def _save(image: Image.Image, path: Path, *, max_width: int = 1500, colors: int = 64) -> Path:
+    """保存为体积可控的 PNG。
+
+    报告有 10MB 上限，而 200 DPI 的无损 PNG 单张就要 260KB 以上、嵌进 PDF 后
+    更容易膨胀。这里统一缩放到合适的显示宽度并做调色板量化——示意图只有纯色块
+    与文字，量化到 64 色肉眼无差别，体积能降一个数量级。
+    """
+
+    if image.width > max_width:
+        ratio = max_width / image.width
+        image = image.resize((max_width, int(image.height * ratio)), Image.LANCZOS)
+    image = image.convert("P", palette=Image.ADAPTIVE, colors=colors)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    image.save(path, optimize=True)
+    return path
+
+
 def figure_architecture() -> Path:
     width, height = 1600, 940
     image, draw = _canvas(width, height)
@@ -209,8 +226,7 @@ def figure_architecture() -> Path:
         width, height,
     )
     path = OUT_DIR / "fig1_architecture.png"
-    image.save(path, dpi=(200, 200))
-    return path
+    return _save(image, path)
 
 
 # ---------------------------------------------------------------------------
@@ -262,8 +278,7 @@ def figure_flow() -> Path:
     )
     _footnote(draw, "所有结论可回溯到 run 目录下的编译日志、仿真日志、VCD 与 result.json。", width, height)
     path = OUT_DIR / "fig2_flow.png"
-    image.save(path, dpi=(200, 200))
-    return path
+    return _save(image, path)
 
 
 # ---------------------------------------------------------------------------
@@ -297,8 +312,7 @@ def figure_layered_evidence(cells: dict | None = None) -> Path:
     )
     _footnote(draw, "综合通过 ≠ 时序收敛 ≠ 能上板；本项目不做时序签核，也不给出频率结论。", width, height)
     path = OUT_DIR / "fig3_layered_evidence.png"
-    image.save(path, dpi=(200, 200))
-    return path
+    return _save(image, path)
 
 
 # ---------------------------------------------------------------------------
@@ -348,8 +362,7 @@ def figure_benchmark(stats: dict) -> Path:
         width, height,
     )
     path = OUT_DIR / "fig4_benchmark.png"
-    image.save(path, dpi=(200, 200))
-    return path
+    return _save(image, path)
 
 
 def _read_benchmark_stats() -> dict:
