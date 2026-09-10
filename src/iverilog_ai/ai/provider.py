@@ -129,7 +129,11 @@ def _is_empty_output_error(detail: str) -> bool:
     """
 
     lowered = detail.lower()
-    return "no output text" in lowered or "output text is empty" in lowered
+    return (
+        "no output text" in lowered
+        or "output text is empty" in lowered
+        or "no usable message" in lowered
+    )
 
 
 def _network_enabled() -> bool:
@@ -168,12 +172,56 @@ def _base_url(value: str) -> str:
     return urlunsplit((parsed.scheme, parsed.netloc, path, "", ""))
 
 
+def _shape_report(data: object) -> str:
+    """给出响应的结构摘要，用于诊断"取不到正文"，且不泄露任何内容。"""
+
+    if not isinstance(data, dict):
+        return f"top-level type: {type(data).__name__}"
+    parts = [f"keys: {', '.join(sorted(str(key) for key in data.keys()))}"]
+    if "output_text" in data:
+        value = data["output_text"]
+        parts.append(f"output_text type: {type(value).__name__}")
+        if isinstance(value, (str, list)):
+            parts.append(f"output_text len: {len(value)}")
+            if isinstance(value, list) and value:
+                parts.append(f"output_text[0] type: {type(value[0]).__name__}")
+    if isinstance(data.get("status"), str):
+        parts.append(f"status: {data['status']}")
+    output = data.get("output")
+    if isinstance(output, list):
+        parts.append(f"output items: {len(output)}")
+        for item in output[:2]:
+            if isinstance(item, dict):
+                parts.append("output[0] keys: " + ", ".join(sorted(str(key) for key in item.keys())))
+                content = item.get("content")
+                if isinstance(content, list):
+                    parts.append(f"output[0].content items: {len(content)}")
+                    for part in content[:2]:
+                        if isinstance(part, dict):
+                            parts.append("content[0] keys: " + ", ".join(sorted(str(key) for key in part.keys())))
+    if isinstance(data.get("choices"), list):
+        parts.append(f"choices: {len(data['choices'])}")
+        if data["choices"] and isinstance(data["choices"][0], dict):
+            parts.append("choices[0] keys: " + ", ".join(sorted(str(key) for key in data["choices"][0].keys())))
+    return "; ".join(parts)
+
+
 def _response_text(data: object) -> str:
     if not isinstance(data, dict):
         raise ValueError("provider response must be a JSON object")
     direct = data.get("output_text")
     if isinstance(direct, str) and direct.strip():
         return direct
+    if isinstance(direct, list):
+        # 少数网关把 output_text 作为数组返回（元素为字符串或 {text: ...}）。
+        collected = []
+        for item in direct:
+            if isinstance(item, str):
+                collected.append(item)
+            elif isinstance(item, dict) and isinstance(item.get("text"), str):
+                collected.append(item["text"])
+        if collected and "".join(collected).strip():
+            return "".join(collected)
     chunks: list[str] = []
     output = data.get("output", [])
     if isinstance(output, list):
@@ -186,13 +234,18 @@ def _response_text(data: object) -> str:
             for part in content:
                 if isinstance(part, dict) and isinstance(part.get("text"), str):
                     chunks.append(part["text"])
+                elif isinstance(part, dict) and isinstance(part.get("content"), str):
+                    # 少数网关把文本放在 content 字符串里，而不是 text 字段。
+                    chunks.append(part["content"])
     if chunks:
         return "".join(chunks)
     try:
         message = data["choices"][0]["message"]
         content = message.get("content") if isinstance(message, dict) else None
     except (KeyError, IndexError, TypeError) as exc:
-        raise ValueError("provider response contains no output text") from exc
+        raise ValueError(
+            "provider returned no usable message or output array; " + _shape_report(data)
+        ) from exc
     if isinstance(content, list):
         parts = []
         for part in content:
@@ -216,12 +269,11 @@ def _response_text(data: object) -> str:
                 content = value
                 break
     if not isinstance(content, str) or not content.strip():
-        keys = ", ".join(sorted(str(key) for key in data.keys()))
         finish_reason = None
         if isinstance(data.get("choices"), list) and data["choices"] and isinstance(data["choices"][0], dict):
             finish_reason = data["choices"][0].get("finish_reason")
         suffix = f", finish_reason: {finish_reason}" if finish_reason else ""
-        raise ValueError(f"provider final output text is empty (response keys: {keys}{suffix})")
+        raise ValueError(f"provider final output text is empty ({_shape_report(data)}{suffix})")
     return content
 
 
@@ -372,7 +424,7 @@ class OpenAICompatibleProvider:
         }
         return tuple(sorted(model_ids))
 
-    def _build_body(self, prompt: str, *, streaming: bool) -> dict[str, object]:
+    def _build_body(self, prompt: str, *, streaming: bool, json_mode: bool = True) -> dict[str, object]:
         if self.wire_api == "responses":
             body: dict[str, object] = {"model": self.model, "input": prompt, "stream": streaming}
             # 仅在调用方明确选择时发送可选字段；默认最小请求兼容更多网关。
@@ -388,47 +440,59 @@ class OpenAICompatibleProvider:
             "messages": [{"role": "user", "content": prompt}],
             "stream": streaming,
         }
-        # OpenAI-compatible Chat Completions providers commonly support this
-        # flag and it materially reduces prose/fenced responses for TestPlan.
-        body["response_format"] = {"type": "json_object"}
-        # DeepSeek-compatible gateways may reject an empty/unsupported
-        # parameter; only send max_tokens when explicitly non-default.
+        # OpenAI 兼容网关普遍支持这个字段，它能明显减少散文/围栏输出。
+        # 但部分网关在收到它时会返回空的流式响应，因此允许在回退时关闭。
+        if json_mode:
+            body["response_format"] = {"type": "json_object"}
+        # DeepSeek 兼容网关可能拒绝空值/不支持参数；仅在非默认时发送 max_tokens。
         if self.max_output_tokens != 4096:
             body["max_tokens"] = self.max_output_tokens
         return body
 
-    def _generate_once(self, prompt: str, *, streaming: bool) -> str:
+    def _generate_once(self, prompt: str, *, streaming: bool, json_mode: bool = True) -> str:
         path = self._endpoint_path("responses" if self.wire_api == "responses" else "chat_completions")
-        return _response_text(self._request(path, body=self._build_body(prompt, streaming=streaming), streaming=streaming))
+        body = self._build_body(prompt, streaming=streaming, json_mode=json_mode)
+        return _response_text(self._request(path, body=body, streaming=streaming))
 
     def generate(self, prompt: str) -> str:
-        """请求一次模型输出。
+        """请求一次模型输出，并在网关兼容性差异下做有界回退。
 
-        ``stream=False``（默认）始终使用非流式请求；``stream=True`` 始终使用
-        SSE 流式请求；``stream="auto"`` 先试非流式，遇到下面两类"网关要求流式"
-        的信号时自动改用流式重试一次：
+        ``stream=False``（默认）与 ``stream=True`` 各自只发一次请求，行为完全
+        确定。``stream="auto"`` 允许最多三次尝试，每一步只针对一类已确认的网关
+        兼容性问题：
 
-        1. 对端在返回响应前关闭连接（``RemoteDisconnected`` 等）；
-        2. 返回了响应但**没有任何输出文本**——部分网关对非流式请求返回 200
-           和空响应体，看起来像"模型没说话"，实际是协议不被支持。
+        1. 非流式 + ``response_format``：默认请求形状；
+        2. 流式 + ``response_format``：对端在返回响应前关闭连接（只接受流式）；
+        3. 流式、不带 ``response_format``：对端接受请求但返回空正文
+           （部分网关不支持 ``response_format``）。
 
-        认证失败、限流、超时与真正的格式错误都不会重试，避免把一次失败变成
-        两次请求和两份费用。
+        认证失败、限流、超时与真正的格式错误都不会重试：它们与请求形状无关，
+        重试只会产生额外请求和额外费用。
         """
 
         if self.stream is True:
             return self._generate_once(prompt, streaming=True)
         if self.stream is False:
             return self._generate_once(prompt, streaming=False)
-        try:
-            return self._generate_once(prompt, streaming=False)
-        except ProviderConnectionError as exc:
-            if not _is_stream_required_error(str(exc)):
-                raise
-            self.last_stream_fallback = True
-            return self._generate_once(prompt, streaming=True)
-        except ValueError as exc:
-            if not _is_empty_output_error(str(exc)):
-                raise
-            self.last_stream_fallback = True
-            return self._generate_once(prompt, streaming=True)
+
+        attempts: list[dict[str, bool]] = [
+            {"streaming": False, "json_mode": True},
+            {"streaming": True, "json_mode": True},
+            {"streaming": True, "json_mode": False},
+        ]
+        last_error: Exception | None = None
+        for index, attempt in enumerate(attempts):
+            try:
+                return self._generate_once(prompt, **attempt)
+            except ProviderConnectionError as exc:
+                last_error = exc
+                if not _is_stream_required_error(str(exc)):
+                    raise
+            except ValueError as exc:
+                last_error = exc
+                if not _is_empty_output_error(str(exc)):
+                    raise
+            if index < len(attempts) - 1:
+                self.last_stream_fallback = True
+        assert last_error is not None
+        raise last_error

@@ -260,6 +260,13 @@ def _main() -> int:
         default="http://127.0.0.1:11434/v1",
         help="base URL of the local debug model server (loopback only)",
     )
+    parser.add_argument(
+        "--online-stream",
+        choices=["auto", "on", "off"],
+        default="auto",
+        help="request shape for the real model: auto tries non-streaming first and falls back; "
+        "on forces SSE streaming; off forces non-streaming",
+    )
     args = parser.parse_args()
     root = Path(args.project_root).expanduser().resolve()
     output = (Path(args.output_dir) if args.output_dir else root / ".iverilog-ai" / "strategy-experiment").expanduser().resolve()
@@ -315,9 +322,10 @@ def _main() -> int:
                             provider = OpenAICompatibleProvider(endpoint=args.debug_endpoint, model="debug-local", wire_api="chat_completions", reasoning_effort=None, allow_network=False, store=False, timeout=30)
                         else:
                             # stream="auto"：先非流式，若网关只接受流式（会在返回
-                            # 响应前断连）则自动改用 SSE 重试一次。真实模型实验
-                            # 因此对两类网关都可用。
-                            provider = OpenAICompatibleProvider(endpoint=args.online_endpoint, model=args.online_model, api_key=online_key, wire_api="chat_completions", reasoning_effort=None, allow_network=True, store=False, timeout=180, stream="auto")
+                            # 响应前断连）或返回空正文，则自动改用 SSE 重试。
+                            # 实测某些网关必须显式强制流式才稳定，故提供开关。
+                            stream_mode: bool | str = {"auto": "auto", "on": True, "off": False}[args.online_stream]
+                            provider = OpenAICompatibleProvider(endpoint=args.online_endpoint, model=args.online_model, api_key=online_key, wire_api="chat_completions", reasoning_effort=None, allow_network=True, store=False, timeout=180, stream=stream_mode)
                         generation_started = time.perf_counter()
                         # Give online models the exact contract; otherwise
                         # they may invent aliases such as ``en`` for ``enable``.
