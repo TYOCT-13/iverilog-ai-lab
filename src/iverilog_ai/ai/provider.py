@@ -118,7 +118,18 @@ def _is_stream_required_error(detail: str) -> bool:
     """判断连接关闭是否属于"服务端要求流式"这一类。"""
 
     lowered = detail.lower()
-    return "closed" in lowered or "reset" in lowered or "without response" in lowered or "断开" in detail
+    return "closed" in lowered or "reset" in lowered or "without response" in lowered or "eof" in lowered or "断开" in detail
+
+
+def _is_empty_output_error(detail: str) -> bool:
+    """判断"返回了响应但没有输出文本"是否属于"服务端要求流式"这一类。
+
+    部分 OpenAI 兼容网关对非流式请求返回 HTTP 200 与空响应体；这看起来像
+    "模型没有输出"，实际是协议不被支持。真正的格式错误不会带这个前缀。
+    """
+
+    lowered = detail.lower()
+    return "no output text" in lowered or "output text is empty" in lowered
 
 
 def _network_enabled() -> bool:
@@ -394,9 +405,15 @@ class OpenAICompatibleProvider:
         """请求一次模型输出。
 
         ``stream=False``（默认）始终使用非流式请求；``stream=True`` 始终使用
-        SSE 流式请求；``stream="auto"`` 先试非流式，若对端在返回响应前关闭连接
-        （部分 OpenAI 兼容网关只接受流式），则自动改用流式重试一次。重试只发生
-        在"服务端要求流式"这一类连接错误上，认证、限流和格式错误均不会重试。
+        SSE 流式请求；``stream="auto"`` 先试非流式，遇到下面两类"网关要求流式"
+        的信号时自动改用流式重试一次：
+
+        1. 对端在返回响应前关闭连接（``RemoteDisconnected`` 等）；
+        2. 返回了响应但**没有任何输出文本**——部分网关对非流式请求返回 200
+           和空响应体，看起来像"模型没说话"，实际是协议不被支持。
+
+        认证失败、限流、超时与真正的格式错误都不会重试，避免把一次失败变成
+        两次请求和两份费用。
         """
 
         if self.stream is True:
@@ -407,6 +424,11 @@ class OpenAICompatibleProvider:
             return self._generate_once(prompt, streaming=False)
         except ProviderConnectionError as exc:
             if not _is_stream_required_error(str(exc)):
+                raise
+            self.last_stream_fallback = True
+            return self._generate_once(prompt, streaming=True)
+        except ValueError as exc:
+            if not _is_empty_output_error(str(exc)):
                 raise
             self.last_stream_fallback = True
             return self._generate_once(prompt, streaming=True)

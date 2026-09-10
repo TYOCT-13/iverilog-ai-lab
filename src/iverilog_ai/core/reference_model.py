@@ -20,6 +20,23 @@ SUPPORTED = {
     "sync_fifo", "uart_tx", "spi_master", "handshake_stage", "debounce", "pwm", "mux4", "sync_reset",
 }
 
+# 可作为**权威预言机**的设计：这些模型已逐项对照参考 RTL 的手写 testbench 验证过，
+# 因此可以用它们的复算值覆盖 AI 期望值。
+#
+# 其余案例的模型只用于**诊断**：在没有与 RTL 逐拍对齐之前，它们不应决定 PASS/FAIL，
+# 否则一句错误的模型语义就会把"参考设计通过"变成 warn 失败。这类案例回退为
+# AI 期望值，并在 oracle 记录里如实标注 expectation_source="ai_generated"。
+#
+# 放宽这个集合的方法只有一个：让模型与 RTL 逐拍对齐（可用
+# tests/core/test_reference_model_cases.py 的对照思路扩展成逐拍比对），
+# 对齐一个才加入一个。
+AUTHORITATIVE: frozenset[str] = frozenset({
+    "mod10_counter",
+    "simple_alu",
+    "sequence_101_overlap",
+    "traffic_light_emergency",
+})
+
 def _get(value: Any, key: str, default: Any = None) -> Any:
     return value.get(key, default) if isinstance(value, Mapping) else getattr(value, key, default)
 
@@ -171,8 +188,19 @@ class _DesignState:
         return {}
 
 
-def reference_expectations(plan: Any, design: str | None = None, contract: Any = None) -> dict[str, dict[str, Any]]:
+def reference_expectations(
+    plan: Any,
+    design: str | None = None,
+    contract: Any = None,
+    *,
+    authoritative_only: bool = True,
+) -> dict[str, dict[str, Any]]:
     """按向量名返回参考模型独立复算的稳态输出。
+
+    ``authoritative_only=True``（默认）只对 :data:`AUTHORITATIVE` 中已与 RTL 核对
+    过的设计返回期望值；其余设计返回空字典，调用方回退为 AI 期望值并如实标注
+    来源。诊断路径（``check_plan_consistency``）传 ``False``：它只报告差异，
+    不参与裁决，因此可以用上全部已建模案例。
 
     只返回 DUT contract 中确实存在、且参考模型确实建模了的信号，因此调用方
     可以安全地用它约束 testbench 的期望值，而不必信任模型给出的数字。
@@ -180,6 +208,8 @@ def reference_expectations(plan: Any, design: str | None = None, contract: Any =
 
     plan_design = str(design or _get(plan, "design", ""))
     if plan_design not in SUPPORTED:
+        return {}
+    if authoritative_only and plan_design not in AUTHORITATIVE:
         return {}
     port_names: set[str] | None = None
     if contract is not None:
@@ -242,7 +272,9 @@ def check_plan_consistency(plan: Any, design: str | None = None, contract: Any =
     if design_name not in SUPPORTED:
         return {"status": "skipped", "design": design_name, "warnings": [], "checked": 0,
                 "reason": "reference model is only defined for bundled examples"}
-    expectations = reference_expectations(plan, design_name, contract)
+    # 诊断不做门控：它只报告差异、不参与裁决，因此可以用上全部已建模案例。
+    expectations = reference_expectations(plan, design_name, contract, authoritative_only=False)
+    report_is_authoritative = design_name in AUTHORITATIVE
     warnings: list[dict[str, Any]] = []
     checked = 0
     matched = 0

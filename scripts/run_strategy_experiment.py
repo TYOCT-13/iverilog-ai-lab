@@ -19,45 +19,48 @@ import time
 from typing import Any, Callable
 
 from iverilog_ai.ai import MockProvider, OpenAICompatibleProvider, plan_tests
+from iverilog_ai.ai.debug_server import build_plan_response
 from iverilog_ai.core.contracts import DutContract
 from iverilog_ai.core.models import ResultStatus
 from iverilog_ai.core.pipeline import VerificationPipeline
 from iverilog_ai.core.rules import rules_context, rules_fingerprint
 
+# 脚本所在仓库根目录；用于按案例定位 examples/<case>_contract.json。
+ROOT_DIR = Path(__file__).resolve().parents[1]
 
-ROOT_CASES: dict[str, dict[str, Any]] = {
-    "mod10_counter": {
-        "rtl": "rtl/mod10_counter.v", "top": "mod10_counter",
-        "testbench": "tb/tb_mod10_counter.v",
-        "contract": {"module": "mod10_counter", "ports": [
-            {"name": "clk", "direction": "input"}, {"name": "rst_n", "direction": "input"},
-            {"name": "enable", "direction": "input"}, {"name": "count", "direction": "output", "width": 4}],
-            "clock": {"signal": "clk", "period_ns": 10}, "reset": {"signal": "rst_n", "active_level": 0, "assert_cycles": 2}},
-    },
-    "traffic_light_emergency": {
-        "rtl": "rtl/traffic_light_emergency.v", "top": "traffic_light_emergency",
-        "testbench": "tb/tb_traffic_light_emergency.v",
-        "contract": {"module": "traffic_light_emergency", "ports": [
-            {"name": "clk", "direction": "input"}, {"name": "rst_n", "direction": "input"},
-            {"name": "emergency", "direction": "input"}, {"name": "main_light", "direction": "output", "width": 2},
-            {"name": "side_light", "direction": "output", "width": 2}],
-            "clock": {"signal": "clk", "period_ns": 10}, "reset": {"signal": "rst_n", "active_level": 0, "assert_cycles": 2}},
-    },
-    "simple_alu": {
-        "rtl": "rtl/simple_alu.v", "top": "simple_alu", "testbench": "tb/tb_simple_alu.v",
-        "contract": {"module": "simple_alu", "ports": [
-            {"name": "a", "direction": "input", "width": 8}, {"name": "b", "direction": "input", "width": 8},
-            {"name": "op", "direction": "input", "width": 3}, {"name": "result", "direction": "output", "width": 8},
-            {"name": "carry", "direction": "output"}, {"name": "zero", "direction": "output"}]},
-    },
-    "sequence_101_overlap": {
-        "rtl": "rtl/sequence_101_overlap.v", "top": "sequence_101_overlap", "testbench": "tb/tb_sequence_101_overlap.v",
-        "contract": {"module": "sequence_101_overlap", "ports": [
-            {"name": "clk", "direction": "input"}, {"name": "rst_n", "direction": "input"},
-            {"name": "bit_in", "direction": "input"}, {"name": "detected", "direction": "output"}],
-            "clock": {"signal": "clk", "period_ns": 10}, "reset": {"signal": "rst_n", "active_level": 0, "assert_cycles": 2}},
-    },
-}
+
+def _load_cases(root: Path) -> tuple[dict[str, dict[str, Any]], dict[str, str]]:
+    """从 benchmarks/manifest.json 发现全部案例，并加载各自的显式 DUT 合约。
+
+    案例集合由 manifest 的 categories 决定，而不是脚本里写死的列表：这样基准
+    扩展到新案例时，公平比较实验会自动跟着覆盖，不会出现"基准有 12 个案例、
+    实验只跑 4 个"的口径错位。
+
+    返回 (可用案例, 被跳过的案例及原因)。纯组合逻辑案例（合约里没有时钟）无法
+    用向量式 testbench 表达时序语义，因此不参与本实验，但仍保留在基准矩阵中
+    由手写 testbench 覆盖。
+    """
+
+    manifest_path = root / "benchmarks" / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    cases: dict[str, dict[str, Any]] = {}
+    skipped: dict[str, str] = {}
+    for case in manifest.get("categories", []):
+        contract_rel = f"examples/{case}_contract.json"
+        contract_path = root / contract_rel
+        if not contract_path.is_file():
+            raise SystemExit(f"案例 {case} 缺少合约文件 {contract_rel}")
+        rtl_rel = f"rtl/{case}.v"
+        if not (root / rtl_rel).is_file():
+            raise SystemExit(f"案例 {case} 缺少参考 RTL {rtl_rel}")
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        if "clock" not in contract:
+            skipped[str(case)] = "合约未定义时钟：纯组合逻辑，向量式 testbench 不适用"
+            continue
+        cases[str(case)] = {"rtl": rtl_rel, "contract": contract}
+    if not cases:
+        raise SystemExit("benchmarks/manifest.json 没有登记任何可计划化案例")
+    return cases, skipped
 
 
 def _alu(a: int, b: int, op: int) -> dict[str, int]:
@@ -72,6 +75,25 @@ def _alu(a: int, b: int, op: int) -> dict[str, int]:
     elif op == 6: value = a >> 1
     else: value = 0
     return {"result": value, "carry": 0, "zero": int(value == 0)}
+
+
+def _contract_stimulus(case: str, seed: int, count: int) -> list[dict[str, Any]]:
+    """为任意案例生成一组确定性激励（只含 inputs，由预言机负责期望值）。
+
+    激励形状复用本地调试模型服务的取值表：它按案例给出了能走到状态空间边界
+    （写满、回绕、位序、门限、占空比边界、同步级数）的输入顺序，因此新案例
+    不必在实验脚本里再维护一份重复的激励表。期望值留空——正确性由参考模型与
+    Icarus 裁决，这正是本实验要验证的口径。
+    """
+
+    contract_rel = ROOT_DIR / "examples" / f"{case}_contract.json"
+    contract = json.loads(contract_rel.read_text(encoding="utf-8"))
+    prompt = "Design: %s DUT context: %s Schema: {}" % (case, json.dumps(contract, ensure_ascii=False))
+    plan = build_plan_response(prompt, vector_count=count, seed=seed)
+    return [
+        {"name": f"{case}_{seed}_{index}", "inputs": vector["inputs"], "cycles": vector.get("cycles", 1), "expected": {}}
+        for index, vector in enumerate(plan["vectors"])
+    ]
 
 
 def _vectors(case: str, seed: int, count: int = 12) -> list[dict[str, Any]]:
@@ -101,6 +123,9 @@ def _vectors(case: str, seed: int, count: int = 12) -> list[dict[str, Any]]:
             state = 1 if emergency else (state + 1) % 4
             main, side = (1, 0) if emergency else ((2, 0), (1, 0), (0, 2), (0, 1))[state]
             vectors.append({"name": f"traffic_{seed}_{index}", "inputs": {"emergency": emergency}, "expected": {"main_light": main, "side_light": side}})
+    else:
+        # 其余案例：使用取值表驱动的确定性激励，随机策略用种子区分取值相位。
+        return _contract_stimulus(case, seed, count)
     return vectors
 
 
@@ -129,7 +154,8 @@ def _fixed(case: str) -> list[dict[str, Any]]:
             {"name": "fixed_side_yellow", "inputs": {"emergency": 0}, "expected": {"main_light": 0, "side_light": 1}},
             {"name": "fixed_main_green", "inputs": {"emergency": 0}, "expected": {"main_light": 2, "side_light": 0}},
         ]
-    return _vectors(case, 0, 12)
+    # 其余案例：固定策略使用取值表的 0 号相位，激励条数与随机策略一致。
+    return _contract_stimulus(case, 0, 12)
 
 
 def _payload(case: str, vectors: list[dict[str, Any]]) -> dict[str, Any]:
@@ -241,6 +267,11 @@ def _main() -> int:
     output.mkdir(parents=True, exist_ok=True)
     manifest = json.loads((root / "benchmarks" / "manifest.json").read_text(encoding="utf-8"))
     defect_files = {str(item["id"]): str(item["file"]) for item in manifest.get("defects", [])}
+    # 案例集合与合约由 manifest 决定，保证实验覆盖面与基准一致。
+    CASES, SKIPPED_CASES = _load_cases(root)
+    if SKIPPED_CASES:
+        for _case, _reason in SKIPPED_CASES.items():
+            print(f"跳过案例 {_case}：{_reason}", flush=True)
     if args.online and args.debug_local:
         parser.error("--online and --debug-local are mutually exclusive")
     if (args.online or args.debug_local) and args.online_repeats < 1:
@@ -251,18 +282,18 @@ def _main() -> int:
     use_remote_or_debug = bool(args.online or args.debug_local)
     rows: list[dict[str, Any]] = []
     rule_sets: dict[str, dict[str, Any]] = {}
-    for case_name, case_spec in ROOT_CASES.items():
+    for case_name, case_spec in CASES.items():
         _, files = rules_context(root, case_name, case_spec["contract"])
         rule_sets[case_name] = {"fingerprint": rules_fingerprint(files), "files": files}
     strategies = ["fixed", "random", "ai"] + (["online_ai"] if use_remote_or_debug else [])
     total_units = sum(
         len([0] if strategy == "fixed" else (range(args.online_repeats) if strategy == "online_ai" else range(args.seeds)))
         * (1 + sum(1 for item in manifest.get("defects", []) if item["type"] == case))
-        for case in ROOT_CASES for strategy in strategies
+        for case in CASES for strategy in strategies
     )
     completed_units = 0
     print(f"实验开始：{experiment_started_wall.isoformat().replace('+00:00', 'Z')}；预计任务数：{total_units}", flush=True)
-    for case, spec in ROOT_CASES.items():
+    for case, spec in CASES.items():
         variants = ["reference"] + [str(item["id"]) for item in manifest.get("defects", []) if item["type"] == case]
         for strategy in strategies:
             seeds = [0] if strategy == "fixed" else (list(range(args.online_repeats)) if strategy == "online_ai" else list(range(args.seeds)))
@@ -359,7 +390,7 @@ def _main() -> int:
         valid_requests = sum(bool(row.get("plan_valid")) for row in request_rows.values())
         summary[strategy] = {"runs": len(selected), "plan_requests": len(request_rows), "valid_plan_requests": valid_requests, "request_plan_valid_rate": valid_requests / len(request_rows) if request_rows else 0.0, "plan_valid": all(row["plan_valid"] for row in selected), "plan_valid_runs": valid_runs, "plan_total_runs": len(selected), "plan_valid_rate": valid_runs / len(selected) if selected else 0.0, "reference_false_positives": reference_false_positives, "reference_warn_mismatches": reference_warn_mismatches, "ai_expected_checked": ai_checked, "ai_expected_matched": ai_matched, "ai_expected_accuracy": (ai_matched / ai_checked) if ai_checked else None, "defects_total": len(total_pairs), "defects_found": len(found_pairs), "detection_rate": len(found_pairs) / len(total_pairs) if total_pairs else 0.0, "inconclusive_runs": sum(row["status"] == "inconclusive" for row in selected), "mean_generation_ms": (sum(generation_times) / len(generation_times) if generation_times else None), "mean_time_to_first_failure_ms": (sum(row["time_to_first_failure_ms"] for row in defects if row.get("time_to_first_failure_ms") is not None) / max(1, sum(row.get("time_to_first_failure_ms") is not None for row in defects)))}
     experiment_finished_wall = datetime.now(timezone.utc)
-    payload = {"schema_version": "1.0", "started_at": experiment_started_wall.isoformat().replace("+00:00", "Z"), "finished_at": experiment_finished_wall.isoformat().replace("+00:00", "Z"), "duration_ms": int((time.perf_counter() - experiment_started) * 1000), "total_units": total_units, "completed_units": completed_units, "rule_sets": rule_sets, "runs": rows, "summary": summary}
+    payload = {"schema_version": "1.0", "started_at": experiment_started_wall.isoformat().replace("+00:00", "Z"), "finished_at": experiment_finished_wall.isoformat().replace("+00:00", "Z"), "duration_ms": int((time.perf_counter() - experiment_started) * 1000), "total_units": total_units, "completed_units": completed_units, "rule_sets": rule_sets, "skipped_cases": SKIPPED_CASES, "runs": rows, "summary": summary}
     (output / "strategy_matrix.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     _write_experiment_report(output / "strategy_report.md", payload, endpoint=(args.debug_endpoint if args.debug_local else args.online_endpoint) if use_remote_or_debug else None, model=("debug-local (offline)" if args.debug_local else args.online_model) if use_remote_or_debug else None)
     print(f"实验完成：总耗时 {payload['duration_ms'] / 1000:.1f}s；结果：{output / 'strategy_matrix.json'}", flush=True)
