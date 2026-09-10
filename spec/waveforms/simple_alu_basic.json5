@@ -1,0 +1,5 @@
+{ signal: [
+  { name: 'op', wave: 'x3....', data: ['ADD','AND','SHL'] },
+  { name: 'result', wave: 'x345..', data: ['0x10','0x00','0x02'] },
+  { name: 'carry', wave: '0.0...' }, { name: 'zero', wave: '0.1...' }
+] }

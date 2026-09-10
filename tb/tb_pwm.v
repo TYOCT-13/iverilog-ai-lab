@@ -1,0 +1,3 @@
+`timescale 1ns/1ps
+module tb_pwm; reg clk=0,rst_n=0; reg [7:0] duty=0; wire pwm_out; pwm dut(clk,rst_n,duty,pwm_out); always #5 clk=~clk;
+ initial begin rst_n=1; #2; rst_n=0; #1; if(pwm_out!==0)$display("IVERILOG_AI_RESULT {\"ok\":false,\"test_id\":\"reset\"}"); else $display("IVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"reset\"}"); rst_n=1; duty=0; @(negedge clk); #1; if(pwm_out!==0)$display("IVERILOG_AI_RESULT {\"ok\":false,\"test_id\":\"zero_duty\"}"); else $display("IVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"zero_duty\"}"); duty=255; @(negedge clk); #1; if(pwm_out!==1)$display("IVERILOG_AI_RESULT {\"ok\":false,\"test_id\":\"full_duty\"}"); else $display("IVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"full_duty\"}"); $finish; end endmodule

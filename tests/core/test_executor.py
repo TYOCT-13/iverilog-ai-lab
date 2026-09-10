@@ -1,0 +1,96 @@
+from pathlib import Path
+
+import pytest
+
+from iverilog_ai.core.config import ExecutionConfig, SafePathError
+from iverilog_ai.core.executor import IcarusExecutor, parse_result_records
+from iverilog_ai.core.models import ResultStatus
+
+
+IVERILOG = Path(r"D:\iverilog\bin\iverilog.exe")
+VVP = Path(r"D:\iverilog\bin\vvp.exe")
+
+
+def test_parse_result_records_is_strict():
+    records, diagnostics = parse_result_records(
+        'ordinary text\nIVERILOG_AI_RESULT {"ok":true,"test_id":"reset"}\n'
+        'IVERILOG_AI_RESULT {"ok":false,"test_id":"wrap","cycle":11}\n'
+        'IVERILOG_AI_RESULT {broken}\n'
+    )
+    assert [record.ok for record in records] == [True, False]
+    assert len(diagnostics) == 1
+
+
+@pytest.mark.skipif(not (IVERILOG.is_file() and VVP.is_file()), reason="Icarus tools are not installed")
+def test_executor_runs_real_iverilog_and_vvp(tmp_path):
+    rtl = tmp_path / "dut.v"
+    tb = tmp_path / "tb_dut.v"
+    rtl.write_text(
+        "module dut(input wire clk, output reg q); "
+        "always @(posedge clk) q <= ~q; endmodule\n",
+        encoding="utf-8",
+    )
+    tb.write_text(
+        "module tb_dut; reg clk=0; wire q; dut u(.clk(clk),.q(q)); "
+        "always #1 clk=~clk; initial begin #0; "
+        '$display("IVERILOG_AI_RESULT {\\\"ok\\\":true,\\\"test_id\\\":\\\"toggle\\\",\\\"cycle\\\":1}"); '
+        "#4 $finish; end endmodule\n",
+        encoding="utf-8",
+    )
+    config = ExecutionConfig(
+        rtl_path=rtl,
+        testbench_path=tb,
+        top_module="tb_dut",
+        output_dir=tmp_path / "runs",
+        allowed_roots=(tmp_path,),
+        iverilog_path=IVERILOG,
+        vvp_path=VVP,
+        timeout_seconds=5,
+    )
+    result = IcarusExecutor(config).run()
+    assert result.status is ResultStatus.PASSED
+    assert result.compile.returncode == 0
+    assert result.run is not None and result.run.returncode == 0
+    assert result.artifacts["result_json"]
+
+
+def test_executor_rejects_source_outside_allowed_root(tmp_path):
+    outside = tmp_path.parent / "outside_dut.v"
+    outside.write_text("module dut; endmodule\n", encoding="utf-8")
+    tb = tmp_path / "tb.v"
+    tb.write_text("module tb; initial $finish; endmodule\n", encoding="utf-8")
+    config = ExecutionConfig(
+        rtl_path=outside,
+        testbench_path=tb,
+        top_module="tb",
+        output_dir=tmp_path / "runs",
+        allowed_roots=(tmp_path,),
+        iverilog_path=IVERILOG,
+        vvp_path=VVP,
+    )
+    with pytest.raises(SafePathError):
+        config.resolve()
+
+
+@pytest.mark.skipif(not (IVERILOG.is_file() and VVP.is_file()), reason="Icarus tools are not installed")
+def test_executor_persists_compile_failure_evidence(tmp_path):
+    rtl = tmp_path / "broken.v"
+    tb = tmp_path / "tb_broken.v"
+    rtl.write_text("module broken(input wire clk; endmodule\n", encoding="utf-8")
+    tb.write_text("module tb_broken; initial $finish; endmodule\n", encoding="utf-8")
+    config = ExecutionConfig(
+        rtl_path=rtl,
+        testbench_path=tb,
+        top_module="tb_broken",
+        output_dir=tmp_path / "runs",
+        allowed_roots=(tmp_path,),
+        iverilog_path=IVERILOG,
+        vvp_path=VVP,
+        timeout_seconds=5,
+    )
+    result = IcarusExecutor(config).run()
+    assert result.status is ResultStatus.COMPILE_FAILED
+    assert result.run is None
+    result_json = Path(result.artifacts["result_json"])
+    assert result_json.is_file()
+    assert "compile.stderr" in result.artifacts["compile_stderr"]

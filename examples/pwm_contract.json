@@ -1,0 +1,1 @@
+{"module":"pwm","parameters":{"WIDTH":8},"ports":[{"name":"clk","direction":"input"},{"name":"rst_n","direction":"input"},{"name":"duty","direction":"input","width":8},{"name":"pwm_out","direction":"output"}],"clock":{"signal":"clk","period_ns":10},"reset":{"signal":"rst_n","active_level":0,"synchronous":false,"assert_cycles":2}}

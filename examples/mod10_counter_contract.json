@@ -1,0 +1,36 @@
+{
+  "module": "mod10_counter",
+  "ports": [
+    {
+      "name": "clk",
+      "direction": "input",
+      "width": 1
+    },
+    {
+      "name": "rst_n",
+      "direction": "input",
+      "width": 1
+    },
+    {
+      "name": "enable",
+      "direction": "input",
+      "width": 1
+    },
+    {
+      "name": "count",
+      "direction": "output",
+      "width": 4,
+      "initial": 0
+    }
+  ],
+  "clock": {
+    "signal": "clk",
+    "period_ns": 10
+  },
+  "reset": {
+    "signal": "rst_n",
+    "active_level": 0,
+    "synchronous": false,
+    "assert_cycles": 2
+  }
+}

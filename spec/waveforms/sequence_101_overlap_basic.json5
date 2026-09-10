@@ -1,0 +1,5 @@
+{ signal: [
+  { name: 'clk', wave: 'p.......' },
+  { name: 'bit_in', wave: '01010100', data: ['1','0','1','0','1'] },
+  { name: 'detected', wave: '00101000' }
+] }

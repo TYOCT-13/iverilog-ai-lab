@@ -1,0 +1,105 @@
+# Icarus 智测：AI 验证扩展
+
+这是一个围绕 Icarus Verilog 开源生态构建的非官方 AI 辅助 RTL 验证工具。AI 负责提出测试场景和解释失败，Icarus Verilog 与自检 testbench 负责裁决功能是否正确。
+
+## 当前进度
+
+- 阶段一确定性验证闭环：已完成并有真实 Icarus/vvp 证据。
+- 阶段二 AI 测试规划：离线 MockProvider、OpenAI-compatible provider、严格 JSON 校验和重试，以及“计划→testbench→Icarus/vvp”确定性流水线均已完成。
+- 阶段三基准与评测：已覆盖模十计数器、交通灯、简单 ALU、可重叠 101 序列检测器，共 50 个缺陷变体；另加入同步上升沿检测器和脉冲展宽器以及 FIFO、UART、SPI、握手、去抖、PWM、多路选择器、同步复位等常用 FPGA 案例。固定矩阵最近一次实跑 50/50 检出、参考误报 0、不可判定 0。
+- 阶段四演示材料：Streamlit 单页、GitHub Actions、申报大纲、演示脚本和公平评测方案已完成。
+- 阶段五验证深度增强：内置案例参考模型校验、测试计划执行覆盖率摘要、失败原因解释、受控断言模板、失败周期波形摘要和 8 类常用案例 reference model 已完成；参数化 contract 与 testbench 实例化已接入。
+- 阶段六 RTL 质量审查：已提供静态规则审查器、质量评分、JSON/Markdown 报告和网页下载；静态审查不替代 Icarus 仿真、综合或时序分析。
+- 阶段七 VCD 自动分析：已提供本地 VCD 解析、信号列表、时间范围和变化统计；无需 GTKWave 也能生成波形摘要，GTKWave 作为可选人工复核工具。
+
+## 快速开始
+
+在工程根目录执行（请按本机 Icarus 安装位置调整工具路径）：
+
+```powershell
+python -m pip install -e .
+python -m iverilog_ai run `
+  --rtl rtl/mod10_counter.v `
+  --testbench tb/tb_mod10_counter.v `
+  --top tb_mod10_counter `
+  --iverilog D:\iverilog\bin\iverilog.exe `
+  --vvp D:\iverilog\bin\vvp.exe
+```
+
+命令返回 0 表示编译、执行和所有结构化检查均通过；返回 1 表示 testbench 发现失败或证据不足。每次运行会在 `.iverilog-ai/runs/` 下建立独立目录。已有结果可用下列命令重新渲染：
+
+```powershell
+python -m iverilog_ai report --result .iverilog-ai/runs/run-<id>/result.json --format html --output report.html
+```
+
+启动演示页面：
+
+```powershell
+streamlit run ui/app.py
+```
+
+在无 API Key、无网络的环境下联调整条流水线（本地调试模型，仅监听回环地址）：
+
+```powershell
+python -m iverilog_ai.ai.debug_server
+```
+
+然后在网页「AI 接口设置」中选择「本地调试模型」即可。详见 [docs/debug_interface.md](docs/debug_interface.md)。
+
+离线测试计划示例：
+
+```powershell
+python -c "from iverilog_ai.ai import plan_tests; print(plan_tests('覆盖复位和回绕', 'mod10_counter').model_dump_json(indent=2))"
+```
+
+从显式 DUT 合约和 AI 测试计划生成受控 testbench 并执行：
+
+```powershell
+python -m iverilog_ai plan-run `
+  --plan examples/simple_alu_plan.json `
+  --contract examples/simple_alu_contract.json `
+  --rtl rtl/simple_alu.v `
+  --iverilog D:\iverilog\bin\iverilog.exe `
+  --vvp D:\iverilog\bin\vvp.exe
+```
+
+运行完整固定向量基准矩阵并生成 JSON/Markdown 摘要：
+
+```powershell
+python scripts/run_benchmark_matrix.py --project-root . `
+  --iverilog D:\iverilog\bin\iverilog.exe `
+  --vvp D:\iverilog\bin\vvp.exe
+```
+
+运行 5-seed fixed/random/AI 公平基线（AI 使用离线 MockProvider）：
+
+```powershell
+python scripts/run_strategy_experiment.py --project-root . --seeds 5 `
+  --iverilog D:\iverilog\bin\iverilog.exe `
+  --vvp D:\iverilog\bin\vvp.exe
+```
+
+实验逐次记录输出到 `.iverilog-ai/strategy-experiment/strategy_matrix.json`。
+
+## 开源生态成果
+
+- Icarus Verilog 外部验证扩展；
+- 可复用测试计划格式与严格校验；
+- 四类 RTL 缺陷基准集（详见 `benchmarks/manifest.json`）；
+- 自动回归、CI 和离线报告工具；
+- 中文案例、教程和参赛材料。
+
+## 项目边界
+
+- 本项目不是 Icarus Verilog 官方项目，也不代表其维护者立场。
+- 本项目不修改、复制或重新分发 Icarus Verilog 源码。
+- AI 输出不能代替编译与仿真证据。
+- 固定案例和经用户确认 contract 的自定义 RTL 均可执行；自定义 RTL 仍不等同于不可信代码安全沙箱。
+- 模型密钥不得写入仓库；网络 provider 只有显式设置 `IVERILOG_AI_ALLOW_NETWORK=1` 才会请求。
+- 不自动覆盖原始 RTL，不自动提交 GitHub Issue/PR。
+
+详细范围见 [PROJECT_SCOPE.md](PROJECT_SCOPE.md)，真实验证记录见 [docs/verification_report.md](docs/verification_report.md)，参赛材料见 `docs/competition/`、`docs/demo/` 和 `docs/experiment/`。
+
+## 许可证
+
+本项目自研部分采用 Apache License 2.0。第三方工具、库和案例遵循各自许可证，详见 `THIRD_PARTY.md`。

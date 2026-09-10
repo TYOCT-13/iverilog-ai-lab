@@ -1,0 +1,6 @@
+{ signal: [
+  { name: 'clk', wave: 'p....|p....|p....|p' },
+  { name: 'emergency', wave: '0...1...0.......' },
+  { name: 'main_light', wave: '=...=...=...=...', data: ['GREEN','YELLOW','YELLOW','RED'] },
+  { name: 'side_light', wave: '=...=...=...=...', data: ['RED','RED','RED','GREEN'] }
+] }

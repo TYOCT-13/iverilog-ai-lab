@@ -1,0 +1,22 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="在线模型实验（DeepSeek）" type="PythonConfigurationType" factoryName="Python">
+    <module name="iverilog-ai-lab" />
+    <option name="INTERPRETER_OPTIONS" value="" />
+    <option name="PARENT_ENVS" value="true" />
+    <envs>
+      <env name="PYTHONPATH" value="$PROJECT_DIR$/src" />
+      <env name="IVERILOG_AI_API_KEY" value="" />
+    </envs>
+    <option name="SDK_HOME" value="" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <option name="IS_MODULE_MODE" value="false" />
+    <option name="ADD_CONTENT_ROOTS" value="true" />
+    <option name="ADD_SOURCE_ROOTS" value="true" />
+    <option name="SCRIPT_NAME" value="$PROJECT_DIR$/scripts/run_strategy_experiment.py" />
+    <option name="PARAMETERS" value="--project-root . --iverilog D:\\iverilog\\bin\\iverilog.exe --vvp D:\\iverilog\\bin\\vvp.exe --online --online-endpoint https://api.deepseek.com --online-model deepseek-v4-flash --online-repeats 10" />
+    <option name="SHOW_COMMAND_LINE" value="false" />
+    <option name="EMULATE_TERMINAL" value="false" />
+    <option name="REDIRECT_INPUT" value="false" />
+    <method v="2" />
+  </configuration>
+</component>

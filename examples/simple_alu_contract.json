@@ -1,0 +1,11 @@
+{
+  "module": "simple_alu",
+  "ports": [
+    {"name": "a", "direction": "input", "width": 8},
+    {"name": "b", "direction": "input", "width": 8},
+    {"name": "op", "direction": "input", "width": 3},
+    {"name": "result", "direction": "output", "width": 8},
+    {"name": "carry", "direction": "output", "width": 1},
+    {"name": "zero", "direction": "output", "width": 1}
+  ]
+}

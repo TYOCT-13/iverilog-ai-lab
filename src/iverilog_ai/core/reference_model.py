@@ -1,0 +1,423 @@
+"""内置案例的确定性参考模型：既做一致性诊断，也提供权威期望值。
+
+本模块有两类用途，必须区分清楚：
+
+1. ``check_plan_consistency`` 只做**诊断**：比较 AI 计划的期望值与参考模型
+   复算值，报告 ``plan_inconsistent`` 警告，不改变任何裁决结论。
+2. ``reference_expectations`` / ``override_plan_expectations`` 提供**权威预言机**：
+   内置案例的期望值由参考模型独立复算，覆盖 AI 给出的数字，使 AI 无法通过
+   猜错期望值来"制造"失败或"掩盖"失败。
+
+参考模型只覆盖内置案例；未建模的设计会被显式跳过，不会被推断为通过。
+"""
+from __future__ import annotations
+from typing import Any, Iterable, Mapping
+
+from ..ai.schema import TestPlan
+
+SUPPORTED = {
+    "mod10_counter", "simple_alu", "sequence_101_overlap", "traffic_light_emergency",
+    "sync_fifo", "uart_tx", "spi_master", "handshake_stage", "debounce", "pwm", "mux4", "sync_reset",
+}
+
+def _get(value: Any, key: str, default: Any = None) -> Any:
+    return value.get(key, default) if isinstance(value, Mapping) else getattr(value, key, default)
+
+def _vectors(plan: Any) -> Iterable[Any]:
+    vectors = _get(plan, "vectors")
+    if vectors is not None: return vectors
+    out = []
+    for case in _get(plan, "cases", ()):
+        out.extend(_get(case, "steps", ()) or _get(case, "vectors", ()))
+    return out
+
+
+def _clamp(value: Any, low: int, high: int, default: int) -> int:
+    try:
+        number = int(value)
+    except (TypeError, ValueError):
+        return default
+    return max(low, min(number, high))
+
+
+class _DesignState:
+    """一次计划评估内的可变状态，覆盖所有受支持的内置案例。"""
+
+    def __init__(self, design: str, contract: Any = None) -> None:
+        self.design = design
+        parameters = _get(contract, "parameters", {}) or {}
+        mapping = parameters if isinstance(parameters, Mapping) else {}
+        self.state, self.history, self.traffic = 0, [0, 0], 0
+        self.fifo_depth = _clamp(mapping.get("DEPTH", 4), 1, 1024, 4)
+        self.fifo_mem, self.fifo_wr, self.fifo_rd, self.fifo_count, self.fifo_rd_data = [0] * self.fifo_depth, 0, 0, 0, 0
+        self.uart_clks_per_bit = _clamp(mapping.get("CLKS_PER_BIT", 4), 1, 65535, 4)
+        self.uart_busy, self.uart_tx, self.uart_tick, self.uart_bit, self.uart_frame = 0, 1, 0, 0, 0
+        self.spi_width = _clamp(mapping.get("WIDTH", 8), 2, 32, 8)
+        self.spi_busy, self.spi_sclk, self.spi_mosi, self.spi_done, self.spi_count, self.spi_shift = 0, 0, 0, 0, 0, 0
+        self.hs_valid, self.hs_data = 0, 0
+        self.debounce_max = _clamp(mapping.get("COUNT_MAX", 3), 1, 15, 3)
+        self.debounce_count, self.debounce_sample, self.debounce_state = 0, 1, 1
+        self.pwm_counter, self.pwm_out = 0, 0
+        self.sync_ff, self.sync_rst = 0, 0
+
+    def step(self, inputs: Mapping[str, Any], cycles: int) -> dict[str, Any]:
+        """把单个向量推进 ``cycles`` 个周期，返回该向量结束时的可观测输出。"""
+
+        design = self.design
+        if design == "simple_alu":
+            a, b, op = int(inputs.get("a", 0)), int(inputs.get("b", 0)), int(inputs.get("op", 0))
+            if op == 0: ext = a + b; result, carry = ext & 255, int(ext > 255)
+            elif op == 1: result, carry = (a - b) & 255, int(a >= b)
+            elif op == 2: result, carry = a & b, 0
+            elif op == 3: result, carry = a | b, 0
+            elif op == 4: result, carry = a ^ b, 0
+            elif op == 5: result, carry = (a << 1) & 255, 0
+            elif op == 6: result, carry = a >> 1, 0
+            else: result, carry = 0, 0
+            return {"result": result, "carry": carry, "zero": int(result == 0)}
+        if design == "mod10_counter":
+            rst, enable = int(inputs.get("rst_n", inputs.get("reset", 1))), int(inputs.get("enable", 0))
+            for _ in range(cycles): self.state = 0 if rst == 0 else ((self.state + 1) % 10 if enable else self.state)
+            return {"count": self.state}
+        if design == "sequence_101_overlap":
+            bit, rst, detected = int(inputs.get("bit_in", 0)), int(inputs.get("rst_n", 1)), 0
+            for _ in range(cycles):
+                if rst == 0: self.history, detected = [0, 0], 0
+                else: detected, self.history = int(self.history == [1, 0] and bit == 1), [self.history[1], bit]
+            return {"detected": detected}
+        if design == "traffic_light_emergency":
+            emergency, rst = int(inputs.get("emergency", 0)), int(inputs.get("rst_n", 1))
+            for _ in range(cycles): self.traffic = 0 if rst == 0 else (1 if emergency else (self.traffic + 1) % 4)
+            if emergency:
+                # 紧急模式是组合覆盖：主路黄灯、支路红灯，与内部状态无关。
+                return {"main_light": 1, "side_light": 0}
+            return [{"main_light": 2, "side_light": 0}, {"main_light": 1, "side_light": 0},
+                    {"main_light": 0, "side_light": 2}, {"main_light": 0, "side_light": 1}][self.traffic]
+        if design == "sync_fifo":
+            rst, wr_en = int(inputs.get("rst_n", 1)), int(inputs.get("wr_en", 0))
+            rd_en, wr_data = int(inputs.get("rd_en", 0)), int(inputs.get("wr_data", 0)) & 255
+            for _ in range(cycles):
+                if rst == 0:
+                    self.fifo_mem, self.fifo_wr, self.fifo_rd, self.fifo_count, self.fifo_rd_data = [0] * self.fifo_depth, 0, 0, 0, 0
+                else:
+                    can_write, can_read = bool(wr_en and self.fifo_count < self.fifo_depth), bool(rd_en and self.fifo_count > 0)
+                    if can_write:
+                        self.fifo_mem[self.fifo_wr] = wr_data; self.fifo_wr = (self.fifo_wr + 1) % self.fifo_depth
+                    if can_read:
+                        self.fifo_rd_data = self.fifo_mem[self.fifo_rd]; self.fifo_rd = (self.fifo_rd + 1) % self.fifo_depth
+                    if can_write and not can_read: self.fifo_count += 1
+                    elif can_read and not can_write: self.fifo_count -= 1
+            return {"rd_data": self.fifo_rd_data, "full": int(self.fifo_count == self.fifo_depth), "empty": int(self.fifo_count == 0)}
+        if design == "uart_tx":
+            rst, start, data_in = int(inputs.get("rst_n", 1)), int(inputs.get("start", 0)), int(inputs.get("data_in", 0)) & 255
+            for _ in range(cycles):
+                if rst == 0:
+                    self.uart_tx, self.uart_busy, self.uart_bit, self.uart_tick, self.uart_frame = 1, 0, 0, 0, 0
+                elif not self.uart_busy:
+                    self.uart_tx = 1
+                    if start:
+                        self.uart_frame = (1 << 9) | (data_in << 1); self.uart_busy = 1; self.uart_bit = 0; self.uart_tick = 0; self.uart_tx = 0
+                elif self.uart_tick == self.uart_clks_per_bit - 1:
+                    self.uart_tick = 0; self.uart_bit += 1
+                    if self.uart_bit == 9: self.uart_busy = 0; self.uart_tx = 1
+                    else: self.uart_tx = (self.uart_frame >> (self.uart_bit + 1)) & 1
+                else: self.uart_tick += 1
+            return {"tx": self.uart_tx, "busy": self.uart_busy}
+        if design == "spi_master":
+            rst, start, data_in = int(inputs.get("rst_n", 1)), int(inputs.get("start", 0)), int(inputs.get("data_in", 0)) & 255
+            for _ in range(cycles):
+                self.spi_done = 0
+                if rst == 0:
+                    self.spi_sclk, self.spi_mosi, self.spi_busy, self.spi_done, self.spi_count, self.spi_shift = 0, 0, 0, 0, 0, 0
+                elif not self.spi_busy:
+                    self.spi_sclk = 0
+                    if start: self.spi_busy = 1; self.spi_shift = data_in; self.spi_count = 0; self.spi_mosi = (data_in >> 7) & 1
+                else:
+                    self.spi_sclk = 0 if self.spi_sclk else 1
+                    if not self.spi_sclk:
+                        if self.spi_count == self.spi_width - 1: self.spi_busy = 0; self.spi_done = 1
+                        else: self.spi_count += 1; self.spi_shift = (self.spi_shift << 1) & 255; self.spi_mosi = (self.spi_shift >> 6) & 1
+            return {"sclk": self.spi_sclk, "mosi": self.spi_mosi, "busy": self.spi_busy, "done": self.spi_done}
+        if design == "handshake_stage":
+            rst, in_valid, out_ready, in_data = int(inputs.get("rst_n", 1)), int(inputs.get("in_valid", 0)), int(inputs.get("out_ready", 0)), int(inputs.get("in_data", 0)) & 255
+            for _ in range(cycles):
+                in_ready = int((not self.hs_valid) or bool(out_ready))
+                if rst == 0: self.hs_valid, self.hs_data = 0, 0
+                elif in_ready: self.hs_valid = in_valid; self.hs_data = in_data if in_valid else self.hs_data
+            return {"in_ready": int((not self.hs_valid) or bool(out_ready)), "out_valid": self.hs_valid, "out_data": self.hs_data}
+        if design == "debounce":
+            rst, key_in = int(inputs.get("rst_n", 1)), int(inputs.get("key_in", 1))
+            for _ in range(cycles):
+                if rst == 0: self.debounce_count, self.debounce_sample, self.debounce_state = 0, 1, 1
+                elif key_in == self.debounce_sample: self.debounce_count = 0
+                elif self.debounce_count == self.debounce_max - 1: self.debounce_sample, self.debounce_state, self.debounce_count = key_in, key_in, 0
+                else: self.debounce_count += 1
+            return {"key_state": self.debounce_state}
+        if design == "pwm":
+            rst, duty = int(inputs.get("rst_n", 1)), int(inputs.get("duty", 0)) & 255
+            for _ in range(cycles):
+                if rst == 0: self.pwm_counter, self.pwm_out = 0, 0
+                else: self.pwm_out = int(self.pwm_counter < duty); self.pwm_counter = (self.pwm_counter + 1) & 255
+            return {"pwm_out": self.pwm_out}
+        if design == "mux4":
+            sel = int(inputs.get("sel", 0)) & 3
+            return {"y": int(inputs.get(f"d{sel}", 0)) & 255}
+        if design == "sync_reset":
+            ext_rst_n = int(inputs.get("ext_rst_n", 1))
+            for _ in range(cycles):
+                if ext_rst_n == 0: self.sync_ff, self.sync_rst = 0, 0
+                else: self.sync_ff, self.sync_rst = 1, self.sync_ff
+            return {"rst_n": self.sync_rst}
+        return {}
+
+
+def reference_expectations(plan: Any, design: str | None = None, contract: Any = None) -> dict[str, dict[str, Any]]:
+    """按向量名返回参考模型独立复算的稳态输出。
+
+    只返回 DUT contract 中确实存在、且参考模型确实建模了的信号，因此调用方
+    可以安全地用它约束 testbench 的期望值，而不必信任模型给出的数字。
+    """
+
+    plan_design = str(design or _get(plan, "design", ""))
+    if plan_design not in SUPPORTED:
+        return {}
+    port_names: set[str] | None = None
+    if contract is not None:
+        ports = _get(contract, "ports", None)
+        if isinstance(ports, (list, tuple)):
+            names = {str(_get(port, "name", "")) for port in ports}
+            if names:
+                port_names = names
+    state = _DesignState(plan_design, contract)
+    expectations: dict[str, dict[str, Any]] = {}
+    for index, vector in enumerate(_vectors(plan)):
+        name = str(_get(vector, "name", _get(vector, "id", f"vector_{index + 1}")))
+        inputs = _get(vector, "inputs", {}) or {}
+        if not isinstance(inputs, Mapping):
+            continue
+        cycles = int(_get(vector, "cycles", 1) or 1)
+        actual = state.step(inputs, cycles)
+        selected = {signal: value for signal, value in actual.items() if port_names is None or signal in port_names}
+        expectations[name] = selected
+    return expectations
+
+
+def override_plan_expectations(
+    plan: TestPlan,
+    expectations: Mapping[str, Mapping[str, Any]],
+    *,
+    fill_missing: bool = True,
+) -> TestPlan:
+    """返回用参考模型期望值替换 AI 期望值的计划副本。
+
+    ``fill_missing=True``（默认）时，参考模型建模的**每个**输出信号都会进入
+    该向量的期望值，包括 AI 没有写期望值的信号。这一点很关键：如果只覆盖
+    AI 已经写过的字段，AI 只要少写期望值就能让检查静默消失，缺陷就会漏检。
+
+    原始计划本身不被修改，便于审计 AI 与参考模型的差异。
+    """
+
+    data = plan.model_dump(mode="json")
+    for vector in data.get("vectors", []):
+        if not isinstance(vector, dict):
+            continue
+        reference = expectations.get(str(vector.get("name", "")))
+        if not isinstance(reference, Mapping) or not reference:
+            continue
+        expected = vector.get("expected")
+        if not isinstance(expected, dict):
+            expected = {}
+        merged = dict(expected)
+        for signal, value in reference.items():
+            if fill_missing or signal in merged:
+                merged[signal] = value
+        vector["expected"] = merged
+    return TestPlan.model_validate(data)
+
+
+def check_plan_consistency(plan: Any, design: str | None = None, contract: Any = None) -> dict[str, Any]:
+    """比较 AI 计划的期望值与参考模型复算值，产出诊断（不改变裁决）。"""
+
+    design_name = str(design or _get(plan, "design", ""))
+    if design_name not in SUPPORTED:
+        return {"status": "skipped", "design": design_name, "warnings": [], "checked": 0,
+                "reason": "reference model is only defined for bundled examples"}
+    expectations = reference_expectations(plan, design_name, contract)
+    warnings: list[dict[str, Any]] = []
+    checked = 0
+    matched = 0
+    for index, vector in enumerate(_vectors(plan)):
+        name = str(_get(vector, "name", _get(vector, "id", f"vector_{index + 1}")))
+        expected = _get(vector, "expected", {}) or {}
+        reference = expectations.get(name) or {}
+        for signal, value in expected.items():
+            if signal not in reference:
+                continue
+            checked += 1
+            if int(value) == int(reference[signal]):
+                matched += 1
+            else:
+                warnings.append({"code": "plan_inconsistent", "severity": "warn", "vector": name,
+                                 "signal": signal, "expected": value, "reference": reference[signal],
+                                 "reason": "expected value disagrees with deterministic reference model"})
+    return {"status": "warn" if warnings else "passed", "design": design_name,
+            "warnings": warnings, "checked": len(list(_vectors(plan))), "checked_expected": checked,
+            "matched_expected": matched,
+            "consistency_rate": round(matched / checked, 4) if checked else None,
+            "evidence_level": "reference_model"}
+    design = str(design or _get(plan, "design", ""))
+    if design not in SUPPORTED:
+        return {"status": "skipped", "design": design, "warnings": [], "checked": 0,
+                "reason": "reference model is only defined for bundled examples"}
+    warnings = []
+    checked = 0
+    matched = 0
+    state, history, traffic = 0, [0, 0], 0
+    parameters = _get(contract, "parameters", {}) or {}
+    fifo_depth = int(parameters.get("DEPTH", 4)) if isinstance(parameters, Mapping) else 4
+    fifo_depth = max(1, min(fifo_depth, 1024))
+    fifo_mem, fifo_wr, fifo_rd, fifo_count, fifo_rd_data = [0] * fifo_depth, 0, 0, 0, 0
+    uart_clks_per_bit = int(parameters.get("CLKS_PER_BIT", 4)) if isinstance(parameters, Mapping) else 4
+    uart_clks_per_bit = max(1, min(uart_clks_per_bit, 65535))
+    uart_busy, uart_tx, uart_tick, uart_bit, uart_frame = 0, 1, 0, 0, 0
+    spi_width = int(parameters.get("WIDTH", 8)) if isinstance(parameters, Mapping) else 8
+    spi_width = max(2, min(spi_width, 32))
+    spi_busy, spi_sclk, spi_mosi, spi_done, spi_count, spi_shift = 0, 0, 0, 0, 0, 0
+    hs_valid, hs_data = 0, 0
+    debounce_max = int(parameters.get("COUNT_MAX", 3)) if isinstance(parameters, Mapping) else 3
+    debounce_max = max(1, min(debounce_max, 15))
+    debounce_count, debounce_sample, debounce_state = 0, 1, 1
+    pwm_counter, pwm_out = 0, 0
+    sync_ff, sync_rst = 0, 0
+    vectors = list(_vectors(plan))
+    for index, vector in enumerate(vectors):
+        name = str(_get(vector, "name", _get(vector, "id", f"vector_{index + 1}")))
+        inputs, expected = _get(vector, "inputs", {}) or {}, _get(vector, "expected", {}) or {}
+        cycles = int(_get(vector, "cycles", 1) or 1)
+        if not expected: continue
+        actual = {}
+        if design == "simple_alu":
+            a, b, op = int(inputs.get("a", 0)), int(inputs.get("b", 0)), int(inputs.get("op", 0))
+            if op == 0: ext = a + b; result, carry = ext & 255, int(ext > 255)
+            elif op == 1: result, carry = (a - b) & 255, int(a >= b)
+            elif op == 2: result, carry = a & b, 0
+            elif op == 3: result, carry = a | b, 0
+            elif op == 4: result, carry = a ^ b, 0
+            elif op == 5: result, carry = (a << 1) & 255, 0
+            elif op == 6: result, carry = a >> 1, 0
+            else: result, carry = 0, 0
+            actual = {"result": result, "carry": carry, "zero": int(result == 0)}
+        elif design == "mod10_counter":
+            rst, enable = int(inputs.get("rst_n", inputs.get("reset", 1))), int(inputs.get("enable", 0))
+            for _ in range(cycles): state = 0 if rst == 0 else ((state + 1) % 10 if enable else state)
+            actual = {"count": state}
+        elif design == "sequence_101_overlap":
+            bit, rst, detected = int(inputs.get("bit_in", 0)), int(inputs.get("rst_n", 1)), 0
+            for _ in range(cycles):
+                if rst == 0: history, detected = [0, 0], 0
+                else: detected, history = int(history == [1, 0] and bit == 1), [history[1], bit]
+            actual = {"detected": detected}
+        elif design == "traffic_light_emergency":
+            emergency, rst = int(inputs.get("emergency", 0)), int(inputs.get("rst_n", 1))
+            for _ in range(cycles): traffic = 0 if rst == 0 else (1 if emergency else (traffic + 1) % 4)
+            actual = ({"main_light": 1, "side_light": 0} if emergency else
+                      [{"main_light": 2, "side_light": 0}, {"main_light": 1, "side_light": 0},
+                       {"main_light": 0, "side_light": 2}, {"main_light": 0, "side_light": 1}][traffic])
+        elif design == "sync_fifo":
+            rst, wr_en = int(inputs.get("rst_n", 1)), int(inputs.get("wr_en", 0))
+            rd_en, wr_data = int(inputs.get("rd_en", 0)), int(inputs.get("wr_data", 0)) & 255
+            for _ in range(cycles):
+                if rst == 0:
+                    fifo_mem, fifo_wr, fifo_rd, fifo_count, fifo_rd_data = [0] * fifo_depth, 0, 0, 0, 0
+                else:
+                    can_write, can_read = bool(wr_en and fifo_count < fifo_depth), bool(rd_en and fifo_count > 0)
+                    if can_write:
+                        fifo_mem[fifo_wr] = wr_data; fifo_wr = (fifo_wr + 1) % fifo_depth
+                    if can_read:
+                        fifo_rd_data = fifo_mem[fifo_rd]; fifo_rd = (fifo_rd + 1) % fifo_depth
+                    if can_write and not can_read: fifo_count += 1
+                    elif can_read and not can_write: fifo_count -= 1
+            actual = {"rd_data": fifo_rd_data, "full": int(fifo_count == fifo_depth), "empty": int(fifo_count == 0)}
+        elif design == "uart_tx":
+            rst, start, data_in = int(inputs.get("rst_n", 1)), int(inputs.get("start", 0)), int(inputs.get("data_in", 0)) & 255
+            for _ in range(cycles):
+                if rst == 0:
+                    uart_tx, uart_busy, uart_bit, uart_tick, uart_frame = 1, 0, 0, 0, 0
+                elif not uart_busy:
+                    uart_tx = 1
+                    if start:
+                        uart_frame = (1 << 9) | (data_in << 1); uart_busy = 1; uart_bit = 0; uart_tick = 0; uart_tx = 0
+                elif uart_tick == uart_clks_per_bit - 1:
+                    uart_tick = 0; uart_bit += 1
+                    if uart_bit == 9: uart_busy = 0; uart_tx = 1
+                    else: uart_tx = (uart_frame >> (uart_bit + 1)) & 1
+                else: uart_tick += 1
+            actual = {"tx": uart_tx, "busy": uart_busy}
+        elif design == "spi_master":
+            rst, start, data_in = int(inputs.get("rst_n", 1)), int(inputs.get("start", 0)), int(inputs.get("data_in", 0)) & 255
+            for _ in range(cycles):
+                spi_done = 0
+                if rst == 0:
+                    spi_sclk, spi_mosi, spi_busy, spi_done, spi_count, spi_shift = 0, 0, 0, 0, 0, 0
+                elif not spi_busy:
+                    spi_sclk = 0
+                    if start: spi_busy = 1; spi_shift = data_in; spi_count = 0; spi_mosi = (data_in >> 7) & 1
+                else:
+                    spi_sclk = 0 if spi_sclk else 1
+                    if not spi_sclk:
+                        if spi_count == spi_width - 1: spi_busy = 0; spi_done = 1
+                        else: spi_count += 1; spi_shift = (spi_shift << 1) & 255; spi_mosi = (spi_shift >> 6) & 1
+            actual = {"sclk": spi_sclk, "mosi": spi_mosi, "busy": spi_busy, "done": spi_done}
+        elif design == "handshake_stage":
+            rst, in_valid, out_ready, in_data = int(inputs.get("rst_n", 1)), int(inputs.get("in_valid", 0)), int(inputs.get("out_ready", 0)), int(inputs.get("in_data", 0)) & 255
+            for _ in range(cycles):
+                in_ready = int((not hs_valid) or bool(out_ready))
+                if rst == 0: hs_valid, hs_data = 0, 0
+                elif in_ready: hs_valid = in_valid; hs_data = in_data if in_valid else hs_data
+            actual = {"in_ready": int((not hs_valid) or bool(out_ready)), "out_valid": hs_valid, "out_data": hs_data}
+        elif design == "debounce":
+            rst, key_in = int(inputs.get("rst_n", 1)), int(inputs.get("key_in", 1))
+            for _ in range(cycles):
+                if rst == 0: debounce_count, debounce_sample, debounce_state = 0, 1, 1
+                elif key_in == debounce_sample: debounce_count = 0
+                elif debounce_count == debounce_max - 1: debounce_sample, debounce_state, debounce_count = key_in, key_in, 0
+                else: debounce_count += 1
+            actual = {"key_state": debounce_state}
+        elif design == "pwm":
+            rst, duty = int(inputs.get("rst_n", 1)), int(inputs.get("duty", 0)) & 255
+            for _ in range(cycles):
+                if rst == 0: pwm_counter, pwm_out = 0, 0
+                else: pwm_out = int(pwm_counter < duty); pwm_counter = (pwm_counter + 1) & 255
+            actual = {"pwm_out": pwm_out}
+        elif design == "mux4":
+            sel = int(inputs.get("sel", 0)) & 3
+            actual = {"y": int(inputs.get(f"d{sel}", 0)) & 255}
+        elif design == "sync_reset":
+            ext_rst_n = int(inputs.get("ext_rst_n", 1))
+            for _ in range(cycles):
+                if ext_rst_n == 0: sync_ff, sync_rst = 0, 0
+                else: sync_ff, sync_rst = 1, sync_ff
+            actual = {"rst_n": sync_rst}
+        for signal, value in expected.items():
+            if signal not in actual:
+                continue
+            checked += 1
+            if int(value) == int(actual[signal]):
+                matched += 1
+            else:
+                warnings.append({"code": "plan_inconsistent", "severity": "warn", "vector": name,
+                                 "signal": signal, "expected": value, "reference": actual[signal],
+                                 "reason": "expected value disagrees with deterministic reference model"})
+    return {"status": "warn" if warnings else "passed", "design": design_name,
+            "warnings": warnings, "checked": len(list(_vectors(plan))), "checked_expected": checked,
+            "matched_expected": matched,
+            "consistency_rate": round(matched / checked, 4) if checked else None,
+            "evidence_level": "reference_model"}
+
+
+__all__ = [
+    "SUPPORTED",
+    "check_plan_consistency",
+    "override_plan_expectations",
+    "reference_expectations",
+]

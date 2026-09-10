@@ -1,0 +1,19 @@
+# 统一换行与文本处理，保证跨平台复现的字节一致
+* text=auto eol=lf
+
+# Windows 批处理与 PowerShell 脚本保留 CRLF，避免执行异常
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# 二进制与生成物不做换行转换
+*.vvp binary
+*.vcd binary
+*.png binary
+*.jpg binary
+*.pdf binary
+*.zip binary
+
+# 明确语言归属，便于托管平台的统计与语法高亮
+*.v text linguist-language=Verilog
+*.sv text linguist-language=SystemVerilog

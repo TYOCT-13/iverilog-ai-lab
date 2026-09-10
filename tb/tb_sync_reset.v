@@ -1,0 +1,3 @@
+`timescale 1ns/1ps
+module tb_sync_reset; reg clk=0,ext_rst_n=0; wire rst_n; sync_reset dut(clk,ext_rst_n,rst_n); always #5 clk=~clk;
+ initial begin ext_rst_n=1; #1; ext_rst_n=0; #1;if(rst_n!==0)$display("IVERILOG_AI_RESULT {\"ok\":false,\"test_id\":\"assert\"}");else $display("IVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"assert\"}"); ext_rst_n=1; @(negedge clk); if(rst_n!==0)$display("IVERILOG_AI_RESULT {\"ok\":false,\"test_id\":\"release1\"}");else $display("IVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"release1\"}"); @(negedge clk); #1; if(rst_n!==1)$display("IVERILOG_AI_RESULT {\"ok\":false,\"test_id\":\"release2\"}");else $display("IVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"release2\"}"); $finish; end endmodule

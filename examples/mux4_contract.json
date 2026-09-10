@@ -1,0 +1,1 @@
+{"module":"mux4","parameters":{"WIDTH":8},"ports":[{"name":"d0","direction":"input","width":8},{"name":"d1","direction":"input","width":8},{"name":"d2","direction":"input","width":8},{"name":"d3","direction":"input","width":8},{"name":"sel","direction":"input","width":2},{"name":"y","direction":"output","width":8}]}

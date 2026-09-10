@@ -1,0 +1,1 @@
+{"module":"edge_detector","ports":[{"name":"clk","direction":"input","width":1},{"name":"rst_n","direction":"input","width":1},{"name":"signal_in","direction":"input","width":1},{"name":"rising","direction":"output","width":1}],"clock":{"signal":"clk","period_ns":10},"reset":{"signal":"rst_n","active_level":0,"synchronous":false,"assert_cycles":2}}

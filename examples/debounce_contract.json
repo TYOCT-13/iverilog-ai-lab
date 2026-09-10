@@ -1,0 +1,1 @@
+{"module":"debounce","parameters":{"COUNT_MAX":3},"ports":[{"name":"clk","direction":"input"},{"name":"rst_n","direction":"input"},{"name":"key_in","direction":"input"},{"name":"key_state","direction":"output"}],"clock":{"signal":"clk","period_ns":10},"reset":{"signal":"rst_n","active_level":0,"synchronous":false,"assert_cycles":2}}

@@ -1,0 +1,15 @@
+Icarus 智测（iverilog-ai-lab）
+Copyright 2026 Icarus 智测 contributors
+
+本产品是围绕 Icarus Verilog 的非官方扩展，与 Icarus Verilog 上游项目及其
+维护者不存在隶属、合作或背书关系。
+
+本项目自研部分按 Apache License, Version 2.0 授权（见 LICENSE）。
+
+本项目不包含、不修改、不重新分发任何第三方源代码或二进制。以独立进程方式
+调用 Icarus Verilog（GPL-2.0-or-later）与可选的 GTKWave（GPL-2.0-or-later）；
+以库依赖方式使用 Python（PSF License Agreement）、pydantic（MIT）与
+Streamlit（Apache-2.0）。
+
+完整的第三方资源、版本、许可证、使用方式、关键许可义务与自主开发边界说明见：
+  docs/competition/opensource_resource_list.md

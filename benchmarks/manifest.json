@@ -1,0 +1,463 @@
+{
+  "version": 1,
+  "categories": [
+    "mod10_counter",
+    "traffic_light_emergency",
+    "simple_alu",
+    "sequence_101_overlap"
+  ],
+  "defects": [
+    {
+      "id": "mod10_bug_enable",
+      "file": "rtl/mod10_counter_bug_enable.v",
+      "type": "mod10_counter",
+      "trigger": "enable=0 at clock edge",
+      "expected": "count holds",
+      "actual": "count increments",
+      "testbench": "tb/tb_mod10_counter.v"
+    },
+    {
+      "id": "mod10_bug_no_wrap",
+      "file": "rtl/mod10_counter_bug_no_wrap.v",
+      "type": "mod10_counter",
+      "trigger": "count=9 and enable=1",
+      "expected": "count becomes 0",
+      "actual": "count becomes 10",
+      "testbench": "tb/tb_mod10_counter.v"
+    },
+    {
+      "id": "mod10_bug_reset_one",
+      "file": "rtl/mod10_counter_bug_reset_one.v",
+      "type": "mod10_counter",
+      "trigger": "rst_n asserted low",
+      "expected": "count=0",
+      "actual": "count=1",
+      "testbench": "tb/tb_mod10_counter.v"
+    },
+    {
+      "id": "traffic_bug_emergency_output",
+      "file": "rtl/traffic_light_bug_emergency_output.v",
+      "type": "traffic_light_emergency",
+      "trigger": "emergency=1",
+      "expected": "main yellow, side red",
+      "actual": "normal output remains",
+      "testbench": "tb/tb_traffic_light_emergency.v"
+    },
+    {
+      "id": "traffic_bug_no_recovery",
+      "file": "rtl/traffic_light_bug_no_recovery.v",
+      "type": "traffic_light_emergency",
+      "trigger": "illegal state",
+      "expected": "recover main green",
+      "actual": "illegal state persists",
+      "testbench": "tb/tb_traffic_light_emergency.v"
+    },
+    {
+      "id": "traffic_bug_wrong_sequence",
+      "file": "rtl/traffic_light_bug_wrong_sequence.v",
+      "type": "traffic_light_emergency",
+      "trigger": "normal state advance",
+      "expected": "main green->yellow->side green",
+      "actual": "wrong state sequence",
+      "testbench": "tb/tb_traffic_light_emergency.v"
+    },
+    {
+      "id": "alu_bug_add_sub",
+      "file": "rtl/simple_alu_bug_add_sub.v",
+      "type": "simple_alu",
+      "trigger": "op 0 or 1",
+      "expected": "op0 add, op1 subtract",
+      "actual": "operations swapped",
+      "testbench": "tb/tb_simple_alu.v"
+    },
+    {
+      "id": "alu_bug_bitwise",
+      "file": "rtl/simple_alu_bug_bitwise.v",
+      "type": "simple_alu",
+      "trigger": "op 2 or 3",
+      "expected": "op2 AND, op3 OR",
+      "actual": "AND/OR swapped",
+      "testbench": "tb/tb_simple_alu.v"
+    },
+    {
+      "id": "alu_bug_shift",
+      "file": "rtl/simple_alu_bug_shift.v",
+      "type": "simple_alu",
+      "trigger": "op 5 or 6",
+      "expected": "op5 left, op6 right",
+      "actual": "shift directions swapped",
+      "testbench": "tb/tb_simple_alu.v"
+    },
+    {
+      "id": "alu_bug_zero",
+      "file": "rtl/simple_alu_bug_zero.v",
+      "type": "simple_alu",
+      "trigger": "a nonzero and result zero",
+      "expected": "zero=1",
+      "actual": "zero follows a",
+      "testbench": "tb/tb_simple_alu.v"
+    },
+    {
+      "id": "alu_bug_carry",
+      "file": "rtl/simple_alu_bug_carry.v",
+      "type": "simple_alu",
+      "trigger": "255+1",
+      "expected": "carry=1",
+      "actual": "carry=0",
+      "testbench": "tb/tb_simple_alu.v"
+    },
+    {
+      "id": "seq_bug_pattern",
+      "file": "rtl/sequence_101_overlap_bug_pattern.v",
+      "type": "sequence_101_overlap",
+      "trigger": "input 101",
+      "expected": "detected pulse",
+      "actual": "tests 110",
+      "testbench": "tb/tb_sequence_101_overlap.v"
+    },
+    {
+      "id": "seq_bug_nonoverlap",
+      "file": "rtl/sequence_101_overlap_bug_nonoverlap.v",
+      "type": "sequence_101_overlap",
+      "trigger": "input 10101",
+      "expected": "pulses at 3 and 5",
+      "actual": "only first pulse",
+      "testbench": "tb/tb_sequence_101_overlap.v"
+    },
+    {
+      "id": "seq_bug_polarity",
+      "file": "rtl/sequence_101_overlap_bug_polarity.v",
+      "type": "sequence_101_overlap",
+      "trigger": "rst_n=0",
+      "expected": "history and output clear",
+      "actual": "reset branch polarity inverted",
+      "testbench": "tb/tb_sequence_101_overlap.v"
+    },
+    {
+      "id": "seq_bug_history",
+      "file": "rtl/sequence_101_overlap_bug_history.v",
+      "type": "sequence_101_overlap",
+      "trigger": "ordered input 101",
+      "expected": "pulse at third bit",
+      "actual": "history order reversed",
+      "testbench": "tb/tb_sequence_101_overlap.v"
+    },
+    {
+      "id": "seq_bug_late",
+      "file": "rtl/sequence_101_overlap_bug_late.v",
+      "type": "sequence_101_overlap",
+      "trigger": "third bit of 101",
+      "expected": "same-edge pulse",
+      "actual": "late/incorrect pulse",
+      "testbench": "tb/tb_sequence_101_overlap.v"
+    },
+    {
+      "id": "mod10_bug_hold",
+      "file": "rtl/mod10_counter_bug_hold.v",
+      "type": "mod10_counter",
+      "trigger": "enable=0",
+      "expected": "count holds",
+      "actual": "count increments",
+      "testbench": "tb/tb_mod10_counter.v"
+    },
+    {
+      "id": "mod10_bug_wrap9",
+      "file": "rtl/mod10_counter_bug_wrap9.v",
+      "type": "mod10_counter",
+      "trigger": "count=8",
+      "expected": "count becomes 9",
+      "actual": "count wraps to 0",
+      "testbench": "tb/tb_mod10_counter.v"
+    },
+    {
+      "id": "mod10_bug_stuck",
+      "file": "rtl/mod10_counter_bug_stuck.v",
+      "type": "mod10_counter",
+      "trigger": "count=9 and enable=1",
+      "expected": "wrap to 0",
+      "actual": "stays at 9",
+      "testbench": "tb/tb_mod10_counter.v"
+    },
+    {
+      "id": "mod10_bug_async",
+      "file": "rtl/mod10_counter_bug_async.v",
+      "type": "mod10_counter",
+      "trigger": "reset assertion between edges",
+      "expected": "immediate reset",
+      "actual": "reset waits for clock",
+      "testbench": "tb/tb_mod10_counter.v",
+      "contract": "examples/mod10_counter_async_contract.json",
+      "note": "该缺陷的可观测差异只出现在复位前的上电初值：RTL 声明 count=4'd15，而 contract 要求 0。观测需要 sample_before_reset。"
+    },
+    {
+      "id": "alu_bug_xor",
+      "file": "rtl/simple_alu_bug_xor.v",
+      "type": "simple_alu",
+      "trigger": "op=4",
+      "expected": "XOR",
+      "actual": "OR",
+      "testbench": "tb/tb_simple_alu.v"
+    },
+    {
+      "id": "alu_bug_carry_sub",
+      "file": "rtl/simple_alu_bug_carry_sub.v",
+      "type": "simple_alu",
+      "trigger": "a=b subtraction",
+      "expected": "carry=1",
+      "actual": "carry=0",
+      "testbench": "tb/tb_simple_alu.v"
+    },
+    {
+      "id": "alu_bug_zero_inv",
+      "file": "rtl/simple_alu_bug_zero_inv.v",
+      "type": "simple_alu",
+      "trigger": "result zero",
+      "expected": "zero=1",
+      "actual": "zero=0",
+      "testbench": "tb/tb_simple_alu.v"
+    },
+    {
+      "id": "alu_bug_default",
+      "file": "rtl/simple_alu_bug_default.v",
+      "type": "simple_alu",
+      "trigger": "unsupported op",
+      "expected": "result=0",
+      "actual": "result=255",
+      "testbench": "tb/tb_simple_alu.v"
+    },
+    {
+      "id": "traffic_bug_stuck_green",
+      "file": "rtl/traffic_light_bug_stuck_green.v",
+      "type": "traffic_light_emergency",
+      "trigger": "normal cycle advance",
+      "expected": "state advances",
+      "actual": "main remains green",
+      "testbench": "tb/tb_traffic_light_emergency.v"
+    },
+    {
+      "id": "traffic_bug_swap_lights",
+      "file": "rtl/traffic_light_bug_swap_lights.v",
+      "type": "traffic_light_emergency",
+      "trigger": "side state",
+      "expected": "independent outputs",
+      "actual": "lights swapped",
+      "testbench": "tb/tb_traffic_light_emergency.v"
+    },
+    {
+      "id": "traffic_bug_reset_red",
+      "file": "rtl/traffic_light_bug_reset_red.v",
+      "type": "traffic_light_emergency",
+      "trigger": "reset",
+      "expected": "main green",
+      "actual": "both red",
+      "testbench": "tb/tb_traffic_light_emergency.v"
+    },
+    {
+      "id": "seq_bug_clear",
+      "file": "rtl/sequence_101_overlap_bug_clear.v",
+      "type": "sequence_101_overlap",
+      "trigger": "consecutive input",
+      "expected": "history retained",
+      "actual": "history cleared",
+      "testbench": "tb/tb_sequence_101_overlap.v"
+    },
+    {
+      "id": "seq_bug_delay2",
+      "file": "rtl/sequence_101_overlap_bug_delay2.v",
+      "type": "sequence_101_overlap",
+      "trigger": "third bit of 101",
+      "expected": "detected pulse",
+      "actual": "delayed pattern",
+      "testbench": "tb/tb_sequence_101_overlap.v"
+    },
+    {
+      "id": "seq_bug_invert",
+      "file": "rtl/sequence_101_overlap_bug_invert.v",
+      "type": "sequence_101_overlap",
+      "trigger": "non-101 input",
+      "expected": "detected=0",
+      "actual": "detected=1",
+      "testbench": "tb/tb_sequence_101_overlap.v"
+    },
+    {
+      "id": "mod10_bug_reset_stuck",
+      "file": "rtl/mod10_counter_bug_reset_stuck.v",
+      "type": "mod10_counter",
+      "trigger": "rst_n asserted low",
+      "expected": "count=0",
+      "actual": "count=1",
+      "testbench": "tb/tb_mod10_counter.v"
+    },
+    {
+      "id": "mod10_bug_increment2",
+      "file": "rtl/mod10_counter_bug_increment2.v",
+      "type": "mod10_counter",
+      "trigger": "enable=1",
+      "expected": "increment by 1",
+      "actual": "increment by 2",
+      "testbench": "tb/tb_mod10_counter.v"
+    },
+    {
+      "id": "mod10_bug_wrap1",
+      "file": "rtl/mod10_counter_bug_wrap1.v",
+      "type": "mod10_counter",
+      "trigger": "count=9 and enable=1",
+      "expected": "wrap to 0",
+      "actual": "wrap to 1",
+      "testbench": "tb/tb_mod10_counter.v"
+    },
+    {
+      "id": "mod10_bug_enable_sticky",
+      "file": "rtl/mod10_counter_bug_enable_sticky.v",
+      "type": "mod10_counter",
+      "trigger": "enable=0 at count=0",
+      "expected": "hold",
+      "actual": "increments",
+      "testbench": "tb/tb_mod10_counter.v"
+    },
+    {
+      "id": "mod10_bug_narrow",
+      "file": "rtl/mod10_counter_bug_narrow.v",
+      "type": "mod10_counter",
+      "trigger": "count reaches 7",
+      "expected": "represent 7..9",
+      "actual": "narrow counter wraps early",
+      "testbench": "tb/tb_mod10_counter.v"
+    },
+    {
+      "id": "traffic_bug_reset_yellow",
+      "file": "rtl/traffic_light_bug_reset_yellow.v",
+      "type": "traffic_light_emergency",
+      "trigger": "reset",
+      "expected": "main green",
+      "actual": "main yellow",
+      "testbench": "tb/tb_traffic_light_emergency.v"
+    },
+    {
+      "id": "traffic_bug_emergency_side_yellow",
+      "file": "rtl/traffic_light_bug_emergency_side_yellow.v",
+      "type": "traffic_light_emergency",
+      "trigger": "emergency=1",
+      "expected": "side red",
+      "actual": "side yellow",
+      "testbench": "tb/tb_traffic_light_emergency.v"
+    },
+    {
+      "id": "traffic_bug_skip_state",
+      "file": "rtl/traffic_light_bug_skip_state.v",
+      "type": "traffic_light_emergency",
+      "trigger": "main green advance",
+      "expected": "main yellow first",
+      "actual": "skips to side green",
+      "testbench": "tb/tb_traffic_light_emergency.v"
+    },
+    {
+      "id": "traffic_bug_both_green",
+      "file": "rtl/traffic_light_bug_both_green.v",
+      "type": "traffic_light_emergency",
+      "trigger": "main green state",
+      "expected": "side red",
+      "actual": "both green",
+      "testbench": "tb/tb_traffic_light_emergency.v"
+    },
+    {
+      "id": "traffic_bug_emergency_release",
+      "file": "rtl/traffic_light_bug_emergency_release.v",
+      "type": "traffic_light_emergency",
+      "trigger": "emergency release",
+      "expected": "resume main yellow",
+      "actual": "jumps to side green",
+      "testbench": "tb/tb_traffic_light_emergency.v"
+    },
+    {
+      "id": "alu_bug_carry_zero",
+      "file": "rtl/simple_alu_bug_carry_zero.v",
+      "type": "simple_alu",
+      "trigger": "addition overflow",
+      "expected": "carry=1",
+      "actual": "carry=0",
+      "testbench": "tb/tb_simple_alu.v"
+    },
+    {
+      "id": "alu_bug_sub_add",
+      "file": "rtl/simple_alu_bug_sub_add.v",
+      "type": "simple_alu",
+      "trigger": "op=1",
+      "expected": "subtract",
+      "actual": "add",
+      "testbench": "tb/tb_simple_alu.v"
+    },
+    {
+      "id": "alu_bug_and_zero",
+      "file": "rtl/simple_alu_bug_and_zero.v",
+      "type": "simple_alu",
+      "trigger": "op=2",
+      "expected": "a AND b",
+      "actual": "zero",
+      "testbench": "tb/tb_simple_alu.v"
+    },
+    {
+      "id": "alu_bug_shift_amount",
+      "file": "rtl/simple_alu_bug_shift_amount.v",
+      "type": "simple_alu",
+      "trigger": "op=5 or 6",
+      "expected": "shift by 1",
+      "actual": "shift by 2",
+      "testbench": "tb/tb_simple_alu.v"
+    },
+    {
+      "id": "alu_bug_zero_operand",
+      "file": "rtl/simple_alu_bug_zero_operand.v",
+      "type": "simple_alu",
+      "trigger": "result zero from nonzero operand",
+      "expected": "zero=1",
+      "actual": "zero follows a",
+      "testbench": "tb/tb_simple_alu.v"
+    },
+    {
+      "id": "seq_bug_sticky",
+      "file": "rtl/sequence_101_overlap_bug_sticky.v",
+      "type": "sequence_101_overlap",
+      "trigger": "after detection pulse",
+      "expected": "detected returns 0",
+      "actual": "detected remains high",
+      "testbench": "tb/tb_sequence_101_overlap.v"
+    },
+    {
+      "id": "seq_bug_early",
+      "file": "rtl/sequence_101_overlap_bug_early.v",
+      "type": "sequence_101_overlap",
+      "trigger": "partial pattern 010",
+      "expected": "detected=0",
+      "actual": "early pulse",
+      "testbench": "tb/tb_sequence_101_overlap.v"
+    },
+    {
+      "id": "seq_bug_wrong_zero",
+      "file": "rtl/sequence_101_overlap_bug_wrong_zero.v",
+      "type": "sequence_101_overlap",
+      "trigger": "pattern 100",
+      "expected": "detected=0",
+      "actual": "detected=1",
+      "testbench": "tb/tb_sequence_101_overlap.v"
+    },
+    {
+      "id": "seq_bug_shift_same",
+      "file": "rtl/sequence_101_overlap_bug_shift_same.v",
+      "type": "sequence_101_overlap",
+      "trigger": "history update",
+      "expected": "retain newest two bits",
+      "actual": "reorders history",
+      "testbench": "tb/tb_sequence_101_overlap.v"
+    },
+    {
+      "id": "seq_bug_hold_detect",
+      "file": "rtl/sequence_101_overlap_bug_hold_detect.v",
+      "type": "sequence_101_overlap",
+      "trigger": "after detection pulse",
+      "expected": "detected clears",
+      "actual": "detected holds high",
+      "testbench": "tb/tb_sequence_101_overlap.v"
+    }
+  ]
+}

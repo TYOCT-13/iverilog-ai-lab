@@ -1,0 +1,1 @@
+{"module":"sync_reset","ports":[{"name":"clk","direction":"input"},{"name":"ext_rst_n","direction":"input"},{"name":"rst_n","direction":"output"}],"clock":{"signal":"clk","period_ns":10},"reset":{"signal":"ext_rst_n","active_level":0,"synchronous":false,"assert_cycles":2}}

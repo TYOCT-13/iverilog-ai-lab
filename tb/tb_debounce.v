@@ -1,0 +1,3 @@
+`timescale 1ns/1ps
+module tb_debounce; reg clk=0,rst_n=0,key_in=1; wire key_state; debounce #(.COUNT_MAX(3)) dut(clk,rst_n,key_in,key_state); always #5 clk=~clk;
+ initial begin rst_n=1; #2; rst_n=0; #1; if(key_state!==1)$display("IVERILOG_AI_RESULT {\"ok\":false,\"test_id\":\"reset\"}"); else $display("IVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"reset\"}"); rst_n=1; key_in=0; repeat(5) @(negedge clk); #1; if(key_state!==0)$display("IVERILOG_AI_RESULT {\"ok\":false,\"test_id\":\"stable_press\",\"signal\":\"key_state\",\"expected\":0,\"actual\":%0d}",key_state); else $display("IVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"stable_press\"}"); $finish; end endmodule

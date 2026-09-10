@@ -1,0 +1,24 @@
+# 3–5 分钟交通灯演示脚本
+
+## 0:00–0:40 开场
+
+打开 `streamlit run ui/app.py`。说明这是 Icarus 的非官方扩展：AI 负责规划，Icarus 负责事实；网络默认关闭，不上传密钥，也不自动提交 PR。
+
+## 0:40–1:20 规格与计划
+
+选择“交通灯·紧急模式”，展示规格路径和验证目标，点击“生成离线 Mock 测试计划”。指出计划是 JSON、来自 MockProvider，进入执行器前会经过模型合同校验，UI 文本不会成为命令。
+
+## 1:20–2:40 真实执行
+
+点击“执行真实 Icarus 仿真”。说明白名单案例映射到固定 RTL/testbench，执行器以非 shell 参数调用 `iverilog` 与 `vvp`，并在独立 run 目录保存工件。展示总体状态、结构化记录通过数、编译/仿真证据。
+
+## 2:40–3:30 证据与反例
+
+展开 JSON，查看 `run_id`、配置、记录、失败反例（若有）和报告路径。强调报告结论来自进程与 testbench；AI 解释不是正确性证据。可切换“模十计数器”重复一次。
+
+## 3:30–4:20 边界与收束
+    
+## 证据包演示（可选）
+
+流水线完成后点击“生成本次运行证据包”。页面会将 `pipeline_result.json`、`result.json`、DUT contract、TestPlan、testbench、报告和 VCD 复制到独立目录，并生成 `evidence_manifest.json` 记录文件大小和 SHA-256。演示时打开证据包 `README.md`，说明评委可以按清单复核，不需要依赖当前网页会话。
+选择“即将加入：SPI 从机”展示规格占位，说明没有 RTL 就不会执行。最后展示 CI：Linux 安装 iverilog、`pip install -e .`、pytest 和两个参考案例。若现场没有 Icarus，明确报告为环境缺失，不伪造通过结果。

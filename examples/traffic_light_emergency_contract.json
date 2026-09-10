@@ -1,0 +1,12 @@
+{
+  "module": "traffic_light_emergency",
+  "ports": [
+    {"name": "clk", "direction": "input", "width": 1},
+    {"name": "rst_n", "direction": "input", "width": 1},
+    {"name": "emergency", "direction": "input", "width": 1},
+    {"name": "main_light", "direction": "output", "width": 2},
+    {"name": "side_light", "direction": "output", "width": 2}
+  ],
+  "clock": {"signal": "clk", "period_ns": 10},
+  "reset": {"signal": "rst_n", "active_level": 0, "synchronous": false, "assert_cycles": 2}
+}
