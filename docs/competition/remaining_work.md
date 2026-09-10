@@ -50,6 +50,47 @@
 
 ## 二、真实在线模型实验实现状态
 
+### 2.0 本轮实测遇到的凭据/网关阻塞（如实记录）
+
+本轮尝试用本机可用的第三方 OpenAI 兼容网关（`https://ai-pixel.online`，模型
+`gpt-5.6-sol`）跑真实在线实验，**未能取得可用数据**，原因在网关侧而非本项目：
+
+| 观测 | 结果 |
+|---|---|
+| `GET /v1/models` | 正常返回 11 个模型 ID |
+| 手工流式 POST（小提示词） | 曾成功返回 200 与流式正文 |
+| 同一请求重复执行 | 成功率不稳定：时好时坏 |
+| 非流式 POST | 时好时坏；成功时返回 HTTP 200 但 `output_text` 为空串 |
+| 强制流式 POST | 同样出现空 `output_text` 或 `IncompleteRead` |
+| 提示词体积（100 / 1500 / 1163 字符） | **与体积无关**，小提示词同样失败 |
+| 协议（chat_completions / responses） | 两种都出现过成功与失败 |
+
+结论：**该网关响应不可靠，无法作为可复现实验的来源**。真实在线实验需要换用
+稳定凭据（例如官方 DeepSeek / OpenAI 端点）。代码侧已经就绪：
+
+- provider 支持 `stream="auto"`（非流式 → 流式 → 流式且不带 `response_format`
+  的三层有界回退），并对认证/限流/超时不做重试；
+- 解析器兼容 Responses 风格响应体（顶层 `output_text`、`output` 数组），
+  失败时报告**实际响应结构**而不泄露正文；
+- 实验脚本提供 `--online-stream {auto,on,off}`，便于对网关做确定性验证。
+
+换到稳定端点的命令（凭据只经环境变量传入，不写入仓库）：
+
+```powershell
+$env:IVERILOG_AI_API_KEY = "<临时密钥>"
+python scripts/run_strategy_experiment.py `
+  --project-root . --iverilog D:\iverilog\bin\iverilog.exe --vvp D:\iverilog\bin\vvp.exe `
+  --seeds 1 --online `
+  --online-endpoint https://api.deepseek.com --online-model deepseek-v4-flash `
+  --online-repeats 1 --online-stream auto
+```
+
+同一次实验中，三个不依赖外部服务的策略已经跑出干净结果：`fixed` 33/54、
+`random` 28/54、离线 `ai` 28/54，三者**参考误报 0、参考设计期望值不一致 0**，
+可作为基线对照。
+
+### 2.1 已有实现
+
 `scripts/run_strategy_experiment.py` 现已增加 `online_ai` 策略：
 
 - 每个案例默认重复 10 次，可通过 `--online-repeats` 调整；
