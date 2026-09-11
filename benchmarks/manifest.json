@@ -748,6 +748,24 @@
       "actual": "rising 为不确定值（历史寄存器未被复位）",
       "testbench": "tb/tb_edge_detector_boundary.v",
       "note": "复位分支漏掉 signal_d <= 1'b0；testbench 把 X 记为 unknown，仍按 ok=false 记录"
+    },
+    {
+      "id": "srst_bug_single_stage_only",
+      "file": "rtl/sync_reset_bug_single_stage_only.v",
+      "type": "sync_reset",
+      "trigger": "ext_rst_n 释放后的第一个时钟沿",
+      "expected": "rst_n 再保持一个时钟才置 1（两级同步）",
+      "actual": "释放当拍就置 1（只有一级延迟）",
+      "testbench": "tb/tb_sync_reset.v"
+    },
+    {
+      "id": "srst_bug_never_release",
+      "file": "rtl/sync_reset_bug_never_release.v",
+      "type": "sync_reset",
+      "trigger": "ext_rst_n 释放并等待多个时钟",
+      "expected": "rst_n 最终置 1",
+      "actual": "rst_n 始终为 0，永不同步释放",
+      "testbench": "tb/tb_sync_reset.v"
     }
   ]
 }
