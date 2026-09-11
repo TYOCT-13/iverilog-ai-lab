@@ -429,9 +429,41 @@ class VerificationPipeline:
         # how far the AI's own numbers were from the deterministic model, and it
         # never overrides the real Icarus status as the PASS/FAIL authority.
         consistency = check_plan_consistency(ai_plan, ai_plan.design, dut_contract)
-        consistency["expectation_source"] = "reference_model" if oracle_expectations else "ai_generated"
-        consistency["ai_expectations_used_for_checking"] = not bool(oracle_expectations)
+        # 期望值的**证据等级**必须如实标注，因为它决定了结论的可信度：
+        #
+        #   reference_model —— 确定性参考模型复算并覆盖了 AI 数字（内置且已逐拍对齐的案例）
+        #   ai_generated    —— 没有参考模型，检查用的是 AI 给出的期望值
+        #   none_given      —— 计划和参考模型都没给期望值，本轮没有功能层证据
+        #
+        # 早期版本用 `"reference_model" if oracle_expectations else "ai_generated"`
+        # 两分支覆盖，于是"AI 也没给期望值"的自定义 RTL 会被标成 ai_generated ——
+        # 把"没有期望值"误报成"有 AI 期望值"，读者会高估结论的可信度。
+        plan_expectation_vectors = [
+            str(vector.name)
+            for vector in ai_plan.vectors
+            if vector.expected
+        ]
+        if oracle_expectations:
+            evidence_level = "reference_model"
+        elif plan_expectation_vectors:
+            evidence_level = "ai_generated"
+        else:
+            evidence_level = "none_given"
+        consistency["expectation_source"] = evidence_level
+        consistency["expectation_evidence_level"] = evidence_level
+        consistency["plans_with_expectations"] = len(plan_expectation_vectors)
+        consistency["ai_expectations_used_for_checking"] = evidence_level == "ai_generated"
         consistency["authoritative_vectors"] = len(oracle_expectations)
+        if evidence_level == "none_given":
+            consistency["advice"] = (
+                "本轮既没有参考模型也没有 AI 期望值，因此只有激励与结构化断言在起作用；"
+                "结论的期望值证据等级为 none_given，不要据此认为功能行为已被验证。"
+            )
+        elif evidence_level == "ai_generated":
+            consistency["advice"] = (
+                "本轮检查用的是 AI 给出的期望值：AI 猜错数字会直接表现为失败或漏检。"
+                "该设计尚未纳入权威参考模型，如需更高可信度请先完成逐拍对齐。"
+            )
         consistency_warnings = consistency.get("warnings", [])
         # AI 期望值偏差是**诊断**，不是裁决：当参考模型已经提供了权威期望值时，
         # 检查用的是参考值，AI 猜错数字不再推翻「通过」结论，只记为
