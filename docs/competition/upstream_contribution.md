@@ -17,7 +17,7 @@
 
 | # | 形式 | 目标 | 价值 | 风险 |
 |---|---|---|---|---|
-| A | Issue：介绍可复现的验证基准集 | Icarus Verilog | 高——提供 14 案例 / 78 缺陷的可复现基准，上游社区可用它回归 | 低。不是报 bug，是提供资源 |
+| A | Issue：介绍可复现的验证基准集 | Icarus Verilog | 高——提供 14 案例 / 80 缺陷的可复现基准，上游社区可用它回归 | 低。不是报 bug，是提供资源 |
 | B | Issue：文档补充建议 | Icarus Verilog | 中——把"如何在 CI 中调用 iverilog 并解析结构化输出"写成可复用片段 | 低 |
 | C | PR：不涉及——本项目不修改上游代码 | — | — | — |
 
@@ -28,7 +28,7 @@
 
 > 提交前请通读并改成你自己的语气。**链接在仓库公开后填入**，不要留占位符提交。
 
-**标题**：`A reproducible verification benchmark (14 designs / 78 defect variants) built on Icarus`
+**标题**：`A reproducible verification benchmark (14 designs / 80 defect variants) built on Icarus`
 
 **正文**：
 
@@ -42,8 +42,8 @@ sole PASS/FAIL authority.
 While building it I accumulated a benchmark that might be useful to others here: 14 small
 RTL designs (counter, FSM, FIFO, UART TX, SPI master, valid/ready handshake, debounce, PWM,
 mux, sync reset, Johnson counter, edge detector, ...) each with several defect variants,
-78 in total. Every variant has a hand-written boundary testbench and a recorded detection
-result. The current matrix run reports 78/78 detected, 0 false positives on the reference
+80 in total. Every variant has a hand-written boundary testbench and a recorded detection
+result. The current matrix run reports 80/80 detected, 0 false positives on the reference
 designs.
 
 Repository: <link>
