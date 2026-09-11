@@ -18,6 +18,7 @@ import argparse
 import json
 from pathlib import Path
 import statistics
+import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -141,13 +142,17 @@ def _detected_variants(payload: dict, strategy: str, case: str) -> set[str]:
     }
 
 
+#: 生成表格时指向的分析文档（由 `--analysis-doc` 覆盖）。
+ANALYSIS_DOC = "docs/experiment/model_comparison.md"
+
+
 def render(model_names: list[str], payloads: dict[str, dict]) -> str:
     lines: list[str] = []
     lines.append("# 多模型公平对比（自动生成）")
     lines.append("")
     lines.append("> 本文件由 `scripts/compare_models.py` 从各次实验的 `strategy_matrix.json` "
                  "机械汇总，**不含分析结论**。对结果的解读、未检出缺陷与口径差异见 "
-                 "`docs/experiment/model_comparison_2026-09-11.md`。")
+                 f"`{ANALYSIS_DOC}`。")
     lines.append("")
     lines.append("案例集合、DUT 合约、上下文口径、重复次数完全一致；差别只在 `online_ai` 策略使用的模型。")
     lines.append("")
@@ -162,9 +167,15 @@ def render(model_names: list[str], payloads: dict[str, dict]) -> str:
         if not summary:
             lines.append(f"| {name} | — | 无数据 | — | — | — | — | — | — |")
             continue
-        runs = summary.get("runs", 0)
         requests = summary.get("plan_requests", 0)
-        repeats = runs // requests if requests else None
+        # 重复次数 = 不同 seed 的个数。早先用 `runs // requests`，而 runs 统计的是
+        # **变体行数**（参考设计 + 各缺陷），于是 13 个变体 × 10 次重复被算成 5 次。
+        seeds = {
+            row.get("seed")
+            for row in payloads[name].get("runs", [])
+            if row.get("strategy") == "online_ai" and row.get("seed") is not None
+        }
+        repeats = len(seeds) if seeds else None
         lines.append(
             f"| **{name}** | {repeats if repeats is not None else '—'} "
             f"| {summary.get('request_plan_valid_rate', 0) * 100:.0f}% "
@@ -250,16 +261,25 @@ def render(model_names: list[str], payloads: dict[str, dict]) -> str:
 
 
 def main() -> int:
+    global ANALYSIS_DOC
     parser = argparse.ArgumentParser(description="多模型公平对比")
     parser.add_argument("directories", nargs="+", help="各模型实验的输出目录（含 strategy_matrix.json）")
     parser.add_argument("--output", default=None, help="Markdown 输出路径")
+    parser.add_argument(
+        "--analysis-doc",
+        default=ANALYSIS_DOC,
+        help="表格首行指向的分析文档路径（相对仓库根）",
+    )
     args = parser.parse_args()
+    ANALYSIS_DOC = args.analysis_doc
 
     payloads: dict[str, dict] = {}
     try:
         for directory in args.directories:
             path = Path(directory)
-            name = path.name.replace("model-compare-", "")
+            # 目录名形如 `model-compare-r10-deepseek-flash`：去掉实验批次前缀，
+            # 表里只显示模型名，否则读者会把批次当成模型。
+            name = re.sub(r"^r\d+-", "", path.name.replace("model-compare-", ""))
             payloads[name] = load(path / "strategy_matrix.json")
         check_comparable(payloads)
     except CompareError as exc:

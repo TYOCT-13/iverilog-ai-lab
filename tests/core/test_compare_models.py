@@ -177,6 +177,37 @@ def test_reports_token_totals_when_available(tmp_path):
     assert "| modelA | 2 |" in text
 
 
+def test_repeat_count_uses_seeds_not_row_ratio(tmp_path):
+    """重复次数必须按 seed 数算，不能按"行数/请求数"算。
+
+    真实事故：`runs // requests` 里的 runs 是**变体行数**（参考设计 + 各缺陷），
+    13 个变体 × 10 次重复被算成 5 次。两个案例、各 2 个变体、3 次重复时，
+    旧公式给出 2（12/6），正确值是 3。
+    """
+
+    cases = {"pwm": ["bug_a", "bug_b"], "fifo": ["bug_c", "bug_d"]}
+    payload = _matrix(cases, model="A", repeats=3)
+    one = _write(tmp_path, "modelA", payload)
+    output = tmp_path / "out.md"
+    result = _run([one], output)
+    assert result.returncode == 0, result.stderr
+    text = output.read_text(encoding="utf-8")
+    assert "| **modelA** | 3 |" in text, text[text.index("| 模型 |"):][:400]
+
+
+def test_batch_prefix_is_not_treated_as_model_name(tmp_path):
+    """目录名里的批次前缀（`r10-`）不能出现在模型列里。"""
+
+    cases = {"pwm": ["bug_a"]}
+    one = _write(tmp_path, "r10-modelA", _matrix(cases, model="A"))
+    output = tmp_path / "out.md"
+    result = _run([one], output)
+    assert result.returncode == 0, result.stderr
+    text = output.read_text(encoding="utf-8")
+    assert "| **modelA** |" in text
+    assert "r10-modelA" not in text
+
+
 def test_missing_matrix_reports_clearly(tmp_path):
     empty = tmp_path / "model-compare-ghost"
     empty.mkdir()
