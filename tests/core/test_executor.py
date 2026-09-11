@@ -57,6 +57,53 @@ def test_executor_runs_real_iverilog_and_vvp(tmp_path):
     assert result.artifacts["result_json"]
 
 
+def test_defines_and_include_dirs_reach_the_compiler(tmp_path):
+    """宏定义与 include 目录必须真的出现在 iverilog 命令行上。
+
+    网页新增了这两个输入框，CLI 也一直有 `--define/--include-dir`；它们很容易"看起来
+    接上了、实际没传下去"。这里直接断言编译命令，而不是只看仿真是否通过——因为即使
+    不传宏，只要 RTL 用了默认值，仿真照样会通过。
+    """
+
+    rtl = tmp_path / "dut.v"
+    tb = tmp_path / "tb_dut.v"
+    include_dir = tmp_path / "inc"
+    include_dir.mkdir()
+    rtl.write_text(
+        "`ifdef USE_WIDE\n"
+        "module dut(input wire clk, output reg [7:0] q); always @(posedge clk) q <= 8'h5a; endmodule\n"
+        "`else\n"
+        "module dut(input wire clk, output reg q); always @(posedge clk) q <= ~q; endmodule\n"
+        "`endif\n",
+        encoding="utf-8",
+    )
+    tb.write_text(
+        "module tb_dut; reg clk=0; wire q; dut u(.clk(clk),.q(q)); "
+        "always #1 clk=~clk; initial begin #0; "
+        '$display("IVERILOG_AI_RESULT {\\\"ok\\\":true,\\\"test_id\\\":\\\"compile_flags\\\",\\\"cycle\\\":1}"); '
+        "#4 $finish; end endmodule\n",
+        encoding="utf-8",
+    )
+    config = ExecutionConfig(
+        rtl_path=rtl,
+        testbench_path=tb,
+        top_module="tb_dut",
+        output_dir=tmp_path / "runs",
+        allowed_roots=(tmp_path,),
+        defines=("USE_WIDE", "WIDTH=8"),
+        include_dirs=(str(include_dir),),
+        iverilog_path=IVERILOG,
+        vvp_path=VVP,
+        timeout_seconds=5,
+    )
+    result = IcarusExecutor(config).run()
+    command = list(result.compile.command)
+    assert "-DUSE_WIDE" in command, command
+    assert "-DWIDTH=8" in command, command
+    assert "-I" in command and str(include_dir) in command, command
+    assert result.status is ResultStatus.PASSED
+
+
 def test_executor_rejects_source_outside_allowed_root(tmp_path):
     outside = tmp_path.parent / "outside_dut.v"
     outside.write_text("module dut; endmodule\n", encoding="utf-8")

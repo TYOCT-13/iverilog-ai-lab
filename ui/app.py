@@ -298,6 +298,21 @@ def _show_synthesis(synthesis: dict | None) -> None:
 # 注意：这个函数必须定义在**第一次调用之前**。ui/app.py 是线性脚本，模块级语句
 # 按顺序执行——把它放在文件后半部分时，自定义 RTL 的行为级对比会在调用点抛
 # NameError（被 except Exception 捕获成一句"行为级对比失败：name '_contract' is not defined"）。
+def _compile_options() -> tuple[tuple[str, ...], tuple[str, ...]]:
+    """读取界面上填写的宏定义与 include 目录（逗号分隔）。
+
+    这两项以前只有命令行支持（`--define` / `--include-dir`），网页上无法使用，
+    于是"自定义 RTL 依赖宏或 include"的场景在演示时只能绕开。路径合法性不在这里
+    判断：`SafePathPolicy` 会在执行前统一校验，越界会以明确错误返回。
+    """
+
+    raw_defines = str(st.session_state.get("compile_defines", "") or "")
+    raw_includes = str(st.session_state.get("compile_includes", "") or "")
+    defines = tuple(item.strip() for item in raw_defines.replace(";", ",").split(",") if item.strip())
+    includes = tuple(item.strip() for item in raw_includes.replace(";", ",").split(",") if item.strip())
+    return defines, includes
+
+
 def _wire_api_for(label: str) -> Literal["responses", "chat_completions"]:
     """把界面上的接口格式标签映射成 provider 接受的**字面量**取值。
 
@@ -936,11 +951,35 @@ if st.session_state.ai_plan is not None:
         pass
     st.json(st.session_state.ai_plan.model_dump(mode="json"))
 
+with st.expander("编译选项（可选：宏定义与 include 目录）"):
+    st.text_input(
+        "宏定义（逗号分隔，`NAME` 或 `NAME=VALUE`）",
+        value=st.session_state.get("compile_defines", ""),
+        key="compile_defines",
+        help="例如 WIDTH=16,SYNTHESIS。只在本地 Icarus 编译时生效，不参与任何判决。",
+    )
+    st.text_input(
+        "include 目录（逗号分隔）",
+        value=st.session_state.get("compile_includes", ""),
+        key="compile_includes",
+        help="目录必须位于项目目录内；越界会被安全路径策略拒绝，并给出明确错误。",
+    )
+    st.caption("这两项同时作用于「执行真实 Icarus 仿真」与「执行 AI 计划」两条路径。")
+
 if case["rtl"] is None:
     st.info("这是即将加入的案例，仅展示规格占位；当前没有可执行 RTL/testbench。")
 elif not is_custom and st.button("执行真实 Icarus 仿真", type="primary"):
     output = ROOT / ".iverilog-ai" / "runs"
-    config = ExecutionConfig(rtl_path=ROOT / case["rtl"], testbench_path=ROOT / case["tb"], top_module=case["top"], output_dir=output, allowed_roots=(ROOT,))
+    _defines, _includes = _compile_options()
+    config = ExecutionConfig(
+        rtl_path=ROOT / str(case["rtl"]),
+        testbench_path=ROOT / str(case["tb"]),
+        top_module=str(case["top"]),
+        output_dir=output,
+        allowed_roots=(ROOT,),
+        defines=_defines,
+        include_dirs=_includes,
+    )
     try:
         simulation_result = IcarusExecutor(config).run()
         report = write_report(simulation_result, Path(simulation_result.artifacts["run_dir"]) / "report.md")
@@ -963,6 +1002,7 @@ if st.session_state.ai_plan is not None and st.button("执行 AI 计划并生成
         contract = _contract()
         output = ROOT / ".iverilog-ai" / "pipeline-ui"
         rtl_relative = str(case["rtl"])
+        _defines, _includes = _compile_options()
         result = VerificationPipeline(
             run_synthesis=st.session_state.get("run_synthesis", False),
             yosys_path=os.getenv("YOSYS_PATH") or None,
@@ -970,6 +1010,8 @@ if st.session_state.ai_plan is not None and st.button("执行 AI 计划并生成
             st.session_state.ai_plan, contract, ROOT / rtl_relative, output,
             allowed_roots=(ROOT,), iverilog_path=os.getenv("IVERILOG_PATH") or r"D:\iverilog\bin\iverilog.exe",
             vvp_path=os.getenv("VVP_PATH") or r"D:\iverilog\bin\vvp.exe",
+            defines=_defines,
+            include_dirs=_includes,
             emit_vcd=True,
         )
         st.session_state.last_pipeline_result = result
