@@ -11,10 +11,12 @@ from iverilog_ai.core.pipeline import (
     explain_failure,
 )
 from iverilog_ai.core.testbench import TestbenchGenerator as Generator
+from iverilog_ai.core.toolchain import locate_tools
 
-
-IVERILOG = Path(r"D:\iverilog\bin\iverilog.exe")
-VVP = Path(r"D:\iverilog\bin\vvp.exe")
+# 工具位置统一由 core.toolchain 解析，保证同一套测试在本机与 Linux CI 上都能跑。
+_TOOLS = locate_tools()
+IVERILOG = _TOOLS.iverilog
+VVP = _TOOLS.vvp
 
 
 def _plan(expected=1):
@@ -87,7 +89,7 @@ def test_clocked_vectors_generate_wait_edge_sequence(tmp_path):
     assert "always #5" in source
 
 
-@pytest.mark.skipif(not (IVERILOG.is_file() and VVP.is_file()), reason="Icarus tools are not installed")
+@pytest.mark.skipif(not _TOOLS.can_simulate, reason="未找到 Icarus Verilog（iverilog/vvp）")
 def test_pipeline_runs_real_iverilog_and_persists_explicit_artifacts(tmp_path):
     result = VerificationPipeline().run(
         _plan(),
@@ -105,7 +107,7 @@ def test_pipeline_runs_real_iverilog_and_persists_explicit_artifacts(tmp_path):
     assert result.simulation.records[0].ok is True
 
 
-@pytest.mark.skipif(not (IVERILOG.is_file() and VVP.is_file()), reason="Icarus tools are not installed")
+@pytest.mark.skipif(not _TOOLS.can_simulate, reason="未找到 Icarus Verilog（iverilog/vvp）")
 def test_pipeline_runs_real_clocked_vectors(tmp_path):
     rtl = tmp_path / "counter.v"
     rtl.write_text(

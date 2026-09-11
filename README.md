@@ -7,7 +7,7 @@
 - 阶段一确定性验证闭环：已完成并有真实 Icarus/vvp 证据。
 - 阶段二 AI 测试规划：离线 MockProvider、OpenAI-compatible provider、严格 JSON 校验和重试，以及“计划→testbench→Icarus/vvp”确定性流水线均已完成。
 - 阶段三基准与评测：**14 个案例、78 个缺陷变体**，最近一次固定矩阵实跑 **78/78 检出、参考误报 0、不可判定 0**。常用 FPGA 案例（FIFO、UART、SPI、握手、去抖、PWM、多路选择器、同步复位、约翰逊计数器、上升沿检测器）均配有专门的边界 testbench 与缺陷基准。
-- 阶段四演示材料：Streamlit 单页、GitHub Actions、申报大纲、演示脚本和公平评测方案已完成。
+- 阶段四演示材料：Streamlit 单页、申报大纲、演示脚本和公平评测方案已完成。CI 工作流见 [`.github/workflows/ci.yml`](.github/workflows/ci.yml)（Linux 与 Windows × Python 3.11/3.12 四组合，跑全量测试、基准矩阵与编码卫生检查）。
 - 阶段五验证深度增强：内置案例参考模型校验、测试计划执行覆盖率摘要、失败原因解释、受控断言模板、失败周期波形摘要和 14 套常用案例 reference model 已完成；参数化 contract 与 testbench 实例化已接入。
 - 阶段六 RTL 质量审查：已提供静态规则审查器、质量评分、JSON/Markdown 报告和网页下载；静态审查不替代 Icarus 仿真、综合或时序分析。
 - 阶段七 VCD 自动分析：已提供本地 VCD 解析、信号列表、时间范围和变化统计；并已扩展到**波形语义结论**（沿统计、毛刺型不稳定、晚/早一拍相位检查）、参考波形与缺陷波形差异对比、失败周期对应时间窗。无需 GTKWave 也能生成波形摘要，GTKWave 作为可选人工复核工具；判据与噪声校准记录见 [docs/vcd_analysis.md](docs/vcd_analysis.md)。
@@ -106,6 +106,14 @@ python -m iverilog_ai compare-rtl `
 - 四类 RTL 缺陷基准集（详见 `benchmarks/manifest.json`）；
 - 自动回归、CI 和离线报告工具；
 - 中文案例、教程和参赛材料。
+
+## 参与贡献
+
+- 贡献流程、案例成套提交要求与提交前必须通过的命令：[CONTRIBUTING.md](CONTRIBUTING.md)
+- 变更记录（含各阶段的误报校准与修复原因）：[CHANGELOG.md](CHANGELOG.md)
+- 安全问题报告渠道（**请勿开公开 Issue**）：[SECURITY.md](SECURITY.md)
+- 行为准则：[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+- 引用信息：[CITATION.cff](CITATION.cff)
 
 ## 项目边界
 

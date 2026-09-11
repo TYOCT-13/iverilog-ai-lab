@@ -55,8 +55,15 @@ AI 输出只作为测试计划输入。最终通过/失败结论必须来自真�
   的临时目录，拥有固定超时和截断后的 stdout/stderr 证据。
 - core.report：离线 Markdown/HTML 渲染器。日志和失败字段都会转义，报告
   不加载远端脚本或样式。
-- core.cli：run、plan-run、report、validate-plan 四个入口，适合本地演示和
-  GitHub Actions 工作流。
+- core.cli：`run`、`plan-run`、`compare-rtl`、`report`、`validate-plan` 五个入口，
+  适合本地演示与 CI（见 `.github/workflows/ci.yml`）。
+- core.toolchain：外部工具探测（`iverilog` / `vvp` / `yosys`）。解析顺序为
+  显式参数 → 环境变量（`IVERILOG_PATH` / `VVP_PATH` / `YOSYS_PATH`）→ `PATH` →
+  常见安装目录；探测不到返回 `None`，由调用方决定 skip 还是报错，**不猜测路径**。
+  测试与 CI 都经它取路径，因此同一套测试在 Windows 与 Linux 上都会真正执行。
+- core.synthesis：可选综合证据层（Yosys 独立进程调用）。产出五层证据表，
+  未做的层级显式标 `not_run`；**不参与** PASS/FAIL 裁决。
+- core.behavior_compare：让两份 RTL 跑同一份 TestPlan，逐检查项与逐波形信号比对。
 
 ## 结构化结果协议
 

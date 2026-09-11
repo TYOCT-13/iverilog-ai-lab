@@ -1,0 +1,80 @@
+name: CI
+
+# 本工作流的定位：把仓库里**可离线复现**的结论每次提交都重跑一遍。
+# 特别说明（避免读者误解）：
+#   - 这里跑的是功能仿真与综合可用性验证，不是时序签核，也不产生比特流；
+#   - 基准矩阵是固定向量，结果确定，因此适合作为回归门禁；
+#   - 工具位置由 iverilog_ai.core.toolchain 解析（显式 → 环境变量 → PATH →
+#     常见目录），所以同一套测试在 Linux 与 Windows 上都会真正执行，而不是被 skip。
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PYTHONPATH: src
+  PYTHONIOENCODING: utf-8
+
+jobs:
+  test:
+    name: 测试与基准（${{ matrix.os }} / Python ${{ matrix.python }}）
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: 安装 Icarus Verilog（Linux）
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends iverilog
+          iverilog -V | head -n 1
+
+      - name: 安装 Icarus Verilog（Windows）
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          choco install --no-progress -y iverilog
+          $exe = Get-ChildItem -Path 'C:\iverilog*' -Recurse -Filter iverilog.exe -ErrorAction SilentlyContinue |
+                 Select-Object -First 1
+          if (-not $exe) { throw '未找到 iverilog.exe' }
+          "IVERILOG_PATH=$($exe.FullName)" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          $vvp = Join-Path $exe.DirectoryName 'vvp.exe'
+          "VVP_PATH=$vvp"                | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+
+      - name: 安装 Python 依赖
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+          python -m pip install pytest yowasp-yosys
+
+      - name: 环境自检（打印工具探测结果，找不到 Icarus 直接失败）
+        run: python -c "from iverilog_ai.core.toolchain import locate_tools, describe_tools; t = locate_tools(); print(describe_tools(t)); raise SystemExit(0 if t.can_simulate else 1)"
+
+      - name: 编码卫生检查（源码不得含 UTF-8 BOM）
+        run: python scripts/strip_bom.py --check
+
+      - name: 全量测试
+        run: python -m pytest -q
+
+      - name: 基准矩阵（Linux）
+        if: runner.os == 'Linux'
+        run: python scripts/run_benchmark_matrix.py --iverilog iverilog --vvp vvp
+
+      - name: 基准矩阵（Windows）
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: python scripts/run_benchmark_matrix.py --iverilog $env:IVERILOG_PATH --vvp $env:VVP_PATH

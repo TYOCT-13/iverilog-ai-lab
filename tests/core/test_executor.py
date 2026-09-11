@@ -5,10 +5,13 @@ import pytest
 from iverilog_ai.core.config import ExecutionConfig, SafePathError
 from iverilog_ai.core.executor import IcarusExecutor, parse_result_records
 from iverilog_ai.core.models import ResultStatus
+from iverilog_ai.core.toolchain import locate_tools
 
-
-IVERILOG = Path(r"D:\iverilog\bin\iverilog.exe")
-VVP = Path(r"D:\iverilog\bin\vvp.exe")
+# 工具位置统一由 core.toolchain 解析（显式 → 环境变量 → PATH → 常见目录），
+# 因此同一套测试在本机与 Linux CI 上都能跑，而不是在 CI 里全部 skip。
+_TOOLS = locate_tools()
+IVERILOG = _TOOLS.iverilog
+VVP = _TOOLS.vvp
 
 
 def test_parse_result_records_is_strict():
@@ -21,7 +24,7 @@ def test_parse_result_records_is_strict():
     assert len(diagnostics) == 1
 
 
-@pytest.mark.skipif(not (IVERILOG.is_file() and VVP.is_file()), reason="Icarus tools are not installed")
+@pytest.mark.skipif(not _TOOLS.can_simulate, reason="未找到 Icarus Verilog（iverilog/vvp）")
 def test_executor_runs_real_iverilog_and_vvp(tmp_path):
     rtl = tmp_path / "dut.v"
     tb = tmp_path / "tb_dut.v"
@@ -72,7 +75,7 @@ def test_executor_rejects_source_outside_allowed_root(tmp_path):
         config.resolve()
 
 
-@pytest.mark.skipif(not (IVERILOG.is_file() and VVP.is_file()), reason="Icarus tools are not installed")
+@pytest.mark.skipif(not _TOOLS.can_simulate, reason="未找到 Icarus Verilog（iverilog/vvp）")
 def test_executor_persists_compile_failure_evidence(tmp_path):
     rtl = tmp_path / "broken.v"
     tb = tmp_path / "tb_broken.v"

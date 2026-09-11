@@ -21,10 +21,14 @@ import pytest
 
 from iverilog_ai.ai.debug_server import build_plan_response
 from iverilog_ai.core.reference_model import AUTHORITATIVE, _DesignState
+from iverilog_ai.core.toolchain import locate_tools
 
 ROOT = Path(__file__).parents[2]
-IVERILOG = r"D:\iverilog\bin\iverilog.exe"
-VVP = r"D:\iverilog\bin\vvp.exe"
+# 工具位置统一由 core.toolchain 解析（显式 → 环境变量 → PATH → 常见目录），
+# 因此本文件在 Linux CI 上同样能真正跑起 Icarus，而不是整文件被 skip。
+_TOOLS = locate_tools()
+IVERILOG = _TOOLS.iverilog
+VVP = _TOOLS.vvp
 
 # 用例字段说明：
 #   rtl/top/instance  参考 RTL、顶层模块名、实例化语句（端口按模块声明顺序连接）
@@ -174,7 +178,7 @@ ALIGNED_CASES: dict[str, dict[str, object]] = {
 
 
 def _iverilog_available() -> bool:
-    return Path(IVERILOG).is_file() and Path(VVP).is_file()
+    return _TOOLS.can_simulate
 
 
 def _warmup_vectors(case: str, contract: dict) -> list[dict]:

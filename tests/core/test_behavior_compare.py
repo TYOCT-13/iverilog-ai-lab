@@ -21,10 +21,13 @@ import pytest
 
 from iverilog_ai.core.behavior_compare import compare_pipeline_behavior, compare_rtl_behavior
 from iverilog_ai.core.contracts import DutContract
+from iverilog_ai.core.toolchain import locate_tools
 
 ROOT = Path(__file__).parents[2]
-IVERILOG = r"D:\iverilog\bin\iverilog.exe"
-VVP = r"D:\iverilog\bin\vvp.exe"
+# 工具位置统一由 core.toolchain 解析，保证同一套测试在本机与 Linux CI 上都能跑。
+_TOOLS = locate_tools()
+IVERILOG = _TOOLS.iverilog
+VVP = _TOOLS.vvp
 # 工件目录必须落在允许根之内（SafePathPolicy 会拒绝项目外的路径），
 # 因此这里用项目内的临时目录而不是 pytest 的 tmp_path。
 WORK_ROOT = ROOT / ".iverilog-ai" / "test-behavior-compare"
@@ -58,7 +61,7 @@ endmodule
 
 
 def _iverilog_available() -> bool:
-    return Path(IVERILOG).is_file() and Path(VVP).is_file()
+    return _TOOLS.can_simulate
 
 
 def _plan(vectors: list[dict], *, design: str = "pwm"):

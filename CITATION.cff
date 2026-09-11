@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+message: "如果本项目的基准集、规则包或测试计划格式对你的工作有帮助，请按以下信息引用。"
+title: "Icarus 智测（iverilog-ai-lab）"
+abstract: >-
+  围绕 Icarus Verilog 的非官方 AI 辅助 RTL 验证扩展。AI 只提出受严格 JSON Schema
+  约束的测试计划，PASS/FAIL 由开源仿真器与结构化断言裁决；内置案例的期望值由与 RTL
+  逐拍对齐的确定性参考模型独立复算并覆盖 AI 数值。随项目提供 14 个案例 / 78 个可复现
+  缺陷的基准集、44 条带正反例的静态规则，以及波形语义分析、分层证据（仿真/综合）与
+  行为级对比能力。
+type: software
+license: Apache-2.0
+license-url: "https://www.apache.org/licenses/LICENSE-2.0"
+repository-code: "https://example.invalid/iverilog-ai-lab"
+# ↑ 仓库公开地址在作品提交时填入。此处保留占位符，避免引用不存在的链接。
+keywords:
+  - Verilog
+  - RTL verification
+  - Icarus Verilog
+  - testbench generation
+  - LLM-assisted verification
+  - benchmark
+  - open source EDA
+authors:
+  - name: "Icarus 智测 contributors"
+    # 按赛事规则，参赛材料中不出现学校名称、校徽与指导教师信息；
+    # 作者身份统一以项目名义署名。
+version: "0.1.0"
+date-released: "2026-09-10"
+references:
+  - type: software
+    title: "Icarus Verilog"
+    abstract: "本项目的仿真与判决引擎（以独立进程调用，未修改、未再分发）。"
+    license: GPL-2.0-or-later
+    repository-code: "https://github.com/steveicarus/iverilog"
+  - type: software
+    title: "Yosys Open SYnthesis Suite"
+    abstract: "可选的综合证据层（以独立进程调用，未修改、未再分发）。"
+    license: ISC
+    repository-code: "https://github.com/YosysHQ/yosys"
