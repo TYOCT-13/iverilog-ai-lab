@@ -3,6 +3,10 @@ import json
 import re
 from .provider import MockProvider, Provider, ProviderHTTPError, ProviderConnectionError
 from .schema import TestPlan, json_schema
+
+#: 发给模型的上下文长度上限。测试会断言真实上下文不超这个值——
+#: 曾经因为把 36KB 的实测约定 JSON 原文拼进上下文而撞上它、导致流水线报错。
+CONTEXT_LIMIT = 20_000
 class PlanningError(ValueError): pass
 
 
@@ -135,8 +139,8 @@ def plan_tests(
     context: str | None = None,
 ) -> TestPlan:
     if max_retries < 0 or max_retries > 5: raise ValueError("max_retries must be between 0 and 5")
-    if context is not None and (not isinstance(context, str) or len(context) > 20_000):
-        raise ValueError("context must be text of at most 20000 characters")
+    if context is not None and (not isinstance(context, str) or len(context) > CONTEXT_LIMIT):
+        raise ValueError(f"context must be text of at most {CONTEXT_LIMIT} characters")
     prompt=(
         "Return JSON only. No markdown, commands, paths, or executable code. "
         "Create concrete input vectors and expected outputs that obey the DUT contract. "

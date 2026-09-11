@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 import pytest
@@ -60,3 +61,37 @@ def test_context_always_carries_the_dut_contract():
 def test_rule_manifest_rejects_unsafe_case_names():
     with pytest.raises(ValueError):
         rule_manifest(ROOT, "../escape")
+
+
+def test_context_stays_within_the_planner_limit():
+    """上下文必须小于 `plan_tests` 的 20000 字符上限。
+
+    这条是真事故的回归用例：`rule_manifest` 为了指纹追溯把
+    `data/opensource_conventions.json`（36KB）也列了进去，而拼接逻辑按 manifest
+    逐条读原文，于是整篇 JSON 被塞进上下文，直接让 `plan_tests` 抛
+    "context must be text of at most 20000 characters"——流水线在真实模型路径上
+    直接报错。真实注入的应是渲染后的几百字片段。
+    """
+
+    from iverilog_ai.ai.planner import CONTEXT_LIMIT  # 上限的唯一来源
+
+    manifest = json.loads((ROOT / "benchmarks" / "manifest.json").read_text(encoding="utf-8"))
+    for case in manifest["categories"]:
+        contract_path = ROOT / "examples" / f"{case}_contract.json"
+        if not contract_path.is_file():
+            continue
+        context, _manifest = rules_context(ROOT, case, contract_path.read_text(encoding="utf-8"))
+        assert len(context) <= CONTEXT_LIMIT, f"{case} 的上下文 {len(context)} 字符，超过上限 {CONTEXT_LIMIT}"
+        # 大数据文件的内容不得出现在上下文里
+        assert "sha256" not in context.replace("sha256:", ""), f"{case} 的上下文混入了 JSON 原文"
+
+
+def test_conventions_fragment_is_small_but_present():
+    """约定片段应当是"几百字的事实摘要"，不是产物原文。"""
+
+    context, _manifest = rules_context(ROOT, "pwm", {"module": "pwm"})
+    start = context.find("实测开源约定")
+    assert start >= 0
+    fragment = context[start:]
+    assert len(fragment) < 2000, f"约定片段 {len(fragment)} 字符，过大"
+    assert "verilog-axi" in fragment

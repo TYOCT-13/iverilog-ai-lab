@@ -71,14 +71,24 @@ def rules_context(
     include_conventions: bool | None = None,
     min_confidence: str = "moderate",
 ) -> tuple[str, list[dict[str, str]]]:
+    """拼出发给模型的受控上下文。
+
+    **只拼接人读的规则文件（`.md`）。** 实测约定来自
+    ``data/opensource_conventions.json``，它必须经
+    :func:`conventions_context` 渲染成几百字的片段再注入；早期版本按 manifest 逐条
+    读原文，把 36KB 的 JSON 整篇塞进上下文，直接撞上 ``plan_tests`` 的 20000 字符
+    上限，使流水线报错。manifest 仍然保留该条目，用于指纹与出处追溯。
+    """
+
     root_path = Path(root).expanduser().resolve()
     manifest = rule_manifest(root_path, case)
     parts = [spec_text] if spec_text else []
     for item in manifest:
-        path = root_path / item["file"]
-        if not path.is_file():  # 实测约定由下面的专用渲染器注入，不走原文拼接
+        if not item["file"].endswith(".md"):
             continue
-        parts.append(f"\n--- {item['file']} (sha256:{item['sha256'][:16]}) ---\n{path.read_text(encoding='utf-8')}")
+        path = root_path / item["file"]
+        if path.is_file():
+            parts.append(f"\n--- {item['file']} (sha256:{item['sha256'][:16]}) ---\n{path.read_text(encoding='utf-8')}")
     measured = conventions_context(root_path, min_confidence=min_confidence) if include_conventions is not False else ""
     if measured:
         conventions_sha = next(
