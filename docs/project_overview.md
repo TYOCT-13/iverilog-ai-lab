@@ -54,7 +54,7 @@ streamlit run ui/app.py
 | 手写 testbench | 25 | `tb/*.v` |
 | 静态检查规则 | **44**（error 4 / warn 27 / info 13） | 规则注册表现算 |
 | 已对齐参考模型（权威预言机） | **14 / 14** | `SUPPORTED == set(AUTHORITATIVE)` |
-| 自动化测试 | **209** | `python -m pytest -q` |
+| 自动化测试 | **218** | `python -m pytest -q` |
 | 上游实测约定来源 | 2 个开源项目、172 个文件 | `data/opensource_conventions.json` |
 
 基准矩阵最近一次实跑结论：
@@ -302,10 +302,19 @@ testbench 检查。**不接受**自由书写的 Verilog 或 SVA 代码，因此�
 |---|---|
 | `scripts/run_benchmark_matrix.py` | 14 参考 + 78 缺陷的固定矩阵实跑 |
 | `scripts/run_strategy_experiment.py` | 固定/随机/离线AI/在线AI 四策略公平对比 |
+| `scripts/compare_models.py` | 多个在线模型横向对比（含可比性检查） |
 | `scripts/ingest_open_source_conventions.py` | 从开源项目度量约定 |
+| `scripts/summarize_trial_feedback.py` | 校验并汇总本地试用反馈 |
 | `scripts/make_report_figures.py` | 生成报告插图（确定性、无第三方素材） |
 | `scripts/markdown_to_pdf.py` | Markdown → PDF（离线渲染） |
 | `scripts/strip_bom.py` | BOM 卫生检查（CI 门禁） |
+
+### 想动手试的人看这里
+
+`docs/trial/` 是一套**可执行的试用材料**：三个任务（基准矩阵 / AI 流程 / 自定义 RTL），
+约 40 分钟，全程不需要 API 密钥，附排查表与结构化反馈表。跟着跑完可以顺便帮我们发现
+文档缺陷——**卡住的位置就是文档缺口**。当前还没有真人试用记录，结果页
+（`docs/trial/results.md`）保持"待收集"状态。
 
 ---
 
@@ -313,7 +322,7 @@ testbench 检查。**不接受**自由书写的 Verilog 或 SVA 代码，因此�
 
 ```powershell
 # 1. 全量测试（含多个真实跑 Icarus 的端到端用例）
-python -m pytest -q                                   # 期望 209 passed
+python -m pytest -q                                   # 期望 218 passed
 
 # 2. 基准矩阵（固定向量，结果确定）
 python scripts/run_benchmark_matrix.py                # 期望 14/14、78/78、0 误报、0 不可判定
