@@ -16,37 +16,15 @@ import json
 from pathlib import Path
 from typing import Any
 
+from iverilog_ai.core.benchmark_cases import CASE_TABLE, case_table, top_for_testbench
 from iverilog_ai.core.config import ExecutionConfig
 from iverilog_ai.core.executor import IcarusExecutor
 from iverilog_ai.core.models import ResultStatus
 
 
-CASES: dict[str, dict[str, str]] = {
-    "mod10_counter": {"rtl": "rtl/mod10_counter.v", "testbench": "tb/tb_mod10_counter.v", "top": "tb_mod10_counter"},
-    "traffic_light_emergency": {
-        "rtl": "rtl/traffic_light_emergency.v",
-        "testbench": "tb/tb_traffic_light_emergency.v",
-        "top": "tb_traffic_light_emergency",
-    },
-    "simple_alu": {"rtl": "rtl/simple_alu.v", "testbench": "tb/tb_simple_alu.v", "top": "tb_simple_alu"},
-    "sequence_101_overlap": {
-        "rtl": "rtl/sequence_101_overlap.v",
-        "testbench": "tb/tb_sequence_101_overlap.v",
-        "top": "tb_sequence_101_overlap",
-    },
-    # 常用 FPGA 案例的边界基准：每个案例使用专门的边界 testbench，
-    # 覆盖写满/回绕、位序、握手保持、门限、占空比边界、同步级数等触发条件。
-    "sync_fifo": {"rtl": "rtl/sync_fifo.v", "testbench": "tb/tb_sync_fifo.v", "top": "tb_sync_fifo"},
-    "uart_tx": {"rtl": "rtl/uart_tx.v", "testbench": "tb/tb_uart_tx.v", "top": "tb_uart_tx"},
-    "spi_master": {"rtl": "rtl/spi_master.v", "testbench": "tb/tb_spi_master.v", "top": "tb_spi_master"},
-    "handshake_stage": {"rtl": "rtl/handshake_stage.v", "testbench": "tb/tb_handshake_stage.v", "top": "tb_handshake_stage"},
-    "debounce": {"rtl": "rtl/debounce.v", "testbench": "tb/tb_debounce.v", "top": "tb_debounce"},
-    "pwm": {"rtl": "rtl/pwm.v", "testbench": "tb/tb_pwm.v", "top": "tb_pwm"},
-    "mux4": {"rtl": "rtl/mux4.v", "testbench": "tb/tb_mux4.v", "top": "tb_mux4"},
-    "sync_reset": {"rtl": "rtl/sync_reset.v", "testbench": "tb/tb_sync_reset.v", "top": "tb_sync_reset"},
-    "johnson_counter": {"rtl": "rtl/johnson_counter.v", "testbench": "tb/tb_johnson_counter.v", "top": "tb_johnson_counter"},
-    "edge_detector": {"rtl": "rtl/edge_detector.v", "testbench": "tb/tb_edge_detector.v", "top": "tb_edge_detector"},
-}
+# 案例表收在 core.benchmark_cases 里（并在加载时与 manifest 对照校验），
+# 避免"manifest 加了案例、脚本没加"导致参考设计被静默漏跑。
+CASES: dict[str, dict[str, str]] = CASE_TABLE
 
 
 def _relative(path: str | Path, root: Path) -> str:
@@ -59,9 +37,7 @@ def _relative(path: str | Path, root: Path) -> str:
 def _top_for(testbench_rel: str, info: dict[str, str]) -> str:
     """由 testbench 路径推出顶层模块名；与案例默认顶层一致时直接复用。"""
 
-    if testbench_rel == info["testbench"]:
-        return info["top"]
-    return Path(testbench_rel).stem
+    return top_for_testbench(testbench_rel, info)
 
 
 def _run_one(
@@ -144,8 +120,11 @@ def run_matrix(
     output_root.mkdir(parents=True, exist_ok=True)
     manifest_path = root / "benchmarks" / "manifest.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    # 先校验案例表与 manifest 一致（含文件存在性），再开始跑：
+    # 否则一个漏登记的案例会让分母悄悄变小，而"全过"的结论看起来毫无变化。
+    cases = case_table(root)
     runs: list[dict[str, Any]] = []
-    for case, info in CASES.items():
+    for case, info in cases.items():
         runs.append(
             _run_one(
                 root=root,
@@ -162,9 +141,9 @@ def run_matrix(
         )
     for defect in manifest.get("defects", []):
         case = str(defect["type"])
-        if case not in CASES:
+        if case not in cases:
             raise ValueError(f"manifest defect refers to unknown case: {case}")
-        info = CASES[case]
+        info = cases[case]
         # 缺陷可以声明专用 testbench（用于覆盖只有特定激励才能触发的缺陷），
         # 未声明时回落到该案例的默认 testbench。
         testbench_rel = str(defect.get("testbench") or info["testbench"])

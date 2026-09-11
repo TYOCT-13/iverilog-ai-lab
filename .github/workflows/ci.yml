@@ -64,7 +64,7 @@ jobs:
       - name: 环境自检（打印工具探测结果，找不到 Icarus 直接失败）
         run: python -c "from iverilog_ai.core.toolchain import locate_tools, describe_tools; t = locate_tools(); print(describe_tools(t)); raise SystemExit(0 if t.can_simulate else 1)"
 
-      - name: 编码卫生检查（源码不得含 UTF-8 BOM）
+      - name: 编码卫生检查（UTF-8 BOM 与编码损坏）
         run: python scripts/strip_bom.py --check
 
       - name: 实测开源约定的产物自洽性
@@ -81,3 +81,9 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: python scripts/run_benchmark_matrix.py --iverilog $env:IVERILOG_PATH --vvp $env:VVP_PATH
+
+      # 综合矩阵：让 docs/layered_evidence.md 里"94 个变体全部可综合"这句话
+      # 每次提交都被重算一遍。判据是"有没有拿到统计"，unavailable 也会判失败，
+      # 因为"没查成"不是证据。
+      - name: 综合矩阵（Yosys 通用门级）
+        run: python scripts/run_synthesis_matrix.py

@@ -42,11 +42,17 @@ python -c "from iverilog_ai.core.toolchain import locate_tools, describe_tools; 
 
 ```powershell
 python -m pytest -q                              # 全量测试
-python scripts/run_benchmark_matrix.py           # 基准矩阵：14 参考全过、78/78 检出、0 误报
+python scripts/run_benchmark_matrix.py           # 基准矩阵：14 参考全过、80/80 检出、0 误报
 python scripts/strip_bom.py --check              # 源码不得含 UTF-8 BOM
 ```
 
 CI 会在 Linux 与 Windows、Python 3.11/3.12 上跑同样的命令。**如果基准矩阵出现误报或漏检，先修代码而不是改期望。**
+
+装了 Yosys 的话建议顺手跑一次综合矩阵（未装会明确报 `unavailable`，不算失败）：
+
+```powershell
+python scripts/run_synthesis_matrix.py           # 94 个变体（14 参考 + 80 缺陷）逐个综合
+```
 
 ## 四、各类贡献的要求
 
@@ -62,6 +68,7 @@ CI 会在 Linux 与 Windows、Python 3.11/3.12 上跑同样的命令。**如果�
 | `tb/tb_<case>.v` | 功能 testbench，每条断言输出 `IVERILOG_AI_RESULT {json}` |
 | `tb/tb_<case>_boundary.v` | 边界 testbench |
 | `benchmarks/manifest.json` | 加入 `categories`，并为每个缺陷补 `defects` 条目 |
+| `src/iverilog_ai/core/benchmark_cases.py` | 在 `CASE_TABLE` 里补 `rtl` / `testbench` / `top` **三件套**；漏了这一行，基准矩阵会直接报错（校验先于执行），不会静默漏跑你的案例 |
 | `src/iverilog_ai/core/reference_model.py` | 加入 `SUPPORTED`、`AUTHORITATIVE`、`INPUT_DEFAULTS`，并实现 `_DesignState.step` |
 | `tests/core/test_reference_model_alignment.py` | 加入 `ALIGNED_CASES`，通过逐拍对齐 |
 

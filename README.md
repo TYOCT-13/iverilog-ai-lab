@@ -6,7 +6,7 @@
 
 - 阶段一确定性验证闭环：已完成并有真实 Icarus/vvp 证据。
 - 阶段二 AI 测试规划：离线 MockProvider、OpenAI-compatible provider、严格 JSON 校验和重试，以及“计划→testbench→Icarus/vvp”确定性流水线均已完成。
-- 阶段三基准与评测：**14 个案例、78 个缺陷变体**，最近一次固定矩阵实跑 **78/78 检出、参考误报 0、不可判定 0**。常用 FPGA 案例（FIFO、UART、SPI、握手、去抖、PWM、多路选择器、同步复位、约翰逊计数器、上升沿检测器）均配有专门的边界 testbench 与缺陷基准。
+- 阶段三基准与评测：**14 个案例、80 个缺陷变体**，最近一次固定矩阵实跑 **80/80 检出、参考误报 0、不可判定 0**。常用 FPGA 案例（FIFO、UART、SPI、握手、去抖、PWM、多路选择器、同步复位、约翰逊计数器、上升沿检测器）均配有专门的边界 testbench 与缺陷基准。
 - 阶段四演示材料：Streamlit 单页、申报大纲、演示脚本和公平评测方案已完成。CI 工作流见 [`.github/workflows/ci.yml`](.github/workflows/ci.yml)（Linux 与 Windows × Python 3.11/3.12 四组合，跑全量测试、基准矩阵与编码卫生检查）。
 - 阶段五验证深度增强：内置案例参考模型校验、测试计划执行覆盖率摘要、失败原因解释、受控断言模板、失败周期波形摘要和 14 套常用案例 reference model 已完成；参数化 contract 与 testbench 实例化已接入。
 - 阶段六 RTL 质量审查：已提供静态规则审查器、质量评分、JSON/Markdown 报告和网页下载；静态审查不替代 Icarus 仿真、综合或时序分析。
@@ -16,6 +16,8 @@
 - 阶段十参考模型全覆盖：**14 / 14 个内置案例**的参考模型已与 RTL 逐拍对齐（`SUPPORTED == AUTHORITATIVE`），因此每个内置案例的期望值都由确定性模型独立复算；对齐方法、采样口径与踩过的 8 个模型错误见 [docs/reference_model_alignment.md](docs/reference_model_alignment.md)。
 - 阶段十一分层证据：新增 Yosys 综合证据层，把「仿真 / 综合 / 时序 / 比特流 / 上板」五层状态显式写入报告与网页，未做的层级标 `not_run`；综合不参与 PASS/FAIL 裁决，也不做时序签核。口径与实测结果见 [docs/layered_evidence.md](docs/layered_evidence.md)。
 - 阶段十二行为级对比：自定义 RTL 与标准 RTL 跑**同一份** TestPlan，逐检查项与逐波形信号比对，命令行入口 `compare-rtl`；语义等价的重写（即使多出内部辅助变量）判为一致。判据与实测见 [docs/behavior_compare.md](docs/behavior_compare.md)。
+- 阶段十三激励质量与证据标注：新增**信号活动覆盖率**（哪些信号动过 + 到达过多少种取值，由 VCD 推导，**不是**代码覆盖率，口径见 [docs/coverage.md](docs/coverage.md)）；期望值来源改为三态如实标注（参考模型复算 / AI 生成 / 本轮没有期望值）；两个真实模型的同口径对比已完成，检出率相同而 AI 期望值准确率相差 11 个百分点，见 [docs/experiment/model_comparison_2026-09-11.md](docs/experiment/model_comparison_2026-09-11.md)。
+- 阶段十四开源协作与成本透明：新增 CI、Issue/PR 模板、行为准则、安全策略、引用文件与变更记录；新增**开源规约知识摄取**（从真实开源项目按固定提交实测编码约定，只存聚合统计与逐文件 sha256，不复制代码，见 [docs/opensource_conventions.md](docs/opensource_conventions.md)）；新增**未核验就留空的费用估算表**（价格留 `null` 而非填 0，见 `data/model_pricing.json`）。
 
 ## 快速开始
 
@@ -109,7 +111,7 @@ python -m iverilog_ai compare-rtl `
 
 ## 参与贡献
 
-- 想先看项目能做什么：[docs/project_overview.md](docs/project_overview.md)（含 8 页 PDF）
+- 想先看项目能做什么：[docs/project_overview.md](docs/project_overview.md)（含 9 页 PDF）
 - 想动手试一遍：`docs/trial/` 的[试用任务卡](docs/trial/task_card.md)，约 40 分钟、无需密钥
 - 贡献流程、案例成套提交要求与提交前必须通过的命令：[CONTRIBUTING.md](CONTRIBUTING.md)
 - 变更记录（含各阶段的误报校准与修复原因）：[CHANGELOG.md](CHANGELOG.md)

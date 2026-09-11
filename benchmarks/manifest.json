@@ -750,13 +750,14 @@
       "note": "复位分支漏掉 signal_d <= 1'b0；testbench 把 X 记为 unknown，仍按 ok=false 记录"
     },
     {
-      "id": "srst_bug_single_stage_only",
-      "file": "rtl/sync_reset_bug_single_stage_only.v",
+      "id": "srst_bug_sync_assert_only",
+      "file": "rtl/sync_reset_bug_sync_assert_only.v",
       "type": "sync_reset",
-      "trigger": "ext_rst_n 释放后的第一个时钟沿",
-      "expected": "rst_n 再保持一个时钟才置 1（两级同步）",
-      "actual": "释放当拍就置 1（只有一级延迟）",
-      "testbench": "tb/tb_sync_reset.v"
+      "trigger": "ext_rst_n 在两个时钟沿之间拉低",
+      "expected": "1ns 内 rst_n 变 0（断言路径异步）",
+      "actual": "当拍仍是旧值（首次为 X，重新拉低时为 1），要等下一个时钟沿才变 0",
+      "testbench": "tb/tb_sync_reset_boundary.v",
+      "note": "第二级触发器写成纯同步复位；释放仍两级同步，只有断言失去异步性。两条断言检查（assert_pulls_low / reassert_immediate_low）同时失败"
     },
     {
       "id": "srst_bug_never_release",

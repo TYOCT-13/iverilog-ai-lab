@@ -32,32 +32,48 @@
 
 ### 全部参考 RTL 与缺陷 RTL
 
-对 14 个参考 RTL + 78 个缺陷 RTL 共 **92 个变体**逐个跑综合：
+对 14 个参考 RTL + 80 个缺陷 RTL 共 **94 个变体**逐个跑综合：
 
 | 结果 | 数量 |
-|---|---:|
-| 综合通过 | **92** |
+|---|---|
+| 综合通过 | **94** |
 | 综合失败 | 0 |
 | 其它（超时/工具缺失/错误） | 0 |
 
+**这次不用信我，可以直接重跑**（早期版本的数字是一次性命令跑出来的，读者无法复现，这是缺陷）：
+
+```powershell
+python scripts/run_synthesis_matrix.py           # 94 个变体，约 35 秒（WASM 版 Yosys）
+```
+
+脚本产出 `.iverilog-ai/synthesis-matrix/synth-matrix.json` 与 `synth-matrix.md`，逐个变体保留 Yosys 原始日志。
+它的判据是**"有没有拿到统计"**而不是退出码，并且把 `unavailable` / `timeout` / `error` 单独计数、
+**不计入通过**——"没查成"不是证据，脚本遇到这三种情况会以非零码退出。
+
 这是符合预期的结论：缺陷变体是**功能**缺陷（回绕少了、位序反了、多发一位），它们都是可综合的。综合层要抓的是另一类问题——不可综合的写法。
 
-单元统计示例（通用门级单元，非器件映射）：
+单元统计示例（通用门级单元，非器件映射；下表取自上面这次实跑）：
 
 | 案例 | 门级单元 | 类型数 | 主要单元 |
 |---|---:|---:|---|
-| `mod10_counter` | 4 | 4 | — |
-| `sequence_101_overlap` | 3 | 2 | — |
+| `sync_reset` | 2 | 1 | `$adff`×2 |
+| `johnson_counter` | 2 | 2 | `$adffe`×1, `$not`×1 |
+| `sequence_101_overlap` | 3 | 2 | `$adff`×2, `$eq`×1 |
+| `mod10_counter` | 4 | 4 | `$adffe`×1, `$alu`×1, `$eq`×1, `$mux`×1 |
+| `mux4` | 4 | 3 | `$eq`×2, `$logic_not`×1, `$pmux`×1 |
+| `edge_detector` | 4 | 3 | `$adff`×2, `$and`×1, `$not`×1 |
+| `handshake_stage` | 5 | 4 | `$adffe`×2, `$not`×1, `$or`×1, `$reduce_and`×1 |
 | `pwm` | 5 | 3 | `$adff`×2, `$alu`×2, `$not`×1 |
-| `debounce` | 9 | 7 | — |
-| `traffic_light_emergency` | 12 | 6 | — |
-| `simple_alu` | 20 | 10 | — |
+| `debounce` | 9 | 7 | `$eq`×2, `$mux`×2, `$adff`×1, `$adffe`×1 |
+| `traffic_light_emergency` | 12 | 6 | `$and`×3, `$reduce_or`×3, `$mux`×2, `$pmux`×2 |
+| `simple_alu` | 20 | 10 | `$eq`×6, `$alu`×2, `$logic_not`×2, `$not`×2 |
 | `uart_tx` | 29 | 10 | `$mux`×14, `$adffe`×4, `$alu`×2, `$eq`×2 |
-| `spi_master` | 33 | 9 | — |
-| `sync_fifo` | 34 | 10 | `$eq`×7, `$logic_not`×5, `$adffe`×4 |
-| `handshake_stage` | 5 | 4 | — |
-| `mux4` | 4 | 3 | — |
-| `sync_reset` | 2 | 1 | — |
+| `spi_master` | 33 | 9 | `$mux`×20, `$adff`×3, `$adffe`×3, `$ne`×2 |
+| `sync_fifo` | 34 | 10 | `$eq`×7, `$logic_not`×5, `$adffe`×4, `$alu`×4 |
+
+顺带一个可核验的细节：`srst_bug_never_release`（`rst_n` 恒 0，从不同步释放）综合出 **0 个单元**——
+输出被常量折叠。它仍然是"综合通过"，但这条记录本身说明了本层的边界：**可综合性与功能正确性无关**，
+所以综合证据不参与 PASS/FAIL 裁决。
 
 ### 负例：这一层真的能抓到问题
 
