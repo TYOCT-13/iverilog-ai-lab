@@ -10,12 +10,39 @@
 
 ### 新增
 
+- **多模型公平对比实验**：同一批案例（12 案 / 62 缺陷）跑两个真实模型，检出率完全相同
+  （58/62 = 93.5%）。`deepseek-v4-pro` 的 AI 期望值准确率比 `deepseek-flash` 低 11 个
+  百分点，检出率却一致——这是权威预言机设计的直接证据。记录见
+  `docs/experiment/model_comparison_2026-09-11.md`。
+- **token 费用估算**：`data/model_pricing.json` 价格表带来源与核验日期；
+  `core/pricing.py` 只在价格已核验时给出金额，未核验时明确报"未估算"（`null` 不等于 0）。
+- **本地试用材料**：`docs/trial/` 的任务卡、反馈表、结果页与汇总脚本。
+- **上游贡献材料包**：`docs/competition/upstream_contribution.md`，含两份可直接提交的
+  Issue 草稿与提交前检查清单。**尚未提交**——实际提交需要维护者的账号。
 - **CI 工作流**：Linux 与 Windows × Python 3.11/3.12 四组合，跑全量测试、基准矩阵与
   编码卫生检查。工具位置改由 `core.toolchain` 统一探测（环境变量 → PATH → 常见目录），
   因此 CI 里是**真正执行**仿真，而不是把测试 skip 掉。
 - **协作门面文件**：`CONTRIBUTING.md`、`CODE_OF_CONDUCT.md`、`SECURITY.md`、
   `CHANGELOG.md`、`CITATION.cff`、Issue 与 PR 模板。
 - **BOM 卫生检查**：`scripts/strip_bom.py`，可在 CI 中作为门禁。
+- **开源规约知识摄取**：`core/conventions.py` + `scripts/ingest_open_source_conventions.py`，
+  从真实开源项目实测编码约定（含出处、许可证、每文件 sha256），注入 AI 规划上下文。
+
+### 修复
+
+- **实测约定 JSON 被整篇拼进模型上下文**：`rules_context` 按 manifest 逐条读原文，把
+  36KB 的约定 JSON 整篇塞进上下文，撞上 `plan_tests` 的 20000 字符上限，使**真实模型
+  路径直接报错**。离线 MockProvider 不走这条路径，因此单元测试与基准矩阵都发现不了。
+  修复后上下文从 38,310 降到 1,639–1,944 字符，并加了防回归断言。
+- **探针两处错误**：复位命名用子串匹配把 `burst` 当成 `rst`（复位名从 35 个虚增到 491 个）；
+  模块头正则不覆盖"参数与端口列表都换行"的真实写法（83 个文件只匹配到 4 个模块头，
+  却算出 ANSI 端口 100%）。两者都已钉成回归用例。
+
+### 记录（不修正史）
+
+- 提交 `a08702e` 的信息里误写"另修正 case 探针等价的贪婪匹配"——实际未做该修改。
+  `verilog-axi` 的 case 0/35 带 `default` 是真实测量结果（其 state 完全枚举），不是 bug。
+
 
 ## 阶段十二：行为级对比
 
