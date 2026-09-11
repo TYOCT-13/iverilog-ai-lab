@@ -664,11 +664,41 @@ class SimulationResult:
     def passed(self) -> bool:
         return self.status in {ResultStatus.PASSED, ResultStatus.PASSED_WITH_WARNINGS}
 
+    @property
+    def verdict(self) -> str:
+        """给脚本与人看的**单一结论词**，把 `passed` 的歧义说清楚。
+
+        为什么需要它：按裁决策略，功能不匹配记为 WARN，因此缺陷变体的
+        `status` 是 `passed_with_warnings`、`passed` 仍是 True——一次跑出 3 条
+        失败记录的运行，输出里却写着 `"passed": true`，只有同时看 `failures`
+        才看得出来。判断缺陷检测与否的人很容易在这里读错。
+
+        因此额外给出一个不含歧义的结论词：
+
+        - ``passed``：仿真跑通且没有任何不匹配记录；
+        - ``failed_checks``：仿真跑通，但存在**不匹配的功能检查**（缺陷检测的正常表现）；
+        - ``failed``：编译失败、执行失败或配置错误；
+        - ``inconclusive``：超时或结果无法判定。
+        """
+
+        if self.status is ResultStatus.PASSED:
+            return "passed"
+        if self.status is ResultStatus.PASSED_WITH_WARNINGS:
+            return "failed_checks" if self.failures else "passed"
+        if self.status in {
+            ResultStatus.FAILED,
+            ResultStatus.COMPILE_FAILED,
+            ResultStatus.CONFIGURATION_ERROR,
+        }:
+            return "failed"
+        return "inconclusive"
+
     def to_dict(self) -> dict[str, Any]:
         return {
             "schema_version": "1.0",
             "run_id": self.run_id,
             "status": self.status.value,
+            "verdict": self.verdict,
             "passed": self.passed,
             "compile": self.compile.to_dict(),
             "run": None if self.run is None else self.run.to_dict(),

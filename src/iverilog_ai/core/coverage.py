@@ -317,8 +317,8 @@ def analyze_signal_activity(
         changed_by_instance[owner] = sorted(declared & leaves)
 
     changed_union: set[str] = set()
-    for leaves in changed_by_instance.values():
-        changed_union |= set(leaves)
+    for changed_leaves in changed_by_instance.values():
+        changed_union |= set(changed_leaves)
 
     observed = len(changed_union)
     unchanged = sorted(declared - changed_union)
@@ -328,8 +328,8 @@ def analyze_signal_activity(
     # 「是否变化」的诊断力有限——复位把计数器清零也算"变化过"。取值数能区分
     # "只被复位动过一次"与"被激励驱动遍历过取值空间"。
     distinct_union: dict[str, int] = {}
-    for leaves in values_by_instance.values():
-        for leaf, count in leaves.items():
+    for value_counts in values_by_instance.values():
+        for leaf, count in value_counts.items():
             if leaf in declared:
                 distinct_union[leaf] = max(distinct_union.get(leaf, 0), count)
     value_detail: list[dict[str, Any]] = []

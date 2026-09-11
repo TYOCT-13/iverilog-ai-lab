@@ -1,13 +1,18 @@
-"""未可达代码检查（AST，静态、不执行任何代码）。
+"""未可达代码与重复定义检查（AST，静态、不执行任何代码）。
 
 **为什么需要它**：`core/reference_model.py` 里曾经有两份语义实现——`_DesignState.step`
 （活的）和 `check_plan_consistency` 里 `return` 之后的 150 行副本（死的）。死的这份
 不会报错、不会被测试覆盖，但会让读者以为"诊断路径自己算了一遍"，也会引诱后人去改错
 那一份。Python 不把这种情况当语法错误，ruff/flake8 的默认规则集也不报。
 
-判据保守，只报**确定不可达**的语句：
+同一类问题的另一种形态是**同名函数定义两次**：`core/static_review.py` 里
+`_numeric_findings` 被定义了两次，后一份静默覆盖前一份，前一份成了永远不执行的死代码
+（mypy 的 `no-redef` 会报，但项目没有跑 mypy 门禁）。本脚本一并检查。
+
+判据保守，只报**确定有问题**的：
 - 同一个语句块里，跟在 `return` / `raise` / `break` / `continue` 之后的语句；
-- `if/else` 两个分支都以终止语句结束、或 `while True` 且体内没有 `break` 时的后续语句。
+- `if/else` 两个分支都以终止语句结束、或 `while True` 且体内没有 `break` 时的后续语句；
+- 同一作用域内同名的函数/类定义出现多次（后一份覆盖前一份）。
 
 用法：`python scripts/check_dead_code.py`（有问题退出码 1）。
 """
@@ -15,6 +20,7 @@
 from __future__ import annotations
 
 import ast
+from collections import Counter
 import sys
 from pathlib import Path
 
@@ -71,6 +77,47 @@ def _check_body(body: list[ast.stmt], where: str, out: list[str]) -> None:
                 _check_body(handler.body, where, out)
 
 
+def _definition_findings(tree: ast.AST, path: Path) -> list[str]:
+    """同一作用域内同名的函数/类定义出现多次：后一份会静默覆盖前一份。"""
+
+    findings: list[str] = []
+    scopes: list[tuple[str, list[ast.stmt]]] = [("<module>", getattr(tree, "body", []))]
+
+    def visit(scope_name: str, body: list[ast.stmt]) -> None:
+        names = [
+            statement.name
+            for statement in body
+            if isinstance(statement, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
+        ]
+        for name, count in Counter(names).items():
+            if count > 1:
+                lines = [
+                    statement.lineno
+                    for statement in body
+                    if isinstance(statement, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
+                    and statement.name == name
+                ]
+                findings.append(
+                    f"{path.relative_to(ROOT)}::{scope_name}: 定义 `{name}` 出现 {count} 次（行 {lines}）——"
+                    "后一份会静默覆盖前一份，前一份是永远不执行的死代码"
+                )
+        for statement in body:
+            nested = getattr(statement, "body", None)
+            if isinstance(nested, list) and nested and all(isinstance(item, ast.stmt) for item in nested):
+                child = statement.name if isinstance(statement, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)) else scope_name
+                visit(child, nested)
+            for field in ("orelse", "finalbody"):
+                extra = getattr(statement, field, None)
+                if isinstance(extra, list) and extra and all(isinstance(item, ast.stmt) for item in extra):
+                    visit(scope_name, extra)
+            for handler in getattr(statement, "handlers", []) or []:
+                if handler.body:
+                    visit(scope_name, handler.body)
+
+    visit("<module>", scopes[0][1])
+    return findings
+
+
 def scan_file(path: Path) -> list[str]:
     try:
         tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
@@ -80,6 +127,7 @@ def scan_file(path: Path) -> list[str]:
     for node in ast.walk(tree):
         if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
             _check_body(node.body, f"{path.relative_to(ROOT)}::{node.name}", findings)
+    findings.extend(_definition_findings(tree, path))
     return findings
 
 

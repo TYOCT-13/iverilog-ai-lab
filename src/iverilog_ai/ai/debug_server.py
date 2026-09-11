@@ -25,7 +25,12 @@ import re
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
 
-from .debug_provider import _DEFAULT_VECTOR_COUNT, DeterministicLocalProvider, known_designs
+from .debug_provider import (
+    _DEFAULT_VECTOR_COUNT,
+    DeterministicLocalProvider,
+    extract_request,
+    known_designs,
+)
 
 _DEBUG_BASE_URL = "http://127.0.0.1"
 SERVER_NAME = "iverilog-ai-lab debug model (deterministic, offline)"
@@ -33,26 +38,6 @@ SERVER_NAME = "iverilog-ai-lab debug model (deterministic, offline)"
 # 调试服务只服务这些内置案例；未知设计返回 400，避免被当成通用模型。
 # 名单直接取自 Provider 的激励表（而不是再手写一份），避免两份名单漂移。
 KNOWN_DESIGNS = known_designs()
-
-_DESIGN_RE = re.compile(r"Design:\s*([A-Za-z_][A-Za-z0-9_$]*)")
-_CONTEXT_RE = re.compile(r"DUT context:\s*(\{.*?\})\s*Schema:", re.DOTALL)
-
-
-def extract_request(text: str, *, default_design: str | None = None) -> tuple[str, dict[str, Any]]:
-    """从提示词中提取设计名和 DUT contract；缺失时回退到默认值。"""
-
-    design_match = _DESIGN_RE.search(text)
-    design = design_match.group(1) if design_match else (default_design or "")
-    context_match = _CONTEXT_RE.search(text)
-    contract: dict[str, Any] = {}
-    if context_match:
-        try:
-            parsed = json.loads(context_match.group(1))
-            if isinstance(parsed, dict):
-                contract = parsed
-        except json.JSONDecodeError:
-            contract = {}
-    return design, contract
 
 
 def build_plan_response(text: str, *, vector_count: int, seed: int) -> dict[str, Any]:
@@ -241,7 +226,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args(argv)
     server = create_server(args.host, args.port, vector_count=args.vector_count, seed=args.seed, verbose=args.verbose)
-    host, port = server.server_address[0], server.server_address[1]
+    # server_address 的元素类型在 typeshed 里是宽松的（可能是 bytes），
+    # 显式 str() 一次，避免 f-string 打出 b'127.0.0.1' 这种噪音。
+    host = str(server.server_address[0])
+    port = int(server.server_address[1])
     base = f"http://{host}:{port}/v1"
     print(f"{SERVER_NAME}")
     print(f"listening on {base}")

@@ -47,7 +47,8 @@ FONT_CANDIDATES = (
 )
 
 
-def _font(size: int, *, bold: bool = False) -> ImageFont.FreeTypeFont:
+# Pillow 的回退字体是 ImageFont.ImageFont（不是 FreeTypeFont），返回类型必须写成并集。
+def _font(size: int, *, bold: bool = False) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
     bold_path = r"C:\Windows\Fonts\msyhbd.ttc"
     if bold and Path(bold_path).is_file():
         return ImageFont.truetype(bold_path, size)
@@ -138,8 +139,10 @@ def _save(image: Image.Image, path: Path, *, max_width: int = 1500, colors: int 
 
     if image.width > max_width:
         ratio = max_width / image.width
-        image = image.resize((max_width, int(image.height * ratio)), Image.LANCZOS)
-    image = image.convert("P", palette=Image.ADAPTIVE, colors=colors)
+        # Pillow 的 type stub 里没有 LANCZOS/ADAPTIVE 这两个常量别名（运行期存在），
+        # 因此单独忽略这两行的属性检查。
+        image = image.resize((max_width, int(image.height * ratio)), Image.LANCZOS)  # type: ignore[attr-defined]
+    image = image.convert("P", palette=Image.ADAPTIVE, colors=colors)  # type: ignore[attr-defined]
     path.parent.mkdir(parents=True, exist_ok=True)
     image.save(path, optimize=True)
     return path
@@ -314,10 +317,11 @@ def figure_layered_evidence(cells: dict | None = None, synth: dict | None = None
         draw.text((64, y + 20), name, font=_font(26, bold=True), fill=INK)
         draw.text((420, y + 22), status, font=_font(24), fill=edge)
         draw.text((700, y + 24), detail, font=_font(22), fill=MUTED)
+    cell_stats = cells or {}
     draw.text(
         (40, height - 92),
-        f"综合单元统计示例：PWM {cells.get('pwm', '—')} 个通用门级单元；"
-        f"UART {cells.get('uart_tx', '—')} 个；FIFO {cells.get('sync_fifo', '—')} 个。",
+        f"综合单元统计示例：PWM {cell_stats.get('pwm', '—')} 个通用门级单元；"
+        f"UART {cell_stats.get('uart_tx', '—')} 个；FIFO {cell_stats.get('sync_fifo', '—')} 个。",
         font=_font(21), fill=INK,
     )
     _footnote(draw, "综合通过 ≠ 时序收敛 ≠ 能上板；本项目不做时序签核，也不给出频率结论。", width, height)
@@ -362,14 +366,14 @@ def figure_benchmark(stats: dict) -> Path:
         ("接口与协议（握手 / 帧格式）", stats.get("by_kind", {}).get("protocol", 0), WARN_EDGE),
         ("边界与极限值", stats.get("by_kind", {}).get("boundary", 0), (150, 120, 190)),
     ]
-    max_value = max((value for _, value, _ in bars), default=1) or 1
+    max_value = int(max((value for _, value, _ in bars), default=1) or 1)
     top = 410
     for index, (label, value, color) in enumerate(bars):
         y = top + index * 54
         draw.text((40, y + 6), label, font=_font(22), fill=INK)
         bar_x = 560
         bar_max = 780
-        length = int(bar_max * (value / max_value)) if max_value else 0
+        length = int(bar_max * (int(value) / max_value)) if max_value else 0
         draw.rounded_rectangle((bar_x, y + 4, bar_x + bar_max, y + 34), radius=6, fill=GRAY_FILL, outline=LINE, width=2)
         if length:
             draw.rounded_rectangle((bar_x, y + 4, bar_x + length, y + 34), radius=6, fill=color)

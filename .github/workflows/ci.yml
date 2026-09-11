@@ -59,7 +59,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install -e .
-          python -m pip install pytest yowasp-yosys
+          python -m pip install pytest mypy yowasp-yosys
 
       - name: 环境自检（打印工具探测结果，找不到 Icarus 直接失败）
         run: python -c "from iverilog_ai.core.toolchain import locate_tools, describe_tools; t = locate_tools(); print(describe_tools(t)); raise SystemExit(0 if t.can_simulate else 1)"
@@ -69,6 +69,12 @@ jobs:
 
       - name: 未可达代码检查（AST）
         run: python scripts/check_dead_code.py
+
+      # 类型门禁：src / ui / scripts 当前是 0 error（配置见 pyproject.toml 的 [tool.mypy]）。
+      # 它抓到过三类真问题：同名函数定义两次（死代码）、线性脚本里"先用后定义"的
+      # NameError、以及把 None 当字符串用的隐患。
+      - name: 类型检查（mypy）
+        run: python -m mypy
 
       - name: 实测开源约定的产物自洽性
         run: python -m pytest tests/core/test_conventions.py -q
@@ -90,3 +96,8 @@ jobs:
       # 因为"没查成"不是证据。
       - name: 综合矩阵（Yosys 通用门级）
         run: python scripts/run_synthesis_matrix.py
+
+      # 离线 AI 路径矩阵：每个案例都走"确定性规划 → 生成 testbench → Icarus →
+      # 权威期望值 → 覆盖率证据"。基准矩阵用手写 testbench，覆盖不到这条路径。
+      - name: 离线 AI 路径矩阵（无需密钥）
+        run: python scripts/run_pipeline_matrix.py

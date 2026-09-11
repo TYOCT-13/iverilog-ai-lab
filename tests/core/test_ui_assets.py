@@ -29,16 +29,26 @@ def _literal(node: ast.AST) -> object:
 
 
 def _module_level_tables() -> dict[str, dict]:
-    """从 ui/app.py 里取出 CASES 与 RULE_CASE_NAMES 两张表。"""
+    """从 ui/app.py 里取出 CASES 与 RULE_CASE_NAMES 两张表。
+
+    两种写法都要支持：`CASES = {...}`（普通赋值）与 `CASES: dict[...] = {...}`
+    （带类型标注的赋值）。只认前者时，给表加上类型标注就会让这些检查**静默失效**
+    ——测试找不到表却什么也不说。
+    """
 
     tree = ast.parse(APP.read_text(encoding="utf-8"))
     tables: dict[str, dict] = {}
     for node in tree.body:
-        if not isinstance(node, ast.Assign):
-            continue
-        for target in node.targets:
-            if isinstance(target, ast.Name) and target.id in {"CASES", "RULE_CASE_NAMES"}:
-                tables[target.id] = _literal(node.value)  # type: ignore[assignment]
+        target_name: str | None = None
+        value: ast.expr | None = None
+        if isinstance(node, ast.Assign) and len(node.targets) == 1 and isinstance(node.targets[0], ast.Name):
+            target_name = node.targets[0].id
+            value = node.value
+        elif isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name) and node.value is not None:
+            target_name = node.target.id
+            value = node.value
+        if target_name in {"CASES", "RULE_CASE_NAMES"} and value is not None:
+            tables[target_name] = _literal(value)  # type: ignore[assignment]
     return tables
 
 

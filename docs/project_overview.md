@@ -54,7 +54,7 @@ streamlit run ui/app.py
 | 手写 testbench | 26 | `tb/*.v` |
 | 静态检查规则 | **44**（error 4 / warn 27 / info 13） | 规则注册表现算 |
 | 已对齐参考模型（权威预言机） | **15 / 15** | `SUPPORTED == set(AUTHORITATIVE)` |
-| 自动化测试 | **324** | `python -m pytest -q` |
+| 自动化测试 | **380** | `python -m pytest -q` |
 | 上游实测约定来源 | 2 个开源项目、172 个文件 | `data/opensource_conventions.json` |
 
 基准矩阵最近一次实跑结论：
@@ -266,6 +266,11 @@ testbench 检查。**不接受**自由书写的 Verilog 或 SVA 代码，因此�
 **用途**：评委/同学在没有 API 凭据的环境下也能完整跑通流程与实验。
 它不代表任何真实模型能力，其数据不作为 AI 效果依据。
 
+**这条路径被实测校验过**：`scripts/run_pipeline_matrix.py` 让 15 个案例逐个走
+"确定性规划 → 生成 testbench → Icarus 裁决 → 权威期望值 → 覆盖率证据"，当前 **15/15**。
+这不是装饰——正因为补了这条门禁，才发现离线计划曾经**端口全空**（合约没能从提示词里
+解析出来），一路"通过"却什么都没测。离线路径的强度必须被自动验证，不能靠"看起来跑通了"。
+
 ### 功能 10：信号活动覆盖率
 
 **它做什么**：用 VCD 里已有的信号事件，算出**激励质量**的两个指标——哪些信号动过
@@ -344,15 +349,18 @@ testbench 检查。**不接受**自由书写的 Verilog 或 SVA 代码，因此�
 
 | 脚本 | 用途 |
 |---|---|
-| `scripts/run_benchmark_matrix.py` | 15 参考 + 83 缺陷的固定矩阵实跑 |
-| `scripts/run_synthesis_matrix.py` | 98 个变体逐个跑 Yosys 综合（第五步的可复现证据） |
+| `scripts/run_benchmark_matrix.py` | 15 参考 + 83 缺陷的固定矩阵实跑（手写 testbench） |
+| `scripts/run_synthesis_matrix.py` | 98 个变体逐个跑 Yosys 综合（分层证据的可复现来源） |
+| `scripts/run_pipeline_matrix.py` | 离线 AI 路径矩阵：15 个案例逐个"规划 → 生成 testbench → Icarus → 权威期望值" |
+| `scripts/check_dead_code.py` | 未可达代码与重复定义检查（AST，CI 门禁） |
+| `python -m mypy` | 类型门禁：`src` / `ui` / `scripts` 共 49 个文件，当前 0 error |
 | `scripts/run_strategy_experiment.py` | 固定/随机/离线AI/在线AI 四策略公平对比 |
 | `scripts/compare_models.py` | 多个在线模型横向对比（含可比性检查） |
 | `scripts/ingest_open_source_conventions.py` | 从开源项目度量约定 |
 | `scripts/summarize_trial_feedback.py` | 校验并汇总本地试用反馈 |
 | `scripts/make_report_figures.py` | 生成报告插图（确定性、无第三方素材） |
 | `scripts/markdown_to_pdf.py` | Markdown → PDF（离线渲染） |
-| `scripts/strip_bom.py` | BOM 卫生检查（CI 门禁） |
+| `scripts/strip_bom.py` | BOM 与编码损坏检查（CI 门禁） |
 
 ### 想动手试的人看这里
 
@@ -367,21 +375,24 @@ testbench 检查。**不接受**自由书写的 Verilog 或 SVA 代码，因此�
 
 ```powershell
 # 1. 全量测试（含多个真实跑 Icarus 的端到端用例）
-python -m pytest -q                                   # 期望 324 passed
+python -m pytest -q                                   # 期望 380 passed
 
-# 2. 基准矩阵（固定向量，结果确定）
+# 2. 基准矩阵（固定向量 + 手写 testbench，结果确定）
 python scripts/run_benchmark_matrix.py                # 期望 15/15、83/83、0 误报、0 不可判定
 
-# 3. 参考模型与 RTL 逐拍对齐（4 个随机种子，零差异）
+# 3. 离线 AI 路径矩阵（无需密钥：规划 → 生成 testbench → Icarus → 权威期望值）
+python scripts/run_pipeline_matrix.py                 # 期望 15/15，且每例证据等级为 reference_model
+
+# 4. 参考模型与 RTL 逐拍对齐（4 个随机种子，零差异）
 python -m pytest tests/core/test_reference_model_alignment.py -q
 
-# 4. 静态规则每条都有正反例
+# 5. 静态规则每条都有正反例
 python -m pytest tests/core/test_static_review_rules.py -q
 
-# 5. 信号活动覆盖率（含取值覆盖，脚本内自带弱激励反例）
+# 6. 信号活动覆盖率（含取值覆盖，脚本内自带弱激励反例）
 python -m pytest tests/core/test_coverage.py -q
 
-# 6. 工具探测（换台机器先跑这个）
+# 7. 工具探测（换台机器先跑这个）
 python -c "from iverilog_ai.core.toolchain import locate_tools, describe_tools; print(describe_tools(locate_tools()))"
 ```
 

@@ -8,7 +8,7 @@ testbench 生成器只接受本模块定义的合约，而不会尝试从 RTL �
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum
 import json
 import math
@@ -261,7 +261,11 @@ class DutContract:
     ports: tuple[PortSpec, ...]
     clock: ClockContract | None = None
     reset: ResetContract | None = None
-    parameters: dict[str, int] = None
+    # `None` 也要接受（JSON 里显式写 null 是常见写法），__post_init__ 会归一化成 {}；
+    # 但字段本身的类型不能声明成"一定是 dict"——那与默认值 None 自相矛盾，
+    # 也会让静态检查失去意义。这里用 default_factory 提供干净默认值，同时保留
+    # 显式 None 的兼容路径。
+    parameters: dict[str, int] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
         object.__setattr__(self, "module", _identifier(self.module, "contract.module"))

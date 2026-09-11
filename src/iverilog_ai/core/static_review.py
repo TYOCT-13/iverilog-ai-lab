@@ -275,50 +275,6 @@ def _lexical_findings(source: str, lines: list[str], findings: list[StaticFindin
             findings.append(_finding(source, lines, rule_id, RULE_REGISTRY[rule_id].severity, match.start(), message, suggestion))
 
 
-def _numeric_findings(source: str, lines: list[str], findings: list[StaticFinding]) -> None:
-    """位宽截断与未指定宽度的常量字面量。"""
-
-    # 带位宽的赋值目标：reg/wire [N-1:0] name ... ; 之后找 name <=/=<常量>
-    declared_width: dict[str, int] = {}
-    for match in re.finditer(r"\b(?:reg|wire|logic)\s*(?:signed\s*)?\[\s*(\d+)\s*:\s*(\d+)\s*\]\s*([A-Za-z_]\w*)", source, re.I):
-        high, low = int(match.group(1)), int(match.group(2))
-        if high >= low:
-            declared_width[match.group(3)] = high - low + 1
-
-    for name, width in declared_width.items():
-        assignment = re.compile(rf"\b{re.escape(name)}\s*(?:<=|=)\s*(?:(\d+)\s*)?'([bBoOdDhH])([0-9a-fA-F_xXzZ]+)")
-        for match in assignment.finditer(source):
-            digits = match.group(3).replace("_", "")
-            if any(ch in digits.lower() for ch in "xz"):
-                continue
-            try:
-                base = {"b": 2, "o": 8, "d": 10, "h": 16}[match.group(2).lower()]
-                value = int(digits, base)
-            except ValueError:
-                continue
-            if value >= (1 << width):
-                findings.append(_finding(
-                    source, lines, "width-truncation", "warn", match.start(),
-                    f"Constant {value} does not fit in {width}-bit signal {name!r} and will be truncated",
-                    "Size the literal explicitly and confirm the truncation is intended.",
-                ))
-
-    # 未指定宽度的十进制常量（排除端口位宽、参数默认值、延时与下标等上下文）
-    for match in re.finditer(r"(?<![\w'\]])(\d{1,3})(?![\w'\]])", source):
-        line_start = source.rfind("\n", 0, match.start()) + 1
-        context = source[line_start:match.start()]
-        if re.search(r"(?:#|\[|\bparameter\b|\blocalparam\b|\bfor\b|,|\(|:)\s*$", context):
-            continue
-        key = re.search(r"(?:<=|=)\s*$", context)
-        if not key:
-            continue
-        findings.append(_finding(
-            source, lines, "unsized-literal", "info", match.start(),
-            f"Unsized decimal literal {match.group(1)}",
-            "Use a sized literal such as 8'd255 so width is explicit.",
-        ))
-
-
 def _style_findings(source: str, lines: list[str], findings: list[StaticFinding]) -> None:
     """风格类规则：每条规则只报第一次出现，避免噪声淹没真正的问题。"""
 
@@ -680,9 +636,9 @@ def _interface_findings(source: str, lines: list[str], findings: list[StaticFind
         for name in [item.strip() for item in ports.split(",") if item.strip()]:
             if not re.fullmatch(r"[A-Za-z_]\w*", name):
                 continue
-            declared = re.search(rf"\b(?:input|output|inout)\b[^;\n]*\b{re.escape(name)}\b", body)
+            declared_direction = re.search(rf"\b(?:input|output|inout)\b[^;\n]*\b{re.escape(name)}\b", body)
             assigned = re.search(rf"\b{re.escape(name)}\b\s*(?:<=|=(?!=))", body)
-            if not declared and not assigned:
+            if not declared_direction and not assigned:
                 findings.append(_finding(source, lines, "missing-port-direction", "warn", match.start(), f"Port {name!r} has no declared direction", "Declare the port direction (input/output/inout); an undeclared port defaults to a wire with no direction."))
                 break
 
@@ -707,14 +663,14 @@ def _interface_findings(source: str, lines: list[str], findings: list[StaticFind
         if not re.search(r"\blocalparam\b", source):
             findings.append(_finding(source, lines, "localparam-missing", "info", match.start(), "State encodings are declared as parameter instead of localparam", "Use localparam for internal state encodings so they cannot be overridden."))
 
-    declared: dict[str, tuple[int, str]] = {}
+    internal_decls: dict[str, tuple[int, str]] = {}
     port_spans = _port_list_spans(source)
     for match in re.finditer(r"\b(reg|wire|logic)\s*(?:signed\s*)?(?:\[[^\]]*\]\s*)?([A-Za-z_]\w*)\s*(?:=|;|,)", source, re.I):
         # 端口列表里的 input/output 声明不是内部信号，不能按"未驱动/未使用"判定
         if any(start <= match.start() < end for start, end in port_spans):
             continue
-        declared.setdefault(match.group(2), (match.start(), match.group(1).lower()))
-    for name, (offset, kind) in declared.items():
+        internal_decls.setdefault(match.group(2), (match.start(), match.group(1).lower()))
+    for name, (offset, kind) in internal_decls.items():
         uses = len(re.findall(rf"\b{re.escape(name)}\b", source))
         if uses <= 1:
             findings.append(_finding(source, lines, "unused-signal", "info", offset, f"Signal {name!r} is declared but never used", "Remove the declaration or connect it; unused declarations hide intent."))

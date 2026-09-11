@@ -78,8 +78,33 @@ def build_assertion(description: Mapping[str, Any] | StructuredAssertion) -> Str
     unknown = sorted(set(description) - allowed)
     if unknown:
         raise AssertionValidationError("unsupported assertion field(s): " + ", ".join(unknown))
+    # 先处理 signal_implies（它没有单一 `signal` 字段，只有 when/then 两个名字），
+    # 这样后面的模板都能拿到一个已经校验过的 str 型信号名——把校验写成
+    # `kind != ... and (...)` 的复合条件时，静态检查无法收窄类型。
+    if kind == "signal_implies":
+        when_name = description.get("when_signal")
+        then_name = description.get("then_signal")
+        if (
+            not isinstance(when_name, str)
+            or not _SIGNAL_RE.fullmatch(when_name)
+            or not isinstance(then_name, str)
+            or not _SIGNAL_RE.fullmatch(then_name)
+        ):
+            raise AssertionValidationError("signal_implies signal names must be safe identifiers")
+        within = description.get("within_cycles", 1)
+        if isinstance(within, bool) or not isinstance(within, int) or not 1 <= within <= 10000:
+            raise AssertionValidationError("within_cycles must be in [1, 10000]")
+        return StructuredAssertion(
+            kind,
+            when_name,
+            when_signal=when_name,
+            when_value=_scalar(description.get("when_value")),
+            then_signal=then_name,
+            then_value=_scalar(description.get("then_value")),
+            within_cycles=within,
+        )
     signal = description.get("signal")
-    if kind != "signal_implies" and (not isinstance(signal, str) or not _SIGNAL_RE.fullmatch(signal)):
+    if not isinstance(signal, str) or not _SIGNAL_RE.fullmatch(signal):
         raise AssertionValidationError("assertion.signal must be a safe Verilog identifier")
     if kind == "signal_equals":
         if "value" not in description:
@@ -93,14 +118,6 @@ def build_assertion(description: Mapping[str, Any] | StructuredAssertion) -> Str
         if isinstance(cycles, bool) or not isinstance(cycles, int) or cycles != len(values):
             raise AssertionValidationError("signal_sequence.cycles must equal values length")
         return StructuredAssertion(kind, signal, cycles=cycles, values=tuple(_scalar(v) for v in values))
-    if kind == "signal_implies":
-        names = (description.get("when_signal"), description.get("then_signal"))
-        if any(not isinstance(v, str) or not _SIGNAL_RE.fullmatch(v) for v in names):
-            raise AssertionValidationError("signal_implies signal names must be safe identifiers")
-        within = description.get("within_cycles", 1)
-        if isinstance(within, bool) or not isinstance(within, int) or not 1 <= within <= 10000:
-            raise AssertionValidationError("within_cycles must be in [1, 10000]")
-        return StructuredAssertion(kind, names[0], when_signal=names[0], when_value=_scalar(description.get("when_value")), then_signal=names[1], then_value=_scalar(description.get("then_value")), within_cycles=within)
     cycles = description.get("cycles", 1)
     if isinstance(cycles, bool) or not isinstance(cycles, int) or not 1 <= cycles <= 10000:
         raise AssertionValidationError("assertion.cycles must be an integer in [1, 10000]")

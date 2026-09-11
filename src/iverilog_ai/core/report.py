@@ -51,6 +51,14 @@ _STAGE_LABELS = {
     "not_run": "未运行",
 }
 
+#: 单一结论词的中文说明（见 ``SimulationResult.verdict``）。
+_VERDICT_LABELS = {
+    "passed": "通过（无检查不匹配）",
+    "failed_checks": "仿真跑通，但存在检查不匹配",
+    "failed": "失败（编译/执行/配置错误）",
+    "inconclusive": "无法判定",
+}
+
 
 def _synthesis_section(synthesis: Mapping[str, Any]) -> list[str]:
     """渲染"仿真→综合→时序→比特流→上板"的分层证据。
@@ -171,6 +179,10 @@ def render_markdown(
         "",
         f"- 运行 ID：{result.run_id}",
         f"- 总体状态：{_status(result.status)}",
+        # verdict 是单一结论词：功能不匹配只记 WARN，因此 status/passed 都不足以
+        # 说明"这次运行是不是真的过"（缺陷检出时的正常表现就是 failed_checks）。
+        f"- 结论：{_VERDICT_LABELS.get(result.verdict, result.verdict)}"
+        + (f"（{len(result.failures)} 条检查不匹配）" if result.failures else ""),
         f"- 证据结论：{result.config.get('verification_status', 'unknown') if isinstance(result.config, dict) else 'unknown'}",
         f"- 结构化记录：{passed}/{total} 通过",
         f"- 开始：{result.started_at}",
@@ -191,7 +203,16 @@ def render_markdown(
             lines.append("")
     oracle = _oracle_for_result(result)
     if oracle:
-        lines.extend(["## 期望值可信度", "", f"- 证据等级：`{oracle.get('evidence_level', 'unknown')}`", f"- 参考模型检查：{oracle.get('checked_expected', 0)} 项", f"- 一致：{oracle.get('matched_expected', 0)} 项", f"- 一致率：{('N/A' if oracle.get('consistency_rate') is None else str(oracle.get('consistency_rate') * 100) + '%')}"])
+        rate = oracle.get("consistency_rate")
+        rate_text = "N/A" if rate is None else f"{float(rate) * 100:.1f}%"
+        lines.extend([
+            "## 期望值可信度",
+            "",
+            f"- 证据等级：`{oracle.get('evidence_level', 'unknown')}`",
+            f"- 参考模型检查：{oracle.get('checked_expected', 0)} 项",
+            f"- 一致：{oracle.get('matched_expected', 0)} 项",
+            f"- 一致率：{rate_text}",
+        ])
         if oracle.get("warnings"):
             lines.append("- 结论：`plan_inconsistent`（AI expected 与参考模型存在差异，不能作为高可信预言机）")
         lines.append("")

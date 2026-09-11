@@ -1,5 +1,6 @@
 """安全的单页演示：案例来自代码内白名单，仿真交给 IcarusExecutor。"""
 from pathlib import Path
+from typing import Any, Literal
 import json
 import streamlit as st
 
@@ -294,6 +295,26 @@ def _show_synthesis(synthesis: dict | None) -> None:
     st.caption(data.get("disclaimer", ""))
 
 
+# 注意：这个函数必须定义在**第一次调用之前**。ui/app.py 是线性脚本，模块级语句
+# 按顺序执行——把它放在文件后半部分时，自定义 RTL 的行为级对比会在调用点抛
+# NameError（被 except Exception 捕获成一句"行为级对比失败：name '_contract' is not defined"）。
+def _wire_api_for(label: str) -> Literal["responses", "chat_completions"]:
+    """把界面上的接口格式标签映射成 provider 接受的**字面量**取值。
+
+    原先三处各写一遍内联三元表达式，类型上退化成 `str`，静态检查无法确认
+    传进去的一定是合法取值。集中成一个函数后，类型与实现都只有一份。
+    """
+
+    return "responses" if label.startswith("Responses") else "chat_completions"
+
+
+def _contract() -> DutContract:
+    if is_custom:
+        if st.session_state.get("custom_contract") is None:
+            raise ValueError("请先上传 RTL 并校验 DUT contract")
+        return st.session_state.custom_contract
+    return DutContract.from_json((ROOT / case["contract"]).read_text(encoding="utf-8"))
+
 def _verification_rules(case_name: str, contract: DutContract, spec_text: str) -> str:
     """Load bounded repository rules for model guidance; never executes them."""
     return rules_context(ROOT, RULE_CASE_NAMES.get(case_name, case_name), contract.to_json(), spec_text=spec_text)[0]
@@ -400,7 +421,7 @@ def _show_vcd_analysis(vcd_path: Path, *, key_prefix: str, preset: dict | None =
         if window_data.get("changes"):
             st.dataframe(window_data["changes"], use_container_width=True, hide_index=True)
         st.download_button("下载 VCD 分析 JSON", json.dumps(window_data, ensure_ascii=False, indent=2).encode("utf-8"), file_name="vcd-analysis.json", mime="application/json", key=f"{key_prefix}_download")
-CASES = {
+CASES: dict[str, dict[str, Any]] = {
     "交通灯·紧急模式": {"rtl": "rtl/traffic_light_emergency.v", "tb": "tb/tb_traffic_light_emergency.v", "top": "tb_traffic_light_emergency", "spec": "spec/traffic_light_emergency_spec.md", "contract": "examples/traffic_light_emergency_contract.json"},
     "模十计数器": {"rtl": "rtl/mod10_counter.v", "tb": "tb/tb_mod10_counter.v", "top": "tb_mod10_counter", "spec": "spec/mod10_counter_spec.md", "contract": "examples/mod10_counter_contract.json"},
     "简单 ALU": {"rtl": "rtl/simple_alu.v", "tb": "tb/tb_simple_alu.v", "top": "tb_simple_alu", "spec": "spec/simple_alu_spec.md", "contract": "examples/simple_alu_contract.json"},
@@ -429,7 +450,10 @@ _render_evidence_header()
 st.divider()
 name = st.selectbox("选择案例", ["自定义 RTL"] + list(CASES))
 is_custom = name == "自定义 RTL"
-case = CASES.get(name, {"rtl": None, "tb": None, "top": None, "spec": "自定义 RTL", "contract": None})
+case: dict[str, Any] = CASES.get(
+    str(name),
+    {"rtl": None, "tb": None, "top": None, "spec": "自定义 RTL", "contract": None},
+)
 
 def _show_failure_explanation(result, key):
     failures = getattr(result, "failures", ())
@@ -566,7 +590,7 @@ def _contract_editor() -> None:
                 if clock_signal.strip():
                     payload["clock"] = {"signal": clock_signal.strip(), "period_ns": float(clock_period), "edge": clock_edge}
                 if reset_signal.strip():
-                    payload["reset"] = {"signal": reset_signal.strip(), "active_level": int(reset_active), "synchronous": bool(reset_sync), "assert_cycles": int(reset_cycles)}
+                    payload["reset"] = {"signal": reset_signal.strip(), "active_level": int(reset_active or 0), "synchronous": bool(reset_sync), "assert_cycles": int(reset_cycles or 1)}
                 contract = DutContract.from_dict(payload)
                 st.session_state.custom_contract_text = contract.to_json()
                 st.session_state.custom_contract_json_text = st.session_state.custom_contract_text
@@ -650,7 +674,7 @@ if is_custom:
     case = {"rtl": st.session_state.get("custom_rtl_path"), "tb": None, "top": None, "spec": "自定义 RTL", "contract": None}
     reference_options = [p for p in sorted((ROOT / "rtl").glob("*.v")) if "_bug_" not in p.name and "bug_" not in p.name]
     if st.session_state.get("custom_rtl_source") and reference_options:
-        reference_choice = st.selectbox("标准 RTL 参考实现", reference_options, format_func=lambda p: p.name)
+        reference_choice = Path(str(st.selectbox("标准 RTL 参考实现", reference_options, format_func=lambda p: p.name)))
         if st.button("对比自定义 RTL 与标准实现", key="compare_custom_reference"):
             comparison = compare_rtl_sources(st.session_state.custom_rtl_source, reference_choice.read_text(encoding="utf-8"), user_name="上传 RTL", reference_name=reference_choice.name)
             st.session_state.rtl_comparison = comparison
@@ -725,7 +749,8 @@ st.session_state.run_synthesis = st.checkbox(
     help="多跑一次综合，报告里增加「仿真/综合/时序/比特流/上板」分层证据表。不参与 PASS/FAIL 裁决，也不做时序分析。",
 )
 if not is_custom:
-    _suggested_assertions = assertion_suggestions(RULE_CASE_NAMES.get(name, name))
+    _case_key = str(name)
+    _suggested_assertions = assertion_suggestions(RULE_CASE_NAMES.get(_case_key, _case_key))
     if _suggested_assertions and st.button("载入本案例推荐结构化断言", key="load_case_assertions"):
         st.session_state.structured_assertions_text = json.dumps(_suggested_assertions, ensure_ascii=False, indent=2)
         st.rerun()
@@ -735,8 +760,8 @@ with st.expander("AI 接口设置（可选）"):
         ["离线 Mock（无需密钥）", "本地调试模型（无需密钥、不联网）", "在线 API（密钥只保存在本次页面会话）"],
         horizontal=True,
     )
-    use_online = provider_mode.startswith("在线")
-    use_debug_local = provider_mode.startswith("本地调试")
+    use_online = str(provider_mode).startswith("在线")
+    use_debug_local = str(provider_mode).startswith("本地调试")
     debug_endpoint = st.text_input(
         "本地调试模型地址",
         value=os.getenv("IVERILOG_AI_DEBUG_ENDPOINT", "http://127.0.0.1:11434/v1"),
@@ -757,8 +782,8 @@ with st.expander("AI 接口设置（可选）"):
     st.caption("当前页面不会读取或修改电脑上的 Codex/PyCharm 配置；API Key 仅用于本次请求。")
     if st.button("检查配置（不调用模型）"):
         try:
-            _diag_wire = "responses" if wire_api_label.startswith("Responses") else "chat_completions"
-            _diag_reasoning = None if reasoning_label.startswith("不发送") or _diag_wire != "responses" else reasoning_label
+            _diag_wire = _wire_api_for(str(wire_api_label))
+            _diag_reasoning = None if str(reasoning_label).startswith("不发送") or _diag_wire != "responses" else reasoning_label
             _diag_provider = OpenAICompatibleProvider(endpoint=api_base, model=api_model, api_key=api_key,
                 wire_api=_diag_wire, reasoning_effort=_diag_reasoning, allow_network=True, store=False, timeout=api_timeout, max_output_tokens=api_output_tokens)
             st.json(_diag_provider.request_diagnostics())
@@ -766,7 +791,7 @@ with st.expander("AI 接口设置（可选）"):
             st.error(f"配置无效：{exc}")
     if st.button("读取模型列表", help="使用当前配置请求 /models；不会显示或保存 API Key"):
         try:
-            _models_wire = "responses" if wire_api_label.startswith("Responses") else "chat_completions"
+            _models_wire = _wire_api_for(str(wire_api_label))
             if "deepseek" in (api_base + " " + api_model).lower():
                 _models_wire = "chat_completions"
             _models_provider = OpenAICompatibleProvider(
@@ -789,10 +814,11 @@ with st.expander("AI 接口设置（可选）"):
             key="picked_model_from_list",
         )
         if _picked_model != "（不覆盖，使用上面的输入）":
-            api_model = _picked_model
-    if "deepseek" in (api_base + " " + api_model).lower() and wire_api_label.startswith("Responses"):
+            # st.selectbox 的返回值在类型标注上是宽泛的，显式转成 str：
+            # 下游用它拼提示词与构造 provider，必须是字符串。
+            api_model = str(_picked_model)
+    if "deepseek" in (api_base + " " + api_model).lower() and str(wire_api_label).startswith("Responses"):
         st.warning("检测到 DeepSeek 配置：官方接口使用 Chat Completions。生成时会自动改用 /chat/completions。")
-
 
 
 def _build_provider(target: str):
@@ -808,7 +834,7 @@ def _build_provider(target: str):
             store=False,
             timeout=30,
         )
-    wire = "responses" if wire_api_label.startswith("Responses") else "chat_completions"
+    wire = _wire_api_for(str(wire_api_label))
     if "deepseek" in (api_base + " " + api_model).lower() and wire == "responses":
         wire = "chat_completions"
     if not api_key.strip():
@@ -818,19 +844,12 @@ def _build_provider(target: str):
         model=api_model,
         api_key=api_key,
         wire_api=wire,
-        reasoning_effort=None if reasoning_label.startswith("不发送") or wire != "responses" else reasoning_label,
+        reasoning_effort=None if str(reasoning_label).startswith("不发送") or wire != "responses" else reasoning_label,
         allow_network=True,
         store=False,
         timeout=api_timeout,
         max_output_tokens=api_output_tokens,
     )
-
-def _contract() -> DutContract:
-    if is_custom:
-        if st.session_state.get("custom_contract") is None:
-            raise ValueError("请先上传 RTL 并校验 DUT contract")
-        return st.session_state.custom_contract
-    return DutContract.from_json((ROOT / case["contract"]).read_text(encoding="utf-8"))
 
 if is_custom and st.session_state.get("rtl_comparison") and st.button("让 AI 解读 RTL 对比并生成学习计划", key="ai_rtl_review"):
     try:
@@ -869,7 +888,14 @@ if st.button("生成测试计划", help="本地调试/离线模式不联网；�
             provider = _build_provider("生成测试计划")
         else:
             provider = MockProvider()
-        generated_plan = plan_tests(objective, name, provider=provider, max_retries=0, context=_verification_rules(name, contract, spec_text))
+        case_name = str(name)
+        generated_plan = plan_tests(
+            objective,
+            case_name,
+            provider=provider,
+            max_retries=0,
+            context=_verification_rules(case_name, contract, spec_text),
+        )
         try:
             requested_assertions = json.loads(assertions_text or "[]")
             if not isinstance(requested_assertions, list):
@@ -897,7 +923,12 @@ if st.session_state.ai_error:
 if st.session_state.ai_plan is not None:
     st.subheader("已校验的 TestPlan")
     try:
-        _rule_files = rules_manifest(ROOT, RULE_CASE_NAMES.get(name, name))
+        # 注意函数名：core.rules 里叫 `rule_manifest(root, case)`，
+        # core.static_review 里的同名函数是 `static_rule_manifest()`（不同签名）。
+        # 这里曾经写成不存在的 `rules_manifest`，抛出的 NameError 又不被
+        # `except ValueError` 接住，于是**生成计划后整页渲染中断**。
+        _case_key = str(name)
+        _rule_files = rule_manifest(ROOT, RULE_CASE_NAMES.get(_case_key, _case_key))
         st.caption("本次模型使用规则集：" + rules_fingerprint(_rule_files))
         with st.expander("查看规则文件指纹"):
             st.json(_rule_files)
@@ -911,19 +942,19 @@ elif not is_custom and st.button("执行真实 Icarus 仿真", type="primary"):
     output = ROOT / ".iverilog-ai" / "runs"
     config = ExecutionConfig(rtl_path=ROOT / case["rtl"], testbench_path=ROOT / case["tb"], top_module=case["top"], output_dir=output, allowed_roots=(ROOT,))
     try:
-        result = IcarusExecutor(config).run()
-        report = write_report(result, Path(result.artifacts["run_dir"]) / "report.md")
-        st.subheader(f"结论：{result.status.value}")
-        st.metric("结构化记录", f"{sum(r.ok for r in result.records)}/{len(result.records)} 通过")
-        st.json(result.to_dict())
+        simulation_result = IcarusExecutor(config).run()
+        report = write_report(simulation_result, Path(simulation_result.artifacts["run_dir"]) / "report.md")
+        st.subheader(f"结论：{simulation_result.status.value}")
+        st.metric("结构化记录", f"{sum(r.ok for r in simulation_result.records)}/{len(simulation_result.records)} 通过")
+        st.json(simulation_result.to_dict())
         st.write("报告路径：")
         st.code(str(report), language="text")
         if Path(report).is_file():
             st.download_button("下载 Markdown 报告", Path(report).read_bytes(), file_name="report.md", mime="text/markdown")
-        if result.failures:
+        if simulation_result.failures:
             st.subheader("失败反例")
-            st.json([f.to_dict() for f in result.failures])
-            _show_candidate_repair(result, case["rtl"], "icarus_candidate_repair")
+            st.json([f.to_dict() for f in simulation_result.failures])
+            _show_candidate_repair(simulation_result, case["rtl"], "icarus_candidate_repair")
     except Exception as exc:
         st.error(f"执行配置或仿真失败：{exc}")
 
@@ -931,11 +962,12 @@ if st.session_state.ai_plan is not None and st.button("执行 AI 计划并生成
     try:
         contract = _contract()
         output = ROOT / ".iverilog-ai" / "pipeline-ui"
+        rtl_relative = str(case["rtl"])
         result = VerificationPipeline(
             run_synthesis=st.session_state.get("run_synthesis", False),
             yosys_path=os.getenv("YOSYS_PATH") or None,
         ).run(
-            st.session_state.ai_plan, contract, ROOT / case["rtl"], output,
+            st.session_state.ai_plan, contract, ROOT / rtl_relative, output,
             allowed_roots=(ROOT,), iverilog_path=os.getenv("IVERILOG_PATH") or r"D:\iverilog\bin\iverilog.exe",
             vvp_path=os.getenv("VVP_PATH") or r"D:\iverilog\bin\vvp.exe",
             emit_vcd=True,
@@ -1013,7 +1045,13 @@ if st.session_state.ai_plan is not None and st.button("执行 AI 计划并生成
             st.json(list(result.failure_summaries))
             _show_failure_explanation(result, "pipeline_explain_failure")
             _show_candidate_repair(result, case["rtl"], "pipeline_candidate_repair")
-            _show_candidate_verify(result.simulation, ROOT / case["rtl"], _contract(), st.session_state.ai_plan, "pipeline_candidate_verify")
+            _show_candidate_verify(
+                result.simulation,
+                ROOT / str(case["rtl"]),
+                _contract(),
+                st.session_state.ai_plan,
+                "pipeline_candidate_verify",
+            )
             if st.button("根据失败补充测试向量", help="向当前 AI Provider 请求一组新的测试向量；不会自动执行"):
                 try:
                     contract = _contract()

@@ -296,9 +296,11 @@ class OpenAICompatibleProvider:
     ) -> None:
         raw_url = endpoint or os.getenv("IVERILOG_AI_BASE_URL") or os.getenv("IVERILOG_AI_ENDPOINT", "")
         self.base_url = _base_url(raw_url) if raw_url else ""
-        self.model = (model or os.getenv("IVERILOG_AI_MODEL", "")).strip()
+        self.model = (model or os.getenv("IVERILOG_AI_MODEL") or "").strip()
         # 去掉复制粘贴时常见的首尾空白；密钥只保存在当前 provider 实例内。
-        self.api_key = (api_key or os.getenv("IVERILOG_AI_API_KEY") or os.getenv("OPENAI_API_KEY", "")).strip()
+        self.api_key = (
+            api_key or os.getenv("IVERILOG_AI_API_KEY") or os.getenv("OPENAI_API_KEY") or ""
+        ).strip()
         self.timeout = float(timeout)
         self.wire_api = wire_api
         self.reasoning_effort = reasoning_effort

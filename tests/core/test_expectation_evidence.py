@@ -111,3 +111,42 @@ def test_aligned_builtin_design_reports_reference_model():
     )
     expectations = reference_expectations(plan, case, contract)
     assert expectations, "已对齐案例应能给出权威期望值"
+
+
+@pytest.mark.skipif(not _TOOLS.can_simulate, reason="未找到 Icarus Verilog")
+def test_offline_planner_path_reaches_reference_model_evidence():
+    """离线规划器 + 内置案例：整条路径必须落到 reference_model 级证据。
+
+    这条用例覆盖一个真实事故：离线 Provider 忽略提示词，生成 `design="design"`、
+    端口全空的计划。它一路"通过"，但既没有激励也没有权威期望值——预言机根本没参与。
+    因此这里同时断言"设计名被正确识别""每条向量都有激励""证据等级是 reference_model"。
+    """
+
+    from iverilog_ai.ai.debug_provider import DeterministicLocalProvider
+    from iverilog_ai.ai.planner import plan_tests
+    from iverilog_ai.core.rules import rules_context
+
+    case = "mod10_counter"
+    contract = DutContract.from_dict(
+        json.loads((ROOT / "examples" / f"{case}_contract.json").read_text(encoding="utf-8"))
+    )
+    context, _manifest = rules_context(ROOT, case, contract.to_dict())
+    plan = plan_tests(
+        "覆盖复位、使能保持与回绕",
+        case,
+        provider=DeterministicLocalProvider(seed=0),
+        context=context,
+    )
+    assert plan.design == case, "计划里的设计名必须是被请求的案例，否则预言机会整轮跳过"
+    assert plan.vectors and all(vector.inputs for vector in plan.vectors), "存在没有激励的向量"
+
+    result = VerificationPipeline().run(
+        plan, contract, ROOT / "rtl" / "mod10_counter.v", WORK / "offline-path",
+        allowed_roots=(ROOT,),
+        iverilog_path=_TOOLS.iverilog, vvp_path=_TOOLS.vvp,
+    )
+    oracle = result.simulation.config.get("oracle", {})
+    assert oracle.get("expectation_source") == "reference_model", oracle
+    assert oracle.get("authoritative_vectors", 0) >= len(plan.vectors)
+    assert not result.failures, [failure.test_id for failure in result.failures]
+    assert result.simulation.verdict == "passed"

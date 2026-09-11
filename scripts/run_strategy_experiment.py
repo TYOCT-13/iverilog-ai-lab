@@ -16,9 +16,10 @@ import os
 from pathlib import Path
 import random
 import time
-from typing import Any, Callable
+from typing import Any, Literal, Callable
 
 from iverilog_ai.ai import MockProvider, OpenAICompatibleProvider, plan_tests
+from iverilog_ai.ai.provider import Provider
 from iverilog_ai.ai.debug_server import build_plan_response
 from iverilog_ai.core.contracts import DutContract
 from iverilog_ai.core.models import ResultStatus
@@ -324,7 +325,8 @@ def _main() -> int:
                 payload = _payload(case, vectors)
                 plan_valid = True
                 request_id = f"{strategy}-{case}-{seed}"
-                provider = None
+                # 两个分支会构造不同的 provider，统一标注成公共基类类型。
+                provider: Provider | None = None
                 generation_ms = None
                 usage = None
                 if strategy in {"ai", "online_ai"}:
@@ -338,7 +340,11 @@ def _main() -> int:
                             # stream="auto"：先非流式，若网关只接受流式（会在返回
                             # 响应前断连）或返回空正文，则自动改用 SSE 重试。
                             # 实测某些网关必须显式强制流式才稳定，故提供开关。
-                            stream_mode: bool | str = {"auto": "auto", "on": True, "off": False}[args.online_stream]
+                            stream_mode: bool | Literal["auto"] = "auto"
+                            if str(args.online_stream) == "on":
+                                stream_mode = True
+                            elif str(args.online_stream) == "off":
+                                stream_mode = False
                             provider = OpenAICompatibleProvider(endpoint=args.online_endpoint, model=args.online_model, api_key=online_key, wire_api="chat_completions", reasoning_effort=None, allow_network=True, store=False, timeout=180, stream=stream_mode)
                         generation_started = time.perf_counter()
                         # Give online models the exact contract; otherwise
@@ -405,7 +411,13 @@ def _main() -> int:
             request_rows.setdefault(row["request_id"], row)
             if not row.get("plan_valid", False):
                 request_rows[row["request_id"]] = row
-        generation_times = [row.get("generation_ms") for row in request_rows.values() if isinstance(row.get("generation_ms"), int)]
+        # 显式转成 int 列表：`row.get(...)` 的静态类型是 Any | None，
+        # 直接求和会让"均值"这条统计在类型层面不可信（也可能混进 None）。
+        generation_times = [
+            int(row["generation_ms"])
+            for row in request_rows.values()
+            if isinstance(row.get("generation_ms"), int)
+        ]
         # 参考误报只统计真正的硬失败；warn 级反例在参考设计上代表"AI 期望值
         # 与参考模型不一致"，属于诊断指标，单独统计，避免把工具缺陷记成误报。
         reference_false_positives = sum(bool(row.get("error_failures")) for row in refs)
@@ -413,7 +425,7 @@ def _main() -> int:
         ai_checked = sum(int(row.get("ai_expected_checked") or 0) for row in selected)
         ai_matched = sum(int(row.get("ai_expected_matched") or 0) for row in selected)
         valid_requests = sum(bool(row.get("plan_valid")) for row in request_rows.values())
-        summary[strategy] = {"runs": len(selected), "plan_requests": len(request_rows), "valid_plan_requests": valid_requests, "request_plan_valid_rate": valid_requests / len(request_rows) if request_rows else 0.0, "plan_valid": all(row["plan_valid"] for row in selected), "plan_valid_runs": valid_runs, "plan_total_runs": len(selected), "plan_valid_rate": valid_runs / len(selected) if selected else 0.0, "reference_false_positives": reference_false_positives, "reference_warn_mismatches": reference_warn_mismatches, "ai_expected_checked": ai_checked, "ai_expected_matched": ai_matched, "ai_expected_accuracy": (ai_matched / ai_checked) if ai_checked else None, "defects_total": len(total_pairs), "defects_found": len(found_pairs), "detection_rate": len(found_pairs) / len(total_pairs) if total_pairs else 0.0, "inconclusive_runs": sum(row["status"] == "inconclusive" for row in selected), "mean_generation_ms": (sum(generation_times) / len(generation_times) if generation_times else None), "mean_time_to_first_failure_ms": (sum(row["time_to_first_failure_ms"] for row in defects if row.get("time_to_first_failure_ms") is not None) / max(1, sum(row.get("time_to_first_failure_ms") is not None for row in defects)))}
+        summary[strategy] = {"runs": len(selected), "plan_requests": len(request_rows), "valid_plan_requests": valid_requests, "request_plan_valid_rate": valid_requests / len(request_rows) if request_rows else 0.0, "plan_valid": all(row["plan_valid"] for row in selected), "plan_valid_runs": valid_runs, "plan_total_runs": len(selected), "plan_valid_rate": valid_runs / len(selected) if selected else 0.0, "reference_false_positives": reference_false_positives, "reference_warn_mismatches": reference_warn_mismatches, "ai_expected_checked": ai_checked, "ai_expected_matched": ai_matched, "ai_expected_accuracy": (ai_matched / ai_checked) if ai_checked else None, "defects_total": len(total_pairs), "defects_found": len(found_pairs), "detection_rate": len(found_pairs) / len(total_pairs) if total_pairs else 0.0, "inconclusive_runs": sum(1 for row in selected if row["status"] == "inconclusive"), "mean_generation_ms": (sum(generation_times) / len(generation_times) if generation_times else None), "mean_time_to_first_failure_ms": (sum(int(row["time_to_first_failure_ms"] or 0) for row in defects if row.get("time_to_first_failure_ms") is not None) / max(1, sum(1 for row in defects if row.get("time_to_first_failure_ms") is not None)))}
     experiment_finished_wall = datetime.now(timezone.utc)
     payload = {"schema_version": "1.0", "started_at": experiment_started_wall.isoformat().replace("+00:00", "Z"), "finished_at": experiment_finished_wall.isoformat().replace("+00:00", "Z"), "duration_ms": int((time.perf_counter() - experiment_started) * 1000), "total_units": total_units, "completed_units": completed_units, "rule_sets": rule_sets, "skipped_cases": SKIPPED_CASES, "runs": rows, "summary": summary}
     (output / "strategy_matrix.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

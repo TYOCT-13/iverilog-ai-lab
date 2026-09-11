@@ -42,8 +42,17 @@
   `validate_case_table`。原先"案例 → RTL/testbench/顶层"的映射在基准矩阵脚本、策略实验
   脚本与网页各写了一份且互不校验，存在**静默漏跑**风险（manifest 加了案例、脚本没加，
   分母变小而"全过"的结论毫无变化）。现在基准矩阵在开跑前先校验，缺一行直接报错。
-- **未可达代码检查**：`scripts/check_dead_code.py`（AST，保守判据）+ CI 门禁 +
-  `pytest` 内的同款断言。
+- **未可达代码检查**：`scripts/check_dead_code.py`（AST，保守判据：终止语句之后的代码、
+  无限循环之后的代码、**同一作用域内重复定义**）+ CI 门禁 + `pytest` 内的同款断言。
+- **类型门禁（mypy）**：`pyproject.toml` 的 `[tool.mypy]` + CI 步骤 +
+  `tests/core/test_type_check.py`；`src` / `ui` / `scripts` 当前 0 error。
+- **离线 AI 路径矩阵（无需密钥）**：`scripts/run_pipeline_matrix.py` + CI 步骤 +
+  `tests/core/test_pipeline_matrix.py`。判据是"跑通 + 无失败记录 + 期望值来自参考模型 +
+  生成了 testbench + 报告里有覆盖率证据"。
+- **CLI 契约测试**：`tests/core/test_cli.py` 把退出码约定（`run` 0/1、`plan-run` 0/1/2、
+  `compare-rtl` 0/1/2、`report` 0/2、`validate-plan` 0/2）与产物路径钉成断言。
+- **`verdict` 单一结论词**：`SimulationResult.verdict`（`passed` / `failed_checks` /
+  `failed` / `inconclusive`），写入 `result.json`、CLI 摘要与报告首部。
 - **基准规模 78 → 80 缺陷（`sync_reset` 扩到 4 个变体）**：`sync_reset` 原先只有 2 个缺陷，
   而复位同步是 CDC 高危点，因此按"根因独立"补足，覆盖复位**释放**与复位**断言**两条不同的
   错误路径。其后复核发现其中一个变体与既有变体代码相同，已替换（见下方修复）。
@@ -60,6 +69,48 @@
 
 ### 修复
 
+- **网页"生成计划"之后整页渲染中断（NameError）**：计划渲染分支里调用了一个不存在的
+  函数名（`rules_manifest`，实际导入的是 `rule_manifest`），抛出的 `NameError` 又不被
+  那里的 `except ValueError` 接住——于是"生成计划"之后，计划 JSON、执行按钮、结果区
+  全都看不到。同一分支里 `_contract()` 也是"先用后定义"（`ui/app.py` 是线性脚本，
+  模块级语句按顺序执行）。两者都已修正并前移定义，`tests/core/test_ui_smoke.py`
+  新增"生成计划后页面仍然存活"的用例（已验证：修之前必失败）。
+- **同名函数定义两次，前者是死代码**：`core/static_review.py` 的 `_numeric_findings`
+  与 `scripts/markdown_to_pdf.py` 的 `_load_font` 各被定义两次，后一份静默覆盖前一份。
+  行为没变（Python 本来就用后一份），但"改错那一份"的风险是真实的。已删除死副本，
+  并把**重复定义**加进未可达代码检查。
+- **开启类型门禁（mypy，0 error）**：`src` / `ui` / `scripts` 共 49 个文件，配置见
+  `pyproject.toml`，CI 与 `tests/core/test_type_check.py` 双重执行。首轮修掉的既有问题
+  包括：`repair_compare` 里 `getattr(after, "status", None).value` 的 AttributeError 隐患、
+  `provider` 构造函数里 `getenv(...).strip()` 可能作用于 None、报告里一致性率的
+  `None * 100` 类型歧义、`DutContract.parameters` 声明成"一定是 dict"却默认 `None`、
+  `rtl_import`/`conventions`/`testbench`/`coverage` 的变量复用与标注不符等。
+- **离线 AI 路径其实什么都没测（两个 bug 叠加）**：这条路径是"无密钥也能完整跑通"的
+  门面，但实测发现它生成的计划**端口全空**：
+  1. `DeterministicLocalProvider.generate()` 直接 `del prompt`，只用构造时传入的
+     `design`/`contract`。于是最自然的用法 `plan_tests(objective, case, provider=DeterministicLocalProvider())`
+     得到的计划里 `design` 是字面量 `"design"`——**参考模型整轮跳过**（`design not in SUPPORTED`），
+     证据等级退化成 `none_given`；
+  2. 调试服务从提示词里取合约的正则只认 `DUT context: {json} Schema:` 这一种形状，而真实
+     提示词是 `rules_context(...)` 的产物：规则文本在前、合约以 `--- DUT contract ---` 附在末尾。
+     于是合约解析为空 → `driveable` 为空 → **每条向量的 `inputs` 都是 `{}`**：计划合法、
+     仿真"通过"，但 DUT 端口从头到尾保持初值。
+  处理：Provider 改为"自身字段 → 提示词 → 仓库内置合约"依次解析；合约提取改为括号配对解析
+  （非贪婪正则在嵌套对象上必然失败）；既无合约又非内置案例时**直接报错**，不再生成空计划。
+  影响范围：网页"本地调试模型"与 `plan_tests` + 本地 Provider 的用法；策略实验自建计划，
+  因此 `docs/experiment/` 里的离线数字不受影响。
+  新增 21 条回归（`tests/ai/test_debug_interface.py` 的真实提示词形状用例 +
+  `tests/core/test_expectation_evidence.py` 的端到端断言"设计名正确、每条向量都有激励、
+  证据等级是 reference_model"）。
+- **新增离线 AI 路径矩阵**：`scripts/run_pipeline_matrix.py`，15 个案例逐个走
+  "确定性规划 → 生成 testbench → Icarus 裁决 → 权威期望值 → 覆盖率证据"，实测 **15/15**。
+  基准矩阵用手写 testbench，覆盖不到这条路径——这正是上面那两个 bug 能长期藏着的原因。
+  已进 CI，并有 `tests/core/test_pipeline_matrix.py` 兜底。
+- **`verdict`：把 `passed` 的歧义收敛成一个结论词**。按裁决策略，功能不匹配记为 WARN，
+  因此缺陷变体输出 `status="passed_with_warnings"`、`passed=true`、`failures=3`——
+  一次"检出 3 个缺陷"的运行写着 `passed: true`，只看这个字段必然读错。现在 CLI 摘要、
+  `result.json` 与报告都给出 `verdict`（`passed` / `failed_checks` / `failed` / `inconclusive`），
+  报告里还写明"（N 条检查不匹配）"。`tests/core/test_verdict.py` 覆盖全部 7 种状态。
 - **报告配图里的数字一直读不到真结果（图内自相矛盾）**：`scripts/make_report_figures.py`
   找的是 `benchmark_matrix.json`，而基准矩阵实际产出 `matrix.json`——于是它**永远**走回退
   分支，图 4 显示硬编码的 `14/14` 与 `78/78`，而同一张图里的柱状图是按清单现算的（总数 83）。

@@ -34,3 +34,20 @@ where = ["src"]
 pythonpath = ["src"]
 testpaths = ["tests"]
 addopts = "-ra"
+
+# 类型检查门禁（`python -m mypy src ui scripts`）。当前三处都是 0 error，
+# 因此它是"可执行的标准"，而不是一份摆设的配置。
+# - `explicit_package_bases` + `mypy_path`：scripts/ 与 ui/ 不是包，但里面的模块
+#   会互相导入，不给这两个开关 mypy 会报"同一个文件出现在两个模块名下"。
+# - `ignore_missing_imports`：pydantic/streamlit/PIL/fitz 的 stub 并不完整，
+#   缺 stub 不应该让门禁失效。
+[tool.mypy]
+python_version = "3.11"
+mypy_path = "src"
+explicit_package_bases = true
+ignore_missing_imports = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+no_implicit_optional = true
+show_error_codes = true
+files = ["src", "ui", "scripts"]

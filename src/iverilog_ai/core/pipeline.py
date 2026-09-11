@@ -160,7 +160,10 @@ def explain_failures(failures: Sequence[FailureRecord]) -> tuple[str, ...]:
 summarize_failure = explain_failure
 
 
-def coverage_summary(plan: TestPlan, simulation: SimulationResult) -> dict[str, Any]:
+#: 输入可以是新的扁平格式（`ai.schema.TestPlan`，用 `vectors`），也可以是旧的内部
+#: 格式（`core.models.TestPlan`，用 `cases/steps`）。两种格式字段名不同，写死任一种
+#: 都会让另一条路径失去支持，因此按 `Any` 处理并在运行时用 `getattr` 分辨。
+def coverage_summary(plan: Any, simulation: SimulationResult) -> dict[str, Any]:
     """计算测试计划的执行摘要（不是 RTL 代码覆盖率）。
 
     vector coverage 按 test case id 统计；check coverage 按带 expected 的

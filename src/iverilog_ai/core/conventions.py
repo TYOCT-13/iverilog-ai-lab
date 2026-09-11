@@ -401,7 +401,7 @@ def measure_source(root: Path, *, globs: Sequence[str] = ("*.v", "*.sv")) -> dic
         if path.is_file()
     )
     totals: dict[str, list[int]] = {probe_id: [0, 0] for probe_id, _, _ in PROBES}
-    digests: list[dict[str, str]] = []
+    digests: list[dict[str, Any]] = []
     for path in files:
         raw = path.read_bytes()
         digests.append(

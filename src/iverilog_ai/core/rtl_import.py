@@ -43,14 +43,17 @@ def available_modules(source: str) -> tuple[str, ...]:
     return tuple(dict.fromkeys(m.group(1) for m in _MODULE_RE.finditer(source)))
 
 
-def extract_contract_draft(source: str, *, filename: str = "rtl.v", module_name: str | None = None):
+def extract_contract_draft(
+    source: str, *, filename: str = "rtl.v", module_name: str | None = None
+) -> tuple[str, dict[str, Any], list[str]]:
     if not isinstance(source, str) or not source.strip(): raise RTLImportError("empty RTL")
     if module_name is not None and not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_$]*", module_name):
         raise RTLImportError("invalid module name")
     matches = list(_MODULE_RE.finditer(source))
     m = next((item for item in matches if module_name is None or item.group(1) == module_name), None)
     if not m: raise RTLImportError("module with port list not found")
-    module, header, warnings, ports = m.group(1), m.group(2), [], []
+    module, header, warnings = m.group(1), m.group(2), []
+    ports: list[dict[str, Any]] = []
     current_direction = None; current_width = 1; current_signed = False
     for chunk in (x.strip() for x in header.split(",")):
         dm = re.search(r"\b(input|output|inout)\b", chunk, re.I)
@@ -72,7 +75,7 @@ def extract_contract_draft(source: str, *, filename: str = "rtl.v", module_name:
         for n in names:
             direction, width, signed = declarations.get(n, ("input", 1, False)); ports.append({"name": n, "direction": direction, "width": width, "signed": signed})
             if n not in declarations: warnings.append(f"port {n} lacks declaration; defaulted to input/1bit")
-    inputs = {p["name"] for p in ports if p["direction"] in {"input", "inout"}}
+    inputs = {str(p["name"]) for p in ports if p["direction"] in {"input", "inout"}}
     clock = next((n for n in inputs if re.search(r"(^|_)clk($|_)|clock", n, re.I)), None); reset = next((n for n in inputs if re.search(r"rst|reset", n, re.I)), None)
     contract: dict[str, Any] = {"module": module, "ports": ports}
     if clock: contract["clock"] = {"signal": clock, "period_ns": 10.0, "edge": "posedge"}

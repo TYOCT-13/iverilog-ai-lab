@@ -59,6 +59,33 @@ def test_provider_settings_expander_contains_model_list_controls(rendered: AppTe
     assert any("读取模型列表" in label for label in labels), labels
 
 
+def test_page_survives_a_generated_plan():
+    """生成计划之后，整页必须继续渲染。
+
+    真实事故：计划渲染分支里调用了一个**不存在的函数名**（`rules_manifest`，
+    实际导入的是 `rule_manifest`）。它抛的是 `NameError`，而那里的 `except` 只接
+    `ValueError`——于是"生成计划"之后页面直接中断：计划 JSON、执行按钮、结果区
+    全都看不到。默认的空状态渲染不会触发这条分支，所以必须显式构造这个状态。
+    """
+
+    from iverilog_ai.ai.schema import TestPlan
+
+    app = AppTest.from_file(str(APP), default_timeout=120)
+    app.run()
+    app.session_state["ai_plan"] = TestPlan.model_validate(
+        {
+            "design": "pwm",
+            "objective": "smoke",
+            "vectors": [{"name": "v1", "inputs": {"rst_n": 1, "duty": 0}, "cycles": 1, "expected": {}}],
+        }
+    )
+    app.run()
+    assert not app.exception, [str(item.value) for item in app.exception]
+    # 计划区与规则集指纹都应该渲染出来
+    assert any("TestPlan" in str(item.value) for item in app.subheader), [item.value for item in app.subheader]
+    assert any("规则集" in item.value for item in app.caption), [item.value for item in app.caption]
+
+
 def test_no_python_file_has_unreachable_code():
     """把未可达代码检查作为测试跑一遍，保证门禁在 `pytest` 里也生效。"""
 

@@ -180,6 +180,9 @@ def _run_command(args: argparse.Namespace) -> int:
         summary = {
             "run_id": result.run_id,
             "status": result.status.value,
+            # verdict 是给脚本/人看的单一结论词：passed / failed_checks / failed / inconclusive。
+            # 缺陷变体的 status 是 passed_with_warnings 且 passed=True，只看这两个字段会读错。
+            "verdict": result.verdict,
             "passed": result.passed,
             "records": len(result.records),
             "failures": len(result.failures),
@@ -266,6 +269,7 @@ def _pipeline_command(args: argparse.Namespace) -> int:
                 json.dumps(
                     {
                         "status": result.status.value,
+                        "verdict": result.simulation.verdict,
                         "passed": result.passed,
                         "records": len(result.records),
                         "failures": len(result.failures),

@@ -18,6 +18,15 @@ class RepairComparison:
     before_fingerprints: tuple[str, ...] = ()
     after_fingerprints: tuple[str, ...] = ()
 
+def _status_value(result: Any) -> str:
+    """安全地取出结果对象的状态字符串（对象可能没有 status，或它是 None）。"""
+
+    status = getattr(result, "status", None)
+    if status is None:
+        return ""
+    return str(getattr(status, "value", status))
+
+
 def _fp(f: Any) -> str:
     raw = "|".join(str(getattr(f, n, "")) for n in ("test_id", "cycle", "signal", "expected", "actual"))
     return hashlib.sha256(raw.encode()).hexdigest()[:16]
@@ -26,8 +35,22 @@ def compare_simulation_results(before: Any, after: Any) -> RepairComparison:
     b = tuple(_fp(f) for f in getattr(before, "failures", ()))
     a = tuple(_fp(f) for f in getattr(after, "failures", ()))
     resolved, introduced = len(set(b)-set(a)), len(set(a)-set(b))
-    verdict = "candidate_verified" if getattr(after, "status", None).value == "passed" and not a else ("improved" if resolved > introduced else "not_verified")
-    return RepairComparison(str(getattr(getattr(before, "status", None), "value", getattr(before, "status", ""))), str(getattr(getattr(after, "status", None), "value", getattr(after, "status", ""))), len(b), len(a), resolved, introduced, verdict, b, a)
+    verdict = (
+        "candidate_verified"
+        if _status_value(after) == "passed" and not a
+        else ("improved" if resolved > introduced else "not_verified")
+    )
+    return RepairComparison(
+        _status_value(before),
+        _status_value(after),
+        len(b),
+        len(a),
+        resolved,
+        introduced,
+        verdict,
+        b,
+        a,
+    )
 
 def safe_candidate_copy(source: str | Path, workspace_root: str | Path) -> Path:
     src = Path(source).resolve(strict=True); root = Path(workspace_root).resolve()

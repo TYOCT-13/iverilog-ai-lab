@@ -217,10 +217,14 @@ def _planned_expected_at_zero(
             declared.setdefault(port.name, port.initial)
     encoded: dict[str, _EncodedValue] = {}
     for signal, value in declared.items():
-        port = port_map.get(signal)
-        if port is None or not port.is_output:
+        # 名字不要复用上面的 `port`（那是 PortSpec）：同一个作用域里混用两种类型
+        # 会让静态检查失效，也容易在后续修改里读错。
+        declared_port = port_map.get(signal)
+        if declared_port is None or not declared_port.is_output:
             continue
-        encoded[signal] = _encode_value(port, value, context=f"plan.pre_reset_expected.{signal}")
+        encoded[signal] = _encode_value(
+            declared_port, value, context=f"plan.pre_reset_expected.{signal}"
+        )
     return encoded
 
 

@@ -39,7 +39,9 @@ class Renderer:
     def __init__(self, base_dir: Path) -> None:
         self.doc = fitz.open()
         self.base_dir = base_dir
-        self.page = None
+        # 类型上标注成 fitz.Page（下面立刻创建），而不是 `None`——
+        # 后者会让每一处 self.page.xxx 都需要忽略注释，也会掩盖真正的空值。
+        self.page: fitz.Page
         self.y = 0.0
         self._new_page()
         # 字体：用 fitz.Font 载入中文字体，配合**每页一个 TextWriter** 累积文字，
@@ -49,15 +51,6 @@ class Renderer:
         self.font = self._load_font(FONT_CANDIDATES)
         self.mono = self._load_font(MONO_CANDIDATES, fallback=self.font)
         self.writer = fitz.TextWriter(self.page.rect)
-
-    def _load_font(self, candidates: tuple[str, ...], *, fallback=None):
-        for candidate in candidates:
-            if Path(candidate).is_file():
-                try:
-                    return fitz.Font(fontfile=candidate)
-                except Exception:
-                    continue
-        return fallback if fallback is not None else fitz.Font("helv")
 
     # ---------------------------------------------------------------- 基础设施
     def _load_font(self, candidates: tuple[str, ...], *, fallback: str | None = None):
@@ -299,8 +292,9 @@ class Renderer:
             x = MARGIN_X
             for width in widths[:-1]:
                 x += width
-                self.page.draw_line(fitz.Point(x, self.y), fitz.Point(x, self.y + row_h),
-                                    color=(0.88, 0.9, 0.93), width=0.7)
+                self.page.draw_line(
+                    fitz.Point(x, self.y), fitz.Point(x, self.y + row_h),
+                    color=(0.88, 0.9, 0.93), width=0.7)
             self.y += row_h
         self.y += 10
 

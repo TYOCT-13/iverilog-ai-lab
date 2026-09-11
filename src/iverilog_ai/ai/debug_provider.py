@@ -18,7 +18,9 @@ from __future__ import annotations
 
 import json
 import random
+import re
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any, Mapping
 
 # 每个内置案例的输入步骤形状：值为候选取值列表，按顺序轮转。
@@ -194,6 +196,96 @@ def known_designs() -> frozenset[str]:
     return frozenset(_INPUT_STEPS)
 
 
+#: 从提示词里取设计名与 DUT contract（真实提示词的形状见 `plan_tests`）。
+_DESIGN_RE = re.compile(r"Design:\s*([A-Za-z_][A-Za-z0-9_$]*)")
+#: contract 在真实提示词里的两种落点：`rules_context` 会把它附在规则文本末尾，
+#: 标记为 `--- DUT contract ---`；早期/简化调用则直接写在 `DUT context:` 之后。
+_CONTRACT_MARKERS = ("--- DUT contract ---", "DUT context:")
+#: 仓库内自带的合约目录（`examples/<case>_contract.json`）。
+_REPO_ROOT = Path(__file__).resolve().parents[3]
+
+
+def _json_object_at(text: str, start: int) -> dict[str, Any] | None:
+    """从 ``text[start]``（必须是 ``{``）开始按括号配对切出第一个 JSON 对象。
+
+    不能用非贪婪正则 ``\\{.*?\\}``：contract 里还有嵌套对象（clock/reset/ports），
+    非贪婪会在第一个内层 ``}`` 处收尾，解析必然失败。
+    """
+
+    depth = 0
+    in_string = False
+    escaped = False
+    for index in range(start, len(text)):
+        char = text[index]
+        if in_string:
+            if escaped:
+                escaped = False
+            elif char == "\\":
+                escaped = True
+            elif char == '"':
+                in_string = False
+            continue
+        if char == '"':
+            in_string = True
+        elif char == "{":
+            depth += 1
+        elif char == "}":
+            depth -= 1
+            if depth == 0:
+                try:
+                    parsed = json.loads(text[start : index + 1])
+                except json.JSONDecodeError:
+                    return None
+                return parsed if isinstance(parsed, dict) else None
+    return None
+
+
+def extract_request(
+    text: str,
+    *,
+    default_design: str | None = None,
+    default_contract: Mapping[str, Any] | None = None,
+) -> tuple[str, dict[str, Any]]:
+    """从提示词中提取设计名与 DUT contract；缺失时回退到提供的默认值。
+
+    这是**离线路径能否真正驱动 DUT 的关键**：contract 提取失败时端口列表为空，
+    生成出来的计划里每条向量的 ``inputs`` 都是 ``{}``——计划"合法"、仿真"通过"，
+    但什么都没测。因此这里对每个标记都尝试括号配对解析，而不是只认一种写法。
+    """
+
+    design_match = _DESIGN_RE.search(text or "")
+    design = design_match.group(1) if design_match else (default_design or "")
+    for marker in _CONTRACT_MARKERS:
+        position = (text or "").find(marker)
+        while position != -1:
+            brace = text.find("{", position)
+            if brace != -1:
+                parsed = _json_object_at(text, brace)
+                if parsed and ("ports" in parsed or "module" in parsed):
+                    return design, parsed
+            position = text.find(marker, position + 1)
+    return design, dict(default_contract or {})
+
+
+def bundled_contract(design: str) -> dict[str, Any]:
+    """读取仓库自带的 ``examples/<design>_contract.json``；不存在时返回空字典。
+
+    离线路径需要端口方向与位宽才能施加激励。提示词没带 contract 时（例如调用方
+    只传了规则文本），就从仓库里取该案例的合约——调试服务的定位就是"服务内置案例"。
+    """
+
+    if not isinstance(design, str) or not design or any(ch in design for ch in "/\\:*?\"<>|"):
+        return {}
+    path = _REPO_ROOT / "examples" / f"{design}_contract.json"
+    if not path.is_file():
+        return {}
+    try:
+        parsed = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    return parsed if isinstance(parsed, dict) else {}
+
+
 def _port_summary(contract: Mapping[str, Any] | Any) -> tuple[dict[str, int], dict[str, int], str | None, str | None]:
     """从 DUT contract 提取输入/输出端口宽度、时钟与复位信号名。"""
 
@@ -274,8 +366,37 @@ class DeterministicLocalProvider:
     mode: str = "plan"  # plan | invalid_json | out_of_range | empty
     assertions: tuple[dict[str, Any], ...] = field(default_factory=tuple)
 
+    #: `generate()` 解析出的实际请求（私有状态，不参与 dataclass 比较/序列化）。
+    _active_design: str | None = field(default=None, init=False, repr=False, compare=False)
+    _resolved_contract: Mapping[str, Any] | None = field(default=None, init=False, repr=False, compare=False)
+
     def generate(self, prompt: str) -> str:
-        del prompt
+        """按"自身字段优先、提示词兜底"的顺序解析请求后生成计划。
+
+        早期实现直接 `del prompt`，只用构造时传入的 `design` / `contract`。于是
+        `plan_tests(objective, case, provider=DeterministicLocalProvider())` 这种
+        最自然的用法会得到 `design="design"`、端口全空的计划：轨迹"合法"、仿真
+        "通过"，但既没有激励也没有参考模型期望值——一个静默失效的假通过。
+        现在：能从提示词解析就用提示词，仍然拿不到 contract 就取仓库自带合约，
+        设计名不在内置案例里则**直接报错**，不生成无效计划。
+        """
+
+        design, contract = self._resolve_request(prompt)
+        inputs, _outputs, clock, _reset = _port_summary(contract)
+        driveable = [name for name in inputs if name != clock]
+        if not design:
+            raise ValueError("request does not name a Design; the deterministic local provider cannot build a plan")
+        # 判据是"能不能真的施加激励"，而不是"设计名认不认识"：调用方完全可以带一份
+        # 自定义合约来生成随机激励（单元测试就这么用）。但如果既没有合约、设计名也不在
+        # 内置案例里，生成出来的会是一份端口全空的计划——那比报错危险得多。
+        if not driveable:
+            raise ValueError(
+                f"cannot drive design {design!r}: no DUT contract with input ports in the request, "
+                "and it is not a bundled example. Bundled examples: "
+                + ", ".join(sorted(known_designs()))
+            )
+        self._active_design = design
+        self._resolved_contract = contract
         if self.mode == "invalid_json":
             return "{ this is deliberately not valid JSON"
         if self.mode == "empty":
@@ -284,9 +405,27 @@ class DeterministicLocalProvider:
             return json.dumps(self._out_of_range_plan(), ensure_ascii=False)
         return json.dumps(self._plan(), ensure_ascii=False)
 
+    def _resolve_request(self, prompt: str) -> tuple[str, dict[str, Any]]:
+        """解析本次请求的设计名与合约（自身字段 → 提示词 → 仓库内置合约）。"""
+
+        design = str(self.design or "")
+        contract: dict[str, Any] = dict(self.contract or {}) if isinstance(self.contract, Mapping) else {}
+        if not design or not contract.get("ports"):
+            extracted_design, extracted_contract = extract_request(
+                prompt or "", default_design=design or None, default_contract=contract or None
+            )
+            design = design or extracted_design
+            if not contract.get("ports") and extracted_contract:
+                contract = dict(extracted_contract)
+        if design and not contract.get("ports"):
+            bundled = bundled_contract(design)
+            if bundled:
+                contract = bundled
+        return design, contract
+
     # ------------------------------------------------------------------
     def _out_of_range_plan(self) -> dict[str, Any]:
-        inputs, _outputs, clock, reset = _port_summary(self.contract or {})
+        inputs, _outputs, clock, reset = _port_summary(self._active_contract())
         # 时钟由 contract 生成，绝不能出现在激励里。
         candidates = [name for name in inputs if name not in {clock, reset}]
         target = candidates[0] if candidates else None
@@ -312,10 +451,15 @@ class DeterministicLocalProvider:
         }
 
     def _design_name(self) -> str:
-        return str(self.design or "design")
+        return str(self._active_design if self._active_design is not None else (self.design or "design"))
+
+    def _active_contract(self) -> Mapping[str, Any]:
+        """本次请求实际使用的合约（`generate` 解析后写入）。"""
+
+        return self._resolved_contract if self._resolved_contract is not None else (self.contract or {})
 
     def _plan(self) -> dict[str, Any]:
-        inputs, _outputs, clock, reset = _port_summary(self.contract or {})
+        inputs, _outputs, clock, reset = _port_summary(self._active_contract())
         driveable = [name for name in inputs if name != clock]
         rng = random.Random(f"{self._design_name()}:{self.seed}")
         steps = _INPUT_STEPS.get(self._design_name())

@@ -4,15 +4,17 @@ from __future__ import annotations
 
 import json
 import threading
+from pathlib import Path
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
 import pytest
 
-from iverilog_ai.ai.debug_provider import DeterministicLocalProvider
+from iverilog_ai.ai.debug_provider import DeterministicLocalProvider, known_designs
 from iverilog_ai.ai.debug_server import build_plan_response, create_server, extract_request
 from iverilog_ai.ai.provider import OpenAICompatibleProvider
 from iverilog_ai.ai.schema import TestPlan
+from iverilog_ai.core.rules import rules_context
 
 CONTRACT = {
     "module": "mod10_counter",
@@ -220,3 +222,135 @@ def test_provider_still_requires_key_and_https_for_remote_hosts():
 def test_debug_server_refuses_non_loopback_bind():
     with pytest.raises(ValueError):
         create_server("0.0.0.0", 0)
+
+
+def test_chat_endpoint_returns_real_stimulus_for_the_real_prompt_shape(debug_server):
+    """真实提示词形状下，HTTP 端点也必须返回**带激励**的计划。
+
+    这是网页"本地调试模型"走的路径：以前合约解析失败会导致每条向量 inputs 为空，
+    生成的 testbench 什么都不驱动，仿真却报"通过"。
+    """
+
+    port = debug_server.server_address[1]
+    body = _post(
+        f"http://127.0.0.1:{port}/v1/chat/completions",
+        {"model": "debug-local", "messages": [{"role": "user", "content": _realistic_prompt("mod10_counter")}]},
+    )
+    plan = TestPlan.model_validate(json.loads(body["choices"][0]["message"]["content"]))
+    assert plan.design == "mod10_counter"
+    assert plan.vectors
+    assert all(vector.inputs for vector in plan.vectors), "端到端返回的计划里存在无激励向量"
+
+
+# --------------------------------------------------------------------------
+# 真实提示词形状：离线路径必须真的驱动 DUT
+#
+# 上面那些用例喂的是 `DUT context: {json} Schema:` 这种**简化**形状，而真实调用方
+# （网页、实验脚本、run_pipeline_matrix）传给 `plan_tests` 的 context 是
+# `rules_context(...)` 的产物：规则文本在前，合约以 `--- DUT contract ---` 标记附在
+# 末尾。旧实现只用非贪婪正则匹配前者，于是真实路径上合约解析为 `{}`——生成出来的
+# 计划每条向量的 `inputs` 都是空的：计划合法、仿真"通过"，但**什么都没测**。
+# 下面这些用例把"真实形状"钉死。
+# --------------------------------------------------------------------------
+ROOT = Path(__file__).resolve().parents[2]
+
+#: 自定义设计（不在内置案例里）的合约：用于验证"显式合约仍然可生成计划"。
+CUSTOM_CONTRACT = {
+    "module": "wide_enable",
+    "ports": [
+        {"name": "clk", "direction": "input", "width": 1},
+        {"name": "rst_n", "direction": "input", "width": 1},
+        {"name": "enable", "direction": "input", "width": 8},
+        {"name": "count", "direction": "output", "width": 8},
+    ],
+    "clock": {"signal": "clk", "period_ns": 10},
+    "reset": {"signal": "rst_n", "active_level": 0, "synchronous": False, "assert_cycles": 2},
+}
+
+
+def _realistic_prompt(case: str) -> str:
+    """按 `plan_tests` 的真实拼法构造提示词（规则文本 + 末尾合约 + Schema）。"""
+
+    contract = json.loads((ROOT / "examples" / f"{case}_contract.json").read_text(encoding="utf-8"))
+    context, _manifest = rules_context(ROOT, case, contract)
+    return (
+        "Return JSON only. No markdown, commands, paths, or executable code. "
+        "Design: %s Objective: cover reset and boundaries DUT context: %s Schema: {\"type\": \"object\"}"
+        % (case, context)
+    )
+
+
+def test_extract_request_reads_contract_appended_after_rules():
+    """合约附在规则文本之后时也必须解析出来（嵌套对象不能靠非贪婪正则）。"""
+
+    design, contract = extract_request(_realistic_prompt("mod10_counter"))
+    assert design == "mod10_counter"
+    assert contract["module"] == "mod10_counter"
+    assert len(contract["ports"]) == 4
+
+
+def test_provider_without_explicit_fields_uses_the_prompt():
+    """最自然的用法：只给 provider，别的都从提示词里取。"""
+
+    provider = DeterministicLocalProvider(seed=0)
+    plan = TestPlan.model_validate(json.loads(provider.generate(_realistic_prompt("mod10_counter"))))
+    assert plan.design == "mod10_counter"
+    assert plan.vectors
+    # 每条向量都必须真的驱动端口，否则激励形同虚设
+    assert all(vector.inputs for vector in plan.vectors), "存在没有任何激励的向量"
+    assert any(vector.inputs.get("enable") == 1 for vector in plan.vectors)
+
+
+def test_provider_falls_back_to_the_bundled_contract():
+    """提示词里完全没有合约时，退回仓库自带的 `examples/<case>_contract.json`。"""
+
+    provider = DeterministicLocalProvider(seed=0)
+    payload = json.loads(provider.generate("Design: pwm Objective: duty boundaries Schema: {}"))
+    assert payload["design"] == "pwm"
+    assert all(vector["inputs"] for vector in payload["vectors"])
+
+
+def test_provider_rejects_an_unknown_design_loudly():
+    """既没有合约、设计名也不在内置案例里时，必须报错。
+
+    生成"合法但端口全空"的计划比报错危险得多：它会一路通过仿真，却什么都没测。
+    反过来，只要调用方给了带输入端口的合约，就允许生成随机激励（下面的自定义
+    合约用例正是这种用法）。
+    """
+
+    provider = DeterministicLocalProvider(seed=0)
+    with pytest.raises(ValueError, match="cannot drive design"):
+        provider.generate("Design: not_bundled DUT context: {} Schema: {}")
+
+
+def test_custom_contract_without_bundled_case_is_allowed():
+    """自定义设计 + 显式合约：依然可以生成计划（走随机激励路径）。"""
+
+    provider = DeterministicLocalProvider(contract=CUSTOM_CONTRACT, design="wide_enable", seed=1)
+    payload = json.loads(provider.generate(""))
+    assert payload["design"] == "wide_enable"
+    assert all(vector["inputs"] for vector in payload["vectors"])
+
+
+@pytest.mark.parametrize("case", sorted(known_designs()))
+def test_every_bundled_case_gets_real_stimulus_from_a_bare_provider(case):
+    """15 个内置案例逐个验证：预算内必须有驱动真实端口名的激励。"""
+
+    contract = json.loads((ROOT / "examples" / f"{case}_contract.json").read_text(encoding="utf-8"))
+    input_ports = {
+        str(port["name"]) for port in contract["ports"] if str(port.get("direction")) == "input"
+    }
+    clock = str((contract.get("clock") or {}).get("signal", ""))
+    driveable = input_ports - {clock}
+
+    provider = DeterministicLocalProvider(seed=0)
+    plan = TestPlan.model_validate(json.loads(provider.generate(_realistic_prompt(case))))
+    assert plan.design == case
+    used: set[str] = set()
+    for vector in plan.vectors:
+        assert vector.inputs, f"{case} 存在无激励向量 {vector.name}"
+        used |= set(vector.inputs)
+    assert used, f"{case} 的激励没有驱动任何端口"
+    assert used <= input_ports, f"{case} 的激励出现了非输入端口：{sorted(used - input_ports)}"
+    assert used & driveable, f"{case} 的激励只碰了时钟"
+
