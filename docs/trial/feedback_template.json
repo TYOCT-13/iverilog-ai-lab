@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "_说明": {
+    "用途": "本地试用反馈表。复制本文件改名（如 feedback-A.json）后填写，不要改动字段名。",
+    "填写原则": "如实记录。卡住、报错、困惑都是有效结果，比'一切顺利'更有价值。",
+    "禁止": "不要在本文件中粘贴任何 API 密钥、访问凭据或他人隐私信息。",
+    "留空规则": "没做的任务把 status 填 'skipped' 并说明原因，不要编造结果。"
+  },
+  "trial": {
+    "trial_id": "",
+    "date": "",
+    "tester_alias": "",
+    "tester_background": "",
+    "verilog_experience": "none | beginner | intermediate | advanced",
+    "previous_tools": ""
+  },
+  "environment": {
+    "os": "",
+    "python_version": "",
+    "iverilog_version": "",
+    "yosys_available": null,
+    "toolchain_probe_output": "",
+    "installed_from": "clone | archive | other",
+    "install_issues": ""
+  },
+  "task_1_benchmark": {
+    "status": "completed | partial | skipped",
+    "duration_minutes": null,
+    "summary_numbers": {
+      "references_total": null,
+      "defects_found": null,
+      "defects_total": null,
+      "reference_false_positives": null,
+      "inconclusive_runs": null
+    },
+    "q1_numbers_readable": "",
+    "q2_do_you_trust_it": "",
+    "q2_why": "",
+    "q3_can_trace_one_defect": "",
+    "problems": []
+  },
+  "task_2_ai_pipeline": {
+    "status": "completed | partial | skipped",
+    "duration_minutes": null,
+    "case_used": "",
+    "plan_generation_seconds": null,
+    "q1_plan_readable": "",
+    "q2_confusing_parts": "",
+    "q3_explain_ai_role": "",
+    "noticed_expectation_source": "",
+    "noticed_layered_evidence": "",
+    "top_ui_improvement": "",
+    "problems": []
+  },
+  "task_3_custom_rtl": {
+    "status": "completed | partial | skipped",
+    "duration_minutes": null,
+    "module_written": "",
+    "compare_result": "identical | different | unavailable | not_run",
+    "compare_exit_code": null,
+    "q1_result_agree": "",
+    "q2_contract_editing": "",
+    "q3_keep_one_feature": "",
+    "problems": []
+  },
+  "overall": {
+    "biggest_strength": "",
+    "biggest_weakness": "",
+    "would_use_again": "yes | maybe | no",
+    "would_recommend_to_classmate": "yes | maybe | no",
+    "docs_gaps": [],
+    "free_notes": ""
+  },
+  "problems": [
+    {
+      "_字段说明": "每个问题一条。severity 取值：blocker（做不下去）/ major（能绕过但很烦）/ minor（小瑕疵）/ docs（文档问题）",
+      "severity": "",
+      "task": "",
+      "what_happened": "",
+      "expected": "",
+      "workaround": "",
+      "reproducible": null
+    }
+  ]
+}
