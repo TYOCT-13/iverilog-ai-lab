@@ -67,6 +67,9 @@ jobs:
       - name: 编码卫生检查（UTF-8 BOM 与编码损坏）
         run: python scripts/strip_bom.py --check
 
+      - name: 未可达代码检查（AST）
+        run: python scripts/check_dead_code.py
+
       - name: 实测开源约定的产物自洽性
         run: python -m pytest tests/core/test_conventions.py -q
 

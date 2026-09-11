@@ -206,14 +206,13 @@ def _consume_statement(text: str, position: int) -> int:
                     break
             position += 1
         position = _consume_statement(text, position)
-        # 继续消费 else 分支
+        # 继续消费 else 分支；循环只能从内部的 return 退出（else 链消费完毕）。
         while True:
             after = text[position:].lstrip()
             if not after.lower().startswith("else"):
                 return position
             position = text.index("else", position) + len("else")
             position = _consume_statement(text, position)
-        return position
 
     semicolon = text.find(";", position)
     return len(text) if semicolon < 0 else semicolon + 1

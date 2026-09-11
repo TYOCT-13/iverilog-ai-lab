@@ -755,6 +755,44 @@ with st.expander("AI 接口设置（可选）"):
     wire_api_label = st.selectbox("接口格式", ["Chat Completions API", "Responses API"], help="DeepSeek 默认使用 Chat Completions；只有服务商明确支持 /v1/responses 时才选 Responses")
     reasoning_label = st.selectbox("推理强度", ["不发送（兼容性最高）", "minimal", "low", "medium", "high", "xhigh"], help="某些第三方 Responses 网关不接受 reasoning 字段；连接被关闭时先选“不发送”")
     st.caption("当前页面不会读取或修改电脑上的 Codex/PyCharm 配置；API Key 仅用于本次请求。")
+    if st.button("检查配置（不调用模型）"):
+        try:
+            _diag_wire = "responses" if wire_api_label.startswith("Responses") else "chat_completions"
+            _diag_reasoning = None if reasoning_label.startswith("不发送") or _diag_wire != "responses" else reasoning_label
+            _diag_provider = OpenAICompatibleProvider(endpoint=api_base, model=api_model, api_key=api_key,
+                wire_api=_diag_wire, reasoning_effort=_diag_reasoning, allow_network=True, store=False, timeout=api_timeout, max_output_tokens=api_output_tokens)
+            st.json(_diag_provider.request_diagnostics())
+        except Exception as exc:
+            st.error(f"配置无效：{exc}")
+    if st.button("读取模型列表", help="使用当前配置请求 /models；不会显示或保存 API Key"):
+        try:
+            _models_wire = "responses" if wire_api_label.startswith("Responses") else "chat_completions"
+            if "deepseek" in (api_base + " " + api_model).lower():
+                _models_wire = "chat_completions"
+            _models_provider = OpenAICompatibleProvider(
+                endpoint=api_base, model=api_model, api_key=api_key,
+                wire_api=_models_wire, reasoning_effort=None, allow_network=True, store=False, timeout=api_timeout, max_output_tokens=api_output_tokens,
+            )
+            if not api_key.strip():
+                raise ValueError("读取模型列表需要先输入 API Key")
+            st.session_state.available_models = _models_provider.list_models()
+            st.success(f"已读取 {len(st.session_state.available_models)} 个模型")
+        except Exception as exc:
+            st.error(f"读取模型列表失败：{exc}")
+    if st.session_state.get("available_models"):
+        _listed_models = list(st.session_state.available_models)
+        st.caption("服务商返回的模型 ID：" + ", ".join(_listed_models))
+        # 读到列表就要能用：选中即覆盖上面的「模型」输入，避免用户手抄 ID。
+        _picked_model = st.selectbox(
+            "从服务商列表中选择模型（覆盖上面的「模型」输入）",
+            ["（不覆盖，使用上面的输入）"] + _listed_models,
+            key="picked_model_from_list",
+        )
+        if _picked_model != "（不覆盖，使用上面的输入）":
+            api_model = _picked_model
+    if "deepseek" in (api_base + " " + api_model).lower() and wire_api_label.startswith("Responses"):
+        st.warning("检测到 DeepSeek 配置：官方接口使用 Chat Completions。生成时会自动改用 /chat/completions。")
+
 
 
 def _build_provider(target: str):
@@ -786,35 +824,6 @@ def _build_provider(target: str):
         timeout=api_timeout,
         max_output_tokens=api_output_tokens,
     )
-
-    if st.button("检查配置（不调用模型）"):
-        try:
-            _diag_wire = "responses" if wire_api_label.startswith("Responses") else "chat_completions"
-            _diag_reasoning = None if reasoning_label.startswith("不发送") or _diag_wire != "responses" else reasoning_label
-            _diag_provider = OpenAICompatibleProvider(endpoint=api_base, model=api_model, api_key=api_key,
-                wire_api=_diag_wire, reasoning_effort=_diag_reasoning, allow_network=True, store=False, timeout=api_timeout, max_output_tokens=api_output_tokens)
-            st.json(_diag_provider.request_diagnostics())
-        except Exception as exc:
-            st.error(f"配置无效：{exc}")
-    if st.button("读取模型列表", help="使用当前配置请求 /models；不会显示或保存 API Key"):
-        try:
-            _models_wire = "responses" if wire_api_label.startswith("Responses") else "chat_completions"
-            if "deepseek" in (api_base + " " + api_model).lower():
-                _models_wire = "chat_completions"
-            _models_provider = OpenAICompatibleProvider(
-                endpoint=api_base, model=api_model, api_key=api_key,
-                wire_api=_models_wire, reasoning_effort=None, allow_network=True, store=False, timeout=api_timeout, max_output_tokens=api_output_tokens,
-            )
-            if not api_key.strip():
-                raise ValueError("读取模型列表需要先输入 API Key")
-            st.session_state.available_models = _models_provider.list_models()
-            st.success(f"已读取 {len(st.session_state.available_models)} 个模型")
-        except Exception as exc:
-            st.error(f"读取模型列表失败：{exc}")
-    if st.session_state.get("available_models"):
-        st.caption("服务商返回的模型 ID：" + ", ".join(st.session_state.available_models))
-    if "deepseek" in (api_base + " " + api_model).lower() and wire_api_label.startswith("Responses"):
-        st.warning("检测到 DeepSeek 配置：官方接口使用 Chat Completions。生成时会自动改用 /chat/completions。")
 
 def _contract() -> DutContract:
     if is_custom:
