@@ -126,11 +126,18 @@ def _render_expectation_source(config: dict) -> None:
             "期望值来源：**确定性参考模型复算**（已与 RTL 逐拍对齐）。"
             "AI 给出的数字不参与裁决，偏差只作为诊断指标记录。"
         )
-    else:
+    elif source == "ai_generated":
         st.warning(
             "期望值来源：**AI 生成**（该设计暂无逐拍对齐的参考模型）。"
             "这种情况下期望值本身可能有误，结论的可信度低于参考模型复算的情形。"
         )
+    elif source == "none_given":
+        st.error(
+            "期望值来源：**没有期望值** —— 本轮既没有参考模型，AI 也没有给出期望值，"
+            "只有激励与结构化断言在起作用。**不要据此认为功能行为已被验证。**"
+        )
+    if oracle.get("advice"):
+        st.caption(oracle["advice"])
     if oracle.get("ai_expected_mismatch"):
         st.caption(
             f"本轮检测到 AI 期望值与参考模型不一致 {oracle.get('mismatched_expected', '若干')} 项——"
@@ -300,6 +307,28 @@ def _show_vcd_analysis(vcd_path: Path, *, key_prefix: str, preset: dict | None =
         if data.get("signals"):
             with st.expander("查看 VCD 信号列表"):
                 st.dataframe(data["signals"], use_container_width=True, hide_index=True)
+
+        # 信号活动覆盖率：激励质量的指标，**不是**代码覆盖率（口径见 docs/coverage.md）
+        activity = data.get("coverage") or {}
+        if activity.get("status") == "measured":
+            st.markdown("**信号活动覆盖率（激励质量）**")
+            columns = st.columns(3)
+            columns[0].metric(
+                "活动信号",
+                f"{activity.get('changed_signals', 0)}/{activity.get('declared_signals', 0)}",
+                f"{activity.get('ratio', 0) * 100:.0f}%",
+            )
+            value_coverage = activity.get("value_coverage")
+            columns[1].metric("取值覆盖", "—" if value_coverage is None else f"{value_coverage * 100:.0f}%")
+            columns[2].metric("未变化信号", activity.get("unchanged_signals", 0))
+            if activity.get("unchanged"):
+                st.info("本次仿真中未发生变化的信号：" + "、".join(activity["unchanged"]))
+            if activity.get("value_detail"):
+                with st.expander("各信号的取值覆盖明细"):
+                    st.dataframe(activity["value_detail"], use_container_width=True, hide_index=True)
+            st.caption(activity.get("disclaimer", ""))
+            if activity.get("note"):
+                st.caption(activity["note"])
 
         # 波形语义结论：边沿统计、稳定性与相位检查（来自流水线的 insights）
         insights = data.get("insights") or {}
