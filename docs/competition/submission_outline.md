@@ -15,7 +15,7 @@
 | 基准集 | `benchmarks/manifest.json` | **15 个案例、83 个可复现缺陷** |
 | 回归测试 | `tests/` | **380 项自动化测试** |
 | 基准矩阵实跑结论 | `scripts/run_benchmark_matrix.py` | 15 参考全过、**83/83 检出、0 误报、0 不可判定** |
-| 真实模型在线实验（10 次重复） | `docs/experiment/online_model_r10_2026-09-12.md` | **13 案例 / 67 缺陷 × 每案例 10 次重复**；在线模型检出 **65/67（97.0%）**、参考误报 0；同批基线：固定向量 83.6%、随机 76.1%、离线 76.1% |
+| 真实模型在线实验（10 次重复，双模型） | `docs/experiment/model_comparison_2026-09-12.md` | **13 案例 / 67 缺陷 × 每案例 10 次重复 × 2 个模型**；`deepseek-flash` 65/67（97.0%）、`deepseek-v4-pro` 64/67（95.5%），**参考误报均为 0**；同批基线：固定向量 83.6%、随机 76.1%、离线 76.1% |
 | 真实模型在线实验（首测） | `docs/experiment/online_model_experiment_2026-09-10.md` | 1 个真实模型、11 案例、256 次仿真（历史口径） |
 | 参考模型对齐 | `docs/reference_model_alignment.md` | 12/12 → 15/15 逐拍零差异 |
 | 静态规则 | `docs/static_rules.md` | 44 条，每条配正反例 |

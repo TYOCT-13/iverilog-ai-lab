@@ -6,7 +6,8 @@
 `simple_alu`、`mux4`——它们的合约没有时钟，向量式 testbench 不适用，运行器会显式跳过并给出原因）
 重复次数：**每个案例 10 次计划请求**（共 130 次）
 输出目录：`.iverilog-ai/model-compare-r10-deepseek-flash/`
-在线模型状态：`deepseek-v4-pro` 的同口径实验仍在运行，完成后另出对比文档。
+在线模型状态：`deepseek-v4-pro` 的同口径实验**已完成**（64/67 = 95.5%、计划合法率 100%），
+两模型对比见 `docs/experiment/model_comparison_2026-09-12.md`。
 
 ---
 
@@ -151,7 +152,8 @@ python scripts/run_strategy_experiment.py `
 
 ## 五、限制（如实说明）
 
-- 本实验只覆盖**一个真实模型**；`deepseek-v4-pro` 的同口径对比仍在运行，完成前不做结论。
+- 本文件只覆盖 `deepseek-flash` 一个模型；`deepseek-v4-pro` 的同口径结果见
+  `docs/experiment/model_comparison_2026-09-12.md`。
 - 两个纯组合逻辑案例（`simple_alu`、`mux4`）不参与：它们的合约无时钟，向量式 testbench
   不适用，运行器**显式跳过并给出原因**，不静默缩小分母。
 - 离线策略的计划由仓库自带的确定性规则生成，**不代表任何真实模型能力**。
