@@ -102,7 +102,11 @@ def _detected_variants(payload: dict, strategy: str, case: str) -> set[str]:
 
 def render(model_names: list[str], payloads: dict[str, dict]) -> str:
     lines: list[str] = []
-    lines.append("# 多模型公平对比")
+    lines.append("# 多模型公平对比（自动生成）")
+    lines.append("")
+    lines.append("> 本文件由 `scripts/compare_models.py` 从各次实验的 `strategy_matrix.json` "
+                 "机械汇总，**不含分析结论**。对结果的解读、未检出缺陷与口径差异见 "
+                 "`docs/experiment/model_comparison_2026-09-11.md`。")
     lines.append("")
     lines.append("案例集合、DUT 合约、上下文口径、重复次数完全一致；差别只在 `online_ai` 策略使用的模型。")
     lines.append("")
