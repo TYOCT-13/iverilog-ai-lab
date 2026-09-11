@@ -25,30 +25,14 @@ import re
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
 
-from .debug_provider import _DEFAULT_VECTOR_COUNT, DeterministicLocalProvider
+from .debug_provider import _DEFAULT_VECTOR_COUNT, DeterministicLocalProvider, known_designs
 
 _DEBUG_BASE_URL = "http://127.0.0.1"
 SERVER_NAME = "iverilog-ai-lab debug model (deterministic, offline)"
 
 # 调试服务只服务这些内置案例；未知设计返回 400，避免被当成通用模型。
-KNOWN_DESIGNS = frozenset(
-    {
-        "mod10_counter",
-        "simple_alu",
-        "sequence_101_overlap",
-        "traffic_light_emergency",
-        "sync_fifo",
-        "uart_tx",
-        "spi_master",
-        "handshake_stage",
-        "debounce",
-        "pwm",
-        "mux4",
-        "sync_reset",
-        "johnson_counter",
-        "edge_detector",
-    }
-)
+# 名单直接取自 Provider 的激励表（而不是再手写一份），避免两份名单漂移。
+KNOWN_DESIGNS = known_designs()
 
 _DESIGN_RE = re.compile(r"Design:\s*([A-Za-z_][A-Za-z0-9_$]*)")
 _CONTEXT_RE = re.compile(r"DUT context:\s*(\{.*?\})\s*Schema:", re.DOTALL)

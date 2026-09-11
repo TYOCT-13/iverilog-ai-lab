@@ -1,9 +1,10 @@
 # 参考模型与 RTL 的逐拍对齐
 
-更新日期：2026-09-10
+更新日期：2026-09-12
 实现位置：`src/iverilog_ai/core/reference_model.py`
 对齐测试：`tests/core/test_reference_model_alignment.py`
-当前状态：**14 / 14 个内置案例已对齐**，`SUPPORTED == AUTHORITATIVE`
+覆盖度测试：`tests/core/test_reference_model_coverage.py`
+当前状态：**15 / 15 个内置案例已对齐**，`SUPPORTED == AUTHORITATIVE`
 
 ## 一、为什么必须对齐
 
@@ -58,10 +59,18 @@ python -m pytest tests/core/test_reference_model_alignment.py -q
 | 6 | `debounce` | 25 条参考伪失败 | 向量未列 `key_in`：测试台保持 0，模型默认 1 | `INPUT_DEFAULTS` 声明 `key_in: 0` 并补全向量 |
 | 7 | `sync_reset` | — | 低有效复位端口默认电平未声明 | `INPUT_DEFAULTS` 显式给出非激活电平 |
 | 8 | 全部 | 行数差一拍 | 生成式 testbench 末尾 `$finish` 少采最后一拍 | 模型序列丢弃尾部一拍，长度必须与 RTL 相等 |
+| 9 | `pulse_stretcher` | 展宽长度差一拍（3 拍 vs 4 拍） | 采样从**捕获沿**开始算："高 WIDTH 拍"里的最后一拍来自 `count` 的旧值判断；从捕获沿的下一个沿才开始数就只有 `WIDTH-1` 拍 | 模型按非阻塞语义逐拍推进（`count != 0` 读旧值），手写边界 testbench 的第一个检查点放在捕获沿 |
+
+第 9 条值得单独说明，因为它是**判据本身**容易写错的一类问题：`pulse_stretcher`
+看起来像"高电平持续 `WIDTH` 拍"，但从哪个沿开始数决定了结论是 3 还是 4。本项目
+不靠口头约定解决它——参考模型与 RTL 在 4 个 seed 上逐拍零差异，边界 testbench 的
+检查点因此有了可核验的依据（`tb/tb_pulse_stretcher_boundary.v` 里 24 条检查）。
 
 ## 五、能力边界（如实说明）
 
 - 对齐测试用的是**确定性激励**（本地调试模型按案例给出的边界取值表），不是形式化等价性证明；
 - 覆盖的是 contract 里声明的可观测输出端口，内部状态不做逐拍比较；
-- 参数化只覆盖 contract 声明的参数取值（如 `CLKS_PER_BIT=4`、`WIDTH=8`、`COUNT_MAX=3`）；
-- 未建模的设计不会进入 `AUTHORITATIVE`：`reference_expectations` 返回空字典，调用方回退为 AI 期望值并如实标注 `expectation_source="ai_generated"`。
+- 参数化只覆盖 contract 声明的参数取值（如 `CLKS_PER_BIT=4`、`WIDTH=8`、`COUNT_MAX=3`、
+  `pulse_stretcher` 的 `WIDTH=4`）；
+- 未建模的设计不会进入 `AUTHORITATIVE`：`reference_expectations` 返回空字典，调用方回退为 AI 期望值并如实标注 `expectation_source="ai_generated"`；
+- "已支持"不等于"随便写都对"：`test_reference_model_coverage.py` 用"故意写错的期望值必须被判为不一致"逐设计验证诊断路径**真的在比对**，而不是返回空结果后报 `passed`。

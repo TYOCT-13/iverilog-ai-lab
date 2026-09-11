@@ -174,6 +174,18 @@ ALIGNED_CASES: dict[str, dict[str, object]] = {
         "declarations": ["wire rising;"],
         "observed": ("rising",),
     },
+    "pulse_stretcher": {
+        "rtl": "rtl/pulse_stretcher.v",
+        "top": "pulse_stretcher",
+        # 参数必须与 examples/pulse_stretcher_contract.json 的 parameters 一致：
+        # 参考模型从 contract 读 WIDTH，测试台从同样的 WIDTH 例化，两边才可比。
+        "instance": "pulse_stretcher #(.WIDTH(4)) dut(.clk(clk),.rst_n(rst_n),"
+                    ".pulse_in(pulse_in),.pulse_out(pulse_out));",
+        "inputs": {"rst_n": "reg", "pulse_in": "reg"},
+        "outputs": {"pulse_out": "b"},
+        "declarations": ["wire pulse_out;"],
+        "observed": ("pulse_out",),
+    },
 }
 
 
@@ -317,9 +329,6 @@ def test_aligned_models_match_rtl_cycle_by_cycle(tmp_path):
 
             for index in range(compare):
                 model, actual = model_rows[index], rtl_rows[index]
-                if case == "uart_tx" and seed == 0:
-                    import sys as _sys
-                    print(f"DBG {index:>3} model={model} rtl={actual}", file=_sys.stderr)
                 for signal in observed:
                     assert signal in model, (
                         f"{case} seed={seed} 第 {index} 拍参考模型没有产出可观测输出 {signal}；"

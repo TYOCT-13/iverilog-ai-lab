@@ -48,21 +48,21 @@ streamlit run ui/app.py
 
 | 项目 | 数量 | 现算方式 |
 |---|---:|---|
-| 基准案例 | **14** | `benchmarks/manifest.json` 的 `categories` |
-| 可复现缺陷变体 | **80** | 同上 `defects` |
-| 参考 RTL 文件 | 95（15 参考 + 80 缺陷） | `rtl/*.v` |
-| 手写 testbench | 25 | `tb/*.v` |
+| 基准案例 | **15** | `benchmarks/manifest.json` 的 `categories` |
+| 可复现缺陷变体 | **83** | 同上 `defects` |
+| 参考 RTL 文件 | 98（15 参考 + 83 缺陷） | `rtl/*.v` |
+| 手写 testbench | 26 | `tb/*.v` |
 | 静态检查规则 | **44**（error 4 / warn 27 / info 13） | 规则注册表现算 |
-| 已对齐参考模型（权威预言机） | **14 / 14** | `SUPPORTED == set(AUTHORITATIVE)` |
-| 自动化测试 | **251** | `python -m pytest -q` |
+| 已对齐参考模型（权威预言机） | **15 / 15** | `SUPPORTED == set(AUTHORITATIVE)` |
+| 自动化测试 | **324** | `python -m pytest -q` |
 | 上游实测约定来源 | 2 个开源项目、172 个文件 | `data/opensource_conventions.json` |
 
 基准矩阵最近一次实跑结论：
 
 | 指标 | 结果 |
 |---|---|
-| 参考设计通过 | **14 / 14** |
-| 缺陷检出 | **80 / 80**（100%） |
+| 参考设计通过 | **15 / 15** |
+| 缺陷检出 | **83 / 83**（100%） |
 | 参考误报 | **0** |
 | 不可判定 | **0** |
 
@@ -189,7 +189,7 @@ pwm 极性反转 → 5 处，`dut_i.pwm_out` 参考 12 次跳变、缺陷 13 次
 | 布局布线/比特流 | **未运行**（需要厂商工具链） |
 | 上板验证 | **未运行**（需要实际硬件） |
 
-**实测**：94 个 RTL 变体（14 参考 + 80 缺陷）全部可综合。14 个参考设计的通用门级单元数：
+**实测**：98 个 RTL 变体（15 参考 + 83 缺陷）全部可综合。14 个参考设计的通用门级单元数：
 `sync_fifo` 34、`spi_master` 33、`uart_tx` 29、`simple_alu` 20、`traffic_light_emergency` 12、
 `debounce` 9、`handshake_stage` 5、`pwm` 5、`edge_detector` 4、`mod10_counter` 4、`mux4` 4、
 `sequence_101_overlap` 3、`johnson_counter` 2、`sync_reset` 2。
@@ -344,8 +344,8 @@ testbench 检查。**不接受**自由书写的 Verilog 或 SVA 代码，因此�
 
 | 脚本 | 用途 |
 |---|---|
-| `scripts/run_benchmark_matrix.py` | 14 参考 + 80 缺陷的固定矩阵实跑 |
-| `scripts/run_synthesis_matrix.py` | 94 个变体逐个跑 Yosys 综合（第五步的可复现证据） |
+| `scripts/run_benchmark_matrix.py` | 15 参考 + 83 缺陷的固定矩阵实跑 |
+| `scripts/run_synthesis_matrix.py` | 98 个变体逐个跑 Yosys 综合（第五步的可复现证据） |
 | `scripts/run_strategy_experiment.py` | 固定/随机/离线AI/在线AI 四策略公平对比 |
 | `scripts/compare_models.py` | 多个在线模型横向对比（含可比性检查） |
 | `scripts/ingest_open_source_conventions.py` | 从开源项目度量约定 |
@@ -367,10 +367,10 @@ testbench 检查。**不接受**自由书写的 Verilog 或 SVA 代码，因此�
 
 ```powershell
 # 1. 全量测试（含多个真实跑 Icarus 的端到端用例）
-python -m pytest -q                                   # 期望 251 passed
+python -m pytest -q                                   # 期望 324 passed
 
 # 2. 基准矩阵（固定向量，结果确定）
-python scripts/run_benchmark_matrix.py                # 期望 14/14、80/80、0 误报、0 不可判定
+python scripts/run_benchmark_matrix.py                # 期望 15/15、83/83、0 误报、0 不可判定
 
 # 3. 参考模型与 RTL 逐拍对齐（4 个随机种子，零差异）
 python -m pytest tests/core/test_reference_model_alignment.py -q
@@ -394,8 +394,8 @@ CI（`.github/workflows/ci.yml`）会在 Linux 与 Windows × Python 3.11/3.12 �
 ## 八、知道了这些之后，建议先玩哪三个
 
 1. **看判决是怎么来的**：跑第 3 步的基准矩阵，然后打开
-   `.iverilog-ai/benchmark-matrix/matrix.md` —— 80 个缺陷的检出记录一目了然。
-   想再看一层，就跑 `scripts/run_synthesis_matrix.py`（94 个变体逐个综合）。
+   `.iverilog-ai/benchmark-matrix/matrix.md` —— 83 个缺陷的检出记录一目了然。
+   想再看一层，就跑 `scripts/run_synthesis_matrix.py`（98 个变体逐个综合）。
 2. **看 AI 到底做了什么、没做什么**：起离线调试模型 + 网页，走一遍
    "生成计划 → 执行 → 报告"，重点看结果区的**期望值来源**提示与**分层证据**表。
 3. **拿自己的 RTL 试**：网页切到"自定义 RTL"，上传后先看结构对比，再用

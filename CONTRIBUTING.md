@@ -42,7 +42,7 @@ python -c "from iverilog_ai.core.toolchain import locate_tools, describe_tools; 
 
 ```powershell
 python -m pytest -q                              # 全量测试
-python scripts/run_benchmark_matrix.py           # 基准矩阵：14 参考全过、80/80 检出、0 误报
+python scripts/run_benchmark_matrix.py           # 基准矩阵：15 参考全过、83/83 检出、0 误报
 python scripts/strip_bom.py --check              # 源码不得含 UTF-8 BOM
 ```
 
@@ -51,7 +51,7 @@ CI 会在 Linux 与 Windows、Python 3.11/3.12 上跑同样的命令。**如果�
 装了 Yosys 的话建议顺手跑一次综合矩阵（未装会明确报 `unavailable`，不算失败）：
 
 ```powershell
-python scripts/run_synthesis_matrix.py           # 94 个变体（14 参考 + 80 缺陷）逐个综合
+python scripts/run_synthesis_matrix.py           # 98 个变体（15 参考 + 83 缺陷）逐个综合
 ```
 
 ## 四、各类贡献的要求

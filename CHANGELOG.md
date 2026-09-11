@@ -35,7 +35,7 @@
 - **期望值证据等级改为三态**：`reference_model`（参考模型复算并覆盖）/ `ai_generated`
   （用的是 AI 数字）/ `none_given`（本轮没有期望值）。第三态来自缺陷修复，见下。
 - **多模型对比脚本的可比性检查**：案例集合不一致时直接拒绝出表，不把不可比数据并排。
-- **综合矩阵脚本（可复现）**：`scripts/run_synthesis_matrix.py`，94 个变体逐个跑 Yosys；
+- **综合矩阵脚本（可复现）**：`scripts/run_synthesis_matrix.py`，98 个变体逐个跑 Yosys；
   此前 `docs/layered_evidence.md` 的"全部可综合"是一次性命令跑出来的，读者无法复现。
   判据是"有没有拿到统计"而非退出码，`unavailable`/`timeout`/`error` 单独计数且**不计入通过**。
 - **案例表收拢到一处**：`core/benchmark_cases.py` 提供 `CASE_TABLE` 与
@@ -44,12 +44,30 @@
   分母变小而"全过"的结论毫无变化）。现在基准矩阵在开跑前先校验，缺一行直接报错。
 - **未可达代码检查**：`scripts/check_dead_code.py`（AST，保守判据）+ CI 门禁 +
   `pytest` 内的同款断言。
-- **基准规模 14 案例 / 78 → 80 缺陷**：`sync_reset` 是缺陷最少的案例（原 2 个），而复位
-  同步是 CDC 高危点，因此新增根因独立的变体，覆盖"释放"与"断言"两条不同的错误路径。
-  固定矩阵现为 **80/80 检出、0 误报、0 不可判定**。
+- **基准规模 78 → 80 缺陷（`sync_reset` 扩到 4 个变体）**：`sync_reset` 原先只有 2 个缺陷，
+  而复位同步是 CDC 高危点，因此按"根因独立"补足，覆盖复位**释放**与复位**断言**两条不同的
+  错误路径。其后复核发现其中一个变体与既有变体代码相同，已替换（见下方修复）。
+- **基准规模 15 案例 / 83 缺陷（+ `pulse_stretcher`）**：`pulse_stretcher` 此前只是网页里的
+  演示案例（有 RTL、testbench、spec、contract，却不在基准清单里），现在补齐为正式案例：
+  参考模型逐拍对齐（15/15）、3 个根因独立的缺陷变体、24 条检查的边界 testbench。
+  交接的教训见下方「手写 testbench 也会被门禁跑一遍」。
+- **参考模型的覆盖度门禁**：`tests/core/test_reference_model_coverage.py` 对每个已支持设计
+  用"故意写错的期望值必须被判为不一致"证明诊断路径真的在比对；另断言两条路径给出同一组
+  期望值、每个设计都产出可观测输出。
+- **调试服务的设计名单不再手抄**：`ai.debug_server.KNOWN_DESIGNS` 改为取自
+  `debug_provider.known_designs()`，由 `tests/core/test_debug_provider_coverage.py` 把
+  "激励表 / 参考模型 / contract 端口名"三者钉在一起（信号名拼错会直接失败）。
 
 ### 修复
 
+- **手写 testbench 也会被门禁跑一遍（`pulse_stretcher` 的复位检查一直是坏的）**：
+  该 testbench 把 `rst_n` 初值声明为 0，之后又赋 0——**没有 negedge，异步复位从不触发**，
+  `pulse_out` 停在 `X`。而 `X` 被直接打进了 JSON（`"actual":x`），记录因此是非法 JSON，
+  流水线只能报 `malformed structured result`。它以前不在基准矩阵里，所以没人跑到；
+  本轮把它纳入矩阵后立刻暴露。
+  处理：复位改为"先拉高再拉低"造出真实 negedge；不确定值统一标注为 `"unknown"`
+  （与边界 testbench 的既有约定一致）；并把展宽长度、重触发、回落都补成显式检查。
+  教训：**一个从未被自动化跑过的 testbench，等于没有 testbench**。
 - **"读取模型列表"与"检查配置"两个按钮从未在页面上出现过**：这两块代码被写在
   `ui/app.py::_build_provider` 的 `return` **之后**，是 150 行不可达代码的一部分，
   而所有静态测试都是绿的。`available_models` 只在死代码里被写入、从未被读取——
@@ -68,7 +86,7 @@
   `tests/core/test_reference_model_coverage.py`，用"把期望值故意写错必须被判为不一致"
   证明诊断路径真的覆盖到**每一个**已支持设计（含 `johnson_counter` / `edge_detector`），
   并断言两条路径给出同一组期望值、每个设计都产出可观测输出。
-- **"80 个缺陷"里有一个是重复计数**：`srst_bug_single_stage_only` 与
+- **"83 个缺陷"里有一个是重复计数**：`srst_bug_single_stage_only` 与
   `srst_bug_single_stage` 的代码**逐字节相同**（只有 id 和注释不同），属于同一缺陷登记两次。
   它同时暴露了两个更早的问题：这类重复靠 id 唯一性检查发现不了，而且这两个文件的中文注释
   在写入时被编码破坏——整行中文退化成成串问号，语义永久丢失，而编译器不会报错。
@@ -151,7 +169,7 @@
 
 ### 变更
 
-- 基准规模：**12 案例 / 70 缺陷 → 14 案例 / 78 缺陷**；固定矩阵
+- 基准规模：**12 案例 / 70 缺陷 → 15 案例 / 78 缺陷**；固定矩阵
   **78/78 检出、0 误报、0 不可判定**。
 - 参考模型对齐：**12/12 → 14/14**，`SUPPORTED == set(AUTHORITATIVE)`。
 - `INPUT_DEFAULTS` 成为"向量未列出的输入取什么值"的单一事实来源，模型与实验激励

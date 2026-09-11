@@ -70,6 +70,10 @@ _INPUT_STEPS: dict[str, list[dict[str, list[Any]]]] = {
         # 含连续高电平（只应有 1 个脉冲）与上升/下降交替。
         {"signal_in": [1, 1, 0, 1, 0, 0, 1, 1, 0, 1]},
     ],
+    "pulse_stretcher": [
+        # 单拍脉冲 → 长间隔 → 展宽期内再次触发（覆盖"重触发是否重新装载计数"）。
+        {"pulse_in": [1, 0, 0, 0, 0, 0, 1, 0, 0, 0]},
+    ],
 }
 
 # 每类案例的复位后额外稳定周期，用来让状态机推进到可观测状态。
@@ -165,7 +169,29 @@ _TRAILING_STIMULUS: dict[str, list[tuple[dict[str, Any], int]]] = {
         ({"signal_in": 1}, 3),
         ({"signal_in": 0}, 2),
     ],
+    "pulse_stretcher": [
+        # 展宽长度必须真的被观测到：单拍脉冲后连续保持低电平足够久，
+        # 覆盖"输出是否按 WIDTH 拍回落"（WIDTH 缺省 4）。
+        ({"pulse_in": 1}, 1),
+        ({"pulse_in": 0}, 8),
+        # 展宽期内再次触发：覆盖"重触发是否重新装载计数"。
+        ({"pulse_in": 1}, 1),
+        ({"pulse_in": 0}, 1),
+        ({"pulse_in": 1}, 1),
+        ({"pulse_in": 0}, 8),
+    ],
 }
+
+
+def known_designs() -> frozenset[str]:
+    """本 Provider 能生成有意义激励的设计集合。
+
+    调试服务用它来判断"是否服务这个设计"，避免再维护一份手写名单：
+    两份名单一旦漂移，要么服务端拒绝一个已支持的案例，要么为一个没有激励表的
+    设计生成空计划。`tests/core/test_debug_provider_coverage.py` 把两边钉在一起。
+    """
+
+    return frozenset(_INPUT_STEPS)
 
 
 def _port_summary(contract: Mapping[str, Any] | Any) -> tuple[dict[str, int], dict[str, int], str | None, str | None]:

@@ -14,7 +14,8 @@
     "mux4",
     "sync_reset",
     "johnson_counter",
-    "edge_detector"
+    "edge_detector",
+    "pulse_stretcher"
   ],
   "defects": [
     {
@@ -767,6 +768,36 @@
       "expected": "rst_n 最终置 1",
       "actual": "rst_n 始终为 0，永不同步释放",
       "testbench": "tb/tb_sync_reset.v"
+    },
+    {
+      "id": "pstr_bug_one_cycle_short",
+      "file": "rtl/pulse_stretcher_bug_one_cycle_short.v",
+      "type": "pulse_stretcher",
+      "trigger": "单拍脉冲后持续观察展宽长度",
+      "expected": "输出保持 WIDTH=4 拍高电平",
+      "actual": "只保持 3 拍，第 4 拍已回落（装载值写成 WIDTH-2）",
+      "testbench": "tb/tb_pulse_stretcher_boundary.v",
+      "note": "计数递减逻辑未改动，只有装载值少 1；三条长度检查同时失败"
+    },
+    {
+      "id": "pstr_bug_no_retrigger",
+      "file": "rtl/pulse_stretcher_bug_no_retrigger.v",
+      "type": "pulse_stretcher",
+      "trigger": "展宽期内（count != 0）再次给出脉冲",
+      "expected": "计数重新装载，展宽被延长",
+      "actual": "展宽期内忽略新脉冲，展宽按原计数结束",
+      "testbench": "tb/tb_pulse_stretcher_boundary.v",
+      "note": "装载条件加上 count==0；retrigger_extended2/3 与 hold_tail2/3 失败"
+    },
+    {
+      "id": "pstr_bug_stuck_high",
+      "file": "rtl/pulse_stretcher_bug_stuck_high.v",
+      "type": "pulse_stretcher",
+      "trigger": "展宽结束、计数归零后继续观察",
+      "expected": "输出回落为 0",
+      "actual": "输出保持高电平不再回落（计数归零分支改为保持原值）",
+      "testbench": "tb/tb_pulse_stretcher_boundary.v",
+      "note": "三条回落检查（stretch_cycle5_low / retrigger_falls_low / hold_tail4_low）失败"
     }
   ]
 }

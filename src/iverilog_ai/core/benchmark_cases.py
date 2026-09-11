@@ -55,6 +55,7 @@ CASE_TABLE: dict[str, dict[str, str]] = {
     "sync_reset": {"rtl": "rtl/sync_reset.v", "testbench": "tb/tb_sync_reset.v", "top": "tb_sync_reset"},
     "johnson_counter": {"rtl": "rtl/johnson_counter.v", "testbench": "tb/tb_johnson_counter.v", "top": "tb_johnson_counter"},
     "edge_detector": {"rtl": "rtl/edge_detector.v", "testbench": "tb/tb_edge_detector.v", "top": "tb_edge_detector"},
+    "pulse_stretcher": {"rtl": "rtl/pulse_stretcher.v", "testbench": "tb/tb_pulse_stretcher.v", "top": "tb_pulse_stretcher"},
 }
 
 

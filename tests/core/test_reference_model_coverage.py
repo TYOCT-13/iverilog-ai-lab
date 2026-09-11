@@ -46,6 +46,7 @@ PROBE_VECTORS: dict[str, list[dict]] = {
     "sync_reset": [{"inputs": {"ext_rst_n": 1}, "cycles": 3}],
     "johnson_counter": [{"inputs": {"rst_n": 1, "enable": 1}, "cycles": 3}],
     "edge_detector": [{"inputs": {"rst_n": 1, "signal_in": 1}, "cycles": 2}],
+    "pulse_stretcher": [{"inputs": {"rst_n": 1, "pulse_in": 1}, "cycles": 2}],
 }
 
 

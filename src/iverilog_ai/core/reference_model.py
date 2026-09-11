@@ -18,7 +18,7 @@ from ..ai.schema import TestPlan
 SUPPORTED = {
     "mod10_counter", "simple_alu", "sequence_101_overlap", "traffic_light_emergency",
     "sync_fifo", "uart_tx", "spi_master", "handshake_stage", "debounce", "pwm", "mux4", "sync_reset",
-    "johnson_counter", "edge_detector",
+    "johnson_counter", "edge_detector", "pulse_stretcher",
 }
 
 # 可作为**权威预言机**的设计：这些模型已逐项对照参考 RTL 的手写 testbench 验证过，
@@ -47,6 +47,7 @@ AUTHORITATIVE: frozenset[str] = frozenset({
     "mux4",
     "johnson_counter",
     "edge_detector",
+    "pulse_stretcher",
 })
 
 # 内置案例的**输入端口默认值**：单一事实来源。
@@ -74,6 +75,7 @@ INPUT_DEFAULTS: dict[str, dict[str, Any]] = {
     "mux4": {"d0": 0, "d1": 0, "d2": 0, "d3": 0, "sel": 0},
     "johnson_counter": {"rst_n": 1, "enable": 0},
     "edge_detector": {"rst_n": 1, "signal_in": 0},
+    "pulse_stretcher": {"rst_n": 1, "pulse_in": 0},
 }
 
 
@@ -132,6 +134,8 @@ class _DesignState:
         self.sync_ff, self.sync_rst = 0, 0
         self.johnson_q = 0
         self.edge_prev, self.edge_rising = 0, 0
+        self.pulse_width = _clamp(mapping.get("WIDTH", 4), 1, 32, 4)
+        self.pulse_count, self.pulse_out = 0, 0
 
     def step(self, inputs: Mapping[str, Any], cycles: int) -> dict[str, Any]:
         """把单个向量推进 ``cycles`` 个周期，返回该向量结束时的可观测输出。
@@ -325,6 +329,23 @@ class _DesignState:
                 else:
                     self.edge_rising, self.edge_prev = sig & (1 - self.edge_prev), sig
             return {"rising": self.edge_rising}
+        if design == "pulse_stretcher":
+            rst, pulse_in = int(inputs.get("rst_n", 1)), int(inputs.get("pulse_in", 0)) & 1
+            # 已与 rtl/pulse_stretcher.v 逐拍对齐。四个分支的优先级与 RTL 一致，
+            # 且全部按**非阻塞**语义：`count != 0` 读的是本拍开始时的旧值，
+            # 因此脉冲输入结束后还会多保持 (WIDTH-1) 拍才回落。
+            mask = (1 << max(1, self.pulse_width)) - 1
+            for _ in range(cycles):
+                if rst == 0:
+                    self.pulse_count, self.pulse_out = 0, 0
+                elif pulse_in:
+                    self.pulse_count, self.pulse_out = self.pulse_width - 1, 1
+                elif self.pulse_count != 0:
+                    self.pulse_count = (self.pulse_count - 1) & mask
+                    self.pulse_out = 1
+                else:
+                    self.pulse_out = 0
+            return {"pulse_out": self.pulse_out}
         return {}
 
 

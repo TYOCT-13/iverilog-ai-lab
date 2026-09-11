@@ -35,7 +35,7 @@ python -c "from iverilog_ai.core.toolchain import locate_tools, describe_tools; 
 python scripts/run_benchmark_matrix.py
 ```
 
-它会跑 14 个参考设计与 80 个缺陷变体。结束后：
+它会跑 14 个参考设计与 83 个缺陷变体。结束后：
 
 ```powershell
 # 看汇总
