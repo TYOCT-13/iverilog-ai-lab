@@ -21,6 +21,9 @@ import statistics
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
+from iverilog_ai.core.pricing import load_pricing  # noqa: E402
 
 STRATEGIES = ("fixed", "random", "ai", "online_ai")
 
@@ -157,21 +160,33 @@ def render(model_names: list[str], payloads: dict[str, dict]) -> str:
     lines.append("")
 
     # token 用量
-    lines.append("## token 用量（仅在线模型）")
+    lines.append("## token 用量与费用（仅在线模型）")
     lines.append("")
-    lines.append("| 模型 | 有 usage 的请求数 | prompt | completion | total |")
-    lines.append("|---|---:|---:|---:|---:|")
+    lines.append("| 模型 | 有 usage 的请求数 | prompt | completion | total | 费用估算 |")
+    lines.append("|---|---:|---:|---:|---:|---|")
+    pricing = load_pricing(ROOT)
     for name in model_names:
         totals = _usage_totals(payloads[name], "online_ai")
         if not totals["requests_with_usage"]:
-            lines.append(f"| {name} | 0 | 服务商未返回 usage | — | — |")
+            lines.append(f"| {name} | 0 | 服务商未返回 usage | — | — | — |")
             continue
+        estimate = pricing.estimate(
+            name, prompt_tokens=totals["prompt_tokens"], completion_tokens=totals["completion_tokens"]
+        )
+        if estimate.amount is None:
+            money = f"未估算（{estimate.reason}）"
+        else:
+            money = f"≈ {estimate.amount:.4f} {estimate.currency}（核验于 {estimate.verified_on}）"
         lines.append(
             f"| {name} | {totals['requests_with_usage']} | {totals['prompt_tokens']:,} "
-            f"| {totals['completion_tokens']:,} | {totals['total_tokens']:,} |"
+            f"| {totals['completion_tokens']:,} | {totals['total_tokens']:,} | {money} |"
         )
     lines.append("")
-    lines.append("> 费用不在此处估算：需要价格表与计价日期。服务商未返回 usage 时该行标注「未返回」，不做推算。")
+    lines.append(
+        "> 价格表在 `data/model_pricing.json`，每行带来源与核验日期；"
+        "**未经核验的价格不给金额**（`null` 不等于 0，也不做汇率换算）。"
+        "更新方式：查阅服务商官方定价页后填入实际数值与核验日期。"
+    )
     lines.append("")
 
     # 逐案例差异：分母统一取自基准清单，避免"分母随手变"的假对比

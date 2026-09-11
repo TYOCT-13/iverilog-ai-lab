@@ -114,7 +114,9 @@ def test_marks_missing_usage_instead_of_estimating(tmp_path):
     assert result.returncode == 0, result.stderr
     text = output.read_text(encoding="utf-8")
     assert "服务商未返回 usage" in text
-    assert "费用不在此处估算" in text
+    # 费用必须说明口径：价格表带来源与核验日期，未核验不给金额
+    assert "未经核验的价格不给金额" in text
+    assert "model_pricing.json" in text
 
 
 def test_reports_token_totals_when_available(tmp_path):

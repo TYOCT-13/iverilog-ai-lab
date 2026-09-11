@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "_说明": {
+    "用途": "把实验记录的 token 用量换算成费用。价格会变动，所以每行都必须带来源与核验日期。",
+    "单位": "USD / 1M tokens（百万 token）",
+    "核验原则": [
+      "price_usd_per_million 为 null 表示未核验，脚本会明确标注'未核验'而不是用 0 顶替",
+      "verified 为 true 才允许在汇总里给出金额，否则只报 token 量与'价格未核验'",
+      "超过 stale_after_days 天未复核时，脚本会提示需要重新核验"
+    ],
+    "如何更新": "查阅对应服务商的官方定价页，把实际数值与核验日期填入；不要凭记忆填。"
+  },
+  "stale_after_days": 90,
+  "prices": [
+    {
+      "provider": "deepseek",
+      "model": "deepseek-flash",
+      "price_usd_per_million": {
+        "prompt": null,
+        "completion": null
+      },
+      "verified": false,
+      "verified_on": null,
+      "source": "https://api-docs.deepseek.com/quick_start/pricing",
+      "note": "本轮实验（2026-09-11）未核验官方价格，因此只报 token 量，不给金额。"
+    },
+    {
+      "provider": "deepseek",
+      "model": "deepseek-v4-pro",
+      "price_usd_per_million": {
+        "prompt": null,
+        "completion": null
+      },
+      "verified": false,
+      "verified_on": null,
+      "source": "https://api-docs.deepseek.com/quick_start/pricing",
+      "note": "同上。"
+    },
+    {
+      "provider": "local",
+      "model": "debug-local",
+      "price_usd_per_million": {
+        "prompt": 0.0,
+        "completion": 0.0
+      },
+      "verified": true,
+      "verified_on": "2026-09-11",
+      "source": "本机离线服务，无外部计费",
+      "note": "仓库自带的离线调试模型，运行不产生费用。"
+    },
+    {
+      "provider": "local",
+      "model": "mock",
+      "price_usd_per_million": {
+        "prompt": 0.0,
+        "completion": 0.0
+      },
+      "verified": true,
+      "verified_on": "2026-09-11",
+      "source": "进程内离线 MockProvider，无外部计费",
+      "note": "默认路径；不联网、无费用。"
+    }
+  ]
+}
