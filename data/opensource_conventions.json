@@ -1,0 +1,1077 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-09-11T00:46:54.579673Z",
+  "generator": "scripts/ingest_open_source_conventions.py",
+  "note": "只含聚合统计与文件指纹，不含上游源代码",
+  "sources": [
+    {
+      "key": "verilog-axi",
+      "repository": "alexforencich/verilog-axi",
+      "ref": "516bd5dadc3365b7f9e225d2af8fe0b8d804fe53",
+      "spdx": "MIT",
+      "license_url": "https://github.com/alexforencich/verilog-axi/blob/master/LICENSE",
+      "note": "AXI 接口、FIFO 与握手实现，工程化程度高",
+      "file_count": 83,
+      "total_bytes": 1093135,
+      "files": [
+        {
+          "path": "rtl/arbiter.v",
+          "sha256": "a001507c82843e36e133dea75491fc044f56660fac0aff0127cf3afec7f927e0",
+          "bytes": 5027
+        },
+        {
+          "path": "rtl/axi_adapter.v",
+          "sha256": "38f7a2ca6396fc95bcc74050b0298c8682dbd4b0a7b0b095b90d980ca73f7e9e",
+          "bytes": 11401
+        },
+        {
+          "path": "rtl/axi_adapter_rd.v",
+          "sha256": "e9031d79a7699c1b7fa55400fa41106645d141f56615eacd0f5973cdc4459036",
+          "bytes": 28519
+        },
+        {
+          "path": "rtl/axi_adapter_wr.v",
+          "sha256": "915b13883a1f13fd7b2c279186e5857778812802c52aea1580aacd804b82abe1",
+          "bytes": 33145
+        },
+        {
+          "path": "rtl/axi_axil_adapter.v",
+          "sha256": "b3aec5057016d4cc8a7114b02d88b8d7cce8021c178741d310af3d93b0f9659e",
+          "bytes": 7925
+        },
+        {
+          "path": "rtl/axi_axil_adapter_rd.v",
+          "sha256": "838caa3b52268f2c9c2778a30b899ebfa374ea5e11975681d613e37904d61cbe",
+          "bytes": 21207
+        },
+        {
+          "path": "rtl/axi_axil_adapter_wr.v",
+          "sha256": "9f0ee91dd9b70e642e992262e8ff3151bb4ae52fc616f01d6964f28789cae0e2",
+          "bytes": 24311
+        },
+        {
+          "path": "rtl/axi_cdma.v",
+          "sha256": "5fef148a3d21ede1f6e43eb7eac8b5a1a7cbb68a8ab76a2bd569a35d6e56c8e2",
+          "bytes": 33165
+        },
+        {
+          "path": "rtl/axi_cdma_desc_mux.v",
+          "sha256": "9ea015e93946c6415f9ce87b4119e56dbb30db2ecb189dc8b8849dcb3fa3c5f7",
+          "bytes": 10376
+        },
+        {
+          "path": "rtl/axi_crossbar.v",
+          "sha256": "f2e5177a8c8bbe4ed844554eece7abd207365a8a7a20796e0654e08362b51b3d",
+          "bytes": 15024
+        },
+        {
+          "path": "rtl/axi_crossbar_addr.v",
+          "sha256": "5d0e1a5b885c6b271b864b64a834057496428147ce3c3ae633459251239048fb",
+          "bytes": 15775
+        },
+        {
+          "path": "rtl/axi_crossbar_rd.v",
+          "sha256": "d42e9e3b8d94ba9e135cd3e5841ee570dce2cd15d50e7ca87621c8eca246fe98",
+          "bytes": 23694
+        },
+        {
+          "path": "rtl/axi_crossbar_wr.v",
+          "sha256": "0892781788371df9d3449608d342542269eb05efd0b6827fdea575d538368816",
+          "bytes": 28234
+        },
+        {
+          "path": "rtl/axi_dma.v",
+          "sha256": "6063279cc0ae29d663108dd7e1aab17fa1b8143ca7f98dfb802efd2c76b0d6b6",
+          "bytes": 13077
+        },
+        {
+          "path": "rtl/axi_dma_desc_mux.v",
+          "sha256": "5ab36d7829d1b3ee3c56944b6299cc10eae6c3ed4394d027ce4f22baedee0537",
+          "bytes": 13649
+        },
+        {
+          "path": "rtl/axi_dma_rd.v",
+          "sha256": "853ff3aedc44ec0c12ef3ae8b84d7559800d372f76832c7c133ed5eecac61dd8",
+          "bytes": 29645
+        },
+        {
+          "path": "rtl/axi_dma_wr.v",
+          "sha256": "91b24115e3a5940a6057d06554fb5c61594a22fc71391e871e5c14f1e21ea0b2",
+          "bytes": 41384
+        },
+        {
+          "path": "rtl/axi_dp_ram.v",
+          "sha256": "e7c5e853a1cac5a79e057ccbb8ea25f5335bfc5c061c95edf378d7f52ce4da43",
+          "bytes": 14548
+        },
+        {
+          "path": "rtl/axi_fifo.v",
+          "sha256": "bae5ea55dcd8c145a56d75931c555697d284a5c7972c0914ac12df4a452cc71d",
+          "bytes": 10872
+        },
+        {
+          "path": "rtl/axi_fifo_rd.v",
+          "sha256": "ecdb21c322732e8e185c6a1408438565d6990f852a8f271b5442e878174a20aa",
+          "bytes": 13997
+        },
+        {
+          "path": "rtl/axi_fifo_wr.v",
+          "sha256": "e0f06c5c6e3deae0b764e85319e16395c7b2e428b7419853c264129350df67ca",
+          "bytes": 15212
+        },
+        {
+          "path": "rtl/axi_interconnect.v",
+          "sha256": "2a06ac654ea73fc960b24922466cb50990584a8318959bea3912cefb0bbf6e65",
+          "bytes": 43236
+        },
+        {
+          "path": "rtl/axi_ram.v",
+          "sha256": "2eb669f3cd1fd912a74c024df3bea5765a3599eead1a007c63f19b6b185d55c4",
+          "bytes": 13216
+        },
+        {
+          "path": "rtl/axi_ram_rd_if.v",
+          "sha256": "a7e81cb85d1c922b29c01ac9c3570f8cebc16e676fd0f9df3cbb37443a394a3d",
+          "bytes": 9941
+        },
+        {
+          "path": "rtl/axi_ram_wr_if.v",
+          "sha256": "cec0682f902f11d61c852812426ffa61417d281b82df10625cbfafd621209743",
+          "bytes": 10518
+        },
+        {
+          "path": "rtl/axi_ram_wr_rd_if.v",
+          "sha256": "36997f5e6de6accab4211704b25c97a5a53319004d2046fe93b1b7d44edb68a2",
+          "bytes": 12167
+        },
+        {
+          "path": "rtl/axi_register.v",
+          "sha256": "76eea19cf4967cfeb40cb4c0f10de3e20b70e841a79271134de685df7e91e3a2",
+          "bytes": 11151
+        },
+        {
+          "path": "rtl/axi_register_rd.v",
+          "sha256": "63f1bd6f9d72ae28643fd7af3a5d5bcb05d45cbfb290c59c120c327ba49aa575",
+          "bytes": 18905
+        },
+        {
+          "path": "rtl/axi_register_wr.v",
+          "sha256": "02dd26f56ee04ad834a28e02ef2726852ab527fb23c3a88b377f3ce55a719c4b",
+          "bytes": 24069
+        },
+        {
+          "path": "rtl/axi_vfifo.v",
+          "sha256": "1fed2250a36b21275d22bd05eeb3ce6185c38bdfbb367c5fa862e374698bbee6",
+          "bytes": 22622
+        },
+        {
+          "path": "rtl/axi_vfifo_dec.v",
+          "sha256": "c8f86151e2721bd9c4e96e9845c8efccbbeceffb5ec0df0949ab0a6febc7ed56",
+          "bytes": 27781
+        },
+        {
+          "path": "rtl/axi_vfifo_enc.v",
+          "sha256": "ec401dd8d0f29e6bf816c4709bb2b9e9afc89ec4eb046cbcb23b2db6abdc46fa",
+          "bytes": 28719
+        },
+        {
+          "path": "rtl/axi_vfifo_raw.v",
+          "sha256": "3ee0d011b2d769f58254be0e53ad0406222f2813f063e346c62a2b6b4fc74806",
+          "bytes": 12127
+        },
+        {
+          "path": "rtl/axi_vfifo_raw_rd.v",
+          "sha256": "3173828129ebb045f8127d5658469f7aef1bae58c065f8b3b3fffb86684901a5",
+          "bytes": 21532
+        },
+        {
+          "path": "rtl/axi_vfifo_raw_wr.v",
+          "sha256": "3d9161cd40ae9697bedf1af27de74d18b97b0321efd9da0a3e4ef7f2ce851ca3",
+          "bytes": 21145
+        },
+        {
+          "path": "rtl/axil_adapter.v",
+          "sha256": "7bc9936dc5c19d42397b638397064aa3ba51906c2cfbf1200d80a8f28ddaea26",
+          "bytes": 5836
+        },
+        {
+          "path": "rtl/axil_adapter_rd.v",
+          "sha256": "8d79906e62200be851fb4eead9f094b6598a728ad729c1fddfcdce8402506dfa",
+          "bytes": 10216
+        },
+        {
+          "path": "rtl/axil_adapter_wr.v",
+          "sha256": "1945be51e41c4c8b6c1e48af9d85f13cf761af5d1dfc42dad66cda40afc60f07",
+          "bytes": 12929
+        },
+        {
+          "path": "rtl/axil_cdc.v",
+          "sha256": "fbb8018e34b7173e9a8de97c9e70be092abbb9a581dc83ec037561f401d11edb",
+          "bytes": 5508
+        },
+        {
+          "path": "rtl/axil_cdc_rd.v",
+          "sha256": "49b0e680b3f69918f6cc0628bdda3fdaf0fb80914b43a0ae9638554b6dc905ec",
+          "bytes": 6395
+        },
+        {
+          "path": "rtl/axil_cdc_wr.v",
+          "sha256": "a997547ca0b34c281be57184805ea5f91d74e29882017e36e718d8e9bb84a9ed",
+          "bytes": 7497
+        },
+        {
+          "path": "rtl/axil_crossbar.v",
+          "sha256": "f48acdb965988038196bc0742f2f18174a1ecd35386a061f634bc64ccf6adb27",
+          "bytes": 9384
+        },
+        {
+          "path": "rtl/axil_crossbar_addr.v",
+          "sha256": "a687cef2780b571b1a1b85746e4e093d0d7131d77bf9d6c610f333b0e27480c0",
+          "bytes": 11600
+        },
+        {
+          "path": "rtl/axil_crossbar_rd.v",
+          "sha256": "b43f1a86164949e78e01e29864c9a2cad5bd442be8356231d2993beaeb3d4e99",
+          "bytes": 16377
+        },
+        {
+          "path": "rtl/axil_crossbar_wr.v",
+          "sha256": "6b415d4d265a6694810913b67f62f93bd01128c59afe962d2784d45b9f310663",
+          "bytes": 20962
+        },
+        {
+          "path": "rtl/axil_dp_ram.v",
+          "sha256": "5751657db197c9505aa2d57d64d32417e3a142c9fa725a013655f163d43fa33c",
+          "bytes": 11281
+        },
+        {
+          "path": "rtl/axil_interconnect.v",
+          "sha256": "f685b0861d4d7a93a8ce4a938589d57e5fdd186204dea32436828496e1426efe",
+          "bytes": 23359
+        },
+        {
+          "path": "rtl/axil_ram.v",
+          "sha256": "5a5ae8c10ab01d8ab3ed18418f4dadfa9c7cadb584ab14838a8d18ac4c3b5644",
+          "bytes": 6093
+        },
+        {
+          "path": "rtl/axil_reg_if.v",
+          "sha256": "6aac73057466d4c16f79a5575f5fb4136b494d41cd63aaa83fefe90319006a39",
+          "bytes": 4673
+        },
+        {
+          "path": "rtl/axil_reg_if_rd.v",
+          "sha256": "57f196a4e073bfe1b483c19127088006e1d5fdd33f514d4c6672ab08fd7d8359",
+          "bytes": 4222
+        },
+        {
+          "path": "rtl/axil_reg_if_wr.v",
+          "sha256": "ec2f3d3d97b694dd4ff046d791fc7a0f95856c41049a107eac1aa3b3daab7412",
+          "bytes": 5022
+        },
+        {
+          "path": "rtl/axil_register.v",
+          "sha256": "b58a923af874e3600727f214897cee868591487d8c00317603e5f232d9f2fa07",
+          "bytes": 6076
+        },
+        {
+          "path": "rtl/axil_register_rd.v",
+          "sha256": "ae1a35af8be25b3fa0f2245ce0ca33287f566279ea5bcf04d822d417ffa5f463",
+          "bytes": 11801
+        },
+        {
+          "path": "rtl/axil_register_wr.v",
+          "sha256": "af7fd3bc697c3e2d8e921105bf33fab62199a211e4aca031ba28bf08054b6563",
+          "bytes": 16239
+        },
+        {
+          "path": "rtl/priority_encoder.v",
+          "sha256": "df28220d95b47df349a72803a9751aad331eb8e1435416e8686d00572a974dd5",
+          "bytes": 3253
+        },
+        {
+          "path": "tb/test_axi_adapter_16_32.v",
+          "sha256": "7169561d7fc55690768544ac6466e1d7dd0b3884d3f266239ffa9f54614764c2",
+          "bytes": 10000
+        },
+        {
+          "path": "tb/test_axi_adapter_32_16.v",
+          "sha256": "beaa194d385d7d4c03d24d8a799f74b549afa86d20894d66a2657463fb2147dc",
+          "bytes": 10000
+        },
+        {
+          "path": "tb/test_axi_adapter_32_32.v",
+          "sha256": "7e41cc0a1b76baca34eb58eec0d9f6381fb2209fda284d0b4856ddd80c29cd5f",
+          "bytes": 10000
+        },
+        {
+          "path": "tb/test_axi_axil_adapter_16_32.v",
+          "sha256": "384a433b88286ec611ca75bf65abec29471eca72c7042732e1d7d7d620c92660",
+          "bytes": 6673
+        },
+        {
+          "path": "tb/test_axi_axil_adapter_32_16.v",
+          "sha256": "eae21e1df4985d2d7ebc75c4f2b4e2ea33078aebfdb3354629ca9598083e9451",
+          "bytes": 6673
+        },
+        {
+          "path": "tb/test_axi_axil_adapter_32_32.v",
+          "sha256": "a6fb4ae8b1b86200daf51c8249d2885ee1509a960ffdaf05936686e6eb2cbc9a",
+          "bytes": 6673
+        },
+        {
+          "path": "tb/test_axi_cdma_32.v",
+          "sha256": "d269b3e43952211466ea74f7a5daf5896ac1ad3a20a7306d15ac0e3296fa7270",
+          "bytes": 5904
+        },
+        {
+          "path": "tb/test_axi_cdma_32_unaligned.v",
+          "sha256": "90908b0cde824c7b70970645e96bb17b61376bcb773b3a9d1ae964e935a92c2f",
+          "bytes": 5934
+        },
+        {
+          "path": "tb/test_axi_crossbar_4x4.v",
+          "sha256": "49024fbb7a20a9f151288e112430145dc80bfc11ef26743fc4e2982dd1761609",
+          "bytes": 12019
+        },
+        {
+          "path": "tb/test_axi_dma_32_32.v",
+          "sha256": "729b55a61203fc31be5747f8c75b90394a2da9009d53ba4042ed69df8945cacb",
+          "bytes": 10926
+        },
+        {
+          "path": "tb/test_axi_dma_rd_32_32.v",
+          "sha256": "be7ffe3e6fae4bb3fd17bd8c16f417fe02e4c5966056580cbafdfc05d6d14740",
+          "bytes": 6593
+        },
+        {
+          "path": "tb/test_axi_dma_rd_32_32_unaligned.v",
+          "sha256": "634ad27dc561f52997818fc56dcb3524282ee221cc296af23efd4e3d3dbe8b2d",
+          "bytes": 6623
+        },
+        {
+          "path": "tb/test_axi_dma_wr_32_32.v",
+          "sha256": "aa07e11e9fca179a45591b50169fb4527e3277095e3f9163f51d691f6e9a6d64",
+          "bytes": 7182
+        },
+        {
+          "path": "tb/test_axi_dma_wr_32_32_unaligned.v",
+          "sha256": "dc7db7c005ab11cc6f80f6e7df1e05c1d932277ed9f04e94caabb3456374dffd",
+          "bytes": 7212
+        },
+        {
+          "path": "tb/test_axi_dp_ram.v",
+          "sha256": "421cf6d3d9fe35556a67193ae680ab0aa3c8624175075947c1f40fb0d04cd0fd",
+          "bytes": 8458
+        },
+        {
+          "path": "tb/test_axi_fifo.v",
+          "sha256": "fa1d6c2b73678fdb01353bc8671d8034142dd97c97217bc26e9bbb8a1f2cece4",
+          "bytes": 9887
+        },
+        {
+          "path": "tb/test_axi_fifo_delay.v",
+          "sha256": "095a2e5356040c63eeae5106bbbfbe806334a99097527d04865754e383cd023e",
+          "bytes": 9905
+        },
+        {
+          "path": "tb/test_axi_interconnect_4x4.v",
+          "sha256": "c863c5bc9f9a1ce97ec54a5d339e9c5862e5bed16962d39a22e59ed8cd4ed2dc",
+          "bytes": 11037
+        },
+        {
+          "path": "tb/test_axi_ram.v",
+          "sha256": "dcbecb5aad6101699725ab4e688963c920e20ac8b534f08071c6a7994fac0e71",
+          "bytes": 4678
+        },
+        {
+          "path": "tb/test_axi_register.v",
+          "sha256": "d805ddffc1913aae32fc8c0a1b3b7bcb7787884df09880bf891c65a75ca1be0a",
+          "bytes": 9900
+        },
+        {
+          "path": "tb/test_axil_adapter_16_32.v",
+          "sha256": "c67a49e7a9e1525daf88eebe0fe2f9fa0c57bb50a89ab6888fd6f61306eb8340",
+          "bytes": 5162
+        },
+        {
+          "path": "tb/test_axil_adapter_32_16.v",
+          "sha256": "aa3b7aec5d33ae879ef28813bd7335e1f80f711db5602de0e118f4dcc705597b",
+          "bytes": 5162
+        },
+        {
+          "path": "tb/test_axil_adapter_32_32.v",
+          "sha256": "33097a6e6c21ed607ddfa4e730986cac507ccb7ca8fe99961aeaeb64c9ac1f8c",
+          "bytes": 5162
+        },
+        {
+          "path": "tb/test_axil_cdc.v",
+          "sha256": "11382b967e225cb506c764ebb000a6a4bdd5eb00ab1594580f67c50d424f268e",
+          "bytes": 5074
+        },
+        {
+          "path": "tb/test_axil_dp_ram.v",
+          "sha256": "914b64c86e604eaa89f4d8441802350f71ea01eb9a655fb78ce73453ae60c15d",
+          "bytes": 5522
+        },
+        {
+          "path": "tb/test_axil_interconnect_4x4.v",
+          "sha256": "e8ff5ef18eeedcca19759186f9e62858ba84fa1bc5efdfadd794a7ea7dd7df37",
+          "bytes": 6054
+        },
+        {
+          "path": "tb/test_axil_ram.v",
+          "sha256": "a22490896a369169b1709c097f5b3083ef9627e39f6ede984b4b7a7356344b04",
+          "bytes": 3417
+        },
+        {
+          "path": "tb/test_axil_register.v",
+          "sha256": "66f7e506ff9a39dcf5d3042d3e079abd5b045c463b64bb33ca2f3ab2e2be9726",
+          "bytes": 5266
+        }
+      ],
+      "probes": [
+        {
+          "probe": "timescale",
+          "title": "文件声明了 `timescale",
+          "numerator": 83,
+          "denominator": 83,
+          "unit": "file",
+          "ratio": 1.0,
+          "confidence": "strong"
+        },
+        {
+          "probe": "ansi_ports",
+          "title": "模块使用 ANSI 风格端口列表",
+          "numerator": 55,
+          "denominator": 55,
+          "unit": "file",
+          "ratio": 1.0,
+          "confidence": "strong"
+        },
+        {
+          "probe": "clocked_always",
+          "title": "always 块以时钟边沿为敏感条件",
+          "numerator": 125,
+          "denominator": 125,
+          "unit": "file",
+          "ratio": 1.0,
+          "confidence": "strong"
+        },
+        {
+          "probe": "nonblocking_in_clocked",
+          "title": "时序块内出现过非阻塞赋值 <=（宽口径）",
+          "numerator": 125,
+          "denominator": 125,
+          "unit": "file",
+          "ratio": 1.0,
+          "confidence": "strong"
+        },
+        {
+          "probe": "no_blocking_in_clocked",
+          "title": "时序块没有阻塞赋值（for 循环变量除外）",
+          "numerator": 120,
+          "denominator": 125,
+          "unit": "file",
+          "ratio": 0.96,
+          "confidence": "strong"
+        },
+        {
+          "probe": "async_reset",
+          "title": "时序块敏感列表含复位边沿（异步复位）",
+          "numerator": 3,
+          "denominator": 125,
+          "unit": "file",
+          "ratio": 0.024,
+          "confidence": "weak"
+        },
+        {
+          "probe": "active_low_reset_naming",
+          "title": "低有效复位命名为 xxx_n",
+          "numerator": 0,
+          "denominator": 147,
+          "unit": "file",
+          "ratio": 0.0,
+          "confidence": "weak"
+        },
+        {
+          "probe": "default_in_case",
+          "title": "case 语句带 default 分支",
+          "numerator": 0,
+          "denominator": 35,
+          "unit": "file",
+          "ratio": 0.0,
+          "confidence": "weak"
+        },
+        {
+          "probe": "param_for_states",
+          "title": "使用参数/localparam 表示状态或常量",
+          "numerator": 83,
+          "denominator": 83,
+          "unit": "file",
+          "ratio": 1.0,
+          "confidence": "strong"
+        },
+        {
+          "probe": "explicit_port_width",
+          "title": "端口声明显式写出位宽",
+          "numerator": 1448,
+          "denominator": 2243,
+          "unit": "file",
+          "ratio": 0.6456,
+          "confidence": "moderate"
+        }
+      ]
+    },
+    {
+      "key": "wb2axip",
+      "repository": "ZipCPU/wb2axip",
+      "ref": "2e8d3bc2d26ddc33d1881022a2a2b9d3f0c16b9b",
+      "spdx": "GPL-3.0-or-later",
+      "license_url": "https://github.com/ZipCPU/wb2axip/blob/master/LICENSE",
+      "note": "总线与握手参考实现；GPL 项目——本模块只读取统计量、不复制代码",
+      "file_count": 89,
+      "total_bytes": 1909729,
+      "files": [
+        {
+          "path": "bench/formal/axi_addr_miter.v",
+          "sha256": "f57c6bad5bd173b6aef164fe3dcde88f952f1ce9cf1d233c3a6f23526c691000",
+          "bytes": 1444
+        },
+        {
+          "path": "bench/formal/axilgpt.v",
+          "sha256": "89092b8c9b090b283aae746c40a6ca65b6f2683e56af40f6afa9652744349a66",
+          "bytes": 10780
+        },
+        {
+          "path": "bench/formal/axilgrok.v",
+          "sha256": "8550c8df96c28d58e5053ff09e4d793e93c95eed8ac6c28fdaac1c36f14f3d08",
+          "bytes": 15862
+        },
+        {
+          "path": "bench/formal/fapb_master.v",
+          "sha256": "aae42df145d42f263f26a1f20771d86d5915480581e2b7362f80235090be7ff2",
+          "bytes": 5473
+        },
+        {
+          "path": "bench/formal/fapb_slave.v",
+          "sha256": "c34c117ac0d3b9671320be9e37225652544703e88e277ff6062e903fdba98854",
+          "bytes": 5471
+        },
+        {
+          "path": "bench/formal/fav_slave.v",
+          "sha256": "5097e800b0ea089f2df9fdb58d582f1b3a921580d2d34e37333aa984659d3855",
+          "bytes": 9183
+        },
+        {
+          "path": "bench/formal/faxi_addr.v",
+          "sha256": "08117901d5c1d8092b4982cdd987f2ea7fd153e310f355652c4886382178782c",
+          "bytes": 3931
+        },
+        {
+          "path": "bench/formal/faxi_master.v",
+          "sha256": "103ea2e64970d9834d1e2521e4afd18ece081100a37bd61f6da9abd6982d25ac",
+          "bytes": 37193
+        },
+        {
+          "path": "bench/formal/faxi_slave.v",
+          "sha256": "9ed1eaa25d434ef2755906e0c6e5a5658849cfbcf2801eff16aaec511fad4991",
+          "bytes": 37193
+        },
+        {
+          "path": "bench/formal/faxil_master.v",
+          "sha256": "15ecd60b570c56c6bf918131c003e9682f96d849d03d8d343c9c1481ff8b040e",
+          "bytes": 24679
+        },
+        {
+          "path": "bench/formal/faxil_register.v",
+          "sha256": "51ed6e788c3043851cf525d65b79c82842a9c50cd5d2921a283b0521cd5ceddd",
+          "bytes": 4995
+        },
+        {
+          "path": "bench/formal/faxil_slave.v",
+          "sha256": "b2b4b2a16e044e6224a17bd083b7b4ad6b6b2a67d887507b39845188fdbdc9a0",
+          "bytes": 24663
+        },
+        {
+          "path": "bench/formal/faxis_master.v",
+          "sha256": "6eafbcaa564291236c837dc3a86103d5a61c0408372c49ecae7a52de5036604f",
+          "bytes": 7469
+        },
+        {
+          "path": "bench/formal/faxis_slave.v",
+          "sha256": "51d58fbabcaf3d6ac26c5a5208a1726268e78399abc4afd2c03824eb370dd639",
+          "bytes": 7466
+        },
+        {
+          "path": "bench/formal/fwb_master.v",
+          "sha256": "c436655c626e903f141bee898b5cdfc58f9a8edc611311f453d31d52c9b45c97",
+          "bytes": 17062
+        },
+        {
+          "path": "bench/formal/fwb_register.v",
+          "sha256": "9b382ac2335ac547635ffe1575d254c78adc353881c45e4570a31cbb53025648",
+          "bytes": 3241
+        },
+        {
+          "path": "bench/formal/fwb_slave.v",
+          "sha256": "c35f17537520508e7088cc6a4bd45d263d02f83908808671fab45b130ad7ec87",
+          "bytes": 15440
+        },
+        {
+          "path": "bench/formal/fwbc_master.v",
+          "sha256": "322236f775c348dc310b9e6239662ce2260a3c105204de01b39a64bd8c0c8cb8",
+          "bytes": 9560
+        },
+        {
+          "path": "bench/formal/fwbc_slave.v",
+          "sha256": "eae486a1cd30ddc55161102ccb7f0f52033444863bb2a13d17a8f2ff8dd07d01",
+          "bytes": 9557
+        },
+        {
+          "path": "bench/formal/xlnxdemo.v",
+          "sha256": "41495060d8f01175346898a8385304e103b558355e0812b2f3fcb63ec27b1a61",
+          "bytes": 40295
+        },
+        {
+          "path": "bench/formal/xlnxdemo_2018_3.v",
+          "sha256": "b5303d1ee14f3ba272fe53932c5ead35324744d6564c3561eb09050f83f33cba",
+          "bytes": 24504
+        },
+        {
+          "path": "bench/formal/xlnxfull_2018_3.v",
+          "sha256": "6602c545c1800c8127f578cc63d865ea9907b17be4d8fbc891424f0e8fe34438",
+          "bytes": 31922
+        },
+        {
+          "path": "bench/formal/xlnxstream_2018_3.v",
+          "sha256": "497c92cf66c6678603f4595916f4db37e59281c7ddb872c495d53fc594649335",
+          "bytes": 10125
+        },
+        {
+          "path": "bench/mcy/easyaxil/easyaxil_tb.sv",
+          "sha256": "fc354fdab79d61cfb4e363c13ad0d8ccd9b08403f557c405fd159bdd73ba2891",
+          "bytes": 6687
+        },
+        {
+          "path": "bench/mcy/easyaxil/easyprops.sv",
+          "sha256": "c21589a2ef3deab5086c6a4c6521070654443c11339454a40bf96fa14b69057f",
+          "bytes": 10884
+        },
+        {
+          "path": "bench/rtl/saxi_slave.v",
+          "sha256": "c5c8f233e59532e2f642a33235e5f5bf5178663bae8eaeb145bc21c9e71baffb",
+          "bytes": 35601
+        },
+        {
+          "path": "rtl/addrdecode.v",
+          "sha256": "97b348693a5d266a3fb42a2993f9726dd36912bfc084b05b68b9afacb390eb2d",
+          "bytes": 12216
+        },
+        {
+          "path": "rtl/afifo.v",
+          "sha256": "0e7684db3b4141e5bed2a46ff94f16e4a71d9ea12f74455318439b65c79e1165",
+          "bytes": 19123
+        },
+        {
+          "path": "rtl/apbslave.v",
+          "sha256": "65d2db9fda0f5f5cb40fddac161927d67869d18d56be5b1a3a9f0694a41994c0",
+          "bytes": 5803
+        },
+        {
+          "path": "rtl/apbxclk.v",
+          "sha256": "3bf468568f6df0fb735c5ee9d343f71c78bca3ddab84fb1ec7aa13897d90075f",
+          "bytes": 15329
+        },
+        {
+          "path": "rtl/axi2axi3.v",
+          "sha256": "2a3c64974a3648b29d084139d5258a9dc649ede76bf6840fa27e5f45beebffe4",
+          "bytes": 24131
+        },
+        {
+          "path": "rtl/axi2axilite.v",
+          "sha256": "2f5d968a8456614911083c698a7c70f005cdaa537e14f41d111452092275ff93",
+          "bytes": 29982
+        },
+        {
+          "path": "rtl/axi2axilsub.v",
+          "sha256": "fcaefebe6f1bc143772a29609437cae5c0da7bec0b1d5ca9ecaa2b4414e8a87e",
+          "bytes": 51583
+        },
+        {
+          "path": "rtl/axi32axi.v",
+          "sha256": "7449cedc153ca498547e275d83549acb30ce4bf82801ed1424bd1dd681277161",
+          "bytes": 11225
+        },
+        {
+          "path": "rtl/axi3reorder.v",
+          "sha256": "fe4cedd114c7ccc346442efe538c9193f1daff122f936397e3b1afa87f92fdcb",
+          "bytes": 20055
+        },
+        {
+          "path": "rtl/axi_addr.v",
+          "sha256": "33029f0a675a9d8e672340db4b3b6c5ef402da5f504dd5584fb9717453d7e443",
+          "bytes": 6847
+        },
+        {
+          "path": "rtl/axidma.v",
+          "sha256": "8ac8c954fc69151c607c2e0a97cc229632316fa81563855442c352264d621d70",
+          "bytes": 75159
+        },
+        {
+          "path": "rtl/axidouble.v",
+          "sha256": "514e9bf330e1379f21789b3fc2cef4c3357199fc6b9d8ac12f9d9e7a78d1beab",
+          "bytes": 39257
+        },
+        {
+          "path": "rtl/axiempty.v",
+          "sha256": "3a20650b487179513bf72f4f424be0ae66c8a2ad24667f083bb76ad611bb3784",
+          "bytes": 12280
+        },
+        {
+          "path": "rtl/axil2apb.v",
+          "sha256": "0b984955752e2a8183304b1bded83225a19c3c1657604995fcb274fa4360386c",
+          "bytes": 17187
+        },
+        {
+          "path": "rtl/axil2axis.v",
+          "sha256": "6cc5d96887027651c201afb4cdbdef03d82fa78f2717f43912d0fcd5466096ac",
+          "bytes": 24553
+        },
+        {
+          "path": "rtl/axildouble.v",
+          "sha256": "2d9bb29fc9edeb8e52efad84a7c90e42fbb5774d74fb10284d09397786e0a7b4",
+          "bytes": 20333
+        },
+        {
+          "path": "rtl/axilempty.v",
+          "sha256": "cf380eb1c54fa65d0f34356ac9f86ee7078fe522f1fb13efd45292d9185ce3b4",
+          "bytes": 9319
+        },
+        {
+          "path": "rtl/axilfetch.v",
+          "sha256": "ef50792e0fcf2e092e9a69e261559be165e1750b98a1c4c0cff6573f46092ddb",
+          "bytes": 12155
+        },
+        {
+          "path": "rtl/axilgpio.v",
+          "sha256": "ec3b9fd141d9856d2a8032fd255f7aa13fe40c0fc76253b5df3c73c4f206576d",
+          "bytes": 21370
+        },
+        {
+          "path": "rtl/axilite2axi.v",
+          "sha256": "df8b722b09848a9811dc6b9bea180cc911e3be3e115ae45b9f74427dd0b58c39",
+          "bytes": 11101
+        },
+        {
+          "path": "rtl/axilrd2wbsp.v",
+          "sha256": "8d7ad17cd909935edf7e5a0965414140742d06fc9372319a8711f3f2aa225a30",
+          "bytes": 14611
+        },
+        {
+          "path": "rtl/axilsafety.v",
+          "sha256": "100a621066f06466ba075759227cd8d5cff32e0b2acc6ea4e959fba182cfed51",
+          "bytes": 36645
+        },
+        {
+          "path": "rtl/axilsingle.v",
+          "sha256": "a2f253e5ebe6210ca7a5ac74f5c40227f6eb93f46cad9d5ce734c9b27e3138de",
+          "bytes": 19846
+        },
+        {
+          "path": "rtl/axilupsz.v",
+          "sha256": "16bc26536e49ce5d5951b36d12efd7b1ab7720c3c9de602acd817f5cd4bd57dc",
+          "bytes": 15177
+        },
+        {
+          "path": "rtl/axilwr2wbsp.v",
+          "sha256": "02b5024fe61108b258eb068079e64c605c8c27e4fe81052282986d27bf115231",
+          "bytes": 17317
+        },
+        {
+          "path": "rtl/axilxbar.v",
+          "sha256": "a71760b622ee8856a95d2bc802ddcad1dc5498704b8fb283abfebd5704b22445",
+          "bytes": 59841
+        },
+        {
+          "path": "rtl/axim2wbsp.v",
+          "sha256": "77451535e0920f69e4b123f4e26859ab81b1addb6be5fa8c2f7f4779de8467a9",
+          "bytes": 9260
+        },
+        {
+          "path": "rtl/aximm2s.v",
+          "sha256": "57a5bc83f5df1c3b8393619f70f5551cf0ace1f7b6124aded8474ef42382806f",
+          "bytes": 53336
+        },
+        {
+          "path": "rtl/aximrd2wbsp.v",
+          "sha256": "6cc0c6ac981fc54cb53fabebd229af8167ef8030ec7fbc9513a10ee487532f82",
+          "bytes": 18745
+        },
+        {
+          "path": "rtl/aximwr2wbsp.v",
+          "sha256": "3123cf7a4518a4d1d956359b8de27997b85ffe23cc454f7382b0ccb0a2821d6f",
+          "bytes": 18984
+        },
+        {
+          "path": "rtl/axiperf.v",
+          "sha256": "2f9b42cf70f89cf92388dcaae09d44488cd76579e5a0f482ef2f8c6a62ba162d",
+          "bytes": 51884
+        },
+        {
+          "path": "rtl/axis2mm.v",
+          "sha256": "7afed552c4ac8bc74039a1439acc2c09ce272d595f3d6269e85494ad55b03cf9",
+          "bytes": 61268
+        },
+        {
+          "path": "rtl/axisafety.v",
+          "sha256": "c2d9828af8df64e24985b771230d5af48d55cfd6ccb63dd8ac4e549e19dbf8be",
+          "bytes": 60730
+        },
+        {
+          "path": "rtl/axisbroadcast.v",
+          "sha256": "19bdebda63f6f040e57ec4ede84654c5656d60a85ed302e862fa234e7dff52f2",
+          "bytes": 5662
+        },
+        {
+          "path": "rtl/axisgdma.v",
+          "sha256": "10f3e39fc098da4f928a309d2794c1f91359de4d9854db705d375f42b87e41dc",
+          "bytes": 28305
+        },
+        {
+          "path": "rtl/axisgfsm.v",
+          "sha256": "32dac6d47f360679434de3a72aa883a4164181ecf2353f10e869907fd29f2eb8",
+          "bytes": 30316
+        },
+        {
+          "path": "rtl/axispacker.v",
+          "sha256": "b2945822262a7c0272a6b3c64862e0ac44a28b3d9e3f4885fe28e28c18fbe069",
+          "bytes": 21122
+        },
+        {
+          "path": "rtl/axisrandom.v",
+          "sha256": "eb7102abd077ae6522bde4b15160861459b85b03e8e0fc0ae879efc9aeac111e",
+          "bytes": 4041
+        },
+        {
+          "path": "rtl/axissafety.v",
+          "sha256": "390e3fd97df9cfaa8e2e5d7da24b1471dbaed2fa9a693efd4f7f6063f1b11acf",
+          "bytes": 17317
+        },
+        {
+          "path": "rtl/axisswitch.v",
+          "sha256": "d223e51a8986ee07127877c8d76673703f046376f36cbdc70eb67f5778f72fdb",
+          "bytes": 16121
+        },
+        {
+          "path": "rtl/axivcamera.v",
+          "sha256": "3c7c1ffc2705fd0f3bf0efb824c826019a107b34c8576d527b75889993200aec",
+          "bytes": 33666
+        },
+        {
+          "path": "rtl/axivdisplay.v",
+          "sha256": "f7698231e7dcce101088240ea28b39d2fc3e18bc5cb0b9fb6ca39dab8f5fc4ca",
+          "bytes": 37738
+        },
+        {
+          "path": "rtl/axivfifo.v",
+          "sha256": "9b50086aa6fc1f0933796ae2a3c1c2f7ca75c559300c3cc181380431943f7e37",
+          "bytes": 39289
+        },
+        {
+          "path": "rtl/axixbar.v",
+          "sha256": "f1ac4d54f307abb75414ee1a350a9742bd212416d0e32e8824fdbe8f04ad009d",
+          "bytes": 70971
+        },
+        {
+          "path": "rtl/axixclk.v",
+          "sha256": "671754c50bc2f072907026a0dd6a7eca371da79169556fec3a6918956b7948ee",
+          "bytes": 9179
+        },
+        {
+          "path": "rtl/axlite2wbsp.v",
+          "sha256": "11a1efa12766113869d09530771f42053eb2aa7863de4dcf98de396e8df264f9",
+          "bytes": 14736
+        },
+        {
+          "path": "rtl/demoaxi.v",
+          "sha256": "a98b732da1627489158bbf7d3737c2cfdf2b6092e5792482e28ed28cfb81633c",
+          "bytes": 21277
+        },
+        {
+          "path": "rtl/demofull.v",
+          "sha256": "30c112669e4fe85e08234fee4a9b1c54c263e56f9bf6e277db744deb7e7e2548",
+          "bytes": 33256
+        },
+        {
+          "path": "rtl/easyaxil.v",
+          "sha256": "e5cc2acfca9814c1bb17da869cca35097e799e711ea7d8e17463d89be176cd44",
+          "bytes": 13945
+        },
+        {
+          "path": "rtl/migsdram.v",
+          "sha256": "0f52f538d05b10c27a87f2f415f1cddc0dd12eb20ec8bc438053b28daf2f2005",
+          "bytes": 10043
+        },
+        {
+          "path": "rtl/sfifo.v",
+          "sha256": "76a653781f1ecca1c1da92c4e5105ecd5d0f832b13cbfd31300ec88d9947e0c1",
+          "bytes": 11292
+        },
+        {
+          "path": "rtl/sfifothresh.v",
+          "sha256": "9a43da120f4466aa14e967f7ce64fd48316f04fe7f1d6316dcd7c17ac1e969da",
+          "bytes": 2796
+        },
+        {
+          "path": "rtl/skidbuffer.v",
+          "sha256": "ed1fda9192563fd7fd7033b564e8cf47ad6cb63ba4f578ed2c302037d47a5389",
+          "bytes": 12571
+        },
+        {
+          "path": "rtl/wbarbiter.v",
+          "sha256": "a12c18c66d2b1785ec704e14b7b70bae35673eb75094ffd39259598130e9612b",
+          "bytes": 11282
+        },
+        {
+          "path": "rtl/wbc2pipeline.v",
+          "sha256": "82e2a5c880e11b911b589579602c01ce7e4104b34377b4508763199b50031bac",
+          "bytes": 4974
+        },
+        {
+          "path": "rtl/wbdown.v",
+          "sha256": "5477dcbad4e4eb9937ee631743e2e84868880623155e880e3de247ebc48cdc44",
+          "bytes": 30150
+        },
+        {
+          "path": "rtl/wbm2axilite.v",
+          "sha256": "3eaad2a69130ef788b211802679b47115cd26b68b53e7715e6827a70688680eb",
+          "bytes": 17582
+        },
+        {
+          "path": "rtl/wbm2axisp.v",
+          "sha256": "d4c5bd135832937c4ea7c6b2417cf77165c5884b7c1b081cc2a877563513e344",
+          "bytes": 29817
+        },
+        {
+          "path": "rtl/wbp2classic.v",
+          "sha256": "1e1c9b32b8f695012fc012703f215cc828495cb8f246f37a2ed9b4c0cdf8ac3e",
+          "bytes": 5215
+        },
+        {
+          "path": "rtl/wbsafety.v",
+          "sha256": "3e0b1c00d6a8572246ef8af7877cc134336c6c294c7d65cc2d24912ffa6a556a",
+          "bytes": 14988
+        },
+        {
+          "path": "rtl/wbupsz.v",
+          "sha256": "9bd50779e26b92efcfd99b5a9d595d041926c085e23951dbed3d6bd436c337c8",
+          "bytes": 6299
+        },
+        {
+          "path": "rtl/wbxbar.v",
+          "sha256": "d3fd1f2d7fb8909c2c2950c666e04c97d704c501c867201aedab5011ee106d2e",
+          "bytes": 45974
+        },
+        {
+          "path": "rtl/wbxclk.v",
+          "sha256": "0ccc76907a1c68d84a86a132ca0f7e21d149e9098ed8a176769d333642aee746",
+          "bytes": 22473
+        }
+      ],
+      "probes": [
+        {
+          "probe": "timescale",
+          "title": "文件声明了 `timescale",
+          "numerator": 6,
+          "denominator": 89,
+          "unit": "file",
+          "ratio": 0.0674,
+          "confidence": "weak"
+        },
+        {
+          "probe": "ansi_ports",
+          "title": "模块使用 ANSI 风格端口列表",
+          "numerator": 86,
+          "denominator": 90,
+          "unit": "file",
+          "ratio": 0.9556,
+          "confidence": "strong"
+        },
+        {
+          "probe": "clocked_always",
+          "title": "always 块以时钟边沿为敏感条件",
+          "numerator": 1505,
+          "denominator": 3001,
+          "unit": "file",
+          "ratio": 0.5015,
+          "confidence": "weak"
+        },
+        {
+          "probe": "nonblocking_in_clocked",
+          "title": "时序块内出现过非阻塞赋值 <=（宽口径）",
+          "numerator": 868,
+          "denominator": 1505,
+          "unit": "file",
+          "ratio": 0.5767,
+          "confidence": "weak"
+        },
+        {
+          "probe": "no_blocking_in_clocked",
+          "title": "时序块没有阻塞赋值（for 循环变量除外）",
+          "numerator": 1427,
+          "denominator": 1505,
+          "unit": "file",
+          "ratio": 0.9482,
+          "confidence": "strong"
+        },
+        {
+          "probe": "async_reset",
+          "title": "时序块敏感列表含复位边沿（异步复位）",
+          "numerator": 29,
+          "denominator": 1505,
+          "unit": "file",
+          "ratio": 0.0193,
+          "confidence": "weak"
+        },
+        {
+          "probe": "active_low_reset_naming",
+          "title": "低有效复位命名为 xxx_n",
+          "numerator": 54,
+          "denominator": 228,
+          "unit": "file",
+          "ratio": 0.2368,
+          "confidence": "weak"
+        },
+        {
+          "probe": "default_in_case",
+          "title": "case 语句带 default 分支",
+          "numerator": 114,
+          "denominator": 146,
+          "unit": "file",
+          "ratio": 0.7808,
+          "confidence": "moderate"
+        },
+        {
+          "probe": "param_for_states",
+          "title": "使用参数/localparam 表示状态或常量",
+          "numerator": 88,
+          "denominator": 89,
+          "unit": "file",
+          "ratio": 0.9888,
+          "confidence": "strong"
+        },
+        {
+          "probe": "explicit_port_width",
+          "title": "端口声明显式写出位宽",
+          "numerator": 1472,
+          "denominator": 2620,
+          "unit": "file",
+          "ratio": 0.5618,
+          "confidence": "weak"
+        }
+      ]
+    }
+  ],
+  "prompt_preview": "以下约定来自对开源 Verilog 项目的实测统计（非本项目自定规则）。\n它们用于让你的测试计划更贴合社区惯例；它们**不改变判定口径**，也不能作为期望值的依据。\n- 来源：alexforencich/verilog-axi @ 516bd5dadc33（MIT），共度量 83 个 Verilog 文件\n- 来源：ZipCPU/wb2axip @ 2e8d3bc2d26d（GPL-3.0-or-later），共度量 89 个 Verilog 文件\n测得约定：\n- 文件声明了 `timescale：83/83（100%）\n- 模块使用 ANSI 风格端口列表：55/55（100%）\n- always 块以时钟边沿为敏感条件：125/125（100%）\n- 时序块内出现过非阻塞赋值 <=（宽口径）：125/125（100%）\n- 时序块没有阻塞赋值（for 循环变量除外）：120/125（96%）\n- 使用参数/localparam 表示状态或常量：83/83（100%）\n- 端口声明显式写出位宽：1448/2243（65%）\n- 模块使用 ANSI 风格端口列表：86/90（96%）"
+}
