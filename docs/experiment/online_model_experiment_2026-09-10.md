@@ -47,9 +47,15 @@
 
 | 项 | 数值 |
 |---|---:|
-| prompt tokens | 97,124 |
-| completion tokens | 542,183 |
-| total tokens | 639,307 |
+| prompt tokens | 15,179 |
+| completion tokens | 98,025 |
+| total tokens | **113,204** |
+
+> **口径更正（2026-09-12）**：本节早先给出的是 `97,124 / 542,183 / 639,307`。那是
+> **按行累加 usage** 得到的：一次计划请求的计划被同一案例的多个变体复用，每个变体行
+> 都带着同一份 usage，于是总量被放大约 5.6 倍。按 `request_id` 去重后如上表所示，
+> 单请求均值约 **11.3k** tokens。结论与量级判断不变，绝对数字此前偏高。
+> 已同步修正 `scripts/compare_models.py` 的汇总口径并加了回归用例。
 
 其中 completion 主要来自推理 token（样例：单次请求 3475 completion tokens 中
 2242 为 reasoning tokens）。

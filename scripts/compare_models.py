@@ -43,11 +43,27 @@ def _case_set(payload: dict) -> set[str]:
 
 
 def check_comparable(payloads: dict[str, dict]) -> None:
-    """确认各次实验在案例集合与重复次数上一致。"""
+    """确认各次实验在案例集合、任务完成度与重复次数上一致。
+
+    **中途落盘的文件必须被拒绝**：长跑实验现在会增量写 `strategy_matrix.json`
+    （`partial=true`）。如果直接拿它做对比，就会把"跑了一部分的实验"当成完整结果，
+    分母悄悄变小而表格看起来完全正常——这正是本工具最该拦住的情况。
+    """
 
     reference_name, reference = next(iter(payloads.items()))
     reference_cases = _case_set(reference)
     for name, payload in payloads.items():
+        if payload.get("partial") is True:
+            raise CompareError(
+                f"{name} 的实验记录是中途落盘的（partial=true），说明那次运行还没结束；"
+                "请等待运行完成后再对比"
+            )
+        completed = payload.get("completed_units")
+        total = payload.get("total_units")
+        if isinstance(completed, int) and isinstance(total, int) and completed < total:
+            raise CompareError(
+                f"{name} 只完成了 {completed}/{total} 个任务，不能作为完整实验参与对比"
+            )
         if name == reference_name:
             continue
         cases = _case_set(payload)
@@ -58,6 +74,16 @@ def check_comparable(payloads: dict[str, dict]) -> None:
                 f"{reference_name} 与 {name} 的案例集合不同："
                 f"仅前者有 {only_a or '无'}；仅后者有 {only_b or '无'}"
             )
+        for strategy in ("online_ai",):
+            left = (reference.get("summary") or {}).get(strategy) or {}
+            right = (payload.get("summary") or {}).get(strategy) or {}
+            if left.get("plan_requests") and right.get("plan_requests") and (
+                left["plan_requests"] != right["plan_requests"]
+            ):
+                raise CompareError(
+                    f"{reference_name} 与 {name} 的 {strategy} 请求数不同"
+                    f"（{left['plan_requests']} vs {right['plan_requests']}），重复次数不一致"
+                )
 
 
 def _summary(payload: dict, strategy: str) -> dict:
@@ -65,13 +91,25 @@ def _summary(payload: dict, strategy: str) -> dict:
 
 
 def _usage_totals(payload: dict, strategy: str) -> dict:
+    """按**请求**汇总 token 用量（不是按行）。
+
+    一次计划请求生成的计划会被同一案例的多个变体复用（参考设计 + 各缺陷），
+    因此每个变体行上都挂着**同一份** usage。早先按行相加，把 token 总量放大了
+    "该案例变体数"倍（实测 13 倍）——这种错误不会报错，只会把成本说得比实际高一个
+    数量级。这里按 `request_id` 去重后再累加。
+    """
+
     totals = {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0, "requests_with_usage": 0}
-    for row in payload.get("runs", []):
+    seen: dict[str, dict] = {}
+    for index, row in enumerate(payload.get("runs", [])):
         if row.get("strategy") != strategy:
             continue
         usage = row.get("usage") or {}
         if not isinstance(usage, dict) or not usage:
             continue
+        request_id = str(row.get("request_id") or f"row-{index}")
+        seen.setdefault(request_id, usage)
+    for usage in seen.values():
         totals["requests_with_usage"] += 1
         for key in ("prompt_tokens", "completion_tokens", "total_tokens"):
             value = usage.get(key)

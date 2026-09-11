@@ -29,6 +29,9 @@ def _matrix(case_defects: dict[str, list[str]], *, model: str, repeats: int = 2,
             for seed in range(repeats):
                 runs.append({
                     "strategy": "online_ai", "case": case, "variant": variant, "seed": seed,
+                    # 真实记录里 request_id = strategy/case/seed：一次计划请求的计划会被
+                    # 同一案例的所有变体复用，因此多行共享同一个 request_id 与同一份 usage。
+                    "request_id": f"online_ai-{case}-{seed}",
                     "defects_found": detected, "plan_valid": True,
                     # 只有在线策略会产生 token 消耗；fixed/random 的 usage 在真实数据里是 None，
                     # 夹具也必须如此，否则测不出"只汇总在线模型用量"这个行为。
@@ -42,7 +45,9 @@ def _matrix(case_defects: dict[str, list[str]], *, model: str, repeats: int = 2,
         "runs": runs,
         "summary": {
             "online_ai": {
-                "runs": online_runs, "plan_requests": len(case_defects), "request_plan_valid_rate": 1.0,
+                # 每个案例每次重复一个计划请求（真实运行里 request_id = strategy/case/seed）
+                "runs": online_runs, "plan_requests": len(case_defects) * repeats,
+                "request_plan_valid_rate": 1.0,
                 "reference_false_positives": 0, "reference_warn_mismatches": 0,
                 "defects_total": total_defects, "defects_found": summary_defects,
                 "detection_rate": summary_defects / total_defects if total_defects else 0.0,
@@ -86,6 +91,39 @@ def test_rejects_incomparable_case_sets(tmp_path):
     assert result.returncode == 2, result.stdout + result.stderr
     assert "不可比" in result.stderr
     assert not output.is_file(), "不可比时不应写出对比文档"
+
+
+def test_rejects_partially_finished_run(tmp_path):
+    """中途落盘的记录（partial=true）必须被拒绝。
+
+    长跑实验会增量写 strategy_matrix.json。若把它当完整结果对比，
+    分母会悄悄变小，而表格看起来完全正常——这是最危险的一种"看起来对"。
+    """
+
+    reference = _matrix({"pwm": ["bug_a", "bug_b"]}, model="A")
+    partial = _matrix({"pwm": ["bug_a", "bug_b"]}, model="B")
+    partial["partial"] = True
+    partial["total_units"] = 100
+    partial["completed_units"] = 40
+    one = _write(tmp_path, "modelA", reference)
+    two = _write(tmp_path, "modelB", partial)
+    output = tmp_path / "out.md"
+    result = _run([one, two], output)
+    assert result.returncode == 2, result.stdout + result.stderr
+    assert "partial" in result.stderr or "还没结束" in result.stderr
+    assert not output.is_file()
+
+
+def test_rejects_unequal_repeat_counts(tmp_path):
+    """重复次数不同也不能对比：那会把"多跑几次"误读成"模型更强"。"""
+
+    one = _write(tmp_path, "modelA", _matrix({"pwm": ["bug_a"]}, model="A"))
+    two = _write(tmp_path, "modelB", _matrix({"pwm": ["bug_a"]}, model="B", repeats=5))
+    output = tmp_path / "out.md"
+    result = _run([one, two], output)
+    assert result.returncode == 2, result.stdout + result.stderr
+    assert "重复次数" in result.stderr
+    assert not output.is_file()
 
 
 def test_renders_per_case_table_with_manifest_denominator(tmp_path):
@@ -145,3 +183,47 @@ def test_missing_matrix_reports_clearly(tmp_path):
     result = _run([empty], tmp_path / "out.md")
     assert result.returncode == 2
     assert "不存在" in result.stderr
+
+
+def test_token_totals_are_deduplicated_per_request(tmp_path):
+    """同一请求被多个变体复用时，token 只能算一次。
+
+    真实事故：usage 挂在每个变体行上，按行相加把 token 总量放大了"该案例变体数"倍
+    （本机实测 13 倍）。这种错误不会报错，只会把成本说高一个数量级。
+    """
+
+    payload = {
+        "partial": False,
+        "total_units": 10,
+        "completed_units": 10,
+        "runs": [
+            # 一次请求（seed=0）产生了 4 个变体行，每行都带同一份 usage
+            {
+                "strategy": "online_ai", "case": "pwm", "variant": variant, "seed": 0,
+                "request_id": "online_ai-pwm-0", "defects_found": True, "plan_valid": True,
+                "usage": {"prompt_tokens": 100, "completion_tokens": 900, "total_tokens": 1000},
+            }
+            for variant in ("reference", "bug_a", "bug_b", "bug_c")
+        ]
+        + [
+            {"strategy": "fixed", "case": "pwm", "variant": "reference", "seed": 0,
+             "defects_found": False, "usage": None},
+        ],
+        "summary": {
+            "online_ai": {
+                "runs": 4, "plan_requests": 1, "request_plan_valid_rate": 1.0,
+                "reference_false_positives": 0, "reference_warn_mismatches": 0,
+                "defects_total": 3, "defects_found": 3, "detection_rate": 1.0,
+                "inconclusive_runs": 0, "mean_generation_ms": 1000,
+                "mean_time_to_first_failure_ms": 100,
+            }
+        },
+    }
+    one = _write(tmp_path, "modelA", payload)
+    output = tmp_path / "out.md"
+    result = _run([one], output)
+    assert result.returncode == 0, result.stderr
+    text = output.read_text(encoding="utf-8")
+    assert "1,000" in text, "4 行共享 1 次请求，总量应为 1,000 而不是 4,000"
+    assert "4,000" not in text
+    assert "| modelA | 1 |" in text, "带用量的请求数应为 1"

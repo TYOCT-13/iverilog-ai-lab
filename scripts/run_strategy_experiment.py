@@ -250,6 +250,107 @@ def _write_experiment_report(path: Path, payload: dict[str, Any], *, endpoint: s
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
+def _summarize(rows: list[dict[str, Any]], strategies: list[str]) -> dict[str, Any]:
+    """按策略汇总逐次记录：中途落盘与最终写盘共用同一份口径。"""
+
+    summary: dict[str, Any] = {}
+    for strategy in strategies:
+        selected = [row for row in rows if row["strategy"] == strategy]
+        refs = [row for row in selected if row["variant"] == "reference"]
+        defects = [row for row in selected if row["variant"] not in {"reference", "plan_generation"}]
+        found_pairs = {(row["case"], row["variant"]) for row in defects if row.get("defects_found")}
+        total_pairs = {(row["case"], row["variant"]) for row in defects}
+        valid_runs = sum(1 for row in selected if row["plan_valid"])
+        request_rows: dict[str, dict[str, Any]] = {}
+        for row in selected:
+            request_rows.setdefault(row["request_id"], row)
+            if not row.get("plan_valid", False):
+                request_rows[row["request_id"]] = row
+        # 显式转成 int 列表：`row.get(...)` 的静态类型是 Any | None，
+        # 直接求和会让"均值"这条统计在类型层面不可信（也可能混进 None）。
+        generation_times = [
+            int(row["generation_ms"])
+            for row in request_rows.values()
+            if isinstance(row.get("generation_ms"), int)
+        ]
+        # 参考误报只统计真正的硬失败；warn 级反例在参考设计上代表"AI 期望值
+        # 与参考模型不一致"，属于诊断指标，单独统计，避免把工具缺陷记成误报。
+        reference_false_positives = sum(bool(row.get("error_failures")) for row in refs)
+        reference_warn_mismatches = sum(bool(row.get("warning_failures")) for row in refs)
+        ai_checked = sum(int(row.get("ai_expected_checked") or 0) for row in selected)
+        ai_matched = sum(int(row.get("ai_expected_matched") or 0) for row in selected)
+        valid_requests = sum(bool(row.get("plan_valid")) for row in request_rows.values())
+        summary[strategy] = {"runs": len(selected), "plan_requests": len(request_rows), "valid_plan_requests": valid_requests, "request_plan_valid_rate": valid_requests / len(request_rows) if request_rows else 0.0, "plan_valid": all(row["plan_valid"] for row in selected), "plan_valid_runs": valid_runs, "plan_total_runs": len(selected), "plan_valid_rate": valid_runs / len(selected) if selected else 0.0, "reference_false_positives": reference_false_positives, "reference_warn_mismatches": reference_warn_mismatches, "ai_expected_checked": ai_checked, "ai_expected_matched": ai_matched, "ai_expected_accuracy": (ai_matched / ai_checked) if ai_checked else None, "defects_total": len(total_pairs), "defects_found": len(found_pairs), "detection_rate": len(found_pairs) / len(total_pairs) if total_pairs else 0.0, "inconclusive_runs": sum(1 for row in selected if row["status"] == "inconclusive"), "mean_generation_ms": (sum(generation_times) / len(generation_times) if generation_times else None), "mean_time_to_first_failure_ms": (sum(int(row["time_to_first_failure_ms"] or 0) for row in defects if row.get("time_to_first_failure_ms") is not None) / max(1, sum(1 for row in defects if row.get("time_to_first_failure_ms") is not None)))}
+    return summary
+
+
+def _build_payload(
+    *,
+    rows: list[dict[str, Any]],
+    summaries: dict[str, Any],
+    total_units: int,
+    completed_units: int,
+    rule_sets: dict[str, Any],
+    skipped: dict[str, str],
+    started_wall: datetime,
+    finished_wall: datetime,
+    started_perf: float,
+    partial: bool,
+) -> dict[str, Any]:
+    """组装实验记录。
+
+    ``partial=True`` 表示这是一次**中途落盘**（进程仍在跑）：真实模型实验动辄几小时，
+    只在最后写一次文件的话，一次中断就会丢掉已经花掉 token 的全部结果。
+    """
+
+    return {
+        "schema_version": "1.0",
+        "partial": partial,
+        "started_at": started_wall.isoformat().replace("+00:00", "Z"),
+        "finished_at": finished_wall.isoformat().replace("+00:00", "Z"),
+        "duration_ms": int((time.perf_counter() - started_perf) * 1000),
+        "total_units": total_units,
+        "completed_units": completed_units,
+        "rule_sets": rule_sets,
+        "skipped_cases": skipped,
+        "runs": rows,
+        "summary": summaries,
+    }
+
+
+def _write_payload(output: Path, payload: dict[str, Any]) -> None:
+    """写盘（先写临时文件再替换，避免读到写了一半的 JSON）。"""
+
+    target = output / "strategy_matrix.json"
+    temporary = target.with_suffix(".json.tmp")
+    temporary.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    temporary.replace(target)
+
+
+def _usage_totals(rows: list[dict[str, Any]]) -> dict[str, int]:
+    """累计 token 用量（**按请求去重**）：真实模型实验必须能随时看到已经花了多少。
+
+    一次计划请求的计划会被同一案例的所有变体复用，因此每个变体行都挂着同一份
+    usage。按行相加会把总量放大到"变体数"倍（实测 13 倍）——成本直接被说高一个
+    数量级，而且不会有任何报错。这里按 `request_id` 只记一次。
+    """
+
+    totals = {"requests": 0, "prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}
+    seen: dict[str, dict[str, Any]] = {}
+    for index, row in enumerate(rows):
+        usage = row.get("usage") or {}
+        if not usage:
+            continue
+        request_id = str(row.get("request_id") or f"row-{index}")
+        seen.setdefault(request_id, usage)
+    for usage in seen.values():
+        totals["requests"] += 1
+        totals["prompt_tokens"] += int(usage.get("prompt_tokens") or 0)
+        totals["completion_tokens"] += int(usage.get("completion_tokens") or 0)
+        totals["total_tokens"] += int(usage.get("total_tokens") or 0)
+    return totals
+
+
 def _main() -> int:
     experiment_started_wall = datetime.now(timezone.utc)
     experiment_started = time.perf_counter()
@@ -316,6 +417,30 @@ def _main() -> int:
     completed_units = 0
     print(f"实验开始：{experiment_started_wall.isoformat().replace('+00:00', 'Z')}；预计任务数：{total_units}", flush=True)
     for case, spec in CASES.items():
+        # 每进入一个新案例就落盘一次：真实模型实验可能跑几小时，
+        # 中途落盘保证任何中断都不会丢掉已经花掉 token 的结果。
+        if rows:
+            _write_payload(
+                output,
+                _build_payload(
+                    rows=rows,
+                    summaries=_summarize(rows, strategies),
+                    total_units=total_units,
+                    completed_units=completed_units,
+                    rule_sets=rule_sets,
+                    skipped=SKIPPED_CASES,
+                    started_wall=experiment_started_wall,
+                    finished_wall=datetime.now(timezone.utc),
+                    started_perf=experiment_started,
+                    partial=True,
+                ),
+            )
+            _usage = _usage_totals(rows)
+            if _usage["total_tokens"]:
+                print(
+                    f"  已用 token 累计：{_usage['total_tokens']:,}（带用量请求 {_usage['requests']}）",
+                    flush=True,
+                )
         variants = ["reference"] + [str(item["id"]) for item in manifest.get("defects", []) if item["type"] == case]
         for strategy in strategies:
             seeds = [0] if strategy == "fixed" else (list(range(args.online_repeats)) if strategy == "online_ai" else list(range(args.seeds)))
@@ -398,38 +523,27 @@ def _main() -> int:
                     rows.append({"strategy": strategy, "case": case, "variant": variant, "seed": seed, "request_id": request_id, "budget_s": 30.0, "vectors": len(plan.vectors), "plan_valid": plan_valid, "plan_sha256": plan_hash, "generation_ms": generation_ms, "usage": usage, "compile_ms": result.simulation.compile.duration_ms, "sim_ms": None if result.simulation.run is None else result.simulation.run.duration_ms, "time_to_first_failure_ms": elapsed if defect_found else None, "records_pass": sum(1 for record in result.records if record.ok), "failures": len(result.failures), "warning_failures": warning_failures, "error_failures": error_failures, "defects_found": defect_found, "expectation_source": oracle.get("expectation_source"), "ai_expected_checked": ai_expected_checked, "ai_expected_matched": ai_expected_matched, "status": result.status.value, "artifact_path": result.artifacts.get("run_dir", "")})
                     completed_units += 1
                     print(f"{_progress_text(completed_units, total_units, experiment_started)}；{strategy}/{case}/{variant} -> {result.status.value}；本组 {time.perf_counter() - request_started:.1f}s", flush=True)
-    summary: dict[str, Any] = {}
-    for strategy in strategies:
-        selected = [row for row in rows if row["strategy"] == strategy]
-        refs = [row for row in selected if row["variant"] == "reference"]
-        defects = [row for row in selected if row["variant"] not in {"reference", "plan_generation"}]
-        found_pairs = {(row["case"], row["variant"]) for row in defects if row.get("defects_found")}
-        total_pairs = {(row["case"], row["variant"]) for row in defects}
-        valid_runs = sum(1 for row in selected if row["plan_valid"])
-        request_rows: dict[str, dict[str, Any]] = {}
-        for row in selected:
-            request_rows.setdefault(row["request_id"], row)
-            if not row.get("plan_valid", False):
-                request_rows[row["request_id"]] = row
-        # 显式转成 int 列表：`row.get(...)` 的静态类型是 Any | None，
-        # 直接求和会让"均值"这条统计在类型层面不可信（也可能混进 None）。
-        generation_times = [
-            int(row["generation_ms"])
-            for row in request_rows.values()
-            if isinstance(row.get("generation_ms"), int)
-        ]
-        # 参考误报只统计真正的硬失败；warn 级反例在参考设计上代表"AI 期望值
-        # 与参考模型不一致"，属于诊断指标，单独统计，避免把工具缺陷记成误报。
-        reference_false_positives = sum(bool(row.get("error_failures")) for row in refs)
-        reference_warn_mismatches = sum(bool(row.get("warning_failures")) for row in refs)
-        ai_checked = sum(int(row.get("ai_expected_checked") or 0) for row in selected)
-        ai_matched = sum(int(row.get("ai_expected_matched") or 0) for row in selected)
-        valid_requests = sum(bool(row.get("plan_valid")) for row in request_rows.values())
-        summary[strategy] = {"runs": len(selected), "plan_requests": len(request_rows), "valid_plan_requests": valid_requests, "request_plan_valid_rate": valid_requests / len(request_rows) if request_rows else 0.0, "plan_valid": all(row["plan_valid"] for row in selected), "plan_valid_runs": valid_runs, "plan_total_runs": len(selected), "plan_valid_rate": valid_runs / len(selected) if selected else 0.0, "reference_false_positives": reference_false_positives, "reference_warn_mismatches": reference_warn_mismatches, "ai_expected_checked": ai_checked, "ai_expected_matched": ai_matched, "ai_expected_accuracy": (ai_matched / ai_checked) if ai_checked else None, "defects_total": len(total_pairs), "defects_found": len(found_pairs), "detection_rate": len(found_pairs) / len(total_pairs) if total_pairs else 0.0, "inconclusive_runs": sum(1 for row in selected if row["status"] == "inconclusive"), "mean_generation_ms": (sum(generation_times) / len(generation_times) if generation_times else None), "mean_time_to_first_failure_ms": (sum(int(row["time_to_first_failure_ms"] or 0) for row in defects if row.get("time_to_first_failure_ms") is not None) / max(1, sum(1 for row in defects if row.get("time_to_first_failure_ms") is not None)))}
+    summary = _summarize(rows, strategies)
     experiment_finished_wall = datetime.now(timezone.utc)
-    payload = {"schema_version": "1.0", "started_at": experiment_started_wall.isoformat().replace("+00:00", "Z"), "finished_at": experiment_finished_wall.isoformat().replace("+00:00", "Z"), "duration_ms": int((time.perf_counter() - experiment_started) * 1000), "total_units": total_units, "completed_units": completed_units, "rule_sets": rule_sets, "skipped_cases": SKIPPED_CASES, "runs": rows, "summary": summary}
-    (output / "strategy_matrix.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    _write_experiment_report(output / "strategy_report.md", payload, endpoint=(args.debug_endpoint if args.debug_local else args.online_endpoint) if use_remote_or_debug else None, model=("debug-local (offline)" if args.debug_local else args.online_model) if use_remote_or_debug else None)
+    payload = _build_payload(
+        rows=rows,
+        summaries=summary,
+        total_units=total_units,
+        completed_units=completed_units,
+        rule_sets=rule_sets,
+        skipped=SKIPPED_CASES,
+        started_wall=experiment_started_wall,
+        finished_wall=experiment_finished_wall,
+        started_perf=experiment_started,
+        partial=False,
+    )
+    _write_payload(output, payload)
+    _write_experiment_report(
+        output / "strategy_report.md",
+        payload,
+        endpoint=(args.debug_endpoint if args.debug_local else args.online_endpoint) if use_remote_or_debug else None,
+        model=("debug-local (offline)" if args.debug_local else args.online_model) if use_remote_or_debug else None,
+    )
     print(f"实验完成：总耗时 {payload['duration_ms'] / 1000:.1f}s；结果：{output / 'strategy_matrix.json'}", flush=True)
     print(json.dumps(summary, ensure_ascii=False, indent=2))
     return 0
