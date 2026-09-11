@@ -22,6 +22,7 @@ from .models import FailureRecord, SimulationResult, ResultStatus
 from .testbench import DUT_INSTANCE, TestbenchGenerationError, TestbenchGenerator
 from .reference_model import check_plan_consistency, override_plan_expectations, reference_expectations
 from .assertions import build_assertion, evaluate_assertion, AssertionValidationError
+from .coverage import analyze_signal_activity
 from .synthesis import SynthConfig, YosysSynthRunner
 from .vcd import analyze_vcd_file, analyze_failure_windows, waveform_insights
 
@@ -420,6 +421,18 @@ class VerificationPipeline:
                     stability_signals=data_signals,
                     dut_scopes=(dut_scope,),
                 )
+                # 信号活动覆盖率：由 VCD 事件推导"激励让设计里哪些信号动过、
+                # 到达过多少种取值"。它是**激励质量**的指标，不是代码覆盖率——
+                # 口径与边界见 core/coverage.py 的模块说明。
+                try:
+                    vcd_analysis["coverage"] = analyze_signal_activity(
+                        rtl.read_text(encoding="utf-8"),
+                        vcd_analysis,
+                        top=f"tb_{dut_contract.module}",
+                        instance=DUT_INSTANCE,
+                    )
+                except (OSError, ValueError, AttributeError) as exc:
+                    vcd_analysis["coverage"] = {"status": "error", "error": str(exc)}
             except (OSError, ValueError, AttributeError) as exc:
                 # AttributeError 也要接住：畸形 failure 记录（例如缺少 cycle）
                 # 不应该让整条流水线崩掉，而应留下一份可审计的错误说明。

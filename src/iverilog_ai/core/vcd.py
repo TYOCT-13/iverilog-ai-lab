@@ -69,6 +69,7 @@ def analyze_vcd_file(path: str | Path, *, start_ns: float | None = None, end_ns:
     current_time = 0
     changes: list[VCDChange] = []
     transition_counts: dict[str, int] = {name: 0 for name in id_to_name.values()}
+    known_values: dict[str, set[int]] = {}
     first_time: float | None = None
     last_time: float | None = None
     selected_ids = set(id_to_name)
@@ -100,6 +101,11 @@ def analyze_vcd_file(path: str | Path, *, start_ns: float | None = None, end_ns:
             continue
         name = id_to_name[ident]
         transition_counts[name] = transition_counts.get(name, 0) + 1
+        # 记录取值集合：仅用于「取值覆盖」这类下游统计，不参与判决。
+        # 用 longint（而不是字符串）比较，避免 x/z 与不同位宽的写法被算成不同值。
+        numeric = _to_int(value)
+        if numeric is not None:
+            known_values.setdefault(name, set()).add(numeric)
         first_time = time_ns if first_time is None else min(first_time, time_ns)
         last_time = time_ns if last_time is None else max(last_time, time_ns)
         if len(changes) < max_changes:
@@ -110,6 +116,7 @@ def analyze_vcd_file(path: str | Path, *, start_ns: float | None = None, end_ns:
             "scope": id_to_scope.get(ident, ""),
             "width": widths.get(ident, 1),
             "changes": transition_counts.get(name, 0),
+            "distinct_values": len(known_values.get(name, ())),
         }
         for ident, name in sorted(id_to_name.items(), key=lambda item: item[1])
     ]

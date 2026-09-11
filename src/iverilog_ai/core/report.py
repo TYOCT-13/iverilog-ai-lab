@@ -215,6 +215,35 @@ def render_markdown(
             lines.append("")
 
         insights = vcd.get("insights") or {}
+        activity = vcd.get("coverage") or {}
+        if activity.get("status") == "measured":
+            lines.extend([
+                "### 信号活动覆盖率（激励质量）",
+                "",
+                f"- 模块：`{_md_cell(activity.get('module', ''))}`；"
+                f"信号 {activity.get('changed_signals', 0)}/{activity.get('declared_signals', 0)} 在本次仿真中发生过变化"
+                f"（{activity.get('ratio', 0) * 100:.0f}%）",
+            ])
+            value_coverage = activity.get("value_coverage")
+            if value_coverage is not None:
+                lines.append(f"- 取值覆盖（信号到达的不同取值 / 类型可能取值）：{value_coverage * 100:.0f}%")
+            if activity.get("unchanged"):
+                unchanged = ", ".join(f"`{_md_cell(name)}`" for name in activity["unchanged"])
+                lines.append(f"- 本次仿真中**未发生变化**的信号：{unchanged}")
+            if activity.get("value_detail"):
+                lines.extend(["", "| 信号 | 到达取值数 | 可能取值数 | 取值覆盖 |", "|---|---:|---:|---:|"])
+                for item in activity["value_detail"]:
+                    ratio = item.get("ratio")
+                    lines.append(
+                        f"| `{_md_cell(item.get('signal', ''))}` | {item.get('distinct_values', 0)} "
+                        f"| {item.get('possible_values', '-')} "
+                        f"| {'-' if ratio is None else f'{ratio * 100:.0f}%'} |"
+                    )
+                lines.append("")
+            lines.extend([f"> {_md_cell(activity.get('disclaimer', ''))}", ""])
+            if activity.get("note"):
+                lines.extend([f"> {_md_cell(activity['note'])}", ""])
+
         if insights.get("notes") or insights.get("signal_edges"):
             lines.extend(["### 波形语义结论", ""])
             notes = insights.get("notes") or []
