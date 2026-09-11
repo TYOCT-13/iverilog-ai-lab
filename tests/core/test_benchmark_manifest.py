@@ -11,7 +11,7 @@ def test_benchmark_manifest_defects_are_distinct_complete_and_existing():
     manifest = json.loads((root / "benchmarks" / "manifest.json").read_text(encoding="utf-8"))
     defects = manifest["defects"]
 
-    # 规模断言：基准已从 4 案例 50 缺陷扩展到 14 案例 80 缺陷。
+    # 规模断言：基准已从 4 案例 50 缺陷扩展到 15 案例 83 缺陷。
     assert len(defects) >= 80
     assert len({item["id"] for item in defects}) == len(defects)
     assert all((root / item["file"]).is_file() for item in defects)
@@ -33,7 +33,7 @@ def test_no_two_defects_have_identical_source():
     """任何两个缺陷变体的代码本体都不能完全相同。
 
     这条断言来自一次真实事故：`srst_bug_single_stage_only` 与
-    `srst_bug_single_stage` 的代码**逐字节相同**，只是 id 不同，于是"80 个缺陷"
+    `srst_bug_single_stage` 的代码**逐字节相同**，只是 id 不同，于是当时的缺陷总数
     里有一个是重复计数。id 唯一并不等于缺陷唯一，必须比对代码本体。
     """
 

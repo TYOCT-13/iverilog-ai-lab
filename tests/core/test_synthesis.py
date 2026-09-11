@@ -15,6 +15,7 @@ from pathlib import Path
 
 import pytest
 
+from iverilog_ai.core.benchmark_cases import case_table
 from iverilog_ai.core.synthesis import (
     EVIDENCE_STAGES,
     SynthConfig,
@@ -26,12 +27,10 @@ from iverilog_ai.core.synthesis import (
 ROOT = Path(__file__).parents[2]
 YOSYS = find_yosys()
 
-# 参考 RTL：全部必须综合通过
-REFERENCE_RTL = (
-    "mod10_counter", "traffic_light_emergency", "simple_alu", "sequence_101_overlap",
-    "sync_fifo", "uart_tx", "spi_master", "handshake_stage", "debounce", "pwm", "mux4", "sync_reset",
-    "johnson_counter", "edge_detector",
-)
+# 参考 RTL：全部必须综合通过。
+# 直接从基准清单派生（而不是手抄一份名单）：新增案例时这里自动覆盖，
+# 不会再出现"清单加了案例、本测试没跟上"的静默漏测。
+REFERENCE_RTL = tuple(case_table(ROOT))
 
 # 故意不可综合：变量上界的 while 循环。Yosys 明确拒绝：
 # `While loops are only allowed in constant functions!`
@@ -153,7 +152,7 @@ def test_missing_rtl_reports_error(tmp_path):
 
 @pytest.mark.skipif(not YOSYS, reason="未安装 Yosys（pip install yowasp-yosys）")
 def test_every_reference_rtl_is_synthesizable(tmp_path):
-    """14 个参考 RTL 必须全部可综合，且能给出单元统计。"""
+    """基准清单里的每个参考 RTL 都必须可综合，且能给出单元统计。"""
 
     for case in REFERENCE_RTL:
         result = YosysSynthRunner(

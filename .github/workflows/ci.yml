@@ -85,7 +85,7 @@ jobs:
         shell: pwsh
         run: python scripts/run_benchmark_matrix.py --iverilog $env:IVERILOG_PATH --vvp $env:VVP_PATH
 
-      # 综合矩阵：让 docs/layered_evidence.md 里"94 个变体全部可综合"这句话
+      # 综合矩阵：让 docs/layered_evidence.md 里"98 个变体全部可综合"这句话
       # 每次提交都被重算一遍。判据是"有没有拿到统计"，unavailable 也会判失败，
       # 因为"没查成"不是证据。
       - name: 综合矩阵（Yosys 通用门级）

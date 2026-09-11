@@ -32,7 +32,7 @@ python -m iverilog_ai plan-run `
   --iverilog D:\iverilog\bin\iverilog.exe `
   --vvp D:\iverilog\bin\vvp.exe
 
-# 3. 一键复现基准结论（14 参考设计 + 80 缺陷变体）
+# 3. 一键复现基准结论（15 参考设计 + 83 缺陷变体）
 python scripts/run_benchmark_matrix.py
 
 # 4. 打开网页演示（导入自己的 RTL、看波形结论、跑行为对比）
@@ -132,7 +132,7 @@ python -m iverilog_ai plan-run --plan <plan.json> --contract <contract.json> --r
 **为什么必须这样**：模型一旦与 RTL 差一拍，预言机就会把"参考设计通过"改写成"参考设计
 失败"——比没有预言机更糟。因此规则是"**对齐一个、加入一个**"。
 
-**实测**：14/14 个内置案例在 4 个确定性随机种子上逐拍零差异。
+**实测**：15/15 个内置案例在 4 个确定性随机种子上逐拍零差异。
 
 **对齐过程顺带发现的真问题**：8 个模型错误，其中 3 个同源于 IEEE 1364 非阻塞赋值语义
 （`bit_idx <= bit_idx + 1` 之后再读 `frame[bit_idx+1]`，读到的是**旧** `bit_idx`）。
@@ -189,7 +189,7 @@ pwm 极性反转 → 5 处，`dut_i.pwm_out` 参考 12 次跳变、缺陷 13 次
 | 布局布线/比特流 | **未运行**（需要厂商工具链） |
 | 上板验证 | **未运行**（需要实际硬件） |
 
-**实测**：98 个 RTL 变体（15 参考 + 83 缺陷）全部可综合。14 个参考设计的通用门级单元数：
+**实测**：98 个 RTL 变体（15 参考 + 83 缺陷）全部可综合。15 个参考设计的通用门级单元数：
 `sync_fifo` 34、`spi_master` 33、`uart_tx` 29、`simple_alu` 20、`traffic_light_emergency` 12、
 `debounce` 9、`handshake_stage` 5、`pwm` 5、`edge_detector` 4、`mod10_counter` 4、`mux4` 4、
 `sequence_101_overlap` 3、`johnson_counter` 2、`sync_reset` 2。

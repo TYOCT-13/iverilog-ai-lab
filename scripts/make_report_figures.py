@@ -198,7 +198,7 @@ def figure_architecture() -> Path:
         draw, (860, 440, 1540, 660),
         "⑤ 开放成果",
         [
-            "14 个案例 / 78 个可复现缺陷（Apache-2.0）",
+            "15 个案例 / 83 个可复现缺陷（Apache-2.0）",
             "44 条静态规则 + 逐条正反例用例",
             "测试计划 JSON 格式（可被其他工具适配）",
             "离线调试接口：无密钥即可复现全部实验",
@@ -284,14 +284,24 @@ def figure_flow() -> Path:
 # ---------------------------------------------------------------------------
 # 图 3：分层证据
 # ---------------------------------------------------------------------------
-def figure_layered_evidence(cells: dict | None = None) -> Path:
+def figure_layered_evidence(cells: dict | None = None, synth: dict | None = None) -> Path:
     width, height = 1500, 700
     image, draw = _canvas(width, height)
     _title(draw, "图 3  分层证据：做过的与没做的都写出来")
 
+    # 综合层的说法必须与实际跑过的结果一致：跑过写"实测 N/N"，没跑过写"未运行"。
+    if synth and synth.get("total"):
+        synth_detail = (
+            f"Yosys 通用门级映射 + 单元统计（实测 {synth['passed']}/{synth['total']} 个 RTL 变体通过）"
+        )
+        synth_status = "已提供（可选）"
+    else:
+        synth_detail = "Yosys 通用门级映射 + 单元统计（本机未运行：python scripts/run_synthesis_matrix.py）"
+        synth_status = "未运行"
+
     rows = [
         ("功能仿真", "本次流水线提供", "Icarus 编译 + vvp 执行 + 结构化断言", DET_GREEN, DET_EDGE),
-        ("逻辑综合", "已提供（可选）", "Yosys 通用门级映射 + 单元统计（92 个 RTL 变体全部通过）", DET_GREEN, DET_EDGE),
+        ("逻辑综合", synth_status, synth_detail, DET_GREEN, DET_EDGE),
         ("时序分析", "未运行", "需要目标器件时序库与时钟约束 —— 本项目不提供", GRAY_FILL, GRAY_EDGE),
         ("布局布线 / 比特流", "未运行", "需要厂商工具链（Vivado / Quartus 等）—— 本项目不提供", GRAY_FILL, GRAY_EDGE),
         ("上板验证", "未运行", "需要实际硬件与测试装置 —— 本项目不提供", GRAY_FILL, GRAY_EDGE),
@@ -323,11 +333,20 @@ def figure_benchmark(stats: dict) -> Path:
     image, draw = _canvas(width, height)
     _title(draw, "图 4  基准矩阵实跑结果（固定向量，可复现）")
 
+    references = stats.get("references_total")
+    defects = stats.get("defects_total")
+    found = stats.get("defects_found")
+
+    def _value(value: object, fmt: str) -> str:
+        """未测量（None）时显示"—"，不显示 0——0 是"测出来是 0"，与此不同。"""
+
+        return "—" if value is None else fmt.format(value)
+
     cards = [
-        ("参考设计通过", f"{stats.get('references_total', 0)}/{stats.get('references_total', 0)}", DET_GREEN, DET_EDGE),
-        ("缺陷检出", f"{stats.get('defects_found', 0)}/{stats.get('defects_total', 0)}", DET_GREEN, DET_EDGE),
-        ("参考误报", str(stats.get("reference_false_positives", 0)), DET_GREEN, DET_EDGE),
-        ("不可判定", str(stats.get("inconclusive_runs", 0)), DET_GREEN, DET_EDGE),
+        ("参考设计通过", _value(references, "{0}/{0}"), DET_GREEN, DET_EDGE),
+        ("缺陷检出", "—" if (found is None or defects is None) else f"{found}/{defects}", DET_GREEN, DET_EDGE),
+        ("参考误报", _value(stats.get("reference_false_positives"), "{0}"), DET_GREEN, DET_EDGE),
+        ("不可判定", _value(stats.get("inconclusive_runs"), "{0}"), DET_GREEN, DET_EDGE),
     ]
     card_w = 330
     for index, (label, value, fill, edge) in enumerate(cards):
@@ -366,19 +385,39 @@ def figure_benchmark(stats: dict) -> Path:
 
 
 def _read_benchmark_stats() -> dict:
-    """优先读最近一次基准矩阵的 JSON；读不到就现算最小统计。"""
+    """优先读最近一次基准矩阵的结果 JSON；读不到就只报"清单规模"，测量值留空。
 
-    candidates = sorted((ROOT / ".iverilog-ai").glob("**/benchmark_matrix.json"))
-    for path in reversed(candidates):
+    这里曾经有两个坑，都修在明面上：
+
+    1. 文件名写错（找 `benchmark_matrix.json`，而矩阵脚本产出的是 `matrix.json`），
+       于是**永远读不到**真实结果，图里一直显示硬编码的旧数字；
+    2. 读不到时回退到硬编码的 `14/78`——数字一旦过期就是错的，而且同一个图里的
+       柱状图是按清单现算的，两者会自相矛盾。
+
+    因此现在：读不到就把未测量的字段设为 `None`，由绘图处渲染成"—（未运行）"，
+    绝不用 0 或旧值冒充一次真实的矩阵运行。
+    """
+
+    for path in sorted((ROOT / ".iverilog-ai").glob("**/*.json"), reverse=True):
         try:
             data = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError):
             continue
+        if not isinstance(data, dict):
+            continue
+        summary = data.get("summary")
+        if isinstance(summary, dict) and "defects_total" in summary:
+            return summary
         if "defects_total" in data:
             return data
+    manifest = json.loads((ROOT / "benchmarks" / "manifest.json").read_text(encoding="utf-8"))
     return {
-        "references_total": 14, "reference_false_positives": 0,
-        "defects_total": 78, "defects_found": 78, "inconclusive_runs": 0,
+        "references_total": len(manifest.get("categories", [])),
+        "defects_total": len(manifest.get("defects", [])),
+        # 未运行 → 不填 0，绘图处显示"—"
+        "defects_found": None,
+        "reference_false_positives": None,
+        "inconclusive_runs": None,
     }
 
 
@@ -398,17 +437,35 @@ def _read_synthesis_cells() -> dict:
     return cells
 
 
+def _read_synthesis_matrix_stats() -> dict | None:
+    """读取综合矩阵的结果摘要（`scripts/run_synthesis_matrix.py` 的产物）。
+
+    读不到就返回 None，图里显示"未运行"——不拿清单规模冒充"实测全部通过"。
+    """
+
+    for path in sorted((ROOT / ".iverilog-ai").glob("**/synth-matrix.json"), reverse=True):
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        summary = data.get("summary")
+        if isinstance(summary, dict) and "passed" in summary and "total" in summary:
+            return summary
+    return None
+
+
 def main() -> int:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     stats = _read_benchmark_stats()
     # 按缺陷触发条件的语义粗分类，仅用于报告配图；数量必须与清单一致
     stats["by_kind"] = _classify_defects()
     cells = _read_synthesis_cells()
+    synth = _read_synthesis_matrix_stats()
 
     produced = [
         figure_architecture(),
         figure_flow(),
-        figure_layered_evidence(cells),
+        figure_layered_evidence(cells, synth),
         figure_benchmark(stats),
     ]
     for path in produced:

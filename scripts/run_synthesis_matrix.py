@@ -46,7 +46,7 @@ def _variants(root: Path) -> list[dict[str, str]]:
 
     顶层模块名一律取**参考 RTL** 的模块名：缺陷变体是参考设计的改动副本，
     模块名保持不变（例如 `rtl/mod10_counter_bug_enable.v` 里仍是
-    `module mod10_counter`）。若按文件名推顶层，80 个缺陷会全部报"找不到顶层"。
+    `module mod10_counter`）。若按文件名推顶层，83 个缺陷会全部报"找不到顶层"。
     """
 
     cases = case_table(root)
