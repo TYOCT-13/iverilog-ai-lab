@@ -2,7 +2,7 @@
 import json
 import re
 from .provider import MockProvider, Provider, ProviderHTTPError, ProviderConnectionError
-from .schema import TestPlan, json_schema
+from .schema import ASSERTION_FIELDS, TestPlan, json_schema
 
 #: 发给模型的上下文长度上限。测试会断言真实上下文不超这个值——
 #: 曾经因为把 36KB 的实测约定 JSON 原文拼进上下文而撞上它、导致流水线报错。
@@ -130,6 +130,61 @@ def _normalize_reset(data: dict) -> dict:
     normalized["reset"] = clean
     return normalized
 
+#: 发给模型的受控断言模板清单。**由 `schema.ASSERTION_FIELDS` 渲染**，不手写：
+#: 手写那一版曾经把 `signal_implies` 写成 `signal_implies{kind,signal,when_signal,then_signal}`，
+#: 而校验器不接受 `signal`——模型严格照提示词写，却被我们自己的严格校验拒绝
+#: （r10 实验里 130 次请求有 5 次栽在这个自相矛盾上，还被误记成"模型能力问题"）。
+def assertion_templates_text() -> str:
+    """渲染形如 ``signal_equals{kind,signal,value}`` 的模板清单（供提示词使用）。"""
+
+    return ", ".join(f"{kind}{{{','.join(fields)}}}" for kind, fields in ASSERTION_FIELDS.items())
+
+
+def _build_plan_prompt(design: str, objective: str, context: str | None) -> str:
+    """拼出发给模型的计划提示词（纯函数，便于用测试钉住"提示词 == 校验器"）。"""
+
+    return (
+        "Return JSON only. No markdown, commands, paths, or executable code. "
+        "Create concrete input vectors and expected outputs that obey the DUT contract. "
+        "Every checked behavior must use expected output fields. "
+        "Every vector.name MUST be unique; use short ASCII identifiers such as reset_1, normal_1, boundary_1. "
+        "Reset MUST be an object with only signal, active_level or active_low, synchronous, and assert_cycles; "
+        "put the reset port name in reset.signal (for example signal=sys_rst_n), never as a separate reset key. "
+        "You may include an assertions array using only these templates: "
+        + ", ".join(ASSERTION_FIELDS)
+        + "; never include Verilog/SVA code. "
+        "Each assertion object must use exactly the fields allowed for its kind, no more and no fewer: "
+        + assertion_templates_text()
+        + ". signal_implies has NO signal field: it needs when_signal and then_signal, and it only checks "
+        "anything if you also give when_value and then_value (a missing value never matches a sampled signal). "
+        "signal_sequence may omit cycles or set it equal to the number of values. "
+        "Do not invent other kind names or fields. "
+        "Design: %s Objective: %s DUT context: %s Schema: %s"
+        % (design, objective, context or "not supplied", json.dumps(json_schema()))
+    )
+
+
+def _validation_summary(exc: Exception) -> str:
+    """把 pydantic 的校验噪声压成一行人话。
+
+    原始信息是一整段 ``1 validation error for TestPlan ... [type=value_error, input_value=[...],
+    input_type=list] For further information visit https://errors.pydantic.dev/...``——用户读不出
+    到底哪里错了。这里只保留 "字段路径: 原因"，并去掉文档链接与原始输入片段。
+    """
+
+    errors = getattr(exc, "errors", None)
+    if not callable(errors):
+        return str(exc)
+    parts: list[str] = []
+    for item in errors():
+        if not isinstance(item, dict):
+            continue
+        location = ".".join(str(part) for part in item.get("loc", ()) if part != "__root__")
+        message = str(item.get("msg", "")).removeprefix("Value error, ").strip()
+        parts.append(f"{location}: {message}" if location else message)
+    return "；".join(parts) or str(exc)
+
+
 def plan_tests(
     objective: str,
     design: str,
@@ -145,30 +200,28 @@ def plan_tests(
     设计生成计划，请显式传入 provider：真实模型用 ``OpenAICompatibleProvider``，无密钥
     离线场景用 ``ai.debug_provider.offline_provider(contract)``（网页离线模式走的就是它）。
     拿演示计划去驱动一个没有 ``rst_n`` 的组合逻辑设计，会在生成 testbench 时被合约拒绝。
+
+    重试会**把上一次的拒绝原因追加到提示词**里再问一次，因此偶尔一次格式失误能被真正纠正，
+    而不是靠重新抽一次样碰运气。
     """
 
     if max_retries < 0 or max_retries > 5: raise ValueError("max_retries must be between 0 and 5")
     if context is not None and (not isinstance(context, str) or len(context) > CONTEXT_LIMIT):
         raise ValueError(f"context must be text of at most {CONTEXT_LIMIT} characters")
-    prompt=(
-        "Return JSON only. No markdown, commands, paths, or executable code. "
-        "Create concrete input vectors and expected outputs that obey the DUT contract. "
-        "Every checked behavior must use expected output fields. "
-        "Every vector.name MUST be unique; use short ASCII identifiers such as reset_1, normal_1, boundary_1. "
-        "Reset MUST be an object with only signal, active_level or active_low, synchronous, and assert_cycles; "
-        "put the reset port name in reset.signal (for example signal=sys_rst_n), never as a separate reset key. "
-        "You may include an assertions array using only signal_equals, signal_stable, never_high, signal_sequence, or signal_implies templates; never include Verilog/SVA code. "
-        "Each assertion object must use exactly the fields allowed for its kind: "
-        "signal_equals{kind,signal,value}, signal_stable{kind,signal,cycles}, never_high{kind,signal}, "
-        "signal_sequence{kind,signal,values}, signal_implies{kind,signal,when_signal,then_signal}. "
-        "Do not invent other kind names or fields. "
-        "Design: %s Objective: %s DUT context: %s Schema: %s"
-        % (design, objective, context or "not supplied", json.dumps(json_schema()))
-    )
-    errors=[]
+    prompt = _build_plan_prompt(design, objective, context)
+    # 每次尝试的**拒绝原因**（人话版）：既用于最终报错，也在重试时发回给模型。
+    errors: list[str] = []
     for attempt in range(max_retries+1):
         try:
-            raw=(provider or MockProvider()).generate(prompt)
+            attempt_prompt = prompt
+            if attempt:
+                attempt_prompt = (
+                    prompt
+                    + "\nYour previous answer was rejected by strict validation: "
+                    + errors[-1]
+                    + "\nReturn a corrected JSON plan that fixes exactly that problem."
+                )
+            raw=(provider or MockProvider()).generate(attempt_prompt)
             if not isinstance(raw,str): raise TypeError("provider output must be text")
             data = _decode_plan_json(raw)
             return TestPlan.model_validate(_normalize_reset(_unique_vector_names(data)))
@@ -176,8 +229,10 @@ def plan_tests(
             # 认证、额度和限流问题不是测试计划格式错误；立即向上层报告，
             # 避免自动重试产生更多请求或费用。
             raise
-        except Exception as exc: errors.append("attempt %d: %s" % (attempt+1,exc))
-    raise PlanningError("模型已返回内容，但 TestPlan 严格校验失败：" + " | ".join(errors))
+        except Exception as exc: errors.append(_validation_summary(exc))
+    raise PlanningError(
+        f"模型返回了内容，但未通过严格校验（共 {len(errors)} 次尝试）：" + " | ".join(errors)
+    )
 
 
 def supplement_tests(

@@ -9,8 +9,12 @@ from dataclasses import dataclass
 from typing import Any, Iterable, Mapping
 import re
 
+from ..ai.schema import ASSERTION_FIELDS, ASSERTION_KINDS
+
 _SIGNAL_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_$]*$")
-_KINDS = frozenset(("signal_equals", "signal_stable", "never_high", "signal_sequence", "signal_implies"))
+#: 模板与字段表都取自 `ai.schema`（唯一事实来源）：这里的执行期校验、那边的严格 Schema
+#: 校验、以及发给模型的提示词三者共用一张表，不会再出现"提示词允许、校验器拒绝"的漂移。
+_KINDS = ASSERTION_KINDS
 
 
 class AssertionValidationError(ValueError):
@@ -71,10 +75,8 @@ def build_assertion(description: Mapping[str, Any] | StructuredAssertion) -> Str
     kind = description.get("kind")
     if kind not in _KINDS:
         raise AssertionValidationError(f"unsupported assertion template: {kind!r}")
-    if kind == "signal_equals": allowed = {"kind", "signal", "value"}
-    elif kind == "signal_sequence": allowed = {"kind", "signal", "values", "cycles"}
-    elif kind == "signal_implies": allowed = {"kind", "when_signal", "when_value", "then_signal", "then_value", "within_cycles"}
-    else: allowed = {"kind", "signal", "cycles"}
+    if kind == "signal_implies": allowed = set(ASSERTION_FIELDS["signal_implies"])
+    else: allowed = set(ASSERTION_FIELDS[str(kind)])
     unknown = sorted(set(description) - allowed)
     if unknown:
         raise AssertionValidationError("unsupported assertion field(s): " + ", ".join(unknown))
@@ -127,6 +129,28 @@ def build_assertion(description: Mapping[str, Any] | StructuredAssertion) -> Str
 create_assertion = build_assertion
 
 
+def _comparable(value: Any) -> Any:
+    """把采样值与断言值折算到同一形态再比较。
+
+    采样记录里的多比特信号是 **Verilog 位串**（``'0000'``、``'1010'``），而断言里的
+    ``value`` 通常写成整数（``0``、``5``）。直接 ``'0000' == 0`` 永远为假，于是**参考设计上
+    也会报假失败**——我们自己的推荐断言就踩了这个坑：``mod10_counter`` 的
+    ``signal_equals{count: 0}`` 在参考设计上被判成 `expected 0, observed '0000'`。
+    这里按"只含 0/1/x/z 的字符串视为二进制位串"折算：含 x/z 的保持文本（不定值只与同形相等），
+    其余原样返回。bool 折算成 0/1，与 Verilog 一致。
+    """
+
+    if isinstance(value, bool):
+        return int(value)
+    if isinstance(value, str):
+        text = value.strip().lower()
+        if text and all(char in "01xz" for char in text):
+            if "x" in text or "z" in text:
+                return text
+            return int(text, 2)
+    return value
+
+
 def evaluate_assertion(assertion: Mapping[str, Any] | StructuredAssertion,
                        samples: Iterable[Mapping[str, Any]]) -> AssertionCheckResult:
     """对采样数据执行模板检查，返回可序列化的结果，不执行代码生成。"""
@@ -138,30 +162,39 @@ def evaluate_assertion(assertion: Mapping[str, Any] | StructuredAssertion,
     if any(not isinstance(row, Mapping) or a.signal not in row for row in rows):
         return AssertionCheckResult(False, a.kind, a.signal, len(rows), message=f"signal {a.signal!r} missing from sample")
     if a.kind == "signal_equals":
-        bad = next((v for v in values if v != a.value), None)
-        ok = all(v == a.value for v in values)
+        expected = _comparable(a.value)
+        bad = next((v for v in values if _comparable(v) != expected), None)
+        ok = bad is None
         return AssertionCheckResult(ok, a.kind, a.signal, len(values), bad if not ok else a.value,
                                     "signal equals expected value" if ok else f"expected {a.value!r}, observed {bad!r}")
     if a.kind == "never_high":
-        bad = next((v for v in values if v is True or v == 1), None)
+        bad = next((v for v in values if _comparable(v) == 1), None)
         ok = bad is None
         return AssertionCheckResult(ok, a.kind, a.signal, len(values), bad, "signal never high" if ok else "signal became high")
     if a.kind == "signal_sequence":
-        ok = values == list(a.values)
+        expected_sequence = [_comparable(v) for v in a.values]
+        observed_sequence = [_comparable(v) for v in values]
+        ok = observed_sequence == expected_sequence
         return AssertionCheckResult(ok, a.kind, a.signal, len(values), values, "signal sequence matched" if ok else f"expected sequence {list(a.values)!r}, observed {values!r}")
     if a.kind == "signal_implies":
         missing = [s for s in (a.when_signal, a.then_signal) if any(s not in row for row in rows)]
         if missing:
             return AssertionCheckResult(False, a.kind, a.when_signal, len(rows), message=f"signal(s) missing from sample: {', '.join(missing)}")
+        when_value = _comparable(a.when_value)
+        then_value = _comparable(a.then_value)
         for index, row in enumerate(rows):
-            if row.get(a.when_signal) == a.when_value:
+            if _comparable(row.get(a.when_signal)) == when_value:
                 window = rows[index + 1:index + 1 + a.within_cycles]
-                if not any(item.get(a.then_signal) == a.then_value for item in window):
+                if not any(_comparable(item.get(a.then_signal)) == then_value for item in window):
                     return AssertionCheckResult(False, a.kind, a.when_signal, len(rows), row.get(a.then_signal), f"{a.when_signal}={a.when_value!r} was not followed by {a.then_signal}={a.then_value!r}")
         return AssertionCheckResult(True, a.kind, a.when_signal, len(rows), message="implication satisfied")
     # signal_stable: every contiguous window of the requested length is constant.
+    # cycles=1 表示"每个采样点自身恒定"，恒为真——这是**空检查**，提示词与手册里都提醒过。
     ok = len(values) < a.cycles or all(len(set(values[i:i + a.cycles])) == 1 for i in range(len(values) - a.cycles + 1))
     observed = values[-1] if values else None
+    if ok and a.cycles <= 1:
+        return AssertionCheckResult(True, a.kind, a.signal, len(values), observed,
+                                    "signal remained stable（cycles=1 恒真，等于没有检查）")
     return AssertionCheckResult(ok, a.kind, a.signal, len(values), observed,
                                 "signal remained stable" if ok else f"signal changed within {a.cycles} samples")
 

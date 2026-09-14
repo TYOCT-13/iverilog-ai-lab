@@ -57,17 +57,34 @@ iverilog-ai run --rtl dut.v --testbench tb_dut.v --top tb_dut `
 
 ## 3. 结构化断言：把"显然的规矩"写死
 
-测试计划里可以带四种受限模板（**不接受自由 Verilog/SVA 代码**）：
+测试计划里可以带五种受限模板（**不接受自由 Verilog/SVA 代码**）：
 
 | 模板 | 用途 | 字段 |
 |---|---|---|
-| `signal_equals` | 某拍信号必须等于某值 | `signal`, `value` |
-| `signal_stable` | 连续 N 拍保持不变 | `signal`, `cycles` |
-| `never_high` | 某些情形下永不为高 | `signal` |
-| `signal_implies` | when 条件成立后 within N 拍内 then 成立 | `when_signal`, `then_signal`, `within_cycles` |
+| `signal_equals` | 该信号在**整个采样序列**里都等于某值 | `signal`, `value` |
+| `signal_stable` | 连续 N 拍保持不变（N 至少 2；N=1 恒真，等于没有检查） | `signal`, `cycles` |
+| `never_high` | 整个序列里从未为高 | `signal` |
+| `signal_sequence` | 采样序列正好等于给定的取值序列 | `signal`, `values`（`cycles` 可省略，省略时等于 `values` 长度） |
+| `signal_implies` | when 条件成立后，within N 拍内 then 成立 | `when_signal`, `when_value`, `then_signal`, `then_value`, `within_cycles` |
 
-> ⚠️ 常见错误：给 `signal_implies` 多写一个 `signal` 字段会被严格校验拒绝
-> （实测在线模型 130 次里有 5 次栽在这里）。它只认 `when_signal` / `then_signal`。
+> ⚠️ **`signal_implies` 没有 `signal` 字段**。它只有 when/then 两个信号名，多写 `signal`
+> 会被严格校验拒绝。2026-09 复核发现：这条"常见错误"其实是**提示词自己写错了**
+> （提示词里列出 `signal_implies{kind,signal,...}`，而校验器不接受 `signal`）——模型只是
+> 照着提示词写。现在提示词由 `ai/schema.py` 的字段表直接渲染，
+> `tests/ai/test_planner.py` 断言"提示词允许的字段 == 校验器接受的字段"，两边不可能再漂移。
+> 同一个复核还发现 `signal_implies` 当时**根本无法通过校验**（写 `signal` 报不支持字段，
+> 不写又报 `signal` 必须是合法标识符），已一并修好。
+
+> ⚠️ **`signal_implies` 缺 `when_value`/`then_value` 时永远匹配不上**（缺省值是 `None`，
+> 而采样值不会是 `None`），断言会静默变成"空检查"。要真的检查就写全取值。
+
+> 采样值是 Verilog 位串（`'0000'`），断言里的 `value` 写整数（`0`）即可——比较按**值**
+> 进行，`'0000'` 与 `0` 相等；`x`/`z` 是不定值，只与同形的不定值相等，不会折算成 0 蒙混过关。
+
+**断言是按"该信号的整个采样序列"判定的**，没有作用域概念，因此只有真正的全局不变量
+（"永不为高"、"始终等于某值"、"req 之后必有 ack"）才适合写成断言。写之前先想清楚它在
+**整个仿真过程**里是否都成立——本仓库曾经自动推荐过 5 条断言，复核时发现全部不成立
+（详见 `src/iverilog_ai/core/rule_assertions.py` 的说明），因此推荐表已清空。
 
 ---
 

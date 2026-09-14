@@ -683,6 +683,23 @@ def _apply_json_to_table_on_click() -> None:
     _contract_editor_notice("success", "已用 JSON 刷新表格；下一步点「校验 contract」。")
 
 
+def _load_suggested_assertions_on_click() -> None:
+    """「载入本案例推荐结构化断言」的回调：把已验证的建议写进断言文本框。
+
+    放在回调里（而不是 `if st.button(...)` 分支里）有两个原因：回调在主体之前执行，
+    写进去的值本次运行就会显示；而且不需要整页重跑——用户在「从表格生成 JSON」那里
+    明确反馈过整页刷新很烦。
+
+    当前 `rule_assertions` 的建议表是空的（原先 5 条全部不成立，见该模块说明），
+    因此这个按钮暂时不会渲染；表里一旦重新加入经门禁验证的条目，按钮即可用。
+    """
+
+    case_key = str(st.session_state.get("case_name", ""))
+    suggestions = assertion_suggestions(RULE_CASE_NAMES.get(case_key, case_key))
+    if suggestions:
+        st.session_state.structured_assertions_text = json.dumps(suggestions, ensure_ascii=False, indent=2)
+
+
 def _contract_module_hint() -> str:
     """从当前 JSON 文本框里取 `module`，作为「从表格生成 JSON」的模块名兜底。
 
@@ -1249,7 +1266,7 @@ with _TAB_VERIFY:
             "结构化断言（可选，JSON 数组）",
             value=st.session_state.get("structured_assertions_text", "[]"),
             height=88,
-            help="仅支持 signal_equals、signal_stable、never_high、signal_implies 模板；禁止填写 Verilog/SVA 代码。",
+            help="仅支持 signal_equals、signal_stable、never_high、signal_sequence、signal_implies 模板；禁止填写 Verilog/SVA 代码。断言按该信号的整个采样序列判定。",
         )
         st.session_state.structured_assertions_text = assertions_text
     st.session_state.run_synthesis = st.checkbox(
@@ -1260,9 +1277,24 @@ with _TAB_VERIFY:
     if not is_custom:
         _case_key = str(name)
         _suggested_assertions = assertion_suggestions(RULE_CASE_NAMES.get(_case_key, _case_key))
-        if _suggested_assertions and st.button("载入本案例推荐结构化断言", key="load_case_assertions"):
-            st.session_state.structured_assertions_text = json.dumps(_suggested_assertions, ensure_ascii=False, indent=2)
-            st.rerun()
+        if _suggested_assertions:
+            # 回调在主体之前执行，写进去的值本次运行就会显示；不需要整页重跑。
+            st.button(
+                "载入本案例推荐结构化断言",
+                key="load_case_assertions",
+                on_click=_load_suggested_assertions_on_click,
+            )
+        else:
+            # 断言按"整个采样序列"判定，只有真正的全局不变量才适合写成断言；本案例没有
+            # 经过验证的推荐断言（2026-09 复核：原先 4 个案例的 5 条建议全部不成立/空检查/
+            # 字段非法，已全部撤掉）。这里给出可直接改用的模板形状，而不是一份会误报的清单。
+            st.caption(
+                "结构化断言按该信号的**整个采样序列**判定，只有真正的全局不变量才适合写成断言；"
+                "本案例没有经过验证的推荐断言。可改用的模板形状（信号名换成你的设计）："
+                '`[{"kind":"signal_implies","when_signal":"req","when_value":1,'
+                '"then_signal":"ack","then_value":1,"within_cycles":2}]`。'
+                "模板与字段表见手册「进阶用法」第 3 节。"
+            )
 
 
 with _TAB_SETTINGS:
@@ -1373,7 +1405,7 @@ with _TAB_VERIFY:
     if st.button(
         "生成测试计划",
         type="primary" if _plan_missing else "secondary",
-        help="本地调试/离线模式不联网；在线模式按所选接口格式请求真实模型",
+        help="本地调试/离线模式不联网；在线模式按所选接口格式请求真实模型。若模型返回的计划未通过严格校验，会把拒绝原因发回并重试一次（仅失败时多花一次请求）。",
         key="generate_plan",
     ):
         provider = None
@@ -1393,7 +1425,10 @@ with _TAB_VERIFY:
                 objective,
                 case_name,
                 provider=provider,
-                max_retries=0,
+                # 允许一次"带着拒绝原因"的重试：模型偶尔会写错一个字段名（例如给
+                # signal_implies 多写 signal），一次修正就能救回整轮；只在第一次被严格
+                # 校验拒绝时才会多发一次请求（认证/限流错误不会重试）。
+                max_retries=1,
                 context=_verification_rules(case_name, contract, spec_text),
             )
             try:

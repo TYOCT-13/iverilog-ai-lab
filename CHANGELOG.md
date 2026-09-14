@@ -82,6 +82,46 @@
 
 ### 修复
 
+- **提示词与严格校验对不上：模型照提示词写，反被我们自己拒绝（`signal_implies` 的
+  `signal` 字段）**。真实反馈是"点击生成测试计划报
+  `1 validation error for TestPlan assertions Value error, assertions[0] contains
+  unsupported field(s): signal`"，而隔一次再点又能成功——因为该模板是可选的，模型有时写、
+  有时不写，成功与否全看它那一次怎么发挥。
+  三处根因全部在本项目一侧：
+  1. **提示词自己写错了**：`ai/planner.py` 把模板清单硬编码成
+     `signal_implies{kind,signal,when_signal,then_signal}`，而校验器**不接受** `signal`
+     （implication 只有 when/then 两个信号名）。模型严格照提示词写，却被自己的严格校验拒绝。
+     r10 实验里 130 次请求有 5 次（3.8%）栽在这里，当时还被记成"模型写错字段"。
+  2. **该模板根本无法通过校验**：`ai/schema.py` 的 `signal` 标识符检查对所有模板无条件生效，
+     于是 `signal_implies` 写 `signal` → 报"不支持的字段"，不写 → 报"`signal` 必须是合法
+     标识符"（`None` 不是 str）。两条路都堵死 = 这个模板从上线起就是死的，而它同时出现在
+     提示词、使用手册与 `core.assertions` 的执行路径里（`core.assertions` 早就把它提前分支
+     处理了，两个校验器因此还互相矛盾）。
+  3. **断言值比较按"写法"而不是"值"**：采样记录里的多比特信号是 Verilog 位串（`'0000'`），
+     断言里的 `value` 通常写整数（`0`），`'0000' == 0` 永远为假——**参考设计上也会报假失败**。
+     我们自己的推荐断言就踩了这个坑。
+  处理：① `ai/schema.py` 新增 `ASSERTION_FIELDS`（模板 → 允许字段）作为**唯一事实来源**，
+  严格校验、`core.assertions` 的执行期校验、发给模型的提示词三处全部由它渲染，不可能再各写
+  一份、悄悄漂移；② 提示词额外点名"`signal_implies` 没有 `signal` 字段"，并说明
+  `when_value`/`then_value` 缺失会让断言**静默变成空检查**；③ 修掉 `signal_implies` 的字段
+  检查死局；④ 断言比较引入 `_comparable()`：位串按值折算（`'0000'` == `0`）、`x`/`z` 保持
+  不定值（不与 0 相等，避免伪造通过）、bool 与 0/1 等价；⑤ 重试不再是"重新抽一次样"——把
+  上一次的**拒绝原因**追加进提示词再问一次（`plan_tests`），网页生成计划也从 `max_retries=0`
+  改为 1，单次格式失误不再直接作废整轮；⑥ 校验失败信息压成一行人话（去掉 pydantic 文档链接
+  与原始输入片段）。
+  顺带发现并修掉**推荐断言全部不成立**的问题：`rule_assertions` 里给 4 个案例写的 5 条
+  "推荐结构化断言"，逐条实测（参考设计 + 本仓库确定性激励）后发现 2 条必然误报
+  （`signal_equals{count,0}` 用在递增计数器上）、2 条恒真等于没检查（`signal_stable{cycles:1}`）、
+  1 条字段非法（`never_high{cycles:1}`，点"载入推荐断言"后计划直接校验失败）。在这套全局语义的
+  模板下这些案例没有可写的真断言，因此推荐表清空，网页改为给出一条可直接改用的模板示例；
+  新增门禁 `tests/core/test_rule_assertions.py`：以后任何一条推荐断言都必须先在参考设计上真的
+  跑通（校验 + 通过 + 非空检查），否则加不进来。
+  回归：`tests/ai/test_planner.py` 新增"提示词渲染的字段表 == 校验器接受的字段"（逐模板正向/
+  反向验证）、"重试把拒绝原因发回去"、"报错可读"；`tests/core/test_assertions.py` 新增位串比较、
+  不定值、空检查标注等用例；实验文档与使用手册按更正后的事实改写
+  （`docs/experiment/online_model_r10_2026-09-12.md`、`model_comparison_2026-09-12.md`
+  保留原记录并加"复核更正"，`docs/manual/02_advanced.md` 的模板表补齐 `signal_sequence`
+  与取值说明）。
 - **自定义 RTL 的「校验 contract」按钮完全不可用（Streamlit 的控件回写限制）**：真实反馈是
   "配置好 API 后：从表格生成 JSON → 刷新表格 → 校验 contract 报错
   `contract 无效：st.session_state.custom_contract_json_text cannot be modified after the
@@ -123,7 +163,8 @@
   `TestbenchGenerationError` 类名以 `Test` 开头，任何 import 它们的测试模块都会触发
   `PytestCollectionWarning: cannot collect test class ...`。虽然不影响结果，但会让"全绿"
   的输出看起来像有测试收集问题（也会埋掉真正的告警）。三个类显式声明 `__test__ = False`，
-  现在 `python -m pytest -q` 是 **436 passed、0 warning**。
+  现在 `python -m pytest -q` 是 **448 passed、0 warning**（另有一条门禁用例在推荐断言表为空时
+  显式 skip）。
 - **检出率用了不可比的口径（把"多试几次"算成"模型更强"）**：在线模型跑了 10 轮，
   而我报的 `97.0% / 95.5%` 是"任意一轮检出即算检出"的**累计并集**；固定/随机/离线三个
   基线各只跑 1 轮。拿 10 轮并集比 1 轮结果，等于把重复次数算成了模型能力。经复算，

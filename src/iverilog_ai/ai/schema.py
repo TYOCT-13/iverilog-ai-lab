@@ -17,6 +17,26 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 _SIGNAL_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_$]*$")
 _PATH_OR_COMMAND_CHARS = set("\\/:*?\"<>|;&$(){}[]") | {chr(96)}
 
+#: 受控断言模板 → 该模板允许出现的字段（**唯一事实来源**）。
+#:
+#: 三处必须永远一致：本文件的严格校验、`core.assertions` 的执行期校验、
+#: 以及 `ai.planner` 发给模型的提示词。提示词直接由这张表渲染，所以不可能再出现
+#: "提示词写着一套、校验器接受另一套"：
+#: 真实事故——提示词写成 `signal_implies{kind,signal,when_signal,then_signal}`，
+#: 而校验器不接受 `signal`（implication 只有 when/then 两个信号名）。模型严格照提示词
+#: 写，却被我们自己的严格校验拒绝，用户看到一句 `assertions[0] contains unsupported
+#: field(s): signal`，一次付费请求也白花了。
+ASSERTION_FIELDS: dict[str, tuple[str, ...]] = {
+    "signal_equals": ("kind", "signal", "value"),
+    "signal_stable": ("kind", "signal", "cycles"),
+    "never_high": ("kind", "signal"),
+    "signal_sequence": ("kind", "signal", "values", "cycles"),
+    "signal_implies": ("kind", "when_signal", "when_value", "then_signal", "then_value", "within_cycles"),
+}
+
+#: 允许的模板名集合（供校验与提示词共用）。
+ASSERTION_KINDS: frozenset[str] = frozenset(ASSERTION_FIELDS)
+
 
 def _printable(value: Any, name: str, *, max_length: int) -> str:
     if not isinstance(value, str) or not value.strip():
@@ -172,24 +192,29 @@ class TestPlan(BaseModel):
     def safe_assertions(cls, value: Any) -> list[dict[str, Any]]:
         if not isinstance(value, list) or len(value) > 50:
             raise ValueError("assertions must be an array with at most 50 items")
-        allowed = {"signal_equals", "signal_stable", "never_high", "signal_sequence", "signal_implies"}
         signal_re = re.compile(r"^[A-Za-z_][A-Za-z0-9_$]*$")
         checked = []
         for index, item in enumerate(value):
             if not isinstance(item, dict):
                 raise ValueError(f"assertions[{index}] must be an object")
             kind = item.get("kind")
-            if kind not in allowed:
+            if kind not in ASSERTION_KINDS:
                 raise ValueError(f"assertions[{index}] uses unsupported template")
-            if kind == "signal_equals": expected = {"kind", "signal", "value"}
-            elif kind == "signal_sequence": expected = {"kind", "signal", "values", "cycles"}
-            elif kind == "signal_implies": expected = {"kind", "when_signal", "when_value", "then_signal", "then_value", "within_cycles"}
-            else: expected = {"kind", "signal", "cycles"}
-            unknown = set(item) - expected
+            # 字段表来自 ASSERTION_FIELDS（唯一事实来源），不再各写一份字面量。
+            fields = ASSERTION_FIELDS[str(kind)]
+            unknown = set(item) - set(fields)
             if unknown:
                 raise ValueError(f"assertions[{index}] contains unsupported field(s): {', '.join(sorted(unknown))}")
-            if not isinstance(item.get("signal"), str) or not signal_re.fullmatch(item["signal"]):
-                raise ValueError(f"assertions[{index}].signal must be a safe Verilog identifier")
+            # `signal` 标识符检查**只对真的带 signal 字段的模板做**。
+            # 这里曾经无条件检查 `item["signal"]`，于是 signal_implies 陷入死局：
+            # 写了 signal → 上面报"不支持的字段"；不写 signal → 这里报"signal 必须是
+            # 合法标识符"（`None` 不是 str）。两条路都被堵死 = 该模板根本无法通过校验，
+            # 而它同时出现在提示词、使用手册与 core.assertions 的执行路径里。
+            # （`core.assertions.build_assertion` 早就把 signal_implies 提前分支处理了，
+            # 两个校验器因此还互相矛盾——这正是 r10 实验里 5 次计划失败的真正原因。）
+            if "signal" in fields:
+                if not isinstance(item.get("signal"), str) or not signal_re.fullmatch(str(item["signal"])):
+                    raise ValueError(f"assertions[{index}].signal must be a safe Verilog identifier")
             if kind == "signal_equals":
                 if "value" not in item or not isinstance(item["value"], (bool, int, str)):
                     raise ValueError(f"assertions[{index}] signal_equals requires a scalar value")
