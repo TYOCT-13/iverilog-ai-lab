@@ -55,7 +55,7 @@ streamlit run ui/app.py
 | 手写 testbench | 26 | `tb/*.v` |
 | 静态检查规则 | **44**（error 4 / warn 27 / info 13） | 规则注册表现算 |
 | 已对齐参考模型（权威预言机） | **15 / 15** | `SUPPORTED == set(AUTHORITATIVE)` |
-| 自动化测试 | **432** | `python -m pytest -q` |
+| 自动化测试 | **436** | `python -m pytest -q` |
 | 上游实测约定来源 | 2 个开源项目、172 个文件 | `data/opensource_conventions.json` |
 
 基准矩阵最近一次实跑结论：
@@ -376,7 +376,7 @@ testbench 检查。**不接受**自由书写的 Verilog 或 SVA 代码，因此�
 
 ```powershell
 # 1. 全量测试（含多个真实跑 Icarus 的端到端用例）
-python -m pytest -q                                   # 期望 432 passed，0 warning
+python -m pytest -q                                   # 期望 436 passed，0 warning
 
 # 2. 基准矩阵（固定向量 + 手写 testbench，结果确定）
 python scripts/run_benchmark_matrix.py                # 期望 15/15、83/83、0 误报、0 不可判定

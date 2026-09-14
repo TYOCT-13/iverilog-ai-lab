@@ -610,6 +610,96 @@ def _contract_payload(
     return payload
 
 
+def _contract_editor_notice(level: str, message: str) -> None:
+    """把一条提示留给 `_contract_editor` 在**下一次运行**开头渲染。
+
+    为什么不直接 `st.success(...)`：校验逻辑放在控件回调里（见下），而回调在 fragment
+    主体之前执行，此时渲染的提示会跑到编辑区最上方、与按钮离得很远；存下来在主体里渲染，
+    位置稳定、也不会因为随后的重跑丢掉。
+    """
+
+    st.session_state["contract_editor_notice"] = (str(level), str(message))
+
+
+def _validate_contract_on_click() -> None:
+    """「校验 contract」按钮的回调：校验 + 规范化 + 回写文本框。
+
+    **回调是关键**：Streamlit 在每次运行开始时先跑控件回调，再执行 fragment 主体，
+    因此这里回写 `st.session_state.custom_contract_json_text` 完全合法——即使那个文本框
+    带 `key` 也一样（它还没被创建）。
+
+    真实事故：这段逻辑原先写在按钮的 `if st.button(...)` 分支里，位置在文本框**创建之后**，
+    于是每次点「校验 contract」都抛
+    `StreamlitAPIException: st.session_state.custom_contract_json_text cannot be modified
+    after the widget with key ... is instantiated`，按钮等于完全不可用。
+    """
+
+    try:
+        contract = DutContract.from_json(st.session_state.get("custom_contract_json_text", ""))
+    except Exception as exc:
+        st.session_state.custom_contract = None
+        _contract_editor_notice("error", f"contract 无效：{exc}")
+        return
+    st.session_state.custom_contract = contract
+    canonical = contract.to_json()
+    st.session_state.custom_contract_text = canonical
+    # 回调阶段回写控件 key 合法：文本框本次运行还没创建，下一次渲染就会显示规范格式。
+    st.session_state.custom_contract_json_text = canonical
+    _contract_editor_notice("success", "contract 校验通过，可以生成 AI 计划")
+
+
+def _apply_json_to_table_on_click() -> None:
+    """「用 JSON 刷新表格」的回调：把 JSON 里的端口、时钟、复位同步到编辑控件。
+
+    同样靠"回调先于主体执行"这条性质：换掉 data_editor 的 key（让它用新数据重新初始化）、
+    直接写时钟/复位控件的 key，都不需要任何重跑。以前这一步用
+    `st.rerun(scope="fragment")`，而整页运行时 Streamlit 会**拒绝**该 scope
+    （"can only be specified from @st.fragment-decorated functions during fragment reruns"），
+    同一个按钮在两种运行上下文里表现不一致；现在整条交互链里不再有 `st.rerun`。
+    """
+
+    try:
+        parsed = DutContract.from_json(st.session_state.get("custom_contract_json_text", ""))
+    except Exception as exc:
+        _contract_editor_notice("error", f"JSON 无效：{exc}")
+        return
+    payload = parsed.to_dict()
+    st.session_state.custom_contract_editor_ports = list(payload.get("ports", []))
+    # 换一代 key：data_editor 用新端口列表重新初始化（数据始终只从影子列表来）。
+    st.session_state["contract_editor_gen"] = int(st.session_state.get("contract_editor_gen", 0)) + 1
+    st.session_state.custom_contract_text = parsed.to_json()
+    _set_contract_editor(parsed.to_json())
+    clock = payload.get("clock") or {}
+    reset = payload.get("reset") or {}
+    st.session_state["contract_clock_signal"] = str(clock.get("signal", ""))
+    st.session_state["contract_clock_period"] = float(clock.get("period_ns", 10.0))
+    st.session_state["contract_clock_edge"] = str(clock.get("edge", "posedge"))
+    st.session_state["contract_reset_signal"] = str(reset.get("signal", ""))
+    st.session_state["contract_reset_active"] = int(reset.get("active_level", 0))
+    st.session_state["contract_reset_sync"] = bool(reset.get("synchronous", False))
+    st.session_state["contract_reset_cycles"] = int(reset.get("assert_cycles", 2))
+    # JSON 改过就必须重新校验，避免用旧合约继续跑
+    st.session_state.custom_contract = None
+    _contract_editor_notice("success", "已用 JSON 刷新表格；下一步点「校验 contract」。")
+
+
+def _contract_module_hint() -> str:
+    """从当前 JSON 文本框里取 `module`，作为「从表格生成 JSON」的模块名兜底。
+
+    只读、只认字符串且非空；解析失败就返回空串（调用方再兜底 "dut"）。
+    """
+
+    try:
+        payload = json.loads(st.session_state.get("custom_contract_json_text") or "{}")
+    except Exception:
+        return ""
+    if isinstance(payload, dict):
+        module = payload.get("module")
+        if isinstance(module, str) and module.strip():
+            return module.strip()
+    return ""
+
+
 @st.fragment
 def _contract_editor() -> None:
     """DUT contract 编辑区（**整段跑在 fragment 里**）。
@@ -624,7 +714,24 @@ def _contract_editor() -> None:
       动作：表格 → JSON（表单提交）、JSON → 表格（按钮），不再有隐式重跑。
     - 原来"从表格生成 JSON"先 `st.success(...)` 再 `st.rerun()`，那条成功提示会被立刻
       丢掉（用户只看到页面一闪）。现在不重跑，提示留在原地。
+
+    还有一条 Streamlit 硬规则必须绕开：**本**次运行里已经创建过 `key=X` 的控件之后，
+    再写 `st.session_state.X` 会直接抛
+    `StreamlitAPIException: ... cannot be modified after the widget with key ... is instantiated`。
+    这里的对策是**按动作选位置**，而不是到处搬代码：
+    - 「表格 → JSON」需要 data_editor 的返回值，只能在主体里做——它写的是文本框 key，
+      但位置在文本框**之前**，合法；
+    - 「校验 contract」不需要任何控件返回值（JSON 文本就在 session state 里），因此整个
+      搬到 `on_click` 回调里，在主体之前执行，回写文本框 key 合法且当次立即生效；
+    - 「JSON → 表格」要在渲染前换成新数据（换 data_editor 的 key、并回写时钟/复位控件），
+      同样放在回调里，因此**整条交互链里没有 `st.rerun`**：不需要整页重跑，也不需要
+      `scope="fragment"` 重跑（后者在整页运行时会被 Streamlit 直接拒绝）。
     """
+
+    _notice = st.session_state.pop("contract_editor_notice", None)
+    if isinstance(_notice, tuple) and len(_notice) == 2:
+        _level, _message = str(_notice[0]), str(_notice[1])
+        (st.error if _level == "error" else st.success)(_message)
 
     if not st.session_state.get("custom_contract_text"):
         return
@@ -678,7 +785,13 @@ def _contract_editor() -> None:
         if _submitted:
             try:
                 payload = _contract_payload(
-                    module=str(st.session_state.get("custom_selected_module", "dut")),
+                    # 模块名的优先级：用户显式选的顶层 module → 当前 JSON 里写的 module →
+                    # 兜底 "dut"。早先只写 `get("custom_selected_module", "dut")`：从没上传过
+                    # RTL（例如直接手写 JSON 进编辑区）时会静默生成一份 `module="dut"` 的
+                    # 合约——它自己校验得过，但和真实 RTL 的模块名对不上。
+                    module=str(
+                        st.session_state.get("custom_selected_module") or _contract_module_hint() or "dut"
+                    ),
                     ports=list(rows),
                     parameters=st.session_state.get("custom_contract_editor_parameters"),
                     clock_signal=clock_signal,
@@ -692,14 +805,17 @@ def _contract_editor() -> None:
                 _contract = DutContract.from_dict(payload)
                 st.session_state.custom_contract_text = _contract.to_json()
                 st.session_state.custom_contract_editor_ports = list(_contract.to_dict()["ports"])
-                if st.session_state.get("custom_contract_json_text") is not None:
-                    st.session_state.custom_contract_json_text = st.session_state.custom_contract_text
+                # 文本框在下方创建，本行在它之前执行，因此回写它的 key 合法。
+                st.session_state.custom_contract_json_text = _contract.to_json()
                 # 表格改过就必须重新校验，避免用旧合约继续跑
                 st.session_state.custom_contract = None
                 st.success("已生成 JSON，下一步点「校验 contract」。")
             except Exception as exc:
                 st.error(f"表格内容无效：{exc}")
 
+    # 文本框带 `key`，值由 Streamlit 自己管；首帧用一个种子，避免出现空框。
+    if "custom_contract_json_text" not in st.session_state:
+        st.session_state.custom_contract_json_text = st.session_state.get("custom_contract_text", "")
     st.text_area(
         "② DUT contract JSON（可直接编辑）",
         height=190,
@@ -708,18 +824,21 @@ def _contract_editor() -> None:
     )
     _sync_col, _validate_col, _export_col = st.columns([1, 1, 3])
     with _sync_col:
-        if st.button("用 JSON 刷新表格", key="contract_json_to_editor"):
-            try:
-                _parsed = DutContract.from_json(st.session_state.custom_contract_json_text)
-                st.session_state.custom_contract_editor_ports = list(_parsed.to_dict()["ports"])
-                st.session_state.custom_contract_text = st.session_state.custom_contract_json_text
-                st.session_state["contract_editor_gen"] = int(st.session_state.get("contract_editor_gen", 0)) + 1
-                st.session_state.custom_contract = None
-                st.rerun(scope="fragment")   # 只重跑这一段：表格拿到新数据，页面不跳
-            except Exception as exc:
-                st.error(f"JSON 无效：{exc}")
+        # 两个按钮的逻辑都放在 `on_click` 回调里：回调在本次运行**创建任何控件之前**执行，
+        # 因此可以合法地回写控件 key、也可以在渲染前换掉 data_editor 的数据，
+        # 既不需要整页重跑，也不需要 fragment 级重跑（见两个回调函数的说明）。
+        st.button(
+            "用 JSON 刷新表格",
+            key="contract_json_to_editor",
+            on_click=_apply_json_to_table_on_click,
+        )
     with _validate_col:
-        _validate_clicked = st.button("校验 contract", type="primary", key="validate_custom_contract")
+        st.button(
+            "校验 contract",
+            type="primary",
+            key="validate_custom_contract",
+            on_click=_validate_contract_on_click,
+        )
     with _export_col:
         if st.session_state.get("custom_contract") is not None:
             with st.popover("导出"):
@@ -730,15 +849,6 @@ def _contract_editor() -> None:
                     mime="application/json",
                     key="download_custom_contract",
                 )
-    if _validate_clicked:
-        try:
-            st.session_state.custom_contract = DutContract.from_json(st.session_state.custom_contract_json_text)
-            st.session_state.custom_contract_text = st.session_state.custom_contract.to_json()
-            st.session_state.custom_contract_json_text = st.session_state.custom_contract_text
-            st.success("contract 校验通过，可以生成 AI 计划")
-        except Exception as exc:
-            st.session_state.custom_contract = None
-            st.error(f"contract 无效：{exc}")
 
 
 def _offline_provider(contract: DutContract, *, vector_count: int | None = None) -> DeterministicLocalProvider:

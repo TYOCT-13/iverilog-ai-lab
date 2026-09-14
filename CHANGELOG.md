@@ -82,6 +82,24 @@
 
 ### 修复
 
+- **自定义 RTL 的「校验 contract」按钮完全不可用（Streamlit 的控件回写限制）**：真实反馈是
+  "配置好 API 后：从表格生成 JSON → 刷新表格 → 校验 contract 报错
+  `contract 无效：st.session_state.custom_contract_json_text cannot be modified after the
+  widget with key custom_contract_json_text is instantiated`"。
+  根因：Streamlit 禁止在**本次运行**里创建过 `key=X` 的控件之后再写 `st.session_state.X`，
+  而"校验通过后把规范格式写回 JSON 文本框"这一步正好写在文本框创建之后——按钮每次点都炸，
+  页面本身却完全正常，所以渲染测试也发现不了。
+  处理：**按动作选位置**，而不是到处搬代码——
+  ①「校验 contract」与「用 JSON 刷新表格」整体搬进 `on_click` 回调。回调在 fragment 主体
+  **之前**执行，因此回写控件 key、以及在渲染前换掉 `data_editor` 的数据都是合法的；
+  ②整条交互链里不再有 `st.rerun(scope="fragment")`（该 scope 在整页运行时会被 Streamlit
+  拒绝，同一个按钮在两种上下文里表现不一致），现在两个按钮都只靠"回调 + 正常 fragment 重跑"；
+  ③「用 JSON 刷新表格」顺带把 JSON 里的时钟/复位写回对应控件（以前只回填端口，时钟/复位
+  控件保留旧值）；④「从表格生成 JSON」的模块名优先级改为"所选顶层 module → 当前 JSON 里的
+  module → dut"，避免手写 JSON 时静默生成一份 `module="dut"` 的合约。
+  回归：`tests/core/test_ui_smoke.py` 新增四条 AppTest 用例（用真实点击走完三个按钮、
+  校验失败仍报可读原因、以及一条**静态门禁**：同一作用域内不允许"控件建好之后再写它的
+  session_state key"，把这类事故整体拦住）。
 - **网页离线模式对组合逻辑案例必然报错（`unknown port 'rst_n'`）**：真实反馈是
   "选离线 mock、简单 ALU、执行 AI 计划并生成 tb 时报 `vectors[0].inputs contains unknown
   port 'rst_n'`，而同一个案例点『执行真实 Icarus 仿真』却是 pass"。
@@ -105,7 +123,7 @@
   `TestbenchGenerationError` 类名以 `Test` 开头，任何 import 它们的测试模块都会触发
   `PytestCollectionWarning: cannot collect test class ...`。虽然不影响结果，但会让"全绿"
   的输出看起来像有测试收集问题（也会埋掉真正的告警）。三个类显式声明 `__test__ = False`，
-  现在 `python -m pytest -q` 是 **432 passed、0 warning**。
+  现在 `python -m pytest -q` 是 **436 passed、0 warning**。
 - **检出率用了不可比的口径（把"多试几次"算成"模型更强"）**：在线模型跑了 10 轮，
   而我报的 `97.0% / 95.5%` 是"任意一轮检出即算检出"的**累计并集**；固定/随机/离线三个
   基线各只跑 1 轮。拿 10 轮并集比 1 轮结果，等于把重复次数算成了模型能力。经复算，

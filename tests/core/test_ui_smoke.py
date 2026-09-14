@@ -278,6 +278,190 @@ def test_contract_editor_survives_stale_widget_state():
     assert isinstance(app.session_state["custom_contract_editor_ports"], list)
 
 
+def _custom_rtl_app(*, json_text: str = "") -> AppTest:
+    """渲染"自定义 RTL"分支（contract 编辑区就在这里），可按需预置 JSON 文本框内容。"""
+
+    app = AppTest.from_file(str(APP), default_timeout=180)
+    app.session_state["case_name"] = "自定义 RTL"
+    # 该分支在 `custom_rtl_path` 缺席时会初始化并清空 contract 文本，因此必须先占位
+    app.session_state["custom_rtl_path"] = ""
+    app.session_state["custom_contract_text"] = json.dumps(
+        {"module": "pwm", "ports": [{"name": "clk", "direction": "input", "width": 1}]}
+    )
+    app.session_state["custom_rtl_source"] = "module pwm(input wire clk); endmodule\n"
+    app.session_state["custom_selected_module"] = "pwm"
+    if json_text:
+        app.session_state["custom_contract_json_text"] = json_text
+    app.run()
+    assert not app.exception, [str(item.value) for item in app.exception]
+    return app
+
+
+def _click(app: AppTest, key: str) -> None:
+    target = next(item for item in app.button if getattr(item, "key", None) == key)
+    target.click()
+    app.run()
+
+
+def test_validate_contract_button_works_when_the_json_box_is_filled():
+    """真实事故：点「校验 contract」报
+    ``contract 无效：st.session_state.custom_contract_json_text cannot be modified after the
+    widget with key `custom_contract_json_text` is instantiated``。
+
+    Streamlit 禁止在**本次运行**创建过 `key=X` 的控件之后再写 `st.session_state.X`。
+    原来 JSON 文本框带 `key`，"校验通过后把规范格式写回文本框"这一步就必然抛错——
+    于是「校验 contract」这个按钮在填过 JSON 之后完全不可用。
+    现在文本框不带 `key`（`value=` 显示 + 手动回写普通 session key），任何时刻都能回写。
+    """
+
+    app = _custom_rtl_app(
+        json_text='{"module":"pwm","ports":[{"name":"clk","direction":"input","width":1}]}'
+    )
+    _click(app, "validate_custom_contract")
+    assert not app.exception, [str(item.value) for item in app.exception]
+    assert not [item.value for item in app.error], [item.value for item in app.error]
+    assert any("校验通过" in item.value for item in app.success), [item.value for item in app.success]
+    contract = app.session_state["custom_contract"]
+    assert contract is not None
+    # 规范化后的 JSON 必须真的回到文本框（显示值）与 session key
+    assert app.session_state["custom_contract_json_text"] == contract.to_json()
+    boxes = [item for item in app.text_area if "DUT contract JSON" in str(item.label)]
+    assert boxes and boxes[0].value == contract.to_json(), [getattr(item, "value", None) for item in boxes]
+
+
+def test_contract_editor_buttons_walk_through_the_documented_flow():
+    """三个按钮按用户实际顺序走一遍：生成 JSON → 刷新表格 → 校验 contract。
+
+    这条覆盖的是"点得到、点了不炸、结果对"：早期实现在「校验 contract」上必然抛
+    StreamlitAPIException（见上一条用例），而「用 JSON 刷新表格」靠
+    `st.rerun(scope="fragment")`——整页运行时 Streamlit 会拒绝该 scope。现在两个按钮都走
+    `on_click` 回调，逻辑在 fragment 主体**之前**执行，因此既不需要重跑，也不受上下文限制。
+    """
+
+    app = _custom_rtl_app()
+    _click(app, "FormSubmitter:contract_form-从表格生成 JSON")
+    assert not app.exception, [str(item.value) for item in app.exception]
+    assert not [item.value for item in app.error], [item.value for item in app.error]
+    generated = json.loads(app.session_state["custom_contract_json_text"])
+    assert generated["module"] == "pwm", generated  # 模块名取自所选顶层 module，而不是字面量 dut
+
+    _click(app, "contract_json_to_editor")
+    assert not app.exception, [str(item.value) for item in app.exception]
+    assert not [item.value for item in app.error], [item.value for item in app.error]
+    assert any("刷新表格" in item.value for item in app.success), [item.value for item in app.success]
+    assert app.session_state["custom_contract_editor_ports"], "JSON 里的端口没有回到表格"
+
+    _click(app, "validate_custom_contract")
+    assert not app.exception, [str(item.value) for item in app.exception]
+    assert not [item.value for item in app.error], [item.value for item in app.error]
+    assert app.session_state["custom_contract"].module == "pwm"
+
+
+def test_validate_contract_reports_invalid_json_without_breaking_the_page():
+    """校验失败必须报"contract 无效：<原因>"，并且不留下半份合约。
+
+    回调里抛出的解析错误在旧实现里会被写成"Streamlit 内部错误"（那条 `cannot be modified…`），
+    真正的原因（JSON 语法错在哪）反而看不到；这里钉住错误信息仍然是给人看的那种。
+    """
+
+    app = _custom_rtl_app(json_text='{"module": "pwm", "ports": [}')
+    _click(app, "validate_custom_contract")
+    assert not app.exception, [str(item.value) for item in app.exception]
+    assert app.session_state["custom_contract"] is None
+    messages = [item.value for item in app.error]
+    assert messages and "contract 无效" in messages[0], messages
+
+
+#: Streamlit 的控件函数（带 `key` 参数的那些）。
+_WIDGET_FUNCS = frozenset(
+    {
+        "button", "download_button", "form_submit_button", "text_area", "text_input", "number_input",
+        "selectbox", "multiselect", "radio", "checkbox", "toggle", "slider", "select_slider",
+        "data_editor", "file_uploader", "color_picker", "date_input", "time_input", "camera_input",
+        "chat_input", "pills", "segmented_control", "audio_input", "link_button", "form",
+    }
+)
+
+
+def _literal_widget_key(call: ast.Call) -> str | None:
+    for keyword in call.keywords:
+        if keyword.arg == "key" and isinstance(keyword.value, ast.Constant) and isinstance(keyword.value.value, str):
+            return keyword.value.value
+    return None
+
+
+def _session_state_target(node: ast.AST) -> str | None:
+    """取出 `st.session_state.X = ...` / `st.session_state["X"] = ...` 里的 X。"""
+
+    targets: list[ast.expr] = []
+    if isinstance(node, ast.Assign):
+        targets = list(node.targets)
+    elif isinstance(node, (ast.AnnAssign, ast.AugAssign)):
+        targets = [node.target]
+    for target in targets:
+        if isinstance(target, ast.Attribute) and isinstance(target.value, ast.Attribute):
+            if target.value.attr == "session_state":
+                return target.attr
+        if isinstance(target, ast.Subscript) and isinstance(target.value, ast.Attribute):
+            if target.value.attr == "session_state" and isinstance(target.slice, ast.Constant):
+                if isinstance(target.slice.value, str):
+                    return target.slice.value
+    return None
+
+
+def _write_after_widget_findings(path: Path) -> list[str]:
+    """保守的 AST 检查：同一作用域内，控件创建之后又去写它的 session_state key。
+
+    只报"同一函数/模块作用域、创建在前、赋值在后"的确定情况（跨函数调用顺序不推断），
+    因此不会有误报，但能拦住这类事故的典型形态。
+    """
+
+    tree = ast.parse(path.read_text(encoding="utf-8"))
+    findings: list[str] = []
+
+    def walk_scope(body: list[ast.stmt], scope: str) -> None:
+        created: dict[str, int] = {}
+
+        def visit(node: ast.AST) -> None:
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                return  # 各自作为独立作用域单独扫描
+            if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute):
+                if node.func.attr in _WIDGET_FUNCS:
+                    key = _literal_widget_key(node)
+                    if key:
+                        created.setdefault(key, node.lineno)
+            key = _session_state_target(node)
+            if key and key in created:
+                findings.append(
+                    f"{path.name}:{node.lineno} 在 {scope} 里写 session_state['{key}']，"
+                    f"而该 key 的控件已在第 {created[key]} 行创建（同一次运行内必抛 StreamlitAPIException）"
+                )
+            for child in ast.iter_child_nodes(node):
+                visit(child)
+
+        for statement in body:
+            if isinstance(statement, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                walk_scope(statement.body, f"{scope}::{statement.name}")
+                continue
+            if isinstance(statement, ast.ClassDef):
+                continue
+            visit(statement)
+
+    walk_scope(tree.body, "module")
+    return findings
+
+
+def test_no_session_state_write_after_widget_instantiation():
+    """把上面那类事故做成静态门禁：整份页面脚本都不允许"控件建好之后再写它的 key"。
+
+    这类 bug 只在**用户点到那个按钮**时才炸，而且报错信息是 Streamlit 的内部话术，
+    渲染测试默认覆盖不到（页面照样能打开）。
+    """
+
+    findings = _write_after_widget_findings(APP)
+    assert not findings, "发现「控件创建后回写 session_state」的代码：\n" + "\n".join(findings)
+
+
 def test_no_python_file_has_unreachable_code():
     """把未可达代码检查作为测试跑一遍，保证门禁在 `pytest` 里也生效。"""
 
