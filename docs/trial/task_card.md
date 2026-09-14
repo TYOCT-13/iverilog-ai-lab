@@ -129,6 +129,7 @@ python -m iverilog_ai compare-rtl `
 |---|---|---|
 | `未找到 Icarus Verilog` | 工具不在 PATH 且不在常见目录 | 设环境变量：`$env:IVERILOG_PATH="D:\iverilog\bin\iverilog.exe"`、`$env:VVP_PATH="D:\iverilog\bin\vvp.exe"` |
 | `ModuleNotFoundError: iverilog_ai` | 没安装或不在仓库根目录 | 在仓库根目录执行 `python -m pip install -e .` |
+| `pip install -e .` 报 `No module named 'setuptools'` | 离线环境里 pip 的隔离构建装不上构建依赖 | 加 `--no-build-isolation`（本机已装 setuptools 时最省事）；该问题已修正 `pyproject.toml` 的 `[build-system]`，旧版本才会遇到 |
 | 基准矩阵某条 `inconclusive` | 仿真超时或编译失败 | 把该条记录与 `.iverilog-ai/benchmark-matrix/` 下对应日志一并记下来 |
 | 网页起不来 / 端口被占 | 8501 被占用 | `streamlit run ui/app.py --server.port 8502` |
 | 综合层显示"工具不可用" | 没装 Yosys（可选） | `python -m pip install yowasp-yosys`，或忽略该层 |

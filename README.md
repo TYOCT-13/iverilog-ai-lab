@@ -25,7 +25,7 @@
 在工程根目录执行（请按本机 Icarus 安装位置调整工具路径）：
 
 ```powershell
-python -m pip install -e .
+python -m pip install -e .            # 离线环境可加 --no-build-isolation
 python -m iverilog_ai run `
   --rtl rtl/mod10_counter.v `
   --testbench tb/tb_mod10_counter.v `

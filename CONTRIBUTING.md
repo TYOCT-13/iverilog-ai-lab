@@ -21,7 +21,7 @@
 
 ```powershell
 # 1. Python 3.11+
-python -m pip install -e .
+python -m pip install -e .            # 离线环境可加 --no-build-isolation
 python -m pip install pytest
 
 # 2. Icarus Verilog（必需，判决权威）

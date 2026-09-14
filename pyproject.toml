@@ -1,6 +1,10 @@
 [build-system]
-requires = []
-build-backend = "setuptools.build_meta:__legacy__"
+# 必须声明 setuptools：pip 默认在**隔离环境**里构建，`requires = []` 会让构建后端
+# 连自己都导不进来，于是文档里的第一步 `pip install -e .` 直接失败
+# （报 `ModuleNotFoundError: No module named 'setuptools'`），而本机明明装了 setuptools。
+# 离线环境可以用 `pip install -e . --no-build-isolation` 跳过隔离构建。
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "iverilog-ai-lab"

@@ -82,6 +82,14 @@
 
 ### 修复
 
+- **文档里的第一步 `pip install -e .` 在干净环境里会直接失败**：`pyproject.toml` 的
+  `[build-system]` 写成 `requires = []`，而 pip 默认在**隔离环境**里构建——构建后端
+  连 setuptools 都导不进来，报 `ModuleNotFoundError: No module named 'setuptools'`，
+  哪怕本机已经装了 setuptools。评委或同学照 README 的第一步就会卡住。
+  已改为标准的 `requires = ["setuptools>=61"]` + `setuptools.build_meta`；离线环境可在
+  命令后加 `--no-build-isolation`，README / CONTRIBUTING / 试用任务卡都补了这一行。
+  顺带核实：装好后 `python -m iverilog_ai` 与 `iverilog-ai` 控制台命令均可用
+  （此前仓库内所有命令都靠 `PYTHONPATH=src` 才跑得起来，属于隐性使用门槛）。
 - **token 总量按行重复累加，被放大 6 倍**：`usage` 挂在每个变体行上，而一次计划请求
   的计划会被同一案例的参考设计与全部缺陷复用——按行相加等于把同一份用量算了 13 次。
   实测：09-11 双模型对比的 `1,428,261` / `1,391,722` 实际是 **236,028 / 231,036**；
