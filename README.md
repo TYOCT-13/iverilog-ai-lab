@@ -113,6 +113,7 @@ python -m iverilog_ai compare-rtl `
 ## 参与贡献
 
 - 想先看项目能做什么：[docs/project_overview.md](docs/project_overview.md)（含 10 页 PDF）
+- 想审一遍"要求 / 计划 / 尝试 / 现状"：[docs/delivery_review.md](docs/delivery_review.md)（交付审核文档，含需要拍板的 7 个点）
 - 想动手试一遍：`docs/trial/` 的[试用任务卡](docs/trial/task_card.md)，约 40 分钟、无需密钥
 - 贡献流程、案例成套提交要求与提交前必须通过的命令：[CONTRIBUTING.md](CONTRIBUTING.md)
 - 变更记录（含各阶段的误报校准与修复原因）：[CHANGELOG.md](CHANGELOG.md)
