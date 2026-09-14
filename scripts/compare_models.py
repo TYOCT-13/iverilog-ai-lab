@@ -146,6 +146,35 @@ def _detected_variants(payload: dict, strategy: str, case: str) -> set[str]:
 ANALYSIS_DOC = "docs/experiment/model_comparison.md"
 
 
+def _per_round_detection(payload: dict, strategy: str, cases: set[str]) -> tuple[float, float, float, int]:
+    """按 seed（轮次）统计检出率，返回 (单轮平均, 最低, 最高, 轮数)。
+
+    **为什么必须给这个数**：`summary.detection_rate` 是"该缺陷在任意一轮被检出即算检出"
+    的**累计并集**——10 轮重复下它天然高于任何单轮结果。而 `fixed` 基线只跑 1 轮，
+    拿 10 轮并集去比 1 轮基线，等于把"多试几次"算成"模型更强"。两个口径必须同时给。
+    """
+
+    manifest = json.loads((ROOT / "benchmarks" / "manifest.json").read_text(encoding="utf-8"))
+    defects = {
+        str(item["id"]) for item in manifest.get("defects", []) if str(item["type"]) in cases
+    }
+    by_round: dict[int, set[str]] = {}
+    for row in payload.get("runs", []):
+        if row.get("strategy") != strategy:
+            continue
+        variant = row.get("variant")
+        if variant in (None, "reference", "plan_generation"):
+            continue
+        seed = int(row.get("seed") or 0)
+        by_round.setdefault(seed, set())
+        if row.get("defects_found"):
+            by_round[seed].add(str(variant))
+    if not defects or not by_round:
+        return (0.0, 0.0, 0.0, 0)
+    rates = [len(found) / len(defects) for found in by_round.values()]
+    return (sum(rates) / len(rates), min(rates), max(rates), len(by_round))
+
+
 def render(model_names: list[str], payloads: dict[str, dict]) -> str:
     lines: list[str] = []
     lines.append("# 多模型公平对比（自动生成）")
@@ -156,12 +185,21 @@ def render(model_names: list[str], payloads: dict[str, dict]) -> str:
     lines.append("")
     lines.append("案例集合、DUT 合约、上下文口径、重复次数完全一致；差别只在 `online_ai` 策略使用的模型。")
     lines.append("")
+    lines.append(
+        "> **两个检出率口径必须分清**：`累计并集`指「该缺陷在任意一轮被检出即算检出」，"
+        "重复次数越多它越高；`单轮平均`才是与固定/随机基线（各只跑一轮）可比的口径。"
+        "两个数都列出，避免把「多试几次」读成「模型更强」。"
+    )
+    lines.append("")
 
     # 在线模型对比
     lines.append("## 在线模型对比（`online_ai` 策略）")
     lines.append("")
-    lines.append("| 模型 | 重复次数 | 请求级计划合法率 | 参考误报 | 参考期望不一致 | 缺陷检出 | 检出率 | 平均生成 | 平均首次失败 |")
-    lines.append("|---|---:|---:|---:|---:|---:|---:|---:|---:|")
+    lines.append(
+        "| 模型 | 重复次数 | 请求级计划合法率 | 参考误报 | 参考期望不一致 | 缺陷检出（累计并集） "
+        "| 累计检出率 | **单轮平均检出率** | 单轮范围 | 平均生成 | 平均首次失败 |"
+    )
+    lines.append("|---|---:|---:|---:|---:|---:|---:|---:|---|---:|---:|")
     for name in model_names:
         summary = _summary(payloads[name], "online_ai")
         if not summary:
@@ -176,6 +214,9 @@ def render(model_names: list[str], payloads: dict[str, dict]) -> str:
             if row.get("strategy") == "online_ai" and row.get("seed") is not None
         }
         repeats = len(seeds) if seeds else None
+        mean_rate, low, high, rounds = _per_round_detection(
+            payloads[name], "online_ai", _case_set(payloads[name])
+        )
         lines.append(
             f"| **{name}** | {repeats if repeats is not None else '—'} "
             f"| {summary.get('request_plan_valid_rate', 0) * 100:.0f}% "
@@ -183,6 +224,8 @@ def render(model_names: list[str], payloads: dict[str, dict]) -> str:
             f"| {summary.get('reference_warn_mismatches', 0)} "
             f"| {summary.get('defects_found', 0)}/{summary.get('defects_total', 0)} "
             f"| {summary.get('detection_rate', 0) * 100:.1f}% "
+            f"| **{mean_rate * 100:.1f}%**（{rounds} 轮） "
+            f"| {low * 100:.1f}%–{high * 100:.1f}% "
             f"| {summary.get('mean_generation_ms', 0) / 1000:.1f}s "
             f"| {summary.get('mean_time_to_first_failure_ms', 0) / 1000:.2f}s |"
         )
