@@ -2,6 +2,7 @@
 from pathlib import Path
 from typing import Any, Literal
 import json
+import sys
 import streamlit as st
 
 import os
@@ -22,6 +23,12 @@ from iverilog_ai.core.rtl_compare import compare_rtl_sources
 from iverilog_ai.core.behavior_compare import compare_rtl_behavior
 from iverilog_ai.core.rules import rules_context, rule_manifest, rules_fingerprint
 from iverilog_ai.core.rule_assertions import assertion_suggestions
+# `scripts/` 不是安装包的一部分：从仓库外启动页面（`streamlit run E:\...\ui\app.py`）时
+# `import scripts.create_evidence_pack` 会失败。把仓库根加进 sys.path 再导入，
+# 页面因此不依赖"当前工作目录必须是仓库根"。
+_ROOT_HINT = Path(__file__).resolve().parents[1]
+if str(_ROOT_HINT) not in sys.path:
+    sys.path.insert(0, str(_ROOT_HINT))
 from scripts.create_evidence_pack import create_evidence_pack
 # 注意：core.rules 与 core.static_review 各有一个 rule_manifest，签名不同
 # （前者按案例返回规则文本，后者返回静态规则注册表）。必须用别名区分，否则
@@ -569,54 +576,169 @@ def _set_contract_editor(raw: str) -> None:
         pass
 
 
+def _contract_payload(
+    *,
+    module: str,
+    ports: list,
+    parameters: dict | None,
+    clock_signal: str,
+    clock_period: float,
+    clock_edge: str,
+    reset_signal: str,
+    reset_active: Any,
+    reset_sync: bool,
+    reset_cycles: Any,
+) -> dict:
+    """把编辑区里的表格与时钟/复位字段拼成 contract 字典（纯函数，便于单测）。
+
+    抽出来的理由：这段转换是"表格 → 合约"的唯一逻辑，出错的后果是**合约静默错位**
+    （比如复位电平写反），而它原本埋在 Streamlit 控件代码里，无法在测试里直接调用。
+    """
+
+    payload: dict = {"module": module or "dut", "ports": list(ports)}
+    if parameters:
+        payload["parameters"] = dict(parameters)
+    if str(clock_signal).strip():
+        payload["clock"] = {"signal": str(clock_signal).strip(), "period_ns": float(clock_period), "edge": clock_edge}
+    if str(reset_signal).strip():
+        payload["reset"] = {
+            "signal": str(reset_signal).strip(),
+            "active_level": int(reset_active or 0),
+            "synchronous": bool(reset_sync),
+            "assert_cycles": int(reset_cycles or 1),
+        }
+    return payload
+
+
+@st.fragment
 def _contract_editor() -> None:
-    """显示受控的 DUT contract 表格和时钟/复位字段，并支持生成 JSON。"""
+    """DUT contract 编辑区（**整段跑在 fragment 里**）。
+
+    为什么要 fragment：Streamlit 默认"控件一变就重跑整个脚本"，编辑表格或点按钮都会让
+    整页重新渲染——滚动位置丢失、其它区域闪烁，体验上就像刷新了整个页面。
+    `@st.fragment` 让这一段的交互只重跑这一段。
+
+    另外两处修正：
+    - 表格 ↔ JSON 的同步原来是**自动双向**的（JSON 一变回写表格、表格一变又靠
+      `st.rerun()` 回写），既容易互相覆盖，也必须多跑一遍脚本才生效。现在改成两个显式
+      动作：表格 → JSON（表单提交）、JSON → 表格（按钮），不再有隐式重跑。
+    - 原来"从表格生成 JSON"先 `st.success(...)` 再 `st.rerun()`，那条成功提示会被立刻
+      丢掉（用户只看到页面一闪）。现在不重跑，提示留在原地。
+    """
+
     if not st.session_state.get("custom_contract_text"):
         return
-    _set_contract_editor(st.session_state.custom_contract_text) if "custom_contract_editor_ports" not in st.session_state else None
-    with st.expander("表格化编辑 DUT contract（可与 JSON 双向同步）", expanded=True):
-        rows = st.data_editor(
-            st.session_state.get("custom_contract_editor_ports", []),
-            num_rows="dynamic", use_container_width=True, key="custom_ports_editor",
-            column_config={
-                "name": st.column_config.TextColumn("端口名称", required=True),
-                "direction": st.column_config.SelectboxColumn("方向", options=["input", "output", "inout"], required=True),
-                "width": st.column_config.NumberColumn("位宽", min_value=1, max_value=4096, step=1, required=True),
-                "signed": st.column_config.CheckboxColumn("有符号", default=False),
-            },
-        )
-        c1, c2, c3 = st.columns(3)
-        clock = st.session_state.get("custom_contract_editor_clock", {"signal": "", "period_ns": 10.0, "edge": "posedge"})
-        reset = st.session_state.get("custom_contract_editor_reset", {"signal": "", "active_level": 0, "synchronous": False, "assert_cycles": 2})
-        with c1:
-            clock_signal = st.text_input("时钟信号", value=clock.get("signal", ""), key="contract_clock_signal")
-            clock_period = st.number_input("时钟周期 (ns)", min_value=0.001, value=float(clock.get("period_ns", 10.0)), key="contract_clock_period")
-            clock_edge = st.selectbox("时钟边沿", ["posedge", "negedge"], index=0 if clock.get("edge", "posedge") == "posedge" else 1, key="contract_clock_edge")
-        with c2:
-            reset_signal = st.text_input("复位信号（可留空）", value=reset.get("signal", ""), key="contract_reset_signal")
-            reset_active = st.selectbox("复位有效电平", [0, 1], index=int(reset.get("active_level", 0)), key="contract_reset_active")
-            reset_sync = st.checkbox("同步复位", value=bool(reset.get("synchronous", False)), key="contract_reset_sync")
-        with c3:
-            reset_cycles = st.number_input("复位持续周期", min_value=1, max_value=10000, value=int(reset.get("assert_cycles", 2)), step=1, key="contract_reset_cycles")
-            st.caption("留空复位信号表示 contract 不包含 reset。")
-        if st.button("从表格生成 JSON", key="contract_editor_to_json"):
+    # 影子列表（端口数据）永远是 list：解析失败也要留一个空列表，否则后续读取会 KeyError。
+    if not isinstance(st.session_state.get("custom_contract_editor_ports"), list):
+        _set_contract_editor(st.session_state.custom_contract_text)
+        if not isinstance(st.session_state.get("custom_contract_editor_ports"), list):
+            st.session_state.custom_contract_editor_ports = []
+    _ports_shadow = st.session_state["custom_contract_editor_ports"]
+    # data_editor 的数据**始终**来自影子列表（`custom_contract_editor_ports`），
+    # `key` 只用来标识控件。踩过的坑：`session_state[key]` 里存的是 Streamlit 自己的
+    # **编辑状态**（`{edited_rows, added_rows, deleted_rows}`），不是端口数据；把它当数据
+    # 喂回 data_editor，pandas 会抛 "Mixing dicts with non-Series…" 直接把整页打成 500
+    # （真实事故，见 job 日志）。所以：数据只从一个地方来，编辑结果只看返回值。
+    #
+    # 需要"换一批数据"时（JSON → 表格），靠换 key 让编辑器重新初始化：
+    _editor_generation = int(st.session_state.get("contract_editor_gen", 0))
+    _editor_key = f"custom_ports_editor_{_editor_generation}"
+
+    with st.expander("① 表格化编辑 DUT contract", expanded=True):
+        with st.form("contract_form", clear_on_submit=False):
+            rows = st.data_editor(
+                _ports_shadow,
+                num_rows="dynamic",
+                use_container_width=True,
+                key=_editor_key,
+                column_config={
+                    "name": st.column_config.TextColumn("端口名称", required=True),
+                    "direction": st.column_config.SelectboxColumn(
+                        "方向", options=["input", "output", "inout"], required=True
+                    ),
+                    "width": st.column_config.NumberColumn("位宽", min_value=1, max_value=4096, step=1, required=True),
+                    "signed": st.column_config.CheckboxColumn("有符号", default=False),
+                },
+            )
+            c1, c2, c3 = st.columns(3)
+            clock = st.session_state.get("custom_contract_editor_clock", {"signal": "", "period_ns": 10.0, "edge": "posedge"})
+            reset = st.session_state.get("custom_contract_editor_reset", {"signal": "", "active_level": 0, "synchronous": False, "assert_cycles": 2})
+            with c1:
+                clock_signal = st.text_input("时钟信号", value=clock.get("signal", ""), key="contract_clock_signal")
+                clock_period = st.number_input("时钟周期 (ns)", min_value=0.001, value=float(clock.get("period_ns", 10.0)), key="contract_clock_period")
+                clock_edge = st.selectbox("时钟边沿", ["posedge", "negedge"], index=0 if clock.get("edge", "posedge") == "posedge" else 1, key="contract_clock_edge")
+            with c2:
+                reset_signal = st.text_input("复位信号（可留空）", value=reset.get("signal", ""), key="contract_reset_signal")
+                reset_active = st.selectbox("复位有效电平", [0, 1], index=int(reset.get("active_level", 0)), key="contract_reset_active")
+                reset_sync = st.checkbox("同步复位", value=bool(reset.get("synchronous", False)), key="contract_reset_sync")
+            with c3:
+                reset_cycles = st.number_input("复位持续周期", min_value=1, max_value=10000, value=int(reset.get("assert_cycles", 2)), step=1, key="contract_reset_cycles")
+                st.caption("留空复位信号表示 contract 不包含 reset。")
+            _submitted = st.form_submit_button("从表格生成 JSON", type="primary")
+        if _submitted:
             try:
-                payload = {"module": st.session_state.get("custom_selected_module", "dut"), "ports": list(rows)}
-                if st.session_state.get("custom_contract_editor_parameters"):
-                    payload["parameters"] = dict(st.session_state.custom_contract_editor_parameters)
-                if clock_signal.strip():
-                    payload["clock"] = {"signal": clock_signal.strip(), "period_ns": float(clock_period), "edge": clock_edge}
-                if reset_signal.strip():
-                    payload["reset"] = {"signal": reset_signal.strip(), "active_level": int(reset_active or 0), "synchronous": bool(reset_sync), "assert_cycles": int(reset_cycles or 1)}
-                contract = DutContract.from_dict(payload)
-                st.session_state.custom_contract_text = contract.to_json()
-                st.session_state.custom_contract_json_text = st.session_state.custom_contract_text
+                payload = _contract_payload(
+                    module=str(st.session_state.get("custom_selected_module", "dut")),
+                    ports=list(rows),
+                    parameters=st.session_state.get("custom_contract_editor_parameters"),
+                    clock_signal=clock_signal,
+                    clock_period=clock_period,
+                    clock_edge=str(clock_edge or "posedge"),
+                    reset_signal=reset_signal,
+                    reset_active=reset_active,
+                    reset_sync=reset_sync,
+                    reset_cycles=reset_cycles,
+                )
+                _contract = DutContract.from_dict(payload)
+                st.session_state.custom_contract_text = _contract.to_json()
+                st.session_state.custom_contract_editor_ports = list(_contract.to_dict()["ports"])
+                if st.session_state.get("custom_contract_json_text") is not None:
+                    st.session_state.custom_contract_json_text = st.session_state.custom_contract_text
+                # 表格改过就必须重新校验，避免用旧合约继续跑
                 st.session_state.custom_contract = None
-                st.session_state.custom_contract_editor_ports = list(contract.to_dict()["ports"])
-                st.success("已从表格生成 JSON，请继续点击“校验自定义 contract”。")
-                st.rerun()
+                st.success("已生成 JSON，下一步点「校验 contract」。")
             except Exception as exc:
                 st.error(f"表格内容无效：{exc}")
+
+    st.text_area(
+        "② DUT contract JSON（可直接编辑）",
+        height=190,
+        key="custom_contract_json_text",
+        help="表格与 JSON 不再自动互相同步：表格改完点上面的「从表格生成 JSON」，JSON 改完点下面的「用 JSON 刷新表格」。",
+    )
+    _sync_col, _validate_col, _export_col = st.columns([1, 1, 3])
+    with _sync_col:
+        if st.button("用 JSON 刷新表格", key="contract_json_to_editor"):
+            try:
+                _parsed = DutContract.from_json(st.session_state.custom_contract_json_text)
+                st.session_state.custom_contract_editor_ports = list(_parsed.to_dict()["ports"])
+                st.session_state.custom_contract_text = st.session_state.custom_contract_json_text
+                st.session_state["contract_editor_gen"] = int(st.session_state.get("contract_editor_gen", 0)) + 1
+                st.session_state.custom_contract = None
+                st.rerun(scope="fragment")   # 只重跑这一段：表格拿到新数据，页面不跳
+            except Exception as exc:
+                st.error(f"JSON 无效：{exc}")
+    with _validate_col:
+        _validate_clicked = st.button("校验 contract", type="primary", key="validate_custom_contract")
+    with _export_col:
+        if st.session_state.get("custom_contract") is not None:
+            with st.popover("导出"):
+                st.download_button(
+                    "contract JSON",
+                    st.session_state.custom_contract.to_json(),
+                    file_name="dut_contract.json",
+                    mime="application/json",
+                    key="download_custom_contract",
+                )
+    if _validate_clicked:
+        try:
+            st.session_state.custom_contract = DutContract.from_json(st.session_state.custom_contract_json_text)
+            st.session_state.custom_contract_text = st.session_state.custom_contract.to_json()
+            st.session_state.custom_contract_json_text = st.session_state.custom_contract_text
+            st.success("contract 校验通过，可以生成 AI 计划")
+        except Exception as exc:
+            st.session_state.custom_contract = None
+            st.error(f"contract 无效：{exc}")
 
 
 def _build_provider(target: str):
@@ -895,32 +1017,6 @@ with _TAB_VERIFY:
         for warning in st.session_state.get("custom_warnings", ()):
             st.warning(warning)
         _contract_editor()
-        contract_text = st.text_area("DUT contract JSON（确认方向、位宽、时钟、复位后再校验）", value=st.session_state.get("custom_contract_text", ""), height=220, key="custom_contract_json_text")
-        # JSON 文本编辑也会回写到表格编辑器，下一次页面刷新时保持双向同步。
-        if contract_text != st.session_state.get("custom_contract_text", ""):
-            st.session_state.custom_contract_text = contract_text
-            _set_contract_editor(contract_text)
-        _btn_validate, _btn_export = st.columns([1, 4])
-        with _btn_validate:
-            _validate_clicked = st.button("校验 contract", type="primary", key="validate_custom_contract")
-        with _btn_export:
-            if st.session_state.get("custom_contract") is not None:
-                with st.popover("导出"):
-                    st.download_button(
-                        "contract JSON",
-                        st.session_state.custom_contract.to_json(),
-                        file_name="dut_contract.json",
-                        mime="application/json",
-                        key="download_custom_contract",
-                    )
-        if _validate_clicked:
-            try:
-                st.session_state.custom_contract = DutContract.from_json(contract_text)
-                st.session_state.custom_contract_text = st.session_state.custom_contract.to_json()
-                st.success("contract 校验通过，可以生成 AI 计划")
-            except Exception as exc:
-                st.session_state.custom_contract = None
-                st.error(f"contract 无效：{exc}")
         case = {"rtl": st.session_state.get("custom_rtl_path"), "tb": None, "top": None, "spec": "自定义 RTL", "contract": None}
         reference_options = [p for p in sorted((ROOT / "rtl").glob("*.v")) if "_bug_" not in p.name and "bug_" not in p.name]
         if st.session_state.get("custom_rtl_source") and reference_options:

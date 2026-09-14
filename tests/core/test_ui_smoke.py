@@ -10,6 +10,8 @@ AppTest 会把脚本跑一遍：语法/名字错误、组件 API 误用、以及
 
 from __future__ import annotations
 
+import ast
+import json
 import sys
 from pathlib import Path
 
@@ -18,6 +20,7 @@ import pytest
 pytest.importorskip("streamlit", reason="未安装 streamlit（UI 冒烟测试跳过）")
 
 from streamlit.testing.v1 import AppTest  # noqa: E402
+from iverilog_ai.core.contracts import DutContract
 
 ROOT = Path(__file__).resolve().parents[2]
 APP = ROOT / "ui" / "app.py"
@@ -113,6 +116,125 @@ def test_page_survives_a_generated_plan():
     # 计划区与规则集指纹都应该渲染出来
     assert any("TestPlan" in str(item.value) for item in app.subheader), [item.value for item in app.subheader]
     assert any("规则集" in item.value for item in app.caption), [item.value for item in app.caption]
+
+
+def _ui_function(name: str):
+    """把 ui/app.py 里的某个纯函数单独取出来执行（不启动 Streamlit）。
+
+    与 `_ui_test_counter` 同一手法：页面脚本没法 import，但纯函数可以按 AST 摘出来跑。
+    """
+
+    tree = ast.parse(APP.read_text(encoding="utf-8"))
+    node = next(
+        item
+        for item in tree.body
+        if isinstance(item, ast.FunctionDef) and item.name == name
+    )
+    namespace: dict = {"Any": object}
+    exec(compile(ast.Module(body=[node], type_ignores=[]), f"ui/app.py:{name}", "exec"), namespace)
+    return namespace[name]
+
+
+def test_contract_payload_builder_matches_the_contract_schema():
+    """表格 → contract 的转换必须产出可校验的合约（含时钟/复位/参数）。"""
+
+    build = _ui_function("_contract_payload")
+    payload = build(
+        module="my_dut",
+        ports=[
+            {"name": "clk", "direction": "input", "width": 1, "signed": False},
+            {"name": "rst_n", "direction": "input", "width": 1, "signed": False},
+        ],
+        parameters={"WIDTH": 8},
+        clock_signal=" clk ",
+        clock_period=10.0,
+        clock_edge="posedge",
+        reset_signal="rst_n",
+        reset_active=0,
+        reset_sync=False,
+        reset_cycles=2,
+    )
+    contract = DutContract.from_dict(payload)
+    assert contract.module == "my_dut"
+    assert contract.parameters == {"WIDTH": 8}
+    assert contract.clock and contract.clock.signal == "clk"  # 首尾空格被去掉
+    assert contract.reset and contract.reset.signal == "rst_n"
+
+    # 不填时钟/复位时不应凭空造出这两个字段
+    bare = build(
+        module="bare",
+        ports=[{"name": "a", "direction": "input", "width": 1, "signed": False}],
+        parameters=None,
+        clock_signal="",
+        clock_period=10.0,
+        clock_edge="posedge",
+        reset_signal="",
+        reset_active=0,
+        reset_sync=False,
+        reset_cycles=2,
+    )
+    assert "clock" not in bare and "reset" not in bare
+
+
+def test_contract_editor_is_a_fragment_and_survives_render():
+    """自定义 RTL 的 contract 编辑区必须独立重跑（而不是刷新整页）。
+
+    这条用例对应真实反馈："点『从表格生成 JSON』整个页面刷新了"。修法是把这一段装进
+    `@st.fragment`，并把原来靠 `st.rerun()` 生效的隐式双向同步改成两个显式动作。
+    这里钉住：源码里确实是 fragment、里面不再有整页重跑、且自定义 RTL 分支能渲染。
+    """
+
+    source = APP.read_text(encoding="utf-8")
+    tree = ast.parse(source)
+    editors = [
+        node
+        for node in tree.body
+        if isinstance(node, ast.FunctionDef) and node.name == "_contract_editor"
+    ]
+    assert editors, "未找到 _contract_editor"
+    decorators = [ast.unparse(item) for item in editors[0].decorator_list]
+    assert any("fragment" in item for item in decorators), decorators
+
+    region = source.split("def _contract_editor")[1].split("def _build_provider")[0]
+    full_page_reruns = [
+        line.strip() for line in region.splitlines() if line.strip().startswith("st.rerun()")
+    ]
+    assert not full_page_reruns, f"contract 编辑区里不应再有整页重跑：{full_page_reruns}"
+
+    app = AppTest.from_file(str(APP), default_timeout=120)
+    app.session_state["case_name"] = "自定义 RTL"
+    # 该分支在 `custom_rtl_path` 缺席时会初始化并清空 contract 文本，因此必须先占位
+    app.session_state["custom_rtl_path"] = ""
+    app.session_state["custom_contract_text"] = json.dumps(
+        {"module": "pwm", "ports": [{"name": "clk", "direction": "input", "width": 1}]}
+    )
+    app.session_state["custom_rtl_source"] = "module pwm(input wire clk); endmodule\n"
+    app.run()
+    assert not app.exception, [str(item.value) for item in app.exception]
+
+
+def test_contract_editor_survives_stale_widget_state():
+    """会话里残留旧形状的编辑状态时，页面必须自愈而不是整页崩掉。
+
+    真实事故：`session_state["custom_ports_editor"]` 里存的是 Streamlit 自己的**编辑状态**
+    （`{edited_rows, added_rows, deleted_rows}`），不是端口数据。早期实现把它当数据喂回
+    `st.data_editor`，pandas 抛 "Mixing dicts with non-Series…"，整页打成 500。
+    现在数据只从影子列表来，任何残留的编辑状态都不影响渲染。
+    """
+
+    app = AppTest.from_file(str(APP), default_timeout=120)
+    app.session_state["case_name"] = "自定义 RTL"
+    # 该分支在 `custom_rtl_path` 缺席时会初始化并清空 contract 文本，因此必须先占位
+    app.session_state["custom_rtl_path"] = ""
+    app.session_state["custom_contract_text"] = json.dumps(
+        {"module": "pwm", "ports": [{"name": "clk", "direction": "input", "width": 1}]}
+    )
+    app.session_state["custom_rtl_source"] = "module pwm(input wire clk); endmodule\n"
+    # 模拟旧会话残留的"编辑事件字典"
+    app.session_state["custom_ports_editor"] = {"edited_rows": {}, "added_rows": [], "deleted_rows": []}
+    app.run()
+    assert not app.exception, [str(item.value) for item in app.exception]
+    assert isinstance(app.session_state["custom_contract_editor_ports"], list)
 
 
 def test_no_python_file_has_unreachable_code():
