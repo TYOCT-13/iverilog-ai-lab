@@ -135,6 +135,21 @@
 
 ### 修复
 
+- **"没有期望值"那一轮的记录数把证据说得比实际强**。用户问："期望值来源：没有期望值……
+  不要据此认为功能行为已被验证。这是什么意思"。查证后确认：没有 `expected` 的向量，
+  testbench 仍会打一条 `ok=true, has_signal=false` 的**观察记录**
+  （`core/testbench.py::_result_display(ok=True, has_signal=False)`），而页面把它和真正的
+  比对记录一起算成 `35/35 通过`——一次比对都没有的一轮，看起来像 35 项检查全过。
+  处理：新增 `_record_stats()` 按"记录里有没有 signal"拆分，页面改为显示
+  **"0 项比对（35 条观察记录，无期望值，不构成检查）"**；`none_given` 的提示补上
+  **原因**（设计名不在参考模型覆盖范围内）与**怎么提升证据等级**（换内置案例→`reference_model`、
+  用在线模型→`ai_generated`、加结构化断言、把设计纳入参考模型）；本轮若连结构化断言也没有，
+  会直说"实际发生的是：编译通过、仿真跑完、端口被激励过——仅此而已"。
+- **概览页"参考模型对齐"永远显示 0 / 15（把满分说成零分）**：页面读的是
+  `_ev.get('aligned', [])`，而 `_project_evidence()` 提供的键是 `models_aligned` /
+  `models_total`——键名不存在，于是这个指标永远渲染成 `0 / 15`，而真实情况是 15/15 已对齐。
+  已修正，并新增门禁 `test_overview_metrics_read_keys_that_evidence_actually_provides`：
+  页面读取的每个 `_ev.get(...)` 键都必须真的被 `_project_evidence()` 写入。
 - **提示词与严格校验对不上：模型照提示词写，反被我们自己拒绝（`signal_implies` 的
   `signal` 字段）**。真实反馈是"点击生成测试计划报
   `1 validation error for TestPlan assertions Value error, assertions[0] contains
@@ -216,7 +231,7 @@
   `TestbenchGenerationError` 类名以 `Test` 开头，任何 import 它们的测试模块都会触发
   `PytestCollectionWarning: cannot collect test class ...`。虽然不影响结果，但会让"全绿"
   的输出看起来像有测试收集问题（也会埋掉真正的告警）。三个类显式声明 `__test__ = False`，
-  现在 `python -m pytest -q` 是 **510 passed、0 warning**（另有一条门禁用例在推荐断言表为空时
+  现在 `python -m pytest -q` 是 **513 passed、0 warning**（另有一条门禁用例在推荐断言表为空时
   显式 skip）。
 - **检出率用了不可比的口径（把"多试几次"算成"模型更强"）**：在线模型跑了 10 轮，
   而我报的 `97.0% / 95.5%` 是"任意一轮检出即算检出"的**累计并集**；固定/随机/离线三个

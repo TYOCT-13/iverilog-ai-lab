@@ -671,6 +671,64 @@ def test_evidence_cache_is_wired_and_test_count_stays_in_tests():
     assert {"_project_evidence", "_tools"} <= decorated, decorated
 
 
+def test_record_stats_separate_checks_from_observations():
+    """`ok=true` 的观察记录不能算进"通过"的检查数。
+
+    没有 `expected` 的向量，testbench 仍会打一条 `ok=true, has_signal=false` 的观察记录
+    （`core/testbench.py::_result_display(ok=True, has_signal=False)`），于是页面上的
+    `35/35 通过` 在"没有期望值"的那一轮里其实一次比对都没有——数字比证据强。
+    这里钉住拆分口径：只有带 `signal` 的记录才算检查。
+    """
+
+    stats = _ui_function("_record_stats")
+
+    class Record:
+        def __init__(self, ok, signal=None):
+            self.ok = ok
+            self.signal = signal
+
+    records = [Record(True, "count"), Record(False, "count"), Record(True), Record(True)]
+    passed, checked, observed = stats(records)
+    assert (passed, checked, observed) == (1, 2, 2)
+
+    # 全是观察记录时，检查数为 0（页面据此显示"0 项比对"而不是"2/2 通过"）
+    assert stats([Record(True), Record(True)]) == (0, 0, 2)
+    assert stats([]) == (0, 0, 0)
+
+
+def test_expectation_source_none_given_tells_you_how_to_improve():
+    """证据等级为 none_given 时，不能只说"未验证"，还要给出可执行的下一步。"""
+
+    source = APP.read_text(encoding="utf-8")
+    assert 'source == "none_given"' in source
+    assert "怎么把证据等级提上去" in source
+    for hint in ("reference_model", "ai_generated", "结构化断言", "reference_model.py"):
+        assert hint in source, hint
+    # 观察记录的口径说明也要在页面上
+    assert "不构成检查" in source
+
+
+def test_overview_metrics_read_keys_that_evidence_actually_provides():
+    """页面读的 evidence 键必须真的被 `_project_evidence()` 写入。
+
+    真实事故：概览页写的是 `_ev.get('aligned', [])`，而 `_project_evidence()` 给的是
+    `models_aligned` —— 于是"参考模型对齐"永远显示 **0 / 15**，把满分说成了零分。
+    """
+
+    import re
+
+    source = APP.read_text(encoding="utf-8")
+    tree = ast.parse(source)
+    function = next(
+        node for node in tree.body
+        if isinstance(node, ast.FunctionDef) and node.name == "_project_evidence"
+    )
+    written = set(re.findall(r"evidence\[['\"]([a-z_]+)['\"]\]", ast.unparse(function)))
+    read = set(re.findall(r"_ev\.get\(['\"]([a-z_]+)['\"]", source))
+    assert read, "没有找到任何 _ev.get(...) 读取"
+    assert not (read - written), f"页面读了未定义的键：{sorted(read - written)}"
+
+
 def test_no_python_file_has_unreachable_code():
     """把未可达代码检查作为测试跑一遍，保证门禁在 `pytest` 里也生效。"""
 

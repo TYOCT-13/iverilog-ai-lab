@@ -96,7 +96,7 @@ streamlit run ui/app.py
 ## 4. 每次都能这样验证（约 1 分钟）
 
 ```powershell
-python -m pytest -q                       # 期望 510 passed，0 warning
+python -m pytest -q                       # 期望 513 passed，0 warning
 python scripts/run_benchmark_matrix.py    # 期望 15/15、83/83、0 误报、0 不可判定
 ```
 

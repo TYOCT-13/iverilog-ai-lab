@@ -173,6 +173,37 @@ def _render_evidence_header() -> None:
     )
 
 
+def _record_stats(records) -> tuple[int, int, int]:
+    """把结构化记录拆成"真的比对过的"与"只观察的"。
+
+    为什么必须拆开：向量里没有 `expected` 时，生成的 testbench 仍会打一条
+    `ok=true` 的**观察记录**（`core/testbench.py` 的 `_result_display(ok=True, has_signal=False)`）。
+    于是 `35/35 通过` 在"没有期望值"的那一轮里其实一次比对都没有——数字看起来比
+    实际证据强。这里按"记录里有没有 signal"区分：有 signal 的才是有比对的检查。
+
+    返回 (通过的比对记录数, 比对记录总数, 观察记录数)。
+    """
+
+    checked = [item for item in records if getattr(item, "signal", None)]
+    observed = len(records) - len(checked)
+    return sum(1 for item in checked if item.ok), len(checked), observed
+
+
+def _render_record_metric(label: str, records) -> None:
+    """显示结构化记录：比对记录与观察记录分开，避免数字夸大证据。"""
+
+    passed, checked, observed = _record_stats(records)
+    if checked:
+        st.metric(
+            label,
+            f"{passed}/{checked} 通过",
+            f"另有 {observed} 条观察记录（未比对）" if observed else None,
+            delta_color="off",
+        )
+    else:
+        st.metric(label, "0 项比对", f"{observed} 条观察记录（无期望值，不构成检查）", delta_color="off")
+
+
 def _render_expectation_source(config: dict) -> None:
     """把"这一轮期望值是谁给的"讲清楚——这是可信度的关键，也是最容易被忽略的信息。"""
 
@@ -195,6 +226,30 @@ def _render_expectation_source(config: dict) -> None:
             "期望值来源：**没有期望值** —— 本轮既没有参考模型，AI 也没有给出期望值，"
             "只有激励与结构化断言在起作用。**不要据此认为功能行为已被验证。**"
         )
+        _design = str(oracle.get("design") or "")
+        _assertions = (config or {}).get("structured_assertions") or {}
+        _assertion_note = (
+            f"本轮还评估了 {_assertions.get('checked', 0)} 条结构化断言（通过 {_assertions.get('passed', 0)} 条）。"
+            if _assertions.get("checked")
+            else "本轮**也没有结构化断言**，因此实际发生的是：编译通过、仿真跑完、端口被激励过——仅此而已。"
+        )
+        st.caption(
+            (f"原因：设计 `{_design}` 不在参考模型覆盖范围内（只有内置案例有逐拍对齐的参考模型）。" if _design else "")
+            + _assertion_note
+        )
+        with st.expander("怎么把证据等级提上去？"):
+            st.markdown(
+                "1. **换内置案例**：15 个内置案例都有确定性参考模型，期望值由它复算并覆盖 AI 数字，"
+                "证据等级直接变成 `reference_model`（最强，且与 RTL 逐拍对齐）。\n"
+                "2. **用在线模型**：AI 会在计划里写 `expected`，证据等级变成 `ai_generated`——"
+                "比什么都没有强，但**没有预言机兜底，AI 猜错数字会直接表现为失败或漏检**。\n"
+                "3. **加结构化断言**：`signal_equals` / `signal_stable` / `never_high` / "
+                "`signal_sequence` / `signal_implies` 五种模板由工具在采样记录上判定，"
+                "属于独立于期望值的另一层证据（手册「进阶用法」第 3 节）。\n"
+                "4. **把该设计纳入参考模型**：需要为它写一个逐拍对齐的模型并加进 "
+                "`core/reference_model.py` 的 `SUPPORTED`，再由 `tests/core/test_reference_model_alignment.py` "
+                "证明模型与 RTL 逐拍一致——这也是本仓库 15/15 对齐的做法。"
+            )
     if oracle.get("advice"):
         st.caption(oracle["advice"])
     if oracle.get("ai_expected_mismatch"):
@@ -1258,7 +1313,15 @@ with _TAB_OVERVIEW:
     st.markdown("### 本轮验证的现场状态")
     _m1, _m2, _m3, _m4 = st.columns(4)
     _m1.metric("基准规模", f"{_ev.get('cases', 0)} 案例", f"{_ev.get('defects', 0)} 个缺陷变体")
-    _m2.metric("参考模型对齐", f"{len(_ev.get('aligned', []))} / {_ev.get('cases', 0)}", "权威期望值来源")
+    # 注意键名：`_project_evidence()` 给的是 `models_aligned` / `models_total`（整数），
+    # 早先这里读的是不存在的 `aligned`（列表）→ 页面永远显示 "0 / 15"，
+    # 而真实情况是 15/15 已对齐。数字读错方向恰好相反：把一个满分说成了零分。
+    _m2.metric(
+        "参考模型对齐",
+        f"{_ev.get('models_aligned', 0)} / {_ev.get('models_total', 0)}",
+        "权威期望值来源",
+        delta_color="off",
+    )
     _m3.metric("自动化测试", f"{_ev.get('tests', 0)}", "pytest")
     _m4.metric("静态规则", f"{_ev.get('rules', 0)}", "每条配正反例")
     _render_evidence_header()
@@ -1766,7 +1829,7 @@ with _TAB_VERIFY:
                 simulation_result = IcarusExecutor(config).run()
             report = write_report(simulation_result, Path(simulation_result.artifacts["run_dir"]) / "report.md")
             st.subheader(f"结论：{simulation_result.status.value}")
-            st.metric("结构化记录", f"{sum(r.ok for r in simulation_result.records)}/{len(simulation_result.records)} 通过")
+            _render_record_metric("结构化记录（手写 testbench）", simulation_result.records)
             st.json(simulation_result.to_dict())
             st.write("报告路径：")
             st.code(str(report), language="text")
@@ -1802,7 +1865,7 @@ with _TAB_VERIFY:
             pipeline_report = Path(result.artifacts["output_dir"]) / "report.md"
             write_report(result.simulation, pipeline_report, title="Icarus 智测 AI 流水线报告")
             st.subheader(f"AI 计划流水线结论：{result.status.value}")
-            st.metric("结构化记录", f"{sum(r.ok for r in result.records)}/{len(result.records)} 通过")
+            _render_record_metric("结构化记录（AI 计划）", result.records)
             _render_expectation_source(result.simulation.config if isinstance(result.simulation.config, dict) else {})
             _show_synthesis(result.synthesis)
             coverage = result.coverage
@@ -1899,7 +1962,7 @@ with _TAB_VERIFY:
         # the GTKWave button appeared to make the passed/failed conclusion and
         # waveform section disappear.
         st.subheader(f"最近一次 AI 计划流水线结论：{_last.status.value}")
-        st.metric("结构化记录", f"{sum(r.ok for r in _last.records)}/{len(_last.records)} 通过")
+        _render_record_metric("结构化记录", _last.records)
         _render_expectation_source(_last.simulation.config if isinstance(_last.simulation.config, dict) else {})
         _show_synthesis(_last.synthesis)
         _last_vcd = _last.artifacts.get("vcd", "")
