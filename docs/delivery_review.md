@@ -13,7 +13,7 @@
 ```powershell
 cd E:\FPGA_WORK\iverilog-ai-lab
 python -m pip install -e ".[ui]"          # 首次
-python -m pytest -q                        # 期望 388 passed
+python -m pytest -q                        # 期望 432 passed，0 warning
 python scripts/run_benchmark_matrix.py     # 期望 15/15 参考全过、83/83 检出、0 误报、0 不可判定
 python scripts/run_synthesis_matrix.py     # 期望 98/98 可综合（未装 Yosys 会明确报 unavailable）
 python scripts/run_pipeline_matrix.py      # 期望 15/15（无需 API 密钥的完整 AI 路径）
@@ -46,7 +46,7 @@ python scripts/run_pipeline_matrix.py      # 期望 15/15（无需 API 密钥的
 | 问题与场景价值 | 15 | README「当前进度」；`docs/competition/submission_outline.md` 第一节列出三类目标用户与痛点 |
 | 创新性与方案设计 | 20 | 权威预言机（参考模型复算覆盖 AI 期望值，15/15 逐拍对齐）、三重门控、证据分层、`verdict` 单一结论词 |
 | AI 与开源融合 | 20 | AI 只产出受 Schema 约束的 TestPlan；判决权归 Icarus/vvp；《开源资源使用清单》含版本/许可证/义务/自研边界 |
-| 实现完成度与可验证效果 | 25 | 基准矩阵 83/83、双模型 10 次重复实验（97.0% / 95.5%，参考误报 0）、388 项测试、离线路径矩阵 15/15 |
+| 实现完成度与可验证效果 | 25 | 基准矩阵 83/83、双模型 10 次重复实验（97.0% / 95.5%，参考误报 0）、432 项测试、离线路径矩阵 15/15 |
 | 开放成果与复用价值 | 15 | Apache-2.0 仓库、15 案例/83 缺陷基准集、44 条静态规则及正反例、可复现脚本、46 份中文文档 |
 | 材料规范与表达 | 5 | 材料齐备度见 1.1（**视频与报告定稿是当前缺口**） |
 
@@ -124,7 +124,7 @@ python scripts/run_pipeline_matrix.py      # 期望 15/15（无需 API 密钥的
 | RTL 文件 / testbench | 98 / 26 | `rtl/*.v`、`tb/*.v` |
 | 静态规则 | **44**（error 4 / warn 27 / info 13） | 规则注册表现算，每条配正反例 |
 | 已对齐参考模型 | **15 / 15** | `SUPPORTED == AUTHORITATIVE`，4 个随机种子逐拍零差异 |
-| 自动化测试 | **388 passed**（45 个测试文件、258 个测试函数） | `python -m pytest -q` |
+| 自动化测试 | **432 passed**（46 个测试文件、273 个测试函数、0 warning） | `python -m pytest -q` |
 | 基准矩阵 | **15/15 参考全过、83/83 检出、0 误报、0 不可判定** | `scripts/run_benchmark_matrix.py` |
 | 综合矩阵 | **98/98 可综合** | `scripts/run_synthesis_matrix.py` |
 | 离线 AI 路径矩阵 | **15/15**（每例证据等级 `reference_model`） | `scripts/run_pipeline_matrix.py` |
@@ -145,7 +145,7 @@ python scripts/run_pipeline_matrix.py      # 期望 15/15（无需 API 密钥的
 
 | 门禁 | 作用 | 命令 |
 |---|---|---|
-| 全量测试 | 388 项，含真实跑 Icarus 的端到端用例 | `python -m pytest -q` |
+| 全量测试 | 432 项，含真实跑 Icarus 的端到端用例 | `python -m pytest -q` |
 | 基准 / 综合 / 离线路径矩阵 | 三个方向的实测回归 | `scripts/run_{benchmark,synthesis,pipeline}_matrix.py` |
 | 未可达代码与重复定义 | 防止"改了不生效的那一份" | `scripts/check_dead_code.py` |
 | 编码卫生 | UTF-8 BOM 与 mojibake | `scripts/strip_bom.py --check` |

@@ -46,7 +46,10 @@ python -m iverilog_ai report --result .iverilog-ai/runs/run-<id>/result.json --f
 streamlit run ui/app.py
 ```
 
-在无 API Key、无网络的环境下联调整条流水线（本地调试模型，仅监听回环地址）：
+页面规划器默认是**离线确定性规划器**：进程内按当前 DUT contract 生成激励，不需要密钥、
+不联网、也不依赖任何服务，组合逻辑案例（如"简单 ALU"）与时序案例都能直接跑通。
+
+在无 API Key、无网络的环境下联调 HTTP 接口层（本地调试模型，仅监听回环地址）：
 
 ```powershell
 python -m iverilog_ai.ai.debug_server
@@ -54,11 +57,19 @@ python -m iverilog_ai.ai.debug_server
 
 然后在网页「AI 接口设置」中选择「本地调试模型」即可。详见 [docs/debug_interface.md](docs/debug_interface.md)。
 
-离线测试计划示例：
+> Windows 终端中文：脚本输出为 UTF-8。若要把输出重定向到文件（`... > out.txt` 或
+> `Tee-Object`），先设置 `$env:PYTHONUTF8="1"`（或 `$env:PYTHONIOENCODING="utf-8"`），
+> 否则 Python 会按系统 ANSI 代码页写文件，用 UTF-8 打开时显示为乱码。
+
+离线测试计划示例（按 DUT 合约生成，不需要密钥也不联网）：
 
 ```powershell
-python -c "from iverilog_ai.ai import plan_tests; print(plan_tests('覆盖复位和回绕', 'mod10_counter').model_dump_json(indent=2))"
+python -c "from iverilog_ai.ai import offline_provider, plan_tests; from iverilog_ai.core.contracts import DutContract; c=DutContract.from_json(open('examples/simple_alu_contract.json',encoding='utf-8').read()); print(plan_tests('覆盖进位与边界', c.module, provider=offline_provider(c)).model_dump_json(indent=2))"
 ```
+
+> 不传 provider 时 `plan_tests` 会回落到 `MockProvider` 的**写死演示计划**（`design="demo"`，
+> 固定驱动 `rst_n`）——它只用于最小可运行示例，拿去跑没有 `rst_n` 的组合逻辑设计会被
+> 合约校验拒绝。要按真实设计生成，请显式传 `offline_provider(contract)` 或在线 provider。
 
 从显式 DUT 合约和 AI 测试计划生成受控 testbench 并执行：
 

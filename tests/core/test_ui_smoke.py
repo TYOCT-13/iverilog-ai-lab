@@ -118,6 +118,47 @@ def test_page_survives_a_generated_plan():
     assert any("规则集" in item.value for item in app.caption), [item.value for item in app.caption]
 
 
+def test_offline_mode_generates_a_plan_that_matches_the_selected_case():
+    """离线模式必须按**所选案例的合约**生成计划，而不是回放一份写死的演示计划。
+
+    真实反馈："选离线 mock，简单 alu，执行 AI 计划并生成 tb 时报
+    `vectors[0].inputs contains unknown port 'rst_n'`；执行真实 Icarus 仿真却是 pass"。
+    根因是离线分支接了 `MockProvider()` 的默认返回值（design=demo，向量固定驱动
+    `rst_n`），而 `simple_alu` 是组合逻辑、合约里既没有时钟也没有复位。
+    """
+
+    app = AppTest.from_file(str(APP), default_timeout=180)
+    app.session_state["case_name"] = "简单 ALU"
+    app.run()
+    assert not app.exception, [str(item.value) for item in app.exception]
+
+    buttons = [item for item in app.button if getattr(item, "key", None) == "generate_plan"]
+    assert buttons, [getattr(item, "label", None) for item in app.button]
+    buttons[0].click()
+    app.run()
+
+    assert not app.exception, [str(item.value) for item in app.exception]
+    assert app.session_state["ai_error"] is None, app.session_state["ai_error"]
+    plan = app.session_state["ai_plan"]
+    assert plan is not None and plan.design == "simple_alu", plan
+    used = sorted({name for vector in plan.vectors for name in vector.inputs})
+    assert used == ["a", "b", "op"], used
+
+
+def test_offline_branches_use_the_contract_aware_provider():
+    """把"离线分支必须用 `_offline_provider`"钉在源码上。
+
+    行为用例（上一条）只覆盖默认案例；这条不依赖任何具体案例，任何一次把离线分支
+    改回 `MockProvider()` 都会在这里被拦下。
+    """
+
+    source = APP.read_text(encoding="utf-8")
+    plan_region = source.split('key="generate_plan"')[1].split("if st.session_state.ai_error")[0]
+    assert "_offline_provider(contract)" in plan_region, plan_region
+    assert "MockProvider()" not in plan_region, "离线生成计划的分支又用回了写死的演示 Provider"
+    assert "_offline_provider(contract, vector_count=2)" in source, "离线补充向量分支没有走合约驱动路径"
+
+
 def _ui_function(name: str):
     """把 ui/app.py 里的某个纯函数单独取出来执行（不启动 Streamlit）。
 

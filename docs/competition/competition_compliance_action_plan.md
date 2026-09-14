@@ -37,7 +37,7 @@
 | 基准案例 | 15 |
 | 缺陷变体 | 83 |
 | RTL 文件 | 98 |
-| 自动化测试 | 388 passed |
+| 自动化测试 | 432 passed（0 warning） |
 | 静态规则 | 44 |
 | 参考模型对齐 | 15/15 |
 | 基准矩阵 | 15/15、83/83、0 误报、0 不可判定 |
@@ -45,7 +45,7 @@
 | 离线 AI 流程 | 15/15 |
 
 - [ ] 修正技术报告中“80 个缺陷”等旧数字。
-- [ ] 修正第三方资源清单中“380 项测试”等旧数字。
+- [x] 修正第三方资源清单中“380 项测试”等旧数字。（已统一为 432 项）
 - [ ] 区分当前结果、历史结果和实验结果，避免不同日期的数据混写。
 - [ ] 检查所有 PDF 是否由最新 Markdown 重新生成。
 
@@ -110,8 +110,11 @@
 
 ### 2. 清理测试与终端输出问题
 
-- [ ] 处理 pytest 的 6 个 collection warning，避免项目看起来像有测试收集问题。
-- [ ] 检查 Windows PowerShell 中矩阵脚本的中文输出乱码。
+- [x] 处理 pytest 的 6 个 collection warning，避免项目看起来像有测试收集问题。
+      （已修：`TestPlan` / `TestbenchGenerator` / `TestbenchGenerationError` 声明
+      `__test__ = False`，现在 `python -m pytest -q` 是 432 passed、0 warning。）
+- [x] 检查 Windows PowerShell 中矩阵脚本的中文输出乱码。
+      （已在 README 写明重定向要用 `$env:PYTHONUTF8="1"`；控制台直出本身正常。）
 - [ ] 确保 JSON、Markdown 和 PDF 产物中的中文内容正常显示。
 - [ ] 在 README 中写明 Windows UTF-8 环境要求或改进脚本输出方式。
 
@@ -150,7 +153,7 @@ python scripts/strip_bom.py --check
 预期核心结果：
 
 ```text
-388 passed
+432 passed（0 warning）
 15/15 reference cases
 83/83 defects detected
 0 reference false positives

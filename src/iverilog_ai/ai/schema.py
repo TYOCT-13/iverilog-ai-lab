@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import math
 import re
-from typing import Any, Literal
+from typing import Any, ClassVar, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
@@ -79,6 +79,10 @@ class TestVector(BaseModel):
 
 class TestPlan(BaseModel):
     model_config = ConfigDict(extra="forbid")
+    # 告诉 pytest "这不是测试类"：类名以 Test 开头，测试模块 import 它时代码里
+    # 就会冒出 PytestCollectionWarning（`cannot collect test class 'TestPlan'`）。
+    # 这类噪声会让"测试输出全绿"看起来不干净，也让真正的告警被埋掉。
+    __test__: ClassVar[bool] = False
     schema_version: Literal["1.0"] = "1.0"
     design: str = Field(min_length=1, max_length=120)
     objective: str = Field(min_length=1, max_length=1000)

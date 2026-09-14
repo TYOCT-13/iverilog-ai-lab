@@ -9,7 +9,7 @@ import os
 import hashlib
 import shutil
 import subprocess
-from iverilog_ai.ai import MockProvider, OpenAICompatibleProvider, plan_tests, supplement_tests
+from iverilog_ai.ai import DeterministicLocalProvider, MockProvider, OpenAICompatibleProvider, offline_provider, plan_tests, supplement_tests
 from iverilog_ai.core.config import ExecutionConfig
 from iverilog_ai.core.executor import IcarusExecutor
 from iverilog_ai.core.contracts import DutContract
@@ -741,6 +741,25 @@ def _contract_editor() -> None:
             st.error(f"contract 无效：{exc}")
 
 
+def _offline_provider(contract: DutContract, *, vector_count: int | None = None) -> DeterministicLocalProvider:
+    """构造页面「离线」模式用的规划器：按**当前 DUT contract** 生成激励。
+
+    真实事故：这里原先直接 `MockProvider()`，而它的默认返回值是一份写死的演示计划
+    （design=demo，向量固定驱动 `rst_n`）。选中组合逻辑案例（`simple_alu`、`mux4`
+    的合约中没有时钟也没有复位）后点「生成测试计划」，下游生成 testbench 时必然
+    报 `vectors[0].inputs contains unknown port 'rst_n'`——而同一个案例点「执行真实
+    Icarus 仿真」却是通过的，看起来像"离线模式坏了"。
+
+    现在离线模式走仓库自带的确定性离线规划器（与本地调试模型服务同一个引擎），
+    它按合约里真实存在的端口生成激励，因此对组合逻辑与时序案例都有效。
+    """
+
+    # seed 固定为 0：同一次输入永远得到同一份计划，报告与复现实验才能对齐。
+    if vector_count is None:
+        return offline_provider(contract, seed=0)
+    return offline_provider(contract, seed=0, vector_count=vector_count)
+
+
 def _build_provider(target: str):
     """按当前界面选择构造 provider；本地调试模型不需要密钥，也不允许出站网络。"""
 
@@ -1140,11 +1159,12 @@ with _TAB_SETTINGS:
     with st.expander("AI 接口设置（可选）"):
         provider_mode = st.radio(
             "规划器",
-            ["离线 Mock（无需密钥）", "本地调试模型（无需密钥、不联网）", "在线 API（密钥只保存在本次页面会话）"],
+            ["离线确定性规划器（无需密钥、进程内）", "本地调试模型（HTTP 回环、无需密钥）", "在线 API（密钥只保存在本次页面会话）"],
             horizontal=True,
         )
         use_online = str(provider_mode).startswith("在线")
         use_debug_local = str(provider_mode).startswith("本地调试")
+        use_offline = str(provider_mode).startswith("离线")
         debug_endpoint = st.text_input(
             "本地调试模型地址",
             value=os.getenv("IVERILOG_AI_DEBUG_ENDPOINT", "http://127.0.0.1:11434/v1"),
@@ -1154,6 +1174,12 @@ with _TAB_SETTINGS:
             st.caption(
                 "本地调试模型由仓库自带的确定性规则生成计划，不调用任何真实模型、不联网、不需要密钥；"
                 "用于在无凭据环境下验证整条流水线。它不代表任何模型能力，不能作为 AI 效果数据。"
+            )
+        elif use_offline:
+            st.caption(
+                "离线模式在**本进程内**按当前 DUT contract 生成确定性激励（不需要密钥、不联网、不启动任何服务），"
+                "与本地调试模型是同一个规则引擎，区别只是不经 HTTP。它不代表任何模型能力，"
+                "也不能作为 AI 效果数据；真实模型能力请在「在线 API」下测量。"
             )
         api_base = st.text_input("Base URL", value=os.getenv("IVERILOG_AI_BASE_URL", "https://api.deepseek.com"), help="默认使用 DeepSeek 官方兼容接口")
         api_model = st.text_input("模型", value=os.getenv("IVERILOG_AI_MODEL", "deepseek-v4-flash"), help="默认使用 DeepSeek V4 Flash；如果服务商模型列表没有该 ID，请改为列表中的精确名称")
@@ -1247,8 +1273,12 @@ with _TAB_VERIFY:
             if use_online or use_debug_local:
                 provider = _build_provider("生成测试计划")
             else:
-                provider = MockProvider()
-            case_name = str(name)
+                provider = _offline_provider(contract)
+            # 提示词里的 Design 用**合约里的模块名**，而不是案例列表上的中文标签：
+            # 标签只是界面用语（"简单 ALU"），模型会把它当设计名回填，报告里的
+            # 设计一栏也就跟着失去意义。模块名对内置案例与自定义 RTL 都成立，
+            # 且与规则文件名、testbench 实例化的模块名三处一致。
+            case_name = contract.module
             generated_plan = plan_tests(
                 objective,
                 case_name,
@@ -1450,7 +1480,11 @@ with _TAB_VERIFY:
                         if use_online or use_debug_local:
                             feedback_provider = _build_provider("补充测试向量")
                         else:
-                            feedback_provider = MockProvider()
+                            # 离线模式不做任何推理，因此不会"针对失败"设计向量；
+                            # 它按合约再补少量边界激励，条数必须留在 max_new_vectors 之内
+                            # （确定性规划器一次会给出整份计划，条数超限会被严格校验拒绝）。
+                            feedback_provider = _offline_provider(contract, vector_count=2)
+                            st.caption("离线模式不分析失败原因，只按 DUT contract 追加少量边界激励。")
                         st.session_state.ai_plan = supplement_tests(
                             st.session_state.ai_plan, result.failures, feedback_provider,
                             context=spec_text + "\nDUT contract:\n" + contract.to_json(),

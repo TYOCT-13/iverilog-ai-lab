@@ -39,8 +39,9 @@ python scripts/run_benchmark_matrix.py
 streamlit run ui/app.py
 ```
 
-第 2 步不需要任何 API 密钥、不需要联网 —— 默认走离线 MockProvider，或另开终端
-`python -m iverilog_ai.ai.debug_server` 走本地调试模型。
+第 2 步不需要任何 API 密钥、不需要联网 —— 网页的规划器默认是**离线确定性规划器**
+（进程内按 DUT contract 生成激励，与调试服务同一个规则引擎），也可以另开终端
+`python -m iverilog_ai.ai.debug_server` 选「本地调试模型」走一遍 HTTP 回环接口。
 
 ---
 
@@ -54,7 +55,7 @@ streamlit run ui/app.py
 | 手写 testbench | 26 | `tb/*.v` |
 | 静态检查规则 | **44**（error 4 / warn 27 / info 13） | 规则注册表现算 |
 | 已对齐参考模型（权威预言机） | **15 / 15** | `SUPPORTED == set(AUTHORITATIVE)` |
-| 自动化测试 | **380** | `python -m pytest -q` |
+| 自动化测试 | **432** | `python -m pytest -q` |
 | 上游实测约定来源 | 2 个开源项目、172 个文件 | `data/opensource_conventions.json` |
 
 基准矩阵最近一次实跑结论：
@@ -105,8 +106,8 @@ testbench。生成器不解析、不拼接模型给的任何文本，只把已�
 | 四 | 结构化断言只用模板 | 模型注入自由 Verilog/SVA 代码 |
 
 **实测**：在线真实模型实验（11 案例、256 次仿真）四个策略的**请求级计划合法性均为
-100%**、参考误报（硬失败）均为 0。离线 MockProvider（默认路径）与本地调试模型都能在不
-联网、不用密钥的前提下走通全流程。后续的双模型对比实验覆盖 **12 个案例 / 62 个缺陷**
+100%**、参考误报（硬失败）均为 0。网页默认的离线确定性规划器（按 DUT contract 生成激励，
+进程内、不联网、不需要密钥）与本地调试模型都能在同样前提下走通全流程。后续的双模型对比实验覆盖 **12 个案例 / 62 个缺陷**
 （比基准集少 16 个缺陷，因为纯组合逻辑案例无法用向量式 testbench 表达时序语义，运行器
 会显式跳过并给出原因，而不是静默漏算）。
 
@@ -375,7 +376,7 @@ testbench 检查。**不接受**自由书写的 Verilog 或 SVA 代码，因此�
 
 ```powershell
 # 1. 全量测试（含多个真实跑 Icarus 的端到端用例）
-python -m pytest -q                                   # 期望 380 passed
+python -m pytest -q                                   # 期望 432 passed，0 warning
 
 # 2. 基准矩阵（固定向量 + 手写 testbench，结果确定）
 python scripts/run_benchmark_matrix.py                # 期望 15/15、83/83、0 误报、0 不可判定

@@ -545,4 +545,42 @@ class DeterministicLocalProvider:
         return plan
 
 
-__all__ = ["DeterministicLocalProvider"]
+def offline_provider(
+    contract: Any,
+    *,
+    design: str | None = None,
+    vector_count: int = _DEFAULT_VECTOR_COUNT,
+    seed: int = 0,
+) -> DeterministicLocalProvider:
+    """按 DUT contract 构建**进程内**的离线规划器（不需要密钥，也不联网）。
+
+    为什么要有这个函数：网页的「离线」模式曾经接到 ``MockProvider()`` 的默认返回
+    值上，而那份写死的演示计划固定驱动 ``rst_n``。对任何**组合逻辑**案例
+    （``simple_alu``、``mux4`` 的合约里没有时钟、也没有复位）而言，这份计划在生成
+    testbench 时必然报 ``vectors[0].inputs contains unknown port 'rst_n'``——用户看到
+    的是"离线模式坏了、真实仿真却能过"。
+
+    离线路径的正确做法是按**当前合约**生成激励，也就是本地调试模型服务
+    （``debug_server``）用的同一个引擎，区别只是不经 HTTP：
+    同一条确定性规则，同一个 ``seed``，永远得到同一份计划。
+    它不代表任何模型能力，也不能作为 AI 效果数据。
+    """
+
+    if hasattr(contract, "to_dict"):
+        payload = dict(contract.to_dict())
+    elif isinstance(contract, Mapping):
+        payload = dict(contract)
+    else:
+        raise TypeError("offline_provider requires a DutContract or a contract mapping")
+    name = design or payload.get("module") or ""
+    if not isinstance(name, str) or not name:
+        raise ValueError("offline_provider could not determine a design name from the contract")
+    return DeterministicLocalProvider(
+        contract=payload,
+        design=name,
+        vector_count=int(vector_count),
+        seed=int(seed),
+    )
+
+
+__all__ = ["DeterministicLocalProvider", "offline_provider"]

@@ -21,6 +21,10 @@ from .contracts import ContractValidationError, DutContract, PortSpec
 class TestbenchGenerationError(ValueError):
     """测试计划不能安全地映射到指定 DUT 合约。"""
 
+    # 类名以 Test 开头，测试模块 import 它就会触发 PytestCollectionWarning。
+    # 显式声明"不是测试类"，让 pytest 输出保持干净（见 tests/core/test_offline_ui_plan.py）。
+    __test__ = False
+
 
 # 生成的 testbench 里 DUT 实例名固定，波形分析据此区分「DUT 内部信号」
 # 与「testbench 记账信号」。改名时必须同步 pipeline 的层次判定。
@@ -233,6 +237,7 @@ def _validate_vectors(
     contract: DutContract,
 ) -> list[tuple[Any, dict[str, _EncodedValue], dict[str, _EncodedValue]]]:
     port_map = contract.port_map
+    legal_inputs = sorted(port.name for port in contract.ports if port.is_input)
     vectors: list[tuple[Any, dict[str, _EncodedValue], dict[str, _EncodedValue]]] = []
     total_cycles = 0
     seen_names: set[str] = set()
@@ -250,7 +255,19 @@ def _validate_vectors(
         for signal, value in vector.inputs.items():
             port = port_map.get(signal)
             if port is None:
-                raise TestbenchGenerationError(f"vectors[{index}].inputs contains unknown port {signal!r}")
+                # 只报"未知端口"不够定位问题：这份计划常常是**为另一个设计**生成的
+                # （离线演示 provider 或在线模型写错了设计名）。把合约里合法的输入
+                # 端口与计划声明的设计名一并给出，报错本身就能说明原因。
+                raise TestbenchGenerationError(
+                    f"vectors[{index}].inputs contains unknown port {signal!r}; "
+                    f"module {contract.module!r} declares input ports: "
+                    + (", ".join(legal_inputs) if legal_inputs else "(none)")
+                    + (
+                        f"; the plan was written for design {plan.design!r}"
+                        if plan.design and plan.design != contract.module
+                        else ""
+                    )
+                )
             if not port.is_input:
                 raise TestbenchGenerationError(f"vectors[{index}].inputs cannot drive output port {signal!r}")
             if contract.clock is not None and signal == contract.clock.signal:
@@ -260,7 +277,11 @@ def _validate_vectors(
         for signal, value in vector.expected.items():
             port = port_map.get(signal)
             if port is None:
-                raise TestbenchGenerationError(f"vectors[{index}].expected contains unknown port {signal!r}")
+                raise TestbenchGenerationError(
+                    f"vectors[{index}].expected contains unknown port {signal!r}; "
+                    f"module {contract.module!r} declares output ports: "
+                    + (", ".join(sorted(port.name for port in contract.ports if port.is_output)) or "(none)")
+                )
             if not port.is_output:
                 raise TestbenchGenerationError(f"vectors[{index}].expected cannot check input port {signal!r}")
             encoded_expected[signal] = _encode_value(port, value, context=f"vectors[{index}].expected.{signal}")
@@ -271,6 +292,9 @@ def _validate_vectors(
 @dataclass(frozen=True)
 class TestbenchGenerator:
     """Generate a deterministic testbench under an explicitly chosen directory."""
+
+    # 同上：类名以 Test 开头，但它不是 pytest 用例。
+    __test__ = False
 
     max_total_cycles: int = 100_000
 

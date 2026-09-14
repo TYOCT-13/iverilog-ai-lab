@@ -72,7 +72,7 @@ Icarus 没有编译期插桩，**本项目不声称**语句/分支/条件/翻转
 ## 5. 复现我们发布的每一个数字
 
 ```powershell
-python -m pytest -q                            # 388 passed
+python -m pytest -q                            # 432 passed，0 warning
 python scripts/run_benchmark_matrix.py         # 15/15 参考、83/83 检出、0 误报、0 不可判定
 python scripts/run_synthesis_matrix.py         # 98/98 可综合
 python scripts/run_pipeline_matrix.py          # 离线 AI 路径 15/15

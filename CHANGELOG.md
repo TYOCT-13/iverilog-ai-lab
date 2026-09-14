@@ -82,6 +82,30 @@
 
 ### 修复
 
+- **网页离线模式对组合逻辑案例必然报错（`unknown port 'rst_n'`）**：真实反馈是
+  "选离线 mock、简单 ALU、执行 AI 计划并生成 tb 时报 `vectors[0].inputs contains unknown
+  port 'rst_n'`，而同一个案例点『执行真实 Icarus 仿真』却是 pass"。
+  根因：离线分支接的是 `MockProvider()` 的**默认返回值**——一份写死的演示计划
+  （`design="demo"`，向量固定驱动 `rst_n`），与所选案例毫无关系。`simple_alu` / `mux4`
+  是组合逻辑，合约里没有时钟也没有复位，因此这份计划只在生成 testbench 时被下游按合约拒绝；
+  它的 JSON 本身"合法"，严格 Schema 抓不到它。
+  处理：新增 `ai.debug_provider.offline_provider(contract)` 工厂，离线模式改为按**当前
+  DUT contract** 生成激励（与本地调试模型服务同一个确定性规则引擎，只是不经 HTTP）；
+  页面选项相应改名为「离线确定性规划器（无需密钥、进程内）」与「本地调试模型（HTTP 回环）」，
+  并把模式说明写清楚（这是规则引擎，不是模型，不能作为 AI 效果依据）。
+  顺带修掉两处相邻问题：① 提示词与报告里的设计名原先用界面标签（`Design: 简单 ALU`），
+  现统一为合约模块名 `simple_alu`，与规则文件名、testbench 实例化的模块名三处一致；
+  ② `_validate_vectors` 的未知端口报错只说 "unknown port"，现在会列出合约里合法的输入端口，
+  并在计划的设计名与合约模块名不一致时点名（"the plan was written for design 'demo'"）。
+  回归：`tests/core/test_offline_ui_plan.py`（15 个案例逐个生成可仿真的 testbench + 组合逻辑
+  案例不得凭空出现复位信号 + 入参边界）、`tests/core/test_ui_smoke.py` 新增 AppTest 用例
+  "选『简单 ALU』→ 点『生成测试计划』"，以及一条把"离线分支必须用 `_offline_provider`"
+  钉在源码上的用例。
+- **pytest 的 8 条 collection warning**：`TestPlan` / `TestbenchGenerator` /
+  `TestbenchGenerationError` 类名以 `Test` 开头，任何 import 它们的测试模块都会触发
+  `PytestCollectionWarning: cannot collect test class ...`。虽然不影响结果，但会让"全绿"
+  的输出看起来像有测试收集问题（也会埋掉真正的告警）。三个类显式声明 `__test__ = False`，
+  现在 `python -m pytest -q` 是 **432 passed、0 warning**。
 - **检出率用了不可比的口径（把"多试几次"算成"模型更强"）**：在线模型跑了 10 轮，
   而我报的 `97.0% / 95.5%` 是"任意一轮检出即算检出"的**累计并集**；固定/随机/离线三个
   基线各只跑 1 轮。拿 10 轮并集比 1 轮结果，等于把重复次数算成了模型能力。经复算，

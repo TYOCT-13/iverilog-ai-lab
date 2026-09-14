@@ -138,6 +138,15 @@ def plan_tests(
     *,
     context: str | None = None,
 ) -> TestPlan:
+    """向 provider 请求一份严格校验过的测试计划。
+
+    ``provider=None`` 时用 :class:`MockProvider` 的默认返回值——那是一份**写死的演示
+    计划**（``design="demo"``，向量驱动 ``rst_n``），只适合"最小可运行示例"。要按真实
+    设计生成计划，请显式传入 provider：真实模型用 ``OpenAICompatibleProvider``，无密钥
+    离线场景用 ``ai.debug_provider.offline_provider(contract)``（网页离线模式走的就是它）。
+    拿演示计划去驱动一个没有 ``rst_n`` 的组合逻辑设计，会在生成 testbench 时被合约拒绝。
+    """
+
     if max_retries < 0 or max_retries > 5: raise ValueError("max_retries must be between 0 and 5")
     if context is not None and (not isinstance(context, str) or len(context) > CONTEXT_LIMIT):
         raise ValueError(f"context must be text of at most {CONTEXT_LIMIT} characters")
