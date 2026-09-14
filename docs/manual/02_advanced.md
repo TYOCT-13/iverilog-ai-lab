@@ -88,7 +88,58 @@ iverilog-ai run --rtl dut.v --testbench tb_dut.v --top tb_dut `
 
 ---
 
-## 4. 批量与回归
+## 4. 看波形：页面内分析 + GTKWave
+
+页面**不依赖 GTKWave**：`core/vcd.py` 自带 VCD 解析，能给出时间范围、信号数、变化次数、
+边沿统计、毛刺型不稳定、晚/早一拍相位检查，以及"失败周期对应的波形时间窗"。
+
+界面上与波形有关的三件事：
+
+| 操作 | 做什么 | 说明 |
+|---|---|---|
+| **分析 VCD 时间窗口** | 按当前 VCD 的时间范围展开两个输入框 | 纯 Python 解析，不调用任何外部程序 |
+| **读取窗口波形** | 解析该时间窗内的变化，给出"多少次变化、覆盖多少信号"与变化列表 | 超过 2000 条会截断并在提示里说明；完整数据可下载 JSON |
+| **用 GTKWave 打开** | 以独立进程启动 GTKWave 并打开这份 VCD | 可选人工复核；启动失败会告诉你**找过哪些位置** |
+
+这三个按钮都在同一个 `@st.fragment` 里，点击**只重跑波形这一段**，不会整页刷新
+（早期版本每次点击都重跑整个脚本，页面跳回顶部、结果落在视口外，看起来像"点了没反应"）。
+
+GTKWave 的路径按"**设置页手填 → 环境变量 `GTKWAVE_PATH` → PATH → 常见安装目录 →
+从 iverilog 安装位置推断**"的顺序解析。最后一条对 Windows 特别有用：Icarus 官方安装包
+把 GTKWave 放在同级 `gtkwave\bin\` 下，因此只要 `iverilog` 找得到，GTKWave 通常也能推出来。
+
+```powershell
+# 方式一：设置页 → 「波形查看器（GTKWave）」→ 填完整路径 → 点「自动检测」清空并重新探测
+# 方式二：环境变量（重启页面后生效）
+$env:GTKWAVE_PATH = "D:\iverilog\gtkwave\bin\gtkwave.exe"
+```
+
+> 找不到 GTKWave **不影响任何判决**：仿真结论来自 Icarus/vvp 与结构化记录，
+> 波形只是给人复核用的。
+
+---
+
+## 5. RTL 静态质量审查：它到底给了什么
+
+「质量与对比」页的静态审查**只读 RTL 文本**，不跑仿真、不做综合与时序分析。它回答的是
+"代码里有没有已知的坑与坏习惯"，**不是**"功能对不对"。表格六列：
+
+| 列 | 含义 |
+|---|---|
+| 规则ID | 英文稳定标识（如 `blocking-in-sequential`），可写进反馈、可 grep 规则表；规则表在 `core/static_review.py` 的 `_RULE_REGISTRY` |
+| 严重度 | 错误 / 警告 / 提示（机器值仍是 `error` / `warn` / `info`） |
+| 行号 | 命中的行（文件级提示固定为第 1 行） |
+| 问题 | 中文问题描述 |
+| 建议 | 中文修改建议 |
+| 代码片段 | 命中的那一行原文 |
+
+评分是**按严重度加权扣分**后的 100 分制参考值（error 20 分、warn 5 分、info 1 分），
+不是功能正确性结论；同一节还给出命中条数分布、文件 sha256（证明审查的是这一版源码）、
+44 条规则的完整清单与出处，以及 Markdown/JSON 导出。
+
+---
+
+## 6. 批量与回归
 
 ```powershell
 # 全量测试（含真实跑 Icarus 的端到端用例）
@@ -108,7 +159,7 @@ python scripts/run_pipeline_matrix.py
 
 ---
 
-## 5. 接进 CI
+## 7. 接进 CI
 
 ```yaml
 - run: python -m pip install -e . pytest mypy yowasp-yosys
@@ -124,7 +175,7 @@ CI 需要 Icarus：Linux `apt-get install iverilog`，Windows `choco install ive
 
 ---
 
-## 6. 在线模型（可选）
+## 8. 在线模型（可选）
 
 ```powershell
 $env:IVERILOG_AI_API_KEY = "sk-..."        # 只走环境变量，不写入任何文件
@@ -138,7 +189,7 @@ AI 写的期望值只作诊断，判决永远由 Icarus + 参考模型给出。
 
 ---
 
-## 7. 想让结果更可信，做这四件事
+## 9. 想让结果更可信，做这四件事
 
 1. 用**边界 testbench**（仓库里 `tb/tb_<case>_boundary.v` 就是范例），别只测"正常流程"；
 2. 期望值尽量来自**参考模型**或人工确认的合约，而不是模型自己写；

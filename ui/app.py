@@ -9,6 +9,7 @@ import os
 import hashlib
 import shutil
 import subprocess
+import time
 from iverilog_ai.ai import DeterministicLocalProvider, MockProvider, OpenAICompatibleProvider, offline_provider, plan_tests, supplement_tests
 from iverilog_ai.core.config import ExecutionConfig
 from iverilog_ai.core.executor import IcarusExecutor
@@ -93,8 +94,10 @@ def _project_evidence() -> dict:
         evidence["iverilog"] = tools.iverilog
         evidence["vvp"] = tools.vvp
         evidence["yosys"] = tools.yosys
+        # GTKWave 只用于"打开波形看"，缺失不影响仿真判决，因此单独一栏、单独显示。
+        evidence["gtkwave"] = tools.gtkwave
     except Exception:  # pragma: no cover - 探测失败不影响页面其它部分
-        evidence["iverilog"] = evidence["vvp"] = evidence["yosys"] = None
+        evidence["iverilog"] = evidence["vvp"] = evidence["yosys"] = evidence["gtkwave"] = None
     try:
         from iverilog_ai.core.reference_model import AUTHORITATIVE, SUPPORTED
 
@@ -161,35 +164,84 @@ def _render_expectation_source(config: dict) -> None:
         )
 
 
-def _open_vcd_with_gtkwave(vcd_path: Path) -> tuple[bool, str]:
-    """Launch GTKWave directly with a fixed executable (never through a shell)."""
-    candidates = []
-    found = shutil.which("gtkwave")
-    if found:
-        candidates.append(Path(found))
-    candidates.extend(Path(p) for p in (
-        r"C:\Program Files\gtkwave\bin\gtkwave.exe",
-        r"C:\Program Files (x86)\gtkwave\bin\gtkwave.exe",
-        r"D:\gtkwave\bin\gtkwave.exe",
-        r"D:\iverilog\gtkwave\bin\gtkwave.exe",
-    ))
-    executable = next((p for p in candidates if p.is_file()), None)
-    if executable is None:
-        return False, "未找到 GTKWave。请安装 GTKWave，或将 gtkwave.exe 加入 PATH。"
+def _configured_gtkwave() -> str | None:
+    """按"页面里填的路径 → 环境变量 → 自动探测"的顺序取 GTKWave 可执行文件。"""
+
+    from iverilog_ai.core.toolchain import locate_tools
+
+    manual = str(st.session_state.get("gtkwave_path", "") or "").strip()
+    if manual:
+        path = Path(manual)
+        if path.is_file():
+            return str(path)
+    env_value = str(os.getenv("GTKWAVE_PATH", "") or "").strip()
+    if env_value and Path(env_value).is_file():
+        return env_value
+    try:
+        return locate_tools().gtkwave
+    except Exception:
+        return None
+
+
+def _open_vcd_with_gtkwave(vcd_path: Path, *, executable: str | None = None) -> tuple[bool, str]:
+    """用 GTKWave 打开 VCD（固定可执行文件 + 参数列表，绝不经过 shell）。
+
+    路径来源见 :func:`_configured_gtkwave`：页面里手填的路径优先，其次是
+    `GTKWAVE_PATH` 环境变量，最后是从 PATH / 常见目录 / iverilog 安装位置推断。
+    真实反馈是"点了没反应、也不知道是不是没找到路径"，因此失败时把**找过哪些位置**
+    一并带出来，而不是只说一句"未找到"。
+    """
+
+    resolved = executable or _configured_gtkwave()
+    if not resolved:
+        tried = _gtkwave_search_summary()
+        return False, (
+            "未找到 GTKWave。请在「设置 → 波形查看器（GTKWave）」里填写 gtkwave.exe 的完整路径，"
+            "或设置环境变量 GTKWAVE_PATH。已查找：" + tried
+        )
+    target = Path(resolved)
+    if not target.is_file():
+        return False, f"GTKWave 路径不存在：{target}。请在「设置 → 波形查看器（GTKWave）」里更正。"
+    if not Path(vcd_path).is_file():
+        return False, f"波形文件不存在：{vcd_path}"
     try:
         # Keep the GUI process visible.  Some Windows GTKWave launchers exit
         # immediately when started with CREATE_NO_WINDOW.
         # Use the executable directory as cwd: GTKWave bundles DLLs and
         # launcher helpers next to the binary on Windows.
-        subprocess.Popen(
-            [str(executable), str(vcd_path)],
+        process = subprocess.Popen(
+            [str(target), str(vcd_path)],
             shell=False,
             close_fds=True,
-            cwd=str(executable.parent),
+            cwd=str(target.parent),
         )
     except OSError as exc:
-        return False, f"GTKWave 启动失败：{exc}"
-    return True, f"已使用 GTKWave 打开：{vcd_path.name}"
+        return False, f"GTKWave 启动失败：{exc}（路径：{target}）"
+    # 启动后立刻退出通常意味着缺 DLL 或参数不被接受；这里等一下再确认，避免"看起来成功了"。
+    time.sleep(0.4)
+    if process.poll() is not None:
+        return False, f"GTKWave 启动后立即退出（退出码 {process.returncode}）：{target}"
+    return True, f"已用 GTKWave 打开：{vcd_path.name}（{target}，PID {process.pid}）"
+
+
+def _gtkwave_search_summary() -> str:
+    """列出 GTKWave 的查找位置，供失败提示使用（不猜测、只说实际找过的地方）。"""
+
+    from iverilog_ai.core.toolchain import gtkwave_candidates, locate_tools
+
+    parts: list[str] = []
+    manual = str(st.session_state.get("gtkwave_path", "") or "").strip()
+    if manual:
+        parts.append(f"页面填写的路径（不存在）：{manual}")
+    if os.getenv("GTKWAVE_PATH"):
+        parts.append(f"环境变量 GTKWAVE_PATH={os.getenv('GTKWAVE_PATH')}")
+    if shutil.which("gtkwave"):
+        parts.append(f"PATH：{shutil.which('gtkwave')}")
+    else:
+        parts.append("PATH 中没有 gtkwave")
+    for candidate in gtkwave_candidates(locate_tools().iverilog):
+        parts.append(candidate)
+    return "；".join(parts)
 
 
 def _show_behavior_comparison(data: dict) -> None:
@@ -350,8 +402,16 @@ def _verification_rules(case_name: str, contract: DutContract, spec_text: str) -
     return rules_context(ROOT, RULE_CASE_NAMES.get(case_name, case_name), contract.to_json(), spec_text=spec_text)[0]
 
 
+@st.fragment
 def _show_vcd_analysis(vcd_path: Path, *, key_prefix: str, preset: dict | None = None) -> None:
-    """Display VCD signal metadata and a bounded time-window analysis."""
+    """显示 VCD 信号元数据、语义结论与时间窗分析。
+
+    **整段是 fragment**：用户反馈"点『读取窗口波形』『分析 VCD 时间窗口』像是没反应"——
+    功能其实跑通了，但每次点击都重跑**整个脚本**，页面回到顶部、结果落在视口之外，
+    看起来就像没生效（"用 GTKWave 自动打开"同理）。放进 fragment 后，这几个按钮只重跑
+    这一段，结果就地出现。
+    """
+
     data = preset or {}
     if data.get("status") == "parsed":
         st.caption(f"VCD 时间范围：{data.get('start_ns')} ns ～ {data.get('end_ns')} ns；信号 {data.get('signal_count', 0)} 个；变化 {data.get('total_changes', 0)} 次")
@@ -438,19 +498,51 @@ def _show_vcd_analysis(vcd_path: Path, *, key_prefix: str, preset: dict | None =
             st.session_state[f"{key_prefix}_window"] = {"start": float(data["start_ns"]), "end": float(data["end_ns"])}
     window = st.session_state.get(f"{key_prefix}_window")
     if window is not None:
-        start = st.number_input("窗口起始时间 (ns)", min_value=0.0, value=float(window["start"]), key=f"{key_prefix}_start")
-        end = st.number_input("窗口结束时间 (ns)", min_value=float(start), value=max(float(start), float(window["end"])), key=f"{key_prefix}_end")
-        if st.button("读取窗口波形", key=f"{key_prefix}_read"):
+        st.caption("按时间范围重新解析波形变化（纯 Python 解析 VCD，不依赖 GTKWave）。")
+        _win_cols = st.columns(2)
+        start = _win_cols[0].number_input("窗口起始时间 (ns)", min_value=0.0, value=float(window["start"]), key=f"{key_prefix}_start")
+        end = _win_cols[1].number_input("窗口结束时间 (ns)", min_value=float(start), value=max(float(start), float(window["end"])), key=f"{key_prefix}_end")
+        if st.button("读取窗口波形", key=f"{key_prefix}_read", type="primary"):
             try:
                 st.session_state[f"{key_prefix}_window_data"] = analyze_vcd_file(vcd_path, start_ns=start, end_ns=end, max_changes=2000)
             except Exception as exc:
                 st.error(f"VCD 窗口分析失败：{exc}")
     window_data = st.session_state.get(f"{key_prefix}_window_data")
     if window_data:
-        st.caption(f"窗口变化：{window_data.get('total_changes', 0)} 次")
+        _win_total = window_data.get("total_changes", 0)
+        _win_signals = window_data.get("signal_count", 0)
+        st.success(
+            f"已读取窗口 {window_data.get('start_ns')} ～ {window_data.get('end_ns')} ns："
+            f"{_win_total} 次变化，覆盖 {_win_signals} 个信号"
+            + ("（列表已按 2000 条截断，完整数据请下载 JSON）" if window_data.get("truncated") else "")
+        )
         if window_data.get("changes"):
             st.dataframe(window_data["changes"], use_container_width=True, hide_index=True)
+        else:
+            st.info("该时间窗内没有任何信号变化；把起始/结束时间放宽一些再试。")
         st.download_button("下载 VCD 分析 JSON", json.dumps(window_data, ensure_ascii=False, indent=2).encode("utf-8"), file_name="vcd-analysis.json", mime="application/json", key=f"{key_prefix}_download")
+    else:
+        st.caption("提示：先点『分析 VCD 时间窗口』展开时间范围，再点『读取窗口波形』。")
+
+    # 波形查看器：按钮放在 fragment 内，点击只重跑这一段（此前会整页重跑，看起来像没反应）。
+    st.divider()
+    _gv_col, _gv_info = st.columns([1, 3])
+    with _gv_col:
+        if st.button("用 GTKWave 打开", key=f"{key_prefix}_gtkwave_open"):
+            ok, message = _open_vcd_with_gtkwave(vcd_path)
+            st.session_state.gtkwave_message = message
+            st.session_state.gtkwave_message_ok = ok
+    with _gv_info:
+        _gv_path = _configured_gtkwave()
+        if _gv_path:
+            st.caption(f"GTKWave：{_gv_path}")
+        else:
+            st.caption("GTKWave：未找到。可在「设置 → 波形查看器（GTKWave）」里手动填写路径。")
+    if st.session_state.get("gtkwave_message"):
+        renderer = st.success if st.session_state.get("gtkwave_message_ok") else st.warning
+        renderer(st.session_state.gtkwave_message)
+
+
 CASES: dict[str, dict[str, Any]] = {
     "交通灯·紧急模式": {"rtl": "rtl/traffic_light_emergency.v", "tb": "tb/tb_traffic_light_emergency.v", "top": "tb_traffic_light_emergency", "spec": "spec/traffic_light_emergency_spec.md", "contract": "examples/traffic_light_emergency_contract.json"},
     "模十计数器": {"rtl": "rtl/mod10_counter.v", "tb": "tb/tb_mod10_counter.v", "top": "tb_mod10_counter", "spec": "spec/mod10_counter_spec.md", "contract": "examples/mod10_counter_contract.json"},
@@ -1073,6 +1165,7 @@ with _col_meta:
             ("案例", str(name), "warn" if is_custom else "ok"),
             ("参考模型", f"{_aligned}/{_models_total}", "ok" if _aligned == _models_total and _aligned else "idle"),
             ("Icarus", "可用" if _tools_ok else "缺失", "ok" if _tools_ok else "err"),
+            ("GTKWave", "可用" if _ev.get("gtkwave") else "缺失", "ok" if _ev.get("gtkwave") else "idle"),
             ("基准", f"{_ev.get('cases', 0)} 案例 / {_ev.get('defects', 0)} 缺陷", "idle"),
             ("静态规则", f"{_ev.get('rules', 0)} 条", "idle"),
             ("测试", f"{_ev.get('tests', 0)} 项", "idle"),
@@ -1227,13 +1320,56 @@ with _TAB_QUALITY:
     if st.session_state.get("static_rtl_review"):
         static_review = st.session_state.static_rtl_review
         st.subheader("RTL 静态质量审查")
-        _score_col, _status_col = st.columns(2)
-        _score_col.metric("质量评分", f"{static_review['quality_score']}/100")
-        _status_col.metric("审查状态", static_review["status"])
+        st.caption(
+            "这一节只**读 RTL 文本**，不跑仿真、不做综合与时序分析——它回答的是"
+            "「代码里有没有已知的坑与坏习惯」，**不是**「功能对不对」（功能对不对由 Icarus 判决）。"
+            "每条命中给出六列：规则 ID（英文稳定标识，可用于查规则表/写反馈）、严重度、行号、"
+            "问题描述、修改建议、命中的那一行代码。"
+        )
+        _score_col, _status_col, _count_col = st.columns(3)
+        _score_col.metric("质量评分", f"{static_review['quality_score']}/100", help="按严重度加权扣分后的参考分（error 20 分、warn 5 分、info 1 分），不是功能正确性结论。")
+        _status_col.metric("审查状态", {"pass": "通过", "warn": "有告警", "fail": "有错误"}.get(static_review["status"], static_review["status"]))
+        _count_col.metric(
+            "命中条数",
+            static_review["finding_count"],
+            f"错误 {static_review['counts'].get('error', 0)} / 警告 {static_review['counts'].get('warn', 0)} / 提示 {static_review['counts'].get('info', 0)}",
+        )
         st.caption(static_review["disclaimer"])
-        st.json({"counts": static_review["counts"], "finding_count": static_review["finding_count"], "source_sha256": static_review["source_sha256"]})
         if static_review["findings"]:
-            st.dataframe(static_review["findings"], use_container_width=True, hide_index=True)
+            _severity_cn = {"error": "错误", "warn": "警告", "info": "提示"}
+            st.dataframe(
+                [
+                    {
+                        "规则ID": item["rule_id"],
+                        "严重度": _severity_cn.get(item["severity"], item["severity"]),
+                        "行号": item["line"],
+                        "问题": item["message"],
+                        "建议": item["suggestion"],
+                        "代码片段": item.get("snippet", ""),
+                    }
+                    for item in static_review["findings"]
+                ],
+                use_container_width=True,
+                hide_index=True,
+            )
+        else:
+            st.success(f"当前规则集（{static_review.get('rule_count', 0)} 条）没有命中任何问题。")
+        with st.expander(f"查看规则集（{static_review.get('rule_count', 0)} 条规则与出处）"):
+            st.caption("规则按「能否可靠判定」分组登记；每条都在 tests/core/test_static_review_rules.py 里配了正例与反例。")
+            st.dataframe(
+                [
+                    {
+                        "规则ID": item["rule_id"],
+                        "严重度": _severity_cn.get(item["severity"], item["severity"]),
+                        "规则": item["title"],
+                        "出处": item["source"],
+                    }
+                    for item in static_review.get("rule_set", [])
+                ],
+                use_container_width=True,
+                hide_index=True,
+            )
+        st.json({"counts": static_review["counts"], "finding_count": static_review["finding_count"], "source_sha256": static_review["source_sha256"]})
         with st.popover("导出审查报告"):
             st.download_button(
                 "Markdown",
@@ -1370,6 +1506,39 @@ with _TAB_SETTINGS:
                 api_model = str(_picked_model)
         if "deepseek" in (api_base + " " + api_model).lower() and str(wire_api_label).startswith("Responses"):
             st.warning("检测到 DeepSeek 配置：官方接口使用 Chat Completions。生成时会自动改用 /chat/completions。")
+
+    with st.expander("波形查看器（GTKWave）"):
+        # 真实反馈："用 GTKWave 自动打开没反应，不知道是不是找不到路径"。
+        # 因此这里既做自动探测（PATH → 常见目录 → 从 iverilog 安装位置推断），
+        # 也允许手填路径并当场校验——两条路都必须存在。
+        _detected_gtkwave = _configured_gtkwave()
+        _gtkwave_cols = st.columns([3, 1])
+        with _gtkwave_cols[0]:
+            gtkwave_input = st.text_input(
+                "GTKWave 可执行文件路径",
+                value=str(st.session_state.get("gtkwave_path", "") or os.getenv("GTKWAVE_PATH", "")),
+                help="留空表示自动探测：先看 PATH，再看常见安装目录，最后从 iverilog 的安装位置推断"
+                     r"（Icarus 官方 Windows 包把 GTKWave 放在同级 gtkwave\bin\ 下）。",
+            )
+            st.session_state.gtkwave_path = gtkwave_input
+        with _gtkwave_cols[1]:
+            st.write("")
+            st.write("")
+            if st.button("自动检测", key="detect_gtkwave"):
+                st.session_state.gtkwave_path = ""
+                st.session_state.gtkwave_detected = _configured_gtkwave()
+        _shown_gtkwave = _configured_gtkwave()
+        if _shown_gtkwave:
+            st.success(f"当前使用的 GTKWave：{_shown_gtkwave}")
+        else:
+            st.warning(
+                "未找到 GTKWave，波形只能用页面内的分析功能查看（下载 VCD 后用 GTKWave 手工打开也可以）。"
+                "可以在上面填写 gtkwave.exe 的完整路径，或设置环境变量 GTKWAVE_PATH 后重启页面。"
+            )
+        from iverilog_ai.core.toolchain import describe_tools
+        st.caption("工具探测结果：" + describe_tools())
+        if st.session_state.get("gtkwave_detected"):
+            st.caption(f"上次自动检测结果：{st.session_state.gtkwave_detected}")
 
 
 with _TAB_VERIFY:
@@ -1590,23 +1759,10 @@ with _TAB_VERIFY:
                 if vcd_path.is_file():
                     st.subheader("仿真波形（VCD）")
                     st.code(str(vcd_path), language="text")
-                    col_download, col_open = st.columns(2)
-                    col_download.download_button("下载 VCD 波形", vcd_path.read_bytes(), file_name=vcd_path.name, mime="application/octet-stream", key="download_pipeline_vcd")
-                    if col_open.button("用 GTKWave 自动打开", key="open_pipeline_vcd"):
-                        ok, message = _open_vcd_with_gtkwave(vcd_path)
-                        st.session_state.gtkwave_message = message
-                        st.session_state.gtkwave_message_ok = ok
-                        # Streamlit already reruns once for the button event.
-                        # Do not trigger a second rerun: it would reset/collapse
-                        # the pipeline result section and make the page appear
-                        # to lose the passed/failed conclusion.
-                        renderer = st.success if ok else st.warning
-                        renderer(message)
-                    st.caption(f"波形大小：{vcd_path.stat().st_size:,} bytes；可使用 GTKWave 打开。")
+                    st.download_button("下载 VCD 波形", vcd_path.read_bytes(), file_name=vcd_path.name, mime="application/octet-stream", key="download_pipeline_vcd")
+                    st.caption(f"波形大小：{vcd_path.stat().st_size:,} bytes；可用下面的按钮直接在 GTKWave 里打开。")
+                    # 「用 GTKWave 打开」与时间窗分析都在这个 fragment 里：点击只重跑这一段。
                     _show_vcd_analysis(vcd_path, key_prefix="pipeline_vcd", preset=result.simulation.config.get("vcd_analysis", {}) if isinstance(result.simulation.config, dict) else None)
-                    if st.session_state.get("gtkwave_message"):
-                        renderer = st.success if st.session_state.get("gtkwave_message_ok") else st.warning
-                        renderer(st.session_state.gtkwave_message)
             if result.failure_summaries:
                 st.json(list(result.failure_summaries))
                 _show_failure_explanation(result, "pipeline_explain_failure")
@@ -1658,15 +1814,7 @@ with _TAB_VERIFY:
         if _last_vcd and Path(_last_vcd).is_file():
             st.subheader("最近一次仿真波形（VCD）")
             st.code(str(_last_vcd), language="text")
-            _dl, _open = st.columns(2)
-            _dl.download_button("下载 VCD 波形", Path(_last_vcd).read_bytes(), file_name=Path(_last_vcd).name, mime="application/octet-stream", key="persisted_download_pipeline_vcd")
-            if _open.button("用 GTKWave 自动打开", key="persisted_open_pipeline_vcd"):
-                _ok, _message = _open_vcd_with_gtkwave(Path(_last_vcd))
-                st.session_state.gtkwave_message = _message
-                st.session_state.gtkwave_message_ok = _ok
-                (st.success if _ok else st.warning)(_message)
-            if st.session_state.get("gtkwave_message"):
-                (st.success if st.session_state.get("gtkwave_message_ok") else st.warning)(st.session_state.gtkwave_message)
+            st.download_button("下载 VCD 波形", Path(_last_vcd).read_bytes(), file_name=Path(_last_vcd).name, mime="application/octet-stream", key="persisted_download_pipeline_vcd")
             _show_vcd_analysis(Path(_last_vcd), key_prefix="persisted_vcd", preset=_last.simulation.config.get("vcd_analysis", {}) if isinstance(_last.simulation.config, dict) else None)
         if getattr(_last, "failures", ()):
             st.subheader("最近一次流水线失败记录")

@@ -251,18 +251,18 @@ def _strip_comments(source: str) -> str:
 # --------------------------------------------------------------------------
 _LEXICAL_RULES: tuple[tuple[str, str, str, str], ...] = (
     # (rule_id, 正则, 消息, 建议)
-    ("real-type", r"\b(?:real|shortreal|realtime)\b", "Design uses real/shortreal/realtime", "Use integer or fixed-point arithmetic; real types are not synthesizable."),
-    ("time-type", r"\btime\b", "Design uses the time type", "Use integer counters for timing; the time type is not synthesizable."),
-    ("event-type", r"\bevent\b", "Design declares an event type", "Use an explicit handshake signal instead of event triggers."),
-    ("fork-join", r"\bfork\b", "Design contains a fork block", "Replace fork/join with a single clocked process and explicit state."),
-    ("wait-statement", r"\bwait\s*\(", "Design uses a wait statement", "Use an explicit state machine or clocked condition instead of wait."),
-    ("disable-statement", r"\bdisable\b", "Design uses the disable statement", "Use an explicit state variable instead of disable."),
-    ("forever-loop", r"\bforever\b", "Design contains a forever loop", "Only testbenches should use forever; use a clocked process for RTL."),
-    ("repeat-loop", r"\brepeat\s*\(", "Design contains a repeat loop", "Prefer a for loop with static bounds so synthesis can unroll it."),
-    ("while-loop", r"\bwhile\s*\(", "Design contains a while loop", "Prefer a for loop with static bounds so synthesis can unroll it."),
-    ("system-task-display", r"\$(?:display|write|strobe|monitor)\b", "Design contains a simulation display task", "Keep $display in testbenches; remove it from synthesizable RTL."),
-    ("system-task-file-io", r"\$(?:fopen|fclose|fdisplay|fwrite|readmemh|readmemb|sformat)\b", "Design uses file IO system tasks", "File IO is not synthesizable; keep it in the testbench."),
-    ("system-task-time", r"\$(?:time|stime|realtime)\b", "Design uses simulation time system functions", "Simulation time is not synthesizable; use a counter for on-chip timing."),
+    ("real-type", r"\b(?:real|shortreal|realtime)\b", "设计中使用了 real/shortreal/realtime 类型", "改用整数或定点运算；real 类型不可综合。"),
+    ("time-type", r"\btime\b", "设计中使用了 time 类型", "计时请用整数计数器；time 类型不可综合。"),
+    ("event-type", r"\bevent\b", "设计中声明了 event 类型", "用显式握手信号代替 event 触发。"),
+    ("fork-join", r"\bfork\b", "设计中包含 fork/join 并行块", "用单个时钟进程加显式状态机替代 fork/join。"),
+    ("wait-statement", r"\bwait\s*\(", "设计中使用了 wait 语句", "改用显式状态机或时钟条件，不要用 wait。"),
+    ("disable-statement", r"\bdisable\b", "设计中使用了 disable 语句", "改用显式状态变量，不要用 disable。"),
+    ("forever-loop", r"\bforever\b", "设计中包含 forever 循环", "只有 testbench 适合用 forever；RTL 请用时钟进程。"),
+    ("repeat-loop", r"\brepeat\s*\(", "设计中包含 repeat 循环", "改用边界可静态展开的 for 循环，便于综合展开。"),
+    ("while-loop", r"\bwhile\s*\(", "设计中包含 while 循环", "改用边界可静态展开的 for 循环，便于综合展开。"),
+    ("system-task-display", r"\$(?:display|write|strobe|monitor)\b", "设计文件中出现了 $display/$write 等仿真系统任务", "$display 应留在 testbench 中；可综合 RTL 里请移除。"),
+    ("system-task-file-io", r"\$(?:fopen|fclose|fdisplay|fwrite|readmemh|readmemb|sformat)\b", "设计中使用了 $fopen/$readmemh 等文件 IO 系统任务", "文件 IO 不可综合，请留在 testbench 中。"),
+    ("system-task-time", r"\$(?:time|stime|realtime)\b", "设计中使用了 $time/$stime/$realtime 等仿真时间函数", "仿真时间不可综合；片上计时请用计数器。"),
 )
 
 _FILE_IO_TASK_RE = re.compile(r"\$(?:fopen|fclose|fdisplay|fwrite|readmemh|readmemb|sformat)\b")
@@ -280,15 +280,15 @@ def _style_findings(source: str, lines: list[str], findings: list[StaticFinding]
 
     for index, line in enumerate(lines, start=1):
         if len(line) > 120:
-            findings.append(StaticFinding("long-line", "info", index, "Line longer than 120 characters", "Wrap long expressions for reviewability.", line.strip()[:240]))
+            findings.append(StaticFinding("long-line", "info", index, "行宽超过 120 字符", "拆分长表达式，便于审查。", line.strip()[:240]))
             break
     for index, line in enumerate(lines, start=1):
         if line.rstrip() != line and line.strip():
-            findings.append(StaticFinding("trailing-whitespace", "info", index, "Trailing whitespace", "Trim trailing whitespace.", line.strip()[:240]))
+            findings.append(StaticFinding("trailing-whitespace", "info", index, "行尾有多余空白", "删除行尾空白。", line.strip()[:240]))
             break
     for index, line in enumerate(lines, start=1):
         if line.startswith("\t") or "\t" in line[: len(line) - len(line.lstrip())]:
-            findings.append(StaticFinding("tab-indent", "info", index, "Tab character used for indentation", "Use spaces (2 per level) for consistent diffs.", line.strip()[:240]))
+            findings.append(StaticFinding("tab-indent", "info", index, "使用制表符缩进", "改用空格（每级 2 个），保证 diff 一致。", line.strip()[:240]))
             break
 
 
@@ -483,8 +483,8 @@ def _structural_findings(source: str, lines: list[str], findings: list[StaticFin
         if len(kinds) > 1:
             findings.append(_finding(
                 source, lines, "mixed-block-assignment", "error", assigned_offsets[name][0],
-                f"Signal {name!r} is assigned with both blocking and non-blocking forms",
-                "Use non-blocking <= for sequential state and blocking = for combinational values, never both on one signal.",
+                f"信号 {name!r} 同时被阻塞赋值与非阻塞赋值",
+                "时序状态用非阻塞 <=、组合值用阻塞 =，同一信号绝不混用。",
             ))
 
     blocks_seen: dict[str, set[int]] = {}
@@ -497,8 +497,8 @@ def _structural_findings(source: str, lines: list[str], findings: list[StaticFin
         if len(blocks) > 1:
             findings.append(StaticFinding(
                 "multiple-procedural-drivers", "error", _line_number(source, min(assigned_offsets[name])),
-                f"Signal {name!r} is assigned in multiple procedural blocks",
-                "Keep one procedural driver per register; combine conditions in one always block.",
+                f"信号 {name!r} 在多个过程块中被赋值",
+                "每个寄存器只保留一个过程驱动；把条件合并到同一个 always 块里。",
                 _snippet(lines, _line_number(source, min(assigned_offsets[name]))),
             ))
 
@@ -509,7 +509,7 @@ def _structural_findings(source: str, lines: list[str], findings: list[StaticFin
 
         if re.search(r"\bposedge\b|\bnegedge\b", sens, re.I):
             if re.search(r"(?<![=!<>])=(?!=|>)", body):
-                findings.append(_finding(source, lines, "blocking-in-sequential", "warn", match.start(), "Sequential always block contains blocking assignment", "Use non-blocking <= for registered state updates."))
+                findings.append(_finding(source, lines, "blocking-in-sequential", "warn", match.start(), "时序 always 块中使用了阻塞赋值", "寄存状态更新请用非阻塞赋值 <=。"))
             # 时钟/复位名可能是后缀形式（clk_n、rst_n），因此先把边沿后的标识符
             # 整体捕获出来再判断，不能用 `[A-Za-z_]\w*(?:rst|reset)` 这种写法——
             # `\w*` 会把后缀一起吃掉，导致永不匹配。
@@ -517,19 +517,19 @@ def _structural_findings(source: str, lines: list[str], findings: list[StaticFin
             if negedge_names and not re.search(r"sync|synchron", source, re.I):
                 reset_like = [name for name in negedge_names if re.search(r"(?:^|_)(?:rst|reset|arst|nrst)(?:_|$)", name, re.I)]
                 if reset_like:
-                    findings.append(_finding(source, lines, "async-reset-no-sync", "warn", match.start(), "Asynchronous reset is used without an obvious synchronizer", "Use asynchronous assertion with synchronized de-assertion when the design requires clean reset release."))
+                    findings.append(_finding(source, lines, "async-reset-no-sync", "warn", match.start(), "使用了异步复位，但看不到明显的同步器", "异步复位、同步释放：需要干净的复位释放时请加同步级。"))
             for reset in resets:
                 if re.search(rf"\belse\s+if\s*\([^)]*\b{re.escape(reset)}\b", body, re.I):
-                    findings.append(_finding(source, lines, "reset-in-data-path", "warn", match.start(), f"Reset signal {reset!r} is evaluated in the data path", "Keep reset handling in the first branch of the clocked block; do not gate data on reset later."))
+                    findings.append(_finding(source, lines, "reset-in-data-path", "warn", match.start(), f"复位信号 {reset!r} 出现在数据路径的条件里", "复位只放在时钟块的第一分支；不要在后面的数据路径里再用复位做条件。"))
                     break
             for clock in clocks:
                 if re.search(rf"(?<!\b(?:pos|neg)edge\s)\b{re.escape(clock)}\b", sens, re.I) and not re.search(rf"\b(?:pos|neg)edge\s+{re.escape(clock)}\b", sens, re.I):
-                    findings.append(_finding(source, lines, "clock-in-always-sensitivity", "warn", match.start(), f"Clock {clock!r} appears in the sensitivity list without an edge qualifier", "Trigger sequential logic on a clock edge, not on the clock level."))
+                    findings.append(_finding(source, lines, "clock-in-always-sensitivity", "warn", match.start(), f"时钟 {clock!r} 出现在敏感列表里，但没有边沿限定", "时序逻辑要在时钟边沿触发，不要用电平触发。"))
                     break
             continue
 
         if "<=" in body:
-            findings.append(_finding(source, lines, "non-blocking-combinational", "warn", match.start(), "Combinational always block contains non-blocking assignment", "Use blocking = assignments in combinational logic."))
+            findings.append(_finding(source, lines, "non-blocking-combinational", "warn", match.start(), "组合 always 块中使用了非阻塞赋值", "组合逻辑请用阻塞赋值 =。"))
 
         # 时钟出现在敏感列表但未加边沿限定：这比"敏感列表不完整"更具体，先报它。
         level_clock = None
@@ -538,9 +538,9 @@ def _structural_findings(source: str, lines: list[str], findings: list[StaticFin
                 level_clock = clock
                 break
         if level_clock is not None:
-            findings.append(_finding(source, lines, "clock-in-always-sensitivity", "warn", match.start(), f"Clock {level_clock!r} appears in the sensitivity list without an edge qualifier", "Trigger sequential logic on a clock edge, not on the clock level."))
+            findings.append(_finding(source, lines, "clock-in-always-sensitivity", "warn", match.start(), f"时钟 {level_clock!r} 出现在敏感列表里，但没有边沿限定", "时序逻辑要在时钟边沿触发，不要用电平触发。"))
         elif "*" not in sens:
-            findings.append(_finding(source, lines, "incomplete-sensitivity", "warn", match.start(), "Explicit combinational sensitivity list may be incomplete", "Use always @(*) or always_comb for combinational logic."))
+            findings.append(_finding(source, lines, "incomplete-sensitivity", "warn", match.start(), "显式组合敏感列表可能不完整", "组合逻辑请用 always @(*) 或 always_comb。"))
 
         # 推断锁存器：只有在确认"存在某条路径没有赋值"时才报。
         # 判定方式是保守的：解析不出来的结构一律不报，宁可漏报也不误报。
@@ -552,8 +552,8 @@ def _structural_findings(source: str, lines: list[str], findings: list[StaticFin
             if latched:
                 findings.append(StaticFinding(
                     "inferred-latch", "error", line,
-                    f"Combinational block may infer a latch for {latched[0]!r} (not assigned on every path)",
-                    "Assign every combinational output on all paths, or add a default assignment before the if/case.",
+                    f"组合块可能为 {latched[0]!r} 推断出锁存器（存在未赋值的路径）",
+                    "组合输出在所有路径上都要赋值，或在 if/case 之前先给默认值。",
                     snippet,
                 ))
 
@@ -563,8 +563,8 @@ def _structural_findings(source: str, lines: list[str], findings: list[StaticFin
                 offset = match.start() + statement.start()
                 findings.append(StaticFinding(
                     "comb-loop", "warn", _line_number(source, offset),
-                    f"Combinational assignment to {name!r} reads its own value",
-                    "Break the feedback path; combinational logic must not depend on its own output.",
+                    f"对 {name!r} 的组合赋值读取了它自己的值",
+                    "打断反馈路径：组合逻辑不能依赖自己的输出。",
                     _snippet(lines, _line_number(source, offset)),
                 ))
                 break
@@ -585,15 +585,15 @@ def _arithmetic_findings(source: str, lines: list[str], findings: list[StaticFin
             continue
         findings.append(_finding(
             source, lines, "division-operator", "warn", match.start(),
-            "Design contains a division operator",
-            "Division rarely maps to a single FPGA primitive; consider shifts or a pipelined divider.",
+            "设计中使用了除法运算符",
+            "除法通常无法映射为单个 FPGA 原语；考虑改用移位或流水线除法器。",
         ))
 
     for match in re.finditer(r"(?<=[\w\)\]])[ \t]*%[ \t]*(?=[\w\(!~])", searchable):
         findings.append(_finding(
             source, lines, "division-operator", "warn", match.start(),
-            "Design contains a modulo operator",
-            "Modulo rarely maps to a single FPGA primitive; consider a counter or a pipelined remainder.",
+            "设计中使用了取模运算符",
+            "取模通常无法映射为单个 FPGA 原语；考虑改用计数器或流水线求余。",
         ))
 
     for match in re.finditer(r"(?:<=|=)(?=[^;\n])[^;\n]*?/[ \t]*(\d+)", searchable):
@@ -602,8 +602,8 @@ def _arithmetic_findings(source: str, lines: list[str], findings: list[StaticFin
             continue
         findings.append(_finding(
             source, lines, "real-division", "warn", match.start(),
-            "Truncating division by a non-power-of-two constant",
-            "Use a shift for powers of two, or make the truncation explicit and covered by a test.",
+            "对非 2 的幂常数做截断除法",
+            "2 的幂请改用移位；否则请让截断显式化并由测试覆盖。",
         ))
 
 
@@ -615,14 +615,14 @@ def _interface_findings(source: str, lines: list[str], findings: list[StaticFind
     """
 
     if "`timescale" not in (raw_source or source):
-        findings.append(StaticFinding("missing-timescale", "info", 1, "File has no `timescale directive", "Add `timescale 1ns/1ps so delays and waveform units are explicit.", _snippet(lines, 1)))
+        findings.append(StaticFinding("missing-timescale", "info", 1, "文件缺少 `timescale 指令", "加上 `timescale 1ns/1ps，让延时与波形的时间单位明确。", _snippet(lines, 1)))
 
     for match in re.finditer(r"\bmodule\s+([A-Za-z_]\w*)\s*\((?P<ports>[^;]*)\)", source, re.I):
         ports = match.group("ports")
         if not ports.strip():
             continue
         if not re.search(r"\b(?:input|output|inout)\b", ports, re.I):
-            findings.append(_finding(source, lines, "non-ansi-port-list", "info", match.start(), "Module uses a non-ANSI port list", "Prefer ANSI style: declare direction and width inline in the port list."))
+            findings.append(_finding(source, lines, "non-ansi-port-list", "info", match.start(), "模块使用了非 ANSI 端口列表", "建议用 ANSI 风格：方向与位宽直接写在端口列表里。"))
 
     # 非 ANSI 风格：端口名出现在端口列表里，但方向声明分开写在模块体内。
     # 若某个端口名在体内既没有方向声明也没有被赋值，说明方向缺失。
@@ -639,11 +639,11 @@ def _interface_findings(source: str, lines: list[str], findings: list[StaticFind
             declared_direction = re.search(rf"\b(?:input|output|inout)\b[^;\n]*\b{re.escape(name)}\b", body)
             assigned = re.search(rf"\b{re.escape(name)}\b\s*(?:<=|=(?!=))", body)
             if not declared_direction and not assigned:
-                findings.append(_finding(source, lines, "missing-port-direction", "warn", match.start(), f"Port {name!r} has no declared direction", "Declare the port direction (input/output/inout); an undeclared port defaults to a wire with no direction."))
+                findings.append(_finding(source, lines, "missing-port-direction", "warn", match.start(), f"端口 {name!r} 没有声明方向", "声明端口方向（input/output/inout）；未声明方向的端口会默认成没有方向的 wire。"))
                 break
 
     for match in re.finditer(r"\.\s*([A-Za-z_]\w*)\s*\(\s*\)", source):
-        findings.append(_finding(source, lines, "empty-port-connection", "info", match.start(), f"Instance connects .{match.group(1)}() with nothing", "Remove the unused connection or document why the port is intentionally left open."))
+        findings.append(_finding(source, lines, "empty-port-connection", "info", match.start(), f"实例把 .{match.group(1)}() 空接（什么都没接）", "删掉未使用的连接，或注明这个端口是有意留空的。"))
 
     # generate 块缺少标号：只在模块体内出现 generate 关键字、且其后没有 `: label` 时提示。
     for match in re.finditer(r"\bgenerate\b(?P<tail>[^\n;]*)", source, re.I):
@@ -653,15 +653,15 @@ def _interface_findings(source: str, lines: list[str], findings: list[StaticFind
         following = source[match.end(): match.end() + 200]
         if re.search(r"^\s*[^\n]*\bbegin\s*:", following) or re.search(r"\bbegin\s*:", source[match.start(): match.start() + 200], re.I):
             continue
-        findings.append(_finding(source, lines, "generate-no-label", "info", match.start(), "generate block has no label", "Label generate blocks (gen_*) so tools and reviewers can reference them."))
+        findings.append(_finding(source, lines, "generate-no-label", "info", match.start(), "generate 块缺少标号", "给 generate 块加标号（gen_*），便于工具与审查者引用。"))
 
     for match in re.finditer(r"\bparameter\s+([A-Za-z_]\w*)\s*(?P<tail>[^;,\n]*)", source, re.I):
         if "=" not in match.group("tail"):
-            findings.append(_finding(source, lines, "parameter-no-default", "info", match.start(), f"parameter {match.group(1)} has no default value", "Give parameters a safe default so the module elaborates standalone."))
+            findings.append(_finding(source, lines, "parameter-no-default", "info", match.start(), f"parameter {match.group(1)} 没有默认值", "给 parameter 一个安全默认值，让模块能独立展开。"))
 
     for match in re.finditer(r"\bparameter\s+[^;\n]*\b(?:IDLE|S_[A-Z_]+|[A-Z]{2,}_STATE)\b", source):
         if not re.search(r"\blocalparam\b", source):
-            findings.append(_finding(source, lines, "localparam-missing", "info", match.start(), "State encodings are declared as parameter instead of localparam", "Use localparam for internal state encodings so they cannot be overridden."))
+            findings.append(_finding(source, lines, "localparam-missing", "info", match.start(), "状态编码用 parameter 声明，而不是 localparam", "内部状态编码请用 localparam，避免被外部覆盖。"))
 
     internal_decls: dict[str, tuple[int, str]] = {}
     port_spans = _port_list_spans(source)
@@ -673,10 +673,10 @@ def _interface_findings(source: str, lines: list[str], findings: list[StaticFind
     for name, (offset, kind) in internal_decls.items():
         uses = len(re.findall(rf"\b{re.escape(name)}\b", source))
         if uses <= 1:
-            findings.append(_finding(source, lines, "unused-signal", "info", offset, f"Signal {name!r} is declared but never used", "Remove the declaration or connect it; unused declarations hide intent."))
+            findings.append(_finding(source, lines, "unused-signal", "info", offset, f"信号 {name!r} 已声明但从未使用", "删掉声明或把它接上；未使用的声明会掩盖设计意图。"))
             continue
         if kind == "wire" and not re.search(rf"\bassign\s+{re.escape(name)}\b|\b{re.escape(name)}\s*<=|\.\s*{re.escape(name)}\s*\(", source):
-            findings.append(_finding(source, lines, "floating-net", "warn", offset, f"Wire {name!r} is never driven", "Drive the wire with an assign or connect it to a module output."))
+            findings.append(_finding(source, lines, "floating-net", "warn", offset, f"wire {name!r} 从未被驱动", "用 assign 驱动这个 wire，或把它接到某个模块的输出上。"))
 
     # 同一个模块里混用高有效与低有效复位。
     # 先匹配完整标识符、再单独判断它是否是复位名：不能写成
@@ -693,7 +693,7 @@ def _interface_findings(source: str, lines: list[str], findings: list[StaticFind
             high_match = match
             break
     if low_match is not None and high_match is not None:
-        findings.append(_finding(source, lines, "reset-polarity-mixed", "warn", low_match.start(), "Module mixes active-low and active-high reset checks", "Use one reset polarity consistently and name the signal accordingly (rst_n vs rst)."))
+        findings.append(_finding(source, lines, "reset-polarity-mixed", "warn", low_match.start(), "同一模块混用了低有效与高有效复位判断", "统一一种复位极性，并按极性命名信号（rst_n 与 rst）。"))
 
 
 def _numeric_findings(source: str, lines: list[str], findings: list[StaticFinding]) -> None:
@@ -719,8 +719,8 @@ def _numeric_findings(source: str, lines: list[str], findings: list[StaticFindin
             if value >= (1 << width):
                 findings.append(_finding(
                     source, lines, "width-truncation", "warn", match.start(),
-                    f"Constant does not fit in {width}-bit signal {name!r} and will be truncated",
-                    "Size the literal explicitly and confirm the truncation is intended.",
+                    f"常量放不进 {width} 位信号 {name!r}，会被截断",
+                    "显式指定位宽，并确认这个截断是你想要的。",
                 ))
 
     # 未指定宽度的常量：只在"写进已知宽度的信号"时才提示，且跳过 0/1 这类
@@ -734,8 +734,8 @@ def _numeric_findings(source: str, lines: list[str], findings: list[StaticFindin
                 continue
             findings.append(_finding(
                 source, lines, "unsized-literal", "info", match.start("value"),
-                f"Unsized decimal literal {value} assigned to {width}-bit signal {name!r}",
-                f"Use a sized literal such as {width}'d{value} so the width is explicit.",
+                f"未指定位宽的十进制常量 {value} 赋给了 {width} 位信号 {name!r}",
+                f"改用带位宽的字面量，例如 {width}'d{value}，把位宽写明确。",
             ))
 
 
@@ -761,32 +761,32 @@ def review_rtl_source(source: str, *, filename: str = "rtl.v") -> dict[str, Any]
     # 测试平台里的 #delay 是正常写法（时钟与激励都需要），只在设计文件里报。
     if not is_tb:
         for match in re.finditer(r"#\s*\d", clean):
-            findings.append(_finding(clean, lines, "synth-delay", "error", match.start(), "RTL contains a #delay construct", "Remove delays from synthesizable RTL; model timing in the testbench."))
+            findings.append(_finding(clean, lines, "synth-delay", "error", match.start(), "RTL 中包含 #delay 延时构造", "可综合 RTL 里请去掉延时；时序行为在 testbench 里建模。"))
 
     if not is_tb:
         for match in re.finditer(r"\binitial\s*(?:begin)?", clean, re.I):
-            findings.append(_finding(clean, lines, "initial-block", "warn", match.start(), "Initial block may not synthesize consistently on the target FPGA", "Use reset-driven initialization; keep initial blocks in testbench files."))
+            findings.append(_finding(clean, lines, "initial-block", "warn", match.start(), "initial 块在目标 FPGA 上未必能一致地综合", "改用复位驱动的初始化；initial 块请留在 testbench 里。"))
 
     for match in re.finditer(r"\bcase\s*\([^)]*\)(?P<body>.*?)(?:\bendcase\b)", clean, re.I | re.S):
         body = match.group("body")
         if not re.search(r"\bdefault\s*:", body, re.I):
-            findings.append(_finding(clean, lines, "missing-default-case", "warn", match.start(), "Case statement has no default branch", "Add a safe default assignment or recovery state."))
+            findings.append(_finding(clean, lines, "missing-default-case", "warn", match.start(), "case 语句没有 default 分支", "补一个安全的默认赋值或恢复状态。"))
         elif not re.search(r"\bdefault\s*:[^;]*?[=;]", body, re.I) or re.search(r"\bdefault\s*:\s*(?:;|endcase)", body, re.I):
-            findings.append(_finding(clean, lines, "incomplete-case-assignment", "warn", match.start(), "Default branch does not assign anything", "Assign the same signals in the default branch as in the explicit branches."))
+            findings.append(_finding(clean, lines, "incomplete-case-assignment", "warn", match.start(), "default 分支没有给任何信号赋值", "default 分支要给与各显式分支相同的信号赋值。"))
 
     # Compact one-line always blocks are common in small examples and are not
     # captured reliably by the multiline block heuristic above.
     for match in re.finditer(r"\balways\s*@\s*\([^)]*\b(?:posedge|negedge)\b[^)]*\)[^\n;{}]*\b[A-Za-z_]\w*\s*=(?!=|>)", clean, re.I):
         line = _line_number(clean, match.start())
         if not any(item.rule_id == "blocking-in-sequential" and item.line == line for item in findings):
-            findings.append(_finding(clean, lines, "blocking-in-sequential", "warn", match.start(), "Sequential always block contains blocking assignment", "Use non-blocking <= for registered state updates."))
+            findings.append(_finding(clean, lines, "blocking-in-sequential", "warn", match.start(), "时序 always 块中使用了阻塞赋值", "寄存状态更新请用非阻塞赋值 <=。"))
 
     # Signals named as synchronizers should carry a placement hint in FPGA RTL.
     for match in re.finditer(r"\b(?:reg|logic)\s+[^;\n]*\b\w*sync\w*\b", clean, re.I):
         declaration_line = _line_number(clean, match.start())
         nearby = clean[max(0, match.start() - 180):match.start()]
         if "ASYNC_REG" not in nearby:
-            findings.append(StaticFinding("missing-async-reg", "info", declaration_line, "Synchronizer-like register lacks ASYNC_REG attribute", "Add the vendor placement attribute when this register is part of a CDC synchronizer.", _snippet(lines, declaration_line)))
+            findings.append(StaticFinding("missing-async-reg", "info", declaration_line, "疑似同步器寄存器缺少 ASYNC_REG 属性", "该寄存器属于 CDC 同步器时，请加上厂商布局属性。", _snippet(lines, declaration_line)))
 
     if not is_tb:
         _lexical_findings(clean, lines, findings)

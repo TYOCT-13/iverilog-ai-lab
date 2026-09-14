@@ -12,6 +12,8 @@
 
 from __future__ import annotations
 
+import re
+
 import pytest
 
 from iverilog_ai.core.static_review import RULE_REGISTRY, review_rtl_source
@@ -280,3 +282,29 @@ def test_rule_count_meets_roadmap_target():
     """路线图要求 30+ 条静态检查规则。"""
 
     assert len(RULE_REGISTRY) >= 30
+
+
+@pytest.mark.parametrize("rule_id,bad,_good", RULE_CASES, ids=[case[0] for case in RULE_CASES])
+def test_findings_are_reported_in_chinese(rule_id, bad, _good):
+    """命中信息必须是中文——这些文字会原样出现在页面表格与报告里。
+
+    真实反馈："表格里的 message 能不能改成中文"。规则 ID 与严重度保持英文标识
+    （稳定、可检索、可写进反馈），但**问题描述与修改建议**必须是中文，
+    否则中文页面里夹着一列英文，读者要自己翻译才能判断要不要改。
+
+    这里直接复用每条规则的最小反例：命中该规则的那条 finding 必须含中文。
+    """
+
+    result = review_rtl_source(bad, filename="case.v")
+    hits = [item for item in result["findings"] if item["rule_id"] == rule_id]
+    assert hits, f"{rule_id} 未命中反例"
+    for item in hits:
+        assert re.search(r"[\u4e00-\u9fff]", item["message"]), f"{rule_id} 的问题描述不是中文：{item['message']}"
+        assert re.search(r"[\u4e00-\u9fff]", item["suggestion"]), f"{rule_id} 的建议不是中文：{item['suggestion']}"
+
+
+def test_no_english_only_message_survives_in_the_registry():
+    """兜底：注册表里任何一条规则的标题都必须是中文（防止新规则又写成英文）。"""
+
+    for rule_id, spec in RULE_REGISTRY.items():
+        assert re.search(r"[\u4e00-\u9fff]", spec.title), f"{rule_id} 的标题不是中文：{spec.title}"

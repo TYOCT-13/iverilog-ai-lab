@@ -49,6 +49,14 @@ streamlit run ui/app.py
 页面规划器默认是**离线确定性规划器**：进程内按当前 DUT contract 生成激励，不需要密钥、
 不联网、也不依赖任何服务，组合逻辑案例（如"简单 ALU"）与时序案例都能直接跑通。
 
+波形查看（可选）：页面自带 VCD 解析与时间窗分析，**不依赖 GTKWave**；要用 GTKWave 人工复核时，
+路径按「设置页手填 → `GTKWAVE_PATH` → PATH → 常见目录 → 从 iverilog 安装位置推断」解析，
+因此官方 Icarus Windows 安装包（GTKWave 在同级 `gtkwave\bin\`）通常不需要手工配置：
+
+```powershell
+$env:GTKWAVE_PATH = "D:\iverilog\gtkwave\bin\gtkwave.exe"   # 需要时显式指定
+```
+
 在无 API Key、无网络的环境下联调 HTTP 接口层（本地调试模型，仅监听回环地址）：
 
 ```powershell

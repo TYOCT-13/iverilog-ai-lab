@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import ast
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -165,15 +166,35 @@ def _ui_function(name: str):
     与 `_ui_test_counter` 同一手法：页面脚本没法 import，但纯函数可以按 AST 摘出来跑。
     """
 
+    return _ui_functions(name)[name]
+
+
+def _ui_functions(*names: str) -> dict:
+    """一次摘出多个函数（互相调用的辅助函数必须一起摘，否则会 NameError）。
+
+    命名空间里补上这些函数用到的标准库模块（`ui/app.py` 顶部 import 的东西在摘出来的
+    模块里并不存在），否则一调用就 `NameError`。
+    """
+
+    import os
+    import shutil
+    import subprocess
+    import time as _time
+
     tree = ast.parse(APP.read_text(encoding="utf-8"))
-    node = next(
+    wanted = set(names)
+    nodes = [
         item
         for item in tree.body
-        if isinstance(item, ast.FunctionDef) and item.name == name
-    )
-    namespace: dict = {"Any": object}
-    exec(compile(ast.Module(body=[node], type_ignores=[]), f"ui/app.py:{name}", "exec"), namespace)
-    return namespace[name]
+        if isinstance(item, ast.FunctionDef) and item.name in wanted
+    ]
+    assert len(nodes) == len(wanted), (sorted(wanted), [node.name for node in nodes])
+    namespace: dict = {
+        "Any": object, "Path": Path, "os": os, "shutil": shutil,
+        "subprocess": subprocess, "time": _time,
+    }
+    exec(compile(ast.Module(body=nodes, type_ignores=[]), "ui/app.py", "exec"), namespace)
+    return namespace
 
 
 def test_contract_payload_builder_matches_the_contract_schema():
@@ -460,6 +481,102 @@ def test_no_session_state_write_after_widget_instantiation():
 
     findings = _write_after_widget_findings(APP)
     assert not findings, "发现「控件创建后回写 session_state」的代码：\n" + "\n".join(findings)
+
+
+def test_static_review_table_is_chinese_and_explains_itself():
+    """静态审查表格：表头与正文都要中文，并说明这一节到底在说什么。
+
+    真实反馈两条："RTL 静态质量审查里有什么信息"、"像图片里面的 message 能够改成中文吗"。
+    规则 ID 与严重度保持英文标识（可检索），问题描述与建议必须中文。
+    """
+
+    app = AppTest.from_file(str(APP), default_timeout=180)
+    app.session_state["case_name"] = "模十计数器"
+    app.run()
+    _click(app, "run_static_rtl_review")
+    assert not app.exception, [str(item.value) for item in app.exception]
+
+    review = app.session_state["static_rtl_review"]
+    assert review["finding_count"] >= 1, "参考设计至少会命中 `timescale 之类的提示"
+    frames = []
+    for element in app.dataframe:
+        try:
+            frames.append(element.value)
+        except Exception:
+            continue
+    columns = [list(frame.columns) for frame in frames]
+    assert any("问题" in item and "建议" in item and "严重度" in item for item in columns), columns
+    body = next(frame for frame in frames if "问题" in list(frame.columns))
+    assert set(body["严重度"]).issubset({"错误", "警告", "提示"}), set(body["严重度"])
+    assert re.search(r"[\u4e00-\u9fff]", str(body.iloc[0]["问题"])), body.iloc[0]["问题"]
+
+    captions = "\n".join(item.value for item in app.caption)
+    assert "只**读 RTL 文本**" in captions or "只读 RTL 文本" in captions, captions[:400]
+
+
+def test_vcd_section_is_a_fragment_so_clicks_do_not_reload_the_page():
+    """VCD 相关按钮必须在 fragment 里，点击只重跑这一段。
+
+    真实反馈："用 GTKWave 自动打开、读取窗口波形、分析 VCD 时间窗口都是无效的"——
+    功能其实跑通，但每次点击重跑整页，页面回到顶部、结果落在视口外，看起来就像没反应。
+    """
+
+    source = APP.read_text(encoding="utf-8")
+    tree = ast.parse(source)
+    target = next(
+        (node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name == "_show_vcd_analysis"),
+        None,
+    )
+    assert target is not None, "未找到 _show_vcd_analysis"
+    decorators = [ast.unparse(item) for item in target.decorator_list]
+    assert any("fragment" in item for item in decorators), decorators
+    # GTKWave 按钮与提示都在这个 fragment 内（不再由调用方渲染，否则又会整页重跑）
+    region = source.split("def _show_vcd_analysis")[1].split("\nCASES: dict")[0]
+    assert "用 GTKWave 打开" in region and "_open_vcd_with_gtkwave" in region, region[-400:]
+    assert "_gtkwave_search_summary" in source, "失败时应说明找过哪些位置"
+
+
+def test_gtkwave_path_can_be_set_manually_and_is_detected_automatically():
+    """设置页必须能自动检测 GTKWave，也能手填路径（用户明确要求的功能）。"""
+
+    app = AppTest.from_file(str(APP), default_timeout=180)
+    app.run()
+    assert not app.exception, [str(item.value) for item in app.exception]
+    labels = [item.label for item in app.text_input]
+    assert any("GTKWave" in label for label in labels), labels
+    assert any("自动检测" in item.label for item in app.button), [item.label for item in app.button]
+    captions = "\n".join(item.value for item in app.caption)
+    assert "工具探测结果" in captions, captions[:400]
+
+
+def test_gtkwave_launcher_reports_what_it_searched():
+    """GTKWave 启动失败时，提示必须说清原因，并且**列出找过哪些位置**。
+
+    真实反馈是"点了没反应、也不知道是不是没找到路径"。只说一句"未找到"没法行动：
+    用户不知道去哪儿填路径。所以三种失败都要有具体信息。
+    """
+
+    namespace = _ui_functions(
+        "_configured_gtkwave", "_gtkwave_search_summary", "_open_vcd_with_gtkwave",
+    )
+    namespace["st"] = type("Stub", (), {"session_state": {}})()
+    open_vcd = namespace["_open_vcd_with_gtkwave"]
+
+    # ① 路径存在性：显式给一个不存在的可执行文件
+    ok, message = open_vcd(Path("Z:/nope/waveform.vcd"), executable="Z:/nope/gtkwave.exe")
+    assert ok is False and "不存在" in message and "gtkwave.exe" in message, message
+
+    # ② 根本没有 GTKWave：提示要包含"找过哪些位置"
+    namespace["_configured_gtkwave"] = lambda: None
+    ok, message = open_vcd(Path("Z:/nope/waveform.vcd"))
+    assert ok is False, message
+    assert "未找到 GTKWave" in message and "设置" in message, message
+    assert "PATH" in message or "gtkwave" in message.lower(), message
+
+    # ③ 有 GTKWave 但波形文件不存在：要说清是波形的问题，而不是"未找到工具"
+    namespace["_configured_gtkwave"] = lambda: sys.executable  # 任何存在的可执行文件都行
+    ok, message = open_vcd(Path("Z:/nope/waveform.vcd"))
+    assert ok is False and "波形文件不存在" in message, message
 
 
 def test_no_python_file_has_unreachable_code():
