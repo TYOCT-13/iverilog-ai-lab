@@ -38,6 +38,35 @@ def test_page_renders_without_exception(rendered: AppTest):
     assert not rendered.exception, [str(item.value) for item in rendered.exception]
 
 
+def test_navigation_tabs_cover_every_section(rendered: AppTest):
+    """顶部导航栏必须把功能分开，而不是全挤在一页里。"""
+
+    labels = [tab.label for tab in rendered.tabs]
+    for expected in ("概览", "验证", "质量与对比", "手册", "设置", "历史"):
+        assert expected in labels, labels
+
+
+def test_theme_is_injected(rendered: AppTest):
+    """风格主题（临床白 + 青色强调 + 导航栏样式）必须真的注入页面。"""
+
+    html = "\n".join(getattr(item, "value", "") for item in rendered.markdown)
+    assert "--rl-cyan" in html and "stTabs" in html, html[:400]
+
+
+def test_manual_has_four_audiences(rendered: AppTest):
+    """网页内的使用手册必须覆盖入门 / 进阶 / 深度 / 按目的四类读者。"""
+
+    manuals = sorted((ROOT / "docs" / "manual").glob("*.md"))
+    assert len(manuals) == 4, [path.name for path in manuals]
+    for path in manuals:
+        text = path.read_text(encoding="utf-8")
+        assert len(text) > 1200, f"{path.name} 内容过短，像是占位"
+        assert "```" in text, f"{path.name} 缺少可执行命令"
+
+    body = "\n".join(getattr(item, "value", "") for item in rendered.markdown)
+    assert "入门" in body and "按目的" in body, "手册内容没有渲染到页面上"
+
+
 def test_default_case_is_selectable_and_labelled(rendered: AppTest):
     assert rendered.selectbox, "页面至少应有一个案例选择框"
     labels = [item.label for item in rendered.selectbox]
