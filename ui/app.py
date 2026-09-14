@@ -1,4 +1,5 @@
 """安全的单页演示：案例来自代码内白名单，仿真交给 IcarusExecutor。"""
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Any, Literal
 import json
@@ -41,6 +42,23 @@ from iverilog_ai.core.vcd import analyze_vcd_file
 ROOT = Path(__file__).resolve().parents[1]
 
 
+@contextmanager
+def _busy(message: str):
+    """在耗时操作**旁边立刻**显示 "LOADING…"，跑完自动消失。
+
+    为什么需要它：Streamlit 是同步执行的——点击按钮后，浏览器上仍是**旧界面**（默认
+    还会被调淡成 opacity .33，也就是用户说的"整个网页调白"），要等这段代码产生新元素
+    才会更新。`st.spinner` 的元素在进入上下文时就推送出去，所以"点了有没有反应"能立刻看到；
+    页面变淡则用 CSS 关掉（见 `_RL_CSS`），让反馈集中在操作本身。
+
+    Streamlit 的按钮本身不支持内嵌文字/加载态，因此提示紧跟在按钮下方（同一列），
+    视觉上就是"这个按钮进入了 LOADING"。
+    """
+
+    with st.spinner(f"LOADING… {message}"):
+        yield
+
+
 def _count_test_cases(root: Path | None = None) -> int | None:
     """统计 `tests/` 下真实的测试用例数（函数级），而不是文件数。
 
@@ -48,14 +66,20 @@ def _count_test_cases(root: Path | None = None) -> int | None:
     注意它**小于** pytest 实际收集的用例数（`@pytest.mark.parametrize` 会在运行时
     展开成多条），因此 `tests/core/test_ui_assets.py` 会断言这里的口径与
     pytest 的收集结果一致，避免页面数字与实际跑的数量脱节。
+
+    **默认只扫 `tests/`**：早先默认从仓库根 `rglob`，会把 `.iverilog-ai/` 下的历史运行
+    目录、`.git`、临时脚本全都走一遍——实测**每次调用 ~10 秒**，而这个函数每次重跑要被
+    调用两次（"换个案例要等半天"的真正原因）。测试目录本身只有几十个文件。
     """
 
     import ast
 
-    base = Path(root) if root is not None else ROOT
+    base = Path(root) if root is not None else ROOT / "tests"
     total = 0
     try:
         for path in base.rglob("test_*.py"):
+            if "__pycache__" in path.parts:
+                continue
             tree = ast.parse(path.read_text(encoding="utf-8"))
             total += sum(
                 1
@@ -68,11 +92,27 @@ def _count_test_cases(root: Path | None = None) -> int | None:
     return total or None
 
 
+@st.cache_data(ttl=300, show_spinner=False)
+def _tools():
+    """探测外部工具（缓存 5 分钟）。
+
+    实测 `locate_tools()` 每次 ~0.4 秒（`shutil.which` 要遍历 PATH），而页面在一次重跑里
+    会问它好几次（顶部状态条、设置页、GTKWave 按钮）。工具路径在一次会话里不会变，
+    缓存它是安全的；需要重新探测时用「自动检测」按钮显式清缓存。
+    """
+
+    return locate_tools()
+
+
+@st.cache_data(ttl=300, show_spinner=False)
 def _project_evidence() -> dict:
     """读取仓库里的真实规模数据，用于页面顶部的"实证状态"面板。
 
     全部从磁盘现算（基准清单、规则注册表、测试函数数），不写死数字——写死的
     数字会随时间失真，而这个页面最重要的承诺就是"给的都是可核验的事实"。
+
+    结果缓存 5 分钟：这些数字在一次会话里不会变，而每次重跑都为它们扫一遍磁盘、
+    解析所有测试文件，是页面"点一下等半天"的另一半原因。
     """
 
     evidence: dict = {}
@@ -90,7 +130,7 @@ def _project_evidence() -> dict:
         evidence["rules"] = evidence["rule_errors"] = None
     evidence["tests"] = _count_test_cases()
     try:
-        tools = locate_tools()
+        tools = _tools()
         evidence["iverilog"] = tools.iverilog
         evidence["vvp"] = tools.vvp
         evidence["yosys"] = tools.yosys
@@ -167,8 +207,6 @@ def _render_expectation_source(config: dict) -> None:
 def _configured_gtkwave() -> str | None:
     """按"页面里填的路径 → 环境变量 → 自动探测"的顺序取 GTKWave 可执行文件。"""
 
-    from iverilog_ai.core.toolchain import locate_tools
-
     manual = str(st.session_state.get("gtkwave_path", "") or "").strip()
     if manual:
         path = Path(manual)
@@ -178,7 +216,7 @@ def _configured_gtkwave() -> str | None:
     if env_value and Path(env_value).is_file():
         return env_value
     try:
-        return locate_tools().gtkwave
+        return _tools().gtkwave
     except Exception:
         return None
 
@@ -225,7 +263,11 @@ def _open_vcd_with_gtkwave(vcd_path: Path, *, executable: str | None = None) -> 
 
 
 def _gtkwave_search_summary() -> str:
-    """列出 GTKWave 的查找位置，供失败提示使用（不猜测、只说实际找过的地方）。"""
+    """列出 GTKWave 的查找位置，供失败提示使用（不猜测、只说实际找过的地方）。
+
+    这里**故意用未缓存的 `locate_tools()`**：它只在"启动失败"这条路径上被调用，
+    此刻需要的是"刚刚真的找过哪里"，而不是 5 分钟前的缓存结果。
+    """
 
     from iverilog_ai.core.toolchain import gtkwave_candidates, locate_tools
 
@@ -280,6 +322,7 @@ def _show_behavior_comparison(data: dict) -> None:
                 ],
                 use_container_width=True,
                 hide_index=True,
+                height=240,
             )
     waveform = data.get("waveform", {})
     st.markdown("**波形比对**")
@@ -341,6 +384,7 @@ def _show_synthesis(synthesis: dict | None) -> None:
         ],
         use_container_width=True,
         hide_index=True,
+        height=200,
     )
     status = str(data.get("status", "not_run"))
     if status == "passed":
@@ -351,7 +395,7 @@ def _show_synthesis(synthesis: dict | None) -> None:
         columns[3].metric("综合耗时", f"{data.get('duration_ms', 0)} ms")
         if data.get("cells"):
             with st.expander("门级单元明细"):
-                st.dataframe(data["cells"], use_container_width=True, hide_index=True)
+                st.dataframe(data["cells"], use_container_width=True, hide_index=True, height=240)
     elif status == "failed":
         st.error("综合失败：" + str(data.get("error") or "未知原因"))
         st.caption("这是强证据——仿真通过也不能说明这份 RTL 可综合。")
@@ -417,7 +461,7 @@ def _show_vcd_analysis(vcd_path: Path, *, key_prefix: str, preset: dict | None =
         st.caption(f"VCD 时间范围：{data.get('start_ns')} ns ～ {data.get('end_ns')} ns；信号 {data.get('signal_count', 0)} 个；变化 {data.get('total_changes', 0)} 次")
         if data.get("signals"):
             with st.expander("查看 VCD 信号列表"):
-                st.dataframe(data["signals"], use_container_width=True, hide_index=True)
+                st.dataframe(data["signals"], use_container_width=True, hide_index=True, height=240)
 
         # 信号活动覆盖率：激励质量的指标，**不是**代码覆盖率（口径见 docs/coverage.md）
         activity = data.get("coverage") or {}
@@ -436,7 +480,7 @@ def _show_vcd_analysis(vcd_path: Path, *, key_prefix: str, preset: dict | None =
                 st.info("本次仿真中未发生变化的信号：" + "、".join(activity["unchanged"]))
             if activity.get("value_detail"):
                 with st.expander("各信号的取值覆盖明细"):
-                    st.dataframe(activity["value_detail"], use_container_width=True, hide_index=True)
+                    st.dataframe(activity["value_detail"], use_container_width=True, hide_index=True, height=240)
             st.caption(activity.get("disclaimer", ""))
             if activity.get("note"):
                 st.caption(activity["note"])
@@ -464,10 +508,10 @@ def _show_vcd_analysis(vcd_path: Path, *, key_prefix: str, preset: dict | None =
                     if entry.get("status") == "unstable":
                         status = "不稳定(DUT)" if entry.get("is_dut") else "不稳定(tb记账)"
                     rows.append({**item, "归属": "DUT" if entry.get("is_dut") else "testbench", "稳定性": status})
-                st.dataframe(rows, use_container_width=True, hide_index=True)
+                st.dataframe(rows, use_container_width=True, hide_index=True, height=240)
         if insights.get("phase_checks"):
             st.markdown("**相位检查（输出晚/早一拍）**")
-            st.dataframe(insights["phase_checks"], use_container_width=True, hide_index=True)
+            st.dataframe(insights["phase_checks"], use_container_width=True, hide_index=True, height=200)
 
         # 失败周期对应的波形时间窗（流水线已算好，此前没有展示入口）
         windows = data.get("failure_windows") or {}
@@ -483,7 +527,7 @@ def _show_vcd_analysis(vcd_path: Path, *, key_prefix: str, preset: dict | None =
                     }
                     for item in windows["windows"]
                 ]
-                st.dataframe(rows, use_container_width=True, hide_index=True)
+                st.dataframe(rows, use_container_width=True, hide_index=True, height=220)
                 st.download_button(
                     "下载失败周期时间窗 JSON",
                     json.dumps(windows, ensure_ascii=False, indent=2).encode("utf-8"),
@@ -504,7 +548,8 @@ def _show_vcd_analysis(vcd_path: Path, *, key_prefix: str, preset: dict | None =
         end = _win_cols[1].number_input("窗口结束时间 (ns)", min_value=float(start), value=max(float(start), float(window["end"])), key=f"{key_prefix}_end")
         if st.button("读取窗口波形", key=f"{key_prefix}_read", type="primary"):
             try:
-                st.session_state[f"{key_prefix}_window_data"] = analyze_vcd_file(vcd_path, start_ns=start, end_ns=end, max_changes=2000)
+                with _busy("正在解析该时间窗的波形变化"):
+                    st.session_state[f"{key_prefix}_window_data"] = analyze_vcd_file(vcd_path, start_ns=start, end_ns=end, max_changes=2000)
             except Exception as exc:
                 st.error(f"VCD 窗口分析失败：{exc}")
     window_data = st.session_state.get(f"{key_prefix}_window_data")
@@ -517,7 +562,7 @@ def _show_vcd_analysis(vcd_path: Path, *, key_prefix: str, preset: dict | None =
             + ("（列表已按 2000 条截断，完整数据请下载 JSON）" if window_data.get("truncated") else "")
         )
         if window_data.get("changes"):
-            st.dataframe(window_data["changes"], use_container_width=True, hide_index=True)
+            st.dataframe(window_data["changes"], use_container_width=True, hide_index=True, height=260)
         else:
             st.info("该时间窗内没有任何信号变化；把起始/结束时间放宽一些再试。")
         st.download_button("下载 VCD 分析 JSON", json.dumps(window_data, ensure_ascii=False, indent=2).encode("utf-8"), file_name="vcd-analysis.json", mime="application/json", key=f"{key_prefix}_download")
@@ -529,7 +574,8 @@ def _show_vcd_analysis(vcd_path: Path, *, key_prefix: str, preset: dict | None =
     _gv_col, _gv_info = st.columns([1, 3])
     with _gv_col:
         if st.button("用 GTKWave 打开", key=f"{key_prefix}_gtkwave_open"):
-            ok, message = _open_vcd_with_gtkwave(vcd_path)
+            with _busy("正在启动 GTKWave"):
+                ok, message = _open_vcd_with_gtkwave(vcd_path)
             st.session_state.gtkwave_message = message
             st.session_state.gtkwave_message_ok = ok
     with _gv_info:
@@ -620,7 +666,8 @@ def _show_candidate_repair(result, rtl_path, key):
         st.session_state["candidate_repair_text"] = _candidate_repair_text(result, rtl_path)
     proposal = st.session_state.get("candidate_repair_text")
     if proposal:
-        st.code(proposal, language="markdown")
+        with st.container(height=260):
+            st.code(proposal, language="markdown")
         st.download_button("下载候选修复建议", proposal.encode("utf-8"), file_name="candidate-repair.md", mime="text/markdown", key=f"{key}_download")
         st.warning("请在临时副本中人工修改并重新运行完整回归；此页面不会自动修改原始 RTL。")
 
@@ -1073,6 +1120,24 @@ h3{font-size:.98rem !important; color:var(--rl-ink-soft);}
 /* 数据表与代码块 */
 [data-testid="stDataFrame"], [data-testid="stTable"]{border:1px solid var(--rl-line);}
 .stCode, pre{font-family:var(--rl-mono) !important; font-size:.8rem;}
+/* 文本框/代码块/JSON：固定可视范围，超出用滚轮，不允许把整页越撑越长。
+   页面里已经逐个给了 height（st.text_area 的 height、st.container(height=...) 包裹的
+   code/json），这里再兜一层：任何遗漏的 pre / 代码块都不会无限增高。 */
+[data-testid="stCode"] pre, [data-testid="stJson"] pre, .stCode pre{
+  max-height:260px; overflow:auto; margin:0;
+}
+.stTextArea textarea{max-height:320px; overflow:auto !important; resize:vertical;}
+[data-testid="stJson"]{max-height:300px; overflow:auto;}
+/* 运行中不要让整页变淡。
+   Streamlit 把手上的旧元素标成 `data-stale="true"` 并施加 opacity .33（在 1s 后开始过渡），
+   用户看到的就是"点了按钮整个网页被调白"。进度反馈改由被点击按钮旁的 LOADING 提示承担，
+   因此这里把变淡关掉——页面保持清晰，只有那一个按钮附近出现加载指示。 */
+[data-stale="true"]{opacity:1 !important; transition:none !important;}
+[data-testid="element-container"][data-stale="true"]{opacity:1 !important;}
+[data-testid="stExpander"] details[data-stale="true"]{opacity:1 !important;}
+/* LOADING 提示：青色小写字，紧跟按钮 */
+[data-testid="stSpinner"]{font-size:.82rem; color:var(--rl-cyan-dark);}
+[data-testid="stSpinner"] > div{border-top-color:var(--rl-cyan) !important;}
 /* 状态点 */
 .rl-chip{display:inline-flex; align-items:center; gap:.35rem; margin:0 .35rem .25rem 0;
   padding:.12rem .45rem; border:1px solid var(--rl-line-strong); border-radius:3px;
@@ -1128,6 +1193,18 @@ _MANUAL_PAGES = (
 )
 
 
+@st.cache_data(ttl=300, show_spinner=False)
+def _manual_text(filename: str) -> str:
+    """读一页手册（缓存 5 分钟）。
+
+    手册每次重跑都会被渲染一遍（Streamlit 的 tabs 会渲染全部页签，只是隐藏未选中的），
+    每次读盘 + 传输几 KB。缓存读盘部分，避免"点一下重发四个文档"。
+    """
+
+    path = _MANUAL_DIR / filename
+    return path.read_text(encoding="utf-8") if path.is_file() else ""
+
+
 def _render_manual() -> None:
     """在网页内渲染多版使用手册（内容源是仓库里的 Markdown，CLI 与网页共用一份）。"""
 
@@ -1138,7 +1215,8 @@ def _render_manual() -> None:
             if not path.is_file():
                 st.warning(f"手册文件缺失：{path.relative_to(ROOT)}")
                 continue
-            st.markdown(path.read_text(encoding="utf-8"), unsafe_allow_html=False)
+            with st.container(height=420):
+                st.markdown(_manual_text(filename), unsafe_allow_html=False)
     st.caption("手册源文件在 `docs/manual/`，与命令行/报告用的是同一份，欢迎直接改。")
 
 
@@ -1216,7 +1294,8 @@ with _TAB_VERIFY:
                 imported_files = []
                 sources = []
                 for item in uploaded:
-                    imported = import_rtl_bytes(item.name, item.getvalue(), ROOT)
+                    with _busy("正在导入并解析上传的 RTL"):
+                        imported = import_rtl_bytes(item.name, item.getvalue(), ROOT)
                     imported_files.append(imported)
                     sources.append(f"// ---- {item.name} ----\n" + item.getvalue().decode("utf-8"))
                 source = "\n\n".join(sources)
@@ -1261,7 +1340,8 @@ with _TAB_VERIFY:
         if st.session_state.get("custom_rtl_source") and reference_options:
             reference_choice = Path(str(st.selectbox("标准 RTL 参考实现", reference_options, format_func=lambda p: p.name)))
             if st.button("对比自定义 RTL 与标准实现", key="compare_custom_reference"):
-                comparison = compare_rtl_sources(st.session_state.custom_rtl_source, reference_choice.read_text(encoding="utf-8"), user_name="上传 RTL", reference_name=reference_choice.name)
+                with _busy("正在对比两份 RTL 的结构"):
+                    comparison = compare_rtl_sources(st.session_state.custom_rtl_source, reference_choice.read_text(encoding="utf-8"), user_name="上传 RTL", reference_name=reference_choice.name)
                 st.session_state.rtl_comparison = comparison
         if st.session_state.get("rtl_comparison"):
             comparison = st.session_state.rtl_comparison
@@ -1314,7 +1394,8 @@ with _TAB_QUALITY:
     if case.get("rtl") and Path(case["rtl"]).is_file():
         if st.button("执行 RTL 静态质量审查", key="run_static_rtl_review", help="检查时序/组合赋值、复位、default、CDC 提示和其他规则；不替代仿真"):
             try:
-                st.session_state.static_rtl_review = review_rtl_file(case["rtl"])
+                with _busy("正在按 44 条规则审查 RTL"):
+                    st.session_state.static_rtl_review = review_rtl_file(case["rtl"])
             except Exception as exc:
                 st.error(f"RTL 静态审查失败：{exc}")
     if st.session_state.get("static_rtl_review"):
@@ -1351,6 +1432,7 @@ with _TAB_QUALITY:
                 ],
                 use_container_width=True,
                 hide_index=True,
+                height=300,
             )
         else:
             st.success(f"当前规则集（{static_review.get('rule_count', 0)} 条）没有命中任何问题。")
@@ -1368,6 +1450,7 @@ with _TAB_QUALITY:
                 ],
                 use_container_width=True,
                 hide_index=True,
+                height=300,
             )
         st.json({"counts": static_review["counts"], "finding_count": static_review["finding_count"], "source_sha256": static_review["source_sha256"]})
         with st.popover("导出审查报告"):
@@ -1487,7 +1570,8 @@ with _TAB_SETTINGS:
                 )
                 if not api_key.strip():
                     raise ValueError("读取模型列表需要先输入 API Key")
-                st.session_state.available_models = _models_provider.list_models()
+                with _busy("正在向服务商请求模型列表"):
+                    st.session_state.available_models = _models_provider.list_models()
                 st.success(f"已读取 {len(st.session_state.available_models)} 个模型")
             except Exception as exc:
                 st.error(f"读取模型列表失败：{exc}")
@@ -1536,7 +1620,7 @@ with _TAB_SETTINGS:
                 "可以在上面填写 gtkwave.exe 的完整路径，或设置环境变量 GTKWAVE_PATH 后重启页面。"
             )
         from iverilog_ai.core.toolchain import describe_tools
-        st.caption("工具探测结果：" + describe_tools())
+        st.caption("工具探测结果：" + describe_tools(_tools()))
         if st.session_state.get("gtkwave_detected"):
             st.caption(f"上次自动检测结果：{st.session_state.gtkwave_detected}")
 
@@ -1551,13 +1635,15 @@ with _TAB_VERIFY:
             review_prompt = ("请作为 FPGA RTL 教学审查员。仅依据以下已脱敏的结构化对比结果，输出 JSON："
                              '{"strengths":[...],"gaps":[...],"learning_plan":[...],"confidence":"low|medium|high"}。'
                              "不要输出代码、命令或路径。\n" + json.dumps(st.session_state.rtl_comparison, ensure_ascii=False))
-            raw_review = review_provider.generate(review_prompt)
+            with _busy("正在请求 AI 解读"):
+                raw_review = review_provider.generate(review_prompt)
             st.session_state.rtl_ai_review = raw_review
         except Exception as exc:
             st.error(f"AI RTL 解读失败：{exc}")
     if st.session_state.get("rtl_ai_review"):
         st.subheader("AI RTL 学习解读")
-        st.code(st.session_state.rtl_ai_review, language="json")
+        with st.container(height=260):
+            st.code(st.session_state.rtl_ai_review, language="json")
 
     if "ai_plan" not in st.session_state:
         st.session_state.ai_plan = None
@@ -1590,16 +1676,17 @@ with _TAB_VERIFY:
             # 设计一栏也就跟着失去意义。模块名对内置案例与自定义 RTL 都成立，
             # 且与规则文件名、testbench 实例化的模块名三处一致。
             case_name = contract.module
-            generated_plan = plan_tests(
-                objective,
-                case_name,
-                provider=provider,
-                # 允许一次"带着拒绝原因"的重试：模型偶尔会写错一个字段名（例如给
-                # signal_implies 多写 signal），一次修正就能救回整轮；只在第一次被严格
-                # 校验拒绝时才会多发一次请求（认证/限流错误不会重试）。
-                max_retries=1,
-                context=_verification_rules(case_name, contract, spec_text),
-            )
+            with _busy("正在生成测试计划（在线模型可能需要几十秒）"):
+                generated_plan = plan_tests(
+                    objective,
+                    case_name,
+                    provider=provider,
+                    # 允许一次"带着拒绝原因"的重试：模型偶尔会写错一个字段名（例如给
+                    # signal_implies 多写 signal），一次修正就能救回整轮；只在第一次被严格
+                    # 校验拒绝时才会多发一次请求（认证/限流错误不会重试）。
+                    max_retries=1,
+                    context=_verification_rules(case_name, contract, spec_text),
+                )
             try:
                 requested_assertions = json.loads(assertions_text or "[]")
                 if not isinstance(requested_assertions, list):
@@ -1638,7 +1725,8 @@ with _TAB_VERIFY:
                 st.json(_rule_files)
         except ValueError:
             pass
-        st.json(st.session_state.ai_plan.model_dump(mode="json"))
+        with st.container(height=320):
+            st.json(st.session_state.ai_plan.model_dump(mode="json"))
 
 
 with _TAB_SETTINGS:
@@ -1674,7 +1762,8 @@ with _TAB_VERIFY:
             include_dirs=_includes,
         )
         try:
-            simulation_result = IcarusExecutor(config).run()
+            with _busy("正在编译并运行 Icarus 仿真"):
+                simulation_result = IcarusExecutor(config).run()
             report = write_report(simulation_result, Path(simulation_result.artifacts["run_dir"]) / "report.md")
             st.subheader(f"结论：{simulation_result.status.value}")
             st.metric("结构化记录", f"{sum(r.ok for r in simulation_result.records)}/{len(simulation_result.records)} 通过")
@@ -1696,17 +1785,18 @@ with _TAB_VERIFY:
             output = ROOT / ".iverilog-ai" / "pipeline-ui"
             rtl_relative = str(case["rtl"])
             _defines, _includes = _compile_options()
-            result = VerificationPipeline(
-                run_synthesis=st.session_state.get("run_synthesis", False),
-                yosys_path=os.getenv("YOSYS_PATH") or None,
-            ).run(
-                st.session_state.ai_plan, contract, ROOT / rtl_relative, output,
-                allowed_roots=(ROOT,), iverilog_path=os.getenv("IVERILOG_PATH") or r"D:\iverilog\bin\iverilog.exe",
-                vvp_path=os.getenv("VVP_PATH") or r"D:\iverilog\bin\vvp.exe",
-                defines=_defines,
-                include_dirs=_includes,
-                emit_vcd=True,
-            )
+            with _busy("正在生成 testbench、跑 Icarus/vvp 并汇总结论"):
+                result = VerificationPipeline(
+                    run_synthesis=st.session_state.get("run_synthesis", False),
+                    yosys_path=os.getenv("YOSYS_PATH") or None,
+                ).run(
+                    st.session_state.ai_plan, contract, ROOT / rtl_relative, output,
+                    allowed_roots=(ROOT,), iverilog_path=os.getenv("IVERILOG_PATH") or r"D:\iverilog\bin\iverilog.exe",
+                    vvp_path=os.getenv("VVP_PATH") or r"D:\iverilog\bin\vvp.exe",
+                    defines=_defines,
+                    include_dirs=_includes,
+                    emit_vcd=True,
+                )
             st.session_state.last_pipeline_result = result
             st.session_state.last_pipeline_case = name
             pipeline_report = Path(result.artifacts["output_dir"]) / "report.md"
@@ -1727,7 +1817,7 @@ with _TAB_VERIFY:
                 st.dataframe([
                     {"信号": signal, "已覆盖": item["covered"], "总检查": item["total"], "覆盖率": f"{item['percent']}%"}
                     for signal, item in coverage["per_signal"].items()
-                ], use_container_width=True, hide_index=True)
+                ], use_container_width=True, hide_index=True, height=220)
             st.write("流水线工件：")
             st.code(str(result.artifacts.get("pipeline_result", "")), language="text")
             st.code(str(pipeline_report), language="text")
@@ -1742,7 +1832,8 @@ with _TAB_VERIFY:
             if st.button("生成本次运行证据包", key="create_pipeline_evidence_pack", help="复制报告、TestPlan、testbench、result.json 和 VCD，并生成哈希清单"):
                 try:
                     pack_dir = Path(result.artifacts.get("output_dir", pipeline_report.parent)) / "evidence-pack"
-                    manifest = create_evidence_pack(result.artifacts.get("pipeline_result", ""), pack_dir)
+                    with _busy("正在收集证据包并计算哈希"):
+                        manifest = create_evidence_pack(result.artifacts.get("pipeline_result", ""), pack_dir)
                     st.success(f"证据包已生成：{pack_dir}（{len(manifest['files'])} 个文件）")
                     st.code(str(pack_dir / "README.md"), language="text")
                     zip_path = Path(manifest.get("zip_file", ""))
@@ -1752,7 +1843,8 @@ with _TAB_VERIFY:
                     st.error(f"证据包生成失败：{exc}")
             with st.expander("查看生成的测试计划和 testbench"):
                 st.json(result.plan.model_dump(mode="json"))
-                st.code(Path(result.artifacts["testbench"]).read_text(encoding="utf-8"), language="verilog")
+                with st.container(height=320):
+                    st.code(Path(result.artifacts["testbench"]).read_text(encoding="utf-8"), language="verilog")
             vcd_value = result.artifacts.get("vcd", "")
             if vcd_value:
                 vcd_path = Path(vcd_value)

@@ -10,6 +10,32 @@
 
 ### 新增
 
+- **页面交互三处改进（固定高度文本框 / 按钮内 LOADING / 换案例秒开）**。三条真实反馈：
+  "把全部文本框设定固定范围，超出用滚轮"、"点击按钮后不要把整个网页调白，而是在按钮里
+  显示 LOADING"、"从自定义 RTL 换到简单 ALU 都要加载半天"。
+  1. **固定可视范围**：12 个 `st.dataframe` 全部显式给 `height`（命中表、规则集、VCD 信号、
+     时间窗变化、逐项差异、覆盖率等）；候选修复建议、AI 解读、TestPlan、生成的 testbench
+     源码套 `st.container(height=...)` 滚动区；手册正文与 `st.text_area` 也都有固定高度。
+     CSS 再兜一层：`code`/`json` 的 `pre` 与 `textarea` 都设 `max-height` + `overflow:auto`，
+     任何遗漏的块都不会把页面越撑越长。
+  2. **不再整页调白**：Streamlit 把手上的旧元素标成 `data-stale="true"` 并施加
+     `opacity:.33`（这就是"整个网页被调白"），现在用 CSS 覆盖回 1；进度反馈改由新增的
+     `_busy()` 承担——它用 `st.spinner` 在**被点击按钮的下方立刻**显示
+     `LOADING… <正在做什么>`，跑完自动消失。已覆盖 11 个耗时动作（生成计划、Icarus 仿真、
+     AI 计划流水线、静态审查、结构/行为对比、上传 RTL 解析、模型列表、AI 解读、证据包、
+     波形窗口解析、启动 GTKWave）。Streamlit 的按钮本身不支持内嵌加载态，因此提示紧贴按钮。
+  3. **重跑快了约 88 倍**：`_count_test_cases()` 原先默认从**仓库根** `rglob("test_*.py")`，
+     把 `.iverilog-ai/` 下成千上万的历史运行目录、`.git`、临时脚本全走一遍——实测
+     **每次 ~10 秒**，而每次重跑要调用两次；`locate_tools()`（`shutil.which` 遍历 PATH，
+     ~0.3 秒）也每次重跑被调用多次。现在：计数只扫 `tests/`，`_project_evidence()` 与
+     `_tools()` 加 `@st.cache_data`（手册读取同理）。实测：首次渲染 17.3s → **1.6s**，
+     切换案例后重跑 16.7s → **0.19s**。
+  回归：`tests/core/test_ui_smoke.py` 新增四条——内容框高度门禁（dataframe/text_area 必须
+  有 height、CSS 兜底规则必须在位）、`data-stale` 覆盖规则与 `_busy` 覆盖率（≥10 处）、
+  **重跑耗时上限 5 秒**（把"又去扫全仓库"这类改动直接拦下）、缓存装饰器与计数目录门禁。
+
+### 修复
+
 - **GTKWave 路径可自动探测、也可手填，波形相关按钮不再整页重跑**。真实反馈三条：
   "用 GTKWave 自动打开 / 读取窗口波形 / 分析 VCD 时间窗口都是无效的"、
   "不知道是不是因为没办法自动获取 GTKWave 的路径"、以及静态审查表格是英文的。
@@ -190,7 +216,7 @@
   `TestbenchGenerationError` 类名以 `Test` 开头，任何 import 它们的测试模块都会触发
   `PytestCollectionWarning: cannot collect test class ...`。虽然不影响结果，但会让"全绿"
   的输出看起来像有测试收集问题（也会埋掉真正的告警）。三个类显式声明 `__test__ = False`，
-  现在 `python -m pytest -q` 是 **506 passed、0 warning**（另有一条门禁用例在推荐断言表为空时
+  现在 `python -m pytest -q` 是 **510 passed、0 warning**（另有一条门禁用例在推荐断言表为空时
   显式 skip）。
 - **检出率用了不可比的口径（把"多试几次"算成"模型更强"）**：在线模型跑了 10 轮，
   而我报的 `97.0% / 95.5%` 是"任意一轮检出即算检出"的**累计并集**；固定/随机/离线三个

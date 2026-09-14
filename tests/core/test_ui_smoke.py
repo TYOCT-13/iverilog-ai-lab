@@ -579,6 +579,98 @@ def test_gtkwave_launcher_reports_what_it_searched():
     assert ok is False and "波形文件不存在" in message, message
 
 
+def test_every_content_box_has_a_bounded_height():
+    """长内容必须有固定可视范围，超出用滚轮（用户明确要求）。
+
+    三类：
+    1. `st.dataframe(...)` 必须显式给 `height=`（否则表格会按行数一直长下去）；
+    2. `st.code(...)` / `st.json(...)` 要么套 `st.container(height=...)`，要么被 CSS 包住；
+    3. `st.text_area(...)` 必须给 `height=`。
+    """
+
+    tree = ast.parse(APP.read_text(encoding="utf-8"))
+    missing: list[str] = []
+    code_json = 0
+    for node in ast.walk(tree):
+        if not (isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)):
+            continue
+        if not (isinstance(node.func.value, ast.Name) and node.func.value.id == "st"):
+            continue
+        method = node.func.attr
+        has_height = any(keyword.arg == "height" for keyword in node.keywords)
+        if method in {"dataframe", "text_area"} and not has_height:
+            missing.append(f"{method} @ line {node.lineno}")
+        if method in {"code", "json"}:
+            code_json += 1
+    assert not missing, "以下内容框没有固定高度：\n" + "\n".join(missing)
+    assert code_json > 0
+
+    source = APP.read_text(encoding="utf-8")
+    # CSS 兜底：code/json 的 pre 与 textarea 都要有 max-height + overflow
+    for needle in ("max-height:260px", "max-height:300px", "max-height:320px"):
+        assert needle in source, needle
+
+
+def test_running_state_does_not_dim_the_whole_page():
+    """运行中不得把整页调淡，进度反馈由按钮旁的 LOADING 提示承担。
+
+    Streamlit 默认给手上的旧元素加 `data-stale="true"` 并施加 opacity .33——用户看到的
+    就是"点了按钮整个网页被调白"。这里钉住覆盖规则存在，并钉住 `_busy` 被用在了
+    所有耗时动作上（少于 10 处就说明有人漏包了）。
+    """
+
+    source = APP.read_text(encoding="utf-8")
+    assert '[data-stale="true"]{opacity:1 !important' in source
+    assert "_busy(" in source and "def _busy(" in source
+    assert "st.spinner(" in source
+    assert source.count("with _busy(") >= 10, source.count("with _busy(")
+
+
+def test_page_rerun_is_fast_enough_to_be_usable():
+    """换个案例不该等半天：第二次重跑必须有明确的速度上限。
+
+    真实反馈："我从自定义 RTL 换到简单 ALU 都要加载半天"。根因是每次重跑都在扫整个仓库
+    数测试函数（实测 ~10 秒 ×2），修好后是 0.2 秒级。这里给一个宽松上限（5 秒）：
+    正常远低于它，而任何"又把全仓库扫一遍"的改动都会立刻超限。
+    """
+
+    import time
+
+    app = AppTest.from_file(str(APP), default_timeout=180)
+    app.run()  # 首次渲染含解释器/模块导入，不计入
+    started = time.perf_counter()
+    app.session_state["case_name"] = "简单 ALU"
+    app.run()
+    elapsed = time.perf_counter() - started
+    assert not app.exception, [str(item.value) for item in app.exception]
+    assert elapsed < 5.0, f"切换案例后重跑用了 {elapsed:.2f}s，又变慢了"
+
+
+def test_evidence_cache_is_wired_and_test_count_stays_in_tests():
+    """顶部实证面板必须走缓存，且测试计数不得再扫整个仓库。"""
+
+    source = APP.read_text(encoding="utf-8")
+    assert "@st.cache_data" in source, "没有使用缓存"
+    assert "def _project_evidence()" in source
+    # 计数函数的默认目录必须是 tests/
+    tree = ast.parse(source)
+    counter = next(
+        node for node in tree.body
+        if isinstance(node, ast.FunctionDef) and node.name == "_count_test_cases"
+    )
+    unparsed = ast.unparse(counter)
+    # ast.unparse 会把字符串统一成单引号，两种写法都认
+    assert "ROOT / 'tests'" in unparsed or 'ROOT / "tests"' in unparsed, "测试计数又回到扫整个仓库了"
+    # 缓存装饰器要落在 _project_evidence 与 _tools 上
+    decorated = {
+        node.name
+        for node in tree.body
+        if isinstance(node, ast.FunctionDef)
+        and any("cache_data" in ast.unparse(item) for item in node.decorator_list)
+    }
+    assert {"_project_evidence", "_tools"} <= decorated, decorated
+
+
 def test_no_python_file_has_unreachable_code():
     """把未可达代码检查作为测试跑一遍，保证门禁在 `pytest` 里也生效。"""
 

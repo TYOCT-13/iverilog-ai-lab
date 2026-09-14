@@ -96,7 +96,7 @@ streamlit run ui/app.py
 ## 4. 每次都能这样验证（约 1 分钟）
 
 ```powershell
-python -m pytest -q                       # 期望 506 passed，0 warning
+python -m pytest -q                       # 期望 510 passed，0 warning
 python scripts/run_benchmark_matrix.py    # 期望 15/15、83/83、0 误报、0 不可判定
 ```
 
@@ -107,6 +107,8 @@ python scripts/run_benchmark_matrix.py    # 期望 15/15、83/83、0 误报、0 
 | 现象 | 原因与处理 |
 |---|---|
 | 网页里"执行"按钮点了没反应 | 先点**生成测试计划**；执行依赖已校验的计划 |
+| 点了按钮只看到 `LOADING…`，页面没有变白 | 这是**预期行为**：进度就显示在被点的按钮下方，页面不再整体调白；在线模型可能要几十秒 |
+| 某块内容很长，看不到结尾 | 长内容都在固定高度的框里，**框内滚轮**即可（表格、JSON、代码、手册正文都是） |
 | 提示 `请先上传 RTL 并校验 DUT contract` | 你选了"自定义 RTL"，需要先上传并点"校验自定义 contract" |
 | 结果里"期望值来源 = `ai_generated`" | 该设计没有参考模型，这一轮用的是 AI 数字，结论可信度较低（见报告里的 advice） |
 | 综合层显示"工具不可用" | 没装 Yosys，属正常，不影响判决 |
