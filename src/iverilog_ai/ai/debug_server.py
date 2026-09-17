@@ -53,6 +53,94 @@ def build_plan_response(text: str, *, vector_count: int, seed: int) -> dict[str,
     return plan
 
 
+#: 静态审查复核请求的标识（`ai/review_advisor.py` 的提示词里固定带这一句）。
+_ADVICE_MARKER = "Required JSON shape: {\"summary\""
+
+
+def _advice_request_payload(text: str) -> dict[str, Any] | None:
+    """从静态审查复核提示词里取出输入载荷（``Input:`` 之后那个 JSON 对象）。
+
+    为什么调试服务也要认这种请求：网页的「本地调试模型」是"整条链路可离线演示"的入口，
+    如果它只会答测试计划，用户点了「让 AI 复核并给修复建议」就会看到一条校验失败——
+    而离线模式下这件事本可以确定性完成（按规则表排序）。因此这里让服务返回**离线建议**，
+    内容与 `offline_review_advice()` 同源，并在 assumptions 里写明"非 AI 输出"。
+    """
+
+    marker = text.find("Input:")
+    while marker != -1:
+        brace = text.find("{", marker)
+        if brace != -1:
+            depth = 0
+            in_string = False
+            escaped = False
+            for index in range(brace, len(text)):
+                char = text[index]
+                if in_string:
+                    if escaped:
+                        escaped = False
+                    elif char == "\\":
+                        escaped = True
+                    elif char == '"':
+                        in_string = False
+                    continue
+                if char == '"':
+                    in_string = True
+                elif char == "{":
+                    depth += 1
+                elif char == "}":
+                    depth -= 1
+                    if depth == 0:
+                        try:
+                            parsed = json.loads(text[brace : index + 1])
+                        except json.JSONDecodeError:
+                            break
+                        if isinstance(parsed, dict) and "rule_hits" in parsed:
+                            return parsed
+                        break
+        marker = text.find("Input:", marker + 1)
+    return None
+
+
+def build_advice_response(text: str) -> dict[str, Any]:
+    """把一次静态审查复核请求映射为确定性建议（离线，不调用任何模型）。"""
+
+    from pydantic import ValidationError
+
+    from .review_advisor import _LEVEL_BY_SEVERITY, ReviewPriority, StaticReviewAdvice  # noqa: PLC0415
+
+    payload = _advice_request_payload(text)
+    if payload is None:
+        raise ValueError("request is not a static review advice request")
+    hits = [item for item in (payload.get("rule_hits") or []) if isinstance(item, dict)]
+    counts = payload.get("counts") or {}
+    ordered = sorted(hits, key=lambda item: ({"error": 0, "warn": 1, "info": 2}.get(str(item.get("severity")), 3), int(item.get("line") or 0)))
+    priorities = [
+        ReviewPriority(
+            rule_id=str(item.get("rule_id")),
+            line=int(item["line"]) if item.get("line") else None,
+            level=_LEVEL_BY_SEVERITY.get(str(item.get("severity")), "consider"),
+            why=f"规则 `{item.get('rule_id')}` 在本次审查中命中（严重度 {item.get('severity')}）",
+            fix="按该规则的说明修改；具体做法见规则表与页面上的问题描述。",
+        )
+        for item in ordered[:20]
+    ]
+    advice = StaticReviewAdvice(
+        summary=(
+            f"离线复核：共 {len(hits)} 条命中（错误 {counts.get('error', 0)} / 警告 {counts.get('warn', 0)} / "
+            f"提示 {counts.get('info', 0)}），按严重度从高到低排列。"
+            if hits
+            else "离线复核：当前规则集没有命中任何问题。"
+        ),
+        priorities=priorities,
+        assumptions=["本建议由本地调试服务的确定性规则生成（非 AI 输出）：不做跨条目归纳，也不判断误报。"],
+    )
+    try:
+        advice = StaticReviewAdvice.model_validate(advice.model_dump(mode="json"))
+    except ValidationError as exc:  # pragma: no cover - 结构固定，仅在字段契约变化时触发
+        raise ValueError(f"offline advice payload is invalid: {exc}") from exc
+    return advice.model_dump(mode="json")
+
+
 class _Handler(BaseHTTPRequestHandler):
     server_version = "iverilog-ai-debug/0.1"
     protocol_version = "HTTP/1.1"
@@ -154,6 +242,9 @@ class _Handler(BaseHTTPRequestHandler):
         try:
             if mode == "invalid_json":
                 content = "{ this is deliberately not valid JSON"
+            elif _ADVICE_MARKER in text:
+                # 静态审查复核请求：确定性离线建议（见 build_advice_response 的说明）
+                content = json.dumps(build_advice_response(text), ensure_ascii=False)
             else:
                 plan = build_plan_response(text, vector_count=self.vector_count, seed=self.seed)
                 content = json.dumps(plan, ensure_ascii=False)

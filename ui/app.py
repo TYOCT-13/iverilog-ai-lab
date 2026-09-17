@@ -11,7 +11,16 @@ import hashlib
 import shutil
 import subprocess
 import time
-from iverilog_ai.ai import DeterministicLocalProvider, MockProvider, OpenAICompatibleProvider, offline_provider, plan_tests, supplement_tests
+from iverilog_ai.ai import (
+    DeterministicLocalProvider,
+    MockProvider,
+    OpenAICompatibleProvider,
+    advise_on_static_review,
+    offline_provider,
+    offline_review_advice,
+    plan_tests,
+    supplement_tests,
+)
 from iverilog_ai.core.config import ExecutionConfig
 from iverilog_ai.core.executor import IcarusExecutor
 from iverilog_ai.core.contracts import DutContract
@@ -1260,6 +1269,169 @@ def _manual_text(filename: str) -> str:
     return path.read_text(encoding="utf-8") if path.is_file() else ""
 
 
+#: AI 建议里的等级/置信度词（模型输出英文枚举，页面展示中文）。
+_ADVICE_LEVEL_CN = {"must_fix": "必须改", "should_fix": "建议改", "consider": "可选"}
+_ADVICE_CONFIDENCE_CN = {"low": "低", "medium": "中", "high": "高"}
+
+
+def _advice_export_payload(review: dict, advice: dict | None, meta: dict | None) -> dict:
+    """导出用载荷：把"事实层"与"AI 建议层"放在**不同键**下，互不覆盖。
+
+    刻意不把建议写进 `review` 本身——那份字典是确定性审查的产物（sha256、评分、命中），
+    掺进不可复现的 AI 文本会让"可复现"这件事失效。
+    """
+
+    payload = dict(review)
+    if advice is not None:
+        payload["ai_advice"] = {
+            "source": (meta or {}).get("source", "unknown"),
+            "model": (meta or {}).get("model"),
+            "included_code_snippets": (meta or {}).get("included_code_snippets", False),
+            "attempts": (meta or {}).get("attempts"),
+            "review_sha256": (meta or {}).get("review_sha256"),
+            "dropped_unknown_rule_ids": (meta or {}).get("dropped_unknown_rule_ids", []),
+            "disclaimer": "AI 建议不修改规则命中、不参与质量评分；命中与评分以 review 字段为准。",
+            "advice": advice,
+        }
+    return payload
+
+
+def _advice_markdown(review: dict, advice: dict | None, meta: dict | None) -> str:
+    """把建议层追加到 Markdown 审查报告末尾（事实层在前，建议层在后）。"""
+
+    if not advice:
+        return render_static_markdown(review)
+    body = [render_static_markdown(review), "", "---", "", "## AI 复核与修复建议", ""]
+    if (meta or {}).get("source") == "ai":
+        body.append(f"> 来源：**AI 模型**（`{(meta or {}).get('model') or '未记录'}`）；发送内容："
+                    f"{'结构化字段 + 命中行代码片段' if (meta or {}).get('included_code_snippets') else '仅结构化字段（不含源码）'}。")
+    else:
+        body.append("> 来源：**离线规则表**（非 AI 输出，无模型参与）。")
+    body.append("> 本层**不修改规则命中，也不参与质量评分**；命中与评分以上面的确定性审查为准。")
+    body.append("")
+    body.append(f"**结论**：{advice.get('summary', '')}")
+    priorities = advice.get("priorities") or []
+    if priorities:
+        body.extend(["", "### 处理优先级", "", "| 优先级 | 规则 | 行号 | 为什么 | 怎么改 |", "|---|---|---:|---|---|"])
+        for item in priorities:
+            body.append(
+                f"| {_ADVICE_LEVEL_CN.get(str(item.get('level')), item.get('level'))} "
+                f"| `{item.get('rule_id')}` | {item.get('line') or '-'} "
+                f"| {str(item.get('why', '')).replace('|', '/')} | {str(item.get('fix', '')).replace('|', '/')} |"
+            )
+    false_positives = advice.get("false_positive_candidates") or []
+    if false_positives:
+        body.extend(["", "### 可能是误报（仅候选，不改命中）", ""])
+        for item in false_positives:
+            body.append(f"- `{item.get('rule_id')}` 行 {item.get('line') or '-'}：{item.get('reason')}"
+                        f"（置信度 {_ADVICE_CONFIDENCE_CN.get(str(item.get('confidence')), item.get('confidence'))}）")
+    suspects = advice.get("additional_suspects") or []
+    if suspects:
+        body.extend(["", "### 额外怀疑（未经规则验证）", ""])
+        for item in suspects:
+            rule = f"`{item.get('rule_id')}`" if item.get("rule_id") else "未映射到现有规则"
+            body.append(f"- {rule} 行 {item.get('line') or '-'}：{item.get('reason')}"
+                        f"（置信度 {_ADVICE_CONFIDENCE_CN.get(str(item.get('confidence')), item.get('confidence'))}）")
+    assumptions = advice.get("assumptions") or []
+    if assumptions:
+        body.extend(["", "**假设**：" + "；".join(str(item) for item in assumptions)])
+    dropped = (meta or {}).get("dropped_unknown_rule_ids") or []
+    if dropped:
+        body.extend(["", f"**被丢弃的无效规则 ID**（幻觉防护）：{', '.join(str(item) for item in dropped)}"])
+    return "\n".join(body) + "\n"
+
+
+def _render_static_advice(advice: dict, meta: dict) -> None:
+    """渲染复核结果：建议 / 误报候选 / 额外怀疑三层分开，并写明来源与发送内容。"""
+
+    is_ai = str(meta.get("source")) == "ai"
+    _model = str(meta.get("model") or "")
+    # 「本地调试模型」走的是回环 HTTP，但它只是确定性规则引擎、不是真实模型：
+    # 这条路径的结论必须与真正调用模型区分开，否则会把规则输出说成模型输出。
+    is_debug_local = "debug-local" in _model
+    if is_ai and is_debug_local:
+        st.info(
+            f"**本地调试服务复核**（确定性规则引擎，**不是真实模型**）：{advice.get('summary', '')}"
+        )
+    elif is_ai:
+        st.success(f"**AI 复核结论**（模型 `{_model or '未记录'}`）：{advice.get('summary', '')}")
+    else:
+        st.info(f"**离线规则建议**（非 AI 输出，未调用任何模型）：{advice.get('summary', '')}")
+
+    priorities = advice.get("priorities") or []
+    if priorities:
+        st.dataframe(
+            [
+                {
+                    "优先级": _ADVICE_LEVEL_CN.get(str(item.get("level")), item.get("level")),
+                    "规则ID": item.get("rule_id"),
+                    "行号": item.get("line"),
+                    "为什么": item.get("why"),
+                    "怎么改": item.get("fix"),
+                }
+                for item in priorities
+            ],
+            use_container_width=True,
+            hide_index=True,
+            height=240,
+        )
+    else:
+        st.caption("没有需要排优先级的命中。")
+
+    false_positives = advice.get("false_positive_candidates") or []
+    if false_positives:
+        st.warning("AI 认为下面这些命中**可能是误报**——只是候选，命中事实与评分都不变，请自行核对：")
+        st.dataframe(
+            [
+                {
+                    "规则ID": item.get("rule_id"),
+                    "行号": item.get("line"),
+                    "理由": item.get("reason"),
+                    "置信度": _ADVICE_CONFIDENCE_CN.get(str(item.get("confidence")), item.get("confidence")),
+                }
+                for item in false_positives
+            ],
+            use_container_width=True,
+            hide_index=True,
+            height=160,
+        )
+
+    suspects = advice.get("additional_suspects") or []
+    if suspects:
+        st.info("AI 对照 44 条规则提出以下**额外怀疑**——它们**没有经过规则验证**，只是提示你去核对：")
+        st.dataframe(
+            [
+                {
+                    "可能规则": item.get("rule_id") or "未映射到现有规则",
+                    "行号": item.get("line"),
+                    "信号": item.get("signal"),
+                    "理由": item.get("reason"),
+                    "置信度": _ADVICE_CONFIDENCE_CN.get(str(item.get("confidence")), item.get("confidence")),
+                }
+                for item in suspects
+            ],
+            use_container_width=True,
+            hide_index=True,
+            height=160,
+        )
+
+    assumptions = advice.get("assumptions") or []
+    if assumptions:
+        st.caption("AI 的假设：" + "；".join(str(item) for item in assumptions))
+
+    sent = ("结构化字段 + 命中行的单行代码片段"
+            if meta.get("included_code_snippets") else "仅结构化字段（**不含任何源码文本**）")
+    _source_label = "本地调试服务（确定性规则）" if is_debug_local else ("AI 模型" if is_ai else "离线规则表")
+    st.caption(
+        f"复核元信息：来源={_source_label}；模型={_model or '—'}；"
+        f"尝试次数={meta.get('attempts', '—')}；发送内容={sent}；"
+        f"审查版本 sha256={str(meta.get('review_sha256') or '')[:12]}…"
+    )
+    dropped = meta.get("dropped_unknown_rule_ids") or []
+    if dropped:
+        st.caption("幻觉防护：AI 引用了不存在的规则 ID，已丢弃这些条目 -> " + "、".join(str(item) for item in dropped))
+
+
 def _render_manual() -> None:
     """在网页内渲染多版使用手册（内容源是仓库里的 Markdown，CLI 与网页共用一份）。"""
 
@@ -1516,17 +1688,87 @@ with _TAB_QUALITY:
                 height=300,
             )
         st.json({"counts": static_review["counts"], "finding_count": static_review["finding_count"], "source_sha256": static_review["source_sha256"]})
+
+        # ── 事实层 / 建议层分界 ────────────────────────────────────────────
+        st.divider()
+        st.markdown("### AI 复核与修复建议")
+        st.caption(
+            "上面是**事实层**：44 条规则命中，确定性、可复现、参与质量评分（`tests/core/test_static_review_rules.py` "
+            "逐条用正反例钉住）。下面是**建议层**：让 AI 在命中与规则表之上排优先级、指认可能的误报、"
+            "并对照全部规则指出规则**没报但可疑**的地方——它**不修改任何命中，也不参与评分**。"
+        )
+        _send_snippets = st.checkbox(
+            "把命中行的代码片段也发给模型（默认关闭）",
+            value=False,
+            key="static_review_send_snippets",
+            help="默认只发结构化字段（规则 ID、严重度、行号、规则名），**不含任何 RTL 源码文本**——"
+                 "这与《开源及第三方资源使用清单》的数据外发说明一致。勾选后额外发送命中行的单行片段（≤200 字符），建议会更具体。",
+        )
+        _advice_btn, _advice_hint = st.columns([1, 2])
+        if _advice_btn.button("让 AI 复核并给修复建议", key="run_static_review_advice", type="primary"):
+            try:
+                _advice_case = RULE_CASE_NAMES.get(str(name), str(name))
+                # 设置页在源文件里排在后面，因此这里读 session_state 里的结论（默认离线）。
+                _planner_is_online = bool(st.session_state.get("planner_is_online"))
+                _planner_is_local = bool(st.session_state.get("planner_is_debug_local"))
+                if _planner_is_online or _planner_is_local:
+                    with _busy("正在请求 AI 复核（在线模型可能需要几十秒）"):
+                        _advice_provider = _build_provider("AI 静态审查复核")
+                        _advice, _advice_meta = advise_on_static_review(
+                            _advice_provider,
+                            static_review,
+                            include_snippets=bool(_send_snippets),
+                            design=_advice_case,
+                        )
+                        _advice_meta["model"] = getattr(_advice_provider, "model", "debug-local")
+                        _advice_meta["usage"] = getattr(_advice_provider, "last_usage", None)
+                else:
+                    _advice = offline_review_advice(static_review)
+                    _advice_meta = {
+                        "source": "offline_rules",
+                        "model": None,
+                        "attempts": 0,
+                        "included_code_snippets": False,
+                        "review_sha256": static_review.get("source_sha256"),
+                        "dropped_unknown_rule_ids": [],
+                    }
+                st.session_state.static_review_advice = _advice.model_dump(mode="json")
+                st.session_state.static_review_advice_meta = _advice_meta
+                st.session_state.static_review_advice_hash = static_review.get("source_sha256")
+            except Exception as exc:
+                st.error(f"AI 复核失败：{exc}")
+        with _advice_hint:
+            st.caption(
+                "规划器选「在线 API」= 真实模型复核（会消耗一次请求，失败会带着拒绝原因重试一次）；"
+                "离线模式则用规则表直接生成建议，并明确标注**非 AI 输出**。"
+            )
+        if st.session_state.get("static_review_advice"):
+            if st.session_state.get("static_review_advice_hash") != static_review.get("source_sha256"):
+                st.warning("审查结果已更新，下面这份建议是针对**上一版**代码的；请重新点「让 AI 复核并给修复建议」。")
+            _render_static_advice(
+                st.session_state.static_review_advice,
+                st.session_state.get("static_review_advice_meta") or {},
+            )
+
+        _export_advice = st.session_state.get("static_review_advice")
+        _export_meta = st.session_state.get("static_review_advice_meta")
+        if _export_advice and st.session_state.get("static_review_advice_hash") != static_review.get("source_sha256"):
+            _export_advice, _export_meta = None, None  # 不导出与当前版本不匹配的建议
         with st.popover("导出审查报告"):
             st.download_button(
                 "Markdown",
-                render_static_markdown(static_review).encode("utf-8"),
+                _advice_markdown(static_review, _export_advice, _export_meta).encode("utf-8"),
                 file_name="rtl_quality_report.md",
                 mime="text/markdown",
                 key="download_static_review_md",
             )
             st.download_button(
                 "JSON",
-                json.dumps(static_review, ensure_ascii=False, indent=2).encode("utf-8"),
+                json.dumps(
+                    _advice_export_payload(static_review, _export_advice, _export_meta),
+                    ensure_ascii=False,
+                    indent=2,
+                ).encode("utf-8"),
                 file_name="rtl_quality_report.json",
                 mime="application/json",
                 key="download_static_review_json",
@@ -1585,10 +1827,16 @@ with _TAB_SETTINGS:
             "规划器",
             ["离线确定性规划器（无需密钥、进程内）", "本地调试模型（HTTP 回环、无需密钥）", "在线 API（密钥只保存在本次页面会话）"],
             horizontal=True,
+            key="planner_mode",
         )
         use_online = str(provider_mode).startswith("在线")
         use_debug_local = str(provider_mode).startswith("本地调试")
         use_offline = str(provider_mode).startswith("离线")
+        # 页面里"质量与对比"页签的代码在源文件里**先于**设置页运行，因此它不能直接读这两个
+        # 变量（早先就踩过：mypy 报 used-before-def，运行时也可能读到上一轮的旧值）。
+        # 统一把结论放进 session_state，任何位置都能安全读取，默认即离线。
+        st.session_state["planner_is_online"] = use_online
+        st.session_state["planner_is_debug_local"] = use_debug_local
         debug_endpoint = st.text_input(
             "本地调试模型地址",
             value=os.getenv("IVERILOG_AI_DEBUG_ENDPOINT", "http://127.0.0.1:11434/v1"),

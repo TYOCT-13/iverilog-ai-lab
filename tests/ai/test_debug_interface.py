@@ -310,6 +310,49 @@ def test_provider_falls_back_to_the_bundled_contract():
     assert all(vector["inputs"] for vector in payload["vectors"])
 
 
+def test_debug_server_serves_static_review_advice_offline():
+    """"本地调试模型"也要能回答静态审查复核请求（离线确定性建议）。
+
+    否则网页在「本地调试模型」模式下点「让 AI 复核并给修复建议」会看到一条严格校验失败——
+    而这件事本可以离线确定性完成。服务返回的建议必须**自报"非 AI 输出"**，
+    并且只引用真实存在的规则 ID。
+    """
+
+    from iverilog_ai.ai.debug_server import build_advice_response
+    from iverilog_ai.ai.review_advisor import StaticReviewAdvice, build_review_prompt
+    from iverilog_ai.core.static_review import review_rtl_source
+
+    review = review_rtl_source(
+        "module m(input wire clk, input wire rst_n, output reg q);\n"
+        "  always @(posedge clk or negedge rst_n) q = 1'b0;\n"
+        "endmodule\n",
+        filename="m.v",
+    )
+    prompt = build_review_prompt(review, include_snippets=False, design="m")
+    payload = build_advice_response(prompt)
+    advice = StaticReviewAdvice.model_validate(payload)  # 必须能过与真实模型同一套严格 Schema
+
+    assert advice.assumptions and "非 AI" in advice.assumptions[0]
+    assert advice.priorities, "有命中时必须给出优先级列表"
+    known = {str(item["rule_id"]) for item in review["findings"]}
+    assert {item.rule_id for item in advice.priorities} <= known
+    # 未命中任何规则的文件也要能回答
+    clean = review_rtl_source("`timescale 1ns/1ps\nmodule m(input wire clk); endmodule\n", filename="clean.v")
+    clean_advice = StaticReviewAdvice.model_validate(
+        build_advice_response(build_review_prompt(clean, design="m"))
+    )
+    assert clean_advice.priorities == []
+
+
+def test_debug_server_rejects_a_prompt_without_advice_payload():
+    """不是复核请求的提示词不能瞎答，要明确报错。"""
+
+    from iverilog_ai.ai.debug_server import build_advice_response
+
+    with pytest.raises(ValueError, match="not a static review advice request"):
+        build_advice_response("Design: mod10_counter Objective: x Schema: {}")
+
+
 def test_provider_rejects_an_unknown_design_loudly():
     """既没有合约、设计名也不在内置案例里时，必须报错。
 

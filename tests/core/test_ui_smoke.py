@@ -729,6 +729,55 @@ def test_overview_metrics_read_keys_that_evidence_actually_provides():
     assert not (read - written), f"页面读了未定义的键：{sorted(read - written)}"
 
 
+def test_static_review_separates_fact_layer_from_ai_advice_layer():
+    """静态审查必须是"事实层 + 建议层"两层，且默认不外发源码。
+
+    规则命中是确定性的、参与评分，由正反例用例钉住；AI 只在其上给建议。
+    真实需求是"为了凸显主题，让 AI 根据规则去比对然后给建议"——但**不能**让 AI 的建议
+    混进事实层，否则可复现性与"AI 不参与判分"的承诺同时失效。
+    """
+
+    app = AppTest.from_file(str(APP), default_timeout=180)
+    app.session_state["case_name"] = "模十计数器"
+    app.run()
+    _click(app, "run_static_rtl_review")
+    assert not app.exception, [str(item.value) for item in app.exception]
+
+    captions = "\n".join(item.value for item in app.caption)
+    assert "事实层" in captions and "建议层" in captions, captions[:400]
+
+    # 默认不把命中行代码发给模型（披露口径：不上传 RTL 源码）
+    opt_in = [item for item in app.checkbox if getattr(item, "key", None) == "static_review_send_snippets"]
+    assert opt_in, [getattr(item, "key", None) for item in app.checkbox]
+    assert opt_in[0].value is False, "代码片段外发必须默认关闭"
+
+    # 离线模式（默认规划器）点复核按钮：给出确定性的"非 AI"建议
+    _click(app, "run_static_review_advice")
+    assert not app.exception, [str(item.value) for item in app.exception]
+    meta = app.session_state["static_review_advice_meta"]
+    advice = app.session_state["static_review_advice"]
+    assert meta["source"] == "offline_rules"
+    assert meta["included_code_snippets"] is False
+    assert advice["priorities"], advice
+    notes = [str(item.value) for item in app.info]
+    assert any("离线规则建议" in text and "非 AI" in text for text in notes), notes
+    # 建议必须绑定到具体的审查版本，避免"代码换了、建议还是旧的"
+    assert app.session_state["static_review_advice_hash"] == app.session_state["static_rtl_review"]["source_sha256"]
+
+
+def test_static_review_advice_never_touches_the_fact_layer():
+    """源码门禁：建议层不得写回命中/评分，且必须记录来源与发送内容。"""
+
+    source = APP.read_text(encoding="utf-8")
+    assert "advise_on_static_review" in source and "offline_review_advice" in source
+    assert "不修改任何命中，也不参与评分" in source
+    assert "不含任何源码文本" in source
+    assert "幻觉防护" in source
+    # 导出时事实层与建议层分开放，不能覆盖 review 字典
+    assert "def _advice_export_payload" in source
+    assert '"ai_advice"' in source
+
+
 def test_no_python_file_has_unreachable_code():
     """把未可达代码检查作为测试跑一遍，保证门禁在 `pytest` 里也生效。"""
 
