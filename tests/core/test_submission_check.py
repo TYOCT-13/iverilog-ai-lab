@@ -15,8 +15,10 @@ import pytest
 from scripts.check_submission import (
     DEFAULT_FORBIDDEN,
     KIND_LIMITS,
+    KindLimit,
     Report,
     check_pdf,
+    check_repo,
     main,
 )
 
@@ -60,16 +62,44 @@ def test_clean_metadata_produces_no_identity_warning(tmp_path: Path) -> None:
     assert not [item for item in report.findings if item.code == "metadata/identity"]
 
 
-def test_page_limit_is_an_error_not_a_warning(tmp_path: Path) -> None:
-    """超页是 error：规则写的是"正文建议 15 页以内"，超了要挡住而不是提示。"""
+def test_page_overrun_is_a_warning_by_default(tmp_path: Path) -> None:
+    """超页默认只是 warning——大纲写的是"建议"，且明确"不以报告篇幅作为评分依据"。
+
+    早期版本把它当 error，代价是为了凑页数把消融实验、事故复盘、测试条件表一路砍进附录。
+    **为一个自己声明"不作为评分依据"的建议去削弱证据，比超出两页糟得多。**
+    """
 
     pdf = _make_pdf(tmp_path / "long.pdf", [f"第 {i} 页" for i in range(1, 18)])
     report = Report()
     check_pdf(pdf, "report", DEFAULT_FORBIDDEN, report)
-    errors = [item for item in report.findings if item.code == "pages/too-many"]
-    assert len(errors) == 1
-    assert "17 页" in errors[0].message
+    hits = [item for item in report.findings if item.code == "pages/over-recommended"]
+    assert len(hits) == 1 and hits[0].level == "warning"
+    assert "17 页" in hits[0].message
+    assert not report.errors
+
+
+def test_page_overrun_can_be_made_an_error_on_request(tmp_path: Path) -> None:
+    """想要严格模式的人可以显式打开——约束级别交给调用方，而不是替他们定死。"""
+
+    pdf = _make_pdf(tmp_path / "long.pdf", [f"第 {i} 页" for i in range(1, 18)])
+    report = Report()
+    check_pdf(pdf, "report", DEFAULT_FORBIDDEN, report, fail_on_page_overrun=True)
+    assert [item.level for item in report.findings if item.code == "pages/over-recommended"] == ["error"]
     assert report.errors
+
+
+def test_size_limit_is_still_a_hard_error(tmp_path: Path) -> None:
+    """体积是**硬约束**（10MB），与页数不同——这条不能也跟着放宽。"""
+
+    pdf = _make_pdf(tmp_path / "big.pdf", ["正文"])
+    original = KIND_LIMITS["report"]
+    KIND_LIMITS["report"] = KindLimit(max_pages=original.max_pages, max_bytes=10)
+    try:
+        report = Report()
+        check_pdf(pdf, "report", DEFAULT_FORBIDDEN, report)
+        assert any(item.code == "size/too-large" and item.level == "error" for item in report.findings)
+    finally:
+        KIND_LIMITS["report"] = original
 
 
 def test_under_limit_reports_room_left_as_info(tmp_path: Path) -> None:
@@ -114,8 +144,13 @@ def test_main_returns_nonzero_only_for_errors(tmp_path: Path, capsys: pytest.Cap
     clean = _make_pdf(tmp_path / "clean.pdf", ["正文"])
     assert main([str(clean)]) == 0
 
-    dirty = _make_pdf(tmp_path / "many.pdf", [f"p{i}" for i in range(20)])
-    assert main([str(dirty)]) == 1
+    # 页面超建议值只是 warning，不该让退出码变红
+    long_doc = _make_pdf(tmp_path / "many.pdf", [f"p{i}" for i in range(20)])
+    assert main([str(long_doc)]) == 0
+    # 但显式要求严格时就是了
+    assert main([str(long_doc), "--fail-on-page-overrun"]) == 1
+    # 真正的 error（文件不存在）必须变红
+    assert main([str(tmp_path / "nope.pdf")]) == 1
 
 
 def test_main_json_output_is_machine_readable(tmp_path: Path, capsys: pytest.CaptureFixture) -> None:
@@ -136,8 +171,72 @@ def test_missing_file_is_an_error(tmp_path: Path) -> None:
 
 
 def test_max_pages_override(tmp_path: Path) -> None:
-    """PPT 等材料可以显式覆盖页数上限。"""
+    """PPT 等材料可以显式覆盖页数建议值，并配 `--fail-on-page-overrun` 变成硬约束。"""
 
     pdf = _make_pdf(tmp_path / "ppt.pdf", [f"p{i}" for i in range(1, 21)])
     assert main([str(pdf), "--kind", "ppt"]) == 0
-    assert main([str(pdf), "--kind", "ppt", "--max-pages", "10"]) == 1
+    assert main([str(pdf), "--kind", "ppt", "--max-pages", "10", "--fail-on-page-overrun"]) == 1
+
+
+def test_repo_scan_flags_placeholders_in_shipped_files(tmp_path: Path) -> None:
+    """交付面里的占位符必须挡住提交——"参赛期间私有、之后再填"最容易在提交当天忘掉。"""
+
+    (tmp_path / "CITATION.cff").write_text(
+        'repository-code: "https://example.invalid/repo"\n', encoding="utf-8"
+    )
+    (tmp_path / "README.md").write_text("# 正常内容\n", encoding="utf-8")
+    report = Report()
+    info = check_repo(tmp_path, report)
+    assert info["files_scanned"] == 2
+    assert info["placeholders"] == 1
+    assert any(item.code == "placeholder/unresolved" for item in report.errors)
+
+
+def test_repo_scan_ignores_tests_and_doc_templates(tmp_path: Path) -> None:
+    """测试夹具与文档模板里的保留域是**有意为之**，不该被报成问题。
+
+    真实教训：第一版扫全仓库，19 条命中里 17 条来自 tests/ 的 fixture 和文档里
+    `<你的文件.v>` 这类约定写法。一个天天误报的门禁，等于没有门禁。
+    """
+
+    (tmp_path / "tests").mkdir()
+    (tmp_path / "tests" / "test_x.py").write_text(
+        'endpoint = "https://example.invalid/v1"\n', encoding="utf-8"
+    )
+    (tmp_path / "docs" / "upstream").mkdir(parents=True)
+    (tmp_path / "docs" / "upstream" / "guide.md").write_text(
+        "- uses: <你的账号>/repo@main\n", encoding="utf-8"
+    )
+    report = Report()
+    info = check_repo(tmp_path, report)
+    assert info["placeholders"] == 0
+    assert info["files_scanned"] == 0
+    assert not report.errors
+
+
+def test_repo_scan_respects_the_inline_allow_marker(tmp_path: Path) -> None:
+    """需要保留占位符的行可以显式放行，但必须写明理由——放行是有痕迹的。"""
+
+    (tmp_path / "CITATION.cff").write_text(
+        'repository-code: "https://example.invalid/repo"  # allow-placeholder: 转公开后替换\n',
+        encoding="utf-8",
+    )
+    report = Report()
+    info = check_repo(tmp_path, report)
+    assert info["placeholders"] == 0
+    assert not report.errors
+
+
+def test_repo_scan_also_catches_todo_markers(tmp_path: Path) -> None:
+    """待办标记同样是"会交出去"的一部分，一并挡住。"""
+
+    (tmp_path / "README.md").write_text("# 项目\n\nTODO 补上安装说明\n", encoding="utf-8")
+    report = Report()
+    assert check_repo(tmp_path, report)["placeholders"] == 1
+
+
+def test_repo_scan_rejects_a_file_path(tmp_path: Path) -> None:
+    """`--repo` 收到文件而不是目录时要明确报错，不能静默扫出 0 处就当通过。"""
+
+    target = _make_pdf(tmp_path / "x.pdf", ["正文"])
+    assert main([str(target), "--repo"]) == 1

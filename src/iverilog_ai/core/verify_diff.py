@@ -43,12 +43,14 @@ from .rtl_import import extract_contract_draft
 __all__ = [
     "CONTRACT_FROM_DRAFT",
     "CONTRACT_PROVIDED",
+    "DiffInputs",
     "PLAN_FROM_OFFLINE",
     "PLAN_PROVIDED",
     "STATUS_DIFFERENT",
     "STATUS_IDENTICAL",
     "STATUS_INCONCLUSIVE",
     "VerifyDiffResult",
+    "prepare_diff_inputs",
     "verify_diff",
 ]
 
@@ -286,17 +288,31 @@ def _plan_evidence_level(plan: AITestPlan, module: str) -> str:
     return "none_given"
 
 
-def _decide_status(comparison_status: str, comparable_checks: int, waveform_compared: bool) -> str:
-    """把底层对比状态翻译成三态结论，**重点是挡住"没有证据的一致"**。
+def _decide_status(
+    comparison_status: str,
+    comparable_checks: int,
+    waveform_compared: bool,
+    *,
+    both_sides_ran: bool = True,
+) -> str:
+    """把底层对比状态翻译成三态结论，**重点是挡住两类"看起来有结论"的假象**。
 
-    为什么需要这一步：离线规划器生成的计划只有激励、没有期望值，两侧因此只会产出数量相同的
-    观察记录（`signal` 为空）。逐项比对会把它们判成"全等"，但一次比较都没发生——这是假通过。
-    所以"一致"必须有证据支撑：要么有带期望值的可比检查项，要么逐拍波形真的比过。
+    **假象一：没有证据的一致。** 离线规划器生成的计划只有激励、没有期望值，两侧因此只会
+    产出数量相同的观察记录（`signal` 为空）。逐项比对会把它们判成"全等"，但一次比较都没
+    发生。所以"一致"必须有证据支撑：要么有带期望值的可比检查项，要么逐拍波形真的比过。
 
-    只吃一个状态字符串（而不是整个对比对象），是为了让这条规则能被单独钉住——
-    它是本模块最容易被改错、也最容易造成假通过的一处。
+    **假象二：把"跑不起来"当成"行为不同"。** 候选编译失败时它一条记录都产不出来，
+    逐项比对会把对方每一条检查都记成"候选缺失"，于是结论显示"两侧不同"——但真实情况是
+    **候选根本没跑起来**，与"实现行为不同"是两回事。批改场景里这个区别尤其要命：
+    学生看到的会是"你的逻辑和标准不一致"，而实际上他的代码连编译都没过。
+    因此只要有一侧没产出任何结构化记录，就判"未取得可比证据"。
+
+    只吃基本类型（而不是整个对比对象），是为了让这两条规则能被单独钉住——
+    它们是本模块最容易被改错、也最容易造成误判的两处。
     """
 
+    if not both_sides_ran:
+        return STATUS_INCONCLUSIVE
     if comparison_status == "different":
         return STATUS_DIFFERENT
     if comparison_status != "identical":
@@ -362,6 +378,57 @@ def _count_comparable(comparison: BehaviorCompareResult) -> int:
     return min(user, reference)
 
 
+@dataclass(frozen=True)
+class DiffInputs:
+    """一次对比所需的输入：合约与计划的最终形态，以及它们各自的来源。
+
+    单独抽出来，是为了让**批量场景**（例如 `grade` 一次比对几十份提交）只解析一次
+    合约与计划，再原样喂给每一次对比——否则"每份提交各生成一次计划"会让批量结果
+    之间失去可比性，也白跑几十次。
+    """
+
+    module: str
+    contract: DutContract
+    contract_source: str
+    contract_draft: dict[str, Any]
+    draft_warnings: tuple[str, ...]
+    plan: AITestPlan
+    plan_source: str
+
+    @property
+    def evidence_level(self) -> str:
+        return _plan_evidence_level(self.plan, self.module)
+
+
+def prepare_diff_inputs(
+    baseline_rtl: str | Path,
+    *,
+    contract: DutContract | Mapping[str, Any] | None = None,
+    plan: Any = None,
+    module: str | None = None,
+    vector_count: int | None = None,
+) -> DiffInputs:
+    """解析出这次对比要用的合约与测试计划（缺什么就按既定回退补什么）。"""
+
+    baseline_text = _read_rtl(Path(baseline_rtl))
+    resolved_contract, contract_source, draft, draft_warnings = _resolve_contract(
+        baseline_text, contract, module
+    )
+    resolved_module = _resolve_module(module, baseline_text, resolved_contract)
+    resolved_plan, plan_source = _resolve_plan(
+        plan, resolved_contract, resolved_module, vector_count=vector_count
+    )
+    return DiffInputs(
+        module=resolved_module,
+        contract=resolved_contract,
+        contract_source=contract_source,
+        contract_draft=draft,
+        draft_warnings=tuple(draft_warnings),
+        plan=resolved_plan,
+        plan_source=plan_source,
+    )
+
+
 def verify_diff(
     baseline_rtl: str | Path,
     candidate_rtl: str | Path,
@@ -394,13 +461,20 @@ def verify_diff(
         raise ValueError(f"候选 RTL 不存在：{candidate}")
 
     baseline_text = _read_rtl(baseline)
-    _read_rtl(candidate)  # 候选也要能读、非空，否则失败原因会伪装成"行为不同"
+    # 候选也要能读、非空——否则"读不出来"会伪装成"行为不同"。
+    _read_rtl(candidate)
+    _ = baseline_text  # 基线源码只用于自动提合约，已由 prepare_diff_inputs 读过
 
-    resolved_contract, contract_source, draft, draft_warnings = _resolve_contract(
-        baseline_text, contract, module
+    inputs = prepare_diff_inputs(
+        baseline, contract=contract, plan=plan, module=module, vector_count=vector_count
     )
-    resolved_module = _resolve_module(module, baseline_text, resolved_contract)
-    resolved_plan, plan_source = _resolve_plan(plan, resolved_contract, resolved_module, vector_count=vector_count)
+    resolved_contract = inputs.contract
+    resolved_module = inputs.module
+    resolved_plan = inputs.plan
+    contract_source = inputs.contract_source
+    plan_source = inputs.plan_source
+    draft = inputs.contract_draft
+    draft_warnings = inputs.draft_warnings
 
     root = Path(output_dir)
     comparison = compare_rtl_behavior(
@@ -421,8 +495,22 @@ def verify_diff(
 
     comparable_checks = _count_comparable(comparison)
     waveform_compared = comparison.waveform.get("status") in {"identical", "different"}
-    status = _decide_status(comparison.status, comparable_checks, waveform_compared)
+    # 两侧都必须产出结构化记录；有一侧为零说明它没跑起来（编译失败、没有结果行等），
+    # 此时"逐项都对不上"是必然的，不能当成行为差异。
+    both_ran = bool(comparison.reference.simulation.records) and bool(comparison.user.simulation.records)
+    status = _decide_status(
+        comparison.status, comparable_checks, waveform_compared, both_sides_ran=both_ran
+    )
     caveats = list(_collect_caveats(comparison, contract_source, comparable_checks, waveform_compared))
+    if not both_ran:
+        missing = "候选" if not comparison.user.simulation.records else "基线"
+        caveats.insert(
+            0,
+            f"**{missing}一侧没有产出任何结构化记录**，多半是编译失败或没有跑起来。"
+            "这种情况下「逐项对不上」是必然的，**不能当成行为差异**——"
+            f"先看 `{comparison.user.simulation.artifacts.get('run_dir') or comparison.reference.simulation.artifacts.get('run_dir')}`"
+            "下的编译日志。",
+        )
     caveats.extend(f"合约草稿提示：{item}" for item in draft_warnings if "draft only" not in item)
 
     result = VerifyDiffResult(

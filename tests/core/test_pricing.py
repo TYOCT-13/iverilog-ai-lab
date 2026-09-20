@@ -97,6 +97,47 @@ def test_free_local_models_report_zero_not_unknown():
     assert estimate.amount == 0.0
 
 
+def test_verified_price_reports_its_basis_when_given():
+    """单价有口径时必须报出来。
+
+    真实情况：官方定价分高峰/非高峰（差一倍）且输入分 cache hit/miss，而用量记录里没有
+    这两个维度。此时表里给的只能是一个**上界**；不写清口径，读者会把上界当精确值。
+    """
+
+    table = _table([{
+        "model": "m1", "verified": True, "verified_on": "2026-09-01",
+        "price_usd_per_million": {"prompt": 1.0, "completion": 2.0},
+        "source": "https://example.invalid/pricing",
+        "basis": "上界：高峰 + 输入按 cache miss",
+    }], stale_after_days=3650)
+    estimate = table.estimate("m1", prompt_tokens=1000, completion_tokens=1000)
+    assert estimate.basis == "上界：高峰 + 输入按 cache miss"
+    assert "口径" in estimate.describe()
+    assert estimate.to_dict()["basis"].startswith("上界")
+    # 没给口径时不能凭空编一个
+    plain = _table([{
+        "model": "m2", "verified": True, "verified_on": "2026-09-01",
+        "price_usd_per_million": {"prompt": 1.0, "completion": 1.0},
+        "source": "https://example.invalid",
+    }], stale_after_days=3650).estimate("m2", prompt_tokens=1, completion_tokens=1)
+    assert plain.basis is None
+    assert "口径" not in plain.describe()
+
+
+def test_repository_pricing_covers_the_models_the_experiments_used():
+    """实验用过的两个真实模型必须在表里，且已核验——否则汇总只能报 token 量。"""
+
+    table = load_pricing(ROOT)
+    for model in ("deepseek-flash", "deepseek-v4-pro"):
+        row = table.lookup(model)
+        assert row is not None, f"价格表缺少实验用过的模型 {model}"
+        assert row.get("verified") is True, f"{model} 仍未核验"
+        assert row.get("verified_on"), f"{model} 缺少核验日期"
+        assert row.get("basis"), f"{model} 缺少计价口径说明"
+        estimate = table.estimate(model, prompt_tokens=1_000_000, completion_tokens=0)
+        assert estimate.amount is not None and estimate.amount > 0
+
+
 def test_repository_pricing_table_is_wellformed():
     """仓库里的价格表必须结构完整：每行都有来源，未核验的行必须没有数值。"""
 

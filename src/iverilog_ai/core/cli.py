@@ -12,6 +12,7 @@ from typing import Sequence
 from .config import ConfigurationError, ExecutionConfig, SafePathError, SafePathPolicy
 from .executor import IcarusExecutor
 from .failure_guide import build_failure_guide, reproduce_command, rtl_source_for
+from .grading import grade_submissions, summarise
 from .labels import layered_conclusion
 from .models import ModelValidationError, ResultStatus, SimulationResult, TestPlan
 from .pipeline import PipelineValidationError, VerificationPipeline
@@ -137,6 +138,28 @@ def _build_parser() -> argparse.ArgumentParser:
     verify_parser.add_argument("--no-vcd", action="store_true", help="不生成 VCD（更快，但失去逐拍比对）")
     verify_parser.add_argument("--quiet", action="store_true", help="不输出摘要，只输出退出码")
     _add_path_options(verify_parser)
+
+    grade_parser = subparsers.add_parser(
+        "grade",
+        help="批量批改：把一整个目录的提交与标准实现做行为对比，并挑出需要人看的相似对",
+    )
+    grade_parser.add_argument("--dir", required=True, help="提交所在目录（含 .v/.sv）")
+    grade_parser.add_argument("--golden", required=True, help="标准实现 RTL")
+    grade_parser.add_argument("--contract", default=None, help="DUT 合约 JSON；省略则从标准实现提取草稿")
+    grade_parser.add_argument("--plan", default=None, help="测试计划 JSON；省略则用离线确定性规划器生成")
+    grade_parser.add_argument("--module", default=None, help="模块名；省略则用合约里的 module")
+    grade_parser.add_argument("--output-dir", "--output", dest="output_dir", default=None, help="输出目录")
+    grade_parser.add_argument("--recursive", action="store_true", help="递归子目录")
+    grade_parser.add_argument(
+        "--similarity-threshold", type=float, default=0.75,
+        help="归一化相似度阈值，超过就列进待看清单；默认 0.75，调低会显著增加条目",
+    )
+    grade_parser.add_argument("--iverilog", dest="iverilog_path", default=None, help="iverilog 可执行文件路径")
+    grade_parser.add_argument("--vvp", dest="vvp_path", default=None, help="vvp 可执行文件路径")
+    grade_parser.add_argument("--timeout", dest="timeout_seconds", type=float, default=30.0, help="单个进程超时秒数")
+    grade_parser.add_argument("--print-markdown", action="store_true", help="打印可存档的 Markdown 批改报告")
+    grade_parser.add_argument("--print-json", action="store_true", help="打印完整 JSON")
+    _add_path_options(grade_parser)
 
     report_parser = subparsers.add_parser("report", help="从 result.json 生成 Markdown 或 HTML")
     report_parser.add_argument("--result", required=True, help="SimulationResult JSON 文件")
@@ -543,6 +566,57 @@ def _explain_command(args: argparse.Namespace) -> int:
     return 0
 
 
+def _grade_command(args: argparse.Namespace) -> int:
+    """批量批改：一次比对一整个目录，并挑出需要人看的相似对。
+
+    退出码与单份对比不同：**只在整批都跑不起来时返回 2**，否则返回 0——
+    "有学生行为不同"是正常的批改结果，不是脚本错误。
+    """
+
+    roots = args.allowed_root or [str(_infer_project_root(args.golden)), str(Path(args.dir).expanduser().resolve())]
+    try:
+        contract = None
+        if args.contract:
+            contract = DutContract.from_json(
+                SafePathPolicy.from_roots(roots).input_file(args.contract, extensions=(".json",)).read_text(encoding="utf-8")
+            )
+        plan = None
+        if args.plan:
+            plan = AITestPlan.model_validate_json(
+                SafePathPolicy.from_roots(roots).input_file(args.plan, extensions=(".json",)).read_text(encoding="utf-8")
+            )
+        output_dir = args.output_dir or str(Path(roots[0]) / ".iverilog-ai" / "grading")
+        report = grade_submissions(
+            args.dir,
+            args.golden,
+            output_dir,
+            contract=contract,
+            plan=plan,
+            module=args.module,
+            threshold=args.similarity_threshold,
+            recursive=args.recursive,
+            iverilog_path=args.iverilog_path,
+            vvp_path=args.vvp_path,
+            timeout_seconds=args.timeout_seconds,
+        )
+    except (OSError, SafePathError, PipelineValidationError, ModelValidationError, ValueError) as exc:
+        print(f"批量批改失败：{exc}", file=sys.stderr)
+        return 2
+
+    if args.print_markdown:
+        print(report.to_markdown())
+    elif args.print_json:
+        print(json.dumps(report.to_dict(), ensure_ascii=False, indent=2))
+    else:
+        print(summarise(report))
+        print(f"报告：{report.artifacts['markdown']}")
+        print(f"JSON：{report.artifacts['json']}")
+        for row in report.rows:
+            if row.needs_attention:
+                print(f"  需人工看：{row.name} —— {row.error or row.label}")
+    return 0
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _build_parser()
     args = parser.parse_args(argv)
@@ -555,6 +629,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             return _compare_rtl_command(args)
         if args.command == "verify-diff":
             return _verify_diff_command(args)
+        if args.command == "grade":
+            return _grade_command(args)
         if args.command == "report":
             return _report_command(args)
         if args.command == "explain":

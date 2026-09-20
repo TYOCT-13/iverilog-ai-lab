@@ -21,6 +21,71 @@ def _profile(source: str) -> dict[str, Any]:
         "uses_nonblocking": bool(re.search(r"<=", source)),
     }
 
+__all__ = ["compare_rtl_sources", "source_similarity", "token_shingles"]
+
+#: Verilog 关键字：做"只改标识符"的相似度时，这些词**不**参与改名，否则两份完全不同的
+#: 设计会因为共用 `always`/`begin`/`end` 而看起来很像。
+_VERILOG_KEYWORDS = frozenset(
+    """
+    module endmodule input output inout wire reg logic signed unsigned integer parameter localparam
+    always initial assign begin end if else case casex casez endcase default for while repeat forever
+    posedge negedge or and not xor nand nor xnor buf bufif0 bufif1 notif0 notif1
+    timescale define include ifdef ifndef endif else elsif
+    posedge_negedge_edge automatic generate endgenerate genvar function endfunction task endtask
+    """.split()
+)
+
+_TOKEN_RE = re.compile(r"[A-Za-z_][A-Za-z0-9_$]*|\d+'[bBoOdDhH][0-9a-fA-FxXzZ_]+|\d+|[^\sA-Za-z0-9_$]")
+_COMMENT_RE = re.compile(r"//[^\n]*|/\*.*?\*/", re.S)
+
+
+def token_shingles(source: str, *, size: int = 5, normalize_identifiers: bool = False) -> frozenset[tuple[str, ...]]:
+    """把源码切成 token n-gram 集合（先去掉注释与空白）。
+
+    ``normalize_identifiers=True`` 时把所有**非关键字**标识符替换成同一个记号，用来抓
+    "改了变量名但结构照搬"的情况；关掉则只抓逐字相同。两种都要看：
+    **归一化后高、原始低 = 改名抄；两者都高 = 直接抄；两者都低 = 各写各的。**
+    """
+
+    text = _COMMENT_RE.sub(" ", source)
+    raw = _TOKEN_RE.findall(text)
+    if normalize_identifiers:
+        tokens = [
+            token if (not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_$]*", token) or token.lower() in _VERILOG_KEYWORDS)
+            else "ID"
+            for token in raw
+        ]
+    else:
+        tokens = raw
+    if len(tokens) < size:
+        return frozenset({tuple(tokens)}) if tokens else frozenset()
+    return frozenset(tuple(tokens[index:index + size]) for index in range(len(tokens) - size + 1))
+
+
+def source_similarity(first: str, second: str, *, size: int = 5) -> dict[str, float]:
+    """两份 RTL 源码的相似度（token 5-gram 的 Jaccard 系数）。
+
+    这是**线索**不是结论：相似度高只说明两段代码长得像，可能是同一份作业被改过名，
+    也可能只是都照着同一份实验指导写的。所以它只用于"把需要人看的几对挑出来"，
+    真正的判据仍然是人看代码与证据。
+    """
+
+    raw_a, raw_b = token_shingles(first, size=size), token_shingles(second, size=size)
+    norm_a = token_shingles(first, size=size, normalize_identifiers=True)
+    norm_b = token_shingles(second, size=size, normalize_identifiers=True)
+
+    def jaccard(left: frozenset, right: frozenset) -> float:
+        if not left and not right:
+            return 0.0
+        union = len(left | right)
+        return round(len(left & right) / union, 4) if union else 0.0
+
+    return {
+        "raw": jaccard(raw_a, raw_b),
+        "normalized": jaccard(norm_a, norm_b),
+    }
+
+
 def compare_rtl_sources(user_source: str, reference_source: str, *, user_name: str = "custom", reference_name: str = "reference") -> dict[str, Any]:
     user, reference = _profile(user_source), _profile(reference_source)
     user_ports = {(p["direction"], p["name"]) for p in user["ports"]}

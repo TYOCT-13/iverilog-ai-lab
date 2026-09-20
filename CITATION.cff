@@ -4,14 +4,17 @@ title: "Icarus 智测（iverilog-ai-lab）"
 abstract: >-
   围绕 Icarus Verilog 的非官方 AI 辅助 RTL 验证扩展。AI 只提出受严格 JSON Schema
   约束的测试计划，PASS/FAIL 由开源仿真器与结构化断言裁决；内置案例的期望值由与 RTL
-  逐拍对齐的确定性参考模型独立复算并覆盖 AI 数值。随项目提供 14 个案例 / 78 个可复现
-  缺陷的基准集、44 条带正反例的静态规则，以及波形语义分析、分层证据（仿真/综合）与
-  行为级对比能力。
+  逐拍对齐的确定性参考模型独立复算并覆盖 AI 数值。随项目提供 15 个案例 / 83 个可复现
+  缺陷的基准集、44 条带正反例的静态规则，以及波形语义分析、分层证据（仿真/综合）、
+  行为级对比（`verify-diff`）与 GitHub Action 能力。
 type: software
 license: Apache-2.0
 license-url: "https://www.apache.org/licenses/LICENSE-2.0"
+# 仓库公开地址：本仓库在参赛期间保持私有，转公开后填入真实地址。
+# 下面这行刻意保留一个不会被误当成真链接的占位符（RFC 2606 保留域），并由
+# `scripts/check_submission.py --repo .` 在提交前把它拦下来——避免"忘了替换"被静默带走。
+# 也就是说：这条 error 是**故意的**，替换成真实地址后它才会消失。
 repository-code: "https://example.invalid/iverilog-ai-lab"
-# ↑ 仓库公开地址在作品提交时填入。此处保留占位符，避免引用不存在的链接。
 keywords:
   - Verilog
   - RTL verification

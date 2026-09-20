@@ -327,6 +327,42 @@ def test_explain_on_a_clean_run_says_so():
     assert "没有失败记录" in explained.stdout
 
 
+def test_grade_batches_a_directory_and_flags_similar_pairs(tmp_path):
+    """批量批改：一次比一整个目录，并挑出需要人看的相似对。
+
+    注意退出码与单份对比不同——**"有学生行为不同"是正常的批改结果，不是脚本错误**，
+    所以整批跑通就返回 0。
+    """
+
+    batch = tmp_path / "submissions"
+    batch.mkdir()
+    (batch / "a_ok.v").write_text((ROOT / "rtl" / "mod10_counter.v").read_text(encoding="utf-8"), encoding="utf-8")
+    (batch / "b_bug.v").write_text((ROOT / "rtl" / "mod10_counter_bug_wrap9.v").read_text(encoding="utf-8"), encoding="utf-8")
+    completed = _cli(
+        "grade",
+        "--dir", str(batch),
+        "--golden", "rtl/mod10_counter.v",
+        "--output-dir", str(tmp_path / "out"),
+        "--print-json",
+    )
+    assert completed.returncode == 0, completed.stderr
+    payload = json.loads(completed.stdout)
+    assert payload["summary"]["total"] == 2
+    assert payload["summary"]["identical"] == 1 and payload["summary"]["different"] == 1
+    # 报告必须自己声明"这不是抄袭判定"
+    assert "不构成任何抄袭判定" in payload["disclaimer"]
+
+
+def test_grade_with_a_missing_golden_exits_2(tmp_path):
+    completed = _cli(
+        "grade",
+        "--dir", str(tmp_path),
+        "--golden", "rtl/does_not_exist.v",
+        "--output-dir", str(tmp_path / "out"),
+    )
+    assert completed.returncode == 2
+
+
 def test_plan_run_rejects_foreign_path_outside_allowed_root():
     """路径策略必须生效：受控目录之外的输入直接拒绝（退出码 2）。"""
 

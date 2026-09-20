@@ -6,7 +6,8 @@
     "核验原则": [
       "price_usd_per_million 为 null 表示未核验，脚本会明确标注'未核验'而不是用 0 顶替",
       "verified 为 true 才允许在汇总里给出金额，否则只报 token 量与'价格未核验'",
-      "超过 stale_after_days 天未复核时，脚本会提示需要重新核验"
+      "超过 stale_after_days 天未复核时，脚本会提示需要重新核验",
+      "官方定价分时段（高峰/非高峰，相差一倍）且输入分 cache hit/miss，而我们的实验记录**没有**逐请求记录这两个维度；因此 price_usd_per_million 取**上界**（高峰 + 输入按 cache miss），并在 basis 字段里写明。真实花费在这个值与它的一半之间。"
     ],
     "如何更新": "查阅对应服务商的官方定价页，把实际数值与核验日期填入；不要凭记忆填。"
   },
@@ -16,23 +17,39 @@
       "provider": "deepseek",
       "model": "deepseek-flash",
       "price_usd_per_million": {
-        "prompt": null,
-        "completion": null
+        "prompt": 0.3,
+        "completion": 1.2
       },
-      "verified": false,
-      "verified_on": null,
+      "basis": "上界：高峰时段（$0.3 / 1M 输入，cache miss）+ 高峰输出（$1.2 / 1M）；非高峰为一半",
+      "price_detail": {
+        "note": "官方价目表原样摘录（2026-09-20 核验）；高峰时段为 UTC 周一至周五 01:00-04:00 与 06:00-10:00，其余为非高峰（半价）",
+        "input_cache_hit": {"off_peak": 0.003, "peak": 0.006},
+        "input_cache_miss": {"off_peak": 0.15, "peak": 0.3},
+        "output": {"off_peak": 0.6, "peak": 1.2},
+        "model_version": "DeepSeek-V4.1-Flash"
+      },
+      "verified": true,
+      "verified_on": "2026-09-20",
       "source": "https://api-docs.deepseek.com/quick_start/pricing",
-      "note": "本轮实验（2026-09-11）未核验官方价格，因此只报 token 量，不给金额。"
+      "note": "本轮实验（2026-09-11/12）跑完后才核验官方价格，因此实验记录里当时只报了 token 量；现在可以给出金额上界与区间。"
     },
     {
       "provider": "deepseek",
       "model": "deepseek-v4-pro",
       "price_usd_per_million": {
-        "prompt": null,
-        "completion": null
+        "prompt": 1.32,
+        "completion": 3.96
       },
-      "verified": false,
-      "verified_on": null,
+      "basis": "上界：高峰时段（$1.32 / 1M 输入，cache miss）+ 高峰输出（$3.96 / 1M）；非高峰为一半",
+      "price_detail": {
+        "note": "官方价目表原样摘录（2026-09-20 核验）",
+        "input_cache_hit": {"off_peak": 0.022, "peak": 0.044},
+        "input_cache_miss": {"off_peak": 0.66, "peak": 1.32},
+        "output": {"off_peak": 1.98, "peak": 3.96},
+        "model_version": "DeepSeek-V4-Pro-0813"
+      },
+      "verified": true,
+      "verified_on": "2026-09-20",
       "source": "https://api-docs.deepseek.com/quick_start/pricing",
       "note": "同上。"
     },
@@ -43,6 +60,7 @@
         "prompt": 0.0,
         "completion": 0.0
       },
+      "basis": "本机离线服务，不产生外部计费",
       "verified": true,
       "verified_on": "2026-09-11",
       "source": "本机离线服务，无外部计费",
@@ -55,6 +73,7 @@
         "prompt": 0.0,
         "completion": 0.0
       },
+      "basis": "进程内离线，不产生外部计费",
       "verified": true,
       "verified_on": "2026-09-11",
       "source": "进程内离线 MockProvider，无外部计费",

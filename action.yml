@@ -148,3 +148,38 @@ runs:
           ${{ inputs.workdir }}/${{ inputs.output-dir }}/verify_diff.json
           ${{ inputs.workdir }}/${{ inputs.output-dir }}/contract.draft.json
         if-no-files-found: warn
+
+    - name: 把结论评论到 PR
+      # 三个条件缺一不可：调用方打开了开关、这确实是一个 PR、报告真的产出了。
+      # `continue-on-error` 是刻意的：没有 pull-requests: write 时 gh 会失败，
+      # 但那不该让整个 job 变红——结论已经在 Job Summary 与 Artifacts 里了。
+      if: ${{ always() && inputs.comment-on-pr == 'true' && github.event.pull_request.number != '' }}
+      continue-on-error: true
+      shell: bash
+      working-directory: ${{ inputs.workdir }}
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        set +e
+        report="${{ inputs.output-dir }}/verify_diff.md"
+        if [ ! -f "$report" ]; then
+          echo "::warning::没有找到对比报告（$report），跳过 PR 评论。"
+          exit 0
+        fi
+        # 首行放一个固定标记：重跑时靠它找到自己上一条评论并原地更新，而不是每次刷一条新的。
+        { echo '<!-- iverilog-ai-verify-diff -->'; cat "$report"; } > verify-diff-comment.md
+
+        number="${{ github.event.pull_request.number }}"
+        existing=$(gh api "repos/${{ github.repository }}/issues/${number}/comments" \
+          --jq 'map(select(.body | startswith("<!-- iverilog-ai-verify-diff -->"))) | last | .id // empty' 2>/dev/null)
+
+        if [ -n "$existing" ]; then
+          gh api -X PATCH "repos/${{ github.repository }}/issues/comments/${existing}" \
+            -F body=@verify-diff-comment.md >/dev/null && echo "已更新 PR 上原有的对比评论。"
+        else
+          gh pr comment "${number}" --body-file verify-diff-comment.md && echo "已在 PR 上新建对比评论。"
+        fi
+        # 权限不足等情况只警告：让读者去 Job Summary 看，而不是把构建判失败。
+        if [ $? -ne 0 ]; then
+          echo "::warning::评论 PR 失败（多半是没给 pull-requests: write 权限）；结论见 Job Summary 与 Artifacts。"
+        fi

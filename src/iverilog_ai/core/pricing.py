@@ -38,6 +38,10 @@ class CostEstimate:
     verified_on: str | None = None
     source: str | None = None
     reason: str | None = None
+    #: 这个单价是什么口径（例如"上界：高峰 + 输入按 cache miss"）。
+    #: 官方定价分时段、分 cache 命中，而用量记录里没有这两个维度；不写清口径，
+    #: 读者会把一个上界当成精确值——差一倍。
+    basis: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -52,15 +56,17 @@ class CostEstimate:
             "verified_on": self.verified_on,
             "source": self.source,
             "reason": self.reason,
+            "basis": self.basis,
         }
 
     def describe(self) -> str:
         tokens = f"{self.prompt_tokens:,} prompt + {self.completion_tokens:,} completion"
         if self.amount is None:
             return f"{self.model}: {tokens} tokens；费用未估算（{self.reason}）"
+        basis = f"；口径：{self.basis}" if self.basis else ""
         return (
             f"{self.model}: {tokens} tokens ≈ {self.amount:.4f} {self.currency}"
-            f"（价格核验于 {self.verified_on}，来源 {self.source}）"
+            f"（价格核验于 {self.verified_on}，来源 {self.source}{basis}）"
         )
 
 
@@ -113,6 +119,7 @@ class PricingTable:
         prompt_amount = prompt_tokens / 1_000_000 * float(prompt_price)
         completion_amount = completion_tokens / 1_000_000 * float(completion_price)
         stale = self.is_stale(model)
+        basis = str(row.get("basis")) if row.get("basis") else None
         return CostEstimate(
             model=model,
             prompt_tokens=prompt_tokens,
@@ -124,6 +131,7 @@ class PricingTable:
             verified_on=str(row.get("verified_on")),
             source=str(row.get("source")) if row.get("source") else None,
             reason="价格核验已超过新鲜期，建议复核" if stale else None,
+            basis=basis,
         )
 
 

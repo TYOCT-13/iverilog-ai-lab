@@ -92,6 +92,28 @@ jobs:
 跑完在 **Job Summary** 里直接看到那份对比报告（结论、凭什么这么说、差异清单、这次没覆盖到什么），
 同时在 Artifacts 里拿到 `verify-diff-report`。
 
+### 让结论自动出现在 PR 对话里
+
+```yaml
+    permissions:
+      contents: read
+      pull-requests: write        # 只有开了这个开关才需要
+    steps:
+      - uses: <你的账号>/iverilog-ai-lab@main
+        with:
+          baseline: /tmp/baseline.v
+          candidate: rtl/module.v
+          comment-on-pr: "true"
+```
+
+行为约定：
+
+- **原地更新**：评论带一个固定标记（`<!-- iverilog-ai-verify-diff -->`），重跑时会找到自己
+  上一条评论改内容，**不是每跑一次刷一条**；
+- **权限不足只警告**：没有 `pull-requests: write` 时 `gh` 会失败，但这一步是
+  `continue-on-error`，不会把构建弄红——结论本来就在 Job Summary 和 Artifacts 里；
+- **没产出报告就不评论**：对比连报告都没跑出来时跳过，并留一条 `::warning::`。
+
 ### 输入
 
 | 名称 | 必填 | 默认 | 说明 |
@@ -104,7 +126,7 @@ jobs:
 | `workdir` | | `.` | 运行目录（通常是仓库根） |
 | `python-version` | | `3.11` | Python 版本 |
 | `output-dir` | | `.iverilog-ai/verify-diff` | 工件目录 |
-| `comment-on-pr` | | `false` | 预留给"把结论写成 PR 评论"；需要调用方自行授予 `pull-requests: write` |
+| `comment-on-pr` | | `false` | 把结论评论到 PR。需要调用方授予 `pull-requests: write`；**未授予时只警告、不让构建变红** |
 
 ### 输出
 

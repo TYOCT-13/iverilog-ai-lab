@@ -70,6 +70,12 @@ class Renderer:
         self.writer = fitz.TextWriter(self.page.rect)
         self.y = MARGIN_Y
 
+    def page_break(self) -> None:
+        """强制换页。当前页已经是空的就什么都不做，避免留下整页空白。"""
+
+        if self.y > MARGIN_Y:
+            self._new_page()
+
     def _flush_writer(self) -> None:
         """把当前页累积的文字一次性写入。
 
@@ -359,6 +365,15 @@ def render_markdown(markdown_path: Path, output_path: Path) -> tuple[Path, int]:
         stripped = raw.strip()
 
         if not stripped:
+            index += 1
+            continue
+
+        # 显式分页：`<!-- pagebreak -->`。为什么需要它——竞赛规则是"正文 ≤15 页、附录按需提供"，
+        # 而正文与附录在 Markdown 里是连着的。没有分页符时附录会从正文最后一页的中间开始，
+        # "正文到哪结束"就成了排版才能回答的问题；有了它，这句判断变成一个写在文件里的、
+        # 可机械检查的事实（`scripts/check_submission.py --body-end-marker` 用的就是这一页）。
+        if stripped in {"<!-- pagebreak -->", "\\pagebreak", "\\newpage"}:
+            renderer.page_break()
             index += 1
             continue
 

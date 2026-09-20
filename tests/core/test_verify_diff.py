@@ -160,7 +160,7 @@ def test_exit_code_mapping_is_total() -> None:
 
 
 def test_no_comparable_evidence_is_not_reported_as_identical() -> None:
-    """**最关键的一条**：没有可比证据时不许说"一致"。
+    """**关键规则一**：没有可比证据时不许说"一致"。
 
     离线规划器对未建模的设计只生成激励、没有期望值，两侧因此只会产出数量相同的观察记录，
     逐项比对会"全等"——但那是一次比较都没发生的假通过。判定规则是：说"一致"必须有证据，
@@ -175,6 +175,22 @@ def test_no_comparable_evidence_is_not_reported_as_identical() -> None:
     # "不同"永远可信：在共享测试台上观测到了真实差异，与覆盖范围无关。
     assert _decide_status("different", 0, False) == STATUS_DIFFERENT
     assert _decide_status("records_identical_waveform_unavailable", 9, True) == STATUS_INCONCLUSIVE
+
+
+def test_a_side_that_did_not_run_is_not_a_behaviour_difference() -> None:
+    """**关键规则二**：候选没跑起来（编译失败）不许报成"两侧不同"。
+
+    候选编译不过时一条记录都产不出来，逐项比对会把基线每一条检查都记成"候选缺失"，
+    于是结论显示"两侧不同"。但真实情况是候选根本没跑起来——批改场景里这个区别要命：
+    学生看到的会是"你的逻辑和标准不一致"，而实际上他的代码连编译都没过。
+    """
+
+    from iverilog_ai.core.verify_diff import _decide_status
+
+    # 底层给的是 different（记录缺失），但只要有一侧没产出记录，就必须降级成"没结论"
+    assert _decide_status("different", 0, False, both_sides_ran=False) == STATUS_INCONCLUSIVE
+    assert _decide_status("identical", 29, True, both_sides_ran=False) == STATUS_INCONCLUSIVE
+    assert _decide_status("different", 0, False, both_sides_ran=True) == STATUS_DIFFERENT
 
 
 def test_inconclusive_result_carries_reasons() -> None:

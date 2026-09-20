@@ -97,7 +97,29 @@ def test_action_defines_no_write_scopes_by_itself(action: dict) -> None:
     """Action 自己不申请任何权限——需要写 PR 评论的调用方自己开 `pull-requests: write`。"""
 
     assert "permissions" not in action
-    assert "pull_request" not in ACTION.read_text(encoding="utf-8")
+
+
+def test_pr_comment_step_is_opt_in_and_never_fails_the_build(action: dict) -> None:
+    """评论 PR 必须是**可选**的，且失败只警告。
+
+    理由：`pull-requests: write` 要由调用方显式授予；没给就失败会让一个只想看结论的人
+    连带把构建弄红——而结论本来就已经在 Job Summary 与 Artifacts 里了。
+    """
+
+    comment = next(
+        step for step in action["runs"]["steps"]
+        if "评论" in str(step.get("name", "")) and "run" in step
+    )
+    condition = str(comment["if"])
+    assert "inputs.comment-on-pr == 'true'" in condition
+    assert condition.startswith("${{ always()")
+    assert comment.get("continue-on-error") is True
+    assert comment.get("env", {}).get("GH_TOKEN") == "${{ github.token }}"
+    # 原地更新而不是每次刷一条：靠固定标记找自己上一条评论
+    assert "iverilog-ai-verify-diff" in comment["run"]
+    assert "PATCH" in comment["run"]
+    # 失败只警告
+    assert "::warning::" in comment["run"]
 
 
 def test_documented_example_matches_the_action_inputs(action: dict) -> None:

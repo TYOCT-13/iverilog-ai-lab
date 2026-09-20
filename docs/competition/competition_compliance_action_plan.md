@@ -92,7 +92,7 @@
 
 - [ ] 创建公开代码托管仓库或确认现有仓库公开可访问。
 - [ ] 配置 Git remote。
-- [ ] 更新 `CITATION.cff` 中的 `example.invalid` 占位链接。
+- [ ] 更新 `CITATION.cff` 中的占位链接（`scripts/check_submission.py --repo .` 会一直报这条，直到替换完成）。 <!-- allow-placeholder: 这一行就是追踪该占位符的待办项本身 -->
 - [ ] 检查 README 中的克隆地址、运行命令和文件链接。
 - [ ] 创建提交前版本标签，例如 `v0.1.0` 或正式提交版本号。
 - [ ] 从一台不依赖本机路径的环境访问仓库并完成最小复现。
