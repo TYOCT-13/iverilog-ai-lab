@@ -260,6 +260,34 @@ def compare_pipeline_behavior(
     )
 
 
+def _default_roots(
+    user_rtl: str | Path,
+    reference_rtl: str | Path,
+    output_dir: str | Path,
+) -> tuple[Path, ...]:
+    """两侧 RTL 所在目录 + 输出目录最近的已存在祖先，三者都是信任根。
+
+    为什么不能只依赖 `VerificationPipeline` 自己的默认推断：它把"输出目录最近的已存在
+    祖先"当作信任根，而这个祖先**会随着第一次运行创建目录而变化**。于是同一个
+    ``output_dir`` 跑第二次时，第一次建的 ``user/``、``reference/`` 子目录成了新的祖先，
+    输出目录反而落在它**外面**，安全检查直接报
+    ``output path is outside allowed roots`` —— 也就是"这条路只能走一次"。
+    实测中第二次调用就是这么失败的，所以这里显式把三个根一次性定下来。
+    """
+
+    roots: list[Path] = []
+    for item in (Path(user_rtl).expanduser().resolve(strict=False).parent,
+                 Path(reference_rtl).expanduser().resolve(strict=False).parent):
+        if item not in roots:
+            roots.append(item)
+    ancestor = Path(output_dir).expanduser().resolve(strict=False)
+    while not ancestor.exists() and ancestor != ancestor.parent:
+        ancestor = ancestor.parent
+    if ancestor not in roots:
+        roots.append(ancestor)
+    return tuple(roots)
+
+
 def compare_rtl_behavior(
     plan: Any,
     contract: DutContract | Mapping[str, Any],
@@ -281,6 +309,7 @@ def compare_rtl_behavior(
 
     两个子目录 ``user/`` 与 ``reference/`` 各自独立，因此工件、日志、VCD 不会
     互相覆盖；两次运行使用完全相同的 plan 与 contract，测试台因此逐字节一致。
+    重复使用同一个 ``output_dir`` 是允许的（见 :func:`_default_roots`）。
     """
 
     dut_contract = contract if isinstance(contract, DutContract) else DutContract.from_dict(dict(contract))
@@ -289,7 +318,7 @@ def compare_rtl_behavior(
     )
     root = Path(output_dir)
     common: dict[str, Any] = {
-        "allowed_roots": allowed_roots,
+        "allowed_roots": tuple(allowed_roots) if allowed_roots else _default_roots(user_rtl, reference_rtl, root),
         "iverilog_path": iverilog_path,
         "vvp_path": vvp_path,
         "include_dirs": tuple(include_dirs),

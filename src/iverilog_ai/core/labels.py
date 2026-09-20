@@ -69,6 +69,17 @@ EVIDENCE_LABELS: dict[str, str] = {
     "none_given": "未给出期望值",
 }
 
+#: **第四层**：两份 RTL 的对比结论（`core/verify_diff.py`）。
+#:
+#: 它回答的问题与"设计结果"不同——那边问"这份设计对不对"，这边问"两份实现一不一样"，
+#: 因此单独一套说法，且刻意避开前三层用过的词（"一致"不会被误读成"设计正确"）。
+#: 第三态不叫"无法判定"或"证据不足"，正是为了不和运行层/结论层撞词。
+DIFF_LABELS: dict[str, str] = {
+    "identical": "两侧一致",
+    "different": "两侧不同",
+    "inconclusive": "未取得可比证据",
+}
+
 #: 证据等级的最短解释，报告与页面直接用。
 EVIDENCE_NOTES: dict[str, str] = {
     "reference_model": "期望值由与 RTL 逐拍对齐的确定性模型独立复算，AI 的数字不参与裁决",
@@ -100,6 +111,12 @@ def evidence_label(value: Any) -> str:
     """期望值证据等级 → 中文说法。"""
 
     return _label(EVIDENCE_LABELS, value, "未收录的证据等级")
+
+
+def diff_label(value: Any) -> str:
+    """对比层：两份 RTL 的对比结论 → 中文说法（如 ``different`` → ``两侧不同``）。"""
+
+    return _label(DIFF_LABELS, value, "未收录的对比结论")
 
 
 def layered_conclusion(status: Any, verdict: Any, mismatches: int, *, error_failures: int = 0) -> str:

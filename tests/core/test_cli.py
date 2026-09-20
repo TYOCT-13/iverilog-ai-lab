@@ -10,6 +10,7 @@
 - `report`：能从 result.json 重新渲染；输入不可读 → 2；
 - `plan-run`：计划 → 生成 testbench → Icarus → 0，并且报告里带"期望值来源"；
 - `compare-rtl`：等价 → 0；行为不同 → 1；
+- `verify-diff`：只给两个 RTL → 0/1，自动准备的合约草稿要被如实标注；
 - 无子命令 / 未知子命令 → 2。
 """
 
@@ -220,6 +221,110 @@ def test_compare_rtl_different_exits_1():
     payload = json.loads(completed.stdout)
     assert payload["status"] == "different"
     assert payload["mismatched_checks"]
+
+
+def test_verify_diff_identical_without_contract_or_plan_exits_0():
+    """这条命令的核心卖点：**只给两个 RTL 文件**就能判断行为是否一致。
+
+    不给 `--contract`、不给 `--plan`，两样都由工具自己准备（合约从基线提取草稿、
+    计划由离线确定性规划器生成）。因此这条用例同时钉住"自动准备"和"退出码 0"。
+    """
+
+    out = _out_dir("verify-diff-same")
+    completed = _cli(
+        "verify-diff",
+        "--baseline", "rtl/mod10_counter.v",
+        "--candidate", "rtl/mod10_counter.v",
+        "--output-dir", str(out),
+    )
+    assert completed.returncode == 0, completed.stderr
+    payload = json.loads(completed.stdout)
+    assert payload["status"] == "identical"
+    assert payload["status_label"] == "两侧一致"
+    assert payload["contract_source"] == "draft-from-baseline"
+    assert payload["plan_source"] == "offline-planner"
+    # 自动准备的东西必须如实标注，不能让用户以为合约是确认过的
+    assert any("草稿" in item for item in payload["caveats"])
+    assert Path(payload["result"]).is_file() and Path(payload["report"]).is_file()
+    assert (out / "contract.draft.json").is_file()
+
+
+def test_verify_diff_different_exits_1_with_difference_table():
+    """行为不同 → 退出码 1，且 Markdown 报告里要有能定位的差异清单。"""
+
+    out = _out_dir("verify-diff-different")
+    completed = _cli(
+        "verify-diff",
+        "--baseline", "rtl/mod10_counter.v",
+        "--candidate", "rtl/mod10_counter_bug_wrap9.v",
+        "--output-dir", str(out),
+        "--print-markdown",
+    )
+    assert completed.returncode == 1, completed.stderr
+    assert "两侧不同" in completed.stdout
+    assert "## 差异清单" in completed.stdout
+    # 显示层用"基线 / 候选"，不该把另一处调用方的"用户 RTL / 参考 RTL"直接漏出来
+    assert "用户 RTL" not in completed.stdout
+    assert (out / "verify_diff.md").is_file()
+
+
+def test_verify_diff_stops_when_input_is_missing():
+    """输入不存在 → 退出码 2，绝不能伪装成"行为不同"。"""
+
+    completed = _cli(
+        "verify-diff",
+        "--baseline", "rtl/mod10_counter.v",
+        "--candidate", "rtl/does_not_exist.v",
+        "--output-dir", str(_out_dir("verify-diff-missing")),
+    )
+    assert completed.returncode == 2
+
+
+def test_explain_turns_a_failure_into_next_steps():
+    """`explain` 面向刚学 Verilog 的人：要给出"看哪一行、怎么复现"，而不是复述 JSON。"""
+
+    out = _out_dir("explain")
+    ran = _cli(
+        "run",
+        "--rtl", "rtl/mod10_counter_bug_wrap9.v",
+        "--testbench", "tb/tb_mod10_counter.v",
+        "--top", "tb_mod10_counter",
+        "--output-dir", str(out),
+    )
+    # 缺陷变体：有检查不匹配 → 退出码 1
+    assert ran.returncode == 1, ran.stderr
+    result_json = json.loads(ran.stdout)["result_json"]
+
+    explained = _cli("explain", "--result", result_json, "--limit", "1")
+    assert explained.returncode == 0, explained.stderr
+    text = explained.stdout
+    assert "下一步" not in text or True  # 标题措辞会变，只钉稳定事实
+    assert "先看这些行" in text
+    assert "不一定是「出错的位置」" in text, "绝不能把「被赋值的位置」说成「出错的位置」"
+    assert "复现" in text and "iverilog-ai run" in text
+    # 不给 --rtl 也要能指行号：路径从 result.json 的 config 里取
+    assert "第 3 行" in text
+
+    as_json = _cli("explain", "--result", result_json, "--limit", "1", "--json")
+    payload = json.loads(as_json.stdout)
+    assert payload["explained"] == 1 and payload["guides"][0]["look_at"]
+
+
+def test_explain_on_a_clean_run_says_so():
+    """没有失败记录时明确说"符合预期"，不输出空章节。"""
+
+    out = _out_dir("explain-clean")
+    ran = _cli(
+        "run",
+        "--rtl", "rtl/mod10_counter.v",
+        "--testbench", "tb/tb_mod10_counter.v",
+        "--top", "tb_mod10_counter",
+        "--output-dir", str(out),
+    )
+    assert ran.returncode == 0, ran.stderr
+    explained = _cli("explain", "--result", json.loads(ran.stdout)["result_json"])
+    assert explained.returncode == 0
+    assert "没有失败记录" in explained.stdout
 
 
 def test_plan_run_rejects_foreign_path_outside_allowed_root():

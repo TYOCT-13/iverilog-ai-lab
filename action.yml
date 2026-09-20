@@ -1,0 +1,150 @@
+name: "Icarus 智测 · 行为对比（verify-diff）"
+description: >-
+  用同一份测试计划跑两份 RTL，判断行为是否一致。被测项目**不需要自带 testbench**：
+  合约由基线 RTL 自动提取草稿，测试计划由离线确定性规划器生成，结论只来自两次真实
+  Icarus 仿真。退出码 0=两侧一致、1=两侧不同、2=未取得可比证据。
+
+author: "iverilog-ai-lab contributors"
+
+branding:
+  icon: "git-compare"
+  color: "purple"
+
+inputs:
+  baseline:
+    description: "基线 RTL 路径（相对 workdir），例如 rtl/module.v"
+    required: true
+  candidate:
+    description: "候选 RTL 路径（相对 workdir），例如 PR 里改写后的版本"
+    required: true
+  contract:
+    description: "DUT 合约 JSON；留空则从基线 RTL 自动提取草稿"
+    required: false
+    default: ""
+  plan:
+    description: "测试计划 JSON；留空则用离线确定性规划器生成"
+    required: false
+    default: ""
+  module:
+    description: "模块名；留空则用合约里的 module"
+    required: false
+    default: ""
+  workdir:
+    description: "运行目录（通常是仓库根）"
+    required: false
+    default: "."
+  python-version:
+    description: "Python 版本"
+    required: false
+    default: "3.11"
+  output-dir:
+    description: "工件目录（相对 workdir）"
+    required: false
+    default: ".iverilog-ai/verify-diff"
+  comment-on-pr:
+    description: "把结论写成 PR 评论（需要 pull-requests: write 权限）"
+    required: false
+    default: "false"
+
+outputs:
+  status:
+    description: "identical / different / inconclusive"
+    value: ${{ steps.compare.outputs.status }}
+  status-label:
+    description: "中文结论（两侧一致 / 两侧不同 / 未取得可比证据）"
+    value: ${{ steps.compare.outputs.status_label }}
+  exit-code:
+    description: "0 一致 / 1 不同 / 2 未取得可比证据"
+    value: ${{ steps.compare.outputs.exit_code }}
+  report-path:
+    description: "可贴进 PR 的 Markdown 报告路径"
+    value: ${{ steps.compare.outputs.report_path }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: 准备 Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: 安装 Icarus Verilog（Linux 走 apt）
+      if: runner.os == 'Linux'
+      shell: bash
+      run: |
+        sudo apt-get update -qq
+        sudo apt-get install -y --no-install-recommends iverilog
+
+    - name: 安装 Icarus Verilog（macOS 走 brew）
+      if: runner.os == 'macOS'
+      shell: bash
+      run: brew install icarus-verilog
+
+    - name: 安装本工具
+      shell: bash
+      # 用 action 自己所在的目录安装：调用方不必先 pip install，也不必关心工作目录。
+      run: python -m pip install --quiet "${{ github.action_path }}"
+
+    - name: 运行行为对比
+      id: compare
+      shell: bash
+      # 不能用 set -e：退出码 1/2 是**结论**而不是脚本错误，我们要把它读出来再决定
+      # 这一步是否失败，并且无论结论如何都要先把报告写进 job summary。
+      working-directory: ${{ inputs.workdir }}
+      run: |
+        set +e
+        args=(
+          --baseline "${{ inputs.baseline }}"
+          --candidate "${{ inputs.candidate }}"
+          --output-dir "${{ inputs.output-dir }}"
+          --print-markdown
+        )
+        [ -n "${{ inputs.contract }}" ] && args+=(--contract "${{ inputs.contract }}")
+        [ -n "${{ inputs.plan }}" ] && args+=(--plan "${{ inputs.plan }}")
+        [ -n "${{ inputs.module }}" ] && args+=(--module "${{ inputs.module }}")
+
+        python -m iverilog_ai verify-diff "${args[@]}" > verify-diff.out 2> verify-diff.err
+        code=$?
+        cat verify-diff.out
+        cat verify-diff.err >&2
+
+        python - "${{ inputs.output-dir }}" "$code" <<'PY'
+        import json, pathlib, sys
+        out = pathlib.Path(sys.argv[1]) / "verify_diff.json"
+        payload = json.loads(out.read_text(encoding="utf-8")) if out.is_file() else {}
+        lines = [
+            f"status={payload.get('status', 'unknown')}",
+            f"status_label={payload.get('status_label', '未知')}",
+            f"exit_code={sys.argv[2]}",
+            f"report_path={out.parent.as_posix()}/verify_diff.md",
+        ]
+        pathlib.Path("verify-diff.env").write_text("\n".join(lines) + "\n", encoding="utf-8")
+        PY
+        cat verify-diff.env >> "$GITHUB_OUTPUT"
+        exit $code
+
+    - name: 写进 job summary
+      if: always()
+      shell: bash
+      working-directory: ${{ inputs.workdir }}
+      run: |
+        {
+          echo "## Icarus 智测 · 行为对比"
+          echo
+          if [ -f "${{ inputs.output-dir }}/verify_diff.md" ]; then
+            cat "${{ inputs.output-dir }}/verify_diff.md"
+          else
+            echo "本次没有产出报告，请查看上面的日志。"
+          fi
+        } >> "$GITHUB_STEP_SUMMARY"
+
+    - name: 上传对比报告
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: verify-diff-report
+        path: |
+          ${{ inputs.workdir }}/${{ inputs.output-dir }}/verify_diff.md
+          ${{ inputs.workdir }}/${{ inputs.output-dir }}/verify_diff.json
+          ${{ inputs.workdir }}/${{ inputs.output-dir }}/contract.draft.json
+        if-no-files-found: warn

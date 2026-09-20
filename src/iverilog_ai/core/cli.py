@@ -11,11 +11,13 @@ from typing import Sequence
 
 from .config import ConfigurationError, ExecutionConfig, SafePathError, SafePathPolicy
 from .executor import IcarusExecutor
+from .failure_guide import build_failure_guide, reproduce_command, rtl_source_for
 from .labels import layered_conclusion
 from .models import ModelValidationError, ResultStatus, SimulationResult, TestPlan
 from .pipeline import PipelineValidationError, VerificationPipeline
 from .behavior_compare import compare_rtl_behavior
 from .report import write_report
+from .verify_diff import verify_diff
 from ..ai.schema import TestPlan as AITestPlan
 from .contracts import DutContract
 
@@ -116,12 +118,42 @@ def _build_parser() -> argparse.ArgumentParser:
     compare_parser.add_argument("--quiet", action="store_true", help="不输出摘要，只输出退出码")
     _add_path_options(compare_parser)
 
+    verify_parser = subparsers.add_parser(
+        "verify-diff",
+        help="一条命令判断两份 RTL 行为是否一致（合约与测试计划都可自动准备）",
+    )
+    verify_parser.add_argument("--baseline", required=True, help="基线 RTL .v/.sv（合约草稿也从它提取）")
+    verify_parser.add_argument("--candidate", required=True, help="候选 RTL .v/.sv（例如 AI 重写后的版本）")
+    verify_parser.add_argument("--contract", default=None, help="DUT 合约 JSON；省略则从基线 RTL 提取草稿")
+    verify_parser.add_argument("--plan", default=None, help="测试计划 JSON；省略则用离线确定性规划器生成")
+    verify_parser.add_argument("--module", default=None, help="模块名；省略则用合约里的 module")
+    verify_parser.add_argument("--output-dir", "--output", dest="output_dir", default=None, help="工件目录")
+    verify_parser.add_argument("--iverilog", dest="iverilog_path", default=None, help="iverilog 可执行文件路径")
+    verify_parser.add_argument("--vvp", dest="vvp_path", default=None, help="vvp 可执行文件路径")
+    verify_parser.add_argument("--timeout", dest="timeout_seconds", type=float, default=30.0, help="单个进程超时秒数")
+    verify_parser.add_argument("--language", default="2012", help="Icarus generation，默认 2012")
+    verify_parser.add_argument("--print-json", action="store_true", help="将完整结果 JSON 打印到标准输出")
+    verify_parser.add_argument("--print-markdown", action="store_true", help="打印可贴进 PR 的 Markdown 报告")
+    verify_parser.add_argument("--no-vcd", action="store_true", help="不生成 VCD（更快，但失去逐拍比对）")
+    verify_parser.add_argument("--quiet", action="store_true", help="不输出摘要，只输出退出码")
+    _add_path_options(verify_parser)
+
     report_parser = subparsers.add_parser("report", help="从 result.json 生成 Markdown 或 HTML")
     report_parser.add_argument("--result", required=True, help="SimulationResult JSON 文件")
     report_parser.add_argument("--output", dest="output_path", default=None, help="报告目标路径")
     report_parser.add_argument("--format", choices=["markdown", "html"], default=None)
     report_parser.add_argument("--title", default="Icarus 智测仿真报告")
     _add_path_options(report_parser)
+
+    explain_parser = subparsers.add_parser(
+        "explain",
+        help="把 result.json 里的失败翻成「下一步看哪里」的白话（面向刚学 Verilog 的人）",
+    )
+    explain_parser.add_argument("--result", required=True, help="SimulationResult JSON 文件")
+    explain_parser.add_argument("--rtl", default=None, help="被测 RTL 源码；省略则用 result.json 里记录的路径")
+    explain_parser.add_argument("--limit", type=int, default=5, help="最多解释几条失败，默认 5")
+    explain_parser.add_argument("--json", action="store_true", help="输出机器可读结果")
+    _add_path_options(explain_parser)
 
     plan_parser = subparsers.add_parser("validate-plan", aliases=["plan"], help="校验 AI 测试计划 JSON")
     plan_parser.add_argument("--plan", required=True, help="测试计划 JSON 文件")
@@ -386,6 +418,131 @@ def _compare_rtl_command(args: argparse.Namespace) -> int:
     return 0 if outcome.status == "identical" else (1 if outcome.status == "different" else 2)
 
 
+def _verify_diff_command(args: argparse.Namespace) -> int:
+    """一条命令判断两份 RTL 行为是否一致。
+
+    退出码沿用 `compare-rtl` 的约定，并额外把"没比出结论"与"不同"分开：
+    **0 = 两侧一致，1 = 两侧不同，2 = 未取得可比证据**。CI 里把 2 当成失败处理，
+    否则"没测出东西"会被静默当成"没问题"——这正是本项目最想避免的误读。
+    """
+
+    roots = args.allowed_root or [str(_infer_project_root(args.baseline))]
+    policy = SafePathPolicy.from_roots(roots)
+    try:
+        baseline = policy.input_file(args.baseline)
+        candidate = policy.input_file(args.candidate)
+        contract = None
+        if args.contract:
+            contract = DutContract.from_json(
+                policy.input_file(args.contract, extensions=(".json",)).read_text(encoding="utf-8")
+            )
+        plan = None
+        if args.plan:
+            plan = AITestPlan.model_validate_json(
+                policy.input_file(args.plan, extensions=(".json",)).read_text(encoding="utf-8")
+            )
+        output_dir = args.output_dir or str(policy.allowed_roots[0] / ".iverilog-ai" / "verify-diff")
+        result = verify_diff(
+            baseline,
+            candidate,
+            output_dir,
+            contract=contract,
+            plan=plan,
+            module=args.module,
+            allowed_roots=tuple(roots),
+            iverilog_path=args.iverilog_path,
+            vvp_path=args.vvp_path,
+            timeout_seconds=args.timeout_seconds,
+            language=args.language,
+            emit_vcd=not args.no_vcd,
+        )
+    except (OSError, SafePathError, PipelineValidationError, ModelValidationError, ValueError) as exc:
+        print(f"行为对比失败：{exc}", file=sys.stderr)
+        return 2
+
+    if not args.quiet:
+        if args.print_markdown:
+            print(result.to_markdown())
+        elif args.print_json:
+            print(result.to_json())
+        else:
+            print(
+                json.dumps(
+                    {
+                        "status": result.status,
+                        "status_label": result.label,
+                        "module": result.module,
+                        "contract_source": result.contract_source,
+                        "plan_source": result.plan_source,
+                        "plan_evidence_level": result.plan_evidence_level,
+                        "comparable_checks": result.comparable_checks,
+                        "waveform_compared": result.waveform_compared,
+                        "differences": len(result.differences),
+                        "caveats": list(result.caveats),
+                        "result": result.artifacts["json"],
+                        "report": result.artifacts["markdown"],
+                    },
+                    ensure_ascii=False,
+                    indent=2,
+                )
+            )
+    return result.exit_code
+
+
+def _explain_command(args: argparse.Namespace) -> int:
+    """把失败的"事实"翻成"下一步看哪里"。
+
+    与 `report` 的分工：那个生成正式报告（给人存档、给评委看），这个只回答
+    "我接下来该打开哪个文件、看哪一行、改完怎么验"——所以它默认只讲前几条，
+    并且**从不声称某一行就是错的那一行**。
+    """
+
+    roots = args.allowed_root or [str(_infer_project_root(args.result))]
+    policy = SafePathPolicy.from_roots(roots)
+    try:
+        result = SimulationResult.from_json(
+            policy.input_file(args.result, extensions=(".json",)).read_text(encoding="utf-8")
+        )
+        source = None
+        if args.rtl:
+            source = policy.input_file(args.rtl).read_text(encoding="utf-8")
+        else:
+            # 不给 --rtl 就沿用 result.json 里记录的路径——用户刚跑完就敲 explain，
+            # 不该被迫再写一遍同一个文件名。
+            source = rtl_source_for(result)
+    except (OSError, SafePathError, ModelValidationError) as exc:
+        print(f"无法读取输入：{exc}", file=sys.stderr)
+        return 2
+
+    failures = tuple(result.failures)
+    if not failures:
+        print("这次运行没有失败记录；设计结果是「符合预期」。")
+        return 0
+
+    guides = [
+        build_failure_guide(item, source=source, reproduce=reproduce_command(result))
+        for item in failures[: max(0, args.limit)]
+    ]
+    if args.json:
+        print(
+            json.dumps(
+                {
+                    "failures": len(failures),
+                    "explained": len(guides),
+                    "guides": [item.to_dict() for item in guides],
+                },
+                ensure_ascii=False,
+                indent=2,
+            )
+        )
+    else:
+        print(f"这次运行有 {len(failures)} 条失败记录，下面解释前 {len(guides)} 条：")
+        print()
+        for item in guides:
+            print(item.to_markdown())
+    return 0
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = _build_parser()
     args = parser.parse_args(argv)
@@ -396,8 +553,12 @@ def main(argv: Sequence[str] | None = None) -> int:
             return _pipeline_command(args)
         if args.command == "compare-rtl":
             return _compare_rtl_command(args)
+        if args.command == "verify-diff":
+            return _verify_diff_command(args)
         if args.command == "report":
             return _report_command(args)
+        if args.command == "explain":
+            return _explain_command(args)
         if args.command in {"validate-plan", "plan"}:
             return _plan_command(args)
     except (ConfigurationError, SafePathError, OSError, ModelValidationError) as exc:

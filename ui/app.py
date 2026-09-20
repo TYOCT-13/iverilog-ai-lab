@@ -1,5 +1,5 @@
 """安全的单页演示：案例来自代码内白名单，仿真交给 IcarusExecutor。"""
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
 from pathlib import Path
 from typing import Any, Literal
 import json
@@ -31,6 +31,8 @@ from iverilog_ai.core.labels import (
     run_status_label,
     verdict_label,
 )
+from iverilog_ai.core.failure_guide import render_failure_guides
+from iverilog_ai.core.verify_diff import verify_diff
 from iverilog_ai.core.pipeline import VerificationPipeline
 from iverilog_ai.core.pipeline import explain_failure_record
 from iverilog_ai.core.report import write_report
@@ -246,6 +248,156 @@ def _render_run_conclusion(prefix: str, status: Any, verdict: Any, failures) -> 
     )
     right.metric("设计结果（这份设计对不对）", design_text, str(verdict), delta_color="off")
 
+
+# ---------------------------------------------------------------- 场景入口
+#
+# 为什么要有"场景"这一层：早先的页签是按**功能**分的（概览 / 验证 / 质量 / 手册 / 设置 /
+# 历史），用户得自己把功能拼成一条流程。真实试用反馈里最常见的一句就是"我不知道从哪开始"。
+# 场景选择只做一件事：按"你要完成什么"决定显示哪些控件，不改变任何裁决逻辑。
+_SINGLE_SCENARIO = "验证一份 RTL（先跑起来）"
+_DIFF_SCENARIO = "对比两份 RTL（AI 改写验收 / 开源行为回归）"
+_LEARN_SCENARIO = "学习模式（只要三个按钮）"
+_SCENARIOS = (_SINGLE_SCENARIO, _DIFF_SCENARIO, _LEARN_SCENARIO)
+
+
+def _ui_scenario() -> str:
+    """当前场景；未选过时按"验证一份 RTL"处理。"""
+
+    value = str(st.session_state.get("ui_scenario") or _SINGLE_SCENARIO)
+    return value if value in _SCENARIOS else _SINGLE_SCENARIO
+
+
+def _builtin_rtl_choices() -> list[str]:
+    """可作基线的仓库内 RTL 列表（相对路径，排序稳定）。"""
+
+    root = ROOT / "rtl"
+    return sorted(path.relative_to(ROOT).as_posix() for path in root.glob("*.v")) if root.is_dir() else []
+
+
+def _render_failure_guides(result: Any, *, prefix: str) -> None:
+    """把失败翻成"下一步看哪里"，并明确这是**提示**不是结论。
+
+    面向刚学 Verilog 的人，但默认对所有场景都显示——它只补充"手该往哪放"，
+    不改变任何判定，因此不会让老用户误读结论。
+    """
+
+    failures = tuple(getattr(result, "failures", ()) or ())
+    if not failures:
+        return
+    with st.expander(f"这些失败是什么意思？手该往哪放（{len(failures)} 条）", expanded=_ui_scenario() == _LEARN_SCENARIO):
+        st.caption(
+            "下面是**提示**，不是结论：给出行号只说明「这个信号在那里被赋值」，"
+            "**不代表那一行就是错的**——问题也可能在激励、复位或上游信号。"
+        )
+        for item in render_failure_guides(result, limit=5):
+            st.markdown(item)
+
+
+def _render_verify_diff_panel() -> None:
+    """两份 RTL 的行为对比：**不需要用户先准备合约与测试计划**。
+
+    这是本页最省事的入口，专为两类人设计：让 AI 重写过某个模块、想知道行为有没有变的人；
+    以及要给一个 PR 补行为回归证据、但上游项目根本没有 testbench 的人。
+    """
+
+    st.markdown("#### 对比两份 RTL 的行为")
+    st.caption(
+        "给两个文件就够了：合约由基线 RTL 自动提取**草稿**、测试计划由离线确定性规划器生成。"
+        "两侧跑**同一份**测试计划，任何检查项或任何可观测信号不同都算行为差异。"
+        "候选文件里必须定义与基线**同名**的模块。"
+    )
+    choices = _builtin_rtl_choices()
+    left, right = st.columns(2)
+    with left:
+        baseline = st.selectbox(
+            "基线 RTL（原来的版本）",
+            choices or ["（仓库里没有可选的 RTL）"],
+            key="diff_baseline",
+            help="也可以先用上面的「自定义 RTL」上传一份基线。",
+        )
+    with right:
+        candidate_file = st.file_uploader(
+            "候选 RTL（例如 AI 改写后的版本）",
+            type=["v", "sv"],
+            key="diff_candidate",
+            help="只读取文本并复制到 .iverilog-ai/custom_rtl；不会执行文件中的任何命令。",
+        )
+
+    if not choices and candidate_file is None:
+        st.info("先选一个基线 RTL，或上传一份候选 RTL。")
+        return
+
+    if st.button("对比行为（不需要合约与计划）", type="primary", key="run_verify_diff"):
+        if not choices or not baseline:
+            st.warning("请先选一个基线 RTL（或用「自定义 RTL」上传一份基线）。")
+        elif candidate_file is None:
+            st.warning("请先上传候选 RTL。")
+        else:
+            try:
+                with _busy("正在跑两次 Icarus 仿真并逐拍比对"):
+                    imported = import_rtl_bytes(candidate_file.name, candidate_file.getvalue(), ROOT)
+                    outcome = verify_diff(
+                        str(baseline),
+                        imported.path,
+                        ROOT / ".iverilog-ai" / "ui-verify-diff",
+                        allowed_roots=(ROOT,),
+                        iverilog_path=os.getenv("IVERILOG_PATH") or r"D:\iverilog\bin\iverilog.exe",
+                        vvp_path=os.getenv("VVP_PATH") or r"D:\iverilog\bin\vvp.exe",
+                    )
+                st.session_state.last_verify_diff = outcome
+            except Exception as exc:
+                st.error(f"行为对比失败：{exc}")
+
+    # 另起一个名字：`outcome` 在按钮块里是本次算出来的结果，这里是上一次留在会话里的，
+    # 两者类型相同但语义不同，混用会让"点了没反应"和"看了旧结果"分不清。
+    last: Any = st.session_state.get("last_verify_diff")
+    if last is None:
+        return
+    outcome = last
+    st.subheader(f"对比结论：{outcome.label}")
+    columns = st.columns(4)
+    columns[0].metric("可比检查项", outcome.comparable_checks, "两侧都带期望值", delta_color="off")
+    columns[1].metric("逐拍波形", "已比对" if outcome.waveform_compared else "未比对", delta_color="off")
+    columns[2].metric(
+        "合约来源",
+        "已确认" if outcome.contract_source == "provided" else "自动草稿",
+        delta_color="off",
+    )
+    columns[3].metric("差异处数", len(outcome.differences), delta_color="off")
+
+    if outcome.differences:
+        st.dataframe(
+            [
+                {
+                    "类型": item["kind"],
+                    "位置": item["where"],
+                    "基线": item["expected"],
+                    "候选": item["actual"],
+                    "说明": item["message"],
+                }
+                for item in outcome.differences
+            ],
+            use_container_width=True,
+            hide_index=True,
+            height=260,
+        )
+    else:
+        st.success("在本测试计划覆盖的激励范围内，没有观测到差异。")
+
+    for caveat in outcome.caveats:
+        st.warning(caveat, icon="⚠️")
+
+    markdown = Path(outcome.artifacts["markdown"])
+    if markdown.is_file():
+        st.download_button(
+            "下载可贴进 PR 的对比报告（Markdown）",
+            markdown.read_bytes(),
+            file_name=markdown.name,
+            mime="text/markdown",
+            key="download_verify_diff_md",
+        )
+    with st.expander("原始结果 JSON"):
+        st.json(outcome.to_dict())
 
 
 def _render_expectation_source(config: dict) -> None:
@@ -1541,11 +1693,36 @@ with _TAB_OVERVIEW:
     _m3.metric("自动化测试", f"{_ev.get('tests', 0)}", "pytest")
     _m4.metric("静态规则", f"{_ev.get('rules', 0)}", "每条配正反例")
     _render_evidence_header()
-    st.markdown("### 三步走完这轮验证")
-    _s1, _s2, _s3 = st.columns(3)
-    _s1.markdown("**① 选案例** —— 顶部下拉框选内置案例，或选「自定义 RTL」上传自己的设计。")
-    _s2.markdown("**② 生成计划** —— 到「验证」页填验证目标 → 生成测试计划（AI 只负责这一件事）。")
-    _s3.markdown("**③ 执行裁决** —— 同页点执行：编译 → 仿真 → 结构化断言 → 报告。判决权在 Icarus。")
+    st.markdown("### 你这次要做什么")
+    st.radio(
+        "选一个场景，页面会只显示该场景需要的控件（不改变任何判定逻辑）",
+        list(_SCENARIOS),
+        key="ui_scenario",
+        horizontal=True,
+        label_visibility="collapsed",
+    )
+    _scenario_now = _ui_scenario()
+    if _scenario_now == _DIFF_SCENARIO:
+        st.markdown(
+            '<div class="rl-note">到 <b>验证</b> 页：选一个基线 RTL、上传候选 RTL，'
+            "点一下就出对比结论。<b>不需要</b>先准备合约与测试计划——"
+            "合约自动从基线提取草稿、计划由离线确定性规划器生成，两条回退都会在结论里如实标注。</div>",
+            unsafe_allow_html=True,
+        )
+    elif _scenario_now == _LEARN_SCENARIO:
+        st.markdown(
+            '<div class="rl-note">到 <b>验证</b> 页，只有三步：<b>①</b> 选案例 '
+            "<b>②</b> 生成测试计划 <b>③</b> 执行并看结论。合约、断言、综合证据都收进"
+            "「高级选项」里，默认不用碰。跑完展开「这些失败是什么意思」，它会告诉你该看 RTL 的哪一行。"
+            "想看一个仓库里所有模块的两两对比，请用命令行 <code>iverilog-ai verify-diff</code>。</div>",
+            unsafe_allow_html=True,
+        )
+    else:
+        st.markdown("### 三步走完这轮验证")
+        _s1, _s2, _s3 = st.columns(3)
+        _s1.markdown("**① 选案例** —— 顶部下拉框选内置案例，或选「自定义 RTL」上传自己的设计。")
+        _s2.markdown("**② 生成计划** —— 到「验证」页填验证目标 → 生成测试计划（AI 只负责这一件事）。")
+        _s3.markdown("**③ 执行裁决** —— 同页点执行：编译 → 仿真 → 结构化断言 → 报告。判决权在 Icarus。")
     st.markdown(
         '<div class="rl-note">不确定从哪开始？<b>手册</b>页有四版说明：入门 / 进阶 / 深度 / 按目的。'
         "只想对比两份 RTL 的人，直接看「按目的」的第一节。</div>",
@@ -1826,28 +2003,49 @@ with _TAB_QUALITY:
 
 
 with _TAB_VERIFY:
-    _obj_col, _asm_col = st.columns([1, 1])
-    with _obj_col:
-        objective = st.text_area(
-            "验证目标",
-            st.session_state.get("objective_text", "覆盖复位、状态转换与边界时序"),
-            height=88,
-            help="用一句话说清要覆盖哪些行为；离线/在线规划器都按它生成测试计划。",
-            key="objective_text",
-        )
-    with _asm_col:
-        assertions_text = st.text_area(
-            "结构化断言（可选，JSON 数组）",
-            value=st.session_state.get("structured_assertions_text", "[]"),
-            height=88,
-            help="仅支持 signal_equals、signal_stable、never_high、signal_sequence、signal_implies 模板；禁止填写 Verilog/SVA 代码。断言按该信号的整个采样序列判定。",
-        )
-        st.session_state.structured_assertions_text = assertions_text
-    st.session_state.run_synthesis = st.checkbox(
-        "附加 Yosys 综合证据层（可选，不参与判决）",
-        value=bool(st.session_state.get("run_synthesis", False)),
-        help="多跑一次综合，报告里增加「仿真/综合/时序/比特流/上板」分层证据表。不做时序分析。",
+    if _ui_scenario() == _DIFF_SCENARIO:
+        _render_verify_diff_panel()
+        st.divider()
+        st.caption("下面是完整的 AI 规划流程——对比两份 RTL 时用不到，展开即可。")
+        with st.expander("展开：走完整的 AI 计划流程"):
+            st.write("见本页下方与「质量与对比」页；场景选「验证一份 RTL」时它们会直接展开。")
+
+
+with _TAB_VERIFY:
+    _learn_mode = _ui_scenario() == _LEARN_SCENARIO
+    # 学习模式把"验证目标 / 结构化断言 / 综合证据"收进一个折叠块；其它场景直接展开。
+    # 用 nullcontext 而不是把整段代码抄两遍——两边逻辑必须完全一致，抄一遍就多一处会漂移的地方。
+    _advanced: Any = (
+        st.expander("高级选项：验证目标、结构化断言、综合证据层") if _learn_mode else nullcontext()
     )
+    if _learn_mode:
+        st.info(
+            "**学习模式**：只需要三步 —— 选案例（顶部）→ 生成测试计划 → 执行。"
+            "跑完记得展开「这些失败是什么意思」，它会告诉你该看 RTL 的哪一行。"
+        )
+    with _advanced:
+        _obj_col, _asm_col = st.columns([1, 1])
+        with _obj_col:
+            objective = st.text_area(
+                "验证目标",
+                st.session_state.get("objective_text", "覆盖复位、状态转换与边界时序"),
+                height=88,
+                help="用一句话说清要覆盖哪些行为；离线/在线规划器都按它生成测试计划。",
+                key="objective_text",
+            )
+        with _asm_col:
+            assertions_text = st.text_area(
+                "结构化断言（可选，JSON 数组）",
+                value=st.session_state.get("structured_assertions_text", "[]"),
+                height=88,
+                help="仅支持 signal_equals、signal_stable、never_high、signal_sequence、signal_implies 模板；禁止填写 Verilog/SVA 代码。断言按该信号的整个采样序列判定。",
+            )
+            st.session_state.structured_assertions_text = assertions_text
+        st.session_state.run_synthesis = st.checkbox(
+            "附加 Yosys 综合证据层（可选，不参与判决）",
+            value=bool(st.session_state.get("run_synthesis", False)),
+            help="多跑一次综合，报告里增加「仿真/综合/时序/比特流/上板」分层证据表。不做时序分析。",
+        )
     if not is_custom:
         _case_key = str(name)
         _suggested_assertions = assertion_suggestions(RULE_CASE_NAMES.get(_case_key, _case_key))
@@ -2130,6 +2328,7 @@ with _TAB_VERIFY:
                 "设计结果", simulation_result.status, simulation_result.verdict, simulation_result.failures
             )
             _render_record_metric("结构化记录（手写 testbench）", simulation_result.records)
+            _render_failure_guides(simulation_result, prefix="手写 testbench")
             st.json(simulation_result.to_dict())
             st.write("报告路径：")
             st.code(str(report), language="text")
@@ -2168,6 +2367,7 @@ with _TAB_VERIFY:
                 "AI 计划流水线设计结果", result.status, result.verdict, result.failures
             )
             _render_record_metric("结构化记录（AI 计划）", result.records)
+            _render_failure_guides(result.simulation, prefix="AI 计划")
             _render_expectation_source(result.simulation.config if isinstance(result.simulation.config, dict) else {})
             _show_synthesis(result.synthesis)
             coverage = result.coverage

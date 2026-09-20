@@ -19,10 +19,12 @@ from pathlib import Path
 
 from iverilog_ai.core.labels import (
     COMPARE_LABELS,
+    DIFF_LABELS,
     EVIDENCE_LABELS,
     LAYER_NAMES,
     RUN_STATUS_LABELS,
     VERDICT_LABELS,
+    diff_label,
     evidence_label,
     layered_conclusion,
     run_status_label,
@@ -69,6 +71,9 @@ def test_labels_of_different_layers_share_no_word() -> None:
         "run": set(RUN_STATUS_LABELS.values()),
         "compare": set(COMPARE_LABELS.values()),
         "design": set(VERDICT_LABELS.values()),
+        # 第四层：两份 RTL 的对比结论。它回答的问题不同，用词也必须不同——
+        # "一致"不能被读成"设计正确"，"未取得可比证据"也不能和"无法判定"混起来。
+        "diff": set(DIFF_LABELS.values()),
     }
     for left, right in itertools.combinations(sorted(layers), 2):
         shared = layers[left] & layers[right]
@@ -83,7 +88,7 @@ def test_no_layer_label_says_tongguo() -> None:
     读者看到哪个词就知道是哪一层。
     """
 
-    for table in (RUN_STATUS_LABELS, VERDICT_LABELS):
+    for table in (RUN_STATUS_LABELS, VERDICT_LABELS, DIFF_LABELS):
         for key, value in table.items():
             assert "通过" not in value, f"{key} → {value} 含「通过」"
 
@@ -108,6 +113,18 @@ def test_unknown_values_are_not_silently_mapped() -> None:
     assert "未收录" in run_status_label("brand_new_status")
     assert "未收录" in verdict_label("brand_new_verdict")
     assert "未收录" in evidence_label("brand_new_level")
+    assert "未收录" in diff_label("brand_new_diff")
+
+
+def test_diff_layer_has_its_own_third_state() -> None:
+    """对比层的第三态必须与运行层/结论层的第三态**不同词**。
+
+    三层都用"无法判定/证据不足"描述各自的失败态时，读者就分不清"工具没跑完"
+    "这次判不了设计"和"两份 RTL 没比出结论"——它们要采取的行动完全不同。
+    """
+
+    assert set(DIFF_LABELS) == {"identical", "different", "inconclusive"}
+    assert DIFF_LABELS["inconclusive"] not in set(RUN_STATUS_LABELS.values()) | set(VERDICT_LABELS.values())
 
 
 def test_layered_conclusion_separates_three_layers() -> None:

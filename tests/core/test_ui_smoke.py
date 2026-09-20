@@ -646,6 +646,62 @@ def test_page_rerun_is_fast_enough_to_be_usable():
     assert elapsed < 5.0, f"切换案例后重跑用了 {elapsed:.2f}s，又变慢了"
 
 
+def test_scenario_selector_ships_three_scenarios(rendered: AppTest):
+    """页面必须按"你要做什么"给入口，而不是只按功能分页签。
+
+    真实试用反馈里最常见的一句就是"我不知道从哪开始"：六个页签按功能命名，
+    用户得自己把功能拼成流程。场景选择不改变任何裁决逻辑，只决定显示哪些控件。
+    """
+
+    radios = [item for item in rendered.radio if item.key == "ui_scenario"]
+    assert radios, [item.key for item in rendered.radio]
+    options = list(radios[0].options)
+    assert len(options) == 3, options
+    assert any("对比两份 RTL" in item for item in options)
+    assert any("学习模式" in item for item in options)
+    # 默认必须是"先跑起来"这条最普通的路径
+    assert "验证一份 RTL" in radios[0].value
+
+
+def test_diff_scenario_offers_baseline_and_candidate_without_contract():
+    """对比场景要给"选基线 + 上传候选"，且**不得**要求先准备合约与计划。"""
+
+    app = _run_app()
+    app.radio(key="ui_scenario").set_value("对比两份 RTL（AI 改写验收 / 开源行为回归）").run()
+    assert not app.exception, [str(item.value) for item in app.exception]
+    keys = {item.key for item in app.selectbox}
+    assert "diff_baseline" in keys, keys
+    source = APP.read_text(encoding="utf-8")
+    # 面板必须直说"不需要合约与计划"，且按钮文案不能出现"合约"这类前置要求
+    assert "对比行为（不需要合约与计划）" in source
+    assert "合约由基线 RTL 自动提取**草稿**" in source
+    # 草稿与计划回退都必须如实告知，不能静默降级
+    assert "st.warning(caveat" in source or "st.warning(caveat," in source
+
+
+def test_learn_mode_collapses_advanced_options():
+    """学习模式：高级选项收起，但功能一个不少（收起 ≠ 删除）。"""
+
+    app = _run_app()
+    app.radio(key="ui_scenario").set_value("学习模式（只要三个按钮）").run()
+    assert not app.exception, [str(item.value) for item in app.exception]
+    labels = [item.label for item in app.expander]
+    assert any("高级选项" in item for item in labels), labels
+    assert any("学习模式" in item.value for item in app.info), [item.value for item in app.info]
+    # 折叠块里的控件仍然存在于页面上（AppTest 会渲染 expander 内容）
+    source = APP.read_text(encoding="utf-8")
+    assert 'st.expander("高级选项' in source
+
+
+def test_failure_guides_say_they_are_hints_not_verdicts(rendered: AppTest):
+    """白话失败解读必须声明"给的行号不代表那一行就是错的"。"""
+
+    source = APP.read_text(encoding="utf-8")
+    assert "def _render_failure_guides(" in source
+    assert "不代表那一行就是错的" in source
+    assert "这些失败是什么意思" in source
+
+
 def test_evidence_cache_is_wired_and_test_count_stays_in_tests():
     """顶部实证面板必须走缓存，且测试计数不得再扫整个仓库。"""
 
