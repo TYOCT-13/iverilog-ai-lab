@@ -163,8 +163,10 @@ def test_reports_read_the_three_layers_apart() -> None:
     assert "设计结果：检出设计问题（`failed_checks`），3 条比对不一致" in markdown
     assert "比对情况：" in markdown and "条比对一致" in markdown
     assert "总体状态" not in markdown
-    # 旧口径下这里会写成"结论：仿真跑通，但存在检查不匹配"，读者最容易把它当成"失败"。
-    assert "结论：" not in markdown.replace("证据结论：", "")
+    # 分母只算真的比对过的记录：3 条都带 signal，所以是 0/3 而不是 0/3+观察记录。
+    assert "比对情况：0/3 条比对一致" in markdown
+    # 旧口径下这里写的是"结论：仿真跑通，但存在检查不匹配"，读者最容易把它当成"失败"。
+    assert "- 结论：" not in markdown
 
     html = render_html(result)
     assert "运行状态：" in html and "设计结果：" in html
@@ -187,6 +189,31 @@ def test_report_evidence_level_is_chinese() -> None:
     markdown = render_markdown(result)
     assert "证据等级：AI 生成（`ai_generated`）" in markdown
     assert "证据等级：`ai_generated`" not in markdown
+
+
+def test_report_comparison_denominator_excludes_observations() -> None:
+    """比对层的分母只算真的比对过的记录——否则"一次比对都没做"会显示成"全对"。
+
+    真实事故的同型：没有 `expected` 的向量，testbench 仍会打一条 `ok=true, has_signal=false`
+    的观察记录，把它算进分母，报告就会写"N/N 条比对一致"而实际上一次比对都没有。
+    """
+
+    process = ProcessResult(status=ProcessStatus.PASSED, returncode=0, command=("iverilog",), stdout="ok")
+    records = (
+        ResultRecord(ok=True, test_id="obs1", cycle=0, signal=None, expected=None, actual=None, message=""),
+        ResultRecord(ok=True, test_id="obs2", cycle=1, signal=None, expected=None, actual=None, message=""),
+    )
+    result = SimulationResult(
+        run_id="labels-observation",
+        status=ResultStatus.PASSED,
+        compile=process,
+        run=process,
+        records=records,
+        failures=(),
+    )
+    markdown = render_markdown(result)
+    assert "比对情况：0/0 条比对一致" in markdown
+    assert "2 条观察记录，未比对，不构成检查" in markdown
 
 
 def test_layer_names_describe_the_three_questions() -> None:

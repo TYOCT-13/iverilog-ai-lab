@@ -172,7 +172,11 @@ def render_markdown(
     """
 
     total = len(result.records)
-    passed = sum(1 for record in result.records if record.ok)
+    # 只有带 `signal` 的记录才是"真的比对过"的检查（与页面 `_record_stats` 同口径）。
+    compared = [record for record in result.records if getattr(record, "signal", None)]
+    passed = sum(1 for record in compared if record.ok)
+    checked = len(compared)
+    observed = total - checked
     lines = [
         f"# {title}",
         "",
@@ -189,7 +193,11 @@ def render_markdown(
         f"- 设计结果：{verdict_label(result.verdict)}（`{result.verdict}`）"
         + (f"，{len(result.failures)} 条{COMPARE_LABELS['failures']}" if result.failures else ""),
         f"- 证据结论：{result.config.get('verification_status', 'unknown') if isinstance(result.config, dict) else 'unknown'}",
-        f"- 比对情况：{passed}/{total} 条比对一致",
+        # 比对层的分母只算**真的比对过**的记录：没有 `expected` 的向量，testbench 仍会打一条
+        # `ok=true` 的观察记录，把它算进分母会让"一次比对都没做"看起来像"N/N 全对"。
+        # 页面 `_record_stats` 用的是同一口径，两处必须一致。
+        f"- 比对情况：{passed}/{checked} 条比对一致"
+        + (f"（另有 {observed} 条观察记录，未比对，不构成检查）" if observed else ""),
         f"- 开始：{result.started_at}",
         f"- 结束：{result.finished_at}",
         "",
@@ -423,7 +431,8 @@ def render_html(
         if path
     ) or "<li>无</li>"
     total = len(result.records)
-    passed = sum(1 for record in result.records if record.ok)
+    passed = sum(1 for record in result.records if record.ok and getattr(record, "signal", None))
+    checked = sum(1 for record in result.records if getattr(record, "signal", None))
     status = _status(result.status)
     coverage = _coverage_for_result(result)
     coverage_html = ""
@@ -489,7 +498,7 @@ th {{ background: #f3f5f7; }}
 <h1>{escape(title)}</h1>
 <p>结论来自本地 iverilog/vvp 进程；AI 解释或自评不是正确性证据。</p>
 <p class="status">运行状态：<strong>{escape(run_status_label(result.status))}</strong>
-（<code>{escape(status)}</code>）；比对情况：{passed}/{total} 条比对一致；
+（<code>{escape(status)}</code>）；比对情况：{passed}/{checked} 条比对一致；
 设计结果：<strong>{escape(verdict_label(result.verdict))}</strong>
 （<code>{escape(result.verdict)}</code>）；运行 ID：<code>{escape(result.run_id)}</code></p>
 {error_html}
