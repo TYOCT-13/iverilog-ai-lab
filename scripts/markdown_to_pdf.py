@@ -39,6 +39,10 @@ class Renderer:
     def __init__(self, base_dir: Path) -> None:
         self.doc = fitz.open()
         self.base_dir = base_dir
+        #: 页眉（每页重复）。由 Markdown 里的 `<!-- header: ... -->` 指令设置。
+        self.header: str = ""
+        #: 页眉右侧的文档标识。由 `<!-- doctitle: ... -->` 设置。
+        self.doc_title: str = ""
         # 类型上标注成 fitz.Page（下面立刻创建），而不是 `None`——
         # 后者会让每一处 self.page.xxx 都需要忽略注释，也会掩盖真正的空值。
         self.page: fitz.Page
@@ -338,10 +342,25 @@ class Renderer:
     # ------------------------------------------------------------------ 保存
     def save(self, path: Path) -> Path:
         self._flush_writer()
-        # 页码：单独用一次性 writer，避免污染正文的累积器
+        # 页码 + 页眉：单独用一次性 writer，避免污染正文的累积器。
+        #
+        # 页眉是照国奖模板补的：那份报告每一页右上角都写着赛道全称与编号，
+        # 评委随手翻到任何一页都知道自己在评哪条赛道。我们之前只有页码，
+        # 翻到第 12 页就只剩一个数字了。
         total = self.doc.page_count
         for index, page in enumerate(self.doc, start=1):
             writer = fitz.TextWriter(page.rect)
+            if self.header:
+                writer.append(fitz.Point(MARGIN_X, MARGIN_Y - 16), self.header,
+                              font=self.font, fontsize=7.5)
+                left = f"{self.doc_title}" if self.doc_title else ""
+                if left:
+                    width = fitz.get_text_length(left, fontname="china-s", fontsize=7.5)
+                    writer.append(fitz.Point(PAGE_W - MARGIN_X - width, MARGIN_Y - 16), left,
+                                  font=self.font, fontsize=7.5)
+                page.draw_line(fitz.Point(MARGIN_X, MARGIN_Y - 10),
+                               fitz.Point(PAGE_W - MARGIN_X, MARGIN_Y - 10),
+                               color=(0.82, 0.85, 0.89), width=0.4)
             writer.append(fitz.Point(PAGE_W / 2 - 18, PAGE_H - 28), f"{index} / {total}",
                           font=self.font, fontsize=8.5)
             writer.write_text(page, color=(0.5, 0.54, 0.6))
@@ -374,6 +393,16 @@ def render_markdown(markdown_path: Path, output_path: Path) -> tuple[Path, int]:
         # 可机械检查的事实（`scripts/check_submission.py --body-end-marker` 用的就是这一页）。
         if stripped in {"<!-- pagebreak -->", "\\pagebreak", "\\newpage"}:
             renderer.page_break()
+            index += 1
+            continue
+
+        # 页眉指令：`<!-- header: 左对齐文本 -->` / `<!-- doctitle: 右对齐文本 -->`
+        header_match = re.match(r"^<!--\s*(header|doctitle)\s*:\s*(.+?)\s*-->$", stripped)
+        if header_match:
+            if header_match.group(1) == "header":
+                renderer.header = header_match.group(2)
+            else:
+                renderer.doc_title = header_match.group(2)
             index += 1
             continue
 
