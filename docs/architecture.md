@@ -122,16 +122,47 @@ D:\iverilog\bin\iverilog.exe 和 D:\iverilog\bin\vvp.exe。每个进程的 timeo
 5. 不覆盖输入 RTL。自动修复如果加入上层流程，必须在临时副本中验证。
 6. 输出过长时保留头尾并在证据中标记截断，避免日志无限占用内存和报告。
 
-## 状态语义
+## 结论口径：三层分开读
 
-| 状态 | 含义 |
-|---|---|
-| passed | 编译、执行和至少一条结构化记录全部通过 |
-| failed | 编译成功但 vvp 非零退出，或存在 ok=false 记录 |
-| compile_failed | iverilog 返回非零或无法启动 |
-| timeout | 编译或执行超过受控时限 |
-| inconclusive | 没有结果行或结果行损坏，证据不足 |
-| configuration_error | CLI 输入或路径策略拒绝执行 |
+同一份 result.json 里同时有 `status`、`passed`、`failures`、`verdict` 四个字段，而
+`status` 与 `verdict` 的取值同名（都可能是 `passed`）。为了避免把一个"成功检出 3 个缺陷"
+的运行读成"通过"，三层各自使用不重叠的说法，措辞表在 `src/iverilog_ai/core/labels.py`
+（报告、网页、手册共用同一份）。
+
+**第一层 · 运行状态（字段 `status`）——工具跑完了吗？**
+
+| `status` | 中文说法 | 含义 |
+|---|---|---|
+| passed | 运行完成 | 编译、执行都正常结束，且没有不匹配记录 |
+| passed_with_warnings | 运行完成（有告警） | 正常结束，但存在**非 error 级**的检查不匹配（缺陷检出的常见表现） |
+| failed | 运行失败 | vvp 非零退出，或存在 error 级不匹配记录 |
+| compile_failed | 编译失败 | iverilog 返回非零或无法启动 |
+| timeout | 超时 | 编译或执行超过受控时限 |
+| inconclusive | 无法判定 | 没有结果行或结果行损坏 |
+| configuration_error | 配置错误 | CLI 输入或路径策略拒绝执行 |
+
+这一层**只说工具状态，与设计好坏无关**：`compile_failed` 不代表设计错了。
+
+**第二层 · 比对情况（字段 `passed` / `failures`）——逐项检查对上了几条？**
+
+- `failures`：**比对不一致条数**（不匹配的检查项个数）。
+- `passed`：**无错误级失败**（是/否）。它只是一个很弱的标志位，正常检出缺陷时也是
+  `true`——它的用途是让脚本快速过滤"仿真有没有炸"，**不要**用它判断功能正确性。
+
+**第三层 · 设计结果（字段 `verdict`）——这份设计到底对不对？**
+
+| `verdict` | 中文说法 | 含义 |
+|---|---|---|
+| passed | 符合预期 | 仿真跑通且没有任何不匹配记录 |
+| failed_checks | 检出设计问题 | 仿真跑通，但存在不匹配的功能检查（**缺陷检测的正常表现**） |
+| failed | 未得出结论（工具出错） | 编译失败、执行失败或配置错误——与设计本身无关 |
+| inconclusive | 证据不足 | 超时或结果无法判定 |
+
+判"这次算不算过"永远看 `verdict`。此外还有与这三层**正交**的一层：期望值证据等级
+（`reference_model` → 参考模型复算 / `ai_generated` → AI 生成 / `none_given` → 未给出期望值），
+它不改变设计结论，只说明结论凭什么可信；详见
+[深度手册](manual/03_deep.md#4-期望值证据等级结论有多可信)。
+
 
 ## 证据与复现
 

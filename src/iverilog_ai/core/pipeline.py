@@ -238,6 +238,17 @@ class PipelineResult:
         return self.simulation.failures
 
     @property
+    def verdict(self) -> str:
+        """三层口径里的**结论层**：这份设计到底对不对。
+
+        直接透传仿真的单一结论词。之所以在流水线结果上也暴露它：页面与报告需要
+        同时显示"运行状态"与"设计结果"，如果这里没有同名属性，调用方就会退回用
+        ``status`` 一个字段讲两件事——那正是被读错的根源（见 ``core/labels.py``）。
+        """
+
+        return self.simulation.verdict
+
+    @property
     def failure_summaries(self) -> tuple[str, ...]:
         return tuple(item.summary for item in self.failure_explanations)
 

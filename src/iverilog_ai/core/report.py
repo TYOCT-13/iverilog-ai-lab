@@ -7,6 +7,12 @@ import json
 from pathlib import Path
 from typing import Any, Literal, Mapping
 
+from .labels import (
+    COMPARE_LABELS,
+    evidence_label,
+    run_status_label,
+    verdict_label,
+)
 from .models import ProcessResult, SimulationResult
 
 
@@ -51,13 +57,8 @@ _STAGE_LABELS = {
     "not_run": "未运行",
 }
 
-#: 单一结论词的中文说明（见 ``SimulationResult.verdict``）。
-_VERDICT_LABELS = {
-    "passed": "通过（无检查不匹配）",
-    "failed_checks": "仿真跑通，但存在检查不匹配",
-    "failed": "失败（编译/执行/配置错误）",
-    "inconclusive": "无法判定",
-}
+#: 单一结论词的中文说明已统一到 ``core/labels.py``（三层措辞表），此处不再自带一份，
+#: 避免报告与页面各写一套说法后再次出现"同名不同义"。
 
 
 def _synthesis_section(synthesis: Mapping[str, Any]) -> list[str]:
@@ -178,13 +179,17 @@ def render_markdown(
         "> 结论来自本地 iverilog/vvp 进程；AI 解释或自评不是正确性证据。",
         "",
         f"- 运行 ID：{result.run_id}",
-        f"- 总体状态：{_status(result.status)}",
+        # 三层分开写，且每层先用层名再用该层的措辞：运行层回答"工具跑完了吗"，
+        # 比对层回答"逐项检查对上了几条"，结论层回答"这份设计到底对不对"。
+        # 三层不共用任何词，因此不会再出现 status="passed_with_warnings" 与
+        # passed=true 并存、被读成互相矛盾的情况（措辞表见 core/labels.py）。
+        f"- 运行状态：{run_status_label(result.status)}（`{_status(result.status)}`）",
         # verdict 是单一结论词：功能不匹配只记 WARN，因此 status/passed 都不足以
         # 说明"这次运行是不是真的过"（缺陷检出时的正常表现就是 failed_checks）。
-        f"- 结论：{_VERDICT_LABELS.get(result.verdict, result.verdict)}"
-        + (f"（{len(result.failures)} 条检查不匹配）" if result.failures else ""),
+        f"- 设计结果：{verdict_label(result.verdict)}（`{result.verdict}`）"
+        + (f"，{len(result.failures)} 条{COMPARE_LABELS['failures']}" if result.failures else ""),
         f"- 证据结论：{result.config.get('verification_status', 'unknown') if isinstance(result.config, dict) else 'unknown'}",
-        f"- 结构化记录：{passed}/{total} 通过",
+        f"- 比对情况：{passed}/{total} 条比对一致",
         f"- 开始：{result.started_at}",
         f"- 结束：{result.finished_at}",
         "",
@@ -208,7 +213,8 @@ def render_markdown(
         lines.extend([
             "## 期望值可信度",
             "",
-            f"- 证据等级：`{oracle.get('evidence_level', 'unknown')}`",
+            f"- 证据等级：{evidence_label(oracle.get('evidence_level', 'unknown'))}"
+            f"（`{oracle.get('evidence_level', 'unknown')}`）",
             f"- 参考模型检查：{oracle.get('checked_expected', 0)} 项",
             f"- 一致：{oracle.get('matched_expected', 0)} 项",
             f"- 一致率：{rate_text}",
@@ -482,8 +488,10 @@ th {{ background: #f3f5f7; }}
 <body>
 <h1>{escape(title)}</h1>
 <p>结论来自本地 iverilog/vvp 进程；AI 解释或自评不是正确性证据。</p>
-<p class="status">总体状态：<strong>{escape(status)}</strong>；
-结构化记录：{passed}/{total} 通过；运行 ID：<code>{escape(result.run_id)}</code></p>
+<p class="status">运行状态：<strong>{escape(run_status_label(result.status))}</strong>
+（<code>{escape(status)}</code>）；比对情况：{passed}/{total} 条比对一致；
+设计结果：<strong>{escape(verdict_label(result.verdict))}</strong>
+（<code>{escape(result.verdict)}</code>）；运行 ID：<code>{escape(result.run_id)}</code></p>
 {error_html}
 {coverage_html}
 {synthesis_html}

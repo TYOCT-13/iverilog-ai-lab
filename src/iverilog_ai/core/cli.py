@@ -11,6 +11,7 @@ from typing import Sequence
 
 from .config import ConfigurationError, ExecutionConfig, SafePathError, SafePathPolicy
 from .executor import IcarusExecutor
+from .labels import layered_conclusion
 from .models import ModelValidationError, ResultStatus, SimulationResult, TestPlan
 from .pipeline import PipelineValidationError, VerificationPipeline
 from .behavior_compare import compare_rtl_behavior
@@ -186,6 +187,12 @@ def _run_command(args: argparse.Namespace) -> int:
             "passed": result.passed,
             "records": len(result.records),
             "failures": len(result.failures),
+            # 上面四个键是为了脚本兼容保留的**机器字段**；同一份 JSON 里 status 与 verdict
+            # 取值同名、且检出缺陷时 passed 仍为 true，人读容易读错。因此额外给一句
+            # 分层的白话，三层不共用任何词（措辞表见 core/labels.py）。
+            "conclusion_zh": layered_conclusion(
+                result.status, result.verdict, len(result.failures)
+            ),
             "result_json": result.artifacts.get("result_json", ""),
             "report": "" if report_path is None else str(report_path),
         }

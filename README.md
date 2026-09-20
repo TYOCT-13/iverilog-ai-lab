@@ -16,7 +16,7 @@
 - 阶段十参考模型全覆盖：**15 / 15 个内置案例**的参考模型已与 RTL 逐拍对齐（`SUPPORTED == AUTHORITATIVE`），因此每个内置案例的期望值都由确定性模型独立复算；对齐方法、采样口径与踩过的 8 个模型错误见 [docs/reference_model_alignment.md](docs/reference_model_alignment.md)。
 - 阶段十一分层证据：新增 Yosys 综合证据层，把「仿真 / 综合 / 时序 / 比特流 / 上板」五层状态显式写入报告与网页，未做的层级标 `not_run`；综合不参与 PASS/FAIL 裁决，也不做时序签核。口径与实测结果见 [docs/layered_evidence.md](docs/layered_evidence.md)。
 - 阶段十二行为级对比：自定义 RTL 与标准 RTL 跑**同一份** TestPlan，逐检查项与逐波形信号比对，命令行入口 `compare-rtl`；语义等价的重写（即使多出内部辅助变量）判为一致。判据与实测见 [docs/behavior_compare.md](docs/behavior_compare.md)。
-- 阶段十三激励质量与证据标注：新增**信号活动覆盖率**（哪些信号动过 + 到达过多少种取值，由 VCD 推导，**不是**代码覆盖率，口径见 [docs/coverage.md](docs/coverage.md)）；期望值来源改为三态如实标注（参考模型复算 / AI 生成 / 本轮没有期望值）；两个真实模型的同口径对比已完成，检出率相同而 AI 期望值准确率相差 11 个百分点，见 [docs/experiment/model_comparison_2026-09-11.md](docs/experiment/model_comparison_2026-09-11.md)。
+- 阶段十三激励质量与证据标注：新增**信号活动覆盖率**（哪些信号动过 + 到达过多少种取值，由 VCD 推导，**不是**代码覆盖率，口径见 [docs/coverage.md](docs/coverage.md)）；期望值来源改为三态如实标注（参考模型复算 / AI 生成 / 未给出期望值）；两个真实模型的同口径对比已完成，检出率相同而 AI 期望值准确率相差 11 个百分点，见 [docs/experiment/model_comparison_2026-09-11.md](docs/experiment/model_comparison_2026-09-11.md)。
 - 阶段十四开源协作与成本透明：新增 CI、Issue/PR 模板、行为准则、安全策略、引用文件与变更记录；新增**开源规约知识摄取**（从真实开源项目按固定提交实测编码约定，只存聚合统计与逐文件 sha256，不复制代码，见 [docs/opensource_conventions.md](docs/opensource_conventions.md)）；新增**未核验就留空的费用估算表**（价格留 `null` 而非填 0，见 `data/model_pricing.json`）。
 - 阶段十五基准扩充与门禁加固：基准扩到 **15 个案例 / 83 个缺陷变体**（新增脉冲展宽器，含参考模型逐拍对齐与 3 个根因独立的缺陷）；新增**可复现的综合矩阵脚本**（`scripts/run_synthesis_matrix.py`，98 个变体）、**重复缺陷检测**、**编码损坏检测**与**未可达代码检查**（`scripts/check_dead_code.py`）。这轮门禁抓出四个真问题：一个重复登记的缺陷、两个被编码破坏的注释、两个从未渲染过的按钮（"读取模型列表"/"检查配置"），以及一份 150 行的死代码语义副本。变更记录见 [CHANGELOG.md](CHANGELOG.md)。
 

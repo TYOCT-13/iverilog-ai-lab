@@ -24,6 +24,13 @@ from iverilog_ai.ai import (
 from iverilog_ai.core.config import ExecutionConfig
 from iverilog_ai.core.executor import IcarusExecutor
 from iverilog_ai.core.contracts import DutContract
+from iverilog_ai.core.labels import (
+    COMPARE_LABELS,
+    EVIDENCE_LABELS,
+    EVIDENCE_NOTES,
+    run_status_label,
+    verdict_label,
+)
 from iverilog_ai.core.pipeline import VerificationPipeline
 from iverilog_ai.core.pipeline import explain_failure_record
 from iverilog_ai.core.report import write_report
@@ -199,13 +206,17 @@ def _record_stats(records) -> tuple[int, int, int]:
 
 
 def _render_record_metric(label: str, records) -> None:
-    """显示结构化记录：比对记录与观察记录分开，避免数字夸大证据。"""
+    """显示结构化记录：比对记录与观察记录分开，避免数字夸大证据。
+
+    措辞刻意用"比对一致"而不是"通过"：这里的数字只说明**逐项检查对上了几条**，
+    与"运行完成没有""设计对不对"是另外两层（见 ``core/labels.py`` 的三层措辞表）。
+    """
 
     passed, checked, observed = _record_stats(records)
     if checked:
         st.metric(
             label,
-            f"{passed}/{checked} 通过",
+            f"{passed}/{checked} 条比对一致",
             f"另有 {observed} 条观察记录（未比对）" if observed else None,
             delta_color="off",
         )
@@ -213,27 +224,56 @@ def _render_record_metric(label: str, records) -> None:
         st.metric(label, "0 项比对", f"{observed} 条观察记录（无期望值，不构成检查）", delta_color="off")
 
 
+def _render_run_conclusion(prefix: str, status: Any, verdict: Any, failures) -> None:
+    """把"运行层 / 比对层 / 结论层"三层分开显示，避免共用一个"通过"造成误读。
+
+    为什么必须分开：``status`` 与 ``verdict`` 的取值同名（都可能是 ``passed``），
+    而 ``passed`` 字段在"检出 3 个缺陷"的正常运行里仍是 ``true``。只显示一个
+    原始枚举值，读者就会把"检出缺陷"读成"通过"。
+    """
+
+    run_text = run_status_label(status)
+    design_text = verdict_label(verdict)
+    mismatch = len(failures or ())
+    st.subheader(f"{prefix}：{design_text}")
+    left, middle, right = st.columns(3)
+    left.metric("运行状态（工具跑完了吗）", run_text, str(getattr(status, "value", status)), delta_color="off")
+    middle.metric(
+        COMPARE_LABELS["failures"],
+        mismatch,
+        "无错误级失败" if mismatch == 0 else "功能不匹配按策略记告警",
+        delta_color="off",
+    )
+    right.metric("设计结果（这份设计对不对）", design_text, str(verdict), delta_color="off")
+
+
+
 def _render_expectation_source(config: dict) -> None:
-    """把"这一轮期望值是谁给的"讲清楚——这是可信度的关键，也是最容易被忽略的信息。"""
+    """把"这一轮期望值是谁给的"讲清楚——这是可信度的关键，也是最容易被忽略的信息。
+
+    证据等级一律用中文说法（``参考模型复算`` / ``AI 生成`` / ``未给出期望值``），
+    原始枚举值放在括号里保留可检索性。措辞表见 ``core/labels.py``。
+    """
 
     oracle = (config or {}).get("oracle") or {}
     if not oracle:
         return
     source = oracle.get("expectation_source", "unknown")
+    grade = EVIDENCE_LABELS.get(str(source), f"未收录的证据等级（{source}）")
     if source == "reference_model":
         st.success(
-            "期望值来源：**确定性参考模型复算**（已与 RTL 逐拍对齐）。"
+            f"证据等级：**{grade}**（`{source}`）——{EVIDENCE_NOTES['reference_model']}。"
             "AI 给出的数字不参与裁决，偏差只作为诊断指标记录。"
         )
     elif source == "ai_generated":
         st.warning(
-            "期望值来源：**AI 生成**（该设计暂无逐拍对齐的参考模型）。"
-            "这种情况下期望值本身可能有误，结论的可信度低于参考模型复算的情形。"
+            f"证据等级：**{grade}**（`{source}`）——{EVIDENCE_NOTES['ai_generated']}。"
+            "结论的可信度低于参考模型复算的情形。"
         )
     elif source == "none_given":
         st.error(
-            "期望值来源：**没有期望值** —— 本轮既没有参考模型，AI 也没有给出期望值，"
-            "只有激励与结构化断言在起作用。**不要据此认为功能行为已被验证。**"
+            f"证据等级：**{grade}**（`{source}`）——{EVIDENCE_NOTES['none_given']}。"
+            "**不要据此认为功能行为已被验证。**"
         )
         _design = str(oracle.get("design") or "")
         _assertions = (config or {}).get("structured_assertions") or {}
@@ -249,8 +289,8 @@ def _render_expectation_source(config: dict) -> None:
         with st.expander("怎么把证据等级提上去？"):
             st.markdown(
                 "1. **换内置案例**：15 个内置案例都有确定性参考模型，期望值由它复算并覆盖 AI 数字，"
-                "证据等级直接变成 `reference_model`（最强，且与 RTL 逐拍对齐）。\n"
-                "2. **用在线模型**：AI 会在计划里写 `expected`，证据等级变成 `ai_generated`——"
+                "证据等级直接变成**参考模型复算**（最强，且与 RTL 逐拍对齐）。\n"
+                "2. **用在线模型**：AI 会在计划里写 `expected`，证据等级变成**AI 生成**——"
                 "比什么都没有强，但**没有预言机兜底，AI 猜错数字会直接表现为失败或漏检**。\n"
                 "3. **加结构化断言**：`signal_equals` / `signal_stable` / `never_high` / "
                 "`signal_sequence` / `signal_implies` 五种模板由工具在采样记录上判定，"
@@ -259,12 +299,14 @@ def _render_expectation_source(config: dict) -> None:
                 "`core/reference_model.py` 的 `SUPPORTED`，再由 `tests/core/test_reference_model_alignment.py` "
                 "证明模型与 RTL 逐拍一致——这也是本仓库 15/15 对齐的做法。"
             )
+    else:
+        st.info(f"证据等级：**{grade}**（`{source}`）")
     if oracle.get("advice"):
         st.caption(oracle["advice"])
     if oracle.get("ai_expected_mismatch"):
         st.caption(
             f"本轮检测到 AI 期望值与参考模型不一致 {oracle.get('mismatched_expected', '若干')} 项——"
-            "这是 AI 的误差，已单独记为诊断指标，不影响 PASS/FAIL。"
+            "这是 AI 的误差，已单独记为诊断指标，不影响设计结果。"
         )
 
 
@@ -430,7 +472,9 @@ def _show_synthesis(synthesis: dict | None) -> None:
     st.subheader("分层证据（仿真 / 综合 / 时序 / 比特流 / 上板）")
     labels = {
         "provided_by_pipeline": "本次流水线提供",
-        "passed": "通过",
+        # 这一列说的是"这一层的工具跑完了没有"，刻意不用"通过"——"通过"是结论层的词，
+        # 混用会让读者把"综合工具跑完了"读成"设计综合正确"。
+        "passed": "已完成",
         "failed": "失败",
         "unavailable": "工具不可用",
         "timeout": "超时",
@@ -1644,7 +1688,13 @@ with _TAB_QUALITY:
         )
         _score_col, _status_col, _count_col = st.columns(3)
         _score_col.metric("质量评分", f"{static_review['quality_score']}/100", help="按严重度加权扣分后的参考分（error 20 分、warn 5 分、info 1 分），不是功能正确性结论。")
-        _status_col.metric("审查状态", {"pass": "通过", "warn": "有告警", "fail": "有错误"}.get(static_review["status"], static_review["status"]))
+        _status_col.metric(
+            "规则命中情况",
+            {"pass": "零命中", "warn": "有警告级命中", "fail": "有错误级命中"}.get(
+                static_review["status"], static_review["status"]
+            ),
+            help="静态规则层的汇总，与仿真层的「设计结果」是两回事。",
+        )
         _count_col.metric(
             "命中条数",
             static_review["finding_count"],
@@ -2076,7 +2126,9 @@ with _TAB_VERIFY:
             with _busy("正在编译并运行 Icarus 仿真"):
                 simulation_result = IcarusExecutor(config).run()
             report = write_report(simulation_result, Path(simulation_result.artifacts["run_dir"]) / "report.md")
-            st.subheader(f"结论：{simulation_result.status.value}")
+            _render_run_conclusion(
+                "设计结果", simulation_result.status, simulation_result.verdict, simulation_result.failures
+            )
             _render_record_metric("结构化记录（手写 testbench）", simulation_result.records)
             st.json(simulation_result.to_dict())
             st.write("报告路径：")
@@ -2112,7 +2164,9 @@ with _TAB_VERIFY:
             st.session_state.last_pipeline_case = name
             pipeline_report = Path(result.artifacts["output_dir"]) / "report.md"
             write_report(result.simulation, pipeline_report, title="Icarus 智测 AI 流水线报告")
-            st.subheader(f"AI 计划流水线结论：{result.status.value}")
+            _render_run_conclusion(
+                "AI 计划流水线设计结果", result.status, result.verdict, result.failures
+            )
             _render_record_metric("结构化记录（AI 计划）", result.records)
             _render_expectation_source(result.simulation.config if isinstance(result.simulation.config, dict) else {})
             _show_synthesis(result.synthesis)
@@ -2209,7 +2263,9 @@ with _TAB_VERIFY:
         # button rerun.  Previously only failures were restored, so a click on
         # the GTKWave button appeared to make the passed/failed conclusion and
         # waveform section disappear.
-        st.subheader(f"最近一次 AI 计划流水线结论：{_last.status.value}")
+        _render_run_conclusion(
+            "最近一次 AI 计划流水线设计结果", _last.status, _last.verdict, _last.failures
+        )
         _render_record_metric("结构化记录", _last.records)
         _render_expectation_source(_last.simulation.config if isinstance(_last.simulation.config, dict) else {})
         _show_synthesis(_last.synthesis)
