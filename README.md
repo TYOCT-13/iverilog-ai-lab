@@ -40,9 +40,19 @@ python -m iverilog_ai run `
 python -m iverilog_ai report --result .iverilog-ai/runs/run-<id>/result.json --format html --output report.html
 ```
 
-启动演示页面：
+启动演示页面——**推荐用启动脚本**（它会替你设好 `PYTHONPATH`、挑一个没被占的端口、
+检查 Icarus 是否装好，并打印本机与局域网地址）：
 
 ```powershell
+.\start_ui.ps1            # 或直接双击 start_ui.cmd
+.\start_ui.ps1 -Restart   # 端口上已有实例时先停掉再启
+.\start_ui.ps1 -Port 8600 # 换端口
+```
+
+手动启动也可以（少记任何一样都会得到不同的报错，而它们看起来都像"代码坏了"）：
+
+```powershell
+$env:PYTHONPATH = "src"
 streamlit run ui/app.py
 ```
 

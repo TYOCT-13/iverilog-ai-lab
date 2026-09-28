@@ -43,8 +43,20 @@ python -c "from iverilog_ai.core.toolchain import locate_tools, describe_tools; 
 ```powershell
 python -m pytest -q                              # 全量测试
 python scripts/run_benchmark_matrix.py           # 基准矩阵：15 参考全过、83/83 检出、0 误报
-python scripts/strip_bom.py --check              # 源码不得含 UTF-8 BOM
+python scripts/strip_bom.py --check              # 文本编码卫生（见下）
 ```
+
+`strip_bom.py` 管三条规则，各对应一个真实事故：
+
+| 类型 | 规则 | 为什么 |
+|---|---|---|
+| `.py` / `.md` / `.json` 等 | **不得**带 UTF-8 BOM | Python 与 JSON 解析器对 BOM 不容忍 |
+| `.ps1` | 含非 ASCII 时**必须**带 UTF-8 BOM | Windows PowerShell 5.1 按系统 ANSI 代码页解码无 BOM 文件，中文会乱码，报错形如语法错误 |
+| `.cmd` / `.bat` | 必须纯 ASCII | cmd.exe 按 OEM 代码页解码，中文必然乱码；BOM 更会让第一行报错 |
+
+**注意**：编辑器与脚本化改写经常会**静默去掉 BOM**。改完 `.ps1` 后跑一次
+`python scripts/strip_bom.py`（不带 `--check`），它会自动补回 BOM；忘了也没关系，
+`--check` 会在 CI 里挡住。
 
 CI 会在 Linux 与 Windows、Python 3.11/3.12 上跑同样的命令。**如果基准矩阵出现误报或漏检，先修代码而不是改期望。**
 
