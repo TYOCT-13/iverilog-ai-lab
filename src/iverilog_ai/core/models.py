@@ -656,9 +656,20 @@ class SimulationResult:
     diagnostics: tuple[str, ...] = ()
     artifacts: dict[str, str] = field(default_factory=dict)
     config: dict[str, Any] = field(default_factory=dict)
+    #: testbench 收尾报告的执行期计数器（checks / failures / cycles）。
+    #: 为空表示**该 testbench 没有报告计数器**（旧 testbench、别处生成的），
+    #: 与"检查项为零"是两件事，因此刻意不用 0 表示缺失。
+    summary: dict[str, int] = field(default_factory=dict)
     started_at: str = field(default_factory=_utc_now)
     finished_at: str = field(default_factory=_utc_now)
     error: str | None = None
+
+    @property
+    def check_count(self) -> int | None:
+        """本次真正执行过的**带期望值检查**条数；未知时为 ``None``。"""
+
+        value = self.summary.get("checks")
+        return value if isinstance(value, int) and not isinstance(value, bool) else None
 
     @property
     def passed(self) -> bool:
@@ -707,6 +718,7 @@ class SimulationResult:
             "diagnostics": list(self.diagnostics),
             "artifacts": dict(self.artifacts),
             "config": dict(self.config),
+            "summary": dict(self.summary),
             "started_at": self.started_at,
             "finished_at": self.finished_at,
             "error": self.error,
@@ -735,10 +747,18 @@ class SimulationResult:
             raise ModelValidationError("simulation result.diagnostics must be an array")
         raw_artifacts = data.get("artifacts", {})
         raw_config = data.get("config", {})
+        raw_summary = data.get("summary", {})
         if not isinstance(raw_artifacts, Mapping):
             raise ModelValidationError("simulation result.artifacts must be an object")
         if not isinstance(raw_config, Mapping):
             raise ModelValidationError("simulation result.config must be an object")
+        if not isinstance(raw_summary, Mapping):
+            raise ModelValidationError("simulation result.summary must be an object")
+        summary: dict[str, int] = {}
+        for key, item in raw_summary.items():
+            if isinstance(item, bool) or not isinstance(item, int):
+                raise ModelValidationError(f"simulation result.summary[{key!r}] must be an integer")
+            summary[str(key)] = item
         failures: list[FailureRecord] = []
         for index, raw in enumerate(raw_failures):
             mapping = _require_mapping(raw, f"failure[{index}]")
@@ -763,6 +783,7 @@ class SimulationResult:
             diagnostics=tuple(str(item) for item in raw_diagnostics),
             artifacts={str(key): str(item) for key, item in raw_artifacts.items()},
             config=dict(raw_config),
+            summary=summary,
             started_at=str(data.get("started_at", "")),
             finished_at=str(data.get("finished_at", "")),
             error=None if data.get("error") is None else str(data["error"]),

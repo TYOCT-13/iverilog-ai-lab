@@ -30,8 +30,21 @@ from .models import (
 RESULT_MARKER = "IVERILOG_AI_RESULT"
 """testbench 应输出的结构化 JSON 行前缀。"""
 
+SUMMARY_MARKER = "IVERILOG_AI_SUMMARY"
+"""testbench 收尾时报告的计数器行前缀（checks / failures / cycles）。
+
+单独一个前缀是刻意的：它不会被 :func:`parse_result_records` 当成一条测试结果，
+旧解析器遇到它只是忽略，因此新增这行不改变历史结果的语义。
+"""
+
 _RESULT_LINE_RE = re.compile(
     r"^\s*(?:IVERILOG_AI_RESULT|\[IVERILOG_AI_RESULT\]|@iverilog-ai-result)"
+    r"\s*(?::|=|\s)\s*(\{.*\})\s*$",
+    re.IGNORECASE,
+)
+
+_SUMMARY_LINE_RE = re.compile(
+    r"^\s*(?:IVERILOG_AI_SUMMARY|\[IVERILOG_AI_SUMMARY\])"
     r"\s*(?::|=|\s)\s*(\{.*\})\s*$",
     re.IGNORECASE,
 )
@@ -88,6 +101,34 @@ def parse_result_records(output: str) -> tuple[tuple[ResultRecord, ...], tuple[s
         except (json.JSONDecodeError, ModelValidationError, TypeError) as exc:
             diagnostics.append(f"malformed structured result at line {line_number}: {exc}")
     return tuple(records), tuple(diagnostics)
+
+
+def parse_run_summary(output: str) -> dict[str, int] | None:
+    """解析收尾的计数器行；没有或不可信时返回 ``None``。
+
+    返回 ``None``（而不是零）很重要：**"没有这一行"必须与"检查项为零"区分开**。
+    旧 testbench、别处生成的 testbench 都不会有这一行，把缺失当成零会让它们的结论
+    从"通过"变成"无法判定"——那是凭解析失败改判，不是凭事实改判。
+    """
+
+    for line in output.splitlines():
+        match = _SUMMARY_LINE_RE.match(line)
+        if not match:
+            continue
+        try:
+            value = json.loads(match.group(1))
+        except json.JSONDecodeError:
+            return None
+        if not isinstance(value, dict):
+            return None
+        summary: dict[str, int] = {}
+        for key in ("checks", "failures", "cycles"):
+            item = value.get(key)
+            if isinstance(item, bool) or not isinstance(item, int) or item < 0:
+                return None
+            summary[key] = item
+        return summary
+    return None
 
 
 def _safe_env() -> dict[str, str]:
@@ -231,6 +272,7 @@ class IcarusExecutor:
         run_result: ProcessResult | None = None
         records: tuple[ResultRecord, ...] = ()
         failures: tuple[FailureRecord, ...] = ()
+        run_summary: dict[str, int] | None = None
         diagnostics: list[str] = []
         error: str | None = None
         if compile_result.status is ProcessStatus.PASSED:
@@ -246,6 +288,7 @@ class IcarusExecutor:
             records, parse_diagnostics = parse_result_records(run_result.stdout + "\n" + run_result.stderr)
             diagnostics.extend(parse_diagnostics)
             failures = tuple(FailureRecord.from_result(record) for record in records if not record.ok)
+            run_summary = parse_run_summary(run_result.stdout + "\n" + run_result.stderr)
         else:
             error = compile_result.error or "iverilog compilation failed"
 
@@ -269,6 +312,17 @@ class IcarusExecutor:
             status = ResultStatus.INCONCLUSIVE
             error = "testbench produced no structured result records"
             diagnostics.append("expected lines beginning with IVERILOG_AI_RESULT")
+        elif run_summary is not None and run_summary["checks"] == 0 and not failures:
+            # **零可比较检查项**：计划里没有任何期望值，testbench 只施加激励、
+            # 一条检查都没做（或只有波形）。`failures == 0` 于是为真，但那是
+            # "什么都没检查"，不是"功能正确"。旧实现把它记成 PASSED，
+            # 于是"缺陷已检出/功能通过"这类结论可以凭空成立。
+            status = ResultStatus.INCONCLUSIVE
+            error = (
+                "本次运行没有任何带期望值的检查项（checks=0）：只有激励与波形，"
+                "不能据此判定功能通过，也不能据此判定缺陷已检出"
+            )
+            diagnostics.append("checks=0 from IVERILOG_AI_SUMMARY")
         elif failures:
             # Functional mismatches are warnings unless explicitly marked
             # error; infrastructure failures above remain hard failures.
@@ -304,6 +358,7 @@ class IcarusExecutor:
             diagnostics=tuple(diagnostics),
             artifacts=artifacts,
             config=config_data,
+            summary=dict(run_summary) if run_summary is not None else {},
             started_at=started_at,
             finished_at=_utc_now(),
             error=error,
@@ -320,6 +375,7 @@ class IcarusExecutor:
             diagnostics=result.diagnostics,
             artifacts=artifacts,
             config=result.config,
+            summary=result.summary,
             started_at=result.started_at,
             finished_at=result.finished_at,
             error=result.error,
@@ -336,6 +392,8 @@ SimulationRunner = IcarusExecutor
 __all__ = [
     "IcarusExecutor",
     "RESULT_MARKER",
+    "SUMMARY_MARKER",
     "SimulationRunner",
     "parse_result_records",
+    "parse_run_summary",
 ]

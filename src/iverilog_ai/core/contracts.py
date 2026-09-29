@@ -123,14 +123,27 @@ class PortSpec:
             raise ContractValidationError(f"port[{index}] requires name and direction")
         if "width" in data and "bits" in data:
             raise ContractValidationError(f"port[{index}] cannot contain both width and bits")
-        width = data.get("width", data.get("bits", 1))
-        return cls(
-            name=_identifier(data["name"], f"port[{index}].name"),
-            direction=data["direction"],
-            width=width,
-            signed=data.get("signed", False),
-            initial=data.get("initial"),
-        )
+        raw_width = data.get("width", data.get("bits", 1))
+        # 显式 null（自动提取器读不懂符号位宽时的产物）必须在这里被挡住。
+        # 曾经它会一路走到 `PortSpec(width=1)`，把 `[WIDTH-1:0]` 变成 1 位端口——
+        # 计划"合法"、仿真"通过"，而那个端口其实一个有效位都没测到。
+        if raw_width is None:
+            raise ContractValidationError(
+                f"port[{index}] {data.get('name')!r}: 位宽未确定（null）。"
+                "符号位宽（如 [WIDTH-1:0]）、宏或多维声明无法自动提取，"
+                "请在合约里给出明确的整数位宽——不要按 1 位处理。"
+            )
+        try:
+            return cls(
+                name=_identifier(data["name"], f"port[{index}].name"),
+                direction=data["direction"],
+                width=raw_width,
+                signed=data.get("signed", False),
+                initial=data.get("initial"),
+            )
+        except ContractValidationError as exc:
+            # 带上端口名：只报 "port.width must be ..." 时，用户不知道是哪个端口。
+            raise ContractValidationError(f"port[{index}] {data.get('name')!r}: {exc}") from exc
 
     def to_dict(self) -> dict[str, Any]:
         payload = {
@@ -185,11 +198,16 @@ class ClockContract:
             raise ContractValidationError("clock.signal is required")
         if "period_ns" in data and "period" in data:
             raise ContractValidationError("clock cannot contain both period_ns and period")
-        return cls(
-            signal=signal,
-            period_ns=data.get("period_ns", data.get("period", 10.0)),
-            edge=data.get("edge", "posedge"),
-        )
+        edge = data.get("edge", "posedge")
+        if edge is None:
+            raise ContractValidationError(
+                "clock.edge 未确定（null）：请在合约里显式写 posedge 或 negedge。"
+                "边沿决定采样时刻，不能从端口名推断。"
+            )
+        period = data.get("period_ns", data.get("period", 10.0))
+        if period is None:
+            raise ContractValidationError("clock.period_ns 未确定（null）：请给出明确的周期（ns）。")
+        return cls(signal=signal, period_ns=period, edge=edge)
 
     def to_dict(self) -> dict[str, Any]:
         return {"signal": self.signal, "period_ns": self.period_ns, "edge": self.edge}
@@ -220,7 +238,12 @@ class ResetContract:
     @classmethod
     def from_dict(cls, value: Any) -> "ResetContract":
         if isinstance(value, str):
-            return cls(signal=value)
+            # 只写信号名就等于默认低有效——那是一个**猜测**，而复位极性猜错会让
+            # 整个测试台把 DUT 一直摁在复位里（或永远不复位），结果看起来还"通过"。
+            raise ContractValidationError(
+                f"reset 不能只写信号名（{value!r}）：必须显式给出 active_level"
+                "（0=低有效，1=高有效）与 synchronous。"
+            )
         data = _mapping(value, "reset")
         _unknown_fields(
             data,
@@ -236,7 +259,12 @@ class ResetContract:
         if active is None and "active_low" in data:
             active = 0 if data["active_low"] else 1
         if active is None:
-            active = 0
+            # 旧实现在这里 `active = 0`。那正是审查要求修掉的"静默猜极性"：
+            # 名字里有 rst 就当低有效，遇到高有效 DUT 会生成错误的复位激励。
+            raise ContractValidationError(
+                "reset.active_level 未给出：请显式写 0（低有效）或 1（高有效），"
+                "或用 active_low: true/false。复位极性不按端口名猜测。"
+            )
         return cls(
             signal=signal,
             active_level=active,

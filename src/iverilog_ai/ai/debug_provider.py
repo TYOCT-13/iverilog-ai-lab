@@ -354,6 +354,78 @@ def _value_for(width: int, candidate: Any) -> Any:
     return number
 
 
+@dataclass(frozen=True)
+class _ResetSpec:
+    """合约里声明的复位语义（信号名、有效电平、保持周期）。"""
+
+    signal: str
+    active_level: int
+    assert_cycles: int
+
+    @property
+    def inactive_level(self) -> int:
+        return 1 - self.active_level
+
+
+def _reset_spec(contract: Mapping[str, Any] | None) -> _ResetSpec | None:
+    """取复位语义；**极性缺失时报错，而不是默认低有效**。
+
+    旧实现把 `active_low` 写死成 True、把复位向量写死成 0/1，于是遇到高有效复位的
+    DUT 时：复位向量给的是"无效"电平（等于没复位），而其余所有向量把复位**一直摁在有效**。
+    结果是一个被永久复位的 DUT——它的输出恒定不变，缺陷版本和正确版本看起来"完全一致"，
+    一个假阴性。所以这里宁可报错。
+    """
+
+    if not isinstance(contract, Mapping):
+        return None
+    reset = contract.get("reset")
+    if not isinstance(reset, Mapping):
+        return None
+    signal = reset.get("signal")
+    if not isinstance(signal, str) or not signal:
+        return None
+    level = reset.get("active_level")
+    if level is None and isinstance(reset.get("active_low"), bool):
+        level = 0 if reset["active_low"] else 1
+    if level not in (0, 1) or isinstance(level, bool):
+        raise ValueError(
+            f"复位 {signal!r} 的有效电平未在合约里明确（active_level 必须是 0 或 1）："
+            "没有它就无法生成正确的复位/释放激励。请先在合约里确认复位极性。"
+        )
+    cycles = reset.get("assert_cycles", 2)
+    if isinstance(cycles, bool) or not isinstance(cycles, int) or not 1 <= cycles <= 10_000:
+        cycles = 2
+    return _ResetSpec(signal=signal, active_level=int(level), assert_cycles=cycles)
+
+
+def _boundary_values(width: int) -> list[int]:
+    """宽输入必须真正走到的边界值。
+
+    为什么需要：旧实现对宽端口只随机 `0 .. 2**min(width,8)-1`，于是 16/32 位输入的
+    **高字节永远恒为 0**。一个只在最高位或全 1 上暴露的缺陷因此永远测不到，
+    而报告会显示"通过"。这里显式列出 0、全 1、最高位、次高位、1、全 1-1。
+    """
+
+    limit = (1 << width) - 1
+    values = [0, limit, 1 << (width - 1), limit >> 1, 1, limit - 1]
+    seen: list[int] = []
+    for value in values:
+        if 0 <= value <= limit and value not in seen:
+            seen.append(value)
+    return seen
+
+
+def _generic_value(width: int, index: int, rng: random.Random) -> int:
+    """通用激励取值：先按顺序覆盖边界，然后用**全位宽**随机。"""
+
+    if width == 1:
+        return rng.randint(0, 1)
+    boundaries = _boundary_values(width)
+    if index < len(boundaries):
+        return boundaries[index]
+    return rng.randint(0, (1 << width) - 1)
+
+
 @dataclass
 class DeterministicLocalProvider:
     """按 DUT contract 生成确定性、Schema 合法 TestPlan 的本地 Provider。"""
@@ -441,12 +513,13 @@ class DeterministicLocalProvider:
                     "rationale": "deliberately out-of-range value for negative testing",
                 }
             )
+        out_of_range_spec = _reset_spec(self._active_contract())
         return {
             "schema_version": "1.0",
             "design": self._design_name(),
             "objective": "negative test: value outside the port width",
             "clock_period_ns": 10,
-            "reset": {"active_low": True},
+            "reset": {"active_low": (out_of_range_spec.active_level == 0) if out_of_range_spec is not None else True},
             "vectors": vectors,
         }
 
@@ -465,24 +538,30 @@ class DeterministicLocalProvider:
         steps = _INPUT_STEPS.get(self._design_name())
         extra = _EXTRA_CYCLES.get(self._design_name(), 0)
         vectors: list[dict[str, Any]] = []
+        spec = _reset_spec(self._active_contract())
+        reset_signal = spec.signal if spec is not None else None
+        inactive = spec.inactive_level if spec is not None else 1
 
-        if reset and reset in driveable:
+        if spec is not None and spec.signal in driveable:
             vectors.append(
                 {
                     "name": "debug_reset",
-                    "inputs": {reset: 0},
-                    "cycles": 2,
+                    "inputs": {spec.signal: spec.active_level},
+                    "cycles": spec.assert_cycles,
                     "sample_phase": "after",
                     "expected": {},
-                    "rationale": "hold reset to drive the DUT into a known state",
+                    # 电平来自合约的 active_level：低有效写 0、高有效写 1。
+                    "rationale": f"hold {spec.signal} at its active level ({spec.active_level}) to drive the DUT into a known state",
                 }
             )
 
         for index in range(self.vector_count):
             payload: dict[str, Any] = {}
             for name in driveable:
-                if name == reset:
-                    payload[name] = 1
+                if name == reset_signal:
+                    # 释放复位：写**无效**电平，也就是 1 - active_level。
+                    # 旧实现写死 1，高有效复位下等于把 DUT 一直摁在复位里。
+                    payload[name] = inactive
                     continue
                 width = inputs.get(name, 1)
                 candidates = None
@@ -493,10 +572,8 @@ class DeterministicLocalProvider:
                             break
                 if candidates:
                     payload[name] = _value_for(width, candidates[index % len(candidates)])
-                elif width == 1:
-                    payload[name] = rng.randint(0, 1)
                 else:
-                    payload[name] = rng.randint(0, (1 << min(width, 8)) - 1)
+                    payload[name] = _generic_value(width, index, rng)
             vectors.append(
                 {
                     "name": f"debug_{index + 1:02d}",
@@ -513,8 +590,8 @@ class DeterministicLocalProvider:
         # 观测型计划：只驱动激励，期望值交给参考模型预言机填写。
         for offset, (payload, cycles) in enumerate(_TRAILING_STIMULUS.get(self._design_name(), ())):
             stimulus = {name: _value_for(inputs.get(name, 1), value) for name, value in payload.items() if name in inputs}
-            if reset and reset not in stimulus and reset in driveable:
-                stimulus[reset] = 1
+            if reset_signal and reset_signal not in stimulus and reset_signal in driveable:
+                stimulus[reset_signal] = inactive
             vectors.append(
                 {
                     "name": f"debug_edge_{offset + 1:02d}",
@@ -531,7 +608,8 @@ class DeterministicLocalProvider:
             "design": self._design_name(),
             "objective": self.objective,
             "clock_period_ns": 10,
-            "reset": {"active_low": True},
+            # active_low 由合约推导，不再写死 True。
+            "reset": {"active_low": (spec.active_level == 0) if spec is not None else True},
             "vectors": vectors,
         }
         # 复位前初值观测：只在 contract 明确声明了输出初值时启用。初值期望值

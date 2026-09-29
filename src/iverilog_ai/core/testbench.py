@@ -481,6 +481,11 @@ class TestbenchGenerator:
                     lines.append("    #1;")
         lines.extend(
             [
+                # 运行结束时报一次计数器。**没有这一行，"零检查项"就无法与"检查全过"区分**：
+                # 计划里没有任何期望值时，testbench 只施加激励、一条检查都不做，
+                # `failures == 0` 于是打印 ok，上层把它读成"功能通过"。
+                # 这一行让上层能明确说"本次没有任何可比对的检查项"。
+                '    $display("IVERILOG_AI_SUMMARY {\\"checks\\":%0d,\\"failures\\":%0d,\\"cycles\\":%0d}", checks, failures, cycle);',
                 "    if (failures == 0) begin",
                 "      $finish(0);",
                 "    end else begin",

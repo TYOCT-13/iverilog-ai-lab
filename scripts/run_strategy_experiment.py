@@ -16,7 +16,7 @@ import os
 from pathlib import Path
 import random
 import time
-from typing import Any, Literal, Callable
+from typing import Any, Literal, Callable, Mapping, Sequence
 
 from iverilog_ai.ai import MockProvider, OpenAICompatibleProvider, plan_tests
 from iverilog_ai.ai.provider import Provider
@@ -26,6 +26,15 @@ from iverilog_ai.core.models import ResultStatus
 from iverilog_ai.core.pipeline import VerificationPipeline
 from iverilog_ai.core.reference_model import completed_inputs
 from iverilog_ai.core.rules import rules_context, rules_fingerprint
+from iverilog_ai.core.strategy_scoring import (
+    CASE_BUDGETS,
+    budget_for,
+    classify_undecidable,
+    normalize_vectors,
+    plan_cycles,
+    render_undecidable_table,
+    summarize as summarize_scoring,
+)
 
 # 脚本所在仓库根目录；用于按案例定位 examples/<case>_contract.json。
 ROOT_DIR = Path(__file__).resolve().parents[1]
@@ -177,12 +186,137 @@ def _payload(case: str, vectors: list[dict[str, Any]]) -> dict[str, Any]:
     return {"schema_version": "1.0", "design": case, "objective": f"bounded verification for {case}", "vectors": vectors}
 
 
+#: 允许出现在计划向量里的字段（归一化会加 `truncated_from` 之类的备注字段，
+#: 回填进 TestPlan 之前必须去掉，否则严格 Schema 会拒绝）。
+_VECTOR_FIELDS = {"name", "inputs", "cycles", "sample_phase", "expected", "rationale"}
+
+
+def _plan_with_vectors(plan: Any, vectors: Sequence[Mapping[str, Any]]) -> Any:
+    """用归一化后的向量重建 TestPlan（校验照旧执行）。"""
+
+    from iverilog_ai.ai.schema import TestPlan
+
+    payload = json.loads(plan.model_dump_json())
+    payload["vectors"] = [
+        {key: value for key, value in vector.items() if key in _VECTOR_FIELDS} for vector in vectors
+    ]
+    return TestPlan.model_validate(payload)
+
+
+def _row_payload(
+    *,
+    strategy: str,
+    case: str,
+    variant: str,
+    seed: int,
+    request_id: str,
+    budget_cycles: int,
+    vectors: Any,
+    plan_valid: bool,
+    plan_sha256: str,
+    plan_raw_sha256: str,
+    generation_ms: int | None,
+    usage: Any,
+    attempts: int,
+    compile_ms: int | None,
+    sim_ms: int | None,
+    time_to_first_failure_ms: int | None,
+    records_pass: int,
+    failures: int,
+    warning_failures: int,
+    error_failures: int,
+    check_count: int | None,
+    total_cycles: int,
+    model: str | None,
+    endpoint: str | None,
+    prompt_sha256: str,
+    status: str,
+    reason: str | None,
+    defect_found: bool,
+    error_msg: str | None,
+    artifacts: Mapping[str, str],
+    expectation_source: str | None,
+    ai_expected_checked: Any,
+    ai_expected_matched: Any,
+) -> dict[str, Any]:
+    """一行实验结果。字段名与旧矩阵保持兼容（只做加法）。"""
+
+    vector_count = vectors if isinstance(vectors, int) else len(vectors)
+    row: dict[str, Any] = {
+        "strategy": strategy,
+        "case": case,
+        "variant": variant,
+        "seed": seed,
+        "request_id": request_id,
+        "budget_s": 30.0,          # 兼容旧字段：仿真超时上限（秒）
+        "budget_cycles": budget_cycles,
+        "vectors": vector_count,
+        "total_cycles": total_cycles,
+        "plan_valid": plan_valid,
+        "plan_sha256": plan_sha256,
+        "plan_raw_sha256": plan_raw_sha256,
+        "generation_ms": generation_ms,
+        "usage": usage,
+        "attempts": attempts,
+        "model": model,
+        "endpoint": endpoint,
+        "prompt_sha256": prompt_sha256,
+        "compile_ms": compile_ms,
+        "sim_ms": sim_ms,
+        "time_to_first_failure_ms": time_to_first_failure_ms,
+        "records_pass": records_pass,
+        "failures": failures,
+        "warning_failures": warning_failures,
+        "error_failures": error_failures,
+        "check_count": check_count,
+        "defects_found": defect_found,
+        "expectation_source": expectation_source,
+        "ai_expected_checked": ai_expected_checked,
+        "ai_expected_matched": ai_expected_matched,
+        "status": status,
+        "artifact_path": artifacts.get("run_dir", ""),
+        "artifact_paths": dict(artifacts),
+    }
+    row["undecidable_reason"] = classify_undecidable(
+        status, defects_found=defect_found, check_count=check_count, variant=variant
+    )
+    if reason is not None:
+        row["undecidable_reason"] = reason
+    if error_msg:
+        row["error"] = error_msg
+    return row
+
+
 def _progress_text(done: int, total: int, started: float) -> str:
     elapsed = time.perf_counter() - started
     percent = (100.0 * done / total) if total else 100.0
     eta = (elapsed / done * (total - done)) if done else None
     eta_text = f"；预计剩余 {eta:.1f}s" if eta is not None else ""
     return f"进度 {done}/{total}（{percent:.1f}%）；已耗时 {elapsed:.1f}s{eta_text}"
+
+
+def _code_revision(root: Path) -> tuple[str, bool]:
+    """取当前代码版本与"工作区是否脏"。
+
+    路线图明确要求记录**代码版本及未提交差异**：换一个版本标签不算重跑实验，
+    而没有 commit 的改动意味着别人无法从哈希复现这次实验。
+    取不到 git 时返回 ("unknown", False)——如实标注未知，不假装干净。
+    """
+
+    import subprocess
+
+    try:
+        head = subprocess.run(
+            ["git", "rev-parse", "HEAD"], cwd=root, capture_output=True, text=True, timeout=10
+        )
+        if head.returncode != 0:
+            return ("unknown", False)
+        status = subprocess.run(
+            ["git", "status", "--porcelain"], cwd=root, capture_output=True, text=True, timeout=15
+        )
+        return (head.stdout.strip(), bool(status.stdout.strip()))
+    except (OSError, ValueError):
+        return ("unknown", False)
 
 
 def _write_experiment_report(path: Path, payload: dict[str, Any], *, endpoint: str | None, model: str | None) -> None:
@@ -193,6 +327,8 @@ def _write_experiment_report(path: Path, payload: dict[str, Any], *, endpoint: s
         f"- 结束时间：`{payload['finished_at']}`",
         f"- 总耗时：`{payload['duration_ms'] / 1000:.1f}s`",
         f"- 完成任务：`{payload['completed_units']}/{payload['total_units']}`",
+        f"- 代码版本：`{payload.get('code_revision', 'unknown')}`"
+        + ("（**工作区有未提交改动**：本次结果无法仅凭 commit 复现）" if payload.get("working_tree_dirty") else ""),
         f"- 在线端点：`{endpoint or '未启用'}`",
         f"- 在线模型：`{model or '未启用'}`", "",
         "> API Key、原始提示词和模型响应正文不会写入本报告。", "",
@@ -204,62 +340,97 @@ def _write_experiment_report(path: Path, payload: dict[str, Any], *, endpoint: s
             lines.append(f"  - `{item['file']}`：`{item['sha256']}`")
     lines.extend(["",
         "## 汇总指标", "",
-        "| 策略 | 模型请求数 | 请求级合法率 | 参考误报(硬失败) | 参考设计期望值不一致 | 缺陷总数 | 缺陷检出 | 检出率 | 不可判定 | 平均生成(ms) |",
-        "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+        "| 策略 | 模型请求数 | 请求级合法率 | 参考误报(硬失败) | 参考设计期望值不一致 | 缺陷总数 | 缺陷检出(累计并集) | 单轮平均检出率 | 单轮范围 | 不可判定 | 因参考告警作废 | 平均生成(ms) |",
+        "|---|---:|---:|---:|---:|---:|---:|---:|---|---:|---:|---:|",
     ])
     for strategy, item in payload["summary"].items():
         accuracy = item.get("ai_expected_accuracy")
         generation = item.get("mean_generation_ms")
+        rate = item.get("detection_rate")
+        single = item.get("detection_rate_single_round_mean")
+        low, high = item.get("detection_rate_single_round_min"), item.get("detection_rate_single_round_max")
+        # 0/0 不能写成 0.0%：那是"没有可算的东西"，与"一个都没检出"是两件事。
+        rate_text = "n/a" if rate is None else f"{rate * 100:.1f}%"
+        single_text = "n/a" if single is None else f"{single * 100:.1f}%"
+        range_text = "n/a" if low is None or high is None else f"{low * 100:.0f}%~{high * 100:.0f}%"
+        generation_text = "-" if generation is None else f"{generation:.1f}"
         lines.append(
             f"| {strategy} | {item.get('plan_requests', 0)} | "
             f"{item.get('request_plan_valid_rate', 0) * 100:.1f}% | "
             f"{item.get('reference_false_positives', 0)} | "
             f"{item.get('reference_warn_mismatches', 0)} | "
             f"{item.get('defects_total', 0)} | "
-            f"{item.get('defects_found', 0)} | {item.get('detection_rate', 0) * 100:.1f}% | "
-            f"{item.get('inconclusive_runs', 0)} | "
-            f"{generation:.1f} |" if generation is not None else
-            f"| {strategy} | {item.get('plan_requests', 0)} | {item.get('request_plan_valid_rate', 0) * 100:.1f}% | {item.get('reference_false_positives', 0)} | {item.get('reference_warn_mismatches', 0)} | {item.get('defects_total', 0)} | {item.get('defects_found', 0)} | {item.get('detection_rate', 0) * 100:.1f}% | {item.get('inconclusive_runs', 0)} | - |"
+            f"{item.get('defects_found', 0)} | {single_text} | {range_text} | "
+            f"{item.get('undecidable_runs', 0)} | "
+            f"{item.get('plans_excluded_by_reference_alarm', 0)} | {generation_text} |"
         )
         if accuracy is not None:
             lines.append(
                 f"| ↳ {strategy} 期望值口径 | 检查项 {item.get('ai_expected_checked', 0)} | "
-                f"AI 期望值准确率 {accuracy * 100:.1f}% | | | | | | | |"
+                f"AI 期望值准确率 {accuracy * 100:.1f}% | | | | | | | | | |"
             )
     lines.extend([
         "",
         "### 指标口径说明",
         "",
+        "- **缺陷总数（分母）**：来自 `benchmarks/manifest.json` 登记的 (案例, 缺陷变体) 组合，"
+        "**在跑实验之前就固定**。它不随实际产出的行变化——否则请求失败会让分母一起缩小，检出率反而变好看。",
+        "- **缺陷检出(累计并集)**：多轮跑完后，被检出过的 (案例, 变体) 去重计数。",
+        "- **单轮平均检出率**：先按轮次各算一次，再取平均；累计并集不能与单轮直接比较"
+        "（同一案例的多个变体也不是彼此独立的大样本）。",
+        "- **不可判定**：计划生成失败、计划非法、编译失败、超时、零可比较检查项，"
+        "以及「预定轮次里缺失的记录」。它们**按未检出计入**端到端检出率，理由见 `undecidable_by_reason`。",
+        "- **因参考告警作废**：某一轮的**参考设计**自己出现了功能不一致（硬失败或期望值不一致）时，"
+        "该轮计划对变体的告警不算有效检出——否则「计划本身在乱报」会被记成「工具发现了缺陷」。"
+        "作废的是那个 (案例,轮次)，不是整轮。",
+        "- **同一刺激预算 ≠ 同一端到端成本**：三组策略的**总周期数**按案例统一（见 `budget_cycles`），"
+        "但生成时间、重试次数与费用单列，不参与检出率。",
         "- **参考误报(硬失败)**：参考设计上出现 `severity=error` 的失败反例，属于工具缺陷。",
         "- **参考设计期望值不一致**：参考设计上出现 `severity=warn` 的失败反例，等价于「AI 期望值判断错误」，是诊断指标而非工具缺陷。",
         "- **AI 期望值准确率**：内置案例的期望值由独立参考模型复算并作为权威预言机；该比率衡量 AI 自己写的期望值中有多少与参考模型一致。",
         "- 当某个策略产出的计划**不写任何期望值**时（例如本地调试模型只施加激励），该比率为空 `n/a`：没有可比对的 AI 数字，不代表准确率为零。",
-        "- 缺陷判定与误报判定使用同一套结构化失败反例，因此必须先排除期望值口径的干扰，再解读检出率。",
     ])
-    failures = [row for row in payload["runs"] if row.get("status") == "inconclusive" or row.get("error")]
     lines.extend(["", "## 不可判定和错误记录", ""])
-    if failures:
-        lines.append("| 策略 | 案例 | 变体 | seed | 错误 |")
-        lines.append("|---|---|---|---:|---|")
-        for row in failures:
-            error = str(row.get("error", "未提供")).replace("|", "\\|").replace("\n", " ")
-            lines.append(f"| {row.get('strategy')} | {row.get('case')} | {row.get('variant')} | {row.get('seed', '-')} | {error} |")
-    else:
-        lines.append("无。")
-    lines.extend(["", "## 逐次结果", "", "逐次机器可读记录位于同目录的 `strategy_matrix.json`；其中包含每次运行的计划哈希、生成耗时、编译/仿真耗时、warn/error 计数和证据目录。", ""])
+    lines.extend(render_undecidable_table(payload["runs"]))
+    missing = [
+        (strategy, item.get("undecidable_missing", 0))
+        for strategy, item in payload["summary"].items()
+        if item.get("undecidable_missing")
+    ]
+    if missing:
+        lines.extend([
+            "",
+            "缺失记录（预定了轮次但没有任何行）——按未检出计入：",
+            "",
+            "| 策略 | 缺失条数 |",
+            "|---|---:|",
+        ])
+        for strategy, count in missing:
+            lines.append(f"| {strategy} | {count} |")
+    lines.extend(["", "## 逐次结果", "", "逐次机器可读记录位于同目录的 `strategy_matrix.json`；其中包含每次运行的计划哈希（原始与归一化）、生成耗时、重试次数、编译/仿真耗时、warn/error 计数、实际总周期与检查项数、不可判定原因和全部证据路径。", ""])
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
-def _summarize(rows: list[dict[str, Any]], strategies: list[str]) -> dict[str, Any]:
-    """按策略汇总逐次记录：中途落盘与最终写盘共用同一份口径。"""
+def _summarize(
+    rows: list[dict[str, Any]],
+    strategies: list[str],
+    *,
+    pairs: Sequence[tuple[str, str]],
+    rounds: Mapping[str, int],
+) -> dict[str, Any]:
+    """按策略汇总逐次记录：中途落盘与最终写盘共用同一份口径。
 
+    计分口径全部交给 `core.strategy_scoring`（纯函数、有离线负例），这里只负责把
+    脚本侧的行结构喂进去、再补上报告需要的旧字段。**分母来自清单**（`pairs`），
+    不来自实际产出的行——否则"跑失败"会让分母缩小，检出率反而变好看。
+    """
+
+    scoring = summarize_scoring(rows, pairs=pairs, strategies=strategies, rounds=rounds)
     summary: dict[str, Any] = {}
     for strategy in strategies:
         selected = [row for row in rows if row["strategy"] == strategy]
         refs = [row for row in selected if row["variant"] == "reference"]
         defects = [row for row in selected if row["variant"] not in {"reference", "plan_generation"}]
-        found_pairs = {(row["case"], row["variant"]) for row in defects if row.get("defects_found")}
-        total_pairs = {(row["case"], row["variant"]) for row in defects}
         valid_runs = sum(1 for row in selected if row["plan_valid"])
         request_rows: dict[str, dict[str, Any]] = {}
         for row in selected:
@@ -273,14 +444,40 @@ def _summarize(rows: list[dict[str, Any]], strategies: list[str]) -> dict[str, A
             for row in request_rows.values()
             if isinstance(row.get("generation_ms"), int)
         ]
-        # 参考误报只统计真正的硬失败；warn 级反例在参考设计上代表"AI 期望值
-        # 与参考模型不一致"，属于诊断指标，单独统计，避免把工具缺陷记成误报。
-        reference_false_positives = sum(bool(row.get("error_failures")) for row in refs)
-        reference_warn_mismatches = sum(bool(row.get("warning_failures")) for row in refs)
         ai_checked = sum(int(row.get("ai_expected_checked") or 0) for row in selected)
         ai_matched = sum(int(row.get("ai_expected_matched") or 0) for row in selected)
         valid_requests = sum(bool(row.get("plan_valid")) for row in request_rows.values())
-        summary[strategy] = {"runs": len(selected), "plan_requests": len(request_rows), "valid_plan_requests": valid_requests, "request_plan_valid_rate": valid_requests / len(request_rows) if request_rows else 0.0, "plan_valid": all(row["plan_valid"] for row in selected), "plan_valid_runs": valid_runs, "plan_total_runs": len(selected), "plan_valid_rate": valid_runs / len(selected) if selected else 0.0, "reference_false_positives": reference_false_positives, "reference_warn_mismatches": reference_warn_mismatches, "ai_expected_checked": ai_checked, "ai_expected_matched": ai_matched, "ai_expected_accuracy": (ai_matched / ai_checked) if ai_checked else None, "defects_total": len(total_pairs), "defects_found": len(found_pairs), "detection_rate": len(found_pairs) / len(total_pairs) if total_pairs else 0.0, "inconclusive_runs": sum(1 for row in selected if row["status"] == "inconclusive"), "mean_generation_ms": (sum(generation_times) / len(generation_times) if generation_times else None), "mean_time_to_first_failure_ms": (sum(int(row["time_to_first_failure_ms"] or 0) for row in defects if row.get("time_to_first_failure_ms") is not None) / max(1, sum(1 for row in defects if row.get("time_to_first_failure_ms") is not None)))}
+        scored = scoring[strategy]
+        summary[strategy] = {
+            "runs": len(selected),
+            "plan_requests": len(request_rows),
+            "valid_plan_requests": valid_requests,
+            "request_plan_valid_rate": valid_requests / len(request_rows) if request_rows else 0.0,
+            "plan_valid": all(row["plan_valid"] for row in selected),
+            "plan_valid_runs": valid_runs,
+            "plan_total_runs": len(selected),
+            "plan_valid_rate": valid_runs / len(selected) if selected else 0.0,
+            "reference_false_positives": scored["reference_false_positives"],
+            "reference_warn_mismatches": scored["reference_warn_mismatches"],
+            "reference_alarming_plans": scored["alarming_plans"],
+            "plans_excluded_by_reference_alarm": scored["plans_excluded_by_reference_alarm"],
+            "ai_expected_checked": ai_checked,
+            "ai_expected_matched": ai_matched,
+            "ai_expected_accuracy": (ai_matched / ai_checked) if ai_checked else None,
+            "defects_total": scored["defects_total"],
+            "defects_found": scored["defects_found"],
+            "detection_rate": scored["detection_rate"],
+            "detection_rate_single_round_mean": scored["detection_rate_single_round_mean"],
+            "detection_rate_single_round_min": scored["detection_rate_single_round_min"],
+            "detection_rate_single_round_max": scored["detection_rate_single_round_max"],
+            "rounds": scored["rounds"],
+            "undecidable_runs": scored["undecidable_runs"],
+            "undecidable_by_reason": scored["undecidable_by_reason"],
+            "undecidable_missing": scored["undecidable_missing"],
+            "inconclusive_runs": sum(1 for row in selected if row["status"] == "inconclusive"),
+            "mean_generation_ms": (sum(generation_times) / len(generation_times) if generation_times else None),
+            "mean_time_to_first_failure_ms": (sum(int(row["time_to_first_failure_ms"] or 0) for row in defects if row.get("time_to_first_failure_ms") is not None) / max(1, sum(1 for row in defects if row.get("time_to_first_failure_ms") is not None))),
+        }
     return summary
 
 
@@ -296,6 +493,8 @@ def _build_payload(
     finished_wall: datetime,
     started_perf: float,
     partial: bool,
+    code_revision: str,
+    working_tree_dirty: bool,
 ) -> dict[str, Any]:
     """组装实验记录。
 
@@ -311,6 +510,8 @@ def _build_payload(
         "duration_ms": int((time.perf_counter() - started_perf) * 1000),
         "total_units": total_units,
         "completed_units": completed_units,
+        "code_revision": code_revision,
+        "working_tree_dirty": working_tree_dirty,
         "rule_sets": rule_sets,
         "skipped_cases": skipped,
         "runs": rows,
@@ -409,6 +610,23 @@ def _main() -> int:
         _, files = rules_context(root, case_name, case_spec["contract"])
         rule_sets[case_name] = {"fingerprint": rules_fingerprint(files), "files": files}
     strategies = ["fixed", "random", "ai"] + (["online_ai"] if use_remote_or_debug else [])
+    # 代码版本与工作区状态写进产物：别人才能判断这次结果对应哪份代码，
+    # 而"工作区有未提交改动"意味着仅凭 commit 无法复现。
+    CODE_REVISION, WORKING_TREE_DIRTY = _code_revision(root)
+    if WORKING_TREE_DIRTY:
+        print("警告：工作区有未提交改动，本次实验无法仅凭 commit 复现", flush=True)
+    # **预先固定的分母**：来自清单登记的 (案例, 缺陷变体)，与"实际跑出了哪些行"无关。
+    # 旧口径在行集合上求分母，于是模型请求失败会让分母一起缩小。
+    expected_pairs: list[tuple[str, str]] = [
+        (case, str(item["id"]))
+        for case in CASES
+        for item in manifest.get("defects", [])
+        if item["type"] == case
+    ]
+    strategy_rounds = {
+        strategy: (1 if strategy == "fixed" else (args.online_repeats if strategy == "online_ai" else args.seeds))
+        for strategy in strategies
+    }
     total_units = sum(
         len([0] if strategy == "fixed" else (range(args.online_repeats) if strategy == "online_ai" else range(args.seeds)))
         * (1 + sum(1 for item in manifest.get("defects", []) if item["type"] == case))
@@ -424,7 +642,7 @@ def _main() -> int:
                 output,
                 _build_payload(
                     rows=rows,
-                    summaries=_summarize(rows, strategies),
+                    summaries=_summarize(rows, strategies, pairs=expected_pairs, rounds=strategy_rounds),
                     total_units=total_units,
                     completed_units=completed_units,
                     rule_sets=rule_sets,
@@ -433,6 +651,8 @@ def _main() -> int:
                     finished_wall=datetime.now(timezone.utc),
                     started_perf=experiment_started,
                     partial=True,
+                    code_revision=CODE_REVISION,
+                    working_tree_dirty=WORKING_TREE_DIRTY,
                 ),
             )
             _usage = _usage_totals(rows)
@@ -442,22 +662,41 @@ def _main() -> int:
                     flush=True,
                 )
         variants = ["reference"] + [str(item["id"]) for item in manifest.get("defects", []) if item["type"] == case]
+        # 预算**在跑之前**就按案例定好，三组策略共用同一个 T；生成出来的计划一律
+        # 按 T 归一化后再执行。旧实现让 fixed/random/ai/online 各自决定跑多久
+        # （实测 4 / 12 / 12 / 18 个向量），"同预算比较"从一开始就不成立。
+        budget = budget_for(case)
+        budget_unregistered = case not in CASE_BUDGETS
+        if budget_unregistered:
+            print(f"  注意：案例 {case} 未登记预算，使用默认 {budget.cycles} 周期", flush=True)
+        # 提示词指纹：模型版本标签可以改，"喂进去的规格 + 规则"才是可复查的输入。
+        rules_text, _rules_files = rules_context(root, case, spec["contract"])
+        prompt_hash = hashlib.sha256(
+            f"{case}\n{_payload(case, [])['objective']}\n{rules_text}".encode("utf-8")
+        ).hexdigest()[:16]
         for strategy in strategies:
+            model_label = None
+            endpoint_label = None
+            if strategy in {"ai", "online_ai"}:
+                # 模型/端点写进行记录：旧矩阵只能靠目录名反推模型，那是不可复查的。
+                model_label = "mock" if strategy == "ai" else ("debug-local" if args.debug_local else str(args.online_model))
+                endpoint_label = None if strategy == "ai" else (str(args.debug_endpoint) if args.debug_local else str(args.online_endpoint))
             seeds = [0] if strategy == "fixed" else (list(range(args.online_repeats)) if strategy == "online_ai" else list(range(args.seeds)))
             for seed in seeds:
                 request_started = time.perf_counter()
-                vectors = _fixed(case) if strategy == "fixed" else _vectors(case, seed)
-                payload = _payload(case, vectors)
+                raw_vectors = _fixed(case) if strategy == "fixed" else _vectors(case, seed)
+                raw_payload = _payload(case, raw_vectors)
                 plan_valid = True
                 request_id = f"{strategy}-{case}-{seed}"
                 # 两个分支会构造不同的 provider，统一标注成公共基类类型。
                 provider: Provider | None = None
                 generation_ms = None
                 usage = None
+                attempts = 0
                 if strategy in {"ai", "online_ai"}:
                     try:
                         if strategy == "ai":
-                            provider = MockProvider(response=payload)
+                            provider = MockProvider(response=raw_payload)
                         elif args.debug_local:
                             # 本地离线调试模型：回环地址、无密钥、确定性计划。
                             provider = OpenAICompatibleProvider(endpoint=args.debug_endpoint, model="debug-local", wire_api="chat_completions", reasoning_effort=None, allow_network=False, store=False, timeout=30)
@@ -478,22 +717,56 @@ def _main() -> int:
                         # 自我纠正一次（常见错误是断言模板名或字段名不合规）。
                         # 只重试一次，避免把一次失败放大成多次请求与多份费用。
                         plan = plan_tests(
-                            payload["objective"], case, provider=provider,
+                            raw_payload["objective"], case, provider=provider,
                             max_retries=1,
-                            context=rules_context(root, case, spec["contract"])[0],
+                            context=rules_text,
                         )
+                        attempts = int(getattr(provider, "request_count", 0) or 0)
                         generation_ms = int((time.perf_counter() - generation_started) * 1000)
                         usage = getattr(provider, "last_usage", None)
                     except Exception as exc:
-                        plan_valid = False
-                        rows.append({"strategy": strategy, "case": case, "variant": "plan_generation", "seed": seed, "request_id": request_id, "plan_valid": False, "generation_ms": generation_ms, "usage": usage, "error": str(exc), "status": "inconclusive"})
+                        # 生成失败**不能只留一行**：那会让该轮的所有变体从分母里消失。
+                        # 为每个预定变体补一条"不可判定"记录，分母因此保持不变。
+                        failed_ms = int((time.perf_counter() - request_started) * 1000)
+                        rows.append({
+                            "strategy": strategy, "case": case, "variant": "plan_generation", "seed": seed,
+                            "request_id": request_id, "plan_valid": False,
+                            "generation_ms": failed_ms, "attempts": attempts,
+                            "usage": usage, "error": str(exc), "status": "inconclusive",
+                            "undecidable_reason": "plan_failed",
+                        })
+                        for variant in variants:
+                            rows.append({
+                                "strategy": strategy, "case": case, "variant": variant, "seed": seed,
+                                "request_id": request_id, "plan_valid": False,
+                                "budget_cycles": budget.cycles, "vectors": 0,
+                                "plan_raw_sha256": "", "plan_sha256": "",
+                                "generation_ms": failed_ms, "usage": usage,
+                                "compile_ms": None, "sim_ms": None, "time_to_first_failure_ms": None,
+                                "records_pass": 0, "failures": 0, "check_count": 0,
+                                "total_cycles": 0, "defects_found": False,
+                                "status": "inconclusive", "undecidable_reason": "plan_failed",
+                                "error": str(exc), "artifact_path": "",
+                            })
                         completed_units += len(variants)
-                        print(f"{_progress_text(completed_units, total_units, experiment_started)}；{strategy}/{case}/seed={seed} 计划失败", flush=True)
+                        print(f"{_progress_text(completed_units, total_units, experiment_started)}；{strategy}/{case}/seed={seed} 计划失败（已为 {len(variants)} 个变体记不可判定）", flush=True)
                         continue
                 else:
                     from iverilog_ai.ai.schema import TestPlan
-                    plan = TestPlan.model_validate(payload)
-                plan_hash = hashlib.sha256(plan.model_dump_json().encode()).hexdigest()[:12]
+                    plan = TestPlan.model_validate(raw_payload)
+
+                # 归一化：原始计划与执行计划都留档，两个哈希都写进行记录。
+                raw_plan_json = plan.model_dump_json()
+                normalized = normalize_vectors([vector.model_dump() for vector in plan.vectors], budget.cycles)
+                execution_plan = _plan_with_vectors(plan, normalized.vectors)
+                plan_hash = hashlib.sha256(execution_plan.model_dump_json().encode()).hexdigest()[:12]
+                plan_raw_hash = hashlib.sha256(raw_plan_json.encode()).hexdigest()[:12]
+                plan_dir = output / strategy / case / str(seed)
+                plan_dir.mkdir(parents=True, exist_ok=True)
+                (plan_dir / "plan_raw.json").write_text(json.dumps(json.loads(raw_plan_json), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+                (plan_dir / "plan_normalized.json").write_text(json.dumps(json.loads(execution_plan.model_dump_json()), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+                plan = execution_plan
+                vectors = normalized.vectors
                 for variant in variants:
                     rtl = root / spec["rtl"] if variant == "reference" else root / defect_files[variant]
                     started = time.perf_counter()
@@ -503,7 +776,20 @@ def _main() -> int:
                         # A malformed model plan or generation/tool error must
                         # not abort the remaining cases. Preserve it as an
                         # auditable inconclusive row instead.
-                        rows.append({"strategy": strategy, "case": case, "variant": variant, "seed": seed, "request_id": request_id, "budget_s": 30.0, "vectors": len(vectors), "plan_valid": False, "plan_sha256": plan_hash, "generation_ms": generation_ms, "usage": usage, "compile_ms": None, "sim_ms": None, "time_to_first_failure_ms": None, "records_pass": 0, "failures": 0, "defects_found": False, "status": "inconclusive", "error": str(exc), "artifact_path": ""})
+                        rows.append(_row_payload(
+                            strategy=strategy, case=case, variant=variant, seed=seed, request_id=request_id,
+                            budget_cycles=budget.cycles, vectors=vectors, plan_valid=False,
+                            plan_sha256=plan_hash, plan_raw_sha256=plan_raw_hash,
+                            generation_ms=generation_ms, usage=usage, attempts=attempts,
+                            compile_ms=None, sim_ms=None, time_to_first_failure_ms=None,
+                            records_pass=0, failures=0, warning_failures=0, error_failures=0,
+                            check_count=None, total_cycles=budget.cycles,
+                            model=model_label, endpoint=endpoint_label, prompt_sha256=prompt_hash,
+                            status="inconclusive", reason="execution_failed",
+                            defect_found=False, error_msg=str(exc),
+                            artifacts={}, expectation_source=None,
+                            ai_expected_checked=None, ai_expected_matched=None,
+                        ))
                         completed_units += 1
                         print(f"{_progress_text(completed_units, total_units, experiment_started)}；{strategy}/{case}/{variant} 不可判定", flush=True)
                         continue
@@ -520,10 +806,35 @@ def _main() -> int:
                     oracle = (result.simulation.config or {}).get("oracle", {}) or {}
                     ai_expected_checked = oracle.get("checked_expected")
                     ai_expected_matched = oracle.get("matched_expected")
-                    rows.append({"strategy": strategy, "case": case, "variant": variant, "seed": seed, "request_id": request_id, "budget_s": 30.0, "vectors": len(plan.vectors), "plan_valid": plan_valid, "plan_sha256": plan_hash, "generation_ms": generation_ms, "usage": usage, "compile_ms": result.simulation.compile.duration_ms, "sim_ms": None if result.simulation.run is None else result.simulation.run.duration_ms, "time_to_first_failure_ms": elapsed if defect_found else None, "records_pass": sum(1 for record in result.records if record.ok), "failures": len(result.failures), "warning_failures": warning_failures, "error_failures": error_failures, "defects_found": defect_found, "expectation_source": oracle.get("expectation_source"), "ai_expected_checked": ai_expected_checked, "ai_expected_matched": ai_expected_matched, "status": result.status.value, "artifact_path": result.artifacts.get("run_dir", "")})
+                    check_count = result.simulation.check_count
+                    rows.append(_row_payload(
+                        strategy=strategy, case=case, variant=variant, seed=seed, request_id=request_id,
+                        budget_cycles=budget.cycles, vectors=plan.vectors, plan_valid=plan_valid,
+                        plan_sha256=plan_hash, plan_raw_sha256=plan_raw_hash,
+                        generation_ms=generation_ms, usage=usage, attempts=attempts,
+                        compile_ms=result.simulation.compile.duration_ms,
+                        sim_ms=None if result.simulation.run is None else result.simulation.run.duration_ms,
+                        time_to_first_failure_ms=elapsed if defect_found else None,
+                        records_pass=sum(1 for record in result.records if record.ok),
+                        failures=len(result.failures), warning_failures=warning_failures,
+                        error_failures=error_failures, check_count=check_count,
+                        total_cycles=int(result.simulation.summary.get("cycles", plan_cycles(vectors))),
+                        model=model_label, endpoint=endpoint_label, prompt_sha256=prompt_hash,
+                        status=result.status.value,
+                        reason=None,
+                        defect_found=defect_found, error_msg=result.simulation.error,
+                        artifacts=dict(result.simulation.artifacts),
+                        expectation_source=oracle.get("expectation_source"),
+                        ai_expected_checked=ai_expected_checked, ai_expected_matched=ai_expected_matched,
+                    ))
                     completed_units += 1
                     print(f"{_progress_text(completed_units, total_units, experiment_started)}；{strategy}/{case}/{variant} -> {result.status.value}；本组 {time.perf_counter() - request_started:.1f}s", flush=True)
-    summary = _summarize(rows, strategies)
+    summary = _summarize(
+        rows,
+        strategies,
+        pairs=expected_pairs,
+        rounds=strategy_rounds,
+    )
     experiment_finished_wall = datetime.now(timezone.utc)
     payload = _build_payload(
         rows=rows,
@@ -536,6 +847,8 @@ def _main() -> int:
         finished_wall=experiment_finished_wall,
         started_perf=experiment_started,
         partial=False,
+        code_revision=CODE_REVISION,
+        working_tree_dirty=WORKING_TREE_DIRTY,
     )
     _write_payload(output, payload)
     _write_experiment_report(
