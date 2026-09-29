@@ -27,3 +27,5 @@ pytest-*/
 .idea/workspace.xml
 .idea/shelf/
 .idea/httpRequests/
+# 桌面快捷方式：内容含本机绝对路径，不可移植；用 scripts/make_shortcuts.ps1 生成
+*.lnk

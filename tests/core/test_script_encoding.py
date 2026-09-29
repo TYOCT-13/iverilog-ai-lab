@@ -13,8 +13,6 @@
 """
 from __future__ import annotations
 
-import shutil
-import subprocess
 import sys
 from pathlib import Path
 
@@ -122,48 +120,14 @@ def test_clean_utf8_chinese_is_not_flagged(tmp_path: Path) -> None:
     assert strip_bom.scan_mojibake(target) == []
 
 
-# ------------------------------------------------------------------ 真实仓库与真实脚本
+# ------------------------------------------------------------------ 真实仓库
 
 
 def test_repository_scripts_pass_the_gate(capsys: pytest.CaptureFixture) -> None:
-    """仓库里所有脚本都必须过这条门禁——包括 `start_ui.ps1` 与 `start_ui.cmd`。"""
+    """仓库里所有脚本都必须过这条门禁——包括 `start_ui.ps1` 与 `start_ui.cmd`。
 
-    assert strip_bom.main(["--check"]) == 0, capsys.readouterr().out
-
-
-def test_launcher_scripts_exist() -> None:
-    """启动脚本本身也是交付物：有人会直接双击它，路径与文件名不能漂。"""
-
-    assert (ROOT / "start_ui.ps1").is_file()
-    assert (ROOT / "start_ui.cmd").is_file()
-    source = (ROOT / "start_ui.ps1").read_text(encoding="utf-8-sig")
-    # 关键行为：设 PYTHONPATH 指向 src、用 python -m streamlit 启、从脚本自身定位仓库根
-    assert "PYTHONPATH" in source and "'src'" in source
-    assert "'-m', 'streamlit', 'run', 'ui/app.py'" in source
-    assert "$MyInvocation.MyCommand.Path" in source, "必须能从任意 cwd 启动"
-    assert "Test-PortBusy" in source and "_stcore/health" in source, "必须探测端口是否已在本项目上"
-
-
-@pytest.mark.parametrize("shell", ["pwsh", "powershell"])
-def test_launcher_parses_under_a_real_shell(shell: str) -> None:
-    """用真实解释器解析一遍——只有它在，才说明脚本真的没有语法错误。
-
-    两者都试是刻意的：`powershell`（5.1）是双击时的解释器，也是唯一会因为缺 BOM
-    而报错的；`pwsh`（7+）不会暴露那个问题，但它是开发时常用的。
+    演示脚本本身的行为断言（启动/停止/快捷方式/图标）在 `test_demo_scripts.py` 里，
+    这个文件只管编码约定。
     """
 
-    executable = shutil.which(shell)
-    if not executable:
-        pytest.skip(f"环境里没有 {shell}")
-    script = ROOT / "start_ui.ps1"
-    completed = subprocess.run(
-        [
-            executable, "-NoProfile", "-Command",
-            f"$e=$null; [System.Management.Automation.Language.Parser]::ParseFile('{script}', [ref]$null, [ref]$e) | Out-Null; "
-            "if ($e) { $e | ForEach-Object { $_.Message }; exit 1 } else { exit 0 }",
-        ],
-        capture_output=True,
-        text=True,
-        timeout=120,
-    )
-    assert completed.returncode == 0, completed.stdout + completed.stderr
+    assert strip_bom.main(["--check"]) == 0, capsys.readouterr().out

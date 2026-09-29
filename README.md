@@ -40,13 +40,24 @@ python -m iverilog_ai run `
 python -m iverilog_ai report --result .iverilog-ai/runs/run-<id>/result.json --format html --output report.html
 ```
 
-启动演示页面——**推荐用启动脚本**（它会替你设好 `PYTHONPATH`、挑一个没被占的端口、
-检查 Icarus 是否装好，并打印本机与局域网地址）：
+启动演示页面——**不想碰命令行的话，先建一次快捷方式，以后双击即可**：
+
+```powershell
+.\scripts\make_shortcuts.ps1      # 在桌面和仓库目录各建「启动/停止网页演示」两个快捷方式
+```
+
+建好后双击「**启动网页演示**」就行：自动挑端口、检查 Icarus、就绪后打开浏览器。
+想停的时候双击「**停止网页演示**」——它**按端口**找进程并先确认那是本项目的服务，
+不会误杀你在别处跑的 Python 程序。
+
+喜欢命令行的话，启动脚本也能直接调（它会替你设好 `PYTHONPATH`、探测被占用的端口、
+报告 Icarus 状态，并打印本机与局域网地址）：
 
 ```powershell
 .\start_ui.ps1            # 或直接双击 start_ui.cmd
 .\start_ui.ps1 -Restart   # 端口上已有实例时先停掉再启
 .\start_ui.ps1 -Port 8600 # 换端口
+.\stop_ui.ps1             # 停止
 ```
 
 手动启动也可以（少记任何一样都会得到不同的报错，而它们看起来都像"代码坏了"）：

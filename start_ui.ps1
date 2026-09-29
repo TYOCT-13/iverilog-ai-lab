@@ -45,6 +45,13 @@ Set-Location $Root
 $env:PYTHONPATH = Join-Path $Root 'src'
 $env:PYTHONIOENCODING = 'utf-8'
 
+# 控制台标题写成一句能自解释的话：就绪后这个窗口会被最小化到任务栏（见 Hide-ConsoleWindow），
+# 用户得能在任务栏上认出它是什么，也得知道"关掉它"意味着什么。
+$ConsoleTitle = 'Icarus 智测网页演示（关掉本窗口即停止服务）'
+if (-not $Headless) {
+    try { $Host.UI.RawUI.WindowTitle = $ConsoleTitle } catch { }
+}
+
 function Write-Step { param([string]$Text) Write-Host "[启动] $Text" -ForegroundColor Cyan }
 function Write-Ok   { param([string]$Text) Write-Host "  OK   $Text" -ForegroundColor Green }
 function Write-Warn { param([string]$Text) Write-Host "  注意 $Text" -ForegroundColor Yellow }
@@ -93,6 +100,30 @@ function Get-LanAddress {
     $preferred = $candidates | Where-Object { $_ -like '192.168.*' -or $_ -like '10.*' -or $_ -match '^172\.(1[6-9]|2[0-9]|3[01])\.' }
     if ($preferred) { return $preferred | Select-Object -First 1 }
     return $candidates | Select-Object -First 1
+}
+
+function Hide-ConsoleWindow {
+    param([string]$Title = $ConsoleTitle)
+    # 服务就绪后把控制台最小化：用户接下来要看的是浏览器，不是这个黑窗口。
+    #
+    # 刻意"最小化"而不是"隐藏"：窗口还留在任务栏上，点开能回看日志，而关掉它
+    # 也就停掉了服务——这条退路必须留着，否则用户只能去任务管理器。
+    # 按标题找窗口而不是用 $PID 的 MainWindowHandle：控制台窗口属于 conhost，
+    # 控制台进程自己的 MainWindowHandle 通常是 0，那条路根本走不通。
+    # 整段包在 try 里：无交互控制台（计划任务、重定向）里拿不到窗口，
+    # 那时静默跳过即可——"收不了窗口"绝不该让服务起不来。
+    try {
+        Add-Type -Namespace IaiNative -Name Win -MemberDefinition @'
+[System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Unicode)]
+public static extern System.IntPtr FindWindow(string lpClassName, string lpWindowName);
+[System.Runtime.InteropServices.DllImport("user32.dll")]
+public static extern bool ShowWindow(System.IntPtr hWnd, int nCmdShow);
+'@ -ErrorAction Stop
+        $handle = [IaiNative.Win]::FindWindow($null, $Title)
+        if ($handle -ne [System.IntPtr]::Zero) {
+            [void][IaiNative.Win]::ShowWindow($handle, 6)   # 6 = SW_MINIMIZE
+        }
+    } catch { }
 }
 
 # ---------------------------------------------------------------- 1. 环境
@@ -200,9 +231,13 @@ if (-not $Headless) {
     Write-Host $url
     $lan = Get-LanAddress
     if ($lan) { Write-Host "  同局域网其他设备：http://${lan}:$Port" }
-    Write-Host '  停止服务：在本窗口按 Ctrl+C'
+    Write-Host '  停止服务：关掉这个窗口，或在本窗口按 Ctrl+C'
+    Write-Host '      （窗口马上会最小化到任务栏，点开就能看到这里的日志）'
     Write-Host ''
 }
 if (-not $NoBrowser -and -not $Headless) { Start-Process $url }
+
+# 放在打开浏览器之后：先把焦点交给浏览器，再让控制台退到任务栏。
+if (-not $Headless) { Hide-ConsoleWindow }
 
 Wait-Process -Id $process.Id
