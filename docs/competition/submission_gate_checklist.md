@@ -64,7 +64,8 @@
 
 ❌ **未做**：仓库尚未公开。
 
-- `CITATION.cff:17` 仍是 `https://example.invalid/iverilog-ai-lab`——提交体检因此报 **1 error**；
+- `CITATION.cff:17` 的 `repository-code` 仍是**保留域占位 URL**（不在此处复写该字面量，
+  否则交付面扫描会把它当成"忘了替换"）——提交体检因此报 **1 error**；
 - `action.yml` 的 GitHub Action **只做过静态 YAML 检查，没有在另一个调用仓库真正跑通**；
 - 证据包（`scripts/create_evidence_pack.py`）**没有生成**——当前 E: 盘只剩 0.13 GB，
   见文末"硬约束"。
