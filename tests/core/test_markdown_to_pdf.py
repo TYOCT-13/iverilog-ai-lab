@@ -86,3 +86,45 @@ def test_all_pagebreak_spellings_work(tmp_path: Path, directive: str) -> None:
     pdf = _render(tmp_path, f"# 正文\n\n一段。\n\n{directive}\n\n附录\n\n附录一段。\n")
     with fitz.open(pdf) as doc:
         assert doc.page_count == 2
+
+
+# ------------------------------------------------------------------ 交付产物新鲜度
+
+ROOT = Path(__file__).resolve().parents[2]
+
+#: 仓库里**进版本库**的交付 PDF 与各自的 Markdown 源。
+TRACKED_REPORTS = [
+    ("docs/competition/technical_report_draft.md", "docs/competition/technical_report_draft.pdf"),
+    ("docs/project_overview.md", "docs/project_overview.pdf"),
+]
+
+
+@pytest.mark.parametrize(("markdown", "pdf"), TRACKED_REPORTS)
+def test_tracked_report_pdf_matches_its_markdown(tmp_path: Path, markdown: str, pdf: str) -> None:
+    """交付 PDF 必须与它当前的 Markdown 源对得上——源改了就得重渲染。
+
+    为什么比内容而不是比时间戳：`git clone` 会把检出文件的时间戳统一成同一时刻，
+    于是"PDF 比 Markdown 旧"这条判断在别人机器与 CI 上**永远通过**。
+    一个只在作者本机有效的门禁等于没有，所以这里现渲染一份逐页比对文本。
+
+    真实事故：技术报告在 9-20 整体改写后没有重渲染，仓库里的 PDF 一直停在 9-11 的
+    13 页版本——缺页眉、缺新增的「作品服务谁」「四层结论」「量化成果指标」。
+    测试全绿，而读者拿到的是旧报告。
+    """
+
+    fresh = tmp_path / "fresh.pdf"
+    md2pdf.render_markdown(ROOT / markdown, fresh)
+
+    with fitz.open(fresh) as new_doc, fitz.open(ROOT / pdf) as old_doc:
+        assert old_doc.page_count == new_doc.page_count, (
+            f"{pdf} 是 {old_doc.page_count} 页，当前 {markdown} 渲染出 {new_doc.page_count} 页："
+            f"PDF 已过期，请重新渲染（python scripts/markdown_to_pdf.py {markdown} {pdf}）"
+        )
+        for index, (old_page, new_page) in enumerate(zip(old_doc, new_doc), 1):
+            # 去掉所有空白再比：换页处的断行差异不说明内容变了，多一个空格也不说明。
+            old_text = "".join(old_page.get_text("text").split())
+            new_text = "".join(new_page.get_text("text").split())
+            assert old_text == new_text, (
+                f"{pdf} 第 {index} 页与当前 {markdown} 不一致：PDF 已过期，请重新渲染"
+                f"（python scripts/markdown_to_pdf.py {markdown} {pdf}）"
+            )
