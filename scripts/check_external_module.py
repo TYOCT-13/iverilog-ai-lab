@@ -265,15 +265,15 @@ def run_spec_tb(rtl: Path, tag: str) -> dict:
     return {"compiled": True, "failed_checks": failed, "summary": summary}
 
 
-def run_verify_diff(candidate: Path, contract: Path, plan: Path, tag: str) -> dict:
+def run_verify_diff(candidate: Path, module: str, contract: Path, plan: Path, tag: str) -> dict:
     """走项目自己的 verify-diff 路径（基线与候选用同一份合约与同一份计划）。"""
 
     out = WORK / f"diff_{tag}"
     done = subprocess.run(
         [PYTHON, "-m", "iverilog_ai", "verify-diff",
-         "--baseline", str(UPSTREAM), "--candidate", str(candidate),
+         "--baseline", str(BASELINES[module]), "--candidate", str(candidate),
          "--contract", str(contract), "--plan", str(plan),
-         "--module", "uart_rx", "--output-dir", str(out),
+         "--module", module, "--output-dir", str(out),
          "--iverilog", r"D:\iverilog\bin\iverilog.exe", "--vvp", r"D:\iverilog\bin\vvp.exe"],
         capture_output=True, text=True, timeout=600, cwd=str(ROOT),
         encoding="utf-8", errors="replace",
@@ -291,53 +291,323 @@ def run_verify_diff(candidate: Path, contract: Path, plan: Path, tag: str) -> di
     return {"exit": done.returncode, "status": status, "stdout": done.stdout.strip()[-160:]}
 
 
-def main() -> int:
-    WORK.mkdir(parents=True, exist_ok=True)
-    contract = write(WORK / "uart_rx_contract.json", json.dumps(CONTRACT, ensure_ascii=False, indent=2) + "\n")
-    plan = write(WORK / "uart_rx_plan.json", json.dumps(build_plan(), ensure_ascii=False, indent=2) + "\n")
-    baseline = WORK / "uart_rx_baseline.v"
-    baseline.write_bytes(UPSTREAM.read_bytes())
+# =====================================================================================
+# 第 2 个模块：同一个上游仓库的 uart_tx（发送侧）
+#
+# 规格测试台刻意做成**环回**：uart_tx → uart_rx，收到的字节必须等于发出的字节。
+# 好处是它同时检验两侧、而且**不需要人工数拍**去采样串行位——位序、停止位、
+# 位周期（prescale）任何一处错了，环回都会失败。这正是第一版 rx 测试台用手工采样
+# 时踩坑（单周期脉冲差一拍）的反面教材。
+# =====================================================================================
 
-    source = UPSTREAM.read_text(encoding="utf-8")
+TX_UPSTREAM = UPSTREAM.parent / "uart_tx.v"
+
+TX_CONTRACT = {
+    "module": "uart_tx",
+    "parameters": {"DATA_WIDTH": 8},
+    "ports": [
+        {"name": "clk", "direction": "input", "width": 1},
+        {"name": "rst", "direction": "input", "width": 1},
+        {"name": "s_axis_tdata", "direction": "input", "width": 8},
+        {"name": "s_axis_tvalid", "direction": "input", "width": 1},
+        {"name": "s_axis_tready", "direction": "output", "width": 1},
+        {"name": "txd", "direction": "output", "width": 1},
+        {"name": "busy", "direction": "output", "width": 1},
+        {"name": "prescale", "direction": "input", "width": 16},
+    ],
+    # 与 rx 同源：高有效、同步复位（源码 `always @(posedge clk) if (rst)`）。
+    "clock": {"signal": "clk", "period_ns": 10, "edge": "posedge"},
+    "reset": {"signal": "rst", "active_level": 1, "synchronous": True, "assert_cycles": 3},
+}
+
+TX_BYTE = 0x96
+TX_BITS = [(TX_BYTE >> index) & 1 for index in range(8)]
+
+
+def build_tx_plan() -> dict:
+    """只含激励：给一帧数据，观察 txd 与握手（判据是"与基线行为一致"）。"""
+
+    vectors = [
+        {"name": "idle", "inputs": {"prescale": 1, "s_axis_tvalid": 0, "s_axis_tdata": 0},
+         "cycles": 4, "sample_phase": "after", "expected": {}, "rationale": "idle, waiting for data"},
+        {"name": "handshake", "inputs": {"s_axis_tvalid": 1, "s_axis_tdata": TX_BYTE},
+         "cycles": 2, "sample_phase": "after", "expected": {}, "rationale": "offer one byte"},
+        {"name": "sending", "inputs": {"s_axis_tvalid": 0, "s_axis_tdata": 0},
+         "cycles": 90, "sample_phase": "after", "expected": {},
+         "rationale": "let the whole frame shift out (start + 8 data bits + stop at prescale=1)"},
+        {"name": "settle", "inputs": {"s_axis_tvalid": 0}, "cycles": 8, "sample_phase": "after",
+         "expected": {}, "rationale": "return to idle"},
+    ]
+    return {
+        "schema_version": "1.0",
+        "design": "uart_tx",
+        "objective": "external module: shift out one UART frame so baseline and candidate see identical stimulus",
+        "clock_period_ns": 10,
+        "reset": {"active_low": False},
+        "vectors": vectors,
+    }
+
+
+TX_SPEC_TB = """\
+// 环回规格测试台：uart_tx 发出去的字节，必须被 uart_rx 原样收回来。
+// 只依据 UART 规范（起始位/8 数据位 LSB 优先/停止位）与 AXI-Stream 握手语义。
+`timescale 1ns/1ps
+module tb_uart_tx;
+  reg clk = 0, rst = 0;
+  reg [7:0] tdata = 0;
+  reg tvalid = 0;
+  reg [15:0] prescale = 1;
+  wire tready, txd, tx_busy;
+  wire [7:0] rdata;
+  wire rvalid, rbusy, ferr, oerr;
+  integer failures = 0, checks = 0;
+
+  uart_tx #(.DATA_WIDTH(8)) tx (
+    .clk(clk), .rst(rst), .s_axis_tdata(tdata), .s_axis_tvalid(tvalid),
+    .s_axis_tready(tready), .txd(txd), .busy(tx_busy), .prescale(prescale));
+
+  uart_rx #(.DATA_WIDTH(8)) rx (
+    .clk(clk), .rst(rst), .m_axis_tdata(rdata), .m_axis_tvalid(rvalid),
+    .m_axis_tready(1'b1), .rxd(txd), .busy(rbusy),
+    .overrun_error(oerr), .frame_error(ferr), .prescale(prescale));
+
+  always #5 clk = ~clk;
+
+  task check;
+    input [255:0] name;
+    input condition;
+    begin
+      checks = checks + 1;
+      if (!condition) begin
+        failures = failures + 1;
+        $display("CHECK %0s FAIL", name);
+      end else begin
+        $display("CHECK %0s ok", name);
+      end
+    end
+  endtask
+
+  // 发一个字节并等它被环回收回；返回收到的字节
+  reg [7:0] received;
+  integer waited;
+  task send_and_receive;
+    input [7:0] value;
+    begin
+      received = 8'h00;
+      @(posedge clk);
+      tdata = value; tvalid = 1'b1;
+      @(posedge clk);
+      // 等握手（tready 在空闲时为 1；被接受后随发送拉低）
+      waited = 0;
+      while (!tready && waited < 20) begin @(posedge clk); waited = waited + 1; end
+      tvalid = 1'b0;
+      // 等环回收回
+      waited = 0;
+      while (waited < 400) begin
+        @(posedge clk);
+        if (rvalid) begin received = rdata; waited = 400; end
+        waited = waited + 1;
+      end
+      // 等**发送侧**也回到空闲再返回：接收侧收到字节比发送侧收尾早一拍，
+      // 不等的话下一次激励会撞在还忙着的 DUT 上（第一版就是因此误报 busy 检查失败）。
+      waited = 0;
+      while (tx_busy && waited < 100) begin @(posedge clk); waited = waited + 1; end
+      repeat (2) @(posedge clk);
+    end
+  endtask
+
+  initial begin
+    rst = 1; repeat (3) @(posedge clk); #1;
+    check("reset_clears_busy", tx_busy === 1'b0);
+    check("reset_idle_txd_high", txd === 1'b1);
+    rst = 0; repeat (2) @(posedge clk);
+
+    send_and_receive(8'h96);
+    check("loopback_96", received === 8'h96);
+    check("no_frame_error", ferr === 1'b0);
+
+    send_and_receive(8'h3C);
+    check("loopback_3C", received === 8'h3C);
+
+    // 连续两帧：握手必须允许背靠背发送
+    send_and_receive(8'hE1);
+    check("loopback_E1", received === 8'hE1);
+
+    // 发送中途复位：busy 必须被清掉（抓"复位极性反了"的实现）
+    // tvalid 要**跨过至少一个时钟边沿**再撤：在 `@(posedge clk)` 之后立刻清掉，
+    // 会与 DUT 的时钟块抢同一个时间步（谁先执行不确定），第一版就是这么"发了但没被接受"的。
+    tdata = 8'h55; tvalid = 1'b1;
+    repeat (2) @(posedge clk);
+    tvalid = 1'b0;
+    repeat (6) @(posedge clk); #1;
+    check("busy_during_send", tx_busy === 1'b1);
+    rst = 1; repeat (2) @(posedge clk); #1;
+    check("reset_mid_send_clears_busy", tx_busy === 1'b0);
+    check("reset_drives_txd_high", txd === 1'b1);
+    rst = 0; repeat (2) @(posedge clk);
+
+    // 复位之后仍能正常发送
+    send_and_receive(8'h0F);
+    check("loopback_after_reset", received === 8'h0F);
+
+    $display("SPEC_SUMMARY checks=%0d failures=%0d", checks, failures);
+    $finish(0);
+  end
+endmodule
+"""
+
+TX_VARIANTS: dict[str, tuple[str, str, str]] = {
+    "mut_reset_polarity": ("复位极性反过来（if (rst) → if (~rst)）", "    if (rst) begin", "    if (~rst) begin"),
+    "mut_prescale_off_by_one": ("位周期少一拍（prescale<<3)-1 → -2）",
+                                "prescale_reg <= (prescale << 3)-1;", "prescale_reg <= (prescale << 3)-2;"),
+    "mut_stop_bit_low": ("停止位发成 0（txd_reg <= 1 → 0）",
+                         "                prescale_reg <= (prescale << 3);\n                txd_reg <= 1;",
+                         "                prescale_reg <= (prescale << 3);\n                txd_reg <= 0;"),
+    "mut_busy_never_clears": ("busy 不会被清掉", "            s_axis_tready_reg <= 1;\n            busy_reg <= 0;",
+                              "            s_axis_tready_reg <= 1;\n            busy_reg <= busy_reg;"),
+    # 说明：曾经这里放的是"接受数据后 tready 不再拉高"，但查源码后发现那个改动与
+    # 原实现**语义等价**（发送期间 ready 本来就是 0，帧尾又会置 1），
+    # 于是 verify-diff 判"一致"是**正确**的，不是漏检。换成真正的数据通路改动。
+    "mut_data_off_by_one": ("发出的字节差一（data_reg 载入 +1）",
+                            "data_reg <= {1'b1, s_axis_tdata};", "data_reg <= {1'b1, s_axis_tdata} + 1'b1;"),
+}
+
+TX_EQUIVALENT = [
+    ("            if (bit_cnt > 1) begin", "            if (bit_cnt >= 2) begin"),
+    ("                bit_cnt <= bit_cnt - 1;\n                prescale_reg <= (prescale << 3);",
+     "                bit_cnt <= bit_cnt - 4'd1;\n                prescale_reg <= (prescale << 3);"),
+]
+
+
+def run_case_generic(
+    rtl: Path,
+    tag: str,
+    tb_source: str,
+    module: str,
+    contract: Path,
+    plan: Path,
+    spec_deps: tuple[Path, ...] = (),
+) -> dict:
+    """编译并运行规格测试台，然后走项目自己的 verify-diff。
+
+    两步是**独立**的：规格测试台编不过时（例如环回需要另一个模块）仍然要跑 verify-diff，
+    因为"编不过的候选"本身就是要验证的一类输入——它必须落到 `inconclusive`，
+    而不是没有结论。
+    """
+
+    tb = write(WORK / f"tb_{module}_{tag}.v", tb_source)
+    vvp = WORK / f"{module}_{tag}.vvp"
+    command = [r"D:\iverilog\bin\iverilog.exe", "-g2012", "-o", str(vvp), str(rtl)]
+    command += [str(path) for path in spec_deps]
+    command.append(str(tb))
+    compile_result = subprocess.run(
+        command, capture_output=True, text=True, timeout=180, encoding="utf-8", errors="replace",
+    )
+    if compile_result.returncode != 0:
+        spec: dict = {
+            "compiled": False,
+            "error": (compile_result.stdout + compile_result.stderr).strip()[:200],
+            "failed_checks": [],
+            "summary": "",
+        }
+    else:
+        done = subprocess.run(
+            [r"D:\iverilog\bin\vvp.exe", str(vvp)],
+            capture_output=True, text=True, timeout=300, encoding="utf-8", errors="replace",
+        )
+        output = done.stdout + done.stderr
+        spec = {
+            "compiled": True,
+            "error": "",
+            "failed_checks": [
+                line.split()[1] for line in output.splitlines() if line.startswith("CHECK") and line.endswith("FAIL")
+            ],
+            "summary": next((l for l in output.splitlines() if l.startswith("SPEC_SUMMARY")), ""),
+        }
+    diff = run_verify_diff(rtl, module, contract, plan, f"{module}_{tag}")
+    return {**spec, "diff_status": diff["status"], "diff_exit": diff["exit"]}
+
+
+#: 每个模块的基线路径。
+BASELINES = {"uart_rx": UPSTREAM, "uart_tx": TX_UPSTREAM}
+
+#: 模块注册表：加一个外部模块就加一条。
+MODULES: dict[str, dict] = {
+    "uart_rx": {
+        "baseline": UPSTREAM,
+        "contract": CONTRACT,
+        "plan": build_plan,
+        "spec_tb": SPEC_TB,
+        "variants": VARIANTS,
+        "equivalent": EQUIVALENT,
+        "description": "接收侧：一帧好帧 + 一帧停止位为 0",
+    },
+    "uart_tx": {
+        "baseline": TX_UPSTREAM,
+        "contract": TX_CONTRACT,
+        "plan": build_tx_plan,
+        "spec_tb": TX_SPEC_TB,
+        "variants": TX_VARIANTS,
+        "equivalent": TX_EQUIVALENT,
+        "description": "发送侧：环回（tx → rx）验证整帧",
+        # 环回测试台同时实例化 rx，所以编译规格测试台时要把它一起传进去。
+        "spec_deps": (UPSTREAM,),
+    },
+}
+
+
+def run_module(name: str, spec: dict, work: Path) -> list[dict]:
+    """跑一个模块的全部输入：基线 / 等价改写 / 各变体 / 编不过的。"""
+
+    contract = write(work / f"{name}_contract.json", json.dumps(spec["contract"], ensure_ascii=False, indent=2) + "\n")
+    plan = write(work / f"{name}_plan.json", json.dumps(spec["plan"](), ensure_ascii=False, indent=2) + "\n")
+    baseline = work / f"{name}_baseline.v"
+    baseline.write_bytes(spec["baseline"].read_bytes())
+    source = spec["baseline"].read_text(encoding="utf-8")
+
     cases: list[tuple[str, str, Path]] = [("baseline", "基线（上游原样）", baseline)]
-
-    for name, (description, old, new) in VARIANTS.items():
-        assert old in source, f"变体 {name} 的锚点没找到：{old}"
-        write(WORK / f"{name}.v", source.replace(old, new, 1))
-        cases.append((name, description, WORK / f"{name}.v"))
+    for variant, (description, old, new) in spec["variants"].items():
+        assert old in source, f"{name} 变体 {variant} 的锚点没找到：{old[:60]}"
+        write(work / f"{name}_{variant}.v", source.replace(old, new, 1))
+        cases.append((variant, description, work / f"{name}_{variant}.v"))
 
     equivalent = source
-    for old, new in EQUIVALENT:
-        assert old in equivalent, f"等价改写的锚点没找到：{old[:40]}"
+    for old, new in spec["equivalent"]:
+        assert old in equivalent, f"{name} 等价改写的锚点没找到：{old[:60]}"
         equivalent = equivalent.replace(old, new, 1)
-    write(WORK / "equivalent_rewrite.v", equivalent)
-    cases.append(("equivalent_rewrite", "等价改写（语义不变，写法不同）", WORK / "equivalent_rewrite.v"))
+    write(work / f"{name}_equivalent_rewrite.v", equivalent)
+    cases.append(("equivalent_rewrite", "等价改写（语义不变，写法不同）", work / f"{name}_equivalent_rewrite.v"))
 
-    write(WORK / "broken_compile.v", BROKEN)
-    cases.append(("broken_compile", "编不过的实现", WORK / "broken_compile.v"))
+    write(work / f"{name}_broken_compile.v", BROKEN)
+    cases.append(("broken_compile", "编不过的实现", work / f"{name}_broken_compile.v"))
 
-    # 每个变体都要有各自的规格测试台文件（同一个 TB 文本，模块名不同会冲突，故一次性写多份）
-    spec_source = SPEC_TB
-    for tag, _description, _path in cases:
-        write(WORK / f"tb_spec_{tag}.v", spec_source)
-
-    print(f"{'输入':26s} {'规格测试台':12s} {'verify-diff':10s} 说明")
-    rows = []
-    for tag, description, path in cases:
-        spec = run_spec_tb(path, tag)
-        diff = run_verify_diff(path, contract, plan, tag)
-        if not spec["compiled"]:
+    print(f"\n=== {name}（{spec['description']}）===")
+    print(f"{'输入':26s} {'规格测试台':14s} {'verify-diff':12s} 说明")
+    rows: list[dict] = []
+    for tag, description, asset in cases:
+        outcome = run_case_generic(asset, tag, spec["spec_tb"], name, contract, plan, spec.get("spec_deps", ()))
+        if not outcome["compiled"]:
             spec_text = "编译失败"
-        elif spec["failed_checks"]:
-            spec_text = f"{len(spec['failed_checks'])} 项失败"
+        elif outcome["failed_checks"]:
+            spec_text = f"{len(outcome['failed_checks'])} 项失败"
         else:
             spec_text = "全过"
-        print(f"{tag:26s} {spec_text:12s} {diff['status'] or '（无状态）':10s} {description}")
-        if spec["compiled"] and spec["failed_checks"]:
-            print(f"{'':26s}   失败的检查：{', '.join(spec['failed_checks'])}")
-        rows.append({"variant": tag, "description": description, "spec": spec, "diff": diff})
+        print(f"{tag:26s} {spec_text:14s} {outcome['diff_status'] or '（无状态）':12s} {description}")
+        if outcome["compiled"] and outcome["failed_checks"]:
+            print(f"{'':26s}   失败的检查：{', '.join(outcome['failed_checks'])}")
+        rows.append({"module": name, "variant": tag, "description": description, "result": outcome})
+    return rows
 
-    write(WORK / "evidence.json", json.dumps({"contract": CONTRACT, "byte": BYTE, "rows": rows}, ensure_ascii=False, indent=2) + "\n")
+
+def main() -> int:
+    WORK.mkdir(parents=True, exist_ok=True)
+    rows: list[dict] = []
+    for name, spec in MODULES.items():
+        rows.extend(run_module(name, spec, WORK))
+    write(
+        WORK / "evidence.json",
+        json.dumps({"byte_rx": BYTE, "byte_tx": TX_BYTE, "rows": rows}, ensure_ascii=False, indent=2) + "\n",
+    )
     print(f"\n证据：{WORK / 'evidence.json'}")
     return 0
 
