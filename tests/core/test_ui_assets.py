@@ -139,6 +139,7 @@ def test_ui_test_count_matches_pytest_collection():
     `--collect-only` 的实际数字兜底，防止页面上出现一个与真实测试规模脱节的数字。
     """
 
+    import os
     import subprocess
     import sys
 
@@ -146,12 +147,21 @@ def test_ui_test_count_matches_pytest_collection():
     reported = counter(ROOT / "tests")
     assert isinstance(reported, int) and reported > 0
 
+    # 两端都写死 UTF-8：子进程在中文 Windows 上默认按 GBK 写管道，
+    # 而父进程默认也按 GBK 解码——**只有两侧一致时才能碰巧通过**。
+    # 实测（全新虚拟环境 + 干净环境变量）会出现
+    # `UnicodeDecodeError: 'gbk' codec can't decode byte 0xaa`，
+    # 于是 `collected.stdout` 变成 None，测试以 AttributeError 失败——
+    # 也就是说：**照着 10 分钟指南做的人会看到 1 failed，而作者本地看不到**。
     collected = subprocess.run(
         [sys.executable, "-m", "pytest", "tests", "--collect-only", "-q"],
         cwd=ROOT,
         capture_output=True,
         text=True,
         timeout=300,
+        encoding="utf-8",
+        errors="replace",
+        env={**os.environ, "PYTHONIOENCODING": "utf-8"},
     )
     assert collected.returncode == 0, collected.stdout[-2000:] + collected.stderr[-2000:]
     lines = [line for line in collected.stdout.splitlines() if "::" in line]

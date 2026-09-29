@@ -7,12 +7,16 @@
 
 ---
 
-## 0. 前置（约 3 分钟）
+## 0. 前置（实测：建 venv 约 5 秒 + 装依赖约 30 秒）
 
 ```powershell
 python -V                      # 需要 3.11 或更高
 git clone <仓库地址> ; cd iverilog-ai-lab
-python -m pip install -e .     # 装本项目
+python -m venv .venv ; .\.venv\Scripts\Activate.ps1
+
+python -m pip install -e ".[dev]"      # 跑下面的复核命令需要它（pytest / mypy / PyMuPDF / Pillow）
+# 只跑产品、不跑复核的话，`pip install -e .` 就够：核心依赖只有 pydantic
+# 要启动网页再加 UI 依赖：`python -m pip install -e ".[ui]"`
 # Icarus Verilog：Windows 用 https://bleyer.org/icarus/ ；Linux 用 apt install iverilog
 python -c "from iverilog_ai.core.toolchain import locate_tools, describe_tools; print(describe_tools(locate_tools()))"
 ```
@@ -20,7 +24,19 @@ python -c "from iverilog_ai.core.toolchain import locate_tools, describe_tools; 
 **期望**：三个工具 `iverilog` / `vvp` / `yosys` 都打印出路径（`yosys` 可选；没有它时综合层
 会显示"工具不可用"，不影响任何判决）。
 
-> 全程**不需要** API 密钥、**不需要**联网。下面每一条都在离线状态可跑完。
+**实测数字（本文档作者在干净虚拟环境里跑出来的，2026-09-29）**：
+
+| 步骤 | 实测 |
+|---|---|
+| 建虚拟环境 | 约 5 秒 |
+| `pip install -e .`（只有 pydantic） | 约 17 秒 |
+| `pip install -e ".[dev]"` | 约 29 秒 |
+| `pip install -e ".[ui]"` | **未能在本机完成**：UI 依赖树（streamlit → pandas / pyarrow / pydeck …）需要数百 MB 空间，而当时项目所在磁盘只剩 0 GB，pip 报 `[Errno 28] No space left on device`。**请预留足够磁盘空间**（见下方"磁盘"一条） |
+
+> **磁盘**：上面的数字是"时间成本"，还有"空间成本"。产物目录 `.iverilog-ai/` 会随实验增长
+> （本项目自身累积到 215 GB 盘写满），跑矩阵前请确认有若干 GB 空闲。
+>
+> 全程**不需要** API 密钥、**不需要**联网（第 0 节装依赖那一步除外）。下面每一条都在离线状态可跑完。
 
 ---
 
@@ -119,6 +135,20 @@ python scripts/run_pipeline_matrix.py          # 期望离线 AI 路径 15/15，
 python -m mypy                                 # 期望 Success: no issues found
 python scripts/check_dead_code.py              # 期望未发现未可达代码
 ```
+
+**条数为什么会和别人不一样**（这是正常的，别以为是坏了）：
+
+| 装了什么 | 收集到的用例 | 说明 |
+|---|---:|---|
+| 只装 `.[dev]` | 约 686 | UI 冒烟（35 条）**不会被收集** |
+| 再装 `.[ui]` | 约 721 | `test_ui_smoke.py` 需要 `streamlit` |
+
+这两组测试是用 `pytest.importorskip` 跳过的：缺依赖时它们**静默地少收集**而不是报错。
+"少测了"比"测失败"更危险，所以我们把数字写在这里，而不是让你去猜。
+
+**本节全部命令都在干净虚拟环境里实测过**（2026-09-29）：`pip install -e ".[dev]"` 之后
+`python -m pytest -q` 得到 **675 passed / 3 skipped / 0 failed**，`python -m mypy` 得到
+`Success: no issues found in 61 source files`。如果这两条对不上，就是我们对不上。
 
 ---
 

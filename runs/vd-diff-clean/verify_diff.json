@@ -1,0 +1,678 @@
+{
+  "artifacts": {
+    "baseline_run": "E:\\FPGA_WORK\\iverilog-ai-lab\\runs\\vd-diff-clean\\reference\\runs\\run-51e2a0456f9a",
+    "candidate_run": "E:\\FPGA_WORK\\iverilog-ai-lab\\runs\\vd-diff-clean\\user\\runs\\run-ec9a239af499",
+    "dir": "runs\\vd-diff-clean",
+    "json": "runs\\vd-diff-clean\\verify_diff.json",
+    "markdown": "runs\\vd-diff-clean\\verify_diff.md"
+  },
+  "baseline": "E:\\FPGA_WORK\\iverilog-ai-lab\\rtl\\mod10_counter.v",
+  "candidate": "E:\\FPGA_WORK\\iverilog-ai-lab\\rtl\\mod10_counter_bug_wrap9.v",
+  "caveats": [
+    "**合约是从基线 RTL 自动提取的草稿**：端口与位宽来自 `module` 头，通常可信；复位极性、同步/异步是猜的。两侧跑在同一套草稿测试台下，因此「两侧不同」仍然可信，而「两侧一致」的覆盖范围可能因此变窄——要提高置信度请用 `--contract` 提供确认过的合约。",
+    "合约草稿提示：时钟 clk（posedge）来自 always 敏感列表；周期 10ns 是默认值，请按需确认",
+    "合约草稿提示：复位 rst_n：always 敏感列表含 negedge rst_n（极性/同步性由代码结构推导，请确认）"
+  ],
+  "comparable_checks": 29,
+  "comparison": {
+    "disclaimer": "结论来自两次真实 Icarus 仿真：任何检查项结果不同即为行为差异；波形差异只描述可观测行为，是否构成缺陷仍由规格与人工判断。",
+    "identical": false,
+    "mismatches": [
+      {
+        "kind": "record",
+        "message": "debug_11 的 count：用户 RTL 失败（actual=0000），参考 RTL 通过（actual=1001）",
+        "reference": {
+          "actual": "1001",
+          "cycle": 12,
+          "expected": "1001",
+          "ok": true,
+          "severity": "info",
+          "signal": "count",
+          "test_id": "debug_11"
+        },
+        "signal": "count",
+        "test_id": "debug_11",
+        "user": {
+          "actual": "0000",
+          "cycle": 12,
+          "expected": "1001",
+          "ok": false,
+          "severity": "warn",
+          "signal": "count",
+          "test_id": "debug_11"
+        }
+      },
+      {
+        "kind": "record",
+        "message": "debug_12 的 count：用户 RTL 失败（actual=0000），参考 RTL 通过（actual=1001）",
+        "reference": {
+          "actual": "1001",
+          "cycle": 13,
+          "expected": "1001",
+          "ok": true,
+          "severity": "info",
+          "signal": "count",
+          "test_id": "debug_12"
+        },
+        "signal": "count",
+        "test_id": "debug_12",
+        "user": {
+          "actual": "0000",
+          "cycle": 13,
+          "expected": "1001",
+          "ok": false,
+          "severity": "warn",
+          "signal": "count",
+          "test_id": "debug_12"
+        }
+      },
+      {
+        "kind": "record",
+        "message": "debug_13 的 count：用户 RTL 失败（actual=0001），参考 RTL 通过（actual=0000）",
+        "reference": {
+          "actual": "0000",
+          "cycle": 14,
+          "expected": "0000",
+          "ok": true,
+          "severity": "info",
+          "signal": "count",
+          "test_id": "debug_13"
+        },
+        "signal": "count",
+        "test_id": "debug_13",
+        "user": {
+          "actual": "0001",
+          "cycle": 14,
+          "expected": "0000",
+          "ok": false,
+          "severity": "warn",
+          "signal": "count",
+          "test_id": "debug_13"
+        }
+      },
+      {
+        "kind": "record",
+        "message": "debug_14 的 count：用户 RTL 失败（actual=0010），参考 RTL 通过（actual=0001）",
+        "reference": {
+          "actual": "0001",
+          "cycle": 15,
+          "expected": "0001",
+          "ok": true,
+          "severity": "info",
+          "signal": "count",
+          "test_id": "debug_14"
+        },
+        "signal": "count",
+        "test_id": "debug_14",
+        "user": {
+          "actual": "0010",
+          "cycle": 15,
+          "expected": "0001",
+          "ok": false,
+          "severity": "warn",
+          "signal": "count",
+          "test_id": "debug_14"
+        }
+      },
+      {
+        "kind": "record",
+        "message": "debug_15 的 count：用户 RTL 失败（actual=0011），参考 RTL 通过（actual=0010）",
+        "reference": {
+          "actual": "0010",
+          "cycle": 16,
+          "expected": "0010",
+          "ok": true,
+          "severity": "info",
+          "signal": "count",
+          "test_id": "debug_15"
+        },
+        "signal": "count",
+        "test_id": "debug_15",
+        "user": {
+          "actual": "0011",
+          "cycle": 16,
+          "expected": "0010",
+          "ok": false,
+          "severity": "warn",
+          "signal": "count",
+          "test_id": "debug_15"
+        }
+      },
+      {
+        "kind": "record",
+        "message": "debug_16 的 count：用户 RTL 失败（actual=0011），参考 RTL 通过（actual=0010）",
+        "reference": {
+          "actual": "0010",
+          "cycle": 17,
+          "expected": "0010",
+          "ok": true,
+          "severity": "info",
+          "signal": "count",
+          "test_id": "debug_16"
+        },
+        "signal": "count",
+        "test_id": "debug_16",
+        "user": {
+          "actual": "0011",
+          "cycle": 17,
+          "expected": "0010",
+          "ok": false,
+          "severity": "warn",
+          "signal": "count",
+          "test_id": "debug_16"
+        }
+      },
+      {
+        "kind": "record",
+        "message": "debug_17 的 count：用户 RTL 失败（actual=0100），参考 RTL 通过（actual=0011）",
+        "reference": {
+          "actual": "0011",
+          "cycle": 18,
+          "expected": "0011",
+          "ok": true,
+          "severity": "info",
+          "signal": "count",
+          "test_id": "debug_17"
+        },
+        "signal": "count",
+        "test_id": "debug_17",
+        "user": {
+          "actual": "0100",
+          "cycle": 18,
+          "expected": "0011",
+          "ok": false,
+          "severity": "warn",
+          "signal": "count",
+          "test_id": "debug_17"
+        }
+      },
+      {
+        "kind": "record",
+        "message": "debug_18 的 count：用户 RTL 失败（actual=0101），参考 RTL 通过（actual=0100）",
+        "reference": {
+          "actual": "0100",
+          "cycle": 19,
+          "expected": "0100",
+          "ok": true,
+          "severity": "info",
+          "signal": "count",
+          "test_id": "debug_18"
+        },
+        "signal": "count",
+        "test_id": "debug_18",
+        "user": {
+          "actual": "0101",
+          "cycle": 19,
+          "expected": "0100",
+          "ok": false,
+          "severity": "warn",
+          "signal": "count",
+          "test_id": "debug_18"
+        }
+      },
+      {
+        "kind": "record",
+        "message": "debug_19 的 count：用户 RTL 失败（actual=0110），参考 RTL 通过（actual=0101）",
+        "reference": {
+          "actual": "0101",
+          "cycle": 20,
+          "expected": "0101",
+          "ok": true,
+          "severity": "info",
+          "signal": "count",
+          "test_id": "debug_19"
+        },
+        "signal": "count",
+        "test_id": "debug_19",
+        "user": {
+          "actual": "0110",
+          "cycle": 20,
+          "expected": "0101",
+          "ok": false,
+          "severity": "warn",
+          "signal": "count",
+          "test_id": "debug_19"
+        }
+      },
+      {
+        "kind": "record",
+        "message": "debug_20 的 count：用户 RTL 失败（actual=0110），参考 RTL 通过（actual=0101）",
+        "reference": {
+          "actual": "0101",
+          "cycle": 21,
+          "expected": "0101",
+          "ok": true,
+          "severity": "info",
+          "signal": "count",
+          "test_id": "debug_20"
+        },
+        "signal": "count",
+        "test_id": "debug_20",
+        "user": {
+          "actual": "0110",
+          "cycle": 21,
+          "expected": "0101",
+          "ok": false,
+          "severity": "warn",
+          "signal": "count",
+          "test_id": "debug_20"
+        }
+      },
+      {
+        "kind": "record",
+        "message": "debug_21 的 count：用户 RTL 失败（actual=0111），参考 RTL 通过（actual=0110）",
+        "reference": {
+          "actual": "0110",
+          "cycle": 22,
+          "expected": "0110",
+          "ok": true,
+          "severity": "info",
+          "signal": "count",
+          "test_id": "debug_21"
+        },
+        "signal": "count",
+        "test_id": "debug_21",
+        "user": {
+          "actual": "0111",
+          "cycle": 22,
+          "expected": "0110",
+          "ok": false,
+          "severity": "warn",
+          "signal": "count",
+          "test_id": "debug_21"
+        }
+      },
+      {
+        "kind": "record",
+        "message": "debug_22 的 count：用户 RTL 失败（actual=1000），参考 RTL 通过（actual=0111）",
+        "reference": {
+          "actual": "0111",
+          "cycle": 23,
+          "expected": "0111",
+          "ok": true,
+          "severity": "info",
+          "signal": "count",
+          "test_id": "debug_22"
+        },
+        "signal": "count",
+        "test_id": "debug_22",
+        "user": {
+          "actual": "1000",
+          "cycle": 23,
+          "expected": "0111",
+          "ok": false,
+          "severity": "warn",
+          "signal": "count",
+          "test_id": "debug_22"
+        }
+      },
+      {
+        "kind": "record",
+        "message": "debug_23 的 count：用户 RTL 失败（actual=0000），参考 RTL 通过（actual=1000）",
+        "reference": {
+          "actual": "1000",
+          "cycle": 24,
+          "expected": "1000",
+          "ok": true,
+          "severity": "info",
+          "signal": "count",
+          "test_id": "debug_23"
+        },
+        "signal": "count",
+        "test_id": "debug_23",
+        "user": {
+          "actual": "0000",
+          "cycle": 24,
+          "expected": "1000",
+          "ok": false,
+          "severity": "warn",
+          "signal": "count",
+          "test_id": "debug_23"
+        }
+      },
+      {
+        "kind": "record",
+        "message": "debug_24 的 count：用户 RTL 失败（actual=0000），参考 RTL 通过（actual=1000）",
+        "reference": {
+          "actual": "1000",
+          "cycle": 25,
+          "expected": "1000",
+          "ok": true,
+          "severity": "info",
+          "signal": "count",
+          "test_id": "debug_24"
+        },
+        "signal": "count",
+        "test_id": "debug_24",
+        "user": {
+          "actual": "0000",
+          "cycle": 25,
+          "expected": "1000",
+          "ok": false,
+          "severity": "warn",
+          "signal": "count",
+          "test_id": "debug_24"
+        }
+      },
+      {
+        "kind": "record",
+        "message": "debug_edge_01 的 count：用户 RTL 失败（actual=0001），参考 RTL 通过（actual=1001）",
+        "reference": {
+          "actual": "1001",
+          "cycle": 26,
+          "expected": "1001",
+          "ok": true,
+          "severity": "info",
+          "signal": "count",
+          "test_id": "debug_edge_01"
+        },
+        "signal": "count",
+        "test_id": "debug_edge_01",
+        "user": {
+          "actual": "0001",
+          "cycle": 26,
+          "expected": "1001",
+          "ok": false,
+          "severity": "warn",
+          "signal": "count",
+          "test_id": "debug_edge_01"
+        }
+      },
+      {
+        "kind": "record",
+        "message": "debug_edge_03 的 count：用户 RTL 失败（actual=0000），参考 RTL 通过（actual=1001）",
+        "reference": {
+          "actual": "1001",
+          "cycle": 36,
+          "expected": "1001",
+          "ok": true,
+          "severity": "info",
+          "signal": "count",
+          "test_id": "debug_edge_03"
+        },
+        "signal": "count",
+        "test_id": "debug_edge_03",
+        "user": {
+          "actual": "0000",
+          "cycle": 36,
+          "expected": "1001",
+          "ok": false,
+          "severity": "warn",
+          "signal": "count",
+          "test_id": "debug_edge_03"
+        }
+      },
+      {
+        "kind": "record",
+        "message": "debug_edge_04 的 count：用户 RTL 失败（actual=0010），参考 RTL 通过（actual=0001）",
+        "reference": {
+          "actual": "0001",
+          "cycle": 38,
+          "expected": "0001",
+          "ok": true,
+          "severity": "info",
+          "signal": "count",
+          "test_id": "debug_edge_04"
+        },
+        "signal": "count",
+        "test_id": "debug_edge_04",
+        "user": {
+          "actual": "0010",
+          "cycle": 38,
+          "expected": "0001",
+          "ok": false,
+          "severity": "warn",
+          "signal": "count",
+          "test_id": "debug_edge_04"
+        }
+      }
+    ],
+    "module": "mod10_counter",
+    "notes": [
+      "整体状态不同：用户 RTL `passed_with_warnings`，参考 RTL `passed`",
+      "逐检查项比对发现 17 处结果差异",
+      "波形差异 3 处（其中 DUT 内部信号 1 处，testbench 记账信号 2 处）"
+    ],
+    "record_summary": {
+      "mismatched_checks": 17,
+      "reference_checks": 29,
+      "reference_failed": 0,
+      "reference_status": "passed",
+      "shared_checks": 29,
+      "user_checks": 29,
+      "user_failed": 17,
+      "user_status": "passed_with_warnings"
+    },
+    "reference_status": "passed",
+    "schema_version": "1.0",
+    "status": "different",
+    "user_status": "passed_with_warnings",
+    "waveform": {
+      "clock_period_ns": 10.0,
+      "difference_count": 3,
+      "differences": [
+        {
+          "kind": "value",
+          "message": "tb_mod10_counter.count：跳变时刻一致但数值序列不同",
+          "signal": "tb_mod10_counter.count"
+        },
+        {
+          "kind": "value",
+          "message": "tb_mod10_counter.dut_i.count：跳变时刻一致但数值序列不同",
+          "signal": "tb_mod10_counter.dut_i.count"
+        },
+        {
+          "candidate": 18,
+          "kind": "edge_count",
+          "message": "tb_mod10_counter.failures：参考 1 次跳变，被测 18 次",
+          "reference": 1,
+          "signal": "tb_mod10_counter.failures"
+        }
+      ],
+      "disclaimer": "波形差异只描述可观测行为差异；是否构成缺陷由规格与 Icarus 判定。",
+      "dut_differences": [
+        {
+          "kind": "value",
+          "message": "tb_mod10_counter.dut_i.count：跳变时刻一致但数值序列不同",
+          "signal": "tb_mod10_counter.dut_i.count"
+        }
+      ],
+      "extra_signals_are_internal_only": true,
+      "only_in_candidate": [],
+      "only_in_reference": [],
+      "reference_only_signals": [],
+      "same_signal_set": true,
+      "schema_version": "1.1",
+      "shared_signals": [
+        "tb_mod10_counter.checks",
+        "tb_mod10_counter.count",
+        "tb_mod10_counter.cycle",
+        "tb_mod10_counter.dut_i.clk",
+        "tb_mod10_counter.dut_i.count",
+        "tb_mod10_counter.dut_i.enable",
+        "tb_mod10_counter.dut_i.rst_n",
+        "tb_mod10_counter.failures"
+      ],
+      "signal_sets_match": true,
+      "status": "different",
+      "user_only_signals": []
+    }
+  },
+  "contract_draft": {
+    "clock": {
+      "edge": "posedge",
+      "period_ns": 10.0,
+      "signal": "clk"
+    },
+    "module": "mod10_counter",
+    "ports": [
+      {
+        "direction": "input",
+        "name": "clk",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "input",
+        "name": "rst_n",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "input",
+        "name": "enable",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "output",
+        "name": "count",
+        "signed": false,
+        "width": 4
+      }
+    ],
+    "reset": {
+      "active_level": 0,
+      "assert_cycles": 2,
+      "signal": "rst_n",
+      "synchronous": false
+    }
+  },
+  "contract_source": "draft-from-baseline",
+  "differences": [
+    {
+      "actual": "0000",
+      "expected": "1001",
+      "kind": "record",
+      "message": "debug_11 的 count：候选 失败（actual=0000），基线 通过（actual=1001）",
+      "where": "debug_11 / count"
+    },
+    {
+      "actual": "0000",
+      "expected": "1001",
+      "kind": "record",
+      "message": "debug_12 的 count：候选 失败（actual=0000），基线 通过（actual=1001）",
+      "where": "debug_12 / count"
+    },
+    {
+      "actual": "0001",
+      "expected": "0000",
+      "kind": "record",
+      "message": "debug_13 的 count：候选 失败（actual=0001），基线 通过（actual=0000）",
+      "where": "debug_13 / count"
+    },
+    {
+      "actual": "0010",
+      "expected": "0001",
+      "kind": "record",
+      "message": "debug_14 的 count：候选 失败（actual=0010），基线 通过（actual=0001）",
+      "where": "debug_14 / count"
+    },
+    {
+      "actual": "0011",
+      "expected": "0010",
+      "kind": "record",
+      "message": "debug_15 的 count：候选 失败（actual=0011），基线 通过（actual=0010）",
+      "where": "debug_15 / count"
+    },
+    {
+      "actual": "0011",
+      "expected": "0010",
+      "kind": "record",
+      "message": "debug_16 的 count：候选 失败（actual=0011），基线 通过（actual=0010）",
+      "where": "debug_16 / count"
+    },
+    {
+      "actual": "0100",
+      "expected": "0011",
+      "kind": "record",
+      "message": "debug_17 的 count：候选 失败（actual=0100），基线 通过（actual=0011）",
+      "where": "debug_17 / count"
+    },
+    {
+      "actual": "0101",
+      "expected": "0100",
+      "kind": "record",
+      "message": "debug_18 的 count：候选 失败（actual=0101），基线 通过（actual=0100）",
+      "where": "debug_18 / count"
+    },
+    {
+      "actual": "0110",
+      "expected": "0101",
+      "kind": "record",
+      "message": "debug_19 的 count：候选 失败（actual=0110），基线 通过（actual=0101）",
+      "where": "debug_19 / count"
+    },
+    {
+      "actual": "0110",
+      "expected": "0101",
+      "kind": "record",
+      "message": "debug_20 的 count：候选 失败（actual=0110），基线 通过（actual=0101）",
+      "where": "debug_20 / count"
+    },
+    {
+      "actual": "0111",
+      "expected": "0110",
+      "kind": "record",
+      "message": "debug_21 的 count：候选 失败（actual=0111），基线 通过（actual=0110）",
+      "where": "debug_21 / count"
+    },
+    {
+      "actual": "1000",
+      "expected": "0111",
+      "kind": "record",
+      "message": "debug_22 的 count：候选 失败（actual=1000），基线 通过（actual=0111）",
+      "where": "debug_22 / count"
+    },
+    {
+      "actual": "0000",
+      "expected": "1000",
+      "kind": "record",
+      "message": "debug_23 的 count：候选 失败（actual=0000），基线 通过（actual=1000）",
+      "where": "debug_23 / count"
+    },
+    {
+      "actual": "0000",
+      "expected": "1000",
+      "kind": "record",
+      "message": "debug_24 的 count：候选 失败（actual=0000），基线 通过（actual=1000）",
+      "where": "debug_24 / count"
+    },
+    {
+      "actual": "0001",
+      "expected": "1001",
+      "kind": "record",
+      "message": "debug_edge_01 的 count：候选 失败（actual=0001），基线 通过（actual=1001）",
+      "where": "debug_edge_01 / count"
+    },
+    {
+      "actual": "0000",
+      "expected": "1001",
+      "kind": "record",
+      "message": "debug_edge_03 的 count：候选 失败（actual=0000），基线 通过（actual=1001）",
+      "where": "debug_edge_03 / count"
+    },
+    {
+      "actual": "0010",
+      "expected": "0001",
+      "kind": "record",
+      "message": "debug_edge_04 的 count：候选 失败（actual=0010），基线 通过（actual=0001）",
+      "where": "debug_edge_04 / count"
+    },
+    {
+      "actual": null,
+      "expected": null,
+      "kind": "waveform_difference",
+      "message": "同一时刻两侧可观测值不同",
+      "where": "t=?ns / tb_mod10_counter.dut_i.count"
+    }
+  ],
+  "exit_code": 1,
+  "module": "mod10_counter",
+  "plan_evidence_level": "reference_model",
+  "plan_source": "offline-planner",
+  "schema_version": "1.0",
+  "status": "different",
+  "status_label": "两侧不同",
+  "waveform_compared": true
+}

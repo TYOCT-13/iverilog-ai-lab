@@ -1,0 +1,118 @@
+{
+  "artifacts": {
+    "baseline_run": "E:\\FPGA_WORK\\iverilog-ai-lab\\runs\\vd-same-clean\\reference\\runs\\run-eafa29e196d9",
+    "candidate_run": "E:\\FPGA_WORK\\iverilog-ai-lab\\runs\\vd-same-clean\\user\\runs\\run-82c2f97793aa",
+    "dir": "runs\\vd-same-clean",
+    "json": "runs\\vd-same-clean\\verify_diff.json",
+    "markdown": "runs\\vd-same-clean\\verify_diff.md"
+  },
+  "baseline": "E:\\FPGA_WORK\\iverilog-ai-lab\\rtl\\mod10_counter.v",
+  "candidate": "E:\\FPGA_WORK\\iverilog-ai-lab\\rtl\\mod10_counter.v",
+  "caveats": [
+    "**合约是从基线 RTL 自动提取的草稿**：端口与位宽来自 `module` 头，通常可信；复位极性、同步/异步是猜的。两侧跑在同一套草稿测试台下，因此「两侧不同」仍然可信，而「两侧一致」的覆盖范围可能因此变窄——要提高置信度请用 `--contract` 提供确认过的合约。",
+    "合约草稿提示：时钟 clk（posedge）来自 always 敏感列表；周期 10ns 是默认值，请按需确认",
+    "合约草稿提示：复位 rst_n：always 敏感列表含 negedge rst_n（极性/同步性由代码结构推导，请确认）"
+  ],
+  "comparable_checks": 29,
+  "comparison": {
+    "disclaimer": "结论来自两次真实 Icarus 仿真：任何检查项结果不同即为行为差异；波形差异只描述可观测行为，是否构成缺陷仍由规格与人工判断。",
+    "identical": true,
+    "mismatches": [],
+    "module": "mod10_counter",
+    "notes": [
+      "两侧全部检查项结果一致",
+      "在本测试计划覆盖的激励范围内，两份 RTL 的行为没有可观测差异",
+      "注意：这只说明覆盖范围内的行为一致，不等于实现完全等价或代码质量相同"
+    ],
+    "record_summary": {
+      "mismatched_checks": 0,
+      "reference_checks": 29,
+      "reference_failed": 0,
+      "reference_status": "passed",
+      "shared_checks": 29,
+      "user_checks": 29,
+      "user_failed": 0,
+      "user_status": "passed"
+    },
+    "reference_status": "passed",
+    "schema_version": "1.0",
+    "status": "identical",
+    "user_status": "passed",
+    "waveform": {
+      "clock_period_ns": 10.0,
+      "difference_count": 0,
+      "differences": [],
+      "disclaimer": "波形差异只描述可观测行为差异；是否构成缺陷由规格与 Icarus 判定。",
+      "dut_differences": [],
+      "extra_signals_are_internal_only": true,
+      "only_in_candidate": [],
+      "only_in_reference": [],
+      "reference_only_signals": [],
+      "same_signal_set": true,
+      "schema_version": "1.1",
+      "shared_signals": [
+        "tb_mod10_counter.checks",
+        "tb_mod10_counter.count",
+        "tb_mod10_counter.cycle",
+        "tb_mod10_counter.dut_i.clk",
+        "tb_mod10_counter.dut_i.count",
+        "tb_mod10_counter.dut_i.enable",
+        "tb_mod10_counter.dut_i.rst_n",
+        "tb_mod10_counter.failures"
+      ],
+      "signal_sets_match": true,
+      "status": "identical",
+      "user_only_signals": []
+    }
+  },
+  "contract_draft": {
+    "clock": {
+      "edge": "posedge",
+      "period_ns": 10.0,
+      "signal": "clk"
+    },
+    "module": "mod10_counter",
+    "ports": [
+      {
+        "direction": "input",
+        "name": "clk",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "input",
+        "name": "rst_n",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "input",
+        "name": "enable",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "output",
+        "name": "count",
+        "signed": false,
+        "width": 4
+      }
+    ],
+    "reset": {
+      "active_level": 0,
+      "assert_cycles": 2,
+      "signal": "rst_n",
+      "synchronous": false
+    }
+  },
+  "contract_source": "draft-from-baseline",
+  "differences": [],
+  "exit_code": 0,
+  "module": "mod10_counter",
+  "plan_evidence_level": "reference_model",
+  "plan_source": "offline-planner",
+  "schema_version": "1.0",
+  "status": "identical",
+  "status_label": "两侧一致",
+  "waveform_compared": true
+}

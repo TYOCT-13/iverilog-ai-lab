@@ -24,6 +24,19 @@ dependencies = [
 ui = [
   "streamlit>=1.30",
 ]
+# 复核与开发所需的依赖。**没有这条 extra 时，`10 分钟复核指南`第 4 节是跑不起来的**：
+# 实测在全新虚拟环境里 `pip install -e .` 之后，`python -m pytest -q` 与 `python -m mypy`
+# 都报 "No module named ..."——因为核心依赖只有 pydantic。
+# PyMuPDF(fitz) 与 Pillow 不是可选的：渲染器测试与图标测试在模块级 import 它们。
+dev = [
+  "pytest>=7.4",
+  "mypy>=1.8",
+  "PyMuPDF>=1.23",
+  "Pillow>=10.0",
+  # PyYAML：GitHub Action 定义的那 10 条测试在模块级 importorskip("yaml")，
+  # 缺它不会报错，只会**静默少收集 10 条**——"少测了"比"测失败"更危险。
+  "PyYAML>=6.0",
+]
 
 [project.scripts]
 iverilog-ai = "iverilog_ai.core.cli:main"

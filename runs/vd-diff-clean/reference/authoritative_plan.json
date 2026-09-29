@@ -1,0 +1,391 @@
+{
+  "schema_version": "1.0",
+  "design": "mod10_counter",
+  "objective": "deterministic local debug plan",
+  "clock_period_ns": 10,
+  "reset": {
+    "active_low": true
+  },
+  "sample_before_reset": false,
+  "pre_reset_expected": {},
+  "vectors": [
+    {
+      "name": "debug_reset",
+      "inputs": {
+        "rst_n": 0
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {
+        "count": 0
+      },
+      "rationale": "hold rst_n at its active level (0) to drive the DUT into a known state"
+    },
+    {
+      "name": "debug_01",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 1
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 1
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_02",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 1
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 2
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_03",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 1
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 3
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_04",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 0
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 3
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_05",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 1
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 4
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_06",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 1
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 5
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_07",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 1
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 6
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_08",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 0
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 6
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_09",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 1
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 7
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_10",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 1
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 8
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_11",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 1
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 9
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_12",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 0
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 9
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_13",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 1
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 0
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_14",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 1
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 1
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_15",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 1
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 2
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_16",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 0
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 2
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_17",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 1
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 3
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_18",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 1
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 4
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_19",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 1
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 5
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_20",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 0
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 5
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_21",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 1
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 6
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_22",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 1
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 7
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_23",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 1
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 8
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_24",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 0
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 8
+      },
+      "rationale": "deterministic local debug stimulus"
+    },
+    {
+      "name": "debug_edge_01",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 1
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 9
+      },
+      "rationale": "boundary stimulus derived from the bundled defect manifest"
+    },
+    {
+      "name": "debug_edge_02",
+      "inputs": {
+        "rst_n": 0,
+        "enable": 1
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "count": 0
+      },
+      "rationale": "boundary stimulus derived from the bundled defect manifest"
+    },
+    {
+      "name": "debug_edge_03",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 1
+      },
+      "cycles": 9,
+      "sample_phase": "after",
+      "expected": {
+        "count": 9
+      },
+      "rationale": "boundary stimulus derived from the bundled defect manifest"
+    },
+    {
+      "name": "debug_edge_04",
+      "inputs": {
+        "rst_n": 1,
+        "enable": 1
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {
+        "count": 1
+      },
+      "rationale": "boundary stimulus derived from the bundled defect manifest"
+    }
+  ],
+  "assumptions": [],
+  "assertions": []
+}

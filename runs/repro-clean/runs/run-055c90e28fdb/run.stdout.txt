@@ -1,0 +1,11 @@
+VCD info: dumpfile waveform.vcd opened for output.
+IVERILOG_AI_RESULT {"ok":true,"test_id":"add_boundary","cycle":0,"signal":"result","expected":"00000000","actual":"00000000"}
+IVERILOG_AI_RESULT {"ok":true,"test_id":"add_boundary","cycle":0,"signal":"carry","expected":"1","actual":"1"}
+IVERILOG_AI_RESULT {"ok":true,"test_id":"add_boundary","cycle":0,"signal":"zero","expected":"1","actual":"1"}
+IVERILOG_AI_RESULT {"ok":true,"test_id":"and_mask","cycle":1,"signal":"result","expected":"00000000","actual":"00000000"}
+IVERILOG_AI_RESULT {"ok":true,"test_id":"and_mask","cycle":1,"signal":"carry","expected":"0","actual":"0"}
+IVERILOG_AI_RESULT {"ok":true,"test_id":"and_mask","cycle":1,"signal":"zero","expected":"1","actual":"1"}
+IVERILOG_AI_RESULT {"ok":true,"test_id":"left_shift","cycle":2,"signal":"result","expected":"00000110","actual":"00000110"}
+IVERILOG_AI_RESULT {"ok":true,"test_id":"left_shift","cycle":2,"signal":"carry","expected":"0","actual":"0"}
+IVERILOG_AI_RESULT {"ok":true,"test_id":"left_shift","cycle":2,"signal":"zero","expected":"0","actual":"0"}
+IVERILOG_AI_SUMMARY {"checks":9,"failures":0,"cycles":3}
