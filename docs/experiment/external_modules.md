@@ -31,10 +31,36 @@
 
 | 候选 | 许可 | 核验方式与时间 | 状态 |
 |---|---|---|---|
-| `pulp-platform/common_cells` | **Solderpad-0.51**（明文允许按 Apache-2.0 处理） | 抓取 `raw.githubusercontent.com/.../master/LICENSE`，2026-09-29 | 许可已核验；**模块与 commit 待选定** |
-| 其余候选 | — | — | **待核验**（下一轮用同样方式核验许可与规模后再列入） |
+| `pulp-platform/common_cells` | **Solderpad-0.51**（明文允许按 Apache-2.0 处理） | 抓取 `LICENSE`（2026-09-29） | 许可已核验，但**本机 Icarus 编不过**（见下） |
+| `alexforencich/verilog-uart` | **MIT** | 抓取 `COPYING`（2026-09-29） | **已选定并跑完第一个模块**（`uart_rx`），见 `external_results.md` |
+| 其余候选 | — | — | **待核验** |
 
-**不写没核验过的东西**：上表第二行刻意留空，而不是先填几个"看起来合适"的仓库名。
+### 3.1 为什么 `common_cells` 没被选上（有证据的工具链限制）
+
+本机 Icarus 是 **12.0 (devel) s20150603**，2015 年的快照，SystemVerilog 支持不完整：
+
+| 文件 | 结果 |
+|---|---|
+| `src/cc_lzc.sv` | 补齐 include 后仍 `syntax error`（第 17 行） |
+| `src/cc_fifo.sv` / `src/cc_rr_arb_tree.sv` | 需要 `common_cells/deprecated/registers.svh`，master 上已不存在该路径 |
+| `src/cc_spill_register.sv` / `cc_shift_register.sv` / `cc_stream_fifo.sv` | `syntax error`（`parameter type` 等 SV 特性） |
+
+另外仓库已把模块统一改名成 `cc_*`（`src/counter.sv` 之类的旧路径已 404），
+所以任何按旧名字写死的抓取脚本都会失败——这也是本轮踩到的第一个坑。
+
+**结论**：不是许可问题，是**工具链版本**问题。要接 `common_cells`，
+要么升级 Icarus（>= 11 的较新版本对 SV 支持好得多），要么改用 Verilog-2001 的模块。
+本轮选了后者（`verilog-uart`），并把这条限制如实写进报告，而不是声称"已适配"。
+
+### 3.2 已选定模块的来源证据
+
+| 项 | 值 |
+|---|---|
+| 仓库 / 许可 | `alexforencich/verilog-uart` / MIT |
+| 固定依据 | 抓取时分支 `master` + **文件 sha256**（`rtl/uart_rx.v` = `e686104e5ff2d25f…`） |
+| 缺口 | **没取到 commit sha**（GitHub API 限流 403），下次必须补 |
+| 与调参的关系 | 未参与规则/提示词调参；但与已用于抽取约定规则的 `verilog-axi` **同作者**，需在报告中说明 |
+| 证据清单 | `.iverilog-ai/external/manifest.json`（URL / 许可 / 字节数 / sha256 / 可编译性） |
 
 ## 4. 每个模块要产出的材料（选定后按此执行）
 
@@ -57,11 +83,13 @@
 |---|---|
 | 选型标准 | 已写下（§2） |
 | 开发集/保留集区分 | 已查明并记录（§1） |
-| 许可核验 | 已核验 1 个候选（common_cells） |
-| 模块选定 | **未做** |
-| 基线/改写/变体 | **未做** |
-| 外部运行 | **未做** |
-| 独立复核 | **未做** |
+| 许可核验 | 已核验 2 个候选 |
+| 模块选定 | **已选定 1 个**（`verilog-uart` 的 `uart_rx`）；目标 3 个 |
+| 基线 + 规格测试台 | **已完成**（11 项检查全过），见 `external_results.md` |
+| 等价改写 + 功能变体 | **已完成**（1 个等价改写 + 5 个变体） |
+| 外部运行（本地 Icarus） | **已完成**：5/5 变体判"不同"，等价改写判"一致"，编不过判 `inconclusive` |
+| 独立复核 | **未做**（必须由人完成，我不代签） |
+| commit sha | **未取到**（API 限流），当前用文件 sha256 固定 |
 
 外部验证是"能访问外网 + 有独立复核人"才能闭环的工作：抓取与本地跑仿真可以自动完成，
 但**"独立审核过的变体"与"独立复核人"必须由人来做**，我不会代签。
