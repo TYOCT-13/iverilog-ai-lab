@@ -29,3 +29,6 @@ pytest-*/
 .idea/httpRequests/
 # 桌面快捷方式：内容含本机绝对路径，不可移植；用 scripts/make_shortcuts.ps1 生成
 *.lnk
+
+# 运行产物：复核指南里的 --output-dir 默认就写到这里，属于本机生成物，不进版本库
+runs/
