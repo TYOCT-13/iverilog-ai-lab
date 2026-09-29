@@ -528,8 +528,160 @@ def run_case_generic(
     return {**spec, "diff_status": diff["status"], "diff_exit": diff["exit"]}
 
 
+# =====================================================================================
+# 第 3 个模块：verilog-axi 的 priority_encoder（**参数化输入**这一类）
+#
+# 为什么是它：前两个模块都是"8 位数据 + 时钟 + 复位 + 握手"，缺"参数化"这一类。
+# 它是纯组合逻辑（没有时钟/复位），行为由 WIDTH 与 LSB_HIGH_PRIORITY 两个参数决定，
+# 于是这一格同时覆盖了：参数化位宽、两种参数取值的对照、以及**无时钟设计**的合约路径。
+#
+# 来源说明（重要）：它属于 **开发集**——静态约定规则是从 verilog-axi 抽取的，
+# 所以它是"别人写的 RTL"，但**不是**未见过的保留集。引用时必须写明这一点。
+# =====================================================================================
+
+PE_UPSTREAM = ROOT / ".iverilog-ai/upstream-cache/verilog-axi-516bd5dadc33/rtl/priority_encoder.v"
+
+PE_CONTRACT = {
+    "module": "priority_encoder",
+    "parameters": {"WIDTH": 4, "LSB_HIGH_PRIORITY": 0},
+    "ports": [
+        {"name": "input_unencoded", "direction": "input", "width": 4},
+        {"name": "output_valid", "direction": "output", "width": 1},
+        {"name": "output_encoded", "direction": "output", "width": 2},
+        {"name": "output_unencoded", "direction": "output", "width": 4},
+    ],
+    # 纯组合逻辑：没有时钟也没有复位。合约里就不写这两项——
+    # 不写等于"没有"，而不是"猜一个时钟/复位出来"。
+}
+
+
+def build_pe_plan() -> dict:
+    """只含激励：把 4 位输入的 16 种取值全部走一遍（组合逻辑不需要时钟）。"""
+
+    vectors = []
+    for value in range(16):
+        vectors.append({
+            "name": f"in_{value:04b}",
+            "inputs": {"input_unencoded": value},
+            "cycles": 1,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": "exhaustive sweep of a 4-bit combinational input",
+        })
+    return {
+        "schema_version": "1.0",
+        "design": "priority_encoder",
+        "objective": "external module: exhaustive 4-bit sweep so baseline and candidate see identical stimulus",
+        "clock_period_ns": 10,
+        "reset": {"active_low": True},
+        "vectors": vectors,
+    }
+
+
+PE_SPEC_TB = """\
+// 手写规格测试台：优先编码器的行为只依据规格——
+//   * 任何一位为 1 → output_valid 必须为 1；全 0 → output_valid 必须为 0；
+//   * 胜者是"优先级最高的那一位"：LSB_HIGH_PRIORITY=0 时最高位优先，=1 时最低位优先；
+//   * output_encoded 是胜者下标，output_unencoded 是该下标的独热。
+// 同一份测试台里实例化**两个参数取值**，直接检验"参数化"这件事本身。
+// 注意：全 0 时 output_encoded/output_unencoded 模块文档没有规定，因此**不做断言**
+// （把实现细节当规格是测试台最常见的自欺）。
+`timescale 1ns/1ps
+module tb_priority_encoder;
+  reg [3:0] value = 0;
+  wire msb_valid, lsb_valid;
+  wire [1:0] msb_enc, lsb_enc;
+  wire [3:0] msb_unenc, lsb_unenc;
+  integer failures = 0, checks = 0;
+
+  priority_encoder #(.WIDTH(4), .LSB_HIGH_PRIORITY(0)) dut_msb (
+    .input_unencoded(value), .output_valid(msb_valid),
+    .output_encoded(msb_enc), .output_unencoded(msb_unenc));
+
+  priority_encoder #(.WIDTH(4), .LSB_HIGH_PRIORITY(1)) dut_lsb (
+    .input_unencoded(value), .output_valid(lsb_valid),
+    .output_encoded(lsb_enc), .output_unencoded(lsb_unenc));
+
+  task check;
+    input [255:0] name;
+    input condition;
+    begin
+      checks = checks + 1;
+      if (!condition) begin
+        failures = failures + 1;
+        $display("CHECK %0s FAIL", name);
+      end else begin
+        $display("CHECK %0s ok", name);
+      end
+    end
+  endtask
+
+  task expect_pair;
+    input [3:0] pattern;
+    input [1:0] expected_msb;      // 最高位优先时的胜者下标
+    input [1:0] expected_lsb;      // 最低位优先时的胜者下标
+    input [255:0] name;
+    begin
+      value = pattern; #1;
+      check({name, "_valid"}, msb_valid === 1'b1 && lsb_valid === 1'b1);
+      check({name, "_msb"}, msb_enc === expected_msb && msb_unenc === (4'b0001 << expected_msb));
+      check({name, "_lsb"}, lsb_enc === expected_lsb && lsb_unenc === (4'b0001 << expected_lsb));
+    end
+  endtask
+
+  initial begin
+    // 全 0：valid 必须为 0（编码值不做断言）
+    value = 4'b0000; #1;
+    check("empty_valid_low", msb_valid === 1'b0 && lsb_valid === 1'b0);
+
+    // 单个位：两种优先级下胜者相同
+    expect_pair(4'b0001, 0, 0, "bit0");
+    expect_pair(4'b0010, 1, 1, "bit1");
+    expect_pair(4'b0100, 2, 2, "bit2");
+    expect_pair(4'b1000, 3, 3, "bit3");
+
+    // 多位：两种优先级必须给出**不同**的胜者，这是参数语义的核心
+    expect_pair(4'b1010, 3, 1, "bits31");
+    expect_pair(4'b0101, 2, 0, "bits20");
+    expect_pair(4'b0110, 2, 1, "bits21");
+    expect_pair(4'b1111, 3, 0, "all");
+
+    $display("SPEC_SUMMARY checks=%0d failures=%0d", checks, failures);
+    $finish(0);
+  end
+endmodule
+"""
+
+PE_VARIANTS: dict[str, tuple[str, str, str]] = {
+    "mut_pair_priority_flip": ("每一对内的优先级取反",
+                               "assign stage_enc[0][n] = input_padded[n*2+1];",
+                               "assign stage_enc[0][n] = input_padded[n*2+0];"),
+    "mut_valid_ignores_low_bit": ("valid 只看奇数位（漏掉只设了偶数位的情况）",
+                                  "assign stage_valid[0][n] = |input_padded[n*2+1:n*2];",
+                                  "assign stage_valid[0][n] = input_padded[n*2+1];"),
+    "mut_encoded_off_by_one": ("编码结果差一",
+                               "assign output_encoded = stage_enc[LEVELS-1];",
+                               "assign output_encoded = stage_enc[LEVELS-1] + 1'b1;"),
+    "mut_unencoded_not_onehot": ("output_unencoded 变成全 1",
+                                 "assign output_unencoded = 1 << output_encoded;",
+                                 "assign output_unencoded = {WIDTH{output_valid}};"),
+    "mut_valid_stuck_high": ("output_valid 恒为 1（空输入也说有效）",
+                             "assign output_valid = stage_valid[LEVELS-1];",
+                             "assign output_valid = 1'b1;"),
+}
+
+PE_EQUIVALENT = [
+    # 等价改写：把"取某一级的 valid"换成"直接看输入是否非零"，语义相同（填充位恒为 0）。
+    ("assign output_valid = stage_valid[LEVELS-1];",
+     "assign output_valid = (input_padded != {W{1'b0}});"),
+    # 等价改写：把独热写成显式拼接移位，值不变。
+    ("assign output_unencoded = 1 << output_encoded;",
+     "assign output_unencoded = {{(WIDTH-1){1'b0}}, 1'b1} << output_encoded;"),
+]
+
+
 #: 每个模块的基线路径。
-BASELINES = {"uart_rx": UPSTREAM, "uart_tx": TX_UPSTREAM}
+BASELINES = {"uart_rx": UPSTREAM, "uart_tx": TX_UPSTREAM, "priority_encoder": PE_UPSTREAM}
 
 #: 模块注册表：加一个外部模块就加一条。
 MODULES: dict[str, dict] = {
@@ -552,6 +704,15 @@ MODULES: dict[str, dict] = {
         "description": "发送侧：环回（tx → rx）验证整帧",
         # 环回测试台同时实例化 rx，所以编译规格测试台时要把它一起传进去。
         "spec_deps": (UPSTREAM,),
+    },
+    "priority_encoder": {
+        "baseline": PE_UPSTREAM,
+        "contract": PE_CONTRACT,
+        "plan": build_pe_plan,
+        "spec_tb": PE_SPEC_TB,
+        "variants": PE_VARIANTS,
+        "equivalent": PE_EQUIVALENT,
+        "description": "参数化输入（纯组合、两个参数取值对照）；来源属**开发集**",
     },
 }
 

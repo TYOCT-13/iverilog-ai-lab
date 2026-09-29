@@ -69,3 +69,34 @@ def test_every_variant_has_a_real_source_anchor(name: str):
     description, old, new = harness.VARIANTS[name]
     assert description and old and new
     assert old != new
+
+
+@pytest.mark.parametrize("name", list(harness.TX_VARIANTS))
+def test_every_tx_variant_has_a_real_source_anchor(name: str):
+    description, old, new = harness.TX_VARIANTS[name]
+    assert description and old and new
+    assert old != new, "变体的替换文本与原文相同 = 没有变异，却会被记成'未检出'"
+
+
+@pytest.mark.parametrize("name", list(harness.PE_VARIANTS))
+def test_every_priority_encoder_variant_has_a_real_source_anchor(name: str):
+    description, old, new = harness.PE_VARIANTS[name]
+    assert description and old and new
+    assert old != new
+
+
+def test_priority_encoder_contract_is_parameterised_and_clockless():
+    """参数化 + 无时钟的合约必须被校验接受：不写 clock/reset 就是"没有"，不是"猜一个"。"""
+
+    contract = DutContract.from_dict(harness.PE_CONTRACT)
+    assert contract.parameters == {"WIDTH": 4, "LSB_HIGH_PRIORITY": 0}
+    assert contract.clock is None and contract.reset is None
+    # $clog2(4) = 2：编码输出只有 2 位，写错会让测试台接错线
+    assert contract.port_map["output_encoded"].width == 2
+    assert contract.port_map["input_unencoded"].width == 4
+
+
+def test_priority_encoder_plan_sweeps_the_whole_input_space():
+    plan = TestPlan.model_validate(harness.build_pe_plan())
+    driven = [vector.inputs["input_unencoded"] for vector in plan.vectors]
+    assert driven == list(range(16)), "组合逻辑的激励必须穷举输入空间，否则覆盖率没有依据"
