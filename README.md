@@ -43,10 +43,33 @@ python -m iverilog_ai report --result .iverilog-ai/runs/run-<id>/result.json --f
 启动演示页面——**不想碰命令行的话，先建一次快捷方式，以后双击即可**：
 
 ```powershell
-.\scripts\make_shortcuts.ps1      # 在桌面和仓库目录各建「启动/停止网页演示」两个快捷方式
+.\scripts\make_shortcuts.ps1      # 在桌面和仓库目录各建三个快捷方式
 ```
 
-建好后双击「**启动网页演示**」就行：自动挑端口、检查 Icarus、就绪后打开浏览器。
+建好后双击「**Icarus 智测面板**」：一个开关面板，状态灯常亮，三个按钮（启动服务 / 停止服务 /
+打开网页），启动与停止每一步的结果就显示在窗口里。**关窗口前它会问要不要顺便停服务**——
+服务是独立进程，关窗口和停服务本来就是两件事。
+
+面板本身是 `IcarusPanel.exe`（约 39 KB，GUI 子系统，双击不弹黑窗口）。它已经随仓库提供，
+改动 C# 源码后重新编译：
+
+```powershell
+.\tools\service_panel\build.ps1   # 用系统自带的 csc.exe，不需要装任何东西
+```
+
+它也能当命令行用，方便写进脚本：
+
+```powershell
+.\IcarusPanel.exe /start     # 启动并等就绪
+.\IcarusPanel.exe /status    # 在跑返回 0，没跑返回 3
+.\IcarusPanel.exe /stop
+```
+
+面板**不做业务逻辑**：端口探测、虚拟网卡过滤、Icarus 检查都在 `start_ui.ps1` / `stop_ui.ps1`
+里，C# 只负责调它们。这样规则只有一份，改脚本面板就跟着变。
+
+另外两个快捷方式是纯命令行路径（不依赖 .NET，适合放进别的脚本）：
+双击「**启动网页演示**」自动挑端口、检查 Icarus、就绪后打开浏览器；
 想停的时候双击「**停止网页演示**」——它**按端口**找进程并先确认那是本项目的服务，
 不会误杀你在别处跑的 Python 程序。
 

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Icarus 智测面板的应用程序清单。
+
+  两件事写在这里，都是"不写就会有人抱怨"的那种：
+
+  - `dpiAware`：不声明的话，Windows 会把整个窗口按 96 DPI 画好再拉伸，
+    在 125%/150% 缩放的笔记本上字是糊的。这类模糊不会报错，只会让人以为软件做得糙。
+  - `asInvoker`：**不要管理员权限**。这个面板只启动一个本地网页服务，
+    弹 UAC 提权既没必要，也会把"双击就能用"变成"还得过一道系统弹窗"。
+-->
+<assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1">
+  <assemblyIdentity version="1.0.0.0" name="IcarusPanel.app" />
+
+  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
+    <security>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+
+  <application xmlns="urn:schemas-microsoft-com:asm.v3">
+    <windowsSettings>
+      <dpiAware xmlns="http://schemas.microsoft.com/SMI/2005/WindowsSettings">true</dpiAware>
+    </windowsSettings>
+  </application>
+
+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+    <application>
+      <!-- Windows 10 / 11：不列出来的话，版本相关的 API 会退回兼容模式 -->
+      <supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />
+    </application>
+  </compatibility>
+</assembly>

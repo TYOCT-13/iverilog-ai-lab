@@ -57,8 +57,9 @@ function New-DemoShortcut {
     Write-Host "  已创建 $path" -ForegroundColor Green
 }
 
-#: 快捷方式名 → 目标脚本 → 说明
+#: 快捷方式名 → 目标 → 说明
 $entries = @(
+    @{ Name = 'Icarus 智测面板'; Script = 'IcarusPanel.exe'; Description = '打开服务开关面板：启动 / 停止 / 看状态，不用命令行' },
     @{ Name = '启动网页演示'; Script = 'start_ui.cmd'; Description = '启动 Icarus 智测网页演示（自动挑端口、检查 Icarus、打开浏览器）' },
     @{ Name = '停止网页演示'; Script = 'stop_ui.cmd';  Description = '停止正在运行的 Icarus 智测网页演示' }
 )

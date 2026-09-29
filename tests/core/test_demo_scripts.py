@@ -1,15 +1,17 @@
-"""网页演示的"非命令行入口"回归测试：启动 / 停止 / 快捷方式 / 图标。
+"""网页演示的"非命令行入口"回归测试：面板 exe / 启动 / 停止 / 快捷方式 / 图标。
 
 为什么值得单独测：这一层面向**不碰命令行的人**，所以他们遇到问题时不会去看日志、
 也不会改用命令行绕过去——双击没反应就是没反应。而这里的失败模式又特别安静：
 快捷方式指向一个被改名的脚本、图标文件被清理掉、停止脚本按进程名而不是按端口杀进程
-（于是误杀别人的 Python）。这些都要靠断言钉住。
+（于是误杀别人的 Python）、面板被编成控制台程序（双击先弹一个黑窗口）。
+这些都要靠断言钉住。
 """
 from __future__ import annotations
 
 import importlib.util
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 import pytest
@@ -68,7 +70,7 @@ def test_shortcut_names_match_the_documented_ones() -> None:
     """快捷方式名是用户界面的一部分——脚本里改了名，README 就会指向不存在的东西。"""
 
     source = (ROOT / "scripts" / "make_shortcuts.ps1").read_text(encoding="utf-8-sig")
-    for name in ("启动网页演示", "停止网页演示"):
+    for name in ("Icarus 智测面板", "启动网页演示", "停止网页演示"):
         assert name in source, f"快捷方式名缺少 {name}"
     assert "GetFolderPath('Desktop')" in source, "要放到桌面——那才是双击的地方"
     assert "$shortcut.WorkingDirectory" in source, "必须写死工作目录，否则 .lnk 被挪走就失效"
@@ -77,6 +79,7 @@ def test_shortcut_names_match_the_documented_ones() -> None:
 def test_readme_tells_people_about_the_shortcut() -> None:
     doc = (ROOT / "README.md").read_text(encoding="utf-8")
     assert "启动网页演示" in doc and "make_shortcuts.ps1" in doc
+    assert "IcarusPanel" in doc, "面板是主入口，README 必须提到它"
 
 
 def test_console_steps_aside_only_after_the_page_is_ready() -> None:
@@ -109,6 +112,120 @@ def test_console_steps_aside_only_after_the_page_is_ready() -> None:
     assert browser > ready
     assert code.index("Hide-ConsoleWindow", browser) > browser
     assert "if (-not $Headless) { Hide-ConsoleWindow }" in code, "无头模式不要动窗口"
+
+
+# ------------------------------------------------------------------ 开关面板 exe
+
+
+PANEL = ROOT / "IcarusPanel.exe"
+PANEL_SOURCE = ROOT / "tools" / "service_panel" / "ServicePanel.cs"
+PANEL_BUILD = ROOT / "tools" / "service_panel" / "build.ps1"
+
+
+def _pe_subsystem(data: bytes) -> int:
+    """读 PE 头里的 Subsystem 字段（2 = GUI，3 = 控制台）。"""
+
+    pe_offset = int.from_bytes(data[0x3C:0x40], "little")
+    assert data[pe_offset : pe_offset + 4] == b"PE\0\0", "不是有效的 PE 文件"
+    # PE 签名(4) + COFF 头(20) 之后是可选头，Subsystem 在可选头偏移 68 处
+    return int.from_bytes(data[pe_offset + 4 + 20 + 68 : pe_offset + 4 + 20 + 70], "little")
+
+
+def test_panel_exe_is_present_and_not_a_console_binary() -> None:
+    """面板必须是 **GUI 子系统**的可执行文件。
+
+    这不是风格问题：控制台子系统的 exe 双击时会先弹一个黑窗口（Windows Terminal 上是一个
+    空白标签页），而且那个窗口会一直挂到程序退出。用 `Console.OutputEncoding` 之类的技巧
+    去补救都不如一开始就编成 GUI 子系统。
+    """
+
+    assert PANEL.is_file(), "缺少 IcarusPanel.exe（用 tools/service_panel/build.ps1 生成）"
+    data = PANEL.read_bytes()
+    assert data[:2] == b"MZ", "不是可执行文件"
+    assert _pe_subsystem(data) == 2, "不是 GUI 子系统：双击会弹控制台窗口"
+
+
+def test_panel_exe_carries_its_manifest_and_icon() -> None:
+    """清单与图标必须真的编进 exe，而不是躺在源码目录里。
+
+    清单里的两条都是"缺了就会被用户看见"的：`dpiAware` 少了，125%/150% 缩放下字是糊的；
+    `asInvoker` 少了或写错，双击会先弹 UAC 提权框。
+    """
+
+    data = PANEL.read_bytes()
+    assert b"dpiAware" in data, "没编进 DPI 感知清单：高缩放下字会糊"
+    assert b"asInvoker" in data, "没编进权限清单：可能弹 UAC 提权框"
+
+    icon = (ROOT / "assets" / "iverilog-ai.ico").read_bytes()
+    assert icon[-64:] in data, "项目图标没有编进 exe"
+
+
+def test_panel_keeps_the_scripts_as_the_only_source_of_truth() -> None:
+    """面板不许自己实现业务逻辑，只能调既有的两个脚本。
+
+    这条断言守的是**重复实现**：端口探测、虚拟网卡过滤、Icarus 检查都在脚本里，
+    C# 里再写一遍的话，两份实现迟早不一致，而差异只会在用户机器上暴露。
+    """
+
+    source = PANEL_SOURCE.read_text(encoding="utf-8")
+    assert '"start_ui.ps1"' in source and '"stop_ui.ps1"' in source
+    assert "_stcore/health" in source, "判断在不在跑必须问健康检查，不能靠'我记得我启动过'"
+    for handler in ("_start.Click += OnStartClick", "_stop.Click += OnStopClick", "_open.Click += OnOpenClick"):
+        assert handler in source, f"按钮没接处理器：{handler}"
+
+
+def test_panel_build_pins_the_source_codepage() -> None:
+    """源码是不带 BOM 的 UTF-8，编译器必须被告知这一点。
+
+    csc 默认按系统 ANSI 代码页解码（中文机器上是 GBK），不指定 `/codepage:65001` 的话
+    界面上的中文会变成乱码——而且编译期没有任何警告，只有用户看得见。
+    """
+
+    script = PANEL_BUILD.read_text(encoding="utf-8-sig")
+    assert "/codepage:65001" in script
+    assert "/target:winexe" in script, "GUI 子系统（见 test_panel_exe_is_present_and_not_a_console_binary）"
+    assert "csc.exe" in script, "用系统自带的 .NET Framework 编译器，不引入新依赖"
+
+
+@pytest.mark.skipif(sys.platform != "win32", reason="面板是 Windows 程序")
+def test_panel_command_line_reports_status_consistently() -> None:
+    """命令行接口要能被脚本调用：输出走管道、退出码有意义。
+
+    这里同时守着一条实测踩过的坑：面板启动 launcher 时若让它继承了我们的标准输出句柄，
+    `communicate()` 就会一直等不到 EOF——表现为"命令卡死"。用管道跑一遍就是那条回归。
+    状态与退出码必须自洽：在跑=0、没跑=3。
+    """
+
+    done = subprocess.run([str(PANEL), "/status"], capture_output=True, timeout=120)
+    text = done.stdout.decode("utf-8", "replace").strip()
+    assert done.returncode in (0, 3), f"退出码应当是 0/3，实际 {done.returncode}：{text!r}"
+    if done.returncode == 0:
+        assert text.startswith("running http://127.0.0.1:"), text
+    else:
+        assert text == "stopped", text
+
+
+@pytest.mark.skipif(sys.platform != "win32", reason="面板是 Windows 程序")
+def test_panel_help_is_usable_and_utf8() -> None:
+    """`/help` 是中文输出，必须按 UTF-8 出来。
+
+    实测过的坑：GUI 子系统的 exe 被重定向输出时，.NET 默认按系统代码页写，
+    于是 ASCII 部分正常、中文全是乱码——只有被脚本调用时才暴露。
+    """
+
+    done = subprocess.run([str(PANEL), "/help"], capture_output=True, timeout=60)
+    assert done.returncode == 0
+    assert "用法" in done.stdout.decode("utf-8"), "中文说明没有按 UTF-8 输出"
+    for verb in ("/start", "/stop", "/status"):
+        assert verb.encode("utf-8") in done.stdout
+
+
+def test_panel_sources_are_documented_where_users_look() -> None:
+    """README 要告诉用户这个 exe 怎么来、怎么用。"""
+
+    doc = (ROOT / "README.md").read_text(encoding="utf-8")
+    assert "IcarusPanel.exe" in doc
+    assert "tools/service_panel/build.ps1" in doc or "tools\\service_panel\\build.ps1" in doc
 
 
 # ------------------------------------------------------------------ 图标
