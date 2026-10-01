@@ -33,7 +33,10 @@
 | **公平实验（5 轮，新口径，真实在线模型）** | 分母 67；**online_ai（deepseek-flash）累计 63/67（94.0%）、单轮均值 83.4%（73.1%–89.6%）**；不可判定 8（参考告警 5 + 零检查项 3）；1680/1680 任务，75.2 分钟，代码 `47ed59b9` 干净树；去重后 128 次计费请求，**费用上界 $1.273** | `.iverilog-ai/strategy-online-flash/strategy_matrix.json` |
 | 外部模块验证 | 3 模块 × 5 变体 = **15/15 判"不同"**；3 个等价改写判"一致"；3 个编不过判 `inconclusive` | `.iverilog-ai/external/uart_rx_check/evidence.json` |
 | 技术报告 | 25 页 / 正文 21 页 / 921 KB（≤10 MB ✓） | `check_submission.py --kind report` |
-| 证据包（演练） | 9 个文件 / 25.7 KB / **manifest 逐文件 sha256**；产物 `G:\iai-evidence-pack[.zip]` | `.dsh-tmp/rehearse_pack.py` 输出 |
+| 证据包（正式） | `G:\iai-evidence-pack-final[.zip]`：8 文件 / 11.1 KB；**6 条 manifest 记录逐条重算 sha256 全部一致**，zip 完整性 OK | `.dsh-tmp/verify_pack_final.py` |
+| 证据包（演练，2026-09-29） | 9 个文件 / 25.7 KB / manifest 逐文件 sha256（含 `waveform.vcd`，演练包保留只读） | `G:\iai-evidence-pack[.zip]` |
+| 基准矩阵（2026-10-01 在当前代码上复跑） | 15 个参考设计**误报 0**；83 个缺陷变体 **83/83 检出**；不可判定 0 | `.iverilog-ai/matrix-final/`（`run_benchmark_matrix.py`） |
+| 提交文案 | 作品名称 3 个候选（19/20/16 字）、简介**实测 293 字**（余量 7 字） | `docs/competition/submission_cover_text.md` |
 | 上游来源固定 | `uart_rx` sha256 `e686104e5ff2d25f…`、`uart_tx` `e9559ddebf124f8f…`、`priority_encoder`（verilog-axi 开发集） | `.iverilog-ai/external/manifest.json` |
 
 ## 3. 这一轮目标里最值得记的三条"发现"

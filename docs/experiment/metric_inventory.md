@@ -102,10 +102,12 @@
 
 | 指标 | 数值 | 来源 / 复现 | 时间 | 备注 |
 |---|---|---|---|---|
-| 自动化测试 | **700 passed / 1 skipped** | `python -m pytest -q` | 2026-09-29（HEAD `2b9594f`） | **不是"全部通过"**：有 1 条按设计跳过（推荐断言表为空）。旧文档里的 531 / 598 / 543 都是过期数字 |
-| 类型门禁 | mypy 59 文件 0 error | `python -m mypy` | 同上 | |
-| 死代码 | 118 文件 0 处 | `python scripts/check_dead_code.py` | 同上 | |
-| 编码门禁 | 0 问题 | `python scripts/strip_bom.py --check` | 同上 | |
+| 自动化测试 | **720 passed / 1 skipped** | `python -m pytest -q` | 2026-10-01（HEAD `84943ad`） | **不是"全部通过"**：有 1 条按设计跳过（推荐断言表为空）。旧文档里的 531 / 598 / 543 都是过期数字；干净 venv 下为 675 passed / 3 skipped / 0 failed |
+| 类型门禁 | mypy 61 文件 0 error | `python -m mypy` | 2026-10-01 | |
+| 死代码 | 121 文件 0 处 | `python scripts/check_dead_code.py` | 2026-10-01 | |
+| 编码门禁 | 0 问题 | `python scripts/strip_bom.py --check` | 2026-10-01 | |
+| 基准矩阵（当前代码复跑） | 参考设计 15 个**误报 0**；缺陷变体 83 个 **83/83 检出**；不可判定 0 | `python scripts/run_benchmark_matrix.py --output-dir .iverilog-ai/matrix-final` | 2026-10-01 | 每案例的 `result.json` 原样保留；矩阵为速度默认不 dump 波形 |
+| 证据包可复核性 | 8 文件 / 11.1 KB；**6 条记录 sha256 逐条重算一致**；zip 完整性 OK | `python .dsh-tmp/verify_pack_final.py G:\iai-evidence-pack-final` | 2026-10-01 | 独立复核（重新哈希）而非信任生成器自报 |
 | 静态规则 | 44 条（error 4 / warn 27 / info 13） | `iverilog_ai.core.static_review.RULE_REGISTRY` | 2026-09-29 实测 | 规则的**条数不是效果**：噪声率另有指标 |
 | 参考模型覆盖 | 15 个设计 | `iverilog_ai.core.reference_model.AUTHORITATIVE` | 2026-09-29 实测 | 只有这些设计能自动提供独立期望值；其余必须人工合约 |
 | 提交体检 | 1 error（`CITATION.cff` 仍写 `example.invalid`） | `python scripts/check_submission.py --repo .` | 2026-09-29 | **已知未修**：仓库公开后填真实地址 |
@@ -114,11 +116,13 @@
 
 | 项 | 状态 |
 |---|---|
-| 仓库公开地址 | **未确定**（`CITATION.cff` / `action.yml` 仍是占位） |
-| GitHub Action 外部调用验证 | **未做**（只做过静态 YAML 检查） |
-| 外部模块（第三方 RTL）验证 | **未做** |
+| 仓库公开地址 | **未确定**（`CITATION.cff` 仍是占位 `example.invalid`，也是提交体检里唯一的 error） |
+| GitHub Action 外部调用验证 | **未做**（需要一个调用方仓库才能真跑） |
+| 外部模块（第三方 RTL）验证 | **已做 3 个**：15/15 变体判"不同"、3 个等价改写判"一致"、3 个编不过判 `inconclusive`（`docs/experiment/external_results.md`） |
 | 真人试用记录 | **无记录**（任务卡与汇总工具已就绪） |
-| 演示视频 | **未录** |
+| 演示视频 | **未录**（脚本已就绪：`docs/demo/demo_script.md`） |
+| 提交文案（名称/简介） | **已备**（`docs/competition/submission_cover_text.md`，293 字实测） |
+| 正式证据包 | **已生成并复核**（`G:\iai-evidence-pack-final[.zip]`） |
 
 这些一律不写成"已完成"。
 
