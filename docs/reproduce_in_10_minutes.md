@@ -31,12 +31,15 @@ python -c "from iverilog_ai.core.toolchain import locate_tools, describe_tools; 
 | 建虚拟环境 | 约 5 秒 |
 | `pip install -e .`（只有 pydantic） | 约 17 秒 |
 | `pip install -e ".[dev]"` | 约 29 秒 |
-| `pip install -e ".[ui]"` | **未能在本机完成**：UI 依赖树（streamlit → pandas / pyarrow / pydeck …）需要数百 MB 空间，而当时项目所在磁盘只剩 0 GB，pip 报 `[Errno 28] No space left on device`。**请预留足够磁盘空间**（见下方"磁盘"一条） |
+| `pip install -e ".[ui]"` | 约 53 秒（需要数百 MB 磁盘） |
+| `streamlit run ui/app.py` 起到可访问 | **约 1 秒**（健康检查返回 `ok`，首页同时可取） |
 
-> **磁盘**：上面的数字是"时间成本"，还有"空间成本"。产物目录 `.iverilog-ai/` 会随实验增长
-> （本项目自身累积到 215 GB 盘写满），跑矩阵前请确认有若干 GB 空闲。
+> **磁盘**：上面的数字是"时间成本"，还有"空间成本"。`.[ui]` 的依赖树（streamlit → pandas /
+> pyarrow / pydeck …）需要数百 MB，产物目录 `.iverilog-ai/` 还会随实验增长；
+> 本文档作者就曾在磁盘只剩 0 GB 时看到 `pip` 报 `[Errno 28] No space left on device`。
+> 跑矩阵前请确认有若干 GB 空闲。
 >
-> 全程**不需要** API 密钥、**不需要**联网（第 0 节装依赖那一步除外）。下面每一条都在离线状态可跑完。
+> 全程**不需要** API 密钥（只有第 0 节装依赖需要联网）。下面每一条都在离线状态可跑完。
 
 ---
 

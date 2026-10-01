@@ -29,9 +29,10 @@
 | 测试（干净 venv，只装 `.[dev]`） | **675 passed / 3 skipped / 0 failed** | `.dsh-tmp/repro/` + 第 6 轮实测 |
 | 类型门禁 | mypy 61 文件 0 error | `python -m mypy` |
 | 死代码 / 编码门禁 | 0 / 0 | `check_dead_code.py` / `strip_bom.py --check` |
-| 公平实验（5 轮，新口径） | 分母 67；fixed 57/67（85.1%），random 与 ai(Mock) 累计 57/67、**单轮均值 78.2%（74.6%–83.6%）**；不可判定 0 | `.iverilog-ai/strategy-fair-5rounds/strategy_matrix.json` |
+| 公平实验（5 轮，新口径，离线三组） | 分母 67；fixed 57/67（85.1%），random 与 ai(Mock) 累计 57/67、**单轮均值 78.2%（74.6%–83.6%）**；不可判定 0 | `.iverilog-ai/strategy-fair-5rounds/strategy_matrix.json` |
+| **公平实验（5 轮，新口径，真实在线模型）** | 分母 67；**online_ai（deepseek-flash）累计 63/67（94.0%）、单轮均值 83.4%（73.1%–89.6%）**；不可判定 8（参考告警 5 + 零检查项 3）；1680/1680 任务，75.2 分钟，代码 `47ed59b9` 干净树；去重后 128 次计费请求，**费用上界 $1.273** | `.iverilog-ai/strategy-online-flash/strategy_matrix.json` |
 | 外部模块验证 | 3 模块 × 5 变体 = **15/15 判"不同"**；3 个等价改写判"一致"；3 个编不过判 `inconclusive` | `.iverilog-ai/external/uart_rx_check/evidence.json` |
-| 技术报告 | 25 页 / 正文 21 页 / 917 KB（≤10 MB ✓） | `check_submission.py --kind report` |
+| 技术报告 | 25 页 / 正文 21 页 / 921 KB（≤10 MB ✓） | `check_submission.py --kind report` |
 | 证据包（演练） | 9 个文件 / 25.7 KB / **manifest 逐文件 sha256**；产物 `G:\iai-evidence-pack[.zip]` | `.dsh-tmp/rehearse_pack.py` 输出 |
 | 上游来源固定 | `uart_rx` sha256 `e686104e5ff2d25f…`、`uart_tx` `e9559ddebf124f8f…`、`priority_encoder`（verilog-axi 开发集） | `.iverilog-ai/external/manifest.json` |
 
@@ -67,17 +68,20 @@
 
 需要你决定/提供的五件事：
 
-1. **磁盘空间**（最紧急，挡住第 4 节里带 ⚠ 的两项与最终打包）；
-2. **独立复核人**（审变体，或至少复核外部模块那 15 个）；
-3. **在线模型实验的付费授权**（并提供端点 / 模型名 / 密钥所在的环境变量名）；
-4. **3 名真实试用者**（任务卡与汇总工具已就绪：`docs/trial/`）；
-5. **仓库公开方式**（公开仓库或评委可访问的私有交付），随后填 `CITATION.cff`。
+| 需求 | 状态 |
+|---|---|
+| 磁盘空间 | ✅ 已解决（E: 23.8 GB / C: 6.4 GB / G: 2.6 GB 可用） |
+| 在线模型实验付费授权 | ✅ 已解决（2026-10-01 用用户提供的 key 跑完 13 案例 × 5 轮，结果已写入报告 §5.3(3) 与本页第 2 节） |
+| 仓库公开方式与 `CITATION.cff` | ❌ 未完成（`CITATION.cff` 里仍是占位 URL，仓库未公开） |
+| 3 名真实试用者 | ❌ 未完成（任务卡与汇总工具已就绪：`docs/trial/`） |
+| 独立复核人 | ❌ 未完成（外部模块 15 个变体待外部复核） |
+| 3–5 分钟演示视频 | ❌ 未录制（脚本已就绪：`docs/demo/demo_script.md`） |
 
 ## 6. 建议的下一步顺序
 
-1. 腾磁盘 → 2. 生成正式证据包并验证可解压、可解出全部 sha256 → 3. 填公开链接与 `CITATION.cff`
-→ 4. 录 3–5 分钟视频 → 5. 收集 3 份试用记录 → 6.（有授权时）跑正式在线实验并更新报告数字
+1. ~~腾磁盘~~（已完成）→ 2. 生成正式证据包并验证可解压、可解出全部 sha256 → 3. 填公开链接与 `CITATION.cff`
+→ 4. 录 3–5 分钟视频 → 5. 收集 3 份试用记录 → 6. ~~跑正式在线实验并更新报告数字~~（**已完成**：报告 §5.3(3) 表末行、`docs/experiment/metric_inventory.md` 第 3 节）
 → 7. 用 `docs/competition/submission_gate_checklist.md` 逐项过一遍再提交。
 
-第 2、3、4 项里凡是"只差执行"的部分（例如证据包生成与校验脚本）我可以继续做；
-第 1、5 项与试用者、复核人必须由你推动。
+第 2 项里凡是"只差执行"的部分（例如证据包生成与校验脚本）我可以继续做；
+第 3、4、5 项与试用者、复核人必须由你推动。

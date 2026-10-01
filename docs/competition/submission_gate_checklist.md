@@ -27,18 +27,26 @@
 每个主指标一行，含**数值 / 口径（这个数字到底测的是什么）/ 来源文件 / 生成时间 / 复现命令 / 适用范围**。
 其中把三处历史混用拆开了：`83/83` 是**手写测试台**、`0/83` 是**零可比较检查项**、
 `76/83` 是**离线规则规划器**，在线数字属**旧口径探索性结果**，不得与新口径并列比较。
+新口径下的**真实在线模型**结果（2026-10-01，deepseek-flash，5 轮）已补进同一张表：
+累计 **63/67（94.0%）**、单轮均值 83.4%、不可判定 8、参考告警作废 5。
 
 ## 3. 同预算实验的计划、检查数、失败样本与费用均可复查
 
-✅ 已核验（离线部分）：`.iverilog-ai/strategy-fair-5rounds/strategy_matrix.json`
+✅ 已核验（离线三组）：`.iverilog-ai/strategy-fair-5rounds/strategy_matrix.json`
 （880/880 任务、`code_revision 2b9594f8`、`working_tree_dirty=false`）。
+✅ 已核验（真实在线组）：`.iverilog-ai/strategy-online-flash/strategy_matrix.json`
+（1680/1680 任务、`code_revision 47ed59b9`、`working_tree_dirty=false`、2026-10-01T10:41:57Z→11:57:07Z）。
 产物里带 `budget_cycles` / `total_cycles` / `check_count` / `plan_raw.json` / `plan_normalized.json` /
 `undecidable_by_reason` / `plans_excluded_by_reference_alarm`。
 
 - 三组在同一案例上的**实际总周期完全一致**（可逐案例核对 `total_cycles`）；
 - 分母 **67** 来自清单，不来自实际产出的行；
-- **费用**：这一轮**全部离线，花费 0 元**。历史在线实验的花费是另一套口径
+- **费用（离线三组）**：**花费 0 元**。历史在线实验的花费是另一套口径
   （`scripts/estimate_model_cost.py` 给出区间，与 API 余额实测下降吻合），不能当作本轮费用。
+- **费用（真实在线组）**：**按 `request_id` 去重后 128 次计费请求**，prompt 242,146 /
+  completion 1,000,332 tokens（含推理 787,217），刊例价高峰 cache-miss 上界 **$1.273**、
+  非高峰约 **$0.637**。原始 per-request usage 保留在产物行里，可逐条复核。
+  ⚠️ 同一请求的 usage 会挂在多个变体行上，**按行累加会把费用高估约 5.5 倍**（793 行 vs 128 请求）。
 
 ## 4. 至少一个外部模块全过程复现；支持范围写清
 
