@@ -106,6 +106,8 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 | 总览 PDF | `docs/project_overview.pdf` | 历史 |
 | 架构 | `docs/architecture.md` | 有效 |
 | API 集成入口 | `docs/experiment/api_handoff.md` | 有效 |
+| API 自动验证 Agent | `docs/experiment/api_agent.md`、`scripts/run_verification_agent.py`、`scripts/export_agent_trajectories.py` | 已实现循环与轨迹采集；托管微调与效果对照尚未完成 |
+| API Agent 本地验收 | `docs/experiment/api_agent_validation_2026-10-04.md` | 195 项相关回归通过；真实服务商联调待配置 |
 | 第一次用（分级手册） | `docs/manual/01_beginner.md` | 有效 |
 | 进阶 | `docs/manual/02_advanced.md` | 有效 |
 | 深入原理 | `docs/manual/03_deep.md` | 有效 |
@@ -152,7 +154,7 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 ## 4. 工程门禁（当前记录与历史快照）
 
 上次完整回归及门禁快照见 `docs/experiment/local_validation_2026-10-04.md`。
-其中 768 项通过是该次完整验证的记录，不包含之后新增试用工具测试；本轮材料验收另见试用验收记录。
+其中 768 项通过是该次完整验证的记录，不包含之后新增试用工具和 Agent 测试；后续验收分别见对应记录。
 下表的 2026-10-01 数字同样为历史快照。
 
 | 门禁 | 命令 | 结果 |
@@ -164,7 +166,7 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 | 编码/BOM | `python scripts/strip_bom.py --check` | 0 问题 |
 | 交付体检 | `python scripts/check_submission.py --repo .` | **1 error**（`CITATION.cff` 占位符） |
 | 报告页数/体积 | `python scripts/check_submission.py --kind report docs/competition/technical_report_draft.pdf` | 0 error / 1 warning（正文 22 页超建议值） |
-| 索引路径存在性 | `python scripts/check_doc_index.py` | **109/109 条路径存在**（2026-10-04；反向测试：故意写错一条则退出码 1） |
+| 索引路径存在性 | `python scripts/check_doc_index.py` | **113/113 条路径存在**（2026-10-04；此前反向测试：故意写错一条则退出码 1） |
 
 ---
 

@@ -23,6 +23,7 @@ from iverilog_ai.ai import (
     supplement_tests,
 )
 from iverilog_ai.core.config import ExecutionConfig
+from iverilog_ai.ai.agent import AgentLimits, STOP_LABELS, run_verification_agent
 from iverilog_ai.core.executor import IcarusExecutor
 from iverilog_ai.core.contracts import DutContract
 from iverilog_ai.core.labels import (
@@ -287,7 +288,7 @@ def _clear_input_evidence() -> bool:
         "last_handwritten_result", "last_handwritten_case", "last_handwritten_report", "last_run_kind",
         "workspace_evidence_pack", "static_rtl_review", "static_review_advice",
         "static_review_advice_meta", "static_review_advice_hash", "rtl_comparison", "rtl_ai_review",
-        "behavior_comparison", "candidate_repair_text", "custom_reference_fingerprint",
+        "behavior_comparison", "candidate_repair_text", "custom_reference_fingerprint", "workspace_agent_result",
     )
     had_evidence = any(st.session_state.get(key) is not None for key in keys)
     for key in keys:
@@ -2569,6 +2570,59 @@ with _PLAN:
         except Exception as exc:
             st.error(f"测试未完成：{exc}")
 
+with _PLAN:
+    with st.expander("自动验证 Agent"):
+        st.caption("通过 API 决定下一组测试，自动运行并保留每轮证据。找到反例或预算用尽时停止。")
+        _agent_left, _agent_right = st.columns(2)
+        _agent_rounds = int(_agent_left.number_input("最多验证轮数", min_value=1, max_value=5, value=3, key="agent_round_limit"))
+        _agent_requests = int(_agent_right.number_input("最多 API 请求", min_value=1, max_value=5, value=3, key="agent_request_limit"))
+        _agent_cycles = int(st.number_input("累计激励周期上限", min_value=20, max_value=20000, value=1000, step=20, key="agent_cycle_limit"))
+        st.caption("会发送接口定义、规格、当前计划和仿真摘要。已有计划会先执行；请求可能计费，次数上限不等于金额上限。")
+        _agent_run = st.button("启动自动验证", key="run_verification_agent", disabled=not use_online)
+        if not use_online:
+            st.caption("先在「工具设置」选择在线模型并填写 API 配置。")
+        if _agent_run:
+            try:
+                _agent_contract = _contract()
+                _agent_defines, _agent_includes = _compile_options()
+                _agent_spec = (ROOT / case["spec"]).read_text(encoding="utf-8") if not is_custom else "用户自定义 RTL；接口定义不等于完整功能规格。"
+                _agent_provider = _build_provider("自动验证")
+                with _busy("Agent 正在验证，达到预算后自动停止"):
+                    _agent_result = run_verification_agent(
+                        provider=_agent_provider, contract=_agent_contract,
+                        rtl_path=ROOT / str(case["rtl"]),
+                        output_dir=ROOT / ".iverilog-ai/pipeline-ui" / f"agent-{uuid.uuid4().hex[:12]}",
+                        objective=str(st.session_state.get("objective_text", "检查正常行为和边界条件，寻找可复现反例")),
+                        specification=_agent_spec, initial_plan=st.session_state.get("ai_plan"),
+                        limits=AgentLimits(max_rounds=_agent_rounds, max_requests=_agent_requests, max_total_cycles=_agent_cycles),
+                        execution_options={"allowed_roots": (ROOT,), "defines": _agent_defines, "include_dirs": _agent_includes,
+                                           "iverilog_path": os.getenv("IVERILOG_PATH") or r"D:\iverilog\bin\iverilog.exe",
+                                           "vvp_path": os.getenv("VVP_PATH") or r"D:\iverilog\bin\vvp.exe"},
+                    )
+                st.session_state.workspace_agent_result = _agent_result
+                if _agent_result.last_result is not None:
+                    _agent_last = _agent_result.last_result
+                    st.session_state.ai_plan = _agent_last.plan
+                    st.session_state.ai_plan_case = name
+                    st.session_state.last_pipeline_result = _agent_last
+                    st.session_state.last_pipeline_case = name
+                    st.session_state.last_run_kind = "pipeline"
+                    _agent_last.artifacts["report"] = str(write_report(_agent_last.simulation, Path(_agent_last.artifacts["output_dir"]) / "report.md", title="Icarus 智测 Agent 运行报告"))
+                    Path(_agent_last.artifacts["pipeline_result"]).write_text(_agent_last.to_json() + "\n", encoding="utf-8")
+            except Exception as exc:
+                st.error(f"自动验证未启动：{type(exc).__name__}。请检查 API 配置、接口定义和运行目录。")
+        _saved_agent = st.session_state.get("workspace_agent_result")
+        if _saved_agent is not None:
+            st.info(STOP_LABELS[_saved_agent.stop_reason])
+            st.caption(f"API 请求 {_saved_agent.trajectory['requests_attempted']} 次 · 已执行 {len(_saved_agent.trajectory['rounds'])} 轮 · 累计激励 {_saved_agent.trajectory['stimulus_cycles_executed']} 周期")
+            if not _saved_agent.trajectory["rounds"]:
+                st.caption("本次没有完成仿真；下方如有结果，来自此前运行。")
+            if _saved_agent.trajectory["rounds"]:
+                st.dataframe([{"轮次": row["round"], "检查数": row["observation"]["checks"],
+                               "失败数": row["observation"]["failures"], "结论": row["observation"]["verdict"]}
+                              for row in _saved_agent.trajectory["rounds"]], hide_index=True, use_container_width=True, height=180)
+            st.download_button("下载完整 Agent 轨迹", _saved_agent.trajectory_path.read_bytes(), file_name="agent_trajectory.json", mime="application/json", key="download_agent_trajectory")
+
 _render_workspace_results()
 with _WORKSPACE_META:
     _chips([
@@ -2581,7 +2635,7 @@ with _WORKSPACE_META:
 with _HISTORY:
     _section_header("03", "RUN ARCHIVE", "运行档案", "")
     history_root = ROOT / ".iverilog-ai" / "pipeline-ui"
-    history_files = sorted([*history_root.glob("runs/*/result.json"), *history_root.glob("workspace-*/runs/*/result.json")], key=lambda item: item.stat().st_mtime, reverse=True) if history_root.is_dir() else []
+    history_files = sorted([*history_root.glob("runs/*/result.json"), *history_root.glob("workspace-*/runs/*/result.json"), *history_root.glob("agent-*/round-*/runs/*/result.json")], key=lambda item: item.stat().st_mtime, reverse=True) if history_root.is_dir() else []
     if not history_files:
         st.info("还没有运行记录。")
     if history_files:
