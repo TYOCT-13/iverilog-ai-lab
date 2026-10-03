@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "blank_human_review_template",
+  "instructions": {
+    "copy_one_record_per_input": "3 个基线和 21 个候选分别记录；不只保留成功项。",
+    "review_verdict_values": ["confirmed", "disputed", "inconclusive", "out_of_scope"],
+    "input_kind_values": ["baseline", "functional_mutant", "proposed_equivalent_rewrite", "compile_failure_control"],
+    "tool_status_values": ["identical", "different", "inconclusive", "not_run"],
+    "empty_values": "未实际核查的字段留 null 或空值；模板不能作为已完成审核证据。",
+    "privacy": "不要填 API 密钥；公开真实身份、原话、声音或录屏需单独授权。",
+    "independence": "独立真人复核与源码来自外部是两回事；代理不能替真人确认。"
+  },
+  "review_id": "",
+  "reviewer": {
+    "alias": "",
+    "relationship_to_team": "",
+    "rtl_verification_background": "",
+    "contributed_to_project": null,
+    "authored_this_feature_variant_or_verdict": null,
+    "compensation_or_other_interest": "",
+    "saw_prior_report": null,
+    "saw_expected_label_before_prediction": null,
+    "developer_assistance": [],
+    "ai_assistance_and_human_checks": ""
+  },
+  "session": {
+    "date_and_timezone": "",
+    "project_commit": "",
+    "working_tree_patch_or_snapshot": "",
+    "environment_record": "",
+    "frozen_manifest_path": "",
+    "frozen_manifest_sha256": "",
+    "raw_record_directory": ""
+  },
+  "records": [
+    {
+      "record_id": "",
+      "module": "",
+      "variant_id": "",
+      "input_kind": null,
+      "baseline_path": "",
+      "baseline_sha256": "",
+      "candidate_path": "",
+      "candidate_sha256": "",
+      "diff_path": "",
+      "parameters_clock_reset_scope": "",
+      "specification_reference": "",
+      "claimed_behavior": "",
+      "reviewer_prediction_before_tool_result": "",
+      "baseline_spec_test_review": "",
+      "semantic_change_analysis": "",
+      "trigger_evidence": {
+        "inputs_and_precondition": "",
+        "first_observable_cycle_or_time": null,
+        "signal_expected_actual": "",
+        "evidence_file_and_location": "",
+        "reduced_plan_rerun": null,
+        "minimality_limit": ""
+      },
+      "execution": {
+        "command": "",
+        "plan_path_and_sha256": "",
+        "contract_path_and_sha256": "",
+        "testbench_path_and_sha256": "",
+        "output_directory": "",
+        "exit_code": null,
+        "tool_status": null,
+        "raw_logs": [],
+        "waveform_path": ""
+      },
+      "review": {
+        "verdict": null,
+        "claim_actually_confirmed_or_disputed": "",
+        "reason_and_evidence": "",
+        "unverified_scope": "",
+        "disagreement_and_follow_up": "",
+        "supersedes_record_id": null
+      },
+      "reviewer_confirmed_this_record": null,
+      "confirmation_date_and_record": ""
+    }
+  ],
+  "publication_consent": {
+    "internal_retention": null,
+    "anonymous_findings": null,
+    "real_identity": null,
+    "raw_recording_or_voice": null,
+    "consent_record_and_limits": ""
+  }
+}

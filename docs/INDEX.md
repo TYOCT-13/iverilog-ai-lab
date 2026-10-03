@@ -10,13 +10,14 @@
 
 ---
 
-## 0. 三条最快的阅读路径
+## 0. 最快的阅读路径
 
 | 你想干什么 | 按顺序读 |
 |---|---|
 | 5 分钟了解这个项目 | `README.md` → `docs/project_overview.md` → `docs/competition/technical_report_draft.pdf` |
 | 复核数字是否可信 | `docs/experiment/metric_inventory.md`（每个数字一行：口径/来源/时间/复现命令）→ `docs/competition/submission_gate_checklist.md` → 产物目录 |
 | 提交当天照着做 | `docs/competition/final_delivery_snapshot.md` → `docs/competition/submission_gate_checklist.md` → `docs/competition/submission_cover_text.md` |
+| 组织真人试用与反馈 | `docs/trial/README.md` → `docs/trial/organizer_workflow.md`；发给参与者从 `docs/trial/participant_start.md` 开始 |
 
 ---
 
@@ -33,7 +34,7 @@
 | 演示视频脚本 | `docs/demo/demo_script.md` | 有效 | **视频尚未录制** |
 | 证据包（正式，历史快照） | `G:\iai-evidence-pack-final[.zip]` | 历史 | 2026-10-01 核验为 8 文件 / 11.1 KB，sha256 已复核；本轮未重新生成，不能视为当前代码的完整复现包 |
 | 证据包（演练） | `G:\iai-evidence-pack[.zip]` | 历史 | 9 文件 / 25.7 KB，含 `waveform.vcd` 样例 |
-| 证据包说明 | `docs/demo/evidence_pack_guide.md` | 有效 | 包里每个文件是什么、怎么验 |
+| 证据包结构说明 | `docs/demo/evidence_pack_guide.md` | 部分历史 | 包结构可参考；旧按钮描述以当前 T08 任务卡与录制指南为准 |
 | 引用信息 | `CITATION.cff` | **待补** | `repository-code` 仍是 `example.invalid`，是提交体检里唯一的 error |
 | 开源与合规清单 | `docs/competition/opensource_resource_list.md` | 有效 | 第三方来源与许可 |
 | 上游贡献说明 | `docs/competition/upstream_contribution.md` | 有效 | Issue/PR 尚未提交 |
@@ -123,23 +124,47 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 | GitHub Action | `action.yml`、`docs/upstream/verify-diff-action.md` | 部分：静态检查过，外部调用未验 |
 | 第三方许可 | `THIRD_PARTY.md`、`NOTICE`、`LICENSE` | 有效 |
 
+### 3.1 真人试用、独立复核与视频材料
+
+以下是可执行的指南和空白表单，不代表已经收集到真人结果。建议安排 **3–5 名不同角色的试用者**，按能力分配部分任务；这是项目的组织安排，不是声称比赛官方规定了人数。
+
+| 内容 | 位置 | 状态 / 使用范围 |
+|---|---|---|
+| 真人试用总入口 | `docs/trial/README.md` | 有效；区分参与者、组织者、复核者 |
+| 组织者流程 | `docs/trial/organizer_workflow.md` | 有效；邀请、分配任务、观察、反馈与复测 |
+| 参与者入口 | `docs/trial/participant_start.md` | 有效；只做分配的任务卡 |
+| 角色与任务覆盖安排 | `docs/trial/personas_and_coverage.md` | 有效；独立机器与共享主机分别记录 |
+| 12 张任务卡与组织者核对要点 | `docs/trial/tasks/` | 有效；核对要点不放入参与者包 |
+| 可填写反馈表与观察模板 | `docs/trial/forms/` | 有效；匿名引用和录屏分别征求同意 |
+| v2 会话汇总工具 | `scripts/summarize_trial_sessions.py` | 有效；按分配任务统计，保留跳过、卡住和缺记录；复测不重复计人数 |
+| 参与者 / 组织者材料包构建 | `scripts/build_trial_kit.py` | 有效；明确文件白名单，两包及逐文件 SHA-256 清单，不包含真人原件 |
+| 独立真人复核指南与空模板 | `docs/review/` | 有效；复核 3 个基线与 21 个候选，包含功能变体、拟等价改写和编译失败控制项 |
+| 原始录屏与成片工作流 | `docs/demo/recording_workflow.md` | 有效；真人试用原片、独立审核记录和团队演示分别保留 |
+| 3–5 分钟团队演示分镜 | `docs/demo/demo_script.md` | 有效；视频尚未录制，离线演示不称为真实 LLM 调用 |
+| 本轮材料验收记录 | `docs/trial/validation_2026-10-04.md` | 有效；记录本次表单、脚本与交付包检查，不替代真人试用 |
+| v1 反馈兼容入口 | `docs/trial/task_card.md`、`docs/trial/feedback_template.json`、`scripts/summarize_trial_feedback.py` | 保留旧表和旧汇总工具；新试用使用 v2 可变任务表 |
+| 真人结果登记 | `docs/trial/results.md` | 待收集；不把自动测试或模板算作用户反馈 |
+
+真人原始记录留在被 Git 忽略的本机目录，公开摘要仅使用同意匿名引用的会话。独立复核需要真人逐条检查规格、源码差异与运行证据；代理自查、外部开源来源和界面试用均不能替代。
+
 ---
 
 ## 4. 工程门禁（当前记录与历史快照）
 
-本轮完整回归及门禁结果统一见 `docs/experiment/local_validation_2026-10-04.md`。
-下表的 2026-10-01 数字为历史快照，不代替本轮验证。
+上次完整回归及门禁快照见 `docs/experiment/local_validation_2026-10-04.md`。
+其中 768 项通过是该次完整验证的记录，不包含之后新增试用工具测试；本轮材料验收另见试用验收记录。
+下表的 2026-10-01 数字同样为历史快照。
 
 | 门禁 | 命令 | 结果 |
 |---|---|---|
-| 当前验证记录 | `docs/experiment/local_validation_2026-10-04.md` | 2026-10-04：768 passed / 1 skipped，mypy 64 文件 0 error；PDF 9 项复核通过 |
+| 上次完整验证快照 | `docs/experiment/local_validation_2026-10-04.md` | 2026-10-04：768 passed / 1 skipped，mypy 64 文件 0 error；PDF 9 项复核通过 |
 | 测试（2026-10-01 历史） | `python -m pytest -q` | **720 passed / 1 skipped**（历史干净 venv：675 / 3 / 0） |
 | 类型 | `python -m mypy` | 61 文件 0 error |
 | 死代码 | `python scripts/check_dead_code.py` | 121 文件 0 处 |
 | 编码/BOM | `python scripts/strip_bom.py --check` | 0 问题 |
 | 交付体检 | `python scripts/check_submission.py --repo .` | **1 error**（`CITATION.cff` 占位符） |
 | 报告页数/体积 | `python scripts/check_submission.py --kind report docs/competition/technical_report_draft.pdf` | 0 error / 1 warning（正文 22 页超建议值） |
-| 索引路径存在性 | `python scripts/check_doc_index.py` | **95/95 条路径存在**（反向测试：故意写错一条则退出码 1） |
+| 索引路径存在性 | `python scripts/check_doc_index.py` | **109/109 条路径存在**（2026-10-04；反向测试：故意写错一条则退出码 1） |
 
 ---
 
@@ -177,14 +202,13 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 | 项 | 状态 | 卡在哪 |
 |---|---|---|
 | `CITATION.cff` 真实地址 | 待补 | 当前先完成本地 Git；公开仓库地址尚未确定，保留占位，不捏造链接 |
-| 3 份真人试用记录 | 待补 | 需要 3 名试用者；任务卡与汇总工具已就绪 `docs/trial/` |
+| 真人试用与复测记录 | 待补 | 建议安排 3–5 名不同角色试用者；材料就绪，尚待实际收集；不是官方人数硬要求 |
 | 3–5 分钟演示视频 | 待补 | 需要录制；脚本 `docs/demo/demo_script.md` |
-| 外部独立复核 | 待补 | 15 个外部变体待他人复核 |
+| 外部独立复核 | 待补 | 3 个基线与 21 个候选待真人逐条复核；记录关系、协助、分歧与不可判定 |
 | GitHub Action 外部调用验证 | 待补 | 需要一个调用方仓库 |
 | 正文 22 页 | 已知取舍 | 超大纲"建议 ≤15 页"；官方不以篇幅评分，已披露 |
 
-试用材料：`docs/trial/README.md`、`docs/trial/task_card.md`、`docs/trial/feedback_template.json`、
-`docs/trial/results.md`（当前为空汇总）、`scripts/summarize_trial_feedback.py`。
+试用与复核的完整入口见 §3.1。v1 原始表和汇总脚本保留兼容，新记录不覆盖旧表；缺少真人反馈、独立审核或视频时继续标注待补。
 
 ---
 

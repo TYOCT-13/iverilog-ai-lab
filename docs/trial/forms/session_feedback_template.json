@@ -1,0 +1,41 @@
+{
+  "schema_version": "2.0",
+  "record_kind": "template",
+  "session": {
+    "session_id": "",
+    "date": "",
+    "participant_alias": "",
+    "roles": [],
+    "development_relation": "",
+    "visit": "",
+    "previous_session_id": null,
+    "recording_basis": "",
+    "recording_note": ""
+  },
+  "build": {"version": "", "commit": "", "dirty": null},
+  "environment": {
+    "os": "",
+    "python_version": "",
+    "iverilog_version": "",
+    "browser": "",
+    "device": "",
+    "viewport": "",
+    "execution_mode": "",
+    "entry": ""
+  },
+  "consent": {"anonymous_quote": null, "screen_recording": null},
+  "assigned_tasks": [],
+  "task_records": [],
+  "overall_feedback": "",
+  "_instructions": {
+    "record_kind": "实际真人试用填 human；合成测试始终填 synthetic。空模板不是试用结果。",
+    "session": "匿名代号跨轮次保持一致。角色 novice/developer/reviewer/reproducer/api_user/mobile_reader；开发关系 external/contributor/team_member；首次 first，复测 retest 并填前次 session_id。",
+    "recording": "现场 contemporaneous，事后补填 retrospective 并在 recording_note 写依据、记不清的内容。日期 YYYY-MM-DD。",
+    "environment": "不适用或无法取得版本写 not_applicable 或 unknown，不要猜。设备 desktop/tablet/mobile；执行模式 independent_machine/shared_host；入口 ui/cli/mixed。",
+    "consent": "匿名引用与录屏分别征求同意，分别填 true/false；拒绝任一项不影响试用。",
+    "tasks": "assigned_tasks 填实际分配的 T01-T12 子集；task_records 只填实际收集的记录。分配但没开始用 skipped 并写原因；来不及记录就不添加该条，汇总显示 missing_record，不自动当作完成或零耗时。任务是否完成与DUT的PASS/FAIL分开：检出已知错误或理解对比中的编译失败，也可能已完成试用目标。",
+    "storage": "真人原件只放 .iverilog-ai/trial-sessions/，不要提交到公开仓库。--public 会排除未同意匿名引用的整份会话，并报告排除份数与统计口径。",
+    "task_record_shape": {"task_id": "", "status": "", "duration_seconds": null, "duration_method": "not_recorded", "prompt_count": null, "assistance": [], "objective_result": "", "subjective_feedback": "", "reason": "", "evidence": []},
+    "task_record_fields": "状态 completed/partial/blocked/skipped；用时仅填实际执行期间的墙钟秒数，包含求助和等待、不含任务间休息；计时 measured，估计 estimated，没记 not_recorded+null。prompt_count 是提示次数，未记用 null。assistance 每条含 kind=hint/explanation/operator_action 与 detail。客观结果和个人感受分别填写；非completed必须填reason。evidence只填本地证据路径，不放密钥、真实姓名或电话。"
+  }
+}

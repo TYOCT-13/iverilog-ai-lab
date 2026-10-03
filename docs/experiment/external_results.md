@@ -1,14 +1,17 @@
-# 外部模块验证结果（P0-D，第 1 个模块）
+# 外部模块验证结果（P0-D，三模块历史记录）
 
 对象：`alexforencich/verilog-uart` 的 `uart_rx`（MIT，Verilog-2001）。
 这是**第一次在非内置、非本项目编写的 RTL 上**跑完整的"合约 → 激励 → Icarus → 行为对比"链。
 
-复现命令（需要先抓取上游文件）：
+本记录从 `uart_rx` 开始，随后在 §5、§7 追加 `uart_tx` 与 `priority_encoder`；当前范围以 §8 的三个模块汇总为准。此处仅修正文档范围说明，没有新增实验或改写历史结果。
+
+历史本机运行入口（需已经备齐冻结输入，不能作为全新环境的一键复现命令）：
 
 ```powershell
-python scripts/fetch_external_modules.py        # 抓取 + 记录来源证据（.iverilog-ai/external/）
-python scripts/check_external_module.py         # 跑规格测试台 + verify-diff 逐变体比对
+python scripts/check_external_module.py         # 仅在可执行副本中运行，会重写固定目录产物
 ```
+
+当前 `fetch_external_modules.py` 抓取的是 `common_cells`，不能补齐这里的 UART / priority_encoder 输入；检查脚本另有本机工具路径依赖。请先按 `docs/review/independent_review_guide.md` 取得冻结输入并确认环境，保留原始证据后在副本重放。
 
 ## 1. 来源与固定依据
 
@@ -154,9 +157,10 @@ python scripts/check_external_module.py         # 跑规格测试台 + verify-di
   强度上 sha256 更精确，但**不符合路线图"记录 commit"的字面要求**，下次抓取时要补上。
 - **变体是我做的，不是独立复核人做的**。路线图要求"经独立审核的功能变体"，
   这一条**必须由人完成**，我不代签，所以在报告里只能称为"开发者人工变异"。
-- **2 个模块，但来自同一个上游仓库**（`verilog-uart` 的 rx/tx）。路线图想要的是不同类型
-  （参数化输入 / 握手缓冲 / 有限状态控制），rx+tx 只覆盖了"握手 + 有限状态控制"这一侧，
-  **参数化输入**（例如参数化计数器/仲裁器）还没有——目标 3 个模块仍未达成。
+- **当前已有 3 个模块，来自同一作者的两个仓库**：`verilog-uart` 的 rx/tx 覆盖握手与有限状态控制，
+  §7 新增的 `verilog-axi/priority_encoder` 覆盖参数化输入，三模块数量已达到。
+  但 `priority_encoder` 属于开发集预检样例，**不是外部留出集**；来源数量和类型覆盖不能替代
+  真人独立审核，也不能据此宣称完成了三个独立来源的泛化验证。上面的独立审核待完成状态仍然保留。
 - 每个模块只有 1 个规格测试台与 1 个激励计划。同一批变体在**其它**计划下的检出情况未测，
   因此本结果**不能**外推成"这套工具能检出这些模块的所有缺陷"。
 - 与调参的关系：`verilog-uart` 未参与规则/提示词调参，但与已用于抽取约定规则的
