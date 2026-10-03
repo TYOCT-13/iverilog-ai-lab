@@ -1,0 +1,23 @@
+{
+  "ok": true,
+  "findings": [
+    {
+      "level": "warning",
+      "code": "pages/over-recommended",
+      "message": "technical_report_draft.pdf 正文 22 页（总 27 页），超出大纲建议的 15 页——**建议值，不是硬约束**；请确认这是有意的取舍"
+    },
+    {
+      "level": "info",
+      "code": "metadata/dump",
+      "message": "technical_report_draft.pdf 元数据：{\"title\": \"\", \"author\": \"\", \"subject\": \"\", \"keywords\": \"\", \"creator\": \"\", \"producer\": \"\"}"
+    }
+  ],
+  "checked": [
+    {
+      "file": "docs\\competition\\technical_report_draft.pdf",
+      "pages": 27,
+      "body_pages": 22,
+      "bytes": 946980
+    }
+  ]
+}

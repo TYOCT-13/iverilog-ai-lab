@@ -1,0 +1,155 @@
+{
+  "started_at": "2026-10-03T19:21:20.414160+00:00",
+  "python": "3.12.7",
+  "git_base": "2ef75da76e7151d8e4302b8eaf51ee46b04b082e",
+  "checks": [
+    {
+      "name": "pytest",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp=<outside-repository-temp>"
+      ],
+      "exit_code": 0,
+      "seconds": 151.52,
+      "tail": [
+        "...............................................s........................ [ 65%]",
+        "........................................................................ [ 74%]",
+        "........................................................................ [ 84%]",
+        "........................................................................ [ 93%]",
+        ".................................................                        [100%]",
+        "=========================== short test summary info ===========================",
+        "SKIPPED [1] tests\\core\\test_rule_assertions.py:55: 推荐断言表当前为空：没有可验证的条目（见 core/rule_assertions.py 的说明）",
+        "768 passed, 1 skipped in 150.44s (0:02:30)"
+      ]
+    },
+    {
+      "name": "mypy",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "-m",
+        "mypy",
+        "src",
+        "ui",
+        "scripts"
+      ],
+      "exit_code": 0,
+      "seconds": 5.78,
+      "tail": [
+        "Success: no issues found in 64 source files"
+      ]
+    }
+  ],
+  "python_source_tree_sha256": "7772bcfaf7cfa41def9f4327b870221b183821b8fea2a39576d1e1e32cf574d0",
+  "pdf_regression_after_layout_edit": {
+    "command": "python -X utf8 -m pytest -q tests/core/test_markdown_to_pdf.py --basetemp=<outside-repository-temp>",
+    "passed": 9,
+    "exit_code": 0
+  },
+  "pdfs": [
+    {
+      "file": "docs/competition/technical_report_draft.pdf",
+      "pages": 27,
+      "bytes": 946980,
+      "metadata": {
+        "format": "PDF 1.7",
+        "title": "",
+        "author": "",
+        "subject": "",
+        "keywords": "",
+        "creator": "",
+        "producer": "",
+        "creationDate": "",
+        "modDate": "",
+        "trapped": "",
+        "encryption": null
+      },
+      "outside_page_text": [],
+      "experiment_pages": [
+        14,
+        15
+      ]
+    },
+    {
+      "file": "docs/project_overview.pdf",
+      "pages": 10,
+      "bytes": 427389,
+      "metadata": {
+        "format": "PDF 1.7",
+        "title": "",
+        "author": "",
+        "subject": "",
+        "keywords": "",
+        "creator": "",
+        "producer": "",
+        "creationDate": "",
+        "modDate": "",
+        "trapped": "",
+        "encryption": null
+      },
+      "outside_page_text": [],
+      "experiment_pages": [
+        1
+      ]
+    }
+  ],
+  "api_local_smoke": {
+    "dry_run_exit": 0,
+    "local_execute_exit": 0,
+    "external_api_called": false,
+    "request_attempts": 1,
+    "runs": [
+      {
+        "case": "simple_alu",
+        "repeat": 0,
+        "status": "plan_valid",
+        "vectors": 10,
+        "usage": {
+          "prompt_tokens": 1302,
+          "completion_tokens": 484,
+          "total_tokens": 1787
+        },
+        "simulation_status": "passed",
+        "checks": 30,
+        "failures": 0
+      }
+    ],
+    "usage_note": "Deterministic debug-server sample usage, not real model billing."
+  },
+  "submission_repo": {
+    "exit_code": 1,
+    "findings": [
+      {
+        "level": "error",
+        "code": "placeholder/unresolved",
+        "message": "CITATION.cff:18 还留着占位符「example.invalid 保留域」：repository-code: \"https://example.invalid/iverilog-ai-lab\""
+      },
+      {
+        "level": "info",
+        "code": "placeholder/scanned",
+        "message": "占位符扫描：26 个交付面文本文件，命中 1 处"
+      }
+    ]
+  },
+  "submission_pdf": {
+    "exit_code": 0,
+    "findings": [
+      {
+        "level": "warning",
+        "code": "pages/over-recommended",
+        "message": "technical_report_draft.pdf 正文 22 页（总 27 页），超出大纲建议的 15 页——**建议值，不是硬约束**；请确认这是有意的取舍"
+      },
+      {
+        "level": "info",
+        "code": "metadata/dump",
+        "message": "technical_report_draft.pdf 元数据：{\"title\": \"\", \"author\": \"\", \"subject\": \"\", \"keywords\": \"\", \"creator\": \"\", \"producer\": \"\"}"
+      }
+    ]
+  }
+}

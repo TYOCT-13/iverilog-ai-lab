@@ -32,6 +32,8 @@
 
 ## 数据与素材
 
-RTL 参考设计与缺陷变体、testbench、规格、contract、缺陷基准、规则包、实验数据**全部为本项目自主编写或自主产生**，未使用任何第三方数据集。
+内置 RTL 参考设计与缺陷变体、testbench、规格、contract、缺陷基准和实验数据由本项目编写或产生。外部复现实验另使用 `verilog-uart` / `verilog-axi` 的 MIT 源码，按来源清单下载到被 Git 忽略的 `.iverilog-ai/external/`；这些上游源码不随本仓库分发，见 `docs/experiment/external_modules.md`。
+
+网页附带 **Anton** 字体（`ui/assets/fonts/Anton-Regular.ttf`），来源为 Google Fonts / The Anton Project Authors，使用 **SIL Open Font License 1.1**。字体保持未修改，版权与完整许可随包保留在 `ui/assets/fonts/OFL.txt`。原创 SVG 主视觉位于 `ui/assets/verification-map.svg`；页面未使用明日方舟的 Logo、角色或官方设备图片。
 
 `verification_rules/` 归纳自公开开源资料的工程约定（lowRISC 风格指南、verilog-axi、verilog-ethernet、cocotb、LiteX、ZipCPU wb2axip、Project F），**仅参考工程原则，未复制任何代码**；来源与提炼原则见 `verification_rules/opensource_synthesis.md`。

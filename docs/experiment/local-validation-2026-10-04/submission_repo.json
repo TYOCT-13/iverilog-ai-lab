@@ -1,0 +1,22 @@
+{
+  "ok": false,
+  "findings": [
+    {
+      "level": "error",
+      "code": "placeholder/unresolved",
+      "message": "CITATION.cff:18 还留着占位符「example.invalid 保留域」：repository-code: \"https://example.invalid/iverilog-ai-lab\""
+    },
+    {
+      "level": "info",
+      "code": "placeholder/scanned",
+      "message": "占位符扫描：26 个交付面文本文件，命中 1 处"
+    }
+  ],
+  "checked": [
+    {
+      "repo": ".",
+      "files_scanned": 26,
+      "placeholders": 1
+    }
+  ]
+}

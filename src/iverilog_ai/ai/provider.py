@@ -10,7 +10,7 @@ from http.client import RemoteDisconnected
 from typing import Literal, Protocol
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit, urlunsplit
-from urllib.request import Request, urlopen
+from urllib.request import HTTPRedirectHandler, Request, build_opener, urlopen
 
 
 class Provider(Protocol):
@@ -43,6 +43,13 @@ class ProviderConnectionError(RuntimeError):
 
     def __init__(self, detail: str = "对端在返回响应前关闭了连接") -> None:
         super().__init__(f"在线 API 连接失败：{detail}；请检查 Base URL、接口格式和网络代理")
+
+
+class _NoRedirect(HTTPRedirectHandler):
+    """Budgeted requests must not create hidden redirect hops."""
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
 
 
 @dataclass
@@ -293,6 +300,8 @@ class OpenAICompatibleProvider:
         allow_network: bool = False,
         store: bool = False,
         stream: bool | Literal["auto"] = False,
+        force_output_limit: bool = False,
+        request_limit: int | None = None,
     ) -> None:
         raw_url = endpoint or os.getenv("IVERILOG_AI_BASE_URL") or os.getenv("IVERILOG_AI_ENDPOINT", "")
         self.base_url = _base_url(raw_url) if raw_url else ""
@@ -307,6 +316,13 @@ class OpenAICompatibleProvider:
         self.max_output_tokens = int(max_output_tokens)
         self.allow_network = bool(allow_network)
         self.store = bool(store)
+        # Budgeted experiment entrypoints must send the cap even when it equals
+        # the compatibility default (4096). Existing callers retain their shape.
+        self.force_output_limit = bool(force_output_limit)
+        if request_limit is not None and (isinstance(request_limit, bool) or not isinstance(request_limit, int) or request_limit < 1):
+            raise ValueError("request_limit must be a positive integer")
+        self.request_limit = request_limit
+        self.request_count = 0
         # stream 取值：
         #   False    —— 始终非流式（默认，兼容性最好）
         #   True     —— 始终流式（部分网关只接受流式）
@@ -335,10 +351,12 @@ class OpenAICompatibleProvider:
         if self.wire_api == "responses":
             if self.store:
                 fields.append("store")
-            if self.max_output_tokens != 4096:
+            if self.force_output_limit or self.max_output_tokens != 4096:
                 fields.append("max_output_tokens")
             if self.reasoning_effort is not None:
                 fields.append("reasoning")
+        elif self.force_output_limit or self.max_output_tokens != 4096:
+            fields.append("max_tokens")
         return {
             "base_url": self.base_url or None,
             "url": (self.base_url + path) if self.base_url else None,
@@ -387,9 +405,18 @@ class OpenAICompatibleProvider:
             payload = json.dumps(body, ensure_ascii=False).encode("utf-8")
             method = "POST"
         request = Request(self.base_url + path, data=payload, headers=headers, method=method)
+        if self.request_limit is not None and self.request_count >= self.request_limit:
+            raise RuntimeError("provider request budget exhausted")
+        self.request_count += 1
         started = time.perf_counter()
         try:
-            with urlopen(request, timeout=self.timeout) as response:
+            # Keep legacy clients' redirect behavior; bounded runs reject it so
+            # every counted attempt can issue at most one HTTP request.
+            response_context = (
+                urlopen(request, timeout=self.timeout) if self.request_limit is None
+                else build_opener(_NoRedirect()).open(request, timeout=self.timeout)
+            )
+            with response_context as response:
                 raw = response.read()
                 self.last_latency_ms = int((time.perf_counter() - started) * 1000)
                 if streaming:
@@ -432,7 +459,7 @@ class OpenAICompatibleProvider:
             # 仅在调用方明确选择时发送可选字段；默认最小请求兼容更多网关。
             if self.store:
                 body["store"] = True
-            if self.max_output_tokens != 4096:
+            if self.force_output_limit or self.max_output_tokens != 4096:
                 body["max_output_tokens"] = self.max_output_tokens
             if self.reasoning_effort is not None:
                 body["reasoning"] = {"effort": self.reasoning_effort}
@@ -447,7 +474,7 @@ class OpenAICompatibleProvider:
         if json_mode:
             body["response_format"] = {"type": "json_object"}
         # DeepSeek 兼容网关可能拒绝空值/不支持参数；仅在非默认时发送 max_tokens。
-        if self.max_output_tokens != 4096:
+        if self.force_output_limit or self.max_output_tokens != 4096:
             body["max_tokens"] = self.max_output_tokens
         return body
 

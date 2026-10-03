@@ -6,10 +6,15 @@ Copyright 2026 Icarus 智测 contributors
 
 本项目自研部分按 Apache License, Version 2.0 授权（见 LICENSE）。
 
-本项目不包含、不修改、不重新分发任何第三方源代码或二进制。以独立进程方式
+本项目不随包分发第三方 EDA 工具或上游 RTL 源码。以独立进程方式
 调用 Icarus Verilog（GPL-2.0-or-later）与可选的 GTKWave（GPL-2.0-or-later）；
 以库依赖方式使用 Python（PSF License Agreement）、pydantic（MIT）与
 Streamlit（Apache-2.0）。
+
+网页随包附带未修改的 Anton 字体（ui/assets/fonts/Anton-Regular.ttf）。
+Copyright 2020 The Anton Project Authors。
+字体按 SIL Open Font License 1.1 授权，完整声明见 ui/assets/fonts/OFL.txt；
+字体不适用本项目自研代码的 Apache-2.0 许可。
 
 完整的第三方资源、版本、许可证、使用方式、关键许可义务与自主开发边界说明见：
   docs/competition/opensource_resource_list.md

@@ -3,8 +3,8 @@
 这一份是**全部材料的入口**。所有路径都相对仓库根 `E:\FPGA_WORK\iverilog-ai-lab`，
 带盘符的除外。路径可用 `python scripts/check_doc_index.py` 校验是否仍然存在。
 
-- 仓库：`iverilog-ai-lab`，MIT；判定权威是 Icarus Verilog 12.0（`s20150603`）
-- 材料截止：**2026-10-01**；代码版本 `e58221b`（提交截止 2026-10-15 20:00 北京时间）
+- 仓库：`iverilog-ai-lab`，Apache-2.0；第三方资源保留各自许可；判定权威是 Icarus Verilog 12.0（`s20150603`）
+- 本次材料修订：**2026-10-04**；本地代码修改基线 `2ef75da`（提交截止 2026-10-15 20:00 北京时间）
 - 状态记号：**有效** = 当前口径，可直接对外引用；**历史** = 反映当时状态，只读归档，
   引用时必须带"旧口径"标注；**待补** = 尚未完成
 
@@ -24,14 +24,14 @@
 
 | 材料 | 路径 | 状态 | 备注 |
 |---|---|---|---|
-| 技术报告（PDF） | `docs/competition/technical_report_draft.pdf` | 有效 | 25 页 / 正文 21 页 / 921 KB；官方 PDF 上限 10 MB |
+| 技术报告（PDF） | `docs/competition/technical_report_draft.pdf` | 有效 | 27 页 / 正文 22 页 / 925 KB（2026-10-04 重渲染）；官方 PDF 上限 10 MB |
 | 技术报告（源） | `docs/competition/technical_report_draft.md` | 有效 | 改完用 `python scripts/markdown_to_pdf.py` 重渲染 |
 | 报告配图 | `docs/competition/figures/` | 有效 | 4 张（架构/流程/分层证据/基准），`scripts/make_report_figures.py` |
-| 作品名称与简介 | `docs/competition/submission_cover_text.md` | 有效 | 简介实测 **293 字**（限 300）；字数校核脚本在 `.dsh-tmp/count_cover.py` |
+| 作品名称与简介 | `docs/competition/submission_cover_text.md` | 有效 | 简介按 Unicode 码点实测 **242 字**（含空格标点，平台限制另行核对） |
 | 提交前门禁清单 | `docs/competition/submission_gate_checklist.md` | 有效 | 逐项状态 + 证据 + 还差什么 |
-| 交付快照 | `docs/competition/final_delivery_snapshot.md` | 有效 | 全部主指标、证据包、剩余外部依赖 |
+| 交付快照 | `docs/competition/final_delivery_snapshot.md` | 历史 | 2026-10-01 的主指标、证据包与当时外部依赖 |
 | 演示视频脚本 | `docs/demo/demo_script.md` | 有效 | **视频尚未录制** |
-| 证据包（正式） | `G:\iai-evidence-pack-final[.zip]` | 有效 | 8 文件 / 11.1 KB，sha256 已独立复核 |
+| 证据包（正式，历史快照） | `G:\iai-evidence-pack-final[.zip]` | 历史 | 2026-10-01 核验为 8 文件 / 11.1 KB，sha256 已复核；本轮未重新生成，不能视为当前代码的完整复现包 |
 | 证据包（演练） | `G:\iai-evidence-pack[.zip]` | 历史 | 9 文件 / 25.7 KB，含 `waveform.vcd` 样例 |
 | 证据包说明 | `docs/demo/evidence_pack_guide.md` | 有效 | 包里每个文件是什么、怎么验 |
 | 引用信息 | `CITATION.cff` | **待补** | `repository-code` 仍是 `example.invalid`，是提交体检里唯一的 error |
@@ -42,27 +42,35 @@
 
 ## 2. 实验与证据
 
-### 2.1 主结果：同预算公平实验（新口径，固定分母）
+### 2.1 主结果：每计划预算对齐实验与同轮数子集（固定分母）
 
 | 内容 | 位置 |
 |---|---|
 | 口径定义（预算按规格定、执行前归一化、不可判定按未检出、参考告警作废） | `docs/experiment/experiment_plan.md` |
 | **指标总账（每个数字一行）** | `docs/experiment/metric_inventory.md` §3 |
-| 离线三组产物（fixed / random / ai-Mock，5 轮） | `.iverilog-ai/strategy-fair-5rounds/strategy_matrix.json` |
-| **真实在线模型产物（deepseek-flash，5 轮）** | `.iverilog-ai/strategy-online-flash/strategy_matrix.json` |
+| 离线三组产物（fixed 1 轮 / random 与 ai-Mock 各 5 轮） | `.iverilog-ai/strategy-fair-5rounds/strategy_matrix.json` |
+| **真实在线模型原始产物（deepseek-flash，10 轮，seed 0–9）** | `.iverilog-ai/strategy-online-flash/strategy_matrix.json` |
+| **seed 0–4 事后子集重算（online / random / Mock 各 5 轮）** | `docs/experiment/matched-budget-2026-10-04/README.md`、`docs/experiment/matched-budget-2026-10-04/summary.json`、`docs/experiment/matched-budget-2026-10-04/selected_runs.json` |
+| 只读重算脚本（不调用模型） | `scripts/summarize_matched_budget.py` |
 | 运行脚本 | `scripts/run_strategy_experiment.py` |
 | 计分与预算实现（纯函数） | `src/iverilog_ai/core/strategy_scoring.py` |
 
-主数字（分母均为 67）：fixed 57/67（85.1%）；random 与 ai-Mock 累计 57/67、单轮均值 78.2%；
-**真实在线模型累计 63/67（94.0%）、单轮均值 83.4%、不可判定 8、参考告警作废 5**。
-去重后 128 次计费请求，费用上界 **$1.273**。两面结论见报告 §5.3(3)。
+原始在线组为 **10 轮、800 条 runs、130 次计划请求**，累计 63/67（94.0%）、单轮均值 83.4%；
+不可判定为 8 条变体 runs，其中参考告警导致失效 5 条。文件总计 1,680 条 runs 包含基线。
+random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算比较。
+
+事后 seed 0–4 子集：在线 **61/67（91.0%）、单轮均值 83.9%、不可判定与参考失效均为 0**；
+随机/Mock 57/67（85.1%）、单轮均值 78.2%；fixed 单轮 57/67（85.1%）。
+在线相对随机累计净多 4 个，单轮均值仍低于人工固定向量；这是开发集描述性分析。
+原始十轮有 128 个请求保存了 usage；按当时标价估算约 **$0.637–1.273**，不是实付账单。
+详细边界见报告 §5.3(3) 与指标总账。
 
 ### 2.2 消融与基准
 
 | 内容 | 位置 | 状态 |
 |---|---|---|
-| 消融矩阵（手写 TB / AI 计划 / 预言机，83 缺陷） | `.iverilog-ai/ablation-matrix/`；脚本 `scripts/run_ablation_matrix.py` | 有效 |
-| 基准矩阵（今日复跑：参考 15 个误报 0、缺陷 83/83、不可判定 0） | `.iverilog-ai/matrix-final/`；脚本 `scripts/run_benchmark_matrix.py` | 有效 |
+| 消融矩阵（三组离线实测 + 并集推导，83 缺陷；不证明 LLM 增益） | `.iverilog-ai/ablation-matrix/`；脚本 `scripts/run_ablation_matrix.py` | 有效 |
+| 基准矩阵（2026-10-01 复跑：参考 15 个误报 0、缺陷 83/83、不可判定 0） | `.iverilog-ai/matrix-final/`；脚本 `scripts/run_benchmark_matrix.py` | 有效 |
 | 缺陷基准清单（15 分类 / 83 缺陷） | `benchmarks/manifest.json` | 有效 |
 | 参考模型对齐（15/15 逐拍零差异） | `docs/reference_model_alignment.md` | 有效 |
 | 分层证据说明 | `docs/layered_evidence.md` | 有效 |
@@ -96,6 +104,7 @@
 | 项目总览（最全的一篇） | `docs/project_overview.md` | 有效 |
 | 总览 PDF | `docs/project_overview.pdf` | 历史 |
 | 架构 | `docs/architecture.md` | 有效 |
+| API 集成入口 | `docs/experiment/api_handoff.md` | 有效 |
 | 第一次用（分级手册） | `docs/manual/01_beginner.md` | 有效 |
 | 进阶 | `docs/manual/02_advanced.md` | 有效 |
 | 深入原理 | `docs/manual/03_deep.md` | 有效 |
@@ -116,16 +125,20 @@
 
 ---
 
-## 4. 工程门禁（2026-10-01 实测）
+## 4. 工程门禁（当前记录与历史快照）
+
+本轮完整回归及门禁结果统一见 `docs/experiment/local_validation_2026-10-04.md`。
+下表的 2026-10-01 数字为历史快照，不代替本轮验证。
 
 | 门禁 | 命令 | 结果 |
 |---|---|---|
-| 测试 | `python -m pytest -q` | **720 passed / 1 skipped**（干净 venv：675 / 3 / 0） |
+| 当前验证记录 | `docs/experiment/local_validation_2026-10-04.md` | 2026-10-04：768 passed / 1 skipped，mypy 64 文件 0 error；PDF 9 项复核通过 |
+| 测试（2026-10-01 历史） | `python -m pytest -q` | **720 passed / 1 skipped**（历史干净 venv：675 / 3 / 0） |
 | 类型 | `python -m mypy` | 61 文件 0 error |
 | 死代码 | `python scripts/check_dead_code.py` | 121 文件 0 处 |
 | 编码/BOM | `python scripts/strip_bom.py --check` | 0 问题 |
 | 交付体检 | `python scripts/check_submission.py --repo .` | **1 error**（`CITATION.cff` 占位符） |
-| 报告页数/体积 | `python scripts/check_submission.py --kind report docs/competition/technical_report_draft.pdf` | 0 error / 1 warning（正文 21 页超建议值） |
+| 报告页数/体积 | `python scripts/check_submission.py --kind report docs/competition/technical_report_draft.pdf` | 0 error / 1 warning（正文 22 页超建议值） |
 | 索引路径存在性 | `python scripts/check_doc_index.py` | **95/95 条路径存在**（反向测试：故意写错一条则退出码 1） |
 
 ---
@@ -163,12 +176,12 @@
 
 | 项 | 状态 | 卡在哪 |
 |---|---|---|
-| `CITATION.cff` 真实地址 | 待补 | 仓库未公开；也是唯一门禁 error |
+| `CITATION.cff` 真实地址 | 待补 | 当前先完成本地 Git；公开仓库地址尚未确定，保留占位，不捏造链接 |
 | 3 份真人试用记录 | 待补 | 需要 3 名试用者；任务卡与汇总工具已就绪 `docs/trial/` |
 | 3–5 分钟演示视频 | 待补 | 需要录制；脚本 `docs/demo/demo_script.md` |
 | 外部独立复核 | 待补 | 15 个外部变体待他人复核 |
 | GitHub Action 外部调用验证 | 待补 | 需要一个调用方仓库 |
-| 正文 21 页 | 已知取舍 | 超大纲"建议 ≤15 页"；官方不以篇幅评分，已披露 |
+| 正文 22 页 | 已知取舍 | 超大纲"建议 ≤15 页"；官方不以篇幅评分，已披露 |
 
 试用材料：`docs/trial/README.md`、`docs/trial/task_card.md`、`docs/trial/feedback_template.json`、
 `docs/trial/results.md`（当前为空汇总）、`scripts/summarize_trial_feedback.py`。

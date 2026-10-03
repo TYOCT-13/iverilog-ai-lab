@@ -1,10 +1,14 @@
 # Icarus 智测 · 功能总览
 
 面向读者：想快速了解这个项目**现在能做什么**的人（评委、同学、潜在使用者）。
-本文只讲当前真实可用的功能与实测结果，每一节都给出可复制的命令；全部数字都由脚本现算，
-不手写。技术细节与实现原理见各功能对应的专门文档。
+本文介绍真实可用的功能及已有实测记录，并给出复现命令。实验的日期、预算和适用范围见
+`docs/experiment/metric_inventory.md`，技术细节见各功能对应的文档。
 
-更新时间：2026-09-11
+更新时间：2026-10-04
+
+本轮修订：网页改造与输入状态修复已落地；实验统一为三组消融实测加并集推导。真实在线
+历史为 10 轮；共同 seed 0–4 的事后 5 轮子集检出 61/67，随机组 57/67，单轮平均仍低于
+人工固定激励，不能概括为 AI 优于人工。重汇总证据见 `docs/experiment/matched-budget-2026-10-04/README.md`。
 
 ---
 
@@ -55,7 +59,7 @@ streamlit run ui/app.py
 | 手写 testbench | 26 | `tb/*.v` |
 | 静态检查规则 | **44**（error 4 / warn 27 / info 13） | 规则注册表现算 |
 | 已对齐参考模型（权威预言机） | **15 / 15** | `SUPPORTED == set(AUTHORITATIVE)` |
-| 自动化测试 | **700 passed / 1 skipped** | `python -m pytest -q` |
+| 自动化测试 | 最新实测数量与日期见 `docs/experiment/local_validation_2026-10-04.md` | `python -m pytest -q` |
 | 上游实测约定来源 | 2 个开源项目、172 个文件 | `data/opensource_conventions.json` |
 
 基准矩阵最近一次实跑结论：
@@ -358,7 +362,9 @@ testbench 检查。**不接受**自由书写的 Verilog 或 SVA 代码，因此�
 | `scripts/run_pipeline_matrix.py` | 离线 AI 路径矩阵：15 个案例逐个"规划 → 生成 testbench → Icarus → 权威期望值" |
 | `scripts/check_dead_code.py` | 未可达代码与重复定义检查（AST，CI 门禁） |
 | `scripts/check_doc_index.py` | 资料索引路径检查：`docs/INDEX.md` 登记的材料是否还存在（CI 门禁） |
-| `python -m mypy` | 类型门禁：`src` / `ui` / `scripts` 共 62 个文件，当前 0 error |
+| `python -m mypy` | 类型门禁：检查 `src` / `ui` / `scripts`；最新结果见本地验证记录 |
+| `scripts/summarize_matched_budget.py` | 从既有记录按共同 seed 重汇总实验，无需调用模型 |
+| `scripts/check_online_api.py` | 默认离线预检；显式执行时限制模型 HTTP 请求次数，接入说明见 `docs/experiment/api_handoff.md` |
 | `scripts/run_strategy_experiment.py` | 固定/随机/离线AI/在线AI 四策略公平对比 |
 | `scripts/compare_models.py` | 多个在线模型横向对比（含可比性检查） |
 | `scripts/ingest_open_source_conventions.py` | 从开源项目度量约定 |
@@ -380,7 +386,7 @@ testbench 检查。**不接受**自由书写的 Verilog 或 SVA 代码，因此�
 
 ```powershell
 # 1. 全量测试（含多个真实跑 Icarus 的端到端用例）
-python -m pytest -q                                   # 期望 700 passed / 1 skipped
+python -m pytest -q                                   # 应全部通过；数量以本次输出为准
 
 # 2. 基准矩阵（固定向量 + 手写 testbench，结果确定）
 python scripts/run_benchmark_matrix.py                # 期望 15/15、83/83、0 误报、0 不可判定
