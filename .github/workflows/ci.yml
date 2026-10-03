@@ -70,6 +70,11 @@ jobs:
       - name: 未可达代码检查（AST）
         run: python scripts/check_dead_code.py
 
+      # 索引门禁：docs/INDEX.md 是全部材料的入口，最容易悄悄变成过期路标
+      # （文件改名后索引照旧，读者按图索骥却找不到，而且没有任何报错）。
+      - name: 资料索引路径检查
+        run: python scripts/check_doc_index.py
+
       # 类型门禁：src / ui / scripts 当前是 0 error（配置见 pyproject.toml 的 [tool.mypy]）。
       # 它抓到过三类真问题：同名函数定义两次（死代码）、线性脚本里"先用后定义"的
       # NameError、以及把 None 当字符串用的隐患。

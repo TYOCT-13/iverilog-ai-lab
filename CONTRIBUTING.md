@@ -44,7 +44,13 @@ python -c "from iverilog_ai.core.toolchain import locate_tools, describe_tools; 
 python -m pytest -q                              # 全量测试
 python scripts/run_benchmark_matrix.py           # 基准矩阵：15 参考全过、83/83 检出、0 误报
 python scripts/strip_bom.py --check              # 文本编码卫生（见下）
+python scripts/check_doc_index.py                # 资料索引里登记的路径是否还存在
+python -m mypy                                   # 类型门禁
+python scripts/check_dead_code.py                # 未可达代码
 ```
+
+`check_doc_index.py` 防的是"索引变成过期路标"：`docs/INDEX.md` 是全部材料的入口，
+文件一改名它就错，而且错得没人报错——所以让脚本按行内代码路径逐个检查存在性。
 
 `strip_bom.py` 管三条规则，各对应一个真实事故：
 

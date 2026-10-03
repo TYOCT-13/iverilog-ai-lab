@@ -137,6 +137,7 @@ python scripts/run_synthesis_matrix.py         # 期望 98/98 可综合
 python scripts/run_pipeline_matrix.py          # 期望离线 AI 路径 15/15，每例证据等级 reference_model
 python -m mypy                                 # 期望 Success: no issues found
 python scripts/check_dead_code.py              # 期望未发现未可达代码
+python scripts/check_doc_index.py              # 期望 docs/INDEX.md 里 95/95 条路径都存在
 ```
 
 **条数为什么会和别人不一样**（这是正常的，别以为是坏了）：

@@ -357,7 +357,8 @@ testbench 检查。**不接受**自由书写的 Verilog 或 SVA 代码，因此�
 | `scripts/run_synthesis_matrix.py` | 98 个变体逐个跑 Yosys 综合（分层证据的可复现来源） |
 | `scripts/run_pipeline_matrix.py` | 离线 AI 路径矩阵：15 个案例逐个"规划 → 生成 testbench → Icarus → 权威期望值" |
 | `scripts/check_dead_code.py` | 未可达代码与重复定义检查（AST，CI 门禁） |
-| `python -m mypy` | 类型门禁：`src` / `ui` / `scripts` 共 49 个文件，当前 0 error |
+| `scripts/check_doc_index.py` | 资料索引路径检查：`docs/INDEX.md` 登记的材料是否还存在（CI 门禁） |
+| `python -m mypy` | 类型门禁：`src` / `ui` / `scripts` 共 62 个文件，当前 0 error |
 | `scripts/run_strategy_experiment.py` | 固定/随机/离线AI/在线AI 四策略公平对比 |
 | `scripts/compare_models.py` | 多个在线模型横向对比（含可比性检查） |
 | `scripts/ingest_open_source_conventions.py` | 从开源项目度量约定 |
