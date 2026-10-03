@@ -11,10 +11,13 @@ AppTest 会把脚本跑一遍：语法/名字错误、组件 API 误用、以及
 from __future__ import annotations
 
 import ast
+from copy import deepcopy
 import json
 import re
 import sys
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import MagicMock
 
 import pytest
 
@@ -42,19 +45,49 @@ def test_page_renders_without_exception(rendered: AppTest):
     assert not rendered.exception, [str(item.value) for item in rendered.exception]
 
 
-def test_navigation_tabs_cover_every_section(rendered: AppTest):
-    """顶部导航栏必须把功能分开，而不是全挤在一页里。"""
+def test_workspace_navigation_covers_every_section():
+    """桌面/手机原生导航双向同步，每个入口都能到达，任务变化同时复位。"""
+    app = _run_app()
+    navigation = app.radio(key="workspace_page")
+    assert navigation.proto.horizontal
+    assert not any(item.key == "workspace_page" for item in app.sidebar.radio)
+    pages = ("工作台", "规则审查", "运行档案", "工具设置", "使用手册", "项目概览")
+    for expected in pages:
+        assert any(expected in label for label in navigation.options), navigation.options
+    mobile = app.selectbox(key="workspace_mobile_page")
+    assert not any(item.key == "workspace_mobile_page" for item in app.sidebar.selectbox)
+    for expected in pages:
+        assert any(expected in label for label in mobile.options), mobile.options
 
-    labels = [tab.label for tab in rendered.tabs]
-    for expected in ("概览", "验证", "质量与对比", "手册", "设置", "历史"):
-        assert expected in labels, labels
+    def assert_page(expected):
+        assert not app.exception, [str(item.value) for item in app.exception]
+        for key in ("workspace_page", "workspace_mobile_page"):
+            assert app.session_state[key] == expected
+        assert app.radio(key="workspace_page").value == expected
+        assert app.selectbox(key="workspace_mobile_page").value == expected
+
+    # 每次换用另一种导航，避免某个控件始终使用刚好相同的旧值而漏掉同步失败。
+    for index, expected in enumerate(pages):
+        target = app.radio(key="workspace_page") if index % 2 == 0 else app.selectbox(key="workspace_mobile_page")
+        target.set_value(expected).run()
+        assert_page(expected)
+
+    app.radio(key="ui_scenario").set_value("对比两份 RTL（AI 改写验收 / 开源行为回归）").run()
+    assert_page("工作台")
+    app.radio(key="workspace_page").set_value("工具设置").run()
+    assert_page("工具设置")
+    app.selectbox(key="workspace_mobile_page").set_value("运行档案").run()
+    assert_page("运行档案")
+    app.run()
+    assert_page("运行档案")
 
 
 def test_theme_is_injected(rendered: AppTest):
-    """风格主题（临床白 + 青色强调 + 导航栏样式）必须真的注入页面。"""
+    """当前本地样式必须真正注入页面，不锁定旧配色或导航外观。"""
 
     html = "\n".join(getattr(item, "value", "") for item in rendered.markdown)
-    assert "--rl-cyan" in html and "stTabs" in html, html[:400]
+    stylesheet = (ROOT / "ui" / "assets" / "console.css").read_text(encoding="utf-8").strip()
+    assert stylesheet and stylesheet in html
 
 
 def test_manual_has_four_audiences(rendered: AppTest):
@@ -114,9 +147,11 @@ def test_page_survives_a_generated_plan():
     )
     app.run()
     assert not app.exception, [str(item.value) for item in app.exception]
-    # 计划区与规则集指纹都应该渲染出来
-    assert any("TestPlan" in str(item.value) for item in app.subheader), [item.value for item in app.subheader]
-    assert any("规则集" in item.value for item in app.caption), [item.value for item in app.caption]
+    # 计划数据、执行入口与规则指纹都应继续渲染，不依赖折叠标题。
+    rendered_json = [json.loads(item.value) for item in app.json]
+    assert app.session_state["ai_plan"].model_dump(mode="json") in rendered_json
+    assert not app.button(key="run_generated_plan").disabled
+    assert any(re.search(r"规则.*\b[a-f0-9]{16}\b", item.value) for item in app.caption), [item.value for item in app.caption]
 
 
 def test_offline_mode_generates_a_plan_that_matches_the_selected_case():
@@ -158,6 +193,40 @@ def test_offline_branches_use_the_contract_aware_provider():
     assert "_offline_provider(contract)" in plan_region, plan_region
     assert "MockProvider()" not in plan_region, "离线生成计划的分支又用回了写死的演示 Provider"
     assert "_offline_provider(contract, vector_count=2)" in source, "离线补充向量分支没有走合约驱动路径"
+
+
+def test_workspace_evidence_survives_navigation_and_export_clicks():
+    """后续点击仍可导出本次证据，下一次运行也不能覆盖旧工件。"""
+    from iverilog_ai.core.toolchain import locate_tools
+
+    if not locate_tools().can_simulate:
+        pytest.skip("需要本机 Icarus/vvp")
+    app = AppTest.from_file(str(APP), default_timeout=120)
+    app.session_state["case_name"] = "简单 ALU"
+    app.run()
+    app.button(key="generate_plan").click().run()
+    app.button(key="run_generated_plan").click().run()
+    assert not app.exception, [str(item.value) for item in app.exception]
+    first = app.session_state["last_pipeline_result"]
+    first_plan = app.session_state["ai_plan"].model_dump(mode="json")
+    first_json = Path(first.artifacts["pipeline_result"])
+    first_bytes = first_json.read_bytes()
+    assert sum("本次验证结果" in str(item.value) for item in app.subheader) == 1
+    app.radio(key="workspace_page").set_value("工具设置").run()
+    app.radio(key="workspace_page").set_value("工作台").run()
+    assert app.selectbox(key="case_name").value == "简单 ALU"
+    assert app.session_state["ai_plan"].model_dump(mode="json") == first_plan
+    assert app.session_state["last_pipeline_result"].artifacts == first.artifacts
+    assert first_json.read_bytes() == first_bytes
+    app.button(key="create_pipeline_evidence_pack").click().run()
+    assert not app.exception, [str(item.value) for item in app.exception]
+    _, manifest, _ = app.session_state["workspace_evidence_pack"]
+    assert {"report", "testplan", "testbench", "vcd"} <= {item["name"] for item in manifest["files"]}
+    assert Path(manifest["zip_file"]).is_file()
+    app.button(key="run_generated_plan").click().run()
+    assert not app.exception, [str(item.value) for item in app.exception]
+    assert app.session_state["last_pipeline_result"].artifacts["output_dir"] != first.artifacts["output_dir"]
+    assert first_json.read_bytes() == first_bytes
 
 
 def _ui_function(name: str):
@@ -332,7 +401,7 @@ def test_validate_contract_button_works_when_the_json_box_is_filled():
     Streamlit 禁止在**本次运行**创建过 `key=X` 的控件之后再写 `st.session_state.X`。
     原来 JSON 文本框带 `key`，"校验通过后把规范格式写回文本框"这一步就必然抛错——
     于是「校验 contract」这个按钮在填过 JSON 之后完全不可用。
-    现在文本框不带 `key`（`value=` 显示 + 手动回写普通 session key），任何时刻都能回写。
+    现在用回调在文本框重新创建前写入规范化 JSON，控件继续使用稳定的 key。
     """
 
     app = _custom_rtl_app(
@@ -346,8 +415,7 @@ def test_validate_contract_button_works_when_the_json_box_is_filled():
     assert contract is not None
     # 规范化后的 JSON 必须真的回到文本框（显示值）与 session key
     assert app.session_state["custom_contract_json_text"] == contract.to_json()
-    boxes = [item for item in app.text_area if "DUT contract JSON" in str(item.label)]
-    assert boxes and boxes[0].value == contract.to_json(), [getattr(item, "value", None) for item in boxes]
+    assert app.text_area(key="custom_contract_json_text").value == contract.to_json()
 
 
 def test_contract_editor_buttons_walk_through_the_documented_flow():
@@ -369,8 +437,8 @@ def test_contract_editor_buttons_walk_through_the_documented_flow():
     _click(app, "contract_json_to_editor")
     assert not app.exception, [str(item.value) for item in app.exception]
     assert not [item.value for item in app.error], [item.value for item in app.error]
-    assert any("刷新表格" in item.value for item in app.success), [item.value for item in app.success]
-    assert app.session_state["custom_contract_editor_ports"], "JSON 里的端口没有回到表格"
+    assert app.success, "刷新表格后应给出反馈"
+    assert app.session_state["custom_contract_editor_ports"] == generated["ports"]
 
     _click(app, "validate_custom_contract")
     assert not app.exception, [str(item.value) for item in app.exception]
@@ -379,7 +447,7 @@ def test_contract_editor_buttons_walk_through_the_documented_flow():
 
 
 def test_validate_contract_reports_invalid_json_without_breaking_the_page():
-    """校验失败必须报"contract 无效：<原因>"，并且不留下半份合约。
+    """校验失败必须报告 JSON 解析原因，并且不留下半份合约。
 
     回调里抛出的解析错误在旧实现里会被写成"Streamlit 内部错误"（那条 `cannot be modified…`），
     真正的原因（JSON 语法错在哪）反而看不到；这里钉住错误信息仍然是给人看的那种。
@@ -390,7 +458,8 @@ def test_validate_contract_reports_invalid_json_without_breaking_the_page():
     assert not app.exception, [str(item.value) for item in app.exception]
     assert app.session_state["custom_contract"] is None
     messages = [item.value for item in app.error]
-    assert messages and "contract 无效" in messages[0], messages
+    assert messages and "JSON" in messages[0] and "Expecting value" in messages[0], messages
+    assert "cannot be modified" not in messages[0]
 
 
 #: Streamlit 的控件函数（带 `key` 参数的那些）。
@@ -511,7 +580,7 @@ def test_static_review_table_is_chinese_and_explains_itself():
     assert re.search(r"[\u4e00-\u9fff]", str(body.iloc[0]["问题"])), body.iloc[0]["问题"]
 
     captions = "\n".join(item.value for item in app.caption)
-    assert "只**读 RTL 文本**" in captions or "只读 RTL 文本" in captions, captions[:400]
+    assert "规则检查" in captions and "不能说明功能是否正确" in captions, captions[:400]
 
 
 def test_vcd_section_is_a_fragment_so_clicks_do_not_reload_the_page():
@@ -605,14 +674,18 @@ def test_every_content_box_has_a_bounded_height():
     assert not missing, "以下内容框没有固定高度：\n" + "\n".join(missing)
     assert code_json > 0
 
-    source = APP.read_text(encoding="utf-8")
-    # CSS 兜底：code/json 的 pre 与 textarea 都要有 max-height + overflow
-    for needle in ("max-height:260px", "max-height:300px", "max-height:320px"):
-        assert needle in source, needle
+    css = (ROOT / "ui" / "assets" / "console.css").read_text(encoding="utf-8")
+    rules = re.findall(r"([^{}]+)\{([^{}]*)\}", css)
+    # 只检查长内容有有限高度与滚动，不固定旧视觉方案的具体像素值。
+    for widget in ("stCode", "stJson", "textarea"):
+        bodies = [body for selector, body in rules if widget in selector]
+        bounded = r"max-height\s*:\s*[1-9]\d*(?:\.\d+)?(?:px|rem|em|d?vh)\b"
+        scrollable = r"overflow(?:-y)?\s*:\s*(?:auto|scroll)\b"
+        assert any(re.search(bounded, body) and re.search(scrollable, body) for body in bodies), widget
 
 
 def test_running_state_does_not_dim_the_whole_page():
-    """运行中不得把整页调淡，进度反馈由按钮旁的 LOADING 提示承担。
+    """运行中不得把整页调淡，进度反馈由按钮旁的加载提示承担。
 
     Streamlit 默认给手上的旧元素加 `data-stale="true"` 并施加 opacity .33——用户看到的
     就是"点了按钮整个网页被调白"。这里钉住覆盖规则存在，并钉住 `_busy` 被用在了
@@ -620,7 +693,8 @@ def test_running_state_does_not_dim_the_whole_page():
     """
 
     source = APP.read_text(encoding="utf-8")
-    assert '[data-stale="true"]{opacity:1 !important' in source
+    css = (ROOT / "ui" / "assets" / "console.css").read_text(encoding="utf-8")
+    assert re.search(r'\[data-stale="true"\][^{]*\{[^}]*\bopacity\s*:\s*1(?:\.0+)?\s*!important\b', css)
     assert "_busy(" in source and "def _busy(" in source
     assert "st.spinner(" in source
     assert source.count("with _busy(") >= 10, source.count("with _busy(")
@@ -671,12 +745,10 @@ def test_diff_scenario_offers_baseline_and_candidate_without_contract():
     assert not app.exception, [str(item.value) for item in app.exception]
     keys = {item.key for item in app.selectbox}
     assert "diff_baseline" in keys, keys
-    source = APP.read_text(encoding="utf-8")
-    # 面板必须直说"不需要合约与计划"，且按钮文案不能出现"合约"这类前置要求
-    assert "对比行为（不需要合约与计划）" in source
-    assert "合约由基线 RTL 自动提取**草稿**" in source
-    # 草稿与计划回退都必须如实告知，不能静默降级
-    assert "st.warning(caveat" in source or "st.warning(caveat," in source
+    assert app.session_state.filtered_state.get("custom_contract") is None
+    assert app.session_state.filtered_state.get("ai_plan") is None
+    assert not app.button(key="run_verify_diff").disabled
+    assert any(item.proto.id.endswith("-diff_candidate") for item in app.get("file_uploader"))
 
 
 def test_learn_mode_collapses_advanced_options():
@@ -685,21 +757,27 @@ def test_learn_mode_collapses_advanced_options():
     app = _run_app()
     app.radio(key="ui_scenario").set_value("学习模式（只要三个按钮）").run()
     assert not app.exception, [str(item.value) for item in app.exception]
-    labels = [item.label for item in app.expander]
-    assert any("高级选项" in item for item in labels), labels
-    assert any("学习模式" in item.value for item in app.info), [item.value for item in app.info]
+    advanced = next(item for item in app.expander if "高级选项" in item.label)
+    assert not advanced.proto.expanded
     # 折叠块里的控件仍然存在于页面上（AppTest 会渲染 expander 内容）
-    source = APP.read_text(encoding="utf-8")
-    assert 'st.expander("高级选项' in source
+    assert app.text_area(key="objective_text")
+    for key in ("generate_plan", "run_generated_plan", "run_handwritten_tb"):
+        assert app.button(key=key)
 
 
-def test_failure_guides_say_they_are_hints_not_verdicts(rendered: AppTest):
+def test_failure_guides_say_they_are_hints_not_verdicts():
     """白话失败解读必须声明"给的行号不代表那一行就是错的"。"""
 
-    source = APP.read_text(encoding="utf-8")
-    assert "def _render_failure_guides(" in source
-    assert "不代表那一行就是错的" in source
-    assert "这些失败是什么意思" in source
+    namespace = _ui_functions("_render_failure_guides")
+    ui = MagicMock()
+    guides = MagicMock(return_value=["检查复位后第一拍的输出。"])
+    namespace.update(st=ui, render_failure_guides=guides, _ui_scenario=lambda: "learn", _LEARN_SCENARIO="learn")
+    result = SimpleNamespace(failures=(object(),))
+    namespace["_render_failure_guides"](result, prefix="test")
+    guides.assert_called_once_with(result, limit=5)
+    ui.markdown.assert_called_once_with("检查复位后第一拍的输出。")
+    caption = ui.caption.call_args.args[0]
+    assert "行号" in caption and "不一定是出错位置" in caption
 
 
 def test_evidence_cache_is_wired_and_test_count_stays_in_tests():
@@ -755,13 +833,17 @@ def test_record_stats_separate_checks_from_observations():
 def test_expectation_source_none_given_tells_you_how_to_improve():
     """证据等级为 none_given 时，不能只说"未验证"，还要给出可执行的下一步。"""
 
-    source = APP.read_text(encoding="utf-8")
-    assert 'source == "none_given"' in source
-    assert "怎么把证据等级提上去" in source
-    for hint in ("reference_model", "ai_generated", "结构化断言", "reference_model.py"):
-        assert hint in source, hint
-    # 观察记录的口径说明也要在页面上
-    assert "不构成检查" in source
+    namespace = _ui_functions("_render_expectation_source")
+    ui = MagicMock()
+    namespace.update(st=ui, EVIDENCE_LABELS={})
+    namespace["_render_expectation_source"]({"oracle": {"expectation_source": "none_given", "design": "custom"}})
+    warning = ui.error.call_args.args[0]
+    assert "没有逐项比对" in warning and "不能视为功能验证通过" in warning
+    hints = ui.markdown.call_args.args[0]
+    for hint in ("期望值", "断言", "参考模型", "人工核验"):
+        assert hint in hints, hint
+    assert "运行完成不代表功能正确" in ui.caption.call_args.args[0]
+    ui.success.assert_not_called()
 
 
 def test_overview_metrics_read_keys_that_evidence_actually_provides():
@@ -800,12 +882,14 @@ def test_static_review_separates_fact_layer_from_ai_advice_layer():
     assert not app.exception, [str(item.value) for item in app.exception]
 
     captions = "\n".join(item.value for item in app.caption)
-    assert "事实层" in captions and "建议层" in captions, captions[:400]
+    assert "不改变规则检查结果" in captions and "不参与评分" in captions, captions[:400]
 
     # 默认不把命中行代码发给模型（披露口径：不上传 RTL 源码）
     opt_in = [item for item in app.checkbox if getattr(item, "key", None) == "static_review_send_snippets"]
     assert opt_in, [getattr(item, "key", None) for item in app.checkbox]
     assert opt_in[0].value is False, "代码片段外发必须默认关闭"
+    assert "不含源码" in opt_in[0].help
+    original_review = deepcopy(app.session_state["static_rtl_review"])
 
     # 离线模式（默认规划器）点复核按钮：给出确定性的"非 AI"建议
     _click(app, "run_static_review_advice")
@@ -814,6 +898,7 @@ def test_static_review_separates_fact_layer_from_ai_advice_layer():
     advice = app.session_state["static_review_advice"]
     assert meta["source"] == "offline_rules"
     assert meta["included_code_snippets"] is False
+    assert app.session_state["static_rtl_review"] == original_review
     assert advice["priorities"], advice
     notes = [str(item.value) for item in app.info]
     assert any("离线规则建议" in text and "非 AI" in text for text in notes), notes
@@ -822,16 +907,29 @@ def test_static_review_separates_fact_layer_from_ai_advice_layer():
 
 
 def test_static_review_advice_never_touches_the_fact_layer():
-    """源码门禁：建议层不得写回命中/评分，且必须记录来源与发送内容。"""
+    """导出保留原始命中/评分，并披露建议来源、发送内容和无效规则 ID。"""
 
-    source = APP.read_text(encoding="utf-8")
-    assert "advise_on_static_review" in source and "offline_review_advice" in source
-    assert "不修改任何命中，也不参与评分" in source
-    assert "不含任何源码文本" in source
-    assert "幻觉防护" in source
-    # 导出时事实层与建议层分开放，不能覆盖 review 字典
-    assert "def _advice_export_payload" in source
-    assert '"ai_advice"' in source
+    namespace = _ui_functions("_advice_export_payload", "_render_static_advice")
+    review = {"score": 70, "findings": [{"rule_id": "RULE001", "line": 4}]}
+    original = deepcopy(review)
+    advice = {"summary": "检查复位", "score": 100}
+    meta = {"source": "ai", "model": "mock-model", "dropped_unknown_rule_ids": ["UNKNOWN_RULE"]}
+    payload = namespace["_advice_export_payload"](review, advice, meta)
+    assert review == original
+    assert payload["score"] == original["score"]
+    assert payload["findings"] == original["findings"]
+    assert payload["ai_advice"]["advice"] == advice
+    assert payload["ai_advice"]["source"] == "ai"
+    assert payload["ai_advice"]["included_code_snippets"] is False
+    assert payload["ai_advice"]["dropped_unknown_rule_ids"] == ["UNKNOWN_RULE"]
+
+    ui = MagicMock()
+    namespace.update(st=ui)
+    namespace["_render_static_advice"](advice, meta)
+    captions = "\n".join(call.args[0] for call in ui.caption.call_args_list)
+    assert "AI 模型" in captions and "不含源码" in captions
+    assert "不改变规则结果" in captions and "不参与评分" in captions
+    assert "已忽略无效规则 ID" in captions and "UNKNOWN_RULE" in captions
 
 
 def test_no_python_file_has_unreachable_code():
