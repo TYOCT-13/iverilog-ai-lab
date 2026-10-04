@@ -74,12 +74,12 @@ def test_real_icarus_existing_sources(tmp_path, module, tag, verdict):
         assert observation["difference_samples"][0]["candidate"] == 0x69
 
 
-def test_parser_rejects_unknown_or_missing_waveform(tmp_path):
-    waveform = tmp_path / "bad.vcd"
-    waveform.write_text("$enddefinitions $end\n#0\n")
+def test_parser_rejects_missing_snapshot(tmp_path):
+    log = tmp_path / "missing.log"
+    log.write_text("no sample lines\n")
     contract = adapter.DutContract.from_dict(adapter.harness.CONTRACT)
-    with pytest.raises(ValueError, match="timescale"):
-        adapter.samples_from_vcd(waveform, contract, 1)
+    with pytest.raises(ValueError, match="sample count"):
+        adapter.samples_from_log(log, contract, 1)
 
 
 def test_existing_output_is_refused_before_api_or_simulation(tmp_path):
@@ -123,18 +123,15 @@ def test_shared_agent_loop_with_mock_http_real_icarus(tmp_path, monkeypatch, bud
 
 
 @pytest.mark.parametrize("output,expected_count,raises", [("1", 1, False), ("x", 1, True), ("1", 2, True)])
-def test_vcd_explicit_sample_timestamp_and_unknowns(tmp_path, output, expected_count, raises):
-    waveform = tmp_path / "synthetic-parser-fixture.vcd"
-    waveform.write_text("$timescale 1ps $end\n$scope module tb_uart_tx $end\n"
-        "$var wire 1 A txd $end\n$var wire 1 B busy $end\n$var integer 32 C cycle $end\n"
-        "$upscope $end\n$enddefinitions $end\n#0\nb0 C\n0B\n1A\n#16000\n"
-        + output + "A\nb1 C\n")
+def test_exact_snapshot_parser_and_unknowns(tmp_path, output, expected_count, raises):
+    log = tmp_path / "synthetic-parser-fixture.log"
+    log.write_text("ICARUS_EXTERNAL_SAMPLE 0 16.000 " + output + " 0\n")
     contract = adapter.DutContract.from_dict(adapter.harness.TX_CONTRACT)
     if raises:
         with pytest.raises(ValueError):
-            adapter.samples_from_vcd(waveform, contract, expected_count)
+            adapter.samples_from_log(log, contract, expected_count)
     else:
-        samples = adapter.samples_from_vcd(waveform, contract, expected_count)
+        samples = adapter.samples_from_log(log, contract, expected_count)
         assert samples == [{"cycle": 0, "time_ns": 16, "outputs": {"txd": 1, "busy": 0}}]
 
 
@@ -162,3 +159,44 @@ def test_missing_qualification_summary_is_not_qualified(tmp_path, monkeypatch):
         output_dir=tmp_path / "qualification", iverilog="mock-compiler", vvp="mock-runtime")
     assert runner.qualification["status"] == "inconclusive"
     assert runner.qualification["checks"] == 0
+
+
+@pytest.mark.parametrize("module,phase", [("priority_encoder", "after"), ("priority_encoder", "before"), ("uart_rx", "before")])
+def test_real_snapshot_phase_and_consecutive_combination_inputs(tmp_path, module, phase):
+    if not MANIFEST.exists() or not IVERILOG or not VVP:
+        pytest.skip("requires frozen historical inputs and local Icarus")
+    runner = adapter.FrozenExternalRunner(manifest=MANIFEST, candidate=HISTORY / f"{module}_baseline.v", module=module,
+        output_dir=tmp_path / "qualification", iverilog=IVERILOG, vvp=VVP)
+    data = adapter.harness.MODULES[module]["plan"]()
+    for vector in data["vectors"]:
+        vector["sample_phase"] = phase
+    plan = TestPlan.model_validate(data)
+    actual = runner.run(plan, runner.contract, runner.candidate, tmp_path / "round")
+    assert runner.observe(actual).verdict == "no_observed_difference"
+    samples = json.loads((tmp_path / "round/baseline_samples.json").read_text(encoding="utf-8"))
+    assert len(samples) == sum(v.cycles for v in plan.vectors)
+    if module == "priority_encoder":
+        for value, sample in enumerate(samples):
+            outputs = sample["outputs"]
+            assert outputs["output_valid"] == bool(value)
+            if value:
+                winner = value.bit_length() - 1
+                assert outputs["output_encoded"] == winner
+                assert outputs["output_unencoded"] == 1 << winner
+        assert samples[0]["outputs"]["output_valid"] == 0  # old final-VCD method returned 1
+    else:
+        assert samples[0]["time_ns"] == 28.0  # #1 before sampling, after reset release at 27ns
+    evidence = json.loads((tmp_path / "round/baseline/snapshot_instrumentation.json").read_text(encoding="utf-8"))
+    assert evidence["anchor_count"] == len(samples)
+    assert evidence["assertions_added"] == 0
+
+
+def test_instrumentation_fails_closed_when_anchor_changes(tmp_path, monkeypatch):
+    original = adapter.TestbenchGenerator._render
+    def changed(*args, **kwargs):
+        return original(*args, **kwargs).replace("    cycle = cycle + 1;", "    cycle=cycle+1;")
+    monkeypatch.setattr(adapter.TestbenchGenerator, "_render", changed)
+    contract = adapter.DutContract.from_dict(adapter.harness.CONTRACT)
+    plan = TestPlan.model_validate(adapter.harness.build_plan())
+    with pytest.raises(adapter.TestbenchGenerationError, match="anchor"):
+        adapter.SnapshotGenerator().generate(plan, contract, tmp_path)

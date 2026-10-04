@@ -23,6 +23,7 @@ from iverilog_ai.ai.provider import OpenAICompatibleProvider
 from iverilog_ai.ai.schema import TestPlan
 from iverilog_ai.core.contracts import DutContract
 from iverilog_ai.core.pipeline import PipelineResult, VerificationPipeline
+from iverilog_ai.core.testbench import TestbenchGenerator, TestbenchGenerationError
 
 # Support both direct script execution and import by tests.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -44,82 +45,62 @@ def save(path: Path, value: Any) -> None:
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
-def samples_from_vcd(path: Path, contract: DutContract, count: int) -> list[dict[str, Any]]:
-    """Read top-level output aliases at actual testbench cycle-counter increments.
+class SnapshotGenerator(TestbenchGenerator):
+    """Add observation-only displays at a validated generator sampling anchor."""
+    def generate(self, plan: Any, contract: Any, output_dir: Any, **options: Any) -> Path:
+        if any(v.expected for v in plan.vectors) or plan.assertions or plan.pre_reset_expected:
+            raise TestbenchGenerationError("snapshot instrumentation requires stimulus-only plans")
+        path = super().generate(plan, contract, output_dir, **options)
+        source = path.read_text(encoding="utf-8")
+        anchor = "    cycle = cycle + 1;"
+        count = sum(vector.cycles for vector in plan.vectors)
+        lines = source.splitlines()
+        locations = [i for i, line in enumerate(lines) if line == anchor]
+        if len(locations) != count or any(i == 0 or not lines[i - 1].startswith('    $display("IVERILOG_AI_RESULT ') for i in locations):
+            raise TestbenchGenerationError("sampling anchor contract changed; refuse instrumentation")
+        names = QUALIFIED_OUTPUTS[contract.module]
+        if not all(contract.port_map[name].direction.value == "output" for name in names):
+            raise TestbenchGenerationError("snapshot can only read qualified outputs")
+        statement = ('    $display("ICARUS_EXTERNAL_SAMPLE %0d %.3f ' + " ".join(["%b"] * len(names))
+                     + '", cycle, $realtime, ' + ", ".join(names) + ');')
+        patched = source.replace(anchor, statement + "\n" + anchor)
+        original = path.with_name(path.stem + "_uninstrumented.v")
+        if original.exists():
+            raise TestbenchGenerationError("uninstrumented evidence already exists")
+        original.write_text(source, encoding="utf-8")
+        path.write_text(patched, encoding="utf-8")
+        generator_source = Path(inspect.getfile(TestbenchGenerator))
+        save(path.parent / "snapshot_instrumentation.json", {
+            "kind": "read_only_sampling_display", "anchor": anchor, "anchor_count": count,
+            "original_sha256": sha(original), "instrumented_sha256": sha(path),
+            "generator_source_sha256": sha(generator_source), "adapter_sha256": sha(Path(__file__)),
+            "outputs": list(names), "time_unit": "ns", "time_precision": "1ps",
+            "assertions_added": 0, "stimulus_or_rtl_changed": False})
+        return path
 
-The generated testbench increments cycle immediately after its sampling statement;
-read the final values in that exact VCD timestamp, not an inferred clock offset.
-Reject missing samples, X/Z, oversized/truncated waveforms and ambiguous timescales.
-"""
+
+def samples_from_log(path: Path, contract: DutContract, count: int) -> list[dict[str, Any]]:
+    """Read statement-time snapshots; final VCD timestamp values are not an oracle."""
     if count < 1 or path.stat().st_size > 64 * 1024 * 1024:
-        raise ValueError("insufficient or excessive waveform")
-    text = path.read_text(encoding="utf-8")
-    header, body = text.split("$enddefinitions $end", 1)
-    timescale = re.search(r"\$timescale\s+(\d+)\s*(s|ms|us|ns|ps|fs)\s+\$end", header)
-    if not timescale:
-        raise ValueError("unknown timescale")
-    scale = int(timescale[1]) * {"s": 1e9, "ms": 1e6, "us": 1e3, "ns": 1, "ps": 1e-3, "fs": 1e-6}[timescale[2]]
-    top = f"tb_{contract.module}"
-    scopes: list[str] = []
-    aliases: dict[str, str] = {}
-    for line in header.splitlines():
-        parts = line.split()
-        if not parts:
-            continue
-        if parts[0] == "$scope":
-            scopes.append(parts[2])
-        elif parts[0] == "$upscope":
-            scopes.pop()
-        elif parts[0] == "$var" and scopes == [top]:
-            aliases[parts[4]] = parts[3]
+        raise ValueError("insufficient or excessive output log")
     outputs = QUALIFIED_OUTPUTS[contract.module]
-    if any(name not in aliases for name in (*outputs, "cycle")):
-        raise ValueError("missing top-level output or cycle counter")
-    values: dict[str, str] = {}
-    samples: list[dict[str, Any]] = []
-    cycle_changed = False
-    timestamp = 0
-
-    def flush() -> None:
-        if not cycle_changed:
-            return
-        raw_cycle = values.get(aliases["cycle"], "x")
-        if not re.fullmatch("[01]+", raw_cycle):
-            raise ValueError("unknown cycle")
-        cycle = int(raw_cycle, 2)
-        if cycle == 0:
-            return
-        if cycle != len(samples) + 1:
-            raise ValueError("missing or duplicate sample")
-        observed = {}
-        for name in outputs:
-            value = values.get(aliases[name], "x")
-            if not re.fullmatch("[01]+", value):
-                raise ValueError("unknown output at sample")
-            observed[name] = int(value, 2)
-        samples.append({"cycle": cycle - 1, "time_ns": timestamp * scale, "outputs": observed})
-
-    for line in body.splitlines():
-        line = line.strip()
-        if not line:
+    snapshots: list[dict[str, Any]] = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if not line.startswith("ICARUS_EXTERNAL_SAMPLE "):
             continue
-        if line.startswith("#"):
-            flush()
-            timestamp = int(line[1:])
-            cycle_changed = False
-        elif line[0].lower() in "01xz":
-            ident, value = line[1:], line[0].lower()
-            values[ident] = value
-            cycle_changed = cycle_changed or ident == aliases["cycle"]
-        elif line[0].lower() == "b":
-            value, ident = line[1:].split()
-            value = value.lower()
-            values[ident] = value
-            cycle_changed = cycle_changed or ident == aliases["cycle"]
-    flush()
-    if len(samples) != count:
+        fields = line.split()
+        if len(fields) != 3 + len(outputs) or not fields[1].isdigit() or not re.fullmatch(r"[0-9]+\.[0-9]{3}", fields[2]):
+            raise ValueError("malformed snapshot")
+        cycle, time_ns = int(fields[1]), float(fields[2])
+        if cycle != len(snapshots) or (snapshots and time_ns <= snapshots[-1]["time_ns"]):
+            raise ValueError("missing, duplicated or unordered sample")
+        if not all(re.fullmatch("[01]+", value) for value in fields[3:]):
+            raise ValueError("unknown output at sample")
+        observed = {name: int(value, 2) for name, value in zip(outputs, fields[3:])}
+        snapshots.append({"cycle": cycle, "time_ns": time_ns, "outputs": observed})
+    if len(snapshots) != count:
         raise ValueError("sample count differs from plan")
-    return samples
+    return snapshots
 
 
 def compare_samples(reference: list[dict[str, Any]], candidate: list[dict[str, Any]], module: str) -> dict[str, Any]:
@@ -207,7 +188,7 @@ class FrozenExternalRunner:
         options = {**options, "iverilog_path": self.iverilog, "vvp_path": self.vvp, "emit_vcd": True}
         output_dir = Path(output_dir)
         output_dir.mkdir(parents=True, exist_ok=False)
-        pipeline = VerificationPipeline(reference_policy="disabled")
+        pipeline = VerificationPipeline(reference_policy="disabled", generator=SnapshotGenerator())
         reference = pipeline.run(plan, contract, self.baseline, output_dir / "baseline", **options)
         candidate = pipeline.run(plan, contract, self.candidate, output_dir / "candidate", **options)
         self.last = candidate
@@ -229,8 +210,8 @@ class FrozenExternalRunner:
                 if sim.compile.returncode != 0 or sim.run is None or sim.run.returncode != 0 or sim.run.timed_out or sim.run.output_truncated:
                     raise ValueError("simulation incomplete")
             count = sum(v.cycles for v in plan.vectors)
-            baseline_samples = samples_from_vcd(Path(reference.simulation.artifacts["vcd"]), contract, count)
-            candidate_samples = samples_from_vcd(Path(candidate.simulation.artifacts["vcd"]), contract, count)
+            baseline_samples = samples_from_log(Path(reference.simulation.artifacts["run_stdout"]), contract, count)
+            candidate_samples = samples_from_log(Path(candidate.simulation.artifacts["run_stdout"]), contract, count)
             save(output_dir / "baseline_samples.json", baseline_samples)
             save(output_dir / "candidate_samples.json", candidate_samples)
             observation.update(compare_samples(baseline_samples, candidate_samples, self.module))

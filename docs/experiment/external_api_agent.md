@@ -16,7 +16,9 @@
 | uart_tx | txd、busy | s_axis_tready 未有直接规格断言，不纳入 |
 | priority_encoder | output_valid、output_encoded、output_unencoded | valid 为 0 时不比较未规定的编码值 |
 
-采样点来自生成测试台 `cycle` 计数器实际递增的 VCD 时刻，每次递增紧接测试台采样语句。两侧必须拥有相同采样周期和时间，样本数必须匹配计划周期数；只读顶层合约输出，忽略 DUT 内部寄存器。未知 X/Z、缺失信号、缺失样本、编译/运行失败或输入哈希变化都不能得到一致结论。
+采样来自生成测试台实际采样语句后的只读 `$display` 快照，位于 `cycle` 递增与下一组输入赋值之前。补丁要求锚点数量等于计划周期数、每个锚点的前行必须是原始结果输出语句；结构变化即拒绝运行，不静默替换。每侧保留未插桩测试台、实际编译测试台及 generator/adapter/测试台 SHA256。两侧必须拥有相同采样周期和时间，样本数必须匹配计划周期数；只读限定合约输出，忽略 DUT 内部寄存器。未知 X/Z、缺失信号、缺失样本、编译/运行失败或输入哈希变化都不能得到一致结论。
+
+旧版使用 cycle 变化所在 VCD 时间戳最终值，现已停用：组合逻辑下一输入可能在同一时间戳更新输出，不能代表采样语句瞬间。本轮真实取证发现 priority_encoder 16 个点中 4 个不一致。原始错误证据保留在 `.iverilog-ai/external-agent/sampling-cross-review-20261004/`。
 
 历史外部 uart_tx 与内置案例同名。适配器必须显式关闭流水线的内置参考模型映射，避免错误套用不相干的模型；不可通过改输出标签隐藏这类冲突。
 
@@ -36,11 +38,11 @@ python scripts/run_external_verification_agent.py --manifest .iverilog-ai/extern
 
 `qualification/` 保留冻结基线、候选、输入清单、SPEC_TB、编译与仿真日志、`qualification.json`。每轮保留候选与基线的真实 pipeline_result、波形、`baseline_samples.json` / `candidate_samples.json` 和 `external_observation.json`。Agent 轨迹仍使用主循环的逐轮落盘和请求预算机制。
 
-在接口联调中，真实 Icarus 对历史 UART RX 位序变体记录了 cycle 80、836 ns 时 m_axis_tdata=150 与 105 的差异；比较了 547 个有效输出样本。该运行没有调用 API，也没有创建新变体。
+早期接口联调的“547 样本、cycle 80”记录来自旧 VCD 时间戳法，存在采样歧义，不能独立支撑精确采样主张。修复后另在全新目录用即时快照真实重放该历史 UART RX 变体，重新观察到 cycle 80、836 ns 的 m_axis_tdata=150 与 105、547 个有效输出比较。新旧产物均保留，不用新结果覆盖旧证据。两次均未调用 API、未创建新变体。
 
 实际服务商 API 联调由主任务统一执行。本适配器开发使用真实 Icarus 和明确 mock 的网络测试，不把 mock 结果作为真实模型成绩。现有 SPEC_TB 的覆盖局限不会因 Agent 接入而消失，尤其 UART TX 的历史两个变体曾被规格测试台漏检。
 
 
-离线验收：`tests/core/test_external_agent.py` 20 项通过，适配脚本 mypy 通过。覆盖三模块基线、已有等价改写、真实位序差异、编译失败、仅内部字段变化、采样不足/XZ、冻结源和资格哈希变化；两项 mock HTTP 配合真实 Icarus 验证了共用 Agent 的追加激励与双侧预算。364 周期预算时没有 API 请求，1200 周期预算时 1 次 mock 请求、2 轮执行实际消耗 732 个双侧激励周期。
+历史初版离线检查曾有 20 项通过，但未覆盖同时间戳后续输入变化，不能作为修复后验收。修复后 `tests/core/test_external_agent.py` **24 项通过**，适配脚本 mypy 通过。新增连续组合输入在 before/after 两种相位的逐点规格检查、UART before 第一采样时刻 28 ns 检查，以及补丁锚点变动即拒绝的测试。覆盖三模块基线、已有等价改写、真实位序差异、编译失败、仅内部字段变化、采样不足/XZ、冻结源和资格哈希变化；两项 mock HTTP 配合真实 Icarus 验证了共用 Agent 的追加激励与双侧预算。364 周期预算时没有 API 请求，1200 周期预算时 1 次 mock 请求、2 轮执行实际消耗 732 个双侧激励周期。
 
-可保留的本轮独立离线 CLI 证据：`.iverilog-ai/external-agent/uart-rx-bit-order-typed-offline/offline-round/external_observation.json`。这是机器执行的真实仿真结果，不是实际服务商调用记录。
+修复后独立离线 CLI 证据：`.iverilog-ai/external-agent/uart-rx-bit-order-exact-snapshot-offline/offline-round/external_observation.json`。旧 `uart-rx-bit-order-typed-offline` 目录保留为历史含采样歧义的记录。这些都是机器仿真结果，不是实际服务商调用记录。
