@@ -1,0 +1,10 @@
+{
+  "source": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\agent-smoke-clean-tests-20261005\\source",
+  "module_origins": {
+    "diagnostic": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\agent-smoke-clean-tests-20261005\\source\\scripts\\run_agent_smoke_diagnostic.py",
+    "agent": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\agent-smoke-clean-tests-20261005\\source\\src\\iverilog_ai\\ai\\agent.py"
+  },
+  "private_parent_result_exists": false,
+  "test_sha256": "de7796901d095d996c618fbb24beadeae7373d12b1af6c1784741ae292c5c36c",
+  "api_requests": 0
+}

@@ -1,0 +1,10 @@
+{
+  "record_kind": "staged_git_source_export_not_live_evaluation",
+  "git_tree": "97d8ca97f490fbe8200fd6a0ff605b08f7f733f1",
+  "archive_sha256": "48cc8e80d6917820bbc8c9a50f2c98b0004d7e21f5497fa3085fae2772545ed2",
+  "source": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\agent-smoke-clean-tests-20261005\\source",
+  "private_run_directory_in_archive": false,
+  "git_directory_in_archive": false,
+  "test_sha256": "de7796901d095d996c618fbb24beadeae7373d12b1af6c1784741ae292c5c36c",
+  "api_requests": 0
+}

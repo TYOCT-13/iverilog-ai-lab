@@ -1,0 +1,47 @@
+{
+  "record_kind": "same_host_git_source_test_without_private_runs",
+  "created_at_utc": "2026-10-04T19:42:10.723434+00:00",
+  "source_commit": "e7223dc203b1441ba3130ba12093f2cb583ace06",
+  "source_tree": "97d8ca97f490fbe8200fd6a0ff605b08f7f733f1",
+  "git_files_verified_against_tested_copy": 692,
+  "process_exit_code": 0,
+  "pytest": {
+    "tests": 25,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0
+  },
+  "duration_seconds": 10.89,
+  "private_parent_result_present": false,
+  "credential_reads": 0,
+  "api_requests": 0,
+  "test_sha256": "de7796901d095d996c618fbb24beadeae7373d12b1af6c1784741ae292c5c36c",
+  "files": {
+    "source_receipt.json": {
+      "source": ".iverilog-ai/agent-smoke-clean-tests-20261005/source_receipt.json",
+      "sha256": "7ed9efc65a4c52105a2c098d4bc8455e7ace6c13da89c53d41764a00b4d4bf37",
+      "bytes": 514
+    },
+    "import_receipt.json": {
+      "source": ".iverilog-ai/agent-smoke-clean-tests-20261005/import_receipt.json",
+      "sha256": "6e407d9f4886ae1aafb9f02439a172729cdcdd97455ed5b37153882a23ec6714",
+      "bytes": 571
+    },
+    "pytest.xml": {
+      "source": ".iverilog-ai/agent-smoke-clean-tests-20261005/pytest.xml",
+      "sha256": "b6bca1f1f8ac093950c1e3142d211583645286348dfc2f165d89ff661f6f5e65",
+      "bytes": 3830
+    },
+    "pytest.log": {
+      "source": ".iverilog-ai/agent-smoke-clean-tests-20261005/pytest.log",
+      "sha256": "572fb2c5d56f7fc35a2572551196e53fa7815dbcbf45384be63bac9eeb5994d9",
+      "bytes": 213
+    }
+  },
+  "notes": [
+    "Unit fixtures explicitly mock parent results and their hash-linked ledger; live experiment data are not used.",
+    "All committed source bytes match the actual tested directory, including the latest fixture change.",
+    "Same host and installed dependencies; not external GitHub Actions, a full-repository rerun or independent human evidence.",
+    "Repeated targeted test counts are not added to the old 1170-pass full validation."
+  ]
+}
