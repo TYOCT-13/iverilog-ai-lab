@@ -45,6 +45,9 @@
 | 当前完整回归与浏览器验收 | `docs/experiment/ic_validation_2026-10-04.md`、`docs/experiment/ic-validation-2026-10-04/validation.json` | 914 通过 / 1 跳过；148 源码指纹冻结；三尺寸及实际上传、仿真、导航保持 |
 | PDF 排版修正后的全仓回归 | `docs/experiment/ic-validation-pdf-final-2026-10-04/validation.json` | 867b8bd，914 通过 / 1 跳过，227.34 秒；之前的完整回归分开保留 |
 | 最终非实现者代理检查 | `docs/review/ic_final_agent_review_2026-10-04.md` | 核心修复、工件与材料核对；材料作者参与，非独立真人审核 |
+| 当前 IC 本地证据包与回执 | `docs/competition/ic/evidence_pack_2026-10-04.md`、`docs/competition/ic/evidence_pack_2026-10-04.json` | 已生成86.4 MB本地ZIP，6源码快照、41,006项文件哈希复核一致；尚未异机复现或正式提交 |
+| 包后代理字节审计 | `docs/review/ic_pack_review_2026-10-04.md` | CRC、完整集合、全部文件哈希、424注册输入及换行差异已核查；内部作者参与，非独立人审 |
+| 包内源码离线运行 | `docs/experiment/ic-pack-smoke-2026-10-04/smoke.json`、`docs/experiment/ic-pack-smoke-2026-10-04/stdout.log`、`docs/experiment/ic-pack-smoke-2026-10-04/stderr.log` | 同机从外层ZIP提取源码执行：0API、547输出比较/0差异；辅助脚本字段错误单列保留 |
 
 ### 1.2 原开源赛道资料与共用交付
 
@@ -192,7 +195,7 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 | 编码/BOM | `python scripts/strip_bom.py --check` | 0 问题 |
 | 交付体检 | `python scripts/check_submission.py --repo .` | **1 error**（`CITATION.cff` 占位符） |
 | 报告页数/体积 | `python scripts/check_submission.py --kind report docs/competition/technical_report_draft.pdf` | 原开源稿：0 error / 1 warning（正文21页超建议值）；IC稿10页/正文9页，0 error / 0 warning |
-| 索引路径存在性 | `python scripts/check_doc_index.py` | **138/138 条路径存在**（2026-10-04；此前反向测试：故意写错一条则退出码 1） |
+| 索引路径存在性 | `python scripts/check_doc_index.py` | **144/144 条路径存在**（2026-10-04；此前反向测试：故意写错一条则退出码 1） |
 
 ---
 

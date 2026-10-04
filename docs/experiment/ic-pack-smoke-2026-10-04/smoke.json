@@ -1,0 +1,52 @@
+{
+  "record_kind": "same_machine_archive_offline_smoke",
+  "created_at_utc": "2026-10-04T08:42:10.136886+00:00",
+  "materials_commit": "81114bce3f3bb72e2e2a05969b15200c1a4ae767",
+  "source_archive_sha256": "a032d7acbdb3f5d713cde76570b8d972dbb1bd61a3d2de91df124d2d8bae0c91",
+  "python_import_source": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-evidence-pack-smoke-20261004\\source\\src",
+  "exit_code": 0,
+  "api_requests": 0,
+  "human_participants": 0,
+  "independent_machine_reproduction": false,
+  "source_kind": "extracted from final outer ZIP; PYTHONPATH explicitly set to extracted src",
+  "fixture_kind": "manifest and 3 RTL files read from the outer ZIP",
+  "observation": {
+    "run_id": "a287cca58122",
+    "status": "passed",
+    "verdict": "no_observed_difference",
+    "expectation_source": "qualified_baseline_differential",
+    "verification_status": "qualified_baseline_differential",
+    "checks": 0,
+    "failures": 0,
+    "failure_samples": [],
+    "compared_samples": 547,
+    "differences": 0,
+    "difference_samples": [],
+    "qualified_outputs": [
+      "m_axis_tdata",
+      "m_axis_tvalid",
+      "frame_error",
+      "busy"
+    ],
+    "qualification_sha256": "b97700b4c5913c3c39b4d9dd1ae6e56298d6446933844c1e9d2035e80943c203",
+    "baseline_sha256": "e686104e5ff2d25fa1504e8d08259cef508f2ec9c9e8cfa63364f3fcb39b9f5c",
+    "candidate_sha256": "e686104e5ff2d25fa1504e8d08259cef508f2ec9c9e8cfa63364f3fcb39b9f5c",
+    "evidence_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-evidence-pack-smoke-20261004\\offline-run\\offline-round\\external_observation.json",
+    "baseline_pipeline_result": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-evidence-pack-smoke-20261004\\offline-run\\offline-round\\baseline\\pipeline_result.json",
+    "candidate_pipeline_result": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-evidence-pack-smoke-20261004\\offline-run\\offline-round\\candidate\\pipeline_result.json",
+    "candidate_stimulus_cycles": 182,
+    "baseline_stimulus_cycles": 182,
+    "error_type": null
+  },
+  "logs_sha256": {
+    "stdout.log": "3eb266551cae2cfda7292cc5c0faed899e665406e18b09b9c5ebc3d1f18065be",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "helper_validation_correction": "Application exited 0; first helper lookup used nonexistent evidence_kind and raised KeyError. Original stdout/stderr retained; post-check uses expectation_source, compared_samples and differences without rerunning the simulation.",
+  "limitations": [
+    "Same installed Python/dependencies and Icarus",
+    "Not a clean or independent machine installation",
+    "Not a rerun of the paid pilot",
+    "Snapshot hashes do not certify full functional correctness"
+  ]
+}

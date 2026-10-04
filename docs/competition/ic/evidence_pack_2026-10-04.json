@@ -1,0 +1,37 @@
+{
+  "package_directory": ".iverilog-ai/ic-evidence-pack-20261004",
+  "zip_path": ".iverilog-ai/ic-evidence-pack-20261004.zip",
+  "zip_sha256": "1d91d09309f45e978cddbb5001bbde022cfc4fbb03b414c7e78346b14a9bf15f",
+  "zip_bytes": 86376627,
+  "files_including_manifest": 41007,
+  "fingerprints_verified": 41006,
+  "source_snapshots": 6,
+  "materials_commit": "81114bce3f3bb72e2e2a05969b15200c1a4ae767",
+  "tested_source_commit": "867b8bd564c881954c98cc18813884a4074d1ed5",
+  "credential_value_scan_passed": true,
+  "record_kind": "local_frozen_evidence_package_receipt",
+  "manifest_sha256": "c7cc63c900e20b3d4c93aa5bdeec3dab3bd6a0f5d9a641d6ad66be55a80d9fbf",
+  "source_snapshot_commits": [
+    "0de10a07c2b5af29729f624e0af093693928c84f",
+    "e9b7b8aa0ef6b78c1871abb7fe4e33c2b2abec2a",
+    "9fbfb9be399957d95f41cbe366b5cd659f4d7f55",
+    "1c1e0dc5b30a65a83673951cc495b1a7b700511c",
+    "867b8bd564c881954c98cc18813884a4074d1ed5",
+    "81114bce3f3bb72e2e2a05969b15200c1a4ae767"
+  ],
+  "registered_input_snapshot_files": 424,
+  "registered_inputs_match_frozen_sha256": true,
+  "credential_scan_scope": "specified API credential exact value; no claim to a comprehensive third-party secret audit",
+  "human_participants": 0,
+  "independent_human_review": false,
+  "independent_machine_reproduction": false,
+  "same_machine_archive_offline_smoke": {
+    "record": "docs/experiment/ic-pack-smoke-2026-10-04/smoke.json",
+    "record_sha256": "28c3b7f5ced26b76c8bfe2e89685afc1d47e3cfc50ca7418eb3bef3f5f6dbc15",
+    "exit_code": 0,
+    "api_requests": 0,
+    "compared_samples": 547,
+    "differences": 0
+  },
+  "post_package_documents_are_outside_immutable_zip": true
+}
