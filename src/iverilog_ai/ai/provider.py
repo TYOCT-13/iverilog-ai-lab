@@ -334,6 +334,7 @@ class OpenAICompatibleProvider:
         self.is_loopback = _is_loopback((urlsplit(self.base_url).hostname or "") if self.base_url else "")
         # Ephemeral telemetry for experiment runners; never contains the API key.
         self.last_usage: dict[str, object] | None = None
+        self.last_finish_reason: str | None = None
         self.last_latency_ms: int | None = None
         # 记录本次请求是否因为网关要求流式而回退到 SSE（仅诊断，不含敏感信息）。
         self.last_stream_fallback = False
@@ -408,6 +409,8 @@ class OpenAICompatibleProvider:
         if self.request_limit is not None and self.request_count >= self.request_limit:
             raise RuntimeError("provider request budget exhausted")
         self.request_count += 1
+        self.last_usage = None
+        self.last_finish_reason = None
         started = time.perf_counter()
         try:
             # Keep legacy clients' redirect behavior; bounded runs reject it so
@@ -426,6 +429,16 @@ class OpenAICompatibleProvider:
                 data = json.loads(raw.decode("utf-8"))
                 usage = data.get("usage") if isinstance(data, dict) else None
                 self.last_usage = dict(usage) if isinstance(usage, dict) else None
+                if isinstance(data, dict):
+                    choices = data.get("choices")
+                    if isinstance(choices, list) and choices and isinstance(choices[0], dict):
+                        reason = choices[0].get("finish_reason")
+                        if isinstance(reason, str) and reason in {"stop", "length", "tool_calls", "content_filter"}:
+                            self.last_finish_reason = reason
+                    elif data.get("status") == "completed":
+                        self.last_finish_reason = "stop"
+                    elif isinstance(data.get("incomplete_details"), dict) and data["incomplete_details"].get("reason") == "max_output_tokens":
+                        self.last_finish_reason = "length"
                 return data
         except HTTPError as exc:
             retry_after = exc.headers.get("Retry-After") if exc.headers is not None else None

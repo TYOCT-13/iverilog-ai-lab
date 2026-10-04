@@ -10,6 +10,7 @@ from urllib.parse import urlsplit
 import uuid
 
 from iverilog_ai.ai.agent import AgentLimits, STOP_LABELS, run_verification_agent
+from iverilog_ai.ai.local_api_profile import read_key_file
 from iverilog_ai.ai.provider import OpenAICompatibleProvider
 from iverilog_ai.ai.schema import TestPlan
 from iverilog_ai.core.benchmark_cases import CASE_TABLE
@@ -30,7 +31,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--spec", type=Path, help="可选的人工规格文本，将随请求发送")
     parser.add_argument("--endpoint", default=os.getenv("IVERILOG_AI_BASE_URL") or os.getenv("IVERILOG_AI_ENDPOINT", ""))
     parser.add_argument("--model", default=os.getenv("IVERILOG_AI_MODEL", ""))
-    parser.add_argument("--api-key-env", default="IVERILOG_AI_API_KEY")
+    credential = parser.add_mutually_exclusive_group()
+    credential.add_argument("--api-key-env", default="IVERILOG_AI_API_KEY")
+    credential.add_argument("--api-key-file", type=Path, help="读取本机的单行密钥文件，不复制密钥到项目中")
     parser.add_argument("--wire-api", choices=["chat_completions", "responses"], default="chat_completions")
     parser.add_argument("--stream", choices=["on", "off"], default="off")
     parser.add_argument("--max-rounds", type=int, default=3)
@@ -55,7 +58,7 @@ def main(argv: list[str] | None = None) -> int:
         if args.spec and not spec_path.is_file():
             raise ValueError("requested specification file missing")
         spec = spec_path.read_text(encoding="utf-8") if spec_path.is_file() else ""
-        key = os.getenv(args.api_key_env, "").strip()
+        key = read_key_file(args.api_key_file) if args.api_key_file else os.getenv(args.api_key_env, "").strip()
         url = urlsplit(args.endpoint)
         if args.endpoint and (url.scheme not in {"https", "http"} or not url.hostname or url.username or url.password or url.query or url.fragment):
             raise ValueError("invalid endpoint")

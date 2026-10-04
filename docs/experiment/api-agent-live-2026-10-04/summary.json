@@ -1,0 +1,219 @@
+{
+  "date": "2026-10-04",
+  "timezone": "Asia/Shanghai",
+  "scope": "Real API connectivity and bounded-loop acceptance; one design family, not an accuracy benchmark",
+  "endpoint": "https://api.deepseek.com",
+  "model": "deepseek-flash",
+  "official_model_mapping": "https://api-docs.deepseek.com/updates/",
+  "total_requests": 3,
+  "requests_with_recorded_usage": 2,
+  "known_tokens_partial": {
+    "prompt_tokens": 1666,
+    "completion_tokens": 5351,
+    "total_tokens": 7017
+  },
+  "usage_limitation": "The rejected v1 decision has no saved usage. These token totals cover only 2 of 3 requests and are not a bill.",
+  "runs": [
+    {
+      "run": "deepseek-flash-20261004-live-01",
+      "trajectory": ".iverilog-ai/agent-runs/deepseek-flash-20261004-live-01/agent_trajectory.json",
+      "trajectory_sha256": "f0da8b0587c704c5b156876bc54a07cb47610f99cf4dd496e55348d1bcf6eaf9",
+      "prompt_version": "verification-agent-v1",
+      "rtl_sha256": "cbb2cf891da6d34c30721b2c40711c26dafcf9dd01ab0484ca6545d02dc21eaf",
+      "requests_attempted": 2,
+      "stimulus_cycles_executed": 33,
+      "elapsed_seconds": 23.0,
+      "stop_reason": "policy_error",
+      "decisions": [
+        {
+          "status": "validated",
+          "error_type": null,
+          "validation_error_types": null,
+          "finish_reason": null,
+          "usage": {
+            "prompt_tokens": 507,
+            "completion_tokens": 3387,
+            "total_tokens": 3894,
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 507
+          },
+          "executed_round": 1
+        },
+        {
+          "status": "rejected",
+          "error_type": "ValidationError",
+          "validation_error_types": null,
+          "finish_reason": null,
+          "usage": null,
+          "executed_round": null
+        }
+      ],
+      "rounds": [
+        {
+          "round": 1,
+          "vector_count": 12,
+          "observation": {
+            "run_id": "02f32ef553a8",
+            "status": "passed",
+            "verdict": "passed",
+            "expectation_source": "reference_model",
+            "verification_status": "verified",
+            "checks": 12,
+            "failures": 0,
+            "failure_samples": []
+          }
+        }
+      ]
+    },
+    {
+      "run": "deepseek-flash-20261004-live-02",
+      "trajectory": ".iverilog-ai/agent-runs/deepseek-flash-20261004-live-02/agent_trajectory.json",
+      "trajectory_sha256": "a5da100c78b12fb88899e8e66e59f84a329ef4640245963825f0b9d80f377f7a",
+      "prompt_version": "verification-agent-v2",
+      "rtl_sha256": "cbb2cf891da6d34c30721b2c40711c26dafcf9dd01ab0484ca6545d02dc21eaf",
+      "requests_attempted": 1,
+      "stimulus_cycles_executed": 79,
+      "elapsed_seconds": 9.641,
+      "stop_reason": "round_budget",
+      "decisions": [
+        {
+          "status": "validated",
+          "error_type": null,
+          "validation_error_types": null,
+          "finish_reason": "stop",
+          "usage": {
+            "prompt_tokens": 1159,
+            "completion_tokens": 1964,
+            "total_tokens": 3123,
+            "prompt_cache_hit_tokens": 0,
+            "prompt_cache_miss_tokens": 1159
+          },
+          "executed_round": 2
+        }
+      ],
+      "rounds": [
+        {
+          "round": 1,
+          "vector_count": 12,
+          "observation": {
+            "run_id": "48b403d97902",
+            "status": "passed",
+            "verdict": "passed",
+            "expectation_source": "reference_model",
+            "verification_status": "verified",
+            "checks": 12,
+            "failures": 0,
+            "failure_samples": []
+          }
+        },
+        {
+          "round": 2,
+          "vector_count": 15,
+          "observation": {
+            "run_id": "b959065be7fa",
+            "status": "passed",
+            "verdict": "passed",
+            "expectation_source": "reference_model",
+            "verification_status": "verified",
+            "checks": 15,
+            "failures": 0,
+            "failure_samples": []
+          }
+        }
+      ]
+    },
+    {
+      "run": "deepseek-flash-20261004-replay-bug",
+      "trajectory": ".iverilog-ai/agent-runs/deepseek-flash-20261004-replay-bug/agent_trajectory.json",
+      "trajectory_sha256": "749184f6ed58ea39c20586bdc205fc2aa3501bbcdadb8d839cb44f6a975a44be",
+      "prompt_version": "verification-agent-v2",
+      "rtl_sha256": "ddadc62c5e02779923e4e63a1ee52baad71aba18ea7737ba8767d228638ad275",
+      "requests_attempted": 0,
+      "stimulus_cycles_executed": 33,
+      "elapsed_seconds": 0.109,
+      "stop_reason": "counterexample_found",
+      "decisions": [],
+      "rounds": [
+        {
+          "round": 1,
+          "vector_count": 12,
+          "observation": {
+            "run_id": "13b9ba724337",
+            "status": "passed_with_warnings",
+            "verdict": "failed_checks",
+            "expectation_source": "reference_model",
+            "verification_status": "verified",
+            "checks": 12,
+            "failures": 8,
+            "failure_samples": [
+              {
+                "test_id": "agent_3_2",
+                "cycle": 12,
+                "signal": "count",
+                "expected": "1001",
+                "actual": "0000",
+                "severity": "warn"
+              },
+              {
+                "test_id": "agent_4_3",
+                "cycle": 15,
+                "signal": "count",
+                "expected": "1001",
+                "actual": "0000",
+                "severity": "warn"
+              },
+              {
+                "test_id": "agent_5_4",
+                "cycle": 16,
+                "signal": "count",
+                "expected": "0000",
+                "actual": "0001",
+                "severity": "warn"
+              },
+              {
+                "test_id": "agent_6_5",
+                "cycle": 17,
+                "signal": "count",
+                "expected": "0001",
+                "actual": "0010",
+                "severity": "warn"
+              },
+              {
+                "test_id": "agent_7_6",
+                "cycle": 19,
+                "signal": "count",
+                "expected": "0001",
+                "actual": "0010",
+                "severity": "warn"
+              },
+              {
+                "test_id": "agent_8_7",
+                "cycle": 27,
+                "signal": "count",
+                "expected": "1001",
+                "actual": "0001",
+                "severity": "warn"
+              },
+              {
+                "test_id": "agent_9_8",
+                "cycle": 28,
+                "signal": "count",
+                "expected": "1001",
+                "actual": "0001",
+                "severity": "warn"
+              },
+              {
+                "test_id": "agent_10_9",
+                "cycle": 29,
+                "signal": "count",
+                "expected": "0000",
+                "actual": "0010",
+                "severity": "warn"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

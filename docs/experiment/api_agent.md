@@ -19,6 +19,10 @@
 
 每次运行创建新目录。导航与同会话 rerun 保留结果；修改 RTL、接口或编译选项会清理页面上的相关旧证据，磁盘记录仍保留。设置为离线时自动验证按钮不可用；不会静默切换为本地模型。
 
+本机可在被 Git 忽略的 `.iverilog-ai/local-api.json` 中保存 `endpoint`、`model`、`api_key_file`（绝对路径）和 `max_output_tokens`（2048–8192）。这里保存密钥文件路径，密钥正文仍在原文件中。网页只在执行操作时读取；API Key 输入框留空即可，手动输入优先。修改目标地址后，不会沿用原地址的文件密钥。
+
+2026-10-04 已配置 DeepSeek 4.1 Flash：Base URL 为 `https://api.deepseek.com`，模型 ID 为 `deepseek-flash`。对应关系见 [DeepSeek 官方更新日志](https://api-docs.deepseek.com/updates/)。默认仍需用户主动选择在线模式和点击操作；打开网页不会发送模型请求。
+
 ## CLI：先预检
 
 沿用 `api_handoff.md` 的环境配置：`IVERILOG_AI_BASE_URL`（或 `IVERILOG_AI_ENDPOINT`）、`IVERILOG_AI_MODEL`，以及 `--api-key-env` 指定的密钥变量。密钥不放在命令行或文档中。
@@ -35,7 +39,11 @@ python -X utf8 scripts/run_verification_agent.py --execute --case mod10_counter 
 
 可用 `--endpoint`、`--model` 覆盖地址与模型，`--wire-api responses` 选择另一协议。需要 SSE 时显式设置 `--stream on`。`--plan` 可传已有计划；`--rtl` 可换同接口的缺陷变体；`--spec` 可提供经人工核对的规格文本。默认规格来自 `spec/<案例>_spec.md`。
 
+密钥保存在单行文本文件时，可用 `--api-key-file 'C:\path\to\api-key.txt'` 替代 `--api-key-env`，两个参数互斥。文件不存在或内容无效时直接停止，不读取其他环境变量中的密钥。CLI 不自动加载网页的本机配置，服务地址和模型仍按显式参数或环境变量指定。
+
 请求在 HTTP 传输前计数，失败也消耗尝试；不自动重试、不自动切换流式、不接受重定向。每次输出上限默认 2048 tokens。次数和 tokens 上限不是金额封顶，输入也可能计费。运行时间预算在操作之间检查；单次 API 和仿真另有超时，不是可中断任意网络阻塞的严格进程截止时间。
+
+网页 Agent 沿用「工具设置」中的输出长度（最多 8192）与请求超时（最多 180 秒）。本次 DeepSeek 联调使用 8192 tokens 完成反馈补测；CLI 可显式加 `--max-output-tokens 8192 --timeout 120`。当服务明确报告输出截断时，停止原因显示 `output_truncated`，不会执行截断内容。
 
 CLI 的退出码 0 表示流程完成，包括“已发现反例”和“达到预算”；须结合 `stop_reason` 判断。1 表示缺少判据、执行失败等需处理状态；2 表示配置或启动错误。
 
@@ -47,6 +55,8 @@ CLI 默认保存至 `.iverilog-ai/agent-runs/<新编号>/`；网页保存至 `.i
 - `round-01/` 等：原有流水线的测试计划、合约、testbench、日志、波形、结构化结果。
 
 轨迹包含用户规格和测试输入，默认留在 Git 忽略目录。导出或上传前检查授权与私密信息。失败响应不保存原始正文；只存错误类别和可用 HTTP 状态码，不存 Authorization 或密钥。模型标签仅代表调用配置，不构成服务商身份认证。
+
+从提示词 v2 起，结构校验失败也保存可用的数字 token 用量、完成状态和校验错误代码，不保存原始响应、字段值或异常正文。v1 历史轨迹保持原样；导出器仍只接受当前提示词版本，避免将历史状态配上新版提示词。
 
 ## 为后续托管微调整理数据
 

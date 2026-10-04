@@ -30,3 +30,18 @@ def test_bad_endpoint_refused_even_during_preflight(endpoint):
 
 def test_explicit_missing_specification_is_not_silently_ignored(tmp_path):
     assert main(["--dry-run", "--spec", str(tmp_path / "missing.md")]) == 2
+
+
+def test_explicit_key_file_is_loaded_without_printing_secret_or_sending_request(tmp_path, monkeypatch, capsys):
+    secret = tmp_path / "api.txt"
+    secret.write_text("\ufeffprivate-file-test-key\n", encoding="utf-8")
+    monkeypatch.setattr("iverilog_ai.ai.provider.OpenAICompatibleProvider.generate", lambda *_: pytest.fail("unexpected network"))
+    assert main(["--dry-run", "--endpoint", "https://api.example", "--model", "test", "--api-key-file", str(secret)]) == 0
+    output = capsys.readouterr().out
+    assert '"missing": []' in output
+    assert "private-file-test-key" not in output
+
+
+def test_missing_key_file_does_not_fall_back_to_environment(tmp_path, monkeypatch):
+    monkeypatch.setenv("IVERILOG_AI_API_KEY", "unrelated-secret")
+    assert main(["--dry-run", "--api-key-file", str(tmp_path / "missing.txt")]) == 2

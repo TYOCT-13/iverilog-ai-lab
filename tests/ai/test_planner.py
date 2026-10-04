@@ -154,6 +154,33 @@ def test_planner_accepts_fenced_json():
     assert plan_tests("verify", "demo", Fenced(), max_retries=0).schema_version == "1.0"
 
 
+@pytest.mark.parametrize("payload", [
+    {"choices": [{"message": {"content": "{}"}, "finish_reason": "length"}], "usage": {"completion_tokens": 4096}},
+    {"output_text": "{}", "status": "incomplete", "incomplete_details": {"reason": "max_output_tokens"}, "usage": {"output_tokens": 4096}},
+])
+def test_truncation_telemetry_does_not_leak_into_next_failed_request(monkeypatch, payload):
+    from iverilog_ai.ai import OpenAICompatibleProvider
+    calls = []
+    class Response:
+        def __enter__(self): return self
+        def __exit__(self, *args): return None
+        def read(self): return json.dumps(payload).encode()
+    def fake(request, timeout):
+        calls.append(request)
+        if len(calls) > 1:
+            raise HTTPError(request.full_url, 429, "limited", Message(), None)
+        return Response()
+    monkeypatch.setattr("iverilog_ai.ai.provider.urlopen", fake)
+    provider = OpenAICompatibleProvider(endpoint="https://provider.example", model="test", api_key="secret", allow_network=True)
+    assert provider.generate("JSON") == "{}"
+    assert provider.last_finish_reason == "length"
+    assert provider.last_usage
+    with pytest.raises(RuntimeError):
+        provider.generate("JSON")
+    assert provider.last_finish_reason is None
+    assert provider.last_usage is None
+
+
 def test_supplement_tests_merges_and_validates_unique_names():
     plan = plan_tests("verify", "demo", MockProvider(), max_retries=0)
     class Supplement:

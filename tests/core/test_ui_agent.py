@@ -8,15 +8,22 @@ import pytest
 pytest.importorskip("streamlit")
 from streamlit.testing.v1 import AppTest
 import iverilog_ai.ai.agent as agent
+from iverilog_ai.ai.local_api_profile import LocalApiProfile
 
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def test_api_agent_survives_navigation_and_invalidates_on_input_change(monkeypatch, tmp_path):
+@pytest.mark.parametrize("file_credential", [False, True])
+def test_api_agent_survives_navigation_and_invalidates_on_input_change(monkeypatch, tmp_path, file_credential):
     if not Path(r"D:\iverilog\bin\iverilog.exe").is_file():
         pytest.skip("local Icarus unavailable")
     actual_run = agent.run_verification_agent
     calls = []
+    key_path = tmp_path / "key.txt"
+    key_path.write_text("fixture-not-a-real-key", encoding="utf-8")
+    profile = LocalApiProfile(endpoint="https://api.example/v1", model="ui-agent-test-fixture",
+                              api_key_file=str(key_path), max_output_tokens=8192) if file_credential else None
+    monkeypatch.setattr("iverilog_ai.ai.local_api_profile.load_local_api_profile", lambda _: profile)
 
     def isolated_run(**kwargs):
         kwargs["output_dir"] = tmp_path / "ui-agent"
@@ -49,7 +56,10 @@ def test_api_agent_survives_navigation_and_invalidates_on_input_change(monkeypat
     app.radio(key="planner_mode").set_value(app.radio(key="planner_mode").options[2])
     app.text_input(key="provider_api_base").set_value("https://api.example/v1")
     app.text_input(key="provider_api_model").set_value("ui-agent-test-fixture")
-    app.text_input(key="provider_api_key").set_value("fixture-not-a-real-key")
+    if not file_credential:
+        app.text_input(key="provider_api_key").set_value("fixture-not-a-real-key")
+    else:
+        assert app.text_input(key="provider_api_key").value == ""
     app.run()
     app.radio(key="workspace_page").set_value("工作台").run()
     app.text_area(key="objective_text").set_value("检查使能保持与回绕").run()
@@ -61,6 +71,8 @@ def test_api_agent_survives_navigation_and_invalidates_on_input_change(monkeypat
     assert len(result.trajectory["rounds"]) == 2
     assert result.trajectory["requests_attempted"] == 3
     assert result.trajectory["objective"] == "检查使能保持与回绕"
+    assert result.trajectory["limits"]["max_output_tokens"] == (8192 if file_credential else 4096)
+    assert all(request["max_tokens"] == (8192 if file_credential else 4096) for request in calls)
     original_id = app.session_state["last_pipeline_result"].simulation.run_id
     app.radio(key="workspace_page").set_value("运行档案").run()
     app.radio(key="workspace_page").set_value("工作台").run()

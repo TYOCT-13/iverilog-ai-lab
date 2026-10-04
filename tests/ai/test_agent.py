@@ -191,3 +191,25 @@ def test_limits_reject_bools_and_out_of_bounds():
     for kwargs in [{"max_rounds": True}, {"max_requests": 0}, {"max_total_cycles": -1}]:
         with pytest.raises(ValueError):
             AgentLimits(**kwargs)
+
+
+def test_invalid_response_keeps_usage_and_safe_diagnostic_codes(tmp_path):
+    provider = Scripted('{"action": "append_vectors", "reason": "brief", "vectors": [], "private-field": 1}')
+    provider.last_usage = {"prompt_tokens": 23, "completion_tokens": 5}
+    result = run(tmp_path, provider)
+    decision = result.trajectory["decisions"][0]
+    assert result.stop_reason == "policy_error"
+    assert decision["usage"] == {"prompt_tokens": 23, "completion_tokens": 5}
+    assert "extra_forbidden" in decision["validation_error_types"]
+    assert "private-field" not in result.trajectory_path.read_text()
+
+
+def test_truncated_response_is_never_executed_even_if_json_parses(tmp_path):
+    provider = Scripted(append())
+    provider.last_finish_reason = "length"
+    provider.last_usage = {"completion_tokens": 4096}
+    pipeline = Pipeline()
+    result = run(tmp_path, provider, pipeline)
+    assert result.stop_reason == "output_truncated"
+    assert result.trajectory["decisions"][0]["usage"]["completion_tokens"] == 4096
+    assert not pipeline.plans

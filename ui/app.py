@@ -24,6 +24,7 @@ from iverilog_ai.ai import (
 )
 from iverilog_ai.core.config import ExecutionConfig
 from iverilog_ai.ai.agent import AgentLimits, STOP_LABELS, run_verification_agent
+from iverilog_ai.ai.local_api_profile import load_local_api_profile
 from iverilog_ai.core.executor import IcarusExecutor
 from iverilog_ai.core.contracts import DutContract
 from iverilog_ai.core.labels import (
@@ -59,6 +60,20 @@ from iverilog_ai.core.static_review import rule_manifest as static_rule_manifest
 from iverilog_ai.core.vcd import analyze_vcd_file
 
 ROOT = Path(__file__).resolve().parents[1]
+_local_api_error = ""
+try:
+    _local_api_profile = load_local_api_profile(ROOT / ".iverilog-ai/local-api.json")
+except (OSError, ValueError) as _profile_exception:
+    _local_api_profile = None
+    _local_api_error = type(_profile_exception).__name__
+_api_default_base = os.getenv("IVERILOG_AI_BASE_URL") or (_local_api_profile.endpoint if _local_api_profile else "https://api.deepseek.com")
+_api_default_model = os.getenv("IVERILOG_AI_MODEL") or (_local_api_profile.model if _local_api_profile else "deepseek-flash")
+
+
+def _configured_api_key(endpoint: str, entered_key: str) -> str:
+    if entered_key.strip():
+        return entered_key.strip()
+    return _local_api_profile.key_for(endpoint) if _local_api_profile else ""
 
 
 @contextmanager
@@ -1423,18 +1438,18 @@ def _build_provider(target: str):
             store=False,
             timeout=30,
         )
-    endpoint = str(settings.get("provider_api_base", os.getenv("IVERILOG_AI_BASE_URL", "https://api.deepseek.com")))
-    model = str(settings.get("provider_api_model", os.getenv("IVERILOG_AI_MODEL", "deepseek-v4-flash")))
+    endpoint = str(settings.get("provider_api_base", _api_default_base))
+    model = str(settings.get("provider_api_model", _api_default_model))
     picked_model = str(settings.get("picked_model_from_list", "（不覆盖，使用上面的输入）"))
     if picked_model != "（不覆盖，使用上面的输入）":
         model = picked_model
-    key = str(settings.get("provider_api_key", ""))
+    key = _configured_api_key(endpoint, str(settings.get("provider_api_key", "")))
     wire = _wire_api_for(str(settings.get("provider_wire_api", "Chat Completions API")))
     reasoning = str(settings.get("provider_reasoning", "不发送（兼容性最高）"))
     if "deepseek" in (endpoint + " " + model).lower() and wire == "responses":
         wire = "chat_completions"
     if not key.strip():
-        raise ValueError(f"{target}需要先输入 API Key（或改用本地调试模型）")
+        raise ValueError(f"{target}需要当前 API 地址对应的密钥。请检查配置或输入 API Key。")
     return OpenAICompatibleProvider(
         endpoint=endpoint,
         model=model,
@@ -2305,7 +2320,7 @@ with _SETTINGS:
     with st.expander("测试计划与模型"):
         provider_mode = st.radio(
             "生成方式",
-            ["离线确定性规划器（无需密钥、进程内）", "本地调试模型（HTTP 回环、无需密钥）", "在线 API（密钥只保存在本次页面会话）"],
+            ["离线确定性规划器（无需密钥、进程内）", "本地调试模型（HTTP 回环、无需密钥）", "在线 API（手动输入或本机密钥文件）"],
             horizontal=True,
             key="planner_mode",
             format_func=lambda value: "在线模型" if value.startswith("在线") else "本地调试" if value.startswith("本地调试") else "离线模式",
@@ -2332,18 +2347,22 @@ with _SETTINGS:
             st.caption(
                 "按接口定义生成测试，不联网，也不需要密钥；这不是 AI 模型生成的结果。"
             )
-        api_base = st.text_input("API 地址", value=os.getenv("IVERILOG_AI_BASE_URL", "https://api.deepseek.com"), key="provider_api_base", help="填写服务商的 Base URL。")
-        api_model = st.text_input("模型名称", value=os.getenv("IVERILOG_AI_MODEL", "deepseek-v4-flash"), key="provider_api_model", help="填写服务商提供的模型名称，也可以从模型列表中选择。")
+        api_base = st.text_input("API 地址", value=_api_default_base, key="provider_api_base", help="填写服务商的 Base URL。")
+        api_model = st.text_input("模型名称", value=_api_default_model, key="provider_api_model", help="填写服务商提供的模型名称，也可以从模型列表中选择。")
         api_key = st.text_input("API Key", value="", type="password", key="provider_api_key", help="不会写入项目文件或报告")
+        if _local_api_profile:
+            st.caption("已配置本机密钥文件。API Key 留空即可；更换 API 地址后需要另行提供密钥。")
+        elif _local_api_error:
+            st.warning(f"本机 API 配置无法读取（{_local_api_error}），可在此手动填写。")
         api_timeout = st.slider("请求超时（秒）", min_value=30, max_value=300, value=120, step=10, key="provider_api_timeout", help="模型响应较慢时可适当调高。")
-        api_output_tokens = st.slider("输出长度上限（token）", min_value=2048, max_value=8192, value=4096, step=512, key="provider_api_output_tokens", help="设置过小可能导致测试计划生成不完整。")
+        api_output_tokens = st.slider("输出长度上限（token）", min_value=2048, max_value=8192, value=_local_api_profile.max_output_tokens if _local_api_profile else 4096, step=512, key="provider_api_output_tokens", help="设置过小可能导致测试计划生成不完整。")
         wire_api_label = st.selectbox("接口格式", ["Chat Completions API", "Responses API"], key="provider_wire_api", help="按服务商文档选择；不确定时使用 Chat Completions。")
         reasoning_label = st.selectbox("推理强度", ["不发送（兼容性最高）", "minimal", "low", "medium", "high", "xhigh"], key="provider_reasoning", help="仅 Responses 接口使用。服务商不支持时选择「不发送」。")
         if st.button("检查配置", help="仅检查参数，不请求模型。"):
             try:
                 _diag_wire = _wire_api_for(str(wire_api_label))
                 _diag_reasoning = None if str(reasoning_label).startswith("不发送") or _diag_wire != "responses" else reasoning_label
-                _diag_provider = OpenAICompatibleProvider(endpoint=api_base, model=api_model, api_key=api_key,
+                _diag_provider = OpenAICompatibleProvider(endpoint=api_base, model=api_model, api_key=_configured_api_key(api_base, api_key) or " ",
                     wire_api=_diag_wire, reasoning_effort=_diag_reasoning, allow_network=True, store=False, timeout=api_timeout, max_output_tokens=api_output_tokens)
                 st.json(_diag_provider.request_diagnostics())
             except Exception as exc:
@@ -2353,12 +2372,13 @@ with _SETTINGS:
                 _models_wire = _wire_api_for(str(wire_api_label))
                 if "deepseek" in (api_base + " " + api_model).lower():
                     _models_wire = "chat_completions"
+                _models_key = _configured_api_key(api_base, api_key)
+                if not _models_key:
+                    raise ValueError("读取模型列表需要当前 API 地址对应的密钥")
                 _models_provider = OpenAICompatibleProvider(
-                    endpoint=api_base, model=api_model, api_key=api_key,
+                    endpoint=api_base, model=api_model, api_key=_models_key,
                     wire_api=_models_wire, reasoning_effort=None, allow_network=True, store=False, timeout=api_timeout, max_output_tokens=api_output_tokens,
                 )
-                if not api_key.strip():
-                    raise ValueError("读取模型列表需要先输入 API Key")
                 with _busy("正在向服务商请求模型列表"):
                     st.session_state.available_models = _models_provider.list_models()
                 st.success(f"已读取 {len(st.session_state.available_models)} 个模型")
@@ -2594,7 +2614,9 @@ with _PLAN:
                         output_dir=ROOT / ".iverilog-ai/pipeline-ui" / f"agent-{uuid.uuid4().hex[:12]}",
                         objective=str(st.session_state.get("objective_text", "检查正常行为和边界条件，寻找可复现反例")),
                         specification=_agent_spec, initial_plan=st.session_state.get("ai_plan"),
-                        limits=AgentLimits(max_rounds=_agent_rounds, max_requests=_agent_requests, max_total_cycles=_agent_cycles),
+                        limits=AgentLimits(max_rounds=_agent_rounds, max_requests=_agent_requests, max_total_cycles=_agent_cycles,
+                                           max_output_tokens=min(_agent_provider.max_output_tokens, 8192),
+                                           request_timeout_seconds=min(int(_agent_provider.timeout), 180)),
                         execution_options={"allowed_roots": (ROOT,), "defines": _agent_defines, "include_dirs": _agent_includes,
                                            "iverilog_path": os.getenv("IVERILOG_PATH") or r"D:\iverilog\bin\iverilog.exe",
                                            "vvp_path": os.getenv("VVP_PATH") or r"D:\iverilog\bin\vvp.exe"},
