@@ -1,0 +1,4129 @@
+{
+  "record_kind": "read_only_agent_smoke_comparison_review",
+  "created_at_utc": "2026-10-04T18:33:39.824957+00:00",
+  "production_revision": "f54ae63a6cb811b3707275c9fed96270e6ef74ff",
+  "audit_head": "f54ae63a6cb811b3707275c9fed96270e6ef74ff",
+  "api_requests_by_this_review": 0,
+  "simulations_by_this_review": 0,
+  "real_credentials_read": false,
+  "human_participants": 0,
+  "independent_human_review": false,
+  "H01_satisfied": false,
+  "H02_satisfied": false,
+  "independent_holdout": false,
+  "cross_machine_reproduction": false,
+  "originals": {
+    "preregistration.json": {
+      "path": ".iverilog-ai/agent-smoke-live-20261005/preregistration.json",
+      "sha256": "71a36686edda32ca55b42db7b5442a9fd353a344b32b3270aeebbf43cbca2d7c",
+      "bytes": 81117
+    },
+    "run_settings.json": {
+      "path": ".iverilog-ai/agent-smoke-live-20261005/run_settings.json",
+      "sha256": "9c8a4694ff512323e75b608bb04d10d4f5cc9f4d1dc1d33fade51b418774d200",
+      "bytes": 887
+    },
+    "results.json": {
+      "path": ".iverilog-ai/agent-smoke-live-20261005/results.json",
+      "sha256": "8d2ed8cae56f2189690c5e108bf25938523c052fe8981ea779116ad3a50d90e9",
+      "bytes": 6378345
+    },
+    "summary.json": {
+      "path": ".iverilog-ai/agent-smoke-live-20261005/summary.json",
+      "sha256": "d8e40fa2c76d57ddfd4102e7e61ce6b164d5a67bd7795afbd86b4c814de49e56",
+      "bytes": 6397632
+    },
+    "registered-inputs/manifest.json": {
+      "path": ".iverilog-ai/agent-smoke-live-20261005/registered-inputs/manifest.json",
+      "sha256": "fd500beac0f93a581642af849f29fb9772a7d1e5cf4e2c82263d286a0d7a5cb5",
+      "bytes": 19738
+    }
+  },
+  "registered_inputs": [
+    {
+      "path": "benchmarks/agent_v2/mutation_manifest.json",
+      "sha256": "5ca8faef783e5d3a3a30ceed4a137353917c767dd7650966e8e4cdb93b7067eb",
+      "bytes": 2833,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "benchmarks/agent_v2/sync_fifo_bug_full_off_by_one.v",
+      "sha256": "64421ef7e99f0d0e4964a680067a7e2d4773c12d15d9b65d8d120156adf8418a",
+      "bytes": 897,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "benchmarks/agent_v2/sync_fifo_bug_write_when_full.v",
+      "sha256": "4d6888893636961465ab503be921859f97d3c0c15695ababaae7ce103032420c",
+      "bytes": 888,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "benchmarks/agent_v2/sync_fifo_reference.v",
+      "sha256": "964cd554041818533ece195f3abcc6979c116c4a3d72106a7fe49c503bd2dadc",
+      "bytes": 895,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "benchmarks/manifest.json",
+      "sha256": "338f6a4f29f84dbe34e14223114d54f6e809b5dd9cd625e081a07f27c396d3f1",
+      "bytes": 28158,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "docs/experiment/agent_comparison_protocol.md",
+      "sha256": "126088737dd77e3a54e66397b7f067a56af235dc49ef0723f4129e706dc243a9",
+      "bytes": 7496,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "docs/experiment/agent_comparison_v5_plan_2026-10-05.md",
+      "sha256": "45dcc49861d275844fbbdac890651ce6ea277fda7211f85f9a71bea69057271f",
+      "bytes": 3546,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "examples/handshake_stage_contract.json",
+      "sha256": "04c7ea8773e394e22bf680304fdcf9d1e3d783d1ca763bb8cc5c4e6a5056f377",
+      "bytes": 522,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "examples/spi_master_contract.json",
+      "sha256": "674473699ff9cfbd2fdf9481272fcc1ce905be4b90148beea4c3d42b92755ebe",
+      "bytes": 487,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "examples/sync_fifo_contract.json",
+      "sha256": "0c51a032e1405f8cfe87a8dc18933c9d6d3cf61b8f8c969bf46ea23402963ce8",
+      "bytes": 515,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "examples/uart_tx_contract.json",
+      "sha256": "0a30a3e3c5e1ee65f5114f476de0e03bb155879b5e7dcdaf099bf918c180f6b4",
+      "bytes": 415,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "rtl/handshake_stage.v",
+      "sha256": "40128340f967f8143bdb55ddfac689a94b7639ac8f175b7b9a4164fb8b531791",
+      "bytes": 472,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "rtl/handshake_stage_bug_ready_ignores_out_ready.v",
+      "sha256": "e52ec6619bcc2b049daff7973c85460482b8ae6bb4b806208a6840442cd9f1d1",
+      "bytes": 587,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "rtl/handshake_stage_bug_valid_not_cleared.v",
+      "sha256": "3f9519c49b4fcb196f4bdee1021d84b922af252be3580d0093b30fef3da68502",
+      "bytes": 601,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "rtl/spi_master.v",
+      "sha256": "8cacdb94472eb7446f0df05ac201f88e1c7e5c46dd01a484b4996b099835c9dd",
+      "bytes": 684,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "rtl/spi_master_bug_done_missing.v",
+      "sha256": "eb194c5f8a88c41111f5cdfb6bb8c67057182448c040691d196ed9bf8376fedf",
+      "bytes": 794,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "rtl/spi_master_bug_sclk_polarity.v",
+      "sha256": "b3c7cb08949d062faaf20811d7d4693ab7a6bf65ce878dbe1a0df15e69fc57f8",
+      "bytes": 794,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "rtl/sync_fifo.v",
+      "sha256": "964cd554041818533ece195f3abcc6979c116c4a3d72106a7fe49c503bd2dadc",
+      "bytes": 895,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "rtl/uart_tx.v",
+      "sha256": "2b6d636a399169bcaa4fdabd9661daedbfde28c42c3bc9f76104db2c371e1193",
+      "bytes": 620,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "rtl/uart_tx_bug_busy_never_clears.v",
+      "sha256": "24b4caa23ac9b7dd2db45401acf781b1641e7eb800c55f32b78cbd6b65c7ffed",
+      "bytes": 733,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "rtl/uart_tx_bug_msb_first.v",
+      "sha256": "93b638a980c2ecf591163f954fd72f5210088c1bf2dda5ab9dbef65c479bd334",
+      "bytes": 725,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "scripts/run_agent_comparison.py",
+      "sha256": "8d283240e1c232ef0cb3a7053f945d1e604456eaf13455648c0868531f5d8287",
+      "bytes": 35055,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "scripts/run_strategy_experiment.py",
+      "sha256": "22889c50c07ff49da00c6278a88e8d710f1f708f1e4bf994f51ad82adee5c341",
+      "bytes": 48683,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "scripts/summarize_agent_comparison.py",
+      "sha256": "ef8ba4bdc7e256ac7ab0bab82abdc372cd4e9c7b0c1460e95c05d7eab383871f",
+      "bytes": 24280,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "spec/agent_protocols.json",
+      "sha256": "24c046c9e0e9a11cc04402efd705244d6efc6417a1e8fafe65ed5db1fc449280",
+      "bytes": 2683,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "spec/handshake_stage_spec.md",
+      "sha256": "fe7fd36d849fadf09e973b006447b63de4c60ea9f9bbe022876983f8aab95398",
+      "bytes": 2912,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "spec/spi_master_spec.md",
+      "sha256": "d98990ce8f73abf4f4cf16196ad99fd345ab729ef35e97bb26ba7f5673eef516",
+      "bytes": 3034,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "spec/sync_fifo_spec.md",
+      "sha256": "4fe66f356d6fb4c0ca7b0c525ec83b3a287f911893af0974a828737dc3eb0aab",
+      "bytes": 3642,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "spec/uart_tx_spec.md",
+      "sha256": "7c99ccfdf59d0bb520b0d9ad9994c3572172402bed32abd1c4cd3425705dfb0f",
+      "bytes": 3199,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/__init__.py",
+      "sha256": "4029747348635aaec01692e07b842e0e371b54137d82ccf87531653e78c20ae5",
+      "bytes": 2323,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/__main__.py",
+      "sha256": "3f5bcafa00f7975197263772705c1a057638fcee62fda5c571d5f346d061458d",
+      "bytes": 182,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/__init__.py",
+      "sha256": "e8f3a29fddabc922dd9bfc972333b84e3617c22ba45f69717953e2ef92c130f4",
+      "bytes": 673,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/agent.py",
+      "sha256": "0b7758b0a5a3cc2a2f07fabfde1b3808fab860872c161df247a68f4b95da3c40",
+      "bytes": 39677,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/debug_provider.py",
+      "sha256": "ee060f47e5d3234be09f5925edd55f58d2e6654f21ca26f1d6b8805d992d976b",
+      "bytes": 28184,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/debug_server.py",
+      "sha256": "c49226654b90f2e507727491253c98ba5384aef156719908197fb88a6040dd0b",
+      "bytes": 15282,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/local_api_profile.py",
+      "sha256": "3942b3a40c131dadb2e84e767ca0656a83f315b9ade6ee1a8d1431e68ff732ea",
+      "bytes": 2258,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/planner.py",
+      "sha256": "0115a312206c0510e12a2ce9bf14f909c88113a1179533023f33da7005bbc805",
+      "bytes": 14117,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/provider.py",
+      "sha256": "caf55116017e962743e03223ff978b13e69ba71b41e11113d16648e8e9763478",
+      "bytes": 29042,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/review_advisor.py",
+      "sha256": "980126489a04fa0d20d7022c544c0a11694ed0ddb76010751879aa5bcbe0edc6",
+      "bytes": 16596,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/schema.py",
+      "sha256": "cf0babeaea6d7a62aa374ca5467f56e8e0575d39407bcf79b57497dfc9e17b06",
+      "bytes": 12436,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/__init__.py",
+      "sha256": "3e0c97ad848d7a60ab75803106040cfd5d449183d57db709f3ece01c9df4f151",
+      "bytes": 4161,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/assertions.py",
+      "sha256": "024168b28e390e7586c91597a7ace8c6cae2dbe8b085d4d7380679892481734f",
+      "bytes": 10842,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/behavior_compare.py",
+      "sha256": "7828c4888b2572bd1b15f2494cf4346e1e327e1403addfec96fa061db7f6d02c",
+      "bytes": 14805,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/benchmark_cases.py",
+      "sha256": "f163c65450e27ba260a8e89a9b3f419b9a2fe23fff6917f77680d8c573f0f73a",
+      "bytes": 5967,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/cli.py",
+      "sha256": "82750a56596d45f49d260433d329e61ff2223571f7e610702c183d70b9d8dc6a",
+      "bytes": 32675,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/config.py",
+      "sha256": "7ba6aedac100d3b7c00d4e4ca0ce3a04402cb0b96f4e7ced73d367c612905d0e",
+      "bytes": 11325,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/contracts.py",
+      "sha256": "775874199ed802d73172202dc68c629ec04796ce1565270a650261e91c8fc097",
+      "bytes": 20368,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/conventions.py",
+      "sha256": "772138a203fe2d738fb4a5d2067f1be7676c4adaec89aed4edc0958dc87cac5e",
+      "bytes": 20766,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/coverage.py",
+      "sha256": "8c85a3816842739f81d20782ba098aab3f17e2f21d0171800eb151802c47b4ca",
+      "bytes": 16726,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/executor.py",
+      "sha256": "d4e352c0317c484a482ddead62b7b6461ad797836de852b88e7b7878f133aba9",
+      "bytes": 15433,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/failure_guide.py",
+      "sha256": "1ec632cdff86255e15a79cdbb1772b7aa0544cf1594f794212cd2d2708dc938a",
+      "bytes": 11246,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/functional_coverage.py",
+      "sha256": "70cd1c00c0e8bc5877fafdb6ba88491d9c5ba2ae16714230aee2a30dfd4bb2fe",
+      "bytes": 24133,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/generator.py",
+      "sha256": "d8463c54bd45f31c379a33cc6d99e35c0fb672f49fd2e4e3c35c0a375e1644a1",
+      "bytes": 393,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/grading.py",
+      "sha256": "8d15c606c39d2182e97f619d8ecf7b9bb11f6222585b085af246d35d111e39c6",
+      "bytes": 13886,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/labels.py",
+      "sha256": "16894f46ab19baf73b251fcd836289d463ecd12e41c1393fc766e363346489be",
+      "bytes": 6508,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/models.py",
+      "sha256": "8d7ff1db511d0e3ab90364e16fd5bb0d0c6159d0adf69c35d519fc7a64cd71d6",
+      "bytes": 34373,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/observations.py",
+      "sha256": "9883628573a7669229a47180dea84591b5b7c7fd7fd2d82dd0d8867019b8e0f3",
+      "bytes": 4041,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/pipeline.py",
+      "sha256": "3cf278b7df84f8d1e8d57786bc3b2485afab14ad5f1a1ce43b5eed657a9b9446",
+      "bytes": 38441,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/pricing.py",
+      "sha256": "8073aae0673652cc664813141be6371270d70b479e8f472afeab7fec9e424a93",
+      "bytes": 7354,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/reference_model.py",
+      "sha256": "bc5b8b4c2bad64541124724f05ecd5ffc3f286fcb72438e759f1445f27c360c1",
+      "bytes": 34171,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/repair_compare.py",
+      "sha256": "fdee57ae6bf2ad9d4f07eb43a35de16ec19f77f2be2d47c85e73900ec7a68939",
+      "bytes": 2526,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/report.py",
+      "sha256": "9564b749aeda1960957f3b20b1bca13e07c5e6fc3316c3aba2d1dffc7f5a0eac",
+      "bytes": 27060,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/rtl_compare.py",
+      "sha256": "4002eeac33e7d937811dfb1af92688dff397929edb6abde8305a50dc6057f3a0",
+      "bytes": 6025,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/rtl_import.py",
+      "sha256": "36b23e675ba8fedb3c2e362a0a3858935cd4828537e88ef7764da7fb26938153",
+      "bytes": 20122,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/rule_assertions.py",
+      "sha256": "b513611ac3f7b1a062352bf4d5168e61bdf0a69d83e0bfda0c4d2b8bf3d1347a",
+      "bytes": 2360,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/rules.py",
+      "sha256": "731534298bce7c909171faaa4bf27492967ca36c1fa2cb9589f8134343ebc7c1",
+      "bytes": 4828,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/static_review.py",
+      "sha256": "ab14b88d043992bbc1c89bec500dfd6e43c3173d7834f8ff3ecfd458e0f6f66f",
+      "bytes": 48269,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/strategy_scoring.py",
+      "sha256": "a16167285dec89bf21a4dcf891747dcb2cf99606bd4b01ec91aeb3e0c4162899",
+      "bytes": 17765,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/synthesis.py",
+      "sha256": "aa67491ea4bd0ff13a329f1ad1f454312476616aa716e5e6915ae4c4c0a7bc7e",
+      "bytes": 15885,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/testbench.py",
+      "sha256": "17119e5851a95e0b065832e0aa03eaeebeb98b630722b66a28751ae7592c86c9",
+      "bytes": 29683,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/toolchain.py",
+      "sha256": "52ce0ae47dfd02ed85aeff8e18d1fd4aa0badc65ceba3ecd999e44e88d3a1d8d",
+      "bytes": 6013,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/vcd.py",
+      "sha256": "01b18b6af89df9ced4da013d8bdacefdf4417a2f7cc1e9f18aea88a9ef0f45f3",
+      "bytes": 31167,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/verify_diff.py",
+      "sha256": "2a01d2e4b90e5ffa97dfaeeefb2ef337e4fb245f7f03fbc18e75ebd52f466967",
+      "bytes": 23826,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "src/iverilog_ai/core/waveform.py",
+      "sha256": "06793bbdb16ee1f8d63be8b914e506362b18e432e82f6370315c759cd97a8433",
+      "bytes": 4246,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "spec/agent_smoke_budgets.json",
+      "sha256": "4d214032533b58ea17b5693bd1a8e3b97d7a860156d01b0e8268781ccab042be",
+      "bytes": 917,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "docs/experiment/agent_smoke_plan_2026-10-05.md",
+      "sha256": "95b72160e841e9a70894fad4af3bc8e88dddd5c6e21a70d4e5468886542ddc3c",
+      "bytes": 3383,
+      "match": true,
+      "matches_current_source": true
+    },
+    {
+      "path": "scripts/run_agent_smoke_comparison.py",
+      "sha256": "c503b59eed5141beea126c0a0523ff8e426f99fbaf15240e64220d4fb70106b7",
+      "bytes": 5423,
+      "match": true,
+      "matches_current_source": true
+    }
+  ],
+  "prior_core_source_diff_empty": true,
+  "strategy_metrics": {
+    "fixed": {
+      "rows": 36,
+      "registered_defects": 24,
+      "registered_correct": 12,
+      "detected": 21,
+      "union": 7,
+      "per_repeat": [
+        {
+          "seed": 0,
+          "denominator": 8,
+          "detected": 7
+        },
+        {
+          "seed": 1,
+          "denominator": 8,
+          "detected": 7
+        },
+        {
+          "seed": 2,
+          "denominator": 8,
+          "detected": 7
+        }
+      ],
+      "status_counts": {
+        "not_detected": 15,
+        "detected": 21
+      },
+      "reference_target_false_alarms": 0,
+      "reference_audit_rejections": 0,
+      "requests": 0,
+      "requests_with_usage": 0,
+      "total_tokens": 0,
+      "cycles": 828,
+      "reference_cycles": 828,
+      "checks": 2232,
+      "elapsed_seconds": 34.904,
+      "per_case_detected": {
+        "sync_fifo": 3,
+        "uart_tx": 6,
+        "spi_master": 6,
+        "handshake_stage": 6
+      }
+    },
+    "random": {
+      "rows": 36,
+      "registered_defects": 24,
+      "registered_correct": 12,
+      "detected": 16,
+      "union": 7,
+      "per_repeat": [
+        {
+          "seed": 0,
+          "denominator": 8,
+          "detected": 5
+        },
+        {
+          "seed": 1,
+          "denominator": 8,
+          "detected": 5
+        },
+        {
+          "seed": 2,
+          "denominator": 8,
+          "detected": 6
+        }
+      ],
+      "status_counts": {
+        "not_detected": 20,
+        "detected": 16
+      },
+      "reference_target_false_alarms": 0,
+      "reference_audit_rejections": 0,
+      "requests": 0,
+      "requests_with_usage": 0,
+      "total_tokens": 0,
+      "cycles": 828,
+      "reference_cycles": 828,
+      "checks": 2232,
+      "elapsed_seconds": 35.498,
+      "per_case_detected": {
+        "sync_fifo": 1,
+        "uart_tx": 5,
+        "spi_master": 6,
+        "handshake_stage": 4
+      }
+    },
+    "protocol_random": {
+      "rows": 36,
+      "registered_defects": 24,
+      "registered_correct": 12,
+      "detected": 21,
+      "union": 7,
+      "per_repeat": [
+        {
+          "seed": 0,
+          "denominator": 8,
+          "detected": 7
+        },
+        {
+          "seed": 1,
+          "denominator": 8,
+          "detected": 7
+        },
+        {
+          "seed": 2,
+          "denominator": 8,
+          "detected": 7
+        }
+      ],
+      "status_counts": {
+        "not_detected": 15,
+        "detected": 21
+      },
+      "reference_target_false_alarms": 0,
+      "reference_audit_rejections": 0,
+      "requests": 0,
+      "requests_with_usage": 0,
+      "total_tokens": 0,
+      "cycles": 828,
+      "reference_cycles": 828,
+      "checks": 2232,
+      "elapsed_seconds": 36.345,
+      "per_case_detected": {
+        "sync_fifo": 6,
+        "uart_tx": 6,
+        "spi_master": 6,
+        "handshake_stage": 3
+      }
+    },
+    "single": {
+      "rows": 36,
+      "registered_defects": 24,
+      "registered_correct": 12,
+      "detected": 15,
+      "union": 8,
+      "per_repeat": [
+        {
+          "seed": 0,
+          "denominator": 8,
+          "detected": 3
+        },
+        {
+          "seed": 1,
+          "denominator": 8,
+          "detected": 6
+        },
+        {
+          "seed": 2,
+          "denominator": 8,
+          "detected": 6
+        }
+      ],
+      "status_counts": {
+        "not_detected": 16,
+        "policy_error": 4,
+        "detected": 15,
+        "cycle_budget": 1
+      },
+      "reference_target_false_alarms": 0,
+      "reference_audit_rejections": 0,
+      "requests": 36,
+      "requests_with_usage": 36,
+      "total_tokens": 78934,
+      "cycles": 530,
+      "reference_cycles": 530,
+      "checks": 1493,
+      "elapsed_seconds": 73.80799999999999,
+      "per_case_detected": {
+        "sync_fifo": 3,
+        "uart_tx": 2,
+        "spi_master": 5,
+        "handshake_stage": 5
+      }
+    }
+  },
+  "requests_attempted": 36,
+  "total_tokens": 78934,
+  "pipeline_sides_checked": 278,
+  "raw_row_checks": [
+    {
+      "row": 0,
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 1,
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 0,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 2,
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 3,
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 0,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 13,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 4,
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 5,
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 1,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 6,
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 7,
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 1,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 12,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 8,
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 9,
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 2,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 10,
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 11,
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 2,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 8,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 12,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": 10
+    },
+    {
+      "row": 13,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "random",
+      "seed": 0,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 14,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": 4
+    },
+    {
+      "row": 15,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "single",
+      "seed": 0,
+      "status": "policy_error",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 0,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 16,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": 10
+    },
+    {
+      "row": 17,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "random",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": 6
+    },
+    {
+      "row": 18,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": 4
+    },
+    {
+      "row": 19,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "single",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 1,
+      "cycles": 12,
+      "first_detection_search_budget": 3
+    },
+    {
+      "row": 20,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": 10
+    },
+    {
+      "row": 21,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "random",
+      "seed": 2,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 22,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": 4
+    },
+    {
+      "row": 23,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "single",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 1,
+      "cycles": 16,
+      "first_detection_search_budget": 5
+    },
+    {
+      "row": 24,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 25,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "random",
+      "seed": 0,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 26,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": 7
+    },
+    {
+      "row": 27,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "single",
+      "seed": 0,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 5,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 28,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 29,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "random",
+      "seed": 1,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 30,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": 7
+    },
+    {
+      "row": 31,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "single",
+      "seed": 1,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 5,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 32,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 33,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "random",
+      "seed": 2,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 34,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 16,
+      "first_detection_search_budget": 7
+    },
+    {
+      "row": 35,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "single",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 1,
+      "cycles": 13,
+      "first_detection_search_budget": 9
+    },
+    {
+      "row": 36,
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 37,
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 0,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 38,
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 39,
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 0,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 46,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 40,
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 41,
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 1,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 42,
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 43,
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 1,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 47,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 44,
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 45,
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 2,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 46,
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 47,
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 2,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 48,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 48,
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": 7
+    },
+    {
+      "row": 49,
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "random",
+      "seed": 0,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 50,
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": 9
+    },
+    {
+      "row": 51,
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "single",
+      "seed": 0,
+      "status": "policy_error",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 0,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 52,
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": 7
+    },
+    {
+      "row": 53,
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "random",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": 6
+    },
+    {
+      "row": 54,
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": 5
+    },
+    {
+      "row": 55,
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "single",
+      "seed": 1,
+      "status": "policy_error",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 0,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 56,
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": 7
+    },
+    {
+      "row": 57,
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "random",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": 8
+    },
+    {
+      "row": 58,
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": 5
+    },
+    {
+      "row": 59,
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "single",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 1,
+      "cycles": 46,
+      "first_detection_search_budget": 5
+    },
+    {
+      "row": 60,
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": 43
+    },
+    {
+      "row": 61,
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "random",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": 41
+    },
+    {
+      "row": 62,
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": 41
+    },
+    {
+      "row": 63,
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "single",
+      "seed": 0,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 14,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 64,
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": 43
+    },
+    {
+      "row": 65,
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "random",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": 42
+    },
+    {
+      "row": 66,
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": 41
+    },
+    {
+      "row": 67,
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "single",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 1,
+      "cycles": 45,
+      "first_detection_search_budget": 44
+    },
+    {
+      "row": 68,
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": 43
+    },
+    {
+      "row": 69,
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "random",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": 44
+    },
+    {
+      "row": 70,
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 48,
+      "first_detection_search_budget": 41
+    },
+    {
+      "row": 71,
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "single",
+      "seed": 2,
+      "status": "cycle_budget",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 0,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 72,
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 73,
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 0,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 74,
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 75,
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 0,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 17,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 76,
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 77,
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 1,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 78,
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 79,
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 1,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 17,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 80,
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 81,
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 2,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 82,
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 83,
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 2,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 20,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 84,
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": 4
+    },
+    {
+      "row": 85,
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "random",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": 2
+    },
+    {
+      "row": 86,
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": 2
+    },
+    {
+      "row": 87,
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "single",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 1,
+      "cycles": 20,
+      "first_detection_search_budget": 5
+    },
+    {
+      "row": 88,
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": 4
+    },
+    {
+      "row": 89,
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "random",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": 3
+    },
+    {
+      "row": 90,
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": 2
+    },
+    {
+      "row": 91,
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "single",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 1,
+      "cycles": 17,
+      "first_detection_search_budget": 2
+    },
+    {
+      "row": 92,
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": 4
+    },
+    {
+      "row": 93,
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "random",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": 5
+    },
+    {
+      "row": 94,
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": 2
+    },
+    {
+      "row": 95,
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "single",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 1,
+      "cycles": 20,
+      "first_detection_search_budget": 5
+    },
+    {
+      "row": 96,
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": 18
+    },
+    {
+      "row": 97,
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "random",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": 16
+    },
+    {
+      "row": 98,
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": 16
+    },
+    {
+      "row": 99,
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "single",
+      "seed": 0,
+      "status": "policy_error",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 0,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 100,
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": 18
+    },
+    {
+      "row": 101,
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "random",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": 17
+    },
+    {
+      "row": 102,
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": 16
+    },
+    {
+      "row": 103,
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "single",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 1,
+      "cycles": 18,
+      "first_detection_search_budget": 17
+    },
+    {
+      "row": 104,
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": 18
+    },
+    {
+      "row": 105,
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "random",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": 19
+    },
+    {
+      "row": 106,
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 20,
+      "first_detection_search_budget": 16
+    },
+    {
+      "row": 107,
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "single",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 1,
+      "cycles": 20,
+      "first_detection_search_budget": 16
+    },
+    {
+      "row": 108,
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 109,
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 0,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 110,
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 111,
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 0,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 6,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 112,
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 113,
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 1,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 114,
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 115,
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 1,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 8,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 116,
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 117,
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 2,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 118,
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 119,
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 2,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 6,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 120,
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": 4
+    },
+    {
+      "row": 121,
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "random",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": 2
+    },
+    {
+      "row": 122,
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": 4
+    },
+    {
+      "row": 123,
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "single",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 1,
+      "cycles": 6,
+      "first_detection_search_budget": 6
+    },
+    {
+      "row": 124,
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": 4
+    },
+    {
+      "row": 125,
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "random",
+      "seed": 1,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 126,
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": 4
+    },
+    {
+      "row": 127,
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "single",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 1,
+      "cycles": 4,
+      "first_detection_search_budget": 3
+    },
+    {
+      "row": 128,
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": 4
+    },
+    {
+      "row": 129,
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "random",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": 2
+    },
+    {
+      "row": 130,
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": 4
+    },
+    {
+      "row": 131,
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "single",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 1,
+      "cycles": 5,
+      "first_detection_search_budget": 3
+    },
+    {
+      "row": 132,
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": 5
+    },
+    {
+      "row": 133,
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "random",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": 4
+    },
+    {
+      "row": 134,
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 135,
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "single",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 1,
+      "cycles": 7,
+      "first_detection_search_budget": 6
+    },
+    {
+      "row": 136,
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": 5
+    },
+    {
+      "row": 137,
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "random",
+      "seed": 1,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 138,
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 139,
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "single",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 1,
+      "cycles": 3,
+      "first_detection_search_budget": 3
+    },
+    {
+      "row": 140,
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": 5
+    },
+    {
+      "row": 141,
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "random",
+      "seed": 2,
+      "status": "detected",
+      "detected_from_records": true,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": 4
+    },
+    {
+      "row": 142,
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 0,
+      "cycles": 8,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 143,
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "single",
+      "seed": 2,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 6,
+      "first_detection_search_budget": null
+    }
+  ],
+  "decision_checks": [
+    {
+      "row": 3,
+      "case": "sync_fifo",
+      "variant": "reference",
+      "seed": 0,
+      "status": "validated",
+      "row_status": "not_detected",
+      "usage": {
+        "prompt_tokens": 2049,
+        "completion_tokens": 268,
+        "total_tokens": 2317,
+        "prompt_cache_hit_tokens": 640,
+        "prompt_cache_miss_tokens": 1409
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 7,
+      "case": "sync_fifo",
+      "variant": "reference",
+      "seed": 1,
+      "status": "validated",
+      "row_status": "not_detected",
+      "usage": {
+        "prompt_tokens": 2049,
+        "completion_tokens": 487,
+        "total_tokens": 2536,
+        "prompt_cache_hit_tokens": 1915,
+        "prompt_cache_miss_tokens": 134
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 11,
+      "case": "sync_fifo",
+      "variant": "reference",
+      "seed": 2,
+      "status": "validated",
+      "row_status": "not_detected",
+      "usage": {
+        "prompt_tokens": 2049,
+        "completion_tokens": 221,
+        "total_tokens": 2270,
+        "prompt_cache_hit_tokens": 1915,
+        "prompt_cache_miss_tokens": 134
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 15,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "seed": 0,
+      "status": "rejected",
+      "row_status": "policy_error",
+      "usage": {
+        "prompt_tokens": 2049,
+        "completion_tokens": 151,
+        "total_tokens": 2200,
+        "prompt_cache_hit_tokens": 1915,
+        "prompt_cache_miss_tokens": 134
+      },
+      "validation_error_types": [
+        "extra_forbidden"
+      ],
+      "executed_round": null,
+      "action_type": null,
+      "action_keys": []
+    },
+    {
+      "row": 19,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "seed": 1,
+      "status": "validated",
+      "row_status": "detected",
+      "usage": {
+        "prompt_tokens": 2049,
+        "completion_tokens": 346,
+        "total_tokens": 2395,
+        "prompt_cache_hit_tokens": 1915,
+        "prompt_cache_miss_tokens": 134
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 23,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "seed": 2,
+      "status": "validated",
+      "row_status": "detected",
+      "usage": {
+        "prompt_tokens": 2049,
+        "completion_tokens": 239,
+        "total_tokens": 2288,
+        "prompt_cache_hit_tokens": 1915,
+        "prompt_cache_miss_tokens": 134
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 27,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "seed": 0,
+      "status": "validated",
+      "row_status": "not_detected",
+      "usage": {
+        "prompt_tokens": 2049,
+        "completion_tokens": 215,
+        "total_tokens": 2264,
+        "prompt_cache_hit_tokens": 1915,
+        "prompt_cache_miss_tokens": 134
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 31,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "seed": 1,
+      "status": "validated",
+      "row_status": "not_detected",
+      "usage": {
+        "prompt_tokens": 2049,
+        "completion_tokens": 89,
+        "total_tokens": 2138,
+        "prompt_cache_hit_tokens": 1915,
+        "prompt_cache_miss_tokens": 134
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 35,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "seed": 2,
+      "status": "validated",
+      "row_status": "detected",
+      "usage": {
+        "prompt_tokens": 2049,
+        "completion_tokens": 212,
+        "total_tokens": 2261,
+        "prompt_cache_hit_tokens": 1915,
+        "prompt_cache_miss_tokens": 134
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 39,
+      "case": "uart_tx",
+      "variant": "reference",
+      "seed": 0,
+      "status": "validated",
+      "row_status": "not_detected",
+      "usage": {
+        "prompt_tokens": 1961,
+        "completion_tokens": 196,
+        "total_tokens": 2157,
+        "prompt_cache_hit_tokens": 640,
+        "prompt_cache_miss_tokens": 1321
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 43,
+      "case": "uart_tx",
+      "variant": "reference",
+      "seed": 1,
+      "status": "validated",
+      "row_status": "not_detected",
+      "usage": {
+        "prompt_tokens": 1961,
+        "completion_tokens": 188,
+        "total_tokens": 2149,
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 169
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 47,
+      "case": "uart_tx",
+      "variant": "reference",
+      "seed": 2,
+      "status": "validated",
+      "row_status": "not_detected",
+      "usage": {
+        "prompt_tokens": 1961,
+        "completion_tokens": 198,
+        "total_tokens": 2159,
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 169
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 51,
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "seed": 0,
+      "status": "rejected",
+      "row_status": "policy_error",
+      "usage": {
+        "prompt_tokens": 1961,
+        "completion_tokens": 145,
+        "total_tokens": 2106,
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 169
+      },
+      "validation_error_types": [
+        "extra_forbidden"
+      ],
+      "executed_round": null,
+      "action_type": null,
+      "action_keys": []
+    },
+    {
+      "row": 55,
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "seed": 1,
+      "status": "rejected",
+      "row_status": "policy_error",
+      "usage": {
+        "prompt_tokens": 1961,
+        "completion_tokens": 198,
+        "total_tokens": 2159,
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 169
+      },
+      "validation_error_types": [
+        "extra_forbidden"
+      ],
+      "executed_round": null,
+      "action_type": null,
+      "action_keys": []
+    },
+    {
+      "row": 59,
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "seed": 2,
+      "status": "validated",
+      "row_status": "detected",
+      "usage": {
+        "prompt_tokens": 1961,
+        "completion_tokens": 210,
+        "total_tokens": 2171,
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 169
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 63,
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "seed": 0,
+      "status": "validated",
+      "row_status": "not_detected",
+      "usage": {
+        "prompt_tokens": 1961,
+        "completion_tokens": 240,
+        "total_tokens": 2201,
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 169
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 67,
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "seed": 1,
+      "status": "validated",
+      "row_status": "detected",
+      "usage": {
+        "prompt_tokens": 1961,
+        "completion_tokens": 195,
+        "total_tokens": 2156,
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 169
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 71,
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "seed": 2,
+      "status": "validated",
+      "row_status": "cycle_budget",
+      "usage": {
+        "prompt_tokens": 1961,
+        "completion_tokens": 421,
+        "total_tokens": 2382,
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 169
+      },
+      "validation_error_types": null,
+      "executed_round": null,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 75,
+      "case": "spi_master",
+      "variant": "reference",
+      "seed": 0,
+      "status": "validated",
+      "row_status": "not_detected",
+      "usage": {
+        "prompt_tokens": 1981,
+        "completion_tokens": 115,
+        "total_tokens": 2096,
+        "prompt_cache_hit_tokens": 640,
+        "prompt_cache_miss_tokens": 1341
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 79,
+      "case": "spi_master",
+      "variant": "reference",
+      "seed": 1,
+      "status": "validated",
+      "row_status": "not_detected",
+      "usage": {
+        "prompt_tokens": 1981,
+        "completion_tokens": 172,
+        "total_tokens": 2153,
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 189
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 83,
+      "case": "spi_master",
+      "variant": "reference",
+      "seed": 2,
+      "status": "validated",
+      "row_status": "not_detected",
+      "usage": {
+        "prompt_tokens": 1981,
+        "completion_tokens": 194,
+        "total_tokens": 2175,
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 189
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 87,
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "seed": 0,
+      "status": "validated",
+      "row_status": "detected",
+      "usage": {
+        "prompt_tokens": 1981,
+        "completion_tokens": 194,
+        "total_tokens": 2175,
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 189
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 91,
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "seed": 1,
+      "status": "validated",
+      "row_status": "detected",
+      "usage": {
+        "prompt_tokens": 1981,
+        "completion_tokens": 119,
+        "total_tokens": 2100,
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 189
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 95,
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "seed": 2,
+      "status": "validated",
+      "row_status": "detected",
+      "usage": {
+        "prompt_tokens": 1981,
+        "completion_tokens": 204,
+        "total_tokens": 2185,
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 189
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 99,
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "seed": 0,
+      "status": "rejected",
+      "row_status": "policy_error",
+      "usage": {
+        "prompt_tokens": 1981,
+        "completion_tokens": 151,
+        "total_tokens": 2132,
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 189
+      },
+      "validation_error_types": [
+        "extra_forbidden"
+      ],
+      "executed_round": null,
+      "action_type": null,
+      "action_keys": []
+    },
+    {
+      "row": 103,
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "seed": 1,
+      "status": "validated",
+      "row_status": "detected",
+      "usage": {
+        "prompt_tokens": 1981,
+        "completion_tokens": 190,
+        "total_tokens": 2171,
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 189
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 107,
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "seed": 2,
+      "status": "validated",
+      "row_status": "detected",
+      "usage": {
+        "prompt_tokens": 1981,
+        "completion_tokens": 222,
+        "total_tokens": 2203,
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 189
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 111,
+      "case": "handshake_stage",
+      "variant": "reference",
+      "seed": 0,
+      "status": "validated",
+      "row_status": "not_detected",
+      "usage": {
+        "prompt_tokens": 1865,
+        "completion_tokens": 320,
+        "total_tokens": 2185,
+        "prompt_cache_hit_tokens": 640,
+        "prompt_cache_miss_tokens": 1225
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 115,
+      "case": "handshake_stage",
+      "variant": "reference",
+      "seed": 1,
+      "status": "validated",
+      "row_status": "not_detected",
+      "usage": {
+        "prompt_tokens": 1865,
+        "completion_tokens": 300,
+        "total_tokens": 2165,
+        "prompt_cache_hit_tokens": 1664,
+        "prompt_cache_miss_tokens": 201
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 119,
+      "case": "handshake_stage",
+      "variant": "reference",
+      "seed": 2,
+      "status": "validated",
+      "row_status": "not_detected",
+      "usage": {
+        "prompt_tokens": 1865,
+        "completion_tokens": 205,
+        "total_tokens": 2070,
+        "prompt_cache_hit_tokens": 1664,
+        "prompt_cache_miss_tokens": 201
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 123,
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "seed": 0,
+      "status": "validated",
+      "row_status": "detected",
+      "usage": {
+        "prompt_tokens": 1865,
+        "completion_tokens": 233,
+        "total_tokens": 2098,
+        "prompt_cache_hit_tokens": 1664,
+        "prompt_cache_miss_tokens": 201
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 127,
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "seed": 1,
+      "status": "validated",
+      "row_status": "detected",
+      "usage": {
+        "prompt_tokens": 1865,
+        "completion_tokens": 324,
+        "total_tokens": 2189,
+        "prompt_cache_hit_tokens": 1664,
+        "prompt_cache_miss_tokens": 201
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 131,
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "seed": 2,
+      "status": "validated",
+      "row_status": "detected",
+      "usage": {
+        "prompt_tokens": 1865,
+        "completion_tokens": 221,
+        "total_tokens": 2086,
+        "prompt_cache_hit_tokens": 1664,
+        "prompt_cache_miss_tokens": 201
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 135,
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "seed": 0,
+      "status": "validated",
+      "row_status": "detected",
+      "usage": {
+        "prompt_tokens": 1865,
+        "completion_tokens": 462,
+        "total_tokens": 2327,
+        "prompt_cache_hit_tokens": 1664,
+        "prompt_cache_miss_tokens": 201
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 139,
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "seed": 1,
+      "status": "validated",
+      "row_status": "detected",
+      "usage": {
+        "prompt_tokens": 1865,
+        "completion_tokens": 181,
+        "total_tokens": 2046,
+        "prompt_cache_hit_tokens": 1664,
+        "prompt_cache_miss_tokens": 201
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    },
+    {
+      "row": 143,
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "seed": 2,
+      "status": "validated",
+      "row_status": "not_detected",
+      "usage": {
+        "prompt_tokens": 1865,
+        "completion_tokens": 204,
+        "total_tokens": 2069,
+        "prompt_cache_hit_tokens": 1664,
+        "prompt_cache_miss_tokens": 201
+      },
+      "validation_error_types": null,
+      "executed_round": 1,
+      "action_type": null,
+      "action_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ]
+    }
+  ],
+  "decision_status_counts": {
+    "validated": 32,
+    "rejected": 4
+  },
+  "retained_nonexecution_rows": [
+    {
+      "row": 15,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "single",
+      "seed": 0,
+      "status": "policy_error",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 0,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 51,
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "single",
+      "seed": 0,
+      "status": "policy_error",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 0,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 55,
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "single",
+      "seed": 1,
+      "status": "policy_error",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 0,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 71,
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "single",
+      "seed": 2,
+      "status": "cycle_budget",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 0,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 99,
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "single",
+      "seed": 0,
+      "status": "policy_error",
+      "detected_from_records": false,
+      "requests": 1,
+      "cycles": 0,
+      "first_detection_search_budget": null
+    }
+  ],
+  "summary_eligible_for_frozen_comparison": false,
+  "package_or_receipt_changes_by_this_review": false,
+  "originals_unchanged_at_end": true,
+  "errors": [],
+  "verdict": "data_consistent_with_prompt_budget_conflict",
+  "audit_script_sha256": "d668a493649127d6316fca1609ae273536e3f3f77be0ae879cf2314aa1f02146",
+  "limitations": [
+    "Exploratory short-budget test on previously seen development targets; no holdout or blinded selection.",
+    "Seeds 0/1/2 repeat the same eight defects; not 24 independent new defects or paired remote model randomness.",
+    "One API proposal per task tests first-plan behavior, not benefits caused by later failure or coverage feedback.",
+    "Equal cycle caps do not imply equal actual cycles, elapsed time, requests, tokens, or implicit baseline design knowledge.",
+    "Reference-model byte and saved-record consistency does not replace independent human validation of its specification.",
+    "No API, model retry, simulation, credential read, human trial, H02, or cross-machine execution was performed by this review."
+  ],
+  "initial_integrity_receipt": {
+    "path": ".iverilog-ai/agent-smoke-readonly-audit-20261005/receipt-integrity-first.json",
+    "sha256": "cf5bcc84c315a3b9e23c41a36d8ba22157bc1132ec22c97c5c069e0073ed1e32"
+  },
+  "unexecuted_proposal_checks": [
+    {
+      "row": 15,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "seed": 0,
+      "path": ".iverilog-ai/agent-smoke-live-20261005/sample-015/agent/untrusted_decisions/decision-001.json",
+      "sha256": "4cead4278795158c3eeb9c793aa6fdd5e274b7d24a2a216091ae78d8be69e229",
+      "bytes": 507,
+      "untrusted": true,
+      "top_level_keys": [
+        "action",
+        "reason",
+        "vectors",
+        "vector_count",
+        "total_cycles"
+      ],
+      "extra_keys": [
+        "total_cycles",
+        "vector_count"
+      ],
+      "proposed_cycles": 3,
+      "hard_cap": 16,
+      "row_status": "policy_error",
+      "requests": 1,
+      "executed_cycles": 0,
+      "usage": {
+        "prompt_tokens": 2049,
+        "completion_tokens": 151,
+        "total_tokens": 2200,
+        "prompt_cache_hit_tokens": 1915,
+        "prompt_cache_miss_tokens": 134
+      },
+      "cause": "Extra top-level field(s) rejected by the unchanged strict action schema; not executed."
+    },
+    {
+      "row": 51,
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "seed": 0,
+      "path": ".iverilog-ai/agent-smoke-live-20261005/sample-051/agent/untrusted_decisions/decision-001.json",
+      "sha256": "e142ccb9c40144e97cfad1aca153e9103b0ef0c18125bc041b6333da2ad280c1",
+      "bytes": 481,
+      "untrusted": true,
+      "top_level_keys": [
+        "action",
+        "reason",
+        "vectors",
+        "cycle_sum"
+      ],
+      "extra_keys": [
+        "cycle_sum"
+      ],
+      "proposed_cycles": 40,
+      "hard_cap": 48,
+      "row_status": "policy_error",
+      "requests": 1,
+      "executed_cycles": 0,
+      "usage": {
+        "prompt_tokens": 1961,
+        "completion_tokens": 145,
+        "total_tokens": 2106,
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 169
+      },
+      "cause": "Extra top-level field(s) rejected by the unchanged strict action schema; not executed."
+    },
+    {
+      "row": 55,
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "seed": 1,
+      "path": ".iverilog-ai/agent-smoke-live-20261005/sample-055/agent/untrusted_decisions/decision-001.json",
+      "sha256": "56f043d474aa2152d70a78265e9f6e4d82303753cd76b9e5eacc07fc9f66c959",
+      "bytes": 652,
+      "untrusted": true,
+      "top_level_keys": [
+        "action",
+        "reason",
+        "vectors",
+        "cycles_total"
+      ],
+      "extra_keys": [
+        "cycles_total"
+      ],
+      "proposed_cycles": 45,
+      "hard_cap": 48,
+      "row_status": "policy_error",
+      "requests": 1,
+      "executed_cycles": 0,
+      "usage": {
+        "prompt_tokens": 1961,
+        "completion_tokens": 198,
+        "total_tokens": 2159,
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 169
+      },
+      "cause": "Extra top-level field(s) rejected by the unchanged strict action schema; not executed."
+    },
+    {
+      "row": 71,
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "seed": 2,
+      "path": ".iverilog-ai/agent-smoke-live-20261005/sample-071/agent/untrusted_decisions/decision-001.json",
+      "sha256": "9500b2f03d7e9955eee75658ffbb5df2bda05ce5741425ef861db6a3645f3f19",
+      "bytes": 1280,
+      "untrusted": true,
+      "top_level_keys": [
+        "action",
+        "reason",
+        "vectors"
+      ],
+      "extra_keys": [],
+      "proposed_cycles": 85,
+      "hard_cap": 48,
+      "row_status": "cycle_budget",
+      "requests": 1,
+      "executed_cycles": 0,
+      "usage": {
+        "prompt_tokens": 1961,
+        "completion_tokens": 421,
+        "total_tokens": 2382,
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 169
+      },
+      "cause": "Schema-valid proposal of 85 cycles exceeded the hard cap of 48; not executed."
+    },
+    {
+      "row": 99,
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "seed": 0,
+      "path": ".iverilog-ai/agent-smoke-live-20261005/sample-099/agent/untrusted_decisions/decision-001.json",
+      "sha256": "664cb5f5a70d12057dbf04bc512c895d538bdbb088039e3f0088212beda977d5",
+      "bytes": 512,
+      "untrusted": true,
+      "top_level_keys": [
+        "action",
+        "reason",
+        "vectors",
+        "cycles"
+      ],
+      "extra_keys": [
+        "cycles"
+      ],
+      "proposed_cycles": 17,
+      "hard_cap": 20,
+      "row_status": "policy_error",
+      "requests": 1,
+      "executed_cycles": 0,
+      "usage": {
+        "prompt_tokens": 1981,
+        "completion_tokens": 151,
+        "total_tokens": 2132,
+        "prompt_cache_hit_tokens": 1792,
+        "prompt_cache_miss_tokens": 189
+      },
+      "cause": "Extra top-level field(s) rejected by the unchanged strict action schema; not executed."
+    }
+  ],
+  "prompt_budget_conflict": {
+    "status": "confirmed_in_36_first_request_states",
+    "checks": [
+      {
+        "row": 3,
+        "case": "sync_fifo",
+        "variant": "reference",
+        "seed": 0,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-003/agent/agent_trajectory.json",
+        "trajectory_sha256": "e9f95e0ed157b54c67c6e321176518b997d5ac06539189885578383651bad72c",
+        "spec_path": "spec/sync_fifo_spec.md",
+        "spec_line": 35,
+        "spec_line_text": "- 已验证累计激励预算为 **160 周期**，足够多轮填满、拒写、排空、回绕和复位。预算不要求把每个输出只在末拍采样；检查密度应在对照结果中单独记录。",
+        "old_text_budget": 160,
+        "hard_limit": 16,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 7,
+        "case": "sync_fifo",
+        "variant": "reference",
+        "seed": 1,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-007/agent/agent_trajectory.json",
+        "trajectory_sha256": "d423a84744b7a5c0f0a76d63e30c743eeeed25b946c43b91cfa0d1cf422e6a75",
+        "spec_path": "spec/sync_fifo_spec.md",
+        "spec_line": 35,
+        "spec_line_text": "- 已验证累计激励预算为 **160 周期**，足够多轮填满、拒写、排空、回绕和复位。预算不要求把每个输出只在末拍采样；检查密度应在对照结果中单独记录。",
+        "old_text_budget": 160,
+        "hard_limit": 16,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 11,
+        "case": "sync_fifo",
+        "variant": "reference",
+        "seed": 2,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-011/agent/agent_trajectory.json",
+        "trajectory_sha256": "ea6d34ed6642b9e7742688616e3ddc3605535b194dd26cb74bb840956fff92e5",
+        "spec_path": "spec/sync_fifo_spec.md",
+        "spec_line": 35,
+        "spec_line_text": "- 已验证累计激励预算为 **160 周期**，足够多轮填满、拒写、排空、回绕和复位。预算不要求把每个输出只在末拍采样；检查密度应在对照结果中单独记录。",
+        "old_text_budget": 160,
+        "hard_limit": 16,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 15,
+        "case": "sync_fifo",
+        "variant": "fifo_bug_full_off_by_one",
+        "seed": 0,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-015/agent/agent_trajectory.json",
+        "trajectory_sha256": "a7dd247af8ac4c7e72fba08da965bb57a5a4434dbefa1984026127ac5479c084",
+        "spec_path": "spec/sync_fifo_spec.md",
+        "spec_line": 35,
+        "spec_line_text": "- 已验证累计激励预算为 **160 周期**，足够多轮填满、拒写、排空、回绕和复位。预算不要求把每个输出只在末拍采样；检查密度应在对照结果中单独记录。",
+        "old_text_budget": 160,
+        "hard_limit": 16,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 19,
+        "case": "sync_fifo",
+        "variant": "fifo_bug_full_off_by_one",
+        "seed": 1,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-019/agent/agent_trajectory.json",
+        "trajectory_sha256": "4df225b12d72caba6f3674e999fa1845e0b074e36df0d2308e4e10706b516ba8",
+        "spec_path": "spec/sync_fifo_spec.md",
+        "spec_line": 35,
+        "spec_line_text": "- 已验证累计激励预算为 **160 周期**，足够多轮填满、拒写、排空、回绕和复位。预算不要求把每个输出只在末拍采样；检查密度应在对照结果中单独记录。",
+        "old_text_budget": 160,
+        "hard_limit": 16,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 23,
+        "case": "sync_fifo",
+        "variant": "fifo_bug_full_off_by_one",
+        "seed": 2,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-023/agent/agent_trajectory.json",
+        "trajectory_sha256": "4b62d54612a6ccfb2577de41d90a9e8a5337697ffccce437cb817c4d71d74c0c",
+        "spec_path": "spec/sync_fifo_spec.md",
+        "spec_line": 35,
+        "spec_line_text": "- 已验证累计激励预算为 **160 周期**，足够多轮填满、拒写、排空、回绕和复位。预算不要求把每个输出只在末拍采样；检查密度应在对照结果中单独记录。",
+        "old_text_budget": 160,
+        "hard_limit": 16,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 27,
+        "case": "sync_fifo",
+        "variant": "fifo_bug_write_when_full",
+        "seed": 0,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-027/agent/agent_trajectory.json",
+        "trajectory_sha256": "a4dafe980c96de4505abc64091a635ac03d344a9059b56c7a6c5b03f289860a8",
+        "spec_path": "spec/sync_fifo_spec.md",
+        "spec_line": 35,
+        "spec_line_text": "- 已验证累计激励预算为 **160 周期**，足够多轮填满、拒写、排空、回绕和复位。预算不要求把每个输出只在末拍采样；检查密度应在对照结果中单独记录。",
+        "old_text_budget": 160,
+        "hard_limit": 16,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 31,
+        "case": "sync_fifo",
+        "variant": "fifo_bug_write_when_full",
+        "seed": 1,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-031/agent/agent_trajectory.json",
+        "trajectory_sha256": "5c6a46b916f56184ab42d496389bd2602b065e14fb43337e10063c889f8743d2",
+        "spec_path": "spec/sync_fifo_spec.md",
+        "spec_line": 35,
+        "spec_line_text": "- 已验证累计激励预算为 **160 周期**，足够多轮填满、拒写、排空、回绕和复位。预算不要求把每个输出只在末拍采样；检查密度应在对照结果中单独记录。",
+        "old_text_budget": 160,
+        "hard_limit": 16,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 35,
+        "case": "sync_fifo",
+        "variant": "fifo_bug_write_when_full",
+        "seed": 2,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-035/agent/agent_trajectory.json",
+        "trajectory_sha256": "4ebd03b55a924e0c12a19db3abbc8fd393ca53a949558907b8d9940d27fe27d9",
+        "spec_path": "spec/sync_fifo_spec.md",
+        "spec_line": 35,
+        "spec_line_text": "- 已验证累计激励预算为 **160 周期**，足够多轮填满、拒写、排空、回绕和复位。预算不要求把每个输出只在末拍采样；检查密度应在对照结果中单独记录。",
+        "old_text_budget": 160,
+        "hard_limit": 16,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 39,
+        "case": "uart_tx",
+        "variant": "reference",
+        "seed": 0,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-039/agent/agent_trajectory.json",
+        "trajectory_sha256": "05961fd0611301f2e81d0c6233f96c22af78122d3c24f5967afaeeba1af2bd8b",
+        "spec_path": "spec/uart_tx_spec.md",
+        "spec_line": 33,
+        "spec_line_text": "累计激励周期上限为 **512**，多轮共享。旧试验的 40 周期上限不足以同时包含接受边沿和 E40 结束检查；本轮单独记录新预算，不改写旧成绩。512 周期可容纳多帧、忙期间请求、结束检查与中途复位，但每个策略仍使用相同累计预算。",
+        "old_text_budget": 512,
+        "hard_limit": 48,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 43,
+        "case": "uart_tx",
+        "variant": "reference",
+        "seed": 1,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-043/agent/agent_trajectory.json",
+        "trajectory_sha256": "60508ebedfb444d24369957fb73ebe90ecebd6104a347dfc3491c6b7e84c62aa",
+        "spec_path": "spec/uart_tx_spec.md",
+        "spec_line": 33,
+        "spec_line_text": "累计激励周期上限为 **512**，多轮共享。旧试验的 40 周期上限不足以同时包含接受边沿和 E40 结束检查；本轮单独记录新预算，不改写旧成绩。512 周期可容纳多帧、忙期间请求、结束检查与中途复位，但每个策略仍使用相同累计预算。",
+        "old_text_budget": 512,
+        "hard_limit": 48,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 47,
+        "case": "uart_tx",
+        "variant": "reference",
+        "seed": 2,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-047/agent/agent_trajectory.json",
+        "trajectory_sha256": "9509f958366c1f8444bb824b739113a971a1c072a59b5a2d132a437111bcbd58",
+        "spec_path": "spec/uart_tx_spec.md",
+        "spec_line": 33,
+        "spec_line_text": "累计激励周期上限为 **512**，多轮共享。旧试验的 40 周期上限不足以同时包含接受边沿和 E40 结束检查；本轮单独记录新预算，不改写旧成绩。512 周期可容纳多帧、忙期间请求、结束检查与中途复位，但每个策略仍使用相同累计预算。",
+        "old_text_budget": 512,
+        "hard_limit": 48,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 51,
+        "case": "uart_tx",
+        "variant": "uart_bug_msb_first",
+        "seed": 0,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-051/agent/agent_trajectory.json",
+        "trajectory_sha256": "732bc55339befc87b26d3117d9c3abbb82a73bb7dcd2daaadd6137c77f75fff6",
+        "spec_path": "spec/uart_tx_spec.md",
+        "spec_line": 33,
+        "spec_line_text": "累计激励周期上限为 **512**，多轮共享。旧试验的 40 周期上限不足以同时包含接受边沿和 E40 结束检查；本轮单独记录新预算，不改写旧成绩。512 周期可容纳多帧、忙期间请求、结束检查与中途复位，但每个策略仍使用相同累计预算。",
+        "old_text_budget": 512,
+        "hard_limit": 48,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 55,
+        "case": "uart_tx",
+        "variant": "uart_bug_msb_first",
+        "seed": 1,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-055/agent/agent_trajectory.json",
+        "trajectory_sha256": "20e5742aea07a6f2ab191cf5b3da6622985bb115a9474013a33c6587282916e8",
+        "spec_path": "spec/uart_tx_spec.md",
+        "spec_line": 33,
+        "spec_line_text": "累计激励周期上限为 **512**，多轮共享。旧试验的 40 周期上限不足以同时包含接受边沿和 E40 结束检查；本轮单独记录新预算，不改写旧成绩。512 周期可容纳多帧、忙期间请求、结束检查与中途复位，但每个策略仍使用相同累计预算。",
+        "old_text_budget": 512,
+        "hard_limit": 48,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 59,
+        "case": "uart_tx",
+        "variant": "uart_bug_msb_first",
+        "seed": 2,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-059/agent/agent_trajectory.json",
+        "trajectory_sha256": "b3f0bba0b88105b9e89a80308e1c2ab4425103e708c03ba1dd921be6a7efcf48",
+        "spec_path": "spec/uart_tx_spec.md",
+        "spec_line": 33,
+        "spec_line_text": "累计激励周期上限为 **512**，多轮共享。旧试验的 40 周期上限不足以同时包含接受边沿和 E40 结束检查；本轮单独记录新预算，不改写旧成绩。512 周期可容纳多帧、忙期间请求、结束检查与中途复位，但每个策略仍使用相同累计预算。",
+        "old_text_budget": 512,
+        "hard_limit": 48,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 63,
+        "case": "uart_tx",
+        "variant": "uart_bug_busy_never_clears",
+        "seed": 0,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-063/agent/agent_trajectory.json",
+        "trajectory_sha256": "b41782a6c520e4814aab2e6b2cd8d939034588c2a5cffdca0bddea99930babfb",
+        "spec_path": "spec/uart_tx_spec.md",
+        "spec_line": 33,
+        "spec_line_text": "累计激励周期上限为 **512**，多轮共享。旧试验的 40 周期上限不足以同时包含接受边沿和 E40 结束检查；本轮单独记录新预算，不改写旧成绩。512 周期可容纳多帧、忙期间请求、结束检查与中途复位，但每个策略仍使用相同累计预算。",
+        "old_text_budget": 512,
+        "hard_limit": 48,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 67,
+        "case": "uart_tx",
+        "variant": "uart_bug_busy_never_clears",
+        "seed": 1,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-067/agent/agent_trajectory.json",
+        "trajectory_sha256": "71dc52c8e312f0a593159a9030d69a86dffb9cbcb26ecfd08f65f1b6c807cc9f",
+        "spec_path": "spec/uart_tx_spec.md",
+        "spec_line": 33,
+        "spec_line_text": "累计激励周期上限为 **512**，多轮共享。旧试验的 40 周期上限不足以同时包含接受边沿和 E40 结束检查；本轮单独记录新预算，不改写旧成绩。512 周期可容纳多帧、忙期间请求、结束检查与中途复位，但每个策略仍使用相同累计预算。",
+        "old_text_budget": 512,
+        "hard_limit": 48,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 71,
+        "case": "uart_tx",
+        "variant": "uart_bug_busy_never_clears",
+        "seed": 2,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-071/agent/agent_trajectory.json",
+        "trajectory_sha256": "35dbb9e8bf7548a75f861f06f417950d16770313dd17b5679f042326dfe0e595",
+        "spec_path": "spec/uart_tx_spec.md",
+        "spec_line": 33,
+        "spec_line_text": "累计激励周期上限为 **512**，多轮共享。旧试验的 40 周期上限不足以同时包含接受边沿和 E40 结束检查；本轮单独记录新预算，不改写旧成绩。512 周期可容纳多帧、忙期间请求、结束检查与中途复位，但每个策略仍使用相同累计预算。",
+        "old_text_budget": 512,
+        "hard_limit": 48,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 75,
+        "case": "spi_master",
+        "variant": "reference",
+        "seed": 0,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-075/agent/agent_trajectory.json",
+        "trajectory_sha256": "85f36e854596b1e3a5ff2bcf738c084af1ac4231c7269c8df6a4f34ac9a7a0a8",
+        "spec_path": "spec/spi_master_spec.md",
+        "spec_line": 32,
+        "spec_line_text": "- 本轮累计激励周期上限 **384**，多轮共享，足够多次完整发送并覆盖复位和边界。各策略用同一预算；实际采样密度另列。",
+        "old_text_budget": 384,
+        "hard_limit": 20,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 79,
+        "case": "spi_master",
+        "variant": "reference",
+        "seed": 1,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-079/agent/agent_trajectory.json",
+        "trajectory_sha256": "7d91f3e4e2b8982623657534f1a2ac44a054aea42566876e7e0bedb17cf00bb7",
+        "spec_path": "spec/spi_master_spec.md",
+        "spec_line": 32,
+        "spec_line_text": "- 本轮累计激励周期上限 **384**，多轮共享，足够多次完整发送并覆盖复位和边界。各策略用同一预算；实际采样密度另列。",
+        "old_text_budget": 384,
+        "hard_limit": 20,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 83,
+        "case": "spi_master",
+        "variant": "reference",
+        "seed": 2,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-083/agent/agent_trajectory.json",
+        "trajectory_sha256": "a1483f711d753a1cf87e80aff6d6772949222bf419cc76bb8e1edb2f8aa85aae",
+        "spec_path": "spec/spi_master_spec.md",
+        "spec_line": 32,
+        "spec_line_text": "- 本轮累计激励周期上限 **384**，多轮共享，足够多次完整发送并覆盖复位和边界。各策略用同一预算；实际采样密度另列。",
+        "old_text_budget": 384,
+        "hard_limit": 20,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 87,
+        "case": "spi_master",
+        "variant": "spi_bug_sclk_polarity",
+        "seed": 0,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-087/agent/agent_trajectory.json",
+        "trajectory_sha256": "982c928ac710ec3b70ecadf37664d8d45432b706db18fc0fa401b4ef95c3759b",
+        "spec_path": "spec/spi_master_spec.md",
+        "spec_line": 32,
+        "spec_line_text": "- 本轮累计激励周期上限 **384**，多轮共享，足够多次完整发送并覆盖复位和边界。各策略用同一预算；实际采样密度另列。",
+        "old_text_budget": 384,
+        "hard_limit": 20,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 91,
+        "case": "spi_master",
+        "variant": "spi_bug_sclk_polarity",
+        "seed": 1,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-091/agent/agent_trajectory.json",
+        "trajectory_sha256": "468fca1776b0daae4d9f2a695f38f6d2906b4ca6ebcadf0fd8253b0851082b21",
+        "spec_path": "spec/spi_master_spec.md",
+        "spec_line": 32,
+        "spec_line_text": "- 本轮累计激励周期上限 **384**，多轮共享，足够多次完整发送并覆盖复位和边界。各策略用同一预算；实际采样密度另列。",
+        "old_text_budget": 384,
+        "hard_limit": 20,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 95,
+        "case": "spi_master",
+        "variant": "spi_bug_sclk_polarity",
+        "seed": 2,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-095/agent/agent_trajectory.json",
+        "trajectory_sha256": "a8e3b8f60204c37dc8d9e87421fc12dccfb3792492ee52b344ac78c14c3949bb",
+        "spec_path": "spec/spi_master_spec.md",
+        "spec_line": 32,
+        "spec_line_text": "- 本轮累计激励周期上限 **384**，多轮共享，足够多次完整发送并覆盖复位和边界。各策略用同一预算；实际采样密度另列。",
+        "old_text_budget": 384,
+        "hard_limit": 20,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 99,
+        "case": "spi_master",
+        "variant": "spi_bug_done_missing",
+        "seed": 0,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-099/agent/agent_trajectory.json",
+        "trajectory_sha256": "937a5d49b6d8995c9572e673082c7dfb333f2cea310713d704a8c33da6c6de4f",
+        "spec_path": "spec/spi_master_spec.md",
+        "spec_line": 32,
+        "spec_line_text": "- 本轮累计激励周期上限 **384**，多轮共享，足够多次完整发送并覆盖复位和边界。各策略用同一预算；实际采样密度另列。",
+        "old_text_budget": 384,
+        "hard_limit": 20,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 103,
+        "case": "spi_master",
+        "variant": "spi_bug_done_missing",
+        "seed": 1,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-103/agent/agent_trajectory.json",
+        "trajectory_sha256": "aa7368d0d1946cee1d3764e527963efdec2eb74e6baf115cc8af1c6c32ceb97a",
+        "spec_path": "spec/spi_master_spec.md",
+        "spec_line": 32,
+        "spec_line_text": "- 本轮累计激励周期上限 **384**，多轮共享，足够多次完整发送并覆盖复位和边界。各策略用同一预算；实际采样密度另列。",
+        "old_text_budget": 384,
+        "hard_limit": 20,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 107,
+        "case": "spi_master",
+        "variant": "spi_bug_done_missing",
+        "seed": 2,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-107/agent/agent_trajectory.json",
+        "trajectory_sha256": "9782cc109939c7f7e447c2312062d7469b09bd0ff605649fe02b0b9aa0caca30",
+        "spec_path": "spec/spi_master_spec.md",
+        "spec_line": 32,
+        "spec_line_text": "- 本轮累计激励周期上限 **384**，多轮共享，足够多次完整发送并覆盖复位和边界。各策略用同一预算；实际采样密度另列。",
+        "old_text_budget": 384,
+        "hard_limit": 20,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 111,
+        "case": "handshake_stage",
+        "variant": "reference",
+        "seed": 0,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-111/agent/agent_trajectory.json",
+        "trajectory_sha256": "8a68deca11a326a4f833bd7ae6356b3e21a8e28c035031b65d1093ee314891b6",
+        "spec_path": "spec/handshake_stage_spec.md",
+        "spec_line": 32,
+        "spec_line_text": "- 本轮多轮共享累计激励预算 **160 周期**。每个策略使用相同累计上限；实际场景覆盖由执行器观察，不由 Agent 自称已覆盖。",
+        "old_text_budget": 160,
+        "hard_limit": 8,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 115,
+        "case": "handshake_stage",
+        "variant": "reference",
+        "seed": 1,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-115/agent/agent_trajectory.json",
+        "trajectory_sha256": "96a61b4905326a8d5f522db70498deda0e626c85e0aa6dc9443273f5141e8f32",
+        "spec_path": "spec/handshake_stage_spec.md",
+        "spec_line": 32,
+        "spec_line_text": "- 本轮多轮共享累计激励预算 **160 周期**。每个策略使用相同累计上限；实际场景覆盖由执行器观察，不由 Agent 自称已覆盖。",
+        "old_text_budget": 160,
+        "hard_limit": 8,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 119,
+        "case": "handshake_stage",
+        "variant": "reference",
+        "seed": 2,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-119/agent/agent_trajectory.json",
+        "trajectory_sha256": "2bfbfff8a6e19ef215fe5bad3c49e3f0058b40943500313798085322e714c648",
+        "spec_path": "spec/handshake_stage_spec.md",
+        "spec_line": 32,
+        "spec_line_text": "- 本轮多轮共享累计激励预算 **160 周期**。每个策略使用相同累计上限；实际场景覆盖由执行器观察，不由 Agent 自称已覆盖。",
+        "old_text_budget": 160,
+        "hard_limit": 8,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 123,
+        "case": "handshake_stage",
+        "variant": "hs_bug_ready_ignores_out_ready",
+        "seed": 0,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-123/agent/agent_trajectory.json",
+        "trajectory_sha256": "95d8771fec917bde70006e0bdf245430a8559afeb772384466b03780ac851284",
+        "spec_path": "spec/handshake_stage_spec.md",
+        "spec_line": 32,
+        "spec_line_text": "- 本轮多轮共享累计激励预算 **160 周期**。每个策略使用相同累计上限；实际场景覆盖由执行器观察，不由 Agent 自称已覆盖。",
+        "old_text_budget": 160,
+        "hard_limit": 8,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 127,
+        "case": "handshake_stage",
+        "variant": "hs_bug_ready_ignores_out_ready",
+        "seed": 1,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-127/agent/agent_trajectory.json",
+        "trajectory_sha256": "46d4124486c37ca26d91f0bc9e755ef1ecd37a1b429c574faa3edb61e80e83fd",
+        "spec_path": "spec/handshake_stage_spec.md",
+        "spec_line": 32,
+        "spec_line_text": "- 本轮多轮共享累计激励预算 **160 周期**。每个策略使用相同累计上限；实际场景覆盖由执行器观察，不由 Agent 自称已覆盖。",
+        "old_text_budget": 160,
+        "hard_limit": 8,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 131,
+        "case": "handshake_stage",
+        "variant": "hs_bug_ready_ignores_out_ready",
+        "seed": 2,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-131/agent/agent_trajectory.json",
+        "trajectory_sha256": "b0f9e71762ab5889a56ed00333b1bb152a8c41faa78e3e09f72eb569ce8c4d26",
+        "spec_path": "spec/handshake_stage_spec.md",
+        "spec_line": 32,
+        "spec_line_text": "- 本轮多轮共享累计激励预算 **160 周期**。每个策略使用相同累计上限；实际场景覆盖由执行器观察，不由 Agent 自称已覆盖。",
+        "old_text_budget": 160,
+        "hard_limit": 8,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 135,
+        "case": "handshake_stage",
+        "variant": "hs_bug_valid_not_cleared",
+        "seed": 0,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-135/agent/agent_trajectory.json",
+        "trajectory_sha256": "49621bf9bfa9535af810a8980ef814661a31d4ebf87386c96880e55637e8e03f",
+        "spec_path": "spec/handshake_stage_spec.md",
+        "spec_line": 32,
+        "spec_line_text": "- 本轮多轮共享累计激励预算 **160 周期**。每个策略使用相同累计上限；实际场景覆盖由执行器观察，不由 Agent 自称已覆盖。",
+        "old_text_budget": 160,
+        "hard_limit": 8,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 139,
+        "case": "handshake_stage",
+        "variant": "hs_bug_valid_not_cleared",
+        "seed": 1,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-139/agent/agent_trajectory.json",
+        "trajectory_sha256": "27c11cda26d63402f649c6b7d975d6a21c98df3d9cb31231925be03601b4da14",
+        "spec_path": "spec/handshake_stage_spec.md",
+        "spec_line": 32,
+        "spec_line_text": "- 本轮多轮共享累计激励预算 **160 周期**。每个策略使用相同累计上限；实际场景覆盖由执行器观察，不由 Agent 自称已覆盖。",
+        "old_text_budget": 160,
+        "hard_limit": 8,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      },
+      {
+        "row": 143,
+        "case": "handshake_stage",
+        "variant": "hs_bug_valid_not_cleared",
+        "seed": 2,
+        "trajectory_path": ".iverilog-ai/agent-smoke-live-20261005/sample-143/agent/agent_trajectory.json",
+        "trajectory_sha256": "38c4e0fc227ccc2ccc258cd2fa82e4a8f2d6fb7bb8fd41cd0e6604d1086bd2d7",
+        "spec_path": "spec/handshake_stage_spec.md",
+        "spec_line": 32,
+        "spec_line_text": "- 本轮多轮共享累计激励预算 **160 周期**。每个策略使用相同累计上限；实际场景覆盖由执行器观察，不由 Agent 自称已覆盖。",
+        "old_text_budget": 160,
+        "hard_limit": 8,
+        "remaining_rounds": 1,
+        "original_frozen_spec_verbatim_in_state": true
+      }
+    ],
+    "hard_cap_enforced": true,
+    "cause_of_observed_over_budget_proposal_proven": false,
+    "recommendation": "Keep this run intact. In a separately preregistered revision, remove historical current-run budget text from reusable specifications and give one authoritative current budget."
+  },
+  "equal_budget_interpretation": {
+    "same_per_case_cycle_caps": true,
+    "same_actual_cycles": false,
+    "baseline_policy": "truncate or pad to cap",
+    "single_policy": "short proposals unpadded; over-cap proposals rejected",
+    "baselines_each_stimulus_cycles": 828,
+    "single_stimulus_cycles": 530,
+    "fixed_repeat_plans_same": true,
+    "extra_manual_reset_in_fixed_template_counts_as_stimulus": true
+  },
+  "data_integrity_verdict": "passed",
+  "findings": [
+    {
+      "id": "prompt_budget_conflict",
+      "status": "confirmed",
+      "scope": "proposal context, not a hard-cap bypass",
+      "description": "Frozen specification retains old per-study long budgets in all 36 API first states while structured state and execution enforce short budgets."
+    }
+  ],
+  "supplemented_at_utc": "2026-10-04T18:39:25.713745+00:00",
+  "supplement_script_sha256": "4f6dbef7b449681a99a214ca45cc706ef3b6df304d452d05144140b5befd4c90"
+}

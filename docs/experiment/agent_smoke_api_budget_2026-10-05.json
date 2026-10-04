@@ -1,0 +1,26 @@
+{
+  "record_kind": "api_budget_ledger_not_invoice",
+  "generated_at_utc": "2026-10-04T18:46:35.388306+00:00",
+  "authorized_total_cap": 360,
+  "known_responses": 353,
+  "reserved_request_upper": 354,
+  "remaining_after_reservation": 6,
+  "unknown_inflight_max": 1,
+  "reported_token_total_known_responses": 844124,
+  "actual_currency_cost": null,
+  "previous_ledger": {
+    "path": "docs/experiment/ic_agent_v5_api_budget_2026-10-05.json",
+    "sha256": "17935f603d42897b03b7b75ac3c83b9f6501772256a792c8252bc717f1a6a9be"
+  },
+  "new_record": {
+    "path": ".iverilog-ai/agent-smoke-live-20261005/results.json",
+    "sha256": "8d2ed8cae56f2189690c5e108bf25938523c052fe8981ea779116ad3a50d90e9",
+    "requests": 36,
+    "requests_with_usage": 36,
+    "tokens": 78934
+  },
+  "notes": [
+    "Prior ledgers and the old possible in-flight reservation remain unchanged.",
+    "The remaining six requests may be used only for a separately reported diagnostic; not merged into this comparison."
+  ]
+}

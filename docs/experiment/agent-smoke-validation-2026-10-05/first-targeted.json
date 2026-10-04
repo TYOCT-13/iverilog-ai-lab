@@ -1,0 +1,10 @@
+{
+  "record_kind": "first_targeted_check_observation",
+  "pytest_passed": 20,
+  "pytest_failed": 0,
+  "duration_seconds": 11.69,
+  "process_exit_code": 0,
+  "api_requests": 0,
+  "cleanup_diagnostic": "pytest atexit cleanup reported PermissionError WinError 5 for C:/Users/TYOCT/AppData/Local/Temp/pytest-of-TYOCT/pytest-current",
+  "followup": "Use a fresh, absent, verified workspace basetemp and retain the first diagnostic; do not remove or change permissions of unrelated Temp entries."
+}

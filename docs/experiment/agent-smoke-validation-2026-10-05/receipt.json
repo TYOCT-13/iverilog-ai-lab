@@ -1,0 +1,75 @@
+{
+  "record_kind": "targeted_checks_not_full_regression",
+  "created_at_utc": "2026-10-04T19:16:56.953725+00:00",
+  "api_requests_for_tests": 0,
+  "checks": [
+    {
+      "file": "pytest.xml",
+      "tests": 20,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "file": "diagnostic-pytest.xml",
+      "tests": 24,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    {
+      "file": "diagnostic-final-pytest.xml",
+      "tests": 5,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    }
+  ],
+  "files": {
+    "first-targeted.json": {
+      "source": ".iverilog-ai/agent-smoke-validation-20261005/first-targeted.json",
+      "sha256": "ccbd6dd1c5daa6e2bfee2ef3d9d5c451fa5e69f58f12cbaac8044beef1ef773b",
+      "bytes": 493
+    },
+    "pytest.log": {
+      "source": ".iverilog-ai/agent-smoke-validation-20261005/pytest.log",
+      "sha256": "f6c9490b283f6c02cf4987689d1d3579c96f46e403a9a5b29cb0767d13e20a84",
+      "bytes": 212
+    },
+    "pytest.xml": {
+      "source": ".iverilog-ai/agent-smoke-validation-20261005/pytest.xml",
+      "sha256": "6e1945327cdd39dc42be3799dd1cab969f3f9d48ec1aa524efdd16e23ce29764",
+      "bytes": 3120
+    },
+    "diagnostic-pytest.log": {
+      "source": ".iverilog-ai/agent-smoke-validation-20261005/diagnostic-pytest.log",
+      "sha256": "4e0f798f788b39afa397b103a7183b072aebf2c44e0c71862ae84cfcfb87c132",
+      "bytes": 223
+    },
+    "diagnostic-pytest.xml": {
+      "source": ".iverilog-ai/agent-smoke-validation-20261005/diagnostic-pytest.xml",
+      "sha256": "eb1359e731768a96f4eda4c14f86ade7e302b591924023900eb477e838fcd2b2",
+      "bytes": 3698
+    },
+    "diagnostic-final-pytest.log": {
+      "source": ".iverilog-ai/agent-smoke-validation-20261005/diagnostic-final-pytest.log",
+      "sha256": "73b66f7bb3325fc16a9dd55bd9b5ea9389a87c65b1f5470d8262836484440a69",
+      "bytes": 227
+    },
+    "diagnostic-final-pytest.xml": {
+      "source": ".iverilog-ai/agent-smoke-validation-20261005/diagnostic-final-pytest.xml",
+      "sha256": "774af8e54534c06d6a50486c92994bc5877f2b1578b198aa1ef6d2bbacfd0f8a",
+      "bytes": 936
+    },
+    "live.stdout.log": {
+      "source": ".iverilog-ai/agent-smoke-validation-20261005/live.stdout.log",
+      "sha256": "59afdcd11870b675aaba05ce052db345fb5752c84e88653f28ad1f35a00cdc94",
+      "bytes": 17591
+    }
+  },
+  "notes": [
+    "20 initial comparison checks passed with a cleanup warning; retained first-targeted.json.",
+    "20 isolated comparison checks, 24 checks after diagnostic addition, then 5 after a parent-hash guard.",
+    "Repeated checks are not summed into a new full-repository test count."
+  ]
+}
