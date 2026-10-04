@@ -1,0 +1,15 @@
+{
+  "preregistration_sha256": "a76c0d918a75accc3236dc352ac6247641288e91fb65a07659e6eb76fcd50abb",
+  "wire_api": "chat_completions",
+  "endpoint_host": null,
+  "model": "",
+  "max_output_tokens": 4096,
+  "total_request_cap": 0,
+  "request_timeout_seconds": 60,
+  "stream": false,
+  "iverilog": "D:/iverilog/bin/iverilog.exe",
+  "vvp": "D:/iverilog/bin/vvp.exe",
+  "profile": "v2",
+  "max_output_chars": 2000000,
+  "prompt_profile_sha256": "e6d65dd89d7b71a949b54826df8c771b0e102df8383c7a72226f45874098dd51"
+}

@@ -1,0 +1,27 @@
+{
+  "kind": "defense_source_count_crosscheck",
+  "human_review": false,
+  "v4_summary_sha256": "ca088434fd908b125df078b3a1f2d7672d04e2fb4da2417de5d8565df401a81a",
+  "v4_results_sha256": "c46df250acfd2a665da204139b5b3beed7f6bba48dee847e26d2a052743b908d",
+  "checks": {
+    "seven_scores_and_denominators": true,
+    "requests_tokens_caps": true,
+    "all_84_statuses_preserved": true,
+    "schema_decisions": true,
+    "one_uart_reference_failure_preserved": true,
+    "strict_gate_false_preserved": true,
+    "sourceguard_empty": true,
+    "original_screenshot_byte_copy": true,
+    "pixel_crop_dimensions": true
+  },
+  "changes_to_raw_sources": false,
+  "c7_checks": {
+    "21_repeat_scores_and_denominators": true,
+    "252_terminal_rows_preserved": true,
+    "157_requests_289219_tokens": true,
+    "137_policy_error_rows": true,
+    "125_zero_round_rows_128_rounds": true,
+    "gate_false_and_sourceguard_empty": true,
+    "separate_from_v4": true
+  }
+}

@@ -20,6 +20,19 @@
 - 阶段十四开源协作与成本透明：新增 CI、Issue/PR 模板、行为准则、安全策略、引用文件与变更记录；新增**开源规约知识摄取**（从真实开源项目按固定提交实测编码约定，只存聚合统计与逐文件 sha256，不复制代码，见 [docs/opensource_conventions.md](docs/opensource_conventions.md)）；新增**未核验就留空的费用估算表**（价格留 `null` 而非填 0，见 `data/model_pricing.json`）。
 - 阶段十五基准扩充与门禁加固：基准扩到 **15 个案例 / 83 个缺陷变体**（新增脉冲展宽器，含参考模型逐拍对齐与 3 个根因独立的缺陷）；新增**可复现的综合矩阵脚本**（`scripts/run_synthesis_matrix.py`，98 个变体）、**重复缺陷检测**、**编码损坏检测**与**未可达代码检查**（`scripts/check_dead_code.py`）。这轮门禁抓出四个真问题：一个重复登记的缺陷、两个被编码破坏的注释、两个从未渲染过的按钮（"读取模型列表"/"检查配置"），以及一份 150 行的死代码语义副本。变更记录见 [CHANGELOG.md](CHANGELOG.md)。
 
+## AI＋集成电路工作流（2026-10-04）
+
+当前改造围绕四类数字 IP：FIFO、UART、SPI 和握手级。API Agent 提出测试激励；独立参考模型与 Icarus 裁决结果，真实端口采样计算 24 项命名功能场景。功能场景是有限事件观察，不是代码覆盖率或正确性证明。网页保留输入、运行记录和结果，可导出原 RTL、测试台及无需 API 的重放脚本。
+
+- [操作与 UART 反例重放](docs/demo/ic_agent_v2_walkthrough.md)
+- [完整规格与 FIFO / 外部 UART 判据修正](docs/experiment/protocol_oracle_improvements_2026-10-04.md)
+- [三次重复的七策略真实结果](docs/experiment/agent_comparison_v2_live_2026-10-04.md)：252 项、157 请求；旧 v3 Agent 大量动作校验失败，未胜本地基线，未证明覆盖反馈增益。
+- [v4 单重复接线烟测](docs/experiment/agent_comparison_v4_smoke_2026-10-04.md)：94/94 决策通过结构校验，反馈检出 6/8，随机 8/8；保留一个正确基线执行失败，仍不证明覆盖反馈增益。
+- [最新冻结验收](docs/experiment/ic_agent_v4_validation_2026-10-04.md)：1073 项通过、2 项跳过；三尺寸实际浏览器检查和 UART 离线流程另列。
+- [API 消息与格式修复说明](docs/experiment/deepseek_decision_v4_2026-10-04.md)：系统规则和状态采用独立消息，保持严格动作校验；新版本实测另列，旧结果不覆盖。
+
+使用服务商 API，不运行本地模型权重。真人试用、独立人工复核和新模块留出评测仍待完成；最新验收、提交材料及证据路径统一从 [资料索引](docs/INDEX.md) 进入。历史 83/83 等成绩仍属于原手写测试台和旧版本，不能当成这次 Agent 成绩。
+
 ## 快速开始
 
 在工程根目录执行（请按本机 Icarus 安装位置调整工具路径）：

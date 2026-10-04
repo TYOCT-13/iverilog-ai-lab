@@ -1,0 +1,30 @@
+{
+  "schema_version": "icarus-defense-finalization-summary-v1",
+  "revision": "r7",
+  "kind": "derived_machine_receipt_summary",
+  "raw_receipt": ".iverilog-ai/defense-v2-build/defense-r7.validation.json",
+  "raw_receipt_sha256": "1ebd19c258cdb8c0218b5569783dfd6d3cfbee1e377ecda34adac6e7c969333c",
+  "final_pptx_sha256": "20838083fcfdecb65172175b54cbf68a1e0521941953dc44ed5165052fd8aa40",
+  "final_pptx_bytes": 219083,
+  "slide_count": 12,
+  "package_integrity": "pass",
+  "package_findings": 0,
+  "layout_findings": 0,
+  "approved_fonts": [
+    "Noto Sans SC",
+    "Bahnschrift"
+  ],
+  "font_policy_passed": true,
+  "first_party_import_passed": true,
+  "native_table_count": 5,
+  "native_chart_count": 3,
+  "native_chart_owner_slides": [
+    6,
+    7,
+    10
+  ],
+  "native_chart_workbooks_passed": true,
+  "native_office_application_open_verified": false,
+  "human_review": false,
+  "claim_boundary": "Structural package, geometry, approved-font policy and artifact-tool import checks. Source-count and visual QA are separate records."
+}

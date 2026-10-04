@@ -1,0 +1,5790 @@
+{
+  "record_kind": "summary_extract_not_raw_result",
+  "generated_at": "2026-10-04T14:08:58.878969+00:00",
+  "raw_directory": ".iverilog-ai/agent-comparison-v2-nonthinking-20261004",
+  "full_raw_files": {
+    "preregistration.json": {
+      "bytes": 125818,
+      "sha256": "6fdd06c0f8e4bbdc2d23d91dca275157de85490df64c1ba5629dfb4dea2b2494"
+    },
+    "run_settings.json": {
+      "bytes": 632,
+      "sha256": "8a5803ac5f13b0aa2b3414ae45d55b267bd01fb525ef1f1251f35ec6993b5126"
+    },
+    "results.json": {
+      "bytes": 10999734,
+      "sha256": "15cc303d7a7b6f462c5394b4cb5f36606127709d0e71fc65058f0fc1f3251c01"
+    },
+    "summary.json": {
+      "bytes": 11102649,
+      "sha256": "a5950aa095ae6846a7ab60b4fe2f941c066c22793b914cdb9bd6e59b0b4132a2"
+    }
+  },
+  "api_requests": 157,
+  "reported_tokens": 289219,
+  "human_participants": 0,
+  "notes": [
+    "This extract is not the full raw experiment or a new evaluation",
+    "All registered rows and unverified evidence retain their denominators",
+    "The original results, summary and logs are not overwritten"
+  ],
+  "schema": "agent-comparison-summary-v2",
+  "profile": "v2",
+  "denominator_source": "preregistration",
+  "registered_rows": 252,
+  "finished_at": "2026-10-04T13:30:17.686933+00:00",
+  "changed_inputs_at_finish": [],
+  "eligible_for_frozen_comparison": false,
+  "strategies": {
+    "fixed": {
+      "registered_defect_samples": 24,
+      "detected_samples": 21,
+      "unique_defects": 8,
+      "unique_detected": 7,
+      "unique_union_rate": 0.875,
+      "incomplete_or_undecidable": 0,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 15,
+        "detected": 21
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 8,
+          "detected": 7,
+          "detection_rate": 0.875,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 8,
+          "detected": 7,
+          "detection_rate": 0.875,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 8,
+          "detected": 7,
+          "detection_rate": 0.875,
+          "incomplete_or_undecidable": 0
+        }
+      ],
+      "repeat_detection_rate_mean": 0.875,
+      "repeat_detection_rate_min": 0.875,
+      "repeat_detection_rate_max": 0.875,
+      "requests": 0,
+      "usage_numeric_sum": {},
+      "requests_with_usage": 0,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 10944,
+      "reference_audit_cycles_recorded": 10944,
+      "reference_audit_cycles_attempted": 10944,
+      "checks_recorded": 1845,
+      "elapsed_seconds_recorded": 87.267,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 0,
+          "cycle": 9,
+          "search_budget": 10,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.407
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 1,
+          "cycle": 9,
+          "search_budget": 10,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.14
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 2,
+          "cycle": 9,
+          "search_budget": 10,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.235
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 0,
+          "cycle": 26,
+          "search_budget": 27,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 3.063
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 1,
+          "cycle": 26,
+          "search_budget": 27,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.594
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 2,
+          "cycle": 26,
+          "search_budget": 27,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.703
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 0,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.672
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 1,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.797
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 2,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.093
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 0,
+          "cycle": 511,
+          "search_budget": 512,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.969
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 1,
+          "cycle": 511,
+          "search_budget": 512,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.953
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 2,
+          "cycle": 511,
+          "search_budget": 512,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.047
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.203
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 1,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.094
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 2,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.0
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.188
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.203
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.266
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 0,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.281
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 1,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.5
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 2,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.719
+        }
+      ]
+    },
+    "random": {
+      "registered_defect_samples": 24,
+      "detected_samples": 24,
+      "unique_defects": 8,
+      "unique_detected": 8,
+      "unique_union_rate": 1.0,
+      "incomplete_or_undecidable": 0,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 12,
+        "detected": 24
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 8,
+          "detected": 8,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 8,
+          "detected": 8,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 8,
+          "detected": 8,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        }
+      ],
+      "repeat_detection_rate_mean": 1.0,
+      "repeat_detection_rate_min": 1.0,
+      "repeat_detection_rate_max": 1.0,
+      "requests": 0,
+      "usage_numeric_sum": {},
+      "requests_with_usage": 0,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 10944,
+      "reference_audit_cycles_recorded": 10944,
+      "reference_audit_cycles_attempted": 10944,
+      "checks_recorded": 19440,
+      "elapsed_seconds_recorded": 121.563,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 0,
+          "cycle": 20,
+          "search_budget": 21,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.344
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 1,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.735
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 2,
+          "cycle": 36,
+          "search_budget": 37,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.86
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 0,
+          "cycle": 92,
+          "search_budget": 93,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.031
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 1,
+          "cycle": 43,
+          "search_budget": 44,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.875
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 2,
+          "cycle": 41,
+          "search_budget": 42,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.735
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 0,
+          "cycle": 47,
+          "search_budget": 48,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.656
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 1,
+          "cycle": 8,
+          "search_budget": 9,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.547
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 2,
+          "cycle": 14,
+          "search_budget": 15,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.906
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 0,
+          "cycle": 41,
+          "search_budget": 42,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.203
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 1,
+          "cycle": 44,
+          "search_budget": 45,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.281
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 2,
+          "cycle": 50,
+          "search_budget": 51,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.234
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 0,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 3.171
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.484
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 2,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.531
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 0,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.375
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 1,
+          "cycle": 17,
+          "search_budget": 18,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.391
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 2,
+          "cycle": 21,
+          "search_budget": 22,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.704
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 0,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.859
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 1,
+          "cycle": 8,
+          "search_budget": 9,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.156
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 2,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.219
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.157
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 1,
+          "cycle": 9,
+          "search_budget": 10,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.078
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.156
+        }
+      ]
+    },
+    "single": {
+      "registered_defect_samples": 24,
+      "detected_samples": 3,
+      "unique_defects": 8,
+      "unique_detected": 3,
+      "unique_union_rate": 0.375,
+      "incomplete_or_undecidable": 21,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "policy_error": 33,
+        "detected": 3
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 8,
+          "detected": 1,
+          "detection_rate": 0.125,
+          "incomplete_or_undecidable": 7
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 8,
+          "detected": 0,
+          "detection_rate": 0.0,
+          "incomplete_or_undecidable": 8
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 8,
+          "detected": 2,
+          "detection_rate": 0.25,
+          "incomplete_or_undecidable": 6
+        }
+      ],
+      "repeat_detection_rate_mean": 0.125,
+      "repeat_detection_rate_min": 0.0,
+      "repeat_detection_rate_max": 0.25,
+      "requests": 36,
+      "usage_numeric_sum": {
+        "prompt_tokens": 54027,
+        "completion_tokens": 11095,
+        "total_tokens": 65122,
+        "prompt_cache_hit_tokens": 41344,
+        "prompt_cache_miss_tokens": 12683
+      },
+      "requests_with_usage": 36,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 120,
+      "reference_audit_cycles_recorded": 120,
+      "reference_audit_cycles_attempted": 120,
+      "checks_recorded": 96,
+      "elapsed_seconds_recorded": 67.501,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 2,
+          "cycle": 18,
+          "search_budget": 19,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 3.344
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 0,
+          "cycle": 64,
+          "search_budget": 65,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 3.047
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 2,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.141
+        }
+      ]
+    },
+    "feedback": {
+      "registered_defect_samples": 24,
+      "detected_samples": 1,
+      "unique_defects": 8,
+      "unique_detected": 1,
+      "unique_union_rate": 0.125,
+      "incomplete_or_undecidable": 23,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "policy_error": 35,
+        "detected": 1
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 8,
+          "detected": 1,
+          "detection_rate": 0.125,
+          "incomplete_or_undecidable": 7
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 8,
+          "detected": 0,
+          "detection_rate": 0.0,
+          "incomplete_or_undecidable": 8
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 8,
+          "detected": 0,
+          "detection_rate": 0.0,
+          "incomplete_or_undecidable": 8
+        }
+      ],
+      "repeat_detection_rate_mean": 0.041666666666666664,
+      "repeat_detection_rate_min": 0.0,
+      "repeat_detection_rate_max": 0.125,
+      "requests": 41,
+      "usage_numeric_sum": {
+        "prompt_tokens": 65596,
+        "completion_tokens": 12986,
+        "total_tokens": 78582,
+        "prompt_cache_hit_tokens": 43776,
+        "prompt_cache_miss_tokens": 21820
+      },
+      "requests_with_usage": 41,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 500,
+      "reference_audit_cycles_recorded": 500,
+      "reference_audit_cycles_attempted": 500,
+      "checks_recorded": 62,
+      "elapsed_seconds_recorded": 80.256,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 0,
+          "cycle": 45,
+          "search_budget": 46,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 3.594
+        }
+      ]
+    },
+    "no_feedback": {
+      "registered_defect_samples": 24,
+      "detected_samples": 3,
+      "unique_defects": 8,
+      "unique_detected": 3,
+      "unique_union_rate": 0.375,
+      "incomplete_or_undecidable": 21,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "policy_error": 33,
+        "detected": 3
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 8,
+          "detected": 3,
+          "detection_rate": 0.375,
+          "incomplete_or_undecidable": 5
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 8,
+          "detected": 0,
+          "detection_rate": 0.0,
+          "incomplete_or_undecidable": 8
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 8,
+          "detected": 0,
+          "detection_rate": 0.0,
+          "incomplete_or_undecidable": 8
+        }
+      ],
+      "repeat_detection_rate_mean": 0.125,
+      "repeat_detection_rate_min": 0.0,
+      "repeat_detection_rate_max": 0.375,
+      "requests": 42,
+      "usage_numeric_sum": {
+        "prompt_tokens": 64984,
+        "completion_tokens": 12212,
+        "total_tokens": 77196,
+        "prompt_cache_hit_tokens": 48384,
+        "prompt_cache_miss_tokens": 16600
+      },
+      "requests_with_usage": 42,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 423,
+      "reference_audit_cycles_recorded": 423,
+      "reference_audit_cycles_attempted": 423,
+      "checks_recorded": 136,
+      "elapsed_seconds_recorded": 82.171,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 0,
+          "cycle": 49,
+          "search_budget": 50,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.891
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 0,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.187
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.343
+        }
+      ]
+    },
+    "protocol_random": {
+      "registered_defect_samples": 24,
+      "detected_samples": 24,
+      "unique_defects": 8,
+      "unique_detected": 8,
+      "unique_union_rate": 1.0,
+      "incomplete_or_undecidable": 0,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 12,
+        "detected": 24
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 8,
+          "detected": 8,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 8,
+          "detected": 8,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 8,
+          "detected": 8,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        }
+      ],
+      "repeat_detection_rate_mean": 1.0,
+      "repeat_detection_rate_min": 1.0,
+      "repeat_detection_rate_max": 1.0,
+      "requests": 0,
+      "usage_numeric_sum": {},
+      "requests_with_usage": 0,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 10944,
+      "reference_audit_cycles_recorded": 10944,
+      "reference_audit_cycles_attempted": 10944,
+      "checks_recorded": 18450,
+      "elapsed_seconds_recorded": 120.439,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.015
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.735
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 3.969
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 0,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.469
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 1,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.719
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 2,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.688
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 0,
+          "cycle": 11,
+          "search_budget": 12,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.297
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 1,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.484
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 2,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.813
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 0,
+          "cycle": 40,
+          "search_budget": 41,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.938
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 1,
+          "cycle": 40,
+          "search_budget": 41,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.063
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 2,
+          "cycle": 40,
+          "search_budget": 41,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.047
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 0,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.813
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 1,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.86
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 2,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.937
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 0,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.328
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 1,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.563
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 2,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.406
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.968
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.031
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.547
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 0,
+          "cycle": 16,
+          "search_budget": 17,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.625
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 1,
+          "cycle": 19,
+          "search_budget": 20,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.546
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 2,
+          "cycle": 17,
+          "search_budget": 18,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.015
+        }
+      ]
+    },
+    "feedback_no_coverage": {
+      "registered_defect_samples": 24,
+      "detected_samples": 0,
+      "unique_defects": 8,
+      "unique_detected": 0,
+      "unique_union_rate": 0.0,
+      "incomplete_or_undecidable": 24,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "policy_error": 36
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 8,
+          "detected": 0,
+          "detection_rate": 0.0,
+          "incomplete_or_undecidable": 8
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 8,
+          "detected": 0,
+          "detection_rate": 0.0,
+          "incomplete_or_undecidable": 8
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 8,
+          "detected": 0,
+          "detection_rate": 0.0,
+          "incomplete_or_undecidable": 8
+        }
+      ],
+      "repeat_detection_rate_mean": 0.0,
+      "repeat_detection_rate_min": 0.0,
+      "repeat_detection_rate_max": 0.0,
+      "requests": 38,
+      "usage_numeric_sum": {
+        "prompt_tokens": 57637,
+        "completion_tokens": 10682,
+        "total_tokens": 68319,
+        "prompt_cache_hit_tokens": 46720,
+        "prompt_cache_miss_tokens": 10917
+      },
+      "requests_with_usage": 38,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 99,
+      "reference_audit_cycles_recorded": 99,
+      "reference_audit_cycles_attempted": 99,
+      "checks_recorded": 16,
+      "elapsed_seconds_recorded": 68.221,
+      "missing_elapsed_samples": 0,
+      "first_detection": []
+    }
+  },
+  "coverage_ablation_pairs": [
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "repeat": 0,
+      "feedback_status": "policy_error",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": false,
+      "no_coverage_detected": false,
+      "feedback_requests": 2,
+      "no_coverage_requests": 1,
+      "feedback_search_cycles": 11,
+      "no_coverage_search_cycles": 0,
+      "feedback_first_detection_budget": null,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [
+        {
+          "schema_version": "1.0",
+          "coverage_type": "functional_scenarios",
+          "scope": "current_execution_plan",
+          "status": "measured",
+          "profile": "builtin-functional-scenarios-v1:sync_fifo",
+          "profile_sha256": "6dae94a0ae1979a6f3fbae1399d85d98d2fc06b99aebd8e1e8dac707abac1305",
+          "bins": [
+            {
+              "id": "fifo.empty",
+              "kind": "output_observation",
+              "definition": "非复位沿后 empty=1 且 full=0",
+              "status": "observed",
+              "first_evidence": {
+                "source": "testbench_sample_statement",
+                "rule": "fifo.empty",
+                "first_cycle": 9,
+                "last_cycle": 9,
+                "samples": [
+                  {
+                    "cycle": 9,
+                    "time_ns": 116.0,
+                    "test_id": "agent_4_3",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "wr_en": "0",
+                      "wr_data": "00000000",
+                      "rd_en": "1"
+                    },
+                    "outputs": {
+                      "rd_data": "00000001",
+                      "full": "0",
+                      "empty": "1"
+                    }
+                  }
+                ],
+                "pre_state_source": null
+              }
+            },
+            {
+              "id": "fifo.full",
+              "kind": "output_observation",
+              "definition": "非复位沿后 full=1 且 empty=0",
+              "status": "observed",
+              "first_evidence": {
+                "source": "testbench_sample_statement",
+                "rule": "fifo.full",
+                "first_cycle": 4,
+                "last_cycle": 4,
+                "samples": [
+                  {
+                    "cycle": 4,
+                    "time_ns": 66.0,
+                    "test_id": "agent_2_1",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "wr_en": "1",
+                      "wr_data": "00000001",
+                      "rd_en": "0"
+                    },
+                    "outputs": {
+                      "rd_data": "00000000",
+                      "full": "1",
+                      "empty": "0"
+                    }
+                  }
+                ],
+                "pre_state_source": null
+              }
+            },
+            {
+              "id": "fifo.read_request",
+              "kind": "input_attempt",
+              "definition": "非复位采样中 rd_en=1；不声称已接受",
+              "status": "observed",
+              "first_evidence": {
+                "source": "testbench_sample_statement",
+                "rule": "fifo.read_request",
+                "first_cycle": 7,
+                "last_cycle": 7,
+                "samples": [
+                  {
+                    "cycle": 7,
+                    "time_ns": 96.0,
+                    "test_id": "agent_4_3",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "wr_en": "0",
+                      "wr_data": "00000000",
+                      "rd_en": "1"
+                    },
+                    "outputs": {
+                      "rd_data": "00000001",
+                      "full": "0",
+                      "empty": "0"
+                    }
+                  }
+                ],
+                "pre_state_source": null
+              }
+            },
+            {
+              "id": "fifo.write_request",
+              "kind": "input_attempt",
+              "definition": "非复位采样中 wr_en=1；不声称已接受",
+              "status": "observed",
+              "first_evidence": {
+                "source": "testbench_sample_statement",
+                "rule": "fifo.write_request",
+                "first_cycle": 2,
+                "last_cycle": 2,
+                "samples": [
+                  {
+                    "cycle": 2,
+                    "time_ns": 46.0,
+                    "test_id": "agent_2_1",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "wr_en": "1",
+                      "wr_data": "00000001",
+                      "rd_en": "0"
+                    },
+                    "outputs": {
+                      "rd_data": "00000000",
+                      "full": "0",
+                      "empty": "0"
+                    }
+                  }
+                ],
+                "pre_state_source": null
+              }
+            },
+            {
+              "id": "fifo.read_empty_attempt",
+              "kind": "input_attempt",
+              "definition": "上一非复位采样 empty=1，本拍 rd_en=1；前态来自连续实测寄存状态",
+              "status": "observed",
+              "first_evidence": {
+                "source": "testbench_sample_statement",
+                "rule": "fifo.read_empty_attempt",
+                "first_cycle": 9,
+                "last_cycle": 10,
+                "samples": [
+                  {
+                    "cycle": 9,
+                    "time_ns": 116.0,
+                    "test_id": "agent_4_3",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "wr_en": "0",
+                      "wr_data": "00000000",
+                      "rd_en": "1"
+                    },
+                    "outputs": {
+                      "rd_data": "00000001",
+                      "full": "0",
+                      "empty": "1"
+                    }
+                  },
+                  {
+                    "cycle": 10,
+                    "time_ns": 126.0,
+                    "test_id": "agent_4_3",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "wr_en": "0",
+                      "wr_data": "00000000",
+                      "rd_en": "1"
+                    },
+                    "outputs": {
+                      "rd_data": "00000001",
+                      "full": "0",
+                      "empty": "1"
+                    }
+                  }
+                ],
+                "pre_state_source": "previous_after_sample"
+              }
+            },
+            {
+              "id": "fifo.write_full_attempt",
+              "kind": "input_attempt",
+              "definition": "上一非复位采样 full=1，本拍 wr_en=1；前态来自连续实测寄存状态",
+              "status": "observed",
+              "first_evidence": {
+                "source": "testbench_sample_statement",
+                "rule": "fifo.write_full_attempt",
+                "first_cycle": 4,
+                "last_cycle": 5,
+                "samples": [
+                  {
+                    "cycle": 4,
+                    "time_ns": 66.0,
+                    "test_id": "agent_2_1",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "wr_en": "1",
+                      "wr_data": "00000001",
+                      "rd_en": "0"
+                    },
+                    "outputs": {
+                      "rd_data": "00000000",
+                      "full": "1",
+                      "empty": "0"
+                    }
+                  },
+                  {
+                    "cycle": 5,
+                    "time_ns": 76.0,
+                    "test_id": "agent_2_1",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "wr_en": "1",
+                      "wr_data": "00000001",
+                      "rd_en": "0"
+                    },
+                    "outputs": {
+                      "rd_data": "00000000",
+                      "full": "1",
+                      "empty": "0"
+                    }
+                  }
+                ],
+                "pre_state_source": "previous_after_sample"
+              }
+            },
+            {
+              "id": "fifo.simultaneous_request",
+              "kind": "input_attempt",
+              "definition": "同一非复位采样 wr_en=1 且 rd_en=1；不声称同时接受",
+              "status": "missing",
+              "first_evidence": null
+            }
+          ],
+          "observed": [
+            "fifo.empty",
+            "fifo.full",
+            "fifo.read_request",
+            "fifo.write_request",
+            "fifo.read_empty_attempt",
+            "fifo.write_full_attempt"
+          ],
+          "missing": [
+            "fifo.simultaneous_request"
+          ],
+          "unknown": [],
+          "expected_cycles": 11,
+          "observed_cycles": 11,
+          "provenance": {
+            "rtl_sha256": "64421ef7e99f0d0e4964a680067a7e2d4773c12d15d9b65d8d120156adf8418a",
+            "plan_sha256": "fb298de634288c62c0b5c737c849155abd7b4594728dd3844a493233a3c82725",
+            "contract_sha256": "b5268889a5a424e0fcb6c2036f5e36517dcea94456389e1241b69277986de614",
+            "testbench_sha256": "08247f92d47e1aa76d0b695888e2a15554c97a8719f8c95fe0a1fd8d900a32a5",
+            "observed_samples_sha256": "7cf8844f70668f36d5e4e0c362eaab53c58ef806fbd0f2c2d7e525f6bb5c1de1",
+            "run_stdout_sha256": "9b4cfb6068cbe247205b73e05e3ef56b3a4a49913f8643282016fb4cf0656194"
+          },
+          "reason": null,
+          "disclaimer": "功能场景覆盖只描述本次计划中实际观察到的有限场景，不是代码覆盖率，不证明功能正确、所有协议路径已覆盖或模型提高了检出率。输入尝试不等于操作被接受。",
+          "limitations": [
+            "沿前寄存状态仅采用连续非复位的上一沿后采样；首拍不推定状态",
+            "仅审计四类内置固定参数，外部模块、变参、before采样不套用",
+            "没有记录、缺行、乱序、相同采样时刻或工件不匹配则整体未知",
+            "含X/Z的必要条件为未知；只有已知条件的实测命中才有首次证据"
+          ],
+          "counts": {
+            "observed": 6,
+            "missing": 1,
+            "unknown": 0
+          },
+          "compact_model_feedback": {
+            "schema_version": "1.0",
+            "coverage_type": "functional_scenarios",
+            "status": "measured",
+            "profile": "builtin-functional-scenarios-v1:sync_fifo",
+            "profile_sha256": "6dae94a0ae1979a6f3fbae1399d85d98d2fc06b99aebd8e1e8dac707abac1305",
+            "expected_cycles": 11,
+            "observed_cycles": 11,
+            "counts": {
+              "observed": 6,
+              "missing": 1,
+              "unknown": 0
+            },
+            "observed": [
+              "fifo.empty",
+              "fifo.full",
+              "fifo.read_request",
+              "fifo.write_request",
+              "fifo.read_empty_attempt",
+              "fifo.write_full_attempt"
+            ],
+            "missing": [
+              "fifo.simultaneous_request"
+            ],
+            "unknown": [],
+            "reason": null,
+            "disclaimer": "功能场景覆盖只描述本次计划中实际观察到的有限场景，不是代码覆盖率，不证明功能正确、所有协议路径已覆盖或模型提高了检出率。输入尝试不等于操作被接受。",
+            "bins": [
+              {
+                "id": "fifo.empty",
+                "kind": "output_observation",
+                "definition": "非复位沿后 empty=1 且 full=0",
+                "status": "observed",
+                "first_cycle": 9,
+                "last_cycle": 9
+              },
+              {
+                "id": "fifo.full",
+                "kind": "output_observation",
+                "definition": "非复位沿后 full=1 且 empty=0",
+                "status": "observed",
+                "first_cycle": 4,
+                "last_cycle": 4
+              },
+              {
+                "id": "fifo.read_request",
+                "kind": "input_attempt",
+                "definition": "非复位采样中 rd_en=1；不声称已接受",
+                "status": "observed",
+                "first_cycle": 7,
+                "last_cycle": 7
+              },
+              {
+                "id": "fifo.write_request",
+                "kind": "input_attempt",
+                "definition": "非复位采样中 wr_en=1；不声称已接受",
+                "status": "observed",
+                "first_cycle": 2,
+                "last_cycle": 2
+              },
+              {
+                "id": "fifo.read_empty_attempt",
+                "kind": "input_attempt",
+                "definition": "上一非复位采样 empty=1，本拍 rd_en=1；前态来自连续实测寄存状态",
+                "status": "observed",
+                "first_cycle": 9,
+                "last_cycle": 10
+              },
+              {
+                "id": "fifo.write_full_attempt",
+                "kind": "input_attempt",
+                "definition": "上一非复位采样 full=1，本拍 wr_en=1；前态来自连续实测寄存状态",
+                "status": "observed",
+                "first_cycle": 4,
+                "last_cycle": 5
+              },
+              {
+                "id": "fifo.simultaneous_request",
+                "kind": "input_attempt",
+                "definition": "同一非复位采样 wr_en=1 且 rd_en=1；不声称同时接受",
+                "status": "missing",
+                "first_cycle": null,
+                "last_cycle": null
+              }
+            ]
+          }
+        }
+      ],
+      "no_coverage_coverage_by_round": []
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "repeat": 1,
+      "feedback_status": "policy_error",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": false,
+      "no_coverage_detected": false,
+      "feedback_requests": 1,
+      "no_coverage_requests": 1,
+      "feedback_search_cycles": 0,
+      "no_coverage_search_cycles": 0,
+      "feedback_first_detection_budget": null,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [],
+      "no_coverage_coverage_by_round": []
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "repeat": 2,
+      "feedback_status": "policy_error",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": false,
+      "no_coverage_detected": false,
+      "feedback_requests": 1,
+      "no_coverage_requests": 1,
+      "feedback_search_cycles": 0,
+      "no_coverage_search_cycles": 0,
+      "feedback_first_detection_budget": null,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [],
+      "no_coverage_coverage_by_round": []
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "repeat": 0,
+      "feedback_status": "policy_error",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": false,
+      "no_coverage_detected": false,
+      "feedback_requests": 1,
+      "no_coverage_requests": 1,
+      "feedback_search_cycles": 0,
+      "no_coverage_search_cycles": 0,
+      "feedback_first_detection_budget": null,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [],
+      "no_coverage_coverage_by_round": []
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "repeat": 1,
+      "feedback_status": "policy_error",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": false,
+      "no_coverage_detected": false,
+      "feedback_requests": 1,
+      "no_coverage_requests": 1,
+      "feedback_search_cycles": 0,
+      "no_coverage_search_cycles": 0,
+      "feedback_first_detection_budget": null,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [],
+      "no_coverage_coverage_by_round": []
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "repeat": 2,
+      "feedback_status": "policy_error",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": false,
+      "no_coverage_detected": false,
+      "feedback_requests": 1,
+      "no_coverage_requests": 1,
+      "feedback_search_cycles": 0,
+      "no_coverage_search_cycles": 0,
+      "feedback_first_detection_budget": null,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [],
+      "no_coverage_coverage_by_round": []
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "repeat": 0,
+      "feedback_status": "policy_error",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": false,
+      "no_coverage_detected": false,
+      "feedback_requests": 2,
+      "no_coverage_requests": 1,
+      "feedback_search_cycles": 51,
+      "no_coverage_search_cycles": 0,
+      "feedback_first_detection_budget": null,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [
+        {
+          "schema_version": "1.0",
+          "coverage_type": "functional_scenarios",
+          "scope": "current_execution_plan",
+          "status": "measured",
+          "profile": "builtin-functional-scenarios-v1:uart_tx",
+          "profile_sha256": "176e80bf256377e8cf530e1c72e4fb87880270b04068b05217f06ad08b13412b",
+          "bins": [
+            {
+              "id": "uart.request",
+              "kind": "input_attempt",
+              "definition": "非复位采样 start=1；不声称已接受",
+              "status": "observed",
+              "first_evidence": {
+                "source": "testbench_sample_statement",
+                "rule": "uart.request",
+                "first_cycle": 6,
+                "last_cycle": 6,
+                "samples": [
+                  {
+                    "cycle": 6,
+                    "time_ns": 86.0,
+                    "test_id": "agent_3_2",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "start": "1",
+                      "data_in": "10010110"
+                    },
+                    "outputs": {
+                      "tx": "0",
+                      "busy": "1"
+                    }
+                  }
+                ],
+                "pre_state_source": null
+              }
+            },
+            {
+              "id": "uart.idle",
+              "kind": "output_observation",
+              "definition": "非复位沿后 busy=0 且 tx=1",
+              "status": "observed",
+              "first_evidence": {
+                "source": "testbench_sample_statement",
+                "rule": "uart.idle",
+                "first_cycle": 2,
+                "last_cycle": 2,
+                "samples": [
+                  {
+                    "cycle": 2,
+                    "time_ns": 46.0,
+                    "test_id": "agent_2_1",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "start": "0",
+                      "data_in": "00000000"
+                    },
+                    "outputs": {
+                      "tx": "1",
+                      "busy": "0"
+                    }
+                  }
+                ],
+                "pre_state_source": null
+              }
+            },
+            {
+              "id": "uart.busy",
+              "kind": "output_observation",
+              "definition": "非复位沿后 busy=1",
+              "status": "observed",
+              "first_evidence": {
+                "source": "testbench_sample_statement",
+                "rule": "uart.busy",
+                "first_cycle": 6,
+                "last_cycle": 6,
+                "samples": [
+                  {
+                    "cycle": 6,
+                    "time_ns": 86.0,
+                    "test_id": "agent_3_2",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "start": "1",
+                      "data_in": "10010110"
+                    },
+                    "outputs": {
+                      "tx": "0",
+                      "busy": "1"
+                    }
+                  }
+                ],
+                "pre_state_source": null
+              }
+            },
+            {
+              "id": "uart.frame_start",
+              "kind": "protocol_sequence",
+              "definition": "上一实测 busy=0，本拍 start=1，沿后 busy=1 且 tx=0",
+              "status": "observed",
+              "first_evidence": {
+                "source": "testbench_sample_statement",
+                "rule": "uart.frame_start",
+                "first_cycle": 5,
+                "last_cycle": 6,
+                "samples": [
+                  {
+                    "cycle": 5,
+                    "time_ns": 76.0,
+                    "test_id": "agent_2_1",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "start": "0",
+                      "data_in": "00000000"
+                    },
+                    "outputs": {
+                      "tx": "1",
+                      "busy": "0"
+                    }
+                  },
+                  {
+                    "cycle": 6,
+                    "time_ns": 86.0,
+                    "test_id": "agent_3_2",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "start": "1",
+                      "data_in": "10010110"
+                    },
+                    "outputs": {
+                      "tx": "0",
+                      "busy": "1"
+                    }
+                  }
+                ],
+                "pre_state_source": "previous_after_sample"
+              }
+            },
+            {
+              "id": "uart.busy_request_attempt",
+              "kind": "input_attempt",
+              "definition": "上一非复位采样 busy=1，本拍 start=1；不声称忽略机制正确",
+              "status": "observed",
+              "first_evidence": {
+                "source": "testbench_sample_statement",
+                "rule": "uart.busy_request_attempt",
+                "first_cycle": 6,
+                "last_cycle": 7,
+                "samples": [
+                  {
+                    "cycle": 6,
+                    "time_ns": 86.0,
+                    "test_id": "agent_3_2",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "start": "1",
+                      "data_in": "10010110"
+                    },
+                    "outputs": {
+                      "tx": "0",
+                      "busy": "1"
+                    }
+                  },
+                  {
+                    "cycle": 7,
+                    "time_ns": 96.0,
+                    "test_id": "agent_3_2",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "start": "1",
+                      "data_in": "10010110"
+                    },
+                    "outputs": {
+                      "tx": "0",
+                      "busy": "1"
+                    }
+                  }
+                ],
+                "pre_state_source": "previous_after_sample"
+              }
+            },
+            {
+              "id": "uart.complete_frame",
+              "kind": "protocol_sequence",
+              "definition": "从实测接收开始连续41拍：8N1十位各4拍，与请求数据相符，末拍 busy=0、tx=1",
+              "status": "missing",
+              "first_evidence": null
+            }
+          ],
+          "observed": [
+            "uart.request",
+            "uart.idle",
+            "uart.busy",
+            "uart.frame_start",
+            "uart.busy_request_attempt"
+          ],
+          "missing": [
+            "uart.complete_frame"
+          ],
+          "unknown": [],
+          "expected_cycles": 51,
+          "observed_cycles": 51,
+          "provenance": {
+            "rtl_sha256": "93b638a980c2ecf591163f954fd72f5210088c1bf2dda5ab9dbef65c479bd334",
+            "plan_sha256": "ecfa8be7dd699e51f56b9677afecece98f6f1f2ea8522260f78ef03f67bdd1df",
+            "contract_sha256": "81bee6c74efc6db12a3299c574d58171b6291e33cc6797ad9a32c402e8d1af75",
+            "testbench_sha256": "6392f46b53d322ed702ff216d64f1b7611bed3a776262d347a4e715ec1ae7924",
+            "observed_samples_sha256": "3711f1e812862e997f6a4abd1cf2d112d1d12df39f7e0dbe5911f6e0ac0408e2",
+            "run_stdout_sha256": "5de00b01657ef342a9adebfcc59bc0063de32f97883c4f02cdaddf33c79b65d1"
+          },
+          "reason": null,
+          "disclaimer": "功能场景覆盖只描述本次计划中实际观察到的有限场景，不是代码覆盖率，不证明功能正确、所有协议路径已覆盖或模型提高了检出率。输入尝试不等于操作被接受。",
+          "limitations": [
+            "沿前寄存状态仅采用连续非复位的上一沿后采样；首拍不推定状态",
+            "仅审计四类内置固定参数，外部模块、变参、before采样不套用",
+            "没有记录、缺行、乱序、相同采样时刻或工件不匹配则整体未知",
+            "含X/Z的必要条件为未知；只有已知条件的实测命中才有首次证据"
+          ],
+          "counts": {
+            "observed": 5,
+            "missing": 1,
+            "unknown": 0
+          },
+          "compact_model_feedback": {
+            "schema_version": "1.0",
+            "coverage_type": "functional_scenarios",
+            "status": "measured",
+            "profile": "builtin-functional-scenarios-v1:uart_tx",
+            "profile_sha256": "176e80bf256377e8cf530e1c72e4fb87880270b04068b05217f06ad08b13412b",
+            "expected_cycles": 51,
+            "observed_cycles": 51,
+            "counts": {
+              "observed": 5,
+              "missing": 1,
+              "unknown": 0
+            },
+            "observed": [
+              "uart.request",
+              "uart.idle",
+              "uart.busy",
+              "uart.frame_start",
+              "uart.busy_request_attempt"
+            ],
+            "missing": [
+              "uart.complete_frame"
+            ],
+            "unknown": [],
+            "reason": null,
+            "disclaimer": "功能场景覆盖只描述本次计划中实际观察到的有限场景，不是代码覆盖率，不证明功能正确、所有协议路径已覆盖或模型提高了检出率。输入尝试不等于操作被接受。",
+            "bins": [
+              {
+                "id": "uart.request",
+                "kind": "input_attempt",
+                "definition": "非复位采样 start=1；不声称已接受",
+                "status": "observed",
+                "first_cycle": 6,
+                "last_cycle": 6
+              },
+              {
+                "id": "uart.idle",
+                "kind": "output_observation",
+                "definition": "非复位沿后 busy=0 且 tx=1",
+                "status": "observed",
+                "first_cycle": 2,
+                "last_cycle": 2
+              },
+              {
+                "id": "uart.busy",
+                "kind": "output_observation",
+                "definition": "非复位沿后 busy=1",
+                "status": "observed",
+                "first_cycle": 6,
+                "last_cycle": 6
+              },
+              {
+                "id": "uart.frame_start",
+                "kind": "protocol_sequence",
+                "definition": "上一实测 busy=0，本拍 start=1，沿后 busy=1 且 tx=0",
+                "status": "observed",
+                "first_cycle": 5,
+                "last_cycle": 6
+              },
+              {
+                "id": "uart.busy_request_attempt",
+                "kind": "input_attempt",
+                "definition": "上一非复位采样 busy=1，本拍 start=1；不声称忽略机制正确",
+                "status": "observed",
+                "first_cycle": 6,
+                "last_cycle": 7
+              },
+              {
+                "id": "uart.complete_frame",
+                "kind": "protocol_sequence",
+                "definition": "从实测接收开始连续41拍：8N1十位各4拍，与请求数据相符，末拍 busy=0、tx=1",
+                "status": "missing",
+                "first_cycle": null,
+                "last_cycle": null
+              }
+            ]
+          }
+        }
+      ],
+      "no_coverage_coverage_by_round": []
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "repeat": 1,
+      "feedback_status": "policy_error",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": false,
+      "no_coverage_detected": false,
+      "feedback_requests": 2,
+      "no_coverage_requests": 1,
+      "feedback_search_cycles": 2,
+      "no_coverage_search_cycles": 0,
+      "feedback_first_detection_budget": null,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [
+        {
+          "schema_version": "1.0",
+          "coverage_type": "functional_scenarios",
+          "scope": "current_execution_plan",
+          "status": "measured",
+          "profile": "builtin-functional-scenarios-v1:uart_tx",
+          "profile_sha256": "176e80bf256377e8cf530e1c72e4fb87880270b04068b05217f06ad08b13412b",
+          "bins": [
+            {
+              "id": "uart.request",
+              "kind": "input_attempt",
+              "definition": "非复位采样 start=1；不声称已接受",
+              "status": "missing",
+              "first_evidence": null
+            },
+            {
+              "id": "uart.idle",
+              "kind": "output_observation",
+              "definition": "非复位沿后 busy=0 且 tx=1",
+              "status": "missing",
+              "first_evidence": null
+            },
+            {
+              "id": "uart.busy",
+              "kind": "output_observation",
+              "definition": "非复位沿后 busy=1",
+              "status": "missing",
+              "first_evidence": null
+            },
+            {
+              "id": "uart.frame_start",
+              "kind": "protocol_sequence",
+              "definition": "上一实测 busy=0，本拍 start=1，沿后 busy=1 且 tx=0",
+              "status": "missing",
+              "first_evidence": null
+            },
+            {
+              "id": "uart.busy_request_attempt",
+              "kind": "input_attempt",
+              "definition": "上一非复位采样 busy=1，本拍 start=1；不声称忽略机制正确",
+              "status": "missing",
+              "first_evidence": null
+            },
+            {
+              "id": "uart.complete_frame",
+              "kind": "protocol_sequence",
+              "definition": "从实测接收开始连续41拍：8N1十位各4拍，与请求数据相符，末拍 busy=0、tx=1",
+              "status": "missing",
+              "first_evidence": null
+            }
+          ],
+          "observed": [],
+          "missing": [
+            "uart.request",
+            "uart.idle",
+            "uart.busy",
+            "uart.frame_start",
+            "uart.busy_request_attempt",
+            "uart.complete_frame"
+          ],
+          "unknown": [],
+          "expected_cycles": 2,
+          "observed_cycles": 2,
+          "provenance": {
+            "rtl_sha256": "93b638a980c2ecf591163f954fd72f5210088c1bf2dda5ab9dbef65c479bd334",
+            "plan_sha256": "280753f943ecb0b2633f9ee23b8273fba7f2496bce766e888b049b83bb12ea32",
+            "contract_sha256": "81bee6c74efc6db12a3299c574d58171b6291e33cc6797ad9a32c402e8d1af75",
+            "testbench_sha256": "32ab62c5c0d3696fda878b178e4dec475969cccb5efbcd7c9a233431067ef3ea",
+            "observed_samples_sha256": "a4c27189a16a08b85d95ec9df8cfe325de5b7359d98b5b83c23f4fd20fce9e78",
+            "run_stdout_sha256": "91e686e72a779ad942769c6ac331ee6a621d0f5b22a49b078ace75d3170dc8b3"
+          },
+          "reason": null,
+          "disclaimer": "功能场景覆盖只描述本次计划中实际观察到的有限场景，不是代码覆盖率，不证明功能正确、所有协议路径已覆盖或模型提高了检出率。输入尝试不等于操作被接受。",
+          "limitations": [
+            "沿前寄存状态仅采用连续非复位的上一沿后采样；首拍不推定状态",
+            "仅审计四类内置固定参数，外部模块、变参、before采样不套用",
+            "没有记录、缺行、乱序、相同采样时刻或工件不匹配则整体未知",
+            "含X/Z的必要条件为未知；只有已知条件的实测命中才有首次证据"
+          ],
+          "counts": {
+            "observed": 0,
+            "missing": 6,
+            "unknown": 0
+          },
+          "compact_model_feedback": {
+            "schema_version": "1.0",
+            "coverage_type": "functional_scenarios",
+            "status": "measured",
+            "profile": "builtin-functional-scenarios-v1:uart_tx",
+            "profile_sha256": "176e80bf256377e8cf530e1c72e4fb87880270b04068b05217f06ad08b13412b",
+            "expected_cycles": 2,
+            "observed_cycles": 2,
+            "counts": {
+              "observed": 0,
+              "missing": 6,
+              "unknown": 0
+            },
+            "observed": [],
+            "missing": [
+              "uart.request",
+              "uart.idle",
+              "uart.busy",
+              "uart.frame_start",
+              "uart.busy_request_attempt",
+              "uart.complete_frame"
+            ],
+            "unknown": [],
+            "reason": null,
+            "disclaimer": "功能场景覆盖只描述本次计划中实际观察到的有限场景，不是代码覆盖率，不证明功能正确、所有协议路径已覆盖或模型提高了检出率。输入尝试不等于操作被接受。",
+            "bins": [
+              {
+                "id": "uart.request",
+                "kind": "input_attempt",
+                "definition": "非复位采样 start=1；不声称已接受",
+                "status": "missing",
+                "first_cycle": null,
+                "last_cycle": null
+              },
+              {
+                "id": "uart.idle",
+                "kind": "output_observation",
+                "definition": "非复位沿后 busy=0 且 tx=1",
+                "status": "missing",
+                "first_cycle": null,
+                "last_cycle": null
+              },
+              {
+                "id": "uart.busy",
+                "kind": "output_observation",
+                "definition": "非复位沿后 busy=1",
+                "status": "missing",
+                "first_cycle": null,
+                "last_cycle": null
+              },
+              {
+                "id": "uart.frame_start",
+                "kind": "protocol_sequence",
+                "definition": "上一实测 busy=0，本拍 start=1，沿后 busy=1 且 tx=0",
+                "status": "missing",
+                "first_cycle": null,
+                "last_cycle": null
+              },
+              {
+                "id": "uart.busy_request_attempt",
+                "kind": "input_attempt",
+                "definition": "上一非复位采样 busy=1，本拍 start=1；不声称忽略机制正确",
+                "status": "missing",
+                "first_cycle": null,
+                "last_cycle": null
+              },
+              {
+                "id": "uart.complete_frame",
+                "kind": "protocol_sequence",
+                "definition": "从实测接收开始连续41拍：8N1十位各4拍，与请求数据相符，末拍 busy=0、tx=1",
+                "status": "missing",
+                "first_cycle": null,
+                "last_cycle": null
+              }
+            ]
+          }
+        }
+      ],
+      "no_coverage_coverage_by_round": []
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "repeat": 2,
+      "feedback_status": "policy_error",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": false,
+      "no_coverage_detected": false,
+      "feedback_requests": 1,
+      "no_coverage_requests": 2,
+      "feedback_search_cycles": 0,
+      "no_coverage_search_cycles": 86,
+      "feedback_first_detection_budget": null,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [],
+      "no_coverage_coverage_by_round": [
+        {
+          "schema_version": "1.0",
+          "coverage_type": "functional_scenarios",
+          "scope": "current_execution_plan",
+          "status": "measured",
+          "profile": "builtin-functional-scenarios-v1:uart_tx",
+          "profile_sha256": "176e80bf256377e8cf530e1c72e4fb87880270b04068b05217f06ad08b13412b",
+          "bins": [
+            {
+              "id": "uart.request",
+              "kind": "input_attempt",
+              "definition": "非复位采样 start=1；不声称已接受",
+              "status": "observed",
+              "first_evidence": {
+                "source": "testbench_sample_statement",
+                "rule": "uart.request",
+                "first_cycle": 4,
+                "last_cycle": 4,
+                "samples": [
+                  {
+                    "cycle": 4,
+                    "time_ns": 66.0,
+                    "test_id": "agent_2_1",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "start": "1",
+                      "data_in": "10010110"
+                    },
+                    "outputs": {
+                      "tx": "0",
+                      "busy": "1"
+                    }
+                  }
+                ],
+                "pre_state_source": null
+              }
+            },
+            {
+              "id": "uart.idle",
+              "kind": "output_observation",
+              "definition": "非复位沿后 busy=0 且 tx=1",
+              "status": "observed",
+              "first_evidence": {
+                "source": "testbench_sample_statement",
+                "rule": "uart.idle",
+                "first_cycle": 0,
+                "last_cycle": 0,
+                "samples": [
+                  {
+                    "cycle": 0,
+                    "time_ns": 26.0,
+                    "test_id": "agent_1_0",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "start": "0",
+                      "data_in": "00000000"
+                    },
+                    "outputs": {
+                      "tx": "1",
+                      "busy": "0"
+                    }
+                  }
+                ],
+                "pre_state_source": null
+              }
+            },
+            {
+              "id": "uart.busy",
+              "kind": "output_observation",
+              "definition": "非复位沿后 busy=1",
+              "status": "observed",
+              "first_evidence": {
+                "source": "testbench_sample_statement",
+                "rule": "uart.busy",
+                "first_cycle": 4,
+                "last_cycle": 4,
+                "samples": [
+                  {
+                    "cycle": 4,
+                    "time_ns": 66.0,
+                    "test_id": "agent_2_1",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "start": "1",
+                      "data_in": "10010110"
+                    },
+                    "outputs": {
+                      "tx": "0",
+                      "busy": "1"
+                    }
+                  }
+                ],
+                "pre_state_source": null
+              }
+            },
+            {
+              "id": "uart.frame_start",
+              "kind": "protocol_sequence",
+              "definition": "上一实测 busy=0，本拍 start=1，沿后 busy=1 且 tx=0",
+              "status": "observed",
+              "first_evidence": {
+                "source": "testbench_sample_statement",
+                "rule": "uart.frame_start",
+                "first_cycle": 3,
+                "last_cycle": 4,
+                "samples": [
+                  {
+                    "cycle": 3,
+                    "time_ns": 56.0,
+                    "test_id": "agent_1_0",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "start": "0",
+                      "data_in": "00000000"
+                    },
+                    "outputs": {
+                      "tx": "1",
+                      "busy": "0"
+                    }
+                  },
+                  {
+                    "cycle": 4,
+                    "time_ns": 66.0,
+                    "test_id": "agent_2_1",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "start": "1",
+                      "data_in": "10010110"
+                    },
+                    "outputs": {
+                      "tx": "0",
+                      "busy": "1"
+                    }
+                  }
+                ],
+                "pre_state_source": "previous_after_sample"
+              }
+            },
+            {
+              "id": "uart.busy_request_attempt",
+              "kind": "input_attempt",
+              "definition": "上一非复位采样 busy=1，本拍 start=1；不声称忽略机制正确",
+              "status": "observed",
+              "first_evidence": {
+                "source": "testbench_sample_statement",
+                "rule": "uart.busy_request_attempt",
+                "first_cycle": 4,
+                "last_cycle": 5,
+                "samples": [
+                  {
+                    "cycle": 4,
+                    "time_ns": 66.0,
+                    "test_id": "agent_2_1",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "start": "1",
+                      "data_in": "10010110"
+                    },
+                    "outputs": {
+                      "tx": "0",
+                      "busy": "1"
+                    }
+                  },
+                  {
+                    "cycle": 5,
+                    "time_ns": 76.0,
+                    "test_id": "agent_2_1",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "start": "1",
+                      "data_in": "10010110"
+                    },
+                    "outputs": {
+                      "tx": "0",
+                      "busy": "1"
+                    }
+                  }
+                ],
+                "pre_state_source": "previous_after_sample"
+              }
+            },
+            {
+              "id": "uart.complete_frame",
+              "kind": "protocol_sequence",
+              "definition": "从实测接收开始连续41拍：8N1十位各4拍，与请求数据相符，末拍 busy=0、tx=1",
+              "status": "missing",
+              "first_evidence": null
+            }
+          ],
+          "observed": [
+            "uart.request",
+            "uart.idle",
+            "uart.busy",
+            "uart.frame_start",
+            "uart.busy_request_attempt"
+          ],
+          "missing": [
+            "uart.complete_frame"
+          ],
+          "unknown": [],
+          "expected_cycles": 86,
+          "observed_cycles": 86,
+          "provenance": {
+            "rtl_sha256": "93b638a980c2ecf591163f954fd72f5210088c1bf2dda5ab9dbef65c479bd334",
+            "plan_sha256": "9d0d53260e4bcab7eda4058cc56cf0449ddb1378d63cd906b357f4e4f4d21fc2",
+            "contract_sha256": "81bee6c74efc6db12a3299c574d58171b6291e33cc6797ad9a32c402e8d1af75",
+            "testbench_sha256": "6d45dba98c411337e6f5efbb35258786ccfba4965a4fbeade8b3e4cc92283761",
+            "observed_samples_sha256": "7fafcda75a45bbafe3eb6d7b8050caed818d8ab8f7ab5134d381fe318f74e8c2",
+            "run_stdout_sha256": "8ca42e9ea9f18f18b9f01e76e8fa6ac52cb7ad662dcecfe433ff5a6ccc15857d"
+          },
+          "reason": null,
+          "disclaimer": "功能场景覆盖只描述本次计划中实际观察到的有限场景，不是代码覆盖率，不证明功能正确、所有协议路径已覆盖或模型提高了检出率。输入尝试不等于操作被接受。",
+          "limitations": [
+            "沿前寄存状态仅采用连续非复位的上一沿后采样；首拍不推定状态",
+            "仅审计四类内置固定参数，外部模块、变参、before采样不套用",
+            "没有记录、缺行、乱序、相同采样时刻或工件不匹配则整体未知",
+            "含X/Z的必要条件为未知；只有已知条件的实测命中才有首次证据"
+          ],
+          "counts": {
+            "observed": 5,
+            "missing": 1,
+            "unknown": 0
+          },
+          "compact_model_feedback": {
+            "schema_version": "1.0",
+            "coverage_type": "functional_scenarios",
+            "status": "measured",
+            "profile": "builtin-functional-scenarios-v1:uart_tx",
+            "profile_sha256": "176e80bf256377e8cf530e1c72e4fb87880270b04068b05217f06ad08b13412b",
+            "expected_cycles": 86,
+            "observed_cycles": 86,
+            "counts": {
+              "observed": 5,
+              "missing": 1,
+              "unknown": 0
+            },
+            "observed": [
+              "uart.request",
+              "uart.idle",
+              "uart.busy",
+              "uart.frame_start",
+              "uart.busy_request_attempt"
+            ],
+            "missing": [
+              "uart.complete_frame"
+            ],
+            "unknown": [],
+            "reason": null,
+            "disclaimer": "功能场景覆盖只描述本次计划中实际观察到的有限场景，不是代码覆盖率，不证明功能正确、所有协议路径已覆盖或模型提高了检出率。输入尝试不等于操作被接受。",
+            "bins": [
+              {
+                "id": "uart.request",
+                "kind": "input_attempt",
+                "definition": "非复位采样 start=1；不声称已接受",
+                "status": "observed",
+                "first_cycle": 4,
+                "last_cycle": 4
+              },
+              {
+                "id": "uart.idle",
+                "kind": "output_observation",
+                "definition": "非复位沿后 busy=0 且 tx=1",
+                "status": "observed",
+                "first_cycle": 0,
+                "last_cycle": 0
+              },
+              {
+                "id": "uart.busy",
+                "kind": "output_observation",
+                "definition": "非复位沿后 busy=1",
+                "status": "observed",
+                "first_cycle": 4,
+                "last_cycle": 4
+              },
+              {
+                "id": "uart.frame_start",
+                "kind": "protocol_sequence",
+                "definition": "上一实测 busy=0，本拍 start=1，沿后 busy=1 且 tx=0",
+                "status": "observed",
+                "first_cycle": 3,
+                "last_cycle": 4
+              },
+              {
+                "id": "uart.busy_request_attempt",
+                "kind": "input_attempt",
+                "definition": "上一非复位采样 busy=1，本拍 start=1；不声称忽略机制正确",
+                "status": "observed",
+                "first_cycle": 4,
+                "last_cycle": 5
+              },
+              {
+                "id": "uart.complete_frame",
+                "kind": "protocol_sequence",
+                "definition": "从实测接收开始连续41拍：8N1十位各4拍，与请求数据相符，末拍 busy=0、tx=1",
+                "status": "missing",
+                "first_cycle": null,
+                "last_cycle": null
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "repeat": 0,
+      "feedback_status": "detected",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": true,
+      "no_coverage_detected": false,
+      "feedback_requests": 1,
+      "no_coverage_requests": 1,
+      "feedback_search_cycles": 135,
+      "no_coverage_search_cycles": 0,
+      "feedback_first_detection_budget": 46,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [
+        {
+          "schema_version": "1.0",
+          "coverage_type": "functional_scenarios",
+          "scope": "current_execution_plan",
+          "status": "measured",
+          "profile": "builtin-functional-scenarios-v1:uart_tx",
+          "profile_sha256": "176e80bf256377e8cf530e1c72e4fb87880270b04068b05217f06ad08b13412b",
+          "bins": [
+            {
+              "id": "uart.request",
+              "kind": "input_attempt",
+              "definition": "非复位采样 start=1；不声称已接受",
+              "status": "observed",
+              "first_evidence": {
+                "source": "testbench_sample_statement",
+                "rule": "uart.request",
+                "first_cycle": 5,
+                "last_cycle": 5,
+                "samples": [
+                  {
+                    "cycle": 5,
+                    "time_ns": 76.0,
+                    "test_id": "agent_2_1",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "start": "1",
+                      "data_in": "10010110"
+                    },
+                    "outputs": {
+                      "tx": "0",
+                      "busy": "1"
+                    }
+                  }
+                ],
+                "pre_state_source": null
+              }
+            },
+            {
+              "id": "uart.idle",
+              "kind": "output_observation",
+              "definition": "非复位沿后 busy=0 且 tx=1",
+              "status": "observed",
+              "first_evidence": {
+                "source": "testbench_sample_statement",
+                "rule": "uart.idle",
+                "first_cycle": 0,
+                "last_cycle": 0,
+                "samples": [
+                  {
+                    "cycle": 0,
+                    "time_ns": 26.0,
+                    "test_id": "agent_1_0",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "start": "0",
+                      "data_in": "00000000"
+                    },
+                    "outputs": {
+                      "tx": "1",
+                      "busy": "0"
+                    }
+                  }
+                ],
+                "pre_state_source": null
+              }
+            },
+            {
+              "id": "uart.busy",
+              "kind": "output_observation",
+              "definition": "非复位沿后 busy=1",
+              "status": "observed",
+              "first_evidence": {
+                "source": "testbench_sample_statement",
+                "rule": "uart.busy",
+                "first_cycle": 5,
+                "last_cycle": 5,
+                "samples": [
+                  {
+                    "cycle": 5,
+                    "time_ns": 76.0,
+                    "test_id": "agent_2_1",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "start": "1",
+                      "data_in": "10010110"
+                    },
+                    "outputs": {
+                      "tx": "0",
+                      "busy": "1"
+                    }
+                  }
+                ],
+                "pre_state_source": null
+              }
+            },
+            {
+              "id": "uart.frame_start",
+              "kind": "protocol_sequence",
+              "definition": "上一实测 busy=0，本拍 start=1，沿后 busy=1 且 tx=0",
+              "status": "observed",
+              "first_evidence": {
+                "source": "testbench_sample_statement",
+                "rule": "uart.frame_start",
+                "first_cycle": 4,
+                "last_cycle": 5,
+                "samples": [
+                  {
+                    "cycle": 4,
+                    "time_ns": 66.0,
+                    "test_id": "agent_1_0",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "start": "0",
+                      "data_in": "00000000"
+                    },
+                    "outputs": {
+                      "tx": "1",
+                      "busy": "0"
+                    }
+                  },
+                  {
+                    "cycle": 5,
+                    "time_ns": 76.0,
+                    "test_id": "agent_2_1",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "start": "1",
+                      "data_in": "10010110"
+                    },
+                    "outputs": {
+                      "tx": "0",
+                      "busy": "1"
+                    }
+                  }
+                ],
+                "pre_state_source": "previous_after_sample"
+              }
+            },
+            {
+              "id": "uart.busy_request_attempt",
+              "kind": "input_attempt",
+              "definition": "上一非复位采样 busy=1，本拍 start=1；不声称忽略机制正确",
+              "status": "observed",
+              "first_evidence": {
+                "source": "testbench_sample_statement",
+                "rule": "uart.busy_request_attempt",
+                "first_cycle": 45,
+                "last_cycle": 46,
+                "samples": [
+                  {
+                    "cycle": 45,
+                    "time_ns": 476.0,
+                    "test_id": "agent_3_2",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "start": "0",
+                      "data_in": "00111010"
+                    },
+                    "outputs": {
+                      "tx": "x",
+                      "busy": "1"
+                    }
+                  },
+                  {
+                    "cycle": 46,
+                    "time_ns": 486.0,
+                    "test_id": "agent_4_3",
+                    "sample_phase": "after",
+                    "inputs": {
+                      "clk": "1",
+                      "rst_n": "1",
+                      "start": "1",
+                      "data_in": "11111111"
+                    },
+                    "outputs": {
+                      "tx": "x",
+                      "busy": "1"
+                    }
+                  }
+                ],
+                "pre_state_source": "previous_after_sample"
+              }
+            },
+            {
+              "id": "uart.complete_frame",
+              "kind": "protocol_sequence",
+              "definition": "从实测接收开始连续41拍：8N1十位各4拍，与请求数据相符，末拍 busy=0、tx=1",
+              "status": "missing",
+              "first_evidence": null
+            }
+          ],
+          "observed": [
+            "uart.request",
+            "uart.idle",
+            "uart.busy",
+            "uart.frame_start",
+            "uart.busy_request_attempt"
+          ],
+          "missing": [
+            "uart.complete_frame"
+          ],
+          "unknown": [],
+          "expected_cycles": 135,
+          "observed_cycles": 135,
+          "provenance": {
+            "rtl_sha256": "24b4caa23ac9b7dd2db45401acf781b1641e7eb800c55f32b78cbd6b65c7ffed",
+            "plan_sha256": "8ba0b9330fdc6c1bb2f525f455ea62cfa56393937a3c011603ef7319a79c70ca",
+            "contract_sha256": "81bee6c74efc6db12a3299c574d58171b6291e33cc6797ad9a32c402e8d1af75",
+            "testbench_sha256": "f8b9ce76ec1ab14eab1f02ab76149bf1dbd6cf3e2d0be035c6c01779caea0e97",
+            "observed_samples_sha256": "3e272e6901e213e75728a067d573ed3c7fa038ea2c26bcc2c69486e682268bbb",
+            "run_stdout_sha256": "fde998355b7b1c35a5f3782568b47a04d8982dbaed6105a75c52ba8b7e653faa"
+          },
+          "reason": null,
+          "disclaimer": "功能场景覆盖只描述本次计划中实际观察到的有限场景，不是代码覆盖率，不证明功能正确、所有协议路径已覆盖或模型提高了检出率。输入尝试不等于操作被接受。",
+          "limitations": [
+            "沿前寄存状态仅采用连续非复位的上一沿后采样；首拍不推定状态",
+            "仅审计四类内置固定参数，外部模块、变参、before采样不套用",
+            "没有记录、缺行、乱序、相同采样时刻或工件不匹配则整体未知",
+            "含X/Z的必要条件为未知；只有已知条件的实测命中才有首次证据"
+          ],
+          "counts": {
+            "observed": 5,
+            "missing": 1,
+            "unknown": 0
+          },
+          "compact_model_feedback": {
+            "schema_version": "1.0",
+            "coverage_type": "functional_scenarios",
+            "status": "measured",
+            "profile": "builtin-functional-scenarios-v1:uart_tx",
+            "profile_sha256": "176e80bf256377e8cf530e1c72e4fb87880270b04068b05217f06ad08b13412b",
+            "expected_cycles": 135,
+            "observed_cycles": 135,
+            "counts": {
+              "observed": 5,
+              "missing": 1,
+              "unknown": 0
+            },
+            "observed": [
+              "uart.request",
+              "uart.idle",
+              "uart.busy",
+              "uart.frame_start",
+              "uart.busy_request_attempt"
+            ],
+            "missing": [
+              "uart.complete_frame"
+            ],
+            "unknown": [],
+            "reason": null,
+            "disclaimer": "功能场景覆盖只描述本次计划中实际观察到的有限场景，不是代码覆盖率，不证明功能正确、所有协议路径已覆盖或模型提高了检出率。输入尝试不等于操作被接受。",
+            "bins": [
+              {
+                "id": "uart.request",
+                "kind": "input_attempt",
+                "definition": "非复位采样 start=1；不声称已接受",
+                "status": "observed",
+                "first_cycle": 5,
+                "last_cycle": 5
+              },
+              {
+                "id": "uart.idle",
+                "kind": "output_observation",
+                "definition": "非复位沿后 busy=0 且 tx=1",
+                "status": "observed",
+                "first_cycle": 0,
+                "last_cycle": 0
+              },
+              {
+                "id": "uart.busy",
+                "kind": "output_observation",
+                "definition": "非复位沿后 busy=1",
+                "status": "observed",
+                "first_cycle": 5,
+                "last_cycle": 5
+              },
+              {
+                "id": "uart.frame_start",
+                "kind": "protocol_sequence",
+                "definition": "上一实测 busy=0，本拍 start=1，沿后 busy=1 且 tx=0",
+                "status": "observed",
+                "first_cycle": 4,
+                "last_cycle": 5
+              },
+              {
+                "id": "uart.busy_request_attempt",
+                "kind": "input_attempt",
+                "definition": "上一非复位采样 busy=1，本拍 start=1；不声称忽略机制正确",
+                "status": "observed",
+                "first_cycle": 45,
+                "last_cycle": 46
+              },
+              {
+                "id": "uart.complete_frame",
+                "kind": "protocol_sequence",
+                "definition": "从实测接收开始连续41拍：8N1十位各4拍，与请求数据相符，末拍 busy=0、tx=1",
+                "status": "missing",
+                "first_cycle": null,
+                "last_cycle": null
+              }
+            ]
+          }
+        }
+      ],
+      "no_coverage_coverage_by_round": []
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "repeat": 1,
+      "feedback_status": "policy_error",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": false,
+      "no_coverage_detected": false,
+      "feedback_requests": 1,
+      "no_coverage_requests": 1,
+      "feedback_search_cycles": 0,
+      "no_coverage_search_cycles": 0,
+      "feedback_first_detection_budget": null,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [],
+      "no_coverage_coverage_by_round": []
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "repeat": 2,
+      "feedback_status": "policy_error",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": false,
+      "no_coverage_detected": false,
+      "feedback_requests": 1,
+      "no_coverage_requests": 1,
+      "feedback_search_cycles": 0,
+      "no_coverage_search_cycles": 0,
+      "feedback_first_detection_budget": null,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [],
+      "no_coverage_coverage_by_round": []
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "repeat": 0,
+      "feedback_status": "policy_error",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": false,
+      "no_coverage_detected": false,
+      "feedback_requests": 1,
+      "no_coverage_requests": 1,
+      "feedback_search_cycles": 0,
+      "no_coverage_search_cycles": 0,
+      "feedback_first_detection_budget": null,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [],
+      "no_coverage_coverage_by_round": []
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "repeat": 1,
+      "feedback_status": "policy_error",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": false,
+      "no_coverage_detected": false,
+      "feedback_requests": 1,
+      "no_coverage_requests": 1,
+      "feedback_search_cycles": 0,
+      "no_coverage_search_cycles": 0,
+      "feedback_first_detection_budget": null,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [],
+      "no_coverage_coverage_by_round": []
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "repeat": 2,
+      "feedback_status": "policy_error",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": false,
+      "no_coverage_detected": false,
+      "feedback_requests": 1,
+      "no_coverage_requests": 1,
+      "feedback_search_cycles": 0,
+      "no_coverage_search_cycles": 0,
+      "feedback_first_detection_budget": null,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [],
+      "no_coverage_coverage_by_round": []
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "repeat": 0,
+      "feedback_status": "policy_error",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": false,
+      "no_coverage_detected": false,
+      "feedback_requests": 1,
+      "no_coverage_requests": 1,
+      "feedback_search_cycles": 0,
+      "no_coverage_search_cycles": 0,
+      "feedback_first_detection_budget": null,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [],
+      "no_coverage_coverage_by_round": []
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "repeat": 1,
+      "feedback_status": "policy_error",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": false,
+      "no_coverage_detected": false,
+      "feedback_requests": 1,
+      "no_coverage_requests": 1,
+      "feedback_search_cycles": 0,
+      "no_coverage_search_cycles": 0,
+      "feedback_first_detection_budget": null,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [],
+      "no_coverage_coverage_by_round": []
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "repeat": 2,
+      "feedback_status": "policy_error",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": false,
+      "no_coverage_detected": false,
+      "feedback_requests": 1,
+      "no_coverage_requests": 1,
+      "feedback_search_cycles": 0,
+      "no_coverage_search_cycles": 0,
+      "feedback_first_detection_budget": null,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [],
+      "no_coverage_coverage_by_round": []
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "repeat": 0,
+      "feedback_status": "policy_error",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": false,
+      "no_coverage_detected": false,
+      "feedback_requests": 1,
+      "no_coverage_requests": 1,
+      "feedback_search_cycles": 0,
+      "no_coverage_search_cycles": 0,
+      "feedback_first_detection_budget": null,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [],
+      "no_coverage_coverage_by_round": []
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "repeat": 1,
+      "feedback_status": "policy_error",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": false,
+      "no_coverage_detected": false,
+      "feedback_requests": 1,
+      "no_coverage_requests": 1,
+      "feedback_search_cycles": 0,
+      "no_coverage_search_cycles": 0,
+      "feedback_first_detection_budget": null,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [],
+      "no_coverage_coverage_by_round": []
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "repeat": 2,
+      "feedback_status": "policy_error",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": false,
+      "no_coverage_detected": false,
+      "feedback_requests": 1,
+      "no_coverage_requests": 1,
+      "feedback_search_cycles": 0,
+      "no_coverage_search_cycles": 0,
+      "feedback_first_detection_budget": null,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [],
+      "no_coverage_coverage_by_round": []
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "repeat": 0,
+      "feedback_status": "policy_error",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": false,
+      "no_coverage_detected": false,
+      "feedback_requests": 1,
+      "no_coverage_requests": 1,
+      "feedback_search_cycles": 0,
+      "no_coverage_search_cycles": 0,
+      "feedback_first_detection_budget": null,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [],
+      "no_coverage_coverage_by_round": []
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "repeat": 1,
+      "feedback_status": "policy_error",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": false,
+      "no_coverage_detected": false,
+      "feedback_requests": 1,
+      "no_coverage_requests": 1,
+      "feedback_search_cycles": 0,
+      "no_coverage_search_cycles": 0,
+      "feedback_first_detection_budget": null,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [],
+      "no_coverage_coverage_by_round": []
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "repeat": 2,
+      "feedback_status": "policy_error",
+      "no_coverage_status": "policy_error",
+      "feedback_detected": false,
+      "no_coverage_detected": false,
+      "feedback_requests": 1,
+      "no_coverage_requests": 1,
+      "feedback_search_cycles": 0,
+      "no_coverage_search_cycles": 0,
+      "feedback_first_detection_budget": null,
+      "no_coverage_first_detection_budget": null,
+      "feedback_coverage_by_round": [],
+      "no_coverage_coverage_by_round": []
+    }
+  ],
+  "coverage_ablation_note": "same registered tasks, independent stochastic API proposals; not paired model RNG",
+  "scope": "development_modules_not_independent_holdout",
+  "cost_currency": null,
+  "source_results_sha256": "15cc303d7a7b6f462c5394b4cb5f36606127709d0e71fc65058f0fc1f3251c01",
+  "source_preregistration_sha256": "6fdd06c0f8e4bbdc2d23d91dca275157de85490df64c1ba5629dfb4dea2b2494",
+  "rows": [
+    {
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 0.688,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 0,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 1.11,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.422,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "feedback",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.422,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "no_feedback",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.782,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 1.172,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "feedback_no_coverage",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.453,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 0.75,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 1,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 1.468,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.61,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.359,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "no_feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.5,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 1.172,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "feedback_no_coverage",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.687,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 0.734,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 2,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 1.282,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.375,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.921,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "no_feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.532,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 1.438,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "reference",
+      "strategy": "feedback_no_coverage",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.047,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 0.922,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "random",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 2.047,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "single",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.719,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "feedback",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 2,
+      "elapsed_seconds": 3.672,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "no_feedback",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 2,
+      "elapsed_seconds": 4.078,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 1.89,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "feedback_no_coverage",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.765,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.172,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "random",
+      "seed": 1,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 2.938,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "single",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.859,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.0,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "no_feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.078,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 2.782,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "feedback_no_coverage",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.688,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 2.422,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "random",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 4.5,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "single",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.485,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.438,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "no_feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.062,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 7.25,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "strategy": "feedback_no_coverage",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.11,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 4.344,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "random",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.391,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "single",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.656,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "feedback",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.516,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "no_feedback",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.89,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 2.406,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "feedback_no_coverage",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.5,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 1.547,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "random",
+      "seed": 1,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 2.969,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "single",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.047,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.203,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "no_feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 0.641,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 2.703,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "feedback_no_coverage",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.485,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 1.531,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "random",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 2.922,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "single",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 1,
+      "elapsed_seconds": 4.203,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.422,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "no_feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.515,
+      "evidence_verified": false
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.047,
+      "evidence_verified": true
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "strategy": "feedback_no_coverage",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.297,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 2.266,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 0,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 2.406,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.953,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "feedback",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.422,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "no_feedback",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.453,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 3.359,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "feedback_no_coverage",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 2,
+      "elapsed_seconds": 5.828,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 2.578,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 1,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 3.281,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.297,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 2,
+      "elapsed_seconds": 6.188,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "no_feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 2,
+      "elapsed_seconds": 4.766,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 2.36,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "feedback_no_coverage",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.704,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 1.906,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 2,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 2.563,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.985,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 2,
+      "elapsed_seconds": 5.047,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "no_feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.25,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 2.875,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "feedback_no_coverage",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.61,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 1.407,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "random",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.094,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "single",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.797,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "feedback",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 2,
+      "elapsed_seconds": 4.672,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "no_feedback",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.703,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 2.609,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "feedback_no_coverage",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.578,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 1.89,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "random",
+      "seed": 1,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 2.891,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "single",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.234,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 2,
+      "elapsed_seconds": 3.891,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "no_feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.375,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.047,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "feedback_no_coverage",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.656,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 2.5,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "random",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.625,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "single",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.266,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.422,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "no_feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 2,
+      "elapsed_seconds": 4.812,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.344,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "feedback_no_coverage",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 2,
+      "elapsed_seconds": 5.25,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 2.25,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "random",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.719,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "single",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.344,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "feedback",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 1,
+      "elapsed_seconds": 4.735,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "no_feedback",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 1,
+      "elapsed_seconds": 2.969,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.375,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "feedback_no_coverage",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.594,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 2.25,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "random",
+      "seed": 1,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.781,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "single",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.547,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.532,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "no_feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.219,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.563,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "feedback_no_coverage",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.625,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 2.422,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "random",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.828,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "single",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.515,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.094,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "no_feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.532,
+      "evidence_verified": false
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.672,
+      "evidence_verified": true
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "feedback_no_coverage",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.765,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 2.359,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 0,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 3.047,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.407,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "feedback",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.594,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "no_feedback",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 3,
+      "elapsed_seconds": 7.109,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 3.11,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "feedback_no_coverage",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.297,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 2.422,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 1,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 3.125,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.14,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.968,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "no_feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.265,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 3.047,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "feedback_no_coverage",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.469,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 3.14,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 2,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 3.391,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.219,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.203,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "no_feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.438,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 3.078,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "feedback_no_coverage",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.015,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 2.985,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "random",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 5.125,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "single",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 1,
+      "elapsed_seconds": 4.328,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "feedback",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.265,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "no_feedback",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.781,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.453,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "feedback_no_coverage",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.375,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 2.625,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "random",
+      "seed": 1,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 4.109,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "single",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.516,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.407,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "no_feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 2,
+      "elapsed_seconds": 4.422,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.453,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "feedback_no_coverage",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.485,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 2.375,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "random",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 4.625,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "single",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.593,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.407,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "no_feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.062,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.922,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "feedback_no_coverage",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.578,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 2.313,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "random",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.125,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "single",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.406,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "feedback",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.641,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "no_feedback",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.797,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.141,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "feedback_no_coverage",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.063,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 3.016,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "random",
+      "seed": 1,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.25,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "single",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.016,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.547,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "no_feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.266,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.578,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "feedback_no_coverage",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.812,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 2.75,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "random",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.75,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "single",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.594,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.672,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "no_feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.5,
+      "evidence_verified": false
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.39,
+      "evidence_verified": true
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "feedback_no_coverage",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.484,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 2.406,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 0,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 2.984,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.453,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "feedback",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.688,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "no_feedback",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.391,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 3.641,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "feedback_no_coverage",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.485,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 2.672,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 1,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 3.265,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.61,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.125,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "no_feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.297,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 3.375,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "feedback_no_coverage",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.328,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 2.297,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "random",
+      "seed": 2,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 3.078,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.718,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.75,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "no_feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.406,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "not_detected",
+      "detected": false,
+      "requests": 0,
+      "elapsed_seconds": 3.5,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "reference",
+      "strategy": "feedback_no_coverage",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.297,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 2.688,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "random",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.906,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "single",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.734,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "feedback",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.5,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "no_feedback",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 1,
+      "elapsed_seconds": 3.953,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 4.078,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "feedback_no_coverage",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.313,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.031,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "random",
+      "seed": 1,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 4.156,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "single",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.375,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.36,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "no_feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.39,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 4.25,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "feedback_no_coverage",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.391,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.156,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "random",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 4.375,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "single",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.063,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.485,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "no_feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.187,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 5.625,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "strategy": "feedback_no_coverage",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.687,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "fixed",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.453,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "random",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 4.5,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "single",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.531,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "feedback",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.594,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "no_feedback",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 1,
+      "elapsed_seconds": 4.828,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 4.453,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "feedback_no_coverage",
+      "seed": 0,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.531,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "fixed",
+      "seed": 1,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 3.5,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "random",
+      "seed": 1,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 5.047,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "single",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.312,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.328,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "no_feedback",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 2.125,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 4.875,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "feedback_no_coverage",
+      "seed": 1,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.219,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "fixed",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 4.5,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "random",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 4.89,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "single",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 1,
+      "elapsed_seconds": 4.172,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.766,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "no_feedback",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.797,
+      "evidence_verified": false
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "status": "detected",
+      "detected": true,
+      "requests": 0,
+      "elapsed_seconds": 4.406,
+      "evidence_verified": true
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "strategy": "feedback_no_coverage",
+      "seed": 2,
+      "status": "policy_error",
+      "detected": false,
+      "requests": 1,
+      "elapsed_seconds": 1.75,
+      "evidence_verified": false
+    }
+  ],
+  "full_raw_delivery": "requires_full_raw_directory; this_extract_is_incomplete"
+}

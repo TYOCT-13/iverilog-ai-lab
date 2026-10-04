@@ -1,0 +1,131 @@
+{
+  "record_kind": "document_render_validation",
+  "generated_at": "2026-10-04T14:41:02.390632+00:00",
+  "human_trial_participants": 0,
+  "independent_human_review_done": false,
+  "source_code_revision": "28be1edc8b84067912e2034567a8e8a5803b8184",
+  "renderer": "existing scripts/markdown_to_pdf.py; production renderer unchanged",
+  "review_process": "PDF->bundled Poppler pdftoppm -r 110; actual PNG inspection; text bounds; empty identity metadata; source links separately checked",
+  "name_characters": 15,
+  "intro_characters": 172,
+  "artifacts": [
+    {
+      "source": "docs/competition/ic/v2/technical_report.md",
+      "source_sha256": "6769572ae927d9d13b0c58b0f2bee03ad0c05620fb7fd4e24fa48a5684019e03",
+      "pdf": "docs/competition/ic/ICARUS_技术方案_v2.pdf",
+      "sha256": "cc2d83c43195ba05cf7c643fbabf915dd2d3ef6ae998c8e0699fb1b64b404f22",
+      "bytes": 1044386,
+      "pages": 9,
+      "body_pages": 8,
+      "metadata": {
+        "format": "PDF 1.7",
+        "title": "",
+        "author": "",
+        "subject": "",
+        "keywords": "",
+        "creator": "",
+        "producer": "",
+        "creationDate": "",
+        "modDate": "",
+        "trapped": "",
+        "encryption": null
+      },
+      "text_outside_page": [],
+      "poppler_png": [
+        {
+          "path": ".iverilog-ai/v4-report-qa/technical-final2-1.png",
+          "sha256": "42cafd50a2772fb0c88e87940dea96408e1beb3117e5bf784b15a15e6648e72f"
+        },
+        {
+          "path": ".iverilog-ai/v4-report-qa/technical-final2-2.png",
+          "sha256": "08ce74f66f9009d48ea558f723b3dd34897939dd7096376984964682d0445b38"
+        },
+        {
+          "path": ".iverilog-ai/v4-report-qa/technical-final2-3.png",
+          "sha256": "172bd8f7a5d998d0402fc67ade138b25ba0dd5e12125fb54d7e8e579ae3ff4dc"
+        },
+        {
+          "path": ".iverilog-ai/v4-report-qa/technical-final2-4.png",
+          "sha256": "99e69ce3dc1edbd3a08676dec65193df405071ca520cc33cab69de812b52e6aa"
+        },
+        {
+          "path": ".iverilog-ai/v4-report-qa/technical-final2-5.png",
+          "sha256": "9f965c14e4c0a51a2b485b359cc24dc8cb74dbfe6b8fbb464af30ffc914ee29f"
+        },
+        {
+          "path": ".iverilog-ai/v4-report-qa/technical-final2-6.png",
+          "sha256": "839c4fb0b783321378d90d93805ddf8b5db0d9570fbc254b53922eb3abca564d"
+        },
+        {
+          "path": ".iverilog-ai/v4-report-qa/technical-final2-7.png",
+          "sha256": "c02e5fcab0ed2c0a13baf190d2ff2fec657fcd6fa8704383a9bfd85934e92396"
+        },
+        {
+          "path": ".iverilog-ai/v4-report-qa/technical-final2-8.png",
+          "sha256": "6fa7f76487382b1fac79b35c5a8dae32d3e7b8570e82af91a6579c302e5c61c8"
+        },
+        {
+          "path": ".iverilog-ai/v4-report-qa/technical-final2-9.png",
+          "sha256": "fc470daf15f91e5dd34a03451bb69313ebf0b44737fd5977fd944335573123d2"
+        }
+      ],
+      "visual_review": "all_pages_contact_sheets_plus_changed_tables_and_appendix_full_resolution",
+      "text_selectable": true,
+      "size_under_10MB": true
+    },
+    {
+      "source": "docs/competition/ic/v2/supporting_evidence.md",
+      "source_sha256": "d6080023bbc9e58d6840f81f9dc91a6003e52bb061ad34c78d772acb474b1638",
+      "pdf": "docs/competition/ic/ICARUS_佐证材料_v2.pdf",
+      "sha256": "57e111886aaf994486ef6f519f078dbfceb3d43654e700c1eb3c4cd634b3eaf4",
+      "bytes": 882465,
+      "pages": 5,
+      "body_pages": 5,
+      "metadata": {
+        "format": "PDF 1.7",
+        "title": "",
+        "author": "",
+        "subject": "",
+        "keywords": "",
+        "creator": "",
+        "producer": "",
+        "creationDate": "",
+        "modDate": "",
+        "trapped": "",
+        "encryption": null
+      },
+      "text_outside_page": [],
+      "poppler_png": [
+        {
+          "path": ".iverilog-ai/v4-report-qa/evidence-final-1.png",
+          "sha256": "059ad39f8e848e6f0dfb1ecb8f359ba511baf5236a5d248495a64cfa7b5bbaed"
+        },
+        {
+          "path": ".iverilog-ai/v4-report-qa/evidence-final-2.png",
+          "sha256": "09224e9c545c5b88e8de88e3f84ec3c05ac4c52ef5609b91ae51393513b74dac"
+        },
+        {
+          "path": ".iverilog-ai/v4-report-qa/evidence-final-3.png",
+          "sha256": "875195b8e3a04640e53a29641033ec7f2c1d7b4bfc9d7da731ff5ff44d3f5c01"
+        },
+        {
+          "path": ".iverilog-ai/v4-report-qa/evidence-final-4.png",
+          "sha256": "710b6ed98bd4028953b59e5cd520ae8d7cd3c96cbc0ace0a78a278922cf705d1"
+        },
+        {
+          "path": ".iverilog-ai/v4-report-qa/evidence-final-5.png",
+          "sha256": "a5fab7b8cb9fcaa0195d09a8559192d7c8356ec431632882487308b2dd238915"
+        }
+      ],
+      "visual_review": "all_pages_contact_sheets_plus_changed_tables_and_appendix_full_resolution",
+      "text_selectable": true,
+      "size_under_10MB": true
+    }
+  ],
+  "notes": [
+    "Previous report PDFs are preserved",
+    "Supporting PDF has no appendix; all five pages count as body",
+    "report-format checker emitted only no-body-marker warning for supporting, not an anonymity or size error",
+    "No new full-repository pytest run was attributed to document rendering"
+  ]
+}

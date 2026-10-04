@@ -1,0 +1,48 @@
+{
+  "record_kind": "api_budget_ledger_not_invoice",
+  "generated_at": "2026-10-04T14:24:25.199988+00:00",
+  "scope": "current_ic_optimization_only; excludes_earlier_pilot_and_historical_calls",
+  "authorized_total_cap": 360,
+  "known_responses": 276,
+  "reserved_request_upper": 277,
+  "remaining_after_reservation": 83,
+  "unknown_inflight_max": 1,
+  "reported_token_total_known_responses": 663939,
+  "actual_currency_cost": null,
+  "records": [
+    {
+      "run": "pre_run_stop",
+      "original": ".iverilog-ai/agent-comparison-v2-live-20261004/stop_receipt.json",
+      "sha256": "86d2a4b42fb857393c64991d88d99294b95f068e2d94cd4ea449b6195e3fe4dc",
+      "known_requests": null,
+      "budget_reservation": 25
+    },
+    {
+      "run": "formal_v2",
+      "original": ".iverilog-ai/agent-comparison-v2-nonthinking-20261004/results.json",
+      "sha256": "15cc303d7a7b6f462c5394b4cb5f36606127709d0e71fc65058f0fc1f3251c01",
+      "known_requests": 157,
+      "budget_reservation": 157
+    },
+    {
+      "run": "single_diagnostic",
+      "original": ".iverilog-ai/decision-format-diagnostic-20261004/diagnosis.json",
+      "sha256": "2f16d17b7c508406b16f184d6b4f8c70690a139f91ee6b0586999bfc42e3db34",
+      "known_requests": 1,
+      "budget_reservation": 1
+    },
+    {
+      "run": "v4_smoke",
+      "original": ".iverilog-ai/agent-comparison-v4-smoke-20261004/results.json",
+      "sha256": "c46df250acfd2a665da204139b5b3beed7f6bba48dee847e26d2a052743b908d",
+      "known_requests": 94,
+      "budget_reservation": 94
+    }
+  ],
+  "notes": [
+    "pre-run has 24 usage-bearing responses plus one possible in-flight request",
+    "conservative 25 reservation is not a confirmed invoice count",
+    "formal 252-row run and v4 84-row smoke are different source/prompt conditions",
+    "no further API request is planned in this iteration"
+  ]
+}

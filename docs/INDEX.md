@@ -4,7 +4,7 @@
 带盘符的除外。路径可用 `python scripts/check_doc_index.py` 校验是否仍然存在。
 
 - 仓库：`iverilog-ai-lab`，Apache-2.0；第三方资源保留各自许可；判定权威是 Icarus Verilog 12.0（`s20150603`）
-- 本次材料修订：**2026-10-04**；最终源码验证版 `867b8bd`，内置判据保护版 `1c1e0dc`，在线 pilot 冻结版 `e9b7b8a`；各记录分开引用（提交截止 2026-10-15 20:00 北京时间）
+- 本次材料修订：**2026-10-04**；最新生产源码与验收 `28be1ed`，v3三重复 `c7bb280`，旧pilot `e9b7b8a`；各版本、提示与结果分别引用（提交截止2026-10-15 20:00北京时间）
 - 状态记号：**有效** = 当前口径，可直接对外引用；**历史** = 反映当时状态，只读归档，
   引用时必须带"旧口径"标注；**待补** = 尚未完成
 
@@ -15,7 +15,7 @@
 | 你想干什么 | 按顺序读 |
 |---|---|
 | 5 分钟了解这个项目 | `README.md` → `docs/project_overview.md` → `docs/competition/ic/report_draft.md` |
-| 准备 AI＋集成电路提交 | `docs/competition/ic/submission_package_readme.md` → `docs/competition/ic/report_submission.md` → `docs/competition/ic/submission_copy.md`；真人和人审条件须用真实原件核实 |
+| 准备 AI＋集成电路提交 | `docs/competition/ic/v2/README.md` → `docs/competition/ic/v2/technical_report.md` → `docs/competition/ic/v2/supporting_evidence.md`；真人与H02待真实原件，新版事实稿优先 |
 | 复核数字是否可信 | `docs/experiment/metric_inventory.md`（每个数字一行：口径/来源/时间/复现命令）→ `docs/competition/submission_gate_checklist.md` → 产物目录 |
 | 提交当天照着做 | `docs/competition/final_delivery_snapshot.md` → `docs/competition/submission_gate_checklist.md` → `docs/competition/submission_cover_text.md` |
 | 组织真人试用与反馈 | `docs/trial/README.md` → `docs/trial/organizer_workflow.md`；发给参与者从 `docs/trial/participant_start.md` 开始 |
@@ -28,10 +28,19 @@
 
 | 材料 | 路径 | 状态 |
 |---|---|---|
-| IC 提交格式技术方案源稿 | `docs/competition/ic/report_submission.md` | 条件稿；按真人、人审均通过的前提起草，H01/H02未核实，实验数字沿用真实记录 |
-| IC 提交格式技术方案 PDF | `docs/competition/ic/ICARUS_技术方案.pdf` | 条件稿；11页/正文10页，七节大纲；匿名版式与逐页检查完成 |
-| IC 佐证汇编源稿与 PDF | `docs/competition/ic/supporting_evidence_submission.md`、`docs/competition/ic/ICARUS_佐证材料.pdf` | 条件稿；5页，E01–E07为真实记录，H01/H02原件待补 |
-| IC 报名短文本与使用说明 | `docs/competition/ic/submission_copy.md`、`docs/competition/ic/submission_package_readme.md` | 名称15字、简介199字；提交位置、命名和条件转事实流程 |
+| 最新技术方案源稿与PDF | `docs/competition/ic/v2/technical_report.md`、`docs/competition/ic/ICARUS_技术方案_v2.pdf` | 有效；9页/正文8页，约1.02MB；c7与v4分版本，真人/H02事实待补 |
+| 最新佐证源稿与PDF | `docs/competition/ic/v2/supporting_evidence.md`、`docs/competition/ic/ICARUS_佐证材料_v2.pdf` | 有效；5页、约0.86MB；V01–V06真实来源，保留失败，不以假设替代人审 |
+| 最新材料入口与PDF回执 | `docs/competition/ic/v2/README.md`、`docs/competition/ic/v2/validation.json` | 名称15字符、简介172字符；全部14页渲染查看，文字可选择、身份元数据空 |
+| 最新答辩稿与构建来源 | `docs/competition/ic/ICARUS_答辩材料_v2.pptx`、`docs/competition/ic/ICARUS_答辩材料_v2.pdf`、`docs/competition/ic/defense_v2/README.md`、`docs/competition/ic/defense_v2/qa_report.json` | 12页，5原生表格/3原生图表/12页备注；PPTX可编辑，PDF图像式；逐页机器检查，不是独立人审 |
+| v4单重复API烟测 | `docs/experiment/agent_comparison_v4_smoke_2026-10-04.md`、`docs/experiment/agent-comparison-v4-smoke-2026-10-04/receipt.json` | 84行、94请求、94/94动作校验；反馈6/8，随机8/8；1正确基线执行失败、严格资格false |
+| v2正式小型回执 | `docs/experiment/agent-comparison-v2-2026-10-04/receipt.json` | 是摘要摘录，不是完整results；全部252行和完整原件另存，SHA可追溯 |
+| 本轮API预算账 | `docs/experiment/ic_agent_v4_api_budget_2026-10-04.json` | 保守277/360请求；已知276响应，预跑另1可能在途，未知不作零；不是账单 |
+| 最新完整回归与浏览器 | `docs/experiment/ic_agent_v4_validation_2026-10-04.md`、`docs/experiment/ic-agent-v4-validation-2026-10-04/validation.json`、`docs/experiment/ic-agent-v4-validation-2026-10-04/browser/results.json` | 28be1ed：1073/2skip；291冻结SHA无变；r3三尺寸0横溢出、UART58/58、切页保持；失败r1/r2保留 |
+| v4非实现者代理复核 | `docs/review/ic_agent_v4_proxy_review_2026-10-04.md` | 复现重复JSON键/转义凭据问题，冻结修复复测；模拟凭据、真实API0，不是H02 |
+| 历史条件稿技术方案源 | `docs/competition/ic/report_submission.md` | 条件稿；按真人、人审均通过的前提起草，H01/H02未核实，实验数字沿用真实记录 |
+| 历史条件稿技术方案PDF | `docs/competition/ic/ICARUS_技术方案.pdf` | 条件稿；11页/正文10页，七节大纲；匿名版式与逐页检查完成 |
+| 历史条件稿佐证源与PDF | `docs/competition/ic/supporting_evidence_submission.md`、`docs/competition/ic/ICARUS_佐证材料.pdf` | 条件稿；5页，E01–E07为真实记录，H01/H02原件待补 |
+| 历史报名短文本与说明 | `docs/competition/ic/submission_copy.md`、`docs/competition/ic/submission_package_readme.md` | 名称15字、简介199字；提交位置、命名和条件转事实流程 |
 | 本轮报告配图 | `docs/competition/ic/submission_figures/architecture.png`、`docs/competition/ic/submission_figures/agent_comparison.png` | 原创架构图与真实五策略结果图，不改写实验成绩 |
 | 本轮报告校验回执 | `docs/competition/ic/submission_validation_2026-10-04.json` | 文档与PDF校验，不是新的全仓回归、真人试用或独立人审 |
 | IC 技术报告源 | `docs/competition/ic/report_draft.md` | 按官方七节大纲整理；真人和人工复核缺口如实保留 |
@@ -40,18 +49,25 @@
 | 报名名称与简介 | `docs/competition/ic/submission_text.md` | 已备，报名系统字段另核对 |
 | IC 差距与提交清单 | `docs/competition/ic/gap_checklist.md` | 当前待办入口 |
 | 多模块 Agent 试验协议 | `docs/experiment/agent_comparison_protocol.md`、`scripts/run_agent_comparison.py` | 预注册、固定分母、请求与累计激励周期上限 |
-| 多模块真实 API 完整试验 | `docs/experiment/agent_comparison_live_2026-10-04.md`、`docs/experiment/agent-comparison-chat-2026-10-04/summary.json` | 60 行、52 请求；反馈 4/8，固定/随机 5/8；单次开发集观察 |
+| 四类完整协议与预算 | `spec/agent_protocols.json`、`spec/sync_fifo_spec.md`、`spec/uart_tx_spec.md`、`spec/spi_master_spec.md`、`spec/handshake_stage_spec.md` | 有效；对应默认参数，FIFO160 / UART512 / SPI384 / 握手160累计激励周期 |
+| 判据修正与单点控制 | `docs/experiment/protocol_oracle_improvements_2026-10-04.md`、`benchmarks/agent_v2/mutation_manifest.json` | FIFO独立队列修复、两个新单点变体；外部人工SPEC检出15/15，原13/15档案保留，非AI增益 |
+| 功能场景及真实采样 | `docs/experiment/functional_coverage_2026-10-04.md`、`src/iverilog_ai/core/functional_coverage.py`、`src/iverilog_ai/core/observations.py` | 有效；24项有限场景，实际stdout与来源SHA绑定，未知不记命中 |
+| v2三次重复API实测 | `docs/experiment/agent_comparison_v2_live_2026-10-04.md` | c7bb280，252行/157请求；API未胜基线，保留137次动作拒绝和全分母，不证明覆盖增益 |
+| 思考模式与动作格式修复 | `docs/experiment/deepseek_thinking_mode_2026-10-04.md`、`docs/experiment/deepseek_decision_v4_2026-10-04.md` | 配置和真实消息角色；与c7实验分别版本化，预跑失败未改写 |
+| UART应用与证据重放 | `docs/demo/ic_agent_v2_walkthrough.md`、`scripts/replay_evidence_pack.py` | 零API协议随机演练；512周期，两个已知变体检出；包内338比较/48不一致可离线重放，非真人记录 |
+| v2采样与计分代理复核 | `docs/review/ic_agent_v2_proxy_review_2026-10-04.md` | 两项真实篡改反例及修复复测；不是H02独立真人审核 |
+| 历史多模块 API pilot | `docs/experiment/agent_comparison_live_2026-10-04.md`、`docs/experiment/agent-comparison-chat-2026-10-04/summary.json` | 60 行、52 请求；反馈 4/8，固定/随机 5/8；单次开发集观察 |
 | 首轮接线失败记录 | `docs/experiment/agent_comparison_interrupted_2026-10-04.md` | 已保留原始失败与未知在途用量，不能并入有效能力成绩 |
 | 代理交叉检查 | `docs/review/agent_comparison_cross_review_2026-10-04.md`、`docs/review/external_agent_cross_review_2026-10-04.md` | 机器与代理检查，非独立人工审核 |
 | 机器功能验收 | `docs/trial/machine_acceptance_2026-10-04.md` | 22 项选定 UI/CLI 测试通过；不计为真人试用 |
-| 外部冻结重放 | `docs/experiment/external_agent_readiness.md` | 24 输入重放；规格测试台检出 13/15 历史变体，含漏检 |
+| 历史外部冻结重放 | `docs/experiment/external_agent_readiness.md` | 旧判据24输入重放；13/15，含漏检；新人工判据15/15见上方修正记录 |
 | 外部 API Agent 适配 | `docs/experiment/external_api_agent.md`、`scripts/run_external_verification_agent.py` | 限定合约输出、资格检查与即时快照；实际联调另列 |
 | 外部真实 API 联调 | `docs/experiment/external_agent_live_2026-10-04.md`、`docs/experiment/external-agent-live-2026-10-04/summary.json` | 1 请求、2 轮、782 双侧周期；固定计划已有的差异不归功于新增 AI 输入 |
 | 内置参考告警诊断 | `docs/review/reference_alarm_diagnosis_2026-10-04.md` | 旧 before 假警保留，当前实现拒绝缺少独立判据的顺序逻辑 before 计划 |
-| 当前完整回归与浏览器验收 | `docs/experiment/ic_validation_2026-10-04.md`、`docs/experiment/ic-validation-2026-10-04/validation.json` | 914 通过 / 1 跳过；148 源码指纹冻结；三尺寸及实际上传、仿真、导航保持 |
+| 历史完整回归与浏览器验收 | `docs/experiment/ic_validation_2026-10-04.md`、`docs/experiment/ic-validation-2026-10-04/validation.json` | 914 通过 / 1 跳过；148 源码指纹冻结；三尺寸及实际上传、仿真、导航保持 |
 | PDF 排版修正后的全仓回归 | `docs/experiment/ic-validation-pdf-final-2026-10-04/validation.json` | 867b8bd，914 通过 / 1 跳过，227.34 秒；之前的完整回归分开保留 |
 | 最终非实现者代理检查 | `docs/review/ic_final_agent_review_2026-10-04.md` | 核心修复、工件与材料核对；材料作者参与，非独立真人审核 |
-| 当前 IC 本地证据包与回执 | `docs/competition/ic/evidence_pack_2026-10-04.md`、`docs/competition/ic/evidence_pack_2026-10-04.json` | 已生成86.4 MB本地ZIP，6源码快照、41,006项文件哈希复核一致；尚未异机复现或正式提交 |
+| 历史 IC 本地证据包与回执 | `docs/competition/ic/evidence_pack_2026-10-04.md`、`docs/competition/ic/evidence_pack_2026-10-04.json` | 历史86.4 MB本地ZIP，6源码快照、41,006项文件哈希复核一致；不含本轮c7/v4原件，未异机复现或正式提交 |
 | 包后代理字节审计 | `docs/review/ic_pack_review_2026-10-04.md` | CRC、完整集合、全部文件哈希、424注册输入及换行差异已核查；内部作者参与，非独立人审 |
 | 包内源码离线运行 | `docs/experiment/ic-pack-smoke-2026-10-04/smoke.json`、`docs/experiment/ic-pack-smoke-2026-10-04/stdout.log`、`docs/experiment/ic-pack-smoke-2026-10-04/stderr.log` | 同机从外层ZIP提取源码执行：0API、547输出比较/0差异；辅助脚本字段错误单列保留 |
 
@@ -140,7 +156,7 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 | 总览 PDF | `docs/project_overview.pdf` | 历史 |
 | 架构 | `docs/architecture.md` | 有效 |
 | API 集成入口 | `docs/experiment/api_handoff.md` | 有效 |
-| API 自动验证 Agent | `docs/experiment/api_agent.md`、`scripts/run_verification_agent.py`、`scripts/export_agent_trajectories.py` | 已实现循环、轨迹及单次开发集对照；托管微调、独立留出及多次重复尚未完成 |
+| API自动验证Agent | `docs/experiment/api_agent.md`、`scripts/run_verification_agent.py`、`scripts/export_agent_trajectories.py` | 实际角色、受控动作、覆盖反馈与三重复/单重复分别完成；仍API推理。托管微调、独立留出、真人效果未完成 |
 | API Agent 本地验收 | `docs/experiment/api_agent_validation_2026-10-04.md` | 先前离线验收快照：195 项相关回归通过 |
 | API Agent 真实联调 | `docs/experiment/api_agent_live_2026-10-04.md`、`docs/experiment/api-agent-live-2026-10-04/summary.json` | 3 次 DeepSeek 4.1 Flash 请求；反馈补测与已知缺陷回放通过，211 项相关回归通过 |
 | 第一次用（分级手册） | `docs/manual/01_beginner.md` | 有效 |
@@ -188,12 +204,13 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 
 ## 4. 工程门禁（当前记录与历史快照）
 
-当前完整回归及浏览器操作见 `docs/experiment/ic_validation_2026-10-04.md`。
-其中 914 项通过对应源码冻结记录；768 项和 2026-10-01 数字均为历史快照，不能相加成去重测试总数。
+当前完整回归及浏览器操作见 `docs/experiment/ic_agent_v4_validation_2026-10-04.md`。
+1073项通过/2跳过对应28be1ed源码与291项指纹；914/1及更早记录均为历史快照，不相加。文档改动后的索引数量另核，不改写原验收日志。
 
 | 门禁 | 命令 | 结果 |
 |---|---|---|
-| 当前完整回归 | `docs/experiment/ic_validation_2026-10-04.md` | 867b8bd，914 passed / 1 skipped / 0 failed；mypy 72 文件 0 error，未可达扫描 163 文件，BOM 0 问题 |
+| 当前完整回归 | `docs/experiment/ic_agent_v4_validation_2026-10-04.md` | 28be1ed，1073 passed / 2 skipped / 0 failed；mypy76文件0错误，未可达187文件0，BOM0 |
+| 历史867全回归 | `docs/experiment/ic_validation_2026-10-04.md` | 914 passed / 1 skipped，保留原日志 |
 | 上次完整验证快照 | `docs/experiment/local_validation_2026-10-04.md` | 2026-10-04：768 passed / 1 skipped，mypy 64 文件 0 error；PDF 9 项复核通过 |
 | 测试（2026-10-01 历史） | `python -m pytest -q` | **720 passed / 1 skipped**（历史干净 venv：675 / 3 / 0） |
 | 类型 | `python -m mypy` | 61 文件 0 error |
@@ -201,7 +218,7 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 | 编码/BOM | `python scripts/strip_bom.py --check` | 0 问题 |
 | 交付体检 | `python scripts/check_submission.py --repo .` | **1 error**（`CITATION.cff` 占位符） |
 | 报告页数/体积 | `python scripts/check_submission.py --kind report docs/competition/technical_report_draft.pdf` | 原开源稿：0 error / 1 warning（正文21页超建议值）；原IC工作稿10页/正文9页；本轮条件技术方案11页/正文10页，佐证5页，均0 error / 0 warning |
-| 索引路径存在性 | `python scripts/check_doc_index.py` | **153/153 条路径存在**（2026-10-04；此前反向测试：故意写错一条则退出码 1） |
+| 索引路径存在性 | `python scripts/check_doc_index.py` | **187/187 条路径存在**（2026-10-04；此前反向测试：故意写错一条则退出码 1） |
 
 ---
 

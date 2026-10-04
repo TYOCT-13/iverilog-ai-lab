@@ -1,0 +1,289 @@
+{
+  "schema_version": "icarus-defense-qa-v1",
+  "revision": "r7",
+  "kind": "machine_artifact_validation",
+  "human_review": false,
+  "native_office_open_verified": false,
+  "finalization_receipt": ".iverilog-ai/defense-v2-build/defense-r7.validation.json",
+  "source_snapshot": "docs/competition/ic/defense_v2/source_checksums.json",
+  "data_audit": "docs/competition/ic/defense_v2/data_audit.json",
+  "outputs": [
+    {
+      "path": "docs/competition/ic/ICARUS_答辩材料_v2.pptx",
+      "sha256": "20838083fcfdecb65172175b54cbf68a1e0521941953dc44ed5165052fd8aa40",
+      "bytes": 219083,
+      "slide_count": 12,
+      "native_table_owner_slides": [
+        4,
+        5,
+        9,
+        11,
+        12
+      ],
+      "native_chart_owner_slides": [
+        6,
+        7,
+        10
+      ],
+      "speaker_notes_with_provenance": 12
+    },
+    {
+      "path": "docs/competition/ic/ICARUS_答辩材料_v2.pdf",
+      "sha256": "747f238e6af1d9b41fbce3e76962e4de81860577fa235a50d91e117227aaee50",
+      "bytes": 2232128,
+      "pages": 12,
+      "author": "",
+      "page_size_points": [
+        960,
+        540
+      ],
+      "raster_pages": true,
+      "selectable_text": false
+    }
+  ],
+  "checks": {
+    "source_snapshot_matches": true,
+    "package_integrity": true,
+    "layout_findings": 0,
+    "first_party_import": true,
+    "approved_fonts": true,
+    "native_chart_workbooks": 3,
+    "native_value_axes_start_at_zero": true,
+    "pptx_no_local_identity_or_key_patterns": true,
+    "pdf_metadata_anonymous": true,
+    "no_public_dependencies": true,
+    "no_root_chart_temp_dirs": true,
+    "all_12_pptx_pages_visually_inspected": true,
+    "all_12_pdf_pages_visually_inspected": true
+  },
+  "pages": [
+    {
+      "page": 1,
+      "dimensions": [
+        2560,
+        1440
+      ],
+      "pdf_re_render": ".iverilog-ai/defense-v2-build/r7-pdf-qa/page-01.png",
+      "pdf_png_sha256": "3be2c6e96129c50ec3d9425b4a5a6028396278e3a9b29e09f5ae2cb2e1829422",
+      "pptx_png_sha256": "5ecdc07e19d7f4b7eafe23fcc939a85afaeb91a9dcf59aa923fddb9f0cfdbcab",
+      "mean_absolute_rgb_difference": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pptx_visual_inspection": "passed",
+      "pdf_visual_inspection": "passed",
+      "visual_observation": "封面标题、原创示意图与日期清晰；无参赛者身份信息。"
+    },
+    {
+      "page": 2,
+      "dimensions": [
+        2560,
+        1440
+      ],
+      "pdf_re_render": ".iverilog-ai/defense-v2-build/r7-pdf-qa/page-02.png",
+      "pdf_png_sha256": "abab78e6ddbddfa351df6ee8b2bde48830eef40a8988370f5e4b652c85f52b05",
+      "pptx_png_sha256": "9de5c6cf1f5a5f713c2af336d776493726af976ad242d07053c2d5d18006cb64",
+      "mean_absolute_rgb_difference": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pptx_visual_inspection": "passed",
+      "pdf_visual_inspection": "passed",
+      "visual_observation": "需求与使用对象对齐、可读；未虚构访谈或效率数据。"
+    },
+    {
+      "page": 3,
+      "dimensions": [
+        2560,
+        1440
+      ],
+      "pdf_re_render": ".iverilog-ai/defense-v2-build/r7-pdf-qa/page-03.png",
+      "pdf_png_sha256": "cb4fec2387ab6185d9172c2aeee9f3f66b9e4beb9c446442420d2411fc7daf5a",
+      "pptx_png_sha256": "5f63aaefc0ecf60ad6076b276bb2afb1b3724488b133412ed4a05cd1c0936d80",
+      "mean_absolute_rgb_difference": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pptx_visual_inspection": "passed",
+      "pdf_visual_inspection": "passed",
+      "visual_observation": "四环节箭头方向正确，权限与结果判据分工清楚。"
+    },
+    {
+      "page": 4,
+      "dimensions": [
+        2560,
+        1440
+      ],
+      "pdf_re_render": ".iverilog-ai/defense-v2-build/r7-pdf-qa/page-04.png",
+      "pdf_png_sha256": "44aefb08f32ff5da47fd3d78992c8c6c9e00e03d73948fb0be201d2b996bfaa1",
+      "pptx_png_sha256": "7385e20406c3a3eb5a9f5beed3bcb45294efceb22f7ff45da182207541bf5ae2",
+      "mean_absolute_rgb_difference": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pptx_visual_inspection": "passed",
+      "pdf_visual_inspection": "passed",
+      "visual_observation": "四模块参数和预算完整可读，真实动作限制清楚。"
+    },
+    {
+      "page": 5,
+      "dimensions": [
+        2560,
+        1440
+      ],
+      "pdf_re_render": ".iverilog-ai/defense-v2-build/r7-pdf-qa/page-05.png",
+      "pdf_png_sha256": "a39332b7a37c29351204b172d31a5691eebac4eb3977516f279798dbfdd54e6d",
+      "pptx_png_sha256": "1da53ab778fe38dad1209bcf0fec6eb758148c4be3a92a5ab5534734630f49da",
+      "mean_absolute_rgb_difference": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pptx_visual_inspection": "passed",
+      "pdf_visual_inspection": "passed",
+      "visual_observation": "24个有限功能场景及7/6/6/5分布清楚；不等同代码覆盖。"
+    },
+    {
+      "page": 6,
+      "dimensions": [
+        2560,
+        1440
+      ],
+      "pdf_re_render": ".iverilog-ai/defense-v2-build/r7-pdf-qa/page-06.png",
+      "pdf_png_sha256": "fd652b339cb693603deb9c5aaa6e431679cde76c11e33edb55d83e247fb17593",
+      "pptx_png_sha256": "fef81ab451c0bcb41a21621f4e4557df78141379975c051b45c6e3ea6386da93",
+      "mean_absolute_rgb_difference": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pptx_visual_inspection": "passed",
+      "pdf_visual_inspection": "passed",
+      "visual_observation": "修复前66、修复后0使用零起点刻度；反例与228次比较可读。"
+    },
+    {
+      "page": 7,
+      "dimensions": [
+        2560,
+        1440
+      ],
+      "pdf_re_render": ".iverilog-ai/defense-v2-build/r7-pdf-qa/page-07.png",
+      "pdf_png_sha256": "f7d0060525c01d702b658a22fff72af85914e2f2dd1454f15760eaf2ed1a45ee",
+      "pptx_png_sha256": "ebfdfb18c52059b35c32ef4191f88ac8559bfd69813b48e179b309de75a5dcb2",
+      "mean_absolute_rgb_difference": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pptx_visual_inspection": "passed",
+      "pdf_visual_inspection": "passed",
+      "visual_observation": "13/15到15/15图示从零起点呈现，24候选的控制项分母清楚。"
+    },
+    {
+      "page": 8,
+      "dimensions": [
+        2560,
+        1440
+      ],
+      "pdf_re_render": ".iverilog-ai/defense-v2-build/r7-pdf-qa/page-08.png",
+      "pdf_png_sha256": "c7d856c65e8dc339948458c5ec22eebfb43831df83ca388101252b73a3dded05",
+      "pptx_png_sha256": "15db9f1f38c85f62837aa05d39cc9ab058ceb7b96a8e9c75db97facf54d098ad",
+      "mean_absolute_rgb_difference": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pptx_visual_inspection": "passed",
+      "pdf_visual_inspection": "passed",
+      "visual_observation": "最终r3控件截图和覆盖开关清楚；离线58/58与在线结果范围区分。"
+    },
+    {
+      "page": 9,
+      "dimensions": [
+        2560,
+        1440
+      ],
+      "pdf_re_render": ".iverilog-ai/defense-v2-build/r7-pdf-qa/page-09.png",
+      "pdf_png_sha256": "448becb4ea2b194aa00b3e36f33057c0d75b316c4080ae11214b53f7c9f8fe6d",
+      "pptx_png_sha256": "8b4e046cdf757977c40672aa48f46fd2454c489415596a79a9cc3265f9c435f0",
+      "mean_absolute_rgb_difference": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pptx_visual_inspection": "passed",
+      "pdf_visual_inspection": "passed",
+      "visual_observation": "工件类型和重放用途可读；旧同主机547次比较与新证据分开。"
+    },
+    {
+      "page": 10,
+      "dimensions": [
+        2560,
+        1440
+      ],
+      "pdf_re_render": ".iverilog-ai/defense-v2-build/r7-pdf-qa/page-10.png",
+      "pdf_png_sha256": "9da03fe2ae545498080af62ef7bd40b6c21d305b3b7da05836fdc16bd546d592",
+      "pptx_png_sha256": "e8ff6d4671da358bffb7b75806ae4c61698fac4d01d6065a89b903e90f933b17",
+      "mean_absolute_rgb_difference": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pptx_visual_inspection": "passed",
+      "pdf_visual_inspection": "passed",
+      "visual_observation": "历史e9b7b8a的五策略数据可读；0到8刻度无截断。"
+    },
+    {
+      "page": 11,
+      "dimensions": [
+        2560,
+        1440
+      ],
+      "pdf_re_render": ".iverilog-ai/defense-v2-build/r7-pdf-qa/page-11.png",
+      "pdf_png_sha256": "e930db1166df43546dd54fc11ea925ee4d2d5865d51a0068108d00926b537bfb",
+      "pptx_png_sha256": "29cf01b9707a961ec31c4b2cdc0a4d6b009003da642a125974ca387ba211d715",
+      "mean_absolute_rgb_difference": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pptx_visual_inspection": "passed",
+      "pdf_visual_inspection": "passed",
+      "visual_observation": "c7七策略三次结果、无轮/36、157请求、137拒绝与125无轮均清楚。"
+    },
+    {
+      "page": 12,
+      "dimensions": [
+        2560,
+        1440
+      ],
+      "pdf_re_render": ".iverilog-ai/defense-v2-build/r7-pdf-qa/page-12.png",
+      "pdf_png_sha256": "a4770c79bf228fc2b01339ca26da9319b3d37133eaa00ff297e0794d68330358",
+      "pptx_png_sha256": "a80483bb9e5931fbc77a80aa98524719c20fd1afe3c47c500550cf6278008ce5",
+      "mean_absolute_rgb_difference": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pptx_visual_inspection": "passed",
+      "pdf_visual_inspection": "passed",
+      "visual_observation": "v4七策略、94/94合法动作、1个正确基线无轮失败与未满足证据条件清楚。"
+    }
+  ],
+  "limitations": [
+    "Image-style PDF has no selectable or searchable text.",
+    "Microsoft PowerPoint and LibreOffice were not available for native application opening.",
+    "Noto Sans SC and Bahnschrift must be installed or intentionally replaced when editing PPTX.",
+    "H01 human trial and H02 independent human review remain unperformed.",
+    "Machine artifact QA is not independent human review."
+  ],
+  "api_requests_for_material_creation": 0,
+  "git_commit_performed": false,
+  "visual_qa": "all_12_reimported_pptx_and_12_rerendered_pdf_pages_viewed",
+  "checked_at_utc": "2026-10-04T14:47:23.148769+00:00",
+  "claim_boundary": "Machine source-count crosscheck and artifact visual inspection; not H01 human trial or H02 independent human review."
+}

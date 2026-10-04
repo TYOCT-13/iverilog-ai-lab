@@ -1,0 +1,17 @@
+{
+  "preregistration_sha256": "b19d3c766e8759c50f49cc32a0c4ff9864ca1505f08cfac29704c90bbe02297e",
+  "wire_api": "chat_completions",
+  "thinking_mode": "disabled",
+  "thinking_mode_meaning": "explicit_request",
+  "endpoint_host": "api.deepseek.com",
+  "model": "deepseek-flash",
+  "max_output_tokens": 8192,
+  "total_request_cap": 120,
+  "request_timeout_seconds": 60,
+  "stream": false,
+  "iverilog": "D:/iverilog/bin/iverilog.exe",
+  "vvp": "D:/iverilog/bin/vvp.exe",
+  "profile": "v2",
+  "max_output_chars": 2000000,
+  "prompt_profile_sha256": "97d288f3bb800c14d52e7498fb4f16854344cb3167d07676ed5c687507a4e50c"
+}

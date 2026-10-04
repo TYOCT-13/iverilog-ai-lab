@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 370" fill="none">
+<defs>
+<linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f0f1ef"/><stop offset=".3" stop-color="#a4a8a8"/><stop offset=".65" stop-color="#444a4d"/><stop offset="1" stop-color="#171b1d"/></linearGradient>
+<linearGradient id="face" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#484e51"/><stop offset="1" stop-color="#141819"/></linearGradient>
+<linearGradient id="chip" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#747b7f"/><stop offset=".4" stop-color="#242a2d"/><stop offset="1" stop-color="#111517"/></linearGradient>
+<linearGradient id="board" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#686e70"/><stop offset=".55" stop-color="#242a2c"/><stop offset="1" stop-color="#121719"/></linearGradient>
+<pattern id="dots" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".55" fill="#e9eeee" opacity=".15"/></pattern>
+<filter id="shadow" x="-.4" y="-.4" width="1.8" height="1.8"><feGaussianBlur stdDeviation="10"/></filter>
+</defs>
+<!-- Original perspective fixture: monochrome metals, a socketed DUT and two probes. -->
+<ellipse cx="415" cy="315" rx="250" ry="29" fill="#000" opacity=".65" filter="url(#shadow)"/>
+<!-- waveform acquisition terminal -->
+<path d="m565 56 181 39v137l-181-40z" fill="#bfc4c4"/><path d="m559 63 180 39v125l-180-39z" fill="url(#face)" stroke="#d5d9d9" stroke-width="1.3"/>
+<path d="m575 79 146 31v89l-146-31z" fill="#06090a" stroke="#727b7f"/>
+<path d="m585 104 125 27m-125-2 125 27m-125-2 125 27m-105-83v70m30-63v70m30-63v70m30-63v70" stroke="#8f999b" opacity=".15"/>
+<path d="m584 147 13 3v-28l14 3v29l15 3v-28l15 3v29l15 3v-28l15 3v28l15 3v-28l14 3v28l12 3" stroke="#d8e0e0" stroke-width="1.7"/>
+<path d="m584 161 22 5 16-11 17 17 17-12 15 13 20-5 20 13" stroke="#8a9599"/>
+<g fill="#cad0d1"><circle cx="578" cy="181" r="2"/><circle cx="590" cy="184" r="2"/><circle cx="602" cy="187" r="2"/></g>
+<path d="m635 207 23 5v45l-23-5z" fill="url(#metal)"/><path d="m598 257 39-17 73 16-38 17z" fill="#6e777a" stroke="#a2abad"/><path d="m598 257 74 16v5l-74-16z" fill="#23292b"/>
+<!-- PCB, steel lower plate and socket -->
+<path d="m167 238 272-120 213 119-270 125z" fill="#101516" stroke="#4b5457"/><path d="m167 224 272-120 213 119-270 125z" fill="url(#board)" stroke="#a0a8a9"/>
+<path d="m167 224 215 124v14L167 238z" fill="#343b3e"/><path d="m382 348 270-125v14L382 362z" fill="#101516"/>
+<path d="m190 224 248-107 188 107-243 112z" fill="url(#dots)" stroke="#949fa1" stroke-opacity=".25"/>
+<g stroke="#a6b0b2" opacity=".35"><path d="m231 236 109-48 112 64 82-37m-286 32 88-39 86 49 118-54m-263 56 83-35 50 30 96-44m-183 65 82-36 87 52m-202-56 110-48m-151 24 85-38 20 12m13-8 90-39m-3 83 117-52"/></g>
+<path d="m282 207 137-61 139 80-138 64z" fill="#080c0d"/><path d="m282 189 137-61 139 80-138 64z" fill="#979fa1" stroke="#d3d8d8"/><path d="m282 189 138 83v18l-138-83z" fill="url(#face)"/><path d="m420 272 138-64v18l-138 64z" fill="#1c2427"/>
+<path d="m308 183 110-49 112 65-110 52z" fill="#101619" stroke="#d1d7d8"/>
+<path d="m326 184 92-40 88 51-91 43z" fill="url(#chip)" stroke="#b5bdbf"/>
+<path d="m326 184 89 54v11l-89-53z" fill="#171e21"/><path d="m415 238 91-43v11l-91 43z" fill="#080d10"/>
+<path d="m350 184 66-28 66 38-66 30z" fill="none" stroke="#bbc3c5" stroke-opacity=".35"/>
+<text transform="matrix(.87 .5 -.9 .4 379 178)" fill="#e3e7e7" font-family="monospace" font-size="24" font-weight="bold">RTL</text>
+<text transform="matrix(.87 .5 -.9 .4 376 198)" fill="#969fa2" font-family="monospace" font-size="7">ICARUS / DUT-01</text>
+<path d="m297.0 187.0 10-4v6l-10 4z" fill="#d7dddd" stroke="#737c80" stroke-width=".5"/><path d="m432.0 262.0 0-7 8-4v7z" fill="#b3bfc3" stroke="#555f64" stroke-width=".5"/><path d="m307.6 193.2 10-4v6l-10 4z" fill="#d7dddd" stroke="#737c80" stroke-width=".5"/><path d="m442.2 257.2 0-7 8-4v7z" fill="#b3bfc3" stroke="#555f64" stroke-width=".5"/><path d="m318.2 199.4 10-4v6l-10 4z" fill="#d7dddd" stroke="#737c80" stroke-width=".5"/><path d="m452.4 252.4 0-7 8-4v7z" fill="#b3bfc3" stroke="#555f64" stroke-width=".5"/><path d="m328.8 205.6 10-4v6l-10 4z" fill="#d7dddd" stroke="#737c80" stroke-width=".5"/><path d="m462.6 247.6 0-7 8-4v7z" fill="#b3bfc3" stroke="#555f64" stroke-width=".5"/><path d="m339.4 211.8 10-4v6l-10 4z" fill="#d7dddd" stroke="#737c80" stroke-width=".5"/><path d="m472.8 242.8 0-7 8-4v7z" fill="#b3bfc3" stroke="#555f64" stroke-width=".5"/><path d="m350.0 218.0 10-4v6l-10 4z" fill="#d7dddd" stroke="#737c80" stroke-width=".5"/><path d="m483.0 238.0 0-7 8-4v7z" fill="#b3bfc3" stroke="#555f64" stroke-width=".5"/><path d="m360.6 224.2 10-4v6l-10 4z" fill="#d7dddd" stroke="#737c80" stroke-width=".5"/><path d="m493.2 233.2 0-7 8-4v7z" fill="#b3bfc3" stroke="#555f64" stroke-width=".5"/><path d="m371.2 230.4 10-4v6l-10 4z" fill="#d7dddd" stroke="#737c80" stroke-width=".5"/><path d="m503.4 228.4 0-7 8-4v7z" fill="#b3bfc3" stroke="#555f64" stroke-width=".5"/><path d="m381.8 236.6 10-4v6l-10 4z" fill="#d7dddd" stroke="#737c80" stroke-width=".5"/><path d="m513.6 223.6 0-7 8-4v7z" fill="#b3bfc3" stroke="#555f64" stroke-width=".5"/><path d="m392.4 242.8 10-4v6l-10 4z" fill="#d7dddd" stroke="#737c80" stroke-width=".5"/><path d="m523.8 218.8 0-7 8-4v7z" fill="#b3bfc3" stroke="#555f64" stroke-width=".5"/><!-- Probe arm and conductive needle -->
+<path d="m191 58 24-11 25 14-24 12z" fill="#d1d5d6"/><path d="m191 58 25 15v134l-25-15z" fill="url(#face)" stroke="#858d90"/><path d="m216 73 24-12v134l-24 12z" fill="#5a6367"/>
+<path d="m187 191 24-11 41 23-25 13z" fill="url(#metal)"/><path d="m187 191 40 25v12l-40-24z" fill="#272f32"/>
+<path d="m218 91 83-37 11 9-84 38z" fill="#aeb7ba" stroke="#eef0f0"/><path d="m228 101 84-38v11l-84 38z" fill="#343d41"/>
+<path d="m297 52 14-6 69 40-13 7z" fill="url(#metal)" stroke="#ced4d6"/><path d="m367 93 13-7v24l-13 6z" fill="#717d83"/>
+<path d="m359 101 15-6 18 11-16 7z" fill="#e0e5e6"/><path d="m359 101 17 12v28l-17-10z" fill="#515c61"/><path d="m376 113 16-7v29l-16 6z" fill="#242e34"/>
+<path d="m370 136 10 6-10 40-5-3z" fill="url(#metal)"/><path d="m365 179 5 3-5 13z" fill="#dfe7e9"/>
+<!-- second clamp / test lead -->
+<path d="m508 109 26-12 10 7-26 12z" fill="#d6dedf"/><path d="m508 109 10 7v42l-10-5z" fill="#434e53"/><path d="m518 116 26-12v42l-26 12z" fill="url(#face)"/>
+<path d="m522 151 5 3-27 47-4-2z" fill="#d1d9dc"/>
+<path d="M536 109C550 25 488 5 456 41S461 103 456 114" stroke="#080d10" stroke-width="8"/><path d="M536 109C550 25 488 5 456 41S461 103 456 114" stroke="#8e979a" stroke-width="2"/>
+<!-- discrete board parts with depth -->
+<g stroke="#9da8ac" stroke-width=".7"><path d="m238 207 28-12 19 11-28 13z" fill="#a9b1b4"/><path d="m238 207 19 12v9l-19-12z" fill="#434c50"/><path d="m257 219 28-13v9l-28 13z" fill="#202a2e"/>
+<path d="m478 284 37-16 22 12-38 18z" fill="#717c82"/><path d="m478 284 21 14v8l-21-13z" fill="#263037"/><path d="m499 298 38-18v8l-38 18z" fill="#111a1e"/>
+<path d="m385 307 15-7 13 7-15 7z" fill="#d5dddd"/><path d="m385 307 13 7v9l-13-7z" fill="#455259"/><path d="m398 314 15-7v9l-15 7z" fill="#1d292f"/></g>
+<g fill="#10181d" stroke="#919fa4"><ellipse cx="225" cy="227" rx="6" ry="3"/><ellipse cx="438" cy="127" rx="6" ry="3"/><ellipse cx="620" cy="224" rx="6" ry="3"/><ellipse cx="385" cy="328" rx="6" ry="3"/></g>
+<!-- understated diagram registration, no invented measurements -->
+<g stroke="#d8e0e2" opacity=".4"><path d="M98 242h40m-20-20v40M758 55h20m-10-10v20M301 330h-62v-28M666 294h92v-31"/><path d="m499 194 27-13h40" stroke-dasharray="3 4"/></g>
+<g fill="#909b9f" font-family="monospace" font-size="8" letter-spacing="1"><text x="87" y="281">VERIFICATION FIXTURE</text><text x="665" y="309">SIGNAL / CAPTURE</text><text x="568" y="183">TEST PROBE</text></g>
+</svg>

@@ -1,0 +1,182 @@
+{
+  "record_kind": "defense_authoring_source_snapshot",
+  "captured_at_utc": "2026-10-04T14:35:39.727Z",
+  "formal_v2_scores_pending": false,
+  "human_review_claim": false,
+  "items": [
+    {
+      "key": "protocols",
+      "relative_path": "spec/agent_protocols.json",
+      "sha256": "24c046c9e0e9a11cc04402efd705244d6efc6417a1e8fafe65ed5db1fc449280",
+      "bytes": 2683
+    },
+    {
+      "key": "coverage",
+      "relative_path": "docs/experiment/functional_coverage_2026-10-04.md",
+      "sha256": "ade2900931c9c2573453f3a450878d1d0af2b4e44c90330d8dac5a011ce6c566",
+      "bytes": 10605
+    },
+    {
+      "key": "protocol_oracles",
+      "relative_path": "docs/experiment/protocol_oracle_improvements_2026-10-04.md",
+      "sha256": "1d279b78128d7b2e40f07d59be0c33a5adb529f20e39b18369c85bdcda3a66aa",
+      "bytes": 11457
+    },
+    {
+      "key": "fifo_before",
+      "relative_path": ".iverilog-ai/protocol-oracle-fifo-20261004-before/evidence.json",
+      "sha256": "220a5fd98db833a5d6d5608a7e66d0902cafb5acdc60e085e5ddbbef58edee93",
+      "bytes": 28803
+    },
+    {
+      "key": "fifo_after",
+      "relative_path": ".iverilog-ai/protocol-oracle-fifo-20261004-after-final/evidence.json",
+      "sha256": "159d827d6905ddd2ffbe35f4390ee32c5be2a9197c551d673dc7bf0fc6281beb",
+      "bytes": 22321
+    },
+    {
+      "key": "external_after",
+      "relative_path": ".iverilog-ai/external/replay-20261004-protocol-v2/evidence.json",
+      "sha256": "d392f4a582f30f5551848b519c86d5a628be7f44f002d4f8e9418645e6b7f3cb",
+      "bytes": 141618
+    },
+    {
+      "key": "legacy_pilot",
+      "relative_path": "docs/experiment/agent_comparison_live_2026-10-04.md",
+      "sha256": "a11730b0b5ab4e0ae295cd4d4a0057ed8a0e3ad706d4e043492b3347746c36dd",
+      "bytes": 6755
+    },
+    {
+      "key": "legacy_summary",
+      "relative_path": "docs/experiment/agent-comparison-chat-2026-10-04/summary.json",
+      "sha256": "874698ecf21863fa6a1d0d3140e40fdf0662ef5877aed3e0f84f991182ed03f6",
+      "bytes": 127324
+    },
+    {
+      "key": "v2_registration",
+      "relative_path": "docs/experiment/agent_comparison_v2_plan_2026-10-04.md",
+      "sha256": "a655f7324df5e2ea0370ce251a781d9a4f25b5ff6886ef586a81906162fa784a",
+      "bytes": 8797
+    },
+    {
+      "key": "evidence_pack",
+      "relative_path": "docs/competition/ic/evidence_pack_2026-10-04.md",
+      "sha256": "01b22dd7e6bf619ed0136e8ce8558af14c745d24d1c075cc1b6c98c26214c6d7",
+      "bytes": 6828
+    },
+    {
+      "key": "browser_controls",
+      "relative_path": ".iverilog-ai/agent-v4-browser-20261004-r3/agent-controls-1440.png",
+      "sha256": "eb29e03a245b1b1e401708e218c7b3bb3ec4ba2a2d2f72e3c99838f06879ce11",
+      "bytes": 781233
+    },
+    {
+      "key": "browser_run",
+      "relative_path": ".iverilog-ai/agent-v4-browser-20261004-r3/uart-offline-run-desktop.png",
+      "sha256": "4b70ab98e76ec003c95f9f1d2abe25f8e58f926b196c606fb39bae58add4e806",
+      "bytes": 763157
+    },
+    {
+      "key": "browser_record",
+      "relative_path": ".iverilog-ai/agent-v4-browser-20261004-r3/results.json",
+      "sha256": "ceaa0a060cd9893ad72d8d080bc3f37516db86c5d65eebbabbefecaf39d18394",
+      "bytes": 871
+    },
+    {
+      "key": "engineering_regression",
+      "relative_path": "docs/experiment/ic_agent_v4_validation_2026-10-04.md",
+      "sha256": "d84cd5633adc82925f3ede348af8db0a3a12c76187ad409dfe0bbec19552a7d1",
+      "bytes": 3785
+    },
+    {
+      "key": "cover_asset",
+      "relative_path": "ui/assets/verification-map.svg",
+      "sha256": "5755cdb4fc6bc2eee823488f346f0b6c57f2be3dda09854b30a03b22b38a11cf",
+      "bytes": 7849
+    },
+    {
+      "key": "narration",
+      "relative_path": "docs/competition/ic/defense_v2/speaker_notes.md",
+      "sha256": "9a24944ea32c7e444ba8c05ecaaead5c41696f4bb0383254fddbe770345167c3",
+      "bytes": 8196
+    },
+    {
+      "key": "v2_live_report",
+      "relative_path": "docs/experiment/agent_comparison_v2_live_2026-10-04.md",
+      "sha256": "78f1f5f073170ec91f713fa7bccf7d1b6f4d4ff40e7e2afe1e14cdce70488fcb",
+      "bytes": 10048
+    },
+    {
+      "key": "v2_live_summary",
+      "relative_path": ".iverilog-ai/agent-comparison-v2-nonthinking-20261004/summary.json",
+      "sha256": "a5950aa095ae6846a7ab60b4fe2f941c066c22793b914cdb9bd6e59b0b4132a2",
+      "bytes": 11102649
+    },
+    {
+      "key": "v2_live_results",
+      "relative_path": ".iverilog-ai/agent-comparison-v2-nonthinking-20261004/results.json",
+      "sha256": "15cc303d7a7b6f462c5394b4cb5f36606127709d0e71fc65058f0fc1f3251c01",
+      "bytes": 10999734
+    },
+    {
+      "key": "v2_live_preregistration",
+      "relative_path": ".iverilog-ai/agent-comparison-v2-nonthinking-20261004/preregistration.json",
+      "sha256": "6fdd06c0f8e4bbdc2d23d91dca275157de85490df64c1ba5629dfb4dea2b2494",
+      "bytes": 125818
+    },
+    {
+      "key": "v4_smoke_report",
+      "relative_path": "docs/experiment/agent_comparison_v4_smoke_2026-10-04.md",
+      "sha256": "99d208ce01c7aa6a1f1a750203e930a3a019b305213d71919707345523a15a03",
+      "bytes": 4807
+    },
+    {
+      "key": "v4_smoke_summary",
+      "relative_path": ".iverilog-ai/agent-comparison-v4-smoke-20261004/summary.json",
+      "sha256": "ca088434fd908b125df078b3a1f2d7672d04e2fb4da2417de5d8565df401a81a",
+      "bytes": 8263477
+    },
+    {
+      "key": "v4_smoke_results",
+      "relative_path": ".iverilog-ai/agent-comparison-v4-smoke-20261004/results.json",
+      "sha256": "c46df250acfd2a665da204139b5b3beed7f6bba48dee847e26d2a052743b908d",
+      "bytes": 7824220
+    },
+    {
+      "key": "v4_smoke_settings",
+      "relative_path": ".iverilog-ai/agent-comparison-v4-smoke-20261004/run_settings.json",
+      "sha256": "811999797a891ee15e434d333eff4c3330f7f3741d9e17163b48453b7ec08815",
+      "bytes": 632
+    },
+    {
+      "key": "v4_smoke_preregistration",
+      "relative_path": ".iverilog-ai/agent-comparison-v4-smoke-20261004/preregistration.json",
+      "sha256": "b19d3c766e8759c50f49cc32a0c4ff9864ca1505f08cfac29704c90bbe02297e",
+      "bytes": 50666
+    },
+    {
+      "key": "browser_crop",
+      "relative_path": "docs/competition/ic/defense_v2/assets/agent-budget-crop.png",
+      "sha256": "7c98f17cfd460d28bbe516aabdeb913433afd734eff77b4b0444877b5bc0a307",
+      "bytes": 149477
+    },
+    {
+      "key": "authoring_data",
+      "relative_path": "docs/competition/ic/defense_v2/data.json",
+      "sha256": "a2b0f3133d210921be7eda8a4a5573f80b2a90f03a8bb8053bd5e4409819cb59",
+      "bytes": 9974
+    },
+    {
+      "key": "authoring_source",
+      "relative_path": "docs/competition/ic/defense_v2/build_defense.mjs",
+      "sha256": "068c08347f6f5a12879d4d6a51ee0e97a351faa48bef310224a216b0b40203b0",
+      "bytes": 22328
+    },
+    {
+      "key": "copied_browser_controls",
+      "relative_path": "docs/competition/ic/defense_v2/assets/agent-controls-1440.png",
+      "sha256": "eb29e03a245b1b1e401708e218c7b3bb3ec4ba2a2d2f72e3c99838f06879ce11",
+      "bytes": 781233
+    }
+  ]
+}
