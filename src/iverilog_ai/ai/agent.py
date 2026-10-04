@@ -233,6 +233,7 @@ def run_verification_agent(
         "feedback_enabled": include_feedback,
         "simulation_multiplier": simulation_multiplier,
         "evidence_mode": "qualified_baseline_differential" if round_observer else "pipeline_observation",
+        "execution_policy": "qualified_observer_or_sampling_guard_v1",
         "started_at": datetime.now(timezone.utc).isoformat(),
         "design_family": contract.module, "objective": objective,
         "rtl_sha256": _sha(source.read_bytes()), "contract": contract.to_dict(),
@@ -294,6 +295,8 @@ def run_verification_agent(
                 if simulation_multiplier == 2:
                     state["simulation_multiplier"] = 2
                     state["remaining_candidate_cycles"] = state["remaining_stimulus_cycles"] // 2
+                if round_observer is None and contract.clock is not None:
+                    state["supported_sample_phases"] = ["after"]
                 prompt = decision_prompt(state)
                 decision_record = {"state": state, "prompt_sha256": _sha(prompt.encode()), "status": "requested"}
                 trace["decisions"].append(decision_record)
@@ -406,6 +409,10 @@ def run_verification_agent(
                         trace["stop_reason"] = "behavior_difference"
                         break
                     continue
+                if (observation["status"] == "inconclusive"
+                        and observation["expectation_source"] != "reference_model"):
+                    trace["stop_reason"] = "insufficient_evidence"
+                    break
                 if observation["status"] not in {"passed", "passed_with_warnings"}:
                     trace["stop_reason"] = "execution_error"
                     break

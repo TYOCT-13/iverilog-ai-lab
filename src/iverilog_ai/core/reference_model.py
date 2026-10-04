@@ -105,6 +105,13 @@ def _vectors(plan: Any) -> Iterable[Any]:
     return out
 
 
+def _unsupported_sampling(plan: Any, design: str) -> bool:
+    # Sequential state.step models outputs after the clock edge. A before
+    # sample is taken earlier by the real TB, and needs a separate timing model.
+    return design not in {"simple_alu", "mux4"} and any(
+        _get(vector, "sample_phase", "after") == "before" for vector in _vectors(plan))
+
+
 def _clamp(value: Any, low: int, high: int, default: int) -> int:
     try:
         number = int(value)
@@ -372,6 +379,8 @@ def reference_expectations(
         return {}
     if authoritative_only and plan_design not in AUTHORITATIVE:
         return {}
+    if _unsupported_sampling(plan, plan_design):
+        return {}
     port_names: set[str] | None = None
     if contract is not None:
         ports = _get(contract, "ports", None)
@@ -380,14 +389,26 @@ def reference_expectations(
             if names:
                 port_names = names
     state = _DesignState(plan_design, contract)
+    held_inputs = dict(INPUT_DEFAULTS.get(plan_design, {}))
+    if contract is not None:
+        for port in _get(contract, "ports", ()) or ():
+            direction = _get(port, "direction", "")
+            if getattr(direction, "value", direction) in {"input", "inout"}:
+                # The generated TB initializes driven inputs to zero, then
+                # releases the explicit contract reset before the first vector.
+                held_inputs[str(_get(port, "name", ""))] = 0
+        reset = _get(contract, "reset", None)
+        if reset is not None:
+            held_inputs[str(_get(reset, "signal", ""))] = 1 - int(_get(reset, "active_level", 0))
     expectations: dict[str, dict[str, Any]] = {}
     for index, vector in enumerate(_vectors(plan)):
         name = str(_get(vector, "name", _get(vector, "id", f"vector_{index + 1}")))
         inputs = _get(vector, "inputs", {}) or {}
         if not isinstance(inputs, Mapping):
             continue
+        held_inputs.update(inputs)
         cycles = int(_get(vector, "cycles", 1) or 1)
-        actual = state.step(inputs, cycles)
+        actual = state.step(held_inputs, cycles)
         selected = {signal: value for signal, value in actual.items() if port_names is None or signal in port_names}
         expectations[name] = selected
     return expectations
@@ -433,6 +454,10 @@ def check_plan_consistency(plan: Any, design: str | None = None, contract: Any =
     if design_name not in SUPPORTED:
         return {"status": "skipped", "design": design_name, "warnings": [], "checked": 0,
                 "reason": "reference model is only defined for bundled examples"}
+    if _unsupported_sampling(plan, design_name):
+        return {"status": "skipped", "design": design_name, "warnings": [], "checked": 0,
+                "reason": "clocked before sampling is not supported by the independent reference model",
+                "unsupported_sample_phase": "before"}
     # 诊断不做门控：它只报告差异、不参与裁决，因此可以用上全部已建模案例。
     expectations = reference_expectations(plan, design_name, contract, authoritative_only=False)
     report_is_authoritative = design_name in AUTHORITATIVE

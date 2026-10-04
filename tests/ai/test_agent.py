@@ -9,6 +9,7 @@ from iverilog_ai.ai.agent import AgentDecision, AgentLimits, AgentObservation, r
 from iverilog_ai.ai.debug_provider import offline_provider
 from iverilog_ai.ai.planner import plan_tests
 from iverilog_ai.ai.provider import OpenAICompatibleProvider
+from iverilog_ai.ai.schema import TestPlan as Plan
 from iverilog_ai.core.contracts import DutContract
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -274,3 +275,39 @@ def test_differential_observation_cannot_relabel_samples_as_assertions():
     with pytest.raises(ValueError, match="not assertion checks"):
         AgentObservation(status="passed", verdict="behavior_difference",
                          expectation_source="qualified_baseline_differential", checks=10)
+
+
+def test_unsupported_clocked_sampling_is_reported_as_missing_evidence(tmp_path):
+    compiler = Path(r"D:\iverilog\bin\iverilog.exe")
+    runtime = Path(r"D:\iverilog\bin\vvp.exe")
+    if not compiler.is_file():
+        pytest.skip("Icarus unavailable in this test environment")
+    contract = DutContract.from_dict(json.loads((ROOT / "examples/mod10_counter_contract.json").read_text()))
+    provider = Scripted(append(2, sample_phase="before"))
+    result = run_verification_agent(provider=provider, contract=contract,
+        rtl_path=ROOT / "rtl/mod10_counter.v", output_dir=tmp_path / "real-before", objective="sampling gate",
+        execution_options={"allowed_roots": (ROOT, tmp_path), "iverilog_path": compiler, "vvp_path": runtime})
+    assert result.stop_reason == "insufficient_evidence"
+    assert result.last_result.simulation.check_count == 0
+    assert result.trajectory["rounds"][0]["observation"]["expectation_source"] == "none_given"
+    state = json.loads(provider.prompts[0].split("STATE_JSON:\n", 1)[1])
+    assert state["supported_sample_phases"] == ["after"]
+
+
+def test_real_counter_holds_omitted_enable_input(tmp_path):
+    compiler = Path(r"D:\iverilog\bin\iverilog.exe")
+    runtime = Path(r"D:\iverilog\bin\vvp.exe")
+    if not compiler.is_file():
+        pytest.skip("Icarus unavailable in this test environment")
+    contract = DutContract.from_dict(json.loads((ROOT / "examples/mod10_counter_contract.json").read_text()))
+    plan = Plan.model_validate({
+        "design": contract.module, "objective": "hold input", "vectors": [
+            {"name": "enable", "inputs": {"enable": 1}, "cycles": 1},
+            {"name": "hold", "inputs": {}, "cycles": 2}]})
+    result = run_verification_agent(provider=Scripted(), contract=contract,
+        rtl_path=ROOT / "rtl/mod10_counter.v", output_dir=tmp_path / "held-input", objective="hold input",
+        initial_plan=plan, limits=AgentLimits(max_rounds=1),
+        execution_options={"allowed_roots": (ROOT, tmp_path), "iverilog_path": compiler, "vvp_path": runtime})
+    assert result.stop_reason == "round_budget"
+    assert result.last_result.simulation.check_count == 2
+    assert not result.last_result.simulation.failures

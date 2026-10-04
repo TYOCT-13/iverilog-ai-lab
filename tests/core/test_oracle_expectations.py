@@ -127,6 +127,22 @@ def test_reference_expectations_skip_unsupported_design():
     assert report["status"] == "skipped"
 
 
+def test_clocked_before_sampling_does_not_attach_an_unaligned_reference_model():
+    plan = _plan(vectors=[{"name": "before", "inputs": {"enable": 1}, "cycles": 2,
+                           "sample_phase": "before", "expected": {}}])
+    assert reference_expectations(plan, contract=COUNTER_CONTRACT) == {}
+    diagnostic = check_plan_consistency(plan, contract=COUNTER_CONTRACT)
+    assert diagnostic["status"] == "skipped"
+    assert diagnostic["unsupported_sample_phase"] == "before"
+
+
+def test_omitted_inputs_retain_prior_values_across_vectors():
+    plan = _plan(vectors=[{"name": "start", "inputs": {"enable": 1}, "cycles": 1},
+                          {"name": "keep_enabled", "inputs": {}, "cycles": 2}])
+    assert reference_expectations(plan, contract=COUNTER_CONTRACT) == {
+        "start": {"count": 1}, "keep_enabled": {"count": 3}}
+
+
 # --------------------------------------------------------------------------
 # 3. 复位前初值观测
 # --------------------------------------------------------------------------
