@@ -10,7 +10,7 @@
 - 追不到记录的，写"未复核"或"无记录"，不估算、不外推。
 
 初次核对：2026-09-29，HEAD `2b9594f`。本次口径修订：2026-10-04；保留原始实验文件，
-补充 seed 0–4 事后子集，区分历史门禁快照与当前验证。
+补充 seed 0–4 事后子集及本轮 Agent/外部/机器证据，区分历史快照与当前验证。最新源码回归为 `1c1e0dc`，API pilot 仍归属冻结 `e9b7b8a`，不能互换。
 
 ---
 
@@ -109,6 +109,38 @@ fixed 实际只执行一次，不能用在线五轮并集宣称同总预算下�
 实际费用仍需账单、缓存命中与调用时段核对，不能写成“费用实测”或挪作五轮子集成本。
 同一请求的 usage 会重复挂在多个变体行上，不能按行累计。
 
+### 3.3 API Agent 五策略 pilot（冻结 `e9b7b8a`，2026-10-04）
+
+来源：[完整报告](agent_comparison_live_2026-10-04.md)、[持久摘要](agent-comparison-chat-2026-10-04/summary.json)；原始目录 `.iverilog-ai/agent-comparison-live-chat-v2/`。北京时间 14:54:42–15:11:32。4 模块，每模块清单首 2 个已有缺陷及正确基线，5 策略，开发集单次重复，**60 行、8 个独立缺陷**。预注册与设置在请求前冻结并关联 SHA256；固定分母包含失败和不可判定。
+
+| 策略 | 检出/8 | 缺陷未检出 | 缺陷不可判定 | 请求 | 正确基线假警 | 变体参考回放否决 |
+|---|---:|---:|---:|---:|---:|---:|
+| fixed | 5/8 | 3 | 0 | 0 | 0 | 0 |
+| random | 5/8 | 3 | 0 | 0 | 0 | 0 |
+| single | 2/8 | 1 | 5 | 12 | 1 | 2 |
+| feedback | 4/8 | 4 | 0 | 19 | 1 | 0 |
+| no_feedback | 2/8 | 3 | 3 | 21 | 0 | 0 |
+
+- 实际 **52/84 请求、234,536 tokens**：prompt 32,429、completion 202,107；52 请求均有 usage，按 sample:decision 去重，重复 ID 为 0。费用未取到账单，不能称实付金额。
+- **36 份 Agent 轨迹、122 份 pipeline 证据**逐项复核。搜索 1,606 周期＋参考审核 1,606 周期，实际检查项 2,904＋参考检查项 2,904。审核是额外执行，不反馈给搜索 Agent。
+- 正确基线假警 **2 个样本**与变体参考回放否决 **2 个样本**分别列示，不合并成含糊的误报率。全样本保留 **6 个 output_truncated、5 个 policy_error**；失败日志条数不作为独立缺陷数。
+- 反馈 4/8 **未胜固定/随机 5/8**。4 对 2 只是单次开发集观察，不能强因果归因为反馈机制；采样密度、检查项与提前停止情况不同，相同周期上限不等于相同覆盖。
+- 发现反例就停止，没有修改 RTL 或失败驱动修复，没有独立留出集、真人试用或独立人工审核。
+
+**首次中断开发记录单列**：`.iverilog-ai/agent-comparison-live-20261004/` 因隐式 Responses 协议与已验证接口不一致而中止。落盘 **7 次已知请求、51,433 已知 tokens**，另有 **1 次可能在途请求**没有最终 usage；没有 finished_at，47 行 not_started。未知消耗不按零处理，不与本轮 52 请求或成绩拼接。
+
+**新护栏不改旧分数**：核心保护提交 `1c1e0dc` 对内置顺序逻辑的 before 相位不提供权威 oracle，Agent 因不足独立证据停止；遗漏输入按真实 testbench 保持上一值。后续 `867b8bd` 只修 PDF 排版；冻结 `e9b7b8a` pilot 未按新护栏重跑，分数和假警原样保留，不能称为修复后新成绩。
+
+### 3.4 外部有限规格与真实 API（分别计量）
+
+| 范围 | 实测 | 来源与边界 |
+|---|---|---|
+| 冻结开发重放 | **24 输入**＝3 基线＋15 历史人工变体＋3 等价改写＋3 编译失败；差分 15 different、6 identical、3 inconclusive | `.iverilog-ai/external/replay-20261004-ic-final/evidence.json`；[说明](external_agent_readiness.md)，不是独立留出或上游真实缺陷 |
+| 有限 SPEC_TB | 三基线分别 11/10/28 检查、零失败；变体检出 **13/15** | UART TX 的 prescale_off_by_one 与 busy_never_clears 未检出；差分 different 不能冒充规格判定 |
+| UART RX 实际 API | **1 请求、2 轮、782 双侧周期、5,661 tokens**；23→27 向量；有效输出比较 547→628、差异 0 | [记录](external_agent_live_2026-10-04.md)、[摘要](external-agent-live-2026-10-04/summary.json)；候选和基线同字节，只证明追加执行接通 |
+
+外部证据为 `qualified_baseline_differential`，不冒充 reference_model；断言 checks/failures 为 0，输出比较数另列。历史位序变体无网络重放中，原固定计划本来就能发现同一差异，不能把功劳归给新增向量。外部 1 请求不并入内置 52 请求；24 输入也不同于适配器的 24 项自动化测试。
+
 ## 4. 在线模型实验（历史，探索性口径）
 
 来源：`.iverilog-ai/model-compare-r10-*`（2026-09-11 生成，`deepseek-flash` / `deepseek-v4-pro`）。
@@ -131,8 +163,13 @@ fixed 实际只执行一次，不能用在线五轮并集宣称同总预算下�
 
 | 指标 | 数值 | 来源 / 复现 | 时间 | 备注 |
 |---|---|---|---|---|
-| 当前自动化测试与类型检查 | **768 passed / 1 skipped / 0 failed；mypy 64 文件 0 error** | `docs/experiment/local_validation_2026-10-04.md` 及其附带日志 | 2026-10-04，基线 `2ef75da` + 本轮修改；源文件指纹见验证记录 | 两份 PDF 同步后全量通过；最终排版再经 9 项 PDF 测试复核 |
-| 自动化测试（历史快照） | **720 passed / 1 skipped** | `python -m pytest -q` | 2026-10-01（HEAD `84943ad`） | 不是当前回归结果；另有更早的 700 passed / 1 skipped。历史干净 venv 为 675 passed / 3 skipped / 0 failed。当前结果见 `docs/experiment/local_validation_2026-10-04.md` |
+| 当前全仓自动化测试 | **914 passed / 1 skipped / 0 failed，227.34 秒** | `.iverilog-ai/ic-validation-pdf-final-20261004/pytest.log`、`pytest.xml`、`metadata.json`；持久记录 `docs/experiment/ic_validation_2026-10-04.md` §6 / `ic-validation-pdf-final-2026-10-04/` | 2026-10-04，源码 `867b8bd564c881954c98cc18813884a4074d1ed5`，148 个源码/配置指纹 | 含采样保护及 PDF 混排/列表修复；mypy 72、未可达扫描163、BOM0；1 跳过为推荐断言表为空，不是模型成绩 |
+| 采样保护版回归 | **914 passed / 1 skipped / 0 failed，211.47 秒** | `.iverilog-ai/ic-validation-sampling-guard-20261004/pytest.log`；持久 `ic-validation-2026-10-04/` | 2026-10-04，源码 `1c1e0dc5b30a65a83673951cc495b1a7b700511c`，148 个源码/配置指纹 | 后续只改 PDF 渲染代码，不重新计算 API pilot 成绩；该日志保留，不能累加 |
+| 专项机器验收 | **22 passed / 0 skipped / 0 failed，285 个工件指纹一致** | `docs/trial/machine_acceptance_2026-10-04.md`，`.iverilog-ai/machine-acceptance-20261004/` | 2026-10-04 | 3 UI＋19 CLI，T12 缺失工具退出 2→正常恢复退出 0；不是真人试用 |
+| 自动化测试与类型检查（历史快照） | **768 passed / 1 skipped / 0 failed；mypy 64 文件 0 error** | `docs/experiment/local_validation_2026-10-04.md` 及其附带日志 | 2026-10-04，基线 `2ef75da` + 当轮修改 | 当时 PDF 同步后的全量快照，不是当前结果，不累加 |
+| 中间回归（历史快照） | **910 passed / 1 skipped，197.00 秒** | `.iverilog-ai/ic-validation-final-20261004/pytest.log` | 2026-10-04 | before 门控前中间源码，已由当前 914/1 替代 |
+| 更早失败回归（历史保留） | **909 passed / 1 failed / 1 skipped，222.74 秒** | `.iverilog-ai/ic-validation-exact-snapshot-20261004/pytest.log` | 2026-10-04 | output_dir 边界测试失败；不能将该日志误引为 910 全过，也不替换当前 914/1 |
+| 自动化测试（历史快照） | **720 passed / 1 skipped** | `python -m pytest -q` | 2026-10-01（HEAD `84943ad`） | 不是当前回归结果；另有更早的 700 passed / 1 skipped。历史干净 venv 为 675 passed / 3 skipped / 0 failed。当前见上方 914/1 行 |
 | 类型门禁 | mypy 61 文件 0 error | `python -m mypy` | 2026-10-01 | |
 | 死代码 | 121 文件 0 处 | `python scripts/check_dead_code.py` | 2026-10-01 | |
 | 编码门禁 | 0 问题 | `python scripts/strip_bom.py --check` | 2026-10-01 | |
@@ -148,13 +185,13 @@ fixed 实际只执行一次，不能用在线五轮并集宣称同总预算下�
 |---|---|
 | 仓库公开地址 | **未确定**（`CITATION.cff` 仍是占位 `example.invalid`，也是提交体检里唯一的 error） |
 | GitHub Action 外部调用验证 | **未做**（需要一个调用方仓库才能真跑） |
-| 外部模块（第三方 RTL）验证 | **已做 3 个**：15/15 变体判"不同"、3 个等价改写判"一致"、3 个编不过判 `inconclusive`（`docs/experiment/external_results.md`） |
-| 真人试用记录 | **无记录**（任务卡与汇总工具已就绪） |
+| 外部模块（第三方 RTL）验证 | 冻结 3 模块/24 输入：差分 15 different、6 identical、3 inconclusive；有限 SPEC 为 13/15 变体检出。另有 UART RX 1 请求真实联调，口径见 3.4 |
+| 真人试用记录 | **无记录**（任务卡与汇总工具已就绪；机器 22 项验收不替代真人） |
 | 演示视频 | **未录**（脚本已就绪：`docs/demo/demo_script.md`） |
 | 提交文案（名称/简介） | **已备**（`docs/competition/submission_cover_text.md`，2026-10-04 实测 242 字） |
 | 正式证据包 | **2026-10-01 历史生成与核验，本轮未重新生成**（`G:\iai-evidence-pack-final[.zip]`） |
 
-这些一律不写成"已完成"。
+其中未确定、未做、无记录与仅有历史证据的项目，不写成当前已完成；机器验收不能补写真人完成状态。
 
 ## 7. 维护规则
 

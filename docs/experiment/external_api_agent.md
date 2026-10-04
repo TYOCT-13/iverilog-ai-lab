@@ -24,7 +24,7 @@
 
 ## 本地运行
 
-先按 `external_agent_readiness.md` 冻结三个源文件。新输出目录不得存在。
+先按[冻结输入与重放说明](external_agent_readiness.md)冻结三个源文件。新输出目录不得存在。
 
 ```powershell
 python scripts/run_external_verification_agent.py --manifest .iverilog-ai/external/frozen-20261004-ic/manifest.json --candidate .iverilog-ai/external/uart_rx_check/uart_rx_baseline.v --module uart_rx --output-dir .iverilog-ai/external-agent/new-offline --iverilog D:/iverilog/bin/iverilog.exe --vvp D:/iverilog/bin/vvp.exe
@@ -40,9 +40,14 @@ python scripts/run_external_verification_agent.py --manifest .iverilog-ai/extern
 
 早期接口联调的“547 样本、cycle 80”记录来自旧 VCD 时间戳法，存在采样歧义，不能独立支撑精确采样主张。修复后另在全新目录用即时快照真实重放该历史 UART RX 变体，重新观察到 cycle 80、836 ns 的 m_axis_tdata=150 与 105、547 个有效输出比较。新旧产物均保留，不用新结果覆盖旧证据。两次均未调用 API、未创建新变体。
 
-实际服务商 API 联调由主任务统一执行。本适配器开发使用真实 Icarus 和明确 mock 的网络测试，不把 mock 结果作为真实模型成绩。现有 SPEC_TB 的覆盖局限不会因 Agent 接入而消失，尤其 UART TX 的历史两个变体曾被规格测试台漏检。
+实际服务商 API 联调已由主任务统一完成，见[真实联调记录](external_agent_live_2026-10-04.md)及[公开摘要](external-agent-live-2026-10-04/summary.json)：1 次 deepseek-flash / Chat Completions 请求、2 轮、输出上限 8192 tokens、双侧周期上限 1200；实际 usage 5661 tokens，累计执行 782 双侧周期。计划从 23 向量/182 周期扩展到 27 向量/209 周期，有效输出比较从 547 增至 628，两轮均无差异，达到 round_budget 停止。这组真实值与下方 mock 测试的 732 周期必须区分。
+
+真实联调使用相同冻结字节的候选与基线，证明链路可运行，不证明模型提高了检出率。最终计划在已有位序变体上的 0 API 重放仍发现同一差异，但原固定计划也能发现，不能将功劳归给新增向量。已有 SPEC_TB 只是有限规格检查，不因接入 Agent 成为独立完整规格；UART TX 两个历史变体的规格漏检仍保留。真实请求、mock 网络回归都不能替代真人试用或独立人工复核。
 
 
 历史初版离线检查曾有 20 项通过，但未覆盖同时间戳后续输入变化，不能作为修复后验收。修复后 `tests/core/test_external_agent.py` **24 项通过**，适配脚本 mypy 通过。新增连续组合输入在 before/after 两种相位的逐点规格检查、UART before 第一采样时刻 28 ns 检查，以及补丁锚点变动即拒绝的测试。覆盖三模块基线、已有等价改写、真实位序差异、编译失败、仅内部字段变化、采样不足/XZ、冻结源和资格哈希变化；两项 mock HTTP 配合真实 Icarus 验证了共用 Agent 的追加激励与双侧预算。364 周期预算时没有 API 请求，1200 周期预算时 1 次 mock 请求、2 轮执行实际消耗 732 个双侧激励周期。
 
 修复后独立离线 CLI 证据：`.iverilog-ai/external-agent/uart-rx-bit-order-exact-snapshot-offline/offline-round/external_observation.json`。旧 `uart-rx-bit-order-typed-offline` 目录保留为历史含采样歧义的记录。这些都是机器仿真结果，不是实际服务商调用记录。
+
+
+采样歧义的发现与修复过程见[代理交叉检查](../review/external_agent_cross_review_2026-10-04.md)。版本 `1c1e0dc` 对内置 reference_model 的 before 相位采用保守门控；外部适配器已关闭该模型映射，并通过 typed observer 使用真实测试台同点快照，因此不受该内置预测限制影响，也不将其误报为外部功能正确性。

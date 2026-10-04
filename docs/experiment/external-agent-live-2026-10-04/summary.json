@@ -1,0 +1,126 @@
+{
+  "schema_version": "external-api-live-summary-v1",
+  "review_kind": "agent_artifact_cross_check",
+  "independent_human_review": false,
+  "model": "deepseek-flash",
+  "wire_api": "chat_completions",
+  "record_kind": "api",
+  "requests_attempted": 1,
+  "stop_reason": "round_budget",
+  "candidate_sha256": "e686104e5ff2d25fa1504e8d08259cef508f2ec9c9e8cfa63364f3fcb39b9f5c",
+  "baseline_sha256": "e686104e5ff2d25fa1504e8d08259cef508f2ec9c9e8cfa63364f3fcb39b9f5c",
+  "qualification_checks": 11,
+  "qualification_failures": 0,
+  "candidate_stimulus_cycles": 391,
+  "baseline_stimulus_cycles": 391,
+  "total_stimulus_cycles": 782,
+  "usage": {
+    "prompt_tokens": 2118,
+    "completion_tokens": 3543,
+    "total_tokens": 5661,
+    "prompt_cache_hit_tokens": 128,
+    "prompt_cache_miss_tokens": 1990
+  },
+  "billing_currency_amount": null,
+  "billing_note": "not supplied; token usage is not a billed amount",
+  "started_at_utc": "2026-10-04T07:13:29.690517+00:00",
+  "finished_at_utc": "2026-10-04T07:13:47.380039+00:00",
+  "elapsed_seconds": 17.688,
+  "rounds": [
+    {
+      "round": 1,
+      "vectors": 23,
+      "candidate_cycles": 182,
+      "baseline_cycles": 182,
+      "actual_sample_points_per_side": 182,
+      "compared_samples": 547,
+      "differences": 0,
+      "difference_samples": []
+    },
+    {
+      "round": 2,
+      "vectors": 27,
+      "candidate_cycles": 209,
+      "baseline_cycles": 209,
+      "actual_sample_points_per_side": 209,
+      "compared_samples": 628,
+      "differences": 0,
+      "difference_samples": []
+    }
+  ],
+  "offline_historical_bitorder_replay": [
+    {
+      "plan_source": "initial_fixed",
+      "requests": 0,
+      "vectors": 23,
+      "candidate_cycles": 182,
+      "compared_samples": 547,
+      "differences": 1,
+      "difference_samples": [
+        {
+          "cycle": 80,
+          "time_ns": 836.0,
+          "signal": "m_axis_tdata",
+          "baseline": 150,
+          "candidate": 105
+        }
+      ],
+      "observation_file": ".iverilog-ai/external-agent/uart-rx-live-plan-bitorder-offline-20261004/initial_fixed/external_observation.json"
+    },
+    {
+      "plan_source": "api_extended",
+      "requests": 0,
+      "vectors": 27,
+      "candidate_cycles": 209,
+      "compared_samples": 628,
+      "differences": 1,
+      "difference_samples": [
+        {
+          "cycle": 80,
+          "time_ns": 836.0,
+          "signal": "m_axis_tdata",
+          "baseline": 150,
+          "candidate": 105
+        }
+      ],
+      "observation_file": ".iverilog-ai/external-agent/uart-rx-live-plan-bitorder-offline-20261004/api_extended/external_observation.json"
+    }
+  ],
+  "limitations": [
+    "same frozen baseline and candidate bytes in live round; integration check, not accuracy proof",
+    "historical fixed plan already exposes bit-order variant; no incremental discovery attribution",
+    "development replay set, not independent holdout",
+    "no human trial or independent human review",
+    "raw ignored local artifacts are not bundled by this public hash summary"
+  ],
+  "verified_artifact_sha256": {
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/agent/agent_trajectory.json": "a0dc8ac97a847d321f506e985b6a936f4503d4c83eaa88dd01bb317757311dfc",
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/qualification/qualification.json": "331c51ef4e93ffd9a7d7ab0900eae55c4fd053b1060c451b2ea2768f55c51b26",
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/agent/round-01/baseline/pipeline_result.json": "f20245c3f72c3ef6aa6741c6ac3ce6943211b6e6fe35cf801768c9ebfb55b483",
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/agent/round-01/baseline/runs/run-332f2ee9e23a/run.stdout.txt": "a4dd25a06b1f2111c8cfa7d4728ed5158655ae36cd3cab565d454d29ac3e961b",
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/agent/round-01/baseline_samples.json": "f22ae10b554ed7e4f7eb9e1f63c7ddc2b02cb3fcde6426deb2850507935c6378",
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/agent/round-01/baseline/snapshot_instrumentation.json": "aa480c88e4a1713bd5425a8c0efa58248d25c2c5a891ac95dd1ec86d1a6c6d24",
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/agent/round-01/baseline/tb_uart_rx.v": "eda2d0a166e0762ee10f2e0f28f326b18bc1d32753f4e63c77aca5b10ae74748",
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/agent/round-01/candidate/pipeline_result.json": "150d41a04734946a959669aecd20a454c142febd6edc0d21f223fc7a7833c35c",
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/agent/round-01/candidate/runs/run-107c2ae0f28c/run.stdout.txt": "a4dd25a06b1f2111c8cfa7d4728ed5158655ae36cd3cab565d454d29ac3e961b",
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/agent/round-01/candidate_samples.json": "f22ae10b554ed7e4f7eb9e1f63c7ddc2b02cb3fcde6426deb2850507935c6378",
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/agent/round-01/candidate/snapshot_instrumentation.json": "aa480c88e4a1713bd5425a8c0efa58248d25c2c5a891ac95dd1ec86d1a6c6d24",
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/agent/round-01/candidate/tb_uart_rx.v": "eda2d0a166e0762ee10f2e0f28f326b18bc1d32753f4e63c77aca5b10ae74748",
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/agent/round-01/external_observation.json": "42eea9789d9024a34c35d69f136ed0d271c5785553159d40c7a47fdd55aba42a",
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/agent/round-02/baseline/pipeline_result.json": "c70d5f817d299fba2b2c03f9fdf51523e4e5568547c8283c973ba5b11a93d120",
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/agent/round-02/baseline/runs/run-5696ac928270/run.stdout.txt": "9fdd98dff9af747d7bc841ef5ecebf58f5d1e00498e7cac92c1a4f767a9fe29e",
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/agent/round-02/baseline_samples.json": "fbe1b5b0b6740ffaaec361db2910722adbb53c1b9a9e26f2f5c5f4b6b89e3200",
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/agent/round-02/baseline/snapshot_instrumentation.json": "98d0f4c76c24105497450324398555cd7102cb1b420ddbc283b9c66dfa32b817",
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/agent/round-02/baseline/tb_uart_rx.v": "984f4f5204a88209dddca2af99c38f5f1100d8fd76ad847511c142b806750cad",
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/agent/round-02/candidate/pipeline_result.json": "e5fe665fb6bcfd2507229bc3d39ed23e277bd1f1f6276c69dda94169d205c6f3",
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/agent/round-02/candidate/runs/run-e6084c9634db/run.stdout.txt": "9fdd98dff9af747d7bc841ef5ecebf58f5d1e00498e7cac92c1a4f767a9fe29e",
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/agent/round-02/candidate_samples.json": "fbe1b5b0b6740ffaaec361db2910722adbb53c1b9a9e26f2f5c5f4b6b89e3200",
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/agent/round-02/candidate/snapshot_instrumentation.json": "98d0f4c76c24105497450324398555cd7102cb1b420ddbc283b9c66dfa32b817",
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/agent/round-02/candidate/tb_uart_rx.v": "984f4f5204a88209dddca2af99c38f5f1100d8fd76ad847511c142b806750cad",
+    ".iverilog-ai/external-agent/uart-rx-live-one-request-20261004/agent/round-02/external_observation.json": "4af585955dc9a84b995fba02291f0065e94a2a0085320eedca4c388551e43668",
+    ".iverilog-ai/external-agent/uart-rx-live-plan-bitorder-offline-20261004/initial_fixed/external_observation.json": "0fdf74a274612193d0e20a255886f85c8ede526bfdd4b45aa084752b66e6fe8c",
+    ".iverilog-ai/external-agent/uart-rx-live-plan-bitorder-offline-20261004/initial_fixed/candidate/pipeline_result.json": "c63be9215e6bb439a4566d527bc345c005c6d9f65c313ff4655a07f57b681187",
+    ".iverilog-ai/external-agent/uart-rx-live-plan-bitorder-offline-20261004/api_extended/external_observation.json": "97ea4ad76c1f8f9be466ed670b19f2769e0692de3bf20a16c1d69211289a463e",
+    ".iverilog-ai/external-agent/uart-rx-live-plan-bitorder-offline-20261004/api_extended/candidate/pipeline_result.json": "f869a8deb7acfacfec25319f4a9ef41be73a575d525702dc9ed90585cd065fea"
+  }
+}

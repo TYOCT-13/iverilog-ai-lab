@@ -14,6 +14,14 @@
 *.pdf binary
 *.zip binary
 
+# 本轮公开实验原件按字节保存，避免换行转换破坏已登记的 SHA-256。
+docs/experiment/agent-comparison-chat-2026-10-04/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/external-agent-live-2026-10-04/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/ic-validation-2026-10-04/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/ic-validation-pdf-final-2026-10-04/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/competition/ic/pdf_validation_2026-10-04.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/competition/ic/evidence_pack_2026-10-04.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
 # 明确语言归属，便于托管平台的统计与语法高亮
 *.v text linguist-language=Verilog
 *.sv text linguist-language=SystemVerilog

@@ -1,0 +1,86 @@
+{
+  "record_kind": "machine_pdf_artifact_validation",
+  "recorded_at_utc": "2026-10-04T08:20:29.936775+00:00",
+  "renderer_commit": "867b8bd564c881954c98cc18813884a4074d1ed5",
+  "renderer_sha256": "7f59d3991d0e383d6b01e489243cf4ec70e877e38ab7422b57d4910b67f7ddfc",
+  "human_participants": 0,
+  "artifacts": [
+    {
+      "path": "docs/competition/ic/report_draft.pdf",
+      "source_md_sha256": "cc9863536911ffc93fc29fa5a4a5ed28d2abc0d405ea39824d63a1893efdc6f5",
+      "pdf_sha256": "3d0e16dab2596e12028f10aaa83076e31cddbea54ae72eb0506763e16bb971af",
+      "bytes": 378164,
+      "pages": 10,
+      "body_pages": 9,
+      "metadata": {
+        "format": "PDF 1.7",
+        "title": "",
+        "author": "",
+        "subject": "",
+        "keywords": "",
+        "creator": "",
+        "producer": "",
+        "creationDate": "",
+        "modDate": "",
+        "trapped": "",
+        "encryption": null
+      },
+      "out_of_page_text": [],
+      "visual_review": "actual rendered pages inspected",
+      "scope": "IC working report"
+    },
+    {
+      "path": "docs/competition/technical_report_draft.pdf",
+      "source_md_sha256": "5bf1521d826bf882ffdb185ab8331294dd7dac4e871e3fd0e5f200cedd622fda",
+      "pdf_sha256": "38abbaece00773531d7f773bb24f69878f58980d860065da994896fe31970f8c",
+      "bytes": 946172,
+      "pages": 26,
+      "body_pages": 21,
+      "metadata": {
+        "format": "PDF 1.7",
+        "title": "",
+        "author": "",
+        "subject": "",
+        "keywords": "",
+        "creator": "",
+        "producer": "",
+        "creationDate": "",
+        "modDate": "",
+        "trapped": "",
+        "encryption": null
+      },
+      "out_of_page_text": [],
+      "visual_review": "actual rendered pages inspected",
+      "scope": "original source re-exported after layout fix"
+    },
+    {
+      "path": "docs/project_overview.pdf",
+      "source_md_sha256": "9ea5fd9fcad8b5a6f6c161a5874f2bd05cba374f51b769f8decd851996114c2f",
+      "pdf_sha256": "10ad8043d07f321c1de3538e339420810ab477b2c48f31ca142da2fbd9ba139e",
+      "bytes": 427494,
+      "pages": 10,
+      "body_pages": 10,
+      "metadata": {
+        "format": "PDF 1.7",
+        "title": "",
+        "author": "",
+        "subject": "",
+        "keywords": "",
+        "creator": "",
+        "producer": "",
+        "creationDate": "",
+        "modDate": "",
+        "trapped": "",
+        "encryption": null
+      },
+      "out_of_page_text": [],
+      "visual_review": "actual rendered pages inspected",
+      "scope": "original source re-exported after layout fix"
+    }
+  ],
+  "limitations": [
+    "IC working draft, not formally submitted",
+    "Does not certify human trials or industrial correctness",
+    "Original open-source report still exceeds its recommended body length; it is not the new IC report"
+  ]
+}

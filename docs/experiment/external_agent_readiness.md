@@ -2,7 +2,7 @@
 
 日期：2026-10-04。执行者：Codex 机器检查。**不属于真人试用或独立人工复核，不预设成绩。**
 
-本轮已修复：抓取对象与检查对象不对应、检查工具路径硬编码、固定目录覆盖旧产物、规格测试没有完整结束标志时仍可能显示“全过”。未修改 RTL、未生成新缺陷、未使用付费 API。历史报告与历史原始目录保留。
+冻结重放阶段已修复：抓取对象与检查对象不对应、检查工具路径硬编码、固定目录覆盖旧产物、规格测试没有完整结束标志时仍可能显示“全过”。该阶段未修改 RTL、未生成新缺陷、未使用付费 API。随后已完成外部 API Agent 接入和一次真实服务商请求，见下文；历史报告与原始目录保留。
 
 ## 可复现入口
 
@@ -40,17 +40,22 @@ python scripts/check_external_module.py --manifest .iverilog-ai/external/new-fro
 
 `result.spec_complete` 表示真实仿真正常退出且含正检查数的完整 SPEC_SUMMARY；与 `failures` 一起阅读。检查失败也是有效的执行结果。`diff_status` 为 identical/different/inconclusive，细节位于 `diff_<module>_<variant>/verify_diff.json`。
 
-## 接入 API Agent 的下一步接口方案（尚未实现）
+## API Agent 接入现状（已实施）
 
-当前 `ai/agent.py` 接受 `VerificationPipeline` 的 reference_model 判据；外部模块没有对应内置参考模型。现有 verify-diff 是另一类证据，**不能把它伪装成 reference_model 或将波形样本数冒充断言数**。
+外部适配器 `scripts/run_external_verification_agent.py` 已复用有界 Agent 循环及 typed observation 接口，使用 `qualified_baseline_differential`，不冒充 reference_model，也不将输出比较样本数称为断言数。实现与命令见[外部 API Agent 使用说明](external_api_agent.md)。
 
-建议增加显式 ExternalVerificationRunner，输入为：已冻结且哈希核验的基线、候选、合约、累计激励计划、已完成的基线规格资格检查、输出目录和工具/时间预算。它应：
+已实施的约束：
 
-1. 先执行并保存基线规格测试，要求正常退出、检查数大于零、失败数为零；将资格仅限定为这些已执行规格检查。
-2. 每轮将同一份激励送入冻结基线和候选，预算计入两次仿真；禁止 API 修改参考实现、合约判据或已有检查。
-3. 差分仅使用合约中输出端口及明确采样时刻。当前原始差分含内部信号，内部实现变化不应自动成为功能差异。
-4. 返回显式证据类型 `qualified_baseline_differential`，包括 baseline/candidate/contract/plan 哈希、两次仿真状态、实际比较的输出/样本、差异样本和资格记录。运行失败、空观测或 X/Z 不可判定情况需保持 inconclusive。
-5. Agent 可据此追加输入；终止标签为 behavior_difference 或预算结束。只有另有规格判据确认时才能称 functional_counterexample。
-6. 轨迹导出按证据类型分开处理，不混进目前只接收 reference_model 的训练候选；三模块本轮轨迹不能称独立留出评估。
+1. 冻结并核验基线/候选哈希，真实执行已有 SPEC_TB；仅在正常退出、正检查数且零失败时授予有限测试范围内的资格。
+2. 同一累计激励计划分别执行基线和候选，两侧周期均计入预算；API 只能追加输入，不能改变基线、合约或判据。
+3. 只比较既有资格检查支持的合约输出。生成测试台在实际采样语句同点加入只读日志，记录即时输出；严格校验补丁锚点并保存原测试台、插桩测试台及源码哈希。旧 VCD 时间戳最终值方案有采样歧义，已停用并保留错误取证，见[代理交叉检查](../review/external_agent_cross_review_2026-10-04.md)。
+4. 断言 checks/failures 保持 0，单列 compared_samples/differences；编译错误、空采样、X/Z、采样点不齐或输入哈希变化不能得到一致结论。发现差异停止为 behavior_difference，不称功能反例。
+5. 外部流水线显式关闭内置参考模型映射，避免外部 uart_tx 与内置同名案例混用判据；训练候选导出仍不把这种差分证据混入 reference_model 样本。
 
-这项 Runner 与 Agent 的类型化证据接口仍需要实现和测试；本轮完成的是可复现外部输入、真实重放与产物契约，并未声称外部 UART 已接入 API Agent。
+真实 UART RX 联调已经完成：**1 次 deepseek-flash / Chat Completions 请求、两轮 23→27 向量、每侧 182→209 周期、累计 782 双侧周期、547→628 个有效输出比较、0 差异**，因 round_budget 停止。实际 usage 为 5661 tokens，没有账单金额。该次使用修复后的即时快照；候选与基线内容相同，所以它验证的是接线与追加执行，不是通用准确率。
+
+详见[真实联调记录](external_agent_live_2026-10-04.md)及[公开摘要与工件指纹](external-agent-live-2026-10-04/summary.json)。保存后的最终 API 计划另做 0 API 历史位序变体重放，但原固定计划本来就能暴露同一差异，不能归因于新增 4 个向量。
+
+基线资格依赖已有有限规格检查，不是额外建立了一套独立完整规格，更不是独立人工认可。UART TX 两个历史变体的规格漏检仍然保留。三模块属于已开发使用的重放集；这些运行没有补齐真人试用、独立人工复核或独立留出评估。
+
+版本 `1c1e0dc` 新增的内置 before 相位保守门控针对 reference_model 路径；外部 typed observer 使用真实测试台同点快照，其 before/after 捕获口径没有因此改为预测值。

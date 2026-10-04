@@ -1,0 +1,65 @@
+{
+  "record_kind": "machine_browser_operation",
+  "human_participants": 0,
+  "planner": "offline",
+  "mobile": "desktop browser viewport emulation",
+  "checks": [
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "horizontal_overflow": false,
+      "generate_visible": true
+    },
+    {
+      "viewport": [
+        1920,
+        1080
+      ],
+      "horizontal_overflow": false,
+      "generate_visible": true
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "horizontal_overflow": false,
+      "generate_visible": true
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "after_run": true,
+      "horizontal_overflow": false
+    }
+  ],
+  "controls": {
+    "radios": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "buttons": [
+      "Drag and drop files hereLimit 2MB per file • V, SV, VHBrowse files",
+      "Browse files",
+      "生成测试计划",
+      "运行测试计划",
+      "运行示例测试"
+    ]
+  },
+  "run_text": "ICARUS 智测\nRTL VERIFICATION\n\nWORKSPACE\n工作台\n\nREVIEW\n规则审查\n\nARCHIVE\n运行档案\n\nSETTINGS\n工具设置\n\nMANUAL\n使用手册\n\nPROJECT\n项目概览\n\n验证一份 RTL\n\n对比两份 RTL\n\n学习模式\n\n当前输入\n自定义 RTL\n规划器\n离线\nIcarus\n可用\n\nICARUS / RTL VERIFICATION SYSTEM\nVERIFICATION\n验证工作台\n\n从设计到证据。\n生成测试计划，执行仿真，追踪每一次信号变化。\n\nDESIGN → PLAN → SIMULATION\nDUT / SIGNAL ACQUISITION\n01\n/ 06\nWORKSPACE\n验证工作台\nICARUS\n01\n选择设计\n\n案例\n\n自定义 RTL\n\n上传 RTL 文件\n\nDrag and drop files here\nLimit 2MB per file • V, SV, VH\nBrowse files\nsimple_alu.v\n0.9KB\n\n端口与时钟\n\n时钟信号\n\n时钟周期 (ns)\n\n时钟边沿\n\nposedge\n\n复位信号（可留空）\n\n复位有效电平\n\n0\n\n同步复位\n\n复位持续周期\n\n没有复位信号时留空。\n\n从表格生成 JSON\n\n接口定义 JSON\n\n用 JSON 刷新表格\n\n校验接口\n\n导出\n\n02\n运行测试\n\n验证目标\n\n断言与综合\n\n生成测试计划\n\n计划已生成，共 28 组测试。\n\n测试计划与规则\n\n运行测试计划\n\n运行示例测试\n\n自动验证 Agent\n\n03\n测试结果\n\n结论\n\n波形\n\n修复建议\n\n导出证据\n\n本次验证结果：符合预期\n\n运行状态\n\n运行完成\n\n比对不一致\n\n0\n未记录差异\n\n本次结论\n\n符合预期\n\n实际仿真比对\n\n84/84 条比对一致\n\n期望值：参考模型复算。本次采用参考模型结果，AI 数值不参与判定。\n\n计划执行情况\n\n统计测试计划的执行情况，不代表 RTL 代码覆盖率。\n\n测试向量覆盖\n\n28/28\n100.0%\n\n计划显式检查覆盖\n\n—\n\n计划未写入预期值，此项显示为“—”。参考模型补充的检查计入上方实际比对。\n\n运行详情\n\nICARUS 智测 / OPEN SOURCE VERIFICATION\nCONTRACT → PLAN → SIMULATION → EVIDENCE",
+  "after_navigation_text": "ICARUS 智测\nRTL VERIFICATION\n\nWORKSPACE\n工作台\n\nREVIEW\n规则审查\n\nARCHIVE\n运行档案\n\nSETTINGS\n工具设置\n\nMANUAL\n使用手册\n\nPROJECT\n项目概览\n\n验证一份 RTL\n\n对比两份 RTL\n\n学习模式\n\n当前输入\n自定义 RTL\n规划器\n离线\nIcarus\n可用\n\nICARUS / RTL VERIFICATION SYSTEM\nVERIFICATION\n验证工作台\n\n从设计到证据。\n生成测试计划，执行仿真，追踪每一次信号变化。\n\nDESIGN → PLAN → SIMULATION\nDUT / SIGNAL ACQUISITION\n01\n/ 06\nWORKSPACE\n验证工作台\nICARUS\n01\n选择设计\n\n案例\n\n自定义 RTL\n\n上传 RTL 文件\n\nDrag and drop files here\nLimit 2MB per file • V, SV, VH\nBrowse files\nsimple_alu.v\n0.9KB\n\n端口与时钟\n\n时钟信号\n\n时钟周期 (ns)\n\n时钟边沿\n\nposedge\n\n复位信号（可留空）\n\n复位有效电平\n\n0\n\n同步复位\n\n复位持续周期\n\n没有复位信号时留空。\n\n从表格生成 JSON\n\n接口定义 JSON\n\n用 JSON 刷新表格\n\n校验接口\n\n导出\n\n02\n运行测试\n\n验证目标\n\n断言与综合\n\n生成测试计划\n\n计划已生成，共 28 组测试。\n\n测试计划与规则\n\n运行测试计划\n\n运行示例测试\n\n自动验证 Agent\n\n03\n测试结果\n\n结论\n\n波形\n\n修复建议\n\n导出证据\n\n本次验证结果：符合预期\n\n运行状态\n\n运行完成\n\n比对不一致\n\n0\n未记录差异\n\n本次结论\n\n符合预期\n\n实际仿真比对\n\n84/84 条比对一致\n\n期望值：参考模型复算。本次采用参考模型结果，AI 数值不参与判定。\n\n计划执行情况\n\n统计测试计划的执行情况，不代表 RTL 代码覆盖率。\n\n测试向量覆盖\n\n28/28\n100.0%\n\n计划显式检查覆盖\n\n—\n\n计划未写入预期值，此项显示为“—”。参考模型补充的检查计入上方实际比对。\n\n运行详情\n\nICARUS 智测 / OPEN SOURCE VERIFICATION\nCONTRACT → PLAN → SIMULATION → EVIDENCE",
+  "result_signature": "84/84 条比对一致",
+  "navigation_has_results": true,
+  "success": true
+}

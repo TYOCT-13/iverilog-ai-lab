@@ -1,10 +1,10 @@
 # 资料索引（Icarus 智测 / iverilog-ai-lab）
 
-这一份是**全部材料的入口**。所有路径都相对仓库根 `E:\FPGA_WORK\iverilog-ai-lab`，
+这一份是**全部材料的入口**。当前准备转入 AI＋集成电路赛道，优先阅读下方 IC 材料；原开源赛道报告继续保留，提交时须核对所选赛道。所有路径都相对仓库根 `E:\FPGA_WORK\iverilog-ai-lab`，
 带盘符的除外。路径可用 `python scripts/check_doc_index.py` 校验是否仍然存在。
 
 - 仓库：`iverilog-ai-lab`，Apache-2.0；第三方资源保留各自许可；判定权威是 Icarus Verilog 12.0（`s20150603`）
-- 本次材料修订：**2026-10-04**；本地代码修改基线 `2ef75da`（提交截止 2026-10-15 20:00 北京时间）
+- 本次材料修订：**2026-10-04**；最终源码验证版 `867b8bd`，内置判据保护版 `1c1e0dc`，在线 pilot 冻结版 `e9b7b8a`；各记录分开引用（提交截止 2026-10-15 20:00 北京时间）
 - 状态记号：**有效** = 当前口径，可直接对外引用；**历史** = 反映当时状态，只读归档，
   引用时必须带"旧口径"标注；**待补** = 尚未完成
 
@@ -14,7 +14,8 @@
 
 | 你想干什么 | 按顺序读 |
 |---|---|
-| 5 分钟了解这个项目 | `README.md` → `docs/project_overview.md` → `docs/competition/technical_report_draft.pdf` |
+| 5 分钟了解这个项目 | `README.md` → `docs/project_overview.md` → `docs/competition/ic/report_draft.md` |
+| 准备 AI＋集成电路提交 | `docs/competition/ic/gap_checklist.md` → `docs/competition/ic/report_draft.md` → `docs/competition/ic/submission_text.md` |
 | 复核数字是否可信 | `docs/experiment/metric_inventory.md`（每个数字一行：口径/来源/时间/复现命令）→ `docs/competition/submission_gate_checklist.md` → 产物目录 |
 | 提交当天照着做 | `docs/competition/final_delivery_snapshot.md` → `docs/competition/submission_gate_checklist.md` → `docs/competition/submission_cover_text.md` |
 | 组织真人试用与反馈 | `docs/trial/README.md` → `docs/trial/organizer_workflow.md`；发给参与者从 `docs/trial/participant_start.md` 开始 |
@@ -23,9 +24,33 @@
 
 ## 1. 要交的东西
 
+### 1.1 AI＋集成电路材料
+
+| 材料 | 路径 | 状态 |
+|---|---|---|
+| IC 技术报告源 | `docs/competition/ic/report_draft.md` | 按官方七节大纲整理；真人和人工复核缺口如实保留 |
+| IC 技术报告 PDF | `docs/competition/ic/report_draft.pdf` | 已导出工作稿，逐页检查；正式团队字段与人审仍待完成 |
+| PDF 版面与文件核验 | `docs/competition/ic/pdf_validation_2026-10-04.json` | IC稿10页/正文9页；元数据、文件哈希与逐页检查；旧两份PDF按原稿同步重导出 |
+| 报名名称与简介 | `docs/competition/ic/submission_text.md` | 已备，报名系统字段另核对 |
+| IC 差距与提交清单 | `docs/competition/ic/gap_checklist.md` | 当前待办入口 |
+| 多模块 Agent 试验协议 | `docs/experiment/agent_comparison_protocol.md`、`scripts/run_agent_comparison.py` | 预注册、固定分母、请求与累计激励周期上限 |
+| 多模块真实 API 完整试验 | `docs/experiment/agent_comparison_live_2026-10-04.md`、`docs/experiment/agent-comparison-chat-2026-10-04/summary.json` | 60 行、52 请求；反馈 4/8，固定/随机 5/8；单次开发集观察 |
+| 首轮接线失败记录 | `docs/experiment/agent_comparison_interrupted_2026-10-04.md` | 已保留原始失败与未知在途用量，不能并入有效能力成绩 |
+| 代理交叉检查 | `docs/review/agent_comparison_cross_review_2026-10-04.md`、`docs/review/external_agent_cross_review_2026-10-04.md` | 机器与代理检查，非独立人工审核 |
+| 机器功能验收 | `docs/trial/machine_acceptance_2026-10-04.md` | 22 项选定 UI/CLI 测试通过；不计为真人试用 |
+| 外部冻结重放 | `docs/experiment/external_agent_readiness.md` | 24 输入重放；规格测试台检出 13/15 历史变体，含漏检 |
+| 外部 API Agent 适配 | `docs/experiment/external_api_agent.md`、`scripts/run_external_verification_agent.py` | 限定合约输出、资格检查与即时快照；实际联调另列 |
+| 外部真实 API 联调 | `docs/experiment/external_agent_live_2026-10-04.md`、`docs/experiment/external-agent-live-2026-10-04/summary.json` | 1 请求、2 轮、782 双侧周期；固定计划已有的差异不归功于新增 AI 输入 |
+| 内置参考告警诊断 | `docs/review/reference_alarm_diagnosis_2026-10-04.md` | 旧 before 假警保留，当前实现拒绝缺少独立判据的顺序逻辑 before 计划 |
+| 当前完整回归与浏览器验收 | `docs/experiment/ic_validation_2026-10-04.md`、`docs/experiment/ic-validation-2026-10-04/validation.json` | 914 通过 / 1 跳过；148 源码指纹冻结；三尺寸及实际上传、仿真、导航保持 |
+| PDF 排版修正后的全仓回归 | `docs/experiment/ic-validation-pdf-final-2026-10-04/validation.json` | 867b8bd，914 通过 / 1 跳过，227.34 秒；之前的完整回归分开保留 |
+| 最终非实现者代理检查 | `docs/review/ic_final_agent_review_2026-10-04.md` | 核心修复、工件与材料核对；材料作者参与，非独立真人审核 |
+
+### 1.2 原开源赛道资料与共用交付
+
 | 材料 | 路径 | 状态 | 备注 |
 |---|---|---|---|
-| 技术报告（PDF） | `docs/competition/technical_report_draft.pdf` | 有效 | 27 页 / 正文 22 页 / 925 KB（2026-10-04 重渲染）；官方 PDF 上限 10 MB |
+| 原开源技术报告（PDF） | `docs/competition/technical_report_draft.pdf` | 原赛道稿 | 26 页 / 正文 21 页 / 924 KB（2026-10-04 排版修复后按原稿重渲染）；当前 IC 报告独立使用 |
 | 技术报告（源） | `docs/competition/technical_report_draft.md` | 有效 | 改完用 `python scripts/markdown_to_pdf.py` 重渲染 |
 | 报告配图 | `docs/competition/figures/` | 有效 | 4 张（架构/流程/分层证据/基准），`scripts/make_report_figures.py` |
 | 作品名称与简介 | `docs/competition/submission_cover_text.md` | 有效 | 简介按 Unicode 码点实测 **242 字**（含空格标点，平台限制另行核对） |
@@ -43,7 +68,7 @@
 
 ## 2. 实验与证据
 
-### 2.1 主结果：每计划预算对齐实验与同轮数子集（固定分母）
+### 2.1 原在线规划实验：每计划预算对齐与同轮数子集（固定分母）
 
 | 内容 | 位置 |
 |---|---|
@@ -106,7 +131,7 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 | 总览 PDF | `docs/project_overview.pdf` | 历史 |
 | 架构 | `docs/architecture.md` | 有效 |
 | API 集成入口 | `docs/experiment/api_handoff.md` | 有效 |
-| API 自动验证 Agent | `docs/experiment/api_agent.md`、`scripts/run_verification_agent.py`、`scripts/export_agent_trajectories.py` | 已实现循环与轨迹采集；托管微调与效果对照尚未完成 |
+| API 自动验证 Agent | `docs/experiment/api_agent.md`、`scripts/run_verification_agent.py`、`scripts/export_agent_trajectories.py` | 已实现循环、轨迹及单次开发集对照；托管微调、独立留出及多次重复尚未完成 |
 | API Agent 本地验收 | `docs/experiment/api_agent_validation_2026-10-04.md` | 先前离线验收快照：195 项相关回归通过 |
 | API Agent 真实联调 | `docs/experiment/api_agent_live_2026-10-04.md`、`docs/experiment/api-agent-live-2026-10-04/summary.json` | 3 次 DeepSeek 4.1 Flash 请求；反馈补测与已知缺陷回放通过，211 项相关回归通过 |
 | 第一次用（分级手册） | `docs/manual/01_beginner.md` | 有效 |
@@ -154,20 +179,20 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 
 ## 4. 工程门禁（当前记录与历史快照）
 
-上次完整回归及门禁快照见 `docs/experiment/local_validation_2026-10-04.md`。
-其中 768 项通过是该次完整验证的记录，不包含之后新增试用工具和 Agent 测试；后续验收分别见对应记录。
-下表的 2026-10-01 数字同样为历史快照。
+当前完整回归及浏览器操作见 `docs/experiment/ic_validation_2026-10-04.md`。
+其中 914 项通过对应源码冻结记录；768 项和 2026-10-01 数字均为历史快照，不能相加成去重测试总数。
 
 | 门禁 | 命令 | 结果 |
 |---|---|---|
+| 当前完整回归 | `docs/experiment/ic_validation_2026-10-04.md` | 867b8bd，914 passed / 1 skipped / 0 failed；mypy 72 文件 0 error，未可达扫描 163 文件，BOM 0 问题 |
 | 上次完整验证快照 | `docs/experiment/local_validation_2026-10-04.md` | 2026-10-04：768 passed / 1 skipped，mypy 64 文件 0 error；PDF 9 项复核通过 |
 | 测试（2026-10-01 历史） | `python -m pytest -q` | **720 passed / 1 skipped**（历史干净 venv：675 / 3 / 0） |
 | 类型 | `python -m mypy` | 61 文件 0 error |
 | 死代码 | `python scripts/check_dead_code.py` | 121 文件 0 处 |
 | 编码/BOM | `python scripts/strip_bom.py --check` | 0 问题 |
 | 交付体检 | `python scripts/check_submission.py --repo .` | **1 error**（`CITATION.cff` 占位符） |
-| 报告页数/体积 | `python scripts/check_submission.py --kind report docs/competition/technical_report_draft.pdf` | 0 error / 1 warning（正文 22 页超建议值） |
-| 索引路径存在性 | `python scripts/check_doc_index.py` | **115/115 条路径存在**（2026-10-04；此前反向测试：故意写错一条则退出码 1） |
+| 报告页数/体积 | `python scripts/check_submission.py --kind report docs/competition/technical_report_draft.pdf` | 原开源稿：0 error / 1 warning（正文21页超建议值）；IC稿10页/正文9页，0 error / 0 warning |
+| 索引路径存在性 | `python scripts/check_doc_index.py` | **138/138 条路径存在**（2026-10-04；此前反向测试：故意写错一条则退出码 1） |
 
 ---
 
@@ -209,7 +234,7 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 | 3–5 分钟演示视频 | 待补 | 需要录制；脚本 `docs/demo/demo_script.md` |
 | 外部独立复核 | 待补 | 3 个基线与 21 个候选待真人逐条复核；记录关系、协助、分歧与不可判定 |
 | GitHub Action 外部调用验证 | 待补 | 需要一个调用方仓库 |
-| 正文 22 页 | 已知取舍 | 超大纲"建议 ≤15 页"；官方不以篇幅评分，已披露 |
+| 原开源报告正文 21 页 | 历史取舍 | 原赛道稿排版修复后为正文21页；IC稿正文9页，各自计量，不混用 |
 
 试用与复核的完整入口见 §3.1。v1 原始表和汇总脚本保留兼容，新记录不覆盖旧表；缺少真人反馈、独立审核或视频时继续标注待补。
 

@@ -1,0 +1,34 @@
+{
+  "record_kind": "machine_regression_after_pdf_layout_fix",
+  "recorded_at_utc": "2026-10-04T08:00:33.900248+00:00",
+  "tested_source_commit": "867b8bd564c881954c98cc18813884a4074d1ed5",
+  "frozen_source_files": 148,
+  "changed_sources_at_finish": [],
+  "pytest": {
+    "tests": 915,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1,
+    "passed": 914,
+    "exit_code": 0,
+    "elapsed_seconds_log": 227.34
+  },
+  "mypy": {
+    "exit_code": 0,
+    "source_files": 72
+  },
+  "human_participants": 0,
+  "artifacts_sha256": {
+    "bom.log": "3d4da650c36b1eeaf4a26ffebd713721816745d2e975182d05ce1313c3bb34f3",
+    "deadcode.log": "3be0f95117ee8b9f6e9228980aeea3a45ce50e3ad446873b35208394151a08dd",
+    "metadata.json": "75f851d8f25ebd59c0b02aed4f3cdd44ccbeca10ffd824f4f9bab5c1ef749863",
+    "mypy.log": "7fc3a2a008fd149a547725791a88995a903553c47a281224a552ff815f4dd4db",
+    "pytest.log": "02e40a2b8644a998b8dba9639d97c5b3f0524944b8af07c86276785392a9954d",
+    "pytest.xml": "91e9f5743e4d8cafbcaf491e3cce09fb0260c991e9acdea6f4e49b53bf486973"
+  },
+  "limitations": [
+    "Does not rerun the historical API pilot",
+    "Not independent human review",
+    "IC report layout and submission checks are recorded separately"
+  ]
+}

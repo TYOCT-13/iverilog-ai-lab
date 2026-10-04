@@ -1,0 +1,120 @@
+{
+  "record_kind": "machine_regression_and_browser_acceptance",
+  "recorded_at_utc": "2026-10-04T07:36:04.619210+00:00",
+  "tested_commit": "1c1e0dc5b30a65a83673951cc495b1a7b700511c",
+  "source_files_frozen": 148,
+  "changed_source_files_at_recording": [],
+  "pytest": {
+    "tests": 915,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1,
+    "passed": 914,
+    "elapsed_seconds_log": 211.47,
+    "elapsed_seconds_junit": 211.416,
+    "exit_code": 0
+  },
+  "mypy": {
+    "exit_code": 0,
+    "source_files": 72
+  },
+  "deadcode": {
+    "exit_code": 0,
+    "scanned_files": 160
+  },
+  "bom": {
+    "exit_code": 0,
+    "issues": 0
+  },
+  "versions": {
+    "python": {
+      "return_code": 0,
+      "first_line": "Python 3.12.7"
+    },
+    "iverilog": {
+      "return_code": 0,
+      "first_line": "Icarus Verilog version 12.0 (devel) (s20150603-1110-g18392a46)"
+    },
+    "vvp": {
+      "return_code": 0,
+      "first_line": "Icarus Verilog runtime version 12.0 (devel) (s20150603-1110-g18392a46)"
+    }
+  },
+  "browser": {
+    "human_participants": 0,
+    "planner": "offline",
+    "simulator": "actual Icarus",
+    "checks": [
+      {
+        "viewport": [
+          1440,
+          900
+        ],
+        "horizontal_overflow": false,
+        "generate_visible": true
+      },
+      {
+        "viewport": [
+          1920,
+          1080
+        ],
+        "horizontal_overflow": false,
+        "generate_visible": true
+      },
+      {
+        "viewport": [
+          390,
+          844
+        ],
+        "horizontal_overflow": false,
+        "generate_visible": true
+      },
+      {
+        "viewport": [
+          390,
+          844
+        ],
+        "after_run": true,
+        "horizontal_overflow": false
+      }
+    ],
+    "upload": "rtl/simple_alu.v",
+    "vectors": 28,
+    "checks_consistent": 84,
+    "navigation_preserved_result": true,
+    "mobile_device": "desktop Edge viewport emulation, not physical phone"
+  },
+  "human_participants": 0,
+  "artifacts_sha256": {
+    "bom.log": "3d4da650c36b1eeaf4a26ffebd713721816745d2e975182d05ce1313c3bb34f3",
+    "browser/results-mobile.png": "f166307ba15aafac387c44d19f48ea5bb652b1cb05cbaf49698e038d94af1856",
+    "browser/results.json": "98063947568dadc2de817d9ed8aa39d98e3042b96b21366978bc7bee7ae65746",
+    "browser/workspace-1440.png": "e4c6313db41c094326f6dfa5a5865003f9579b739b9aeffe7a6f5fdf74d8b4e2",
+    "browser/workspace-1920.png": "92838ab2a234251590a8892b394931ff22853e552524f98ad8f5782e8f60da68",
+    "browser/workspace-390.png": "62096eacf635269a0c9c29319311fb3b7ce54bebd30fbd734cad677531ce505d",
+    "browser/workspace-run-desktop.png": "26d8e13de86c443a17bcbc07922d745b9e92a8b36f55b56a8665b3643fa0bf8b",
+    "browser/workspace-run-mobile.png": "a60da7f21184d41b92e63ddd77b0e30b6c1e0a260671aca47ef8ba6e0a26f62d",
+    "deadcode.log": "159509bbb2e3c31a015f45ee1d38015e432279a0825b76c63f41297608d70af7",
+    "metadata.json": "4bf10846ada3e1652efd26448d1ec39e87bf46c726819224f7974619f3a95bed",
+    "mypy.log": "7fc3a2a008fd149a547725791a88995a903553c47a281224a552ff815f4dd4db",
+    "pytest.log": "d5f85d831cc81a85561cdd9c4f63e9d12f2bca986cc31bb36221c8dd64e58182",
+    "pytest.xml": "6552a39363999840070e06645e9e196f1cc0f5fffdd659a7a5b97d0a951371fa"
+  },
+  "history": [
+    {
+      "raw_directory": ".iverilog-ai/ic-validation-exact-snapshot-20261004",
+      "passed": 909,
+      "failed": 1,
+      "skipped": 1,
+      "note": "basetemp placed inside project violated an existing test assumption; no test assertion weakened"
+    },
+    {
+      "raw_directory": ".iverilog-ai/ic-validation-final-20261004",
+      "passed": 910,
+      "failed": 0,
+      "skipped": 1,
+      "tested_commit": "9fbfb9b",
+      "note": "before sampling and held-input protection was added later"
+    }
+  ]
+}
