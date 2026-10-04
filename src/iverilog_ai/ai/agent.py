@@ -146,17 +146,47 @@ def decision_prompt(state: dict[str, Any]) -> str:
     return SYSTEM_PROMPT + "\nSTATE_JSON:\n" + _json(state)
 
 
+class _ResponsePolicyError(ValueError):
+    def __init__(self, code: Literal["duplicate_json_key", "credential_in_response"]) -> None:
+        self.code = code
+        super().__init__(code)
+
+
+def _contains_secret_json(value: Any, secret: str) -> bool:
+    """Inspect decoded strings directly so quotes/backslashes stay literal."""
+    if not secret:
+        return False
+    if isinstance(value, str):
+        return secret in value
+    if isinstance(value, dict):
+        return any(_contains_secret_json(key, secret) or _contains_secret_json(item, secret)
+                   for key, item in value.items())
+    if isinstance(value, list):
+        return any(_contains_secret_json(item, secret) for item in value)
+    return False
+
+
+def _unique_json_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+    """Reject duplicate decoded keys before a parser can discard any value."""
+    decoded: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in decoded:
+            raise _ResponsePolicyError("duplicate_json_key")
+        decoded[key] = value
+    return decoded
+
+
 def _response_json_and_guard(raw: str, secret: str) -> bool:
     """Check the active key before recording raw or decoded JSON strings."""
     if secret and secret in raw:
-        raise ValueError("response contains a credential")
+        raise _ResponsePolicyError("credential_in_response")
     try:
-        decoded = json.loads(raw)
-    except (json.JSONDecodeError, ValueError):
+        decoded = json.loads(raw, object_pairs_hook=_unique_json_pairs)
+    except json.JSONDecodeError:
         # Do not archive malformed JSON whose escaped strings cannot be checked.
         return False
-    if secret and secret in _json(decoded):
-        raise ValueError("response contains a credential")
+    if _contains_secret_json(decoded, secret):
+        raise _ResponsePolicyError("credential_in_response")
     return True
 
 
@@ -302,7 +332,7 @@ def run_verification_agent(
         "stimulus_cycles_executed": 0, "stop_reason": "interrupted",
         "candidate_stimulus_cycles_executed": 0, "baseline_stimulus_cycles_executed": 0,
     }
-    if secret and secret in _json(trace):
+    if _contains_secret_json(trace, secret):
         raise ValueError("input contains a credential; refuse to record or send it")
     output.mkdir(parents=True, exist_ok=False)
     trace_path = output / "agent_trajectory.json"
@@ -413,6 +443,8 @@ def run_verification_agent(
                 except Exception as exc:
                     decision_record["status"] = "rejected"
                     decision_record["error_type"] = type(exc).__name__
+                    if isinstance(exc, _ResponsePolicyError):
+                        decision_record["policy_error_code"] = exc.code
                     if isinstance(exc, ValidationError):
                         # Error locations/messages may contain model-supplied text; keep codes only.
                         decision_record["validation_error_types"] = sorted({item["type"] for item in exc.errors(include_input=False, include_context=False)})
@@ -463,7 +495,7 @@ def run_verification_agent(
                     if not isinstance(observed, AgentObservation):
                         raise ValueError("round observer must return a typed AgentObservation")
                     observation = observed.model_dump(mode="json")
-                    if secret and secret in _json(observation):
+                    if _contains_secret_json(observation, secret):
                         raise ValueError("observation contains a credential")
                 functional_coverage = analyze_functional_coverage(
                     actual, rtl_sha256=trace["rtl_sha256"],

@@ -7,7 +7,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from iverilog_ai.ai.agent import AgentDecision, AgentLimits, SYSTEM_PROMPT, run_verification_agent
+from iverilog_ai.ai.agent import AgentDecision, AgentLimits, AgentObservation, SYSTEM_PROMPT, run_verification_agent
 from iverilog_ai.ai.provider import OpenAICompatibleProvider, ProviderMessage
 from iverilog_ai.core.contracts import DutContract
 
@@ -190,9 +190,91 @@ def test_raw_and_unicode_escaped_active_keys_are_not_archived_or_executed(tmp_pa
     install(monkeypatch, raw)
     result = run(tmp_path, service)
     assert result.stop_reason == "policy_error"
+    assert result.trajectory["decisions"][0]["policy_error_code"] == "credential_in_response"
     assert not (tmp_path / "agent/untrusted_decisions").exists()
     assert service.api_key not in result.trajectory_path.read_text()
     assert "\\u0073ynthetic" not in result.trajectory_path.read_text()
+
+
+@pytest.mark.parametrize("raw", [
+    '{"action":"stop","reason":"\\u0073ynthetic-v4-test-key-only","reason":"safe","vectors":[]}',
+    '{"action":"append_vectors","action":"stop","reason":"safe","vectors":[]}',
+    '{"action":"stop","reason":"first","reason":"second","vectors":[]}',
+    '{"action":"stop","reason":"first","reas\\u006fn":"second","vectors":[]}',
+    '{"action":"stop","reason":"safe","vectors":[],"extra":'
+    '{"reason":"\\u0073ynthetic-v4-test-key-only","reason":"safe"}}',
+    '{"action":"append_vectors","reason":"safe","vectors":[{"name":"attempt","inputs":'
+    '{"enable":"\\u0073ynthetic-v4-test-key-only","enable":1},"cycles":1,"sample_phase":"after"}]}',
+], ids=["hidden_key", "duplicate_action", "duplicate_reason", "equivalent_decoded_key",
+        "nested_hidden_key", "nested_input_duplicate"])
+def test_duplicate_decoded_keys_never_archive_or_execute(tmp_path, monkeypatch, raw):
+    service = provider()
+    install(monkeypatch, raw)
+    pipeline = Pipeline()
+    result = run(tmp_path, service, pipeline)
+    row = result.trajectory["decisions"][0]
+    assert result.stop_reason == "policy_error" and not pipeline.plans
+    assert row["status"] == "rejected" and row["policy_error_code"] == "duplicate_json_key"
+    assert row["usage"] == {"prompt_tokens": 7, "completion_tokens": 11}
+    assert "action" not in row and "untrusted_response" not in row
+    assert not (tmp_path / "agent/untrusted_decisions").exists()
+    assert service.api_key not in result.trajectory_path.read_text()
+    assert "\\u0073ynthetic" not in result.trajectory_path.read_text()
+
+
+@pytest.mark.parametrize("secret,location", [
+    ('synthetic-"-credential', "reason"),
+    ('synthetic-\\-credential', "reason"),
+    ('synthetic-"-\\-credential', "nested_value"),
+    ('synthetic-"-\\-credential', "object_key"),
+], ids=["quote", "backslash", "nested_value", "decoded_key"])
+def test_escaped_punctuation_in_active_key_is_checked_as_decoded_text(tmp_path, monkeypatch, secret, location):
+    service = provider()
+    service.api_key = secret
+    response = {"action": "stop", "reason": "safe", "vectors": []}
+    if location == "reason":
+        response["reason"] = secret
+    elif location == "nested_value":
+        response["extra"] = {"items": [0, {"nested": secret}]}
+    else:
+        response[secret] = "safe"
+    raw = json.dumps(response)
+    assert secret not in raw
+    install(monkeypatch, raw)
+    pipeline = Pipeline()
+    result = run(tmp_path, service, pipeline)
+    row = result.trajectory["decisions"][0]
+    assert result.stop_reason == "policy_error" and not pipeline.plans
+    assert row["policy_error_code"] == "credential_in_response"
+    assert "action" not in row and "untrusted_response" not in row
+    assert not (tmp_path / "agent/untrusted_decisions").exists()
+    assert json.dumps(secret)[1:-1] not in result.trajectory_path.read_text()
+
+
+def test_escaped_active_key_in_initial_state_is_rejected_before_any_request(tmp_path, monkeypatch):
+    service = provider()
+    service.api_key = 'synthetic-"-\\-credential'
+    bodies = install(monkeypatch, stop())
+    contract = DutContract.from_dict(json.loads((ROOT / "examples/mod10_counter_contract.json").read_text()))
+    with pytest.raises(ValueError, match="input contains a credential"):
+        run_verification_agent(provider=service, contract=contract, rtl_path=ROOT / "rtl/mod10_counter.v",
+            output_dir=tmp_path / "agent", objective=service.api_key, pipeline=Pipeline())
+    assert not bodies and service.request_count == 0
+    assert not (tmp_path / "agent").exists()
+
+
+def test_escaped_active_key_in_typed_observation_is_never_recorded(tmp_path, monkeypatch):
+    service = provider()
+    service.api_key = 'synthetic-"-\\-credential'
+    raw = json.dumps({"action": "append_vectors", "reason": "safe", "vectors": [
+        {"name": "try", "inputs": {"enable": 1}, "cycles": 1, "sample_phase": "after"}]})
+    install(monkeypatch, raw)
+    def observer(actual):
+        return AgentObservation(status="passed", verdict=service.api_key, expectation_source="reference_model")
+    result = run(tmp_path, service, round_observer=observer, simulation_multiplier=2)
+    assert result.stop_reason == "execution_error"
+    assert result.trajectory["rounds"] == []
+    assert json.dumps(service.api_key)[1:-1] not in result.trajectory_path.read_text()
 
 
 @pytest.mark.parametrize("raw,finish", [(stop(), "length"), ("{}" * 32001, "stop"), ('{"action":', "stop"), (stop(), None)],

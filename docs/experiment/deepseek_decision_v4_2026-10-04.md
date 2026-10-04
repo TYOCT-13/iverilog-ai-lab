@@ -25,12 +25,16 @@ schema 保持 `extra="forbid"`，不删除非法 type、不修补输出、不回
 满足下列条件的决策正文原字节，保存为 `untrusted_decisions/decision-NNN.json`，供错误诊断和将来的失败轨迹筛选：
 
 - 最多 64000 字符、256000 UTF-8 字节，服务报告结束为 `stop`。
-- JSON 可解析；活动 provider key 不出现在 raw，也不出现在解码后以 ensure_ascii=False 规范化的 JSON 中。这样能拒绝 `\u` 转义的活动密钥。
+- JSON 可解析，每个对象内的解码键必须唯一，包括嵌套对象。活动 provider key 不出现在 raw，也不出现在递归遍历的已解码字符串键/值中；不通过重新 JSON 序列化来检查。这样能拒绝 `\u` 转义以及带 quote/backslash 的活动密钥。
 - 路径完全由程序生成并受本次 output_dir 的 SafePathPolicy 限制；目录链接被拒绝，目标文件必须新建，以 exclusive open 写入，不覆盖已有文件。
 
 每条决策保存工件相对路径、原字节 SHA256、字节数、`record_kind="untrusted_model_decision"`、`trusted=false`、结束状态与凭据检查范围。合法 JSON 但 schema 不合法的响应也能保留；后续 schema 校验仍然拒绝执行，usage 与失败代码照常记录。
 
 该产物不进入 observation 或下一次模型状态，不作为缺陷、正确性或覆盖的裁决，也不自动当作正向 SFT 样本。现有训练候选导出器依旧要求决策通过校验并具有真实执行结果。
+
+应用后的独立代理复核发现初版的重复键漏洞：第一个 reason 包含 Unicode 转义的活动模拟 key，后一个 reason 为 safe；普通 json.loads 丢弃前值，导致归档包含被遗漏的模拟凭据，并接受最后一个值。原复现保留于 `.iverilog-ai/v4-proxy-audit-05961407c1/duplicate_key_probe.json`，只使用模拟 key，没有真实 API 请求。修复使用 object_pairs_hook 在丢弃值之前检查每个解码键，重复键直接抛出静态错误并停止 Agent，绝不归档或执行；这个错误不能当作普通 JSON 解析失败吞掉。重复 action/reason、Unicode 等价键、嵌套字段或输入键均采用同一拒绝规则。
+
+独立复核还发现模拟活动 key 含 quote/backslash 时，重新序列化会再次转义字符，从而漏掉明文子串。现版直接检查全部已解码字符串键/值，并在初始状态与 typed observation 的既有守门处复用同一窄检查。输入含活动 key 时零请求拒绝；观察含活动 key 时不记录该轮。决策只保留静态 `duplicate_json_key` 或 `credential_in_response` 错误码，不保存模型原文、密钥或异常详情；这仍不保证检测其他秘密或任意编码方式。
 
 这里的凭据检查只覆盖活动 key 的原文及 JSON 解码，不保证发现其他秘密或所有编码方式。无法解析的 JSON、长度截断、超大正文、结束状态未知均不保存原文。现有 SSE 路径没有可靠的完成标记遥测，因此仅返回文本而没有 stop 标记时不宣称获得完整可归档响应；旧调用的判定不因此放宽。
 
@@ -63,3 +67,5 @@ schema 保持 `extra="forbid"`，不删除非法 type、不修补输出、不回
 ```
 
 应用后正常导入路径的结果：142 项通过、1 项因同一 Windows 权限限制跳过，7.94 秒；两份实际源码 mypy 通过，diff whitespace 检查无错误。JUnit 保存于 `.iverilog-ai/v4-prepared/applied-tests.xml`。本代理不调用真实 API，正式实验由主代理另外冻结并执行。
+
+独立复核后的凭据边界修复回归：154 项通过、1 项因相同 Windows 符号链接权限限制跳过，8.66 秒；实际 provider/agent 的 mypy 通过，diff whitespace 检查通过。新增检查包含重复 action/reason、Unicode 等价键、顶层与嵌套重复隐藏值、quote/backslash 的解码字符串值与键，以及初始状态零请求拒绝、typed observation 不落盘。JUnit 另存于 `.iverilog-ai/v4-prepared/credential-guard-tests.xml`；原重复键复现与此前测试收据保留。
