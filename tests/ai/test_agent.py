@@ -378,3 +378,40 @@ def test_typed_external_observer_is_not_augmented_with_builtin_coverage(tmp_path
     assert row["functional_coverage"]["status"] == "unsupported"
     state = json.loads(provider.prompts[1].split("STATE_JSON:\n", 1)[1])
     assert "functional_coverage" not in state["observation"]
+
+
+@pytest.mark.parametrize("mode", [None, "enabled", "disabled"])
+def test_api_agent_records_selected_mode_without_credentials(tmp_path, monkeypatch, mode):
+    bodies = []
+    secret = "synthetic-agent-key-do-not-record"
+    class Response:
+        def __enter__(self): return self
+        def __exit__(self, *args): return None
+        def read(self):
+            return json.dumps({"choices": [{"message": {"content": json.dumps(
+                {"action": "stop", "reason": "no further proposal", "vectors": []})}, "finish_reason": "stop"}]}).encode()
+    def transport(request, timeout):
+        bodies.append(json.loads(request.data))
+        return Response()
+    monkeypatch.setattr("iverilog_ai.ai.provider.build_opener", lambda *args: SimpleNamespace(open=transport))
+    provider = OpenAICompatibleProvider(endpoint="https://api.deepseek.com", model="deepseek-flash",
+        api_key=secret, allow_network=True, wire_api="chat_completions", thinking_mode=mode)
+    result = run(tmp_path, provider, limits=AgentLimits(max_requests=1))
+    assert result.stop_reason == "model_stopped"
+    assert result.trajectory["record_kind"] == "api"
+    assert result.trajectory["thinking_mode"] == mode
+    assert result.trajectory["thinking_mode_source"] == ("explicit_request" if mode is not None else "not_requested")
+    assert ("thinking" in bodies[0]) is (mode is not None)
+    if mode is not None:
+        assert bodies[0]["thinking"] == {"type": mode}
+    assert secret not in result.trajectory_path.read_text()
+    assert secret not in json.dumps(provider.request_diagnostics())
+
+
+def test_test_provider_does_not_claim_a_service_thinking_mode(tmp_path):
+    provider = Scripted(append())
+    provider.thinking_mode = "disabled"
+    result = run(tmp_path, provider, limits=AgentLimits(max_rounds=1))
+    assert result.trajectory["record_kind"] == "test_provider"
+    assert result.trajectory["thinking_mode"] is None
+    assert result.trajectory["thinking_mode_source"] == "not_requested"

@@ -262,7 +262,12 @@ def decision_records(index: int, trace: dict) -> list[dict]:
 
 def execute(registration: dict, output: Path, *, endpoint="", model="", key="", request_cap=0,
             max_output_tokens=4096, wire_api: Literal["chat_completions", "responses"] = "chat_completions",
+            thinking_mode: Literal["enabled", "disabled"] | None = None,
             iverilog="iverilog", vvp="vvp", provider_factory=None) -> dict:
+    if thinking_mode not in {None, "enabled", "disabled"}:
+        raise ValueError("invalid thinking mode")
+    if wire_api == "responses" and thinking_mode is not None:
+        raise ValueError("explicit thinking mode requires chat_completions")
     if any(not (ROOT / p).is_file() or sha(ROOT / p) != digest
            for p, digest in registration["code_and_input_sha256"].items()):
         raise ValueError("registered source/input changed before execution")
@@ -271,6 +276,8 @@ def execute(registration: dict, output: Path, *, endpoint="", model="", key="", 
     output.mkdir(parents=True, exist_ok=False)
     write(output / "preregistration.json", registration)
     settings = {"preregistration_sha256": sha(output / "preregistration.json"), "wire_api": wire_api,
+                "thinking_mode": thinking_mode,
+                "thinking_mode_meaning": "unspecified_provider_default" if thinking_mode is None else "explicit_request",
                 "endpoint_host": urlsplit(endpoint).hostname, "model": model,
                 "max_output_tokens": max_output_tokens, "total_request_cap": request_cap,
                 "request_timeout_seconds": 60, "stream": False, "iverilog": iverilog, "vvp": vvp,
@@ -279,6 +286,7 @@ def execute(registration: dict, output: Path, *, endpoint="", model="", key="", 
     write(output / "run_settings.json", settings)
     report = {"preregistration_sha256": sha(output / "preregistration.json"),
               "run_settings_sha256": sha(output / "run_settings.json"), "wire_api": wire_api, "profile": profile,
+              "thinking_mode": thinking_mode,
               "started_at": datetime.now(timezone.utc).isoformat(), "endpoint_host": urlsplit(endpoint).hostname,
               "model": model, "total_request_cap": request_cap, "max_output_tokens": max_output_tokens,
               "cost_currency": None, "cost_missing_reason": "provider billing not supplied; usage is not currency",
@@ -361,7 +369,7 @@ def execute(registration: dict, output: Path, *, endpoint="", model="", key="", 
                     count = min(1 if row["strategy"] == "single" else 3, remaining)
                     provider = provider_factory(count) if provider_factory else OpenAICompatibleProvider(
                         endpoint=endpoint, model=model, api_key=key, allow_network=True, store=False,
-                        reasoning_effort=None, timeout=60, stream=False, request_limit=count, wire_api=wire_api,
+                        reasoning_effort=None, thinking_mode=thinking_mode, timeout=60, stream=False, request_limit=count, wire_api=wire_api,
                         max_output_tokens=max_output_tokens, force_output_limit=True)
                     result = run_verification_agent(provider=provider, contract=contract, rtl_path=ROOT / row["rtl"],
                         output_dir=work / "agent", objective="Check contract behavior and protocol boundaries",
@@ -441,18 +449,21 @@ def main(argv=None) -> int:
     parser.add_argument("--endpoint", default=os.getenv("IVERILOG_AI_BASE_URL", ""))
     parser.add_argument("--model", default=os.getenv("IVERILOG_AI_MODEL", ""))
     parser.add_argument("--wire-api", choices=["chat_completions", "responses"], default="chat_completions")
+    parser.add_argument("--thinking-mode", choices=["enabled", "disabled"], default=None)
     parser.add_argument("--api-key-file", type=Path)
     parser.add_argument("--output-dir", type=Path, default=None)
     parser.add_argument("--iverilog", default="D:/iverilog/bin/iverilog.exe")
     parser.add_argument("--vvp", default="D:/iverilog/bin/vvp.exe")
     args = parser.parse_args(argv)
     try:
+        if args.wire_api == "responses" and args.thinking_mode is not None:
+            raise ValueError("explicit thinking mode requires chat_completions")
         if args.total_request_cap < 0:
             raise ValueError("negative request cap")
         reg = preregister(args.cases, args.strategies, args.repeats, args.defects_per_case, profile=args.profile)
         print(json.dumps({"mode": "execute" if args.execute else "dry_run", "samples": len(reg["rows"]),
                           "theoretical_requests": reg["theoretical_requests"], "authorized_request_cap": args.total_request_cap,
-                          "wire_api": args.wire_api, "endpoint_host": urlsplit(args.endpoint).hostname,
+                          "wire_api": args.wire_api, "thinking_mode": args.thinking_mode, "endpoint_host": urlsplit(args.endpoint).hostname,
                           "model": args.model, "max_output_tokens": args.max_output_tokens}))
         if not args.execute:
             return 0
@@ -466,7 +477,7 @@ def main(argv=None) -> int:
                 raise ValueError("credential missing")
         execute(reg, args.output_dir or ROOT / (".iverilog-ai/agent-comparison-v2" if args.profile == "v2" else ".iverilog-ai/agent-comparison-pilot"), endpoint=args.endpoint, model=args.model, key=key,
                 request_cap=args.total_request_cap, max_output_tokens=args.max_output_tokens,
-                wire_api=args.wire_api, iverilog=args.iverilog, vvp=args.vvp)
+                wire_api=args.wire_api, thinking_mode=args.thinking_mode, iverilog=args.iverilog, vvp=args.vvp)
         return 0
     except Exception as exc:
         print(f"Comparison failed: {type(exc).__name__}")

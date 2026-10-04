@@ -237,6 +237,9 @@ def run_verification_agent(
         "schema_version": "1.0", "prompt_version": PROMPT_VERSION,
         "record_kind": descriptor, "model": str(getattr(provider, "model", "test")),
         "wire_api": getattr(provider, "wire_api", None),
+        "thinking_mode": provider.thinking_mode if isinstance(provider, OpenAICompatibleProvider) else None,
+        "thinking_mode_source": ("explicit_request" if isinstance(provider, OpenAICompatibleProvider)
+                                 and provider.thinking_mode is not None else "not_requested"),
         "feedback_enabled": include_feedback,
         "functional_coverage_feedback_enabled": include_functional_coverage,
         "simulation_multiplier": simulation_multiplier,

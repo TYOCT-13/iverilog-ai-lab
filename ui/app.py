@@ -12,6 +12,7 @@ import shutil
 import subprocess
 import time
 import uuid
+from urllib.parse import urlsplit
 from iverilog_ai.ai import (
     DeterministicLocalProvider,
     MockProvider,
@@ -75,6 +76,18 @@ def _configured_api_key(endpoint: str, entered_key: str) -> str:
     if entered_key.strip():
         return entered_key.strip()
     return _local_api_profile.key_for(endpoint) if _local_api_profile else ""
+
+
+def _thinking_mode_for(choice: str, endpoint: str, model: str, wire_api: str) -> Literal["enabled", "disabled"] | None:
+    if wire_api != "chat_completions":
+        return None
+    if choice == "关闭":
+        return "disabled"
+    if choice == "开启":
+        return "enabled"
+    if choice == "自动" and urlsplit(endpoint).hostname == "api.deepseek.com" and model.lower() == "deepseek-flash":
+        return "disabled"
+    return None
 
 
 @contextmanager
@@ -1457,6 +1470,7 @@ def _build_provider(target: str):
         api_key=key,
         wire_api=wire,
         reasoning_effort=None if reasoning.startswith("不发送") or wire != "responses" else reasoning,
+        thinking_mode=_thinking_mode_for(str(settings.get("provider_thinking_mode", "自动")), endpoint, model, wire),
         allow_network=True,
         store=False,
         timeout=int(settings.get("provider_api_timeout", 120)),
@@ -2358,13 +2372,17 @@ with _SETTINGS:
         api_timeout = st.slider("请求超时（秒）", min_value=30, max_value=300, value=120, step=10, key="provider_api_timeout", help="模型响应较慢时可适当调高。")
         api_output_tokens = st.slider("输出长度上限（token）", min_value=2048, max_value=8192, value=_local_api_profile.max_output_tokens if _local_api_profile else 4096, step=512, key="provider_api_output_tokens", help="设置过小可能导致测试计划生成不完整。")
         wire_api_label = st.selectbox("接口格式", ["Chat Completions API", "Responses API"], key="provider_wire_api", help="按服务商文档选择；不确定时使用 Chat Completions。")
+        thinking_label = st.selectbox("思考模式", ["自动", "服务默认", "关闭", "开启"], key="provider_thinking_mode",
+            disabled=wire_api_label == "Responses API", help="自动会关闭官方 DeepSeek Flash 的思考，便于生成工具计划；其他服务沿用默认。手动开启或关闭只适用于支持 thinking 参数的 Chat 服务。")
         reasoning_label = st.selectbox("推理强度", ["不发送（兼容性最高）", "minimal", "low", "medium", "high", "xhigh"], key="provider_reasoning", help="仅 Responses 接口使用。服务商不支持时选择「不发送」。")
         if st.button("检查配置", help="仅检查参数，不请求模型。"):
             try:
                 _diag_wire = _wire_api_for(str(wire_api_label))
                 _diag_reasoning = None if str(reasoning_label).startswith("不发送") or _diag_wire != "responses" else reasoning_label
                 _diag_provider = OpenAICompatibleProvider(endpoint=api_base, model=api_model, api_key=_configured_api_key(api_base, api_key) or " ",
-                    wire_api=_diag_wire, reasoning_effort=_diag_reasoning, allow_network=True, store=False, timeout=api_timeout, max_output_tokens=api_output_tokens)
+                    wire_api=_diag_wire, reasoning_effort=_diag_reasoning,
+                    thinking_mode=_thinking_mode_for(str(thinking_label), api_base, api_model, _diag_wire),
+                    allow_network=True, store=False, timeout=api_timeout, max_output_tokens=api_output_tokens)
                 st.json(_diag_provider.request_diagnostics())
             except Exception as exc:
                 st.error(f"配置无效：{exc}")

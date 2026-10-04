@@ -25,8 +25,23 @@ def test_dry_run_does_not_read_key_or_create_output(tmp_path):
     assert not output.exists()
 
 
-@pytest.mark.parametrize("wire_api,route", [("chat_completions", "/chat/completions"), ("responses", "/responses")])
-def test_real_provider_transport_uses_frozen_protocol(tmp_path, monkeypatch, wire_api, route):
+def test_responses_thinking_mode_rejected_before_output_or_key_read(tmp_path):
+    folder = tmp_path / "absent"
+    reg = preregister(cases=["handshake_stage"], strategies=["single"], defects_per_case=1)
+    with pytest.raises(ValueError, match="chat_completions"):
+        execute(reg, folder, wire_api="responses", thinking_mode="disabled")
+    assert not folder.exists()
+    assert main(["--wire-api", "responses", "--thinking-mode", "enabled",
+                 "--api-key-file", str(tmp_path / "no-key"), "--output-dir", str(folder)]) == 2
+    assert not folder.exists()
+
+
+@pytest.mark.parametrize("wire_api,route,thinking_mode", [
+    ("chat_completions", "/chat/completions", None),
+    ("chat_completions", "/chat/completions", "enabled"),
+    ("chat_completions", "/chat/completions", "disabled"),
+    ("responses", "/responses", None)])
+def test_real_provider_transport_uses_frozen_protocol(tmp_path, monkeypatch, wire_api, route, thinking_mode):
     calls = []
     output = tmp_path / wire_api
     stop = json.dumps({"action": "stop", "reason": "transport test", "vectors": []})
@@ -43,15 +58,22 @@ def test_real_provider_transport_uses_frozen_protocol(tmp_path, monkeypatch, wir
         assert settings["model"] == "transport-test"
         assert settings["total_request_cap"] == 1
         assert settings["max_output_tokens"] == 256
+        assert settings["thinking_mode"] == thinking_mode
+        assert settings["thinking_mode_meaning"] == ("unspecified_provider_default" if thinking_mode is None else "explicit_request")
         calls.append((req.full_url, json.loads(req.data)))
         return Response()
     monkeypatch.setattr("iverilog_ai.ai.provider.build_opener", lambda *args: SimpleNamespace(open=request))
     reg = preregister(cases=["handshake_stage"], strategies=["single"], defects_per_case=1)
     kwargs = {} if wire_api == "chat_completions" else {"wire_api": wire_api}
     report = execute(reg, output, endpoint="https://api.example/v1", model="transport-test", key="fake-credential",
-                     request_cap=1, max_output_tokens=256, **kwargs)
+                     request_cap=1, max_output_tokens=256, thinking_mode=thinking_mode, **kwargs)
     assert len(calls) == 1 and calls[0][0].endswith(route)
     assert report["wire_api"] == wire_api
+    assert report["thinking_mode"] == thinking_mode
+    if thinking_mode is None:
+        assert "thinking" not in calls[0][1]
+    else:
+        assert calls[0][1]["thinking"] == {"type": thinking_mode}
     assert report["run_settings_sha256"] == hashlib.sha256((output / "run_settings.json").read_bytes()).hexdigest()
     assert report["requests_attempted"] == 1
     assert report["rows"][0]["requests_without_usage"] == 0
@@ -179,7 +201,7 @@ def test_v2_registration_freezes_protocol_and_keeps_legacy_budget():
 
 def test_v2_dry_run_does_not_read_secret_or_create_directory(tmp_path):
     folder = tmp_path / "absent"
-    assert main(["--profile", "v2", "--api-key-file", str(tmp_path / "no-key"), "--output-dir", str(folder)]) == 0
+    assert main(["--profile", "v2", "--thinking-mode", "disabled", "--api-key-file", str(tmp_path / "no-key"), "--output-dir", str(folder)]) == 0
     assert not folder.exists()
 
 

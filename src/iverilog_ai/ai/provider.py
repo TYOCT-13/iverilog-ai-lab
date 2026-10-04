@@ -147,6 +147,14 @@ def _network_enabled() -> bool:
     return os.getenv("IVERILOG_AI_ALLOW_NETWORK") == "1"
 
 
+def _validate_thinking_mode(wire_api: str, mode: str | None) -> None:
+    """显式扩展只进入Chat协议；缺省不推定服务端的思考策略。"""
+    if mode is not None and (not isinstance(mode, str) or mode not in {"enabled", "disabled"}):
+        raise ValueError("thinking_mode must be enabled, disabled or None")
+    if mode is not None and wire_api != "chat_completions":
+        raise ValueError("thinking_mode is supported only by chat_completions; Responses uses reasoning.effort")
+
+
 def _is_loopback(host: str) -> bool:
     """判断主机名是否为本机回环地址。"""
 
@@ -296,6 +304,7 @@ class OpenAICompatibleProvider:
         *,
         wire_api: Literal["responses", "chat_completions"] = "responses",
         reasoning_effort: str | None = "medium",
+        thinking_mode: Literal["enabled", "disabled"] | None = None,
         max_output_tokens: int = 4096,
         allow_network: bool = False,
         store: bool = False,
@@ -313,6 +322,7 @@ class OpenAICompatibleProvider:
         self.timeout = float(timeout)
         self.wire_api = wire_api
         self.reasoning_effort = reasoning_effort
+        self.thinking_mode = thinking_mode
         self.max_output_tokens = int(max_output_tokens)
         self.allow_network = bool(allow_network)
         self.store = bool(store)
@@ -340,6 +350,7 @@ class OpenAICompatibleProvider:
         self.last_stream_fallback = False
         if wire_api not in {"responses", "chat_completions"}:
             raise ValueError("wire_api must be responses or chat_completions")
+        _validate_thinking_mode(wire_api, thinking_mode)
         if reasoning_effort not in {None, "minimal", "low", "medium", "high", "xhigh"}:
             raise ValueError("unsupported reasoning effort")
         if not 256 <= self.max_output_tokens <= 32768:
@@ -348,6 +359,7 @@ class OpenAICompatibleProvider:
     def request_diagnostics(self) -> dict[str, object]:
         """返回不含密钥的最终请求配置，便于网页端定位网关/协议问题。"""
         path = self._endpoint_path(self.wire_api)
+        _validate_thinking_mode(self.wire_api, self.thinking_mode)
         fields = ["model", "input", "stream"] if self.wire_api == "responses" else ["model", "messages", "stream", "response_format"]
         if self.wire_api == "responses":
             if self.store:
@@ -358,11 +370,14 @@ class OpenAICompatibleProvider:
                 fields.append("reasoning")
         elif self.force_output_limit or self.max_output_tokens != 4096:
             fields.append("max_tokens")
+        if self.thinking_mode is not None:
+            fields.append("thinking")
         return {
             "base_url": self.base_url or None,
             "url": (self.base_url + path) if self.base_url else None,
             "wire_api": self.wire_api,
             "model": self.model or None,
+            "thinking_mode": self.thinking_mode,
             "request_fields": fields,
             "has_api_key": bool(self.api_key),
             "timeout_seconds": self.timeout,
@@ -467,6 +482,7 @@ class OpenAICompatibleProvider:
         return tuple(sorted(model_ids))
 
     def _build_body(self, prompt: str, *, streaming: bool, json_mode: bool = True) -> dict[str, object]:
+        _validate_thinking_mode(self.wire_api, self.thinking_mode)
         if self.wire_api == "responses":
             body: dict[str, object] = {"model": self.model, "input": prompt, "stream": streaming}
             # 仅在调用方明确选择时发送可选字段；默认最小请求兼容更多网关。
@@ -486,6 +502,8 @@ class OpenAICompatibleProvider:
         # 但部分网关在收到它时会返回空的流式响应，因此允许在回退时关闭。
         if json_mode:
             body["response_format"] = {"type": "json_object"}
+        if self.thinking_mode is not None:
+            body["thinking"] = {"type": self.thinking_mode}
         # DeepSeek 兼容网关可能拒绝空值/不支持参数；仅在非默认时发送 max_tokens。
         if self.force_output_limit or self.max_output_tokens != 4096:
             body["max_tokens"] = self.max_output_tokens

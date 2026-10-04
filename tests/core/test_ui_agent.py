@@ -56,6 +56,7 @@ def test_api_agent_survives_navigation_and_invalidates_on_input_change(monkeypat
     app.radio(key="planner_mode").set_value(app.radio(key="planner_mode").options[2])
     app.text_input(key="provider_api_base").set_value("https://api.example/v1")
     app.text_input(key="provider_api_model").set_value("ui-agent-test-fixture")
+    app.selectbox(key="provider_thinking_mode").set_value("关闭")
     if not file_credential:
         app.text_input(key="provider_api_key").set_value("fixture-not-a-real-key")
     else:
@@ -73,6 +74,8 @@ def test_api_agent_survives_navigation_and_invalidates_on_input_change(monkeypat
     assert result.trajectory["objective"] == "检查使能保持与回绕"
     assert result.trajectory["limits"]["max_output_tokens"] == (8192 if file_credential else 4096)
     assert all(request["max_tokens"] == (8192 if file_credential else 4096) for request in calls)
+    assert all(request["thinking"] == {"type": "disabled"} for request in calls)
+    assert result.trajectory["thinking_mode"] == "disabled"
     original_id = app.session_state["last_pipeline_result"].simulation.run_id
     app.radio(key="workspace_page").set_value("运行档案").run()
     app.radio(key="workspace_page").set_value("工作台").run()
