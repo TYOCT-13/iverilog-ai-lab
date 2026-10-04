@@ -176,6 +176,26 @@ def _target(port: PortSpec) -> str:
     return port.name if port.direction.value == "input" else f"{port.name}_drive"
 
 
+def _observation_display(test_id: str, sample_phase: str, contract: DutContract) -> str:
+    """Read declared ports at the existing sample statement, without extra delay."""
+
+    fields = ['{"cycle":%0d,"time_ns":%.3f,"test_id":',
+              json.dumps(test_id, ensure_ascii=True).replace("%", "%%"),
+              ',"sample_phase":', json.dumps(sample_phase), ',"inputs":{']
+    arguments = ["cycle", "$realtime"]
+    for kind in ("input", "output"):
+        if kind == "output":
+            fields.append('},"outputs":{')
+        ports = [port for port in contract.ports if port.direction.value == kind]
+        for index, port in enumerate(ports):
+            if index:
+                fields.append(",")
+            fields.append(json.dumps(port.name) + ':"%b"')
+            arguments.append(port.name)
+    fields.append("}}")
+    return f"$display({_verilog_string('IVERILOG_AI_OBSERVATION ' + ''.join(fields))}, {', '.join(arguments)});"
+
+
 def _declaration(port: PortSpec) -> list[str]:
     if port.direction.value == "input":
         suffix = " signed" if port.signed else ""
@@ -307,6 +327,7 @@ class TestbenchGenerator:
         filename: str | None = None,
         emit_vcd: bool = False,
         vcd_filename: str = "waveform.vcd",
+        capture_observations: bool = False,
     ) -> Path:
         try:
             dut_contract = contract if isinstance(contract, DutContract) else DutContract.from_dict(contract)
@@ -314,6 +335,8 @@ class TestbenchGenerator:
             raise TestbenchGenerationError(str(exc)) from exc
         ai_plan = _coerce_plan(plan)
         vectors = _validate_vectors(ai_plan, dut_contract)
+        if not isinstance(capture_observations, bool):
+            raise TestbenchGenerationError("capture_observations must be a boolean")
         if self.max_total_cycles < 1 or self.max_total_cycles > 1_000_000:
             raise TestbenchGenerationError("max_total_cycles must be in [1, 1000000]")
         if sum(vector.cycles for vector, _, _ in vectors) > self.max_total_cycles:
@@ -336,7 +359,8 @@ class TestbenchGenerator:
             raise TestbenchGenerationError("generated testbench path must not be a symbolic link")
         if target.resolve(strict=False).parent != root:
             raise TestbenchGenerationError("generated testbench must remain directly under output_dir")
-        source = self._render(ai_plan, dut_contract, vectors, emit_vcd=emit_vcd, vcd_filename=vcd_filename)
+        source = self._render(ai_plan, dut_contract, vectors, emit_vcd=emit_vcd,
+                              vcd_filename=vcd_filename, capture_observations=capture_observations)
         target.write_text(source, encoding="utf-8", newline="\n")
         return target
 
@@ -345,7 +369,7 @@ class TestbenchGenerator:
         plan: TestPlan,
         contract: DutContract,
         vectors: list[tuple[Any, dict[str, _EncodedValue], dict[str, _EncodedValue]]],
-        *, emit_vcd: bool = False, vcd_filename: str = "waveform.vcd",
+        *, emit_vcd: bool = False, vcd_filename: str = "waveform.vcd", capture_observations: bool = False,
     ) -> str:
         top = f"tb_{contract.module}"
         lines = [
@@ -475,6 +499,8 @@ class TestbenchGenerator:
                         )
                 elif not encoded_expected:
                     lines.append("    " + _result_display(ok=True, test_id=vector.name, has_signal=False))
+                if capture_observations:
+                    lines.append("    " + _observation_display(vector.name, vector.sample_phase, contract))
                 lines.append("    cycle = cycle + 1;")
                 if contract.clock is not None and vector.sample_phase == "before":
                     lines.append(f"    @( {contract.clock.edge} {contract.clock.signal} );")

@@ -293,10 +293,8 @@ def run_verify_diff(candidate: Path, module: str, contract: Path, plan: Path, ta
 # =====================================================================================
 # 第 2 个模块：同一个上游仓库的 uart_tx（发送侧）
 #
-# 规格测试台刻意做成**环回**：uart_tx → uart_rx，收到的字节必须等于发出的字节。
-# 好处是它同时检验两侧、而且**不需要人工数拍**去采样串行位——位序、停止位、
-# 位周期（prescale）任何一处错了，环回都会失败。这正是第一版 rx 测试台用手工采样
-# 时踩坑（单周期脉冲差一拍）的反面教材。
+# 环回检查字节解码，另用独立的端口级数拍检查位持续时间与 busy 释放。
+# 接收器有采样容差，环回成功并不能证明精确位周期；旧判据确实漏掉了这两类变体。
 # =====================================================================================
 
 TX_UPSTREAM = UPSTREAM.parent / "uart_tx.v"
@@ -348,8 +346,10 @@ def build_tx_plan() -> dict:
 
 
 TX_SPEC_TB = """\
-// 环回规格测试台：uart_tx 发出去的字节，必须被 uart_rx 原样收回来。
-// 只依据 UART 规范（起始位/8 数据位 LSB 优先/停止位）与 AXI-Stream 握手语义。
+// 端口级规格测试台：环回验证数据；独立计时验证位持续时间和 busy 释放。
+// 本冻结实现 prescale=P 的起始/数据位为 8*P 个 clk 周期；停止位忙状态为
+// 8*P+1 周期。后者是本模块的明确完成约定，不是所有 UART 的通用规定。
+// 输入在 negedge 驱动，输出在 posedge 后 #1 采样，避免测试台与 NBA 抢时序。
 `timescale 1ns/1ps
 module tb_uart_tx;
   reg clk = 0, rst = 0;
@@ -386,40 +386,88 @@ module tb_uart_tx;
     end
   endtask
 
-  // 发一个字节并等它被环回收回；返回收到的字节
   reg [7:0] received;
-  integer waited;
+  reg received_valid;
+  integer waited, frame_cycle, bit_cycles, completion_cycles;
+
+  task offer;
+    input [7:0] value;
+    begin
+      waited = 0;
+      while (tready !== 1'b1 && waited < 20) begin
+        @(posedge clk); #1; waited = waited + 1;
+      end
+      check("ready_before_offer", tready === 1'b1);
+      @(negedge clk); tdata = value; tvalid = 1'b1;
+      @(posedge clk); #1;
+      check("busy_after_offer", tx_busy === 1'b1);
+      check("start_bit_after_offer", txd === 1'b0);
+      @(negedge clk); tvalid = 1'b0;
+    end
+  endtask
+
+  // 完成期限按发送规格计算，不能仅仅等 busy（busy 永远不清应当形成失败）。
   task send_and_receive;
     input [7:0] value;
     begin
-      received = 8'h00;
-      @(posedge clk);
-      tdata = value; tvalid = 1'b1;
-      @(posedge clk);
-      // 等握手（tready 在空闲时为 1；被接受后随发送拉低）
-      waited = 0;
-      while (!tready && waited < 20) begin @(posedge clk); waited = waited + 1; end
-      tvalid = 1'b0;
-      // 等环回收回
-      waited = 0;
-      while (waited < 400) begin
-        @(posedge clk);
-        if (rvalid) begin received = rdata; waited = 400; end
-        waited = waited + 1;
+      received = 8'h00; received_valid = 1'b0;
+      bit_cycles = prescale * 8;
+      completion_cycles = 10 * bit_cycles + 1;
+      offer(value);
+      for (frame_cycle = 1; frame_cycle <= completion_cycles + 5; frame_cycle = frame_cycle + 1) begin
+        @(posedge clk); #1;
+        if (rvalid) begin received = rdata; received_valid = 1'b1; end
       end
-      // 等**发送侧**也回到空闲再返回：接收侧收到字节比发送侧收尾早一拍，
-      // 不等的话下一次激励会撞在还忙着的 DUT 上（第一版就是因此误报 busy 检查失败）。
-      waited = 0;
-      while (tx_busy && waited < 100) begin @(posedge clk); waited = waited + 1; end
-      repeat (2) @(posedge clk);
+      check("loopback_valid_observed", received_valid === 1'b1);
+      check("busy_released_after_stop", tx_busy === 1'b0);
+      check("ready_restored_after_stop", tready === 1'b1);
+      check("idle_line_after_stop", txd === 1'b1);
+    end
+  endtask
+
+  // 0x55 的完整 8N1 帧每个相邻位都不同：0,1,0,1,0,1,0,1,0,1。
+  // 所以按期望位窗口逐周期检查可检出位持续时间少一拍，环回容差不能掩盖它。
+  task check_frame_timing;
+    input [15:0] scale;
+    reg [9:0] expected_frame;
+    reg expected_level;
+    integer serial_cycle, serial_bit, serial_period, finish_cycle;
+    begin
+      @(negedge clk); prescale = scale;
+      expected_frame = {1'b1, 8'h55, 1'b0};
+      serial_period = scale * 8;
+      finish_cycle = 10 * serial_period + 1;
+      offer(8'h55);
+      for (serial_cycle = 1; serial_cycle <= finish_cycle; serial_cycle = serial_cycle + 1) begin
+        @(posedge clk); #1;
+        serial_bit = serial_cycle / serial_period;
+        expected_level = serial_bit < 10 ? expected_frame[serial_bit] : 1'b1;
+        check("serial_bit_value_or_duration", txd === expected_level);
+        if (serial_cycle < finish_cycle) begin
+          check("busy_held_until_stop_end", tx_busy === 1'b1);
+          check("ready_low_during_frame", tready === 1'b0);
+        end else begin
+          check("busy_released_on_deadline", tx_busy === 1'b0);
+          check("ready_restored_on_deadline", tready === 1'b1);
+        end
+      end
+      repeat (3) begin @(posedge clk); #1; end
     end
   endtask
 
   initial begin
-    rst = 1; repeat (3) @(posedge clk); #1;
+    #200000;
+    $display("SPEC_TIMEOUT");
+    $finish(1);
+  end
+
+  initial begin
+    @(negedge clk); rst = 1;
+    repeat (3) @(posedge clk); #1;
     check("reset_clears_busy", tx_busy === 1'b0);
     check("reset_idle_txd_high", txd === 1'b1);
-    rst = 0; repeat (2) @(posedge clk);
+    @(negedge clk); rst = 0;
+    repeat (2) begin @(posedge clk); #1; end
 
     send_and_receive(8'h96);
     check("loopback_96", received === 8'h96);
@@ -428,22 +476,24 @@ module tb_uart_tx;
     send_and_receive(8'h3C);
     check("loopback_3C", received === 8'h3C);
 
-    // 连续两帧：握手必须允许背靠背发送
+    // 不复位连续发送另一个字节；这里只声称重复发送，不声称零间隔吞吐。
     send_and_receive(8'hE1);
     check("loopback_E1", received === 8'hE1);
 
-    // 发送中途复位：busy 必须被清掉（抓"复位极性反了"的实现）
-    // tvalid 要**跨过至少一个时钟边沿**再撤：在 `@(posedge clk)` 之后立刻清掉，
-    // 会与 DUT 的时钟块抢同一个时间步（谁先执行不确定），第一版就是这么"发了但没被接受"的。
-    tdata = 8'h55; tvalid = 1'b1;
-    repeat (2) @(posedge clk);
-    tvalid = 1'b0;
+    // 计时探针分别使用两个合法 prescale；不读 DUT 内部计数器。
+    check_frame_timing(1);
+    check_frame_timing(2);
+    @(negedge clk); prescale = 1;
+
+    offer(8'h55);
     repeat (6) @(posedge clk); #1;
     check("busy_during_send", tx_busy === 1'b1);
-    rst = 1; repeat (2) @(posedge clk); #1;
+    @(negedge clk); rst = 1;
+    repeat (2) @(posedge clk); #1;
     check("reset_mid_send_clears_busy", tx_busy === 1'b0);
     check("reset_drives_txd_high", txd === 1'b1);
-    rst = 0; repeat (2) @(posedge clk);
+    @(negedge clk); rst = 0;
+    repeat (2) begin @(posedge clk); #1; end
 
     // 复位之后仍能正常发送
     send_and_receive(8'h0F);
@@ -707,7 +757,7 @@ MODULES: dict[str, dict] = {
         "spec_tb": TX_SPEC_TB,
         "variants": TX_VARIANTS,
         "equivalent": TX_EQUIVALENT,
-        "description": "发送侧：环回（tx → rx）验证整帧",
+        "description": "发送侧：环回数据 + 位持续时间 + busy 完成期限",
         # 环回测试台同时实例化 rx，所以编译规格测试台时要把它一起传进去。
         "spec_deps": (UPSTREAM,),
     },
@@ -756,7 +806,9 @@ def run_module(name: str, spec: dict, work: Path) -> list[dict]:
             spec_text = "全过"
         print(f"{tag:26s} {spec_text:14s} {outcome['diff_status'] or '（无状态）':12s} {description}")
         if outcome["compiled"] and outcome["failed_checks"]:
-            print(f"{'':26s}   失败的检查：{', '.join(outcome['failed_checks'])}")
+            # Per-cycle timing checks intentionally repeat a name. Keep every
+            # failure in the evidence, but avoid hundreds of duplicate console labels.
+            print(f"{'':26s}   失败的检查：{', '.join(dict.fromkeys(outcome['failed_checks']))}")
         rows.append({"module": name, "variant": tag, "description": description,
                      "candidate": asset.relative_to(work).as_posix(),
                      "candidate_sha256": hashlib.sha256(asset.read_bytes()).hexdigest(), "result": outcome})

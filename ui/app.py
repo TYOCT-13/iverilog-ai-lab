@@ -37,6 +37,7 @@ from iverilog_ai.core.failure_guide import render_failure_guides
 from iverilog_ai.core.verify_diff import verify_diff
 from iverilog_ai.core.pipeline import VerificationPipeline
 from iverilog_ai.core.pipeline import explain_failure_record
+from iverilog_ai.core.functional_coverage import functional_coverage_profile
 from iverilog_ai.core.report import write_report
 from iverilog_ai.core.toolchain import locate_tools
 from iverilog_ai.core.rtl_import import import_rtl_bytes, extract_contract_draft, available_modules, RTLImportError
@@ -960,10 +961,10 @@ CASES: dict[str, dict[str, Any]] = {
     "101 序列检测（允许重叠）": {"rtl": "rtl/sequence_101_overlap.v", "tb": "tb/tb_sequence_101_overlap.v", "top": "tb_sequence_101_overlap", "spec": "spec/sequence_101_overlap_spec.md", "contract": "examples/sequence_101_overlap_contract.json"},
     "同步上升沿检测器": {"rtl": "rtl/edge_detector.v", "tb": "tb/tb_edge_detector.v", "top": "tb_edge_detector", "spec": "spec/edge_detector_spec.md", "contract": "examples/edge_detector_contract.json"},
     "脉冲展宽器": {"rtl": "rtl/pulse_stretcher.v", "tb": "tb/tb_pulse_stretcher.v", "top": "tb_pulse_stretcher", "spec": "spec/pulse_stretcher_spec.md", "contract": "examples/pulse_stretcher_contract.json"},
-    "单时钟 FIFO": {"rtl": "rtl/sync_fifo.v", "tb": "tb/tb_sync_fifo.v", "top": "tb_sync_fifo", "spec": "spec/common_cases.md", "contract": "examples/sync_fifo_contract.json"},
-    "UART 发送器": {"rtl": "rtl/uart_tx.v", "tb": "tb/tb_uart_tx.v", "top": "tb_uart_tx", "spec": "spec/common_cases.md", "contract": "examples/uart_tx_contract.json"},
-    "SPI 主机": {"rtl": "rtl/spi_master.v", "tb": "tb/tb_spi_master.v", "top": "tb_spi_master", "spec": "spec/common_cases.md", "contract": "examples/spi_master_contract.json"},
-    "Valid-Ready 握手级": {"rtl": "rtl/handshake_stage.v", "tb": "tb/tb_handshake_stage.v", "top": "tb_handshake_stage", "spec": "spec/common_cases.md", "contract": "examples/handshake_stage_contract.json"},
+    "单时钟 FIFO": {"rtl": "rtl/sync_fifo.v", "tb": "tb/tb_sync_fifo.v", "top": "tb_sync_fifo", "spec": "spec/sync_fifo_spec.md", "contract": "examples/sync_fifo_contract.json"},
+    "UART 发送器": {"rtl": "rtl/uart_tx.v", "tb": "tb/tb_uart_tx.v", "top": "tb_uart_tx", "spec": "spec/uart_tx_spec.md", "contract": "examples/uart_tx_contract.json"},
+    "SPI 主机": {"rtl": "rtl/spi_master.v", "tb": "tb/tb_spi_master.v", "top": "tb_spi_master", "spec": "spec/spi_master_spec.md", "contract": "examples/spi_master_contract.json"},
+    "Valid-Ready 握手级": {"rtl": "rtl/handshake_stage.v", "tb": "tb/tb_handshake_stage.v", "top": "tb_handshake_stage", "spec": "spec/handshake_stage_spec.md", "contract": "examples/handshake_stage_contract.json"},
     "按键去抖": {"rtl": "rtl/debounce.v", "tb": "tb/tb_debounce.v", "top": "tb_debounce", "spec": "spec/common_cases.md", "contract": "examples/debounce_contract.json"},
     "PWM": {"rtl": "rtl/pwm.v", "tb": "tb/tb_pwm.v", "top": "tb_pwm", "spec": "spec/common_cases.md", "contract": "examples/pwm_contract.json"},
     "四选一多路选择器": {"rtl": "rtl/mux4.v", "tb": "tb/tb_mux4.v", "top": "tb_mux4", "spec": "spec/common_cases.md", "contract": "examples/mux4_contract.json"},
@@ -2590,6 +2591,29 @@ with _PLAN:
         except Exception as exc:
             st.error(f"测试未完成：{exc}")
 
+def _render_agent_functional_coverage(coverage: dict) -> None:
+    st.markdown("**功能场景**")
+    if coverage.get("status") == "unsupported":
+        st.caption("当前接口暂未配置功能场景覆盖。")
+        return
+    counts = coverage.get("counts", {})
+    counters = st.columns(3)
+    for column, key, label in zip(counters, ("observed", "missing", "unknown"), ("已观察", "尚未观察", "证据不足")):
+        column.metric(label, counts.get(key, 0))
+    status_labels = {"observed": "已观察", "missing": "尚未观察", "unknown": "证据不足"}
+    rows = []
+    for item in coverage.get("bins", []):
+        evidence = item.get("first_evidence") or {}
+        rows.append({"场景": item.get("definition", item.get("id", "")),
+                     "状态": status_labels.get(item.get("status"), "证据不足"),
+                     "首次周期": evidence.get("first_cycle")})
+    if rows:
+        st.dataframe(rows, hide_index=True, use_container_width=True, height=240)
+    st.caption("场景覆盖来自实际采样；已观察到场景不等于设计正确。")
+    st.download_button("下载场景覆盖记录", json.dumps(coverage, ensure_ascii=False, indent=2).encode("utf-8"),
+                       file_name="functional_coverage.json", mime="application/json", key="download_agent_functional_coverage")
+
+
 with _PLAN:
     with st.expander("自动验证 Agent"):
         st.caption("通过 API 决定下一组测试，自动运行并保留每轮证据。找到反例或预算用尽时停止。")
@@ -2597,6 +2621,8 @@ with _PLAN:
         _agent_rounds = int(_agent_left.number_input("最多验证轮数", min_value=1, max_value=5, value=3, key="agent_round_limit"))
         _agent_requests = int(_agent_right.number_input("最多 API 请求", min_value=1, max_value=5, value=3, key="agent_request_limit"))
         _agent_cycles = int(st.number_input("累计激励周期上限", min_value=20, max_value=20000, value=1000, step=20, key="agent_cycle_limit"))
+        _scene_profile = functional_coverage_profile(_contract()) if not is_custom else None
+        _agent_coverage = st.checkbox("根据场景覆盖缺口补测", value=True, key="agent_coverage_feedback", disabled=_scene_profile is None)
         st.caption("会发送接口定义、规格、当前计划和仿真摘要。已有计划会先执行；请求可能计费，次数上限不等于金额上限。")
         _agent_run = st.button("启动自动验证", key="run_verification_agent", disabled=not use_online)
         if not use_online:
@@ -2614,6 +2640,7 @@ with _PLAN:
                         output_dir=ROOT / ".iverilog-ai/pipeline-ui" / f"agent-{uuid.uuid4().hex[:12]}",
                         objective=str(st.session_state.get("objective_text", "检查正常行为和边界条件，寻找可复现反例")),
                         specification=_agent_spec, initial_plan=st.session_state.get("ai_plan"),
+                        include_functional_coverage=bool(_agent_coverage and _scene_profile),
                         limits=AgentLimits(max_rounds=_agent_rounds, max_requests=_agent_requests, max_total_cycles=_agent_cycles,
                                            max_output_tokens=min(_agent_provider.max_output_tokens, 8192),
                                            request_timeout_seconds=min(int(_agent_provider.timeout), 180)),
@@ -2643,6 +2670,9 @@ with _PLAN:
                 st.dataframe([{"轮次": row["round"], "检查数": row["observation"]["checks"],
                                "失败数": row["observation"]["failures"], "结论": row["observation"]["verdict"]}
                               for row in _saved_agent.trajectory["rounds"]], hide_index=True, use_container_width=True, height=180)
+                _last_round_coverage = _saved_agent.trajectory["rounds"][-1].get("functional_coverage")
+                if isinstance(_last_round_coverage, dict):
+                    _render_agent_functional_coverage(_last_round_coverage)
             st.download_button("下载完整 Agent 轨迹", _saved_agent.trajectory_path.read_bytes(), file_name="agent_trajectory.json", mime="application/json", key="download_agent_trajectory")
 
 _render_workspace_results()

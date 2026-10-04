@@ -107,6 +107,8 @@ def test_unique_defects_and_incomplete_denominator():
         if r["variant"] != "reference":
             r["detected"] = True
             r["status"] = "detected"
+            r["rounds"] = [{"actual": {"status": "passed", "checks": 1, "failures": 1, "expectation_source": "reference_model"},
+                             "reference": {"status": "passed", "checks": 1, "failures": 0, "expectation_source": "reference_model"}}]
     rows[-1]["status"] = "not_started"
     rows[-1]["detected"] = False
     summary = summarize(rows)["fixed"]
@@ -156,3 +158,131 @@ def test_actual_icarus_baseline_audit_and_artifacts(tmp_path):
     assert all(r["rounds"][0]["reference"]["failures"] == 0 for r in report["rows"])
     with pytest.raises(FileExistsError):
         execute(reg, tmp_path / "real")
+
+
+def test_v2_registration_freezes_protocol_and_keeps_legacy_budget():
+    old = preregister()
+    new = preregister(profile="v2")
+    assert len(old["rows"]) == 60 and old["theoretical_requests"] == 84
+    assert len(new["rows"]) == 252 and new["theoretical_requests"] == 360
+    assert new["independent_holdout"] is False
+    assert {r["budget_cycles"] for r in old["rows"] if r["case"] == "uart_tx"} == {40}
+    assert {r["budget_cycles"] for r in new["rows"] if r["case"] == "uart_tx"} == {512}
+    assert "spec/agent_protocols.json" in new["code_and_input_sha256"]
+    assert "spec/uart_tx_spec.md" in new["code_and_input_sha256"]
+    assert len(new["prompt_profile_sha256"]) == 64
+    assert "benchmarks/agent_v2/mutation_manifest.json" in new["code_and_input_sha256"]
+    assert all(r["rtl"].startswith("benchmarks/agent_v2/") for r in new["rows"]
+               if r["case"] == "sync_fifo" and r["variant"] != "reference")
+    assert all(r["rtl"].startswith("rtl/") for r in old["rows"] if r["case"] == "sync_fifo")
+
+
+def test_v2_dry_run_does_not_read_secret_or_create_directory(tmp_path):
+    folder = tmp_path / "absent"
+    assert main(["--profile", "v2", "--api-key-file", str(tmp_path / "no-key"), "--output-dir", str(folder)]) == 0
+    assert not folder.exists()
+
+
+@pytest.mark.parametrize("case", ["sync_fifo", "uart_tx", "spi_master", "handshake_stage"])
+def test_v2_protocol_and_uniform_random_exact_budget(case):
+    from scripts.run_agent_comparison import protocol_config
+    config = protocol_config()["cases"][case]
+    contract = DutContract.from_dict(json.loads((ROOT / f"examples/{case}_contract.json").read_text()))
+    for strategy in ["protocol_random", "random"]:
+        plan = baseline_plan(case, strategy, 2, contract, config["cycle_budget"], profile="v2", protocol=config)
+        assert sum(v.cycles for v in plan.vectors) == config["cycle_budget"]
+        assert len(plan.vectors) <= 200
+        assert all(v.sample_phase == "after" and not v.expected for v in plan.vectors)
+        assert plan == baseline_plan(case, strategy, 2, contract, config["cycle_budget"], profile="v2", protocol=config)
+
+
+def test_protocol_uart_preserves_complete_frames_and_has_no_labels():
+    from scripts.run_agent_comparison import protocol_config, protocol_random_vectors
+    config = protocol_config()["cases"]["uart_tx"]
+    contract = DutContract.from_dict(json.loads((ROOT / "examples/uart_tx_contract.json").read_text()))
+    vectors = protocol_random_vectors("uart_tx", 0, contract, 512, config)
+    # Every data bit and stop bit is sampled; don't only check final idle.
+    frame_vectors = 14
+    blocks = (len(vectors) - 1) // frame_vectors
+    assert blocks >= 2
+    for offset in range(0, blocks * frame_vectors, frame_vectors):
+        frame = vectors[offset:offset + frame_vectors]
+        assert [v["cycles"] for v in frame] == [1, 1, 2] + [4] * 9 + [1, 1]
+        assert [v["inputs"]["start"] for v in frame] == [1, 1] + [0] * 12
+    assert vectors[-1]["inputs"]["start"] == 0
+
+
+def test_changed_registration_refused_before_directory_or_provider(tmp_path):
+    reg = preregister(cases=["handshake_stage"], strategies=["single"])
+    reg["code_and_input_sha256"]["scripts/run_agent_comparison.py"] = "0" * 64
+    with pytest.raises(ValueError, match="changed"):
+        execute(reg, tmp_path / "no-create", request_cap=1)
+    assert not (tmp_path / "no-create").exists()
+
+
+def test_v2_api_profiles_forward_full_spec_and_coverage_ablation(tmp_path, monkeypatch):
+    calls = []
+    def fake_agent(**kwargs):
+        calls.append(kwargs)
+        kwargs["provider"].request_count += 1
+        return SimpleNamespace(stop_reason="model_stopped", trajectory_path=kwargs["output_dir"] / "agent_trajectory.json",
+            trajectory={"record_kind": "test_provider", "stimulus_cycles_executed": 0,
+                        "decisions": [{"usage": None}], "requests_attempted": 1})
+    monkeypatch.setattr("scripts.run_agent_comparison.run_verification_agent", fake_agent)
+    reg = preregister(cases=["handshake_stage"], strategies=["single", "feedback", "no_feedback", "feedback_no_coverage"],
+                     repeats=1, defects_per_case=1, profile="v2")
+    result = execute(reg, tmp_path / "profiles", request_cap=8,
+                     provider_factory=lambda count: SimpleNamespace(request_count=0))
+    assert result["requests_attempted"] == 8
+    assert [(c["include_feedback"], c["include_functional_coverage"]) for c in calls[:4]] == [
+        (True, True), (True, True), (False, False), (True, False)]
+    full_spec = (ROOT / "spec/handshake_stage_spec.md").read_text(encoding="utf-8")
+    assert all(c["specification"] == full_spec for c in calls)
+    assert all(c["execution_options"]["capture_observations"] for c in calls)
+    assert all(c["limits"].max_total_cycles == 160 for c in calls)
+
+
+def test_v2_missing_profile_never_silently_uses_legacy(monkeypatch):
+    def missing():
+        raise FileNotFoundError("test missing configuration")
+    monkeypatch.setattr("scripts.run_agent_comparison.protocol_config", missing)
+    with pytest.raises(FileNotFoundError):
+        preregister(profile="v2")
+    assert len(preregister()["rows"]) == 60
+
+@pytest.mark.skipif(not Path("D:/iverilog/bin/iverilog.exe").exists(), reason="Icarus unavailable")
+@pytest.mark.parametrize("case", ["sync_fifo", "uart_tx", "spi_master", "handshake_stage"])
+def test_v2_real_protocol_baseline_has_measured_coverage(tmp_path, case):
+    from scripts.summarize_agent_comparison import build_summary
+    reg = preregister(cases=[case], strategies=["protocol_random"], repeats=1, defects_per_case=1, profile="v2")
+    report = execute(reg, tmp_path / case, iverilog="D:/iverilog/bin/iverilog.exe", vvp="D:/iverilog/bin/vvp.exe")
+    assert report["requests_attempted"] == 0
+    assert report["changed_inputs_at_finish"] == []
+    summary = build_summary(report, reg)
+    assert summary["eligible_for_frozen_comparison"]
+    assert all(r["evidence_verified"] for r in summary["rows"])
+    for row in report["rows"]:
+        assert row["status"] in {"detected", "not_detected"}
+        assert row["search_cycles"] == row["budget_cycles"]
+        entry = row["rounds"][0]
+        assert entry["reference"]["failures"] == 0
+        assert entry["reference"]["functional_coverage"]["status"] == "measured"
+        assert entry["actual"]["functional_coverage"]["status"] == "measured"
+        assert entry["actual"]["checks"] > 0
+        if row["detected"]:
+            assert row["first_detection_cycle"] >= 0
+            assert row["first_detection_search_budget"] == row["first_detection_cycle"] + 1
+            detection = summary["strategies"]["protocol_random"]["first_detection"][0]
+            assert detection["elapsed_seconds"] is None
+            assert detection["result_available_elapsed_seconds"] == row["first_detection_available_elapsed_seconds"]
+    damaged = json.loads(json.dumps(report))
+    damaged["rows"][-1]["rounds"][0]["actual"]["failures"] += 1
+    assert not build_summary(damaged, reg)["eligible_for_frozen_comparison"]
+    assert not build_summary(damaged, reg)["rows"][-1]["detected"]
+    conflicting = json.loads(json.dumps(report))
+    conflicting["rows"][-1].update(status="compile_failed", detected=True)
+    assert not build_summary(conflicting, reg)["rows"][-1]["detected"]
+    assert not build_summary(conflicting, reg)["eligible_for_frozen_comparison"]
+    evidence = Path(report["rows"][-1]["rounds"][0]["actual"]["pipeline_result"])
+    evidence.write_bytes(evidence.read_bytes() + b" ")
+    assert not build_summary(report, reg)["eligible_for_frozen_comparison"]

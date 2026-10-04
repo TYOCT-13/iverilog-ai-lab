@@ -311,3 +311,70 @@ def test_real_counter_holds_omitted_enable_input(tmp_path):
     assert result.stop_reason == "round_budget"
     assert result.last_result.simulation.check_count == 2
     assert not result.last_result.simulation.failures
+
+
+def test_real_functional_feedback_ablation_keeps_sampling_and_trace_without_leaks(tmp_path):
+    compiler = Path("D:/iverilog/bin/iverilog.exe")
+    runtime = Path("D:/iverilog/bin/vvp.exe")
+    if not compiler.is_file() or not runtime.is_file():
+        pytest.skip("Icarus unavailable")
+    contract = DutContract.from_dict(json.loads((ROOT / "examples/uart_tx_contract.json").read_text()))
+    first = {"action": "append_vectors", "reason": "start an observed frame", "vectors": [
+        {"name": "idle", "inputs": {}, "cycles": 1},
+        {"name": "start", "inputs": {"start": 1, "data_in": 150}, "cycles": 1},
+        {"name": "short", "inputs": {"start": 0}, "cycles": 2}]}
+    follow = {"action": "append_vectors", "reason": "observe terminal symbol", "vectors": [
+        {"name": "long", "inputs": {}, "cycles": 41}]}
+    providers = []
+    for feedback, coverage in ((True, True), (True, False), (False, False)):
+        provider = Scripted(first, follow)
+        providers.append(provider)
+        result = run_verification_agent(provider=provider, contract=contract,
+            rtl_path=ROOT / "rtl/uart_tx.v", output_dir=tmp_path / f"feedback-{feedback}-{coverage}",
+            objective="observe a UART frame", limits=AgentLimits(max_rounds=2, max_total_cycles=128),
+            include_feedback=feedback, include_functional_coverage=coverage,
+            execution_options={"allowed_roots": (ROOT, tmp_path), "iverilog_path": compiler,
+                               "vvp_path": runtime, "max_output_chars": 2_000_000})
+        assert result.stop_reason == "round_budget"
+        rows = result.trajectory["rounds"]
+        assert rows[0]["functional_coverage"]["status"] == "measured"
+        assert "uart.complete_frame" in rows[0]["functional_coverage"]["unknown"]
+        assert "uart.complete_frame" in rows[1]["functional_coverage"]["observed"]
+        assert rows[0]["observation"]["functional_coverage"] == rows[0]["functional_coverage"]
+        state = json.loads(provider.prompts[1].split("STATE_JSON:\n", 1)[1])
+        assert bool(state["observation"]) is feedback
+        if feedback:
+            assert ("functional_coverage" in state["observation"]) is coverage
+            if coverage:
+                compact = state["observation"]["functional_coverage"]
+                assert compact == rows[0]["functional_coverage"]["compact_model_feedback"]
+                assert "first_evidence" not in json.dumps(compact)
+                assert "samples" not in json.dumps(compact)
+                assert compact["observed"]
+                assert any(b["first_cycle"] is not None for b in compact["bins"])
+        else:
+            assert state["observation"] is None
+        # Correctness checks remain endpoint checks; these are not the 45 observed samples.
+        assert rows[1]["observation"]["checks"] == 8
+        assert rows[1]["functional_coverage"]["observed_cycles"] == 45
+        assert result.trajectory["stimulus_cycles_executed"] == 49
+        assert result.trajectory["functional_coverage_feedback_enabled"] is coverage
+    assert providers[0].prompts[0] == providers[1].prompts[0] == providers[2].prompts[0]
+
+
+@pytest.mark.parametrize("value", [1, "false", None])
+def test_functional_feedback_switch_rejects_non_booleans_before_execution(tmp_path, value):
+    with pytest.raises(ValueError, match="include_functional_coverage must be a boolean"):
+        run(tmp_path, Scripted(), include_functional_coverage=value)
+    assert not (tmp_path / "agent").exists()
+
+
+def test_typed_external_observer_is_not_augmented_with_builtin_coverage(tmp_path):
+    provider = Scripted(append(), append(2))
+    result = run(tmp_path, provider, round_observer=differential_observer(), simulation_multiplier=2,
+                 limits=AgentLimits(max_rounds=2))
+    row = result.trajectory["rounds"][0]
+    assert "functional_coverage" not in row["observation"]
+    assert row["functional_coverage"]["status"] == "unsupported"
+    state = json.loads(provider.prompts[1].split("STATE_JSON:\n", 1)[1])
+    assert "functional_coverage" not in state["observation"]

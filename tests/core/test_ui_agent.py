@@ -82,3 +82,65 @@ def test_api_agent_survives_navigation_and_invalidates_on_input_change(monkeypat
     app.selectbox(key="case_name").set_value("简单 ALU").run()
     assert app.session_state.filtered_state.get("workspace_agent_result") is None
     assert not app.exception
+
+
+@pytest.mark.parametrize("coverage_feedback", [True, False])
+def test_uart_coverage_is_measured_visible_and_feedback_can_be_disabled(monkeypatch, tmp_path, coverage_feedback):
+    if not Path(r"D:\iverilog\bin\iverilog.exe").is_file():
+        pytest.skip("local Icarus unavailable")
+    monkeypatch.setattr("iverilog_ai.ai.local_api_profile.load_local_api_profile", lambda _: None)
+    actual_run = agent.run_verification_agent
+    states = []
+
+    def isolated_run(**kwargs):
+        kwargs["output_dir"] = tmp_path / "ui-uart-agent"
+        kwargs["execution_options"]["allowed_roots"] = (ROOT, tmp_path)
+        result = actual_run(**kwargs)
+        result.trajectory["record_kind"] = "test_provider"
+        result.trajectory_path.write_text(json.dumps(result.trajectory), encoding="utf-8")
+        return result
+
+    class Response:
+        def __init__(self, answer): self.answer = answer
+        def __enter__(self): return self
+        def __exit__(self, *args): return None
+        def read(self): return json.dumps({"choices": [{"message": {"content": json.dumps(self.answer)}}]}).encode()
+
+    def request(req, timeout):
+        body = json.loads(req.data)
+        state_text = body["messages"][-1]["content"].split("STATE_JSON:")[-1].strip()
+        states.append(json.loads(state_text))
+        if len(states) == 1:
+            return Response({"action": "append_vectors", "reason": "fixture idle", "vectors": [{"name": "idle", "inputs": {"start": 0}, "cycles": 1}]})
+        if len(states) == 2:
+            return Response({"action": "append_vectors", "reason": "fixture full frame", "vectors": [
+                {"name": "request", "inputs": {"start": 1, "data_in": 150}, "cycles": 1},
+                {"name": "finish", "inputs": {"start": 0}, "cycles": 40}]})
+        return Response({"action": "stop", "reason": "fixture complete", "vectors": []})
+
+    monkeypatch.setattr(agent, "run_verification_agent", isolated_run)
+    monkeypatch.setattr("iverilog_ai.ai.provider.build_opener", lambda *args: SimpleNamespace(open=request))
+    app = AppTest.from_file(str(ROOT / "ui/app.py"), default_timeout=120)
+    app.session_state["case_name"] = "UART 发送器"
+    app.run()
+    app.radio(key="workspace_page").set_value("工具设置").run()
+    app.radio(key="planner_mode").set_value(app.radio(key="planner_mode").options[2])
+    app.text_input(key="provider_api_base").set_value("https://api.example/v1")
+    app.text_input(key="provider_api_model").set_value("ui-uart-fixture")
+    app.text_input(key="provider_api_key").set_value("fixture-not-a-real-key")
+    app.run()
+    app.radio(key="workspace_page").set_value("工作台").run()
+    assert not app.checkbox(key="agent_coverage_feedback").disabled
+    app.checkbox(key="agent_coverage_feedback").set_value(coverage_feedback).run()
+    app.button(key="run_verification_agent").click().run()
+    assert not app.exception and not app.error
+    result = app.session_state["workspace_agent_result"]
+    coverage = result.trajectory["rounds"][-1]["functional_coverage"]
+    assert coverage["status"] == "measured" and "uart.complete_frame" in coverage["observed"]
+    assert any(item.value == "功能场景" or "功能场景" in item.value for item in app.markdown)
+    assert "functional_coverage" in states[1]["observation"] if coverage_feedback else "functional_coverage" not in states[1]["observation"]
+    app.radio(key="workspace_page").set_value("运行档案").run()
+    app.radio(key="workspace_page").set_value("工作台").run()
+    assert app.checkbox(key="agent_coverage_feedback").value == coverage_feedback
+    assert app.session_state["workspace_agent_result"].trajectory["rounds"][-1]["functional_coverage"] == coverage
+    assert len(states) == 3

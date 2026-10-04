@@ -353,3 +353,96 @@ def test_alignment_cases_cover_authoritative_set():
     """对齐用例表与权威集合必须一致，防止"加入 AUTHORITATIVE 却忘了对齐"。"""
 
     assert set(ALIGNED_CASES) == set(AUTHORITATIVE)
+
+
+def _fifo_protocol_vectors() -> list[dict]:
+    """Exercise full/empty admission and repeated simultaneous operations/wrap."""
+    vectors = []
+
+    def operation(wr=0, rd=0, data=0, reset=1):
+        vectors.append({"inputs": {"rst_n": reset, "wr_en": wr, "rd_en": rd, "wr_data": data}, "cycles": 1})
+
+    operation(reset=0)
+    operation(reset=0)
+    operation(wr=1, rd=1, data=0x19)  # Empty: accept only write.
+    operation(wr=1, data=0x42)
+    operation(wr=1, rd=1, data=0x63)  # Middle occupancy: preserve count.
+    operation(wr=1, data=0x84)
+    operation(wr=1, data=0xA5)
+    operation(wr=1, rd=1, data=0xFA)  # Full: accept only read.
+    for _ in range(4):
+        operation(rd=1)
+    for batch in range(5):  # Both pointers must wrap more than once.
+        for item in range(4):
+            operation(wr=1, data=batch * 4 + item)
+        operation(wr=1, data=0xFF)  # Full write must be rejected.
+        for _ in range(4):
+            operation(rd=1)
+        operation(rd=1)  # Empty read must hold last rd_data.
+    for item in (0x11, 0x22, 0x33):
+        operation(wr=1, data=item)
+    for item in (0x44, 0x55, 0x66):
+        operation(wr=1, rd=1, data=item)
+    for _ in range(3):
+        operation(rd=1)
+    operation(wr=1, data=0xB7)
+    operation(reset=0)  # Discard queued data and clear registered output.
+    operation(rd=1)
+    operation(wr=1, data=0xC8)
+    operation(rd=1)
+    return vectors
+
+
+def _fifo_queue_trace(vectors: list[dict]) -> list[dict]:
+    """Independent FIFO specification: a software queue, no RTL pointer/count copy."""
+    from collections import deque
+
+    queue = deque()
+    last_read = 0
+    expected = []
+    for vector in vectors:
+        inputs = vector["inputs"]
+        if not inputs["rst_n"]:
+            queue.clear()
+            last_read = 0
+        else:
+            occupancy_before_edge = len(queue)
+            accept_read = inputs["rd_en"] and occupancy_before_edge > 0
+            accept_write = inputs["wr_en"] and occupancy_before_edge < 4
+            if accept_read:
+                last_read = queue.popleft()
+            if accept_write:
+                queue.append(inputs["wr_data"])
+        expected.append({"rd_data": last_read, "full": int(len(queue) == 4), "empty": int(not queue)})
+    return expected
+
+
+def test_fifo_simultaneous_admission_and_pointer_wrap_match_independent_queue(tmp_path):
+    """The RTL and oracle both must satisfy conventional net-zero middle read/write."""
+    assert _iverilog_available(), "FIFO protocol regression requires local Icarus"
+    vectors = _fifo_protocol_vectors()
+    expected = _fifo_queue_trace(vectors)
+    actual = _rtl_trace("sync_fifo", vectors, [], ROOT / "rtl/sync_fifo.v", tmp_path)
+    contract = json.loads((ROOT / "examples/sync_fifo_contract.json").read_text(encoding="utf-8"))
+    state = _DesignState("sync_fifo", contract)
+    model = [state.step(vector["inputs"], 1) for vector in vectors]
+    assert len(actual) == len(expected) == len(model)
+    for index, (rtl, oracle, reference) in enumerate(zip(actual, model, expected)):
+        assert rtl == reference, f"FIFO RTL protocol mismatch at cycle {index}: {rtl} != {reference}"
+        assert oracle == reference, f"FIFO oracle protocol mismatch at cycle {index}: {oracle} != {reference}"
+
+
+@pytest.mark.parametrize("variant", ("sync_fifo_bug_full_off_by_one", "sync_fifo_bug_write_when_full"))
+def test_v2_fifo_single_fault_controls_preserve_non_target_behavior_and_trigger_target(tmp_path, variant):
+    assert _iverilog_available(), "FIFO mutation control regression requires local Icarus"
+    vectors = _fifo_protocol_vectors()
+    expected = _fifo_queue_trace(vectors)
+    actual = _rtl_trace("sync_fifo", vectors, [], ROOT / f"benchmarks/agent_v2/{variant}.v", tmp_path)
+    # Reset, empty admission and middle simultaneous read/write all precede
+    # the first near-full operation. Both controls must keep the repaired count.
+    assert actual[:5] == expected[:5]
+    differences = [(index, signal) for index, (rtl, wanted) in enumerate(zip(actual, expected))
+                   for signal in wanted if rtl[signal] != wanted[signal]]
+    assert differences, "a registered single-fault control must be exercised by its boundary probe"
+    target_signal = "full" if variant.endswith("full_off_by_one") else "rd_data"
+    assert any(signal == target_signal for _, signal in differences)

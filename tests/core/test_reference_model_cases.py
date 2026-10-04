@@ -26,7 +26,7 @@ def test_common_case_reference_models():
     _check("sync_fifo", [
         {"name": "reset", "inputs": {"rst_n": 0}, "expected": {"empty": 1}},
         {"name": "write", "inputs": {"rst_n": 1, "wr_en": 1, "wr_data": 165}, "expected": {"empty": 0}},
-        {"name": "read", "inputs": {"rd_en": 1}, "expected": {"empty": 1}},
+        {"name": "read", "inputs": {"wr_en": 0, "rd_en": 1}, "expected": {"empty": 1}},
     ])
     _check("uart_tx", [
         {"name": "reset", "inputs": {"rst_n": 0}, "expected": {"tx": 1, "busy": 0}},

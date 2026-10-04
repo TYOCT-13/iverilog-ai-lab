@@ -185,14 +185,14 @@ class _DesignState:
         if design == "sync_fifo":
             rst, wr_en = int(inputs.get("rst_n", 1)), int(inputs.get("wr_en", 0))
             rd_en, wr_data = int(inputs.get("rd_en", 0)), int(inputs.get("wr_data", 0)) & 255
-            # 该模型已与 rtl/sync_fifo.v 逐拍对齐（29 拍零差异）。三条关键语义：
+            # 该模型与 rtl/sync_fifo.v 逐拍对齐，并通过独立队列规格验证。关键语义：
             #   1. rd_data 是寄存器输出，读发生时在同一个时钟沿就更新为新值；
             #   2. 写判定 `!full` 与读判定 `!empty` 用的都是**时钟沿之前**的
             #      count——因为 full/empty 由 assign 组合产生，非阻塞赋值右侧
             #      读到的是旧寄存器的值；
-            #   3. `count<=count+1` 与 `count<=count-1` 是源码顺序上的两条非阻塞
-            #      赋值，IEEE 1364 规定同一时刻以**最后一条**为准，因此同拍既写
-            #      又读时 count 的净变化是 -1，而不是 ±0。
+            #   3. 同拍接受读写时占用量净变化为 0。2026-10-04 修复了旧 RTL
+            #      两条 count 非阻塞赋值使最后读赋值覆盖写赋值的计数问题。
+            #      历史已冻结实验仍属于旧 RTL/模型，不追溯改写其结果。
             for _ in range(cycles):
                 if rst == 0:
                     self.fifo_mem, self.fifo_wr, self.fifo_rd, self.fifo_count, self.fifo_rd_data = [0] * self.fifo_depth, 0, 0, 0, 0
@@ -202,12 +202,7 @@ class _DesignState:
                 do_write = bool(wr_en and not full_now)
                 do_read = bool(rd_en and not empty_now)
                 new_rd_data = self.fifo_mem[self.fifo_rd] if do_read else self.fifo_rd_data
-                if do_read:
-                    new_count = self.fifo_count - 1
-                elif do_write:
-                    new_count = self.fifo_count + 1
-                else:
-                    new_count = self.fifo_count
+                new_count = self.fifo_count + int(do_write) - int(do_read)
                 if do_write:
                     self.fifo_mem[self.fifo_wr] = wr_data
                     self.fifo_wr = (self.fifo_wr + 1) % self.fifo_depth

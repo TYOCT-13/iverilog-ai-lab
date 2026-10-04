@@ -23,6 +23,7 @@ from .testbench import DUT_INSTANCE, TestbenchGenerationError, TestbenchGenerato
 from .reference_model import check_plan_consistency, override_plan_expectations, reference_expectations
 from .assertions import build_assertion, evaluate_assertion, AssertionValidationError
 from .coverage import analyze_signal_activity
+from .observations import collect_observed_samples
 from .synthesis import SynthConfig, YosysSynthRunner
 from .vcd import analyze_vcd_file, analyze_failure_windows, waveform_insights
 
@@ -322,7 +323,10 @@ class VerificationPipeline:
         testbench_filename: str | None = None,
         emit_vcd: bool = True,
         vcd_filename: str = "waveform.vcd",
+        capture_observations: bool = False,
     ) -> PipelineResult:
+        if not isinstance(capture_observations, bool):
+            raise PipelineValidationError("capture_observations must be a boolean")
         ai_plan = _coerce_plan(plan)
         dut_contract = _coerce_contract(contract)
         raw_output = Path(output_dir).expanduser()
@@ -372,6 +376,7 @@ class VerificationPipeline:
                 filename=testbench_filename,
                 emit_vcd=emit_vcd,
                 vcd_filename=vcd_filename,
+                **({"capture_observations": True} if capture_observations else {}),
             )
         except TestbenchGenerationError:
             raise
@@ -408,6 +413,29 @@ class VerificationPipeline:
             keep_artifacts=True,
         )
         simulation = self.executor_factory(config).run()
+        observations_path: Path | None = None
+        if capture_observations:
+            observations_path = artifact_dir / "observed_samples.json"
+            if observations_path.is_symlink():
+                raise PipelineValidationError("observed_samples artifact must not be a symbolic link")
+            policy.check(observations_path, must_exist=False)
+            # Bind observations to this execution's captured output. A later
+            # change to the saved stdout must not change the measured evidence.
+            stdout = simulation.run.stdout if simulation.run is not None else ""
+            provenance = {"rtl_sha256": hashlib.sha256(rtl.read_bytes()).hexdigest(),
+                          "contract_sha256": hashlib.sha256(contract_path.read_bytes()).hexdigest(),
+                          "plan_sha256": hashlib.sha256(plan_path.read_bytes()).hexdigest(),
+                          "testbench_sha256": hashlib.sha256(testbench_path.read_bytes()).hexdigest()}
+            observations = collect_observed_samples(
+                stdout, ai_plan, dut_contract, provenance=provenance,
+                execution_complete=bool(simulation.run and simulation.run.status.value == "passed"),
+                output_truncated=bool(simulation.run and simulation.run.output_truncated),
+            )
+            observations_path.write_text(json.dumps(observations, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            observation_metadata = {k: value for k, value in observations.items() if k != "samples"}
+            observation_metadata["sha256"] = hashlib.sha256(observations_path.read_bytes()).hexdigest()
+            simulation = replace(simulation, config={**simulation.config,
+                "observed_samples": observation_metadata})
         vcd_analysis: dict[str, Any] = {"status": "not_available"}
         vcd_path_for_analysis = simulation.artifacts.get("vcd", "")
         if vcd_path_for_analysis:
@@ -576,6 +604,8 @@ class VerificationPipeline:
             "vcd": simulation.artifacts.get("vcd", ""),
         }
         artifacts.update(artifacts_synth)
+        if observations_path is not None:
+            artifacts["observed_samples"] = str(observations_path)
         if oracle_expectations:
             artifacts["authoritative_plan"] = str(authoritative_plan_path)
         result = PipelineResult(

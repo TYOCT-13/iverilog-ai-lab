@@ -20,6 +20,9 @@ docs/experiment/external-agent-live-2026-10-04/** -text whitespace=blank-at-eol,
 docs/experiment/ic-validation-2026-10-04/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 docs/experiment/ic-validation-pdf-final-2026-10-04/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 docs/experiment/ic-pack-smoke-2026-10-04/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/agent-comparison-v2-2026-10-04/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/ic-agent-v2-validation-2026-10-04/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/application-uart-v2-2026-10-04/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 docs/competition/ic/pdf_validation_2026-10-04.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 docs/competition/ic/evidence_pack_2026-10-04.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 

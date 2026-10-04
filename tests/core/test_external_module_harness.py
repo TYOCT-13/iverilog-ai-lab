@@ -1,6 +1,7 @@
 """外部模块验证夹具（P0-D）的离线回归。
 
 只测**不依赖网络、不依赖上游文件**的部分：合约与激励计划必须能被项目的严格校验接受。
+端口级计时判据另外用独立的周期脚本发射器验证正负例，不冒充真实外部检出成绩。
 真正的对比运行需要先抓取上游 RTL（`.iverilog-ai/external/`，不进版本库），
 在 CI 里没有网络也能跑的就到这里为止——与其写一个"网络不通就 skip"的假回归，
 不如把能离线钉住的部分钉死。
@@ -180,3 +181,111 @@ def test_missing_or_crashed_spec_run_is_not_reported_as_pass(tmp_path, monkeypat
     result = harness.run_case_generic(tmp_path / "x.v", "baseline", "", "uart_rx",
                                       tmp_path / "contract.json", tmp_path / "plan.json")
     assert result["spec_complete"] is complete
+
+
+def _task_source(name: str) -> str:
+    """Use the production checker tasks with an independently scripted waveform."""
+    import re
+    found = re.search(rf"  task {name};.*?  endtask", harness.TX_SPEC_TB, re.S)
+    assert found is not None
+    return found.group()
+
+
+# Fixture-only transmitter: schedule txd from the elapsed frame index. It does
+# not copy the frozen upstream's prescale counter/shift-register implementation.
+# The fixture probes the new port-level timing tasks, not the loopback receiver.
+_TIMELINE_TRANSMITTER = r"""
+`timescale 1ns/1ps
+module uart_tx #(
+  parameter DATA_WIDTH=8, PERIOD_SHORT=0, STUCK_BUSY=0, BAD_STOP=0
+)(
+  input wire clk, rst,
+  input wire [DATA_WIDTH-1:0] s_axis_tdata,
+  input wire s_axis_tvalid,
+  output reg s_axis_tready, txd, busy,
+  input wire [15:0] prescale
+);
+  reg [9:0] scripted_frame;
+  integer elapsed=0, bit_window=8, bit_index;
+  reg emitting=0;
+  initial begin s_axis_tready=0; txd=1; busy=0; end
+  always @(posedge clk) begin
+    if (rst) begin
+      busy<=0; txd<=1; s_axis_tready<=0; elapsed<=0; emitting<=0;
+    end else if (!emitting) begin
+      s_axis_tready<=1;
+      if (s_axis_tready && s_axis_tvalid) begin
+        scripted_frame <= {BAD_STOP ? 1'b0 : 1'b1, s_axis_tdata, 1'b0};
+        bit_window <= 8*prescale-PERIOD_SHORT;
+        elapsed<=0; emitting<=1; busy<=1; txd<=0; s_axis_tready<=0;
+      end
+    end else begin
+      elapsed<=elapsed+1;
+      bit_index=(elapsed+1)/bit_window;
+      txd <= bit_index<10 ? scripted_frame[bit_index] : 1'b1;
+      if (elapsed+1==10*bit_window+1) begin
+        emitting<=0; busy<=STUCK_BUSY ? 1'b1 : 1'b0; s_axis_tready<=1;
+      end
+    end
+  end
+endmodule
+"""
+
+
+@pytest.mark.parametrize("fixture_parameters,expected_failure", [
+    ("", None),
+    (", .PERIOD_SHORT(1)", "serial_bit_value_or_duration"),
+    (", .STUCK_BUSY(1)", "busy_released_on_deadline"),
+    (", .BAD_STOP(1)", "serial_bit_value_or_duration"),
+])
+def test_tx_port_timing_oracle_accepts_good_trace_and_rejects_bad_controls(
+    tmp_path, fixture_parameters, expected_failure,
+):
+    """An accurate decoder alone must not hide shortened bits or stuck busy."""
+    import subprocess
+    from iverilog_ai.core.toolchain import locate_tools
+
+    tools = locate_tools()
+    assert tools.iverilog and tools.vvp, "these offline oracle controls require Icarus"
+    tasks = "\n".join(_task_source(name) for name in ("check", "offer", "check_frame_timing"))
+    testbench = f"""
+`timescale 1ns/1ps
+module tb;
+  reg clk=0, rst=1;
+  reg [7:0] tdata=0;
+  reg tvalid=0;
+  reg [15:0] prescale=1;
+  wire tready, txd, tx_busy;
+  integer checks=0, failures=0, waited=0;
+  uart_tx #(.DATA_WIDTH(8){fixture_parameters}) dut(
+    .clk(clk), .rst(rst), .s_axis_tdata(tdata), .s_axis_tvalid(tvalid),
+    .s_axis_tready(tready), .txd(txd), .busy(tx_busy), .prescale(prescale));
+  always #5 clk=~clk;
+{tasks}
+  initial begin
+    repeat (3) @(posedge clk);
+    @(negedge clk); rst=0;
+    repeat (2) begin @(posedge clk); #1; end
+    check_frame_timing(1);
+    check_frame_timing(2);
+    $display("SPEC_SUMMARY checks=%0d failures=%0d", checks, failures);
+    $finish;
+  end
+endmodule
+"""
+    source = tmp_path / "timing_controls.v"
+    source.write_text(_TIMELINE_TRANSMITTER + testbench, encoding="utf-8")
+    executable = tmp_path / "timing_controls.vvp"
+    compiled = subprocess.run(
+        [tools.iverilog, "-g2012", "-s", "tb", "-o", str(executable), str(source)],
+        capture_output=True, text=True, timeout=30,
+    )
+    assert compiled.returncode == 0, compiled.stderr
+    simulated = subprocess.run([tools.vvp, str(executable)], capture_output=True, text=True, timeout=30)
+    assert simulated.returncode == 0, simulated.stderr
+    failed = [line for line in simulated.stdout.splitlines() if line.endswith("FAIL")]
+    if expected_failure is None:
+        assert not failed, "correct trace must pass at both prescale=1 and prescale=2"
+        assert "failures=0" in simulated.stdout
+    else:
+        assert any(f"CHECK {expected_failure} FAIL" == line for line in failed), simulated.stdout

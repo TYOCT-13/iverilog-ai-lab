@@ -1,0 +1,63 @@
+{
+  "schema_version": "agent-v2-mutations-v1",
+  "independent_holdout": false,
+  "scope": "two_fifo_overrides_only_other_six_defects_unchanged",
+  "defect_count": 2,
+  "baseline": {
+    "path": "rtl/sync_fifo.v",
+    "snapshot_path": "benchmarks/agent_v2/sync_fifo_reference.v",
+    "sha256": "964cd554041818533ece195f3abcc6979c116c4a3d72106a7fe49c503bd2dadc",
+    "ancestor_git_commit": "d1feb018c1839289c371e6fa6f85ec76f32b4d52",
+    "ancestor_is_before_count_correction": true,
+    "current_baseline_is_committed_at_generation": false,
+    "revision": "2026-10-04 accepted_read_write_net_zero_count_fix"
+  },
+  "legacy_manifest": {
+    "path": "benchmarks/manifest.json",
+    "sha256": "338f6a4f29f84dbe34e14223114d54f6e809b5dd9cd625e081a07f27c396d3f1"
+  },
+  "mutation_policy": "exactly one occurrence of the same old operator applied to corrected baseline; no other source edits",
+  "notes": [
+    "Canonical LF bytes are frozen for Git/export stability.",
+    "write_when_full removes memory write gating only; the corrected independent count admission remains unchanged.",
+    "Legacy variants retain the old count issue and are not used as v2 single-fault controls."
+  ],
+  "defects": [
+    {
+      "type": "sync_fifo",
+      "id": "fifo_bug_full_off_by_one",
+      "file": "benchmarks/agent_v2/sync_fifo_bug_full_off_by_one.v",
+      "sha256": "64421ef7e99f0d0e4964a680067a7e2d4773c12d15d9b65d8d120156adf8418a",
+      "baseline_sha256": "964cd554041818533ece195f3abcc6979c116c4a3d72106a7fe49c503bd2dadc",
+      "legacy_file": "rtl/sync_fifo_bug_full_off_by_one.v",
+      "legacy_sha256": "d4488c931444acf82d57c2fd9d16981b5692829a432fe9775ab83dfb5d3616ef",
+      "operator": {
+        "anchor": "assign full=(count==DEPTH);",
+        "replacement": "assign full=(count==DEPTH-1);",
+        "expected_occurrences": 1,
+        "source_line": 4,
+        "byte_offset": 337,
+        "same_legacy_operator": true
+      },
+      "purpose": "development_set_manual_single_mutation_control_not_real_world_bug_discovery"
+    },
+    {
+      "type": "sync_fifo",
+      "id": "fifo_bug_write_when_full",
+      "file": "benchmarks/agent_v2/sync_fifo_bug_write_when_full.v",
+      "sha256": "4d6888893636961465ab503be921859f97d3c0c15695ababaae7ce103032420c",
+      "baseline_sha256": "964cd554041818533ece195f3abcc6979c116c4a3d72106a7fe49c503bd2dadc",
+      "legacy_file": "rtl/sync_fifo_bug_write_when_full.v",
+      "legacy_sha256": "b579005f8af33f20a6abea7a695ae634850228831da1f5e15fecc43e55253e71",
+      "operator": {
+        "anchor": "if(wr_en&&!full)",
+        "replacement": "if(wr_en)",
+        "expected_occurrences": 1,
+        "source_line": 5,
+        "byte_offset": 509,
+        "same_legacy_operator": true
+      },
+      "purpose": "development_set_manual_single_mutation_control_not_real_world_bug_discovery"
+    }
+  ]
+}
