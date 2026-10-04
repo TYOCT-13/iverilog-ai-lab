@@ -108,6 +108,31 @@ def test_pipeline_runs_real_iverilog_and_persists_explicit_artifacts(tmp_path):
 
 
 @pytest.mark.skipif(not _TOOLS.can_simulate, reason="未找到 Icarus Verilog（iverilog/vvp）")
+def test_explicitly_disabled_reference_lookup_cannot_attach_a_same_named_builtin(tmp_path, monkeypatch):
+    def unexpected_lookup(*args, **kwargs):
+        raise AssertionError("disabled reference lookup must not execute")
+    monkeypatch.setattr("iverilog_ai.core.pipeline.reference_expectations", unexpected_lookup)
+    monkeypatch.setattr("iverilog_ai.core.pipeline.check_plan_consistency", unexpected_lookup)
+    plan = _plan()
+    plan.vectors[0].expected = {}
+    result = VerificationPipeline(reference_policy="disabled").run(
+        plan, _contract(), _rtl(tmp_path), tmp_path / "external-like",
+        allowed_roots=(tmp_path,), iverilog_path=IVERILOG, vvp_path=VVP)
+    oracle = result.simulation.config["oracle"]
+    assert oracle["reference_policy"] == "disabled"
+    assert oracle["status"] == "skipped"
+    assert oracle["expectation_source"] == "none_given"
+    assert result.simulation.config["verification_status"] == "inconclusive"
+    assert result.simulation.check_count == 0
+    assert all(record.expected is None for record in result.simulation.records)
+
+
+def test_reference_policy_rejects_unknown_values():
+    with pytest.raises(PipelineValidationError, match="reference_policy"):
+        VerificationPipeline(reference_policy="untrusted")
+
+
+@pytest.mark.skipif(not _TOOLS.can_simulate, reason="未找到 Icarus Verilog（iverilog/vvp）")
 def test_pipeline_runs_real_clocked_vectors(tmp_path):
     rtl = tmp_path / "counter.v"
     rtl.write_text(

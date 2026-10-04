@@ -10,7 +10,7 @@ from pathlib import Path
 import random
 import sys
 import time
-from typing import Any
+from typing import Any, Literal
 from urllib.parse import urlsplit
 
 from iverilog_ai.ai.agent import AgentLimits, run_verification_agent
@@ -126,10 +126,17 @@ def summarize(rows: list[dict]) -> dict:
 
 
 def execute(registration: dict, output: Path, *, endpoint="", model="", key="", request_cap=0,
-            max_output_tokens=4096, iverilog="iverilog", vvp="vvp", provider_factory=None) -> dict:
+            max_output_tokens=4096, wire_api: Literal["chat_completions", "responses"] = "chat_completions",
+            iverilog="iverilog", vvp="vvp", provider_factory=None) -> dict:
     output.mkdir(parents=True, exist_ok=False)
     write(output / "preregistration.json", registration)
+    settings = {"preregistration_sha256": sha(output / "preregistration.json"), "wire_api": wire_api,
+                "endpoint_host": urlsplit(endpoint).hostname, "model": model,
+                "max_output_tokens": max_output_tokens, "total_request_cap": request_cap,
+                "request_timeout_seconds": 60, "stream": False, "iverilog": iverilog, "vvp": vvp}
+    write(output / "run_settings.json", settings)
     report = {"preregistration_sha256": sha(output / "preregistration.json"),
+              "run_settings_sha256": sha(output / "run_settings.json"), "wire_api": wire_api,
               "started_at": datetime.now(timezone.utc).isoformat(), "endpoint_host": urlsplit(endpoint).hostname,
               "model": model, "total_request_cap": request_cap, "max_output_tokens": max_output_tokens,
               "cost_currency": None, "cost_missing_reason": "provider billing not supplied; usage is not currency",
@@ -152,10 +159,17 @@ def execute(registration: dict, output: Path, *, endpoint="", model="", key="", 
                 contract = DutContract.from_dict(json.loads((ROOT / f"examples/{case}_contract.json").read_text()))
                 def audit(round_row):
                     plan = TestPlan.model_validate(round_row["plan"])
+                    cycles = plan_cycles(plan.model_dump(mode="json")["vectors"])
+                    entry = {"round": round_row["round"], "plan": plan.model_dump(mode="json"),
+                             "actual": round_row["observation"], "cycles": cycles,
+                             "reference": {"status": "not_completed", "checks": 0, "failures": 0,
+                                           "expectation_source": None}}
+                    row["rounds"].append(entry)
+                    row["reference_audit_cycles_attempted"] = row.get("reference_audit_cycles_attempted", 0) + cycles
+                    save()
                     reference = runner.run(plan, contract, ROOT / f"rtl/{case}.v", work / f"audit-{round_row['round']}", **options)
-                    row["rounds"].append({"round": round_row["round"], "plan": plan.model_dump(mode="json"),
-                                          "actual": round_row["observation"], "reference": observation(reference),
-                                          "cycles": plan_cycles(plan.model_dump(mode="json")["vectors"])})
+                    entry["reference"] = observation(reference)
+                    row["reference_audit_cycles"] = row.get("reference_audit_cycles", 0) + cycles
                     save()
                 if row["strategy"] in {"fixed", "random"}:
                     plan = baseline_plan(case, row["strategy"], row["seed"], contract, row["budget_cycles"])
@@ -170,7 +184,7 @@ def execute(registration: dict, output: Path, *, endpoint="", model="", key="", 
                     count = min(1 if row["strategy"] == "single" else 3, remaining)
                     provider = provider_factory(count) if provider_factory else OpenAICompatibleProvider(
                         endpoint=endpoint, model=model, api_key=key, allow_network=True, store=False,
-                        reasoning_effort=None, timeout=60, stream=False, request_limit=count,
+                        reasoning_effort=None, timeout=60, stream=False, request_limit=count, wire_api=wire_api,
                         max_output_tokens=max_output_tokens, force_output_limit=True)
                     result = run_verification_agent(provider=provider, contract=contract, rtl_path=ROOT / row["rtl"],
                         output_dir=work / "agent", objective="Check contract behavior and protocol boundaries",
@@ -187,16 +201,34 @@ def execute(registration: dict, output: Path, *, endpoint="", model="", key="", 
                                                 for n, d in enumerate(result.trajectory["decisions"])]
                     row["requests"] = result.trajectory["requests_attempted"]
                 row["status"], row["detected"] = classify(row)
+            except KeyboardInterrupt:
+                row["status"] = "interrupted"
+                raise
             except Exception as exc:
                 row["status"] = "execution_error"
                 row["error_type"] = type(exc).__name__
             finally:
+                trace_path = work / "agent/agent_trajectory.json"
+                if trace_path.is_file():
+                    try:
+                        trace = json.loads(trace_path.read_text(encoding="utf-8"))
+                        row["agent_stimulus_cycles"] = trace["stimulus_cycles_executed"]
+                        row["trajectory"] = str(trace_path)
+                        row["requests"] = trace["requests_attempted"]
+                        row["stop_reason"] = trace["stop_reason"]
+                        row["usage_by_decision"] = [{"request_id": f"{index}:{n}", "usage": d.get("usage")}
+                                                    for n, d in enumerate(trace["decisions"])]
+                    except (OSError, ValueError, KeyError) as exc:
+                        row["trace_recovery_error_type"] = type(exc).__name__
                 if provider is not None:
                     row["requests"] = int(getattr(provider, "request_count", row["requests"]))
                 report["requests_attempted"] += row["requests"]
                 row["elapsed_seconds"] = round(time.monotonic() - started, 3)
-                row["search_cycles"] = sum(r["cycles"] for r in row["rounds"])
-                row["reference_audit_cycles"] = row["search_cycles"]
+                row["audited_round_search_cycles"] = sum(r["cycles"] for r in row["rounds"])
+                row["search_cycles"] = row.get("agent_stimulus_cycles", row["audited_round_search_cycles"])
+                row["search_cycle_accounting_gap"] = row["search_cycles"] - row["audited_round_search_cycles"]
+                row.setdefault("reference_audit_cycles", 0)
+                row["requests_without_usage"] = max(0, row["requests"] - sum(bool(d["usage"]) for d in row.get("usage_by_decision", [])))
                 save()
                 print(json.dumps({k: row[k] for k in ("case", "variant", "strategy", "status", "requests")}), flush=True)
     finally:
@@ -218,6 +250,7 @@ def main(argv=None) -> int:
     parser.add_argument("--max-output-tokens", type=int, choices=range(128, 8193), default=4096)
     parser.add_argument("--endpoint", default=os.getenv("IVERILOG_AI_BASE_URL", ""))
     parser.add_argument("--model", default=os.getenv("IVERILOG_AI_MODEL", ""))
+    parser.add_argument("--wire-api", choices=["chat_completions", "responses"], default="chat_completions")
     parser.add_argument("--api-key-file", type=Path)
     parser.add_argument("--output-dir", type=Path, default=ROOT / ".iverilog-ai/agent-comparison-pilot")
     parser.add_argument("--iverilog", default="D:/iverilog/bin/iverilog.exe")
@@ -228,7 +261,9 @@ def main(argv=None) -> int:
             raise ValueError("negative request cap")
         reg = preregister(args.cases, args.strategies, args.repeats, args.defects_per_case)
         print(json.dumps({"mode": "execute" if args.execute else "dry_run", "samples": len(reg["rows"]),
-                          "theoretical_requests": reg["theoretical_requests"], "authorized_request_cap": args.total_request_cap}))
+                          "theoretical_requests": reg["theoretical_requests"], "authorized_request_cap": args.total_request_cap,
+                          "wire_api": args.wire_api, "endpoint_host": urlsplit(args.endpoint).hostname,
+                          "model": args.model, "max_output_tokens": args.max_output_tokens}))
         if not args.execute:
             return 0
         key = ""
@@ -241,7 +276,7 @@ def main(argv=None) -> int:
                 raise ValueError("credential missing")
         execute(reg, args.output_dir, endpoint=args.endpoint, model=args.model, key=key,
                 request_cap=args.total_request_cap, max_output_tokens=args.max_output_tokens,
-                iverilog=args.iverilog, vvp=args.vvp)
+                wire_api=args.wire_api, iverilog=args.iverilog, vvp=args.vvp)
         return 0
     except Exception as exc:
         print(f"Comparison failed: {type(exc).__name__}")

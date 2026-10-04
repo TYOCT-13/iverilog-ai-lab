@@ -5,7 +5,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from iverilog_ai.ai.agent import AgentDecision, AgentLimits, run_verification_agent
+from iverilog_ai.ai.agent import AgentDecision, AgentLimits, AgentObservation, run_verification_agent
 from iverilog_ai.ai.debug_provider import offline_provider
 from iverilog_ai.ai.planner import plan_tests
 from iverilog_ai.ai.provider import OpenAICompatibleProvider
@@ -225,3 +225,52 @@ def test_no_feedback_ablation_hides_observations_but_preserves_actual_evidence(t
         assert len(result.trajectory["rounds"]) == 2
         assert result.trajectory["rounds"][0]["observation"]["checks"] == 2
         assert result.trajectory["feedback_enabled"] is enabled
+
+
+def differential_observer(*, differences=0, samples=2, source="qualified_baseline_differential",
+                          outputs=None):
+    """Synthetic observations exercise the gate; these are not external evidence."""
+    import hashlib
+    candidate = hashlib.sha256((ROOT / "rtl/mod10_counter.v").read_bytes()).hexdigest()
+    def observe(result):
+        return AgentObservation(
+            status="passed", verdict="behavior_difference" if differences else "no_observed_difference",
+            expectation_source=source, verification_status="qualified_baseline_differential",
+            compared_samples=samples, differences=differences,
+            qualified_outputs=["count"] if outputs is None else outputs,
+            qualification_sha256="a" * 64, baseline_sha256="b" * 64, candidate_sha256=candidate)
+    return observe
+
+
+def test_qualified_output_difference_has_its_own_verdict_and_paired_budget(tmp_path):
+    result = run(tmp_path, Scripted(append()), Pipeline(source="none_given"),
+                 round_observer=differential_observer(differences=1), simulation_multiplier=2)
+    assert result.stop_reason == "behavior_difference"
+    row = result.trajectory["rounds"][0]
+    assert row["observation"]["checks"] == row["observation"]["failures"] == 0
+    assert row["observation"]["differences"] == 1
+    assert row["stimulus_cycles"] == 2
+    assert result.trajectory["candidate_stimulus_cycles_executed"] == 1
+    assert result.trajectory["baseline_stimulus_cycles_executed"] == 1
+
+
+@pytest.mark.parametrize("kwargs", [{"samples": 0}, {"source": "ai_generated"}, {"outputs": ["internal_state"]}])
+def test_unqualified_differential_observation_stops_without_confirmed_defect(tmp_path, kwargs):
+    result = run(tmp_path, Scripted(append()), round_observer=differential_observer(**kwargs),
+                 simulation_multiplier=2)
+    assert result.stop_reason == "insufficient_evidence"
+
+
+def test_paired_replay_budget_is_charged_before_another_api_request(tmp_path):
+    provider = Scripted(append(), append(2))
+    result = run(tmp_path, provider, round_observer=differential_observer(), simulation_multiplier=2,
+                 limits=AgentLimits(max_total_cycles=2))
+    assert result.stop_reason == "cycle_budget"
+    assert result.trajectory["stimulus_cycles_executed"] == 2
+    assert len(provider.prompts) == 1
+
+
+def test_differential_observation_cannot_relabel_samples_as_assertions():
+    with pytest.raises(ValueError, match="not assertion checks"):
+        AgentObservation(status="passed", verdict="behavior_difference",
+                         expectation_source="qualified_baseline_differential", checks=10)

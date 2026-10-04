@@ -61,6 +61,7 @@ class AgentLimits(BaseModel):
 
 STOP_LABELS = {
     "counterexample_found": "发现反例，已保留证据",
+    "behavior_difference": "发现输出行为差异，已保留对比证据",
     "model_stopped": "模型选择停止；结论仅限已执行测试",
     "round_budget": "已达到验证轮数上限",
     "request_budget": "已达到 API 请求上限",
@@ -75,6 +76,45 @@ STOP_LABELS = {
     "input_changed": "RTL 文件发生变化，已停止",
     "interrupted": "运行被中断，已保留已完成记录",
 }
+
+
+class AgentObservation(BaseModel):
+    """Trusted executor observations; an API decision cannot supply this model."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    run_id: str = ""
+    status: str = Field(max_length=80)
+    verdict: str = Field(max_length=80)
+    expectation_source: str = Field(max_length=80)
+    verification_status: str = Field(default="unknown", max_length=80)
+    checks: int = Field(default=0, ge=0)
+    failures: int = Field(default=0, ge=0)
+    failure_samples: list[dict[str, Any]] = Field(default_factory=list, max_length=8)
+    compared_samples: int = Field(default=0, ge=0)
+    differences: int = Field(default=0, ge=0)
+    difference_samples: list[dict[str, Any]] = Field(default_factory=list, max_length=8)
+    qualified_outputs: list[str] = Field(default_factory=list, max_length=128)
+    qualification_sha256: str = ""
+    baseline_sha256: str = ""
+    candidate_sha256: str = ""
+    evidence_path: str = ""
+    baseline_pipeline_result: str = ""
+    candidate_pipeline_result: str = ""
+    candidate_stimulus_cycles: int = Field(default=0, ge=0)
+    baseline_stimulus_cycles: int = Field(default=0, ge=0)
+    error_type: str | None = None
+
+    @model_validator(mode="after")
+    def validate_differential_evidence(self) -> AgentObservation:
+        if self.expectation_source == "qualified_baseline_differential":
+            if self.checks or self.failures:
+                raise ValueError("differential samples are not assertion checks")
+            for digest in (self.qualification_sha256, self.baseline_sha256, self.candidate_sha256):
+                if len(digest) != 64 or any(char not in "0123456789abcdef" for char in digest):
+                    raise ValueError("qualified differential evidence requires SHA256 provenance")
+            if self.differences > self.compared_samples:
+                raise ValueError("differences exceed compared output samples")
+        return self
 
 
 def _json(value: Any) -> str:
@@ -147,11 +187,18 @@ def run_verification_agent(
     execution_options: dict[str, Any] | None = None,
     on_round: Callable[[dict[str, Any]], None] | None = None,
     include_feedback: bool = True,
+    round_observer: Callable[[PipelineResult], AgentObservation] | None = None,
+    simulation_multiplier: int = 1,
 ) -> AgentResult:
     """执行真实仿真并逐轮落盘；失败不重试，已有目录不覆盖。"""
     limits = limits or AgentLimits()
     if not isinstance(include_feedback, bool):
         raise ValueError("include_feedback must be a boolean")
+    if (isinstance(simulation_multiplier, bool) or not isinstance(simulation_multiplier, int)
+            or simulation_multiplier not in (1, 2)):
+        raise ValueError("simulation_multiplier must be 1 or 2")
+    if (round_observer is None) != (simulation_multiplier == 1):
+        raise ValueError("paired differential execution requires an observer and multiplier 2")
     if len(specification) > 16000 or not 1 <= len(objective) <= 1000:
         raise ValueError("specification <= 16000 characters; objective must contain 1..1000 characters")
     source = Path(rtl_path).resolve(strict=True)
@@ -184,6 +231,8 @@ def run_verification_agent(
         "record_kind": descriptor, "model": str(getattr(provider, "model", "test")),
         "wire_api": getattr(provider, "wire_api", None),
         "feedback_enabled": include_feedback,
+        "simulation_multiplier": simulation_multiplier,
+        "evidence_mode": "qualified_baseline_differential" if round_observer else "pipeline_observation",
         "started_at": datetime.now(timezone.utc).isoformat(),
         "design_family": contract.module, "objective": objective,
         "rtl_sha256": _sha(source.read_bytes()), "contract": contract.to_dict(),
@@ -192,6 +241,7 @@ def run_verification_agent(
         "initial_plan": plan.model_dump(mode="json") if plan else None,
         "rounds": [], "decisions": [], "requests_attempted": 0,
         "stimulus_cycles_executed": 0, "stop_reason": "interrupted",
+        "candidate_stimulus_cycles_executed": 0, "baseline_stimulus_cycles_executed": 0,
     }
     if secret and secret in _json(trace):
         raise ValueError("input contains a credential; refuse to record or send it")
@@ -227,7 +277,7 @@ def run_verification_agent(
                 if plan and len(plan.vectors) >= limits.max_vectors:
                     trace["stop_reason"] = "vector_budget"
                     break
-                if plan and trace["stimulus_cycles_executed"] + sum(v.cycles for v in plan.vectors) + 1 > limits.max_total_cycles:
+                if plan and trace["stimulus_cycles_executed"] + (sum(v.cycles for v in plan.vectors) + 1) * simulation_multiplier > limits.max_total_cycles:
                     trace["stop_reason"] = "cycle_budget"
                     break
                 if trace["requests_attempted"] >= limits.max_requests or calls >= limits.max_requests:
@@ -241,6 +291,9 @@ def run_verification_agent(
                     "remaining_stimulus_cycles": limits.max_total_cycles - trace["stimulus_cycles_executed"],
                     "max_new_vectors": min(12, limits.max_vectors - (len(plan.vectors) if plan else 0)),
                 }
+                if simulation_multiplier == 2:
+                    state["simulation_multiplier"] = 2
+                    state["remaining_candidate_cycles"] = state["remaining_stimulus_cycles"] // 2
                 prompt = decision_prompt(state)
                 decision_record = {"state": state, "prompt_sha256": _sha(prompt.encode()), "status": "requested"}
                 trace["decisions"].append(decision_record)
@@ -297,7 +350,7 @@ def run_verification_agent(
                 trace["stop_reason"] = "vector_budget"
                 break
             cycles = sum(vector.cycles for vector in plan.vectors)
-            if trace["stimulus_cycles_executed"] + cycles > limits.max_total_cycles:
+            if trace["stimulus_cycles_executed"] + cycles * simulation_multiplier > limits.max_total_cycles:
                 trace["stop_reason"] = "cycle_budget"
                 break
             if time.monotonic() - started >= limits.wall_time_seconds:
@@ -315,10 +368,22 @@ def run_verification_agent(
                     trace["stop_reason"] = "input_changed"
                     break
                 result.last_result = actual
-                trace["stimulus_cycles_executed"] += cycles
-                observation = _summary(actual)
+                trace["candidate_stimulus_cycles_executed"] += cycles
+                trace["baseline_stimulus_cycles_executed"] += cycles if simulation_multiplier == 2 else 0
+                trace["stimulus_cycles_executed"] += cycles * simulation_multiplier
+                if round_observer is None:
+                    observation = _summary(actual)
+                else:
+                    observed = round_observer(actual)
+                    if not isinstance(observed, AgentObservation):
+                        raise ValueError("round observer must return a typed AgentObservation")
+                    observation = observed.model_dump(mode="json")
+                    if secret and secret in _json(observation):
+                        raise ValueError("observation contains a credential")
                 row = {"round": round_index + 1, "plan": plan.model_dump(mode="json"),
-                       "observation": observation, "stimulus_cycles": cycles,
+                       "observation": observation, "stimulus_cycles": cycles * simulation_multiplier,
+                       "candidate_stimulus_cycles": cycles,
+                       "baseline_stimulus_cycles": cycles if simulation_multiplier == 2 else 0,
                        "pipeline_result": str(Path(actual.artifacts["pipeline_result"]).relative_to(output.resolve()))}
                 trace["rounds"].append(row)
                 if decision_record is not None:
@@ -326,6 +391,21 @@ def run_verification_agent(
                 save()
                 if on_round:
                     on_round(row)
+                if round_observer is not None:
+                    output_names = {port.name for port in contract.ports if port.direction.value == "output"}
+                    if (observation["status"] not in {"passed", "passed_with_warnings"}
+                            or observation["expectation_source"] != "qualified_baseline_differential"
+                            or observation["verification_status"] != "qualified_baseline_differential"
+                            or observation["candidate_sha256"] != trace["rtl_sha256"]
+                            or not observation["compared_samples"]
+                            or not observation["qualified_outputs"]
+                            or not set(observation["qualified_outputs"]).issubset(output_names)):
+                        trace["stop_reason"] = "insufficient_evidence"
+                        break
+                    if observation["differences"]:
+                        trace["stop_reason"] = "behavior_difference"
+                        break
+                    continue
                 if observation["status"] not in {"passed", "passed_with_warnings"}:
                     trace["stop_reason"] = "execution_error"
                     break

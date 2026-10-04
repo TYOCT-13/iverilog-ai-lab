@@ -18,7 +18,9 @@
 
 每个缺陷最多计一次独立检出，同时保留逐重复样本统计。分母来自预注册，不因请求失败或预算耗尽缩小。多个失败日志条目不能当成多个缺陷。缺失 usage 保留为空，费用没有服务商账单时记 null，不把未知费用记为零。API 传输请求按样本累计一次，usage 按唯一 `sample:decision` 记录，不因参考回放重复累加。
 
-执行前写 preregistration.json（含模块、缺陷、策略、预算和代码/输入 SHA256），results.json 引用其文件 SHA256。结果逐样本原子更新；Agent 自身还逐轮保存轨迹。已存在目录拒绝覆盖。中断后的未开始样本保留；重跑应使用新目录，不能把最佳结果拼成一轮。
+执行前写 preregistration.json（含模块、缺陷、策略、预算和代码/输入 SHA256）。另写 run_settings.json，冻结 wire_api、endpoint_host、model、max_output_tokens、total_request_cap、超时、流式设置和工具路径，并引用预注册 SHA256；results.json 同时引用两个文件的 SHA256。这两个文件均在第一次请求之前落盘，且不含密钥。dry-run 显示这些非密钥设置，不读取密钥文件。
+
+结果逐样本原子更新；Agent 自身还逐轮保存轨迹。中断或审计失败时，入口从已经落盘的 Agent 轨迹恢复请求、usage、实际刺激周期；search_cycles 使用轨迹的累计执行值，audited_round_search_cycles 是已有审核条目的周期，差值单列 search_cycle_accounting_gap，不能用审核失败把真实执行成本减为零。参考审核分别记录已返回执行周期和尝试周期。请求缺失 usage 的数量保留，未知费用不当零。已存在目录拒绝覆盖。中断后的未开始样本保留；重跑应使用新目录，不能把最佳结果拼成一轮。
 
 ## 运行
 
@@ -37,9 +39,13 @@ python scripts/run_agent_comparison.py --execute --strategies fixed random --out
 经授权的付费 pilot 示例（模型与地址必须是实际服务配置；密钥只从指定本机文件读取）：
 
 ```powershell
-python scripts/run_agent_comparison.py --execute --endpoint https://api.deepseek.com --model deepseek-flash --api-key-file C:/Users/TYOCT/OneDrive/api/ds-aic.txt --total-request-cap 84 --max-output-tokens 8192 --output-dir .iverilog-ai/agent-comparison-live
+python scripts/run_agent_comparison.py --execute --endpoint https://api.deepseek.com --model deepseek-flash --wire-api chat_completions --api-key-file C:/Users/TYOCT/OneDrive/api/ds-aic.txt --total-request-cap 84 --max-output-tokens 8192 --output-dir .iverilog-ai/agent-comparison-live-chat-v2
 ```
 
 总 cap 是请求数量，不是人民币限额。默认 cap=0，所有 API 样本会明确记为 global_request_budget。脚本无自动重试；错误只记录类型，不保存密钥或远程错误正文。Icarus 路径可用 `--iverilog`、`--vvp` 显式配置。
+
+### 2026-10-04 协议配置修正
+
+首次 `.iverilog-ai/agent-comparison-live-20261004` 使用了 Provider 隐含的 `responses` 默认协议，与此前服务商成功联调使用的 Chat Completions 不一致，已停止。原目录及失败记录保留。入口现提供 `--wire-api chat_completions|responses`，默认显式传 `chat_completions`；使用真实 Provider 和 mock HTTP 传输测试实际请求路由，而不是只检查代码字符串。后续新目录属于修正运行，不能删除首次失败、与首次局部成绩拼接，或把新运行说成首次就成功。此协议修正本身没有进行付费请求。
 
 后续正式实验需要更多经过复核的缺陷、至少 3–5 次重复、独立留出模块、更完整的规格和协议感知随机基线，并记录实际费用。真人试用与第三方人工审核仍需真实参与者另行完成。

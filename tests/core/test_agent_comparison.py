@@ -1,5 +1,7 @@
 import json
+import hashlib
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
@@ -21,6 +23,61 @@ def test_dry_run_does_not_read_key_or_create_output(tmp_path):
     output = tmp_path / "output"
     assert main(["--api-key-file", str(tmp_path / "missing"), "--output-dir", str(output)]) == 0
     assert not output.exists()
+
+
+@pytest.mark.parametrize("wire_api,route", [("chat_completions", "/chat/completions"), ("responses", "/responses")])
+def test_real_provider_transport_uses_frozen_protocol(tmp_path, monkeypatch, wire_api, route):
+    calls = []
+    output = tmp_path / wire_api
+    stop = json.dumps({"action": "stop", "reason": "transport test", "vectors": []})
+    class Response:
+        def __enter__(self): return self
+        def __exit__(self, *args): return None
+        def read(self):
+            return json.dumps({"choices": [{"message": {"content": stop}}], "output_text": stop,
+                               "usage": {"prompt_tokens": 13, "completion_tokens": 5}}).encode()
+    def request(req, timeout):
+        settings = json.loads((output / "run_settings.json").read_text())
+        assert settings["wire_api"] == wire_api
+        assert settings["endpoint_host"] == "api.example"
+        assert settings["model"] == "transport-test"
+        assert settings["total_request_cap"] == 1
+        assert settings["max_output_tokens"] == 256
+        calls.append((req.full_url, json.loads(req.data)))
+        return Response()
+    monkeypatch.setattr("iverilog_ai.ai.provider.build_opener", lambda *args: SimpleNamespace(open=request))
+    reg = preregister(cases=["handshake_stage"], strategies=["single"], defects_per_case=1)
+    kwargs = {} if wire_api == "chat_completions" else {"wire_api": wire_api}
+    report = execute(reg, output, endpoint="https://api.example/v1", model="transport-test", key="fake-credential",
+                     request_cap=1, max_output_tokens=256, **kwargs)
+    assert len(calls) == 1 and calls[0][0].endswith(route)
+    assert report["wire_api"] == wire_api
+    assert report["run_settings_sha256"] == hashlib.sha256((output / "run_settings.json").read_bytes()).hexdigest()
+    assert report["requests_attempted"] == 1
+    assert report["rows"][0]["requests_without_usage"] == 0
+    assert "fake-credential" not in (output / "run_settings.json").read_text()
+
+
+def test_interrupted_engine_recovers_trace_costs(tmp_path, monkeypatch):
+    def interrupted(**kwargs):
+        folder = kwargs["output_dir"]
+        folder.mkdir()
+        (folder / "agent_trajectory.json").write_text(json.dumps({"stimulus_cycles_executed": 7,
+            "requests_attempted": 1, "stop_reason": "interrupted", "decisions": [{"usage": {"total_tokens": 42}}]}))
+        raise KeyboardInterrupt
+    monkeypatch.setattr("scripts.run_agent_comparison.run_verification_agent", interrupted)
+    reg = preregister(cases=["handshake_stage"], strategies=["single"], defects_per_case=1)
+    output = tmp_path / "interrupted"
+    with pytest.raises(KeyboardInterrupt):
+        execute(reg, output, request_cap=1, provider_factory=lambda count: SimpleNamespace(request_count=1))
+    report = json.loads((output / "results.json").read_text())
+    assert report["requests_attempted"] == 1
+    row = report["rows"][0]
+    assert row["status"] == "interrupted"
+    assert row["search_cycles"] == 7 and row["search_cycle_accounting_gap"] == 7
+    assert row["reference_audit_cycles"] == 0
+    assert row["usage_by_decision"][0]["usage"]["total_tokens"] == 42
+    assert report["rows"][1]["status"] == "not_started"
 
 
 @pytest.mark.parametrize("case,cycles", [("sync_fifo", 40), ("uart_tx", 40), ("spi_master", 64), ("handshake_stage", 24)])

@@ -12,7 +12,7 @@ from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
-from typing import Any, Mapping, Sequence
+from typing import Any, Literal, Mapping, Sequence
 
 from ..ai.schema import TestPlan
 from .config import ExecutionConfig, SafePathPolicy
@@ -290,7 +290,11 @@ class VerificationPipeline:
         run_synthesis: bool = False,
         yosys_path: str | None = None,
         synthesis_timeout_s: float = 180.0,
+        reference_policy: Literal["builtin", "disabled"] = "builtin",
     ) -> None:
+        if reference_policy not in {"builtin", "disabled"}:
+            raise PipelineValidationError("reference_policy must be builtin or disabled")
+        self.reference_policy = reference_policy
         self.generator = generator or TestbenchGenerator()
         self.executor_factory = executor_factory
         # 相位检查的期望延迟由调用方（contract/规格）显式给出，不从波形反推。
@@ -357,7 +361,8 @@ class VerificationPipeline:
         # 这样 AI 无法通过猜错期望值来"制造"失败（假误报）或"掩盖"失败，而
         # 仿真裁决权仍然只属于 Icarus。AI 原始计划保留在 testplan.json 中，
         # 差异在 oracle 诊断里单独记录。
-        oracle_expectations = reference_expectations(ai_plan, ai_plan.design, dut_contract)
+        oracle_expectations = (reference_expectations(ai_plan, ai_plan.design, dut_contract)
+                               if self.reference_policy == "builtin" else {})
         generation_plan = override_plan_expectations(ai_plan, oracle_expectations) if oracle_expectations else ai_plan
         try:
             testbench_path = self.generator.generate(
@@ -455,7 +460,12 @@ class VerificationPipeline:
         # already constrained the generated testbench. This block only records
         # how far the AI's own numbers were from the deterministic model, and it
         # never overrides the real Icarus status as the PASS/FAIL authority.
-        consistency = check_plan_consistency(ai_plan, ai_plan.design, dut_contract)
+        consistency = (check_plan_consistency(ai_plan, ai_plan.design, dut_contract)
+                       if self.reference_policy == "builtin" else {
+                           "status": "skipped", "warnings": [],
+                           "reason": "builtin reference lookup explicitly disabled",
+                       })
+        consistency["reference_policy"] = self.reference_policy
         # 期望值的**证据等级**必须如实标注，因为它决定了结论的可信度：
         #
         #   reference_model —— 确定性参考模型复算并覆盖了 AI 数字（内置且已逐拍对齐的案例）
