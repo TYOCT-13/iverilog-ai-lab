@@ -1,0 +1,132 @@
+{
+  "record_kind": "local_scoped_evidence_pack_machine_receipt",
+  "created_at_utc": "2026-10-04T15:09:14.145515+00:00",
+  "zip_path": ".iverilog-ai/ic-agent-v4-evidence-20261004.zip",
+  "bytes": 127448982,
+  "sha256": "768c3c91b1fca0cf86683580a463de8dc4b30228d4b67335781e6773bc25570c",
+  "zip_entries": 10331,
+  "hashed_entries": 10330,
+  "crc_valid": true,
+  "all_listed_hashes_match": true,
+  "manifest_sha256": "88c83e362202ef762e4bfb47286df8f09dec316f53c6fd196e95773ed7a3afbd",
+  "material_commit": "c5e917115a40fc30aab4524b06fcce34ddde1b63",
+  "production_revision": "28be1edc8b84067912e2034567a8e8a5803b8184",
+  "source_archives": [
+    "598e6dcf11fef60497ac12c26642b375bc1810a9",
+    "c7bb280a1d884db90bd35e89e17142b42b7ca80c",
+    "28be1edc8b84067912e2034567a8e8a5803b8184",
+    "c5e917115a40fc30aab4524b06fcce34ddde1b63"
+  ],
+  "raw_directory_allowlist": [
+    "agent-comparison-v2-live-20261004",
+    "agent-comparison-v2-nonthinking-20261004",
+    "agent-comparison-v4-smoke-20261004",
+    "decision-format-diagnostic-20261004",
+    "application-uart-v2-20261004",
+    "ic-agent-v2-validation-20261004",
+    "ic-agent-v2-validation-final-20261004",
+    "ic-agent-v2-nonthinking-validation-20261004",
+    "ic-agent-v4-validation-20261004",
+    "agent-v2-browser-20261004",
+    "agent-v2-browser-20261004-v2",
+    "agent-v2-browser-20261004-v3",
+    "agent-v4-browser-20261004",
+    "agent-v4-browser-20261004-r2",
+    "agent-v4-browser-20261004-r3",
+    "protocol-oracle-fifo-20261004-before",
+    "protocol-oracle-fifo-20261004-after",
+    "protocol-oracle-fifo-20261004-after-final",
+    "protocol-oracle-fifo-20261004-full-off-by-one",
+    "protocol-oracle-fifo-20261004-write-when-full",
+    "external/replay-20261004-protocol-before",
+    "external/replay-20261004-protocol-v2",
+    "agent-v2-proxy-audit-1dda850aa6",
+    "agent-v2-proxy-recheck-9236dde473",
+    "agent-v2-proxy-recheck-dd3d2378a2",
+    "agent-v2-proxy-summary-e2df558de2",
+    "v4-proxy-audit-05961407c1",
+    "v4-proxy-export-f10cba3001",
+    "v4-proxy-frozen-4c120b99c1",
+    "v4-proxy-junction-03218113a4",
+    "ic-agent-v4-frozen-inputs-20261004",
+    "ic-v4-material-readonly-audit-20261004"
+  ],
+  "frozen_inputs": {
+    "registered_entries": 281,
+    "copied_entries": 280,
+    "copied_bytes": 3432536,
+    "workspace_exact": 269,
+    "git_blob_exact": 9,
+    "git_blob_normalized_crlf": 2,
+    "failures": 1
+  },
+  "excluded_reparse_points": [
+    {
+      "path": ".iverilog-ai/v4-proxy-junction-03218113a4/agent/untrusted_decisions",
+      "contents_followed": false,
+      "reason": "existing junction-escape negative-test fixture; rejection evidence and regular target files retained"
+    }
+  ],
+  "unmatched_registered_inputs": [
+    {
+      "group": "application-uart-v2-20261004",
+      "path": "docs/experiment/agent_comparison_v2_plan_2026-10-04.md",
+      "registered_sha256": "e072ac312e1fd1c82097b62a90f2a427ae17cd3dc62ae337365ebf12c1482b6c",
+      "revision_candidates_attempted": [
+        "598e6dcf11fef60497ac12c26642b375bc1810a9"
+      ]
+    }
+  ],
+  "active_credential_scan": {
+    "clear_and_nested_items_scanned": 12866,
+    "hits": 0,
+    "scope": "active key plaintext/JSON escaping and decoded JSON strings; not a universal secret detector"
+  },
+  "api_requests_for_packaging": 0,
+  "human_participants": 0,
+  "independent_human_review": false,
+  "cross_machine_reproduction": false,
+  "public_receipt_generated_at_utc": "2026-10-04T15:13:35.072113+00:00",
+  "original_pack_receipt_sha256": "37e4ffb08b095eb8d436a0c40723a7e3c4f002a3f41e5bbdff077d7c0934c32e",
+  "portable_replay": {
+    "public_receipt": "docs/experiment/ic-agent-v4-pack-replay-2026-10-04/receipt.json",
+    "receipt_sha256": "6bc7d5284a6f75f9c3ba7ffdb52921592791d9eb16b8676942405ae675232b0d",
+    "status": "failed_checks",
+    "checks": 338,
+    "failures": 48,
+    "exit_code": 0,
+    "api_requests": 0,
+    "cross_machine_reproduction": false,
+    "outer_zip_sha256": "768c3c91b1fca0cf86683580a463de8dc4b30228d4b67335781e6773bc25570c"
+  },
+  "preserved_assembly_failures": [
+    {
+      "kind": "pack_builder_link_guard",
+      "path": ".iverilog-ai/ic-agent-v4-evidence-20261004.incomplete-r1.zip",
+      "outcome": "incomplete; not the delivered archive",
+      "reason": "known junction negative-test link refused; final pack excludes that single link explicitly"
+    },
+    {
+      "kind": "replay_helper_entry_path",
+      "path": ".iverilog-ai/ic-agent-v4-pack-replay-20261004/stderr.log",
+      "sha256": "c767ea01729e8cad5cf41d6932a6964a71de4bc0fa0c08ea8b0e8a79a0f0526e",
+      "outcome": "saved script was not started because helper assumed wrong ZIP root",
+      "reason": "r2 helper selects the unique actual bundled replay.py; not a model or DUT failure"
+    }
+  ],
+  "receipt_is_outside_frozen_zip": true,
+  "scope_notice": "This post-pack receipt and replay happened after c5e9171 was frozen. The original ZIP is not rewritten.",
+  "post_pack_readonly_proxy_audit": {
+    "public_receipt": "docs/review/ic-v4-pack-review-2026-10-04/receipt.json",
+    "receipt_sha256": "d9f3ba87b07e2ba5d4de92a0231f33b98fc8353f89281106ef782c68f8b75b53",
+    "zip_crc_valid": true,
+    "hashed_entries_matched": 10330,
+    "git_archive_regeneration_byte_identical": 4,
+    "registered_input_matches": 280,
+    "registered_input_total": 281,
+    "known_unmatched_inputs": 1,
+    "independent_human_review": false,
+    "cross_machine_reproduction": false,
+    "api_requests": 0
+  }
+}

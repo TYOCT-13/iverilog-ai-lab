@@ -1,0 +1,41 @@
+{
+  "record_kind": "same_host_fresh_folder_packaged_counterexample_replay",
+  "created_at_utc": "2026-10-04T15:10:47.601806+00:00",
+  "outer_zip_sha256": "768c3c91b1fca0cf86683580a463de8dc4b30228d4b67335781e6773bc25570c",
+  "portable_zip_sha256": "7057f77b49e5bd8330f337518478e110be2a365c09f6ce420c475c28de74375b",
+  "material_commit": "c5e917115a40fc30aab4524b06fcce34ddde1b63",
+  "production_revision": "28be1edc8b84067912e2034567a8e8a5803b8184",
+  "command": [
+    "D:\\Users\\TYOCT\\anaconda3\\python.exe",
+    "-X",
+    "utf8",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-agent-v4-pack-replay-20261004-r2\\portable-failure\\replay.py",
+    "--iverilog",
+    "D:/iverilog/bin/iverilog.exe",
+    "--vvp",
+    "D:/iverilog/bin/vvp.exe"
+  ],
+  "exit_code": 0,
+  "observation": {
+    "status": "failed_checks",
+    "compile_exit_code": 0,
+    "run_exit_code": 0,
+    "checks": 338,
+    "failures": 48,
+    "invalid_records": 0,
+    "api_requests": 0,
+    "output_dir": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-agent-v4-pack-replay-20261004-r2\\portable-failure\\replay-5b5d64f53e20",
+    "note": "Replay checks the saved testbench; it does not extend verification scope"
+  },
+  "api_requests": 0,
+  "human_participants": 0,
+  "independent_human_review": false,
+  "cross_machine_reproduction": false,
+  "uses_project_imports": false,
+  "log_sha256": {
+    "stdout.log": "5386ff4837d424aee6c13f39c214a4d9e293b71a7d731f4f1af08941d8ae515a",
+    "stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "scope": "fresh extraction of saved RTL/testbench/replay.py; same installed Python and Icarus; no model decision replay or full comparison relocation",
+  "verdict_notice": "exit 0 denotes completed replay; 48 failing comparisons remain a failed design"
+}

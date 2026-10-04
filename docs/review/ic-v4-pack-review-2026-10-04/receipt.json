@@ -1,0 +1,2771 @@
+{
+  "record_kind": "read_only_local_agent_package_integrity_audit",
+  "created_at_utc": "2026-10-04T15:19:03.397018+00:00",
+  "package_path": ".iverilog-ai/ic-agent-v4-evidence-20261004.zip",
+  "build_receipt_path": ".iverilog-ai/ic-agent-v4-pack-build-20261004/receipt.json",
+  "build_receipt_sha256": "37e4ffb08b095eb8d436a0c40723a7e3c4f002a3f41e5bbdff077d7c0934c32e",
+  "package_sha256": "768c3c91b1fca0cf86683580a463de8dc4b30228d4b67335781e6773bc25570c",
+  "package_bytes": 127448982,
+  "api_requests": 0,
+  "human_participants": 0,
+  "independent_human_review": false,
+  "H02_satisfied": false,
+  "cross_machine_reproduction": false,
+  "simulation_executed": false,
+  "real_credentials_read": false,
+  "credential_scan_independently_repeated": false,
+  "zip_entries": 10331,
+  "manifest_entries": 10330,
+  "manifest_sha256": "88c83e362202ef762e4bfb47286df8f09dec316f53c6fd196e95773ed7a3afbd",
+  "zip_duplicate_names": [],
+  "manifest_duplicate_names": [],
+  "unlisted_entries": [],
+  "missing_entries": [],
+  "unsafe_paths": [],
+  "zip_symlink_entries": [],
+  "crc_first_bad_entry": null,
+  "entry_sha_and_size_checks": {
+    "checked": 10330,
+    "matched": 10330,
+    "mismatches": []
+  },
+  "source_archives": [
+    {
+      "path": "source/598e6dcf11fef60497ac12c26642b375bc1810a9.zip",
+      "expected_commit": "598e6dcf11fef60497ac12c26642b375bc1810a9",
+      "archive_commit_comment": "598e6dcf11fef60497ac12c26642b375bc1810a9",
+      "crc_first_bad_entry": null,
+      "files": 547,
+      "git_tree_blob_count": 547,
+      "unsafe_paths": [],
+      "missing_git_blobs": [],
+      "extra_git_blobs": [],
+      "blob_mismatches": [
+        "scripts/make_shortcuts.ps1",
+        "start_ui.cmd",
+        "start_ui.ps1",
+        "stop_ui.cmd",
+        "stop_ui.ps1",
+        "tools/service_panel/build.ps1"
+      ]
+    },
+    {
+      "path": "source/c7bb280a1d884db90bd35e89e17142b42b7ca80c.zip",
+      "expected_commit": "c7bb280a1d884db90bd35e89e17142b42b7ca80c",
+      "archive_commit_comment": "c7bb280a1d884db90bd35e89e17142b42b7ca80c",
+      "crc_first_bad_entry": null,
+      "files": 549,
+      "git_tree_blob_count": 549,
+      "unsafe_paths": [],
+      "missing_git_blobs": [],
+      "extra_git_blobs": [],
+      "blob_mismatches": [
+        "scripts/make_shortcuts.ps1",
+        "start_ui.cmd",
+        "start_ui.ps1",
+        "stop_ui.cmd",
+        "stop_ui.ps1",
+        "tools/service_panel/build.ps1"
+      ]
+    },
+    {
+      "path": "source/28be1edc8b84067912e2034567a8e8a5803b8184.zip",
+      "expected_commit": "28be1edc8b84067912e2034567a8e8a5803b8184",
+      "archive_commit_comment": "28be1edc8b84067912e2034567a8e8a5803b8184",
+      "crc_first_bad_entry": null,
+      "files": 551,
+      "git_tree_blob_count": 551,
+      "unsafe_paths": [],
+      "missing_git_blobs": [],
+      "extra_git_blobs": [],
+      "blob_mismatches": [
+        "scripts/make_shortcuts.ps1",
+        "start_ui.cmd",
+        "start_ui.ps1",
+        "stop_ui.cmd",
+        "stop_ui.ps1",
+        "tools/service_panel/build.ps1"
+      ]
+    },
+    {
+      "path": "source/c5e917115a40fc30aab4524b06fcce34ddde1b63.zip",
+      "expected_commit": "c5e917115a40fc30aab4524b06fcce34ddde1b63",
+      "archive_commit_comment": "c5e917115a40fc30aab4524b06fcce34ddde1b63",
+      "crc_first_bad_entry": null,
+      "files": 603,
+      "git_tree_blob_count": 603,
+      "unsafe_paths": [],
+      "missing_git_blobs": [],
+      "extra_git_blobs": [],
+      "blob_mismatches": [
+        "scripts/make_shortcuts.ps1",
+        "start_ui.cmd",
+        "start_ui.ps1",
+        "stop_ui.cmd",
+        "stop_ui.ps1",
+        "tools/service_panel/build.ps1"
+      ]
+    }
+  ],
+  "experiment_originals": [
+    {
+      "group": "agent-comparison-v2-nonthinking-20261004",
+      "files": [
+        {
+          "path": "raw/agent-comparison-v2-nonthinking-20261004/results.json",
+          "sha256": "15cc303d7a7b6f462c5394b4cb5f36606127709d0e71fc65058f0fc1f3251c01",
+          "bytes": 10999734,
+          "identical_to_original_bytes": true,
+          "matches_prior_audit_sha": true
+        },
+        {
+          "path": "raw/agent-comparison-v2-nonthinking-20261004/summary.json",
+          "sha256": "a5950aa095ae6846a7ab60b4fe2f941c066c22793b914cdb9bd6e59b0b4132a2",
+          "bytes": 11102649,
+          "identical_to_original_bytes": true,
+          "matches_prior_audit_sha": true
+        }
+      ],
+      "rows": 252,
+      "requests_attempted": 157,
+      "row_status_counts": {
+        "not_detected": 39,
+        "policy_error": 137,
+        "detected": 76
+      }
+    },
+    {
+      "group": "agent-comparison-v4-smoke-20261004",
+      "files": [
+        {
+          "path": "raw/agent-comparison-v4-smoke-20261004/results.json",
+          "sha256": "c46df250acfd2a665da204139b5b3beed7f6bba48dee847e26d2a052743b908d",
+          "bytes": 7824220,
+          "identical_to_original_bytes": true,
+          "matches_prior_audit_sha": true
+        },
+        {
+          "path": "raw/agent-comparison-v4-smoke-20261004/summary.json",
+          "sha256": "ca088434fd908b125df078b3a1f2d7672d04e2fb4da2417de5d8565df401a81a",
+          "bytes": 8263477,
+          "identical_to_original_bytes": true,
+          "matches_prior_audit_sha": true
+        }
+      ],
+      "rows": 84,
+      "requests_attempted": 94,
+      "row_status_counts": {
+        "not_detected": 40,
+        "detected": 43,
+        "execution_error": 1
+      }
+    }
+  ],
+  "registered_inputs": {
+    "groups": [
+      {
+        "group": "agent-comparison-v2-live-20261004",
+        "registered_entries": 74,
+        "matched_entries": 74,
+        "unmatched_entries": 0,
+        "copied_bytes": 860822,
+        "origin_counts": {
+          "workspace_exact": 69,
+          "git_blob_exact": 4,
+          "git_blob_normalized_crlf": 1
+        },
+        "checks": [
+          {
+            "path": "benchmarks/agent_v2/mutation_manifest.json",
+            "registered_sha256": "5ca8faef783e5d3a3a30ceed4a137353917c767dd7650966e8e4cdb93b7067eb",
+            "status": "matched",
+            "sha256": "5ca8faef783e5d3a3a30ceed4a137353917c767dd7650966e8e4cdb93b7067eb",
+            "bytes": 2833,
+            "matches_registered": true
+          },
+          {
+            "path": "benchmarks/agent_v2/sync_fifo_bug_full_off_by_one.v",
+            "registered_sha256": "64421ef7e99f0d0e4964a680067a7e2d4773c12d15d9b65d8d120156adf8418a",
+            "status": "matched",
+            "sha256": "64421ef7e99f0d0e4964a680067a7e2d4773c12d15d9b65d8d120156adf8418a",
+            "bytes": 897,
+            "matches_registered": true
+          },
+          {
+            "path": "benchmarks/agent_v2/sync_fifo_bug_write_when_full.v",
+            "registered_sha256": "4d6888893636961465ab503be921859f97d3c0c15695ababaae7ce103032420c",
+            "status": "matched",
+            "sha256": "4d6888893636961465ab503be921859f97d3c0c15695ababaae7ce103032420c",
+            "bytes": 888,
+            "matches_registered": true
+          },
+          {
+            "path": "benchmarks/agent_v2/sync_fifo_reference.v",
+            "registered_sha256": "964cd554041818533ece195f3abcc6979c116c4a3d72106a7fe49c503bd2dadc",
+            "status": "matched",
+            "sha256": "964cd554041818533ece195f3abcc6979c116c4a3d72106a7fe49c503bd2dadc",
+            "bytes": 895,
+            "matches_registered": true
+          },
+          {
+            "path": "benchmarks/manifest.json",
+            "registered_sha256": "338f6a4f29f84dbe34e14223114d54f6e809b5dd9cd625e081a07f27c396d3f1",
+            "status": "matched",
+            "sha256": "338f6a4f29f84dbe34e14223114d54f6e809b5dd9cd625e081a07f27c396d3f1",
+            "bytes": 28158,
+            "matches_registered": true
+          },
+          {
+            "path": "docs/experiment/agent_comparison_protocol.md",
+            "registered_sha256": "378f69380df37f185a4dbbeb4e6c4483e8e5ab390cf19c5441cb96f7e54fcc95",
+            "status": "matched",
+            "sha256": "378f69380df37f185a4dbbeb4e6c4483e8e5ab390cf19c5441cb96f7e54fcc95",
+            "bytes": 7095,
+            "matches_registered": true,
+            "origin_recovery_verified": true
+          },
+          {
+            "path": "docs/experiment/agent_comparison_v2_plan_2026-10-04.md",
+            "registered_sha256": "3b802c106a5d9f353fcaa926e5686e84b82ce29ea93b6e45eeeacaa72cf9433f",
+            "status": "matched",
+            "sha256": "3b802c106a5d9f353fcaa926e5686e84b82ce29ea93b6e45eeeacaa72cf9433f",
+            "bytes": 7399,
+            "matches_registered": true,
+            "origin_recovery_verified": true
+          },
+          {
+            "path": "examples/handshake_stage_contract.json",
+            "registered_sha256": "04c7ea8773e394e22bf680304fdcf9d1e3d783d1ca763bb8cc5c4e6a5056f377",
+            "status": "matched",
+            "sha256": "04c7ea8773e394e22bf680304fdcf9d1e3d783d1ca763bb8cc5c4e6a5056f377",
+            "bytes": 522,
+            "matches_registered": true
+          },
+          {
+            "path": "examples/spi_master_contract.json",
+            "registered_sha256": "674473699ff9cfbd2fdf9481272fcc1ce905be4b90148beea4c3d42b92755ebe",
+            "status": "matched",
+            "sha256": "674473699ff9cfbd2fdf9481272fcc1ce905be4b90148beea4c3d42b92755ebe",
+            "bytes": 487,
+            "matches_registered": true
+          },
+          {
+            "path": "examples/sync_fifo_contract.json",
+            "registered_sha256": "0c51a032e1405f8cfe87a8dc18933c9d6d3cf61b8f8c969bf46ea23402963ce8",
+            "status": "matched",
+            "sha256": "0c51a032e1405f8cfe87a8dc18933c9d6d3cf61b8f8c969bf46ea23402963ce8",
+            "bytes": 515,
+            "matches_registered": true
+          },
+          {
+            "path": "examples/uart_tx_contract.json",
+            "registered_sha256": "0a30a3e3c5e1ee65f5114f476de0e03bb155879b5e7dcdaf099bf918c180f6b4",
+            "status": "matched",
+            "sha256": "0a30a3e3c5e1ee65f5114f476de0e03bb155879b5e7dcdaf099bf918c180f6b4",
+            "bytes": 415,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/handshake_stage.v",
+            "registered_sha256": "40128340f967f8143bdb55ddfac689a94b7639ac8f175b7b9a4164fb8b531791",
+            "status": "matched",
+            "sha256": "40128340f967f8143bdb55ddfac689a94b7639ac8f175b7b9a4164fb8b531791",
+            "bytes": 472,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/handshake_stage_bug_ready_ignores_out_ready.v",
+            "registered_sha256": "e52ec6619bcc2b049daff7973c85460482b8ae6bb4b806208a6840442cd9f1d1",
+            "status": "matched",
+            "sha256": "e52ec6619bcc2b049daff7973c85460482b8ae6bb4b806208a6840442cd9f1d1",
+            "bytes": 587,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/handshake_stage_bug_valid_not_cleared.v",
+            "registered_sha256": "3f9519c49b4fcb196f4bdee1021d84b922af252be3580d0093b30fef3da68502",
+            "status": "matched",
+            "sha256": "3f9519c49b4fcb196f4bdee1021d84b922af252be3580d0093b30fef3da68502",
+            "bytes": 601,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/spi_master.v",
+            "registered_sha256": "8cacdb94472eb7446f0df05ac201f88e1c7e5c46dd01a484b4996b099835c9dd",
+            "status": "matched",
+            "sha256": "8cacdb94472eb7446f0df05ac201f88e1c7e5c46dd01a484b4996b099835c9dd",
+            "bytes": 684,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/spi_master_bug_done_missing.v",
+            "registered_sha256": "eb194c5f8a88c41111f5cdfb6bb8c67057182448c040691d196ed9bf8376fedf",
+            "status": "matched",
+            "sha256": "eb194c5f8a88c41111f5cdfb6bb8c67057182448c040691d196ed9bf8376fedf",
+            "bytes": 794,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/spi_master_bug_sclk_polarity.v",
+            "registered_sha256": "b3c7cb08949d062faaf20811d7d4693ab7a6bf65ce878dbe1a0df15e69fc57f8",
+            "status": "matched",
+            "sha256": "b3c7cb08949d062faaf20811d7d4693ab7a6bf65ce878dbe1a0df15e69fc57f8",
+            "bytes": 794,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/sync_fifo.v",
+            "registered_sha256": "964cd554041818533ece195f3abcc6979c116c4a3d72106a7fe49c503bd2dadc",
+            "status": "matched",
+            "sha256": "964cd554041818533ece195f3abcc6979c116c4a3d72106a7fe49c503bd2dadc",
+            "bytes": 895,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/uart_tx.v",
+            "registered_sha256": "2b6d636a399169bcaa4fdabd9661daedbfde28c42c3bc9f76104db2c371e1193",
+            "status": "matched",
+            "sha256": "2b6d636a399169bcaa4fdabd9661daedbfde28c42c3bc9f76104db2c371e1193",
+            "bytes": 620,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/uart_tx_bug_busy_never_clears.v",
+            "registered_sha256": "24b4caa23ac9b7dd2db45401acf781b1641e7eb800c55f32b78cbd6b65c7ffed",
+            "status": "matched",
+            "sha256": "24b4caa23ac9b7dd2db45401acf781b1641e7eb800c55f32b78cbd6b65c7ffed",
+            "bytes": 733,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/uart_tx_bug_msb_first.v",
+            "registered_sha256": "93b638a980c2ecf591163f954fd72f5210088c1bf2dda5ab9dbef65c479bd334",
+            "status": "matched",
+            "sha256": "93b638a980c2ecf591163f954fd72f5210088c1bf2dda5ab9dbef65c479bd334",
+            "bytes": 725,
+            "matches_registered": true
+          },
+          {
+            "path": "scripts/run_agent_comparison.py",
+            "registered_sha256": "b8dbf4bc3a9bac6b9a82fe8f2385ffc21de2d2364a79ccc646bfc17eb5e6b299",
+            "status": "matched",
+            "sha256": "b8dbf4bc3a9bac6b9a82fe8f2385ffc21de2d2364a79ccc646bfc17eb5e6b299",
+            "bytes": 30841,
+            "matches_registered": true,
+            "origin_recovery_verified": true
+          },
+          {
+            "path": "scripts/run_strategy_experiment.py",
+            "registered_sha256": "22889c50c07ff49da00c6278a88e8d710f1f708f1e4bf994f51ad82adee5c341",
+            "status": "matched",
+            "sha256": "22889c50c07ff49da00c6278a88e8d710f1f708f1e4bf994f51ad82adee5c341",
+            "bytes": 48683,
+            "matches_registered": true
+          },
+          {
+            "path": "scripts/summarize_agent_comparison.py",
+            "registered_sha256": "b6f806d7362216e2af7fcff470454e8d1ce50edadf899b59e2380622c21280d7",
+            "status": "matched",
+            "sha256": "b6f806d7362216e2af7fcff470454e8d1ce50edadf899b59e2380622c21280d7",
+            "bytes": 15963,
+            "matches_registered": true
+          },
+          {
+            "path": "spec/agent_protocols.json",
+            "registered_sha256": "24c046c9e0e9a11cc04402efd705244d6efc6417a1e8fafe65ed5db1fc449280",
+            "status": "matched",
+            "sha256": "24c046c9e0e9a11cc04402efd705244d6efc6417a1e8fafe65ed5db1fc449280",
+            "bytes": 2683,
+            "matches_registered": true
+          },
+          {
+            "path": "spec/handshake_stage_spec.md",
+            "registered_sha256": "fe7fd36d849fadf09e973b006447b63de4c60ea9f9bbe022876983f8aab95398",
+            "status": "matched",
+            "sha256": "fe7fd36d849fadf09e973b006447b63de4c60ea9f9bbe022876983f8aab95398",
+            "bytes": 2912,
+            "matches_registered": true
+          },
+          {
+            "path": "spec/spi_master_spec.md",
+            "registered_sha256": "d98990ce8f73abf4f4cf16196ad99fd345ab729ef35e97bb26ba7f5673eef516",
+            "status": "matched",
+            "sha256": "d98990ce8f73abf4f4cf16196ad99fd345ab729ef35e97bb26ba7f5673eef516",
+            "bytes": 3034,
+            "matches_registered": true
+          },
+          {
+            "path": "spec/sync_fifo_spec.md",
+            "registered_sha256": "4fe66f356d6fb4c0ca7b0c525ec83b3a287f911893af0974a828737dc3eb0aab",
+            "status": "matched",
+            "sha256": "4fe66f356d6fb4c0ca7b0c525ec83b3a287f911893af0974a828737dc3eb0aab",
+            "bytes": 3642,
+            "matches_registered": true
+          },
+          {
+            "path": "spec/uart_tx_spec.md",
+            "registered_sha256": "7c99ccfdf59d0bb520b0d9ad9994c3572172402bed32abd1c4cd3425705dfb0f",
+            "status": "matched",
+            "sha256": "7c99ccfdf59d0bb520b0d9ad9994c3572172402bed32abd1c4cd3425705dfb0f",
+            "bytes": 3199,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/__init__.py",
+            "registered_sha256": "4029747348635aaec01692e07b842e0e371b54137d82ccf87531653e78c20ae5",
+            "status": "matched",
+            "sha256": "4029747348635aaec01692e07b842e0e371b54137d82ccf87531653e78c20ae5",
+            "bytes": 2323,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/__main__.py",
+            "registered_sha256": "3f5bcafa00f7975197263772705c1a057638fcee62fda5c571d5f346d061458d",
+            "status": "matched",
+            "sha256": "3f5bcafa00f7975197263772705c1a057638fcee62fda5c571d5f346d061458d",
+            "bytes": 182,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/__init__.py",
+            "registered_sha256": "e8f3a29fddabc922dd9bfc972333b84e3617c22ba45f69717953e2ef92c130f4",
+            "status": "matched",
+            "sha256": "e8f3a29fddabc922dd9bfc972333b84e3617c22ba45f69717953e2ef92c130f4",
+            "bytes": 673,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/agent.py",
+            "registered_sha256": "06bd54f636fed3fb4245e111bd0a08105456569338077107a4d05723ecbc62b6",
+            "status": "matched",
+            "sha256": "06bd54f636fed3fb4245e111bd0a08105456569338077107a4d05723ecbc62b6",
+            "bytes": 25595,
+            "matches_registered": true,
+            "origin_recovery_verified": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/debug_provider.py",
+            "registered_sha256": "ee060f47e5d3234be09f5925edd55f58d2e6654f21ca26f1d6b8805d992d976b",
+            "status": "matched",
+            "sha256": "ee060f47e5d3234be09f5925edd55f58d2e6654f21ca26f1d6b8805d992d976b",
+            "bytes": 28184,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/debug_server.py",
+            "registered_sha256": "c49226654b90f2e507727491253c98ba5384aef156719908197fb88a6040dd0b",
+            "status": "matched",
+            "sha256": "c49226654b90f2e507727491253c98ba5384aef156719908197fb88a6040dd0b",
+            "bytes": 15282,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/local_api_profile.py",
+            "registered_sha256": "3942b3a40c131dadb2e84e767ca0656a83f315b9ade6ee1a8d1431e68ff732ea",
+            "status": "matched",
+            "sha256": "3942b3a40c131dadb2e84e767ca0656a83f315b9ade6ee1a8d1431e68ff732ea",
+            "bytes": 2258,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/planner.py",
+            "registered_sha256": "0115a312206c0510e12a2ce9bf14f909c88113a1179533023f33da7005bbc805",
+            "status": "matched",
+            "sha256": "0115a312206c0510e12a2ce9bf14f909c88113a1179533023f33da7005bbc805",
+            "bytes": 14117,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/provider.py",
+            "registered_sha256": "4921479b534555c91dfe0e587cc741d911331992b9405e78a8ea3559e7ef99a9",
+            "status": "matched",
+            "sha256": "4921479b534555c91dfe0e587cc741d911331992b9405e78a8ea3559e7ef99a9",
+            "bytes": 25966,
+            "matches_registered": true,
+            "origin_recovery_verified": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/review_advisor.py",
+            "registered_sha256": "980126489a04fa0d20d7022c544c0a11694ed0ddb76010751879aa5bcbe0edc6",
+            "status": "matched",
+            "sha256": "980126489a04fa0d20d7022c544c0a11694ed0ddb76010751879aa5bcbe0edc6",
+            "bytes": 16596,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/schema.py",
+            "registered_sha256": "cf0babeaea6d7a62aa374ca5467f56e8e0575d39407bcf79b57497dfc9e17b06",
+            "status": "matched",
+            "sha256": "cf0babeaea6d7a62aa374ca5467f56e8e0575d39407bcf79b57497dfc9e17b06",
+            "bytes": 12436,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/__init__.py",
+            "registered_sha256": "3e0c97ad848d7a60ab75803106040cfd5d449183d57db709f3ece01c9df4f151",
+            "status": "matched",
+            "sha256": "3e0c97ad848d7a60ab75803106040cfd5d449183d57db709f3ece01c9df4f151",
+            "bytes": 4161,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/assertions.py",
+            "registered_sha256": "024168b28e390e7586c91597a7ace8c6cae2dbe8b085d4d7380679892481734f",
+            "status": "matched",
+            "sha256": "024168b28e390e7586c91597a7ace8c6cae2dbe8b085d4d7380679892481734f",
+            "bytes": 10842,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/behavior_compare.py",
+            "registered_sha256": "7828c4888b2572bd1b15f2494cf4346e1e327e1403addfec96fa061db7f6d02c",
+            "status": "matched",
+            "sha256": "7828c4888b2572bd1b15f2494cf4346e1e327e1403addfec96fa061db7f6d02c",
+            "bytes": 14805,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/benchmark_cases.py",
+            "registered_sha256": "f163c65450e27ba260a8e89a9b3f419b9a2fe23fff6917f77680d8c573f0f73a",
+            "status": "matched",
+            "sha256": "f163c65450e27ba260a8e89a9b3f419b9a2fe23fff6917f77680d8c573f0f73a",
+            "bytes": 5967,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/cli.py",
+            "registered_sha256": "82750a56596d45f49d260433d329e61ff2223571f7e610702c183d70b9d8dc6a",
+            "status": "matched",
+            "sha256": "82750a56596d45f49d260433d329e61ff2223571f7e610702c183d70b9d8dc6a",
+            "bytes": 32675,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/config.py",
+            "registered_sha256": "7ba6aedac100d3b7c00d4e4ca0ce3a04402cb0b96f4e7ced73d367c612905d0e",
+            "status": "matched",
+            "sha256": "7ba6aedac100d3b7c00d4e4ca0ce3a04402cb0b96f4e7ced73d367c612905d0e",
+            "bytes": 11325,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/contracts.py",
+            "registered_sha256": "775874199ed802d73172202dc68c629ec04796ce1565270a650261e91c8fc097",
+            "status": "matched",
+            "sha256": "775874199ed802d73172202dc68c629ec04796ce1565270a650261e91c8fc097",
+            "bytes": 20368,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/conventions.py",
+            "registered_sha256": "772138a203fe2d738fb4a5d2067f1be7676c4adaec89aed4edc0958dc87cac5e",
+            "status": "matched",
+            "sha256": "772138a203fe2d738fb4a5d2067f1be7676c4adaec89aed4edc0958dc87cac5e",
+            "bytes": 20766,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/coverage.py",
+            "registered_sha256": "8c85a3816842739f81d20782ba098aab3f17e2f21d0171800eb151802c47b4ca",
+            "status": "matched",
+            "sha256": "8c85a3816842739f81d20782ba098aab3f17e2f21d0171800eb151802c47b4ca",
+            "bytes": 16726,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/executor.py",
+            "registered_sha256": "d4e352c0317c484a482ddead62b7b6461ad797836de852b88e7b7878f133aba9",
+            "status": "matched",
+            "sha256": "d4e352c0317c484a482ddead62b7b6461ad797836de852b88e7b7878f133aba9",
+            "bytes": 15433,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/failure_guide.py",
+            "registered_sha256": "1ec632cdff86255e15a79cdbb1772b7aa0544cf1594f794212cd2d2708dc938a",
+            "status": "matched",
+            "sha256": "1ec632cdff86255e15a79cdbb1772b7aa0544cf1594f794212cd2d2708dc938a",
+            "bytes": 11246,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/functional_coverage.py",
+            "registered_sha256": "70cd1c00c0e8bc5877fafdb6ba88491d9c5ba2ae16714230aee2a30dfd4bb2fe",
+            "status": "matched",
+            "sha256": "70cd1c00c0e8bc5877fafdb6ba88491d9c5ba2ae16714230aee2a30dfd4bb2fe",
+            "bytes": 24133,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/generator.py",
+            "registered_sha256": "d8463c54bd45f31c379a33cc6d99e35c0fb672f49fd2e4e3c35c0a375e1644a1",
+            "status": "matched",
+            "sha256": "d8463c54bd45f31c379a33cc6d99e35c0fb672f49fd2e4e3c35c0a375e1644a1",
+            "bytes": 393,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/grading.py",
+            "registered_sha256": "8d15c606c39d2182e97f619d8ecf7b9bb11f6222585b085af246d35d111e39c6",
+            "status": "matched",
+            "sha256": "8d15c606c39d2182e97f619d8ecf7b9bb11f6222585b085af246d35d111e39c6",
+            "bytes": 13886,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/labels.py",
+            "registered_sha256": "16894f46ab19baf73b251fcd836289d463ecd12e41c1393fc766e363346489be",
+            "status": "matched",
+            "sha256": "16894f46ab19baf73b251fcd836289d463ecd12e41c1393fc766e363346489be",
+            "bytes": 6508,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/models.py",
+            "registered_sha256": "8d7ff1db511d0e3ab90364e16fd5bb0d0c6159d0adf69c35d519fc7a64cd71d6",
+            "status": "matched",
+            "sha256": "8d7ff1db511d0e3ab90364e16fd5bb0d0c6159d0adf69c35d519fc7a64cd71d6",
+            "bytes": 34373,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/observations.py",
+            "registered_sha256": "9883628573a7669229a47180dea84591b5b7c7fd7fd2d82dd0d8867019b8e0f3",
+            "status": "matched",
+            "sha256": "9883628573a7669229a47180dea84591b5b7c7fd7fd2d82dd0d8867019b8e0f3",
+            "bytes": 4041,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/pipeline.py",
+            "registered_sha256": "55e8359c2112807b742404822e8bc8538570bda18c751e91b0a876717c29fa6a",
+            "status": "matched",
+            "sha256": "55e8359c2112807b742404822e8bc8538570bda18c751e91b0a876717c29fa6a",
+            "bytes": 32731,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/pricing.py",
+            "registered_sha256": "8073aae0673652cc664813141be6371270d70b479e8f472afeab7fec9e424a93",
+            "status": "matched",
+            "sha256": "8073aae0673652cc664813141be6371270d70b479e8f472afeab7fec9e424a93",
+            "bytes": 7354,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/reference_model.py",
+            "registered_sha256": "d3b7ab61f9a4fe2ec4ed4551b395193a5c37ebf31e4f01e4e44c73f9f1f1b209",
+            "status": "matched",
+            "sha256": "d3b7ab61f9a4fe2ec4ed4551b395193a5c37ebf31e4f01e4e44c73f9f1f1b209",
+            "bytes": 26132,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/repair_compare.py",
+            "registered_sha256": "fdee57ae6bf2ad9d4f07eb43a35de16ec19f77f2be2d47c85e73900ec7a68939",
+            "status": "matched",
+            "sha256": "fdee57ae6bf2ad9d4f07eb43a35de16ec19f77f2be2d47c85e73900ec7a68939",
+            "bytes": 2526,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/report.py",
+            "registered_sha256": "9564b749aeda1960957f3b20b1bca13e07c5e6fc3316c3aba2d1dffc7f5a0eac",
+            "status": "matched",
+            "sha256": "9564b749aeda1960957f3b20b1bca13e07c5e6fc3316c3aba2d1dffc7f5a0eac",
+            "bytes": 27060,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/rtl_compare.py",
+            "registered_sha256": "4002eeac33e7d937811dfb1af92688dff397929edb6abde8305a50dc6057f3a0",
+            "status": "matched",
+            "sha256": "4002eeac33e7d937811dfb1af92688dff397929edb6abde8305a50dc6057f3a0",
+            "bytes": 6025,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/rtl_import.py",
+            "registered_sha256": "36b23e675ba8fedb3c2e362a0a3858935cd4828537e88ef7764da7fb26938153",
+            "status": "matched",
+            "sha256": "36b23e675ba8fedb3c2e362a0a3858935cd4828537e88ef7764da7fb26938153",
+            "bytes": 20122,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/rule_assertions.py",
+            "registered_sha256": "b513611ac3f7b1a062352bf4d5168e61bdf0a69d83e0bfda0c4d2b8bf3d1347a",
+            "status": "matched",
+            "sha256": "b513611ac3f7b1a062352bf4d5168e61bdf0a69d83e0bfda0c4d2b8bf3d1347a",
+            "bytes": 2360,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/rules.py",
+            "registered_sha256": "731534298bce7c909171faaa4bf27492967ca36c1fa2cb9589f8134343ebc7c1",
+            "status": "matched",
+            "sha256": "731534298bce7c909171faaa4bf27492967ca36c1fa2cb9589f8134343ebc7c1",
+            "bytes": 4828,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/static_review.py",
+            "registered_sha256": "ab14b88d043992bbc1c89bec500dfd6e43c3173d7834f8ff3ecfd458e0f6f66f",
+            "status": "matched",
+            "sha256": "ab14b88d043992bbc1c89bec500dfd6e43c3173d7834f8ff3ecfd458e0f6f66f",
+            "bytes": 48269,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/strategy_scoring.py",
+            "registered_sha256": "a16167285dec89bf21a4dcf891747dcb2cf99606bd4b01ec91aeb3e0c4162899",
+            "status": "matched",
+            "sha256": "a16167285dec89bf21a4dcf891747dcb2cf99606bd4b01ec91aeb3e0c4162899",
+            "bytes": 17765,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/synthesis.py",
+            "registered_sha256": "aa67491ea4bd0ff13a329f1ad1f454312476616aa716e5e6915ae4c4c0a7bc7e",
+            "status": "matched",
+            "sha256": "aa67491ea4bd0ff13a329f1ad1f454312476616aa716e5e6915ae4c4c0a7bc7e",
+            "bytes": 15885,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/testbench.py",
+            "registered_sha256": "72da53d44f9a1f2998cc1dfe9d21b1cfd70a29bd46292f4eea2abb78143f468e",
+            "status": "matched",
+            "sha256": "72da53d44f9a1f2998cc1dfe9d21b1cfd70a29bd46292f4eea2abb78143f468e",
+            "bytes": 25287,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/toolchain.py",
+            "registered_sha256": "52ce0ae47dfd02ed85aeff8e18d1fd4aa0badc65ceba3ecd999e44e88d3a1d8d",
+            "status": "matched",
+            "sha256": "52ce0ae47dfd02ed85aeff8e18d1fd4aa0badc65ceba3ecd999e44e88d3a1d8d",
+            "bytes": 6013,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/vcd.py",
+            "registered_sha256": "01b18b6af89df9ced4da013d8bdacefdf4417a2f7cc1e9f18aea88a9ef0f45f3",
+            "status": "matched",
+            "sha256": "01b18b6af89df9ced4da013d8bdacefdf4417a2f7cc1e9f18aea88a9ef0f45f3",
+            "bytes": 31167,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/verify_diff.py",
+            "registered_sha256": "2a01d2e4b90e5ffa97dfaeeefb2ef337e4fb245f7f03fbc18e75ebd52f466967",
+            "status": "matched",
+            "sha256": "2a01d2e4b90e5ffa97dfaeeefb2ef337e4fb245f7f03fbc18e75ebd52f466967",
+            "bytes": 23826,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/waveform.py",
+            "registered_sha256": "06793bbdb16ee1f8d63be8b914e506362b18e432e82f6370315c759cd97a8433",
+            "status": "matched",
+            "sha256": "06793bbdb16ee1f8d63be8b914e506362b18e432e82f6370315c759cd97a8433",
+            "bytes": 4246,
+            "matches_registered": true
+          }
+        ]
+      },
+      {
+        "group": "agent-comparison-v2-nonthinking-20261004",
+        "registered_entries": 74,
+        "matched_entries": 74,
+        "unmatched_entries": 0,
+        "copied_bytes": 864311,
+        "origin_counts": {
+          "workspace_exact": 72,
+          "git_blob_exact": 2
+        },
+        "checks": [
+          {
+            "path": "benchmarks/agent_v2/mutation_manifest.json",
+            "registered_sha256": "5ca8faef783e5d3a3a30ceed4a137353917c767dd7650966e8e4cdb93b7067eb",
+            "status": "matched",
+            "sha256": "5ca8faef783e5d3a3a30ceed4a137353917c767dd7650966e8e4cdb93b7067eb",
+            "bytes": 2833,
+            "matches_registered": true
+          },
+          {
+            "path": "benchmarks/agent_v2/sync_fifo_bug_full_off_by_one.v",
+            "registered_sha256": "64421ef7e99f0d0e4964a680067a7e2d4773c12d15d9b65d8d120156adf8418a",
+            "status": "matched",
+            "sha256": "64421ef7e99f0d0e4964a680067a7e2d4773c12d15d9b65d8d120156adf8418a",
+            "bytes": 897,
+            "matches_registered": true
+          },
+          {
+            "path": "benchmarks/agent_v2/sync_fifo_bug_write_when_full.v",
+            "registered_sha256": "4d6888893636961465ab503be921859f97d3c0c15695ababaae7ce103032420c",
+            "status": "matched",
+            "sha256": "4d6888893636961465ab503be921859f97d3c0c15695ababaae7ce103032420c",
+            "bytes": 888,
+            "matches_registered": true
+          },
+          {
+            "path": "benchmarks/agent_v2/sync_fifo_reference.v",
+            "registered_sha256": "964cd554041818533ece195f3abcc6979c116c4a3d72106a7fe49c503bd2dadc",
+            "status": "matched",
+            "sha256": "964cd554041818533ece195f3abcc6979c116c4a3d72106a7fe49c503bd2dadc",
+            "bytes": 895,
+            "matches_registered": true
+          },
+          {
+            "path": "benchmarks/manifest.json",
+            "registered_sha256": "338f6a4f29f84dbe34e14223114d54f6e809b5dd9cd625e081a07f27c396d3f1",
+            "status": "matched",
+            "sha256": "338f6a4f29f84dbe34e14223114d54f6e809b5dd9cd625e081a07f27c396d3f1",
+            "bytes": 28158,
+            "matches_registered": true
+          },
+          {
+            "path": "docs/experiment/agent_comparison_protocol.md",
+            "registered_sha256": "126088737dd77e3a54e66397b7f067a56af235dc49ef0723f4129e706dc243a9",
+            "status": "matched",
+            "sha256": "126088737dd77e3a54e66397b7f067a56af235dc49ef0723f4129e706dc243a9",
+            "bytes": 7496,
+            "matches_registered": true
+          },
+          {
+            "path": "docs/experiment/agent_comparison_v2_plan_2026-10-04.md",
+            "registered_sha256": "a655f7324df5e2ea0370ce251a781d9a4f25b5ff6886ef586a81906162fa784a",
+            "status": "matched",
+            "sha256": "a655f7324df5e2ea0370ce251a781d9a4f25b5ff6886ef586a81906162fa784a",
+            "bytes": 8797,
+            "matches_registered": true
+          },
+          {
+            "path": "examples/handshake_stage_contract.json",
+            "registered_sha256": "04c7ea8773e394e22bf680304fdcf9d1e3d783d1ca763bb8cc5c4e6a5056f377",
+            "status": "matched",
+            "sha256": "04c7ea8773e394e22bf680304fdcf9d1e3d783d1ca763bb8cc5c4e6a5056f377",
+            "bytes": 522,
+            "matches_registered": true
+          },
+          {
+            "path": "examples/spi_master_contract.json",
+            "registered_sha256": "674473699ff9cfbd2fdf9481272fcc1ce905be4b90148beea4c3d42b92755ebe",
+            "status": "matched",
+            "sha256": "674473699ff9cfbd2fdf9481272fcc1ce905be4b90148beea4c3d42b92755ebe",
+            "bytes": 487,
+            "matches_registered": true
+          },
+          {
+            "path": "examples/sync_fifo_contract.json",
+            "registered_sha256": "0c51a032e1405f8cfe87a8dc18933c9d6d3cf61b8f8c969bf46ea23402963ce8",
+            "status": "matched",
+            "sha256": "0c51a032e1405f8cfe87a8dc18933c9d6d3cf61b8f8c969bf46ea23402963ce8",
+            "bytes": 515,
+            "matches_registered": true
+          },
+          {
+            "path": "examples/uart_tx_contract.json",
+            "registered_sha256": "0a30a3e3c5e1ee65f5114f476de0e03bb155879b5e7dcdaf099bf918c180f6b4",
+            "status": "matched",
+            "sha256": "0a30a3e3c5e1ee65f5114f476de0e03bb155879b5e7dcdaf099bf918c180f6b4",
+            "bytes": 415,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/handshake_stage.v",
+            "registered_sha256": "40128340f967f8143bdb55ddfac689a94b7639ac8f175b7b9a4164fb8b531791",
+            "status": "matched",
+            "sha256": "40128340f967f8143bdb55ddfac689a94b7639ac8f175b7b9a4164fb8b531791",
+            "bytes": 472,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/handshake_stage_bug_ready_ignores_out_ready.v",
+            "registered_sha256": "e52ec6619bcc2b049daff7973c85460482b8ae6bb4b806208a6840442cd9f1d1",
+            "status": "matched",
+            "sha256": "e52ec6619bcc2b049daff7973c85460482b8ae6bb4b806208a6840442cd9f1d1",
+            "bytes": 587,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/handshake_stage_bug_valid_not_cleared.v",
+            "registered_sha256": "3f9519c49b4fcb196f4bdee1021d84b922af252be3580d0093b30fef3da68502",
+            "status": "matched",
+            "sha256": "3f9519c49b4fcb196f4bdee1021d84b922af252be3580d0093b30fef3da68502",
+            "bytes": 601,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/spi_master.v",
+            "registered_sha256": "8cacdb94472eb7446f0df05ac201f88e1c7e5c46dd01a484b4996b099835c9dd",
+            "status": "matched",
+            "sha256": "8cacdb94472eb7446f0df05ac201f88e1c7e5c46dd01a484b4996b099835c9dd",
+            "bytes": 684,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/spi_master_bug_done_missing.v",
+            "registered_sha256": "eb194c5f8a88c41111f5cdfb6bb8c67057182448c040691d196ed9bf8376fedf",
+            "status": "matched",
+            "sha256": "eb194c5f8a88c41111f5cdfb6bb8c67057182448c040691d196ed9bf8376fedf",
+            "bytes": 794,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/spi_master_bug_sclk_polarity.v",
+            "registered_sha256": "b3c7cb08949d062faaf20811d7d4693ab7a6bf65ce878dbe1a0df15e69fc57f8",
+            "status": "matched",
+            "sha256": "b3c7cb08949d062faaf20811d7d4693ab7a6bf65ce878dbe1a0df15e69fc57f8",
+            "bytes": 794,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/sync_fifo.v",
+            "registered_sha256": "964cd554041818533ece195f3abcc6979c116c4a3d72106a7fe49c503bd2dadc",
+            "status": "matched",
+            "sha256": "964cd554041818533ece195f3abcc6979c116c4a3d72106a7fe49c503bd2dadc",
+            "bytes": 895,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/uart_tx.v",
+            "registered_sha256": "2b6d636a399169bcaa4fdabd9661daedbfde28c42c3bc9f76104db2c371e1193",
+            "status": "matched",
+            "sha256": "2b6d636a399169bcaa4fdabd9661daedbfde28c42c3bc9f76104db2c371e1193",
+            "bytes": 620,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/uart_tx_bug_busy_never_clears.v",
+            "registered_sha256": "24b4caa23ac9b7dd2db45401acf781b1641e7eb800c55f32b78cbd6b65c7ffed",
+            "status": "matched",
+            "sha256": "24b4caa23ac9b7dd2db45401acf781b1641e7eb800c55f32b78cbd6b65c7ffed",
+            "bytes": 733,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/uart_tx_bug_msb_first.v",
+            "registered_sha256": "93b638a980c2ecf591163f954fd72f5210088c1bf2dda5ab9dbef65c479bd334",
+            "status": "matched",
+            "sha256": "93b638a980c2ecf591163f954fd72f5210088c1bf2dda5ab9dbef65c479bd334",
+            "bytes": 725,
+            "matches_registered": true
+          },
+          {
+            "path": "scripts/run_agent_comparison.py",
+            "registered_sha256": "f54d7a9a1006a2323da9143863699e94215b22804c1cf620109da3a4a08633d7",
+            "status": "matched",
+            "sha256": "f54d7a9a1006a2323da9143863699e94215b22804c1cf620109da3a4a08633d7",
+            "bytes": 31725,
+            "matches_registered": true
+          },
+          {
+            "path": "scripts/run_strategy_experiment.py",
+            "registered_sha256": "22889c50c07ff49da00c6278a88e8d710f1f708f1e4bf994f51ad82adee5c341",
+            "status": "matched",
+            "sha256": "22889c50c07ff49da00c6278a88e8d710f1f708f1e4bf994f51ad82adee5c341",
+            "bytes": 48683,
+            "matches_registered": true
+          },
+          {
+            "path": "scripts/summarize_agent_comparison.py",
+            "registered_sha256": "b6f806d7362216e2af7fcff470454e8d1ce50edadf899b59e2380622c21280d7",
+            "status": "matched",
+            "sha256": "b6f806d7362216e2af7fcff470454e8d1ce50edadf899b59e2380622c21280d7",
+            "bytes": 15963,
+            "matches_registered": true
+          },
+          {
+            "path": "spec/agent_protocols.json",
+            "registered_sha256": "24c046c9e0e9a11cc04402efd705244d6efc6417a1e8fafe65ed5db1fc449280",
+            "status": "matched",
+            "sha256": "24c046c9e0e9a11cc04402efd705244d6efc6417a1e8fafe65ed5db1fc449280",
+            "bytes": 2683,
+            "matches_registered": true
+          },
+          {
+            "path": "spec/handshake_stage_spec.md",
+            "registered_sha256": "fe7fd36d849fadf09e973b006447b63de4c60ea9f9bbe022876983f8aab95398",
+            "status": "matched",
+            "sha256": "fe7fd36d849fadf09e973b006447b63de4c60ea9f9bbe022876983f8aab95398",
+            "bytes": 2912,
+            "matches_registered": true
+          },
+          {
+            "path": "spec/spi_master_spec.md",
+            "registered_sha256": "d98990ce8f73abf4f4cf16196ad99fd345ab729ef35e97bb26ba7f5673eef516",
+            "status": "matched",
+            "sha256": "d98990ce8f73abf4f4cf16196ad99fd345ab729ef35e97bb26ba7f5673eef516",
+            "bytes": 3034,
+            "matches_registered": true
+          },
+          {
+            "path": "spec/sync_fifo_spec.md",
+            "registered_sha256": "4fe66f356d6fb4c0ca7b0c525ec83b3a287f911893af0974a828737dc3eb0aab",
+            "status": "matched",
+            "sha256": "4fe66f356d6fb4c0ca7b0c525ec83b3a287f911893af0974a828737dc3eb0aab",
+            "bytes": 3642,
+            "matches_registered": true
+          },
+          {
+            "path": "spec/uart_tx_spec.md",
+            "registered_sha256": "7c99ccfdf59d0bb520b0d9ad9994c3572172402bed32abd1c4cd3425705dfb0f",
+            "status": "matched",
+            "sha256": "7c99ccfdf59d0bb520b0d9ad9994c3572172402bed32abd1c4cd3425705dfb0f",
+            "bytes": 3199,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/__init__.py",
+            "registered_sha256": "4029747348635aaec01692e07b842e0e371b54137d82ccf87531653e78c20ae5",
+            "status": "matched",
+            "sha256": "4029747348635aaec01692e07b842e0e371b54137d82ccf87531653e78c20ae5",
+            "bytes": 2323,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/__main__.py",
+            "registered_sha256": "3f5bcafa00f7975197263772705c1a057638fcee62fda5c571d5f346d061458d",
+            "status": "matched",
+            "sha256": "3f5bcafa00f7975197263772705c1a057638fcee62fda5c571d5f346d061458d",
+            "bytes": 182,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/__init__.py",
+            "registered_sha256": "e8f3a29fddabc922dd9bfc972333b84e3617c22ba45f69717953e2ef92c130f4",
+            "status": "matched",
+            "sha256": "e8f3a29fddabc922dd9bfc972333b84e3617c22ba45f69717953e2ef92c130f4",
+            "bytes": 673,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/agent.py",
+            "registered_sha256": "ab9502e4f4ad363e5adc0dbf1e2f7555e1a64092da6a0d1bf431dfc0db3bb01f",
+            "status": "matched",
+            "sha256": "ab9502e4f4ad363e5adc0dbf1e2f7555e1a64092da6a0d1bf431dfc0db3bb01f",
+            "bytes": 25901,
+            "matches_registered": true,
+            "origin_recovery_verified": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/debug_provider.py",
+            "registered_sha256": "ee060f47e5d3234be09f5925edd55f58d2e6654f21ca26f1d6b8805d992d976b",
+            "status": "matched",
+            "sha256": "ee060f47e5d3234be09f5925edd55f58d2e6654f21ca26f1d6b8805d992d976b",
+            "bytes": 28184,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/debug_server.py",
+            "registered_sha256": "c49226654b90f2e507727491253c98ba5384aef156719908197fb88a6040dd0b",
+            "status": "matched",
+            "sha256": "c49226654b90f2e507727491253c98ba5384aef156719908197fb88a6040dd0b",
+            "bytes": 15282,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/local_api_profile.py",
+            "registered_sha256": "3942b3a40c131dadb2e84e767ca0656a83f315b9ade6ee1a8d1431e68ff732ea",
+            "status": "matched",
+            "sha256": "3942b3a40c131dadb2e84e767ca0656a83f315b9ade6ee1a8d1431e68ff732ea",
+            "bytes": 2258,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/planner.py",
+            "registered_sha256": "0115a312206c0510e12a2ce9bf14f909c88113a1179533023f33da7005bbc805",
+            "status": "matched",
+            "sha256": "0115a312206c0510e12a2ce9bf14f909c88113a1179533023f33da7005bbc805",
+            "bytes": 14117,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/provider.py",
+            "registered_sha256": "9e98a74d381d667541f0f39ebebc6c8921fed743ce26eddbc6dfb3010d9d854e",
+            "status": "matched",
+            "sha256": "9e98a74d381d667541f0f39ebebc6c8921fed743ce26eddbc6dfb3010d9d854e",
+            "bytes": 26466,
+            "matches_registered": true,
+            "origin_recovery_verified": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/review_advisor.py",
+            "registered_sha256": "980126489a04fa0d20d7022c544c0a11694ed0ddb76010751879aa5bcbe0edc6",
+            "status": "matched",
+            "sha256": "980126489a04fa0d20d7022c544c0a11694ed0ddb76010751879aa5bcbe0edc6",
+            "bytes": 16596,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/schema.py",
+            "registered_sha256": "cf0babeaea6d7a62aa374ca5467f56e8e0575d39407bcf79b57497dfc9e17b06",
+            "status": "matched",
+            "sha256": "cf0babeaea6d7a62aa374ca5467f56e8e0575d39407bcf79b57497dfc9e17b06",
+            "bytes": 12436,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/__init__.py",
+            "registered_sha256": "3e0c97ad848d7a60ab75803106040cfd5d449183d57db709f3ece01c9df4f151",
+            "status": "matched",
+            "sha256": "3e0c97ad848d7a60ab75803106040cfd5d449183d57db709f3ece01c9df4f151",
+            "bytes": 4161,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/assertions.py",
+            "registered_sha256": "024168b28e390e7586c91597a7ace8c6cae2dbe8b085d4d7380679892481734f",
+            "status": "matched",
+            "sha256": "024168b28e390e7586c91597a7ace8c6cae2dbe8b085d4d7380679892481734f",
+            "bytes": 10842,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/behavior_compare.py",
+            "registered_sha256": "7828c4888b2572bd1b15f2494cf4346e1e327e1403addfec96fa061db7f6d02c",
+            "status": "matched",
+            "sha256": "7828c4888b2572bd1b15f2494cf4346e1e327e1403addfec96fa061db7f6d02c",
+            "bytes": 14805,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/benchmark_cases.py",
+            "registered_sha256": "f163c65450e27ba260a8e89a9b3f419b9a2fe23fff6917f77680d8c573f0f73a",
+            "status": "matched",
+            "sha256": "f163c65450e27ba260a8e89a9b3f419b9a2fe23fff6917f77680d8c573f0f73a",
+            "bytes": 5967,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/cli.py",
+            "registered_sha256": "82750a56596d45f49d260433d329e61ff2223571f7e610702c183d70b9d8dc6a",
+            "status": "matched",
+            "sha256": "82750a56596d45f49d260433d329e61ff2223571f7e610702c183d70b9d8dc6a",
+            "bytes": 32675,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/config.py",
+            "registered_sha256": "7ba6aedac100d3b7c00d4e4ca0ce3a04402cb0b96f4e7ced73d367c612905d0e",
+            "status": "matched",
+            "sha256": "7ba6aedac100d3b7c00d4e4ca0ce3a04402cb0b96f4e7ced73d367c612905d0e",
+            "bytes": 11325,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/contracts.py",
+            "registered_sha256": "775874199ed802d73172202dc68c629ec04796ce1565270a650261e91c8fc097",
+            "status": "matched",
+            "sha256": "775874199ed802d73172202dc68c629ec04796ce1565270a650261e91c8fc097",
+            "bytes": 20368,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/conventions.py",
+            "registered_sha256": "772138a203fe2d738fb4a5d2067f1be7676c4adaec89aed4edc0958dc87cac5e",
+            "status": "matched",
+            "sha256": "772138a203fe2d738fb4a5d2067f1be7676c4adaec89aed4edc0958dc87cac5e",
+            "bytes": 20766,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/coverage.py",
+            "registered_sha256": "8c85a3816842739f81d20782ba098aab3f17e2f21d0171800eb151802c47b4ca",
+            "status": "matched",
+            "sha256": "8c85a3816842739f81d20782ba098aab3f17e2f21d0171800eb151802c47b4ca",
+            "bytes": 16726,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/executor.py",
+            "registered_sha256": "d4e352c0317c484a482ddead62b7b6461ad797836de852b88e7b7878f133aba9",
+            "status": "matched",
+            "sha256": "d4e352c0317c484a482ddead62b7b6461ad797836de852b88e7b7878f133aba9",
+            "bytes": 15433,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/failure_guide.py",
+            "registered_sha256": "1ec632cdff86255e15a79cdbb1772b7aa0544cf1594f794212cd2d2708dc938a",
+            "status": "matched",
+            "sha256": "1ec632cdff86255e15a79cdbb1772b7aa0544cf1594f794212cd2d2708dc938a",
+            "bytes": 11246,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/functional_coverage.py",
+            "registered_sha256": "70cd1c00c0e8bc5877fafdb6ba88491d9c5ba2ae16714230aee2a30dfd4bb2fe",
+            "status": "matched",
+            "sha256": "70cd1c00c0e8bc5877fafdb6ba88491d9c5ba2ae16714230aee2a30dfd4bb2fe",
+            "bytes": 24133,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/generator.py",
+            "registered_sha256": "d8463c54bd45f31c379a33cc6d99e35c0fb672f49fd2e4e3c35c0a375e1644a1",
+            "status": "matched",
+            "sha256": "d8463c54bd45f31c379a33cc6d99e35c0fb672f49fd2e4e3c35c0a375e1644a1",
+            "bytes": 393,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/grading.py",
+            "registered_sha256": "8d15c606c39d2182e97f619d8ecf7b9bb11f6222585b085af246d35d111e39c6",
+            "status": "matched",
+            "sha256": "8d15c606c39d2182e97f619d8ecf7b9bb11f6222585b085af246d35d111e39c6",
+            "bytes": 13886,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/labels.py",
+            "registered_sha256": "16894f46ab19baf73b251fcd836289d463ecd12e41c1393fc766e363346489be",
+            "status": "matched",
+            "sha256": "16894f46ab19baf73b251fcd836289d463ecd12e41c1393fc766e363346489be",
+            "bytes": 6508,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/models.py",
+            "registered_sha256": "8d7ff1db511d0e3ab90364e16fd5bb0d0c6159d0adf69c35d519fc7a64cd71d6",
+            "status": "matched",
+            "sha256": "8d7ff1db511d0e3ab90364e16fd5bb0d0c6159d0adf69c35d519fc7a64cd71d6",
+            "bytes": 34373,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/observations.py",
+            "registered_sha256": "9883628573a7669229a47180dea84591b5b7c7fd7fd2d82dd0d8867019b8e0f3",
+            "status": "matched",
+            "sha256": "9883628573a7669229a47180dea84591b5b7c7fd7fd2d82dd0d8867019b8e0f3",
+            "bytes": 4041,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/pipeline.py",
+            "registered_sha256": "55e8359c2112807b742404822e8bc8538570bda18c751e91b0a876717c29fa6a",
+            "status": "matched",
+            "sha256": "55e8359c2112807b742404822e8bc8538570bda18c751e91b0a876717c29fa6a",
+            "bytes": 32731,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/pricing.py",
+            "registered_sha256": "8073aae0673652cc664813141be6371270d70b479e8f472afeab7fec9e424a93",
+            "status": "matched",
+            "sha256": "8073aae0673652cc664813141be6371270d70b479e8f472afeab7fec9e424a93",
+            "bytes": 7354,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/reference_model.py",
+            "registered_sha256": "d3b7ab61f9a4fe2ec4ed4551b395193a5c37ebf31e4f01e4e44c73f9f1f1b209",
+            "status": "matched",
+            "sha256": "d3b7ab61f9a4fe2ec4ed4551b395193a5c37ebf31e4f01e4e44c73f9f1f1b209",
+            "bytes": 26132,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/repair_compare.py",
+            "registered_sha256": "fdee57ae6bf2ad9d4f07eb43a35de16ec19f77f2be2d47c85e73900ec7a68939",
+            "status": "matched",
+            "sha256": "fdee57ae6bf2ad9d4f07eb43a35de16ec19f77f2be2d47c85e73900ec7a68939",
+            "bytes": 2526,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/report.py",
+            "registered_sha256": "9564b749aeda1960957f3b20b1bca13e07c5e6fc3316c3aba2d1dffc7f5a0eac",
+            "status": "matched",
+            "sha256": "9564b749aeda1960957f3b20b1bca13e07c5e6fc3316c3aba2d1dffc7f5a0eac",
+            "bytes": 27060,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/rtl_compare.py",
+            "registered_sha256": "4002eeac33e7d937811dfb1af92688dff397929edb6abde8305a50dc6057f3a0",
+            "status": "matched",
+            "sha256": "4002eeac33e7d937811dfb1af92688dff397929edb6abde8305a50dc6057f3a0",
+            "bytes": 6025,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/rtl_import.py",
+            "registered_sha256": "36b23e675ba8fedb3c2e362a0a3858935cd4828537e88ef7764da7fb26938153",
+            "status": "matched",
+            "sha256": "36b23e675ba8fedb3c2e362a0a3858935cd4828537e88ef7764da7fb26938153",
+            "bytes": 20122,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/rule_assertions.py",
+            "registered_sha256": "b513611ac3f7b1a062352bf4d5168e61bdf0a69d83e0bfda0c4d2b8bf3d1347a",
+            "status": "matched",
+            "sha256": "b513611ac3f7b1a062352bf4d5168e61bdf0a69d83e0bfda0c4d2b8bf3d1347a",
+            "bytes": 2360,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/rules.py",
+            "registered_sha256": "731534298bce7c909171faaa4bf27492967ca36c1fa2cb9589f8134343ebc7c1",
+            "status": "matched",
+            "sha256": "731534298bce7c909171faaa4bf27492967ca36c1fa2cb9589f8134343ebc7c1",
+            "bytes": 4828,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/static_review.py",
+            "registered_sha256": "ab14b88d043992bbc1c89bec500dfd6e43c3173d7834f8ff3ecfd458e0f6f66f",
+            "status": "matched",
+            "sha256": "ab14b88d043992bbc1c89bec500dfd6e43c3173d7834f8ff3ecfd458e0f6f66f",
+            "bytes": 48269,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/strategy_scoring.py",
+            "registered_sha256": "a16167285dec89bf21a4dcf891747dcb2cf99606bd4b01ec91aeb3e0c4162899",
+            "status": "matched",
+            "sha256": "a16167285dec89bf21a4dcf891747dcb2cf99606bd4b01ec91aeb3e0c4162899",
+            "bytes": 17765,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/synthesis.py",
+            "registered_sha256": "aa67491ea4bd0ff13a329f1ad1f454312476616aa716e5e6915ae4c4c0a7bc7e",
+            "status": "matched",
+            "sha256": "aa67491ea4bd0ff13a329f1ad1f454312476616aa716e5e6915ae4c4c0a7bc7e",
+            "bytes": 15885,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/testbench.py",
+            "registered_sha256": "72da53d44f9a1f2998cc1dfe9d21b1cfd70a29bd46292f4eea2abb78143f468e",
+            "status": "matched",
+            "sha256": "72da53d44f9a1f2998cc1dfe9d21b1cfd70a29bd46292f4eea2abb78143f468e",
+            "bytes": 25287,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/toolchain.py",
+            "registered_sha256": "52ce0ae47dfd02ed85aeff8e18d1fd4aa0badc65ceba3ecd999e44e88d3a1d8d",
+            "status": "matched",
+            "sha256": "52ce0ae47dfd02ed85aeff8e18d1fd4aa0badc65ceba3ecd999e44e88d3a1d8d",
+            "bytes": 6013,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/vcd.py",
+            "registered_sha256": "01b18b6af89df9ced4da013d8bdacefdf4417a2f7cc1e9f18aea88a9ef0f45f3",
+            "status": "matched",
+            "sha256": "01b18b6af89df9ced4da013d8bdacefdf4417a2f7cc1e9f18aea88a9ef0f45f3",
+            "bytes": 31167,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/verify_diff.py",
+            "registered_sha256": "2a01d2e4b90e5ffa97dfaeeefb2ef337e4fb245f7f03fbc18e75ebd52f466967",
+            "status": "matched",
+            "sha256": "2a01d2e4b90e5ffa97dfaeeefb2ef337e4fb245f7f03fbc18e75ebd52f466967",
+            "bytes": 23826,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/waveform.py",
+            "registered_sha256": "06793bbdb16ee1f8d63be8b914e506362b18e432e82f6370315c759cd97a8433",
+            "status": "matched",
+            "sha256": "06793bbdb16ee1f8d63be8b914e506362b18e432e82f6370315c759cd97a8433",
+            "bytes": 4246,
+            "matches_registered": true
+          }
+        ]
+      },
+      {
+        "group": "agent-comparison-v4-smoke-20261004",
+        "registered_entries": 74,
+        "matched_entries": 74,
+        "unmatched_entries": 0,
+        "copied_bytes": 871704,
+        "origin_counts": {
+          "workspace_exact": 74
+        },
+        "checks": [
+          {
+            "path": "benchmarks/agent_v2/mutation_manifest.json",
+            "registered_sha256": "5ca8faef783e5d3a3a30ceed4a137353917c767dd7650966e8e4cdb93b7067eb",
+            "status": "matched",
+            "sha256": "5ca8faef783e5d3a3a30ceed4a137353917c767dd7650966e8e4cdb93b7067eb",
+            "bytes": 2833,
+            "matches_registered": true
+          },
+          {
+            "path": "benchmarks/agent_v2/sync_fifo_bug_full_off_by_one.v",
+            "registered_sha256": "64421ef7e99f0d0e4964a680067a7e2d4773c12d15d9b65d8d120156adf8418a",
+            "status": "matched",
+            "sha256": "64421ef7e99f0d0e4964a680067a7e2d4773c12d15d9b65d8d120156adf8418a",
+            "bytes": 897,
+            "matches_registered": true
+          },
+          {
+            "path": "benchmarks/agent_v2/sync_fifo_bug_write_when_full.v",
+            "registered_sha256": "4d6888893636961465ab503be921859f97d3c0c15695ababaae7ce103032420c",
+            "status": "matched",
+            "sha256": "4d6888893636961465ab503be921859f97d3c0c15695ababaae7ce103032420c",
+            "bytes": 888,
+            "matches_registered": true
+          },
+          {
+            "path": "benchmarks/agent_v2/sync_fifo_reference.v",
+            "registered_sha256": "964cd554041818533ece195f3abcc6979c116c4a3d72106a7fe49c503bd2dadc",
+            "status": "matched",
+            "sha256": "964cd554041818533ece195f3abcc6979c116c4a3d72106a7fe49c503bd2dadc",
+            "bytes": 895,
+            "matches_registered": true
+          },
+          {
+            "path": "benchmarks/manifest.json",
+            "registered_sha256": "338f6a4f29f84dbe34e14223114d54f6e809b5dd9cd625e081a07f27c396d3f1",
+            "status": "matched",
+            "sha256": "338f6a4f29f84dbe34e14223114d54f6e809b5dd9cd625e081a07f27c396d3f1",
+            "bytes": 28158,
+            "matches_registered": true
+          },
+          {
+            "path": "docs/experiment/agent_comparison_protocol.md",
+            "registered_sha256": "126088737dd77e3a54e66397b7f067a56af235dc49ef0723f4129e706dc243a9",
+            "status": "matched",
+            "sha256": "126088737dd77e3a54e66397b7f067a56af235dc49ef0723f4129e706dc243a9",
+            "bytes": 7496,
+            "matches_registered": true
+          },
+          {
+            "path": "docs/experiment/agent_comparison_v2_plan_2026-10-04.md",
+            "registered_sha256": "a655f7324df5e2ea0370ce251a781d9a4f25b5ff6886ef586a81906162fa784a",
+            "status": "matched",
+            "sha256": "a655f7324df5e2ea0370ce251a781d9a4f25b5ff6886ef586a81906162fa784a",
+            "bytes": 8797,
+            "matches_registered": true
+          },
+          {
+            "path": "examples/handshake_stage_contract.json",
+            "registered_sha256": "04c7ea8773e394e22bf680304fdcf9d1e3d783d1ca763bb8cc5c4e6a5056f377",
+            "status": "matched",
+            "sha256": "04c7ea8773e394e22bf680304fdcf9d1e3d783d1ca763bb8cc5c4e6a5056f377",
+            "bytes": 522,
+            "matches_registered": true
+          },
+          {
+            "path": "examples/spi_master_contract.json",
+            "registered_sha256": "674473699ff9cfbd2fdf9481272fcc1ce905be4b90148beea4c3d42b92755ebe",
+            "status": "matched",
+            "sha256": "674473699ff9cfbd2fdf9481272fcc1ce905be4b90148beea4c3d42b92755ebe",
+            "bytes": 487,
+            "matches_registered": true
+          },
+          {
+            "path": "examples/sync_fifo_contract.json",
+            "registered_sha256": "0c51a032e1405f8cfe87a8dc18933c9d6d3cf61b8f8c969bf46ea23402963ce8",
+            "status": "matched",
+            "sha256": "0c51a032e1405f8cfe87a8dc18933c9d6d3cf61b8f8c969bf46ea23402963ce8",
+            "bytes": 515,
+            "matches_registered": true
+          },
+          {
+            "path": "examples/uart_tx_contract.json",
+            "registered_sha256": "0a30a3e3c5e1ee65f5114f476de0e03bb155879b5e7dcdaf099bf918c180f6b4",
+            "status": "matched",
+            "sha256": "0a30a3e3c5e1ee65f5114f476de0e03bb155879b5e7dcdaf099bf918c180f6b4",
+            "bytes": 415,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/handshake_stage.v",
+            "registered_sha256": "40128340f967f8143bdb55ddfac689a94b7639ac8f175b7b9a4164fb8b531791",
+            "status": "matched",
+            "sha256": "40128340f967f8143bdb55ddfac689a94b7639ac8f175b7b9a4164fb8b531791",
+            "bytes": 472,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/handshake_stage_bug_ready_ignores_out_ready.v",
+            "registered_sha256": "e52ec6619bcc2b049daff7973c85460482b8ae6bb4b806208a6840442cd9f1d1",
+            "status": "matched",
+            "sha256": "e52ec6619bcc2b049daff7973c85460482b8ae6bb4b806208a6840442cd9f1d1",
+            "bytes": 587,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/handshake_stage_bug_valid_not_cleared.v",
+            "registered_sha256": "3f9519c49b4fcb196f4bdee1021d84b922af252be3580d0093b30fef3da68502",
+            "status": "matched",
+            "sha256": "3f9519c49b4fcb196f4bdee1021d84b922af252be3580d0093b30fef3da68502",
+            "bytes": 601,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/spi_master.v",
+            "registered_sha256": "8cacdb94472eb7446f0df05ac201f88e1c7e5c46dd01a484b4996b099835c9dd",
+            "status": "matched",
+            "sha256": "8cacdb94472eb7446f0df05ac201f88e1c7e5c46dd01a484b4996b099835c9dd",
+            "bytes": 684,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/spi_master_bug_done_missing.v",
+            "registered_sha256": "eb194c5f8a88c41111f5cdfb6bb8c67057182448c040691d196ed9bf8376fedf",
+            "status": "matched",
+            "sha256": "eb194c5f8a88c41111f5cdfb6bb8c67057182448c040691d196ed9bf8376fedf",
+            "bytes": 794,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/spi_master_bug_sclk_polarity.v",
+            "registered_sha256": "b3c7cb08949d062faaf20811d7d4693ab7a6bf65ce878dbe1a0df15e69fc57f8",
+            "status": "matched",
+            "sha256": "b3c7cb08949d062faaf20811d7d4693ab7a6bf65ce878dbe1a0df15e69fc57f8",
+            "bytes": 794,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/sync_fifo.v",
+            "registered_sha256": "964cd554041818533ece195f3abcc6979c116c4a3d72106a7fe49c503bd2dadc",
+            "status": "matched",
+            "sha256": "964cd554041818533ece195f3abcc6979c116c4a3d72106a7fe49c503bd2dadc",
+            "bytes": 895,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/uart_tx.v",
+            "registered_sha256": "2b6d636a399169bcaa4fdabd9661daedbfde28c42c3bc9f76104db2c371e1193",
+            "status": "matched",
+            "sha256": "2b6d636a399169bcaa4fdabd9661daedbfde28c42c3bc9f76104db2c371e1193",
+            "bytes": 620,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/uart_tx_bug_busy_never_clears.v",
+            "registered_sha256": "24b4caa23ac9b7dd2db45401acf781b1641e7eb800c55f32b78cbd6b65c7ffed",
+            "status": "matched",
+            "sha256": "24b4caa23ac9b7dd2db45401acf781b1641e7eb800c55f32b78cbd6b65c7ffed",
+            "bytes": 733,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/uart_tx_bug_msb_first.v",
+            "registered_sha256": "93b638a980c2ecf591163f954fd72f5210088c1bf2dda5ab9dbef65c479bd334",
+            "status": "matched",
+            "sha256": "93b638a980c2ecf591163f954fd72f5210088c1bf2dda5ab9dbef65c479bd334",
+            "bytes": 725,
+            "matches_registered": true
+          },
+          {
+            "path": "scripts/run_agent_comparison.py",
+            "registered_sha256": "f54d7a9a1006a2323da9143863699e94215b22804c1cf620109da3a4a08633d7",
+            "status": "matched",
+            "sha256": "f54d7a9a1006a2323da9143863699e94215b22804c1cf620109da3a4a08633d7",
+            "bytes": 31725,
+            "matches_registered": true
+          },
+          {
+            "path": "scripts/run_strategy_experiment.py",
+            "registered_sha256": "22889c50c07ff49da00c6278a88e8d710f1f708f1e4bf994f51ad82adee5c341",
+            "status": "matched",
+            "sha256": "22889c50c07ff49da00c6278a88e8d710f1f708f1e4bf994f51ad82adee5c341",
+            "bytes": 48683,
+            "matches_registered": true
+          },
+          {
+            "path": "scripts/summarize_agent_comparison.py",
+            "registered_sha256": "b6f806d7362216e2af7fcff470454e8d1ce50edadf899b59e2380622c21280d7",
+            "status": "matched",
+            "sha256": "b6f806d7362216e2af7fcff470454e8d1ce50edadf899b59e2380622c21280d7",
+            "bytes": 15963,
+            "matches_registered": true
+          },
+          {
+            "path": "spec/agent_protocols.json",
+            "registered_sha256": "24c046c9e0e9a11cc04402efd705244d6efc6417a1e8fafe65ed5db1fc449280",
+            "status": "matched",
+            "sha256": "24c046c9e0e9a11cc04402efd705244d6efc6417a1e8fafe65ed5db1fc449280",
+            "bytes": 2683,
+            "matches_registered": true
+          },
+          {
+            "path": "spec/handshake_stage_spec.md",
+            "registered_sha256": "fe7fd36d849fadf09e973b006447b63de4c60ea9f9bbe022876983f8aab95398",
+            "status": "matched",
+            "sha256": "fe7fd36d849fadf09e973b006447b63de4c60ea9f9bbe022876983f8aab95398",
+            "bytes": 2912,
+            "matches_registered": true
+          },
+          {
+            "path": "spec/spi_master_spec.md",
+            "registered_sha256": "d98990ce8f73abf4f4cf16196ad99fd345ab729ef35e97bb26ba7f5673eef516",
+            "status": "matched",
+            "sha256": "d98990ce8f73abf4f4cf16196ad99fd345ab729ef35e97bb26ba7f5673eef516",
+            "bytes": 3034,
+            "matches_registered": true
+          },
+          {
+            "path": "spec/sync_fifo_spec.md",
+            "registered_sha256": "4fe66f356d6fb4c0ca7b0c525ec83b3a287f911893af0974a828737dc3eb0aab",
+            "status": "matched",
+            "sha256": "4fe66f356d6fb4c0ca7b0c525ec83b3a287f911893af0974a828737dc3eb0aab",
+            "bytes": 3642,
+            "matches_registered": true
+          },
+          {
+            "path": "spec/uart_tx_spec.md",
+            "registered_sha256": "7c99ccfdf59d0bb520b0d9ad9994c3572172402bed32abd1c4cd3425705dfb0f",
+            "status": "matched",
+            "sha256": "7c99ccfdf59d0bb520b0d9ad9994c3572172402bed32abd1c4cd3425705dfb0f",
+            "bytes": 3199,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/__init__.py",
+            "registered_sha256": "4029747348635aaec01692e07b842e0e371b54137d82ccf87531653e78c20ae5",
+            "status": "matched",
+            "sha256": "4029747348635aaec01692e07b842e0e371b54137d82ccf87531653e78c20ae5",
+            "bytes": 2323,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/__main__.py",
+            "registered_sha256": "3f5bcafa00f7975197263772705c1a057638fcee62fda5c571d5f346d061458d",
+            "status": "matched",
+            "sha256": "3f5bcafa00f7975197263772705c1a057638fcee62fda5c571d5f346d061458d",
+            "bytes": 182,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/__init__.py",
+            "registered_sha256": "e8f3a29fddabc922dd9bfc972333b84e3617c22ba45f69717953e2ef92c130f4",
+            "status": "matched",
+            "sha256": "e8f3a29fddabc922dd9bfc972333b84e3617c22ba45f69717953e2ef92c130f4",
+            "bytes": 673,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/agent.py",
+            "registered_sha256": "80d77a699a1fe4683c24cba1b96deff3497fe242adfde31264e29a29807cd742",
+            "status": "matched",
+            "sha256": "80d77a699a1fe4683c24cba1b96deff3497fe242adfde31264e29a29807cd742",
+            "bytes": 30718,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/debug_provider.py",
+            "registered_sha256": "ee060f47e5d3234be09f5925edd55f58d2e6654f21ca26f1d6b8805d992d976b",
+            "status": "matched",
+            "sha256": "ee060f47e5d3234be09f5925edd55f58d2e6654f21ca26f1d6b8805d992d976b",
+            "bytes": 28184,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/debug_server.py",
+            "registered_sha256": "c49226654b90f2e507727491253c98ba5384aef156719908197fb88a6040dd0b",
+            "status": "matched",
+            "sha256": "c49226654b90f2e507727491253c98ba5384aef156719908197fb88a6040dd0b",
+            "bytes": 15282,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/local_api_profile.py",
+            "registered_sha256": "3942b3a40c131dadb2e84e767ca0656a83f315b9ade6ee1a8d1431e68ff732ea",
+            "status": "matched",
+            "sha256": "3942b3a40c131dadb2e84e767ca0656a83f315b9ade6ee1a8d1431e68ff732ea",
+            "bytes": 2258,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/planner.py",
+            "registered_sha256": "0115a312206c0510e12a2ce9bf14f909c88113a1179533023f33da7005bbc805",
+            "status": "matched",
+            "sha256": "0115a312206c0510e12a2ce9bf14f909c88113a1179533023f33da7005bbc805",
+            "bytes": 14117,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/provider.py",
+            "registered_sha256": "caf55116017e962743e03223ff978b13e69ba71b41e11113d16648e8e9763478",
+            "status": "matched",
+            "sha256": "caf55116017e962743e03223ff978b13e69ba71b41e11113d16648e8e9763478",
+            "bytes": 29042,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/review_advisor.py",
+            "registered_sha256": "980126489a04fa0d20d7022c544c0a11694ed0ddb76010751879aa5bcbe0edc6",
+            "status": "matched",
+            "sha256": "980126489a04fa0d20d7022c544c0a11694ed0ddb76010751879aa5bcbe0edc6",
+            "bytes": 16596,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/schema.py",
+            "registered_sha256": "cf0babeaea6d7a62aa374ca5467f56e8e0575d39407bcf79b57497dfc9e17b06",
+            "status": "matched",
+            "sha256": "cf0babeaea6d7a62aa374ca5467f56e8e0575d39407bcf79b57497dfc9e17b06",
+            "bytes": 12436,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/__init__.py",
+            "registered_sha256": "3e0c97ad848d7a60ab75803106040cfd5d449183d57db709f3ece01c9df4f151",
+            "status": "matched",
+            "sha256": "3e0c97ad848d7a60ab75803106040cfd5d449183d57db709f3ece01c9df4f151",
+            "bytes": 4161,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/assertions.py",
+            "registered_sha256": "024168b28e390e7586c91597a7ace8c6cae2dbe8b085d4d7380679892481734f",
+            "status": "matched",
+            "sha256": "024168b28e390e7586c91597a7ace8c6cae2dbe8b085d4d7380679892481734f",
+            "bytes": 10842,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/behavior_compare.py",
+            "registered_sha256": "7828c4888b2572bd1b15f2494cf4346e1e327e1403addfec96fa061db7f6d02c",
+            "status": "matched",
+            "sha256": "7828c4888b2572bd1b15f2494cf4346e1e327e1403addfec96fa061db7f6d02c",
+            "bytes": 14805,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/benchmark_cases.py",
+            "registered_sha256": "f163c65450e27ba260a8e89a9b3f419b9a2fe23fff6917f77680d8c573f0f73a",
+            "status": "matched",
+            "sha256": "f163c65450e27ba260a8e89a9b3f419b9a2fe23fff6917f77680d8c573f0f73a",
+            "bytes": 5967,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/cli.py",
+            "registered_sha256": "82750a56596d45f49d260433d329e61ff2223571f7e610702c183d70b9d8dc6a",
+            "status": "matched",
+            "sha256": "82750a56596d45f49d260433d329e61ff2223571f7e610702c183d70b9d8dc6a",
+            "bytes": 32675,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/config.py",
+            "registered_sha256": "7ba6aedac100d3b7c00d4e4ca0ce3a04402cb0b96f4e7ced73d367c612905d0e",
+            "status": "matched",
+            "sha256": "7ba6aedac100d3b7c00d4e4ca0ce3a04402cb0b96f4e7ced73d367c612905d0e",
+            "bytes": 11325,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/contracts.py",
+            "registered_sha256": "775874199ed802d73172202dc68c629ec04796ce1565270a650261e91c8fc097",
+            "status": "matched",
+            "sha256": "775874199ed802d73172202dc68c629ec04796ce1565270a650261e91c8fc097",
+            "bytes": 20368,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/conventions.py",
+            "registered_sha256": "772138a203fe2d738fb4a5d2067f1be7676c4adaec89aed4edc0958dc87cac5e",
+            "status": "matched",
+            "sha256": "772138a203fe2d738fb4a5d2067f1be7676c4adaec89aed4edc0958dc87cac5e",
+            "bytes": 20766,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/coverage.py",
+            "registered_sha256": "8c85a3816842739f81d20782ba098aab3f17e2f21d0171800eb151802c47b4ca",
+            "status": "matched",
+            "sha256": "8c85a3816842739f81d20782ba098aab3f17e2f21d0171800eb151802c47b4ca",
+            "bytes": 16726,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/executor.py",
+            "registered_sha256": "d4e352c0317c484a482ddead62b7b6461ad797836de852b88e7b7878f133aba9",
+            "status": "matched",
+            "sha256": "d4e352c0317c484a482ddead62b7b6461ad797836de852b88e7b7878f133aba9",
+            "bytes": 15433,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/failure_guide.py",
+            "registered_sha256": "1ec632cdff86255e15a79cdbb1772b7aa0544cf1594f794212cd2d2708dc938a",
+            "status": "matched",
+            "sha256": "1ec632cdff86255e15a79cdbb1772b7aa0544cf1594f794212cd2d2708dc938a",
+            "bytes": 11246,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/functional_coverage.py",
+            "registered_sha256": "70cd1c00c0e8bc5877fafdb6ba88491d9c5ba2ae16714230aee2a30dfd4bb2fe",
+            "status": "matched",
+            "sha256": "70cd1c00c0e8bc5877fafdb6ba88491d9c5ba2ae16714230aee2a30dfd4bb2fe",
+            "bytes": 24133,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/generator.py",
+            "registered_sha256": "d8463c54bd45f31c379a33cc6d99e35c0fb672f49fd2e4e3c35c0a375e1644a1",
+            "status": "matched",
+            "sha256": "d8463c54bd45f31c379a33cc6d99e35c0fb672f49fd2e4e3c35c0a375e1644a1",
+            "bytes": 393,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/grading.py",
+            "registered_sha256": "8d15c606c39d2182e97f619d8ecf7b9bb11f6222585b085af246d35d111e39c6",
+            "status": "matched",
+            "sha256": "8d15c606c39d2182e97f619d8ecf7b9bb11f6222585b085af246d35d111e39c6",
+            "bytes": 13886,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/labels.py",
+            "registered_sha256": "16894f46ab19baf73b251fcd836289d463ecd12e41c1393fc766e363346489be",
+            "status": "matched",
+            "sha256": "16894f46ab19baf73b251fcd836289d463ecd12e41c1393fc766e363346489be",
+            "bytes": 6508,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/models.py",
+            "registered_sha256": "8d7ff1db511d0e3ab90364e16fd5bb0d0c6159d0adf69c35d519fc7a64cd71d6",
+            "status": "matched",
+            "sha256": "8d7ff1db511d0e3ab90364e16fd5bb0d0c6159d0adf69c35d519fc7a64cd71d6",
+            "bytes": 34373,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/observations.py",
+            "registered_sha256": "9883628573a7669229a47180dea84591b5b7c7fd7fd2d82dd0d8867019b8e0f3",
+            "status": "matched",
+            "sha256": "9883628573a7669229a47180dea84591b5b7c7fd7fd2d82dd0d8867019b8e0f3",
+            "bytes": 4041,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/pipeline.py",
+            "registered_sha256": "55e8359c2112807b742404822e8bc8538570bda18c751e91b0a876717c29fa6a",
+            "status": "matched",
+            "sha256": "55e8359c2112807b742404822e8bc8538570bda18c751e91b0a876717c29fa6a",
+            "bytes": 32731,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/pricing.py",
+            "registered_sha256": "8073aae0673652cc664813141be6371270d70b479e8f472afeab7fec9e424a93",
+            "status": "matched",
+            "sha256": "8073aae0673652cc664813141be6371270d70b479e8f472afeab7fec9e424a93",
+            "bytes": 7354,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/reference_model.py",
+            "registered_sha256": "d3b7ab61f9a4fe2ec4ed4551b395193a5c37ebf31e4f01e4e44c73f9f1f1b209",
+            "status": "matched",
+            "sha256": "d3b7ab61f9a4fe2ec4ed4551b395193a5c37ebf31e4f01e4e44c73f9f1f1b209",
+            "bytes": 26132,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/repair_compare.py",
+            "registered_sha256": "fdee57ae6bf2ad9d4f07eb43a35de16ec19f77f2be2d47c85e73900ec7a68939",
+            "status": "matched",
+            "sha256": "fdee57ae6bf2ad9d4f07eb43a35de16ec19f77f2be2d47c85e73900ec7a68939",
+            "bytes": 2526,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/report.py",
+            "registered_sha256": "9564b749aeda1960957f3b20b1bca13e07c5e6fc3316c3aba2d1dffc7f5a0eac",
+            "status": "matched",
+            "sha256": "9564b749aeda1960957f3b20b1bca13e07c5e6fc3316c3aba2d1dffc7f5a0eac",
+            "bytes": 27060,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/rtl_compare.py",
+            "registered_sha256": "4002eeac33e7d937811dfb1af92688dff397929edb6abde8305a50dc6057f3a0",
+            "status": "matched",
+            "sha256": "4002eeac33e7d937811dfb1af92688dff397929edb6abde8305a50dc6057f3a0",
+            "bytes": 6025,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/rtl_import.py",
+            "registered_sha256": "36b23e675ba8fedb3c2e362a0a3858935cd4828537e88ef7764da7fb26938153",
+            "status": "matched",
+            "sha256": "36b23e675ba8fedb3c2e362a0a3858935cd4828537e88ef7764da7fb26938153",
+            "bytes": 20122,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/rule_assertions.py",
+            "registered_sha256": "b513611ac3f7b1a062352bf4d5168e61bdf0a69d83e0bfda0c4d2b8bf3d1347a",
+            "status": "matched",
+            "sha256": "b513611ac3f7b1a062352bf4d5168e61bdf0a69d83e0bfda0c4d2b8bf3d1347a",
+            "bytes": 2360,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/rules.py",
+            "registered_sha256": "731534298bce7c909171faaa4bf27492967ca36c1fa2cb9589f8134343ebc7c1",
+            "status": "matched",
+            "sha256": "731534298bce7c909171faaa4bf27492967ca36c1fa2cb9589f8134343ebc7c1",
+            "bytes": 4828,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/static_review.py",
+            "registered_sha256": "ab14b88d043992bbc1c89bec500dfd6e43c3173d7834f8ff3ecfd458e0f6f66f",
+            "status": "matched",
+            "sha256": "ab14b88d043992bbc1c89bec500dfd6e43c3173d7834f8ff3ecfd458e0f6f66f",
+            "bytes": 48269,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/strategy_scoring.py",
+            "registered_sha256": "a16167285dec89bf21a4dcf891747dcb2cf99606bd4b01ec91aeb3e0c4162899",
+            "status": "matched",
+            "sha256": "a16167285dec89bf21a4dcf891747dcb2cf99606bd4b01ec91aeb3e0c4162899",
+            "bytes": 17765,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/synthesis.py",
+            "registered_sha256": "aa67491ea4bd0ff13a329f1ad1f454312476616aa716e5e6915ae4c4c0a7bc7e",
+            "status": "matched",
+            "sha256": "aa67491ea4bd0ff13a329f1ad1f454312476616aa716e5e6915ae4c4c0a7bc7e",
+            "bytes": 15885,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/testbench.py",
+            "registered_sha256": "72da53d44f9a1f2998cc1dfe9d21b1cfd70a29bd46292f4eea2abb78143f468e",
+            "status": "matched",
+            "sha256": "72da53d44f9a1f2998cc1dfe9d21b1cfd70a29bd46292f4eea2abb78143f468e",
+            "bytes": 25287,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/toolchain.py",
+            "registered_sha256": "52ce0ae47dfd02ed85aeff8e18d1fd4aa0badc65ceba3ecd999e44e88d3a1d8d",
+            "status": "matched",
+            "sha256": "52ce0ae47dfd02ed85aeff8e18d1fd4aa0badc65ceba3ecd999e44e88d3a1d8d",
+            "bytes": 6013,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/vcd.py",
+            "registered_sha256": "01b18b6af89df9ced4da013d8bdacefdf4417a2f7cc1e9f18aea88a9ef0f45f3",
+            "status": "matched",
+            "sha256": "01b18b6af89df9ced4da013d8bdacefdf4417a2f7cc1e9f18aea88a9ef0f45f3",
+            "bytes": 31167,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/verify_diff.py",
+            "registered_sha256": "2a01d2e4b90e5ffa97dfaeeefb2ef337e4fb245f7f03fbc18e75ebd52f466967",
+            "status": "matched",
+            "sha256": "2a01d2e4b90e5ffa97dfaeeefb2ef337e4fb245f7f03fbc18e75ebd52f466967",
+            "bytes": 23826,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/waveform.py",
+            "registered_sha256": "06793bbdb16ee1f8d63be8b914e506362b18e432e82f6370315c759cd97a8433",
+            "status": "matched",
+            "sha256": "06793bbdb16ee1f8d63be8b914e506362b18e432e82f6370315c759cd97a8433",
+            "bytes": 4246,
+            "matches_registered": true
+          }
+        ]
+      },
+      {
+        "group": "application-uart-v2-20261004",
+        "registered_entries": 59,
+        "matched_entries": 58,
+        "unmatched_entries": 1,
+        "copied_bytes": 835699,
+        "origin_counts": {
+          "workspace_exact": 54,
+          "git_blob_exact": 3,
+          "git_blob_normalized_crlf": 1
+        },
+        "checks": [
+          {
+            "path": "benchmarks/agent_v2/mutation_manifest.json",
+            "registered_sha256": "5ca8faef783e5d3a3a30ceed4a137353917c767dd7650966e8e4cdb93b7067eb",
+            "status": "matched",
+            "sha256": "5ca8faef783e5d3a3a30ceed4a137353917c767dd7650966e8e4cdb93b7067eb",
+            "bytes": 2833,
+            "matches_registered": true
+          },
+          {
+            "path": "benchmarks/agent_v2/sync_fifo_reference.v",
+            "registered_sha256": "964cd554041818533ece195f3abcc6979c116c4a3d72106a7fe49c503bd2dadc",
+            "status": "matched",
+            "sha256": "964cd554041818533ece195f3abcc6979c116c4a3d72106a7fe49c503bd2dadc",
+            "bytes": 895,
+            "matches_registered": true
+          },
+          {
+            "path": "benchmarks/manifest.json",
+            "registered_sha256": "338f6a4f29f84dbe34e14223114d54f6e809b5dd9cd625e081a07f27c396d3f1",
+            "status": "matched",
+            "sha256": "338f6a4f29f84dbe34e14223114d54f6e809b5dd9cd625e081a07f27c396d3f1",
+            "bytes": 28158,
+            "matches_registered": true
+          },
+          {
+            "path": "docs/experiment/agent_comparison_protocol.md",
+            "registered_sha256": "378f69380df37f185a4dbbeb4e6c4483e8e5ab390cf19c5441cb96f7e54fcc95",
+            "status": "matched",
+            "sha256": "378f69380df37f185a4dbbeb4e6c4483e8e5ab390cf19c5441cb96f7e54fcc95",
+            "bytes": 7095,
+            "matches_registered": true,
+            "origin_recovery_verified": true
+          },
+          {
+            "path": "docs/experiment/agent_comparison_v2_plan_2026-10-04.md",
+            "registered_sha256": "e072ac312e1fd1c82097b62a90f2a427ae17cd3dc62ae337365ebf12c1482b6c",
+            "status": "unmatched",
+            "absent_from_frozen_files": true
+          },
+          {
+            "path": "examples/uart_tx_contract.json",
+            "registered_sha256": "0a30a3e3c5e1ee65f5114f476de0e03bb155879b5e7dcdaf099bf918c180f6b4",
+            "status": "matched",
+            "sha256": "0a30a3e3c5e1ee65f5114f476de0e03bb155879b5e7dcdaf099bf918c180f6b4",
+            "bytes": 415,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/uart_tx.v",
+            "registered_sha256": "2b6d636a399169bcaa4fdabd9661daedbfde28c42c3bc9f76104db2c371e1193",
+            "status": "matched",
+            "sha256": "2b6d636a399169bcaa4fdabd9661daedbfde28c42c3bc9f76104db2c371e1193",
+            "bytes": 620,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/uart_tx_bug_busy_never_clears.v",
+            "registered_sha256": "24b4caa23ac9b7dd2db45401acf781b1641e7eb800c55f32b78cbd6b65c7ffed",
+            "status": "matched",
+            "sha256": "24b4caa23ac9b7dd2db45401acf781b1641e7eb800c55f32b78cbd6b65c7ffed",
+            "bytes": 733,
+            "matches_registered": true
+          },
+          {
+            "path": "rtl/uart_tx_bug_msb_first.v",
+            "registered_sha256": "93b638a980c2ecf591163f954fd72f5210088c1bf2dda5ab9dbef65c479bd334",
+            "status": "matched",
+            "sha256": "93b638a980c2ecf591163f954fd72f5210088c1bf2dda5ab9dbef65c479bd334",
+            "bytes": 725,
+            "matches_registered": true
+          },
+          {
+            "path": "scripts/run_agent_comparison.py",
+            "registered_sha256": "b8dbf4bc3a9bac6b9a82fe8f2385ffc21de2d2364a79ccc646bfc17eb5e6b299",
+            "status": "matched",
+            "sha256": "b8dbf4bc3a9bac6b9a82fe8f2385ffc21de2d2364a79ccc646bfc17eb5e6b299",
+            "bytes": 30841,
+            "matches_registered": true,
+            "origin_recovery_verified": true
+          },
+          {
+            "path": "scripts/run_strategy_experiment.py",
+            "registered_sha256": "22889c50c07ff49da00c6278a88e8d710f1f708f1e4bf994f51ad82adee5c341",
+            "status": "matched",
+            "sha256": "22889c50c07ff49da00c6278a88e8d710f1f708f1e4bf994f51ad82adee5c341",
+            "bytes": 48683,
+            "matches_registered": true
+          },
+          {
+            "path": "scripts/summarize_agent_comparison.py",
+            "registered_sha256": "b6f806d7362216e2af7fcff470454e8d1ce50edadf899b59e2380622c21280d7",
+            "status": "matched",
+            "sha256": "b6f806d7362216e2af7fcff470454e8d1ce50edadf899b59e2380622c21280d7",
+            "bytes": 15963,
+            "matches_registered": true
+          },
+          {
+            "path": "spec/agent_protocols.json",
+            "registered_sha256": "24c046c9e0e9a11cc04402efd705244d6efc6417a1e8fafe65ed5db1fc449280",
+            "status": "matched",
+            "sha256": "24c046c9e0e9a11cc04402efd705244d6efc6417a1e8fafe65ed5db1fc449280",
+            "bytes": 2683,
+            "matches_registered": true
+          },
+          {
+            "path": "spec/uart_tx_spec.md",
+            "registered_sha256": "7c99ccfdf59d0bb520b0d9ad9994c3572172402bed32abd1c4cd3425705dfb0f",
+            "status": "matched",
+            "sha256": "7c99ccfdf59d0bb520b0d9ad9994c3572172402bed32abd1c4cd3425705dfb0f",
+            "bytes": 3199,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/__init__.py",
+            "registered_sha256": "4029747348635aaec01692e07b842e0e371b54137d82ccf87531653e78c20ae5",
+            "status": "matched",
+            "sha256": "4029747348635aaec01692e07b842e0e371b54137d82ccf87531653e78c20ae5",
+            "bytes": 2323,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/__main__.py",
+            "registered_sha256": "3f5bcafa00f7975197263772705c1a057638fcee62fda5c571d5f346d061458d",
+            "status": "matched",
+            "sha256": "3f5bcafa00f7975197263772705c1a057638fcee62fda5c571d5f346d061458d",
+            "bytes": 182,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/__init__.py",
+            "registered_sha256": "e8f3a29fddabc922dd9bfc972333b84e3617c22ba45f69717953e2ef92c130f4",
+            "status": "matched",
+            "sha256": "e8f3a29fddabc922dd9bfc972333b84e3617c22ba45f69717953e2ef92c130f4",
+            "bytes": 673,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/agent.py",
+            "registered_sha256": "06bd54f636fed3fb4245e111bd0a08105456569338077107a4d05723ecbc62b6",
+            "status": "matched",
+            "sha256": "06bd54f636fed3fb4245e111bd0a08105456569338077107a4d05723ecbc62b6",
+            "bytes": 25595,
+            "matches_registered": true,
+            "origin_recovery_verified": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/debug_provider.py",
+            "registered_sha256": "ee060f47e5d3234be09f5925edd55f58d2e6654f21ca26f1d6b8805d992d976b",
+            "status": "matched",
+            "sha256": "ee060f47e5d3234be09f5925edd55f58d2e6654f21ca26f1d6b8805d992d976b",
+            "bytes": 28184,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/debug_server.py",
+            "registered_sha256": "c49226654b90f2e507727491253c98ba5384aef156719908197fb88a6040dd0b",
+            "status": "matched",
+            "sha256": "c49226654b90f2e507727491253c98ba5384aef156719908197fb88a6040dd0b",
+            "bytes": 15282,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/local_api_profile.py",
+            "registered_sha256": "3942b3a40c131dadb2e84e767ca0656a83f315b9ade6ee1a8d1431e68ff732ea",
+            "status": "matched",
+            "sha256": "3942b3a40c131dadb2e84e767ca0656a83f315b9ade6ee1a8d1431e68ff732ea",
+            "bytes": 2258,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/planner.py",
+            "registered_sha256": "0115a312206c0510e12a2ce9bf14f909c88113a1179533023f33da7005bbc805",
+            "status": "matched",
+            "sha256": "0115a312206c0510e12a2ce9bf14f909c88113a1179533023f33da7005bbc805",
+            "bytes": 14117,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/provider.py",
+            "registered_sha256": "4921479b534555c91dfe0e587cc741d911331992b9405e78a8ea3559e7ef99a9",
+            "status": "matched",
+            "sha256": "4921479b534555c91dfe0e587cc741d911331992b9405e78a8ea3559e7ef99a9",
+            "bytes": 25966,
+            "matches_registered": true,
+            "origin_recovery_verified": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/review_advisor.py",
+            "registered_sha256": "980126489a04fa0d20d7022c544c0a11694ed0ddb76010751879aa5bcbe0edc6",
+            "status": "matched",
+            "sha256": "980126489a04fa0d20d7022c544c0a11694ed0ddb76010751879aa5bcbe0edc6",
+            "bytes": 16596,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/ai/schema.py",
+            "registered_sha256": "cf0babeaea6d7a62aa374ca5467f56e8e0575d39407bcf79b57497dfc9e17b06",
+            "status": "matched",
+            "sha256": "cf0babeaea6d7a62aa374ca5467f56e8e0575d39407bcf79b57497dfc9e17b06",
+            "bytes": 12436,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/__init__.py",
+            "registered_sha256": "3e0c97ad848d7a60ab75803106040cfd5d449183d57db709f3ece01c9df4f151",
+            "status": "matched",
+            "sha256": "3e0c97ad848d7a60ab75803106040cfd5d449183d57db709f3ece01c9df4f151",
+            "bytes": 4161,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/assertions.py",
+            "registered_sha256": "024168b28e390e7586c91597a7ace8c6cae2dbe8b085d4d7380679892481734f",
+            "status": "matched",
+            "sha256": "024168b28e390e7586c91597a7ace8c6cae2dbe8b085d4d7380679892481734f",
+            "bytes": 10842,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/behavior_compare.py",
+            "registered_sha256": "7828c4888b2572bd1b15f2494cf4346e1e327e1403addfec96fa061db7f6d02c",
+            "status": "matched",
+            "sha256": "7828c4888b2572bd1b15f2494cf4346e1e327e1403addfec96fa061db7f6d02c",
+            "bytes": 14805,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/benchmark_cases.py",
+            "registered_sha256": "f163c65450e27ba260a8e89a9b3f419b9a2fe23fff6917f77680d8c573f0f73a",
+            "status": "matched",
+            "sha256": "f163c65450e27ba260a8e89a9b3f419b9a2fe23fff6917f77680d8c573f0f73a",
+            "bytes": 5967,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/cli.py",
+            "registered_sha256": "82750a56596d45f49d260433d329e61ff2223571f7e610702c183d70b9d8dc6a",
+            "status": "matched",
+            "sha256": "82750a56596d45f49d260433d329e61ff2223571f7e610702c183d70b9d8dc6a",
+            "bytes": 32675,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/config.py",
+            "registered_sha256": "7ba6aedac100d3b7c00d4e4ca0ce3a04402cb0b96f4e7ced73d367c612905d0e",
+            "status": "matched",
+            "sha256": "7ba6aedac100d3b7c00d4e4ca0ce3a04402cb0b96f4e7ced73d367c612905d0e",
+            "bytes": 11325,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/contracts.py",
+            "registered_sha256": "775874199ed802d73172202dc68c629ec04796ce1565270a650261e91c8fc097",
+            "status": "matched",
+            "sha256": "775874199ed802d73172202dc68c629ec04796ce1565270a650261e91c8fc097",
+            "bytes": 20368,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/conventions.py",
+            "registered_sha256": "772138a203fe2d738fb4a5d2067f1be7676c4adaec89aed4edc0958dc87cac5e",
+            "status": "matched",
+            "sha256": "772138a203fe2d738fb4a5d2067f1be7676c4adaec89aed4edc0958dc87cac5e",
+            "bytes": 20766,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/coverage.py",
+            "registered_sha256": "8c85a3816842739f81d20782ba098aab3f17e2f21d0171800eb151802c47b4ca",
+            "status": "matched",
+            "sha256": "8c85a3816842739f81d20782ba098aab3f17e2f21d0171800eb151802c47b4ca",
+            "bytes": 16726,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/executor.py",
+            "registered_sha256": "d4e352c0317c484a482ddead62b7b6461ad797836de852b88e7b7878f133aba9",
+            "status": "matched",
+            "sha256": "d4e352c0317c484a482ddead62b7b6461ad797836de852b88e7b7878f133aba9",
+            "bytes": 15433,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/failure_guide.py",
+            "registered_sha256": "1ec632cdff86255e15a79cdbb1772b7aa0544cf1594f794212cd2d2708dc938a",
+            "status": "matched",
+            "sha256": "1ec632cdff86255e15a79cdbb1772b7aa0544cf1594f794212cd2d2708dc938a",
+            "bytes": 11246,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/functional_coverage.py",
+            "registered_sha256": "70cd1c00c0e8bc5877fafdb6ba88491d9c5ba2ae16714230aee2a30dfd4bb2fe",
+            "status": "matched",
+            "sha256": "70cd1c00c0e8bc5877fafdb6ba88491d9c5ba2ae16714230aee2a30dfd4bb2fe",
+            "bytes": 24133,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/generator.py",
+            "registered_sha256": "d8463c54bd45f31c379a33cc6d99e35c0fb672f49fd2e4e3c35c0a375e1644a1",
+            "status": "matched",
+            "sha256": "d8463c54bd45f31c379a33cc6d99e35c0fb672f49fd2e4e3c35c0a375e1644a1",
+            "bytes": 393,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/grading.py",
+            "registered_sha256": "8d15c606c39d2182e97f619d8ecf7b9bb11f6222585b085af246d35d111e39c6",
+            "status": "matched",
+            "sha256": "8d15c606c39d2182e97f619d8ecf7b9bb11f6222585b085af246d35d111e39c6",
+            "bytes": 13886,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/labels.py",
+            "registered_sha256": "16894f46ab19baf73b251fcd836289d463ecd12e41c1393fc766e363346489be",
+            "status": "matched",
+            "sha256": "16894f46ab19baf73b251fcd836289d463ecd12e41c1393fc766e363346489be",
+            "bytes": 6508,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/models.py",
+            "registered_sha256": "8d7ff1db511d0e3ab90364e16fd5bb0d0c6159d0adf69c35d519fc7a64cd71d6",
+            "status": "matched",
+            "sha256": "8d7ff1db511d0e3ab90364e16fd5bb0d0c6159d0adf69c35d519fc7a64cd71d6",
+            "bytes": 34373,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/observations.py",
+            "registered_sha256": "9883628573a7669229a47180dea84591b5b7c7fd7fd2d82dd0d8867019b8e0f3",
+            "status": "matched",
+            "sha256": "9883628573a7669229a47180dea84591b5b7c7fd7fd2d82dd0d8867019b8e0f3",
+            "bytes": 4041,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/pipeline.py",
+            "registered_sha256": "55e8359c2112807b742404822e8bc8538570bda18c751e91b0a876717c29fa6a",
+            "status": "matched",
+            "sha256": "55e8359c2112807b742404822e8bc8538570bda18c751e91b0a876717c29fa6a",
+            "bytes": 32731,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/pricing.py",
+            "registered_sha256": "8073aae0673652cc664813141be6371270d70b479e8f472afeab7fec9e424a93",
+            "status": "matched",
+            "sha256": "8073aae0673652cc664813141be6371270d70b479e8f472afeab7fec9e424a93",
+            "bytes": 7354,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/reference_model.py",
+            "registered_sha256": "d3b7ab61f9a4fe2ec4ed4551b395193a5c37ebf31e4f01e4e44c73f9f1f1b209",
+            "status": "matched",
+            "sha256": "d3b7ab61f9a4fe2ec4ed4551b395193a5c37ebf31e4f01e4e44c73f9f1f1b209",
+            "bytes": 26132,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/repair_compare.py",
+            "registered_sha256": "fdee57ae6bf2ad9d4f07eb43a35de16ec19f77f2be2d47c85e73900ec7a68939",
+            "status": "matched",
+            "sha256": "fdee57ae6bf2ad9d4f07eb43a35de16ec19f77f2be2d47c85e73900ec7a68939",
+            "bytes": 2526,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/report.py",
+            "registered_sha256": "9564b749aeda1960957f3b20b1bca13e07c5e6fc3316c3aba2d1dffc7f5a0eac",
+            "status": "matched",
+            "sha256": "9564b749aeda1960957f3b20b1bca13e07c5e6fc3316c3aba2d1dffc7f5a0eac",
+            "bytes": 27060,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/rtl_compare.py",
+            "registered_sha256": "4002eeac33e7d937811dfb1af92688dff397929edb6abde8305a50dc6057f3a0",
+            "status": "matched",
+            "sha256": "4002eeac33e7d937811dfb1af92688dff397929edb6abde8305a50dc6057f3a0",
+            "bytes": 6025,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/rtl_import.py",
+            "registered_sha256": "36b23e675ba8fedb3c2e362a0a3858935cd4828537e88ef7764da7fb26938153",
+            "status": "matched",
+            "sha256": "36b23e675ba8fedb3c2e362a0a3858935cd4828537e88ef7764da7fb26938153",
+            "bytes": 20122,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/rule_assertions.py",
+            "registered_sha256": "b513611ac3f7b1a062352bf4d5168e61bdf0a69d83e0bfda0c4d2b8bf3d1347a",
+            "status": "matched",
+            "sha256": "b513611ac3f7b1a062352bf4d5168e61bdf0a69d83e0bfda0c4d2b8bf3d1347a",
+            "bytes": 2360,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/rules.py",
+            "registered_sha256": "731534298bce7c909171faaa4bf27492967ca36c1fa2cb9589f8134343ebc7c1",
+            "status": "matched",
+            "sha256": "731534298bce7c909171faaa4bf27492967ca36c1fa2cb9589f8134343ebc7c1",
+            "bytes": 4828,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/static_review.py",
+            "registered_sha256": "ab14b88d043992bbc1c89bec500dfd6e43c3173d7834f8ff3ecfd458e0f6f66f",
+            "status": "matched",
+            "sha256": "ab14b88d043992bbc1c89bec500dfd6e43c3173d7834f8ff3ecfd458e0f6f66f",
+            "bytes": 48269,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/strategy_scoring.py",
+            "registered_sha256": "a16167285dec89bf21a4dcf891747dcb2cf99606bd4b01ec91aeb3e0c4162899",
+            "status": "matched",
+            "sha256": "a16167285dec89bf21a4dcf891747dcb2cf99606bd4b01ec91aeb3e0c4162899",
+            "bytes": 17765,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/synthesis.py",
+            "registered_sha256": "aa67491ea4bd0ff13a329f1ad1f454312476616aa716e5e6915ae4c4c0a7bc7e",
+            "status": "matched",
+            "sha256": "aa67491ea4bd0ff13a329f1ad1f454312476616aa716e5e6915ae4c4c0a7bc7e",
+            "bytes": 15885,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/testbench.py",
+            "registered_sha256": "72da53d44f9a1f2998cc1dfe9d21b1cfd70a29bd46292f4eea2abb78143f468e",
+            "status": "matched",
+            "sha256": "72da53d44f9a1f2998cc1dfe9d21b1cfd70a29bd46292f4eea2abb78143f468e",
+            "bytes": 25287,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/toolchain.py",
+            "registered_sha256": "52ce0ae47dfd02ed85aeff8e18d1fd4aa0badc65ceba3ecd999e44e88d3a1d8d",
+            "status": "matched",
+            "sha256": "52ce0ae47dfd02ed85aeff8e18d1fd4aa0badc65ceba3ecd999e44e88d3a1d8d",
+            "bytes": 6013,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/vcd.py",
+            "registered_sha256": "01b18b6af89df9ced4da013d8bdacefdf4417a2f7cc1e9f18aea88a9ef0f45f3",
+            "status": "matched",
+            "sha256": "01b18b6af89df9ced4da013d8bdacefdf4417a2f7cc1e9f18aea88a9ef0f45f3",
+            "bytes": 31167,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/verify_diff.py",
+            "registered_sha256": "2a01d2e4b90e5ffa97dfaeeefb2ef337e4fb245f7f03fbc18e75ebd52f466967",
+            "status": "matched",
+            "sha256": "2a01d2e4b90e5ffa97dfaeeefb2ef337e4fb245f7f03fbc18e75ebd52f466967",
+            "bytes": 23826,
+            "matches_registered": true
+          },
+          {
+            "path": "src/iverilog_ai/core/waveform.py",
+            "registered_sha256": "06793bbdb16ee1f8d63be8b914e506362b18e432e82f6370315c759cd97a8433",
+            "status": "matched",
+            "sha256": "06793bbdb16ee1f8d63be8b914e506362b18e432e82f6370315c759cd97a8433",
+            "bytes": 4246,
+            "matches_registered": true
+          }
+        ]
+      }
+    ],
+    "registered_entries": 281,
+    "matched_entries": 280,
+    "copied_bytes": 3432536,
+    "origin_counts": {
+      "workspace_exact": 269,
+      "git_blob_exact": 9,
+      "git_blob_normalized_crlf": 2
+    },
+    "unmatched": [
+      {
+        "group": "application-uart-v2-20261004",
+        "path": "docs/experiment/agent_comparison_v2_plan_2026-10-04.md",
+        "registered_sha256": "e072ac312e1fd1c82097b62a90f2a427ae17cd3dc62ae337365ebf12c1482b6c"
+      }
+    ]
+  },
+  "junction_evidence": {
+    "excluded": [
+      {
+        "path": ".iverilog-ai/v4-proxy-junction-03218113a4/agent/untrusted_decisions",
+        "contents_followed": false,
+        "reason": "existing junction-escape negative-test fixture; rejection evidence and regular target files retained"
+      }
+    ],
+    "link_and_children_absent": true,
+    "refusal_record_path": "raw/v4-proxy-junction-03218113a4/junction_probe.json",
+    "refusal_record_sha256": "0adf3b14df8bda0252108e47087119078d6494ba307f7ab47f9a2dce7ed1b76d",
+    "refusal_record": {
+      "record_kind": "offline_proxy_path_control",
+      "real_api_requests": 0,
+      "path_kind": "Windows_directory_junction",
+      "rejected": true,
+      "error_type": "SafePathError",
+      "outside_files": []
+    }
+  },
+  "declared_security_scan": {
+    "clear_and_nested_items_scanned": 12866,
+    "hits": 0,
+    "scope": "active key plaintext/JSON escaping and decoded JSON strings; not a universal secret detector"
+  },
+  "limitations": [
+    "One historically registered plan document is unavailable; this audit does not close that gap.",
+    "269 workspace exact plus 9 exact Git blobs plus 2 labeled CRLF recoveries match the registered bytes; recovery is not proof of original historical Git line endings.",
+    "The existing packaging credential scan is recorded but was not repeated; no active credential was read.",
+    "This verifies local bytes and retained evidence only, not experiment outcomes, cross-host replay, or H02 independent human review.",
+    "Source ZIPs match regenerated git archive byte-for-byte. Six Windows launcher/build scripts in each archive contain the committed eol=crlf export form, not raw Git blob LF bytes."
+  ],
+  "errors": [],
+  "verdict": "pass_with_declared_missing_historical_document",
+  "package_sha256_after_audit": "768c3c91b1fca0cf86683580a463de8dc4b30228d4b67335781e6773bc25570c",
+  "audit_script_sha256": "81a07fc7c81104906041301d5562ba96bbe315edda2d40b7cfd79548891099dc",
+  "prior_unclassified_receipt": {
+    "path": ".iverilog-ai/ic-v4-pack-readonly-audit-20261004/receipt.json",
+    "sha256": "747adb208ad4119f9453505fcc57086726b9640973e95e837c9cf3689602d4e4",
+    "unchanged": true,
+    "explanation": "Initial receipt compared archive bytes directly to raw Git blobs. Four sets of six differences are expected eol=crlf export conversions; this follow-up retains and classifies them."
+  },
+  "git_archive_reproduction": [
+    {
+      "commit": "598e6dcf11fef60497ac12c26642b375bc1810a9",
+      "archive_sha256": "3f49f00d6663075dd7081e1d20f837db494e67ba6f8bed0099020251e73c30e7",
+      "regenerated_git_archive_sha256": "3f49f00d6663075dd7081e1d20f837db494e67ba6f8bed0099020251e73c30e7",
+      "byte_identical_to_regenerated_git_archive": true,
+      "eol_classifications": [
+        {
+          "path": "scripts/make_shortcuts.ps1",
+          "git_blob_sha256": "7469efcf9250672d0743a7e2f77a39377df760a0d40c931d3cc9c62dd6f85e76",
+          "archive_bytes_sha256": "0db23ae5a49b1328bbf6f807f8927ee28046cb141fbf17341197d38781dde2c7",
+          "git_blob_bytes": 3380,
+          "archive_bytes": 3461,
+          "only_declared_lf_to_crlf_conversion": true
+        },
+        {
+          "path": "start_ui.cmd",
+          "git_blob_sha256": "2ebf72996bb163d42695f63c47c2c73905852ac62b9eb93ce86144cfce514bd3",
+          "archive_bytes_sha256": "b0fc5956fa219d6ff4482788316c659897cdd724fbb42be3d697cedb4fd4807c",
+          "git_blob_bytes": 782,
+          "archive_bytes": 801,
+          "only_declared_lf_to_crlf_conversion": true
+        },
+        {
+          "path": "start_ui.ps1",
+          "git_blob_sha256": "4d05326ebaec291367c8314aee9c608c310f8a8dcf0824207905bb10fe76e360",
+          "archive_bytes_sha256": "a7f07e759b9ac74efb71d94f2eadcff45c54b89ba98d0d322bd3f81a3b6ef82c",
+          "git_blob_bytes": 11013,
+          "archive_bytes": 11256,
+          "only_declared_lf_to_crlf_conversion": true
+        },
+        {
+          "path": "stop_ui.cmd",
+          "git_blob_sha256": "43ce50ecff46e8ac0bc089e879e913289a84289bff0e162c912d37531264f898",
+          "archive_bytes_sha256": "8cded1aa57e67e0e150b24ada3d01e946e4d498a58a07042fd6f6cef1df8f91b",
+          "git_blob_bytes": 415,
+          "archive_bytes": 427,
+          "only_declared_lf_to_crlf_conversion": true
+        },
+        {
+          "path": "stop_ui.ps1",
+          "git_blob_sha256": "b52bd12d8ad318dd7a9ddf12d50c7a50948fa45151f6f687c04fe5228ed80dab",
+          "archive_bytes_sha256": "9a0876e0406c98d94aac55fb24106f93b9dbf0fc19ff310329ee1d4121e1cc9d",
+          "git_blob_bytes": 2683,
+          "archive_bytes": 2757,
+          "only_declared_lf_to_crlf_conversion": true
+        },
+        {
+          "path": "tools/service_panel/build.ps1",
+          "git_blob_sha256": "f2374042cd5b56d809021387aa2ee764cb311677fbad603e0a26598fdb60473a",
+          "archive_bytes_sha256": "6cb5f0de95cb1247aa974ecb9dd2d7dd2b25bae4a033ee4a9395348bb0a87bf0",
+          "git_blob_bytes": 3365,
+          "archive_bytes": 3441,
+          "only_declared_lf_to_crlf_conversion": true
+        }
+      ],
+      "gitattributes_sha256": "6745899c7d1a998c90ebe412f7951adbea9f5fbd6ac45d05d46da03c7949c4f1",
+      "explicit_crlf_rules": true
+    },
+    {
+      "commit": "c7bb280a1d884db90bd35e89e17142b42b7ca80c",
+      "archive_sha256": "e936fbc28d87d6c4acb1c866594ed920f8ffb398d70983d103dc3a545d056e14",
+      "regenerated_git_archive_sha256": "e936fbc28d87d6c4acb1c866594ed920f8ffb398d70983d103dc3a545d056e14",
+      "byte_identical_to_regenerated_git_archive": true,
+      "eol_classifications": [
+        {
+          "path": "scripts/make_shortcuts.ps1",
+          "git_blob_sha256": "7469efcf9250672d0743a7e2f77a39377df760a0d40c931d3cc9c62dd6f85e76",
+          "archive_bytes_sha256": "0db23ae5a49b1328bbf6f807f8927ee28046cb141fbf17341197d38781dde2c7",
+          "git_blob_bytes": 3380,
+          "archive_bytes": 3461,
+          "only_declared_lf_to_crlf_conversion": true
+        },
+        {
+          "path": "start_ui.cmd",
+          "git_blob_sha256": "2ebf72996bb163d42695f63c47c2c73905852ac62b9eb93ce86144cfce514bd3",
+          "archive_bytes_sha256": "b0fc5956fa219d6ff4482788316c659897cdd724fbb42be3d697cedb4fd4807c",
+          "git_blob_bytes": 782,
+          "archive_bytes": 801,
+          "only_declared_lf_to_crlf_conversion": true
+        },
+        {
+          "path": "start_ui.ps1",
+          "git_blob_sha256": "4d05326ebaec291367c8314aee9c608c310f8a8dcf0824207905bb10fe76e360",
+          "archive_bytes_sha256": "a7f07e759b9ac74efb71d94f2eadcff45c54b89ba98d0d322bd3f81a3b6ef82c",
+          "git_blob_bytes": 11013,
+          "archive_bytes": 11256,
+          "only_declared_lf_to_crlf_conversion": true
+        },
+        {
+          "path": "stop_ui.cmd",
+          "git_blob_sha256": "43ce50ecff46e8ac0bc089e879e913289a84289bff0e162c912d37531264f898",
+          "archive_bytes_sha256": "8cded1aa57e67e0e150b24ada3d01e946e4d498a58a07042fd6f6cef1df8f91b",
+          "git_blob_bytes": 415,
+          "archive_bytes": 427,
+          "only_declared_lf_to_crlf_conversion": true
+        },
+        {
+          "path": "stop_ui.ps1",
+          "git_blob_sha256": "b52bd12d8ad318dd7a9ddf12d50c7a50948fa45151f6f687c04fe5228ed80dab",
+          "archive_bytes_sha256": "9a0876e0406c98d94aac55fb24106f93b9dbf0fc19ff310329ee1d4121e1cc9d",
+          "git_blob_bytes": 2683,
+          "archive_bytes": 2757,
+          "only_declared_lf_to_crlf_conversion": true
+        },
+        {
+          "path": "tools/service_panel/build.ps1",
+          "git_blob_sha256": "f2374042cd5b56d809021387aa2ee764cb311677fbad603e0a26598fdb60473a",
+          "archive_bytes_sha256": "6cb5f0de95cb1247aa974ecb9dd2d7dd2b25bae4a033ee4a9395348bb0a87bf0",
+          "git_blob_bytes": 3365,
+          "archive_bytes": 3441,
+          "only_declared_lf_to_crlf_conversion": true
+        }
+      ],
+      "gitattributes_sha256": "6745899c7d1a998c90ebe412f7951adbea9f5fbd6ac45d05d46da03c7949c4f1",
+      "explicit_crlf_rules": true
+    },
+    {
+      "commit": "28be1edc8b84067912e2034567a8e8a5803b8184",
+      "archive_sha256": "11fffa0802c14efbff4d34ec532693f96cae5147422dd7c0605894f765bcc0f1",
+      "regenerated_git_archive_sha256": "11fffa0802c14efbff4d34ec532693f96cae5147422dd7c0605894f765bcc0f1",
+      "byte_identical_to_regenerated_git_archive": true,
+      "eol_classifications": [
+        {
+          "path": "scripts/make_shortcuts.ps1",
+          "git_blob_sha256": "7469efcf9250672d0743a7e2f77a39377df760a0d40c931d3cc9c62dd6f85e76",
+          "archive_bytes_sha256": "0db23ae5a49b1328bbf6f807f8927ee28046cb141fbf17341197d38781dde2c7",
+          "git_blob_bytes": 3380,
+          "archive_bytes": 3461,
+          "only_declared_lf_to_crlf_conversion": true
+        },
+        {
+          "path": "start_ui.cmd",
+          "git_blob_sha256": "2ebf72996bb163d42695f63c47c2c73905852ac62b9eb93ce86144cfce514bd3",
+          "archive_bytes_sha256": "b0fc5956fa219d6ff4482788316c659897cdd724fbb42be3d697cedb4fd4807c",
+          "git_blob_bytes": 782,
+          "archive_bytes": 801,
+          "only_declared_lf_to_crlf_conversion": true
+        },
+        {
+          "path": "start_ui.ps1",
+          "git_blob_sha256": "4d05326ebaec291367c8314aee9c608c310f8a8dcf0824207905bb10fe76e360",
+          "archive_bytes_sha256": "a7f07e759b9ac74efb71d94f2eadcff45c54b89ba98d0d322bd3f81a3b6ef82c",
+          "git_blob_bytes": 11013,
+          "archive_bytes": 11256,
+          "only_declared_lf_to_crlf_conversion": true
+        },
+        {
+          "path": "stop_ui.cmd",
+          "git_blob_sha256": "43ce50ecff46e8ac0bc089e879e913289a84289bff0e162c912d37531264f898",
+          "archive_bytes_sha256": "8cded1aa57e67e0e150b24ada3d01e946e4d498a58a07042fd6f6cef1df8f91b",
+          "git_blob_bytes": 415,
+          "archive_bytes": 427,
+          "only_declared_lf_to_crlf_conversion": true
+        },
+        {
+          "path": "stop_ui.ps1",
+          "git_blob_sha256": "b52bd12d8ad318dd7a9ddf12d50c7a50948fa45151f6f687c04fe5228ed80dab",
+          "archive_bytes_sha256": "9a0876e0406c98d94aac55fb24106f93b9dbf0fc19ff310329ee1d4121e1cc9d",
+          "git_blob_bytes": 2683,
+          "archive_bytes": 2757,
+          "only_declared_lf_to_crlf_conversion": true
+        },
+        {
+          "path": "tools/service_panel/build.ps1",
+          "git_blob_sha256": "f2374042cd5b56d809021387aa2ee764cb311677fbad603e0a26598fdb60473a",
+          "archive_bytes_sha256": "6cb5f0de95cb1247aa974ecb9dd2d7dd2b25bae4a033ee4a9395348bb0a87bf0",
+          "git_blob_bytes": 3365,
+          "archive_bytes": 3441,
+          "only_declared_lf_to_crlf_conversion": true
+        }
+      ],
+      "gitattributes_sha256": "6745899c7d1a998c90ebe412f7951adbea9f5fbd6ac45d05d46da03c7949c4f1",
+      "explicit_crlf_rules": true
+    },
+    {
+      "commit": "c5e917115a40fc30aab4524b06fcce34ddde1b63",
+      "archive_sha256": "7f69536e23c54338de6f0edc6f816efe7e1180e1518f25478927b1b0a5df5b39",
+      "regenerated_git_archive_sha256": "7f69536e23c54338de6f0edc6f816efe7e1180e1518f25478927b1b0a5df5b39",
+      "byte_identical_to_regenerated_git_archive": true,
+      "eol_classifications": [
+        {
+          "path": "scripts/make_shortcuts.ps1",
+          "git_blob_sha256": "7469efcf9250672d0743a7e2f77a39377df760a0d40c931d3cc9c62dd6f85e76",
+          "archive_bytes_sha256": "0db23ae5a49b1328bbf6f807f8927ee28046cb141fbf17341197d38781dde2c7",
+          "git_blob_bytes": 3380,
+          "archive_bytes": 3461,
+          "only_declared_lf_to_crlf_conversion": true
+        },
+        {
+          "path": "start_ui.cmd",
+          "git_blob_sha256": "2ebf72996bb163d42695f63c47c2c73905852ac62b9eb93ce86144cfce514bd3",
+          "archive_bytes_sha256": "b0fc5956fa219d6ff4482788316c659897cdd724fbb42be3d697cedb4fd4807c",
+          "git_blob_bytes": 782,
+          "archive_bytes": 801,
+          "only_declared_lf_to_crlf_conversion": true
+        },
+        {
+          "path": "start_ui.ps1",
+          "git_blob_sha256": "4d05326ebaec291367c8314aee9c608c310f8a8dcf0824207905bb10fe76e360",
+          "archive_bytes_sha256": "a7f07e759b9ac74efb71d94f2eadcff45c54b89ba98d0d322bd3f81a3b6ef82c",
+          "git_blob_bytes": 11013,
+          "archive_bytes": 11256,
+          "only_declared_lf_to_crlf_conversion": true
+        },
+        {
+          "path": "stop_ui.cmd",
+          "git_blob_sha256": "43ce50ecff46e8ac0bc089e879e913289a84289bff0e162c912d37531264f898",
+          "archive_bytes_sha256": "8cded1aa57e67e0e150b24ada3d01e946e4d498a58a07042fd6f6cef1df8f91b",
+          "git_blob_bytes": 415,
+          "archive_bytes": 427,
+          "only_declared_lf_to_crlf_conversion": true
+        },
+        {
+          "path": "stop_ui.ps1",
+          "git_blob_sha256": "b52bd12d8ad318dd7a9ddf12d50c7a50948fa45151f6f687c04fe5228ed80dab",
+          "archive_bytes_sha256": "9a0876e0406c98d94aac55fb24106f93b9dbf0fc19ff310329ee1d4121e1cc9d",
+          "git_blob_bytes": 2683,
+          "archive_bytes": 2757,
+          "only_declared_lf_to_crlf_conversion": true
+        },
+        {
+          "path": "tools/service_panel/build.ps1",
+          "git_blob_sha256": "f2374042cd5b56d809021387aa2ee764cb311677fbad603e0a26598fdb60473a",
+          "archive_bytes_sha256": "6cb5f0de95cb1247aa974ecb9dd2d7dd2b25bae4a033ee4a9395348bb0a87bf0",
+          "git_blob_bytes": 3365,
+          "archive_bytes": 3441,
+          "only_declared_lf_to_crlf_conversion": true
+        }
+      ],
+      "gitattributes_sha256": "974c938969411c9549defb9e008dd291a8222582814695d662d43206cbc5a5a2",
+      "explicit_crlf_rules": true
+    }
+  ],
+  "package_sha256_after_followup": "768c3c91b1fca0cf86683580a463de8dc4b30228d4b67335781e6773bc25570c",
+  "followup_script_sha256": "ed976f6df5bbdebe220a2bd33ce4ae60ef70cda864b1fba1dc877dc3b31926d7"
+}

@@ -17,7 +17,7 @@
 | 5 分钟了解这个项目 | `README.md` → `docs/project_overview.md` → `docs/competition/ic/report_draft.md` |
 | 准备 AI＋集成电路提交 | `docs/competition/ic/v2/README.md` → `docs/competition/ic/v2/technical_report.md` → `docs/competition/ic/v2/supporting_evidence.md`；真人与H02待真实原件，新版事实稿优先 |
 | 复核数字是否可信 | `docs/experiment/metric_inventory.md`（每个数字一行：口径/来源/时间/复现命令）→ `docs/competition/submission_gate_checklist.md` → 产物目录 |
-| 提交当天照着做 | `docs/competition/final_delivery_snapshot.md` → `docs/competition/submission_gate_checklist.md` → `docs/competition/submission_cover_text.md` |
+| IC提交当天照着做 | `docs/competition/ic/v2/README.md` → `docs/competition/ic/gap_checklist.md`；先核对所选赛道、真人/H02原件和团队字段 |
 | 组织真人试用与反馈 | `docs/trial/README.md` → `docs/trial/organizer_workflow.md`；发给参与者从 `docs/trial/participant_start.md` 开始 |
 
 ---
@@ -32,6 +32,9 @@
 | 最新佐证源稿与PDF | `docs/competition/ic/v2/supporting_evidence.md`、`docs/competition/ic/ICARUS_佐证材料_v2.pdf` | 有效；5页、约0.86MB；V01–V06真实来源，保留失败，不以假设替代人审 |
 | 最新材料入口与PDF回执 | `docs/competition/ic/v2/README.md`、`docs/competition/ic/v2/validation.json` | 名称15字符、简介172字符；全部14页渲染查看，文字可选择、身份元数据空 |
 | 最新答辩稿与构建来源 | `docs/competition/ic/ICARUS_答辩材料_v2.pptx`、`docs/competition/ic/ICARUS_答辩材料_v2.pdf`、`docs/competition/ic/defense_v2/README.md`、`docs/competition/ic/defense_v2/qa_report.json` | 12页，5原生表格/3原生图表/12页备注；PPTX可编辑，PDF图像式；逐页机器检查，不是独立人审 |
+| 本轮c7/v4冻结交接包 | `docs/competition/ic/evidence_pack_v4_2026-10-04.md`、`docs/competition/ic/evidence_pack_v4_2026-10-04.json`、`.iverilog-ai/ic-agent-v4-evidence-20261004.zip` | 127,448,982字节；10,330项文件SHA/CRC通过；281登记中280精确匹配，1早期计划MD未恢复；完整结果及失败保留 |
+| 本轮包后代理字节核查 | `docs/review/ic_v4_pack_review_2026-10-04.md`、`docs/review/ic-v4-pack-review-2026-10-04/receipt.json` | CRC/10,330项SHA与280输入均匹配；4 Git归档重新导出字节一致，预期CRLF差异明记；不是H02或异机 |
+| 新包内反例实际重放 | `docs/experiment/ic-agent-v4-pack-replay-2026-10-04/receipt.json`、`docs/experiment/ic-agent-v4-pack-replay-2026-10-04/stdout.log`、`docs/experiment/ic-agent-v4-pack-replay-2026-10-04/stderr.log` | 从外层ZIP取内层小包，在新目录运行包内replay.py；338比较/48失败，failed_checks，0API；同机已有工具，不是异机或真人 |
 | v4单重复API烟测 | `docs/experiment/agent_comparison_v4_smoke_2026-10-04.md`、`docs/experiment/agent-comparison-v4-smoke-2026-10-04/receipt.json` | 84行、94请求、94/94动作校验；反馈6/8，随机8/8；1正确基线执行失败、严格资格false |
 | v2正式小型回执 | `docs/experiment/agent-comparison-v2-2026-10-04/receipt.json` | 是摘要摘录，不是完整results；全部252行和完整原件另存，SHA可追溯 |
 | 本轮API预算账 | `docs/experiment/ic_agent_v4_api_budget_2026-10-04.json` | 保守277/360请求；已知276响应，预跑另1可能在途，未知不作零；不是账单 |
@@ -218,7 +221,7 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 | 编码/BOM | `python scripts/strip_bom.py --check` | 0 问题 |
 | 交付体检 | `python scripts/check_submission.py --repo .` | **1 error**（`CITATION.cff` 占位符） |
 | 报告页数/体积 | `python scripts/check_submission.py --kind report docs/competition/technical_report_draft.pdf` | 原开源稿：0 error / 1 warning（正文21页超建议值）；原IC工作稿10页/正文9页；本轮条件技术方案11页/正文10页，佐证5页，均0 error / 0 warning |
-| 索引路径存在性 | `python scripts/check_doc_index.py` | **187/187 条路径存在**（2026-10-04；此前反向测试：故意写错一条则退出码 1） |
+| 索引路径存在性 | `python scripts/check_doc_index.py` | **195/195 条路径存在**（2026-10-04；此前反向测试：故意写错一条则退出码 1） |
 
 ---
 
@@ -260,7 +263,7 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 | 3–5 分钟演示视频 | 待补 | 需要录制；脚本 `docs/demo/demo_script.md` |
 | 外部独立复核 | 待补 | 3 个基线与 21 个候选待真人逐条复核；记录关系、协助、分歧与不可判定 |
 | GitHub Action 外部调用验证 | 待补 | 需要一个调用方仓库 |
-| 原开源报告正文 21 页 | 历史取舍 | 原赛道稿排版修复后为正文21页；IC稿正文9页，各自计量，不混用 |
+| 原开源报告正文 21 页 | 历史取舍 | 原赛道稿正文21页；旧IC工作稿正文9页，最新v2正文8页；各版本分别计量 |
 
 试用与复核的完整入口见 §3.1。v1 原始表和汇总脚本保留兼容，新记录不覆盖旧表；缺少真人反馈、独立审核或视频时继续标注待补。
 

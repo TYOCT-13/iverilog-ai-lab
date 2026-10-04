@@ -223,7 +223,8 @@ fixed 实际只执行一次，不能用在线五轮并集宣称同总预算下�
 | 编码门禁 | 0 问题 | `python scripts/strip_bom.py --check` | 2026-10-01 | |
 | 基准矩阵（2026-10-01 代码复跑） | 参考设计 15 个**误报 0**；缺陷变体 83 个 **83/83 检出**；不可判定 0 | `python scripts/run_benchmark_matrix.py --output-dir .iverilog-ai/matrix-final` | 2026-10-01 | 每案例的 `result.json` 原样保留；矩阵为速度默认不 dump 波形 |
 | 证据包可复核性（历史快照） | 8 文件 / 11.1 KB；**6 条记录 sha256 逐条重算一致**；zip 完整性 OK | `python .dsh-tmp/verify_pack_final.py G:\iai-evidence-pack-final` | 2026-10-01 | 本轮未重新生成；历史重新哈希结论不等于当前代码的完整可复现性 |
-| 历史 IC 本地冻结包 | **86,376,627 字节；41,007 文件；41,006 项 SHA-256 全匹配；6 源码归档；424 份注册输入精确匹配** | `docs/competition/ic/evidence_pack_2026-10-04.md`、同名 JSON；`docs/review/ic_pack_review_2026-10-04.md` | 2026-10-04，包内材料 `81114bce`，最终测试源码 `867b8bd` | ZIP CRC与集合已核对；36处源码归档 CRLF转换按属性解释；424含跨快照重复；非真人、异机或正式上传，不含本轮c7/v4原件 |
+| 本轮c7/v4冻结交接包 | **127,448,982字节；10,331 ZIP条目，10,330项文件SHA全匹配；4源码归档；注册280/281精确匹配** | `docs/competition/ic/evidence_pack_v4_2026-10-04.md`与JSON | 2026-10-04，材料c5e9171；生产28be1ed | 1早期计划MD未恢复，2旧provider换行恢复明记；已知负例junction链接明确排除；CRC/SHA是字节检查，非人审或异机 |
+| 本轮包后反例重放 | **338比较/48失败；failed_checks；0API；过程退出0** | `docs/experiment/ic-agent-v4-pack-replay-2026-10-04/receipt.json`及stdout/stderr | 2026-10-04，新目录解包后运行真实replay.py | 同机既有Python/Icarus，无项目模块导入；初次辅助脚本ZIP根路径错误另存，不当模型或DUT失败 |
 | 包内源码离线抽检 | **0 API 请求；547 输出比较 / 0 差异；退出 0** | `docs/experiment/ic-pack-smoke-2026-10-04/smoke.json`、stdout/stderr | 2026-10-04 | 外层ZIP提取源码和冻结UART RX，显式导入提取后的src；使用本机已有依赖/Icarus；首个辅助脚本字段KeyError另记，不计入应用失败或模型成绩 |
 | 静态规则 | 44 条（error 4 / warn 27 / info 13） | `iverilog_ai.core.static_review.RULE_REGISTRY` | 2026-09-29 实测 | 规则的**条数不是效果**：噪声率另有指标 |
 | 参考模型覆盖 | 15 个设计 | `iverilog_ai.core.reference_model.AUTHORITATIVE` | 2026-09-29 实测 | 只有这些设计能自动提供独立期望值；其余必须人工合约 |
@@ -240,6 +241,7 @@ fixed 实际只执行一次，不能用在线五轮并集宣称同总预算下�
 | 演示视频 | **未录**（脚本已就绪：`docs/demo/demo_script.md`） |
 | 提交文案（名称/简介） | **已备**（`docs/competition/submission_cover_text.md`，2026-10-04 实测 242 字） |
 | 原开源赛道证据包 | **2026-10-01 历史生成与核验，本轮未覆盖**（`G:\iai-evidence-pack-final[.zip]`） |
+| 本轮c7/v4本地证据包 | **已生成、字节校验及同机反例重放**（`.iverilog-ai/ic-agent-v4-evidence-20261004.zip`）；280/281注册字节匹配，1项缺失明记；异机、真人及正式提交未完成 |
 | 历史 IC 本地证据包 | **已生成与代理审计**（`.iverilog-ai/ic-evidence-pack-20261004.zip`）；旧包内源码同机抽检通过；不含本轮c7/v4原件，异机与正式提交未完成 |
 
 其中未确定、未做、无记录与仅有历史证据的项目，不写成当前已完成；机器验收不能补写真人完成状态。

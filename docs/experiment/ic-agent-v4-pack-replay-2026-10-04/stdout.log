@@ -1,0 +1,1 @@
+{"status": "failed_checks", "compile_exit_code": 0, "run_exit_code": 0, "checks": 338, "failures": 48, "invalid_records": 0, "api_requests": 0, "output_dir": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-agent-v4-pack-replay-20261004-r2\\portable-failure\\replay-5b5d64f53e20", "note": "Replay checks the saved testbench; it does not extend verification scope"}
