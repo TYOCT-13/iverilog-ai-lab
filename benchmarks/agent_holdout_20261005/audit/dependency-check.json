@@ -1,0 +1,249 @@
+{
+  "command": [
+    "D:\\Users\\TYOCT\\anaconda3\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "scripts.python.toolchain.manage_skill_dependencies",
+    "check",
+    "--state-path",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\holdout-assets-validation-20261005\\dependency-state-unused.json"
+  ],
+  "returncode": 1,
+  "result": {
+    "version": 2,
+    "ok": false,
+    "required_ok": false,
+    "recommended_ok": false,
+    "skills_root": "C:\\Users\\TYOCT\\.codex\\skills",
+    "plugin_cache": "C:\\Users\\TYOCT\\.codex\\plugins\\cache",
+    "state_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\holdout-assets-validation-20261005\\dependency-state-unused.json",
+    "developer_skills": {
+      "state_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\holdout-assets-validation-20261005\\dependency-state-unused.json",
+      "available_vendors": [],
+      "vendors": {
+        "amd_xilinx": {
+          "label": "AMD-Xilinx",
+          "skills": [
+            "vivado-developer",
+            "vitis-developer"
+          ],
+          "present": false,
+          "selected_skill": null,
+          "skill_paths": {}
+        },
+        "pangomicro": {
+          "label": "PangoMicro",
+          "skills": [
+            "pds-developer"
+          ],
+          "present": false,
+          "selected_skill": null,
+          "skill_paths": {}
+        }
+      },
+      "selected_vendor": null,
+      "selection_required": false,
+      "selection_stale": false,
+      "fpga_agent_required_when_developer_present": false
+    },
+    "active_fpga_dependency_mode": "fpga_agent_manual_fallback",
+    "fpga_agent_skipped_by_developer_skill": false,
+    "required": [
+      {
+        "id": "erie-remote-ssh",
+        "kind": "required",
+        "url": "https://github.com/Eriemon/remote-ssh.git",
+        "purpose": "Remote SSH server selection and remote Verilog development/validation.",
+        "present": false,
+        "skills": [
+          "erie-remote-ssh"
+        ],
+        "selected_skill_set": [
+          "erie-remote-ssh"
+        ],
+        "missing_skills": [
+          "erie-remote-ssh"
+        ],
+        "skill_paths": {}
+      }
+    ],
+    "manual_fallback": [
+      {
+        "id": "fpga-agent-skills",
+        "kind": "manual_fallback",
+        "url": "https://github.com/adeleempurpled290/FPGA-Agent-skills.git",
+        "purpose": "Vivado/Vitis FPGA development workflow support.",
+        "present": false,
+        "skills": [
+          "vivado-tcl",
+          "vivado-sim",
+          "vivado-synth",
+          "vivado-impl",
+          "vivado-analysis",
+          "vivado-constraints",
+          "vivado-debug",
+          "vitis-hls-synthesis"
+        ],
+        "selected_skill_set": [
+          "vivado-tcl",
+          "vivado-sim",
+          "vivado-synth",
+          "vivado-impl",
+          "vivado-analysis",
+          "vivado-constraints",
+          "vivado-debug",
+          "vitis-hls-synthesis"
+        ],
+        "missing_skills": [
+          "vivado-tcl",
+          "vivado-sim",
+          "vivado-synth",
+          "vivado-impl",
+          "vivado-analysis",
+          "vivado-constraints",
+          "vivado-debug",
+          "vitis-hls-synthesis"
+        ],
+        "skill_paths": {}
+      }
+    ],
+    "recommended": [
+      {
+        "id": "context-engineering",
+        "kind": "recommended",
+        "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering.git",
+        "purpose": "Engineering task debugging, context optimization, and agent workflow diagnosis.",
+        "present": false,
+        "skills": [
+          "context-engineering"
+        ],
+        "selected_skill_set": [
+          "context-engineering"
+        ],
+        "missing_skills": [
+          "context-engineering"
+        ],
+        "skill_paths": {}
+      }
+    ],
+    "missing_required": [
+      {
+        "id": "erie-remote-ssh",
+        "kind": "required",
+        "url": "https://github.com/Eriemon/remote-ssh.git",
+        "purpose": "Remote SSH server selection and remote Verilog development/validation.",
+        "present": false,
+        "skills": [
+          "erie-remote-ssh"
+        ],
+        "selected_skill_set": [
+          "erie-remote-ssh"
+        ],
+        "missing_skills": [
+          "erie-remote-ssh"
+        ],
+        "skill_paths": {}
+      }
+    ],
+    "missing_recommended": [
+      {
+        "id": "context-engineering",
+        "kind": "recommended",
+        "url": "https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering.git",
+        "purpose": "Engineering task debugging, context optimization, and agent workflow diagnosis.",
+        "present": false,
+        "skills": [
+          "context-engineering"
+        ],
+        "selected_skill_set": [
+          "context-engineering"
+        ],
+        "missing_skills": [
+          "context-engineering"
+        ],
+        "skill_paths": {}
+      }
+    ],
+    "required_tools": [
+      {
+        "id": "wavedrom",
+        "kind": "tool",
+        "present": false,
+        "required": true,
+        "version": "24.21.0",
+        "details": {
+          "package": "wavedrom",
+          "required_version": "3.6.1",
+          "minimum_node_version": "20.0.0",
+          "node": {
+            "path": "D:\\node_js\\node.EXE",
+            "version": "24.21.0",
+            "ok": true
+          },
+          "npm": {
+            "path": "D:\\node_js\\npm.CMD",
+            "version": "11.19.0",
+            "ok": true
+          },
+          "wavedrom": {
+            "path": null,
+            "version": null,
+            "ok": false
+          },
+          "smoke": {
+            "requested": false,
+            "ok": true,
+            "status": "skipped"
+          },
+          "missing": [
+            "wavedrom@3.6.1"
+          ],
+          "ok": false
+        }
+      }
+    ],
+    "missing_required_tools": [
+      {
+        "id": "wavedrom",
+        "kind": "tool",
+        "present": false,
+        "required": true,
+        "version": "24.21.0",
+        "details": {
+          "package": "wavedrom",
+          "required_version": "3.6.1",
+          "minimum_node_version": "20.0.0",
+          "node": {
+            "path": "D:\\node_js\\node.EXE",
+            "version": "24.21.0",
+            "ok": true
+          },
+          "npm": {
+            "path": "D:\\node_js\\npm.CMD",
+            "version": "11.19.0",
+            "ok": true
+          },
+          "wavedrom": {
+            "path": null,
+            "version": null,
+            "ok": false
+          },
+          "smoke": {
+            "requested": false,
+            "ok": true,
+            "status": "skipped"
+          },
+          "missing": [
+            "wavedrom@3.6.1"
+          ],
+          "ok": false
+        }
+      }
+    ],
+    "skipped_recommended": []
+  },
+  "stderr": "",
+  "installations": 0
+}

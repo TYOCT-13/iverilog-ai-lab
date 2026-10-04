@@ -1,0 +1,120 @@
+{
+  "schema": "holdout-eight-gate-matrix-v1",
+  "skill_chain_completed": false,
+  "cases": {
+    "credit_guard": {
+      "delivery_ready": false,
+      "errors": 36,
+      "strict_warnings": 0,
+      "checks": {
+        "compile": {
+          "status": "passed",
+          "ready": true,
+          "errors": 0,
+          "warnings": 0
+        },
+        "ast": {
+          "status": "failed",
+          "ready": false,
+          "errors": 1,
+          "warnings": 0
+        },
+        "readability": {
+          "status": "failed",
+          "ready": false,
+          "errors": 35,
+          "warnings": 0
+        },
+        "comment": {
+          "status": "passed",
+          "ready": true,
+          "errors": 0,
+          "warnings": 0
+        },
+        "naming": {
+          "status": "failed",
+          "ready": false,
+          "errors": 6,
+          "warnings": 0
+        },
+        "profile": {
+          "status": "passed",
+          "ready": true,
+          "errors": 0,
+          "warnings": 0
+        },
+        "testbench": {
+          "status": "not_requested",
+          "ready": true,
+          "errors": 0,
+          "warnings": 0
+        },
+        "toolchain": {
+          "status": "not_requested",
+          "ready": true,
+          "errors": 0,
+          "warnings": 0
+        }
+      },
+      "report_path": "benchmarks/agent_holdout_20261005/audit/credit-deliverable-corrected.json",
+      "actual_icarus_toolchain": "passed separately in offline runs; skill toolchain itself not_requested"
+    },
+    "rotating_arbiter": {
+      "delivery_ready": false,
+      "errors": 115,
+      "strict_warnings": 1,
+      "checks": {
+        "compile": {
+          "status": "passed",
+          "ready": true,
+          "errors": 0,
+          "warnings": 0
+        },
+        "ast": {
+          "status": "failed",
+          "ready": false,
+          "errors": 2,
+          "warnings": 0
+        },
+        "readability": {
+          "status": "failed",
+          "ready": false,
+          "errors": 113,
+          "warnings": 1
+        },
+        "comment": {
+          "status": "passed",
+          "ready": true,
+          "errors": 0,
+          "warnings": 0
+        },
+        "naming": {
+          "status": "failed",
+          "ready": false,
+          "errors": 11,
+          "warnings": 0
+        },
+        "profile": {
+          "status": "passed",
+          "ready": true,
+          "errors": 0,
+          "warnings": 0
+        },
+        "testbench": {
+          "status": "not_requested",
+          "ready": true,
+          "errors": 0,
+          "warnings": 0
+        },
+        "toolchain": {
+          "status": "not_requested",
+          "ready": true,
+          "errors": 0,
+          "warnings": 0
+        }
+      },
+      "report_path": "benchmarks/agent_holdout_20261005/audit/arbiter-deliverable-corrected.json",
+      "actual_icarus_toolchain": "passed separately in offline runs; skill toolchain itself not_requested"
+    }
+  }
+}

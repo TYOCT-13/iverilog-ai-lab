@@ -1,0 +1,426 @@
+{
+  "schema": "agent-holdout-assets-validation-v1",
+  "generated_at_utc": "2026-10-04T23:32:09.490668+00:00",
+  "asset_manifest_sha256": "9bc16e190ed4c9fa295bf0b692cd85bbe5c6015ca5cfd808d7b70c4df7974a44",
+  "interface": {
+    "credit_guard": {
+      "inputs": {
+        "acquire": 1,
+        "release_req": 1
+      },
+      "outputs": {
+        "credits": 3
+      },
+      "reset_outputs": {
+        "credits": 3
+      }
+    },
+    "rotating_arbiter": {
+      "inputs": {
+        "request": 4,
+        "advance": 1
+      },
+      "outputs": {
+        "grant": 4
+      },
+      "reset_outputs": {
+        "grant": 0
+      }
+    }
+  },
+  "cumulative_stimulus_cycles": 16,
+  "max_vectors_per_proposal": 12,
+  "max_accepted_vectors_total": 64,
+  "generic_testplan_max_vectors": 200,
+  "targets": 6,
+  "manual_mutations": 4,
+  "agent_model_execution": false,
+  "api_calls": 0,
+  "credentials_read": false,
+  "network_used": false,
+  "dependency_installations": 0,
+  "git_commits": 0,
+  "pytest": {
+    "tests": 28,
+    "passed": 28,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "reported_elapsed_seconds": 2.78,
+    "xml_path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation.xml",
+    "xml_sha256": "1d6fb51b1ed95475c07d16bba05741bfeb9571f2f9ac8c5878c1c15f063e909a",
+    "command": "D:/Users/TYOCT/anaconda3/python.exe -B -X utf8 -m pytest tests/core/test_agent_holdout_assets.py -q --basetemp .iverilog-ai/holdout-assets-validation-20261005/final-validation --junitxml .iverilog-ai/holdout-assets-validation-20261005/final-validation.xml"
+  },
+  "final_budget_document_recheck": {
+    "tests": 6,
+    "passed": 6,
+    "elapsed_seconds": 0.4,
+    "xml_path": ".iverilog-ai/holdout-assets-validation-20261005/budget64-document-recheck.xml",
+    "xml_sha256": "14437516d9588edcd16bf4f39c91823de68ce889c07b8de13ecd30597803a9b3",
+    "rtl_or_semantics_changed": false,
+    "command": "D:/Users/TYOCT/anaconda3/python.exe -B -X utf8 -m pytest tests/core/test_agent_holdout_assets.py -q -k \"interface_budget or sha_binding or manual_golden\""
+  },
+  "actual_icarus": {
+    "compile_executions": 28,
+    "cycle_observations": 2296,
+    "records": [
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_actual_icarus_all_state_a0/credit_guard/observation.json",
+        "sha256": "3050e53897858f49031e2570da32762e819a046fe385f30f6d40d97293496202",
+        "case": "credit_guard",
+        "rtl": "rtl/credit_guard.v",
+        "observed_cycles": 160,
+        "asynchronous_resets": 32,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_actual_icarus_all_state_a1/rotating_arbiter/observation.json",
+        "sha256": "91b5efabe74041d996a2f6ea301eb8c212963695e331b85029db57213ea8f074",
+        "case": "rotating_arbiter",
+        "rtl": "rtl/rotating_arbiter.v",
+        "observed_cycles": 512,
+        "asynchronous_resets": 128,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_actual_icarus_seeded_inpu0/credit_guard-0/observation.json",
+        "sha256": "83938dc461287b58263fba7973e7aa4b6539b5c674f00236dcb909f929fa7bd1",
+        "case": "credit_guard",
+        "rtl": "rtl/credit_guard.v",
+        "observed_cycles": 192,
+        "asynchronous_resets": 6,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_actual_icarus_seeded_inpu1/rotating_arbiter-0/observation.json",
+        "sha256": "3265477d25e2da9119353c7de36d59f0f9b0d18ca4ebf27de0cf97aa5bb84fc5",
+        "case": "rotating_arbiter",
+        "rtl": "rtl/rotating_arbiter.v",
+        "observed_cycles": 192,
+        "asynchronous_resets": 6,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_actual_icarus_seeded_inpu2/credit_guard-1/observation.json",
+        "sha256": "9c8b04ddd34b8a5aaa228b8da9578484fab1b47081c0903260df561dda8a8951",
+        "case": "credit_guard",
+        "rtl": "rtl/credit_guard.v",
+        "observed_cycles": 192,
+        "asynchronous_resets": 6,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_actual_icarus_seeded_inpu3/rotating_arbiter-1/observation.json",
+        "sha256": "fbf20bf9b40bc8cdce11f4adfe9a6c92f3f0f220957eb65a3ec6c2ca48c9dfbd",
+        "case": "rotating_arbiter",
+        "rtl": "rtl/rotating_arbiter.v",
+        "observed_cycles": 192,
+        "asynchronous_resets": 6,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_actual_icarus_seeded_inpu4/credit_guard-2/observation.json",
+        "sha256": "4b93e614f67ddb9b65d80253d06ed9398cd16e39ceb8dc9a84a01411c3489be2",
+        "case": "credit_guard",
+        "rtl": "rtl/credit_guard.v",
+        "observed_cycles": 192,
+        "asynchronous_resets": 6,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_actual_icarus_seeded_inpu5/rotating_arbiter-2/observation.json",
+        "sha256": "5e82be881b0b917cb8023ad57a5f9189de8bfc602309348272c4469dde96b358",
+        "case": "rotating_arbiter",
+        "rtl": "rtl/rotating_arbiter.v",
+        "observed_cycles": 192,
+        "asynchronous_resets": 6,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_actual_icarus_seeded_inpu6/credit_guard-20261005/observation.json",
+        "sha256": "af81bec068528aa38d398c030058343fa75f7678d1a996e4214053dc8a971c60",
+        "case": "credit_guard",
+        "rtl": "rtl/credit_guard.v",
+        "observed_cycles": 192,
+        "asynchronous_resets": 6,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_actual_icarus_seeded_inpu7/rotating_arbiter-20261005/observation.json",
+        "sha256": "3973904df4b0bbc4f647c945f510a3f470d88bec5c7872d9fd24c95ee6de97af",
+        "case": "rotating_arbiter",
+        "rtl": "rtl/rotating_arbiter.v",
+        "observed_cycles": 192,
+        "asynchronous_resets": 6,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_manual_mutation_witness_i0/mutant/observation.json",
+        "sha256": "464dc4c452726d2db16a16d50ccd79a865950eff343b7d98196b641d0205a25b",
+        "case": "credit_guard",
+        "rtl": "benchmarks/agent_holdout_20261005/targets/credit_guard/B.v",
+        "observed_cycles": 4,
+        "asynchronous_resets": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_manual_mutation_witness_i0/reference/observation.json",
+        "sha256": "802b3bb092e7764e2e8b02f844d13d5f1c534d2293fd5b67026ed91d1c6cff66",
+        "case": "credit_guard",
+        "rtl": "rtl/credit_guard.v",
+        "observed_cycles": 4,
+        "asynchronous_resets": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_manual_mutation_witness_i1/mutant/observation.json",
+        "sha256": "eb8b057bd4b1d65cbc4ec633350d350dcf49d7d2857295a3aa417987c9ee85d7",
+        "case": "credit_guard",
+        "rtl": "benchmarks/agent_holdout_20261005/targets/credit_guard/C.v",
+        "observed_cycles": 1,
+        "asynchronous_resets": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_manual_mutation_witness_i1/reference/observation.json",
+        "sha256": "1a8a470b1929bd2cf7cd75fef3a3c1a87df60b50f6ef747185e09a1dfe4f1a46",
+        "case": "credit_guard",
+        "rtl": "rtl/credit_guard.v",
+        "observed_cycles": 1,
+        "asynchronous_resets": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_manual_mutation_witness_i2/mutant/observation.json",
+        "sha256": "cbe82dd303b35903cddd87cb93d7892d8f91584cd1cf971fa0a25d04bf0222ca",
+        "case": "rotating_arbiter",
+        "rtl": "benchmarks/agent_holdout_20261005/targets/rotating_arbiter/B.v",
+        "observed_cycles": 2,
+        "asynchronous_resets": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_manual_mutation_witness_i2/reference/observation.json",
+        "sha256": "b207fb3553b88b27c9f0228128eaba13b0c2e5cdb376a996d9ccd7e29d7885d8",
+        "case": "rotating_arbiter",
+        "rtl": "rtl/rotating_arbiter.v",
+        "observed_cycles": 2,
+        "asynchronous_resets": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_manual_mutation_witness_i3/mutant/observation.json",
+        "sha256": "9fc46f84e042b8a77afbee317bfae710b7991e861ee56e63ef41661afa3cd518",
+        "case": "rotating_arbiter",
+        "rtl": "benchmarks/agent_holdout_20261005/targets/rotating_arbiter/C.v",
+        "observed_cycles": 2,
+        "asynchronous_resets": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_manual_mutation_witness_i3/reference/observation.json",
+        "sha256": "04cd031cf370baf136e5fad8f9580bb23d01c20f535f60c663e08bd9c1786a2d",
+        "case": "rotating_arbiter",
+        "rtl": "rtl/rotating_arbiter.v",
+        "observed_cycles": 2,
+        "asynchronous_resets": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_mutation_non_target_scena0/non-target/observation.json",
+        "sha256": "ae4be8b7b3c9c86b6e96b5befcad2e9256750147036319861d6bca56baa69456",
+        "case": "credit_guard",
+        "rtl": "benchmarks/agent_holdout_20261005/targets/credit_guard/B.v",
+        "observed_cycles": 13,
+        "asynchronous_resets": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_mutation_non_target_scena1/non-target/observation.json",
+        "sha256": "d0705973faab669bfdc0858d087dc98e354eee9f483d53d5e78977f8d99f4b57",
+        "case": "credit_guard",
+        "rtl": "benchmarks/agent_holdout_20261005/targets/credit_guard/C.v",
+        "observed_cycles": 12,
+        "asynchronous_resets": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_mutation_non_target_scena2/non-target/observation.json",
+        "sha256": "6500669f173c0eee96d90cd136cbcad5a8c8b70ea5a9d9b1083e76675c9e4cbe",
+        "case": "rotating_arbiter",
+        "rtl": "benchmarks/agent_holdout_20261005/targets/rotating_arbiter/B.v",
+        "observed_cycles": 10,
+        "asynchronous_resets": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_mutation_non_target_scena3/non-target/observation.json",
+        "sha256": "fa07c0a16e773e45abdf84239e7fb740f3bf3ba7279fada526e86905ac07d76f",
+        "case": "rotating_arbiter",
+        "rtl": "benchmarks/agent_holdout_20261005/targets/rotating_arbiter/C.v",
+        "observed_cycles": 8,
+        "asynchronous_resets": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_published_normal_timing_e0/mutation_b/observation.json",
+        "sha256": "7b8caf399a36c1f2015db0e9ce26b402ca7214cfe9ada1ee125e54ba81cbaf8c",
+        "case": "credit_guard",
+        "rtl": "benchmarks/agent_holdout_20261005/targets/credit_guard/B.v",
+        "observed_cycles": 4,
+        "asynchronous_resets": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_published_normal_timing_e0/mutation_c/observation.json",
+        "sha256": "103a7db4a5cc1e260aa2466089952d02ab938aef86cdf303b812fca256471642",
+        "case": "credit_guard",
+        "rtl": "benchmarks/agent_holdout_20261005/targets/credit_guard/C.v",
+        "observed_cycles": 4,
+        "asynchronous_resets": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_published_normal_timing_e0/reference/observation.json",
+        "sha256": "d122ee371df4d50c2c57f396760439a5d40209760e9094ad3262e3cf0f260bf8",
+        "case": "credit_guard",
+        "rtl": "benchmarks/agent_holdout_20261005/targets/credit_guard/A.v",
+        "observed_cycles": 4,
+        "asynchronous_resets": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_published_normal_timing_e1/mutation_b/observation.json",
+        "sha256": "bd9494b54998f1562f179917d6351dfa48f6eab915fa9f0d46e603d67e4269a8",
+        "case": "rotating_arbiter",
+        "rtl": "benchmarks/agent_holdout_20261005/targets/rotating_arbiter/B.v",
+        "observed_cycles": 5,
+        "asynchronous_resets": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_published_normal_timing_e1/mutation_c/observation.json",
+        "sha256": "26fbb5a5e0ba9f3ac8d938e3616a5d7389b5a726e1e7127e475c589dd4622312",
+        "case": "rotating_arbiter",
+        "rtl": "benchmarks/agent_holdout_20261005/targets/rotating_arbiter/C.v",
+        "observed_cycles": 5,
+        "asynchronous_resets": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      },
+      {
+        "path": ".iverilog-ai/holdout-assets-validation-20261005/final-validation/test_published_normal_timing_e1/reference/observation.json",
+        "sha256": "af0412141e588263117d3395e77da533b061675f54523aad84f2b4d1dc4366e8",
+        "case": "rotating_arbiter",
+        "rtl": "benchmarks/agent_holdout_20261005/targets/rotating_arbiter/A.v",
+        "observed_cycles": 5,
+        "asynchronous_resets": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0
+      }
+    ],
+    "scope": "offline semantic/oracle audit, not short-budget Agent evaluation"
+  },
+  "manual_semantic_witnesses": {
+    "verified": 4,
+    "all_detected": true,
+    "non_target_scenarios_passed": 4,
+    "published_normal_examples_passed_on_all_targets": 2
+  },
+  "initial_failure": {
+    "preserved": true,
+    "reason": "Verilog reserved word release used as port before release_req correction",
+    "compile_returncode": 332,
+    "record_path": ".iverilog-ai/holdout-assets-validation-20261005/initial-compile-failure/test_actual_icarus_all_state_a0/credit_guard/observation.json",
+    "record_sha256": "dddc5e3c825a53462cc7c0b57df5e388bd2016be1d7383da511ff843b3dd1d36",
+    "xml_path": ".iverilog-ai/holdout-assets-validation-20261005/initial-compile-failure.xml",
+    "was_not_counted_as_success": true
+  },
+  "spec_interface_validation": {
+    "ok": true,
+    "issues": [],
+    "report_path": "benchmarks/agent_holdout_20261005/audit/spec-interface-validation.json"
+  },
+  "skill": {
+    "name": "readable-verilog-generator",
+    "strict_delivery_ready": false,
+    "matrix_path": "benchmarks/agent_holdout_20261005/audit/skill_gate_matrix.json",
+    "write_spec_svg_rendered": false,
+    "render_failure": "configured wavedrom@3.6.1 executable missing",
+    "installed_dependencies": false,
+    "not_claimed": [
+      "strict style completion",
+      "WaveDrom SVG rendering",
+      "remote validation",
+      "synthesis",
+      "timing closure",
+      "hardware validation"
+    ]
+  },
+  "mypy": {
+    "source_files": 2,
+    "errors": 0,
+    "command": "D:/Users/TYOCT/anaconda3/python.exe -B -X utf8 -m mypy --follow-imports=silent benchmarks/agent_holdout_20261005/semantics.py benchmarks/agent_holdout_20261005/validation.py"
+  },
+  "human_trials": false,
+  "independent_human_review": false,
+  "source_inputs": {
+    "benchmarks/agent_holdout_20261005/audit/arbiter-deliverable-corrected.json": "d72906dd7326a48d1edd203f61b440583cc8668aac7b62f9150af00ac7dca941",
+    "benchmarks/agent_holdout_20261005/audit/arbiter-deliverable-corrected.md": "9b4b776c94831a416f40700a30833e6d65276b1a3ae1ae7e52eed8abea77ab72",
+    "benchmarks/agent_holdout_20261005/audit/arbiter-deliverable-first.json": "d72906dd7326a48d1edd203f61b440583cc8668aac7b62f9150af00ac7dca941",
+    "benchmarks/agent_holdout_20261005/audit/arbiter-deliverable-first.md": "9b4b776c94831a416f40700a30833e6d65276b1a3ae1ae7e52eed8abea77ab72",
+    "benchmarks/agent_holdout_20261005/audit/credit-deliverable-corrected.json": "f4b36046918b21299c2840b9970c6de12f3fa8b2cd3004c3c88405486ebe065a",
+    "benchmarks/agent_holdout_20261005/audit/credit-deliverable-corrected.md": "a04ff21cc22fdfb56e51be98f5687b70a902df5cb6fdf49fa5705eea29eedcc9",
+    "benchmarks/agent_holdout_20261005/audit/credit-deliverable-first.json": "cd67830cd1d4ce5dce304bbffd1e45de1648287a95c40c3182e71af69e9475f4",
+    "benchmarks/agent_holdout_20261005/audit/credit-deliverable-first.md": "b08407af4a60fc3dbd242fe6b4f5b9dcb4dcc8d4d04cfcb33a9c09a0ffd4f923",
+    "benchmarks/agent_holdout_20261005/audit/dependency-check.json": "23480c363fb26f34113e14c6d948a53ea5ab745b656c4ee21a1a932fc9c2a6d4",
+    "benchmarks/agent_holdout_20261005/audit/skill_gate_matrix.json": "ba8eee56edda7465ce22401a5043b1b595af302706894821470d6dbc1009fc8e",
+    "benchmarks/agent_holdout_20261005/audit/spec-interface-validation.json": "17e6a4940a675f541bf30232822eb2330efd8188a76b4c4725ddda4895474812",
+    "benchmarks/agent_holdout_20261005/audit/write-spec-first-attempt.json": "4b4a543a0ccbfad90b6cf8c02799572fab874a7bb55c7c41c66c8423b73edda4",
+    "benchmarks/agent_holdout_20261005/codegen_plan.json": "02f6985ffc245aba51ff04abe31b81f8daed99c01cfbd534e066580f55976f34",
+    "benchmarks/agent_holdout_20261005/manifest.json": "9bc16e190ed4c9fa295bf0b692cd85bbe5c6015ca5cfd808d7b70c4df7974a44",
+    "benchmarks/agent_holdout_20261005/README.md": "f797b204e2c919f163a5a6cfc0aa30f3a3df3ed0fb2f49f8fcdf7034687554f7",
+    "benchmarks/agent_holdout_20261005/semantics.py": "55c2ae41d21b9944e7e41c86267cd5619547e33daac2f1882253f582d431a09c",
+    "benchmarks/agent_holdout_20261005/targets/credit_guard/A.v": "c10b8778659b69f519f28847a7964bbc7544ebaa887034ac1cf2c76f024916e5",
+    "benchmarks/agent_holdout_20261005/targets/credit_guard/B.v": "1fd4b1ee1f73b6a4007912008e53d0d887c66faaa78a460c5cdcfc53764ed758",
+    "benchmarks/agent_holdout_20261005/targets/credit_guard/C.v": "29d2c75d84292275da33e8dafea2976bce157b47fce59a17859b7e0646c06f30",
+    "benchmarks/agent_holdout_20261005/targets/rotating_arbiter/A.v": "031d53a99912335ba02fbd788586cf6c588ccfe633f103230dab36c458e2c171",
+    "benchmarks/agent_holdout_20261005/targets/rotating_arbiter/B.v": "803d853ae4050c35717027fcc5fe96d314bc35c037ab1024e620b3780032773c",
+    "benchmarks/agent_holdout_20261005/targets/rotating_arbiter/C.v": "334a09e94abe47f303f57709c90a05115de619682455edcf86f7e36f189a66e2",
+    "benchmarks/agent_holdout_20261005/validation.py": "ed95a8a0d3ff4d50cdfa488b1b30363556dc67249e2a5a827eb9e4d66513192e",
+    "examples/credit_guard_contract.json": "57d570465c6a44bf0a80594e4b86ef27e8e6c4966a93f87b136901bc6ae07b2d",
+    "examples/rotating_arbiter_contract.json": "5cd2253935f311e3e10cdcf5c849df779aece0abed13ec2351f205219bef4349",
+    "rtl/credit_guard.v": "c10b8778659b69f519f28847a7964bbc7544ebaa887034ac1cf2c76f024916e5",
+    "rtl/rotating_arbiter.v": "031d53a99912335ba02fbd788586cf6c588ccfe633f103230dab36c458e2c171",
+    "spec/agent_holdout_20261005/credit_guard_spec.md": "fb84ce7339bb5ef2069fe269ff84160d33d478462b41f50a18bd559f1e83ea36",
+    "spec/agent_holdout_20261005/module_specs.json": "4c480d640450b91ec3dafb7d624633fb0cd463ce0d637e9c39a372e85c51063c",
+    "spec/agent_holdout_20261005/rotating_arbiter_spec.md": "99bfe04348fa8a2cf2304d76a5cd3d6608e457542e7b1fb6bccb42d0cabe5081",
+    "tests/core/test_agent_holdout_assets.py": "9d1e663ab8483e7b9fa8e688b832fea29ee2077b89dd8840aea2d6bcb4e7dbae"
+  }
+}

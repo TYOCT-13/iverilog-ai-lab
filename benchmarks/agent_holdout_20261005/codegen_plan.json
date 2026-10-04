@@ -1,0 +1,47 @@
+{
+  "schema": "holdout-codegen-plan-v1",
+  "task_classes": [
+    "generate",
+    "validate"
+  ],
+  "created_from_commit": "f664d85c9204ffacb64c54feeb9e6dd13c87a34a",
+  "implementation_order": [
+    "confirmed interfaces and semantics",
+    "independent Python arithmetic semantics",
+    "functional specification",
+    "Verilog-2001 RTL",
+    "strict gate",
+    "local Icarus semantic comparison"
+  ],
+  "module_names": [
+    "credit_guard",
+    "rotating_arbiter"
+  ],
+  "interface_changes_allowed": false,
+  "latency_changes_allowed": false,
+  "rtl_style_profile": "erie_strict",
+  "public_gate_matrix": [
+    "compile",
+    "ast",
+    "readability",
+    "comment",
+    "naming",
+    "profile",
+    "testbench",
+    "toolchain"
+  ],
+  "authority": "local Icarus Verilog explicitly selected by project user",
+  "remote_allowed": false,
+  "dependency_installation_allowed": false,
+  "api_calls_allowed": 0,
+  "source_visibility": "Only functional spec_path and explicit interface contract are provided to Agent. Manifest, semantic model, mutation operators and witnesses are audit-only.",
+  "known_style_constraints": [
+    "User requires unprefixed public port names and neutral A/B/C target filenames; preserve this interface instead of silently renaming it.",
+    "Do not add pipeline latency to satisfy generic combinational-operation limits.",
+    "Report missing optional runtime/dependency and strict style failures without claiming a strict all-pass."
+  ],
+  "cumulative_stimulus_cycles": 16,
+  "max_vectors_per_proposal": 12,
+  "max_accepted_vectors_total": 64,
+  "generic_testplan_max_vectors": 200
+}

@@ -76,6 +76,16 @@ _INPUT_STEPS: dict[str, list[dict[str, list[Any]]]] = {
         # 单拍脉冲 → 长间隔 → 展宽期内再次触发（覆盖"重触发是否重新装载计数"）。
         {"pulse_in": [1, 0, 0, 0, 0, 0, 1, 0, 0, 0]},
     ],
+    # New holdout entries are offline regression inputs from the public
+    # contracts, without expected outputs or defect labels.
+    "credit_guard": [
+        {"acquire": [1, 1, 1, 1, 0, 0, 0, 0, 1, 0],
+         "release_req": [0, 0, 0, 0, 1, 1, 1, 1, 1, 0]},
+    ],
+    "rotating_arbiter": [
+        {"request": [15, 15, 15, 15, 0, 5, 10, 9, 2, 8],
+         "advance": [1, 1, 1, 1, 1, 0, 1, 1, 0, 1]},
+    ],
 }
 
 # 每类案例的复位后额外稳定周期，用来让状态机推进到可观测状态。

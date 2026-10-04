@@ -1,0 +1,249 @@
+{
+  "schema": "agent-holdout-modules-v1",
+  "created_from_commit": "f664d85c9204ffacb64c54feeb9e6dd13c87a34a",
+  "frozen_agent_prompt": "verification-agent-v6-bounded-format-recovery",
+  "asset_role": "new-module manual-mutation holdout prepared before model execution",
+  "blind_independent_human_review": false,
+  "training_or_prompt_tuning_on_targets": false,
+  "model_visibility": {
+    "included": [
+      "functional spec_path",
+      "explicit interface contract"
+    ],
+    "excluded": [
+      "RTL source",
+      "manifest.json",
+      "semantics.py",
+      "validation.py",
+      "mutation operators",
+      "manual witnesses",
+      "audit results"
+    ]
+  },
+  "cycle_budget": 16,
+  "reference_sampling": "per_cycle",
+  "sample_phase": "after",
+  "agent_plan_mode": "independent",
+  "cases": {
+    "credit_guard": {
+      "reference_rtl": "rtl/credit_guard.v",
+      "reference_sha256": "c10b8778659b69f519f28847a7964bbc7544ebaa887034ac1cf2c76f024916e5",
+      "contract_path": "examples/credit_guard_contract.json",
+      "spec_path": "spec/agent_holdout_20261005/credit_guard_spec.md",
+      "cycle_budget": 16,
+      "default_parameters": {},
+      "input_defaults": {
+        "rst_n": 1,
+        "acquire": 0,
+        "release_req": 0
+      },
+      "reset_outputs": {
+        "credits": 3
+      },
+      "timing_basis": "posedge old input/state -> registered after observation; asynchronous active-low reset, independent reset before each episode",
+      "targets": [
+        {
+          "variant": "reference",
+          "rtl": "benchmarks/agent_holdout_20261005/targets/credit_guard/A.v",
+          "sha256": "c10b8778659b69f519f28847a7964bbc7544ebaa887034ac1cf2c76f024916e5"
+        },
+        {
+          "variant": "mutation_b",
+          "rtl": "benchmarks/agent_holdout_20261005/targets/credit_guard/B.v",
+          "sha256": "1fd4b1ee1f73b6a4007912008e53d0d887c66faaa78a460c5cdcfc53764ed758",
+          "metadata": {
+            "private_mutation_id": "acquire_zero_wrap",
+            "operator": {
+              "anchor": "if(credits_o != 3'd0)begin",
+              "replacement": "if(1'b1)begin",
+              "expected_occurrences": 1,
+              "byte_offset": 1970,
+              "source_line": 46
+            },
+            "witness": {
+              "source": "manual semantic calculation, separate from executable oracle",
+              "inputs": [
+                {
+                  "acquire": 1,
+                  "release_req": 0
+                },
+                {
+                  "acquire": 1,
+                  "release_req": 0
+                },
+                {
+                  "acquire": 1,
+                  "release_req": 0
+                },
+                {
+                  "acquire": 1,
+                  "release_req": 0
+                }
+              ],
+              "reference_after": [
+                2,
+                1,
+                0,
+                0
+              ],
+              "mutant_after": [
+                2,
+                1,
+                0,
+                7
+              ],
+              "budget_cycles": 4
+            }
+          }
+        },
+        {
+          "variant": "mutation_c",
+          "rtl": "benchmarks/agent_holdout_20261005/targets/credit_guard/C.v",
+          "sha256": "29d2c75d84292275da33e8dafea2976bce157b47fce59a17859b7e0646c06f30",
+          "metadata": {
+            "private_mutation_id": "simultaneous_consumption",
+            "operator": {
+              "anchor": "else if(acquire && !release_req)begin",
+              "replacement": "else if(acquire)begin",
+              "expected_occurrences": 1,
+              "byte_offset": 1929,
+              "source_line": 45
+            },
+            "witness": {
+              "source": "manual semantic calculation, separate from executable oracle",
+              "inputs": [
+                {
+                  "acquire": 1,
+                  "release_req": 1
+                }
+              ],
+              "reference_after": [
+                3
+              ],
+              "mutant_after": [
+                2
+              ],
+              "budget_cycles": 1
+            }
+          }
+        }
+      ],
+      "contract_sha256": "57d570465c6a44bf0a80594e4b86ef27e8e6c4966a93f87b136901bc6ae07b2d",
+      "spec_sha256": "fb84ce7339bb5ef2069fe269ff84160d33d478462b41f50a18bd559f1e83ea36",
+      "max_vectors_per_proposal": 12,
+      "max_accepted_vectors_total": 64
+    },
+    "rotating_arbiter": {
+      "reference_rtl": "rtl/rotating_arbiter.v",
+      "reference_sha256": "031d53a99912335ba02fbd788586cf6c588ccfe633f103230dab36c458e2c171",
+      "contract_path": "examples/rotating_arbiter_contract.json",
+      "spec_path": "spec/agent_holdout_20261005/rotating_arbiter_spec.md",
+      "cycle_budget": 16,
+      "default_parameters": {},
+      "input_defaults": {
+        "rst_n": 1,
+        "request": 0,
+        "advance": 0
+      },
+      "reset_outputs": {
+        "grant": 0
+      },
+      "timing_basis": "posedge old input/state -> registered after observation; asynchronous active-low reset, independent reset before each episode",
+      "targets": [
+        {
+          "variant": "reference",
+          "rtl": "benchmarks/agent_holdout_20261005/targets/rotating_arbiter/A.v",
+          "sha256": "031d53a99912335ba02fbd788586cf6c588ccfe633f103230dab36c458e2c171"
+        },
+        {
+          "variant": "mutation_b",
+          "rtl": "benchmarks/agent_holdout_20261005/targets/rotating_arbiter/B.v",
+          "sha256": "803d853ae4050c35717027fcc5fe96d314bc35c037ab1024e620b3780032773c",
+          "metadata": {
+            "private_mutation_id": "advance_disabled_progress",
+            "operator": {
+              "anchor": "else if(advance && flag_selected)begin",
+              "replacement": "else if(flag_selected)begin",
+              "expected_occurrences": 1,
+              "byte_offset": 4834,
+              "source_line": 149
+            },
+            "witness": {
+              "source": "manual semantic calculation, separate from executable oracle",
+              "inputs": [
+                {
+                  "request": 15,
+                  "advance": 0
+                },
+                {
+                  "request": 15,
+                  "advance": 0
+                }
+              ],
+              "reference_after": [
+                1,
+                1
+              ],
+              "mutant_after": [
+                1,
+                2
+              ],
+              "budget_cycles": 2
+            }
+          }
+        },
+        {
+          "variant": "mutation_c",
+          "rtl": "benchmarks/agent_holdout_20261005/targets/rotating_arbiter/C.v",
+          "sha256": "334a09e94abe47f303f57709c90a05115de619682455edcf86f7e36f189a66e2",
+          "metadata": {
+            "private_mutation_id": "advance_to_selected",
+            "operator": {
+              "anchor": "reg_pointer <= enc_selected + 2'd1;",
+              "replacement": "reg_pointer <= enc_selected;",
+              "expected_occurrences": 1,
+              "byte_offset": 4875,
+              "source_line": 150
+            },
+            "witness": {
+              "source": "manual semantic calculation, separate from executable oracle",
+              "inputs": [
+                {
+                  "request": 15,
+                  "advance": 1
+                },
+                {
+                  "request": 15,
+                  "advance": 1
+                }
+              ],
+              "reference_after": [
+                1,
+                2
+              ],
+              "mutant_after": [
+                1,
+                1
+              ],
+              "budget_cycles": 2
+            }
+          }
+        }
+      ],
+      "contract_sha256": "5cd2253935f311e3e10cdcf5c849df779aece0abed13ec2351f205219bef4349",
+      "spec_sha256": "99bfe04348fa8a2cf2304d76a5cd3d6608e457542e7b1fb6bccb42d0cabe5081",
+      "max_vectors_per_proposal": 12,
+      "max_accepted_vectors_total": 64
+    }
+  },
+  "interface_correction": {
+    "old_identifier": "release",
+    "new_identifier": "release_req",
+    "reason": "Verilog keyword detected by actual Icarus compilation before any model request",
+    "semantic_change": false,
+    "initial_failure_preserved": ".iverilog-ai/holdout-assets-validation-20261005/initial-compile-failure"
+  },
+  "max_vectors_per_proposal": 12,
+  "max_accepted_vectors_total": 64,
+  "generic_testplan_max_vectors": 200
+}

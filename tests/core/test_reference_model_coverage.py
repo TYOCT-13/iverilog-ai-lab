@@ -47,6 +47,8 @@ PROBE_VECTORS: dict[str, list[dict]] = {
     "johnson_counter": [{"inputs": {"rst_n": 1, "enable": 1}, "cycles": 3}],
     "edge_detector": [{"inputs": {"rst_n": 1, "signal_in": 1}, "cycles": 2}],
     "pulse_stretcher": [{"inputs": {"rst_n": 1, "pulse_in": 1}, "cycles": 2}],
+    "credit_guard": [{"inputs": {"rst_n": 1, "acquire": 1, "release_req": 0}, "cycles": 2}],
+    "rotating_arbiter": [{"inputs": {"rst_n": 1, "request": 15, "advance": 1}, "cycles": 3}],
 }
 
 

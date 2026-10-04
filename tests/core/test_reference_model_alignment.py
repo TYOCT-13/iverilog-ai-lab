@@ -186,6 +186,24 @@ ALIGNED_CASES: dict[str, dict[str, object]] = {
         "declarations": ["wire pulse_out;"],
         "observed": ("pulse_out",),
     },
+    "credit_guard": {
+        "rtl": "rtl/credit_guard.v",
+        "top": "credit_guard",
+        "instance": "credit_guard dut(.clk(clk),.rst_n(rst_n),.acquire(acquire),.release_req(release_req),.credits(credits));",
+        "inputs": {"rst_n": "reg", "acquire": "reg", "release_req": "reg"},
+        "outputs": {"credits": "h"},
+        "declarations": ["wire [2:0] credits;"],
+        "observed": ("credits",),
+    },
+    "rotating_arbiter": {
+        "rtl": "rtl/rotating_arbiter.v",
+        "top": "rotating_arbiter",
+        "instance": "rotating_arbiter dut(.clk(clk),.rst_n(rst_n),.request(request),.advance(advance),.grant(grant));",
+        "inputs": {"rst_n": "reg", "request": "reg [3:0]", "advance": "reg"},
+        "outputs": {"grant": "h"},
+        "declarations": ["wire [3:0] grant;"],
+        "observed": ("grant",),
+    },
 }
 
 

@@ -52,6 +52,10 @@ docs/experiment/agent-recovery-validation-2026-10-05/** -text whitespace=blank-a
 docs/experiment/agent_recovery_study_budget_2026-10-05.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 docs/review/agent-recovery-code-review-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 docs/review/agent-recovery-study-review-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/agent-holdout-validation-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/agent-holdout-study-live-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/review/agent-holdout-prereg-review-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/review/agent-holdout-study-review-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 # 原始 pytest 失败位置标记含行末空白；保留日志字节，只豁免这两份原件的末空白检查。
 docs/experiment/agent-study-1m-validation-2026-10-05/pytest.log whitespace=-blank-at-eol,cr-at-eol
 docs/experiment/agent-study-1m-validation-2026-10-05/pytest.xml whitespace=-blank-at-eol,cr-at-eol
@@ -61,3 +65,17 @@ docs/experiment/agent-recovery-validation-2026-10-05/r1/pytest.xml whitespace=-b
 # 明确语言归属，便于托管平台的统计与语法高亮
 *.v text linguist-language=Verilog
 *.sv text linguist-language=SystemVerilog
+
+# 新留出资产已按原字节测试与审核，保持其 CRLF/LF，避免 Git 转换破坏绑定。
+benchmarks/agent_holdout_20261005/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+spec/agent_holdout_20261005/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+rtl/credit_guard.v -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+rtl/rotating_arbiter.v -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+examples/credit_guard_contract.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+examples/rotating_arbiter_contract.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+tests/core/test_agent_holdout_assets.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# 技能生成的四份失败审查原报告含尾空行，保留原件，仅豁免其 EOF 空白。
+benchmarks/agent_holdout_20261005/audit/credit-deliverable-first.md whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+benchmarks/agent_holdout_20261005/audit/credit-deliverable-corrected.md whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+benchmarks/agent_holdout_20261005/audit/arbiter-deliverable-first.md whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+benchmarks/agent_holdout_20261005/audit/arbiter-deliverable-corrected.md whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol

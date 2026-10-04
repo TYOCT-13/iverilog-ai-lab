@@ -1,0 +1,266 @@
+{
+  "ok": true,
+  "issues": [],
+  "spec": {
+    "schema": "holdout-confirmed-module-specs-v1",
+    "modules": [
+      {
+        "name": "credit_guard",
+        "rtl_path": "credit_guard.v",
+        "interfaces": {
+          "ports": [
+            {
+              "name": "clk",
+              "direction": "input",
+              "width": 1,
+              "role": "clock",
+              "description": "10 ns 上升沿时钟",
+              "clock_domain": "clk",
+              "active_level": null
+            },
+            {
+              "name": "rst_n",
+              "direction": "input",
+              "width": 1,
+              "role": "reset",
+              "description": "异步低有效复位",
+              "clock_domain": "clk",
+              "active_level": null
+            },
+            {
+              "name": "acquire",
+              "direction": "input",
+              "width": 1,
+              "role": "event",
+              "description": "获取一个可用信用",
+              "clock_domain": "clk",
+              "active_level": null
+            },
+            {
+              "name": "release_req",
+              "direction": "input",
+              "width": 1,
+              "role": "event",
+              "description": "归还一个可用信用",
+              "clock_domain": "clk",
+              "active_level": null
+            },
+            {
+              "name": "credits",
+              "direction": "output",
+              "width": 3,
+              "role": "status",
+              "description": "0至7饱和信用计数",
+              "clock_domain": "clk",
+              "active_level": null
+            }
+          ]
+        },
+        "parameters": [],
+        "clock": {
+          "signal": "clk",
+          "period_ns": 10,
+          "edge": "posedge"
+        },
+        "reset": {
+          "signal": "rst_n",
+          "active_level": 0,
+          "synchronous": false,
+          "assert_cycles": 2,
+          "outputs": {
+            "credits": 3
+          }
+        },
+        "behavior": [
+          "饱和单事件加减，同时或均无事件保持；复位到3。"
+        ],
+        "constraints": [
+          "固定接口、无参数。",
+          "每次提案/每episode计划最多12向量；所有已执行episode累计16刺激周期，服从state剩余周期；接受向量累计64仅内部安全上限，不是提案额度。",
+          "after逐拍检查全部输出；每episode自动独立复位；不驱动clk，不使用X/Z。"
+        ],
+        "corner_cases": [
+          "复位优先，范围上下界，连续事件与中性事件。"
+        ],
+        "verification_cases": [
+          "独立算术判据、实际Icarus逐拍观察、状态输入覆盖、随机和异步复位。"
+        ],
+        "timing_diagrams": [
+          {
+            "id": "credit_guard_normal",
+            "title": "正常接口时序 / Normal interface timing",
+            "scenario": "自动复位后的普通协议输入",
+            "description": "输出在各上升沿之后观察，起点使用边沿前状态。",
+            "wavejson": {
+              "signal": [
+                {
+                  "name": "clk",
+                  "wave": "p...."
+                },
+                {
+                  "name": "rst_n",
+                  "wave": "01..."
+                },
+                {
+                  "name": "acquire",
+                  "wave": "0010."
+                },
+                {
+                  "name": "release_req",
+                  "wave": "00010"
+                },
+                {
+                  "name": "credits (after)",
+                  "wave": "=====",
+                  "data": [
+                    "3",
+                    "3",
+                    "2",
+                    "3",
+                    "3"
+                  ]
+                }
+              ],
+              "head": {
+                "text": "Reset then four active edges"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "rotating_arbiter",
+        "rtl_path": "rotating_arbiter.v",
+        "interfaces": {
+          "ports": [
+            {
+              "name": "clk",
+              "direction": "input",
+              "width": 1,
+              "role": "clock",
+              "description": "10 ns 上升沿时钟",
+              "clock_domain": "clk",
+              "active_level": null
+            },
+            {
+              "name": "rst_n",
+              "direction": "input",
+              "width": 1,
+              "role": "reset",
+              "description": "异步低有效复位",
+              "clock_domain": "clk",
+              "active_level": null
+            },
+            {
+              "name": "request",
+              "direction": "input",
+              "width": 4,
+              "role": "request",
+              "description": "四个请求位置",
+              "clock_domain": "clk",
+              "active_level": null
+            },
+            {
+              "name": "advance",
+              "direction": "input",
+              "width": 1,
+              "role": "enable",
+              "description": "允许选中后更新下拍起点",
+              "clock_domain": "clk",
+              "active_level": null
+            },
+            {
+              "name": "grant",
+              "direction": "output",
+              "width": 4,
+              "role": "status",
+              "description": "旧起点产生的本拍寄存独热许可",
+              "clock_domain": "clk",
+              "active_level": null
+            }
+          ]
+        },
+        "parameters": [],
+        "clock": {
+          "signal": "clk",
+          "period_ns": 10,
+          "edge": "posedge"
+        },
+        "reset": {
+          "signal": "rst_n",
+          "active_level": 0,
+          "synchronous": false,
+          "assert_cycles": 2,
+          "outputs": {
+            "grant": 0
+          }
+        },
+        "behavior": [
+          "从旧优先起点选择首个请求，寄存独热许可；有选中且advance=1时下拍起点为selected+1模4；空请求保持起点。"
+        ],
+        "constraints": [
+          "固定接口、无参数。",
+          "每次提案/每episode计划最多12向量；所有已执行episode累计16刺激周期，服从state剩余周期；接受向量累计64仅内部安全上限，不是提案额度。",
+          "after逐拍检查全部输出；每episode自动独立复位；不驱动clk，不使用X/Z。"
+        ],
+        "corner_cases": [
+          "无请求、多个请求、禁止推进和模4环回。"
+        ],
+        "verification_cases": [
+          "独立算术判据、实际Icarus逐拍观察、状态输入覆盖、随机和异步复位。"
+        ],
+        "timing_diagrams": [
+          {
+            "id": "rotating_arbiter_normal",
+            "title": "正常接口时序 / Normal interface timing",
+            "scenario": "自动复位后的普通协议输入",
+            "description": "输出在各上升沿之后观察，起点使用边沿前状态。",
+            "wavejson": {
+              "signal": [
+                {
+                  "name": "clk",
+                  "wave": "p....."
+                },
+                {
+                  "name": "rst_n",
+                  "wave": "01...."
+                },
+                {
+                  "name": "request",
+                  "wave": "======",
+                  "data": [
+                    "0",
+                    "2",
+                    "4",
+                    "0",
+                    "8",
+                    "8"
+                  ]
+                },
+                {
+                  "name": "advance",
+                  "wave": "01..01"
+                },
+                {
+                  "name": "grant (after)",
+                  "wave": "======",
+                  "data": [
+                    "0",
+                    "2",
+                    "4",
+                    "0",
+                    "8",
+                    "8"
+                  ]
+                }
+              ],
+              "head": {
+                "text": "Old pointer selects this edge; advance affects the next"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

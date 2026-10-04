@@ -1,0 +1,26 @@
+{
+  "schema": "agent-new-module-holdout-per-round-v1",
+  "round_name": "post_freeze_new_module_holdout_20261005",
+  "agent_frozen_from_revision": "f664d85c9204ffacb64c54feeb9e6dd13c87a34a",
+  "agent_sha256": "b3eca75bab345ef2b9d5d2ebd0280f9811bd37532fb979d2f8c5a4ac220ce5fe",
+  "system_prompt_sha256": "8b5f844143e9c85052eee2398cf2f13c4840e3fc86e589ca9c48fc4304c7cb03",
+  "token_cap": 1000000,
+  "token_scope": "this complete registered cohort: input plus output, including rejected requests",
+  "max_output_tokens_per_request": 4096,
+  "max_vectors_per_proposal": 12,
+  "max_accepted_vectors_total": 64,
+  "repeats": 3,
+  "strategies": ["fixed", "random", "protocol_random", "single", "feedback", "no_feedback"],
+  "cycle_budgets": {"credit_guard": 16, "rotating_arbiter": 16},
+  "registered_rows": 108,
+  "theoretical_request_cap": 126,
+  "transport": {
+    "endpoint": "https://api.deepseek.com",
+    "model": "deepseek-flash",
+    "wire_api": "chat_completions",
+    "thinking_mode": "disabled",
+    "stream": false,
+    "timeout_seconds": 60,
+    "automatic_transport_retry": false
+  }
+}

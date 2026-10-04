@@ -1,0 +1,13 @@
+{
+  "module": "rotating_arbiter",
+  "ports": [
+    {"name": "clk", "direction": "input", "width": 1},
+    {"name": "rst_n", "direction": "input", "width": 1},
+    {"name": "request", "direction": "input", "width": 4},
+    {"name": "advance", "direction": "input", "width": 1},
+    {"name": "grant", "direction": "output", "width": 4}
+  ],
+  "clock": {"signal": "clk", "period_ns": 10, "edge": "posedge"},
+  "reset": {"signal": "rst_n", "active_level": 0, "synchronous": false, "assert_cycles": 2},
+  "parameters": {}
+}

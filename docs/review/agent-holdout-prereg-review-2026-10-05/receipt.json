@@ -1,0 +1,561 @@
+{
+  "schema": "agent-holdout-prereg-proxy-review-v1",
+  "review_date": "2026-10-05",
+  "reviewer_kind": "automated_proxy_not_H02",
+  "scope": "pre_execution_fairness_oracle_and_information_boundaries",
+  "result": "no_unresolved_blocker_in_reviewed_final_candidate",
+  "real_api_requests": 0,
+  "real_credentials_read": false,
+  "production_files_modified": false,
+  "old_evidence_modified": false,
+  "candidate_binding": {
+    "candidate_base_revision": "f664d85c9204ffacb64c54feeb9e6dd13c87a34a",
+    "revision_basis": "parent-stated base, final holdout source commit not yet created",
+    "agent_sha256": "b3eca75bab345ef2b9d5d2ebd0280f9811bd37532fb979d2f8c5a4ac220ce5fe",
+    "system_prompt_sha256": "8b5f844143e9c85052eee2398cf2f13c4840e3fc86e589ca9c48fc4304c7cb03",
+    "all_manifest_sha_match": true,
+    "budget_documents_aligned_64_12_16": true,
+    "candidate_files": [
+      {
+        "path": ".gitattributes",
+        "bytes": 7585,
+        "sha256": "3e6ac36020fed49e7613e7231fdaa13d291695baf8d872f815661e765b50e0c8",
+        "contains_crlf": false
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/README.md",
+        "bytes": 7131,
+        "sha256": "f797b204e2c919f163a5a6cfc0aa30f3a3df3ed0fb2f49f8fcdf7034687554f7",
+        "contains_crlf": true
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/audit/arbiter-deliverable-corrected.json",
+        "bytes": 2339287,
+        "sha256": "d72906dd7326a48d1edd203f61b440583cc8668aac7b62f9150af00ac7dca941",
+        "contains_crlf": true
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/audit/arbiter-deliverable-corrected.md",
+        "bytes": 131104,
+        "sha256": "9b4b776c94831a416f40700a30833e6d65276b1a3ae1ae7e52eed8abea77ab72",
+        "contains_crlf": true
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/audit/arbiter-deliverable-first.json",
+        "bytes": 2339287,
+        "sha256": "d72906dd7326a48d1edd203f61b440583cc8668aac7b62f9150af00ac7dca941",
+        "contains_crlf": true
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/audit/arbiter-deliverable-first.md",
+        "bytes": 131104,
+        "sha256": "9b4b776c94831a416f40700a30833e6d65276b1a3ae1ae7e52eed8abea77ab72",
+        "contains_crlf": true
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/audit/credit-deliverable-corrected.json",
+        "bytes": 650858,
+        "sha256": "f4b36046918b21299c2840b9970c6de12f3fa8b2cd3004c3c88405486ebe065a",
+        "contains_crlf": true
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/audit/credit-deliverable-corrected.md",
+        "bytes": 39008,
+        "sha256": "a04ff21cc22fdfb56e51be98f5687b70a902df5cb6fdf49fa5705eea29eedcc9",
+        "contains_crlf": true
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/audit/credit-deliverable-first.json",
+        "bytes": 650580,
+        "sha256": "cd67830cd1d4ce5dce304bbffd1e45de1648287a95c40c3182e71af69e9475f4",
+        "contains_crlf": true
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/audit/credit-deliverable-first.md",
+        "bytes": 39004,
+        "sha256": "b08407af4a60fc3dbd242fe6b4f5b9dcb4dcc8d4d04cfcb33a9c09a0ffd4f923",
+        "contains_crlf": true
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/audit/dependency-check.json",
+        "bytes": 7080,
+        "sha256": "23480c363fb26f34113e14c6d948a53ea5ab745b656c4ee21a1a932fc9c2a6d4",
+        "contains_crlf": true
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/audit/skill_gate_matrix.json",
+        "bytes": 3090,
+        "sha256": "ba8eee56edda7465ce22401a5043b1b595af302706894821470d6dbc1009fc8e",
+        "contains_crlf": true
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/audit/spec-interface-validation.json",
+        "bytes": 8530,
+        "sha256": "17e6a4940a675f541bf30232822eb2330efd8188a76b4c4725ddda4895474812",
+        "contains_crlf": true
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/audit/write-spec-first-attempt.json",
+        "bytes": 2889,
+        "sha256": "4b4a543a0ccbfad90b6cf8c02799572fab874a7bb55c7c41c66c8423b73edda4",
+        "contains_crlf": true
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/codegen_plan.json",
+        "bytes": 1658,
+        "sha256": "02f6985ffc245aba51ff04abe31b81f8daed99c01cfbd534e066580f55976f34",
+        "contains_crlf": true
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/manifest.json",
+        "bytes": 8689,
+        "sha256": "9bc16e190ed4c9fa295bf0b692cd85bbe5c6015ca5cfd808d7b70c4df7974a44",
+        "contains_crlf": true
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/semantics.py",
+        "bytes": 1759,
+        "sha256": "55c2ae41d21b9944e7e41c86267cd5619547e33daac2f1882253f582d431a09c",
+        "contains_crlf": true
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/targets/credit_guard/A.v",
+        "bytes": 2503,
+        "sha256": "c10b8778659b69f519f28847a7964bbc7544ebaa887034ac1cf2c76f024916e5",
+        "contains_crlf": true
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/targets/credit_guard/B.v",
+        "bytes": 2490,
+        "sha256": "1fd4b1ee1f73b6a4007912008e53d0d887c66faaa78a460c5cdcfc53764ed758",
+        "contains_crlf": true
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/targets/credit_guard/C.v",
+        "bytes": 2487,
+        "sha256": "29d2c75d84292275da33e8dafea2976bce157b47fce59a17859b7e0646c06f30",
+        "contains_crlf": true
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/targets/rotating_arbiter/A.v",
+        "bytes": 5418,
+        "sha256": "031d53a99912335ba02fbd788586cf6c588ccfe633f103230dab36c458e2c171",
+        "contains_crlf": false
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/targets/rotating_arbiter/B.v",
+        "bytes": 5407,
+        "sha256": "803d853ae4050c35717027fcc5fe96d314bc35c037ab1024e620b3780032773c",
+        "contains_crlf": false
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/targets/rotating_arbiter/C.v",
+        "bytes": 5411,
+        "sha256": "334a09e94abe47f303f57709c90a05115de619682455edcf86f7e36f189a66e2",
+        "contains_crlf": false
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/validation.py",
+        "bytes": 5207,
+        "sha256": "ed95a8a0d3ff4d50cdfa488b1b30363556dc67249e2a5a827eb9e4d66513192e",
+        "contains_crlf": true
+      },
+      {
+        "path": "benchmarks/agent_holdout_20261005/validation_receipt.json",
+        "bytes": 21766,
+        "sha256": "73b2b8931692348295db60061f8e358b8c73e0e4652e5656cecfdbc569ca8a6c",
+        "contains_crlf": true
+      },
+      {
+        "path": "docs/experiment/agent_holdout_study_plan_2026-10-05.md",
+        "bytes": 6078,
+        "sha256": "79b22d63331d87bb498f8e494336b3670f3ed444acf8557fcc565a501c9ddc97",
+        "contains_crlf": false
+      },
+      {
+        "path": "examples/credit_guard_contract.json",
+        "bytes": 534,
+        "sha256": "57d570465c6a44bf0a80594e4b86ef27e8e6c4966a93f87b136901bc6ae07b2d",
+        "contains_crlf": true
+      },
+      {
+        "path": "examples/rotating_arbiter_contract.json",
+        "bytes": 519,
+        "sha256": "5cd2253935f311e3e10cdcf5c849df779aece0abed13ec2351f205219bef4349",
+        "contains_crlf": false
+      },
+      {
+        "path": "rtl/credit_guard.v",
+        "bytes": 2503,
+        "sha256": "c10b8778659b69f519f28847a7964bbc7544ebaa887034ac1cf2c76f024916e5",
+        "contains_crlf": true
+      },
+      {
+        "path": "rtl/rotating_arbiter.v",
+        "bytes": 5418,
+        "sha256": "031d53a99912335ba02fbd788586cf6c588ccfe633f103230dab36c458e2c171",
+        "contains_crlf": false
+      },
+      {
+        "path": "scripts/agent_token_budget.py",
+        "bytes": 9336,
+        "sha256": "21fa24954566092d7d6acbfa5f36c247e19b2d1ac717df4b050f07886ae2197b",
+        "contains_crlf": false
+      },
+      {
+        "path": "scripts/run_agent_comparison.py",
+        "bytes": 37186,
+        "sha256": "1296186752f5fd91fbc24bb055219386a8cf6d212b8944f0e9efc6ea4c8325d4",
+        "contains_crlf": false
+      },
+      {
+        "path": "scripts/run_agent_holdout_study.py",
+        "bytes": 15431,
+        "sha256": "cb01b01c9c1865811993fde74a9736845ed7862cae03f49edb89bd4af6763079",
+        "contains_crlf": false
+      },
+      {
+        "path": "scripts/summarize_agent_comparison.py",
+        "bytes": 24838,
+        "sha256": "c184667043131fcfe1ed7934c2152ff2471004137c0f421e2d2c952d21c57d5b",
+        "contains_crlf": false
+      },
+      {
+        "path": "spec/agent_holdout_20261005/credit_guard_spec.md",
+        "bytes": 2938,
+        "sha256": "fb84ce7339bb5ef2069fe269ff84160d33d478462b41f50a18bd559f1e83ea36",
+        "contains_crlf": true
+      },
+      {
+        "path": "spec/agent_holdout_20261005/module_specs.json",
+        "bytes": 7610,
+        "sha256": "4c480d640450b91ec3dafb7d624633fb0cd463ce0d637e9c39a372e85c51063c",
+        "contains_crlf": true
+      },
+      {
+        "path": "spec/agent_holdout_20261005/rotating_arbiter_spec.md",
+        "bytes": 3439,
+        "sha256": "99bfe04348fa8a2cf2304d76a5cd3d6608e457542e7b1fb6bccb42d0cabe5081",
+        "contains_crlf": true
+      },
+      {
+        "path": "spec/agent_holdout_study_1m.json",
+        "bytes": 1093,
+        "sha256": "4a85241db9f78e4f27e3c66e90f61170d5ea614a7fb33536306d55f46bd9d650",
+        "contains_crlf": false
+      },
+      {
+        "path": "src/iverilog_ai/ai/agent.py",
+        "bytes": 48297,
+        "sha256": "b3eca75bab345ef2b9d5d2ebd0280f9811bd37532fb979d2f8c5a4ac220ce5fe",
+        "contains_crlf": false
+      },
+      {
+        "path": "src/iverilog_ai/ai/debug_provider.py",
+        "bytes": 28597,
+        "sha256": "0446d5da0d670423ae0270086fe2e42c7259eb557996d500ff99823cf25a57b1",
+        "contains_crlf": false
+      },
+      {
+        "path": "src/iverilog_ai/ai/provider.py",
+        "bytes": 29042,
+        "sha256": "caf55116017e962743e03223ff978b13e69ba71b41e11113d16648e8e9763478",
+        "contains_crlf": false
+      },
+      {
+        "path": "src/iverilog_ai/core/functional_coverage.py",
+        "bytes": 24133,
+        "sha256": "70cd1c00c0e8bc5877fafdb6ba88491d9c5ba2ae16714230aee2a30dfd4bb2fe",
+        "contains_crlf": false
+      },
+      {
+        "path": "src/iverilog_ai/core/observations.py",
+        "bytes": 4041,
+        "sha256": "9883628573a7669229a47180dea84591b5b7c7fd7fd2d82dd0d8867019b8e0f3",
+        "contains_crlf": false
+      },
+      {
+        "path": "src/iverilog_ai/core/pipeline.py",
+        "bytes": 38441,
+        "sha256": "3cf278b7df84f8d1e8d57786bc3b2485afab14ad5f1a1ce43b5eed657a9b9446",
+        "contains_crlf": false
+      },
+      {
+        "path": "src/iverilog_ai/core/reference_model.py",
+        "bytes": 36646,
+        "sha256": "561eaf956a660ac6f3cfb4b28ba04561e63cebef2cf8eac2089b5d3e76287219",
+        "contains_crlf": false
+      },
+      {
+        "path": "src/iverilog_ai/core/testbench.py",
+        "bytes": 29683,
+        "sha256": "17119e5851a95e0b065832e0aa03eaeebeb98b630722b66a28751ae7592c86c9",
+        "contains_crlf": false
+      },
+      {
+        "path": "tests/core/test_agent_holdout_assets.py",
+        "bytes": 12690,
+        "sha256": "9d1e663ab8483e7b9fa8e688b832fea29ee2077b89dd8840aea2d6bcb4e7dbae",
+        "contains_crlf": true
+      },
+      {
+        "path": "tests/core/test_agent_holdout_oracles.py",
+        "bytes": 14072,
+        "sha256": "1fd2800415d8cfdb389e04fe7ae4d76846b39607a09ad5a180ee61f5bd419544",
+        "contains_crlf": false
+      },
+      {
+        "path": "tests/core/test_agent_holdout_study.py",
+        "bytes": 7075,
+        "sha256": "0deebe2ed792a47c3ab295276f9831f9fe958ef7a6f1c5a3d62690bce859398b",
+        "contains_crlf": false
+      }
+    ],
+    "frozen_original_line_endings_preserved": true,
+    "candidate_file_count": 49,
+    "live_output_exists": false,
+    "final_binding_note": "Only .gitattributes changed after first candidate capture to preserve original CRLF report EOF as parent disclosed; 48 other candidate files unchanged."
+  },
+  "findings": [
+    {
+      "id": "R1",
+      "initial": "Specs advertised 200 vectors; actual v6 had 12 per proposal and AgentLimits default64 cumulative",
+      "final": "All cohort specs/config/manifest/plan agree16 cumulative stimulus,12 per proposal,64 accepted total; generic TestPlan200 identified separately",
+      "status": "corrected_before_API"
+    },
+    {
+      "id": "R2",
+      "initial": "Custom baseline_factory plan had no runner-side module/vector/cycle guard; frozen18 plans were compliant",
+      "final": "Guard before DUT rejects17cycles,13vectors,wrongdesign with execution_error row retained",
+      "status": "corrected_and_three_zero_DUT_regressions_passed"
+    },
+    {
+      "id": "R3",
+      "initial": "Shared runner/summary had four-case hardcoded contract and reference paths",
+      "final": "Explicit registered resource paths validated before output/provider; reference hash replay and summary use same mapping",
+      "status": "resolved_in_candidate"
+    }
+  ],
+  "planned_membership": {
+    "cases": 2,
+    "targets_per_case": 3,
+    "repeats": 3,
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "strategies": [
+      "fixed",
+      "random",
+      "protocol_random",
+      "single",
+      "feedback",
+      "no_feedback"
+    ],
+    "total_rows": 108,
+    "unique_rows": 108,
+    "per_strategy_rows": 18,
+    "per_strategy_defect_tasks": 12,
+    "per_strategy_correct_controls": 6,
+    "unique_defects": 4,
+    "theoretical_requests": 126,
+    "token_cap": 1000000,
+    "output_token_cap": 4096,
+    "max_stimulus_cycles": 16,
+    "max_vectors_per_proposal": 12,
+    "max_accepted_vectors_total": 64
+  },
+  "baseline_memory_check": {
+    "plans": 18,
+    "all_cycles": 16,
+    "all_vectors_at_most": 12,
+    "expected_outputs_empty": true,
+    "after_sampling": true,
+    "deterministic": true,
+    "counts_by_case": {
+      "credit_guard": {
+        "fixed": [
+          6,
+          6,
+          6
+        ],
+        "random": [
+          12,
+          12,
+          12
+        ],
+        "protocol_random": [
+          4,
+          4,
+          4
+        ]
+      },
+      "rotating_arbiter": {
+        "fixed": [
+          10,
+          10,
+          10
+        ],
+        "random": [
+          12,
+          12,
+          12
+        ],
+        "protocol_random": [
+          10,
+          10,
+          11
+        ]
+      }
+    },
+    "uniform_sampling": "12 independent input segments; first4 last2cycles and remaining8 last1cycle; not old cohort per-cycle resampling"
+  },
+  "executed_checks": {
+    "targeted_pytest": {
+      "passed": 40,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 1.98
+    },
+    "final_fix_pytest": {
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 1.71,
+      "real_DUT_runs": 0
+    },
+    "overlap": "2 SHA test parameterizations repeated; do not sum as49 independent tests or add worker/full-repo tests",
+    "actual_icarus": {
+      "asset_runs": 10,
+      "asset_observations": 690,
+      "pipeline_runs": 2,
+      "pipeline_checks": 26,
+      "total_runs": 12
+    },
+    "wire_stub": {
+      "initial_scenarios": 12,
+      "initial_mock_requests": 36,
+      "final_scenarios": 12,
+      "final_mock_requests": 36,
+      "total_mock_requests": 72,
+      "final_in_memory_pipeline_calls": 12,
+      "total_in_memory_pipeline_calls": 24,
+      "real_DUT_runs": 0,
+      "real_api_requests": 0,
+      "network_blocked": true,
+      "typed_roles": [
+        "system",
+        "user"
+      ],
+      "same_case_ABC_states_equal": true,
+      "no_feedback_observation_plan_error_decision_error_null": true,
+      "expected_output_leak": false,
+      "source_variant_witness_leak": false
+    }
+  },
+  "limitations": [
+    "Internal synthetic disjoint module holdout; not external blinded evaluation or H02",
+    "Unsupported/unknown functional coverage for both modules; no custom coverage feedback",
+    "No-feedback still subject to outcome-dependent early stopping and budget/state cues",
+    "16-cycle cap shared but actual proposal count/cycle consumption may differ",
+    "No new API scores, usage, statistical victory or feedback causality claimed",
+    "Strict readable-Verilog gates not passed; skill chain/SVG render/synthesis/timing/hardware unverified",
+    "Root full-repository acceptance and future holdout source commit not verified here"
+  ],
+  "skill_gate_matrix": {
+    "both_modules": {
+      "compile": "passed",
+      "ast": "failed",
+      "readability": "failed",
+      "comment": "passed",
+      "naming": "failed",
+      "profile": "passed",
+      "testbench": "not_requested",
+      "toolchain": "not_requested"
+    },
+    "credit_guard": {
+      "errors": 36,
+      "strict_warnings": 0
+    },
+    "rotating_arbiter": {
+      "errors": 115,
+      "strict_warnings": 1
+    }
+  },
+  "auxiliary_error": "First read-only receipt helper read nonexistent top-level status and raised KeyError before writing; corrected to simulation.status, no DUT rerun or original edits",
+  "evidence": [
+    {
+      "path": ".iverilog-ai/holdout-prereg-review-20261005-bfe9e11ea9/targeted-tests.log",
+      "bytes": 226,
+      "sha256": "a67961677fcdd3d47ea7cbd4fa29c327a59ca35ef1aef7e6f3f34b8bd1a7dae5"
+    },
+    {
+      "path": ".iverilog-ai/holdout-prereg-review-20261005-bfe9e11ea9/targeted-tests.xml",
+      "bytes": 7276,
+      "sha256": "72b6c9617e69816c7c346a54a61acd107e4277086b51360f89c313c6baaf33c3"
+    },
+    {
+      "path": ".iverilog-ai/holdout-prereg-review-20261005-bfe9e11ea9/command.json",
+      "bytes": 1280,
+      "sha256": "67a627edc7df4276ee527860a6bf2ec8304068438054647bf7de9ff662393410"
+    },
+    {
+      "path": ".iverilog-ai/holdout-prereg-review-20261005-bfe9e11ea9/final-guards.log",
+      "bytes": 223,
+      "sha256": "6257f0124990a6cafa09283e31cd19776456fe41793c8f44e8313a7fae1b649c"
+    },
+    {
+      "path": ".iverilog-ai/holdout-prereg-review-20261005-bfe9e11ea9/final-guards.xml",
+      "bytes": 1516,
+      "sha256": "c542d5c978ebf2aa4293e006f52115ccd6ef14f14c1f480611fc6eaa8e61a203"
+    },
+    {
+      "path": ".iverilog-ai/holdout-prereg-review-20261005-bfe9e11ea9/final-guards-command.json",
+      "bytes": 910,
+      "sha256": "ebdb0082369362843fd0354a3dd9d7a041a24bd3e5d8a90da488061f19044c3e"
+    },
+    {
+      "path": ".iverilog-ai/holdout-prereg-review-20261005-bfe9e11ea9/wire-isolation.json",
+      "bytes": 257289,
+      "sha256": "c4c123f81ed44eeb7b9c80dbbe57a406d54823c6e448848c7ed6a831a3474a41"
+    },
+    {
+      "path": ".iverilog-ai/holdout-prereg-review-20261005-bfe9e11ea9/wire-final-isolation.json",
+      "bytes": 257289,
+      "sha256": "281f7064d530512a7a3270e21767e4daf9d881b2a343f76e3915926349da492b"
+    },
+    {
+      "path": ".iverilog-ai/holdout-prereg-review-20261005-bfe9e11ea9/icarus-evidence.json",
+      "bytes": 4699,
+      "sha256": "606c2226a1468fdfc882949321594189c3d14daa8874d4274b597af08d711255"
+    },
+    {
+      "path": ".iverilog-ai/holdout-prereg-review-20261005-bfe9e11ea9/icarus-raw-evidence.zip",
+      "bytes": 73823,
+      "sha256": "0cd444c6dd8eae679a0941d8e0f16b2a1bb5b5cca3b75291cecaeb38da24cf4d"
+    },
+    {
+      "path": ".iverilog-ai/holdout-prereg-review-20261005-bfe9e11ea9/icarus-raw-manifest.json",
+      "bytes": 11528,
+      "sha256": "c2bb332689e2d059b0dcd84b8a9f7525d776462f96a52625ea71bb856996b4a9"
+    },
+    {
+      "path": ".iverilog-ai/holdout-prereg-review-20261005-bfe9e11ea9/final-binding.json",
+      "bytes": 11005,
+      "sha256": "bdfff48f06d8c08de8e0c46643a62286516c53a41a57047d3d98804efe8662c8"
+    }
+  ],
+  "review_markdown": {
+    "path": "docs/review/agent_holdout_prereg_review_2026-10-05.md",
+    "sha256": "d0706c86d33c9576d968ab42ad679f76159d89a216a6285a5fff9618821adf8a"
+  },
+  "final_candidate_changes_before_report": [
+    {
+      "path": ".gitattributes",
+      "previous": "6d9b6f1350ee4da9adc368a367192c47b64bed5b686185c7650cc9296304bbe2",
+      "actual": "3e6ac36020fed49e7613e7231fdaa13d291695baf8d872f815661e765b50e0c8"
+    }
+  ],
+  "final_candidate_changes_explained": true
+}

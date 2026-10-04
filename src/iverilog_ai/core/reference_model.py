@@ -20,6 +20,7 @@ SUPPORTED = {
     "mod10_counter", "simple_alu", "sequence_101_overlap", "traffic_light_emergency",
     "sync_fifo", "uart_tx", "spi_master", "handshake_stage", "debounce", "pwm", "mux4", "sync_reset",
     "johnson_counter", "edge_detector", "pulse_stretcher",
+    "credit_guard", "rotating_arbiter",
 }
 
 # 可作为**权威预言机**的设计：这些模型已逐项对照参考 RTL 的手写 testbench 验证过，
@@ -49,6 +50,8 @@ AUTHORITATIVE: frozenset[str] = frozenset({
     "johnson_counter",
     "edge_detector",
     "pulse_stretcher",
+    "credit_guard",
+    "rotating_arbiter",
 })
 
 # 内置案例的**输入端口默认值**：单一事实来源。
@@ -77,7 +80,13 @@ INPUT_DEFAULTS: dict[str, dict[str, Any]] = {
     "johnson_counter": {"rst_n": 1, "enable": 0},
     "edge_detector": {"rst_n": 1, "signal_in": 0},
     "pulse_stretcher": {"rst_n": 1, "pulse_in": 0},
+    "credit_guard": {"rst_n": 1, "acquire": 0, "release_req": 0},
+    "rotating_arbiter": {"rst_n": 1, "request": 0, "advance": 0},
 }
+
+# 新增留出设计的参考值只对固定合约开放，不能只凭同名字符串把外部
+# 任意接口/参数当作权威。既有十五类参考模型的兼容调用保持不变。
+_FIXED_HOLDOUT_DESIGNS = frozenset({"credit_guard", "rotating_arbiter"})
 
 
 class ReferenceSamplingError(ValueError):
@@ -114,6 +123,8 @@ _PER_CYCLE_DATA_PORTS: dict[str, tuple[dict[str, int], dict[str, int]]] = {
     "johnson_counter": ({"enable": 1}, {"q": 4}),
     "edge_detector": ({"signal_in": 1}, {"rising": 1}),
     "pulse_stretcher": ({"pulse_in": 1}, {"pulse_out": 1}),
+    "credit_guard": ({"acquire": 1, "release_req": 1}, {"credits": 3}),
+    "rotating_arbiter": ({"request": 4, "advance": 1}, {"grant": 4}),
 }
 
 
@@ -211,6 +222,8 @@ class _DesignState:
         self.edge_prev, self.edge_rising = 0, 0
         self.pulse_width = _clamp(mapping.get("WIDTH", 4), 1, 32, 4)
         self.pulse_count, self.pulse_out = 0, 0
+        self.credits = 3
+        self.arbiter_pointer, self.arbiter_grant = 0, 0
 
     def step(self, inputs: Mapping[str, Any], cycles: int) -> dict[str, Any]:
         """把单个向量推进 ``cycles`` 个周期，返回该向量结束时的可观测输出。
@@ -236,6 +249,32 @@ class _DesignState:
             rst, enable = int(inputs.get("rst_n", inputs.get("reset", 1))), int(inputs.get("enable", 0))
             for _ in range(cycles): self.state = 0 if rst == 0 else ((self.state + 1) % 10 if enable else self.state)
             return {"count": self.state}
+        if design == "credit_guard":
+            rst = int(inputs.get("rst_n", 1))
+            acquire, release = int(inputs.get("acquire", 0)), int(inputs.get("release_req", 0))
+            for _ in range(cycles):
+                if rst == 0:
+                    self.credits = 3
+                elif bool(acquire) != bool(release):
+                    # One accepted direction per cycle; equal request levels
+                    # hold the state, and arithmetic saturates at both limits.
+                    self.credits = max(0, self.credits - 1) if acquire else min(7, self.credits + 1)
+            return {"credits": self.credits}
+        if design == "rotating_arbiter":
+            rst = int(inputs.get("rst_n", 1))
+            request, advance = int(inputs.get("request", 0)), int(inputs.get("advance", 0))
+            for _ in range(cycles):
+                if rst == 0:
+                    self.arbiter_pointer, self.arbiter_grant = 0, 0
+                    continue
+                # Pick from the old pointer. Updating the pointer after that
+                # choice affects the next cycle, never this registered grant.
+                priority = [(self.arbiter_pointer + offset) % 4 for offset in range(4)]
+                selected = next((index for index in priority if request & (1 << index)), None)
+                self.arbiter_grant = 0 if selected is None else 1 << selected
+                if advance and selected is not None:
+                    self.arbiter_pointer = (selected + 1) % 4
+            return {"grant": self.arbiter_grant}
         if design == "sequence_101_overlap":
             bit, rst, detected = int(inputs.get("bit_in", 0)), int(inputs.get("rst_n", 1)), 0
             for _ in range(cycles):
@@ -441,6 +480,10 @@ def reference_expectations(
     if plan_design not in SUPPORTED:
         return {}
     if authoritative_only and plan_design not in AUTHORITATIVE:
+        return {}
+    if plan_design in _FIXED_HOLDOUT_DESIGNS and (
+            not isinstance(contract, DutContract) or contract.module != plan_design
+            or reference_sampling_profile(contract) is None):
         return {}
     if _unsupported_sampling(plan, plan_design):
         return {}

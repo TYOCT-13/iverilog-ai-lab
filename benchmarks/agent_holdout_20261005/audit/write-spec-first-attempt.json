@@ -1,0 +1,25 @@
+{
+  "command": [
+    "D:\\Users\\TYOCT\\anaconda3\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "scripts.python.workflow.cli",
+    "write-spec",
+    "--spec",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\spec\\agent_holdout_20261005\\module_specs.json",
+    "--out-dir",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\holdout-assets-validation-20261005\\governed-spec-first-attempt",
+    "--source",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\rtl\\credit_guard.v",
+    "--source",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\rtl\\rotating_arbiter.v",
+    "--no-state"
+  ],
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"C:\\Users\\TYOCT\\.codex\\skills\\readable-verilog-generator\\scripts\\python\\workflow\\cli.py\", line 119, in <module>\n    raise SystemExit(main())\n                     ^^^^^^\n  File \"C:\\Users\\TYOCT\\.codex\\skills\\readable-verilog-generator\\scripts\\python\\workflow\\cli.py\", line 104, in main\n    return int(args.func(args))\n               ^^^^^^^^^^^^^^^\n  File \"C:\\Users\\TYOCT\\.codex\\skills\\readable-verilog-generator\\scripts\\python\\workflow\\cli_generation_commands.py\", line 133, in cmd_write_spec\n    dict_report = write_spec_bundle(  # 统一写出规范、WaveDrom JSON 与 SVG 结果\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\TYOCT\\.codex\\skills\\readable-verilog-generator\\scripts\\python\\workflow\\spec_document.py\", line 1464, in write_spec_bundle\n    list_wave_outputs = _write_waveforms(module_value, dict_paths, renderer, runtime_settings)  # 当前模块波形报告\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\TYOCT\\.codex\\skills\\readable-verilog-generator\\scripts\\python\\workflow\\spec_document.py\", line 1282, in _write_waveforms\n    dict_render = render_waveform_with_settings(  # 统一当前图的 runtime 与替身渲染结果\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\TYOCT\\.codex\\skills\\readable-verilog-generator\\scripts\\python\\workflow\\spec_document_io.py\", line 55, in render_waveform_with_settings\n    return func_renderer(path_json, path_svg, settings=runtime_settings)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\TYOCT\\.codex\\skills\\readable-verilog-generator\\scripts\\python\\toolchain\\wavedrom_runtime.py\", line 1098, in render_waveform\n    raise FileNotFoundError(\"> ERR: [Python] renderer executable was not found.\")\nFileNotFoundError: > ERR: [Python] renderer executable was not found.\n",
+  "dependency_installations": 0,
+  "api_calls": 0
+}

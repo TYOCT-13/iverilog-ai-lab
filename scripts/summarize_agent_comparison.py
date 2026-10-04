@@ -196,7 +196,7 @@ def verify_row_evidence(row: dict, registration: dict | None) -> dict:
                     raise ValueError("missing_or_changed_evidence_files")
                 raw = json.loads(Path(observed["pipeline_result"]).read_text(encoding="utf-8"))
                 sim = raw["simulation"]
-                expected_path = row["rtl"] if side == "actual" else f"rtl/{row['case']}.v"
+                expected_path = row["rtl"] if side == "actual" else row.get("reference_rtl", f"rtl/{row['case']}.v")
                 if sim["config"]["rtl_sha256"] != registration["code_and_input_sha256"][expected_path]:
                     raise ValueError("rtl_hash_mismatch")
                 if raw["plan"] != entry["plan"]:
@@ -357,7 +357,8 @@ def build_summary(report: dict, registration: dict | None = None, *, evidence_ro
                 and all(r["status"] not in {"not_started", "interrupted", "missing_result", "global_request_budget", "evidence_unknown", "token_budget", "token_accounting_error"} for r in rows),
             "strategies": summarize_rows(rows), "coverage_ablation_pairs": pairs,
             "coverage_ablation_note": "same registered tasks, independent stochastic API proposals; not paired model RNG",
-            "scope": "development_modules_not_independent_holdout", "cost_currency": None,
+            "scope": (registration.get("scope", "development_modules_not_independent_holdout")
+                      if registration else "development_modules_not_independent_holdout"), "cost_currency": None,
             "rows": rows}
 
 

@@ -1,0 +1,37 @@
+{
+  "schema": "agent-holdout-validation-index-v1",
+  "full_validation": "r1/receipt.json",
+  "counts": {
+    "tests": 1572,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 2,
+    "passed": 1570
+  },
+  "real_api_calls": 0,
+  "working_candidate_parent": "f664d85c9204ffacb64c54feeb9e6dd13c87a34a",
+  "mypy_log": "r1/mypy.log",
+  "source_changed_during_checks": false,
+  "artifacts": [
+    {
+      "path": "r1/mypy.log",
+      "sha256": "c2c4d2b4afc5b35e7408233a72133f8833f063992d3e78ae414f476c895b8332",
+      "size_bytes": 45
+    },
+    {
+      "path": "r1/pytest.log",
+      "sha256": "2038dc159a9c823e6fa89420310edbe26c347676c865b8d2bda355e1fb25f8a8",
+      "size_bytes": 2263
+    },
+    {
+      "path": "r1/pytest.xml",
+      "sha256": "908ea8ca938a7b1a1888337d0bf9546e5baa07b585ab731bfd70be0356a83d51",
+      "size_bytes": 232152
+    },
+    {
+      "path": "r1/receipt.json",
+      "sha256": "2f65fc9c25ed9a210a50bc38360c21011573f6e5301780d1a5e41e4a05934878",
+      "size_bytes": 78312
+    }
+  ]
+}

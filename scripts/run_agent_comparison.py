@@ -10,7 +10,7 @@ from pathlib import Path
 import random
 import sys
 import time
-from typing import Any, Literal
+from typing import Any, Callable, Literal
 from urllib.parse import urlsplit
 
 from iverilog_ai.ai.agent import AgentLimits, PROMPT_VERSION, SYSTEM_PROMPT, run_verification_agent
@@ -309,7 +309,8 @@ def execute(registration: dict, output: Path, *, endpoint="", model="", key="", 
             max_output_tokens=4096, wire_api: Literal["chat_completions", "responses"] = "chat_completions",
             thinking_mode: Literal["enabled", "disabled"] | None = None,
             iverilog="iverilog", vvp="vvp", provider_factory=None,
-            provider_factory_record_kind="test_provider") -> dict:
+            provider_factory_record_kind="test_provider",
+            baseline_factory: Callable[[str, str, int, DutContract, int], TestPlan] | None = None) -> dict:
     if provider_factory_record_kind not in {"test_provider", "api_and_local_simulation"}:
         raise ValueError("invalid provider factory provenance")
     if thinking_mode not in {None, "enabled", "disabled"}:
@@ -319,6 +320,15 @@ def execute(registration: dict, output: Path, *, endpoint="", model="", key="", 
     if any(sha(registered_source_path(p)) != digest
            for p, digest in registration["code_and_input_sha256"].items()):
         raise ValueError("registered source/input changed before execution")
+    # Custom module resources remain part of the same frozen registration.
+    for registered in registration["rows"]:
+        resources = (registered["rtl"],
+                     registered.get("contract_path", f"examples/{registered['case']}_contract.json"),
+                     registered.get("reference_rtl", f"rtl/{registered['case']}.v"))
+        for resource in resources:
+            if resource not in registration["code_and_input_sha256"]:
+                raise ValueError("sample resource is not registered")
+            registered_source_path(resource)
     profile = registration.get("profile", "legacy")
     protocols = registration.get("protocol_config")
     output.mkdir(parents=True, exist_ok=False)
@@ -332,6 +342,8 @@ def execute(registration: dict, output: Path, *, endpoint="", model="", key="", 
                 "request_timeout_seconds": 60, "stream": False, "iverilog": iverilog, "vvp": vvp,
                 "profile": profile, "max_output_chars": 2_000_000 if profile in {"v2", "v3"} else 200_000,
                 "prompt_profile_sha256": registration.get("prompt_profile_sha256")}
+    settings["baseline_factory"] = (baseline_factory.__module__ + "." + baseline_factory.__qualname__
+                                    if baseline_factory else "scripts.run_agent_comparison.baseline_plan")
     if profile == "v3":
         settings.update(reference_sampling="per_cycle", agent_plan_mode="independent", frozen_inputs=frozen_inputs)
     write(output / "run_settings.json", settings)
@@ -365,7 +377,9 @@ def execute(registration: dict, output: Path, *, endpoint="", model="", key="", 
             work.mkdir()
             try:
                 case = row["case"]
-                contract = DutContract.from_dict(json.loads((ROOT / f"examples/{case}_contract.json").read_text()))
+                contract_path = registered_source_path(row.get("contract_path", f"examples/{case}_contract.json"))
+                reference_rtl = registered_source_path(row.get("reference_rtl", f"rtl/{case}.v"))
+                contract = DutContract.from_dict(json.loads(contract_path.read_text(encoding="utf-8")))
                 def audit(round_row):
                     plan = TestPlan.model_validate(round_row["plan"])
                     cycles = plan_cycles(plan.model_dump(mode="json")["vectors"])
@@ -399,17 +413,23 @@ def execute(registration: dict, output: Path, *, endpoint="", model="", key="", 
                     save()
                     audit_started = time.monotonic()
                     try:
-                        reference = runner.run(plan, contract, ROOT / f"rtl/{case}.v", work / f"audit-{round_row['round']}", **options)
+                        reference = runner.run(plan, contract, reference_rtl, work / f"audit-{round_row['round']}", **options)
                         entry["reference"] = observation(reference, capture_coverage=profile in {"v2", "v3"},
-                                                         rtl_sha256=sha(ROOT / f"rtl/{case}.v"))
+                                                         rtl_sha256=sha(reference_rtl))
                         entry["reference"]["evidence_files"] = freeze_pipeline_evidence(entry["reference"]["pipeline_result"])
                     finally:
                         entry["reference_audit_elapsed_seconds"] = round(time.monotonic() - audit_started, 6)
                     row["reference_audit_cycles"] = row.get("reference_audit_cycles", 0) + cycles
                     save()
                 if row["strategy"] in BASELINES:
-                    plan = baseline_plan(case, row["strategy"], row["seed"], contract, row["budget_cycles"],
-                                         profile=profile, protocol=protocols["cases"][case] if protocols else None)
+                    plan = (baseline_factory(case, row["strategy"], row["seed"], contract, row["budget_cycles"])
+                            if baseline_factory else baseline_plan(case, row["strategy"], row["seed"], contract, row["budget_cycles"],
+                                         profile=profile, protocol=protocols["cases"][case] if protocols else None))
+                    vector_cap = registration.get("study", {}).get("limits", {}).get("max_vectors_per_proposal", 200)
+                    if (not isinstance(plan, TestPlan) or plan.design != contract.module
+                            or len(plan.vectors) > vector_cap
+                            or plan_cycles(plan.model_dump(mode="json")["vectors"]) > row["budget_cycles"]):
+                        raise ValueError("baseline proposal exceeds the registered contract or budget")
                     row["baseline_cycles_attempted"] = plan_cycles(plan.model_dump(mode="json")["vectors"])
                     save()
                     actual = runner.run(plan, contract, ROOT / row["rtl"], work / "run", **options)
