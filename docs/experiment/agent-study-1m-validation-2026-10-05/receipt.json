@@ -1,0 +1,83 @@
+{
+  "schema": "agent-study-targeted-validation-v1",
+  "created_at_utc": "2026-10-04T20:42:55.490012+00:00",
+  "source_revision": "75f9baa87987ef9ed7f660600db5818b9394afb7",
+  "production_core_revision": "4d8eafb97681eb96ffe5477b1840bb46558256fa",
+  "scope": "token guard, specification renderer, registered entry, shared comparison and summary tests",
+  "runs": [
+    {
+      "tag": "pytest",
+      "passed": 63,
+      "failed": 1,
+      "errors": 0,
+      "skipped": 0,
+      "elapsed_xml_seconds": 8.962
+    },
+    {
+      "tag": "pytest-r2",
+      "passed": 64,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "elapsed_xml_seconds": 7.519
+    },
+    {
+      "tag": "pytest-r3",
+      "passed": 65,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "elapsed_xml_seconds": 9.332
+    }
+  ],
+  "latest_passed": 65,
+  "results_not_added_across_repeats": true,
+  "initial_failure": "unit fixture omitted chat_completions; fixed fixture, not production mode",
+  "last_added_regression": "inconsistent reported usage retains 1100000 conservative tokens and halts",
+  "api_calls_for_tests": 0,
+  "tracked_workspace_files_checked": 706,
+  "tracked_workspace_files_equal_git": 525,
+  "working_git_byte_differences": 181,
+  "registered_working_git_byte_differences": 22,
+  "non_newline_differences": 0,
+  "initial_byte_check_note": "strict all-file check encountered preexisting ci.yml CRLF/LF; all differences preserved, no source normalized during API run",
+  "source_byte_check_is_separate_clean_execution": false,
+  "final_preregistration_caveat_text_completed_after_tests": true,
+  "artifacts": [
+    {
+      "path": "pytest.log",
+      "sha256": "337c9023c6061994ad0244e17d0d418f63d59a70003e08012e440f796d1f8f14",
+      "size_bytes": 2870
+    },
+    {
+      "path": "pytest.xml",
+      "sha256": "04495325de6872c75dbcda673d3fec9514f141af6ccab93c40a3223270b9c66d",
+      "size_bytes": 12084
+    },
+    {
+      "path": "pytest-r2.log",
+      "sha256": "b251297ebcd4f9d4858ec61d4607dea07d858da89292414cb1dee195205be0c2",
+      "size_bytes": 217
+    },
+    {
+      "path": "pytest-r2.xml",
+      "sha256": "105d6b2780e494d4acb7e4a5cbab8b07cc533b12304dd532e6f0e1b5d76dea53",
+      "size_bytes": 9660
+    },
+    {
+      "path": "pytest-r3.log",
+      "sha256": "7fd0ed872ab740606bd84c328e58f09056eef7a89124b452dd066be5d39b66bb",
+      "size_bytes": 217
+    },
+    {
+      "path": "pytest-r3.xml",
+      "sha256": "3693c82a7cd94b02dc5aa8179487fee318d33922d4ccdff9016fa74b0a0c7168",
+      "size_bytes": 9813
+    },
+    {
+      "path": "source_bytes.json",
+      "sha256": "e0c1111611c0e5fdb1256ec980c6b902fad27f615deee1773cf2c4c623c29823",
+      "size_bytes": 178739
+    }
+  ]
+}

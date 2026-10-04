@@ -1,0 +1,43 @@
+........F.......................................................         [100%]
+================================== FAILURES ===================================
+_ test_failure_with_usage_is_charged_and_both_generation_interfaces_share_gate _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000172DDAF6C30>
+tmp_path = WindowsPath('E:/FPGA_WORK/iverilog-ai-lab/.iverilog-ai/agent-study-1m-test-20261005/test_failure_with_usage_is_cha0')
+
+    def test_failure_with_usage_is_charged_and_both_generation_interfaces_share_gate(monkeypatch,tmp_path):
+        book=TokenBudget(1000000,tmp_path/'journal.json')
+        def fake_request(self,path,**kwargs):
+            # Represents the existing provider after a real transport attempt.
+            self.request_count += 1
+            self.last_usage = usage()
+            assert book.journal.exists() and book.data["records"][-1]["status"] == "pending"
+            return {"choices":[{"message":{"content":"{}"}}]}
+        monkeypatch.setattr(OpenAICompatibleProvider,"_request",fake_request)
+>       provider=BudgetedProvider(token_budget=book,endpoint="https://api.deepseek.com",model="deepseek-flash",
+                                  api_key="unit_fixture",allow_network=False,stream=False,thinking_mode="disabled",
+                                  force_output_limit=True,max_output_tokens=4096,request_limit=3)
+
+tests\core\test_agent_token_budget.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\agent_token_budget.py:122: in __init__
+    super().__init__(**kwargs)
+src\iverilog_ai\ai\provider.py:378: in __init__
+    _validate_thinking_mode(wire_api, thinking_mode)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+wire_api = 'responses', mode = 'disabled'
+
+    def _validate_thinking_mode(wire_api: str, mode: str | None) -> None:
+        """显式扩展只进入Chat协议；缺省不推定服务端的思考策略。"""
+        if mode is not None and (not isinstance(mode, str) or mode not in {"enabled", "disabled"}):
+            raise ValueError("thinking_mode must be enabled, disabled or None")
+        if mode is not None and wire_api != "chat_completions":
+>           raise ValueError("thinking_mode is supported only by chat_completions; Responses uses reasoning.effort")
+E           ValueError: thinking_mode is supported only by chat_completions; Responses uses reasoning.effort
+
+src\iverilog_ai\ai\provider.py:179: ValueError
+- generated xml file: E:\FPGA_WORK\iverilog-ai-lab\.iverilog-ai\agent-study-1m-validation-20261005\pytest.xml -
+=========================== short test summary info ===========================
+FAILED tests/core/test_agent_token_budget.py::test_failure_with_usage_is_charged_and_both_generation_interfaces_share_gate
+1 failed, 63 passed in 9.06s

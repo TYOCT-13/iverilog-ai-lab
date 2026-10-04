@@ -4,7 +4,7 @@
 带盘符的除外。路径可用 `python scripts/check_doc_index.py` 校验是否仍然存在。
 
 - 仓库：`iverilog-ai-lab`，Apache-2.0；第三方资源保留各自许可；判定权威是 Icarus Verilog 12.0（`s20150603`）
-- 本次材料修订：**2026-10-05**；生产源码 `4d8eafb`；补充短预算三重复144任务（入口`f54ae63`）与六项选样诊断（入口`bdc9e20`），不改旧v5一次重复60任务。v2提交PDF/答辩仍为 `28be1ed`，旧三重复 `c7bb280`、pilot `e9b7b8a`分别归档。最新实测与旧版正式材料不能混作同一版本（已查阅通知的提交截止2026-10-15 20:00北京时间）。
+- 本次材料修订：**2026-10-05**；最新评测源码 `75f9baa`（生产Agent/core仍为`4d8eafb`）；新增六组三重复216任务、145请求/399083tokens，独立每轮100万额度；历史短预算三重复144任务（入口`f54ae63`）与六项选样诊断（入口`bdc9e20`），不改旧v5一次重复60任务。v2提交PDF/答辩仍为 `28be1ed`，旧三重复 `c7bb280`、pilot `e9b7b8a`分别归档。最新实测与旧版正式材料不能混作同一版本（已查阅通知的提交截止2026-10-15 20:00北京时间）。
 - 状态记号：**有效** = 当前口径，可直接对外引用；**历史** = 反映当时状态，只读归档，
   引用时必须带"旧口径"标注；**待补** = 尚未完成
 
@@ -15,7 +15,7 @@
 | 你想干什么 | 按顺序读 |
 |---|---|
 | 5 分钟了解这个项目 | `README.md` → `docs/project_overview.md` → `docs/competition/ic/report_draft.md` |
-| 准备 AI＋集成电路提交 | `docs/experiment/agent_smoke_live_2026-10-05.md` → `docs/experiment/agent_smoke_diagnostic_2026-10-05.md` → `docs/competition/ic/gap_checklist.md` → `docs/competition/ic/v2/README.md`；正式v2文件尚未同步最新实测，真人/H02待真实原件 |
+| 准备 AI＋集成电路提交 | `docs/experiment/agent_study_1m_live_2026-10-05.md` → `docs/competition/ic/gap_checklist.md` → `docs/competition/ic/v2/README.md`；正式v2文件尚未同步最新实测，真人/H02待真实原件 |
 | 复核数字是否可信 | `docs/experiment/metric_inventory.md`（每个数字一行：口径/来源/时间/复现命令）→ `docs/competition/submission_gate_checklist.md` → 产物目录 |
 | IC提交当天照着做 | `docs/competition/ic/v2/README.md` → `docs/competition/ic/gap_checklist.md`；先核对所选赛道、真人/H02原件和团队字段 |
 | 组织真人试用与反馈 | `docs/trial/README.md` → `docs/trial/organizer_workflow.md`；发给参与者从 `docs/trial/participant_start.md` 开始 |
@@ -32,17 +32,20 @@
 | v2佐证源稿与PDF | `docs/competition/ic/v2/supporting_evidence.md`、`docs/competition/ic/ICARUS_佐证材料_v2.pdf` | 28be1ed版本；5页、约0.86MB；V01–V06真实来源，保留失败，尚未纳入v5 |
 | 最新材料入口与PDF回执 | `docs/competition/ic/v2/README.md`、`docs/competition/ic/v2/validation.json` | 名称15字符、简介172字符；全部14页渲染查看，文字可选择、身份元数据空 |
 | 最新答辩稿与构建来源 | `docs/competition/ic/ICARUS_答辩材料_v2.pptx`、`docs/competition/ic/ICARUS_答辩材料_v2.pdf`、`docs/competition/ic/defense_v2/README.md`、`docs/competition/ic/defense_v2/qa_report.json` | 12页，5原生表格/3原生图表/12页备注；PPTX可编辑，PDF图像式；逐页机器检查，不是独立人审 |
+| 每轮100万tokens六组对照 | `docs/experiment/agent_study_1m_plan_2026-10-05.md`、`docs/experiment/agent_study_1m_live_2026-10-05.md`、`docs/experiment/agent-study-1m-live-2026-10-05/receipt.json`、`docs/experiment/agent-study-1m-live-2026-10-05/rows.json` | 216任务三重复；fixed/random/protocol_random/single/feedback/no_feedback为21/16/21/21/18/22（各24）；85快照匹配，212任务/480执行侧，4全无执行，严格资格false |
+| 本轮独立tokens账与冻结设置 | `docs/experiment/agent_study_1m_budget_2026-10-05.json`、`docs/experiment/agent-study-1m-live-2026-10-05/token_budget.json`、`docs/experiment/agent-study-1m-live-2026-10-05/preregistration.json`、`docs/experiment/agent-study-1m-live-2026-10-05/run_settings.json` | 145请求、399083tokens、剩600917；历史857957不扣新轮，旧360限制撤销；无未知usage/守门拒绝/超限，实付未知 |
+| 本轮入口定向测试与只读复核 | `docs/experiment/agent-study-1m-validation-2026-10-05/receipt.json`、`docs/review/agent_study_1m_review_2026-10-05.md` | 65项定向通过，不与1170全仓相加；代理复核非真人/H02 |
 | 短预算三重复真实API对照 | `docs/experiment/agent_smoke_plan_2026-10-05.md`、`scripts/run_agent_smoke_comparison.py`、`spec/agent_smoke_budgets.json`、`docs/experiment/agent_smoke_live_2026-10-05.md`、`docs/experiment/agent-smoke-live-2026-10-05/receipt.json` | 144任务、36请求；API15/24、随机16/24、固定/协议随机21/24；77快照、139任务/278执行侧；5未执行，严格资格false；旧长预算提示冲突披露 |
 | 提示澄清后的六请求诊断 | `docs/experiment/agent_smoke_diagnostic_plan_2026-10-05.md`、`scripts/run_agent_smoke_diagnostic.py`、`docs/experiment/agent_smoke_diagnostic_2026-10-05.md`、`docs/experiment/agent-smoke-diagnostic-2026-10-05/receipt.json` | 5未执行任务+1正确控制；6合规执行、缺陷任务4/5（不同缺陷3/4）、正确控制无误报；85快照、12执行侧；不更新原主指标，非新完整比较 |
-| 短预算与诊断累计API预算 | `docs/experiment/agent_smoke_api_budget_2026-10-05.json`、`docs/experiment/agent_smoke_diagnostic_api_budget_2026-10-05.json` | 两账分别保守354/360、360/360；最新已知359响应+旧1预留，857957已报告tokens，剩0；实付未知 |
+| 短预算与诊断累计API预算 | `docs/experiment/agent_smoke_api_budget_2026-10-05.json`、`docs/experiment/agent_smoke_diagnostic_api_budget_2026-10-05.json` | 两账分别保守354/360、360/360；该时点已知359响应+旧1预留，857957已报告tokens，剩0；旧360限制已撤销，历史不扣新轮；实付未知 |
 | 新入口定向验收 | `docs/experiment/agent-smoke-validation-2026-10-05/receipt.json`、`docs/experiment/agent-smoke-validation-2026-10-05/clean-source/README.md`、`docs/experiment/agent-smoke-validation-2026-10-05/clean-source/receipt.json` | 旧20/24/5分开保存；单测改独立夹具后，e7223dc干净Git源码副本25通过，未带私有父实验且源码字节全匹配；不相加作全仓数，不是外部Actions；初始Win5告警保留；0API |
 | 短预算与诊断只读代理复核 | `docs/review/agent_smoke_review_2026-10-05.md`、`docs/review/agent-smoke-review-2026-10-05/receipt.json`、`docs/review/agent_smoke_diagnostic_review_2026-10-05.md`、`docs/review/agent-smoke-diagnostic-review-2026-10-05/receipt.json` | 机器原件与登记字节复核；不替代真人/H02，不把选样诊断解释成胜随机 |
 | v5优化与旧输入诊断 | `docs/experiment/agent_v5_optimization_2026-10-05.md`、`docs/experiment/agent_comparison_v5_plan_2026-10-05.md` | 有效；逐拍、独立复位与预检；旧UART/SPI计划零API重放，不能计新模型成绩 |
 | v5真实API开发集对比 | `docs/experiment/agent_comparison_v5_live_2026-10-05.md`、`docs/experiment/agent-comparison-v5-live-2026-10-05/receipt.json`、`docs/experiment/agent-comparison-v5-live-2026-10-05/rows.json` | 60任务/41请求；反馈8/8，随机/固定/协议随机8/8，无反馈7/8；保留1格式拒绝；74冻结输入、60原件均可核验，非留出 |
 | v5最新全仓与浏览器验收 | `docs/experiment/ic_agent_v5_validation_2026-10-05.md`、`docs/experiment/ic-agent-v5-validation-2026-10-05/validation.json`、`docs/experiment/ic-agent-v5-validation-2026-10-05/browser/results.json` | 1170/2skip，296指纹无变；两测试文件末尾格式变化和45项复测单列；三尺寸、UART58/58、非默认设置切页保持 |
 | v5独立代理代码检查 | `docs/review/ic_v5_code_review_2026-10-05.md` | 发现并复测执行指纹/失败记录绑定、非法逐拍提案和登记路径问题；0API，非H02 |
-| v5时点历史累计API预算 | `docs/experiment/ic_agent_v5_api_budget_2026-10-05.json` | 当时已知317响应，加旧1保守318/360、剩42；新试验后已用满本轮保守上限，见新账；旧账不覆盖 |
-| v5完整原件交接包 | `docs/competition/ic/evidence_pack_v5_2026-10-05.md`、`docs/competition/ic/evidence_pack_v5_2026-10-05.json`、`.iverilog-ai/ic-agent-v5-evidence-20261005.zip` | 48,306,453字节；3,281项文件SHA/CRC通过，74/74输入冻结；未含新增短预算与六项诊断，旧c7/v4包另存 |
+| v5时点历史累计API预算 | `docs/experiment/ic_agent_v5_api_budget_2026-10-05.json` | 当时已知317响应，加旧1保守318/360、剩42；后续历史试验曾用满360；现已撤销该累计限制，新1M轮单独记账；旧账不覆盖 |
+| v5完整原件交接包 | `docs/competition/ic/evidence_pack_v5_2026-10-05.md`、`docs/competition/ic/evidence_pack_v5_2026-10-05.json`、`.iverilog-ai/ic-agent-v5-evidence-20261005.zip` | 48,306,453字节；3,281项文件SHA/CRC通过，74/74输入冻结；未含新增短预算、六项诊断及216任务轮，旧c7/v4包另存 |
 | v5包外实际反例重放 | `docs/experiment/ic-agent-v5-pack-replay-2026-10-05/receipt.json`、`docs/experiment/ic-agent-v5-pack-replay-2026-10-05/stdout.log`、`docs/experiment/ic-agent-v5-pack-replay-2026-10-05/run.stdout.txt` | 从本轮ZIP解13文件至仓库外新目录；108检查/16失败、0API、结构记录与原件一致；同机已有工具，非真人/异机 |
 | v5包后独立代理核查 | `docs/review/ic_v5_pack_review_2026-10-05.md`、`docs/review/ic-v5-pack-review-2026-10-05/receipt.json` | CRC/3,281项SHA、74快照、60任务/150执行侧、41请求和预算一致；仅浮点尾差，非H02、异机或新API |
 | 历史c7/v4冻结交接包 | `docs/competition/ic/evidence_pack_v4_2026-10-04.md`、`docs/competition/ic/evidence_pack_v4_2026-10-04.json`、`.iverilog-ai/ic-agent-v4-evidence-20261004.zip` | 127,448,982字节；10,330项文件SHA/CRC通过；281登记中280精确匹配，1早期计划MD未恢复；完整结果及失败保留 |
