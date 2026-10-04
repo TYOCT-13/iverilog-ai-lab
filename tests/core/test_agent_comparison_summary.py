@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from scripts.summarize_agent_comparison import build_summary, main, registered_rows, summarize_rows
+from scripts.summarize_agent_comparison import build_summary, classify, main, registered_rows, summarize_rows
 
 
 def row(strategy, seed, variant="d1", detected=False, status="not_started"):
@@ -28,6 +28,36 @@ def test_repeat_denominator_is_preserved_and_union_not_mean():
     assert stats["repeat_detection_rate_mean"] == pytest.approx(1 / 3)
     assert [r["detection_rate"] for r in stats["per_repeat"]] == [0.5, 0.5, 0]
     assert stats["status_counts"]["missing_result"] == 1
+
+
+@pytest.mark.parametrize("variant", ["d1", "reference"])
+@pytest.mark.parametrize("prior_execution", [False, True])
+def test_exhausted_format_recovery_remains_incomplete(variant, prior_execution):
+    sample = {**row("feedback", 0, variant, status="decision_format_error"),
+              "stop_reason": "decision_format_error", "budget_stop_reason": "request_budget"}
+    if prior_execution:
+        sample["rounds"] = [{
+            "actual": {"status": "passed", "checks": 1, "failures": 0,
+                       "expectation_source": "reference_model"},
+            "reference": {"status": "passed", "checks": 1, "failures": 0,
+                          "expectation_source": "reference_model"},
+        }]
+    sample["status"], sample["detected"] = classify(sample)
+    assert (sample["status"], sample["detected"]) == ("decision_format_error", False)
+    stats = summarize_rows([sample])["feedback"]
+    # This aggregate counts defect tasks; reference failures stay in status_counts.
+    assert stats["incomplete_or_undecidable"] == (1 if variant != "reference" else 0)
+    assert stats["status_counts"]["decision_format_error"] == 1
+
+
+def test_format_terminal_does_not_erase_an_executed_counterexample():
+    sample = {**row("feedback", 0), "stop_reason": "decision_format_error", "rounds": [{
+        "actual": {"status": "passed", "checks": 1, "failures": 1,
+                   "expectation_source": "reference_model"},
+        "reference": {"status": "passed", "checks": 1, "failures": 0,
+                      "expectation_source": "reference_model"},
+    }]}
+    assert classify(sample) == ("detected", True)
 
 
 @pytest.mark.parametrize("field,value", [("budget_cycles", 999), ("rtl", "different.v"), ("target", "other")])

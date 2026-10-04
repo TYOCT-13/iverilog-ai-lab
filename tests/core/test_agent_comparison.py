@@ -5,7 +5,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from scripts.run_agent_comparison import (ROOT, baseline_plan, classify, execute, main, preregister, summarize)
+from scripts.run_agent_comparison import (ROOT, baseline_plan, classify, decision_records, execute, main, preregister, summarize)
 from iverilog_ai.core.contracts import DutContract
 from iverilog_ai.core.strategy_scoring import plan_cycles
 
@@ -100,6 +100,25 @@ def test_interrupted_engine_recovers_trace_costs(tmp_path, monkeypatch):
     assert row["reference_audit_cycles"] == 0
     assert row["usage_by_decision"][0]["usage"]["total_tokens"] == 42
     assert report["rows"][1]["status"] == "not_started"
+
+
+def test_rejected_request_keeps_recovery_and_artifact_metadata_without_raw_response():
+    metadata = {"path": "untrusted/decision_0001.txt", "sha256": "a" * 64,
+                "size_bytes": 10, "parse_status": "json_invalid", "trusted": False}
+    diagnostic = {"code": "json_invalid", "errors": [], "hint": "Return one complete JSON object."}
+    records = decision_records(12, {"decisions": [{
+        "status": "rejected", "error_type": "ValidationError", "retry_eligible": True,
+        "decision_error": diagnostic, "parse_status": "json_invalid", "untrusted_response": metadata,
+        "untrusted_response_status": "saved", "response_bytes": 10, "response_sha256": "a" * 64,
+        "usage": {"prompt_tokens": 9, "completion_tokens": 1, "total_tokens": 10},
+        "response": "untrusted raw text", "prompt": "original full state", "error_message": "model text",
+    }]})
+    assert records[0]["request_id"] == "12:0"
+    assert records[0]["usage"]["total_tokens"] == 10
+    assert records[0]["retry_eligible"] is True
+    assert records[0]["decision_error"] == diagnostic
+    assert records[0]["untrusted_response"] == metadata
+    assert not {"response", "prompt", "error_message"} & records[0].keys()
 
 
 @pytest.mark.parametrize("case,cycles", [("sync_fifo", 40), ("uart_tx", 40), ("spi_master", 64), ("handshake_stage", 24)])

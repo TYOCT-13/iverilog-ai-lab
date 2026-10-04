@@ -34,7 +34,7 @@ def classify(row: dict) -> tuple[str, bool]:
     alarm = any(r["actual"]["failures"] for r in rounds)
     if not alarm and token_status:
         return token_status, False
-    if not alarm and row.get("stop_reason") in {"policy_error", "output_truncated", "execution_error", "input_changed", "interrupted", "insufficient_evidence"}:
+    if not alarm and row.get("stop_reason") in {"policy_error", "decision_format_error", "output_truncated", "execution_error", "input_changed", "interrupted", "insufficient_evidence"}:
         return row["stop_reason"], False
     return ("reference_false_alarm" if row["variant"] == "reference" and alarm else "detected" if alarm else "not_detected"), bool(alarm and row["variant"] != "reference")
 

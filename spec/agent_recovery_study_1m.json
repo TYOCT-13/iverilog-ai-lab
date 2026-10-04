@@ -1,0 +1,33 @@
+{
+  "schema": "agent-recovery-study-per-round-v1",
+  "round_name": "bounded_schema_recovery_full_comparison_20261005",
+  "parent_config_path": "spec/agent_study_1m.json",
+  "parent_config_sha256": "135b716ff566bf2147e7889cef66db6907cf3b73ec8288ef82c5847a83b05857",
+  "parent_source_commit": "10ebefe7848812ce57c4d50ed7ee5b6e51db4eb6",
+  "parent_prompt": {
+    "agent_prompt_version": "verification-agent-v5-independent-episodes",
+    "system_prompt_sha256": "e3938568bc3adcdffd02def88bc4c8bcd1636c3e193c1e94653bc4b09e56bc4b"
+  },
+  "generated_spec_sha256": {
+    "sync_fifo": "4e932c00a88af5a4d80617c1cc09040a259bed1d5f7f17bdafec6833d547c0c3",
+    "uart_tx": "68e0f9f0317f3eab50c8a93717f7a0aa44bbb6bc21c257fe27f163541e097863",
+    "spi_master": "2c4f8e45d417f1017501018211509324584a5c145ef68f98065a5f5d3a9c62fd",
+    "handshake_stage": "07a1f5b6015185007f1f69c380e0bd5830a29a3f86403cb5dd51d83a3a5973ed"
+  },
+  "token_cap": 1000000,
+  "token_scope": "this new registered batch only, sum of prompt and completion usage",
+  "max_output_tokens_per_request": 4096,
+  "repeats": 3,
+  "strategies": ["fixed", "random", "protocol_random", "single", "feedback", "no_feedback"],
+  "cycle_budgets": {"sync_fifo": 16, "uart_tx": 48, "spi_master": 20, "handshake_stage": 8},
+  "theoretical_request_cap": 252,
+  "transport": {
+    "endpoint": "https://api.deepseek.com",
+    "model": "deepseek-flash",
+    "wire_api": "chat_completions",
+    "thinking_mode": "disabled",
+    "stream": false,
+    "timeout_seconds": 60,
+    "automatic_transport_retry": false
+  }
+}

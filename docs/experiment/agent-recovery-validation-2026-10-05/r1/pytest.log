@@ -1,0 +1,112 @@
+........................................................................ [  5%]
+............s........................................................... [ 11%]
+........................................................................ [ 16%]
+........................................................................ [ 22%]
+........................................................................ [ 27%]
+........................................................................ [ 33%]
+........................................................................ [ 38%]
+........................................................................ [ 44%]
+........................................................................ [ 49%]
+........................................................................ [ 55%]
+........................................................................ [ 60%]
+..........................................F............................. [ 66%]
+........................................................................ [ 71%]
+..................................s....................F................ [ 77%]
+........................................................................ [ 82%]
+........................................................................ [ 88%]
+........................................................................ [ 93%]
+.............................................F.......................... [ 99%]
+.............                                                            [100%]
+================================== FAILURES ===================================
+________________ test_output_dir_must_stay_inside_the_project _________________
+
+tmp_path = WindowsPath('E:/FPGA_WORK/iverilog-ai-lab/.tmp-codex/recovery-full-tests-20261005-r1/test_output_dir_must_stay_insi0')
+
+    def test_output_dir_must_stay_inside_the_project(tmp_path):
+        """产物目录必须在仓库内：避免脚本往仓库外写文件。"""
+    
+>       with pytest.raises(ValueError, match="inside project_root"):
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests\core\test_pipeline_matrix.py:48: Failed
+____________________ test_repository_scripts_pass_the_gate ____________________
+
+capsys = <_pytest.capture.CaptureFixture object at 0x000002BDE6ED57F0>
+
+    def test_repository_scripts_pass_the_gate(capsys: pytest.CaptureFixture) -> None:
+        """仓库里所有脚本都必须过这条门禁——包括 `start_ui.ps1` 与 `start_ui.cmd`。
+    
+        演示脚本本身的行为断言（启动/停止/快捷方式/图标）在 `test_demo_scripts.py` 里，
+        这个文件只管编码约定。
+        """
+    
+>       assert strip_bom.main(["--check"]) == 0, capsys.readouterr().out
+E       AssertionError: BOM 清理：无需处理（仅检查）
+E         编码问题: .tmp-codex/recovery-full-tests-20261005-r1/test_cmd_with_bom_is_rejected0/b.cmd —— 带 UTF-8 BOM——cmd.exe 会把 BOM 当成命令的一部分，第一行直接报错
+E         编码问题: .tmp-codex/recovery-full-tests-20261005-r1/test_cmd_with_chinese_is_rejec0/a.cmd —— 含非 ASCII 字符——cmd.exe 按 OEM 代码页解码，中文在这里必然乱码，请改成英文
+E         编码问题: .tmp-codex/recovery-full-tests-20261005-r1/test_explicit_key_file_is_load0/api.txt —— 带 UTF-8 BOM（Python/JSON/Markdown 解析器会因此报错）
+E         编码问题: .tmp-codex/recovery-full-tests-20261005-r1/test_mojibake_is_detected_from0/bad.v —— 含替换字符 U+FFFD（某处用错了解码器） 第 1 行：'�'
+E         编码问题: .tmp-codex/recovery-full-tests-20261005-r1/test_mojibake_is_detected_from0/bad.v —— 含替换字符 U+FFFD（某处用错了解码器） 第 1 行：'�'
+E         编码问题: .tmp-codex/recovery-full-tests-20261005-r1/test_mojibake_is_detected_from0/bad.v —— 疑似 mojibake 第 1 行：'涓�鏂�'
+E         编码问题: .tmp-codex/recovery-full-tests-20261005-r1/test_plain_replacement_charact0/bad2.v —— 含替换字符 U+FFFD（某处用错了解码器） 第 1 行：'�'
+E         编码问题: .tmp-codex/recovery-full-tests-20261005-r1/test_ps1_that_is_not_utf8_is_r0/d.ps1 —— 不是合法 UTF-8：'utf-8' codec can't decode byte 0xd6 in position 12: invalid continuation byte
+E         编码问题: .tmp-codex/recovery-full-tests-20261005-r1/test_ps1_that_is_not_utf8_is_r0/d.ps1 —— 不是合法 UTF-8：'utf-8' codec can't decode byte 0xd6 in position 12: invalid continuation byte
+E         编码问题: .tmp-codex/recovery-full-tests-20261005-r1/test_ps1_with_chinese_requires0/a.ps1 —— 含非 ASCII 字符但没有 UTF-8 BOM——Windows PowerShell 5.1 会按系统 ANSI 代码页解码，脚本里的中文会变成乱码（且报错像语法错误）
+E         编码问题: .tmp-codex/recovery-full-tests-20261005-r1/test_python_file_with_bom_is_r0/a.py —— 带 UTF-8 BOM（Python/JSON/Markdown 解析器会因此报错）
+E         共 8 个文件存在问题
+E         
+E         修法：.py/.md 等去掉 BOM；含中文的 .ps1 补 UTF-8 BOM；.cmd/.bat 改成英文。
+E         
+E       assert 1 == 0
+E        +  where 1 = <function main at 0x000002BDE4002FC0>(['--check'])
+E        +    where <function main at 0x000002BDE4002FC0> = strip_bom.main
+
+tests\core\test_script_encoding.py:133: AssertionError
+__________________ test_no_python_file_has_unreachable_code ___________________
+
+    def test_no_python_file_has_unreachable_code():
+        """把未可达代码检查作为测试跑一遍，保证门禁在 `pytest` 里也生效。"""
+    
+        scripts = ROOT / "scripts"
+        sys.path.insert(0, str(scripts))
+        try:
+            import check_dead_code  # type: ignore[import-not-found]
+        finally:
+            sys.path.pop(0)
+    
+        findings: list[str] = []
+        for path in sorted(ROOT.rglob("*.py")):
+            if {".git", ".iverilog-ai", ".dsh-tmp", "__pycache__"} & set(path.parts):
+                continue
+            if path.resolve() == Path(check_dead_code.__file__).resolve():
+                continue
+            findings.extend(check_dead_code.scan_file(path))
+>       assert not findings, "发现不可达代码：\n" + "\n".join(findings)
+E       AssertionError: 发现不可达代码：
+E         E:\FPGA_WORK\iverilog-ai-lab\.tmp-codex\recovery-full-tests-20261005-r1\test_archives_are_repeatable_f0\SYNTHETIC-kit-repo\scripts\build_trial_kit.py:1: 语法错误：invalid syntax
+E         E:\FPGA_WORK\iverilog-ai-lab\.tmp-codex\recovery-full-tests-20261005-r1\test_archives_are_repeatable_f0\SYNTHETIC-kit-repo\scripts\summarize_trial_feedback.py:1: 语法错误：invalid syntax
+E         E:\FPGA_WORK\iverilog-ai-lab\.tmp-codex\recovery-full-tests-20261005-r1\test_archives_are_repeatable_f0\SYNTHETIC-kit-repo\scripts\summarize_trial_sessions.py:1: 语法错误：invalid syntax
+E         E:\FPGA_WORK\iverilog-ai-lab\.tmp-codex\recovery-full-tests-20261005-r1\test_check_mode_and_missing_re0\SYNTHETIC-kit-repo\scripts\build_trial_kit.py:1: 语法错误：invalid syntax
+E         E:\FPGA_WORK\iverilog-ai-lab\.tmp-codex\recovery-full-tests-20261005-r1\test_check_mode_and_missing_re0\SYNTHETIC-kit-repo\scripts\summarize_trial_feedback.py:1: 语法错误：invalid syntax
+E         E:\FPGA_WORK\iverilog-ai-lab\.tmp-codex\recovery-full-tests-20261005-r1\test_check_mode_and_missing_re0\SYNTHETIC-kit-repo\scripts\summarize_trial_sessions.py:1: 语法错误：invalid syntax
+E         E:\FPGA_WORK\iverilog-ai-lab\.tmp-codex\recovery-full-tests-20261005-r1\test_every_archived_file_and_a0\SYNTHETIC-kit-repo\scripts\build_trial_kit.py:1: 语法错误：invalid syntax
+E         E:\FPGA_WORK\iverilog-ai-lab\.tmp-codex\recovery-full-tests-20261005-r1\test_every_archived_file_and_a0\SYNTHETIC-kit-repo\scripts\summarize_trial_feedback.py:1: 语法错误：invalid syntax
+E         E:\FPGA_WORK\iverilog-ai-lab\.tmp-codex\recovery-full-tests-20261005-r1\test_every_archived_file_and_a0\SYNTHETIC-kit-repo\scripts\summarize_trial_sessions.py:1: 语法错误：invalid syntax
+E         E:\FPGA_WORK\iverilog-ai-lab\.tmp-codex\recovery-full-tests-20261005-r1\test_filled_json_template_is_n0\SYNTHETIC-kit-repo\scripts\build_trial_kit.py:1: 语法错误：invalid syntax
+E         E:\FPGA_WORK\iverilog-ai-lab\.tmp-codex\recovery-full-tests-20261005-r1\test_filled_json_template_is_n0\SYNTHETIC-kit-repo\scripts\summarize_trial_feedback.py:1: 语法错误：invalid syntax
+E         E:\FPGA_WORK\iverilog-ai-lab\.tmp-codex\recovery-full-tests-20261005-r1\test_filled_json_template_is_n0\SYNTHETIC-kit-repo\scripts\summarize_trial_sessions.py:1: 语法错误：invalid syntax
+E         E:\FPGA_WORK\iverilog-ai-lab\.tmp-codex\recovery-full-tests-20261005-r1\test_participant_allowlist_exc0\SYNTHETIC-kit-repo\scripts\build_trial_kit.py:1: 语法错误：invalid syntax
+E         E:\FPGA_WORK\iverilog-ai-lab\.tmp-codex\recovery-full-tests-20261005-r1\test_participant_allowlist_exc0\SYNTHETIC-kit-repo\scripts\summarize_trial_feedback.py:1: 语法错误：invalid syntax
+E         E:\FPGA_WORK\iverilog-ai-lab\.tmp-codex\recovery-full-tests-20261005-r1\test_participant_allowlist_exc0\SYNTHETIC-kit-repo\scripts\summarize_trial_sessions.py:1: 语法错误：invalid syntax
+E         E:\FPGA_WORK\iverilog-ai-lab\.tmp-codex\recovery-full-tests-20261005-r1\test_python_file_with_bom_is_r0\a.py:1: 语法错误：invalid non-printable character U+FEFF
+E       assert not ['E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\recovery-full-tests-20261005-r1\\test_archives_are_repeatable_f0\\SYNTHE...test_check_mode_and_missing_re0\\SYNTHETIC-kit-repo\\scripts\\summarize_trial_sessions.py:1: 语法错误：invalid syntax', ...]
+
+tests\core\test_ui_smoke.py:952: AssertionError
+- generated xml file: E:\FPGA_WORK\iverilog-ai-lab\.iverilog-ai\agent-recovery-validation-20261005\r1\pytest.xml -
+=========================== short test summary info ===========================
+SKIPPED [1] tests\ai\test_agent_decision_v4.py:327: directory symlinks unavailable: 1314
+SKIPPED [1] tests\core\test_rule_assertions.py:55: 推荐断言表当前为空：没有可验证的条目（见 core/rule_assertions.py 的说明）
+FAILED tests/core/test_pipeline_matrix.py::test_output_dir_must_stay_inside_the_project
+FAILED tests/core/test_script_encoding.py::test_repository_scripts_pass_the_gate
+FAILED tests/core/test_ui_smoke.py::test_no_python_file_has_unreachable_code
+3 failed, 1304 passed, 2 skipped in 223.42s (0:03:43)

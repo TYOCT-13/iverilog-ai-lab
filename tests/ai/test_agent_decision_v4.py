@@ -172,9 +172,11 @@ def test_illegal_type_is_archived_but_still_rejected_without_execution(tmp_path,
     raw = stop(type="json_object")
     install(monkeypatch, raw)
     pipeline = Pipeline()
-    result = run(tmp_path, provider(), pipeline)
+    service = provider()
+    result = run(tmp_path, service, pipeline, limits=AgentLimits(max_requests=1))
     row = result.trajectory["decisions"][0]
-    assert result.stop_reason == "policy_error" and not pipeline.plans
+    assert result.stop_reason == "decision_format_error" and not pipeline.plans
+    assert service.request_count == result.trajectory["requests_attempted"] == 1
     assert row["status"] == "rejected" and "extra_forbidden" in row["validation_error_types"]
     assert row["usage"] == {"prompt_tokens": 7, "completion_tokens": 11}
     assert (result.trajectory_path.parent / row["untrusted_response"]["path"]).read_text() == raw
@@ -277,15 +279,31 @@ def test_escaped_active_key_in_typed_observation_is_never_recorded(tmp_path, mon
     assert json.dumps(service.api_key)[1:-1] not in result.trajectory_path.read_text()
 
 
-@pytest.mark.parametrize("raw,finish", [(stop(), "length"), ("{}" * 32001, "stop"), ('{"action":', "stop"), (stop(), None)],
-                         ids=["truncated", "oversized", "malformed", "completion_unknown"])
-def test_truncated_oversized_unparseable_or_completion_unknown_outputs_are_not_archived(tmp_path, monkeypatch, raw, finish):
+@pytest.mark.parametrize("raw,finish", [(stop(), "length"), ("{}" * 32001, "stop"), (stop(), None)],
+                         ids=["truncated", "oversized", "completion_unknown"])
+def test_truncated_oversized_or_completion_unknown_outputs_are_not_archived(tmp_path, monkeypatch, raw, finish):
     install(monkeypatch, raw, finish=finish)
     result = run(tmp_path, provider())
     assert not (tmp_path / "agent/untrusted_decisions").exists()
     assert "untrusted_response" not in result.trajectory["decisions"][0]
     if finish == "length":
         assert result.stop_reason == "output_truncated"
+
+
+def test_inspectable_malformed_json_is_inert_archived_and_single_never_retries(tmp_path, monkeypatch):
+    raw = '{"action":'
+    bodies = install(monkeypatch, raw)
+    service, pipeline = provider(), Pipeline()
+    result = run(tmp_path, service, pipeline, limits=AgentLimits(max_requests=1))
+    row = result.trajectory["decisions"][0]
+    assert result.stop_reason == "decision_format_error" and not pipeline.plans
+    assert service.request_count == result.trajectory["requests_attempted"] == len(bodies) == 1
+    assert row["status"] == "rejected" and row["retry_eligible"] is True and "action" not in row
+    artifact = row["untrusted_response"]
+    path = result.trajectory_path.parent / artifact["path"]
+    assert path.suffix == ".txt" and path.read_bytes() == raw.encode("utf-8")
+    assert artifact["trusted"] is False and artifact["parse_status"] == "json_invalid"
+    assert artifact["sha256"] == hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def test_existing_diagnostic_file_is_not_overwritten(tmp_path, monkeypatch):

@@ -5,6 +5,7 @@ import hashlib
 import json
 from pathlib import Path
 from threading import RLock
+from typing import Any
 
 from iverilog_ai.ai.provider import OpenAICompatibleProvider
 
@@ -28,7 +29,7 @@ class TokenBudget:
             raise ValueError("positive token cap required")
         self.journal = Path(journal)
         self.lock = RLock()
-        self.data = {"schema": "agent-round-token-budget-v1", "limit": limit,
+        self.data: dict[str, Any] = {"schema": "agent-round-token-budget-v1", "limit": limit,
                      "scope": "one_registered_batch_input_plus_output",
                      "reservation_rule": "2 * serialized UTF-8 request bytes + 4096 framing margin + max_tokens",
                      "reservation_is_tokenizer_proof": False, "halted": False, "records": []}
@@ -73,7 +74,7 @@ class TokenBudget:
             stream.write("\n")
         temporary.replace(self.journal)
 
-    def reserve(self, body: dict) -> int:
+    def reserve(self, body: dict | None) -> int:
         if (not isinstance(body, dict) or body.get("stream") is not False
                 or body.get("thinking") != {"type": "disabled"}
                 or type(body.get("max_tokens")) is not int or not 256 <= body["max_tokens"] <= 8192
@@ -125,6 +126,7 @@ class TokenBudget:
                 if usage is not None:
                     raise TokenUsageViolation("invalid reported token usage")
                 return
+            assert isinstance(usage, dict)  # The validity gate above excludes missing usage.
             record.update(status="known_usage", charged_tokens=usage["total_tokens"],
                           prompt_tokens=usage["prompt_tokens"], completion_tokens=usage["completion_tokens"])
             violated = (usage["total_tokens"] > record["reserved_tokens"]

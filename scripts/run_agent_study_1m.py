@@ -33,7 +33,7 @@ def preregister_study() -> tuple[dict, dict[Path, bytes]]:
     if config["cycle_budgets"] != {c: validated_short["protocol_config"]["cases"][c]["cycle_budget"] for c in CASES}:
         raise ValueError("cycle budget differs from validated short transactions")
     reg = preregister(strategies=STRATEGIES, repeats=3, profile="v3")
-    ranks = {}
+    ranks: dict[str, dict[str, int]] = {}
     for row in reg["rows"]:
         ranks.setdefault(row["case"], {})
         ranks[row["case"]].setdefault(row["variant"], len(ranks[row["case"]]))

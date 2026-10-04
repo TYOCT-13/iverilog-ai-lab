@@ -73,8 +73,12 @@ def test_iterates_and_keeps_old_vectors_and_round_artifacts(tmp_path):
                                       {"action": "stop", "reason": "x", "vectors": [], "command": "calc"}])
 def test_rejects_model_judges_commands_and_unknown_fields(tmp_path, decision):
     pipeline = Pipeline()
-    result = run(tmp_path, Scripted(decision), pipeline)
-    assert result.stop_reason == "policy_error"
+    service = Scripted(decision)
+    result = run(tmp_path, service, pipeline, limits=AgentLimits(max_requests=1))
+    assert result.stop_reason == "decision_format_error"
+    assert result.trajectory["requests_attempted"] == len(service.prompts) == 1
+    assert result.trajectory["decisions"][0]["status"] == "rejected"
+    assert "action" not in result.trajectory["decisions"][0]
     assert not pipeline.plans
 
 
@@ -197,9 +201,10 @@ def test_limits_reject_bools_and_out_of_bounds():
 def test_invalid_response_keeps_usage_and_safe_diagnostic_codes(tmp_path):
     provider = Scripted('{"action": "append_vectors", "reason": "brief", "vectors": [], "private-field": 1}')
     provider.last_usage = {"prompt_tokens": 23, "completion_tokens": 5}
-    result = run(tmp_path, provider)
+    result = run(tmp_path, provider, limits=AgentLimits(max_requests=1))
     decision = result.trajectory["decisions"][0]
-    assert result.stop_reason == "policy_error"
+    assert result.stop_reason == "decision_format_error"
+    assert result.trajectory["requests_attempted"] == len(provider.prompts) == 1
     assert decision["usage"] == {"prompt_tokens": 23, "completion_tokens": 5}
     assert "extra_forbidden" in decision["validation_error_types"]
     assert "private-field" not in result.trajectory_path.read_text()
