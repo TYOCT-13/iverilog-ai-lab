@@ -125,44 +125,43 @@ class Renderer:
         return text.strip()
 
     def _wrap(self, text: str, size: float, width: float, *, mono: bool = False) -> list[str]:
-        """中英混排换行。
-
-        中文没有空格可依赖，必须在字符间断行；但**拉丁词不能被从中间劈开**
-        （早期版本会把 `testbench` 拆成 `testb`/`ench`，很难读）。因此策略是：
-
-        1. 有空格时优先在空格处断行（拉丁文按词走）；
-        2. 单个词本身就超宽时（常见于没有空格的中文长句与代码），退化为逐字符断行。
-        """
+        """中文逐字填行，保留可容纳的拉丁单词；超长代码/路径才按字符拆分。"""
 
         def fits(candidate: str) -> bool:
             return self._text_width(candidate, size, mono=mono) <= width
 
+        # ASCII 非空白段保留单词和路径，中文等非 ASCII 字符各自成为换行单位。
+        # 不再把一整段中文当作一个必须先移到新行的长单词。
         tokens: list[str] = []
-        for piece in text.split(" "):
-            if piece:
-                tokens.append(piece)
-                tokens.append(" ")
-        if tokens and tokens[-1] == " ":
-            tokens.pop()
+        closing = "，。！？；：、）》】〕〉」』…"
+        for token in re.findall(r"[!-~]+|\s+|[^\s]", text):
+            if token in closing and tokens and not tokens[-1].isspace():
+                tokens[-1] += token
+            else:
+                tokens.append(token)
 
         lines: list[str] = []
         current = ""
         for token in tokens:
+            if token.isspace():
+                space = token if mono else " "
+                if current and fits(current + space):
+                    current += space
+                continue
             if fits(current + token):
                 current += token
-                continue
-            if current.strip():
-                lines.append(current.rstrip())
-                current = ""
-            if token == " ":
-                continue
-            # 单个词超宽：逐字符断行（中文长句走这条路径）
-            for char in token:
-                if fits(current + char):
+            elif fits(token):
+                if current.strip():
+                    lines.append(current.rstrip())
+                current = token
+            else:
+                # 超出整行宽度的代码/路径利用当前行余量，再继续逐字符排版。
+                for char in token:
+                    if current and not fits(current + char):
+                        if current.strip():
+                            lines.append(current.rstrip())
+                        current = ""
                     current += char
-                else:
-                    lines.append(current)
-                    current = char
         if current.strip() or not lines:
             lines.append(current.rstrip())
         return lines
@@ -198,11 +197,11 @@ class Renderer:
     def bullet(self, text: str, *, ordered: bool, index: int, indent: float = 0.0) -> None:
         marker = f"{index}." if ordered else "•"
         text = self._strip_inline(text)
-        marker_w = 18.0
+        marker_w = max(18.0, self._text_width(marker, BODY_SIZE) + 5.0)
         lines = self._wrap(text, BODY_SIZE, CONTENT_W - marker_w - indent)
         self._ensure(BODY_SIZE * LINE_GAP)
         self._draw(marker, MARGIN_X + indent, self.y + BODY_SIZE, BODY_SIZE)
-        self._render_lines(lines, BODY_SIZE, indent=indent + marker_w, first_line_offset=-marker_w)
+        self._render_lines(lines, BODY_SIZE, indent=indent + marker_w)
         self.y += 5
 
     def _render_lines(self, lines: list[str], size: float, *, indent: float, first_line_offset: float = 0.0) -> None:
