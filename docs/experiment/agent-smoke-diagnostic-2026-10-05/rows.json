@@ -1,0 +1,588 @@
+[
+  {
+    "index": 0,
+    "parent_index": 15,
+    "case": "sync_fifo",
+    "variant": "fifo_bug_full_off_by_one",
+    "seed": 0,
+    "strategy": "single",
+    "budget_cycles": 16,
+    "status": "detected",
+    "detected": true,
+    "requests": 1,
+    "search_cycles": 4,
+    "elapsed_seconds": 1.218,
+    "trajectory_sha256": "03ac1563540ba2afd4165b6787a08cef470ffeb81cccfba7becab53b0035573c",
+    "first_detection_search_budget": 3,
+    "round_count": 1,
+    "executed_plans": [
+      {
+        "schema_version": "1.0",
+        "design": "sync_fifo",
+        "objective": "Check contract behavior and protocol boundaries",
+        "clock_period_ns": 10,
+        "reset": {
+          "signal": "rst_n",
+          "active_level": 0,
+          "synchronous": false,
+          "assert_cycles": 2
+        },
+        "sample_before_reset": false,
+        "pre_reset_expected": {},
+        "vectors": [
+          {
+            "name": "agent_1_0",
+            "inputs": {
+              "rst_n": 1,
+              "wr_en": 1,
+              "rd_en": 0,
+              "wr_data": 16
+            },
+            "cycles": 1,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": ""
+          },
+          {
+            "name": "agent_2_1",
+            "inputs": {
+              "wr_en": 1,
+              "rd_en": 0,
+              "wr_data": 34
+            },
+            "cycles": 2,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": ""
+          },
+          {
+            "name": "agent_3_2",
+            "inputs": {
+              "wr_en": 1,
+              "rd_en": 0,
+              "wr_data": 68
+            },
+            "cycles": 1,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": ""
+          }
+        ],
+        "assumptions": [],
+        "assertions": []
+      }
+    ],
+    "functional_coverage": [
+      {
+        "observed": 3,
+        "missing": 4,
+        "unknown": 0
+      }
+    ],
+    "usage_by_decision": [
+      {
+        "request_id": "0:0",
+        "usage": {
+          "prompt_tokens": 2207,
+          "completion_tokens": 150,
+          "total_tokens": 2357,
+          "prompt_cache_hit_tokens": 768,
+          "prompt_cache_miss_tokens": 1439
+        },
+        "status": "validated",
+        "finish_reason": "stop",
+        "plan_validation_status": "passed",
+        "executed_round": 1
+      }
+    ]
+  },
+  {
+    "index": 1,
+    "parent_index": 51,
+    "case": "uart_tx",
+    "variant": "uart_bug_msb_first",
+    "seed": 0,
+    "strategy": "single",
+    "budget_cycles": 48,
+    "status": "detected",
+    "detected": true,
+    "requests": 1,
+    "search_cycles": 46,
+    "elapsed_seconds": 1.672,
+    "trajectory_sha256": "c5a8931c170011c8e727919f7c6860a1dc721c60369bbdd0cab9a6ee7bf93e03",
+    "first_detection_search_budget": 8,
+    "round_count": 1,
+    "executed_plans": [
+      {
+        "schema_version": "1.0",
+        "design": "uart_tx",
+        "objective": "Check contract behavior and protocol boundaries",
+        "clock_period_ns": 10,
+        "reset": {
+          "signal": "rst_n",
+          "active_level": 0,
+          "synchronous": false,
+          "assert_cycles": 2
+        },
+        "sample_before_reset": false,
+        "pre_reset_expected": {},
+        "vectors": [
+          {
+            "name": "agent_1_0",
+            "inputs": {
+              "rst_n": 1,
+              "start": 0,
+              "data_in": 0
+            },
+            "cycles": 3,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": ""
+          },
+          {
+            "name": "agent_2_1",
+            "inputs": {
+              "rst_n": 1,
+              "start": 1,
+              "data_in": 150
+            },
+            "cycles": 1,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": ""
+          },
+          {
+            "name": "agent_3_2",
+            "inputs": {
+              "start": 0,
+              "data_in": 150
+            },
+            "cycles": 40,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": ""
+          },
+          {
+            "name": "agent_4_3",
+            "inputs": {
+              "rst_n": 0,
+              "start": 0,
+              "data_in": 150
+            },
+            "cycles": 2,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": ""
+          }
+        ],
+        "assumptions": [],
+        "assertions": []
+      }
+    ],
+    "functional_coverage": [
+      {
+        "observed": 4,
+        "missing": 2,
+        "unknown": 0
+      }
+    ],
+    "usage_by_decision": [
+      {
+        "request_id": "1:0",
+        "usage": {
+          "prompt_tokens": 2097,
+          "completion_tokens": 199,
+          "total_tokens": 2296,
+          "prompt_cache_hit_tokens": 768,
+          "prompt_cache_miss_tokens": 1329
+        },
+        "status": "validated",
+        "finish_reason": "stop",
+        "plan_validation_status": "passed",
+        "executed_round": 1
+      }
+    ]
+  },
+  {
+    "index": 2,
+    "parent_index": 55,
+    "case": "uart_tx",
+    "variant": "uart_bug_msb_first",
+    "seed": 1,
+    "strategy": "single",
+    "budget_cycles": 48,
+    "status": "detected",
+    "detected": true,
+    "requests": 1,
+    "search_cycles": 42,
+    "elapsed_seconds": 1.516,
+    "trajectory_sha256": "46b0b47abcdd8e3b103723c7846432cd73136a6ef2337bcdb8169330df176833",
+    "first_detection_search_budget": 5,
+    "round_count": 1,
+    "executed_plans": [
+      {
+        "schema_version": "1.0",
+        "design": "uart_tx",
+        "objective": "Check contract behavior and protocol boundaries",
+        "clock_period_ns": 10,
+        "reset": {
+          "signal": "rst_n",
+          "active_level": 0,
+          "synchronous": false,
+          "assert_cycles": 2
+        },
+        "sample_before_reset": false,
+        "pre_reset_expected": {},
+        "vectors": [
+          {
+            "name": "agent_1_0",
+            "inputs": {
+              "rst_n": 1,
+              "start": 1,
+              "data_in": 150
+            },
+            "cycles": 1,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": ""
+          },
+          {
+            "name": "agent_2_1",
+            "inputs": {
+              "rst_n": 1,
+              "start": 0,
+              "data_in": 150
+            },
+            "cycles": 41,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": ""
+          }
+        ],
+        "assumptions": [],
+        "assertions": []
+      }
+    ],
+    "functional_coverage": [
+      {
+        "observed": 3,
+        "missing": 0,
+        "unknown": 3
+      }
+    ],
+    "usage_by_decision": [
+      {
+        "request_id": "2:0",
+        "usage": {
+          "prompt_tokens": 2097,
+          "completion_tokens": 134,
+          "total_tokens": 2231,
+          "prompt_cache_hit_tokens": 1920,
+          "prompt_cache_miss_tokens": 177
+        },
+        "status": "validated",
+        "finish_reason": "stop",
+        "plan_validation_status": "passed",
+        "executed_round": 1
+      }
+    ]
+  },
+  {
+    "index": 3,
+    "parent_index": 71,
+    "case": "uart_tx",
+    "variant": "uart_bug_busy_never_clears",
+    "seed": 2,
+    "strategy": "single",
+    "budget_cycles": 48,
+    "status": "not_detected",
+    "detected": false,
+    "requests": 1,
+    "search_cycles": 5,
+    "elapsed_seconds": 1.719,
+    "trajectory_sha256": "d14350eb94404ed3f8b42d7b205a1c2962ff7a7eec8cb03e9b62ce4fad1c8ce0",
+    "first_detection_search_budget": null,
+    "round_count": 1,
+    "executed_plans": [
+      {
+        "schema_version": "1.0",
+        "design": "uart_tx",
+        "objective": "Check contract behavior and protocol boundaries",
+        "clock_period_ns": 10,
+        "reset": {
+          "signal": "rst_n",
+          "active_level": 0,
+          "synchronous": false,
+          "assert_cycles": 2
+        },
+        "sample_before_reset": false,
+        "pre_reset_expected": {},
+        "vectors": [
+          {
+            "name": "agent_1_0",
+            "inputs": {
+              "rst_n": 1,
+              "start": 0,
+              "data_in": 0
+            },
+            "cycles": 3,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": ""
+          },
+          {
+            "name": "agent_2_1",
+            "inputs": {
+              "start": 0,
+              "data_in": 255
+            },
+            "cycles": 2,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": ""
+          }
+        ],
+        "assumptions": [],
+        "assertions": []
+      }
+    ],
+    "functional_coverage": [
+      {
+        "observed": 1,
+        "missing": 5,
+        "unknown": 0
+      }
+    ],
+    "usage_by_decision": [
+      {
+        "request_id": "3:0",
+        "usage": {
+          "prompt_tokens": 2097,
+          "completion_tokens": 109,
+          "total_tokens": 2206,
+          "prompt_cache_hit_tokens": 1920,
+          "prompt_cache_miss_tokens": 177
+        },
+        "status": "validated",
+        "finish_reason": "stop",
+        "plan_validation_status": "passed",
+        "executed_round": 1
+      }
+    ]
+  },
+  {
+    "index": 4,
+    "parent_index": 99,
+    "case": "spi_master",
+    "variant": "spi_bug_done_missing",
+    "seed": 0,
+    "strategy": "single",
+    "budget_cycles": 20,
+    "status": "detected",
+    "detected": true,
+    "requests": 1,
+    "search_cycles": 18,
+    "elapsed_seconds": 1.562,
+    "trajectory_sha256": "e7f063971c2c78cbf202bab03cc2796e28fc394d86421d34709e6a78cabbea90",
+    "first_detection_search_budget": 16,
+    "round_count": 1,
+    "executed_plans": [
+      {
+        "schema_version": "1.0",
+        "design": "spi_master",
+        "objective": "Check contract behavior and protocol boundaries",
+        "clock_period_ns": 10,
+        "reset": {
+          "signal": "rst_n",
+          "active_level": 0,
+          "synchronous": false,
+          "assert_cycles": 2
+        },
+        "sample_before_reset": false,
+        "pre_reset_expected": {},
+        "vectors": [
+          {
+            "name": "agent_1_0",
+            "inputs": {
+              "rst_n": 1,
+              "start": 1,
+              "data_in": 165
+            },
+            "cycles": 1,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": ""
+          },
+          {
+            "name": "agent_2_1",
+            "inputs": {
+              "start": 0,
+              "data_in": 165
+            },
+            "cycles": 16,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": ""
+          },
+          {
+            "name": "agent_3_2",
+            "inputs": {
+              "start": 0,
+              "data_in": 165
+            },
+            "cycles": 1,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": ""
+          }
+        ],
+        "assumptions": [],
+        "assertions": []
+      }
+    ],
+    "functional_coverage": [
+      {
+        "observed": 3,
+        "missing": 1,
+        "unknown": 2
+      }
+    ],
+    "usage_by_decision": [
+      {
+        "request_id": "4:0",
+        "usage": {
+          "prompt_tokens": 2152,
+          "completion_tokens": 158,
+          "total_tokens": 2310,
+          "prompt_cache_hit_tokens": 768,
+          "prompt_cache_miss_tokens": 1384
+        },
+        "status": "validated",
+        "finish_reason": "stop",
+        "plan_validation_status": "passed",
+        "executed_round": 1
+      }
+    ]
+  },
+  {
+    "index": 5,
+    "parent_index": 7,
+    "case": "sync_fifo",
+    "variant": "reference",
+    "seed": 1,
+    "strategy": "single",
+    "budget_cycles": 16,
+    "status": "not_detected",
+    "detected": false,
+    "requests": 1,
+    "search_cycles": 7,
+    "elapsed_seconds": 1.672,
+    "trajectory_sha256": "faff2d6b314af8a74f7553c400e00dd986ec8b49168ff8f186a7bdf23661c6b9",
+    "first_detection_search_budget": null,
+    "round_count": 1,
+    "executed_plans": [
+      {
+        "schema_version": "1.0",
+        "design": "sync_fifo",
+        "objective": "Check contract behavior and protocol boundaries",
+        "clock_period_ns": 10,
+        "reset": {
+          "signal": "rst_n",
+          "active_level": 0,
+          "synchronous": false,
+          "assert_cycles": 2
+        },
+        "sample_before_reset": false,
+        "pre_reset_expected": {},
+        "vectors": [
+          {
+            "name": "agent_1_0",
+            "inputs": {
+              "rst_n": 1,
+              "wr_en": 1,
+              "rd_en": 0,
+              "wr_data": 17
+            },
+            "cycles": 3,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": ""
+          },
+          {
+            "name": "agent_2_1",
+            "inputs": {
+              "wr_en": 0,
+              "rd_en": 1,
+              "wr_data": 0
+            },
+            "cycles": 1,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": ""
+          },
+          {
+            "name": "agent_3_2",
+            "inputs": {
+              "wr_en": 0,
+              "rd_en": 1,
+              "wr_data": 0
+            },
+            "cycles": 1,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": ""
+          },
+          {
+            "name": "agent_4_3",
+            "inputs": {
+              "wr_en": 1,
+              "rd_en": 0,
+              "wr_data": 68
+            },
+            "cycles": 1,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": ""
+          },
+          {
+            "name": "agent_5_4",
+            "inputs": {
+              "wr_en": 1,
+              "rd_en": 0,
+              "wr_data": 85
+            },
+            "cycles": 1,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": ""
+          }
+        ],
+        "assumptions": [],
+        "assertions": []
+      }
+    ],
+    "functional_coverage": [
+      {
+        "observed": 2,
+        "missing": 4,
+        "unknown": 1
+      }
+    ],
+    "usage_by_decision": [
+      {
+        "request_id": "5:0",
+        "usage": {
+          "prompt_tokens": 2207,
+          "completion_tokens": 226,
+          "total_tokens": 2433,
+          "prompt_cache_hit_tokens": 2048,
+          "prompt_cache_miss_tokens": 159
+        },
+        "status": "validated",
+        "finish_reason": "stop",
+        "plan_validation_status": "passed",
+        "executed_round": 1
+      }
+    ]
+  }
+]

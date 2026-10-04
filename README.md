@@ -25,6 +25,8 @@
 当前改造围绕四类数字 IP：FIFO、UART、SPI 和握手级。API Agent 提出测试激励；独立参考模型与 Icarus 裁决结果，真实端口采样计算 24 项命名功能场景。功能场景是有限事件观察，不是代码覆盖率或正确性证明。网页保留输入、运行记录和结果，可导出原 RTL、测试台及无需 API 的重放脚本。
 
 - [操作与 UART 反例重放](docs/demo/ic_agent_v2_walkthrough.md)
+- [短预算三重复实测](docs/experiment/agent_smoke_live_2026-10-05.md)：144任务、36真实请求；API首轮15/24，均匀随机16/24，固定/协议随机21/24；保留4格式拒绝与1超预算，并披露提示旧长预算冲突。跨重复并集8/8不替换主指标，当前未胜随机。
+- [提示澄清后的六请求诊断](docs/experiment/agent_smoke_diagnostic_2026-10-05.md)：6/6合规执行，事后选择的缺陷任务4/5检出，正确FIFO无误报；剩一个UART提案只测空闲。不是完整新对比，不更新15/24；[预算账](docs/experiment/agent_smoke_diagnostic_api_budget_2026-10-05.json)保守360/360，停止本轮新API。
 - [完整规格与 FIFO / 外部 UART 判据修正](docs/experiment/protocol_oracle_improvements_2026-10-04.md)
 - [三次重复的七策略真实结果](docs/experiment/agent_comparison_v2_live_2026-10-04.md)：252 项、157 请求；旧 v3 Agent 大量动作校验失败，未胜本地基线，未证明覆盖反馈增益。
 - [v4 单重复接线烟测](docs/experiment/agent_comparison_v4_smoke_2026-10-04.md)：94/94 决策通过结构校验，反馈检出 6/8，随机 8/8；保留一个正确基线执行失败，仍不证明覆盖反馈增益。
@@ -33,6 +35,8 @@
 - [逐拍与补测修复](docs/experiment/agent_v5_optimization_2026-10-05.md)：长输入段内每拍复算期望，非法提案在剩余请求内可纠正，原始stdout与执行指纹共同核验；库仍保留原兼容默认值。
 - [v5本地证据包](docs/competition/ic/evidence_pack_v5_2026-10-05.md)：完整本轮原件、74份冻结输入和源码；仓库外真实反例重放108检查/16失败，另有独立子代理字节核查，均不代替真人或独立人审。
 - [API 消息与格式修复说明](docs/experiment/deepseek_decision_v4_2026-10-04.md)：系统规则和状态采用独立消息，保持严格动作校验；新版本实测另列，旧结果不覆盖。
+
+旧v5 ZIP与28be1ed版正式PDF尚未包含这次短预算实验和六项诊断，新增记录按上述独立路径阅读。
 
 使用服务商 API，不运行本地模型权重。真人试用、独立人工复核和新模块留出评测仍待完成；最新验收、提交材料及证据路径统一从 [资料索引](docs/INDEX.md) 进入。历史 83/83 等成绩仍属于原手写测试台和旧版本，不能当成这次 Agent 成绩。
 

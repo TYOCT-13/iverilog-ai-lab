@@ -1,9 +1,43 @@
 """The small post-failure diagnostic must preserve scope, semantics and budget."""
+import hashlib
 import json
+from pathlib import Path
 
 import pytest
 
 from scripts import run_agent_smoke_diagnostic as diagnostic
+
+
+@pytest.fixture(autouse=True)
+def isolated_parent_records(monkeypatch):
+    """Unit tests need no private live run; live evidence is checked separately."""
+    read_text = Path.read_text
+    real_sha = diagnostic.sha
+    parent = {"finished_at": "unit_fixture_not_live", "requests_attempted": 36,
+              "rows": [{"case": case, "variant": variant, "seed": seed, "strategy": "single",
+                        "status": status, "requests": 1, "detected": False,
+                        "rounds": [{}] if variant == "reference" else []}
+                       for case, variant, seed, status in diagnostic.SELECTION]}
+    parent_text = json.dumps(parent)
+    parent_digest = hashlib.sha256(parent_text.encode()).hexdigest()
+    ledger_path = diagnostic.LEDGER
+    ledger = json.loads(read_text(ledger_path, encoding="utf-8"))
+    ledger["new_record"]["sha256"] = parent_digest
+    ledger_text = json.dumps(ledger)
+    texts = {diagnostic.PARENT: parent_text, ledger_path: ledger_text}
+
+    def fixture_read(path, *args, **kwargs):
+        if path in texts:
+            return texts[path]
+        return read_text(path, *args, **kwargs)
+
+    def fixture_sha(path):
+        if path in texts:
+            return hashlib.sha256(texts[path].encode()).hexdigest()
+        return real_sha(path)
+
+    monkeypatch.setattr(Path, "read_text", fixture_read)
+    monkeypatch.setattr(diagnostic, "sha", fixture_sha)
 
 
 def test_normalization_removes_only_old_budget_and_preserves_circuit_semantics():

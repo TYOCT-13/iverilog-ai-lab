@@ -1,0 +1,149 @@
+{
+  "record_kind": "selected_diagnostic_compact_receipt_not_complete_comparison",
+  "created_at_utc": "2026-10-04T19:22:26.116273+00:00",
+  "source_revision": "bdc9e20a0d4d1fe6c79d5f3c125d866338d43d5b",
+  "agent_core_revision": "4d8eafb",
+  "new_comparison": false,
+  "independent_holdout": false,
+  "selected_after_parent_results": true,
+  "registered_tasks": 6,
+  "defect_tasks": 5,
+  "unique_defects": 4,
+  "correct_controls": 1,
+  "requests": 6,
+  "schema_validated": 6,
+  "executed_tasks": 6,
+  "defect_tasks_detected": 4,
+  "correct_false_alarms": 0,
+  "pipeline_sides": 12,
+  "evidence_verified_rows": 6,
+  "frozen_inputs": 85,
+  "frozen_snapshot_verified": true,
+  "shared_checker_eligible_flag": true,
+  "shared_checker_flag_meaning": "byte/execution integrity only; this selected diagnostic is not a new strategy comparison",
+  "strategy_statistics": {
+    "registered_defect_samples": 5,
+    "detected_samples": 4,
+    "unique_defects": 4,
+    "unique_detected": 3,
+    "unique_union_rate": 0.75,
+    "incomplete_or_undecidable": 0,
+    "reference_false_alarm_samples": 0,
+    "reference_target_false_alarms": 0,
+    "variant_reference_audit_rejections": 0,
+    "status_counts": {
+      "detected": 4,
+      "not_detected": 2
+    },
+    "per_repeat": [
+      {
+        "repeat": 0,
+        "registered_defects": 3,
+        "detected": 3,
+        "detection_rate": 1.0,
+        "incomplete_or_undecidable": 0
+      },
+      {
+        "repeat": 1,
+        "registered_defects": 1,
+        "detected": 1,
+        "detection_rate": 1.0,
+        "incomplete_or_undecidable": 0
+      },
+      {
+        "repeat": 2,
+        "registered_defects": 1,
+        "detected": 0,
+        "detection_rate": 0.0,
+        "incomplete_or_undecidable": 0
+      }
+    ],
+    "repeat_detection_rate_mean": 0.6666666666666666,
+    "repeat_detection_rate_min": 0.0,
+    "repeat_detection_rate_max": 1.0,
+    "requests": 6,
+    "usage_numeric_sum": {
+      "prompt_tokens": 12857,
+      "completion_tokens": 976,
+      "total_tokens": 13833,
+      "prompt_cache_hit_tokens": 8192,
+      "prompt_cache_miss_tokens": 4665
+    },
+    "requests_with_usage": 6,
+    "requests_without_usage": 0,
+    "search_cycles_recorded": 122,
+    "reference_audit_cycles_recorded": 122,
+    "reference_audit_cycles_attempted": 122,
+    "checks_recorded": 291,
+    "elapsed_seconds_recorded": 9.359,
+    "missing_elapsed_samples": 0,
+    "first_detection": [
+      {
+        "case": "sync_fifo",
+        "variant": "fifo_bug_full_off_by_one",
+        "repeat": 0,
+        "cycle": 2,
+        "search_budget": 3,
+        "elapsed_seconds": null,
+        "result_available_elapsed_seconds": 1.062
+      },
+      {
+        "case": "uart_tx",
+        "variant": "uart_bug_msb_first",
+        "repeat": 0,
+        "cycle": 7,
+        "search_budget": 8,
+        "elapsed_seconds": null,
+        "result_available_elapsed_seconds": 1.485
+      },
+      {
+        "case": "uart_tx",
+        "variant": "uart_bug_msb_first",
+        "repeat": 1,
+        "cycle": 4,
+        "search_budget": 5,
+        "elapsed_seconds": null,
+        "result_available_elapsed_seconds": 1.297
+      },
+      {
+        "case": "spi_master",
+        "variant": "spi_bug_done_missing",
+        "repeat": 0,
+        "cycle": 15,
+        "search_budget": 16,
+        "elapsed_seconds": null,
+        "result_available_elapsed_seconds": 1.328
+      }
+    ]
+  },
+  "source_files": {
+    "results.json": {
+      "path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005/results.json",
+      "sha256": "bd3046d68cb30b7fa35ffa2d118150bdfc95ee04571634c3a452a1ac87226c22",
+      "bytes": 234502
+    },
+    "summary.json": {
+      "path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005/summary.json",
+      "sha256": "a747c4cbcb3c442e19a1e0ab49ccdd2db9b303d75170a38338e64e34f1cef288",
+      "bytes": 235098
+    },
+    "preregistration.json": {
+      "path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005/preregistration.json",
+      "sha256": "4cc5cbc5adebf8446f7159a1021c68ad930a9f71a4a0194565257795e87b8d0d",
+      "bytes": 19288
+    },
+    "run_settings.json": {
+      "path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005/run_settings.json",
+      "sha256": "fad8b558adb275b4abdd37fabc0ba7b3216cf9ca8b5770f9c2653048c9b5723b",
+      "bytes": 886
+    },
+    "registered-inputs/manifest.json": {
+      "path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005/registered-inputs/manifest.json",
+      "sha256": "b70828d7d594cda59ce5806d6fa3c0c3a9422a26b632b87a2c4c0fb9b46247c9",
+      "bytes": 22245
+    }
+  },
+  "miss": "UART busy_never_clears: 5 stimulus cycles, start always zero, idle observed only",
+  "human_participants": 0,
+  "actual_currency_cost": null
+}

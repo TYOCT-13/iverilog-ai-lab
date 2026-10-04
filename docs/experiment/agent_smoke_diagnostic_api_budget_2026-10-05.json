@@ -1,0 +1,26 @@
+{
+  "record_kind": "api_budget_ledger_not_invoice",
+  "generated_at_utc": "2026-10-04T19:22:26.197467+00:00",
+  "authorized_total_cap": 360,
+  "known_responses": 359,
+  "reserved_request_upper": 360,
+  "remaining_after_reservation": 0,
+  "unknown_inflight_max": 1,
+  "reported_token_total_known_responses": 857957,
+  "actual_currency_cost": null,
+  "previous_ledger": {
+    "path": "docs/experiment/agent_smoke_api_budget_2026-10-05.json",
+    "sha256": "48be9e22948a5bfc5fe4885e1bd68753b5abf34b932b25dda0a2b2c361f6761b"
+  },
+  "new_record": {
+    "path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005/results.json",
+    "sha256": "bd3046d68cb30b7fa35ffa2d118150bdfc95ee04571634c3a452a1ac87226c22",
+    "requests": 6,
+    "requests_with_usage": 6,
+    "tokens": 13833
+  },
+  "notes": [
+    "Keep the old possible in-flight request reserved; no further API calls under this cap.",
+    "Six selected diagnostic requests are not merged into the original 15/24 versus 16/24 comparison."
+  ]
+}

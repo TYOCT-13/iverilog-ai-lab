@@ -1,0 +1,7 @@
+{"mode": "execute", "rows": 6, "requests": 6, "new_comparison": false, "output": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\agent-smoke-diagnostic-live-20261005"}
+{"case": "sync_fifo", "variant": "fifo_bug_full_off_by_one", "strategy": "single", "status": "detected", "requests": 1}
+{"case": "uart_tx", "variant": "uart_bug_msb_first", "strategy": "single", "status": "detected", "requests": 1}
+{"case": "uart_tx", "variant": "uart_bug_msb_first", "strategy": "single", "status": "detected", "requests": 1}
+{"case": "uart_tx", "variant": "uart_bug_busy_never_clears", "strategy": "single", "status": "not_detected", "requests": 1}
+{"case": "spi_master", "variant": "spi_bug_done_missing", "strategy": "single", "status": "detected", "requests": 1}
+{"case": "sync_fifo", "variant": "reference", "strategy": "single", "status": "not_detected", "requests": 1}

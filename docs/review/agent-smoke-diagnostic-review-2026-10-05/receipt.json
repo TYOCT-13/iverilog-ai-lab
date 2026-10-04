@@ -1,0 +1,1054 @@
+{
+  "record_kind": "read_only_agent_smoke_diagnostic_review",
+  "created_at_utc": "2026-10-04T19:26:46.633256+00:00",
+  "audited_head": "bdc9e20a0d4d1fe6c79d5f3c125d866338d43d5b",
+  "api_requests_by_this_review": 0,
+  "simulations_by_this_review": 0,
+  "real_credentials_read": false,
+  "human_participants": 0,
+  "independent_human_review": false,
+  "H01_satisfied": false,
+  "H02_satisfied": false,
+  "cross_machine_reproduction": false,
+  "originals": {
+    "preregistration.json": {
+      "path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005/preregistration.json",
+      "sha256": "4cc5cbc5adebf8446f7159a1021c68ad930a9f71a4a0194565257795e87b8d0d",
+      "bytes": 19288
+    },
+    "run_settings.json": {
+      "path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005/run_settings.json",
+      "sha256": "fad8b558adb275b4abdd37fabc0ba7b3216cf9ca8b5770f9c2653048c9b5723b",
+      "bytes": 886
+    },
+    "results.json": {
+      "path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005/results.json",
+      "sha256": "bd3046d68cb30b7fa35ffa2d118150bdfc95ee04571634c3a452a1ac87226c22",
+      "bytes": 234502
+    },
+    "summary.json": {
+      "path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005/summary.json",
+      "sha256": "a747c4cbcb3c442e19a1e0ab49ccdd2db9b303d75170a38338e64e34f1cef288",
+      "bytes": 235098
+    },
+    "registered-inputs/manifest.json": {
+      "path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005/registered-inputs/manifest.json",
+      "sha256": "b70828d7d594cda59ce5806d6fa3c0c3a9422a26b632b87a2c4c0fb9b46247c9",
+      "bytes": 22245
+    }
+  },
+  "registered_inputs": [
+    {
+      "path": "benchmarks/agent_v2/mutation_manifest.json",
+      "sha256": "5ca8faef783e5d3a3a30ceed4a137353917c767dd7650966e8e4cdb93b7067eb",
+      "bytes": 2833,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "benchmarks/agent_v2/sync_fifo_bug_full_off_by_one.v",
+      "sha256": "64421ef7e99f0d0e4964a680067a7e2d4773c12d15d9b65d8d120156adf8418a",
+      "bytes": 897,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "benchmarks/agent_v2/sync_fifo_bug_write_when_full.v",
+      "sha256": "4d6888893636961465ab503be921859f97d3c0c15695ababaae7ce103032420c",
+      "bytes": 888,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "benchmarks/agent_v2/sync_fifo_reference.v",
+      "sha256": "964cd554041818533ece195f3abcc6979c116c4a3d72106a7fe49c503bd2dadc",
+      "bytes": 895,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "benchmarks/manifest.json",
+      "sha256": "338f6a4f29f84dbe34e14223114d54f6e809b5dd9cd625e081a07f27c396d3f1",
+      "bytes": 28158,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "docs/experiment/agent_comparison_protocol.md",
+      "sha256": "126088737dd77e3a54e66397b7f067a56af235dc49ef0723f4129e706dc243a9",
+      "bytes": 7496,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "docs/experiment/agent_comparison_v5_plan_2026-10-05.md",
+      "sha256": "45dcc49861d275844fbbdac890651ce6ea277fda7211f85f9a71bea69057271f",
+      "bytes": 3546,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "examples/handshake_stage_contract.json",
+      "sha256": "04c7ea8773e394e22bf680304fdcf9d1e3d783d1ca763bb8cc5c4e6a5056f377",
+      "bytes": 522,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "examples/spi_master_contract.json",
+      "sha256": "674473699ff9cfbd2fdf9481272fcc1ce905be4b90148beea4c3d42b92755ebe",
+      "bytes": 487,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "examples/sync_fifo_contract.json",
+      "sha256": "0c51a032e1405f8cfe87a8dc18933c9d6d3cf61b8f8c969bf46ea23402963ce8",
+      "bytes": 515,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "examples/uart_tx_contract.json",
+      "sha256": "0a30a3e3c5e1ee65f5114f476de0e03bb155879b5e7dcdaf099bf918c180f6b4",
+      "bytes": 415,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "rtl/handshake_stage.v",
+      "sha256": "40128340f967f8143bdb55ddfac689a94b7639ac8f175b7b9a4164fb8b531791",
+      "bytes": 472,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "rtl/handshake_stage_bug_ready_ignores_out_ready.v",
+      "sha256": "e52ec6619bcc2b049daff7973c85460482b8ae6bb4b806208a6840442cd9f1d1",
+      "bytes": 587,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "rtl/handshake_stage_bug_valid_not_cleared.v",
+      "sha256": "3f9519c49b4fcb196f4bdee1021d84b922af252be3580d0093b30fef3da68502",
+      "bytes": 601,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "rtl/spi_master.v",
+      "sha256": "8cacdb94472eb7446f0df05ac201f88e1c7e5c46dd01a484b4996b099835c9dd",
+      "bytes": 684,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "rtl/spi_master_bug_done_missing.v",
+      "sha256": "eb194c5f8a88c41111f5cdfb6bb8c67057182448c040691d196ed9bf8376fedf",
+      "bytes": 794,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "rtl/spi_master_bug_sclk_polarity.v",
+      "sha256": "b3c7cb08949d062faaf20811d7d4693ab7a6bf65ce878dbe1a0df15e69fc57f8",
+      "bytes": 794,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "rtl/sync_fifo.v",
+      "sha256": "964cd554041818533ece195f3abcc6979c116c4a3d72106a7fe49c503bd2dadc",
+      "bytes": 895,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "rtl/uart_tx.v",
+      "sha256": "2b6d636a399169bcaa4fdabd9661daedbfde28c42c3bc9f76104db2c371e1193",
+      "bytes": 620,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "rtl/uart_tx_bug_busy_never_clears.v",
+      "sha256": "24b4caa23ac9b7dd2db45401acf781b1641e7eb800c55f32b78cbd6b65c7ffed",
+      "bytes": 733,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "rtl/uart_tx_bug_msb_first.v",
+      "sha256": "93b638a980c2ecf591163f954fd72f5210088c1bf2dda5ab9dbef65c479bd334",
+      "bytes": 725,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "scripts/run_agent_comparison.py",
+      "sha256": "8d283240e1c232ef0cb3a7053f945d1e604456eaf13455648c0868531f5d8287",
+      "bytes": 35055,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "scripts/run_strategy_experiment.py",
+      "sha256": "22889c50c07ff49da00c6278a88e8d710f1f708f1e4bf994f51ad82adee5c341",
+      "bytes": 48683,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "scripts/summarize_agent_comparison.py",
+      "sha256": "ef8ba4bdc7e256ac7ab0bab82abdc372cd4e9c7b0c1460e95c05d7eab383871f",
+      "bytes": 24280,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "spec/agent_protocols.json",
+      "sha256": "24c046c9e0e9a11cc04402efd705244d6efc6417a1e8fafe65ed5db1fc449280",
+      "bytes": 2683,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "spec/handshake_stage_spec.md",
+      "sha256": "fe7fd36d849fadf09e973b006447b63de4c60ea9f9bbe022876983f8aab95398",
+      "bytes": 2912,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "spec/spi_master_spec.md",
+      "sha256": "d98990ce8f73abf4f4cf16196ad99fd345ab729ef35e97bb26ba7f5673eef516",
+      "bytes": 3034,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "spec/sync_fifo_spec.md",
+      "sha256": "4fe66f356d6fb4c0ca7b0c525ec83b3a287f911893af0974a828737dc3eb0aab",
+      "bytes": 3642,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "spec/uart_tx_spec.md",
+      "sha256": "7c99ccfdf59d0bb520b0d9ad9994c3572172402bed32abd1c4cd3425705dfb0f",
+      "bytes": 3199,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/__init__.py",
+      "sha256": "4029747348635aaec01692e07b842e0e371b54137d82ccf87531653e78c20ae5",
+      "bytes": 2323,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/__main__.py",
+      "sha256": "3f5bcafa00f7975197263772705c1a057638fcee62fda5c571d5f346d061458d",
+      "bytes": 182,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/__init__.py",
+      "sha256": "e8f3a29fddabc922dd9bfc972333b84e3617c22ba45f69717953e2ef92c130f4",
+      "bytes": 673,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/agent.py",
+      "sha256": "0b7758b0a5a3cc2a2f07fabfde1b3808fab860872c161df247a68f4b95da3c40",
+      "bytes": 39677,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/debug_provider.py",
+      "sha256": "ee060f47e5d3234be09f5925edd55f58d2e6654f21ca26f1d6b8805d992d976b",
+      "bytes": 28184,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/debug_server.py",
+      "sha256": "c49226654b90f2e507727491253c98ba5384aef156719908197fb88a6040dd0b",
+      "bytes": 15282,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/local_api_profile.py",
+      "sha256": "3942b3a40c131dadb2e84e767ca0656a83f315b9ade6ee1a8d1431e68ff732ea",
+      "bytes": 2258,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/planner.py",
+      "sha256": "0115a312206c0510e12a2ce9bf14f909c88113a1179533023f33da7005bbc805",
+      "bytes": 14117,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/provider.py",
+      "sha256": "caf55116017e962743e03223ff978b13e69ba71b41e11113d16648e8e9763478",
+      "bytes": 29042,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/review_advisor.py",
+      "sha256": "980126489a04fa0d20d7022c544c0a11694ed0ddb76010751879aa5bcbe0edc6",
+      "bytes": 16596,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/schema.py",
+      "sha256": "cf0babeaea6d7a62aa374ca5467f56e8e0575d39407bcf79b57497dfc9e17b06",
+      "bytes": 12436,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/__init__.py",
+      "sha256": "3e0c97ad848d7a60ab75803106040cfd5d449183d57db709f3ece01c9df4f151",
+      "bytes": 4161,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/assertions.py",
+      "sha256": "024168b28e390e7586c91597a7ace8c6cae2dbe8b085d4d7380679892481734f",
+      "bytes": 10842,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/behavior_compare.py",
+      "sha256": "7828c4888b2572bd1b15f2494cf4346e1e327e1403addfec96fa061db7f6d02c",
+      "bytes": 14805,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/benchmark_cases.py",
+      "sha256": "f163c65450e27ba260a8e89a9b3f419b9a2fe23fff6917f77680d8c573f0f73a",
+      "bytes": 5967,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/cli.py",
+      "sha256": "82750a56596d45f49d260433d329e61ff2223571f7e610702c183d70b9d8dc6a",
+      "bytes": 32675,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/config.py",
+      "sha256": "7ba6aedac100d3b7c00d4e4ca0ce3a04402cb0b96f4e7ced73d367c612905d0e",
+      "bytes": 11325,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/contracts.py",
+      "sha256": "775874199ed802d73172202dc68c629ec04796ce1565270a650261e91c8fc097",
+      "bytes": 20368,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/conventions.py",
+      "sha256": "772138a203fe2d738fb4a5d2067f1be7676c4adaec89aed4edc0958dc87cac5e",
+      "bytes": 20766,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/coverage.py",
+      "sha256": "8c85a3816842739f81d20782ba098aab3f17e2f21d0171800eb151802c47b4ca",
+      "bytes": 16726,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/executor.py",
+      "sha256": "d4e352c0317c484a482ddead62b7b6461ad797836de852b88e7b7878f133aba9",
+      "bytes": 15433,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/failure_guide.py",
+      "sha256": "1ec632cdff86255e15a79cdbb1772b7aa0544cf1594f794212cd2d2708dc938a",
+      "bytes": 11246,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/functional_coverage.py",
+      "sha256": "70cd1c00c0e8bc5877fafdb6ba88491d9c5ba2ae16714230aee2a30dfd4bb2fe",
+      "bytes": 24133,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/generator.py",
+      "sha256": "d8463c54bd45f31c379a33cc6d99e35c0fb672f49fd2e4e3c35c0a375e1644a1",
+      "bytes": 393,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/grading.py",
+      "sha256": "8d15c606c39d2182e97f619d8ecf7b9bb11f6222585b085af246d35d111e39c6",
+      "bytes": 13886,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/labels.py",
+      "sha256": "16894f46ab19baf73b251fcd836289d463ecd12e41c1393fc766e363346489be",
+      "bytes": 6508,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/models.py",
+      "sha256": "8d7ff1db511d0e3ab90364e16fd5bb0d0c6159d0adf69c35d519fc7a64cd71d6",
+      "bytes": 34373,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/observations.py",
+      "sha256": "9883628573a7669229a47180dea84591b5b7c7fd7fd2d82dd0d8867019b8e0f3",
+      "bytes": 4041,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/pipeline.py",
+      "sha256": "3cf278b7df84f8d1e8d57786bc3b2485afab14ad5f1a1ce43b5eed657a9b9446",
+      "bytes": 38441,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/pricing.py",
+      "sha256": "8073aae0673652cc664813141be6371270d70b479e8f472afeab7fec9e424a93",
+      "bytes": 7354,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/reference_model.py",
+      "sha256": "bc5b8b4c2bad64541124724f05ecd5ffc3f286fcb72438e759f1445f27c360c1",
+      "bytes": 34171,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/repair_compare.py",
+      "sha256": "fdee57ae6bf2ad9d4f07eb43a35de16ec19f77f2be2d47c85e73900ec7a68939",
+      "bytes": 2526,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/report.py",
+      "sha256": "9564b749aeda1960957f3b20b1bca13e07c5e6fc3316c3aba2d1dffc7f5a0eac",
+      "bytes": 27060,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/rtl_compare.py",
+      "sha256": "4002eeac33e7d937811dfb1af92688dff397929edb6abde8305a50dc6057f3a0",
+      "bytes": 6025,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/rtl_import.py",
+      "sha256": "36b23e675ba8fedb3c2e362a0a3858935cd4828537e88ef7764da7fb26938153",
+      "bytes": 20122,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/rule_assertions.py",
+      "sha256": "b513611ac3f7b1a062352bf4d5168e61bdf0a69d83e0bfda0c4d2b8bf3d1347a",
+      "bytes": 2360,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/rules.py",
+      "sha256": "731534298bce7c909171faaa4bf27492967ca36c1fa2cb9589f8134343ebc7c1",
+      "bytes": 4828,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/static_review.py",
+      "sha256": "ab14b88d043992bbc1c89bec500dfd6e43c3173d7834f8ff3ecfd458e0f6f66f",
+      "bytes": 48269,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/strategy_scoring.py",
+      "sha256": "a16167285dec89bf21a4dcf891747dcb2cf99606bd4b01ec91aeb3e0c4162899",
+      "bytes": 17765,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/synthesis.py",
+      "sha256": "aa67491ea4bd0ff13a329f1ad1f454312476616aa716e5e6915ae4c4c0a7bc7e",
+      "bytes": 15885,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/testbench.py",
+      "sha256": "17119e5851a95e0b065832e0aa03eaeebeb98b630722b66a28751ae7592c86c9",
+      "bytes": 29683,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/toolchain.py",
+      "sha256": "52ce0ae47dfd02ed85aeff8e18d1fd4aa0badc65ceba3ecd999e44e88d3a1d8d",
+      "bytes": 6013,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/vcd.py",
+      "sha256": "01b18b6af89df9ced4da013d8bdacefdf4417a2f7cc1e9f18aea88a9ef0f45f3",
+      "bytes": 31167,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/verify_diff.py",
+      "sha256": "2a01d2e4b90e5ffa97dfaeeefb2ef337e4fb245f7f03fbc18e75ebd52f466967",
+      "bytes": 23826,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/waveform.py",
+      "sha256": "06793bbdb16ee1f8d63be8b914e506362b18e432e82f6370315c759cd97a8433",
+      "bytes": 4246,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "spec/agent_smoke_budgets.json",
+      "sha256": "4d214032533b58ea17b5693bd1a8e3b97d7a860156d01b0e8268781ccab042be",
+      "bytes": 917,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "docs/experiment/agent_smoke_plan_2026-10-05.md",
+      "sha256": "95b72160e841e9a70894fad4af3bc8e88dddd5c6e21a70d4e5468886542ddc3c",
+      "bytes": 3383,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "scripts/run_agent_smoke_comparison.py",
+      "sha256": "c503b59eed5141beea126c0a0523ff8e426f99fbaf15240e64220d4fb70106b7",
+      "bytes": 5423,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005-inputs/sync_fifo_spec.md",
+      "sha256": "dbdf9a1fc9ca195e25813dba8ffdc75f72d51589d7538c192031d88681d27d7e",
+      "bytes": 4474,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005-inputs/uart_tx_spec.md",
+      "sha256": "8add0d36255e2ba26ec3440a5e53c8e94e599645cbfc9eff26e021add2ade0a6",
+      "bytes": 3928,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005-inputs/spi_master_spec.md",
+      "sha256": "606360b21575c9d12505c9130afce753bd092bf841ad9550efbab3c03e8b452d",
+      "bytes": 3909,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005-inputs/handshake_stage_spec.md",
+      "sha256": "59bc8dc1e06bc9b3fd3f49de8b7d64bce611cc2ce7197424a98c15d03a117546",
+      "bytes": 3783,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "scripts/run_agent_smoke_diagnostic.py",
+      "sha256": "f7374acf7db54b5a8b9a2a03af8d9e197641b019fdfa985f7e82b6fb6a21e462",
+      "bytes": 8151,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "docs/experiment/agent_smoke_diagnostic_plan_2026-10-05.md",
+      "sha256": "201aa7b0e6881d98e37c8e9742cf42d8af24a64e01b53f633e98fd0c83ca3f0f",
+      "bytes": 3504,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": "docs/experiment/agent_smoke_api_budget_2026-10-05.json",
+      "sha256": "48be9e22948a5bfc5fe4885e1bd68753b5abf34b932b25dda0a2b2c361f6761b",
+      "bytes": 1017,
+      "snapshot_and_current_match": true
+    },
+    {
+      "path": ".iverilog-ai/agent-smoke-live-20261005/results.json",
+      "sha256": "8d2ed8cae56f2189690c5e108bf25938523c052fe8981ea779116ad3a50d90e9",
+      "bytes": 6378345,
+      "snapshot_and_current_match": true
+    }
+  ],
+  "missed_uart": {
+    "row": 3,
+    "status": "not_detected",
+    "stimulus_cycles": 5,
+    "vectors": [
+      {
+        "inputs": {
+          "rst_n": 1,
+          "start": 0,
+          "data_in": 0
+        },
+        "cycles": 3
+      },
+      {
+        "inputs": {
+          "start": 0,
+          "data_in": 255
+        },
+        "cycles": 2
+      }
+    ],
+    "coverage_observed": [
+      "uart.idle"
+    ],
+    "coverage_missing": [
+      "uart.request",
+      "uart.busy",
+      "uart.frame_start",
+      "uart.busy_request_attempt",
+      "uart.complete_frame"
+    ],
+    "sample_start_zero_busy_zero_tx_one": true,
+    "observed_packet_sha256": "a7f884736326795b2f8152d5b0a14e08023645cdabd85f908af39403abfa6631"
+  },
+  "row_checks": [
+    {
+      "row": 0,
+      "parent_sample": 15,
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "cycles": 4,
+      "first_detection_search_budget": 3
+    },
+    {
+      "row": 1,
+      "parent_sample": 51,
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "cycles": 46,
+      "first_detection_search_budget": 8
+    },
+    {
+      "row": 2,
+      "parent_sample": 55,
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "seed": 1,
+      "status": "detected",
+      "detected_from_records": true,
+      "cycles": 42,
+      "first_detection_search_budget": 5
+    },
+    {
+      "row": 3,
+      "parent_sample": 71,
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "seed": 2,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "cycles": 5,
+      "first_detection_search_budget": null
+    },
+    {
+      "row": 4,
+      "parent_sample": 99,
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "seed": 0,
+      "status": "detected",
+      "detected_from_records": true,
+      "cycles": 18,
+      "first_detection_search_budget": 16
+    },
+    {
+      "row": 5,
+      "parent_sample": 7,
+      "case": "sync_fifo",
+      "variant": "reference",
+      "seed": 1,
+      "status": "not_detected",
+      "detected_from_records": false,
+      "cycles": 7,
+      "first_detection_search_budget": null
+    }
+  ],
+  "pipeline_sides": [
+    {
+      "row": 0,
+      "side": "actual",
+      "run_id": "ed519891ad86",
+      "cycles": 4,
+      "checks": 12,
+      "failures": 1
+    },
+    {
+      "row": 0,
+      "side": "reference",
+      "run_id": "5144b14974b4",
+      "cycles": 4,
+      "checks": 12,
+      "failures": 0
+    },
+    {
+      "row": 1,
+      "side": "actual",
+      "run_id": "4c4b49d1c474",
+      "cycles": 46,
+      "checks": 92,
+      "failures": 16
+    },
+    {
+      "row": 1,
+      "side": "reference",
+      "run_id": "16f3ec4cc54a",
+      "cycles": 46,
+      "checks": 92,
+      "failures": 0
+    },
+    {
+      "row": 2,
+      "side": "actual",
+      "run_id": "db342e2afadf",
+      "cycles": 42,
+      "checks": 84,
+      "failures": 16
+    },
+    {
+      "row": 2,
+      "side": "reference",
+      "run_id": "b5a6d1c1c57f",
+      "cycles": 42,
+      "checks": 84,
+      "failures": 0
+    },
+    {
+      "row": 3,
+      "side": "actual",
+      "run_id": "6c130b65d290",
+      "cycles": 5,
+      "checks": 10,
+      "failures": 0
+    },
+    {
+      "row": 3,
+      "side": "reference",
+      "run_id": "f3354df04e72",
+      "cycles": 5,
+      "checks": 10,
+      "failures": 0
+    },
+    {
+      "row": 4,
+      "side": "actual",
+      "run_id": "e0df207ea635",
+      "cycles": 18,
+      "checks": 72,
+      "failures": 1
+    },
+    {
+      "row": 4,
+      "side": "reference",
+      "run_id": "f8e01e0e4da5",
+      "cycles": 18,
+      "checks": 72,
+      "failures": 0
+    },
+    {
+      "row": 5,
+      "side": "actual",
+      "run_id": "0467ca5439c4",
+      "cycles": 7,
+      "checks": 21,
+      "failures": 0
+    },
+    {
+      "row": 5,
+      "side": "reference",
+      "run_id": "248b2eaa169e",
+      "cycles": 7,
+      "checks": 21,
+      "failures": 0
+    }
+  ],
+  "trace_checks": [
+    {
+      "row": 0,
+      "path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005/sample-000/agent/agent_trajectory.json",
+      "sha256": "03ac1563540ba2afd4165b6787a08cef470ffeb81cccfba7becab53b0035573c",
+      "requests": 1,
+      "status": "validated",
+      "executed_round": 1,
+      "usage": {
+        "prompt_tokens": 2207,
+        "completion_tokens": 150,
+        "total_tokens": 2357,
+        "prompt_cache_hit_tokens": 768,
+        "prompt_cache_miss_tokens": 1439
+      },
+      "raw_decision_sha256": "f24c96fb2ce90dceaf034c7257068762aa524cf1efc1e749351a1519d4ba0fa2",
+      "raw_decision_fields": [
+        "action",
+        "reason",
+        "vectors"
+      ],
+      "no_parent_state": true
+    },
+    {
+      "row": 1,
+      "path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005/sample-001/agent/agent_trajectory.json",
+      "sha256": "c5a8931c170011c8e727919f7c6860a1dc721c60369bbdd0cab9a6ee7bf93e03",
+      "requests": 1,
+      "status": "validated",
+      "executed_round": 1,
+      "usage": {
+        "prompt_tokens": 2097,
+        "completion_tokens": 199,
+        "total_tokens": 2296,
+        "prompt_cache_hit_tokens": 768,
+        "prompt_cache_miss_tokens": 1329
+      },
+      "raw_decision_sha256": "be6cc678e4ba2cf4310bc627694638de4c99b9b04cd07d8fd07647d7d7543701",
+      "raw_decision_fields": [
+        "action",
+        "reason",
+        "vectors"
+      ],
+      "no_parent_state": true
+    },
+    {
+      "row": 2,
+      "path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005/sample-002/agent/agent_trajectory.json",
+      "sha256": "46b0b47abcdd8e3b103723c7846432cd73136a6ef2337bcdb8169330df176833",
+      "requests": 1,
+      "status": "validated",
+      "executed_round": 1,
+      "usage": {
+        "prompt_tokens": 2097,
+        "completion_tokens": 134,
+        "total_tokens": 2231,
+        "prompt_cache_hit_tokens": 1920,
+        "prompt_cache_miss_tokens": 177
+      },
+      "raw_decision_sha256": "1ad0131e2babacb392fe7c22eb8e3af979f63e00a7948209028005b12a5d9772",
+      "raw_decision_fields": [
+        "action",
+        "reason",
+        "vectors"
+      ],
+      "no_parent_state": true
+    },
+    {
+      "row": 3,
+      "path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005/sample-003/agent/agent_trajectory.json",
+      "sha256": "d14350eb94404ed3f8b42d7b205a1c2962ff7a7eec8cb03e9b62ce4fad1c8ce0",
+      "requests": 1,
+      "status": "validated",
+      "executed_round": 1,
+      "usage": {
+        "prompt_tokens": 2097,
+        "completion_tokens": 109,
+        "total_tokens": 2206,
+        "prompt_cache_hit_tokens": 1920,
+        "prompt_cache_miss_tokens": 177
+      },
+      "raw_decision_sha256": "473e420ef6451faa141bb74383742306844ff661284b1ce0693b462508000c70",
+      "raw_decision_fields": [
+        "action",
+        "reason",
+        "vectors"
+      ],
+      "no_parent_state": true
+    },
+    {
+      "row": 4,
+      "path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005/sample-004/agent/agent_trajectory.json",
+      "sha256": "e7f063971c2c78cbf202bab03cc2796e28fc394d86421d34709e6a78cabbea90",
+      "requests": 1,
+      "status": "validated",
+      "executed_round": 1,
+      "usage": {
+        "prompt_tokens": 2152,
+        "completion_tokens": 158,
+        "total_tokens": 2310,
+        "prompt_cache_hit_tokens": 768,
+        "prompt_cache_miss_tokens": 1384
+      },
+      "raw_decision_sha256": "a848118734c2db5d48f31d209225c1602ffc6d7ea95b723d682d7ed908ed4742",
+      "raw_decision_fields": [
+        "action",
+        "reason",
+        "vectors"
+      ],
+      "no_parent_state": true
+    },
+    {
+      "row": 5,
+      "path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005/sample-005/agent/agent_trajectory.json",
+      "sha256": "faff2d6b314af8a74f7553c400e00dd986ec8b49168ff8f186a7bdf23661c6b9",
+      "requests": 1,
+      "status": "validated",
+      "executed_round": 1,
+      "usage": {
+        "prompt_tokens": 2207,
+        "completion_tokens": 226,
+        "total_tokens": 2433,
+        "prompt_cache_hit_tokens": 2048,
+        "prompt_cache_miss_tokens": 159
+      },
+      "raw_decision_sha256": "58882f8acabc6f3a8fdbf24ca9653d22c929c5b708b625d43781eb45413cb9e0",
+      "raw_decision_fields": [
+        "action",
+        "reason",
+        "vectors"
+      ],
+      "no_parent_state": true
+    }
+  ],
+  "requests": 6,
+  "requests_with_usage": 6,
+  "total_tokens": 13833,
+  "validated_decisions": 6,
+  "executed_target_tasks": 6,
+  "registered_defect_tasks": 5,
+  "detected_defect_tasks": 4,
+  "unique_defects": 4,
+  "unique_detected": 3,
+  "correct_controls": 1,
+  "correct_control_false_alarms": 0,
+  "reference_audit_false_alarms": 0,
+  "stimulus_cycles": 122,
+  "reference_audit_cycles": 122,
+  "actual_output_checks": 291,
+  "summary_eligible_for_frozen_comparison": true,
+  "source_inputs_unchanged": true,
+  "original_files_unchanged": true,
+  "errors": [],
+  "verdict": "passed_with_scope_limits",
+  "normalization_checks": [
+    {
+      "case": "sync_fifo",
+      "original_path": "spec/sync_fifo_spec.md",
+      "original_sha256": "4fe66f356d6fb4c0ca7b0c525ec83b3a287f911893af0974a828737dc3eb0aab",
+      "removed_line_number": 35,
+      "removed_line": "- 已验证累计激励预算为 **160 周期**，足够多轮填满、拒写、排空、回绕和复位。预算不要求把每个输出只在末拍采样；检查密度应在对照结果中单独记录。",
+      "removed_line_count": 1,
+      "all_other_source_lines_retained": true,
+      "normalized_path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005-inputs/sync_fifo_spec.md",
+      "normalized_sha256": "dbdf9a1fc9ca195e25813dba8ffdc75f72d51589d7538c192031d88681d27d7e",
+      "prefix_sha256": "a6a2aac32be9bdc579cc544cbcd56e18715ae9d3c4564271415a45dd68e2420b",
+      "matches_frozen_generated_and_public_bytes": true
+    },
+    {
+      "case": "uart_tx",
+      "original_path": "spec/uart_tx_spec.md",
+      "original_sha256": "7c99ccfdf59d0bb520b0d9ad9994c3572172402bed32abd1c4cd3425705dfb0f",
+      "removed_line_number": 33,
+      "removed_line": "累计激励周期上限为 **512**，多轮共享。旧试验的 40 周期上限不足以同时包含接受边沿和 E40 结束检查；本轮单独记录新预算，不改写旧成绩。512 周期可容纳多帧、忙期间请求、结束检查与中途复位，但每个策略仍使用相同累计预算。",
+      "removed_line_count": 1,
+      "all_other_source_lines_retained": true,
+      "normalized_path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005-inputs/uart_tx_spec.md",
+      "normalized_sha256": "8add0d36255e2ba26ec3440a5e53c8e94e599645cbfc9eff26e021add2ade0a6",
+      "prefix_sha256": "fb2b30afbd3a6a76fdb6a13bcbdea61e153a68b793300514bad2c8a1133e1aeb",
+      "matches_frozen_generated_and_public_bytes": true
+    },
+    {
+      "case": "spi_master",
+      "original_path": "spec/spi_master_spec.md",
+      "original_sha256": "d98990ce8f73abf4f4cf16196ad99fd345ab729ef35e97bb26ba7f5673eef516",
+      "removed_line_number": 32,
+      "removed_line": "- 本轮累计激励周期上限 **384**，多轮共享，足够多次完整发送并覆盖复位和边界。各策略用同一预算；实际采样密度另列。",
+      "removed_line_count": 1,
+      "all_other_source_lines_retained": true,
+      "normalized_path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005-inputs/spi_master_spec.md",
+      "normalized_sha256": "606360b21575c9d12505c9130afce753bd092bf841ad9550efbab3c03e8b452d",
+      "prefix_sha256": "09433f960d78e522ae6fd921dc21ac4d37daf154e6c65088d3e2959def035658",
+      "matches_frozen_generated_and_public_bytes": true
+    },
+    {
+      "case": "handshake_stage",
+      "original_path": "spec/handshake_stage_spec.md",
+      "original_sha256": "fe7fd36d849fadf09e973b006447b63de4c60ea9f9bbe022876983f8aab95398",
+      "removed_line_number": 32,
+      "removed_line": "- 本轮多轮共享累计激励预算 **160 周期**。每个策略使用相同累计上限；实际场景覆盖由执行器观察，不由 Agent 自称已覆盖。",
+      "removed_line_count": 1,
+      "all_other_source_lines_retained": true,
+      "normalized_path": ".iverilog-ai/agent-smoke-diagnostic-live-20261005-inputs/handshake_stage_spec.md",
+      "normalized_sha256": "59bc8dc1e06bc9b3fd3f49de8b7d64bce611cc2ce7197424a98c15d03a117546",
+      "prefix_sha256": "187ca2c3b372e5db5cbbf737dfb23738a2c899f5403ecfd7c69bfa48c05b4623",
+      "matches_frozen_generated_and_public_bytes": true
+    }
+  ],
+  "publication_checks": {
+    "compact_receipt_strategy_fields_exact": true,
+    "all_source_checksums_exact": true,
+    "six_compact_rows_plans_usage_and_coverage_exact": true,
+    "preregistration_settings_public_copies_exact": true,
+    "documents_matched_expected_final_lf_hashes": true,
+    "artifacts": [
+      {
+        "path": "docs/experiment/agent_smoke_diagnostic_2026-10-05.md",
+        "sha256": "9b775d65c95ac76661a3ccf85df361cf8e7e5c0d2f69b317fb664f5f0b756b3d",
+        "bytes": 4156
+      },
+      {
+        "path": "docs/experiment/agent_smoke_live_2026-10-05.md",
+        "sha256": "5abd8dd708b2bcd1d31a233968c55f6232c218eb022dbbd6d13995f7c562ac7e",
+        "bytes": 5139
+      },
+      {
+        "path": "docs/experiment/agent_smoke_diagnostic_api_budget_2026-10-05.json",
+        "sha256": "42da5004074b06d5e892bd4343a22be4e17195dcae3cae831abb0d5c9fd1c035",
+        "bytes": 1020
+      },
+      {
+        "path": "docs/experiment/agent-smoke-diagnostic-2026-10-05/receipt.json",
+        "sha256": "d73f9ff0524307fee55127e3145c352cdf1f458d9eaff425db139e947f763f03",
+        "bytes": 4861
+      },
+      {
+        "path": "docs/experiment/agent-smoke-diagnostic-2026-10-05/rows.json",
+        "sha256": "7f7f4a324822d73060a77336889a4ca3eb5f63a898bceab1765a590b12d327b7",
+        "bytes": 15282
+      },
+      {
+        "path": "docs/experiment/agent-smoke-diagnostic-2026-10-05/preregistration.json",
+        "sha256": "4cc5cbc5adebf8446f7159a1021c68ad930a9f71a4a0194565257795e87b8d0d",
+        "bytes": 19288
+      },
+      {
+        "path": "docs/experiment/agent-smoke-diagnostic-2026-10-05/run_settings.json",
+        "sha256": "fad8b558adb275b4abdd37fabc0ba7b3216cf9ca8b5770f9c2653048c9b5723b",
+        "bytes": 886
+      }
+    ]
+  },
+  "budget_check": {
+    "authorized_total_cap": 360,
+    "known_responses": 359,
+    "reserved_request_upper": 360,
+    "remaining_after_reservation": 0,
+    "unknown_inflight_max": 1,
+    "reported_token_total_known_responses": 857957,
+    "actual_currency_cost": null,
+    "previous_ledger_sha_matched": true,
+    "new_results_sha_matched": true,
+    "arithmetic_matched": true
+  },
+  "scope": "Post-result-selected six-request diagnostic; not a new complete comparison or independent holdout",
+  "model_context_review": {
+    "first_state_count": 6,
+    "normalized_spec_verbatim_matches_frozen_bytes": true,
+    "prior_plan": null,
+    "prior_observation": null,
+    "prior_plan_error": null,
+    "variant_paths_or_selection_reason_in_model_state": false,
+    "non_spec_state_fields_reconstructed_and_compared_by_auxiliary_agent": true,
+    "scope": "Read-only agent review, not independent human H02"
+  },
+  "original_comparison": {
+    "single": "15/24",
+    "random": "16/24",
+    "unchanged": true,
+    "diagnostic_results_not_merged": true
+  },
+  "audit_helper_adjustments": [
+    {
+      "kind": "review_helper_only",
+      "error_type": "TypeError",
+      "reason": "The initial read-only helper assumed current_plan was a dict; actual fresh first states correctly use null.",
+      "correction": "Require current_plan to be null, then complete the six-row audit.",
+      "experiment_files_changed": false,
+      "api_requests": 0,
+      "simulations": 0
+    }
+  ],
+  "limitations": [
+    "Five selected defect tasks contain four distinct defects; the UART msb_first defect appears twice. Four task detections are three distinct defects.",
+    "Selected after previous failures and then frozen before six new requests. There is no newly executed control strategy comparison.",
+    "Budget clarification, format emphasis and stochastic new model proposals changed together; this does not identify a single causal effect.",
+    "Shared summary eligibility is evidence integrity for these six rows, not a claim that post-selection is an unbiased comparison.",
+    "One missed UART task remained idle for all five stimulus cycles; format/budget acceptance is not proof of useful protocol coverage.",
+    "The original single 15/24 versus uniform random 16/24 remains the registered comparison result.",
+    "Ledger arithmetic and reported token usage are not a provider invoice. One historical possible in-flight request remains reserved; zero budget remains.",
+    "No API, simulation, real credential access, human trial, H02 or cross-machine run occurred in this review."
+  ]
+}
