@@ -1,0 +1,381 @@
+{
+  "record_kind": "conditional_ic_submission_materials_validation",
+  "recorded_at_utc": "2026-10-04T10:37:14.516292+00:00",
+  "hypothesis": {
+    "H01": "human trials pass within recorded task scope",
+    "H02": "independent human review passes within agreed review scope",
+    "actual_originals_provided": false,
+    "counts_quotes_signatures_or_dates_fabricated": false,
+    "submittable_as_completed_human_evidence": false
+  },
+  "engineering": {
+    "tested_source_commit": "867b8bd564c881954c98cc18813884a4074d1ed5",
+    "reference_metadata": "docs/experiment/ic-validation-pdf-final-2026-10-04/metadata.json",
+    "unchanged_frozen_source_files_checked": 148,
+    "changed_source_files": [],
+    "new_full_regression_run": false,
+    "new_api_requests": 0,
+    "reuses_historical_regression": {
+      "passed": 914,
+      "skipped": 1,
+      "failed": 0,
+      "elapsed_seconds": 227.34
+    }
+  },
+  "copy": {
+    "name": "ICARUS数字IP验证智能体",
+    "name_unicode_codepoints": 15,
+    "intro": "面向数字IP的RTL功能验证，ICARUS把第三方模型API与Icarus仿真连接。模型根据规格和执行反馈追加输入，独立参考判据判断结果；系统限制请求、轮数和周期，保存计划、波形与停止原因。已完成四类模块、五策略的真实API试验：反馈Agent检出4/8，固定和随机各5/8。外部有限规格测试检出13/15，完整工程回归914项通过。作品提供网页与命令行入口，适用于小型数字IP开发辅助与教学实训。",
+    "intro_unicode_codepoints": 199
+  },
+  "evidence_labels": {
+    "observed": [
+      "E01",
+      "E02",
+      "E03",
+      "E04",
+      "E05",
+      "E06",
+      "E07"
+    ],
+    "conditional_not_verified": [
+      "H01",
+      "H02"
+    ],
+    "agent_proofreading_is_independent_human_review": false
+  },
+  "pdfs": [
+    {
+      "pdf": "docs/competition/ic/ICARUS_技术方案.pdf",
+      "source": "docs/competition/ic/report_submission.md",
+      "bytes": 476163,
+      "sha256": "170abf00526fd14e414243c04d4fedb03ea5fba1c1aa9ee6dfac6c4882acd1eb",
+      "pages": 11,
+      "body_pages": 10,
+      "anonymous_metadata": {
+        "format": "PDF 1.7",
+        "title": "",
+        "author": "",
+        "subject": "",
+        "keywords": "",
+        "creator": "",
+        "producer": "",
+        "creationDate": "",
+        "modDate": "",
+        "trapped": "",
+        "encryption": null
+      },
+      "fonts": [
+        {
+          "font_name": "Microsoft YaHei Regular",
+          "extension": "ttf",
+          "font_type": "Type0",
+          "embedded_bytes": 653310
+        }
+      ],
+      "text_spans_outside_page": [],
+      "automated_check": {
+        "argv": [
+          "D:/Users/TYOCT/anaconda3/python.exe",
+          "-X",
+          "utf8",
+          "scripts/check_submission.py",
+          "--json",
+          "--kind",
+          "report",
+          "docs\\competition\\ic\\ICARUS_技术方案.pdf"
+        ],
+        "exit_code": 0,
+        "result": {
+          "ok": true,
+          "findings": [
+            {
+              "level": "info",
+              "code": "pages/room-left",
+              "message": "ICARUS_技术方案.pdf 正文 10 页（总 11 页），距 15 页建议值还空 5 页"
+            },
+            {
+              "level": "info",
+              "code": "metadata/dump",
+              "message": "ICARUS_技术方案.pdf 元数据：{\"title\": \"\", \"author\": \"\", \"subject\": \"\", \"keywords\": \"\", \"creator\": \"\", \"producer\": \"\"}"
+            }
+          ],
+          "checked": [
+            {
+              "file": "docs\\competition\\ic\\ICARUS_技术方案.pdf",
+              "pages": 11,
+              "body_pages": 10,
+              "bytes": 476163
+            }
+          ]
+        },
+        "stderr": ""
+      },
+      "visual_review": {
+        "method": "Poppler rasterization and visual inspection of every final page in two-page contact sheets",
+        "pages": [
+          {
+            "page": 1,
+            "private_preview": ".tmp-codex/ic-submission-preview/technical-01.png",
+            "sha256": "022d75904e9c739e5acfaa409d199d7688f18c64b3a4d549f1d037fb3a6e451c",
+            "visually_reviewed": true
+          },
+          {
+            "page": 2,
+            "private_preview": ".tmp-codex/ic-submission-preview/technical-02.png",
+            "sha256": "f0094d56a51cfe91a80d42a415aedd9ec0dc51e6d2053d7b88468727f437ff5d",
+            "visually_reviewed": true
+          },
+          {
+            "page": 3,
+            "private_preview": ".tmp-codex/ic-submission-preview/technical-03.png",
+            "sha256": "3d883ef93046d3dd660ac889872924a670e19bee981b800bd420038d22b8e7ed",
+            "visually_reviewed": true
+          },
+          {
+            "page": 4,
+            "private_preview": ".tmp-codex/ic-submission-preview/technical-04.png",
+            "sha256": "8fbe7ae3dc4b6ded96db503573af66bb22dca27129e293d754606bba04573472",
+            "visually_reviewed": true
+          },
+          {
+            "page": 5,
+            "private_preview": ".tmp-codex/ic-submission-preview/technical-05.png",
+            "sha256": "813486259fc52ec691f62c8003d1742034020ea693563e3a7477f22787aba177",
+            "visually_reviewed": true
+          },
+          {
+            "page": 6,
+            "private_preview": ".tmp-codex/ic-submission-preview/technical-06.png",
+            "sha256": "9f08b7de9279bf10f6fa6a11d730fd716780365db8078b2e723ee745982b3ad0",
+            "visually_reviewed": true
+          },
+          {
+            "page": 7,
+            "private_preview": ".tmp-codex/ic-submission-preview/technical-07.png",
+            "sha256": "108727f0d73f77f65e2c5672443b7080c4d0b30de9aec9a37ccae585f820a11f",
+            "visually_reviewed": true
+          },
+          {
+            "page": 8,
+            "private_preview": ".tmp-codex/ic-submission-preview/technical-08.png",
+            "sha256": "9edb03d7a5c37b44923b36f323bf00756d5662efd49d1cb4b2943b7a30717fac",
+            "visually_reviewed": true
+          },
+          {
+            "page": 9,
+            "private_preview": ".tmp-codex/ic-submission-preview/technical-09.png",
+            "sha256": "c9baa6dfec2f6cdeb926c93b6034cbcef0458a7f156ee4eeef9577544323409a",
+            "visually_reviewed": true
+          },
+          {
+            "page": 10,
+            "private_preview": ".tmp-codex/ic-submission-preview/technical-10.png",
+            "sha256": "9688e5ceb08911583d8eba566b59da2f8cf225b6b3947e671af3727233050ee2",
+            "visually_reviewed": true
+          },
+          {
+            "page": 11,
+            "private_preview": ".tmp-codex/ic-submission-preview/technical-11.png",
+            "sha256": "ffdecf35f8834c9b6473a17a245118c30ac229c0886118d41289cd1aaf06a8dc",
+            "visually_reviewed": true
+          }
+        ]
+      }
+    },
+    {
+      "pdf": "docs/competition/ic/ICARUS_佐证材料.pdf",
+      "source": "docs/competition/ic/supporting_evidence_submission.md",
+      "bytes": 811612,
+      "sha256": "8bf906276a2db410cb2ec5af6bfcbb39b874579fb6e03e336be4c00c7d94e576",
+      "pages": 5,
+      "body_pages": 5,
+      "anonymous_metadata": {
+        "format": "PDF 1.7",
+        "title": "",
+        "author": "",
+        "subject": "",
+        "keywords": "",
+        "creator": "",
+        "producer": "",
+        "creationDate": "",
+        "modDate": "",
+        "trapped": "",
+        "encryption": null
+      },
+      "fonts": [
+        {
+          "font_name": "Microsoft YaHei Regular",
+          "extension": "ttf",
+          "font_type": "Type0",
+          "embedded_bytes": 519940
+        }
+      ],
+      "text_spans_outside_page": [],
+      "automated_check": {
+        "argv": [
+          "D:/Users/TYOCT/anaconda3/python.exe",
+          "-X",
+          "utf8",
+          "scripts/check_submission.py",
+          "--json",
+          "--kind",
+          "report",
+          "--body-end-marker",
+          "",
+          "docs\\competition\\ic\\ICARUS_佐证材料.pdf"
+        ],
+        "exit_code": 0,
+        "result": {
+          "ok": true,
+          "findings": [
+            {
+              "level": "info",
+              "code": "pages/room-left",
+              "message": "ICARUS_佐证材料.pdf 正文 5 页（总 5 页），距 15 页建议值还空 10 页"
+            },
+            {
+              "level": "info",
+              "code": "metadata/dump",
+              "message": "ICARUS_佐证材料.pdf 元数据：{\"title\": \"\", \"author\": \"\", \"subject\": \"\", \"keywords\": \"\", \"creator\": \"\", \"producer\": \"\"}"
+            }
+          ],
+          "checked": [
+            {
+              "file": "docs\\competition\\ic\\ICARUS_佐证材料.pdf",
+              "pages": 5,
+              "body_pages": 5,
+              "bytes": 811612
+            }
+          ]
+        },
+        "stderr": ""
+      },
+      "visual_review": {
+        "method": "Poppler rasterization and visual inspection of every final page in two-page contact sheets",
+        "pages": [
+          {
+            "page": 1,
+            "private_preview": ".tmp-codex/ic-submission-preview/evidence-1.png",
+            "sha256": "7fe58551a1dfefa4f8ffca10c0bdf59616c320e58cdcbd1088995dc8344a15f7",
+            "visually_reviewed": true
+          },
+          {
+            "page": 2,
+            "private_preview": ".tmp-codex/ic-submission-preview/evidence-2.png",
+            "sha256": "a8029344fdabfe29a4242f0a1f700d2ea547dfad246fc141b442a80f0c7d8d37",
+            "visually_reviewed": true
+          },
+          {
+            "page": 3,
+            "private_preview": ".tmp-codex/ic-submission-preview/evidence-3.png",
+            "sha256": "7e1c96c22c3b80e75f1ce786f10c6bfdc52d481bff90459aa179ed7408e86c7c",
+            "visually_reviewed": true
+          },
+          {
+            "page": 4,
+            "private_preview": ".tmp-codex/ic-submission-preview/evidence-4.png",
+            "sha256": "519b565aa213b8318fa2f5249e0e04e6633bfac8377a828aad755094558f82a4",
+            "visually_reviewed": true
+          },
+          {
+            "page": 5,
+            "private_preview": ".tmp-codex/ic-submission-preview/evidence-5.png",
+            "sha256": "bb1b39855dba008598f3e71abfc647439703438ceec0a34bc29849fa7a399a45",
+            "visually_reviewed": true
+          }
+        ]
+      }
+    }
+  ],
+  "files": {
+    "docs/competition/ic/report_submission.md": {
+      "bytes": 21561,
+      "sha256": "7524ddd03ec1c0bcf9556fedb460ae222bb6963c38a7451e4c59acc4fdc0ed17"
+    },
+    "docs/competition/ic/supporting_evidence_submission.md": {
+      "bytes": 9261,
+      "sha256": "64555717b6caca619bc703df720c03d9f74e7e3b523f30795f5be9bac9244d7c"
+    },
+    "docs/competition/ic/submission_copy.md": {
+      "bytes": 1775,
+      "sha256": "9e022e2bfb8c25a0e43f25717c41765af44e0952fa581c04d57a90dc85b7c5a6"
+    },
+    "docs/competition/ic/submission_package_readme.md": {
+      "bytes": 4699,
+      "sha256": "4f3eccac8e6dd89c925cecfd17c5251a24043cbec9e0dc88513fcbca540542a1"
+    },
+    "docs/competition/ic/submission_figures/architecture.png": {
+      "bytes": 112642,
+      "sha256": "8898808e4fc2f68c82197a914fcd9551abb946dff1954ae94782ba3fb58fcbf8"
+    },
+    "docs/competition/ic/submission_figures/agent_comparison.png": {
+      "bytes": 65433,
+      "sha256": "e8353e8b04d7752ed7f30ec8150f3bd46e0adbc70c1da10133e5af9ee3a1d295"
+    },
+    "docs/competition/ic/ICARUS_技术方案.pdf": {
+      "bytes": 476163,
+      "sha256": "170abf00526fd14e414243c04d4fedb03ea5fba1c1aa9ee6dfac6c4882acd1eb"
+    },
+    "docs/competition/ic/ICARUS_佐证材料.pdf": {
+      "bytes": 811612,
+      "sha256": "8bf906276a2db410cb2ec5af6bfcbb39b874579fb6e03e336be4c00c7d94e576"
+    }
+  },
+  "repairs": [
+    "Reduced two short overflow pages: technical 12 to 11 pages, supporting evidence 6 to 5 pages",
+    "Required H02 reviewer to have no authorship of reviewed feature, variants or oracle",
+    "Retained all assigned tasks in human-trial denominator and marked missing records unknown"
+  ],
+  "limitations": [
+    "No human originals supplied; success statements remain conditional",
+    "PDF visual review is author quality control, not independent human audit",
+    "No new model trial or human measurements",
+    "No defence PDF, video, remote share or registration submission created",
+    "Existing frozen engineering ZIP is unchanged and does not include these new reports"
+  ],
+  "local_materials_zip": ".iverilog-ai/ic-submission-materials-20261004.zip",
+  "index_check": {
+    "exit_code": 0,
+    "paths": 153,
+    "stdout": "索引：E:\\FPGA_WORK\\iverilog-ai-lab\\docs\\INDEX.md\n抽出的材料路径：153 条\n结论：153/153 条路径存在，索引未过期"
+  },
+  "repo_submission_gate": {
+    "known_blocker": "CITATION.cff still has placeholder repository-code; user currently requested local Git only",
+    "check": {
+      "argv": [
+        "D:/Users/TYOCT/anaconda3/python.exe",
+        "-X",
+        "utf8",
+        "scripts/check_submission.py",
+        "--json",
+        "--repo",
+        "."
+      ],
+      "exit_code": 1,
+      "result": {
+        "ok": false,
+        "findings": [
+          {
+            "level": "error",
+            "code": "placeholder/unresolved",
+            "message": "CITATION.cff:18 还留着占位符「example.invalid 保留域」：repository-code: \"https://example.invalid/iverilog-ai-lab\""
+          },
+          {
+            "level": "info",
+            "code": "placeholder/scanned",
+            "message": "占位符扫描：34 个交付面文本文件，命中 1 处"
+          }
+        ],
+        "checked": [
+          {
+            "repo": ".",
+            "files_scanned": 34,
+            "placeholders": 1
+          }
+        ]
+      },
+      "stderr": ""
+    }
+  }
+}

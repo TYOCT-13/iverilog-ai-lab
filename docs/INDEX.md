@@ -15,7 +15,7 @@
 | 你想干什么 | 按顺序读 |
 |---|---|
 | 5 分钟了解这个项目 | `README.md` → `docs/project_overview.md` → `docs/competition/ic/report_draft.md` |
-| 准备 AI＋集成电路提交 | `docs/competition/ic/gap_checklist.md` → `docs/competition/ic/report_draft.md` → `docs/competition/ic/submission_text.md` |
+| 准备 AI＋集成电路提交 | `docs/competition/ic/submission_package_readme.md` → `docs/competition/ic/report_submission.md` → `docs/competition/ic/submission_copy.md`；真人和人审条件须用真实原件核实 |
 | 复核数字是否可信 | `docs/experiment/metric_inventory.md`（每个数字一行：口径/来源/时间/复现命令）→ `docs/competition/submission_gate_checklist.md` → 产物目录 |
 | 提交当天照着做 | `docs/competition/final_delivery_snapshot.md` → `docs/competition/submission_gate_checklist.md` → `docs/competition/submission_cover_text.md` |
 | 组织真人试用与反馈 | `docs/trial/README.md` → `docs/trial/organizer_workflow.md`；发给参与者从 `docs/trial/participant_start.md` 开始 |
@@ -28,6 +28,12 @@
 
 | 材料 | 路径 | 状态 |
 |---|---|---|
+| IC 提交格式技术方案源稿 | `docs/competition/ic/report_submission.md` | 条件稿；按真人、人审均通过的前提起草，H01/H02未核实，实验数字沿用真实记录 |
+| IC 提交格式技术方案 PDF | `docs/competition/ic/ICARUS_技术方案.pdf` | 条件稿；11页/正文10页，七节大纲；匿名版式与逐页检查完成 |
+| IC 佐证汇编源稿与 PDF | `docs/competition/ic/supporting_evidence_submission.md`、`docs/competition/ic/ICARUS_佐证材料.pdf` | 条件稿；5页，E01–E07为真实记录，H01/H02原件待补 |
+| IC 报名短文本与使用说明 | `docs/competition/ic/submission_copy.md`、`docs/competition/ic/submission_package_readme.md` | 名称15字、简介199字；提交位置、命名和条件转事实流程 |
+| 本轮报告配图 | `docs/competition/ic/submission_figures/architecture.png`、`docs/competition/ic/submission_figures/agent_comparison.png` | 原创架构图与真实五策略结果图，不改写实验成绩 |
+| 本轮报告校验回执 | `docs/competition/ic/submission_validation_2026-10-04.json` | 文档与PDF校验，不是新的全仓回归、真人试用或独立人审 |
 | IC 技术报告源 | `docs/competition/ic/report_draft.md` | 按官方七节大纲整理；真人和人工复核缺口如实保留 |
 | IC 技术报告 PDF | `docs/competition/ic/report_draft.pdf` | 已导出工作稿，逐页检查；正式团队字段与人审仍待完成 |
 | PDF 版面与文件核验 | `docs/competition/ic/pdf_validation_2026-10-04.json` | IC稿10页/正文9页；元数据、文件哈希与逐页检查；旧两份PDF按原稿同步重导出 |
@@ -194,8 +200,8 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 | 死代码 | `python scripts/check_dead_code.py` | 121 文件 0 处 |
 | 编码/BOM | `python scripts/strip_bom.py --check` | 0 问题 |
 | 交付体检 | `python scripts/check_submission.py --repo .` | **1 error**（`CITATION.cff` 占位符） |
-| 报告页数/体积 | `python scripts/check_submission.py --kind report docs/competition/technical_report_draft.pdf` | 原开源稿：0 error / 1 warning（正文21页超建议值）；IC稿10页/正文9页，0 error / 0 warning |
-| 索引路径存在性 | `python scripts/check_doc_index.py` | **144/144 条路径存在**（2026-10-04；此前反向测试：故意写错一条则退出码 1） |
+| 报告页数/体积 | `python scripts/check_submission.py --kind report docs/competition/technical_report_draft.pdf` | 原开源稿：0 error / 1 warning（正文21页超建议值）；原IC工作稿10页/正文9页；本轮条件技术方案11页/正文10页，佐证5页，均0 error / 0 warning |
+| 索引路径存在性 | `python scripts/check_doc_index.py` | **153/153 条路径存在**（2026-10-04；此前反向测试：故意写错一条则退出码 1） |
 
 ---
 
