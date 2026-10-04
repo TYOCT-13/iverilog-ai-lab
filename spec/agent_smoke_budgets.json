@@ -1,0 +1,22 @@
+{
+  "schema": "agent-smoke-budgets-v1",
+  "scope": "known_development_modules_short_budget_first_proposal",
+  "cases": {
+    "sync_fifo": {
+      "cycle_budget": 16,
+      "rationale": "DEPTH=4: fill, overflow attempt, drain and empty read require about ten cycles; sixteen allows idle and simultaneous-operation probes."
+    },
+    "uart_tx": {
+      "cycle_budget": 48,
+      "rationale": "CLKS_PER_BIT=4: acceptance, 40 busy cycles and idle recovery need 42 cycles; six further cycles allow request timing and a busy probe."
+    },
+    "spi_master": {
+      "cycle_budget": 20,
+      "rationale": "WIDTH=8: acceptance, 15 busy cycles and idle recovery need 17 cycles; three further cycles allow a request/busy probe."
+    },
+    "handshake_stage": {
+      "cycle_budget": 8,
+      "rationale": "One-entry stage: idle, accept, blocked hold, consume and empty observation fit within eight rising edges."
+    }
+  }
+}
