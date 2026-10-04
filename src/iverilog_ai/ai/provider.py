@@ -2,15 +2,39 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import time
 from dataclasses import dataclass
 from http.client import RemoteDisconnected
-from typing import Literal, Protocol
+from typing import Literal, Protocol, Sequence
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit, urlunsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener, urlopen
+
+
+@dataclass(frozen=True)
+class ProviderMessage:
+    """A plain text system/user message; no model-selected roles or tools."""
+
+    role: Literal["system", "user"]
+    content: str
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.role, str) or self.role not in {"system", "user"}:
+            raise ValueError("message role must be system or user")
+        if not isinstance(self.content, str) or not self.content.strip():
+            raise ValueError("message content must be nonempty text")
+
+
+def _message_payload(messages: Sequence[ProviderMessage]) -> list[dict[str, str]]:
+    if isinstance(messages, (str, bytes)):
+        raise ValueError("messages must contain typed ProviderMessage items")
+    items = tuple(messages)
+    if not 1 <= len(items) <= 64 or any(not isinstance(item, ProviderMessage) for item in items):
+        raise ValueError("messages must contain 1..64 typed ProviderMessage items")
+    return [{"role": item.role, "content": item.content} for item in items]
 
 
 class Provider(Protocol):
@@ -345,6 +369,7 @@ class OpenAICompatibleProvider:
         # Ephemeral telemetry for experiment runners; never contains the API key.
         self.last_usage: dict[str, object] | None = None
         self.last_finish_reason: str | None = None
+        self.last_messages_sha256: str | None = None
         self.last_latency_ms: int | None = None
         # 记录本次请求是否因为网关要求流式而回退到 SSE（仅诊断，不含敏感信息）。
         self.last_stream_fallback = False
@@ -424,6 +449,14 @@ class OpenAICompatibleProvider:
         if self.request_limit is not None and self.request_count >= self.request_limit:
             raise RuntimeError("provider request budget exhausted")
         self.request_count += 1
+        wire_messages = None
+        if body is not None:
+            wire_messages = body.get("messages")
+            if wire_messages is None and isinstance(body.get("input"), list):
+                wire_messages = body["input"]
+        self.last_messages_sha256 = (hashlib.sha256(json.dumps(
+            wire_messages, ensure_ascii=False, sort_keys=True, separators=(",", ":")
+        ).encode("utf-8")).hexdigest() if wire_messages is not None else None)
         self.last_usage = None
         self.last_finish_reason = None
         started = time.perf_counter()
@@ -481,10 +514,12 @@ class OpenAICompatibleProvider:
         }
         return tuple(sorted(model_ids))
 
-    def _build_body(self, prompt: str, *, streaming: bool, json_mode: bool = True) -> dict[str, object]:
+    def _build_body(self, prompt: str, *, streaming: bool, json_mode: bool = True,
+                    messages: Sequence[ProviderMessage] | None = None) -> dict[str, object]:
         _validate_thinking_mode(self.wire_api, self.thinking_mode)
+        payload = _message_payload(messages) if messages is not None else None
         if self.wire_api == "responses":
-            body: dict[str, object] = {"model": self.model, "input": prompt, "stream": streaming}
+            body: dict[str, object] = {"model": self.model, "input": payload if payload is not None else prompt, "stream": streaming}
             # 仅在调用方明确选择时发送可选字段；默认最小请求兼容更多网关。
             if self.store:
                 body["store"] = True
@@ -495,7 +530,7 @@ class OpenAICompatibleProvider:
             return body
         body = {
             "model": self.model,
-            "messages": [{"role": "user", "content": prompt}],
+            "messages": payload if payload is not None else [{"role": "user", "content": prompt}],
             "stream": streaming,
         }
         # OpenAI 兼容网关普遍支持这个字段，它能明显减少散文/围栏输出。
@@ -509,9 +544,10 @@ class OpenAICompatibleProvider:
             body["max_tokens"] = self.max_output_tokens
         return body
 
-    def _generate_once(self, prompt: str, *, streaming: bool, json_mode: bool = True) -> str:
+    def _generate_once(self, prompt: str, *, streaming: bool, json_mode: bool = True,
+                       messages: Sequence[ProviderMessage] | None = None) -> str:
         path = self._endpoint_path("responses" if self.wire_api == "responses" else "chat_completions")
-        body = self._build_body(prompt, streaming=streaming, json_mode=json_mode)
+        body = self._build_body(prompt, streaming=streaming, json_mode=json_mode, messages=messages)
         return _response_text(self._request(path, body=body, streaming=streaming))
 
     def generate(self, prompt: str) -> str:
@@ -530,10 +566,25 @@ class OpenAICompatibleProvider:
         重试只会产生额外请求和额外费用。
         """
 
+        return self._generate_with_fallback(prompt)
+
+    def generate_messages(self, messages: Sequence[ProviderMessage]) -> str:
+        """Send explicit text roles through the same bounded transport path."""
+        typed = tuple(messages)
+        _message_payload(typed)
+        return self._generate_with_fallback("", messages=typed)
+
+    def _generate_with_fallback(self, prompt: str, *,
+                                messages: Sequence[ProviderMessage] | None = None) -> str:
+        def once(*, streaming: bool, json_mode: bool = True) -> str:
+            if messages is None:
+                return self._generate_once(prompt, streaming=streaming, json_mode=json_mode)
+            return self._generate_once(prompt, streaming=streaming, json_mode=json_mode, messages=messages)
+
         if self.stream is True:
-            return self._generate_once(prompt, streaming=True)
+            return once(streaming=True)
         if self.stream is False:
-            return self._generate_once(prompt, streaming=False)
+            return once(streaming=False)
 
         attempts: list[dict[str, bool]] = [
             {"streaming": False, "json_mode": True},
@@ -543,7 +594,7 @@ class OpenAICompatibleProvider:
         last_error: Exception | None = None
         for index, attempt in enumerate(attempts):
             try:
-                return self._generate_once(prompt, **attempt)
+                return once(**attempt)
             except ProviderConnectionError as exc:
                 last_error = exc
                 if not _is_stream_required_error(str(exc)):
