@@ -1,0 +1,41 @@
+{
+  "kind": "machine_browser_operation",
+  "human_participants": 0,
+  "api_requests": 0,
+  "mobile": "viewport emulation",
+  "checks": [
+    {
+      "viewport": [
+        1440,
+        900
+      ],
+      "horizontal_overflow": false,
+      "sampling_visible": true
+    },
+    {
+      "viewport": [
+        1920,
+        1080
+      ],
+      "horizontal_overflow": false,
+      "sampling_visible": true
+    },
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "horizontal_overflow": false,
+      "sampling_visible": true
+    }
+  ],
+  "independent_default": true,
+  "per_cycle_default": true,
+  "per_cycle_enabled": true,
+  "agent_disabled_offline": true,
+  "result_signature": "58/58 条比对一致",
+  "navigation_preserved": true,
+  "mode_preserved": true,
+  "sampling_preserved": true,
+  "success": true
+}

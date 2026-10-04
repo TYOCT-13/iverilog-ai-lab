@@ -1,0 +1,45 @@
+{
+  "record_kind": "local_scoped_v5_pack_machine_receipt",
+  "created_at_utc": "2026-10-04T17:35:23.075737+00:00",
+  "zip_path": ".iverilog-ai/ic-agent-v5-evidence-20261005.zip",
+  "bytes": 48306453,
+  "sha256": "d710a75c651acb4ed64622325b281dbf091660625f70eea3f87703ad8655f3f8",
+  "manifest_sha256": "95980af851e2799dc721daafda7a9bf5383ce54afd13808dfcdb8f53aeead452",
+  "zip_entries": 3282,
+  "hashed_entries": 3281,
+  "crc_valid": true,
+  "all_listed_hashes_match": true,
+  "production_revision": "4d8eafb97681eb96ffe5477b1840bb46558256fa",
+  "raw_directory_allowlist": [
+    "agent-comparison-v5-live-20261005",
+    "v5-sampling-replay-20261005",
+    "agent-v5-scheduling-20261005",
+    "ic-v5-code-review-20261005",
+    "ic-agent-v5-validation-20261005",
+    "ic-agent-v5-validation-20261005-r2",
+    "agent-v5-browser-20261005",
+    "agent-v5-browser-20261005-r2",
+    "agent-v5-browser-20261005-r3",
+    "ic-agent-v5-offline-demo-20261005"
+  ],
+  "public_files": [
+    "docs/experiment/agent_v5_optimization_2026-10-05.md",
+    "docs/experiment/agent_comparison_v5_plan_2026-10-05.md",
+    "docs/experiment/agent_comparison_v5_live_2026-10-05.md",
+    "docs/experiment/ic_agent_v5_validation_2026-10-05.md",
+    "docs/experiment/ic_agent_v5_api_budget_2026-10-05.json",
+    "docs/review/ic_v5_code_review_2026-10-05.md"
+  ],
+  "active_credential_scan": {
+    "clear_and_nested_items_scanned": 4008,
+    "hits": 0,
+    "scope": "active key plaintext, JSON escaping and decoded JSON; not a universal secret detector"
+  },
+  "frozen_registered_inputs": 74,
+  "evidence_verified_tasks": 60,
+  "reparse_points_followed": 0,
+  "api_requests_for_packaging": 0,
+  "human_participants": 0,
+  "independent_human_review": false,
+  "cross_machine_reproduction": false
+}

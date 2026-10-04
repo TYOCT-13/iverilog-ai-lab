@@ -1,0 +1,30 @@
+{
+  "record_kind": "api_budget_ledger_not_invoice",
+  "generated_at_utc": "2026-10-04T17:31:57.106775+00:00",
+  "scope": "current_ic_optimization_only; excludes_earlier_pilot_and_historical_calls",
+  "authorized_total_cap": 360,
+  "known_responses": 317,
+  "reserved_request_upper": 318,
+  "remaining_after_reservation": 42,
+  "unknown_inflight_max": 1,
+  "reported_token_total_known_responses": 765190,
+  "actual_currency_cost": null,
+  "previous_ledger": {
+    "path": "docs/experiment/ic_agent_v4_api_budget_2026-10-04.json",
+    "sha256": "c075392527d38338421b92cbf3ef1a1f9522ad0899de2437be3c3c6ef2d55164"
+  },
+  "new_record": {
+    "run": "v5_independent_per_cycle_development",
+    "original": ".iverilog-ai/agent-comparison-v5-live-20261005/results.json",
+    "sha256": "ba75a6a1ea75675244307927261ac13ce19cb21ff8a87171e8781d8ed6f342e8",
+    "known_requests": 41,
+    "budget_reservation": 41,
+    "requests_with_usage": 41,
+    "reported_tokens": 101251
+  },
+  "notes": [
+    "The prior ledger is retained unchanged; one possible old in-flight request remains reserved.",
+    "No API requests were used for packaging, replay, browser checks, or publication.",
+    "Usage totals are not a provider invoice; no further request is required to finish this iteration."
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "record_kind": "detached_same_machine_saved_counterexample_replay",
+  "created_at_utc": "2026-10-04T17:43:54.890019+00:00",
+  "zip_path": ".iverilog-ai/ic-agent-v5-evidence-20261005.zip",
+  "zip_sha256": "d710a75c651acb4ed64622325b281dbf091660625f70eea3f87703ad8655f3f8",
+  "member_prefix": "raw/ic-agent-v5-offline-demo-20261005/",
+  "extracted_files": [
+    {
+      "member": "raw/ic-agent-v5-offline-demo-20261005/authoritative_plan.json",
+      "file": "authoritative_plan.json",
+      "bytes": 1235,
+      "sha256": "c1b5187de6b7db0815bfadcbdb8c4708130037aa8cb3325f52d46100514c59e1"
+    },
+    {
+      "member": "raw/ic-agent-v5-offline-demo-20261005/dut_contract.json",
+      "file": "dut_contract.json",
+      "bytes": 962,
+      "sha256": "81bee6c74efc6db12a3299c574d58171b6291e33cc6797ad9a32c402e8d1af75"
+    },
+    {
+      "member": "raw/ic-agent-v5-offline-demo-20261005/evidence_manifest.json",
+      "file": "evidence_manifest.json",
+      "bytes": 2579,
+      "sha256": "68f0f7f99f453500f7c525a505cd58a4b5a99b7ac4a9c05c5db91640e16cb0d9"
+    },
+    {
+      "member": "raw/ic-agent-v5-offline-demo-20261005/observed_samples.json",
+      "file": "observed_samples.json",
+      "bytes": 18023,
+      "sha256": "405152b52982b641addaf42fe18709886181d1a8c74b4829426cf5ed0f8f9458"
+    },
+    {
+      "member": "raw/ic-agent-v5-offline-demo-20261005/pipeline_result.json",
+      "file": "pipeline_result.json",
+      "bytes": 248925,
+      "sha256": "223380217c259b4ff14992ba7fa43d838118f121bf8a251408bbcc559ad246bb"
+    },
+    {
+      "member": "raw/ic-agent-v5-offline-demo-20261005/README.md",
+      "file": "README.md",
+      "bytes": 2335,
+      "sha256": "a7a4f9ceda9d62958336bc88850cbf2e1a98d7377727205cc8b587040c11f64e"
+    },
+    {
+      "member": "raw/ic-agent-v5-offline-demo-20261005/reference_samples.json",
+      "file": "reference_samples.json",
+      "bytes": 10238,
+      "sha256": "f5dc9fb1a3279363ca8e135209c871b807955f108e4ad4738de9882e9a21d9e1"
+    },
+    {
+      "member": "raw/ic-agent-v5-offline-demo-20261005/replay.py",
+      "file": "replay.py",
+      "bytes": 4433,
+      "sha256": "07398b27b5e7f0875a8a37f309ab0215ed69cd839827ea9e71b7551e88788c33"
+    },
+    {
+      "member": "raw/ic-agent-v5-offline-demo-20261005/result.json",
+      "file": "result.json",
+      "bytes": 53777,
+      "sha256": "c0cc64472d176cc2e94eb0ad0606da8d08b1f99c8709406416da9e984452c546"
+    },
+    {
+      "member": "raw/ic-agent-v5-offline-demo-20261005/tb_uart_tx.v",
+      "file": "tb_uart_tx.v",
+      "bytes": 70463,
+      "sha256": "2f83d69f6e9587f92e16d28d5154a14867d5d1e53072ba7cbf91ab7a72b35c4e"
+    },
+    {
+      "member": "raw/ic-agent-v5-offline-demo-20261005/testplan.json",
+      "file": "testplan.json",
+      "bytes": 1100,
+      "sha256": "3256141b6ed91476337693430aa5253505aa7169a9f281de87aec2460f8a11d4"
+    },
+    {
+      "member": "raw/ic-agent-v5-offline-demo-20261005/uart_tx_bug_msb_first.v",
+      "file": "uart_tx_bug_msb_first.v",
+      "bytes": 725,
+      "sha256": "93b638a980c2ecf591163f954fd72f5210088c1bf2dda5ab9dbef65c479bd334"
+    },
+    {
+      "member": "raw/ic-agent-v5-offline-demo-20261005/waveform.vcd",
+      "file": "waveform.vcd",
+      "bytes": 4464,
+      "sha256": "d91dabcffd79b1c5a4be994cbc91f8f7693cda8827a7227f9b091cf5b1da0c2c"
+    }
+  ],
+  "working_directory": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v5-replay-0dff1665057e",
+  "outside_original_repository": true,
+  "command": [
+    "D:/Users/TYOCT/anaconda3/python.exe",
+    "-X",
+    "utf8",
+    "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v5-replay-0dff1665057e\\replay.py",
+    "--iverilog",
+    "D:/iverilog/bin/iverilog.exe",
+    "--vvp",
+    "D:/iverilog/bin/vvp.exe"
+  ],
+  "process_exit_code": 0,
+  "replay": {
+    "status": "failed_checks",
+    "compile_exit_code": 0,
+    "run_exit_code": 0,
+    "checks": 108,
+    "failures": 16,
+    "invalid_records": 0,
+    "api_requests": 0,
+    "output_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v5-replay-0dff1665057e\\replay-cbfcb09f5101",
+    "note": "Replay checks the saved testbench; it does not extend verification scope"
+  },
+  "original_run_id": "d52a1836ec44",
+  "original_verdict": "failed_checks",
+  "original_checks": 108,
+  "original_failures": 16,
+  "structured_records_match_original_stdout": true,
+  "copied_input_bytes_unchanged_after_execution": true,
+  "project_module_imports_required": false,
+  "api_requests": 0,
+  "human_participants": 0,
+  "independent_human_review": false,
+  "cross_machine_reproduction": false,
+  "note": "Exit 0 means complete replay. failed_checks is a counterexample, not a passing design. Existing local Python/Icarus used; no new environment installation."
+}

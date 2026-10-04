@@ -1,0 +1,1425 @@
+{
+  "record_kind": "read_only_local_agent_v5_pack_review",
+  "created_at_utc": "2026-10-04T17:47:30.511898+00:00",
+  "package_path": ".iverilog-ai/ic-agent-v5-evidence-20261005.zip",
+  "sha256": "d710a75c651acb4ed64622325b281dbf091660625f70eea3f87703ad8655f3f8",
+  "bytes": 48306453,
+  "production_revision": "4d8eafb97681eb96ffe5477b1840bb46558256fa",
+  "api_requests": 0,
+  "human_participants": 0,
+  "H02_satisfied": false,
+  "independent_human_review": false,
+  "cross_machine_reproduction": false,
+  "simulation_executed": false,
+  "real_credentials_read": false,
+  "credential_scan_independently_repeated": false,
+  "manifest_sha256": "95980af851e2799dc721daafda7a9bf5383ce54afd13808dfcdb8f53aeead452",
+  "zip_entries": 3282,
+  "hashed_entries": 3281,
+  "set_and_path_checks": {
+    "duplicate_names": [],
+    "casefold_collisions": [],
+    "duplicate_manifest_names": [],
+    "extra_entries": [],
+    "missing_entries": [],
+    "unsafe_paths": [],
+    "symlink_entries": [],
+    "encrypted_entries": []
+  },
+  "crc_first_bad_entry": null,
+  "matched_sha_and_size_entries": 3281,
+  "source_archive": {
+    "path": "source/4d8eafb97681eb96ffe5477b1840bb46558256fa.zip",
+    "sha256": "7b303ca06a117a428191fac3ae98de382c72e4e94174555a523aa1aa3107a728",
+    "commit_comment": "4d8eafb97681eb96ffe5477b1840bb46558256fa",
+    "crc_first_bad_entry": null,
+    "matches_regenerated_git_archive_bytes": true,
+    "unsafe_paths": []
+  },
+  "fresh_originals": {
+    "preregistration.json": {
+      "sha256": "76b3d5bfb58b7c7ffa6c353c1036f423802e64a0598c70becca44b9985bc588c",
+      "bytes": 40322,
+      "matches_local_original": true
+    },
+    "run_settings.json": {
+      "sha256": "8eb630943bb78e1dc987a9e03a43642be513421a1c898a3428a47115afc4eb00",
+      "bytes": 887,
+      "matches_local_original": true
+    },
+    "results.json": {
+      "sha256": "ba75a6a1ea75675244307927261ac13ce19cb21ff8a87171e8781d8ed6f342e8",
+      "bytes": 5358863,
+      "matches_local_original": true
+    },
+    "summary.json": {
+      "sha256": "91ea2b17dca81b878e9edb5fc8e2f39bac81f8ddde25a2d1c6763173d306ae2b",
+      "bytes": 5366379,
+      "matches_local_original": true
+    },
+    "registered-inputs/manifest.json": {
+      "sha256": "051ff6f4e6f79c221e3d14d8105e7d405fbf07bddfb0afb070421e0757fef4da",
+      "bytes": 18951,
+      "matches_local_original": true
+    }
+  },
+  "registered_input_checks": [
+    {
+      "path": "benchmarks/agent_v2/mutation_manifest.json",
+      "sha256": "5ca8faef783e5d3a3a30ceed4a137353917c767dd7650966e8e4cdb93b7067eb",
+      "bytes": 2833,
+      "match": true
+    },
+    {
+      "path": "benchmarks/agent_v2/sync_fifo_bug_full_off_by_one.v",
+      "sha256": "64421ef7e99f0d0e4964a680067a7e2d4773c12d15d9b65d8d120156adf8418a",
+      "bytes": 897,
+      "match": true
+    },
+    {
+      "path": "benchmarks/agent_v2/sync_fifo_bug_write_when_full.v",
+      "sha256": "4d6888893636961465ab503be921859f97d3c0c15695ababaae7ce103032420c",
+      "bytes": 888,
+      "match": true
+    },
+    {
+      "path": "benchmarks/agent_v2/sync_fifo_reference.v",
+      "sha256": "964cd554041818533ece195f3abcc6979c116c4a3d72106a7fe49c503bd2dadc",
+      "bytes": 895,
+      "match": true
+    },
+    {
+      "path": "benchmarks/manifest.json",
+      "sha256": "338f6a4f29f84dbe34e14223114d54f6e809b5dd9cd625e081a07f27c396d3f1",
+      "bytes": 28158,
+      "match": true
+    },
+    {
+      "path": "docs/experiment/agent_comparison_protocol.md",
+      "sha256": "126088737dd77e3a54e66397b7f067a56af235dc49ef0723f4129e706dc243a9",
+      "bytes": 7496,
+      "match": true
+    },
+    {
+      "path": "docs/experiment/agent_comparison_v5_plan_2026-10-05.md",
+      "sha256": "45dcc49861d275844fbbdac890651ce6ea277fda7211f85f9a71bea69057271f",
+      "bytes": 3546,
+      "match": true
+    },
+    {
+      "path": "examples/handshake_stage_contract.json",
+      "sha256": "04c7ea8773e394e22bf680304fdcf9d1e3d783d1ca763bb8cc5c4e6a5056f377",
+      "bytes": 522,
+      "match": true
+    },
+    {
+      "path": "examples/spi_master_contract.json",
+      "sha256": "674473699ff9cfbd2fdf9481272fcc1ce905be4b90148beea4c3d42b92755ebe",
+      "bytes": 487,
+      "match": true
+    },
+    {
+      "path": "examples/sync_fifo_contract.json",
+      "sha256": "0c51a032e1405f8cfe87a8dc18933c9d6d3cf61b8f8c969bf46ea23402963ce8",
+      "bytes": 515,
+      "match": true
+    },
+    {
+      "path": "examples/uart_tx_contract.json",
+      "sha256": "0a30a3e3c5e1ee65f5114f476de0e03bb155879b5e7dcdaf099bf918c180f6b4",
+      "bytes": 415,
+      "match": true
+    },
+    {
+      "path": "rtl/handshake_stage.v",
+      "sha256": "40128340f967f8143bdb55ddfac689a94b7639ac8f175b7b9a4164fb8b531791",
+      "bytes": 472,
+      "match": true
+    },
+    {
+      "path": "rtl/handshake_stage_bug_ready_ignores_out_ready.v",
+      "sha256": "e52ec6619bcc2b049daff7973c85460482b8ae6bb4b806208a6840442cd9f1d1",
+      "bytes": 587,
+      "match": true
+    },
+    {
+      "path": "rtl/handshake_stage_bug_valid_not_cleared.v",
+      "sha256": "3f9519c49b4fcb196f4bdee1021d84b922af252be3580d0093b30fef3da68502",
+      "bytes": 601,
+      "match": true
+    },
+    {
+      "path": "rtl/spi_master.v",
+      "sha256": "8cacdb94472eb7446f0df05ac201f88e1c7e5c46dd01a484b4996b099835c9dd",
+      "bytes": 684,
+      "match": true
+    },
+    {
+      "path": "rtl/spi_master_bug_done_missing.v",
+      "sha256": "eb194c5f8a88c41111f5cdfb6bb8c67057182448c040691d196ed9bf8376fedf",
+      "bytes": 794,
+      "match": true
+    },
+    {
+      "path": "rtl/spi_master_bug_sclk_polarity.v",
+      "sha256": "b3c7cb08949d062faaf20811d7d4693ab7a6bf65ce878dbe1a0df15e69fc57f8",
+      "bytes": 794,
+      "match": true
+    },
+    {
+      "path": "rtl/sync_fifo.v",
+      "sha256": "964cd554041818533ece195f3abcc6979c116c4a3d72106a7fe49c503bd2dadc",
+      "bytes": 895,
+      "match": true
+    },
+    {
+      "path": "rtl/uart_tx.v",
+      "sha256": "2b6d636a399169bcaa4fdabd9661daedbfde28c42c3bc9f76104db2c371e1193",
+      "bytes": 620,
+      "match": true
+    },
+    {
+      "path": "rtl/uart_tx_bug_busy_never_clears.v",
+      "sha256": "24b4caa23ac9b7dd2db45401acf781b1641e7eb800c55f32b78cbd6b65c7ffed",
+      "bytes": 733,
+      "match": true
+    },
+    {
+      "path": "rtl/uart_tx_bug_msb_first.v",
+      "sha256": "93b638a980c2ecf591163f954fd72f5210088c1bf2dda5ab9dbef65c479bd334",
+      "bytes": 725,
+      "match": true
+    },
+    {
+      "path": "scripts/run_agent_comparison.py",
+      "sha256": "8d283240e1c232ef0cb3a7053f945d1e604456eaf13455648c0868531f5d8287",
+      "bytes": 35055,
+      "match": true
+    },
+    {
+      "path": "scripts/run_strategy_experiment.py",
+      "sha256": "22889c50c07ff49da00c6278a88e8d710f1f708f1e4bf994f51ad82adee5c341",
+      "bytes": 48683,
+      "match": true
+    },
+    {
+      "path": "scripts/summarize_agent_comparison.py",
+      "sha256": "ef8ba4bdc7e256ac7ab0bab82abdc372cd4e9c7b0c1460e95c05d7eab383871f",
+      "bytes": 24280,
+      "match": true
+    },
+    {
+      "path": "spec/agent_protocols.json",
+      "sha256": "24c046c9e0e9a11cc04402efd705244d6efc6417a1e8fafe65ed5db1fc449280",
+      "bytes": 2683,
+      "match": true
+    },
+    {
+      "path": "spec/handshake_stage_spec.md",
+      "sha256": "fe7fd36d849fadf09e973b006447b63de4c60ea9f9bbe022876983f8aab95398",
+      "bytes": 2912,
+      "match": true
+    },
+    {
+      "path": "spec/spi_master_spec.md",
+      "sha256": "d98990ce8f73abf4f4cf16196ad99fd345ab729ef35e97bb26ba7f5673eef516",
+      "bytes": 3034,
+      "match": true
+    },
+    {
+      "path": "spec/sync_fifo_spec.md",
+      "sha256": "4fe66f356d6fb4c0ca7b0c525ec83b3a287f911893af0974a828737dc3eb0aab",
+      "bytes": 3642,
+      "match": true
+    },
+    {
+      "path": "spec/uart_tx_spec.md",
+      "sha256": "7c99ccfdf59d0bb520b0d9ad9994c3572172402bed32abd1c4cd3425705dfb0f",
+      "bytes": 3199,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/__init__.py",
+      "sha256": "4029747348635aaec01692e07b842e0e371b54137d82ccf87531653e78c20ae5",
+      "bytes": 2323,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/__main__.py",
+      "sha256": "3f5bcafa00f7975197263772705c1a057638fcee62fda5c571d5f346d061458d",
+      "bytes": 182,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/__init__.py",
+      "sha256": "e8f3a29fddabc922dd9bfc972333b84e3617c22ba45f69717953e2ef92c130f4",
+      "bytes": 673,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/agent.py",
+      "sha256": "0b7758b0a5a3cc2a2f07fabfde1b3808fab860872c161df247a68f4b95da3c40",
+      "bytes": 39677,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/debug_provider.py",
+      "sha256": "ee060f47e5d3234be09f5925edd55f58d2e6654f21ca26f1d6b8805d992d976b",
+      "bytes": 28184,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/debug_server.py",
+      "sha256": "c49226654b90f2e507727491253c98ba5384aef156719908197fb88a6040dd0b",
+      "bytes": 15282,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/local_api_profile.py",
+      "sha256": "3942b3a40c131dadb2e84e767ca0656a83f315b9ade6ee1a8d1431e68ff732ea",
+      "bytes": 2258,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/planner.py",
+      "sha256": "0115a312206c0510e12a2ce9bf14f909c88113a1179533023f33da7005bbc805",
+      "bytes": 14117,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/provider.py",
+      "sha256": "caf55116017e962743e03223ff978b13e69ba71b41e11113d16648e8e9763478",
+      "bytes": 29042,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/review_advisor.py",
+      "sha256": "980126489a04fa0d20d7022c544c0a11694ed0ddb76010751879aa5bcbe0edc6",
+      "bytes": 16596,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/schema.py",
+      "sha256": "cf0babeaea6d7a62aa374ca5467f56e8e0575d39407bcf79b57497dfc9e17b06",
+      "bytes": 12436,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/__init__.py",
+      "sha256": "3e0c97ad848d7a60ab75803106040cfd5d449183d57db709f3ece01c9df4f151",
+      "bytes": 4161,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/assertions.py",
+      "sha256": "024168b28e390e7586c91597a7ace8c6cae2dbe8b085d4d7380679892481734f",
+      "bytes": 10842,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/behavior_compare.py",
+      "sha256": "7828c4888b2572bd1b15f2494cf4346e1e327e1403addfec96fa061db7f6d02c",
+      "bytes": 14805,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/benchmark_cases.py",
+      "sha256": "f163c65450e27ba260a8e89a9b3f419b9a2fe23fff6917f77680d8c573f0f73a",
+      "bytes": 5967,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/cli.py",
+      "sha256": "82750a56596d45f49d260433d329e61ff2223571f7e610702c183d70b9d8dc6a",
+      "bytes": 32675,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/config.py",
+      "sha256": "7ba6aedac100d3b7c00d4e4ca0ce3a04402cb0b96f4e7ced73d367c612905d0e",
+      "bytes": 11325,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/contracts.py",
+      "sha256": "775874199ed802d73172202dc68c629ec04796ce1565270a650261e91c8fc097",
+      "bytes": 20368,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/conventions.py",
+      "sha256": "772138a203fe2d738fb4a5d2067f1be7676c4adaec89aed4edc0958dc87cac5e",
+      "bytes": 20766,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/coverage.py",
+      "sha256": "8c85a3816842739f81d20782ba098aab3f17e2f21d0171800eb151802c47b4ca",
+      "bytes": 16726,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/executor.py",
+      "sha256": "d4e352c0317c484a482ddead62b7b6461ad797836de852b88e7b7878f133aba9",
+      "bytes": 15433,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/failure_guide.py",
+      "sha256": "1ec632cdff86255e15a79cdbb1772b7aa0544cf1594f794212cd2d2708dc938a",
+      "bytes": 11246,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/functional_coverage.py",
+      "sha256": "70cd1c00c0e8bc5877fafdb6ba88491d9c5ba2ae16714230aee2a30dfd4bb2fe",
+      "bytes": 24133,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/generator.py",
+      "sha256": "d8463c54bd45f31c379a33cc6d99e35c0fb672f49fd2e4e3c35c0a375e1644a1",
+      "bytes": 393,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/grading.py",
+      "sha256": "8d15c606c39d2182e97f619d8ecf7b9bb11f6222585b085af246d35d111e39c6",
+      "bytes": 13886,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/labels.py",
+      "sha256": "16894f46ab19baf73b251fcd836289d463ecd12e41c1393fc766e363346489be",
+      "bytes": 6508,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/models.py",
+      "sha256": "8d7ff1db511d0e3ab90364e16fd5bb0d0c6159d0adf69c35d519fc7a64cd71d6",
+      "bytes": 34373,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/observations.py",
+      "sha256": "9883628573a7669229a47180dea84591b5b7c7fd7fd2d82dd0d8867019b8e0f3",
+      "bytes": 4041,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/pipeline.py",
+      "sha256": "3cf278b7df84f8d1e8d57786bc3b2485afab14ad5f1a1ce43b5eed657a9b9446",
+      "bytes": 38441,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/pricing.py",
+      "sha256": "8073aae0673652cc664813141be6371270d70b479e8f472afeab7fec9e424a93",
+      "bytes": 7354,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/reference_model.py",
+      "sha256": "bc5b8b4c2bad64541124724f05ecd5ffc3f286fcb72438e759f1445f27c360c1",
+      "bytes": 34171,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/repair_compare.py",
+      "sha256": "fdee57ae6bf2ad9d4f07eb43a35de16ec19f77f2be2d47c85e73900ec7a68939",
+      "bytes": 2526,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/report.py",
+      "sha256": "9564b749aeda1960957f3b20b1bca13e07c5e6fc3316c3aba2d1dffc7f5a0eac",
+      "bytes": 27060,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/rtl_compare.py",
+      "sha256": "4002eeac33e7d937811dfb1af92688dff397929edb6abde8305a50dc6057f3a0",
+      "bytes": 6025,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/rtl_import.py",
+      "sha256": "36b23e675ba8fedb3c2e362a0a3858935cd4828537e88ef7764da7fb26938153",
+      "bytes": 20122,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/rule_assertions.py",
+      "sha256": "b513611ac3f7b1a062352bf4d5168e61bdf0a69d83e0bfda0c4d2b8bf3d1347a",
+      "bytes": 2360,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/rules.py",
+      "sha256": "731534298bce7c909171faaa4bf27492967ca36c1fa2cb9589f8134343ebc7c1",
+      "bytes": 4828,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/static_review.py",
+      "sha256": "ab14b88d043992bbc1c89bec500dfd6e43c3173d7834f8ff3ecfd458e0f6f66f",
+      "bytes": 48269,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/strategy_scoring.py",
+      "sha256": "a16167285dec89bf21a4dcf891747dcb2cf99606bd4b01ec91aeb3e0c4162899",
+      "bytes": 17765,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/synthesis.py",
+      "sha256": "aa67491ea4bd0ff13a329f1ad1f454312476616aa716e5e6915ae4c4c0a7bc7e",
+      "bytes": 15885,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/testbench.py",
+      "sha256": "17119e5851a95e0b065832e0aa03eaeebeb98b630722b66a28751ae7592c86c9",
+      "bytes": 29683,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/toolchain.py",
+      "sha256": "52ce0ae47dfd02ed85aeff8e18d1fd4aa0badc65ceba3ecd999e44e88d3a1d8d",
+      "bytes": 6013,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/vcd.py",
+      "sha256": "01b18b6af89df9ced4da013d8bdacefdf4417a2f7cc1e9f18aea88a9ef0f45f3",
+      "bytes": 31167,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/verify_diff.py",
+      "sha256": "2a01d2e4b90e5ffa97dfaeeefb2ef337e4fb245f7f03fbc18e75ebd52f466967",
+      "bytes": 23826,
+      "match": true
+    },
+    {
+      "path": "src/iverilog_ai/core/waveform.py",
+      "sha256": "06793bbdb16ee1f8d63be8b914e506362b18e432e82f6370315c759cd97a8433",
+      "bytes": 4246,
+      "match": true
+    }
+  ],
+  "experiment_checks": {
+    "rows": [
+      {
+        "row": 0,
+        "case": "sync_fifo",
+        "variant": "reference",
+        "strategy": "fixed",
+        "status": "not_detected",
+        "detected_from_records": false,
+        "requests": 0,
+        "first_detection_search_budget": null
+      },
+      {
+        "row": 1,
+        "case": "sync_fifo",
+        "variant": "reference",
+        "strategy": "random",
+        "status": "not_detected",
+        "detected_from_records": false,
+        "requests": 0,
+        "first_detection_search_budget": null
+      },
+      {
+        "row": 2,
+        "case": "sync_fifo",
+        "variant": "reference",
+        "strategy": "protocol_random",
+        "status": "not_detected",
+        "detected_from_records": false,
+        "requests": 0,
+        "first_detection_search_budget": null
+      },
+      {
+        "row": 3,
+        "case": "sync_fifo",
+        "variant": "reference",
+        "strategy": "feedback",
+        "status": "not_detected",
+        "detected_from_records": false,
+        "requests": 3,
+        "first_detection_search_budget": null
+      },
+      {
+        "row": 4,
+        "case": "sync_fifo",
+        "variant": "reference",
+        "strategy": "no_feedback",
+        "status": "policy_error",
+        "detected_from_records": false,
+        "requests": 2,
+        "first_detection_search_budget": null
+      },
+      {
+        "row": 5,
+        "case": "sync_fifo",
+        "variant": "fifo_bug_full_off_by_one",
+        "strategy": "fixed",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 10
+      },
+      {
+        "row": 6,
+        "case": "sync_fifo",
+        "variant": "fifo_bug_full_off_by_one",
+        "strategy": "random",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 21
+      },
+      {
+        "row": 7,
+        "case": "sync_fifo",
+        "variant": "fifo_bug_full_off_by_one",
+        "strategy": "protocol_random",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 4
+      },
+      {
+        "row": 8,
+        "case": "sync_fifo",
+        "variant": "fifo_bug_full_off_by_one",
+        "strategy": "feedback",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 1,
+        "first_detection_search_budget": 5
+      },
+      {
+        "row": 9,
+        "case": "sync_fifo",
+        "variant": "fifo_bug_full_off_by_one",
+        "strategy": "no_feedback",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 1,
+        "first_detection_search_budget": 5
+      },
+      {
+        "row": 10,
+        "case": "sync_fifo",
+        "variant": "fifo_bug_write_when_full",
+        "strategy": "fixed",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 20
+      },
+      {
+        "row": 11,
+        "case": "sync_fifo",
+        "variant": "fifo_bug_write_when_full",
+        "strategy": "random",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 93
+      },
+      {
+        "row": 12,
+        "case": "sync_fifo",
+        "variant": "fifo_bug_write_when_full",
+        "strategy": "protocol_random",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 7
+      },
+      {
+        "row": 13,
+        "case": "sync_fifo",
+        "variant": "fifo_bug_write_when_full",
+        "strategy": "feedback",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 1,
+        "first_detection_search_budget": 8
+      },
+      {
+        "row": 14,
+        "case": "sync_fifo",
+        "variant": "fifo_bug_write_when_full",
+        "strategy": "no_feedback",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 1,
+        "first_detection_search_budget": 10
+      },
+      {
+        "row": 15,
+        "case": "uart_tx",
+        "variant": "reference",
+        "strategy": "fixed",
+        "status": "not_detected",
+        "detected_from_records": false,
+        "requests": 0,
+        "first_detection_search_budget": null
+      },
+      {
+        "row": 16,
+        "case": "uart_tx",
+        "variant": "reference",
+        "strategy": "random",
+        "status": "not_detected",
+        "detected_from_records": false,
+        "requests": 0,
+        "first_detection_search_budget": null
+      },
+      {
+        "row": 17,
+        "case": "uart_tx",
+        "variant": "reference",
+        "strategy": "protocol_random",
+        "status": "not_detected",
+        "detected_from_records": false,
+        "requests": 0,
+        "first_detection_search_budget": null
+      },
+      {
+        "row": 18,
+        "case": "uart_tx",
+        "variant": "reference",
+        "strategy": "feedback",
+        "status": "not_detected",
+        "detected_from_records": false,
+        "requests": 3,
+        "first_detection_search_budget": null
+      },
+      {
+        "row": 19,
+        "case": "uart_tx",
+        "variant": "reference",
+        "strategy": "no_feedback",
+        "status": "not_detected",
+        "detected_from_records": false,
+        "requests": 3,
+        "first_detection_search_budget": null
+      },
+      {
+        "row": 20,
+        "case": "uart_tx",
+        "variant": "uart_bug_msb_first",
+        "strategy": "fixed",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 7
+      },
+      {
+        "row": 21,
+        "case": "uart_tx",
+        "variant": "uart_bug_msb_first",
+        "strategy": "random",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 46
+      },
+      {
+        "row": 22,
+        "case": "uart_tx",
+        "variant": "uart_bug_msb_first",
+        "strategy": "protocol_random",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 9
+      },
+      {
+        "row": 23,
+        "case": "uart_tx",
+        "variant": "uart_bug_msb_first",
+        "strategy": "feedback",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 1,
+        "first_detection_search_budget": 9
+      },
+      {
+        "row": 24,
+        "case": "uart_tx",
+        "variant": "uart_bug_msb_first",
+        "strategy": "no_feedback",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 1,
+        "first_detection_search_budget": 9
+      },
+      {
+        "row": 25,
+        "case": "uart_tx",
+        "variant": "uart_bug_busy_never_clears",
+        "strategy": "fixed",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 43
+      },
+      {
+        "row": 26,
+        "case": "uart_tx",
+        "variant": "uart_bug_busy_never_clears",
+        "strategy": "random",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 41
+      },
+      {
+        "row": 27,
+        "case": "uart_tx",
+        "variant": "uart_bug_busy_never_clears",
+        "strategy": "protocol_random",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 41
+      },
+      {
+        "row": 28,
+        "case": "uart_tx",
+        "variant": "uart_bug_busy_never_clears",
+        "strategy": "feedback",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 1,
+        "first_detection_search_budget": 44
+      },
+      {
+        "row": 29,
+        "case": "uart_tx",
+        "variant": "uart_bug_busy_never_clears",
+        "strategy": "no_feedback",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 1,
+        "first_detection_search_budget": 45
+      },
+      {
+        "row": 30,
+        "case": "spi_master",
+        "variant": "reference",
+        "strategy": "fixed",
+        "status": "not_detected",
+        "detected_from_records": false,
+        "requests": 0,
+        "first_detection_search_budget": null
+      },
+      {
+        "row": 31,
+        "case": "spi_master",
+        "variant": "reference",
+        "strategy": "random",
+        "status": "not_detected",
+        "detected_from_records": false,
+        "requests": 0,
+        "first_detection_search_budget": null
+      },
+      {
+        "row": 32,
+        "case": "spi_master",
+        "variant": "reference",
+        "strategy": "protocol_random",
+        "status": "not_detected",
+        "detected_from_records": false,
+        "requests": 0,
+        "first_detection_search_budget": null
+      },
+      {
+        "row": 33,
+        "case": "spi_master",
+        "variant": "reference",
+        "strategy": "feedback",
+        "status": "not_detected",
+        "detected_from_records": false,
+        "requests": 3,
+        "first_detection_search_budget": null
+      },
+      {
+        "row": 34,
+        "case": "spi_master",
+        "variant": "reference",
+        "strategy": "no_feedback",
+        "status": "not_detected",
+        "detected_from_records": false,
+        "requests": 3,
+        "first_detection_search_budget": null
+      },
+      {
+        "row": 35,
+        "case": "spi_master",
+        "variant": "spi_bug_sclk_polarity",
+        "strategy": "fixed",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 4
+      },
+      {
+        "row": 36,
+        "case": "spi_master",
+        "variant": "spi_bug_sclk_polarity",
+        "strategy": "random",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 2
+      },
+      {
+        "row": 37,
+        "case": "spi_master",
+        "variant": "spi_bug_sclk_polarity",
+        "strategy": "protocol_random",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 2
+      },
+      {
+        "row": 38,
+        "case": "spi_master",
+        "variant": "spi_bug_sclk_polarity",
+        "strategy": "feedback",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 1,
+        "first_detection_search_budget": 4
+      },
+      {
+        "row": 39,
+        "case": "spi_master",
+        "variant": "spi_bug_sclk_polarity",
+        "strategy": "no_feedback",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 1,
+        "first_detection_search_budget": 2
+      },
+      {
+        "row": 40,
+        "case": "spi_master",
+        "variant": "spi_bug_done_missing",
+        "strategy": "fixed",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 18
+      },
+      {
+        "row": 41,
+        "case": "spi_master",
+        "variant": "spi_bug_done_missing",
+        "strategy": "random",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 16
+      },
+      {
+        "row": 42,
+        "case": "spi_master",
+        "variant": "spi_bug_done_missing",
+        "strategy": "protocol_random",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 16
+      },
+      {
+        "row": 43,
+        "case": "spi_master",
+        "variant": "spi_bug_done_missing",
+        "strategy": "feedback",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 1,
+        "first_detection_search_budget": 16
+      },
+      {
+        "row": 44,
+        "case": "spi_master",
+        "variant": "spi_bug_done_missing",
+        "strategy": "no_feedback",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 1,
+        "first_detection_search_budget": 16
+      },
+      {
+        "row": 45,
+        "case": "handshake_stage",
+        "variant": "reference",
+        "strategy": "fixed",
+        "status": "not_detected",
+        "detected_from_records": false,
+        "requests": 0,
+        "first_detection_search_budget": null
+      },
+      {
+        "row": 46,
+        "case": "handshake_stage",
+        "variant": "reference",
+        "strategy": "random",
+        "status": "not_detected",
+        "detected_from_records": false,
+        "requests": 0,
+        "first_detection_search_budget": null
+      },
+      {
+        "row": 47,
+        "case": "handshake_stage",
+        "variant": "reference",
+        "strategy": "protocol_random",
+        "status": "not_detected",
+        "detected_from_records": false,
+        "requests": 0,
+        "first_detection_search_budget": null
+      },
+      {
+        "row": 48,
+        "case": "handshake_stage",
+        "variant": "reference",
+        "strategy": "feedback",
+        "status": "not_detected",
+        "detected_from_records": false,
+        "requests": 3,
+        "first_detection_search_budget": null
+      },
+      {
+        "row": 49,
+        "case": "handshake_stage",
+        "variant": "reference",
+        "strategy": "no_feedback",
+        "status": "not_detected",
+        "detected_from_records": false,
+        "requests": 3,
+        "first_detection_search_budget": null
+      },
+      {
+        "row": 50,
+        "case": "handshake_stage",
+        "variant": "hs_bug_ready_ignores_out_ready",
+        "strategy": "fixed",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 4
+      },
+      {
+        "row": 51,
+        "case": "handshake_stage",
+        "variant": "hs_bug_ready_ignores_out_ready",
+        "strategy": "random",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 2
+      },
+      {
+        "row": 52,
+        "case": "handshake_stage",
+        "variant": "hs_bug_ready_ignores_out_ready",
+        "strategy": "protocol_random",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 4
+      },
+      {
+        "row": 53,
+        "case": "handshake_stage",
+        "variant": "hs_bug_ready_ignores_out_ready",
+        "strategy": "feedback",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 1,
+        "first_detection_search_budget": 6
+      },
+      {
+        "row": 54,
+        "case": "handshake_stage",
+        "variant": "hs_bug_ready_ignores_out_ready",
+        "strategy": "no_feedback",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 1,
+        "first_detection_search_budget": 4
+      },
+      {
+        "row": 55,
+        "case": "handshake_stage",
+        "variant": "hs_bug_valid_not_cleared",
+        "strategy": "fixed",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 5
+      },
+      {
+        "row": 56,
+        "case": "handshake_stage",
+        "variant": "hs_bug_valid_not_cleared",
+        "strategy": "random",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 4
+      },
+      {
+        "row": 57,
+        "case": "handshake_stage",
+        "variant": "hs_bug_valid_not_cleared",
+        "strategy": "protocol_random",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 0,
+        "first_detection_search_budget": 17
+      },
+      {
+        "row": 58,
+        "case": "handshake_stage",
+        "variant": "hs_bug_valid_not_cleared",
+        "strategy": "feedback",
+        "status": "detected",
+        "detected_from_records": true,
+        "requests": 1,
+        "first_detection_search_budget": 8
+      },
+      {
+        "row": 59,
+        "case": "handshake_stage",
+        "variant": "hs_bug_valid_not_cleared",
+        "strategy": "no_feedback",
+        "status": "not_detected",
+        "detected_from_records": false,
+        "requests": 3,
+        "first_detection_search_budget": null
+      }
+    ],
+    "pipeline_sides_checked": 150,
+    "total_record_checks": 70114,
+    "strategy_metrics": {
+      "fixed": {
+        "rows": 12,
+        "registered_defects": 8,
+        "detected": 8,
+        "requests": 0,
+        "total_tokens": 0,
+        "requests_with_usage": 0,
+        "cycles": 3648,
+        "reference_audit_cycles": 3648,
+        "checks": 10560,
+        "elapsed_seconds": 22.03
+      },
+      "random": {
+        "rows": 12,
+        "registered_defects": 8,
+        "detected": 8,
+        "requests": 0,
+        "total_tokens": 0,
+        "requests_with_usage": 0,
+        "cycles": 3648,
+        "reference_audit_cycles": 3648,
+        "checks": 10560,
+        "elapsed_seconds": 24.876
+      },
+      "protocol_random": {
+        "rows": 12,
+        "registered_defects": 8,
+        "detected": 8,
+        "requests": 0,
+        "total_tokens": 0,
+        "requests_with_usage": 0,
+        "cycles": 3648,
+        "reference_audit_cycles": 3648,
+        "checks": 10560,
+        "elapsed_seconds": 23.641
+      },
+      "feedback": {
+        "rows": 12,
+        "registered_defects": 8,
+        "detected": 8,
+        "requests": 20,
+        "total_tokens": 51179,
+        "requests_with_usage": 20,
+        "cycles": 595,
+        "reference_audit_cycles": 595,
+        "checks": 1626,
+        "elapsed_seconds": 40.096
+      },
+      "no_feedback": {
+        "rows": 12,
+        "registered_defects": 8,
+        "detected": 7,
+        "requests": 21,
+        "total_tokens": 50072,
+        "requests_with_usage": 21,
+        "cycles": 627,
+        "reference_audit_cycles": 627,
+        "checks": 1751,
+        "elapsed_seconds": 46.437
+      }
+    },
+    "decision_status_counts": {
+      "validated": 40,
+      "rejected": 1
+    },
+    "feedback_first_request_detections": [
+      {
+        "row": 8,
+        "case": "sync_fifo",
+        "variant": "fifo_bug_full_off_by_one",
+        "first_request_without_observation": true
+      },
+      {
+        "row": 13,
+        "case": "sync_fifo",
+        "variant": "fifo_bug_write_when_full",
+        "first_request_without_observation": true
+      },
+      {
+        "row": 23,
+        "case": "uart_tx",
+        "variant": "uart_bug_msb_first",
+        "first_request_without_observation": true
+      },
+      {
+        "row": 28,
+        "case": "uart_tx",
+        "variant": "uart_bug_busy_never_clears",
+        "first_request_without_observation": true
+      },
+      {
+        "row": 38,
+        "case": "spi_master",
+        "variant": "spi_bug_sclk_polarity",
+        "first_request_without_observation": true
+      },
+      {
+        "row": 43,
+        "case": "spi_master",
+        "variant": "spi_bug_done_missing",
+        "first_request_without_observation": true
+      },
+      {
+        "row": 53,
+        "case": "handshake_stage",
+        "variant": "hs_bug_ready_ignores_out_ready",
+        "first_request_without_observation": true
+      },
+      {
+        "row": 58,
+        "case": "handshake_stage",
+        "variant": "hs_bug_valid_not_cleared",
+        "first_request_without_observation": true
+      }
+    ],
+    "exceptions": [
+      {
+        "case": "sync_fifo",
+        "variant": "reference",
+        "strategy": "no_feedback",
+        "status": "policy_error",
+        "requests": 2,
+        "rounds": 1,
+        "cycles": 15,
+        "decision_error_types": [
+          [
+            "extra_forbidden"
+          ]
+        ]
+      },
+      {
+        "case": "handshake_stage",
+        "variant": "hs_bug_valid_not_cleared",
+        "strategy": "no_feedback",
+        "status": "not_detected",
+        "requests": 3,
+        "rounds": 3,
+        "cycles": 29,
+        "decision_error_types": []
+      }
+    ]
+  },
+  "first_detection_comparison": {
+    "feedback_median": 8.0,
+    "random_median": 18.5,
+    "feedback_earlier": 3,
+    "same": 1,
+    "feedback_later": 4
+  },
+  "budget": {
+    "scope": "current_ic_optimization_only; excludes_earlier_pilot_and_historical_calls",
+    "authorized_total_cap": 360,
+    "known_responses": 317,
+    "reserved_request_upper": 318,
+    "remaining_after_reservation": 42,
+    "unknown_inflight_max": 1,
+    "reported_token_total_known_responses": 765190,
+    "actual_currency_cost": null
+  },
+  "document_checks": {
+    "path": "docs/experiment/agent_comparison_v5_live_2026-10-05.md",
+    "sha256": "7f04dc97d9b65cb09b1744449ff2dabacaecc33d07c20daaefbd917aa3c4610f",
+    "matches_current_bytes": true,
+    "limits_retained": [
+      "one known development repeat",
+      "8 first-request feedback detections do not establish feedback causality",
+      "policy_error and missed defect retained",
+      "no H01/H02 or human claim",
+      "cost remains unknown; tokens are not invoice"
+    ]
+  },
+  "declared_credential_scan": {
+    "clear_and_nested_items_scanned": 4008,
+    "hits": 0,
+    "scope": "active key plaintext, JSON escaping and decoded JSON; not a universal secret detector"
+  },
+  "full_entry_checks": {
+    "path": ".iverilog-ai/ic-v5-pack-readonly-audit-20261005/entry-checks.json",
+    "sha256": "37669031c6f0cb05eedd552c253b5093d1f10d54e33dc71080675986ccf09cf9"
+  },
+  "sha256_after_audit": "d710a75c651acb4ed64622325b281dbf091660625f70eea3f87703ad8655f3f8",
+  "errors": [],
+  "verdict": "passed_with_scope_limits",
+  "audit_script_sha256": "457f4fbb85840660fbc8b4588e4367a30deb3d2b05dc0bf9b7af2a2f80275cb2",
+  "limitations": [
+    "Byte and record consistency is not independent human review or cross-host reproduction.",
+    "No archive source was executed and no simulation/API request was run during this package audit.",
+    "Active credential scan results are packaging declarations; this review did not read a real credential or repeat that scan.",
+    "The package is scoped to v5; the cumulative budget is checked against the retained previous ledger and does not recount every historical remote response."
+  ],
+  "numeric_tail_classification": {
+    "strategy": "protocol_random",
+    "field": "elapsed_seconds_recorded",
+    "sum_of_raw_elapsed_seconds": 23.641000000000002,
+    "stored_summary_value": 23.641000000000002,
+    "rounded_to_three_decimals": 23.641,
+    "absolute_difference": 3.552713678800501e-15,
+    "absolute_tolerance": 1e-09,
+    "classification": "Floating-point serialization only. Raw unrounded sum equals stored summary exactly; all non-time metrics match exactly.",
+    "initial_receipt": ".iverilog-ai/ic-v5-pack-readonly-audit-20261005/receipt-initial-unclassified.json",
+    "initial_receipt_sha256": "ea6ef5442cfb3485f19f5fa32a8d69bb5c6d1d0297188b791db9a5be8d2ec4b4"
+  },
+  "existing_detached_replay_spotcheck": {
+    "receipt_path": "docs/experiment/ic-agent-v5-pack-replay-2026-10-05/receipt.json",
+    "receipt_sha256": "04282f78aa532af866987e221b63cd14c3202e26d1ea3bff3ed60cea40345260",
+    "extracted_files": [
+      {
+        "file": "authoritative_plan.json",
+        "sha256": "c1b5187de6b7db0815bfadcbdb8c4708130037aa8cb3325f52d46100514c59e1",
+        "matches_zip_and_receipt": true
+      },
+      {
+        "file": "dut_contract.json",
+        "sha256": "81bee6c74efc6db12a3299c574d58171b6291e33cc6797ad9a32c402e8d1af75",
+        "matches_zip_and_receipt": true
+      },
+      {
+        "file": "evidence_manifest.json",
+        "sha256": "68f0f7f99f453500f7c525a505cd58a4b5a99b7ac4a9c05c5db91640e16cb0d9",
+        "matches_zip_and_receipt": true
+      },
+      {
+        "file": "observed_samples.json",
+        "sha256": "405152b52982b641addaf42fe18709886181d1a8c74b4829426cf5ed0f8f9458",
+        "matches_zip_and_receipt": true
+      },
+      {
+        "file": "pipeline_result.json",
+        "sha256": "223380217c259b4ff14992ba7fa43d838118f121bf8a251408bbcc559ad246bb",
+        "matches_zip_and_receipt": true
+      },
+      {
+        "file": "README.md",
+        "sha256": "a7a4f9ceda9d62958336bc88850cbf2e1a98d7377727205cc8b587040c11f64e",
+        "matches_zip_and_receipt": true
+      },
+      {
+        "file": "reference_samples.json",
+        "sha256": "f5dc9fb1a3279363ca8e135209c871b807955f108e4ad4738de9882e9a21d9e1",
+        "matches_zip_and_receipt": true
+      },
+      {
+        "file": "replay.py",
+        "sha256": "07398b27b5e7f0875a8a37f309ab0215ed69cd839827ea9e71b7551e88788c33",
+        "matches_zip_and_receipt": true
+      },
+      {
+        "file": "result.json",
+        "sha256": "c0cc64472d176cc2e94eb0ad0606da8d08b1f99c8709406416da9e984452c546",
+        "matches_zip_and_receipt": true
+      },
+      {
+        "file": "tb_uart_tx.v",
+        "sha256": "2f83d69f6e9587f92e16d28d5154a14867d5d1e53072ba7cbf91ab7a72b35c4e",
+        "matches_zip_and_receipt": true
+      },
+      {
+        "file": "testplan.json",
+        "sha256": "3256141b6ed91476337693430aa5253505aa7169a9f281de87aec2460f8a11d4",
+        "matches_zip_and_receipt": true
+      },
+      {
+        "file": "uart_tx_bug_msb_first.v",
+        "sha256": "93b638a980c2ecf591163f954fd72f5210088c1bf2dda5ab9dbef65c479bd334",
+        "matches_zip_and_receipt": true
+      },
+      {
+        "file": "waveform.vcd",
+        "sha256": "d91dabcffd79b1c5a4be994cbc91f8f7693cda8827a7227f9b091cf5b1da0c2c",
+        "matches_zip_and_receipt": true
+      }
+    ],
+    "manifest_files": 11,
+    "current_input_bytes_match_zip": true,
+    "public_and_execution_stdout_sha256": "d4a899eca8fe113318d0e7f06ec6a966c7f44ea7ede89cfabcbf90b53fd1bd93",
+    "public_process_log_matches_execution_result": true,
+    "structured_result_records_match_original_stdout": true,
+    "checks": 108,
+    "failures": 16,
+    "status": "failed_checks",
+    "original_run_id": "d52a1836ec44",
+    "replay_executed_by_this_audit": false,
+    "same_machine": true,
+    "outside_original_repository": true,
+    "first_failure_receipt": {
+      "path": "docs/experiment/ic-agent-v5-pack-replay-2026-10-05/first-attempts/replay-r1.json",
+      "sha256": "066e47231bb214797ee4e24658a5d5ac6344fc7de14328875fa08815ab0fe741",
+      "declares_icarus_started": false,
+      "output_directories_found": []
+    },
+    "pack_preflight_receipt": {
+      "path": "docs/experiment/ic-agent-v5-pack-replay-2026-10-05/first-attempts/pack-helper-preflight.json",
+      "sha256": "0d7f37d4199037f8d9b346d43700b6de49e58ec7684efab3050b424b9f0935f0",
+      "declares_zip_created": false
+    },
+    "limit": "This audit reread existing files and logs. It did not witness or rerun the process; execution-before hashes are supported by the retained replay receipt."
+  },
+  "package_document_spotcheck": {
+    "path": "docs/competition/ic/evidence_pack_v5_2026-10-05.md",
+    "sha256": "4d1fea404a4edad8e3190ccb85b712648e5ab1c891a6f6c6b135e235d365afaa",
+    "build_receipt_public_copy_identical": true,
+    "matches_checked_counts_and_scope": true,
+    "post_pack_receipts_outside_zip": true
+  },
+  "finalized_at_utc": "2026-10-04T17:57:33.917084+00:00",
+  "finalizer_script_sha256": "2de4e54431fd06dd469c19a83c04fe8c19ea50a891d31ebb040f53c8321a49a4",
+  "sha256_after_final_spotcheck": "d710a75c651acb4ed64622325b281dbf091660625f70eea3f87703ad8655f3f8"
+}

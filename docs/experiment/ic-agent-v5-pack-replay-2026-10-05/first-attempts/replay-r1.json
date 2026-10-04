@@ -1,0 +1,10 @@
+{
+  "record_kind": "detached_replay_helper_first_failure",
+  "working_directory": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v5-replay-836c7016e03d",
+  "error_type": "AssertionError",
+  "reason": "Helper expected 12 extracted files, but the original bundle also has README.md, making 13.",
+  "correction": "Compare the full file set against all manifest entries plus evidence_manifest.json and README.md; do not change archived evidence.",
+  "icarus_started": false,
+  "api_requests": 0,
+  "not_a_model_or_dut_failure": true
+}

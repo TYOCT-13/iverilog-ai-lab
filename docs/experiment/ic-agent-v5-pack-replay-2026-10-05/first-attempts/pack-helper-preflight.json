@@ -1,0 +1,9 @@
+{
+  "record_kind": "pack_helper_initial_preflight_failure",
+  "api_requests": 0,
+  "zip_created": false,
+  "error_type": "RuntimeError",
+  "reason": "required directory is missing: ic-agent-v5-validation-20261005-r1",
+  "correction": "The initial full validation directory is ic-agent-v5-validation-20261005, without -r1. Only the packing allowlist was corrected; validation originals were not changed.",
+  "not_a_model_or_dut_failure": true
+}

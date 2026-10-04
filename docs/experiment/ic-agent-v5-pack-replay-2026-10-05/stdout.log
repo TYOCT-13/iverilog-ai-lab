@@ -1,0 +1,1 @@
+{"status": "failed_checks", "compile_exit_code": 0, "run_exit_code": 0, "checks": 108, "failures": 16, "invalid_records": 0, "api_requests": 0, "output_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v5-replay-0dff1665057e\\replay-cbfcb09f5101", "note": "Replay checks the saved testbench; it does not extend verification scope"}

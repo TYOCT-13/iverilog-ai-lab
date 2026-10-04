@@ -24,12 +24,18 @@ docs/experiment/agent-comparison-v2-2026-10-04/** -text whitespace=blank-at-eol,
 docs/experiment/ic-agent-v2-validation-2026-10-04/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 docs/experiment/ic-agent-v4-validation-2026-10-04/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 docs/experiment/ic-agent-v4-pack-replay-2026-10-04/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/ic-agent-v5-validation-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/ic-agent-v5-pack-replay-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/agent-comparison-v5-live-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/ic_agent_v5_api_budget_2026-10-05.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 docs/experiment/agent-comparison-v4-smoke-2026-10-04/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 docs/experiment/application-uart-v2-2026-10-04/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 docs/competition/ic/pdf_validation_2026-10-04.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 docs/competition/ic/evidence_pack_2026-10-04.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 docs/competition/ic/evidence_pack_v4_2026-10-04.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/competition/ic/evidence_pack_v5_2026-10-05.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 docs/review/ic-v4-pack-review-2026-10-04/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/review/ic-v5-pack-review-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 
 # 明确语言归属，便于托管平台的统计与语法高亮
 *.v text linguist-language=Verilog

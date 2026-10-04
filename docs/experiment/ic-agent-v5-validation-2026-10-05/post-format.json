@@ -1,0 +1,12 @@
+{
+  "reason": "Only trailing blank line at EOF removed in two new tests; production bytes unchanged",
+  "tests": {
+    "passed": 45,
+    "failed": 0,
+    "seconds": 4.94
+  },
+  "paths": {
+    "tests/core/test_reference_per_cycle.py": "1a48bb01f039413a930002317db6c403d96a1cb2329ce48e69bad4d2d0912e18",
+    "tests/core/test_testbench_per_cycle.py": "05c6ea5ded176f064355065db965c62f44227cc3922531f02cdbda98a3cc5aae"
+  }
+}
