@@ -1,27 +1,25 @@
-"""外部模块验证（P0-D）第 1 个模块：`alexforencich/verilog-uart` 的 `uart_rx`。
+"""Replay frozen external RTL through specification tests and sampled differential checks.
 
-这个脚本做四件事，全部离线、只用本机 Icarus：
-
-1. 用**手写规格测试台**证明基线实现是对的（这是"可信基线"的正确性依据，
-   不是"我觉得它对"）；
-2. 生成一份**只含激励**的计划（不含期望值——外部模块的判据是"与基线行为一致"）；
-3. 造 1 个等价改写 + 5 个人工变体 + 1 个编不过的输入；
-4. 用项目自己的 `verify-diff` 路径逐个比对，检查四类输入是否落到正确的类别：
-   等价改写→一致、功能变体→不同、编不过→未取得可比证据、基线自己→一致。
-
-产物写在 `.iverilog-ai/external/uart_rx_check/`（上游源码与变体不进版本库）。
+New output directories are mandatory. Default checks only baselines; historical
+cases may be replayed explicitly. No new RTL mutations are generated.
 """
 from __future__ import annotations
 
+import argparse
+import hashlib
+import shutil
+import re
 import json
 import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path(".").resolve()
+ROOT = Path(__file__).resolve().parents[1]
 UPSTREAM = ROOT / ".iverilog-ai/external/verilog-uart-master/uart_rx.v"
 WORK = ROOT / ".iverilog-ai/external/uart_rx_check"
 PYTHON = sys.executable
+IVERILOG = "iverilog"
+VVP = "vvp"
 
 CONTRACT = {
     "module": "uart_rx",
@@ -250,13 +248,13 @@ def run_spec_tb(rtl: Path, tag: str) -> dict:
     tb = WORK / f"tb_spec_{tag}.v"
     vvp = WORK / f"spec_{tag}.vvp"
     compile_result = subprocess.run(
-        [r"D:\iverilog\bin\iverilog.exe", "-g2005", "-o", str(vvp), str(rtl), str(tb)],
+        [IVERILOG, "-g2005", "-o", str(vvp), str(rtl), str(tb)],
         capture_output=True, text=True, timeout=180, encoding="utf-8", errors="replace",
     )
     if compile_result.returncode != 0:
         return {"compiled": False, "error": (compile_result.stdout + compile_result.stderr).strip()[:200]}
     done = subprocess.run(
-        [r"D:\iverilog\bin\vvp.exe", str(vvp)],
+        [VVP, str(vvp)],
         capture_output=True, text=True, timeout=180, encoding="utf-8", errors="replace",
     )
     output = done.stdout + done.stderr
@@ -274,11 +272,12 @@ def run_verify_diff(candidate: Path, module: str, contract: Path, plan: Path, ta
          "--baseline", str(BASELINES[module]), "--candidate", str(candidate),
          "--contract", str(contract), "--plan", str(plan),
          "--module", module, "--output-dir", str(out),
-         "--iverilog", r"D:\iverilog\bin\iverilog.exe", "--vvp", r"D:\iverilog\bin\vvp.exe"],
+         "--iverilog", IVERILOG, "--vvp", VVP],
         capture_output=True, text=True, timeout=600, cwd=str(ROOT),
         encoding="utf-8", errors="replace",
         env={**__import__("os").environ, "PYTHONPATH": str(ROOT / "src"), "PYTHONIOENCODING": "utf-8"},
     )
+    write(WORK / f"{tag}_diff.log", done.stdout + done.stderr)
     status = ""
     for candidate_json in sorted(out.glob("*.json")):
         try:
@@ -497,12 +496,13 @@ def run_case_generic(
 
     tb = write(WORK / f"tb_{module}_{tag}.v", tb_source)
     vvp = WORK / f"{module}_{tag}.vvp"
-    command = [r"D:\iverilog\bin\iverilog.exe", "-g2012", "-o", str(vvp), str(rtl)]
+    command = [IVERILOG, "-g2012", "-o", str(vvp), str(rtl)]
     command += [str(path) for path in spec_deps]
     command.append(str(tb))
     compile_result = subprocess.run(
         command, capture_output=True, text=True, timeout=180, encoding="utf-8", errors="replace",
     )
+    write(WORK / f"{module}_{tag}_compile.log", compile_result.stdout + compile_result.stderr)
     if compile_result.returncode != 0:
         spec: dict = {
             "compiled": False,
@@ -512,10 +512,11 @@ def run_case_generic(
         }
     else:
         done = subprocess.run(
-            [r"D:\iverilog\bin\vvp.exe", str(vvp)],
+            [VVP, str(vvp)],
             capture_output=True, text=True, timeout=300, encoding="utf-8", errors="replace",
         )
         output = done.stdout + done.stderr
+        write(WORK / f"{module}_{tag}_simulation.log", output)
         spec = {
             "compiled": True,
             "error": "",
@@ -524,6 +525,11 @@ def run_case_generic(
             ],
             "summary": next((l for l in output.splitlines() if l.startswith("SPEC_SUMMARY")), ""),
         }
+    match = re.fullmatch(r"SPEC_SUMMARY checks=(\d+) failures=(\d+)", spec["summary"])
+    spec["checks"] = int(match.group(1)) if match else 0
+    spec["failures"] = int(match.group(2)) if match else None
+    spec["spec_complete"] = bool(match and spec["checks"] > 0 and
+                                 (not spec["compiled"] or done.returncode == 0))
     diff = run_verify_diff(rtl, module, contract, plan, f"{module}_{tag}")
     return {**spec, "diff_status": diff["status"], "diff_exit": diff["exit"]}
 
@@ -724,23 +730,16 @@ def run_module(name: str, spec: dict, work: Path) -> list[dict]:
     plan = write(work / f"{name}_plan.json", json.dumps(spec["plan"](), ensure_ascii=False, indent=2) + "\n")
     baseline = work / f"{name}_baseline.v"
     baseline.write_bytes(spec["baseline"].read_bytes())
-    source = spec["baseline"].read_text(encoding="utf-8")
-
-    cases: list[tuple[str, str, Path]] = [("baseline", "基线（上游原样）", baseline)]
-    for variant, (description, old, new) in spec["variants"].items():
-        assert old in source, f"{name} 变体 {variant} 的锚点没找到：{old[:60]}"
-        write(work / f"{name}_{variant}.v", source.replace(old, new, 1))
-        cases.append((variant, description, work / f"{name}_{variant}.v"))
-
-    equivalent = source
-    for old, new in spec["equivalent"]:
-        assert old in equivalent, f"{name} 等价改写的锚点没找到：{old[:60]}"
-        equivalent = equivalent.replace(old, new, 1)
-    write(work / f"{name}_equivalent_rewrite.v", equivalent)
-    cases.append(("equivalent_rewrite", "等价改写（语义不变，写法不同）", work / f"{name}_equivalent_rewrite.v"))
-
-    write(work / f"{name}_broken_compile.v", BROKEN)
-    cases.append(("broken_compile", "编不过的实现", work / f"{name}_broken_compile.v"))
+    cases: list[tuple[str, str, Path]] = [("baseline", "基线（冻结来源）", baseline)]
+    existing = spec.get("existing_cases")
+    if existing:
+        for tag in [*spec["variants"], "equivalent_rewrite", "broken_compile"]:
+            source = Path(existing) / f"{name}_{tag}.v"
+            if not source.is_file():
+                raise FileNotFoundError(source)
+            destination = work / source.name
+            destination.write_bytes(source.read_bytes())
+            cases.append((tag, "历史输入重放；非新发现真实缺陷", destination))
 
     print(f"\n=== {name}（{spec['description']}）===")
     print(f"{'输入':26s} {'规格测试台':14s} {'verify-diff':12s} 说明")
@@ -751,26 +750,84 @@ def run_module(name: str, spec: dict, work: Path) -> list[dict]:
             spec_text = "编译失败"
         elif outcome["failed_checks"]:
             spec_text = f"{len(outcome['failed_checks'])} 项失败"
+        elif not outcome.get("spec_complete"):
+            spec_text = "未取得完整检查"
         else:
             spec_text = "全过"
         print(f"{tag:26s} {spec_text:14s} {outcome['diff_status'] or '（无状态）':12s} {description}")
         if outcome["compiled"] and outcome["failed_checks"]:
             print(f"{'':26s}   失败的检查：{', '.join(outcome['failed_checks'])}")
-        rows.append({"module": name, "variant": tag, "description": description, "result": outcome})
+        rows.append({"module": name, "variant": tag, "description": description,
+                     "candidate": asset.relative_to(work).as_posix(),
+                     "candidate_sha256": hashlib.sha256(asset.read_bytes()).hexdigest(), "result": outcome})
     return rows
 
 
-def main() -> int:
-    WORK.mkdir(parents=True, exist_ok=True)
+def freeze_inputs(manifest_path: Path, work: Path) -> dict[str, dict]:
+    """Verify all bytes before creating the new run; never trust a manifest path escape."""
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    if manifest.get("schema_version") != "external-inputs-v1":
+        raise ValueError("expected external-inputs-v1 manifest")
+    inputs = {}
+    root = manifest_path.resolve().parent
+    for name in MODULES:
+        item = manifest["modules"][name]
+        source = (root / item["local"]).resolve()
+        if not source.is_relative_to(root):
+            raise ValueError("manifest input escapes its directory")
+        data = source.read_bytes()
+        if hashlib.sha256(data).hexdigest() != item["sha256"]:
+            raise ValueError(f"input hash mismatch: {name}")
+        inputs[name] = (item, data)
+    work.mkdir(parents=True, exist_ok=False)
+    records = {}
+    for name, (item, data) in inputs.items():
+        target = work / "inputs" / f"{name}.v"
+        target.parent.mkdir(exist_ok=True)
+        target.write_bytes(data)
+        records[name] = {**item, "local": target.relative_to(work).as_posix()}
+    write(work / "inputs_manifest.json", json.dumps({"schema_version": "external-inputs-v1",
+          "modules": records}, ensure_ascii=False, indent=2))
+    return records
+
+
+def main(argv: list[str] | None = None) -> int:
+    global WORK, IVERILOG, VVP
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--manifest", type=Path, required=True)
+    parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument("--iverilog", default="iverilog")
+    parser.add_argument("--vvp", default="vvp")
+    parser.add_argument("--existing-cases", type=Path, help="replay existing historical cases; never generate mutations")
+    args = parser.parse_args(argv)
+    IVERILOG, VVP = args.iverilog, args.vvp
+    for tool in (IVERILOG, VVP):
+        if not shutil.which(tool):
+            parser.error(f"tool not found: {tool}")
+    WORK = args.output_dir.resolve()
+    try:
+        records = freeze_inputs(args.manifest, WORK)
+    except (ValueError, KeyError, OSError) as error:
+        parser.error(str(error))
     rows: list[dict] = []
-    for name, spec in MODULES.items():
+    for name in MODULES:
+        BASELINES[name] = WORK / records[name]["local"]
+    for name, original in MODULES.items():
+        spec = {**original, "baseline": BASELINES[name], "existing_cases": args.existing_cases}
+        if name == "uart_tx":
+            spec["spec_deps"] = (BASELINES["uart_rx"],)
         rows.extend(run_module(name, spec, WORK))
-    write(
-        WORK / "evidence.json",
-        json.dumps({"byte_rx": BYTE, "byte_tx": TX_BYTE, "rows": rows}, ensure_ascii=False, indent=2) + "\n",
-    )
+    artifacts = {path.relative_to(WORK).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
+                 for path in WORK.rglob("*") if path.is_file()}
+    tools = {tool: subprocess.run([tool, "-V"], capture_output=True, text=True,
+                                  timeout=30, errors="replace").stdout[:1000]
+             for tool in (IVERILOG, VVP)}
+    write(WORK / "evidence.json", json.dumps({"record_kind": "machine_replay",
+        "independent_holdout": False, "tools": tools, "input_manifest": records,
+        "artifact_sha256": artifacts, "rows": rows}, ensure_ascii=False, indent=2) + "\n")
     print(f"\n证据：{WORK / 'evidence.json'}")
-    return 0
+    return 0 if all(row["result"].get("spec_complete") or row["variant"] == "broken_compile"
+                    for row in rows) else 1
 
 
 if __name__ == "__main__":

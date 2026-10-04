@@ -146,9 +146,12 @@ def run_verification_agent(
     limits: AgentLimits | None = None, pipeline: VerificationPipeline | None = None,
     execution_options: dict[str, Any] | None = None,
     on_round: Callable[[dict[str, Any]], None] | None = None,
+    include_feedback: bool = True,
 ) -> AgentResult:
     """执行真实仿真并逐轮落盘；失败不重试，已有目录不覆盖。"""
     limits = limits or AgentLimits()
+    if not isinstance(include_feedback, bool):
+        raise ValueError("include_feedback must be a boolean")
     if len(specification) > 16000 or not 1 <= len(objective) <= 1000:
         raise ValueError("specification <= 16000 characters; objective must contain 1..1000 characters")
     source = Path(rtl_path).resolve(strict=True)
@@ -180,6 +183,7 @@ def run_verification_agent(
         "schema_version": "1.0", "prompt_version": PROMPT_VERSION,
         "record_kind": descriptor, "model": str(getattr(provider, "model", "test")),
         "wire_api": getattr(provider, "wire_api", None),
+        "feedback_enabled": include_feedback,
         "started_at": datetime.now(timezone.utc).isoformat(),
         "design_family": contract.module, "objective": objective,
         "rtl_sha256": _sha(source.read_bytes()), "contract": contract.to_dict(),
@@ -232,7 +236,7 @@ def run_verification_agent(
                 state = {
                     "design": contract.module, "objective": objective, "specification": specification,
                     "contract": contract.to_dict(), "current_plan": plan.model_dump(mode="json") if plan else None,
-                    "observation": trace["rounds"][-1]["observation"] if trace["rounds"] else None,
+                    "observation": trace["rounds"][-1]["observation"] if include_feedback and trace["rounds"] else None,
                     "remaining_rounds": limits.max_rounds - round_index,
                     "remaining_stimulus_cycles": limits.max_total_cycles - trace["stimulus_cycles_executed"],
                     "max_new_vectors": min(12, limits.max_vectors - (len(plan.vectors) if plan else 0)),

@@ -100,3 +100,83 @@ def test_priority_encoder_plan_sweeps_the_whole_input_space():
     plan = TestPlan.model_validate(harness.build_pe_plan())
     driven = [vector.inputs["input_unencoded"] for vector in plan.vectors]
     assert driven == list(range(16)), "组合逻辑的激励必须穷举输入空间，否则覆盖率没有依据"
+
+
+def _manifest(tmp_path):
+    import hashlib
+    import json
+    root = tmp_path / "source"
+    root.mkdir()
+    modules = {}
+    for name in harness.MODULES:
+        data = f"frozen source {name}".encode()
+        (root / f"{name}.v").write_bytes(data)
+        modules[name] = {"local": f"{name}.v", "sha256": hashlib.sha256(data).hexdigest()}
+    manifest = root / "manifest.json"
+    manifest.write_text(json.dumps({"schema_version": "external-inputs-v1", "modules": modules}))
+    return manifest
+
+
+def test_freeze_copies_verified_inputs_and_refuses_existing_run(tmp_path):
+    manifest = _manifest(tmp_path)
+    work = tmp_path / "run"
+    records = harness.freeze_inputs(manifest, work)
+    assert len(records) == 3
+    assert (work / "inputs/uart_rx.v").read_bytes() == b"frozen source uart_rx"
+    with pytest.raises(FileExistsError):
+        harness.freeze_inputs(manifest, work)
+
+
+def test_changed_input_fails_before_creating_output(tmp_path):
+    manifest = _manifest(tmp_path)
+    (manifest.parent / "uart_rx.v").write_bytes(b"modified")
+    work = tmp_path / "run"
+    with pytest.raises(ValueError, match="hash mismatch"):
+        harness.freeze_inputs(manifest, work)
+    assert not work.exists()
+
+
+def test_manifest_cannot_escape_bundle_directory(tmp_path):
+    import json
+    manifest = _manifest(tmp_path)
+    payload = json.loads(manifest.read_text())
+    payload["modules"]["uart_rx"]["local"] = "../outside.v"
+    manifest.write_text(json.dumps(payload))
+    with pytest.raises(ValueError, match="escapes"):
+        harness.freeze_inputs(manifest, tmp_path / "run")
+
+
+def test_check_requires_explicit_paths():
+    with pytest.raises(SystemExit) as error:
+        harness.main([])
+    assert error.value.code == 2
+
+
+def test_fetch_registry_matches_checked_modules_and_rejects_wrong_hash(tmp_path):
+    spec = importlib.util.spec_from_file_location("external_fetch", ROOT / "scripts/fetch_external_modules.py")
+    fetcher = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(fetcher)
+    assert set(fetcher.SOURCES) == set(harness.MODULES)
+    item = fetcher.SOURCES["uart_rx"]
+    wrong = tmp_path / item["legacy_local"]
+    wrong.parent.mkdir(parents=True)
+    wrong.write_bytes(b"wrong source")
+    with pytest.raises(ValueError, match="hash differs"):
+        fetcher.freeze(tmp_path / "output", tmp_path)
+    assert not (tmp_path / "output").exists()
+
+
+@pytest.mark.parametrize("summary,exit_code,complete", [
+    ("", 0, False), ("SPEC_SUMMARY checks=0 failures=0", 0, False),
+    ("SPEC_SUMMARY checks=11 failures=0", 1, False),
+    ("SPEC_SUMMARY checks=11 failures=2", 0, True),
+])
+def test_missing_or_crashed_spec_run_is_not_reported_as_pass(tmp_path, monkeypatch, summary, exit_code, complete):
+    from subprocess import CompletedProcess
+    calls = iter([CompletedProcess([], 0, "", ""), CompletedProcess([], exit_code, summary, "")])
+    monkeypatch.setattr(harness, "WORK", tmp_path)
+    monkeypatch.setattr(harness.subprocess, "run", lambda *a, **k: next(calls))
+    monkeypatch.setattr(harness, "run_verify_diff", lambda *a: {"status": "identical", "exit": 0})
+    result = harness.run_case_generic(tmp_path / "x.v", "baseline", "", "uart_rx",
+                                      tmp_path / "contract.json", tmp_path / "plan.json")
+    assert result["spec_complete"] is complete

@@ -213,3 +213,15 @@ def test_truncated_response_is_never_executed_even_if_json_parses(tmp_path):
     assert result.stop_reason == "output_truncated"
     assert result.trajectory["decisions"][0]["usage"]["completion_tokens"] == 4096
     assert not pipeline.plans
+
+
+def test_no_feedback_ablation_hides_observations_but_preserves_actual_evidence(tmp_path):
+    for enabled in (True, False):
+        provider = Scripted(append(1), append(2))
+        result = run(tmp_path / str(enabled), provider, limits=AgentLimits(max_rounds=2), include_feedback=enabled)
+        state = json.loads(provider.prompts[1].split("STATE_JSON:\n", 1)[1])
+        assert bool(state["observation"]) is enabled
+        assert state["current_plan"]["vectors"]
+        assert len(result.trajectory["rounds"]) == 2
+        assert result.trajectory["rounds"][0]["observation"]["checks"] == 2
+        assert result.trajectory["feedback_enabled"] is enabled
