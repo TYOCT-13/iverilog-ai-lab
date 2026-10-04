@@ -10,7 +10,7 @@
 - 追不到记录的，写"未复核"或"无记录"，不估算、不外推。
 
 初次核对：2026-09-29，HEAD `2b9594f`。本次口径修订：2026-10-05；保留原始实验文件，
-最新评测源码`75f9baa`，生产Agent/core仍为`4d8eafb`；新六组216任务/145请求/399083tokens见3.13。历史生产完整回归1170/2，296项指纹无变；两测试文件随后格式修改与45项复测另列。旧v5逐拍/独立补测为1重复60任务；新增短预算三重复144任务与六项选样诊断单列在3.11/3.12。旧c7三重复、28be1ed烟测与e9b7b8a pilot分别归档，不能互换。当前正式v2 PDF仍属于28be1ed，旧v5 ZIP未含新增短预算、诊断及216任务轮。
+当前Agent v6与评测源码`9c3bd3c`；新恢复轮216任务/138请求/378204tokens见3.14，全仓1307/2。上一轮`75f9baa`（当时生产Agent/core为`4d8eafb`）六组216任务/145请求/399083tokens见3.13。历史生产完整回归1170/2，296项指纹无变；两测试文件随后格式修改与45项复测另列。旧v5逐拍/独立补测为1重复60任务；新增短预算三重复144任务与六项选样诊断单列在3.11/3.12。旧c7三重复、28be1ed烟测与e9b7b8a pilot分别归档，不能互换。当前正式v2 PDF仍属于28be1ed，旧v5 ZIP未含新增短预算、诊断、1M及v6恢复轮。
 
 ---
 
@@ -238,7 +238,7 @@ UART busy_never_clears仍漏检，提案5拍start全0，仅idle场景；发送�
 
 ### 3.13 独立每轮100万tokens：六组三重复（2026-10-05）
 
-[本轮报告](agent_study_1m_live_2026-10-05.md)、[公开回执](agent-study-1m-live-2026-10-05/receipt.json)、[逐任务表](agent-study-1m-live-2026-10-05/rows.json)、[预注册](agent-study-1m-live-2026-10-05/preregistration.json)、[实际设置](agent-study-1m-live-2026-10-05/run_settings.json)；完整results/strict_summary/token_budget原件位于`.iverilog-ai/agent-study-1m-live-20261005/`。源码冻结`75f9baa87987ef9ed7f660600db5818b9394afb7`，生产Agent/core仍为`4d8eafb`。四模块共同使用16/48/20/8累计激励周期，六策略三重复共216登记任务；每策略24缺陷任务另加12正确基线任务。
+[本轮报告](agent_study_1m_live_2026-10-05.md)、[公开回执](agent-study-1m-live-2026-10-05/receipt.json)、[逐任务表](agent-study-1m-live-2026-10-05/rows.json)、[预注册](agent-study-1m-live-2026-10-05/preregistration.json)、[实际设置](agent-study-1m-live-2026-10-05/run_settings.json)；完整results/strict_summary/token_budget原件位于`.iverilog-ai/agent-study-1m-live-20261005/`。源码冻结`75f9baa87987ef9ed7f660600db5818b9394afb7`，当时生产Agent/core为`4d8eafb`。四模块共同使用16/48/20/8累计激励周期，六策略三重复共216登记任务；每策略24缺陷任务另加12正确基线任务。
 
 | 策略 | 检出/24 | 三次检出（各/8） | 平均率 | 不同缺陷并集 | 真实请求 | 已报告tokens |
 |---|---:|---|---:|---:|---:|---:|
@@ -256,6 +256,29 @@ UART busy_never_clears仍漏检，提案5拍start全0，仅idle场景；发送�
 [本轮独立预算账](agent_study_1m_budget_2026-10-05.json)与[原始token守门账](agent-study-1m-live-2026-10-05/token_budget.json)：145真实请求、399083输入加输出tokens，上限1000000，剩600917；无未知usage、预算守门拒绝或超限，实付费用未知。用户澄清每轮Agent输入加输出≤100万tokens；历史857957不扣新轮，旧360总请求限制已撤销，历史账不回写。
 
 [入口定向65项测试](agent-study-1m-validation-2026-10-05/receipt.json)不与旧1170全仓结果相加；[只读代理复核](../review/agent_study_1m_review_2026-10-05.md)不是真人/H02。旧PDF、答辩和v5 ZIP尚未纳入本轮，真人试用、独立人审与新模块留出仍待真实证据。
+
+### 3.14 Agent v6受限格式恢复：六组三重复（2026-10-05）
+
+[本轮报告](agent_recovery_study_live_2026-10-05.md)、[回执](agent-recovery-study-live-2026-10-05/receipt.json)、[严格汇总](agent-recovery-study-live-2026-10-05/strict_summary.json)、[原文轨迹清单](agent-recovery-study-live-2026-10-05/trace_manifest.json)。当前冻结源码`9c3bd3c0cf9caa0fb95e6bbdee6147ae447e58cc`；不再将当前生产Agent称为4d8eafb。216登记任务，六组各24缺陷任务+12正确任务，三次重复；仍为开发集，没有独立留出或真人参与。
+
+| 策略 | 检出/24 | 三次检出（各/8） | 平均率 | 请求 |
+|---|---:|---|---:|---:|
+| fixed | 21/24 | 7、7、7 | 87.50% | 0 |
+| random | 16/24 | 5、5、6 | 66.67% | 0 |
+| protocol_random | 21/24 | 7、7、7 | 87.50% | 0 |
+| single | 20/24 | 6、8、6 | 83.33% | 36 |
+| feedback | 23/24 | 8、7、8 | 95.83% | 51 |
+| no_feedback | 22/24 | 7、7、8 | 91.67% | 51 |
+
+**feedback的23个检出全部发生在首个实际仿真轮**，没有依赖已有仿真反馈的新增检出。格式纠正可能在首实际轮之前发生，不能混称为仿真反馈收益；系统prompt也发生变化。23高于20/22仅是本次计数，不能宣称反馈因果、统计显著或泛化。no_feedback仍含失败早停等残余信号，不能当作完全隔绝执行信息的强因果对照。
+
+实际212任务执行、229轮/458执行侧，4项全无执行仍保留完整分母；89快照校验通过、输入变化空，严格资格false。已实际执行的正确任务误报0，但feedback只有11/12执行：1项重复键blocked；另2项正确任务在先前执行后最终格式耗尽。no_feedback有1正确任务最终重复键错误，不能把无误报写成所有正确任务成功。
+
+10个普通schema拒绝均保存原始JSON：后续5次合法schema恢复中4次真实执行（3缺陷任务+1正确任务），另1次是合法stop，不计作执行恢复。另3个重复JSON键为安全fatal，只保存hash/长度。135份受控响应原件已保留；本轮没有json_invalid，因此新增txt归档只得到模拟/真实Icarus测试覆盖，不能宣称在线已经观察过这种恢复。历史row126缺失原文仍然缺失，不补造、不替换。格式拒绝和合法但超周期的拒绝仍是可靠性待改问题，不为检出率放宽schema。
+
+[本轮预算](agent_recovery_study_budget_2026-10-05.json)：138真实请求、378204输入加输出tokens（348617+29587），独立100万上限剩621796，138请求usage均已知，实付未知。普通格式补提计新付费请求，不是自动传输重试；余额本身不授权另开新批次。上一轮399083与旧857957均不扣本轮，历史360累计请求限制已撤销，历史账保留。
+
+[全仓r1/r2原件](agent-recovery-validation-2026-10-05/receipt.json)：r1因执行者把basetemp放仓库内导致3项失败，原件保留；r2用仓库外临时目录得到1307 passed/2 skipped/0 failed，mypy82源码0错误。不能与历史1170全仓或65/263定向测试相加。[代码代理审查](../review/agent_recovery_code_review_2026-10-05.md)已有；[结果只读代理复核](../review/agent_recovery_study_review_2026-10-05.md)已完成，不等于H02真人审核。旧PDF/ZIP未更新到本轮，真人/H02和独立新模块留出继续待验。
 
 ## 4. 在线模型实验（历史，探索性口径）
 
@@ -280,8 +303,8 @@ UART busy_never_clears仍漏检，提案5拍start全0，仅idle场景；发送�
 | 指标 | 数值 | 来源 / 复现 | 时间 | 备注 |
 |---|---|---|---|---|
 | 历史全仓自动化测试 | **914 passed / 1 skipped / 0 failed，227.34 秒** | `.iverilog-ai/ic-validation-pdf-final-20261004/pytest.log`、`pytest.xml`、`metadata.json`；持久记录 `docs/experiment/ic_validation_2026-10-04.md` §6 / `ic-validation-pdf-final-2026-10-04/` | 2026-10-04，源码 `867b8bd564c881954c98cc18813884a4074d1ed5`，148 个源码/配置指纹 | 含采样保护及 PDF 混排/列表修复；mypy 72、未可达扫描163、BOM0；1 跳过为推荐断言表为空，不是模型成绩 |
-| 当前v5全仓自动化测试 | **1170 passed / 2 skipped / 0 failed / 0 errors，245.01秒** | [冻结验收](ic_agent_v5_validation_2026-10-05.md)、`docs/experiment/ic-agent-v5-validation-2026-10-05/validation.json`及JUnit/日志 | 2026-10-05，生产实现 `4d8eafb`，296源码/测试/配置指纹 | mypy76源码0错、未可达200文件0、BOM0；两测试尾空行后续变化与45项复测单列；不声称最终全部测试字节与清单相同 |
-| 当前v5浏览器工作流 | **三尺寸0横溢出；UART58/58；非默认补测/采样设置与结果切页保持；0API** | `docs/experiment/ic-agent-v5-validation-2026-10-05/browser/results.json` | 2026-10-05，重启冻结源码服务 | 手机为视口模拟，r1/r2自动化失败保留；同会话rerun保持不是进程重启保持；非真人或真实浏览器API请求 |
+| 历史v5全仓自动化测试 | **1170 passed / 2 skipped / 0 failed / 0 errors，245.01秒** | [冻结验收](ic_agent_v5_validation_2026-10-05.md)、`docs/experiment/ic-agent-v5-validation-2026-10-05/validation.json`及JUnit/日志 | 2026-10-05，生产实现 `4d8eafb`，296源码/测试/配置指纹 | mypy76源码0错、未可达200文件0、BOM0；两测试尾空行后续变化与45项复测单列；不声称最终全部测试字节与清单相同 |
+| 历史v5浏览器工作流 | **三尺寸0横溢出；UART58/58；非默认补测/采样设置与结果切页保持；0API** | `docs/experiment/ic-agent-v5-validation-2026-10-05/browser/results.json` | 2026-10-05，重启冻结源码服务 | 手机为视口模拟，r1/r2自动化失败保留；同会话rerun保持不是进程重启保持；非真人或真实浏览器API请求 |
 | 历史v4全仓自动化测试 | **1073 passed / 2 skipped / 0 failed，187.031秒** | [冻结验收](ic_agent_v4_validation_2026-10-04.md)、`docs/experiment/ic-agent-v4-validation-2026-10-04/validation.json`及JUnit/日志 | 2026-10-04，源码 `28be1ed`，291源码/配置指纹 | mypy76源码0错误、未可达187文件0、BOM0；空断言表/Win1314 symlink跳过；浏览器r3另列，历史日志不覆盖 |
 | 历史v4浏览器工作流 | **三尺寸0横溢出；UART58/58；切页结果保留；0API** | `docs/experiment/ic-agent-v4-validation-2026-10-04/browser/results.json` | 2026-10-04，冻结源码新服务 | 手机为视口模拟；r1/r2失败保留；不称真人、在线API或实体手机测试 |
 | 采样保护版回归 | **914 passed / 1 skipped / 0 failed，211.47 秒** | `.iverilog-ai/ic-validation-sampling-guard-20261004/pytest.log`；持久 `ic-validation-2026-10-04/` | 2026-10-04，源码 `1c1e0dc5b30a65a83673951cc495b1a7b700511c`，148 个源码/配置指纹 | 后续只改 PDF 渲染代码，不重新计算 API pilot 成绩；该日志保留，不能累加 |
@@ -296,9 +319,9 @@ UART busy_never_clears仍漏检，提案5拍start全0，仅idle场景；发送�
 | 基准矩阵（2026-10-01 代码复跑） | 参考设计 15 个**误报 0**；缺陷变体 83 个 **83/83 检出**；不可判定 0 | `python scripts/run_benchmark_matrix.py --output-dir .iverilog-ai/matrix-final` | 2026-10-01 | 每案例的 `result.json` 原样保留；矩阵为速度默认不 dump 波形 |
 | 证据包可复核性（历史快照） | 8 文件 / 11.1 KB；**6 条记录 sha256 逐条重算一致**；zip 完整性 OK | `python .dsh-tmp/verify_pack_final.py G:\iai-evidence-pack-final` | 2026-10-01 | 本轮未重新生成；历史重新哈希结论不等于当前代码的完整可复现性 |
 | 本轮c7/v4冻结交接包 | **127,448,982字节；10,331 ZIP条目，10,330项文件SHA全匹配；4源码归档；注册280/281精确匹配** | `docs/competition/ic/evidence_pack_v4_2026-10-04.md`与JSON | 2026-10-04，材料c5e9171；生产28be1ed | 1早期计划MD未恢复，2旧provider换行恢复明记；已知负例junction链接明确排除；CRC/SHA是字节检查，非人审或异机 |
-| 当前v5限定证据包 | **48,306,453字节；3,282 ZIP条目，3,281文件SHA/CRC通过；74/74输入字节冻结** | `docs/competition/ic/evidence_pack_v5_2026-10-05.md`与JSON | 2026-10-05，生产4d8eafb | 包括本轮60任务/41请求、允许目录的失败与截图；不替代旧c7/v4或其缺项；包后回执独立存放 |
-| 当前v5包外反例重放 | **108输出比较/16失败；failed_checks；0API；结构化stdout与原run一致** | `docs/experiment/ic-agent-v5-pack-replay-2026-10-05/receipt.json`及完整stdout/stderr | 2026-10-05，从新ZIP解至仓库外独立Temp目录 | 同机已有Python/Icarus，不导入项目模块；过程退出0不是DUT通过；首次辅助脚本文件计数错误在执行前停止，另存 |
-| 当前v5包后代理核查 | **3,281项SHA/CRC、74快照、60行/150执行侧、41请求和预算一致** | `docs/review/ic_v5_pack_review_2026-10-05.md`及`docs/review/ic-v5-pack-review-2026-10-05/receipt.json` | 2026-10-05，独立子代理只读核查 | 仅3.55e-15耗时浮点尾差，无实质冲突；复核既有离线日志，不重跑仿真/凭据扫描/历史远程响应，不是H02或异机 |
+| 历史v5限定证据包 | **48,306,453字节；3,282 ZIP条目，3,281文件SHA/CRC通过；74/74输入字节冻结** | `docs/competition/ic/evidence_pack_v5_2026-10-05.md`与JSON | 2026-10-05，生产4d8eafb | 包括本轮60任务/41请求、允许目录的失败与截图；不替代旧c7/v4或其缺项；包后回执独立存放 |
+| 历史v5包外反例重放 | **108输出比较/16失败；failed_checks；0API；结构化stdout与原run一致** | `docs/experiment/ic-agent-v5-pack-replay-2026-10-05/receipt.json`及完整stdout/stderr | 2026-10-05，从新ZIP解至仓库外独立Temp目录 | 同机已有Python/Icarus，不导入项目模块；过程退出0不是DUT通过；首次辅助脚本文件计数错误在执行前停止，另存 |
+| 历史v5包后代理核查 | **3,281项SHA/CRC、74快照、60行/150执行侧、41请求和预算一致** | `docs/review/ic_v5_pack_review_2026-10-05.md`及`docs/review/ic-v5-pack-review-2026-10-05/receipt.json` | 2026-10-05，独立子代理只读核查 | 仅3.55e-15耗时浮点尾差，无实质冲突；复核既有离线日志，不重跑仿真/凭据扫描/历史远程响应，不是H02或异机 |
 | 本轮包后反例重放 | **338比较/48失败；failed_checks；0API；过程退出0** | `docs/experiment/ic-agent-v4-pack-replay-2026-10-04/receipt.json`及stdout/stderr | 2026-10-04，新目录解包后运行真实replay.py | 同机既有Python/Icarus，无项目模块导入；初次辅助脚本ZIP根路径错误另存，不当模型或DUT失败 |
 | 包内源码离线抽检 | **0 API 请求；547 输出比较 / 0 差异；退出 0** | `docs/experiment/ic-pack-smoke-2026-10-04/smoke.json`、stdout/stderr | 2026-10-04 | 外层ZIP提取源码和冻结UART RX，显式导入提取后的src；使用本机已有依赖/Icarus；首个辅助脚本字段KeyError另记，不计入应用失败或模型成绩 |
 | 静态规则 | 44 条（error 4 / warn 27 / info 13） | `iverilog_ai.core.static_review.RULE_REGISTRY` | 2026-09-29 实测 | 规则的**条数不是效果**：噪声率另有指标 |
@@ -317,7 +340,7 @@ UART busy_never_clears仍漏检，提案5拍start全0，仅idle场景；发送�
 | 提交文案（名称/简介） | **已备**（`docs/competition/submission_cover_text.md`，2026-10-04 实测 242 字） |
 | 原开源赛道证据包 | **2026-10-01 历史生成与核验，本轮未覆盖**（`G:\iai-evidence-pack-final[.zip]`） |
 | 本轮c7/v4本地证据包 | **已生成、字节校验及同机反例重放**（`.iverilog-ai/ic-agent-v4-evidence-20261004.zip`）；280/281注册字节匹配，1项缺失明记；异机、真人及正式提交未完成 |
-| 当前v5本地证据包 | **已生成、字节校验及仓库外反例重放**（`.iverilog-ai/ic-agent-v5-evidence-20261005.zip`）；74/74该版输入齐全，未包含新216任务等后续实验，不改写旧缺项；异机、真人与正式提交未完成 |
+| 历史v5本地证据包 | **已生成、字节校验及仓库外反例重放**（`.iverilog-ai/ic-agent-v5-evidence-20261005.zip`）；74/74该版输入齐全，未包含新216任务等后续实验，不改写旧缺项；异机、真人与正式提交未完成 |
 | 历史 IC 本地证据包 | **已生成与代理审计**（`.iverilog-ai/ic-evidence-pack-20261004.zip`）；旧包内源码同机抽检通过；不含本轮c7/v4原件，异机与正式提交未完成 |
 
 其中未确定、未做、无记录与仅有历史证据的项目，不写成当前已完成；机器验收不能补写真人完成状态。

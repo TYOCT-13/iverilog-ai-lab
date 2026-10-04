@@ -1,0 +1,32 @@
+{
+  "schema": "agent-per-round-budget-receipt-v1",
+  "round_name": "bounded_schema_recovery_full_comparison_20261005",
+  "round_scope": "one complete preregistered evaluation batch; all API groups share the same 1M limit",
+  "round_limit": 1000000,
+  "round_totals": {
+    "reported_tokens": 378204,
+    "unknown_reserved_tokens": 0,
+    "conservative_total": 378204,
+    "remaining_tokens": 621796,
+    "requests_known_usage": 138,
+    "requests_unknown_usage": 0
+  },
+  "requests": 138,
+  "reported_prompt_tokens": 348617,
+  "reported_completion_tokens": 29587,
+  "requests_with_usage": 138,
+  "requests_without_usage": 0,
+  "theoretical_request_cap": 252,
+  "output_cap_per_request": 4096,
+  "thinking": "disabled",
+  "stream": false,
+  "automatic_transport_retries": 0,
+  "ordinary_format_reproposal_is_a_charged_new_request": true,
+  "historical_tokens_deducted_from_round": false,
+  "historical_360_request_limit_is_current": false,
+  "remaining_tokens_is_not_authorization_to_start_another_batch": true,
+  "actual_currency": null,
+  "provider_billing_receipt_supplied": false,
+  "raw_journal_sha256": "754de0d9d5587b4e7a5288800adbadc4794803e50f9c0361f4c31f5c5d0f7d7e",
+  "public_journal": "agent-recovery-study-live-2026-10-05/token_budget.json"
+}

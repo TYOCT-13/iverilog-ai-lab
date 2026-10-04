@@ -4,7 +4,7 @@
 带盘符的除外。路径可用 `python scripts/check_doc_index.py` 校验是否仍然存在。
 
 - 仓库：`iverilog-ai-lab`，Apache-2.0；第三方资源保留各自许可；判定权威是 Icarus Verilog 12.0（`s20150603`）
-- 本次材料修订：**2026-10-05**；最新评测源码 `75f9baa`（生产Agent/core仍为`4d8eafb`）；新增六组三重复216任务、145请求/399083tokens，独立每轮100万额度；历史短预算三重复144任务（入口`f54ae63`）与六项选样诊断（入口`bdc9e20`），不改旧v5一次重复60任务。v2提交PDF/答辩仍为 `28be1ed`，旧三重复 `c7bb280`、pilot `e9b7b8a`分别归档。最新实测与旧版正式材料不能混作同一版本（已查阅通知的提交截止2026-10-15 20:00北京时间）。
+- 本次材料修订：**2026-10-05**；当前Agent v6与评测源码`9c3bd3c`；新恢复轮216任务/138请求/378204tokens，独立每轮100万额度；上一轮`75f9baa`的216任务/145请求/399083tokens保持历史，历史短预算三重复144任务（入口`f54ae63`）与六项选样诊断（入口`bdc9e20`），不改旧v5一次重复60任务。v2提交PDF/答辩仍为 `28be1ed`，旧三重复 `c7bb280`、pilot `e9b7b8a`分别归档。最新实测与旧版正式材料不能混作同一版本（已查阅通知的提交截止2026-10-15 20:00北京时间）。
 - 状态记号：**有效** = 当前口径，可直接对外引用；**历史** = 反映当时状态，只读归档，
   引用时必须带"旧口径"标注；**待补** = 尚未完成
 
@@ -15,7 +15,7 @@
 | 你想干什么 | 按顺序读 |
 |---|---|
 | 5 分钟了解这个项目 | `README.md` → `docs/project_overview.md` → `docs/competition/ic/report_draft.md` |
-| 准备 AI＋集成电路提交 | `docs/experiment/agent_study_1m_live_2026-10-05.md` → `docs/competition/ic/gap_checklist.md` → `docs/competition/ic/v2/README.md`；正式v2文件尚未同步最新实测，真人/H02待真实原件 |
+| 准备 AI＋集成电路提交 | `docs/experiment/agent_recovery_study_live_2026-10-05.md` → `docs/competition/ic/gap_checklist.md` → `docs/competition/ic/v2/README.md`；正式v2文件尚未同步最新实测，真人/H02待真实原件 |
 | 复核数字是否可信 | `docs/experiment/metric_inventory.md`（每个数字一行：口径/来源/时间/复现命令）→ `docs/competition/submission_gate_checklist.md` → 产物目录 |
 | IC提交当天照着做 | `docs/competition/ic/v2/README.md` → `docs/competition/ic/gap_checklist.md`；先核对所选赛道、真人/H02原件和团队字段 |
 | 组织真人试用与反馈 | `docs/trial/README.md` → `docs/trial/organizer_workflow.md`；发给参与者从 `docs/trial/participant_start.md` 开始 |
@@ -32,9 +32,12 @@
 | v2佐证源稿与PDF | `docs/competition/ic/v2/supporting_evidence.md`、`docs/competition/ic/ICARUS_佐证材料_v2.pdf` | 28be1ed版本；5页、约0.86MB；V01–V06真实来源，保留失败，尚未纳入v5 |
 | 最新材料入口与PDF回执 | `docs/competition/ic/v2/README.md`、`docs/competition/ic/v2/validation.json` | 名称15字符、简介172字符；全部14页渲染查看，文字可选择、身份元数据空 |
 | 最新答辩稿与构建来源 | `docs/competition/ic/ICARUS_答辩材料_v2.pptx`、`docs/competition/ic/ICARUS_答辩材料_v2.pdf`、`docs/competition/ic/defense_v2/README.md`、`docs/competition/ic/defense_v2/qa_report.json` | 12页，5原生表格/3原生图表/12页备注；PPTX可编辑，PDF图像式；逐页机器检查，不是独立人审 |
-| 每轮100万tokens六组对照 | `docs/experiment/agent_study_1m_plan_2026-10-05.md`、`docs/experiment/agent_study_1m_live_2026-10-05.md`、`docs/experiment/agent-study-1m-live-2026-10-05/receipt.json`、`docs/experiment/agent-study-1m-live-2026-10-05/rows.json` | 216任务三重复；fixed/random/protocol_random/single/feedback/no_feedback为21/16/21/21/18/22（各24）；85快照匹配，212任务/480执行侧，4全无执行，严格资格false |
-| 本轮独立tokens账与冻结设置 | `docs/experiment/agent_study_1m_budget_2026-10-05.json`、`docs/experiment/agent-study-1m-live-2026-10-05/token_budget.json`、`docs/experiment/agent-study-1m-live-2026-10-05/preregistration.json`、`docs/experiment/agent-study-1m-live-2026-10-05/run_settings.json` | 145请求、399083tokens、剩600917；历史857957不扣新轮，旧360限制撤销；无未知usage/守门拒绝/超限，实付未知 |
-| 本轮入口定向测试与只读复核 | `docs/experiment/agent-study-1m-validation-2026-10-05/receipt.json`、`docs/review/agent_study_1m_review_2026-10-05.md` | 65项定向通过，不与1170全仓相加；代理复核非真人/H02 |
+| v6格式恢复六组真实对照 | `docs/experiment/agent_recovery_study_live_2026-10-05.md`、`docs/experiment/agent-recovery-study-live-2026-10-05/receipt.json`、`docs/experiment/agent-recovery-study-live-2026-10-05/strict_summary.json`、`docs/experiment/agent-recovery-study-live-2026-10-05/trace_manifest.json` | 216任务，六组21/16/21/20/23/22（各24）；212执行/229轮/458侧，89快照无变，严格false；反馈23全在首实际仿真轮，非反馈因果 |
+| v6独立tokens预算 | `docs/experiment/agent_recovery_study_budget_2026-10-05.json` | 138请求、378204tokens、剩621796；无未知usage；旧360限制非当前，新轮不扣旧账，费用未知 |
+| v6全仓与代理复核 | `docs/experiment/agent-recovery-validation-2026-10-05/receipt.json`、`docs/review/agent_recovery_code_review_2026-10-05.md`、`docs/review/agent_recovery_study_review_2026-10-05.md` | 1307/2skip、mypy82；r1误放仓库内临时目录的3失败保留，r2外部目录通过；结果只读复核完成，不是H02 |
+| 上一轮100万tokens六组对照 | `docs/experiment/agent_study_1m_plan_2026-10-05.md`、`docs/experiment/agent_study_1m_live_2026-10-05.md`、`docs/experiment/agent-study-1m-live-2026-10-05/receipt.json`、`docs/experiment/agent-study-1m-live-2026-10-05/rows.json` | 216任务三重复；fixed/random/protocol_random/single/feedback/no_feedback为21/16/21/21/18/22（各24）；85快照匹配，212任务/480执行侧，4全无执行，严格资格false |
+| 上一轮1M独立tokens账与冻结设置 | `docs/experiment/agent_study_1m_budget_2026-10-05.json`、`docs/experiment/agent-study-1m-live-2026-10-05/token_budget.json`、`docs/experiment/agent-study-1m-live-2026-10-05/preregistration.json`、`docs/experiment/agent-study-1m-live-2026-10-05/run_settings.json` | 145请求、399083tokens、剩600917；历史857957不扣新轮，旧360限制撤销；无未知usage/守门拒绝/超限，实付未知 |
+| 上一轮1M入口定向测试与只读复核 | `docs/experiment/agent-study-1m-validation-2026-10-05/receipt.json`、`docs/review/agent_study_1m_review_2026-10-05.md` | 65项定向通过，不与1170全仓相加；代理复核非真人/H02 |
 | 短预算三重复真实API对照 | `docs/experiment/agent_smoke_plan_2026-10-05.md`、`scripts/run_agent_smoke_comparison.py`、`spec/agent_smoke_budgets.json`、`docs/experiment/agent_smoke_live_2026-10-05.md`、`docs/experiment/agent-smoke-live-2026-10-05/receipt.json` | 144任务、36请求；API15/24、随机16/24、固定/协议随机21/24；77快照、139任务/278执行侧；5未执行，严格资格false；旧长预算提示冲突披露 |
 | 提示澄清后的六请求诊断 | `docs/experiment/agent_smoke_diagnostic_plan_2026-10-05.md`、`scripts/run_agent_smoke_diagnostic.py`、`docs/experiment/agent_smoke_diagnostic_2026-10-05.md`、`docs/experiment/agent-smoke-diagnostic-2026-10-05/receipt.json` | 5未执行任务+1正确控制；6合规执行、缺陷任务4/5（不同缺陷3/4）、正确控制无误报；85快照、12执行侧；不更新原主指标，非新完整比较 |
 | 短预算与诊断累计API预算 | `docs/experiment/agent_smoke_api_budget_2026-10-05.json`、`docs/experiment/agent_smoke_diagnostic_api_budget_2026-10-05.json` | 两账分别保守354/360、360/360；该时点已知359响应+旧1预留，857957已报告tokens，剩0；旧360限制已撤销，历史不扣新轮；实付未知 |
@@ -42,26 +45,26 @@
 | 短预算与诊断只读代理复核 | `docs/review/agent_smoke_review_2026-10-05.md`、`docs/review/agent-smoke-review-2026-10-05/receipt.json`、`docs/review/agent_smoke_diagnostic_review_2026-10-05.md`、`docs/review/agent-smoke-diagnostic-review-2026-10-05/receipt.json` | 机器原件与登记字节复核；不替代真人/H02，不把选样诊断解释成胜随机 |
 | v5优化与旧输入诊断 | `docs/experiment/agent_v5_optimization_2026-10-05.md`、`docs/experiment/agent_comparison_v5_plan_2026-10-05.md` | 有效；逐拍、独立复位与预检；旧UART/SPI计划零API重放，不能计新模型成绩 |
 | v5真实API开发集对比 | `docs/experiment/agent_comparison_v5_live_2026-10-05.md`、`docs/experiment/agent-comparison-v5-live-2026-10-05/receipt.json`、`docs/experiment/agent-comparison-v5-live-2026-10-05/rows.json` | 60任务/41请求；反馈8/8，随机/固定/协议随机8/8，无反馈7/8；保留1格式拒绝；74冻结输入、60原件均可核验，非留出 |
-| v5最新全仓与浏览器验收 | `docs/experiment/ic_agent_v5_validation_2026-10-05.md`、`docs/experiment/ic-agent-v5-validation-2026-10-05/validation.json`、`docs/experiment/ic-agent-v5-validation-2026-10-05/browser/results.json` | 1170/2skip，296指纹无变；两测试文件末尾格式变化和45项复测单列；三尺寸、UART58/58、非默认设置切页保持 |
+| 历史v5全仓与浏览器验收 | `docs/experiment/ic_agent_v5_validation_2026-10-05.md`、`docs/experiment/ic-agent-v5-validation-2026-10-05/validation.json`、`docs/experiment/ic-agent-v5-validation-2026-10-05/browser/results.json` | 1170/2skip，296指纹无变；两测试文件末尾格式变化和45项复测单列；三尺寸、UART58/58、非默认设置切页保持 |
 | v5独立代理代码检查 | `docs/review/ic_v5_code_review_2026-10-05.md` | 发现并复测执行指纹/失败记录绑定、非法逐拍提案和登记路径问题；0API，非H02 |
 | v5时点历史累计API预算 | `docs/experiment/ic_agent_v5_api_budget_2026-10-05.json` | 当时已知317响应，加旧1保守318/360、剩42；后续历史试验曾用满360；现已撤销该累计限制，新1M轮单独记账；旧账不覆盖 |
-| v5完整原件交接包 | `docs/competition/ic/evidence_pack_v5_2026-10-05.md`、`docs/competition/ic/evidence_pack_v5_2026-10-05.json`、`.iverilog-ai/ic-agent-v5-evidence-20261005.zip` | 48,306,453字节；3,281项文件SHA/CRC通过，74/74输入冻结；未含新增短预算、六项诊断及216任务轮，旧c7/v4包另存 |
-| v5包外实际反例重放 | `docs/experiment/ic-agent-v5-pack-replay-2026-10-05/receipt.json`、`docs/experiment/ic-agent-v5-pack-replay-2026-10-05/stdout.log`、`docs/experiment/ic-agent-v5-pack-replay-2026-10-05/run.stdout.txt` | 从本轮ZIP解13文件至仓库外新目录；108检查/16失败、0API、结构记录与原件一致；同机已有工具，非真人/异机 |
+| v5完整原件交接包 | `docs/competition/ic/evidence_pack_v5_2026-10-05.md`、`docs/competition/ic/evidence_pack_v5_2026-10-05.json`、`.iverilog-ai/ic-agent-v5-evidence-20261005.zip` | 48,306,453字节；3,281项文件SHA/CRC通过，74/74输入冻结；未含新增短预算、六项诊断、1M和v6恢复轮，旧c7/v4包另存 |
+| v5包外实际反例重放 | `docs/experiment/ic-agent-v5-pack-replay-2026-10-05/receipt.json`、`docs/experiment/ic-agent-v5-pack-replay-2026-10-05/stdout.log`、`docs/experiment/ic-agent-v5-pack-replay-2026-10-05/run.stdout.txt` | 从历史v5 ZIP解13文件至仓库外新目录；108检查/16失败、0API、结构记录与原件一致；同机已有工具，非真人/异机 |
 | v5包后独立代理核查 | `docs/review/ic_v5_pack_review_2026-10-05.md`、`docs/review/ic-v5-pack-review-2026-10-05/receipt.json` | CRC/3,281项SHA、74快照、60任务/150执行侧、41请求和预算一致；仅浮点尾差，非H02、异机或新API |
 | 历史c7/v4冻结交接包 | `docs/competition/ic/evidence_pack_v4_2026-10-04.md`、`docs/competition/ic/evidence_pack_v4_2026-10-04.json`、`.iverilog-ai/ic-agent-v4-evidence-20261004.zip` | 127,448,982字节；10,330项文件SHA/CRC通过；281登记中280精确匹配，1早期计划MD未恢复；完整结果及失败保留 |
-| 本轮包后代理字节核查 | `docs/review/ic_v4_pack_review_2026-10-04.md`、`docs/review/ic-v4-pack-review-2026-10-04/receipt.json` | CRC/10,330项SHA与280输入均匹配；4 Git归档重新导出字节一致，预期CRLF差异明记；不是H02或异机 |
+| 历史v4包后代理字节核查 | `docs/review/ic_v4_pack_review_2026-10-04.md`、`docs/review/ic-v4-pack-review-2026-10-04/receipt.json` | CRC/10,330项SHA与280输入均匹配；4 Git归档重新导出字节一致，预期CRLF差异明记；不是H02或异机 |
 | 新包内反例实际重放 | `docs/experiment/ic-agent-v4-pack-replay-2026-10-04/receipt.json`、`docs/experiment/ic-agent-v4-pack-replay-2026-10-04/stdout.log`、`docs/experiment/ic-agent-v4-pack-replay-2026-10-04/stderr.log` | 从外层ZIP取内层小包，在新目录运行包内replay.py；338比较/48失败，failed_checks，0API；同机已有工具，不是异机或真人 |
 | v4单重复API烟测 | `docs/experiment/agent_comparison_v4_smoke_2026-10-04.md`、`docs/experiment/agent-comparison-v4-smoke-2026-10-04/receipt.json` | 84行、94请求、94/94动作校验；反馈6/8，随机8/8；1正确基线执行失败、严格资格false |
 | v2正式小型回执 | `docs/experiment/agent-comparison-v2-2026-10-04/receipt.json` | 是摘要摘录，不是完整results；全部252行和完整原件另存，SHA可追溯 |
-| 本轮API预算账 | `docs/experiment/ic_agent_v4_api_budget_2026-10-04.json` | 保守277/360请求；已知276响应，预跑另1可能在途，未知不作零；不是账单 |
+| 历史v4 API预算账 | `docs/experiment/ic_agent_v4_api_budget_2026-10-04.json` | 保守277/360请求；已知276响应，预跑另1可能在途，未知不作零；不是账单 |
 | 历史v4完整回归与浏览器 | `docs/experiment/ic_agent_v4_validation_2026-10-04.md`、`docs/experiment/ic-agent-v4-validation-2026-10-04/validation.json`、`docs/experiment/ic-agent-v4-validation-2026-10-04/browser/results.json` | 28be1ed：1073/2skip；291冻结SHA无变；r3三尺寸0横溢出、UART58/58、切页保持；失败r1/r2保留 |
 | v4非实现者代理复核 | `docs/review/ic_agent_v4_proxy_review_2026-10-04.md` | 复现重复JSON键/转义凭据问题，冻结修复复测；模拟凭据、真实API0，不是H02 |
 | 历史条件稿技术方案源 | `docs/competition/ic/report_submission.md` | 条件稿；按真人、人审均通过的前提起草，H01/H02未核实，实验数字沿用真实记录 |
 | 历史条件稿技术方案PDF | `docs/competition/ic/ICARUS_技术方案.pdf` | 条件稿；11页/正文10页，七节大纲；匿名版式与逐页检查完成 |
 | 历史条件稿佐证源与PDF | `docs/competition/ic/supporting_evidence_submission.md`、`docs/competition/ic/ICARUS_佐证材料.pdf` | 条件稿；5页，E01–E07为真实记录，H01/H02原件待补 |
 | 历史报名短文本与说明 | `docs/competition/ic/submission_copy.md`、`docs/competition/ic/submission_package_readme.md` | 名称15字、简介199字；提交位置、命名和条件转事实流程 |
-| 本轮报告配图 | `docs/competition/ic/submission_figures/architecture.png`、`docs/competition/ic/submission_figures/agent_comparison.png` | 原创架构图与真实五策略结果图，不改写实验成绩 |
-| 本轮报告校验回执 | `docs/competition/ic/submission_validation_2026-10-04.json` | 文档与PDF校验，不是新的全仓回归、真人试用或独立人审 |
+| 旧IC报告配图 | `docs/competition/ic/submission_figures/architecture.png`、`docs/competition/ic/submission_figures/agent_comparison.png` | 原创架构图与真实五策略结果图，不改写实验成绩 |
+| 旧IC报告校验回执 | `docs/competition/ic/submission_validation_2026-10-04.json` | 文档与PDF校验，不是新的全仓回归、真人试用或独立人审 |
 | IC 技术报告源 | `docs/competition/ic/report_draft.md` | 按官方七节大纲整理；真人和人工复核缺口如实保留 |
 | IC 技术报告 PDF | `docs/competition/ic/report_draft.pdf` | 已导出工作稿，逐页检查；正式团队字段与人审仍待完成 |
 | PDF 版面与文件核验 | `docs/competition/ic/pdf_validation_2026-10-04.json` | IC稿10页/正文9页；元数据、文件哈希与逐页检查；旧两份PDF按原稿同步重导出 |
@@ -213,7 +216,7 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 | 独立真人复核指南与空模板 | `docs/review/` | 有效；复核 3 个基线与 21 个候选，包含功能变体、拟等价改写和编译失败控制项 |
 | 原始录屏与成片工作流 | `docs/demo/recording_workflow.md` | 有效；真人试用原片、独立审核记录和团队演示分别保留 |
 | 3–5 分钟团队演示分镜 | `docs/demo/demo_script.md` | 有效；视频尚未录制，离线演示不称为真实 LLM 调用 |
-| 本轮材料验收记录 | `docs/trial/validation_2026-10-04.md` | 有效；记录本次表单、脚本与交付包检查，不替代真人试用 |
+| 真人试用材料验收记录 | `docs/trial/validation_2026-10-04.md` | 有效；记录本次表单、脚本与交付包检查，不替代真人试用 |
 | v1 反馈兼容入口 | `docs/trial/task_card.md`、`docs/trial/feedback_template.json`、`scripts/summarize_trial_feedback.py` | 保留旧表和旧汇总工具；新试用使用 v2 可变任务表 |
 | 真人结果登记 | `docs/trial/results.md` | 待收集；不把自动测试或模板算作用户反馈 |
 
@@ -236,7 +239,7 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 | 死代码 | `python scripts/check_dead_code.py` | 121 文件 0 处 |
 | 编码/BOM | `python scripts/strip_bom.py --check` | 0 问题 |
 | 交付体检 | `python scripts/check_submission.py --repo .` | **1 error**（`CITATION.cff` 占位符） |
-| 报告页数/体积 | `python scripts/check_submission.py --kind report docs/competition/technical_report_draft.pdf` | 原开源稿：0 error / 1 warning（正文21页超建议值）；原IC工作稿10页/正文9页；本轮条件技术方案11页/正文10页，佐证5页，均0 error / 0 warning |
+| 报告页数/体积 | `python scripts/check_submission.py --kind report docs/competition/technical_report_draft.pdf` | 原开源稿：0 error / 1 warning（正文21页超建议值）；原IC工作稿10页/正文9页；历史条件技术方案11页/正文10页，佐证5页，均0 error / 0 warning |
 | 索引路径存在性 | `python scripts/check_doc_index.py` | **195/195 条路径存在**（2026-10-04；此前反向测试：故意写错一条则退出码 1） |
 
 ---

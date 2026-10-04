@@ -1,0 +1,1765 @@
+{
+  "schema": "agent-recovery-full-compact-receipt-v1",
+  "created_at_utc": "2026-10-04T22:29:05.267255+00:00",
+  "source_revision": "9c3bd3c0cf9caa0fb95e6bbdee6147ae447e58cc",
+  "registered_tasks": 216,
+  "defect_tasks_per_strategy": 24,
+  "correct_tasks_per_strategy": 12,
+  "distinct_development_defects": 8,
+  "repeats": 3,
+  "independent_holdout": false,
+  "human_trial": false,
+  "H02_human_review": false,
+  "requests": 138,
+  "tokens": {
+    "reported_tokens": 378204,
+    "unknown_reserved_tokens": 0,
+    "conservative_total": 378204,
+    "remaining_tokens": 621796,
+    "requests_known_usage": 138,
+    "requests_unknown_usage": 0
+  },
+  "round_token_cap": 1000000,
+  "executed_tasks": 212,
+  "audited_rounds": 229,
+  "pipeline_sides": 458,
+  "evidence_verified_tasks": 212,
+  "unexecuted_tasks": [
+    {
+      "row_index": 9,
+      "case": "uart_tx",
+      "variant": "reference",
+      "strategy": "feedback",
+      "seed": 0,
+      "status": "policy_error"
+    },
+    {
+      "row_index": 31,
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "single",
+      "seed": 0,
+      "status": "decision_format_error"
+    },
+    {
+      "row_index": 56,
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "strategy": "no_feedback",
+      "seed": 0,
+      "status": "cycle_budget"
+    },
+    {
+      "row_index": 207,
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "single",
+      "seed": 2,
+      "status": "decision_format_error"
+    }
+  ],
+  "frozen_inputs": 89,
+  "snapshot_verified": true,
+  "changed_inputs_at_finish": [],
+  "strict_comparison_eligible": false,
+  "schema_counts": {
+    "accepted": 125,
+    "rejected": 13
+  },
+  "format_rejections": 10,
+  "schema_recoveries": 5,
+  "recovered_rejection_requests": 5,
+  "executed_recovery_episodes": 4,
+  "retained_format_rejection_artifacts": 10,
+  "retained_response_artifacts": 135,
+  "malformed_retained_response_artifacts": 0,
+  "strategies": {
+    "fixed": {
+      "registered_defect_samples": 24,
+      "detected_samples": 21,
+      "unique_defects": 8,
+      "unique_detected": 7,
+      "unique_union_rate": 0.875,
+      "incomplete_or_undecidable": 0,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 15,
+        "detected": 21
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 8,
+          "detected": 7,
+          "detection_rate": 0.875,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 8,
+          "detected": 7,
+          "detection_rate": 0.875,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 8,
+          "detected": 7,
+          "detection_rate": 0.875,
+          "incomplete_or_undecidable": 0
+        }
+      ],
+      "repeat_detection_rate_mean": 0.875,
+      "repeat_detection_rate_min": 0.875,
+      "repeat_detection_rate_max": 0.875,
+      "requests": 0,
+      "usage_numeric_sum": {},
+      "requests_with_usage": 0,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 828,
+      "reference_audit_cycles_recorded": 828,
+      "reference_audit_cycles_attempted": 828,
+      "checks_recorded": 2232,
+      "elapsed_seconds_recorded": 30.754,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 0,
+          "cycle": 9,
+          "search_budget": 10,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.172
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 0,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.203
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.219
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.188
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 0,
+          "cycle": 42,
+          "search_budget": 43,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.235
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 0,
+          "cycle": 17,
+          "search_budget": 18,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.234
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 0,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.234
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 1,
+          "cycle": 9,
+          "search_budget": 10,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.344
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 1,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.359
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.36
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.328
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 1,
+          "cycle": 42,
+          "search_budget": 43,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.375
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 1,
+          "cycle": 17,
+          "search_budget": 18,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.375
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 1,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.359
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 2,
+          "cycle": 9,
+          "search_budget": 10,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.438
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 2,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.484
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.5
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.469
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 2,
+          "cycle": 42,
+          "search_budget": 43,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.515
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 2,
+          "cycle": 17,
+          "search_budget": 18,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.5
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 2,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.5
+        }
+      ]
+    },
+    "random": {
+      "registered_defect_samples": 24,
+      "detected_samples": 16,
+      "unique_defects": 8,
+      "unique_detected": 7,
+      "unique_union_rate": 0.875,
+      "incomplete_or_undecidable": 0,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 20,
+        "detected": 16
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 8,
+          "detected": 5,
+          "detection_rate": 0.625,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 8,
+          "detected": 5,
+          "detection_rate": 0.625,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 8,
+          "detected": 6,
+          "detection_rate": 0.75,
+          "incomplete_or_undecidable": 0
+        }
+      ],
+      "repeat_detection_rate_mean": 0.6666666666666666,
+      "repeat_detection_rate_min": 0.625,
+      "repeat_detection_rate_max": 0.75,
+      "requests": 0,
+      "usage_numeric_sum": {},
+      "requests_with_usage": 0,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 828,
+      "reference_audit_cycles_recorded": 828,
+      "reference_audit_cycles_attempted": 828,
+      "checks_recorded": 2232,
+      "elapsed_seconds_recorded": 30.781,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 0,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.219
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 0,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.187
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 0,
+          "cycle": 40,
+          "search_budget": 41,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.25
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 0,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.219
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.219
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 1,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.328
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 1,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.406
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 1,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.343
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 1,
+          "cycle": 41,
+          "search_budget": 42,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.391
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 1,
+          "cycle": 16,
+          "search_budget": 17,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.406
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 2,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.485
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 2,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.516
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 2,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.453
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 2,
+          "cycle": 43,
+          "search_budget": 44,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.562
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 2,
+          "cycle": 18,
+          "search_budget": 19,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.484
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.547
+        }
+      ]
+    },
+    "protocol_random": {
+      "registered_defect_samples": 24,
+      "detected_samples": 21,
+      "unique_defects": 8,
+      "unique_detected": 7,
+      "unique_union_rate": 0.875,
+      "incomplete_or_undecidable": 0,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 15,
+        "detected": 21
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 8,
+          "detected": 7,
+          "detection_rate": 0.875,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 8,
+          "detected": 7,
+          "detection_rate": 0.875,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 8,
+          "detected": 7,
+          "detection_rate": 0.875,
+          "incomplete_or_undecidable": 0
+        }
+      ],
+      "repeat_detection_rate_mean": 0.875,
+      "repeat_detection_rate_min": 0.875,
+      "repeat_detection_rate_max": 0.875,
+      "requests": 0,
+      "usage_numeric_sum": {},
+      "requests_with_usage": 0,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 828,
+      "reference_audit_cycles_recorded": 828,
+      "reference_audit_cycles_attempted": 828,
+      "checks_recorded": 2232,
+      "elapsed_seconds_recorded": 30.925,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.172
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 0,
+          "cycle": 8,
+          "search_budget": 9,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.219
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 0,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.204
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.187
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 0,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.219
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 0,
+          "cycle": 40,
+          "search_budget": 41,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.25
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 0,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.235
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.297
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 1,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.406
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 1,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.344
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.328
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 1,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.36
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 1,
+          "cycle": 40,
+          "search_budget": 41,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.391
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 1,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.391
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.453
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 2,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.516
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 2,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.5
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.469
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 2,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.469
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 2,
+          "cycle": 40,
+          "search_budget": 41,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.531
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 2,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.516
+        }
+      ]
+    },
+    "single": {
+      "registered_defect_samples": 24,
+      "detected_samples": 20,
+      "unique_defects": 8,
+      "unique_detected": 8,
+      "unique_union_rate": 1.0,
+      "incomplete_or_undecidable": 2,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 14,
+        "detected": 20,
+        "decision_format_error": 2
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 8,
+          "detected": 6,
+          "detection_rate": 0.75,
+          "incomplete_or_undecidable": 1
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 8,
+          "detected": 8,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 8,
+          "detected": 6,
+          "detection_rate": 0.75,
+          "incomplete_or_undecidable": 1
+        }
+      ],
+      "repeat_detection_rate_mean": 0.8333333333333334,
+      "repeat_detection_rate_min": 0.75,
+      "repeat_detection_rate_max": 1.0,
+      "requests": 36,
+      "usage_numeric_sum": {
+        "prompt_tokens": 87156,
+        "completion_tokens": 8456,
+        "total_tokens": 95612,
+        "prompt_cache_hit_tokens": 73088,
+        "prompt_cache_miss_tokens": 14068
+      },
+      "requests_with_usage": 36,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 621,
+      "reference_audit_cycles_recorded": 621,
+      "reference_audit_cycles_attempted": 621,
+      "checks_recorded": 1657,
+      "elapsed_seconds_recorded": 71.171,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 0,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.578
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 0,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.25
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.281
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.297
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 0,
+          "cycle": 40,
+          "search_budget": 41,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.406
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 0,
+          "cycle": 17,
+          "search_budget": 18,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.25
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 1,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.437
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 1,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.25
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 1,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.625
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.625
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 1,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.921
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 1,
+          "cycle": 40,
+          "search_budget": 41,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.25
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 1,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.297
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 1,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.672
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 2,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.719
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 2,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.562
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 2,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.266
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 2,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.875
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 2,
+          "cycle": 40,
+          "search_budget": 41,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.906
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 2,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.922
+        }
+      ]
+    },
+    "feedback": {
+      "registered_defect_samples": 24,
+      "detected_samples": 23,
+      "unique_defects": 8,
+      "unique_detected": 8,
+      "unique_union_rate": 1.0,
+      "incomplete_or_undecidable": 0,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 10,
+        "policy_error": 1,
+        "detected": 23,
+        "decision_format_error": 2
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 8,
+          "detected": 8,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 8,
+          "detected": 7,
+          "detection_rate": 0.875,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 8,
+          "detected": 8,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        }
+      ],
+      "repeat_detection_rate_mean": 0.9583333333333334,
+      "repeat_detection_rate_min": 0.875,
+      "repeat_detection_rate_max": 1.0,
+      "requests": 51,
+      "usage_numeric_sum": {
+        "prompt_tokens": 134482,
+        "completion_tokens": 10568,
+        "total_tokens": 145050,
+        "prompt_cache_hit_tokens": 86016,
+        "prompt_cache_miss_tokens": 48466
+      },
+      "requests_with_usage": 51,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 688,
+      "reference_audit_cycles_recorded": 688,
+      "reference_audit_cycles_attempted": 688,
+      "checks_recorded": 1877,
+      "elapsed_seconds_recorded": 93.358,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 0,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.906
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 0,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.141
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 0,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.047
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 0,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.609
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.406
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 0,
+          "cycle": 40,
+          "search_budget": 41,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.156
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 0,
+          "cycle": 17,
+          "search_budget": 18,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.391
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 3.109
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 1,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.953
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 1,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.359
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 1,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.25
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.797
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 1,
+          "cycle": 41,
+          "search_budget": 42,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.532
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 1,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.078
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 1,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.75
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 2,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.406
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 2,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.906
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 2,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.547
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.609
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 2,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.235
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 2,
+          "cycle": 41,
+          "search_budget": 42,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.266
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 2,
+          "cycle": 17,
+          "search_budget": 18,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.531
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.25
+        }
+      ]
+    },
+    "no_feedback": {
+      "registered_defect_samples": 24,
+      "detected_samples": 22,
+      "unique_defects": 8,
+      "unique_detected": 8,
+      "unique_union_rate": 1.0,
+      "incomplete_or_undecidable": 2,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 11,
+        "detected": 22,
+        "cycle_budget": 1,
+        "policy_error": 2
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 8,
+          "detected": 7,
+          "detection_rate": 0.875,
+          "incomplete_or_undecidable": 1
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 8,
+          "detected": 7,
+          "detection_rate": 0.875,
+          "incomplete_or_undecidable": 1
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 8,
+          "detected": 8,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        }
+      ],
+      "repeat_detection_rate_mean": 0.9166666666666666,
+      "repeat_detection_rate_min": 0.875,
+      "repeat_detection_rate_max": 1.0,
+      "requests": 51,
+      "usage_numeric_sum": {
+        "prompt_tokens": 126979,
+        "completion_tokens": 10563,
+        "total_tokens": 137542,
+        "prompt_cache_hit_tokens": 98560,
+        "prompt_cache_miss_tokens": 28419
+      },
+      "requests_with_usage": 51,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 687,
+      "reference_audit_cycles_recorded": 687,
+      "reference_audit_cycles_attempted": 687,
+      "checks_recorded": 1863,
+      "elapsed_seconds_recorded": 92.768,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 0,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.546
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 0,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.485
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 0,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.063
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.297
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.438
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 0,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.109
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 3.094
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 1,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.985
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 1,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.187
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 1,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.5
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 1,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.516
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 1,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.906
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 1,
+          "cycle": 40,
+          "search_budget": 41,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.234
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 1,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.172
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 2,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.515
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 2,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.313
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 2,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.782
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.266
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 2,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.844
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 2,
+          "cycle": 43,
+          "search_budget": 44,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.937
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 2,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.297
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.954
+        }
+      ]
+    }
+  },
+  "correct_controls": {
+    "fixed": {
+      "registered": 12,
+      "executed": 12,
+      "terminal_statuses": {
+        "not_detected": 12
+      },
+      "actual_false_alarms": 0
+    },
+    "random": {
+      "registered": 12,
+      "executed": 12,
+      "terminal_statuses": {
+        "not_detected": 12
+      },
+      "actual_false_alarms": 0
+    },
+    "protocol_random": {
+      "registered": 12,
+      "executed": 12,
+      "terminal_statuses": {
+        "not_detected": 12
+      },
+      "actual_false_alarms": 0
+    },
+    "single": {
+      "registered": 12,
+      "executed": 12,
+      "terminal_statuses": {
+        "not_detected": 12
+      },
+      "actual_false_alarms": 0
+    },
+    "feedback": {
+      "registered": 12,
+      "executed": 11,
+      "terminal_statuses": {
+        "not_detected": 9,
+        "policy_error": 1,
+        "decision_format_error": 2
+      },
+      "actual_false_alarms": 0
+    },
+    "no_feedback": {
+      "registered": 12,
+      "executed": 12,
+      "terminal_statuses": {
+        "not_detected": 11,
+        "policy_error": 1
+      },
+      "actual_false_alarms": 0
+    }
+  },
+  "defect_matrix": [
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 1,
+        "protocol_random": 3,
+        "single": 3,
+        "feedback": 3,
+        "no_feedback": 3
+      }
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 2,
+        "protocol_random": 3,
+        "single": 2,
+        "feedback": 3,
+        "no_feedback": 3
+      }
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 3,
+        "protocol_random": 3,
+        "single": 2,
+        "feedback": 3,
+        "no_feedback": 3
+      }
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 2,
+        "protocol_random": 3,
+        "single": 3,
+        "feedback": 3,
+        "no_feedback": 3
+      }
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "detected_by_strategy": {
+        "fixed": 0,
+        "random": 0,
+        "protocol_random": 3,
+        "single": 3,
+        "feedback": 2,
+        "no_feedback": 3
+      }
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 3,
+        "protocol_random": 3,
+        "single": 3,
+        "feedback": 3,
+        "no_feedback": 2
+      }
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 3,
+        "protocol_random": 3,
+        "single": 2,
+        "feedback": 3,
+        "no_feedback": 3
+      }
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 2,
+        "protocol_random": 0,
+        "single": 2,
+        "feedback": 3,
+        "no_feedback": 2
+      }
+    }
+  ],
+  "first_detection_rounds": {
+    "single": {
+      "1": 20
+    },
+    "feedback": {
+      "1": 23
+    },
+    "no_feedback": {
+      "1": 21,
+      "2": 1
+    }
+  },
+  "started_at_utc": "2026-10-04T22:21:50.092549+00:00",
+  "finished_at_utc": "2026-10-04T22:28:23.107371+00:00",
+  "wall_seconds": 393.014822,
+  "source_results_sha256": "c2ecd4ae44f2b0f10e6500c20bd56ce23c8faaa8ef84d193aa05bb724de6aeb5",
+  "source_summary_sha256": "cd04f6f84dd4b7ee2d12192a65a5a1880d224f1c8c92dcf5eef5ca5fee669fe1",
+  "complete_raw_evidence": ".iverilog-ai/agent-recovery-study-live-20261005/",
+  "public_copy_contains_all_execution_side_logs": false,
+  "public_copy_contains_api_trajectories_and_saved_responses": true,
+  "cost_currency": null,
+  "artifacts": [
+    {
+      "path": "preregistration.json",
+      "sha256": "5cdb8ffc0eb88bbbb6942e316a3b76a184afff8b95de06f8929d678559adea07",
+      "size_bytes": 120384
+    },
+    {
+      "path": "run_settings.json",
+      "sha256": "79d854516860bba8f2609e3cf198bc3a158be9509cd70353534d9fdd6c54ea00",
+      "size_bytes": 888
+    },
+    {
+      "path": "token_budget.json",
+      "sha256": "754de0d9d5587b4e7a5288800adbadc4794803e50f9c0361f4c31f5c5d0f7d7e",
+      "size_bytes": 46076
+    },
+    {
+      "path": "strict_summary.json",
+      "sha256": "cd04f6f84dd4b7ee2d12192a65a5a1880d224f1c8c92dcf5eef5ca5fee669fe1",
+      "size_bytes": 10292143
+    },
+    {
+      "path": "results.zip",
+      "sha256": "288acf69d4809dd3888ee89a36b80dc521dd719f5ca23ef7bfbd85358dd72151",
+      "size_bytes": 605992
+    },
+    {
+      "path": "specs/sync_fifo_spec.md",
+      "sha256": "4e932c00a88af5a4d80617c1cc09040a259bed1d5f7f17bdafec6833d547c0c3",
+      "size_bytes": 5969
+    },
+    {
+      "path": "specs/uart_tx_spec.md",
+      "sha256": "68e0f9f0317f3eab50c8a93717f7a0aa44bbb6bc21c257fe27f163541e097863",
+      "size_bytes": 5417
+    },
+    {
+      "path": "specs/spi_master_spec.md",
+      "sha256": "2c4f8e45d417f1017501018211509324584a5c145ef68f98065a5f5d3a9c62fd",
+      "size_bytes": 5418
+    },
+    {
+      "path": "specs/handshake_stage_spec.md",
+      "sha256": "07a1f5b6015185007f1f69c380e0bd5830a29a3f86403cb5dd51d83a3a5973ed",
+      "size_bytes": 5251
+    },
+    {
+      "path": "registered_inputs_manifest.json",
+      "sha256": "580e1ba8f4947650af793a5e508daba17145537d524c58b9ac96c9287008fb3c",
+      "size_bytes": 23091
+    },
+    {
+      "path": "registered_inputs.zip",
+      "sha256": "3d1ee93b77fe0825a79e69fa1878876016681d5599858a78bb355e33ffe148a1",
+      "size_bytes": 350203
+    },
+    {
+      "path": "traces_and_decisions.zip",
+      "sha256": "2cd51d4b55cc3582a6c9ccfacfd77d7406d0133aab136e244973eec494af2d8f",
+      "size_bytes": 1126704
+    },
+    {
+      "path": "trace_manifest.json",
+      "sha256": "b12eb3df279e257b67227e8dd4354ed0a607113ffb0573232f2906d0e8171102",
+      "size_bytes": 105425
+    }
+  ]
+}
