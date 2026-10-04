@@ -39,6 +39,7 @@ from iverilog_ai.core.verify_diff import verify_diff
 from iverilog_ai.core.pipeline import VerificationPipeline
 from iverilog_ai.core.pipeline import explain_failure_record
 from iverilog_ai.core.functional_coverage import functional_coverage_profile
+from iverilog_ai.core.reference_model import reference_sampling_profile
 from iverilog_ai.core.report import write_report
 from iverilog_ai.core.toolchain import locate_tools
 from iverilog_ai.core.rtl_import import import_rtl_bytes, extract_contract_draft, available_modules, RTLImportError
@@ -2639,6 +2640,19 @@ with _PLAN:
         _agent_rounds = int(_agent_left.number_input("最多验证轮数", min_value=1, max_value=5, value=3, key="agent_round_limit"))
         _agent_requests = int(_agent_right.number_input("最多 API 请求", min_value=1, max_value=5, value=3, key="agent_request_limit"))
         _agent_cycles = int(st.number_input("累计激励周期上限", min_value=20, max_value=20000, value=1000, step=20, key="agent_cycle_limit"))
+        _episode_col, _sampling_col = st.columns(2)
+        _agent_mode_selection = _episode_col.selectbox("补测方式", ("independent", "append"),
+                                                    format_func=lambda value: "每轮独立运行" if value == "independent" else "重放已有输入后补测",
+                                                    key="agent_plan_mode")
+        _agent_plan_mode: Literal["append", "independent"] = "append" if _agent_mode_selection == "append" else "independent"
+        _sampling_profile = reference_sampling_profile(_contract()) if not is_custom else None
+        if _sampling_profile:
+            _agent_per_cycle = _sampling_col.checkbox("逐拍检查输出", value=True, key="agent_per_cycle_checks")
+        else:
+            _agent_per_cycle = False
+            _sampling_col.caption("当前接口没有逐拍参考模型，沿用计划中的检查点。")
+        st.caption("每轮从复位开始，只运行本轮输入。" if _agent_plan_mode == "independent"
+                   else "每轮从复位开始，重放已有输入后再补测；重放也计入累计周期。")
         _scene_profile = functional_coverage_profile(_contract()) if not is_custom else None
         _agent_coverage = st.checkbox("根据场景覆盖缺口补测", value=True, key="agent_coverage_feedback", disabled=_scene_profile is None)
         st.caption("会发送接口定义、规格、当前计划和仿真摘要。已有计划会先执行；请求可能计费，次数上限不等于金额上限。")
@@ -2658,13 +2672,15 @@ with _PLAN:
                         output_dir=ROOT / ".iverilog-ai/pipeline-ui" / f"agent-{uuid.uuid4().hex[:12]}",
                         objective=str(st.session_state.get("objective_text", "检查正常行为和边界条件，寻找可复现反例")),
                         specification=_agent_spec, initial_plan=st.session_state.get("ai_plan"),
+                        agent_plan_mode=_agent_plan_mode,
                         include_functional_coverage=bool(_agent_coverage and _scene_profile),
                         limits=AgentLimits(max_rounds=_agent_rounds, max_requests=_agent_requests, max_total_cycles=_agent_cycles,
                                            max_output_tokens=min(_agent_provider.max_output_tokens, 8192),
                                            request_timeout_seconds=min(int(_agent_provider.timeout), 180)),
                         execution_options={"allowed_roots": (ROOT,), "defines": _agent_defines, "include_dirs": _agent_includes,
                                            "iverilog_path": os.getenv("IVERILOG_PATH") or r"D:\iverilog\bin\iverilog.exe",
-                                           "vvp_path": os.getenv("VVP_PATH") or r"D:\iverilog\bin\vvp.exe"},
+                                           "vvp_path": os.getenv("VVP_PATH") or r"D:\iverilog\bin\vvp.exe",
+                                           "reference_sampling": "per_cycle" if _agent_per_cycle else "vector_end"},
                     )
                 st.session_state.workspace_agent_result = _agent_result
                 if _agent_result.last_result is not None:
@@ -2682,6 +2698,18 @@ with _PLAN:
         if _saved_agent is not None:
             st.info(STOP_LABELS[_saved_agent.stop_reason])
             st.caption(f"API 请求 {_saved_agent.trajectory['requests_attempted']} 次 · 已执行 {len(_saved_agent.trajectory['rounds'])} 轮 · 累计激励 {_saved_agent.trajectory['stimulus_cycles_executed']} 周期")
+            _rejected_proposals = [attempt for attempt in _saved_agent.trajectory.get("failed_attempts", [])
+                                   if attempt.get("stage") == "plan_preflight"]
+            if _rejected_proposals:
+                st.warning(f"{len(_rejected_proposals)} 次提案未通过执行前检查，没有运行仿真。")
+                _preflight_labels = {"auto_clock_input": "时钟由测试台驱动", "unknown_input_port": "输入端口不存在",
+                                     "output_port_input": "把输出端口用作输入", "plan_contract_invalid": "输入值与接口不符",
+                                     "unsupported_sample_phase": "逐拍检查只支持时钟沿后采样",
+                                     "reference_plan_invalid": "输入值不适用于参考模型"}
+                with st.expander("查看未执行的提案"):
+                    st.dataframe([{"请求": attempt.get("decision_index"),
+                                   "检查结果": _preflight_labels.get(attempt.get("error", {}).get("code"), "计划不符合当前检查要求")}
+                                  for attempt in _rejected_proposals], hide_index=True, use_container_width=True, height=180)
             if not _saved_agent.trajectory["rounds"]:
                 st.caption("本次没有完成仿真；下方如有结果，来自此前运行。")
             if _saved_agent.trajectory["rounds"]:

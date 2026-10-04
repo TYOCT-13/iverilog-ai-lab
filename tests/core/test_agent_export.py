@@ -59,3 +59,14 @@ def test_windows_wildcards_and_no_match(tmp_path):
     trace(tmp_path, "fifo")
     assert main([str(tmp_path / "*.json"), "--holdout-designs", "fifo", "--output-dir", str(tmp_path / "out")]) == 0
     assert main([str(tmp_path / "missing-*.json"), "--holdout-designs", "fifo", "--output-dir", str(tmp_path / "absent")]) == 2
+
+
+def test_old_prompt_trace_is_not_rewritten_using_the_current_prompt(tmp_path):
+    first = trace(tmp_path, "counter")
+    old = json.loads(first.read_text())
+    old["prompt_version"] = "verification-agent-v4-typed-state"
+    first.write_text(json.dumps(old), encoding="utf-8")
+    second = trace(tmp_path, "fifo")
+    with pytest.raises(ValueError, match="both train and validation"):
+        export([first, second], tmp_path / "out", {"fifo"})
+    assert not (tmp_path / "out").exists()

@@ -19,8 +19,10 @@ from .config import ExecutionConfig, SafePathPolicy
 from .contracts import ContractValidationError, DutContract
 from .executor import IcarusExecutor
 from .models import FailureRecord, SimulationResult, ResultStatus
-from .testbench import DUT_INSTANCE, TestbenchGenerationError, TestbenchGenerator
-from .reference_model import check_plan_consistency, override_plan_expectations, reference_expectations
+from .testbench import DUT_INSTANCE, TestbenchGenerationError, TestbenchGenerator, _encode_value
+from .reference_model import (ReferenceSamplingError, check_plan_consistency,
+                              override_plan_expectations, reference_cycle_expectations,
+                              reference_expectations, reference_sampling_profile)
 from .assertions import build_assertion, evaluate_assertion, AssertionValidationError
 from .coverage import analyze_signal_activity
 from .observations import collect_observed_samples
@@ -169,7 +171,9 @@ def coverage_summary(plan: Any, simulation: SimulationResult) -> dict[str, Any]:
 
     vector coverage 按 test case id 统计；check coverage 按带 expected 的
     step 数量与实际产生的结构化记录统计；per-signal coverage 统计每个
-    expected 信号至少被检查一次的比例。
+    expected 信号至少被检查一次的比例。逐拍参考模式使用已生成参考表的
+    周期/信号安排作为分母，并要求真实记录的 test_id/signal/cycle 相符；
+    执行了检查仍不代表检查通过。
     """
     # Current AI schema uses flat vectors; older internal plans used cases.
     raw_vectors = getattr(plan, "vectors", None)
@@ -177,27 +181,35 @@ def coverage_summary(plan: Any, simulation: SimulationResult) -> dict[str, Any]:
         vectors = [vector.name for vector in raw_vectors]
     else:
         vectors = [case.id for case in plan.cases]
-    expected_checks: list[tuple[str, str]] = []
-    if raw_vectors is not None:
+    expected_checks: list[tuple[str, str, int | None]] = []
+    oracle = simulation.config.get("oracle", {})
+    per_cycle = isinstance(oracle, Mapping) and oracle.get("reference_sampling") == "per_cycle"
+    if per_cycle:
+        for span in oracle.get("reference_check_schedule", ()):
+            for cycle in range(span["first_cycle"], span["first_cycle"] + span["cycles"]):
+                for signal in span["signals"]:
+                    expected_checks.append((span["test_id"], signal, cycle))
+    elif raw_vectors is not None:
         for vector in raw_vectors:
             for signal in vector.expected:
-                expected_checks.append((vector.name, signal))
+                expected_checks.append((vector.name, signal, None))
     else:
         for case in plan.cases:
             for step in case.steps:
                 for signal in step.expected:
-                    expected_checks.append((case.id, signal))
+                    expected_checks.append((case.id, signal, None))
     executed_ids = {r.test_id for r in simulation.records if r.test_id}
     from collections import Counter
     expected_counts = Counter(expected_checks)
-    actual_counts = Counter((r.test_id, r.signal) for r in simulation.records if r.test_id and r.signal)
-    signal_names = sorted({signal for _, signal in expected_checks})
+    actual_counts = Counter((r.test_id, r.signal, r.cycle if per_cycle else None)
+                            for r in simulation.records if r.test_id and r.signal)
+    signal_names = sorted({signal for _, signal, _ in expected_checks})
     covered_vectors = sum(1 for item in vectors if item in executed_ids)
     covered_checks = sum(min(expected_counts[pair], actual_counts[pair]) for pair in expected_counts)
     per_signal = {}
     for signal in signal_names:
-        total = sum(1 for _, s in expected_checks if s == signal)
-        covered = sum(min(expected_counts[(case_id, signal)], actual_counts[(case_id, signal)]) for case_id, s in expected_counts if s == signal)
+        total = sum(1 for _, s, _ in expected_checks if s == signal)
+        covered = sum(min(expected_counts[pair], actual_counts[pair]) for pair in expected_counts if pair[1] == signal)
         per_signal[signal] = {"covered": covered, "total": total, "percent": round(100 * covered / total, 2) if total else 0.0}
     return {
         "definition": "测试计划执行覆盖率；不代表 RTL 代码覆盖率",
@@ -324,11 +336,33 @@ class VerificationPipeline:
         emit_vcd: bool = True,
         vcd_filename: str = "waveform.vcd",
         capture_observations: bool = False,
+        reference_sampling: Literal["vector_end", "per_cycle"] = "vector_end",
     ) -> PipelineResult:
         if not isinstance(capture_observations, bool):
             raise PipelineValidationError("capture_observations must be a boolean")
+        if reference_sampling not in ("vector_end", "per_cycle"):
+            raise PipelineValidationError("reference_sampling must be vector_end or per_cycle")
         ai_plan = _coerce_plan(plan)
         dut_contract = _coerce_contract(contract)
+        cycle_expectations: dict[str, tuple[dict[str, int], ...]] | None = None
+        if reference_sampling == "per_cycle":
+            if self.reference_policy != "builtin":
+                raise PipelineValidationError("per_cycle requires explicitly selected builtin reference policy")
+            try:
+                cycle_expectations = reference_cycle_expectations(ai_plan, dut_contract)
+            except ReferenceSamplingError as exc:
+                raise PipelineValidationError(str(exc)) from exc
+        oracle_expectations = ({name: rows[-1] for name, rows in cycle_expectations.items()}
+                               if cycle_expectations is not None else
+                               reference_expectations(ai_plan, ai_plan.design, dut_contract)
+                               if self.reference_policy == "builtin" else {})
+        generation_plan = override_plan_expectations(ai_plan, oracle_expectations) if oracle_expectations else ai_plan
+        generation_options: dict[str, Any] = {}
+        if cycle_expectations is not None:
+            generation_options = {"reference_sampling": "per_cycle", "cycle_expectations": cycle_expectations}
+            self.generator.validate(generation_plan, dut_contract, **generation_options)
+        if capture_observations:
+            generation_options["capture_observations"] = True
         raw_output = Path(output_dir).expanduser()
         if raw_output.exists() and raw_output.is_symlink():
             raise PipelineValidationError("output_dir must not be a symbolic link")
@@ -365,9 +399,6 @@ class VerificationPipeline:
         # 这样 AI 无法通过猜错期望值来"制造"失败（假误报）或"掩盖"失败，而
         # 仿真裁决权仍然只属于 Icarus。AI 原始计划保留在 testplan.json 中，
         # 差异在 oracle 诊断里单独记录。
-        oracle_expectations = (reference_expectations(ai_plan, ai_plan.design, dut_contract)
-                               if self.reference_policy == "builtin" else {})
-        generation_plan = override_plan_expectations(ai_plan, oracle_expectations) if oracle_expectations else ai_plan
         try:
             testbench_path = self.generator.generate(
                 generation_plan,
@@ -376,7 +407,7 @@ class VerificationPipeline:
                 filename=testbench_filename,
                 emit_vcd=emit_vcd,
                 vcd_filename=vcd_filename,
-                **({"capture_observations": True} if capture_observations else {}),
+                **generation_options,
             )
         except TestbenchGenerationError:
             raise
@@ -384,9 +415,12 @@ class VerificationPipeline:
         contract_path = artifact_dir / "dut_contract.json"
         pipeline_result_path = artifact_dir / "pipeline_result.json"
         authoritative_plan_path = artifact_dir / "authoritative_plan.json"
+        reference_samples_path = artifact_dir / "reference_samples.json" if cycle_expectations is not None else None
         planned_artifacts = [plan_path, contract_path, pipeline_result_path]
         if oracle_expectations:
             planned_artifacts.append(authoritative_plan_path)
+        if reference_samples_path is not None:
+            planned_artifacts.append(reference_samples_path)
         for artifact in planned_artifacts:
             if artifact.exists() and artifact.is_symlink():
                 raise PipelineValidationError(f"artifact path must not be a symbolic link: {artifact}")
@@ -395,6 +429,43 @@ class VerificationPipeline:
         contract_path.write_text(dut_contract.to_json() + "\n", encoding="utf-8")
         if oracle_expectations:
             authoritative_plan_path.write_text(generation_plan.model_dump_json(indent=2) + "\n", encoding="utf-8")
+
+        reference_metadata: dict[str, Any] = {}
+        reference_check_schedule: list[dict[str, Any]] = []
+        if reference_samples_path is not None and cycle_expectations is not None:
+            reference_rows: list[dict[str, Any]] = []
+            cycle = 0
+            for vector in ai_plan.vectors:
+                rows = cycle_expectations[vector.name]
+                reference_check_schedule.append({"test_id": vector.name, "first_cycle": cycle,
+                    "cycles": vector.cycles, "signals": list(rows[0])})
+                for outputs in rows:
+                    reference_rows.append({"cycle": cycle, "test_id": vector.name,
+                        "sample_phase": vector.sample_phase,
+                        "expected": {signal: _encode_value(dut_contract.port_map[signal], value,
+                                      context="reference_samples.expected").bits
+                                     for signal, value in outputs.items()}})
+                    cycle += 1
+            reference_packet = {
+                "schema_version": "1.0", "source": "independent_reference_model",
+                "status": "generated", "reference_sampling": reference_sampling,
+                "profile": reference_sampling_profile(dut_contract),
+                "expected_cycles": cycle,
+                "expected_checks": sum(len(row["expected"]) for row in reference_rows),
+                "provenance": {"rtl_sha256": hashlib.sha256(rtl.read_bytes()).hexdigest(),
+                    "plan_sha256": hashlib.sha256(plan_path.read_bytes()).hexdigest(),
+                    "contract_sha256": hashlib.sha256(contract_path.read_bytes()).hexdigest(),
+                    "testbench_sha256": hashlib.sha256(testbench_path.read_bytes()).hexdigest(),
+                    "reference_model_sha256": hashlib.sha256(Path(__file__).with_name("reference_model.py").read_bytes()).hexdigest()},
+                "samples": reference_rows,
+                "limitations": ["Generated expectations are separate from actual simulation observations",
+                    "The original plan is not expanded; each sample uses one reference state transition",
+                    "Only supported builtin profiles and after sampling are authoritative",
+                    "Initial contract reset is applied; these cycles exclude reset and pre_reset assertions"],
+            }
+            reference_samples_path.write_text(json.dumps(reference_packet, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            reference_metadata = {key: value for key, value in reference_packet.items() if key != "samples"}
+            reference_metadata["sha256"] = hashlib.sha256(reference_samples_path.read_bytes()).hexdigest()
 
         run_dir = artifact_dir / "runs"
         config = ExecutionConfig(
@@ -488,12 +559,17 @@ class VerificationPipeline:
         # already constrained the generated testbench. This block only records
         # how far the AI's own numbers were from the deterministic model, and it
         # never overrides the real Icarus status as the PASS/FAIL authority.
-        consistency = (check_plan_consistency(ai_plan, ai_plan.design, dut_contract)
+        consistency = (check_plan_consistency(ai_plan, ai_plan.design, dut_contract,
+                            **({"reference_outputs": oracle_expectations} if cycle_expectations is not None else {}))
                        if self.reference_policy == "builtin" else {
                            "status": "skipped", "warnings": [],
                            "reason": "builtin reference lookup explicitly disabled",
                        })
         consistency["reference_policy"] = self.reference_policy
+        consistency["reference_sampling"] = reference_sampling
+        if reference_samples_path is not None:
+            consistency["reference_samples"] = reference_metadata
+            consistency["reference_check_schedule"] = reference_check_schedule
         # 期望值的**证据等级**必须如实标注，因为它决定了结论的可信度：
         #
         #   reference_model —— 确定性参考模型复算并覆盖了 AI 数字（内置且已逐拍对齐的案例）
@@ -566,7 +642,10 @@ class VerificationPipeline:
             verification_status = "passed_unverified"
         simulation = replace(
             simulation,
-            config={**simulation.config, "coverage": coverage_summary(ai_plan, simulation), "oracle": consistency, "structured_assertions": assertion_result, "cross_validation": cross_validation, "verification_status": verification_status, "vcd_analysis": vcd_analysis},
+            config={**simulation.config, "coverage": coverage_summary(ai_plan, replace(simulation,
+                    config={**simulation.config, "oracle": consistency})), "oracle": consistency,
+                    "reference_sampling": reference_sampling, "structured_assertions": assertion_result,
+                    "cross_validation": cross_validation, "verification_status": verification_status, "vcd_analysis": vcd_analysis},
         )
         explanations = tuple(explain_failure_record(failure) for failure in simulation.failures)
         # 综合证据层：可选、不参与 PASS/FAIL 裁决。它只回答"这份 RTL 能不能被
@@ -606,6 +685,8 @@ class VerificationPipeline:
         artifacts.update(artifacts_synth)
         if observations_path is not None:
             artifacts["observed_samples"] = str(observations_path)
+        if reference_samples_path is not None:
+            artifacts["reference_samples"] = str(reference_samples_path)
         if oracle_expectations:
             artifacts["authoritative_plan"] = str(authoritative_plan_path)
         result = PipelineResult(

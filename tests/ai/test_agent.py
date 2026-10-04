@@ -286,7 +286,8 @@ def test_unsupported_clocked_sampling_is_reported_as_missing_evidence(tmp_path):
     provider = Scripted(append(2, sample_phase="before"))
     result = run_verification_agent(provider=provider, contract=contract,
         rtl_path=ROOT / "rtl/mod10_counter.v", output_dir=tmp_path / "real-before", objective="sampling gate",
-        execution_options={"allowed_roots": (ROOT, tmp_path), "iverilog_path": compiler, "vvp_path": runtime})
+        execution_options={"allowed_roots": (ROOT, tmp_path), "iverilog_path": compiler,
+                           "vvp_path": runtime, "reference_sampling": "vector_end"})
     assert result.stop_reason == "insufficient_evidence"
     assert result.last_result.simulation.check_count == 0
     assert result.trajectory["rounds"][0]["observation"]["expectation_source"] == "none_given"
@@ -294,7 +295,8 @@ def test_unsupported_clocked_sampling_is_reported_as_missing_evidence(tmp_path):
     assert state["supported_sample_phases"] == ["after"]
 
 
-def test_real_counter_holds_omitted_enable_input(tmp_path):
+@pytest.mark.parametrize("sampling,expected_counts", [("vector_end", [1, 3]), ("per_cycle", [1, 2, 3])])
+def test_real_counter_holds_omitted_enable_input(tmp_path, sampling, expected_counts):
     compiler = Path(r"D:\iverilog\bin\iverilog.exe")
     runtime = Path(r"D:\iverilog\bin\vvp.exe")
     if not compiler.is_file():
@@ -307,9 +309,12 @@ def test_real_counter_holds_omitted_enable_input(tmp_path):
     result = run_verification_agent(provider=Scripted(), contract=contract,
         rtl_path=ROOT / "rtl/mod10_counter.v", output_dir=tmp_path / "held-input", objective="hold input",
         initial_plan=plan, limits=AgentLimits(max_rounds=1),
-        execution_options={"allowed_roots": (ROOT, tmp_path), "iverilog_path": compiler, "vvp_path": runtime})
+        execution_options={"allowed_roots": (ROOT, tmp_path), "iverilog_path": compiler,
+                           "vvp_path": runtime, "reference_sampling": sampling})
     assert result.stop_reason == "round_budget"
-    assert result.last_result.simulation.check_count == 2
+    assert result.last_result.simulation.check_count == len(expected_counts)
+    assert [int(record.actual, 2) for record in result.last_result.simulation.records] == expected_counts
+    assert result.trajectory["reference_sampling"] == sampling
     assert not result.last_result.simulation.failures
 
 
@@ -334,7 +339,8 @@ def test_real_functional_feedback_ablation_keeps_sampling_and_trace_without_leak
             objective="observe a UART frame", limits=AgentLimits(max_rounds=2, max_total_cycles=128),
             include_feedback=feedback, include_functional_coverage=coverage,
             execution_options={"allowed_roots": (ROOT, tmp_path), "iverilog_path": compiler,
-                               "vvp_path": runtime, "max_output_chars": 2_000_000})
+                               "vvp_path": runtime, "max_output_chars": 2_000_000,
+                               "reference_sampling": "per_cycle"})
         assert result.stop_reason == "round_budget"
         rows = result.trajectory["rounds"]
         assert rows[0]["functional_coverage"]["status"] == "measured"
@@ -354,8 +360,9 @@ def test_real_functional_feedback_ablation_keeps_sampling_and_trace_without_leak
                 assert any(b["first_cycle"] is not None for b in compact["bins"])
         else:
             assert state["observation"] is None
-        # Correctness checks remain endpoint checks; these are not the 45 observed samples.
-        assert rows[1]["observation"]["checks"] == 8
+        # Both UART outputs are checked at all 45 stimulus edges.
+        assert rows[1]["observation"]["checks"] == 90
+        assert rows[1]["reference_sampling"] == "per_cycle"
         assert rows[1]["functional_coverage"]["observed_cycles"] == 45
         assert result.trajectory["stimulus_cycles_executed"] == 49
         assert result.trajectory["functional_coverage_feedback_enabled"] is coverage

@@ -1,4 +1,5 @@
 from pathlib import Path
+import json
 
 import pytest
 
@@ -45,3 +46,19 @@ def test_explicit_key_file_is_loaded_without_printing_secret_or_sending_request(
 def test_missing_key_file_does_not_fall_back_to_environment(tmp_path, monkeypatch):
     monkeypatch.setenv("IVERILOG_AI_API_KEY", "unrelated-secret")
     assert main(["--dry-run", "--api-key-file", str(tmp_path / "missing.txt")]) == 2
+
+
+def test_new_modes_are_explicit_in_dry_run_without_request(monkeypatch, capsys):
+    monkeypatch.setattr("iverilog_ai.ai.provider.OpenAICompatibleProvider.generate", lambda *_: pytest.fail("unexpected network"))
+    assert main(["--dry-run", "--agent-plan-mode", "independent", "--reference-sampling", "per_cycle",
+                 "--thinking-mode", "disabled"]) == 0
+    record = json.loads(capsys.readouterr().out)
+    assert record["agent_plan_mode"] == "independent"
+    assert record["reference_sampling"] == "per_cycle"
+    assert record["thinking_mode"] == "disabled"
+
+
+def test_responses_rejects_thinking_switch_before_reading_key_file(tmp_path, monkeypatch):
+    monkeypatch.setattr("scripts.run_verification_agent.read_key_file", lambda *_: pytest.fail("unexpected credential read"))
+    assert main(["--dry-run", "--wire-api", "responses", "--thinking-mode", "disabled",
+                 "--api-key-file", str(tmp_path / "unused.txt")]) == 2

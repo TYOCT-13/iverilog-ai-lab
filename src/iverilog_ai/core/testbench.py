@@ -12,7 +12,7 @@ from dataclasses import dataclass
 import json
 from pathlib import Path
 import re
-from typing import Any, Mapping
+from typing import Any, Literal, Mapping, Sequence
 
 from ..ai.schema import TestPlan
 from .contracts import ContractValidationError, DutContract, PortSpec
@@ -309,6 +309,46 @@ def _validate_vectors(
     return vectors
 
 
+def _validate_cycle_expectations(
+    plan: TestPlan,
+    contract: DutContract,
+    reference_sampling: str,
+    cycle_expectations: Mapping[str, Sequence[Mapping[str, Any]]] | None,
+) -> dict[str, tuple[dict[str, _EncodedValue], ...]] | None:
+    """逐拍表与原向量一一对应，绝不以一份末态值填补缺失周期。"""
+    if reference_sampling not in ("vector_end", "per_cycle"):
+        raise TestbenchGenerationError("reference_sampling must be vector_end or per_cycle")
+    if reference_sampling == "vector_end":
+        if cycle_expectations is not None:
+            raise TestbenchGenerationError("cycle_expectations requires per_cycle reference_sampling")
+        return None
+    if not isinstance(cycle_expectations, Mapping) or set(cycle_expectations) != {v.name for v in plan.vectors}:
+        raise TestbenchGenerationError("per_cycle expectations must match every original vector name")
+    if any(vector.sample_phase != "after" for vector in plan.vectors):
+        raise TestbenchGenerationError("per_cycle reference sampling supports after only")
+    output_ports = {port.name: port for port in contract.outputs}
+    if not output_ports:
+        raise TestbenchGenerationError("per_cycle reference requires declared outputs")
+    encoded: dict[str, tuple[dict[str, _EncodedValue], ...]] = {}
+    for vector in plan.vectors:
+        samples = cycle_expectations[vector.name]
+        if (not isinstance(samples, Sequence) or isinstance(samples, (str, bytes))
+                or len(samples) != vector.cycles):
+            raise TestbenchGenerationError("per_cycle expectation count must match vector.cycles")
+        rows: list[dict[str, _EncodedValue]] = []
+        for index, sample in enumerate(samples):
+            if not isinstance(sample, Mapping) or set(sample) != set(output_ports):
+                raise TestbenchGenerationError("per_cycle expectations must match every declared output")
+            row = {signal: _encode_value(port, sample[signal],
+                       context=f"per_cycle.{vector.name}[{index}].{signal}")
+                   for signal, port in output_ports.items()}
+            if any(bit in value.bits for value in row.values() for bit in "xz"):
+                raise TestbenchGenerationError("per_cycle reference expectations must have known bits")
+            rows.append(row)
+        encoded[vector.name] = tuple(rows)
+    return encoded
+
+
 @dataclass(frozen=True)
 class TestbenchGenerator:
     """Generate a deterministic testbench under an explicitly chosen directory."""
@@ -317,6 +357,41 @@ class TestbenchGenerator:
     __test__ = False
 
     max_total_cycles: int = 100_000
+
+    def _prepare(
+        self,
+        plan: TestPlan | Mapping[str, Any],
+        contract: DutContract | Mapping[str, Any],
+        reference_sampling: str,
+        cycle_expectations: Mapping[str, Sequence[Mapping[str, Any]]] | None,
+    ) -> tuple[TestPlan, DutContract,
+               list[tuple[Any, dict[str, _EncodedValue], dict[str, _EncodedValue]]],
+               dict[str, tuple[dict[str, _EncodedValue], ...]] | None]:
+        try:
+            dut_contract = contract if isinstance(contract, DutContract) else DutContract.from_dict(contract)
+        except ContractValidationError as exc:
+            raise TestbenchGenerationError(str(exc)) from exc
+        ai_plan = _coerce_plan(plan)
+        vectors = _validate_vectors(ai_plan, dut_contract)
+        if self.max_total_cycles < 1 or self.max_total_cycles > 1_000_000:
+            raise TestbenchGenerationError("max_total_cycles must be in [1, 1000000]")
+        if sum(vector.cycles for vector, _, _ in vectors) > self.max_total_cycles:
+            raise TestbenchGenerationError(
+                f"test plan exceeds generator max_total_cycles={self.max_total_cycles}"
+            )
+        encoded_cycles = _validate_cycle_expectations(ai_plan, dut_contract, reference_sampling, cycle_expectations)
+        return ai_plan, dut_contract, vectors, encoded_cycles
+
+    def validate(
+        self,
+        plan: TestPlan | Mapping[str, Any],
+        contract: DutContract | Mapping[str, Any],
+        *,
+        reference_sampling: Literal["vector_end", "per_cycle"] = "vector_end",
+        cycle_expectations: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
+    ) -> None:
+        """纯内存预检：检查受控激励与期望值，不写文件、不运行进程。"""
+        self._prepare(plan, contract, reference_sampling, cycle_expectations)
 
     def generate(
         self,
@@ -328,21 +403,13 @@ class TestbenchGenerator:
         emit_vcd: bool = False,
         vcd_filename: str = "waveform.vcd",
         capture_observations: bool = False,
+        reference_sampling: Literal["vector_end", "per_cycle"] = "vector_end",
+        cycle_expectations: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
     ) -> Path:
-        try:
-            dut_contract = contract if isinstance(contract, DutContract) else DutContract.from_dict(contract)
-        except ContractValidationError as exc:
-            raise TestbenchGenerationError(str(exc)) from exc
-        ai_plan = _coerce_plan(plan)
-        vectors = _validate_vectors(ai_plan, dut_contract)
+        ai_plan, dut_contract, vectors, encoded_cycles = self._prepare(
+            plan, contract, reference_sampling, cycle_expectations)
         if not isinstance(capture_observations, bool):
             raise TestbenchGenerationError("capture_observations must be a boolean")
-        if self.max_total_cycles < 1 or self.max_total_cycles > 1_000_000:
-            raise TestbenchGenerationError("max_total_cycles must be in [1, 1000000]")
-        if sum(vector.cycles for vector, _, _ in vectors) > self.max_total_cycles:
-            raise TestbenchGenerationError(
-                f"test plan exceeds generator max_total_cycles={self.max_total_cycles}"
-            )
         root = Path(output_dir).expanduser().resolve(strict=False)
         if root.exists() and not root.is_dir():
             raise TestbenchGenerationError(f"output_dir is not a directory: {root}")
@@ -360,7 +427,8 @@ class TestbenchGenerator:
         if target.resolve(strict=False).parent != root:
             raise TestbenchGenerationError("generated testbench must remain directly under output_dir")
         source = self._render(ai_plan, dut_contract, vectors, emit_vcd=emit_vcd,
-                              vcd_filename=vcd_filename, capture_observations=capture_observations)
+                              vcd_filename=vcd_filename, capture_observations=capture_observations,
+                              **({"cycle_expectations": encoded_cycles} if encoded_cycles is not None else {}))
         target.write_text(source, encoding="utf-8", newline="\n")
         return target
 
@@ -370,6 +438,7 @@ class TestbenchGenerator:
         contract: DutContract,
         vectors: list[tuple[Any, dict[str, _EncodedValue], dict[str, _EncodedValue]]],
         *, emit_vcd: bool = False, vcd_filename: str = "waveform.vcd", capture_observations: bool = False,
+        cycle_expectations: Mapping[str, Sequence[Mapping[str, _EncodedValue]]] | None = None,
     ) -> str:
         top = f"tb_{contract.module}"
         lines = [
@@ -455,9 +524,8 @@ class TestbenchGenerator:
             lines.append(f"    {_target(reset_port)} = {inactive};")
             lines.append("    #1;")
         for vector, encoded_inputs, encoded_expected in vectors:
-            # 多周期向量的 expected 描述的是该向量结束时的稳态输出。逐周期
-            # 检查会把合法的中间状态判成失败（例如「7 个周期后 count=9」
-            # 会在第 2 个周期就期望 9）。因此只在最后一个周期采样断言。
+            # 默认仍只在末拍检查计划 expected。逐拍模式的每拍期望值来自
+            # 独立状态演进表；不能重复使用向量结束时的一份期望值。
             for index in range(vector.cycles):
                 is_final_cycle = index == vector.cycles - 1
                 for signal, encoded in encoded_inputs.items():
@@ -470,8 +538,10 @@ class TestbenchGenerator:
                         lines.append("    #1;")
                 else:
                     lines.append("    #1;")
-                if encoded_expected and is_final_cycle:
-                    for signal, encoded in encoded_expected.items():
+                expected_at_sample = (cycle_expectations[vector.name][index] if cycle_expectations is not None
+                                      else encoded_expected if is_final_cycle else {})
+                if expected_at_sample:
+                    for signal, encoded in expected_at_sample.items():
                         lines.extend(
                             [
                                 "    checks = checks + 1;",
@@ -497,7 +567,7 @@ class TestbenchGenerator:
                                 "    end",
                             ]
                         )
-                elif not encoded_expected:
+                elif cycle_expectations is None and not encoded_expected:
                     lines.append("    " + _result_display(ok=True, test_id=vector.name, has_signal=False))
                 if capture_observations:
                     lines.append("    " + _observation_display(vector.name, vector.sample_phase, contract))
@@ -534,11 +604,14 @@ def generate_testbench(
     max_total_cycles: int = 100_000,
     emit_vcd: bool = False,
     vcd_filename: str = "waveform.vcd",
+    reference_sampling: Literal["vector_end", "per_cycle"] = "vector_end",
+    cycle_expectations: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
 ) -> Path:
     """生成 testbench 的函数式 API；工件只写入调用方指定的 output_dir。"""
 
     return TestbenchGenerator(max_total_cycles=max_total_cycles).generate(
-        plan, contract, output_dir, filename=filename, emit_vcd=emit_vcd, vcd_filename=vcd_filename
+        plan, contract, output_dir, filename=filename, emit_vcd=emit_vcd, vcd_filename=vcd_filename,
+        reference_sampling=reference_sampling, cycle_expectations=cycle_expectations,
     )
 
 

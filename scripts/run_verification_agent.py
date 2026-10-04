@@ -35,6 +35,9 @@ def main(argv: list[str] | None = None) -> int:
     credential.add_argument("--api-key-env", default="IVERILOG_AI_API_KEY")
     credential.add_argument("--api-key-file", type=Path, help="读取本机的单行密钥文件，不复制密钥到项目中")
     parser.add_argument("--wire-api", choices=["chat_completions", "responses"], default="chat_completions")
+    parser.add_argument("--thinking-mode", choices=["enabled", "disabled"], default=None)
+    parser.add_argument("--agent-plan-mode", choices=["append", "independent"], default="append")
+    parser.add_argument("--reference-sampling", choices=["vector_end", "per_cycle"], default="vector_end")
     parser.add_argument("--stream", choices=["on", "off"], default="off")
     parser.add_argument("--max-rounds", type=int, default=3)
     parser.add_argument("--max-requests", type=int, default=3)
@@ -46,6 +49,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--output-dir", type=Path)
     args = parser.parse_args(argv)
     try:
+        if args.thinking_mode is not None and args.wire_api != "chat_completions":
+            raise ValueError("explicit thinking mode requires chat_completions")
         limits = AgentLimits(max_rounds=args.max_rounds, max_requests=args.max_requests,
                              max_total_cycles=args.max_total_cycles, max_output_tokens=args.max_output_tokens,
                              request_timeout_seconds=args.timeout)
@@ -70,6 +75,8 @@ def main(argv: list[str] | None = None) -> int:
         # 不显示自定义端点路径、凭据或完整环境变量。
         print(json.dumps({"mode": "execute" if args.execute else "dry_run", "case": args.case,
                           "endpoint_host": url.hostname, "model": args.model, "missing": missing,
+                          "thinking_mode": args.thinking_mode, "agent_plan_mode": args.agent_plan_mode,
+                          "reference_sampling": args.reference_sampling,
                           "limits": limits.model_dump(), "initial_plan": "provided" if initial else "api"}, ensure_ascii=False))
         if not args.execute:
             return 0
@@ -80,6 +87,7 @@ def main(argv: list[str] | None = None) -> int:
         provider = OpenAICompatibleProvider(
             endpoint=args.endpoint, model=args.model, api_key=key or "local-no-key",
             wire_api=args.wire_api, reasoning_effort=None, allow_network=True, store=False,
+            thinking_mode=args.thinking_mode,
             timeout=args.timeout, stream=args.stream == "on", request_limit=limits.max_requests,
             max_output_tokens=limits.max_output_tokens, force_output_limit=True,
         )
@@ -87,8 +95,10 @@ def main(argv: list[str] | None = None) -> int:
         result = run_verification_agent(
             provider=provider, contract=contract, rtl_path=source, output_dir=output,
             objective=args.objective, specification=spec, initial_plan=initial, limits=limits,
+            agent_plan_mode=args.agent_plan_mode,
             execution_options={"allowed_roots": (ROOT, source.resolve().parent),
-                               "iverilog_path": args.iverilog, "vvp_path": args.vvp},
+                               "iverilog_path": args.iverilog, "vvp_path": args.vvp,
+                               "reference_sampling": args.reference_sampling},
             on_round=lambda row: print(json.dumps({"round": row["round"], **row["observation"]}, ensure_ascii=False), flush=True),
         )
         print(STOP_LABELS[result.stop_reason])

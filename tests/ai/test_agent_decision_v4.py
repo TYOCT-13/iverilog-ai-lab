@@ -322,3 +322,49 @@ def test_archived_raw_and_metadata_never_become_model_observations(tmp_path, mon
     assert "unique raw diagnostic marker" not in second
     assert "untrusted_decisions" not in second and "untrusted_response" not in second
     assert result.trajectory["decisions"][0]["untrusted_response_status"] == "saved"
+
+
+def test_v5_preflight_rejection_retains_both_typed_requests_usage_and_inert_actions(tmp_path, monkeypatch):
+    invalid = json.dumps({"action": "append_vectors", "reason": "request automatic clock", "vectors": [
+        {"name": "try_clock", "inputs": {"clk": 0}, "cycles": 1, "sample_phase": "after"}]})
+    valid = json.dumps({"action": "append_vectors", "reason": "correct input selection", "vectors": [
+        {"name": "corrected", "inputs": {"rst_n": 1, "enable": 1}, "cycles": 1,
+         "sample_phase": "after"}]})
+    bodies = install(monkeypatch, [invalid, valid])
+    pipeline = Pipeline()
+    service = provider(request_limit=2)
+    result = run(tmp_path, service, pipeline, agent_plan_mode="independent",
+                 limits=AgentLimits(max_rounds=1, max_requests=2))
+    assert result.stop_reason == "round_budget"
+    assert service.request_count == result.trajectory["requests_attempted"] == 2
+    assert len(pipeline.plans) == len(result.trajectory["rounds"]) == 1
+    assert len(result.trajectory["failed_attempts"]) == 1
+    rows = result.trajectory["decisions"]
+    assert [row["status"] for row in rows] == ["validated", "validated"]
+    assert [row["plan_validation_status"] for row in rows] == ["rejected", "passed"]
+    assert "executed_round" not in rows[0] and rows[1]["executed_round"] == 1
+    for row, raw, body in zip(rows, [invalid, valid], bodies):
+        assert row["usage"] == {"prompt_tokens": 7, "completion_tokens": 11}
+        assert row["messages_sha256"] == sha(body["messages"])
+        assert (result.trajectory_path.parent / row["untrusted_response"]["path"]).read_text() == raw
+    state = json.loads(bodies[1]["messages"][1]["content"])
+    assert state["plan_error"] == {"code": "auto_clock_input", "fields": ["vectors.inputs.clk"]}
+    assert state["current_plan"] is None and state["observation"] is None
+    assert "request automatic clock" not in bodies[1]["messages"][1]["content"]
+    assert service.api_key not in result.trajectory_path.read_text()
+
+
+def test_bad_per_cycle_configuration_cannot_change_provider_limits_or_use_transport(tmp_path, monkeypatch):
+    bodies = install(monkeypatch, stop())
+    service = provider(request_limit=7, max_output_tokens=8192, timeout=150)
+    before = (service.request_limit, service.max_output_tokens, service.timeout, service.force_output_limit)
+    contract_data = json.loads((ROOT / "examples/mod10_counter_contract.json").read_text())
+    contract_data["ports"][-1]["width"] = 5
+    with pytest.raises(ValueError, match="supported builtin reference"):
+        run_verification_agent(provider=service, contract=DutContract.from_dict(contract_data),
+            rtl_path=ROOT / "rtl/mod10_counter.v", output_dir=tmp_path / "wrong-profile",
+            objective="unsupported configuration", pipeline=Pipeline(),
+            execution_options={"reference_sampling": "per_cycle"})
+    assert (service.request_limit, service.max_output_tokens, service.timeout, service.force_output_limit) == before
+    assert service.request_count == 0 and bodies == []
+    assert not (tmp_path / "wrong-profile").exists()

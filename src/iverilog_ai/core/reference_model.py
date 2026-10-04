@@ -14,6 +14,7 @@ from __future__ import annotations
 from typing import Any, Iterable, Mapping
 
 from ..ai.schema import TestPlan
+from .contracts import DutContract
 
 SUPPORTED = {
     "mod10_counter", "simple_alu", "sequence_101_overlap", "traffic_light_emergency",
@@ -77,6 +78,73 @@ INPUT_DEFAULTS: dict[str, dict[str, Any]] = {
     "edge_detector": {"rst_n": 1, "signal_in": 0},
     "pulse_stretcher": {"rst_n": 1, "pulse_in": 0},
 }
+
+
+class ReferenceSamplingError(ValueError):
+    """逐拍参考检查没有已验证的合约或确定性输入，不能生成权威期望值。"""
+
+
+PER_CYCLE_PROFILE_VERSION = "builtin-reference-per-cycle-v1"
+
+# 逐拍模式只开放逐拍对齐测试使用的固定配置。不能把一个同名、任意位宽
+# 的外部模块或被 _clamp 修正的参数默认为已验证的参考行为。
+_PER_CYCLE_PARAMETERS: dict[str, dict[str, int]] = {
+    "sync_fifo": {"DATA_WIDTH": 8, "DEPTH": 4},
+    "uart_tx": {"CLKS_PER_BIT": 4},
+    "spi_master": {"WIDTH": 8},
+    "handshake_stage": {"WIDTH": 8},
+    "debounce": {"COUNT_MAX": 3},
+    "pwm": {"WIDTH": 8},
+    "mux4": {"WIDTH": 8},
+    "pulse_stretcher": {"WIDTH": 4},
+}
+_PER_CYCLE_DATA_PORTS: dict[str, tuple[dict[str, int], dict[str, int]]] = {
+    "mod10_counter": ({"enable": 1}, {"count": 4}),
+    "simple_alu": ({"a": 8, "b": 8, "op": 3}, {"result": 8, "carry": 1, "zero": 1}),
+    "sequence_101_overlap": ({"bit_in": 1}, {"detected": 1}),
+    "traffic_light_emergency": ({"emergency": 1}, {"main_light": 2, "side_light": 2}),
+    "sync_fifo": ({"wr_en": 1, "wr_data": 8, "rd_en": 1}, {"rd_data": 8, "full": 1, "empty": 1}),
+    "uart_tx": ({"start": 1, "data_in": 8}, {"tx": 1, "busy": 1}),
+    "spi_master": ({"start": 1, "data_in": 8}, {"sclk": 1, "mosi": 1, "busy": 1, "done": 1}),
+    "handshake_stage": ({"in_valid": 1, "in_data": 8, "out_ready": 1}, {"in_ready": 1, "out_valid": 1, "out_data": 8}),
+    "debounce": ({"key_in": 1}, {"key_state": 1}),
+    "pwm": ({"duty": 8}, {"pwm_out": 1}),
+    "sync_reset": ({}, {"rst_n": 1}),
+    "mux4": ({"d0": 8, "d1": 8, "d2": 8, "d3": 8, "sel": 2}, {"y": 8}),
+    "johnson_counter": ({"enable": 1}, {"q": 4}),
+    "edge_detector": ({"signal_in": 1}, {"rising": 1}),
+    "pulse_stretcher": ({"pulse_in": 1}, {"pulse_out": 1}),
+}
+
+
+def reference_sampling_profile(contract: DutContract) -> str | None:
+    """识别已对齐的内置逐拍合约；内置/外部策略仍须由调用方明确选择。"""
+    if not isinstance(contract, DutContract) or contract.module not in AUTHORITATIVE:
+        return None
+    shape = _PER_CYCLE_DATA_PORTS.get(contract.module)
+    if shape is None or any(port.signed for port in contract.ports):
+        return None
+    inputs, outputs = shape
+    inputs = dict(inputs)
+    combinational = contract.module in {"simple_alu", "mux4"}
+    if combinational:
+        if contract.clock is not None or contract.reset is not None:
+            return None
+    else:
+        reset_signal = "ext_rst_n" if contract.module == "sync_reset" else "rst_n"
+        inputs.update({"clk": 1, reset_signal: 1})
+        clock, reset = contract.clock, contract.reset
+        if (clock is None or clock.signal != "clk" or clock.edge != "posedge"
+                or clock.period_ns <= 2 or reset is None or reset.signal != reset_signal
+                or reset.active_level != 0 or reset.synchronous):
+            return None
+    ports = {name: ("input", width) for name, width in inputs.items()}
+    ports.update({name: ("output", width) for name, width in outputs.items()})
+    defaults = _PER_CYCLE_PARAMETERS.get(contract.module, {})
+    if ({port.name: (port.direction.value, port.width) for port in contract.ports} != ports
+            or {**defaults, **contract.parameters} != defaults):
+        return None
+    return f"{PER_CYCLE_PROFILE_VERSION}:{contract.module}"
 
 
 def completed_inputs(design: str, inputs: Mapping[str, Any] | None) -> dict[str, Any]:
@@ -409,6 +477,59 @@ def reference_expectations(
     return expectations
 
 
+def reference_cycle_expectations(
+    plan: TestPlan,
+    contract: DutContract,
+) -> dict[str, tuple[dict[str, int], ...]]:
+    """为原计划各向量逐拍复算期望值，不展开或改写 TestPlan。
+
+    每一项来自 ``state.step(held_inputs, 1)``。未列输入保持上一驱动值；
+    初始化与 testbench 相同，并明确推进合约的隐式复位。只支持已逐拍
+    对齐的固定合约和 after 采样，未知输入无法生成权威数字。
+    """
+    # 延迟导入受控标量编码器，复用生成器的字面值/宽度解释，避免另一套解析。
+    from .testbench import _encode_value, TestbenchGenerationError
+
+    if not isinstance(plan, TestPlan) or not isinstance(contract, DutContract):
+        raise ReferenceSamplingError("per_cycle requires a TestPlan and DutContract")
+    if plan.design != contract.module or reference_sampling_profile(contract) is None:
+        raise ReferenceSamplingError("per_cycle reference contract/profile is not supported")
+    if any(vector.sample_phase != "after" for vector in plan.vectors):
+        raise ReferenceSamplingError("per_cycle reference sampling supports after only")
+    if sum(vector.cycles for vector in plan.vectors) > 100_000:
+        raise ReferenceSamplingError("per_cycle reference exceeds 100000 cycles")
+    state = _DesignState(contract.module, contract)
+    held_inputs = {port.name: 0 for port in contract.inputs}
+    if contract.reset is not None:
+        held_inputs[contract.reset.signal] = contract.reset.active_level
+        state.step(held_inputs, contract.reset.assert_cycles)
+        held_inputs[contract.reset.signal] = 1 - contract.reset.active_level
+    output_names = {port.name for port in contract.outputs}
+    expectations: dict[str, tuple[dict[str, int], ...]] = {}
+    for vector in plan.vectors:
+        for signal, value in vector.inputs.items():
+            port = contract.port_map.get(signal)
+            if port is None or not port.is_input:
+                raise ReferenceSamplingError("per_cycle input does not match contract")
+            if contract.clock is not None and signal == contract.clock.signal:
+                raise ReferenceSamplingError("per_cycle inputs cannot drive the generated clock")
+            try:
+                bits = _encode_value(port, value, context="per_cycle.inputs").bits
+            except TestbenchGenerationError as exc:
+                raise ReferenceSamplingError(str(exc)) from exc
+            if any(bit not in "01" for bit in bits):
+                raise ReferenceSamplingError("per_cycle reference input contains unknown x/z bits")
+            held_inputs[signal] = int(bits, 2)
+        rows: list[dict[str, int]] = []
+        for _ in range(vector.cycles):
+            outputs = state.step(held_inputs, 1)
+            if set(outputs) != output_names:
+                raise ReferenceSamplingError("per_cycle reference must model every declared output")
+            rows.append({signal: int(value) for signal, value in outputs.items()})
+        expectations[vector.name] = tuple(rows)
+    return expectations
+
+
 def override_plan_expectations(
     plan: TestPlan,
     expectations: Mapping[str, Mapping[str, Any]],
@@ -442,7 +563,13 @@ def override_plan_expectations(
     return TestPlan.model_validate(data)
 
 
-def check_plan_consistency(plan: Any, design: str | None = None, contract: Any = None) -> dict[str, Any]:
+def check_plan_consistency(
+    plan: Any,
+    design: str | None = None,
+    contract: Any = None,
+    *,
+    reference_outputs: Mapping[str, Mapping[str, Any]] | None = None,
+) -> dict[str, Any]:
     """比较 AI 计划的期望值与参考模型复算值，产出诊断（不改变裁决）。"""
 
     design_name = str(design or _get(plan, "design", ""))
@@ -454,9 +581,11 @@ def check_plan_consistency(plan: Any, design: str | None = None, contract: Any =
                 "reason": "clocked before sampling is not supported by the independent reference model",
                 "unsupported_sample_phase": "before"}
     # 诊断不做门控：它只报告差异、不参与裁决，因此可以用上全部已建模案例。
-    expectations = reference_expectations(plan, design_name, contract, authoritative_only=False)
+    expectations = (reference_outputs if reference_outputs is not None else
+                    reference_expectations(plan, design_name, contract, authoritative_only=False))
     report_is_authoritative = design_name in AUTHORITATIVE
     warnings: list[dict[str, Any]] = []
+    uncheckable: list[dict[str, str]] = []
     checked = 0
     matched = 0
     for index, vector in enumerate(_vectors(plan)):
@@ -466,23 +595,45 @@ def check_plan_consistency(plan: Any, design: str | None = None, contract: Any =
         for signal, value in expected.items():
             if signal not in reference:
                 continue
+            if reference_outputs is not None and isinstance(contract, DutContract):
+                # 逐拍参考表已经由受控输入复算；诊断 AI 末态数字时也使用
+                # 同一字面值解释。AI 的 X/Z 或非法期望值不能让已完成仿真崩溃，
+                # 更不能被当作一个已核对的数字。
+                from .testbench import _encode_value, TestbenchGenerationError
+                try:
+                    bits = _encode_value(contract.port_map[signal], value, context="consistency.expected").bits
+                except TestbenchGenerationError:
+                    uncheckable.append({"vector": name, "signal": signal, "reason": "invalid_expected_scalar"})
+                    continue
+                if any(bit not in "01" for bit in bits):
+                    uncheckable.append({"vector": name, "signal": signal, "reason": "unknown_expected_bits"})
+                    continue
+                expected_number = int(bits, 2)
+            else:
+                expected_number = int(value)
             checked += 1
-            if int(value) == int(reference[signal]):
+            if expected_number == int(reference[signal]):
                 matched += 1
             else:
                 warnings.append({"code": "plan_inconsistent", "severity": "warn", "vector": name,
                                  "signal": signal, "expected": value, "reference": reference[signal],
                                  "reason": "expected value disagrees with deterministic reference model"})
-    return {"status": "warn" if warnings else "passed", "design": design_name,
+    return {"status": "warn" if warnings else "inconclusive" if uncheckable else "passed", "design": design_name,
             "warnings": warnings, "checked": len(list(_vectors(plan))), "checked_expected": checked,
+            "uncheckable_expected": uncheckable,
             "matched_expected": matched,
             "consistency_rate": round(matched / checked, 4) if checked else None,
             "evidence_level": "reference_model"}
 
 
 __all__ = [
+    "AUTHORITATIVE",
+    "PER_CYCLE_PROFILE_VERSION",
+    "ReferenceSamplingError",
     "SUPPORTED",
     "check_plan_consistency",
     "override_plan_expectations",
+    "reference_cycle_expectations",
     "reference_expectations",
+    "reference_sampling_profile",
 ]

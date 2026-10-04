@@ -28,6 +28,7 @@ from scripts.summarize_agent_comparison import classify, summarize_rows, freeze_
 CASES = ("sync_fifo", "uart_tx", "spi_master", "handshake_stage")
 STRATEGIES = ("fixed", "random", "single", "feedback", "no_feedback")
 V2_STRATEGIES = (*STRATEGIES, "protocol_random", "feedback_no_coverage")
+V3_STRATEGIES = ("fixed", "random", "protocol_random", "feedback", "no_feedback")
 BASELINES = {"fixed", "random", "protocol_random"}
 PROTOCOLS_PATH = ROOT / "spec/agent_protocols.json"
 
@@ -40,6 +41,38 @@ def write(path: Path, data: Any) -> None:
     temporary = path.with_suffix(path.suffix + ".tmp")
     temporary.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     temporary.replace(path)
+
+
+def registered_source_path(relative: str) -> Path:
+    """Validate a registered path before opening it, including Windows drives."""
+    path = Path(relative)
+    if path.is_absolute() or path.drive or ".." in path.parts:
+        raise ValueError("registered input escapes repository")
+    source = (ROOT / path).resolve(strict=True)
+    if not source.is_relative_to(ROOT.resolve()) or not source.is_file():
+        raise ValueError("registered input escapes repository")
+    return source
+
+
+def freeze_registered_inputs(registration: dict, output: Path) -> dict:
+    """Keep the registered bytes before the first request, not just their hashes."""
+    files = []
+    for relative, digest in registration["code_and_input_sha256"].items():
+        source = registered_source_path(relative)
+        raw = source.read_bytes()
+        if hashlib.sha256(raw).hexdigest() != digest:
+            raise ValueError("registered input changed during snapshot")
+        target = output / "registered-inputs" / "files" / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        with target.open("xb") as handle:
+            handle.write(raw)
+        files.append({"path": relative, "copy": str(target.relative_to(output)).replace("\\", "/"),
+                      "sha256": digest, "size_bytes": len(raw)})
+    manifest = {"schema": "registered-input-bytes-v1", "files": files,
+                "purpose": "exact bytes frozen before API execution; no newline conversion"}
+    write(output / "registered-inputs" / "manifest.json", manifest)
+    return {"path": "registered-inputs/manifest.json",
+            "sha256": sha(output / "registered-inputs" / "manifest.json"), "file_count": len(files)}
 
 
 def protocol_config(path: Path = PROTOCOLS_PATH) -> dict:
@@ -60,17 +93,18 @@ def protocol_config(path: Path = PROTOCOLS_PATH) -> dict:
 
 
 def preregister(cases=CASES, strategies=None, repeats=None, defects_per_case=2, *, profile="legacy") -> dict:
-    if profile not in {"legacy", "v2"}:
+    if profile not in {"legacy", "v2", "v3"}:
         raise ValueError("unknown comparison profile")
-    strategies = tuple(strategies if strategies is not None else V2_STRATEGIES if profile == "v2" else STRATEGIES)
+    strategies = tuple(strategies if strategies is not None else V3_STRATEGIES if profile == "v3"
+                       else V2_STRATEGIES if profile == "v2" else STRATEGIES)
     repeats = repeats if repeats is not None else 3 if profile == "v2" else 1
     if len(set(cases)) != len(cases) or len(set(strategies)) != len(strategies):
         raise ValueError("duplicate cases or strategies")
     if not cases or not strategies or not 1 <= repeats <= 5 or not 1 <= defects_per_case <= 3:
         raise ValueError("invalid registered sample selection")
-    if set(strategies) - set(V2_STRATEGIES if profile == "v2" else STRATEGIES):
+    if set(strategies) - set(V2_STRATEGIES if profile in {"v2", "v3"} else STRATEGIES):
         raise ValueError("strategy requires v2 profile")
-    protocols = protocol_config() if profile == "v2" else None
+    protocols = protocol_config() if profile in {"v2", "v3"} else None
     manifest = json.loads((ROOT / "benchmarks/manifest.json").read_text(encoding="utf-8"))
     mutation_profile = None
     if protocols:
@@ -84,11 +118,14 @@ def preregister(cases=CASES, strategies=None, repeats=None, defects_per_case=2, 
             if sha(ROOT / defect["file"]) != defect["sha256"] or defect["baseline_sha256"] != baseline["sha256"]:
                 raise ValueError("v2 mutation hash mismatch")
     targets = []
+    contract_profiles = {}
     for case in cases:
         if case not in CASES:
             raise ValueError("case outside registered development families")
         if protocols:
             contract_data = json.loads((ROOT / f"examples/{case}_contract.json").read_text(encoding="utf-8"))
+            contract_profiles[case] = hashlib.sha256(json.dumps(DutContract.from_dict(contract_data).to_dict(),
+                                                               ensure_ascii=False, sort_keys=True).encode()).hexdigest()
             if contract_data.get("parameters", {}) != protocols["cases"][case]["default_parameters"]:
                 raise ValueError("protocol timing profile does not match contract parameters")
         targets.append({"case": case, "variant": "reference", "rtl": f"rtl/{case}.v"})
@@ -111,7 +148,8 @@ def preregister(cases=CASES, strategies=None, repeats=None, defects_per_case=2, 
     if protocols:
         assert mutation_profile is not None
         inputs.add("spec/agent_protocols.json")
-        inputs.add("docs/experiment/agent_comparison_v2_plan_2026-10-04.md")
+        inputs.add("docs/experiment/agent_comparison_v5_plan_2026-10-05.md" if profile == "v3"
+                   else "docs/experiment/agent_comparison_v2_plan_2026-10-04.md")
         inputs.add("benchmarks/agent_v2/mutation_manifest.json")
         inputs.add(mutation_profile["baseline"]["snapshot_path"])
     prompt_profile = {"agent_prompt_version": PROMPT_VERSION,
@@ -119,7 +157,10 @@ def preregister(cases=CASES, strategies=None, repeats=None, defects_per_case=2, 
                       "profile": profile, "strategies": list(strategies), "repeats": repeats,
                       "functional_coverage": "available to single/feedback; no_feedback and feedback_no_coverage hidden" if protocols else "disabled legacy",
                       "max_rounds": 3, "api_request_limit_per_sample": {"single": 1, "feedback": 3, "no_feedback": 3, "feedback_no_coverage": 3}}
-    return {"schema": "agent-comparison-v2" if protocols else "agent-comparison-v1", "profile": profile,
+    if profile == "v3":
+        prompt_profile.update(reference_sampling="per_cycle", agent_plan_mode="independent")
+    return {"schema": "agent-comparison-v3" if profile == "v3" else "agent-comparison-v2" if protocols else "agent-comparison-v1", "profile": profile,
+            **({"contract_profile_sha256": contract_profiles} if profile == "v3" else {}),
             "scope": "development_repeated_not_human_trial" if protocols else "pilot_not_human_trial", "rows": rows,
             "independent_holdout": False, "protocol_config": protocols,
             "prompt_profile": prompt_profile,
@@ -127,7 +168,8 @@ def preregister(cases=CASES, strategies=None, repeats=None, defects_per_case=2, 
             "theoretical_requests": sum(0 if r["strategy"] in BASELINES else 1 if r["strategy"] == "single" else 3 for r in rows),
             "code_and_input_sha256": {p: sha(ROOT / p) for p in sorted(inputs)},
             "protocol": {"reference_replay": "every executed plan; any alarm invalidates target sample",
-                         "cycles": "cumulative reruns, excluding reset and separately reported reference audit",
+                         "cycles": ("independent reset episodes; sum of all executed stimulus, excluding reset and separately reported reference audit"
+                                    if profile == "v3" else "cumulative reruns, excluding reset and separately reported reference audit"),
                          "denominator": "all registered defects per repeat including incomplete samples",
                          "single": "same decision schema and prompt, one API proposal and one simulation",
                          "no_feedback": "same loop and budget, observation withheld; failure stop retained",
@@ -218,7 +260,7 @@ def protocol_random_vectors(case: str, seed: int, contract: DutContract, cycles:
 
 def baseline_plan(case: str, strategy: str, seed: int, contract: DutContract, cycles: int, *, profile="legacy", protocol=None) -> TestPlan:
     if strategy == "protocol_random":
-        if profile != "v2" or protocol is None:
+        if profile not in {"v2", "v3"} or protocol is None:
             raise ValueError("protocol random requires explicit v2 specification")
         vectors = protocol_random_vectors(case, seed, contract, cycles, protocol)
     elif strategy == "fixed":
@@ -227,7 +269,7 @@ def baseline_plan(case: str, strategy: str, seed: int, contract: DutContract, cy
         rng = random.Random(seed)
         excluded = {contract.clock.signal if contract.clock else "", contract.reset.signal if contract.reset else ""}
         inputs = [p for p in contract.ports if p.direction.value == "input" and p.name not in excluded]
-        segments = min(cycles, 200) if profile == "v2" else cycles
+        segments = min(cycles, 200) if profile in {"v2", "v3"} else cycles
         vectors = [{"name": f"random_{i}", "inputs": {p.name: rng.randrange(1 << p.width) for p in inputs},
                     "cycles": cycles // segments + int(i < cycles % segments), "expected": {}} for i in range(segments)]
     plan = TestPlan.model_validate({"design": case, "objective": "Check contract behavior and protocol boundaries", "vectors": vectors,
@@ -254,7 +296,8 @@ def summarize(rows: list[dict]) -> dict:
 
 
 def decision_records(index: int, trace: dict) -> list[dict]:
-    safe_fields = {"status", "error_type", "validation_error_types", "http_status", "finish_reason", "executed_round"}
+    safe_fields = {"status", "error_type", "validation_error_types", "http_status", "finish_reason", "executed_round",
+                   "plan_validation_status", "plan_error"}
     return [{"request_id": f"{index}:{n}", "usage": decision.get("usage"),
              **{key: value for key, value in decision.items() if key in safe_fields}}
             for n, decision in enumerate(trace.get("decisions", []))]
@@ -268,21 +311,24 @@ def execute(registration: dict, output: Path, *, endpoint="", model="", key="", 
         raise ValueError("invalid thinking mode")
     if wire_api == "responses" and thinking_mode is not None:
         raise ValueError("explicit thinking mode requires chat_completions")
-    if any(not (ROOT / p).is_file() or sha(ROOT / p) != digest
+    if any(sha(registered_source_path(p)) != digest
            for p, digest in registration["code_and_input_sha256"].items()):
         raise ValueError("registered source/input changed before execution")
     profile = registration.get("profile", "legacy")
     protocols = registration.get("protocol_config")
     output.mkdir(parents=True, exist_ok=False)
     write(output / "preregistration.json", registration)
+    frozen_inputs = freeze_registered_inputs(registration, output) if profile == "v3" else None
     settings = {"preregistration_sha256": sha(output / "preregistration.json"), "wire_api": wire_api,
                 "thinking_mode": thinking_mode,
                 "thinking_mode_meaning": "unspecified_provider_default" if thinking_mode is None else "explicit_request",
                 "endpoint_host": urlsplit(endpoint).hostname, "model": model,
                 "max_output_tokens": max_output_tokens, "total_request_cap": request_cap,
                 "request_timeout_seconds": 60, "stream": False, "iverilog": iverilog, "vvp": vvp,
-                "profile": profile, "max_output_chars": 2_000_000 if profile == "v2" else 200_000,
+                "profile": profile, "max_output_chars": 2_000_000 if profile in {"v2", "v3"} else 200_000,
                 "prompt_profile_sha256": registration.get("prompt_profile_sha256")}
+    if profile == "v3":
+        settings.update(reference_sampling="per_cycle", agent_plan_mode="independent", frozen_inputs=frozen_inputs)
     write(output / "run_settings.json", settings)
     report = {"preregistration_sha256": sha(output / "preregistration.json"),
               "run_settings_sha256": sha(output / "run_settings.json"), "wire_api": wire_api, "profile": profile,
@@ -292,15 +338,19 @@ def execute(registration: dict, output: Path, *, endpoint="", model="", key="", 
               "cost_currency": None, "cost_missing_reason": "provider billing not supplied; usage is not currency",
               "rows": json.loads(json.dumps(registration["rows"])), "requests_attempted": 0,
               "record_kind": "test_provider" if provider_factory else "api_and_local_simulation"}
+    if frozen_inputs:
+        report["frozen_inputs"] = frozen_inputs
     def save():
         report["summary"] = summarize(report["rows"])
         write(output / "results.json", report)
     save()
     runner = VerificationPipeline()
     options = {"allowed_roots": (ROOT, output.resolve()), "iverilog_path": iverilog, "vvp_path": vvp, "timeout_seconds": 30}
-    if profile == "v2":
+    if profile in {"v2", "v3"}:
         options["capture_observations"] = True
         options["max_output_chars"] = 2_000_000
+    if profile == "v3":
+        options["reference_sampling"] = "per_cycle"
     try:
         for index, row in enumerate(report["rows"]):
             started = time.monotonic()
@@ -345,7 +395,7 @@ def execute(registration: dict, output: Path, *, endpoint="", model="", key="", 
                     audit_started = time.monotonic()
                     try:
                         reference = runner.run(plan, contract, ROOT / f"rtl/{case}.v", work / f"audit-{round_row['round']}", **options)
-                        entry["reference"] = observation(reference, capture_coverage=profile == "v2",
+                        entry["reference"] = observation(reference, capture_coverage=profile in {"v2", "v3"},
                                                          rtl_sha256=sha(ROOT / f"rtl/{case}.v"))
                         entry["reference"]["evidence_files"] = freeze_pipeline_evidence(entry["reference"]["pipeline_result"])
                     finally:
@@ -359,7 +409,7 @@ def execute(registration: dict, output: Path, *, endpoint="", model="", key="", 
                     save()
                     actual = runner.run(plan, contract, ROOT / row["rtl"], work / "run", **options)
                     audit({"round": 1, "plan": plan.model_dump(mode="json"),
-                           "observation": observation(actual, capture_coverage=profile == "v2", rtl_sha256=sha(ROOT / row["rtl"]))})
+                           "observation": observation(actual, capture_coverage=profile in {"v2", "v3"}, rtl_sha256=sha(ROOT / row["rtl"]))})
                     row["stop_reason"] = "single_run"
                 else:
                     remaining = request_cap - report["requests_attempted"]
@@ -375,7 +425,8 @@ def execute(registration: dict, output: Path, *, endpoint="", model="", key="", 
                         output_dir=work / "agent", objective="Check contract behavior and protocol boundaries",
                         specification=(ROOT / protocols["cases"][case]["spec_path"]).read_text(encoding="utf-8") if protocols else "\n".join(line for line in (ROOT / "spec/common_cases.md").read_text(encoding="utf-8").splitlines() if f"`{case}.v`" in line),
                         include_feedback=row["strategy"] != "no_feedback",
-                        include_functional_coverage=profile == "v2" and row["strategy"] not in {"no_feedback", "feedback_no_coverage"},
+                        include_functional_coverage=profile in {"v2", "v3"} and row["strategy"] not in {"no_feedback", "feedback_no_coverage"},
+                        agent_plan_mode="independent" if profile == "v3" else "append",
                         limits=AgentLimits(max_rounds=1 if row["strategy"] == "single" else 3, max_requests=count,
                                            max_total_cycles=row["budget_cycles"], max_output_tokens=max_output_tokens),
                         execution_options=options, on_round=audit)
@@ -411,6 +462,7 @@ def execute(registration: dict, output: Path, *, endpoint="", model="", key="", 
                         trace = json.loads(trace_path.read_text(encoding="utf-8"))
                         row["agent_stimulus_cycles"] = trace["stimulus_cycles_executed"]
                         row["trajectory"] = str(trace_path)
+                        row["trajectory_sha256"] = sha(trace_path)
                         row["requests"] = trace["requests_attempted"]
                         row["stop_reason"] = trace["stop_reason"]
                         row["usage_by_decision"] = decision_records(index, trace)
@@ -440,7 +492,7 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--execute", action="store_true")
     parser.add_argument("--cases", nargs="+", choices=CASES, default=list(CASES))
-    parser.add_argument("--profile", choices=["legacy", "v2"], default="legacy")
+    parser.add_argument("--profile", choices=["legacy", "v2", "v3"], default="legacy")
     parser.add_argument("--strategies", nargs="+", choices=V2_STRATEGIES)
     parser.add_argument("--repeats", type=int, choices=range(1, 6))
     parser.add_argument("--defects-per-case", type=int, choices=range(1, 4), default=2)
@@ -475,7 +527,7 @@ def main(argv=None) -> int:
             key = read_key_file(args.api_key_file) if args.api_key_file else os.getenv("IVERILOG_AI_API_KEY", "")
             if not key:
                 raise ValueError("credential missing")
-        execute(reg, args.output_dir or ROOT / (".iverilog-ai/agent-comparison-v2" if args.profile == "v2" else ".iverilog-ai/agent-comparison-pilot"), endpoint=args.endpoint, model=args.model, key=key,
+        execute(reg, args.output_dir or ROOT / (f".iverilog-ai/agent-comparison-{args.profile}" if args.profile in {"v2", "v3"} else ".iverilog-ai/agent-comparison-pilot"), endpoint=args.endpoint, model=args.model, key=key,
                 request_cap=args.total_request_cap, max_output_tokens=args.max_output_tokens,
                 wire_api=args.wire_api, thinking_mode=args.thinking_mode, iverilog=args.iverilog, vvp=args.vvp)
         return 0
