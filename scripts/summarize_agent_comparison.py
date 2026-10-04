@@ -14,8 +14,11 @@ from iverilog_ai.core.strategy_scoring import classify_undecidable
 
 def classify(row: dict) -> tuple[str, bool]:
     rounds = row["rounds"]
+    token_errors = {d.get("error_type") for d in row.get("usage_by_decision", [])}
+    token_status = ("token_budget" if "TokenBudgetExceeded" in token_errors
+                    else "token_accounting_error" if "TokenUsageViolation" in token_errors else None)
     if not rounds:
-        return row.get("stop_reason", "no_records"), False
+        return token_status or row.get("stop_reason", "no_records"), False
     for item in rounds:
         ref = item["reference"]
         if ref["failures"]:
@@ -29,6 +32,8 @@ def classify(row: dict) -> tuple[str, bool]:
         if actual["expectation_source"] != "reference_model":
             return "unverified_oracle", False
     alarm = any(r["actual"]["failures"] for r in rounds)
+    if not alarm and token_status:
+        return token_status, False
     if not alarm and row.get("stop_reason") in {"policy_error", "output_truncated", "execution_error", "input_changed", "interrupted", "insufficient_evidence"}:
         return row["stop_reason"], False
     return ("reference_false_alarm" if row["variant"] == "reference" and alarm else "detected" if alarm else "not_detected"), bool(alarm and row["variant"] != "reference")
@@ -349,7 +354,7 @@ def build_summary(report: dict, registration: dict | None = None, *, evidence_ro
                 and registration is not None
                 and frozen_ok is not False
                 and all(r.get("evidence_verified") for r in rows)
-                and all(r["status"] not in {"not_started", "interrupted", "missing_result", "global_request_budget", "evidence_unknown"} for r in rows),
+                and all(r["status"] not in {"not_started", "interrupted", "missing_result", "global_request_budget", "evidence_unknown", "token_budget", "token_accounting_error"} for r in rows),
             "strategies": summarize_rows(rows), "coverage_ablation_pairs": pairs,
             "coverage_ablation_note": "same registered tasks, independent stochastic API proposals; not paired model RNG",
             "scope": "development_modules_not_independent_holdout", "cost_currency": None,

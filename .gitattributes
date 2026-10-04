@@ -43,6 +43,10 @@ docs/experiment/agent_smoke_api_budget_2026-10-05.json -text whitespace=blank-at
 docs/experiment/agent_smoke_diagnostic_api_budget_2026-10-05.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 docs/review/agent-smoke-review-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 docs/review/agent-smoke-diagnostic-review-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/agent-study-1m-live-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/agent-study-1m-validation-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/agent_study_1m_budget_2026-10-05.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/review/agent-study-1m-review-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 
 # 明确语言归属，便于托管平台的统计与语法高亮
 *.v text linguist-language=Verilog

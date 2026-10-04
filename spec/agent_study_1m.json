@@ -1,0 +1,10 @@
+{
+  "schema": "agent-study-per-round-v1",
+  "round_name": "protocol_priority_full_comparison_20261005",
+  "token_cap": 1000000,
+  "token_scope": "this registered batch only, sum of prompt and completion usage",
+  "max_output_tokens_per_request": 4096,
+  "repeats": 3,
+  "strategies": ["fixed", "random", "protocol_random", "single", "feedback", "no_feedback"],
+  "cycle_budgets": {"sync_fifo": 16, "uart_tx": 48, "spi_master": 20, "handshake_stage": 8}
+}

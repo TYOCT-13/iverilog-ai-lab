@@ -306,7 +306,10 @@ def decision_records(index: int, trace: dict) -> list[dict]:
 def execute(registration: dict, output: Path, *, endpoint="", model="", key="", request_cap=0,
             max_output_tokens=4096, wire_api: Literal["chat_completions", "responses"] = "chat_completions",
             thinking_mode: Literal["enabled", "disabled"] | None = None,
-            iverilog="iverilog", vvp="vvp", provider_factory=None) -> dict:
+            iverilog="iverilog", vvp="vvp", provider_factory=None,
+            provider_factory_record_kind="test_provider") -> dict:
+    if provider_factory_record_kind not in {"test_provider", "api_and_local_simulation"}:
+        raise ValueError("invalid provider factory provenance")
     if thinking_mode not in {None, "enabled", "disabled"}:
         raise ValueError("invalid thinking mode")
     if wire_api == "responses" and thinking_mode is not None:
@@ -337,7 +340,7 @@ def execute(registration: dict, output: Path, *, endpoint="", model="", key="", 
               "model": model, "total_request_cap": request_cap, "max_output_tokens": max_output_tokens,
               "cost_currency": None, "cost_missing_reason": "provider billing not supplied; usage is not currency",
               "rows": json.loads(json.dumps(registration["rows"])), "requests_attempted": 0,
-              "record_kind": "test_provider" if provider_factory else "api_and_local_simulation"}
+              "record_kind": provider_factory_record_kind if provider_factory else "api_and_local_simulation"}
     if frozen_inputs:
         report["frozen_inputs"] = frozen_inputs
     def save():
