@@ -1,0 +1,84 @@
+{
+  "kind": "publication_tool_failure_not_API_or_DUT_failure",
+  "exit_code": 1,
+  "git_show_return_code": 128,
+  "cause": "Windows Git stat on revision:path exceeds path length; frozen raw batch completed unchanged",
+  "actual_API_calls_added": 0,
+  "actual_DUT_runs_added": 0,
+  "publisher_original_sha256": "c10c28120836c20c654292cc365c9a7869e4622f916a3861835fede065100ab0",
+  "partial_package_sha256": "4843aebe642c398e6f2341caf6f799750cab0c61c34238f390cad4f67b36449d",
+  "original_partial_members": [
+    {
+      "path": "cohort_summaries.json",
+      "sha256": "aebded1819648973092afb01c0a7253248174ecdfe8ba8ada287d5b06b306bcb",
+      "bytes": 25063
+    },
+    {
+      "path": "full_raw_evidence.zip",
+      "sha256": "31cc477aaf2160477921767603064c2532fa9a3ebe76ca68908fe8b57b649e7d",
+      "bytes": 7027646
+    },
+    {
+      "path": "full_raw_manifest.json",
+      "sha256": "e00d4b08cd596a0c3bdcc9d7aae4892a95a740ec7349d80130bdfa5bc7d43c57",
+      "bytes": 876138
+    },
+    {
+      "path": "preregistration.json",
+      "sha256": "45a151529e2f2e1960f54696386db1ee5574e27dd0b688aad50afb432971b83f",
+      "bytes": 195253
+    },
+    {
+      "path": "registered_inputs.zip",
+      "sha256": "379340c3314736867c9234c3a5f38da1a40c1dbb3ff97bc0ddfddc59faf2f014",
+      "bytes": 1023930
+    },
+    {
+      "path": "registered_inputs_manifest.json",
+      "sha256": "f516a5fda999476538bb42fa51c1acdf13ae9c8c4fcc535b3196b951a762fb5c",
+      "bytes": 223120
+    },
+    {
+      "path": "results.zip",
+      "sha256": "d9e78b66ebd39bf78a43cc2bea072c8e3795db2c1e7eda947fead89645af0384",
+      "bytes": 186636
+    },
+    {
+      "path": "run_settings.json",
+      "sha256": "f0b1aee45691bbdcf8094f2e106a799a4ca5ff847f423b3034bf74cfff8fdbba",
+      "bytes": 941
+    },
+    {
+      "path": "specs/event_accumulator_spec.md",
+      "sha256": "93e13226df4eb0323f1ae31316c1370934ec5faddc7f801f352d2f18971db515",
+      "bytes": 4573
+    },
+    {
+      "path": "specs/valid_data_pipeline_spec.md",
+      "sha256": "94045a833fa947eb2e1fca5088e000ccfd2e28ad523c08826c562b9e6b87a71a",
+      "bytes": 5202
+    },
+    {
+      "path": "strict_summary.json",
+      "sha256": "d0fb0195aa7747919e5e3be5d3cd6947ab5653f8f7a3cd27d9031bab7b2f82b9",
+      "bytes": 3087950
+    },
+    {
+      "path": "token_budget.json",
+      "sha256": "7277cb7ae7aee2dc7d546dcd2ae3ad75e487e7f9c06f0b6ce88d9bf351aa7e8f",
+      "bytes": 29209
+    },
+    {
+      "path": "trace_manifest.json",
+      "sha256": "3bef02272b0f065660d070052117ff3daf65c09bdd270d108dfdeb4546a49a0f",
+      "bytes": 65370
+    },
+    {
+      "path": "traces_and_decisions.zip",
+      "sha256": "79c2b6be1217882368b8f0118b2a67909962f09fa9008bb0ac6ab16b00d9db9d",
+      "bytes": 530759
+    }
+  ],
+  "console_bytes_retained": false,
+  "console_status": "Failure text was returned in the tool output; no original stdout byte file was created"
+}

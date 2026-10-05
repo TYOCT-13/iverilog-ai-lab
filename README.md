@@ -25,6 +25,10 @@
 当前改造围绕四类数字 IP：FIFO、UART、SPI 和握手级。API Agent 提出测试激励；独立参考模型与 Icarus 裁决结果，真实端口采样计算 24 项命名功能场景。功能场景是有限事件观察，不是代码覆盖率或正确性证明。网页保留输入、运行记录和结果，可导出原 RTL、测试台及无需 API 的重放脚本。
 
 - [操作与 UART 反例重放](docs/demo/ic_agent_v2_walkthrough.md)
+- [最新两模块内部留出](docs/experiment/agent_new_holdout_study_live_2026-10-05.md)：实际源码`20400fa`，Agent/helper/系统提示保持`a969337`。`valid_data_pipeline`与`event_accumulator`共108任务全部实际执行；fixed/random/protocol_random/single/feedback/no_feedback分别检出12/10/8/8/11/10（各12缺陷任务，来自4个不同人工缺陷×3重复）。反馈仅比随机和无反馈多1项，固定仍12/12，不作显著性、因果或工业泛化结论。
+- [最新原件回执](docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json)、[完整原件包](docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip)与[独立预算账](docs/experiment/agent_new_holdout_study_budget_2026-10-05.json)：134实际episode/268执行侧，36/36正确控制无误报，严格比较资格true；仍有1终态格式失败，全部分母保留。87请求、339624输入加输出tokens，本批100万剩660376，未知/pending均0，历史用量不扣本批。458原字节快照无变，Git446精确/12仅换行不同，精确重放以快照为准。
+- [最新源码验收](docs/experiment/agent_new_holdout_source_validation_2026-10-05.md)、[方案](docs/experiment/agent_new_holdout_study_plan_2026-10-05.md)及[事前机器审查](docs/review/agent_new_holdout_prereg_review_2026-10-05.md)：2033通过/2跳过、mypy88、535指纹无变；非实现者202不同非DUT检查另列、不相加。两个新模块与五个历史受控API批次的模块集合互斥，仍是同团队合成设计和缺陷；没有独立时间证据支持选型早于旧v8成绩，也不代表外部盲测、独立作者或预训练未见。
+- [最新结果双机器审计](docs/review/agent_new_holdout_study_review_2026-10-05.md)：非实现者核心2192不同非DUT检查全部通过，作者轨迹核验已封存、无矛盾；检查数不与2033项测试相加，均不是H02。新资产仍有12项严格样式问题，WaveDrom缺依赖，不能称全门禁通过。
 - [v7完整组别只读诊断](docs/experiment/agent_v7_diagnosis_2026-10-05.md)：0新模型/仿真。30普通拒绝为27顶层多余字段、3超12向量；信用/仲裁反馈47请求中28后续观察无端口过程，但42实际采样包均完整，240刺激拍含24显式复位且低于随机288拍；不能单因归结其4/12检出。
 - [v8八模块完整对照](docs/experiment/agent_feedback_study_live_2026-10-05.md)：冻结`a969337`，432任务完成；fixed/random/protocol_random/single/feedback/no_feedback各48缺陷检出48/32/48/29/37/37。反馈37与历史v7及本轮无反馈均持平，未证明整体改善；信用/仲裁8/12与随机持平，开发组20/24、edge/pulse9/12。八模块均已暴露，不是新留出。
 - [v8原件回执](docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json)与[独立预算账](docs/experiment/agent_feedback_study_budget_2026-10-05.json)：306实际收费请求、973149tokens、余26851，0未知/待结算；414执行/484轮/968侧，18零DUT，8项token_budget终态未发送，严格资格false；正确143/144执行、实际误报0，未执行项不算通过。18格式拒绝后12轨迹恢复执行/5检出，16预算拒绝后9轨迹执行/4检出，含无反馈，不作反馈因果结论。
@@ -51,9 +55,9 @@
 - [v5本地证据包](docs/competition/ic/evidence_pack_v5_2026-10-05.md)：完整v5时点原件、74份冻结输入和源码；仓库外真实反例重放108检查/16失败，另有独立子代理字节核查，均不代替真人或独立人审。
 - [API 消息与格式修复说明](docs/experiment/deepseek_decision_v4_2026-10-04.md)：系统规则和状态采用独立消息，保持严格动作校验；新版本实测另列，旧结果不覆盖。
 
-旧v5 ZIP与28be1ed版正式PDF尚未包含新增短预算、六项诊断、上一轮1M、v6恢复及新模块留出实验。新1570全仓与历史1307/1170全仓、65/263定向测试不相加；新增记录按独立路径阅读。
+旧v5 ZIP与28be1ed版正式PDF/PPT尚未包含新增短预算、六项诊断、上一轮1M、v6恢复和最新两模块实测。最新2033全仓与历史1858/1570/1307/1170全仓、专项检查不相加；新增记录按独立路径阅读。
 
-后续仅有两个新内部模块在私有准备中，尚未API执行或公共验收，不预填留出成功。
+最新两模块已完成完整API批次、本机源码验收与双机器审计；正式材料同步及异机完整复现仍待完成。
 
 使用服务商 API，不运行本地模型权重。内部合成新模块互斥留出已完成；真人试用、独立人工复核和外部独立盲测仍待完成；最新验收、提交材料及证据路径统一从 [资料索引](docs/INDEX.md) 进入。历史 83/83 等成绩仍属于原手写测试台和旧版本，不能当成这次 Agent 成绩。
 

@@ -1,0 +1,116 @@
+{
+  "schema": "new-holdout-publication-attempt-preservation-v1",
+  "record_author": "parent agent packaging evidence, not the independent result auditor",
+  "first_attempt_exit_code": 1,
+  "first_attempt_failure": "Windows Git stat on revision:path exceeds path length; frozen raw batch completed unchanged",
+  "first_attempt_partial_archive_members_verified": 14,
+  "first_attempt_console_bytes_retained": false,
+  "original_console_not_reconstructed": true,
+  "repair": "Publishing tool alone uses ls-tree blob IDs and cat-file, avoiding Git revision:path stat on long Windows paths",
+  "raw_batch_results_modified": false,
+  "registered_inputs_modified": false,
+  "API_requests_added": 0,
+  "DUT_runs_added": 0,
+  "successful_public_receipt_sha256": "4751fe084711d6ed4f0d02212e715079803671a7b3605b6150679a8ee9096a65",
+  "successful_public_artifacts_verified": [
+    {
+      "path": "preregistration.json",
+      "bytes": 195253,
+      "sha256": "45a151529e2f2e1960f54696386db1ee5574e27dd0b688aad50afb432971b83f"
+    },
+    {
+      "path": "run_settings.json",
+      "bytes": 941,
+      "sha256": "f0b1aee45691bbdcf8094f2e106a799a4ca5ff847f423b3034bf74cfff8fdbba"
+    },
+    {
+      "path": "token_budget.json",
+      "bytes": 29209,
+      "sha256": "7277cb7ae7aee2dc7d546dcd2ae3ad75e487e7f9c06f0b6ce88d9bf351aa7e8f"
+    },
+    {
+      "path": "strict_summary.json",
+      "bytes": 3087950,
+      "sha256": "d0fb0195aa7747919e5e3be5d3cd6947ab5653f8f7a3cd27d9031bab7b2f82b9"
+    },
+    {
+      "path": "results.zip",
+      "bytes": 186636,
+      "sha256": "e90ff84d5dd32f97b624484148860bcb9d65a2b429230fdf2d9c70f04ed80a7c"
+    },
+    {
+      "path": "specs/valid_data_pipeline_spec.md",
+      "bytes": 5202,
+      "sha256": "94045a833fa947eb2e1fca5088e000ccfd2e28ad523c08826c562b9e6b87a71a"
+    },
+    {
+      "path": "specs/event_accumulator_spec.md",
+      "bytes": 4573,
+      "sha256": "93e13226df4eb0323f1ae31316c1370934ec5faddc7f801f352d2f18971db515"
+    },
+    {
+      "path": "registered_inputs_manifest.json",
+      "bytes": 223120,
+      "sha256": "f516a5fda999476538bb42fa51c1acdf13ae9c8c4fcc535b3196b951a762fb5c"
+    },
+    {
+      "path": "registered_inputs.zip",
+      "bytes": 1023930,
+      "sha256": "b881df1a99012c29d3e205dfae31476d995be1e4cfd91967a362c65ef297f4ee"
+    },
+    {
+      "path": "traces_and_decisions.zip",
+      "bytes": 530759,
+      "sha256": "89798be640c59f9c11a6d4fa698bb141c4fe1f8f706651310a0b3bdbfa2b229a"
+    },
+    {
+      "path": "trace_manifest.json",
+      "bytes": 65370,
+      "sha256": "3bef02272b0f065660d070052117ff3daf65c09bdd270d108dfdeb4546a49a0f"
+    },
+    {
+      "path": "full_raw_manifest.json",
+      "bytes": 876138,
+      "sha256": "e00d4b08cd596a0c3bdcc9d7aae4892a95a740ec7349d80130bdfa5bc7d43c57"
+    },
+    {
+      "path": "full_raw_evidence.zip",
+      "bytes": 7027646,
+      "sha256": "cd9ddc98b4b11062e3d820b475419335450d2e29fd54b300fa13c03643b13375"
+    },
+    {
+      "path": "cohort_summaries.json",
+      "bytes": 25063,
+      "sha256": "aebded1819648973092afb01c0a7253248174ecdfe8ba8ada287d5b06b306bcb"
+    },
+    {
+      "path": "source_byte_binding.json",
+      "bytes": 180623,
+      "sha256": "c02e53b79b6d31a48e989691fe521b7fe1f1cb2f6d73ea90df93dcc8d129417a"
+    }
+  ],
+  "preserved_original_files": [
+    {
+      "path": "r1/receipt.json",
+      "bytes": 2874,
+      "sha256": "667592af0a58436dd836dc2fe0b89580b825adf11b8639f51f9171a203e88f15"
+    },
+    {
+      "path": "r1/publisher_source.py",
+      "bytes": 18047,
+      "sha256": "c10c28120836c20c654292cc365c9a7869e4622f916a3861835fede065100ab0"
+    },
+    {
+      "path": "r1/partial_public_originals.zip",
+      "bytes": 7785810,
+      "sha256": "4843aebe642c398e6f2341caf6f799750cab0c61c34238f390cad4f67b36449d"
+    },
+    {
+      "path": "r2/publisher_source.py",
+      "bytes": 18418,
+      "sha256": "e10eb63d0dbff221f09a499ced28027f452fa23edc47f797eb0ce15032d3ca3f"
+    }
+  ],
+  "actual_execution_revision": "20400fa7dca0c9804a96b1eb9842956782a9e81f",
+  "H02": false
+}

@@ -4,7 +4,7 @@
 带盘符的除外。路径可用 `python scripts/check_doc_index.py` 校验是否仍然存在。
 
 - 仓库：`iverilog-ai-lab`，Apache-2.0；第三方资源保留各自许可；判定权威是 Icarus Verilog 12.0（`s20150603`）
-- 本次材料修订：**2026-10-05**；最新完成批次冻结源码`a969337`；v8 432任务六组48/32/48/29/37/37，306请求/973149tokens、18零DUT、严格资格false，结果双代理审计完成但非H02；历史v7八模块432任务已结束：六组各48缺陷为48/32/48/34/37/37，334请求/833216tokens，严格资格false，预算补提真实收益未证；历史`c07756f`内部合成模块互斥留出108任务/86请求/190387tokens、全仓1570/2；历史Agent v6恢复源码`9c3bd3c`，恢复轮216任务/138请求/378204tokens，独立每轮100万额度；上一轮`75f9baa`的216任务/145请求/399083tokens保持历史，历史短预算三重复144任务（入口`f54ae63`）与六项选样诊断（入口`bdc9e20`），不改旧v5一次重复60任务。v2提交PDF/答辩仍为 `28be1ed`，旧三重复 `c7bb280`、pilot `e9b7b8a`分别归档。最新实测与旧版正式材料不能混作同一版本（已查阅通知的提交截止2026-10-15 20:00北京时间）。
+- 本次材料修订：**2026-10-05**；最新两模块批次实际源码`20400fa`，Agent/helper/系统提示仍冻结`a969337`；108任务全部执行，六组各12缺陷检出12/10/8/8/11/10，87请求/339624tokens，严格资格true但保留1终态格式失败；双机器审计完成，非H02。历史v8八模块432任务六组48/32/48/29/37/37，306请求/973149tokens、18零DUT、严格资格false，双代理审计完成但非H02；历史v7八模块432任务已结束：六组各48缺陷为48/32/48/34/37/37，334请求/833216tokens，严格资格false，预算补提真实收益未证；历史`c07756f`内部合成模块互斥留出108任务/86请求/190387tokens、全仓1570/2；历史Agent v6恢复源码`9c3bd3c`，恢复轮216任务/138请求/378204tokens，独立每轮100万额度；上一轮`75f9baa`的216任务/145请求/399083tokens保持历史，历史短预算三重复144任务（入口`f54ae63`）与六项选样诊断（入口`bdc9e20`），不改旧v5一次重复60任务。v2提交PDF/答辩仍为 `28be1ed`，旧三重复 `c7bb280`、pilot `e9b7b8a`分别归档。最新实测与旧版正式材料不能混作同一版本（已查阅通知的提交截止2026-10-15 20:00北京时间）。
 - 状态记号：**有效** = 当前口径，可直接对外引用；**历史** = 反映当时状态，只读归档，
   引用时必须带"旧口径"标注；**待补** = 尚未完成
 
@@ -15,7 +15,7 @@
 | 你想干什么 | 按顺序读 |
 |---|---|
 | 5 分钟了解这个项目 | `README.md` → `docs/project_overview.md` → `docs/competition/ic/report_draft.md` |
-| 准备 AI＋集成电路提交 | `docs/experiment/agent_feedback_study_live_2026-10-05.md` → `docs/experiment/agent_v7_diagnosis_2026-10-05.md` → `docs/competition/ic/gap_checklist.md` → `docs/competition/ic/v2/README.md`；正式v2文件尚未同步最新实测，真人/H02待真实原件 |
+| 准备 AI＋集成电路提交 | `docs/experiment/agent_new_holdout_study_live_2026-10-05.md` → `docs/experiment/metric_inventory.md` → `docs/competition/ic/gap_checklist.md` → `docs/competition/ic/v2/README.md`；正式v2文件尚未同步最新实测，真人/H02待真实原件 |
 | 复核数字是否可信 | `docs/experiment/metric_inventory.md`（每个数字一行：口径/来源/时间/复现命令）→ `docs/competition/submission_gate_checklist.md` → 产物目录 |
 | IC提交当天照着做 | `docs/competition/ic/v2/README.md` → `docs/competition/ic/gap_checklist.md`；先核对所选赛道、真人/H02原件和团队字段 |
 | 组织真人试用与反馈 | `docs/trial/README.md` → `docs/trial/organizer_workflow.md`；发给参与者从 `docs/trial/participant_start.md` 开始 |
@@ -32,9 +32,13 @@
 | v2佐证源稿与PDF | `docs/competition/ic/v2/supporting_evidence.md`、`docs/competition/ic/ICARUS_佐证材料_v2.pdf` | 28be1ed版本；5页、约0.86MB；V01–V06真实来源，保留失败，尚未纳入v5 |
 | 最新材料入口与PDF回执 | `docs/competition/ic/v2/README.md`、`docs/competition/ic/v2/validation.json` | 名称15字符、简介172字符；全部14页渲染查看，文字可选择、身份元数据空 |
 | 最新答辩稿与构建来源 | `docs/competition/ic/ICARUS_答辩材料_v2.pptx`、`docs/competition/ic/ICARUS_答辩材料_v2.pdf`、`docs/competition/ic/defense_v2/README.md`、`docs/competition/ic/defense_v2/qa_report.json` | 12页，5原生表格/3原生图表/12页备注；PPTX可编辑，PDF图像式；逐页机器检查，不是独立人审 |
+| 最新两模块内部留出 | [报告](experiment/agent_new_holdout_study_live_2026-10-05.md)、[回执](experiment/agent-new-holdout-study-live-2026-10-05/receipt.json)、[严格汇总](experiment/agent-new-holdout-study-live-2026-10-05/strict_summary.json) | 20400fa；108任务全部执行/134episode/268侧；六组各12缺陷检出12/10/8/8/11/10，分母为4不同缺陷×3重复；36/36正确控制无误报，严格true但1终态格式失败 |
+| 最新预算与完整原件 | [独立预算](experiment/agent_new_holdout_study_budget_2026-10-05.json)、[完整原件ZIP](experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip)、[原件清单](experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json)、[字节绑定](experiment/agent-new-holdout-study-live-2026-10-05/source_byte_binding.json) | 87请求/339624tokens/余660376，未知/pending0，历史不扣本批1M；458快照无变、Git446exact/12仅换行，精确重放须用快照，异机待验 |
+| 最新方案、源码验收与事前审查 | [方案](experiment/agent_new_holdout_study_plan_2026-10-05.md)、[登记](experiment/agent-new-holdout-study-live-2026-10-05/preregistration.json)、[源码验收](experiment/agent_new_holdout_source_validation_2026-10-05.md)、[事前机器审查](review/agent_new_holdout_prereg_review_2026-10-05.md) | 2033通过/2跳过、mypy88、535指纹无变；非实现者202不同非DUT检查，不与全仓相加。Agent/helper/系统提示保持a969337；12样式问题、WaveDrom缺依赖仍在 |
+| 最新结果双机器审计 | [审计文书](review/agent_new_holdout_study_review_2026-10-05.md)、[审计回执](review/agent-new-holdout-study-review-2026-10-05/receipt.json) | 核心2192不同非DUT检查全部通过，作者轨迹核验封存、无矛盾，均非H02；不与2033项测试相加。两模块仅内部集合留出，非外部盲测、独立作者或预训练未见；反馈比随机/无反馈仅多1任务，固定仍12/12 |
 | v7完整组别只读诊断 | `docs/experiment/agent_v7_diagnosis_2026-10-05.md`、`docs/experiment/agent-v7-diagnosis-2026-10-05/receipt.json` | 原诊断按字节复制，0新API/DUT；27顶层字段+3超12，端口反馈缺口与42完整采样/240对288拍反向证据并列 |
 | v8八模块完整对照 | `docs/experiment/agent_feedback_study_live_2026-10-05.md`、`docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json`、`docs/experiment/agent-feedback-study-live-2026-10-05/strict_summary.json` | a969337；432任务六组48/32/48/29/37/37；414执行/484轮/968侧、18零DUT、严格false；反馈未超历史或无反馈37，八模块已暴露非新留出 |
-| v8预算、方案与结果审计 | `docs/experiment/agent_feedback_study_budget_2026-10-05.json`、`docs/experiment/agent_feedback_study_plan_2026-10-05.md`、`docs/review/agent_feedback_study_review_2026-10-05.md`、`docs/review/agent-feedback-study-review-2026-10-05/receipt.json` | 306收费请求/973149tokens/余26851、0未知或pending；8项token_budget未发送；143/144正确执行误报0；全量双代理审计完成，非H02。两个新内部模块仅私有准备，未API/公共验收 |
+| v8预算、方案与结果审计 | `docs/experiment/agent_feedback_study_budget_2026-10-05.json`、`docs/experiment/agent_feedback_study_plan_2026-10-05.md`、`docs/review/agent_feedback_study_review_2026-10-05.md`、`docs/review/agent-feedback-study-review-2026-10-05/receipt.json` | 历史432任务批次；306收费请求/973149tokens/余26851、0未知或pending；8项token_budget未发送；143/144正确执行误报0；全量双代理审计完成，非H02。后续两模块108任务另列，不回写本批 |
 | v8稳定源码验收与事前审查 | `docs/experiment/agent_feedback_source_validation_2026-10-05.md`、`docs/review/agent_feedback_prereg_review_2026-10-05.md` | 1858/2skip/0fail/error、mypy87、263指纹无变；非实现者代理121不同非DUT检查，131登记/66旧资产/四旧账闭合；非H02或API成绩 |
 | v7八模块完整对照 | `docs/experiment/agent_budget_study_live_2026-10-05.md`、`docs/experiment/agent-budget-study-live-2026-10-05/receipt.json`、`docs/experiment/agent-budget-study-live-2026-10-05/strict_summary.json`、`docs/experiment/agent-budget-study-live-2026-10-05/cohort_summaries.json` | 432任务、各48缺陷为48/32/48/34/37/37；423执行、9零DUT、严格false；反馈并不优于无反馈，prior子组低于随机 |
 | v7预算与完整原件 | `docs/experiment/agent-budget-study-live-2026-10-05/token_budget.json`、`docs/experiment/agent-budget-study-live-2026-10-05/full_raw_manifest.json`、`docs/experiment/agent-budget-study-live-2026-10-05/full_raw_evidence.zip`、`docs/experiment/agent-budget-study-live-2026-10-05/source_byte_binding.json`、`docs/experiment/agent-budget-study-live-2026-10-05/trace_manifest.json` | 334请求/833216tokens/余166784；127快照无变，Git103exact+24仅换行不同；原字节需快照。结果代理核心全量核对与文书完成，非H02 |
@@ -238,11 +242,12 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 
 ## 4. 工程门禁（当前记录与历史快照）
 
-最新v7检查见 `docs/experiment/agent_budget_source_validation_2026-10-05.md`：r1全量1716/2但runner/test中途补漏，r2仅定向34与全mypy85、207指纹无变，不称冻结后全套回归；旧留出批次1570/2另存。新增严格RTL风格门禁未通过，不能称全部门禁通过；浏览器仍引用各历史版本原件。
+最新检查见 [两模块源码验收](experiment/agent_new_holdout_source_validation_2026-10-05.md)：2033通过/2跳过/0失败错误、mypy88、535指纹无变；首次全仓2017通过/10失败/2跳过原件保留。历史v8为1858/2，历史v7 r1全量1716/2但runner/test中途补漏，r2仅定向34与全mypy85、207指纹无变，不称冻结后全套回归；旧留出批次1570/2另存。新资产12项严格RTL样式问题和WaveDrom缺依赖未解决，不能称全部门禁通过；浏览器仍引用各历史版本原件。
 1073项通过/2跳过对应28be1ed源码与291项指纹；914/1及更早记录均为历史快照，不相加。文档改动后的索引数量另核，不改写原验收日志。
 
 | 门禁 | 命令 | 结果 |
 |---|---|---|
+| 最新两模块源码完整回归 | [r2回执](experiment/agent-new-holdout-validation-2026-10-05/r2/receipt.json)、[源码验收](experiment/agent_new_holdout_source_validation_2026-10-05.md) | 2033 passed/2 skipped/0 failed/error，mypy88文件零问题，535指纹无变；与专项202检查不相加，不是外部Actions或真人 |
 | 历史留出批次回归 | `docs/experiment/agent-holdout-validation-2026-10-05/receipt.json` | c07756f，1570 passed/2 skipped/0 failed，mypy83；严格RTL风格门禁另列未通过 |
 | 历史v4完整回归 | `docs/experiment/ic_agent_v4_validation_2026-10-04.md` | 28be1ed，1073 passed / 2 skipped / 0 failed；mypy76文件0错误，未可达187文件0，BOM0 |
 | 历史867全回归 | `docs/experiment/ic_validation_2026-10-04.md` | 914 passed / 1 skipped，保留原日志 |
@@ -290,6 +295,7 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 
 | 项 | 状态 | 卡在哪 |
 |---|---|---|
+| 正式v2 PDF/PPT同步最新实测 | 待补 | 当前仍为28be1ed材料；需分别列历史432与最新108任务，不把机器审计写成真人/H02 |
 | `CITATION.cff` 真实地址 | 待补 | 当前先完成本地 Git；公开仓库地址尚未确定，保留占位，不捏造链接 |
 | 真人试用与复测记录 | 待补 | 建议安排 3–5 名不同角色试用者；材料就绪，尚待实际收集；不是官方人数硬要求 |
 | 3–5 分钟演示视频 | 待补 | 需要录制；脚本 `docs/demo/demo_script.md` |

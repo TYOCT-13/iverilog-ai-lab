@@ -1,0 +1,2117 @@
+{
+  "schema": "agent-new-internal-module-holdout-receipt-v1",
+  "created_at_utc": "2026-10-05T06:08:36.808733+00:00",
+  "source_revision": "20400fa7dca0c9804a96b1eb9842956782a9e81f",
+  "registered_tasks": 108,
+  "defect_tasks_per_strategy": 12,
+  "correct_tasks_per_strategy": 6,
+  "distinct_registered_defects": 4,
+  "repeats": 3,
+  "independent_holdout": true,
+  "external_independent_holdout": false,
+  "human_trial": false,
+  "H02_human_review": false,
+  "requests": 87,
+  "tokens": {
+    "reported_tokens": 339624,
+    "unknown_reserved_tokens": 0,
+    "conservative_total": 339624,
+    "remaining_tokens": 660376,
+    "requests_known_usage": 87,
+    "requests_unknown_usage": 0
+  },
+  "round_token_cap": 1000000,
+  "executed_tasks": 108,
+  "audited_rounds": 134,
+  "pipeline_sides": 268,
+  "evidence_verified_tasks": 108,
+  "unexecuted_tasks": [],
+  "frozen_inputs": 458,
+  "snapshot_verified": true,
+  "changed_inputs_at_finish": [],
+  "strict_comparison_eligible": true,
+  "schema_counts": {
+    "passed": 85,
+    "rejected": 2
+  },
+  "format_rejections": 2,
+  "plan_budget_rejections": 5,
+  "plan_preflight_rejections": 0,
+  "charged_reproposal_opportunities": 7,
+  "recoveries": 3,
+  "recovered_rejection_requests": 3,
+  "executed_recovery_episodes": 3,
+  "retained_rejection_artifacts": 7,
+  "retained_response_artifacts": 87,
+  "malformed_retained_response_artifacts": 1,
+  "cohorts": {
+    "new_internal_synthetic_modules": [
+      "valid_data_pipeline",
+      "event_accumulator"
+    ]
+  },
+  "cohort_summaries": {
+    "new_internal_synthetic_modules": {
+      "fixed": {
+        "registered_defect_samples": 12,
+        "detected_samples": 12,
+        "unique_defects": 4,
+        "unique_detected": 4,
+        "unique_union_rate": 1.0,
+        "incomplete_or_undecidable": 0,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "not_detected": 6,
+          "detected": 12
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          }
+        ],
+        "repeat_detection_rate_mean": 1.0,
+        "repeat_detection_rate_min": 1.0,
+        "repeat_detection_rate_max": 1.0,
+        "requests": 0,
+        "usage_numeric_sum": {},
+        "requests_with_usage": 0,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 432,
+        "reference_audit_cycles_recorded": 432,
+        "reference_audit_cycles_attempted": 432,
+        "checks_recorded": 648,
+        "elapsed_seconds_recorded": 7.297,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.141
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 18,
+            "search_budget": 19,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.141
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 12,
+            "search_budget": 13,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.156
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 20,
+            "search_budget": 21,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.156
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.172
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 18,
+            "search_budget": 19,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.172
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 12,
+            "search_budget": 13,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.172
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 20,
+            "search_budget": 21,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.171
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.234
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 18,
+            "search_budget": 19,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.204
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 12,
+            "search_budget": 13,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.219
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 20,
+            "search_budget": 21,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.219
+          }
+        ]
+      },
+      "random": {
+        "registered_defect_samples": 12,
+        "detected_samples": 10,
+        "unique_defects": 4,
+        "unique_detected": 4,
+        "unique_union_rate": 1.0,
+        "incomplete_or_undecidable": 0,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "not_detected": 8,
+          "detected": 10
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 4,
+            "detected": 3,
+            "detection_rate": 0.75,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 4,
+            "detected": 3,
+            "detection_rate": 0.75,
+            "incomplete_or_undecidable": 0
+          }
+        ],
+        "repeat_detection_rate_mean": 0.8333333333333334,
+        "repeat_detection_rate_min": 0.75,
+        "repeat_detection_rate_max": 1.0,
+        "requests": 0,
+        "usage_numeric_sum": {},
+        "requests_with_usage": 0,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 432,
+        "reference_audit_cycles_recorded": 432,
+        "reference_audit_cycles_attempted": 432,
+        "checks_recorded": 648,
+        "elapsed_seconds_recorded": 7.219,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 10,
+            "search_budget": 11,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.14
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 10,
+            "search_budget": 11,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.156
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 16,
+            "search_budget": 17,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.156
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 20,
+            "search_budget": 21,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.156
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.171
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 6,
+            "search_budget": 7,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.203
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.172
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 6,
+            "search_budget": 7,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.234
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 18,
+            "search_budget": 19,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.203
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 8,
+            "search_budget": 9,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.219
+          }
+        ]
+      },
+      "protocol_random": {
+        "registered_defect_samples": 12,
+        "detected_samples": 8,
+        "unique_defects": 4,
+        "unique_detected": 4,
+        "unique_union_rate": 1.0,
+        "incomplete_or_undecidable": 0,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "not_detected": 10,
+          "detected": 8
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 4,
+            "detected": 2,
+            "detection_rate": 0.5,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 4,
+            "detected": 2,
+            "detection_rate": 0.5,
+            "incomplete_or_undecidable": 0
+          }
+        ],
+        "repeat_detection_rate_mean": 0.6666666666666666,
+        "repeat_detection_rate_min": 0.5,
+        "repeat_detection_rate_max": 1.0,
+        "requests": 0,
+        "usage_numeric_sum": {},
+        "requests_with_usage": 0,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 432,
+        "reference_audit_cycles_recorded": 432,
+        "reference_audit_cycles_attempted": 432,
+        "checks_recorded": 648,
+        "elapsed_seconds_recorded": 7.015,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.141
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 18,
+            "search_budget": 19,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.14
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 10,
+            "search_budget": 11,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.14
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 20,
+            "search_budget": 21,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.156
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.172
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 10,
+            "search_budget": 11,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.172
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.203
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 8,
+            "search_budget": 9,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.219
+          }
+        ]
+      },
+      "single": {
+        "registered_defect_samples": 12,
+        "detected_samples": 8,
+        "unique_defects": 4,
+        "unique_detected": 4,
+        "unique_union_rate": 1.0,
+        "incomplete_or_undecidable": 0,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "not_detected": 10,
+          "detected": 8
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 4,
+            "detected": 2,
+            "detection_rate": 0.5,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 4,
+            "detected": 2,
+            "detection_rate": 0.5,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          }
+        ],
+        "repeat_detection_rate_mean": 0.6666666666666666,
+        "repeat_detection_rate_min": 0.5,
+        "repeat_detection_rate_max": 1.0,
+        "requests": 18,
+        "usage_numeric_sum": {
+          "prompt_tokens": 53631,
+          "completion_tokens": 7898,
+          "total_tokens": 61529,
+          "prompt_cache_hit_tokens": 46592,
+          "prompt_cache_miss_tokens": 7039
+        },
+        "requests_with_usage": 18,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 236,
+        "reference_audit_cycles_recorded": 236,
+        "reference_audit_cycles_attempted": 236,
+        "checks_recorded": 311,
+        "elapsed_seconds_recorded": 46.326,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 0,
+            "search_budget": 1,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 2.765
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 2.375
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 3.078
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 2.109
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 0,
+            "search_budget": 1,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 2.703
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 7,
+            "search_budget": 8,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 2.985
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 2.11
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 22,
+            "search_budget": 23,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 3.14
+          }
+        ]
+      },
+      "feedback": {
+        "registered_defect_samples": 12,
+        "detected_samples": 11,
+        "unique_defects": 4,
+        "unique_detected": 4,
+        "unique_union_rate": 1.0,
+        "incomplete_or_undecidable": 1,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "not_detected": 6,
+          "detected": 11,
+          "decision_format_error": 1
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 4,
+            "detected": 3,
+            "detection_rate": 0.75,
+            "incomplete_or_undecidable": 1
+          }
+        ],
+        "repeat_detection_rate_mean": 0.9166666666666666,
+        "repeat_detection_rate_min": 0.75,
+        "repeat_detection_rate_max": 1.0,
+        "requests": 38,
+        "usage_numeric_sum": {
+          "prompt_tokens": 149855,
+          "completion_tokens": 16218,
+          "total_tokens": 166073,
+          "prompt_cache_hit_tokens": 76160,
+          "prompt_cache_miss_tokens": 73695
+        },
+        "requests_with_usage": 38,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 300,
+        "reference_audit_cycles_recorded": 300,
+        "reference_audit_cycles_attempted": 300,
+        "checks_recorded": 433,
+        "elapsed_seconds_recorded": 98.937,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 2.688
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 4,
+            "search_budget": 13,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 6.734
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 1,
+            "search_budget": 9,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 4.953
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 5,
+            "search_budget": 16,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 4.844
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 0,
+            "search_budget": 1,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.969
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 6,
+            "search_budget": 7,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 3.0
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 1,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 3.812
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 3.063
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 0,
+            "search_budget": 1,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 3.703
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 2.781
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 3,
+            "search_budget": 12,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 5.563
+          }
+        ]
+      },
+      "no_feedback": {
+        "registered_defect_samples": 12,
+        "detected_samples": 10,
+        "unique_defects": 4,
+        "unique_detected": 4,
+        "unique_union_rate": 1.0,
+        "incomplete_or_undecidable": 0,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "not_detected": 8,
+          "detected": 10
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 4,
+            "detected": 3,
+            "detection_rate": 0.75,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 4,
+            "detected": 3,
+            "detection_rate": 0.75,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          }
+        ],
+        "repeat_detection_rate_mean": 0.8333333333333334,
+        "repeat_detection_rate_min": 0.75,
+        "repeat_detection_rate_max": 1.0,
+        "requests": 31,
+        "usage_numeric_sum": {
+          "prompt_tokens": 98424,
+          "completion_tokens": 13598,
+          "total_tokens": 112022,
+          "prompt_cache_hit_tokens": 67456,
+          "prompt_cache_miss_tokens": 30968
+        },
+        "requests_with_usage": 31,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 290,
+        "reference_audit_cycles_recorded": 290,
+        "reference_audit_cycles_attempted": 290,
+        "checks_recorded": 419,
+        "elapsed_seconds_recorded": 80.471,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 4.797
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 2.422
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 2.86
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 2.203
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.5
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 2.219
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 0,
+            "search_budget": 1,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 3.234
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 2.078
+          },
+          {
+            "case": "valid_data_pipeline",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 1,
+            "search_budget": 14,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 7.093
+          },
+          {
+            "case": "event_accumulator",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 5,
+            "search_budget": 13,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 3.844
+          }
+        ]
+      }
+    }
+  },
+  "source_byte_binding_counts": {
+    "exact": 446,
+    "newline_only": 12
+  },
+  "strategies": {
+    "fixed": {
+      "registered_defect_samples": 12,
+      "detected_samples": 12,
+      "unique_defects": 4,
+      "unique_detected": 4,
+      "unique_union_rate": 1.0,
+      "incomplete_or_undecidable": 0,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 6,
+        "detected": 12
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 4,
+          "detected": 4,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 4,
+          "detected": 4,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 4,
+          "detected": 4,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        }
+      ],
+      "repeat_detection_rate_mean": 1.0,
+      "repeat_detection_rate_min": 1.0,
+      "repeat_detection_rate_max": 1.0,
+      "requests": 0,
+      "usage_numeric_sum": {},
+      "requests_with_usage": 0,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 432,
+      "reference_audit_cycles_recorded": 432,
+      "reference_audit_cycles_attempted": 432,
+      "checks_recorded": 648,
+      "elapsed_seconds_recorded": 7.297,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.141
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 18,
+          "search_budget": 19,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.141
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 12,
+          "search_budget": 13,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.156
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 20,
+          "search_budget": 21,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.156
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.172
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 18,
+          "search_budget": 19,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.172
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 12,
+          "search_budget": 13,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.172
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 20,
+          "search_budget": 21,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.171
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.234
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 18,
+          "search_budget": 19,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.204
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 12,
+          "search_budget": 13,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.219
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 20,
+          "search_budget": 21,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.219
+        }
+      ]
+    },
+    "random": {
+      "registered_defect_samples": 12,
+      "detected_samples": 10,
+      "unique_defects": 4,
+      "unique_detected": 4,
+      "unique_union_rate": 1.0,
+      "incomplete_or_undecidable": 0,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 8,
+        "detected": 10
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 4,
+          "detected": 4,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 4,
+          "detected": 3,
+          "detection_rate": 0.75,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 4,
+          "detected": 3,
+          "detection_rate": 0.75,
+          "incomplete_or_undecidable": 0
+        }
+      ],
+      "repeat_detection_rate_mean": 0.8333333333333334,
+      "repeat_detection_rate_min": 0.75,
+      "repeat_detection_rate_max": 1.0,
+      "requests": 0,
+      "usage_numeric_sum": {},
+      "requests_with_usage": 0,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 432,
+      "reference_audit_cycles_recorded": 432,
+      "reference_audit_cycles_attempted": 432,
+      "checks_recorded": 648,
+      "elapsed_seconds_recorded": 7.219,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 10,
+          "search_budget": 11,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.14
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 10,
+          "search_budget": 11,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.156
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 16,
+          "search_budget": 17,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.156
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 20,
+          "search_budget": 21,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.156
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.171
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.203
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.172
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.234
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 18,
+          "search_budget": 19,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.203
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 8,
+          "search_budget": 9,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.219
+        }
+      ]
+    },
+    "protocol_random": {
+      "registered_defect_samples": 12,
+      "detected_samples": 8,
+      "unique_defects": 4,
+      "unique_detected": 4,
+      "unique_union_rate": 1.0,
+      "incomplete_or_undecidable": 0,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 10,
+        "detected": 8
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 4,
+          "detected": 4,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 4,
+          "detected": 2,
+          "detection_rate": 0.5,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 4,
+          "detected": 2,
+          "detection_rate": 0.5,
+          "incomplete_or_undecidable": 0
+        }
+      ],
+      "repeat_detection_rate_mean": 0.6666666666666666,
+      "repeat_detection_rate_min": 0.5,
+      "repeat_detection_rate_max": 1.0,
+      "requests": 0,
+      "usage_numeric_sum": {},
+      "requests_with_usage": 0,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 432,
+      "reference_audit_cycles_recorded": 432,
+      "reference_audit_cycles_attempted": 432,
+      "checks_recorded": 648,
+      "elapsed_seconds_recorded": 7.015,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.141
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 18,
+          "search_budget": 19,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.14
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 10,
+          "search_budget": 11,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.14
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 20,
+          "search_budget": 21,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.156
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.172
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 10,
+          "search_budget": 11,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.172
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.203
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 8,
+          "search_budget": 9,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.219
+        }
+      ]
+    },
+    "single": {
+      "registered_defect_samples": 12,
+      "detected_samples": 8,
+      "unique_defects": 4,
+      "unique_detected": 4,
+      "unique_union_rate": 1.0,
+      "incomplete_or_undecidable": 0,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 10,
+        "detected": 8
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 4,
+          "detected": 2,
+          "detection_rate": 0.5,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 4,
+          "detected": 2,
+          "detection_rate": 0.5,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 4,
+          "detected": 4,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        }
+      ],
+      "repeat_detection_rate_mean": 0.6666666666666666,
+      "repeat_detection_rate_min": 0.5,
+      "repeat_detection_rate_max": 1.0,
+      "requests": 18,
+      "usage_numeric_sum": {
+        "prompt_tokens": 53631,
+        "completion_tokens": 7898,
+        "total_tokens": 61529,
+        "prompt_cache_hit_tokens": 46592,
+        "prompt_cache_miss_tokens": 7039
+      },
+      "requests_with_usage": 18,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 236,
+      "reference_audit_cycles_recorded": 236,
+      "reference_audit_cycles_attempted": 236,
+      "checks_recorded": 311,
+      "elapsed_seconds_recorded": 46.326,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 0,
+          "search_budget": 1,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.765
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.375
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 3.078
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.109
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 0,
+          "search_budget": 1,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.703
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.985
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.11
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 22,
+          "search_budget": 23,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 3.14
+        }
+      ]
+    },
+    "feedback": {
+      "registered_defect_samples": 12,
+      "detected_samples": 11,
+      "unique_defects": 4,
+      "unique_detected": 4,
+      "unique_union_rate": 1.0,
+      "incomplete_or_undecidable": 1,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 6,
+        "detected": 11,
+        "decision_format_error": 1
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 4,
+          "detected": 4,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 4,
+          "detected": 4,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 4,
+          "detected": 3,
+          "detection_rate": 0.75,
+          "incomplete_or_undecidable": 1
+        }
+      ],
+      "repeat_detection_rate_mean": 0.9166666666666666,
+      "repeat_detection_rate_min": 0.75,
+      "repeat_detection_rate_max": 1.0,
+      "requests": 38,
+      "usage_numeric_sum": {
+        "prompt_tokens": 149855,
+        "completion_tokens": 16218,
+        "total_tokens": 166073,
+        "prompt_cache_hit_tokens": 76160,
+        "prompt_cache_miss_tokens": 73695
+      },
+      "requests_with_usage": 38,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 300,
+      "reference_audit_cycles_recorded": 300,
+      "reference_audit_cycles_attempted": 300,
+      "checks_recorded": 433,
+      "elapsed_seconds_recorded": 98.937,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.688
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 4,
+          "search_budget": 13,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 6.734
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 1,
+          "search_budget": 9,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 4.953
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 4.844
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 0,
+          "search_budget": 1,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.969
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 3.0
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 1,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 3.812
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 3.063
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 0,
+          "search_budget": 1,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 3.703
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.781
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 12,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 5.563
+        }
+      ]
+    },
+    "no_feedback": {
+      "registered_defect_samples": 12,
+      "detected_samples": 10,
+      "unique_defects": 4,
+      "unique_detected": 4,
+      "unique_union_rate": 1.0,
+      "incomplete_or_undecidable": 0,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 8,
+        "detected": 10
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 4,
+          "detected": 3,
+          "detection_rate": 0.75,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 4,
+          "detected": 3,
+          "detection_rate": 0.75,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 4,
+          "detected": 4,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        }
+      ],
+      "repeat_detection_rate_mean": 0.8333333333333334,
+      "repeat_detection_rate_min": 0.75,
+      "repeat_detection_rate_max": 1.0,
+      "requests": 31,
+      "usage_numeric_sum": {
+        "prompt_tokens": 98424,
+        "completion_tokens": 13598,
+        "total_tokens": 112022,
+        "prompt_cache_hit_tokens": 67456,
+        "prompt_cache_miss_tokens": 30968
+      },
+      "requests_with_usage": 31,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 290,
+      "reference_audit_cycles_recorded": 290,
+      "reference_audit_cycles_attempted": 290,
+      "checks_recorded": 419,
+      "elapsed_seconds_recorded": 80.471,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 4.797
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.422
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.86
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.203
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.5
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.219
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 0,
+          "search_budget": 1,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 3.234
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.078
+        },
+        {
+          "case": "valid_data_pipeline",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 1,
+          "search_budget": 14,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 7.093
+        },
+        {
+          "case": "event_accumulator",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 5,
+          "search_budget": 13,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 3.844
+        }
+      ]
+    }
+  },
+  "correct_controls": {
+    "fixed": {
+      "registered": 6,
+      "executed": 6,
+      "terminal_statuses": {
+        "not_detected": 6
+      },
+      "actual_false_alarms": 0
+    },
+    "random": {
+      "registered": 6,
+      "executed": 6,
+      "terminal_statuses": {
+        "not_detected": 6
+      },
+      "actual_false_alarms": 0
+    },
+    "protocol_random": {
+      "registered": 6,
+      "executed": 6,
+      "terminal_statuses": {
+        "not_detected": 6
+      },
+      "actual_false_alarms": 0
+    },
+    "single": {
+      "registered": 6,
+      "executed": 6,
+      "terminal_statuses": {
+        "not_detected": 6
+      },
+      "actual_false_alarms": 0
+    },
+    "feedback": {
+      "registered": 6,
+      "executed": 6,
+      "terminal_statuses": {
+        "not_detected": 6
+      },
+      "actual_false_alarms": 0
+    },
+    "no_feedback": {
+      "registered": 6,
+      "executed": 6,
+      "terminal_statuses": {
+        "not_detected": 6
+      },
+      "actual_false_alarms": 0
+    }
+  },
+  "defect_matrix": [
+    {
+      "case": "valid_data_pipeline",
+      "variant": "mutation_b",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 3,
+        "protocol_random": 3,
+        "single": 3,
+        "feedback": 3,
+        "no_feedback": 3
+      }
+    },
+    {
+      "case": "event_accumulator",
+      "variant": "mutation_b",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 3,
+        "protocol_random": 1,
+        "single": 3,
+        "feedback": 3,
+        "no_feedback": 3
+      }
+    },
+    {
+      "case": "valid_data_pipeline",
+      "variant": "mutation_c",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 3,
+        "protocol_random": 3,
+        "single": 1,
+        "feedback": 3,
+        "no_feedback": 3
+      }
+    },
+    {
+      "case": "event_accumulator",
+      "variant": "mutation_c",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 1,
+        "protocol_random": 1,
+        "single": 1,
+        "feedback": 2,
+        "no_feedback": 1
+      }
+    }
+  ],
+  "first_detection_rounds": {
+    "single": {
+      "1": 8
+    },
+    "feedback": {
+      "1": 6,
+      "2": 5
+    },
+    "no_feedback": {
+      "1": 8,
+      "3": 1,
+      "2": 1
+    }
+  },
+  "started_at_utc": "2026-10-05T05:59:49.415938+00:00",
+  "finished_at_utc": "2026-10-05T06:04:02.593875+00:00",
+  "wall_seconds": 253.177937,
+  "source_results_sha256": "20a0feff235831d6dcd2bc7d042c5b7cde1102072205c4e89662b2f0f2ddf632",
+  "source_summary_sha256": "d0fb0195aa7747919e5e3be5d3cd6947ab5653f8f7a3cd27d9031bab7b2f82b9",
+  "complete_raw_evidence": ".iverilog-ai/agent-new-holdout-study-live-20261005/",
+  "public_copy_contains_all_execution_side_logs": true,
+  "public_copy_contains_api_trajectories_and_saved_responses": true,
+  "cost_currency": null,
+  "artifacts": [
+    {
+      "path": "preregistration.json",
+      "sha256": "45a151529e2f2e1960f54696386db1ee5574e27dd0b688aad50afb432971b83f",
+      "size_bytes": 195253
+    },
+    {
+      "path": "run_settings.json",
+      "sha256": "f0b1aee45691bbdcf8094f2e106a799a4ca5ff847f423b3034bf74cfff8fdbba",
+      "size_bytes": 941
+    },
+    {
+      "path": "token_budget.json",
+      "sha256": "7277cb7ae7aee2dc7d546dcd2ae3ad75e487e7f9c06f0b6ce88d9bf351aa7e8f",
+      "size_bytes": 29209
+    },
+    {
+      "path": "strict_summary.json",
+      "sha256": "d0fb0195aa7747919e5e3be5d3cd6947ab5653f8f7a3cd27d9031bab7b2f82b9",
+      "size_bytes": 3087950
+    },
+    {
+      "path": "results.zip",
+      "sha256": "e90ff84d5dd32f97b624484148860bcb9d65a2b429230fdf2d9c70f04ed80a7c",
+      "size_bytes": 186636
+    },
+    {
+      "path": "specs/valid_data_pipeline_spec.md",
+      "sha256": "94045a833fa947eb2e1fca5088e000ccfd2e28ad523c08826c562b9e6b87a71a",
+      "size_bytes": 5202
+    },
+    {
+      "path": "specs/event_accumulator_spec.md",
+      "sha256": "93e13226df4eb0323f1ae31316c1370934ec5faddc7f801f352d2f18971db515",
+      "size_bytes": 4573
+    },
+    {
+      "path": "registered_inputs_manifest.json",
+      "sha256": "f516a5fda999476538bb42fa51c1acdf13ae9c8c4fcc535b3196b951a762fb5c",
+      "size_bytes": 223120
+    },
+    {
+      "path": "registered_inputs.zip",
+      "sha256": "b881df1a99012c29d3e205dfae31476d995be1e4cfd91967a362c65ef297f4ee",
+      "size_bytes": 1023930
+    },
+    {
+      "path": "traces_and_decisions.zip",
+      "sha256": "89798be640c59f9c11a6d4fa698bb141c4fe1f8f706651310a0b3bdbfa2b229a",
+      "size_bytes": 530759
+    },
+    {
+      "path": "trace_manifest.json",
+      "sha256": "3bef02272b0f065660d070052117ff3daf65c09bdd270d108dfdeb4546a49a0f",
+      "size_bytes": 65370
+    },
+    {
+      "path": "full_raw_manifest.json",
+      "sha256": "e00d4b08cd596a0c3bdcc9d7aae4892a95a740ec7349d80130bdfa5bc7d43c57",
+      "size_bytes": 876138
+    },
+    {
+      "path": "full_raw_evidence.zip",
+      "sha256": "cd9ddc98b4b11062e3d820b475419335450d2e29fd54b300fa13c03643b13375",
+      "size_bytes": 7027646
+    },
+    {
+      "path": "cohort_summaries.json",
+      "sha256": "aebded1819648973092afb01c0a7253248174ecdfe8ba8ada287d5b06b306bcb",
+      "size_bytes": 25063
+    },
+    {
+      "path": "source_byte_binding.json",
+      "sha256": "c02e53b79b6d31a48e989691fe521b7fe1f1cb2f6d73ea90df93dcc8d129417a",
+      "size_bytes": 180623
+    }
+  ],
+  "all_modules_previously_agent_exposed": false,
+  "new_holdout_modules": [
+    "valid_data_pipeline",
+    "event_accumulator"
+  ],
+  "internal_controlled_module_set_holdout": true,
+  "independent_holdout_meaning": "new module membership disjoint from five earlier controlled API batches; same-team synthetic designs and mutations, not external blindness",
+  "training_data_unseen_claim": false,
+  "agent_frozen_from": "a96933786c17986a739fc2da515db3294d6e8044",
+  "new_oracle_adapters_are_not_agent_tuning": true,
+  "port_observation_episodes": {
+    "episodes": 80,
+    "status.complete": 80,
+    "returned_samples": 701,
+    "omitted_samples": 125
+  },
+  "paid_model_observation_states": {
+    "observation_present": 20,
+    "port.complete": 20
+  },
+  "no_feedback_states_all_hidden": 31,
+  "pre_execution_previous_accounting": [
+    {
+      "batch": "agent-study-1m-live-20261005",
+      "local_private_records": "verified_present",
+      "finished_at": "2026-10-04T20:45:15.255582+00:00",
+      "pending_requests": 0,
+      "unknown_usage_requests": 0,
+      "unknown_usage_records": [],
+      "tokens": {
+        "reported_tokens": 399083,
+        "unknown_reserved_tokens": 0,
+        "conservative_total": 399083,
+        "remaining_tokens": 600917,
+        "requests_known_usage": 145,
+        "requests_unknown_usage": 0
+      },
+      "journal_sha256": "43eb0a532fd7924f1421dbb168efa776eeaf13c7d32955b98fd232dc6d3ff274",
+      "results_sha256": "a71ebafc2b56638ce0d6694c455306f1eff9250eee27f63446e3120b56c98a38",
+      "historical_usage_charged_to_this_batch": false
+    },
+    {
+      "batch": "agent-recovery-study-live-20261005",
+      "local_private_records": "verified_present",
+      "finished_at": "2026-10-04T22:28:23.107371+00:00",
+      "pending_requests": 0,
+      "unknown_usage_requests": 0,
+      "unknown_usage_records": [],
+      "tokens": {
+        "reported_tokens": 378204,
+        "unknown_reserved_tokens": 0,
+        "conservative_total": 378204,
+        "remaining_tokens": 621796,
+        "requests_known_usage": 138,
+        "requests_unknown_usage": 0
+      },
+      "journal_sha256": "754de0d9d5587b4e7a5288800adbadc4794803e50f9c0361f4c31f5c5d0f7d7e",
+      "results_sha256": "c2ecd4ae44f2b0f10e6500c20bd56ce23c8faaa8ef84d193aa05bb724de6aeb5",
+      "historical_usage_charged_to_this_batch": false
+    },
+    {
+      "batch": "agent-holdout-study-live-20261005",
+      "local_private_records": "verified_present",
+      "finished_at": "2026-10-04T23:54:23.073999+00:00",
+      "pending_requests": 0,
+      "unknown_usage_requests": 0,
+      "unknown_usage_records": [],
+      "tokens": {
+        "reported_tokens": 190387,
+        "unknown_reserved_tokens": 0,
+        "conservative_total": 190387,
+        "remaining_tokens": 809613,
+        "requests_known_usage": 86,
+        "requests_unknown_usage": 0
+      },
+      "journal_sha256": "804139bf49211714b256066027a4aef04735b1422406b52769962aef008f5ed0",
+      "results_sha256": "f7cba4da3026224534857265911bc0cff419d768c6ae331b7b99f9ebe161c209",
+      "historical_usage_charged_to_this_batch": false
+    },
+    {
+      "batch": "agent-budget-study-live-20261005",
+      "local_private_records": "verified_present",
+      "finished_at": "2026-10-05T01:37:34.134317+00:00",
+      "pending_requests": 0,
+      "unknown_usage_requests": 0,
+      "unknown_usage_records": [],
+      "tokens": {
+        "reported_tokens": 833216,
+        "unknown_reserved_tokens": 0,
+        "conservative_total": 833216,
+        "remaining_tokens": 166784,
+        "requests_known_usage": 334,
+        "requests_unknown_usage": 0
+      },
+      "journal_sha256": "92fc58f7796865771708ba5606180e19a4fd67052680da7d7b6a41c8570a26f4",
+      "results_sha256": "4eb7e07c216281bd97e53c0ea259eabbf97578ceb2a259bc2fa74740d086ebb9",
+      "historical_usage_charged_to_this_batch": false
+    },
+    {
+      "batch": "agent-feedback-study-live-20261005",
+      "local_private_records": "verified_present",
+      "finished_at": "2026-10-05T04:28:29.066686+00:00",
+      "pending_requests": 0,
+      "unknown_usage_requests": 0,
+      "unknown_usage_records": [],
+      "tokens": {
+        "reported_tokens": 973149,
+        "unknown_reserved_tokens": 0,
+        "conservative_total": 973149,
+        "remaining_tokens": 26851,
+        "requests_known_usage": 306,
+        "requests_unknown_usage": 0
+      },
+      "journal_sha256": "ceea9752de0595f4afe65ce432fb715451cf74534bd607d86a37fd08aaf55660",
+      "results_sha256": "0386a0a7407d9a0f3f74590e4eb54b6880759ca83954c46ee870c36eb959f99d",
+      "historical_usage_charged_to_this_batch": false
+    }
+  ]
+}

@@ -1,0 +1,1791 @@
+{
+  "traces": [
+    {
+      "row_index": 3,
+      "entry": "sample-003/agent/agent_trajectory.json",
+      "sha256": "6d2c558b841aea552cb17ccf9226ceeee7531b1970a25e0da2e2250404f2c282",
+      "size_bytes": 39961
+    },
+    {
+      "row_index": 4,
+      "entry": "sample-004/agent/agent_trajectory.json",
+      "sha256": "c671e14e01eee8a5390470bc04ac065e4a800d7eb7335dda4385081ee475a57b",
+      "size_bytes": 114522
+    },
+    {
+      "row_index": 5,
+      "entry": "sample-005/agent/agent_trajectory.json",
+      "sha256": "48d004d69513f0c7d470f2a2ab0abafc60c79edd89c5e3965e9dbbd983f5a464",
+      "size_bytes": 73990
+    },
+    {
+      "row_index": 8,
+      "entry": "sample-008/agent/agent_trajectory.json",
+      "sha256": "0bc53540911eff5991cabc371119b515df6f6098d76700bcffff60f8bd89f5b8",
+      "size_bytes": 35134
+    },
+    {
+      "row_index": 9,
+      "entry": "sample-009/agent/agent_trajectory.json",
+      "sha256": "22af5b2dfa171b57615f2c561a4bdcf0378833ee57ba9ba3d5a63845a665f30e",
+      "size_bytes": 95854
+    },
+    {
+      "row_index": 10,
+      "entry": "sample-010/agent/agent_trajectory.json",
+      "sha256": "fee3893d3df38b56b7d2c7ddbc13ba4d07685802e872ebcbda5c258a8dc89cf8",
+      "size_bytes": 60692
+    },
+    {
+      "row_index": 14,
+      "entry": "sample-014/agent/agent_trajectory.json",
+      "sha256": "f2900f771a8415ad6a8e5581674f582fe1eca5a91e1f3c99772722276d114dc2",
+      "size_bytes": 41311
+    },
+    {
+      "row_index": 15,
+      "entry": "sample-015/agent/agent_trajectory.json",
+      "sha256": "2cafe2dd13ec1a3dc70138cef9d2dcdeedcc683c8057abb6afd32749c1c43136",
+      "size_bytes": 35475
+    },
+    {
+      "row_index": 16,
+      "entry": "sample-016/agent/agent_trajectory.json",
+      "sha256": "0a2535eeeabd1690c8bc1d99b3397722a6230ce9f5e29f6518cac6882634978f",
+      "size_bytes": 43530
+    },
+    {
+      "row_index": 19,
+      "entry": "sample-019/agent/agent_trajectory.json",
+      "sha256": "ca7f636de5192d0a651ebcaba8b5fab5d6cffb87b20134cc4e11dc716a964072",
+      "size_bytes": 31837
+    },
+    {
+      "row_index": 20,
+      "entry": "sample-020/agent/agent_trajectory.json",
+      "sha256": "f5943e7a4987f238a2278a8c2e523eb877d8bdd7fd53b89c3b4f75a79a778969",
+      "size_bytes": 85896
+    },
+    {
+      "row_index": 21,
+      "entry": "sample-021/agent/agent_trajectory.json",
+      "sha256": "86ead4c972f87c1454780bec0a7cad9a8d71a54577ebdd67bbe9e20b0b3ee9af",
+      "size_bytes": 35444
+    },
+    {
+      "row_index": 25,
+      "entry": "sample-025/agent/agent_trajectory.json",
+      "sha256": "84fd4b1b22bbdb17c726307ce65dff9083100fff117bd6029cf6d19442d1ec0b",
+      "size_bytes": 33951
+    },
+    {
+      "row_index": 26,
+      "entry": "sample-026/agent/agent_trajectory.json",
+      "sha256": "d2c59c8ab501e87e46451fee40fd6bef825d72702d8d445d095021fb5364513b",
+      "size_bytes": 68377
+    },
+    {
+      "row_index": 27,
+      "entry": "sample-027/agent/agent_trajectory.json",
+      "sha256": "e61445f6fa1db4a8d7157f4477d43000e1ff35d5dfc01ad6513b0f342a8df6c8",
+      "size_bytes": 37372
+    },
+    {
+      "row_index": 30,
+      "entry": "sample-030/agent/agent_trajectory.json",
+      "sha256": "8644bca67f143f3a650d08aed0522071d5e6329ee3c9ffb31058319e8c85fb7d",
+      "size_bytes": 32991
+    },
+    {
+      "row_index": 31,
+      "entry": "sample-031/agent/agent_trajectory.json",
+      "sha256": "b135a825d52ae44462c1bedccccf15966b22af29f0510e20c7be6c0b2b144e0d",
+      "size_bytes": 69699
+    },
+    {
+      "row_index": 32,
+      "entry": "sample-032/agent/agent_trajectory.json",
+      "sha256": "6533f73644d10556b6fcb4940ed75184ff282b94cbe01083945d05a4edc135f5",
+      "size_bytes": 60266
+    },
+    {
+      "row_index": 38,
+      "entry": "sample-038/agent/agent_trajectory.json",
+      "sha256": "ef17fb94baaa0b35c888eabed50b70750958acb437eaef6e1a1e45e8451ae8b5",
+      "size_bytes": 32862
+    },
+    {
+      "row_index": 39,
+      "entry": "sample-039/agent/agent_trajectory.json",
+      "sha256": "63e5358d050dff072f6a85258a7cb805b3416aaa40da987d14c6bceb4083eb64",
+      "size_bytes": 111852
+    },
+    {
+      "row_index": 40,
+      "entry": "sample-040/agent/agent_trajectory.json",
+      "sha256": "13090e4e982b4c0417498f1bbfae02754c5d85d05eb4e88a38785b4176fd095a",
+      "size_bytes": 74847
+    },
+    {
+      "row_index": 43,
+      "entry": "sample-043/agent/agent_trajectory.json",
+      "sha256": "4640c0603c5f4a45e7b60eba23e23bf20b00f3842274f5e96b4fb835b3e8e980",
+      "size_bytes": 32764
+    },
+    {
+      "row_index": 44,
+      "entry": "sample-044/agent/agent_trajectory.json",
+      "sha256": "59d90187d9f16f52bcd93a088bc3d0623ff637cc318b88205af657e6c0967eb4",
+      "size_bytes": 87547
+    },
+    {
+      "row_index": 45,
+      "entry": "sample-045/agent/agent_trajectory.json",
+      "sha256": "2ae3c358c788d8c3cabb571a9bb8da88f80846abc36100dd57b16364edd2acff",
+      "size_bytes": 71252
+    },
+    {
+      "row_index": 49,
+      "entry": "sample-049/agent/agent_trajectory.json",
+      "sha256": "08117e3785f38aac8acae0915b2ab875d7aa1422c7472b8ebe26043a4b1b2f0c",
+      "size_bytes": 35736
+    },
+    {
+      "row_index": 50,
+      "entry": "sample-050/agent/agent_trajectory.json",
+      "sha256": "4003c1841e7f41f5179f5ba3cf9192532b86ccd81c1c109203067ba75f048be6",
+      "size_bytes": 34247
+    },
+    {
+      "row_index": 51,
+      "entry": "sample-051/agent/agent_trajectory.json",
+      "sha256": "960feb09d15ab19191bd7eb8b5eb21f0ce0828e26083c1d8345f96ea41728019",
+      "size_bytes": 38340
+    },
+    {
+      "row_index": 54,
+      "entry": "sample-054/agent/agent_trajectory.json",
+      "sha256": "2706ce1605fcbd1ff26f51f501aaecf8d610cfbd6d3ae49ab649f9b0361427e0",
+      "size_bytes": 34020
+    },
+    {
+      "row_index": 55,
+      "entry": "sample-055/agent/agent_trajectory.json",
+      "sha256": "911b6a2dad00ef381bb461ac67dd6027cd1abdcaf8b53d6d43a7d77984f61e10",
+      "size_bytes": 38329
+    },
+    {
+      "row_index": 56,
+      "entry": "sample-056/agent/agent_trajectory.json",
+      "sha256": "d4a9776570b1552f264314abec6e6c04fd89e1fb5526516b6ebc2907048b5d7a",
+      "size_bytes": 31423
+    },
+    {
+      "row_index": 60,
+      "entry": "sample-060/agent/agent_trajectory.json",
+      "sha256": "2fc4efb9376c06c66fab7cb5d3ef6fa64d1fe8e8668f01cfb7f47078f6117cc8",
+      "size_bytes": 35190
+    },
+    {
+      "row_index": 61,
+      "entry": "sample-061/agent/agent_trajectory.json",
+      "sha256": "1b9b056b37e8458fee76f4a7bba9f38c16d840535524289b94ed87f6eb583eac",
+      "size_bytes": 61383
+    },
+    {
+      "row_index": 62,
+      "entry": "sample-062/agent/agent_trajectory.json",
+      "sha256": "a58f18290eeab1734772367f69d739d492c94f5a6860c93d4c9004ea6e2b846e",
+      "size_bytes": 36666
+    },
+    {
+      "row_index": 66,
+      "entry": "sample-066/agent/agent_trajectory.json",
+      "sha256": "3c704fa9808567f98c92ae7cd7ab563f05af6b6c65b011deda5b3d1295e1d347",
+      "size_bytes": 36872
+    },
+    {
+      "row_index": 67,
+      "entry": "sample-067/agent/agent_trajectory.json",
+      "sha256": "4a8b1eae38a8d479c327914597d6d06ad543b744789fcdbfeb6429e2ad57ac7f",
+      "size_bytes": 35867
+    },
+    {
+      "row_index": 71,
+      "entry": "sample-071/agent/agent_trajectory.json",
+      "sha256": "b276300863c1ef5a01e67e53b518428b258288fc4d7af888c7fc7e35a728a49a",
+      "size_bytes": 33496
+    },
+    {
+      "row_index": 73,
+      "entry": "sample-073/agent/agent_trajectory.json",
+      "sha256": "3706b465518b476cb5f7a7ea8d8a10bca17d1d4d2d68a27e2855674d07f62d2e",
+      "size_bytes": 33290
+    },
+    {
+      "row_index": 74,
+      "entry": "sample-074/agent/agent_trajectory.json",
+      "sha256": "623475c567c440f848002922afae3ebfcefd0ed5714ed6536f1ee194ccd552c2",
+      "size_bytes": 104421
+    },
+    {
+      "row_index": 75,
+      "entry": "sample-075/agent/agent_trajectory.json",
+      "sha256": "84aa2aa0a9bbf6a56820656935e58a8d8e3d144cb5dcb0c0ff8b151dd45bfe47",
+      "size_bytes": 93207
+    },
+    {
+      "row_index": 78,
+      "entry": "sample-078/agent/agent_trajectory.json",
+      "sha256": "14e6344cf83d8aa6a3d12b469e134e761db0781735de5fe9e562648276b8ce8e",
+      "size_bytes": 33069
+    },
+    {
+      "row_index": 79,
+      "entry": "sample-079/agent/agent_trajectory.json",
+      "sha256": "2625bf41c4f9dd3dad2e6cf9b61dad357dcfccca03e47bb72fb0c728390a28bc",
+      "size_bytes": 95352
+    },
+    {
+      "row_index": 80,
+      "entry": "sample-080/agent/agent_trajectory.json",
+      "sha256": "1507eeb13e769cb7036f7aff593b2f4a5771de55eb4545ee4dd93c7974b2c8df",
+      "size_bytes": 64787
+    },
+    {
+      "row_index": 84,
+      "entry": "sample-084/agent/agent_trajectory.json",
+      "sha256": "bc35cb9801a3a3e9d7f15a816fa5f2c3da3e63a4147c87547675480738eac48c",
+      "size_bytes": 36766
+    },
+    {
+      "row_index": 85,
+      "entry": "sample-085/agent/agent_trajectory.json",
+      "sha256": "e41bfa68ca8034fc0e3870b5f21848e8cdfa4e02e69fd62ad1c4d36f85b4e68b",
+      "size_bytes": 41847
+    },
+    {
+      "row_index": 86,
+      "entry": "sample-086/agent/agent_trajectory.json",
+      "sha256": "bda7ee903b4ecc1d665deb4b765cdd8a9df2a24556e35ac9804a794f44bb5c9b",
+      "size_bytes": 38746
+    },
+    {
+      "row_index": 90,
+      "entry": "sample-090/agent/agent_trajectory.json",
+      "sha256": "41ff6782cf91b91dae2425c34f2e13f922c73c5ad9c848b0ae5045fdcf700435",
+      "size_bytes": 38004
+    },
+    {
+      "row_index": 91,
+      "entry": "sample-091/agent/agent_trajectory.json",
+      "sha256": "579ba1b973cd6144cdf4137cf1aff68772ac3c9799734c8bf37170059151b763",
+      "size_bytes": 31450
+    },
+    {
+      "row_index": 95,
+      "entry": "sample-095/agent/agent_trajectory.json",
+      "sha256": "b79d4038cd3abcf3c941696536a5a7d5fe3ae317638a5a607ce53de963931701",
+      "size_bytes": 38112
+    },
+    {
+      "row_index": 96,
+      "entry": "sample-096/agent/agent_trajectory.json",
+      "sha256": "0959cb5ebba15bc6e73e318413a15aadd51955d63cb24f86209df3f0208fd641",
+      "size_bytes": 75365
+    },
+    {
+      "row_index": 97,
+      "entry": "sample-097/agent/agent_trajectory.json",
+      "sha256": "a495f8f5ae027625772d320201d5f685df2640e1bde1a56c5e753adeefdef6c7",
+      "size_bytes": 86322
+    },
+    {
+      "row_index": 101,
+      "entry": "sample-101/agent/agent_trajectory.json",
+      "sha256": "7f07b7ae31e56efbcd613592bd0d82aab48ef4c884d7718673cb42026b79d04f",
+      "size_bytes": 34350
+    },
+    {
+      "row_index": 102,
+      "entry": "sample-102/agent/agent_trajectory.json",
+      "sha256": "d58e8695b2908b5d98c966e53c694bff9e4d63badd312a7827da5f206d3e4972",
+      "size_bytes": 58189
+    },
+    {
+      "row_index": 106,
+      "entry": "sample-106/agent/agent_trajectory.json",
+      "sha256": "b764808af5f87a8bcb06d17a96bd17ee26ac0e27220d28b320e9d28643ae6d2d",
+      "size_bytes": 38211
+    },
+    {
+      "row_index": 107,
+      "entry": "sample-107/agent/agent_trajectory.json",
+      "sha256": "de4260ec3791a82519f63d22415ed132dcf3119244cfd6cca805a4cdbfb76b3d",
+      "size_bytes": 85139
+    }
+  ],
+  "responses": [
+    {
+      "row_index": 3,
+      "decision_index": 0,
+      "entry": "sample-003/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "4f4417c9cc20c4ef842f6e61f51fc2e8f0463add6f28d2331dda6b2a089f4afe",
+      "bytes": 2320,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 4,
+      "decision_index": 0,
+      "entry": "sample-004/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "67a85fd5bebd40430529dcd04883f53504c544c3884a229ac8a6ed997cb5164d",
+      "bytes": 1966,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 4,
+      "decision_index": 1,
+      "entry": "sample-004/agent/untrusted_decisions/decision-002.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-002.json",
+      "sha256": "c0adc9eb85c7ad322316f8be38f9d0459e09e7e4431f7bd9bdd3c872c40b407b",
+      "bytes": 2325,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 4,
+      "decision_index": 2,
+      "entry": "sample-004/agent/untrusted_decisions/decision-003.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-003.json",
+      "sha256": "68694b3996483aee52ddddc13faac2e1df12699763e39ee79eee0e6de418e182",
+      "bytes": 855,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 5,
+      "decision_index": 0,
+      "entry": "sample-005/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "6b0be059760bb8e3c594b4a93c6fcd2ed1fef44114e391728556a0ee1ca741a0",
+      "bytes": 1520,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 5,
+      "decision_index": 1,
+      "entry": "sample-005/agent/untrusted_decisions/decision-002.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-002.json",
+      "sha256": "9f6f64d3d2dee08193b5effb0c8050e6737946173e0ff8d6c0d31c60e5174492",
+      "bytes": 1764,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 8,
+      "decision_index": 0,
+      "entry": "sample-008/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "008e2be90c81a9e2e79e93262f4598ec4ecf6d41e149e12e4888c7da160fa6e1",
+      "bytes": 1253,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 9,
+      "decision_index": 0,
+      "entry": "sample-009/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "9661adfc03ae0be7adfca05bb7013e68134e92e54773c6bad1a1aa1f0c724a29",
+      "bytes": 1283,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 9,
+      "decision_index": 1,
+      "entry": "sample-009/agent/untrusted_decisions/decision-002.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-002.json",
+      "sha256": "af4fe95c11ceddbc4da82900c616aeb827e476e66b83a1afb302994b3d6f6b19",
+      "bytes": 1144,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 9,
+      "decision_index": 2,
+      "entry": "sample-009/agent/untrusted_decisions/decision-003.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-003.json",
+      "sha256": "f39578433f2e66d1476923eb3f85b5832a1bee93284bbfc5947917530fddc7f9",
+      "bytes": 566,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 10,
+      "decision_index": 0,
+      "entry": "sample-010/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "f5e766b6cb0bf5a72a87175d11a2ddec9b261902cc5a98fc232219aa9b51d31d",
+      "bytes": 1497,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 10,
+      "decision_index": 1,
+      "entry": "sample-010/agent/untrusted_decisions/decision-002.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-002.json",
+      "sha256": "29268354966982fec9c589130a9924764e28660a83b7e41c7f2fe623f80acf93",
+      "bytes": 1332,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 14,
+      "decision_index": 0,
+      "entry": "sample-014/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "faf80be04d6651d3f702dd008548c8512a36e8de6554619074646f17d64407d5",
+      "bytes": 1744,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 15,
+      "decision_index": 0,
+      "entry": "sample-015/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "490c231ef456576b16a26151a867cdf7095b60e347a409da88fe19d70dcce3f5",
+      "bytes": 1568,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 16,
+      "decision_index": 0,
+      "entry": "sample-016/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "d27b9b51b43f8e2fb2dd5bccdfa43924234db791691e72ce0d36a5f79e6595ae",
+      "bytes": 3414,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 19,
+      "decision_index": 0,
+      "entry": "sample-019/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "284ce4a07477c428069c76585c8efff3df57243bd8e3b43a0d0e5d31d78dbd72",
+      "bytes": 1246,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 20,
+      "decision_index": 0,
+      "entry": "sample-020/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "a6bf4d35f057615c8d341d537c579b4e9a246ec1b887e318a829025152a3fc71",
+      "bytes": 1397,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 20,
+      "decision_index": 1,
+      "entry": "sample-020/agent/untrusted_decisions/decision-002.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-002.json",
+      "sha256": "7c91a5ba75c7ce00ac915a5e580c2b95aa64884f3176eed276e933456c9eeb88",
+      "bytes": 1106,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 20,
+      "decision_index": 2,
+      "entry": "sample-020/agent/untrusted_decisions/decision-003.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-003.json",
+      "sha256": "b2f90c45db519d4117fca5537adde57774251fd770473306c5645f760fbce9a6",
+      "bytes": 1085,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 21,
+      "decision_index": 0,
+      "entry": "sample-021/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "bbfe496dc0908d2d0872e1ec1025faec6d8a29917a7b9eab0bdc11588a3500b8",
+      "bytes": 1295,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 25,
+      "decision_index": 0,
+      "entry": "sample-025/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "aac35d359a76e660fb27bd7151839c4226f496a599ce9b52288c479d12126bf2",
+      "bytes": 1330,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 26,
+      "decision_index": 0,
+      "entry": "sample-026/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "22af4c451b431926b0f3bda498aa67fe6acd42cfdb99f83959d165460881dd98",
+      "bytes": 1454,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 26,
+      "decision_index": 1,
+      "entry": "sample-026/agent/untrusted_decisions/decision-002.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-002.json",
+      "sha256": "53df4aecd647e930b2b6eafd7b9916de7fd5d1237e121d84dd3d0db0a347f82d",
+      "bytes": 1152,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 27,
+      "decision_index": 0,
+      "entry": "sample-027/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "35f1369a52aa401e08a1583c851465ebbb08a5eb5fb681d6ddacb2b7337c64a8",
+      "bytes": 1772,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 30,
+      "decision_index": 0,
+      "entry": "sample-030/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "10627d8894dc18b5f4faa28ab856755fff3d8883d3014659d4255ee462dda383",
+      "bytes": 800,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 31,
+      "decision_index": 0,
+      "entry": "sample-031/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "f0097e0de4d48227fc6c995e7ca50361a0746fc3b4b2a696de96a4ada72ed197",
+      "bytes": 1167,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 31,
+      "decision_index": 1,
+      "entry": "sample-031/agent/untrusted_decisions/decision-002.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-002.json",
+      "sha256": "7e3da618b8db8701c0b5b0a3a0e8d4c8a98ab82dd21ecb8a879f56a5a68e268e",
+      "bytes": 1334,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 32,
+      "decision_index": 0,
+      "entry": "sample-032/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "d7623b22af504470f66cb4a06e4268dfa3b22cdf1672690a8702f08d5b169c88",
+      "bytes": 1165,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 32,
+      "decision_index": 1,
+      "entry": "sample-032/agent/untrusted_decisions/decision-002.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-002.json",
+      "sha256": "672f362e8f20d9fd43924dc5c677a87aed99a6b8fae4a8818531519a2bdf54a0",
+      "bytes": 504,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 38,
+      "decision_index": 0,
+      "entry": "sample-038/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "8fd1b882154e8c65ed4387b56189b0b335424a1e971929b920eba34f3d1f627e",
+      "bytes": 997,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 39,
+      "decision_index": 0,
+      "entry": "sample-039/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "f171ac51bdaef3e8a54599b8ea3d6130c419d6e11e16dfa181299f049a5b3356",
+      "bytes": 1013,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 39,
+      "decision_index": 1,
+      "entry": "sample-039/agent/untrusted_decisions/decision-002.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-002.json",
+      "sha256": "c95f8cd4ee829642b18e40c69a862bb2dc514ebdc01e83447f6345592ec47f14",
+      "bytes": 2243,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 39,
+      "decision_index": 2,
+      "entry": "sample-039/agent/untrusted_decisions/decision-003.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-003.json",
+      "sha256": "90e19346da8169cf9211a327b5610786fd9c35e1b1081451a1e425886ccca381",
+      "bytes": 1696,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 40,
+      "decision_index": 0,
+      "entry": "sample-040/agent/untrusted_decisions/decision-001.txt",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.txt",
+      "sha256": "4502430b34a0e82e9e51abaabbd68a47386d6f276ee94dacae0bf4df73bb128a",
+      "bytes": 2550,
+      "completion_status": "reported_stop",
+      "parse_status": "json_invalid",
+      "secret_guard": "active_key_raw_and_complete_json_strings"
+    },
+    {
+      "row_index": 40,
+      "decision_index": 1,
+      "entry": "sample-040/agent/untrusted_decisions/decision-002.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-002.json",
+      "sha256": "96fab699f9535aa9fa655f70a979e4024817bfda7781f6c95117130d0680c491",
+      "bytes": 1102,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 40,
+      "decision_index": 2,
+      "entry": "sample-040/agent/untrusted_decisions/decision-003.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-003.json",
+      "sha256": "a09b5c856f6c3870f09ce8787136a49c2df6df3312c2c0789a2aa44266fa0822",
+      "bytes": 1480,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 43,
+      "decision_index": 0,
+      "entry": "sample-043/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "9245da9e7b49351d6fbad7f689671e3073745f49e06e0e2e4d0453ed06d28c5e",
+      "bytes": 1082,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 44,
+      "decision_index": 0,
+      "entry": "sample-044/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "291bcd746ca6e7259676cc5932b37d78dca7b2989c354db1b37294adba591319",
+      "bytes": 1242,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 44,
+      "decision_index": 1,
+      "entry": "sample-044/agent/untrusted_decisions/decision-002.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-002.json",
+      "sha256": "be27e213ef52678aa84ba5d67f856273e7aa92704b33ecd56ea7985bee368746",
+      "bytes": 1544,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 44,
+      "decision_index": 2,
+      "entry": "sample-044/agent/untrusted_decisions/decision-003.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-003.json",
+      "sha256": "fce59845af37fbc81d4ec44273dbd6921a9552c010a67cfe500509ff2b49ab04",
+      "bytes": 1863,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 45,
+      "decision_index": 0,
+      "entry": "sample-045/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "83173dd5e104cf4fe8a3208959e56443b446537ced90780ed3037f5b17ef13d9",
+      "bytes": 1490,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 45,
+      "decision_index": 1,
+      "entry": "sample-045/agent/untrusted_decisions/decision-002.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-002.json",
+      "sha256": "bdf1889c8796ed33c214e0c6924968a31732993826fd1349ff80afec3b37a3f0",
+      "bytes": 1172,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 45,
+      "decision_index": 2,
+      "entry": "sample-045/agent/untrusted_decisions/decision-003.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-003.json",
+      "sha256": "6ede0d6342c966e5991fdf629e05745d9196cfa6c1ee1ca37b336b8d2dd12c47",
+      "bytes": 1132,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 49,
+      "decision_index": 0,
+      "entry": "sample-049/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "05a796bd20b8ce43bdb86f203df4dde1a743dfb04cdd0e83ccc803b138240638",
+      "bytes": 1727,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 50,
+      "decision_index": 0,
+      "entry": "sample-050/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "03db2d158e39eaca3871b0f05b87671166deb4a2b3b3e0722dc1a23121a4d93e",
+      "bytes": 997,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 51,
+      "decision_index": 0,
+      "entry": "sample-051/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "424b807bca1bd8630d27ab97a6bf02e22a481aa4fa4a5135e71fb43cdfa1f57b",
+      "bytes": 1341,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 54,
+      "decision_index": 0,
+      "entry": "sample-054/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "8c61047c8de2ff8728f41287ec026ea64f6f2efd016511d51839086eec6854f2",
+      "bytes": 1005,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 55,
+      "decision_index": 0,
+      "entry": "sample-055/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "fa34e4518fbeb2ad91f47591b14071553099a6478db809747dd3508ca0934711",
+      "bytes": 2070,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 56,
+      "decision_index": 0,
+      "entry": "sample-056/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "4222ff25e9f416676fba9bce8fff4b0b32653aa192e76d7196738fdfda451477",
+      "bytes": 938,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 60,
+      "decision_index": 0,
+      "entry": "sample-060/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "989b9605d0e57ad116d4909439596bfeac8d156be5045f772f7cdaa429b5f861",
+      "bytes": 1206,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 61,
+      "decision_index": 0,
+      "entry": "sample-061/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "bccc4185f1024e8e81aebe1c0f5e21f141aa8a9ad7002e9acd201ad2b2cee7d6",
+      "bytes": 940,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 61,
+      "decision_index": 1,
+      "entry": "sample-061/agent/untrusted_decisions/decision-002.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-002.json",
+      "sha256": "00d01640a62f69ca613a9e8e83107ecba2447f7cd7abf8c2e4433bebf26b094a",
+      "bytes": 904,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 62,
+      "decision_index": 0,
+      "entry": "sample-062/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "e8b7e8e472ea9db9ccf7bf2aa7db73e7f3a2d101d41ff37fa2b8250d3ccc284d",
+      "bytes": 1366,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 66,
+      "decision_index": 0,
+      "entry": "sample-066/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "bc5cf29b9494c17d591e0c49745b4e219003c28a03c5479d565575b420ac8377",
+      "bytes": 1917,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 67,
+      "decision_index": 0,
+      "entry": "sample-067/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "f8f81366916f6408d77b0378de4330e044b1ca33accb122a2d5a91a51a18b75f",
+      "bytes": 1411,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 71,
+      "decision_index": 0,
+      "entry": "sample-071/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "3f566aaec67af2f61e8d0bc7bf7a2fb3aff206d8bab98984554f7c5f89a46e45",
+      "bytes": 1249,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 73,
+      "decision_index": 0,
+      "entry": "sample-073/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "eaf1e05ab1554840bbb621dbe16c5e82aaff6c1f77e4cbd953340e3129249549",
+      "bytes": 930,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 74,
+      "decision_index": 0,
+      "entry": "sample-074/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "dc9557f107de1c9be773e501c34118426ccd26251e61fff9e24e6ca5e1d160a2",
+      "bytes": 1294,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 74,
+      "decision_index": 1,
+      "entry": "sample-074/agent/untrusted_decisions/decision-002.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-002.json",
+      "sha256": "2f75fd54912e1cb473ad3c84f03de9b30406424d8312e8319334bd0dfc80ac20",
+      "bytes": 877,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 74,
+      "decision_index": 2,
+      "entry": "sample-074/agent/untrusted_decisions/decision-003.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-003.json",
+      "sha256": "c9b2f6e723c3a7b695257cee991fef680ee8a71af48d754a3932661a379b3516",
+      "bytes": 766,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 75,
+      "decision_index": 0,
+      "entry": "sample-075/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "a1058a82c681e3228afe13ad97e0f07820c58a20396edbce3239da1f14a1c711",
+      "bytes": 1426,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 75,
+      "decision_index": 1,
+      "entry": "sample-075/agent/untrusted_decisions/decision-002.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-002.json",
+      "sha256": "0489da5a7c6c6382b0193489f2e713ea26c624d1c5226320115a9f4f291d2ac2",
+      "bytes": 1699,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 75,
+      "decision_index": 2,
+      "entry": "sample-075/agent/untrusted_decisions/decision-003.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-003.json",
+      "sha256": "127d9e3b1345d2995cb8a2697f74493239c8b0c0dba89851aa183429c591c20f",
+      "bytes": 970,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 78,
+      "decision_index": 0,
+      "entry": "sample-078/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "f218fef4873d973c3133473fdac2cbc93ee24f3b3c877781d30ec5927fdcca8a",
+      "bytes": 878,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 79,
+      "decision_index": 0,
+      "entry": "sample-079/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "28fd20943e7b48b1a174e3edcd43a3b5b4336e726314d14cca82f29cc38639fb",
+      "bytes": 1787,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 79,
+      "decision_index": 1,
+      "entry": "sample-079/agent/untrusted_decisions/decision-002.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-002.json",
+      "sha256": "fda49cad154761c34bb02a4127e021549e5ffa9c2e0d7121d749f606bb704c25",
+      "bytes": 973,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 79,
+      "decision_index": 2,
+      "entry": "sample-079/agent/untrusted_decisions/decision-003.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-003.json",
+      "sha256": "42112bc64271f65bda40b4e01fdf210f00562ca68d8763eabb2b8e550a854b7c",
+      "bytes": 1248,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 80,
+      "decision_index": 0,
+      "entry": "sample-080/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "2e6e30e68fd9e497d786d8382fa5fd7a4ce937ccbe09767228c6c3caf56c89d5",
+      "bytes": 1753,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 80,
+      "decision_index": 1,
+      "entry": "sample-080/agent/untrusted_decisions/decision-002.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-002.json",
+      "sha256": "c6d68575eb52e7c3fb70323e48cace99f29976d33a245900182a8c431e7cd5d6",
+      "bytes": 1101,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 84,
+      "decision_index": 0,
+      "entry": "sample-084/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "2a642400f5f0e7309546c52445504e375e977cd41beca8f52b885cb8a0eaff7e",
+      "bytes": 1758,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 85,
+      "decision_index": 0,
+      "entry": "sample-085/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "89cae71bad5f5e205a4b36b2a3a6f22bff7dfe83f47167d4f53f557630f8c3fb",
+      "bytes": 2642,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 86,
+      "decision_index": 0,
+      "entry": "sample-086/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "32ec2c9977145d519e0440cc9450a00bfe5c83807742b01a76eb54c79003bb67",
+      "bytes": 2178,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 90,
+      "decision_index": 0,
+      "entry": "sample-090/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "c38750a005b52c88b5f6840fa4153952a5a4357bc1d6c17347d7001e094fb642",
+      "bytes": 1714,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 91,
+      "decision_index": 0,
+      "entry": "sample-091/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "6c7c6b621098b9e84c7ef4b3822738dabb6701c606d19cf69dbbd82e68cf2a06",
+      "bytes": 977,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 95,
+      "decision_index": 0,
+      "entry": "sample-095/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "700bfbee28270306783bf717d456942ebda1b05ea402e1e10a59cf83a953931d",
+      "bytes": 1693,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 96,
+      "decision_index": 0,
+      "entry": "sample-096/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "3c69d14738651f0bdae43b380eb7c991579967f807532cae60cc4d5b4378fd43",
+      "bytes": 1729,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 96,
+      "decision_index": 1,
+      "entry": "sample-096/agent/untrusted_decisions/decision-002.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-002.json",
+      "sha256": "ea0ef5e2d6c3d7bee0f6f7e9dc097dc5849c7edfac953d139cb465cb0e9f8588",
+      "bytes": 1864,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 97,
+      "decision_index": 0,
+      "entry": "sample-097/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "c8a79ca339cfa5559a642465883787b47a7fe09eddc08a6498a01ef99a258b67",
+      "bytes": 1561,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 97,
+      "decision_index": 1,
+      "entry": "sample-097/agent/untrusted_decisions/decision-002.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-002.json",
+      "sha256": "9671676937fb7e15780bd53898e00a0f6340a6c8177ed0c223acdffc306fd5ea",
+      "bytes": 1220,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 97,
+      "decision_index": 2,
+      "entry": "sample-097/agent/untrusted_decisions/decision-003.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-003.json",
+      "sha256": "dacccee44c0c7509b63798d390908c0819ebdb0664054238f87a7c17f0da5a3c",
+      "bytes": 939,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 101,
+      "decision_index": 0,
+      "entry": "sample-101/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "3d82555d6a31e60f816a38be795b813520fd6085d1d8405bea8e1b9238879172",
+      "bytes": 1389,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 102,
+      "decision_index": 0,
+      "entry": "sample-102/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "a644bf67a48b97fd78a1ca077e78848ff8185693485a2451d210ad5e396c8e30",
+      "bytes": 938,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 102,
+      "decision_index": 1,
+      "entry": "sample-102/agent/untrusted_decisions/decision-002.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-002.json",
+      "sha256": "c635c703da0d7ccac1d6480890415062d54e7915281e2a2f81a5006de95d3da7",
+      "bytes": 1180,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 106,
+      "decision_index": 0,
+      "entry": "sample-106/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "60298cf24454b2127e4d19b17a043c8a075259fdfbe6cfe44770807a85eb023d",
+      "bytes": 2280,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 107,
+      "decision_index": 0,
+      "entry": "sample-107/agent/untrusted_decisions/decision-001.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-001.json",
+      "sha256": "664920c67fc4ca7809fe4bec0a9f30cf595ff0bf4792320b4138df02836b0973",
+      "bytes": 1480,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 107,
+      "decision_index": 1,
+      "entry": "sample-107/agent/untrusted_decisions/decision-002.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-002.json",
+      "sha256": "151d3a2834df610ba6bb11ba796a164e70566d435ea311459f34933c8b93b4c7",
+      "bytes": 1119,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    },
+    {
+      "row_index": 107,
+      "decision_index": 2,
+      "entry": "sample-107/agent/untrusted_decisions/decision-003.json",
+      "record_kind": "untrusted_model_decision",
+      "trusted": false,
+      "path": "untrusted_decisions/decision-003.json",
+      "sha256": "7364a47656e4c672260ad91118bfb8a23c0a7df9cdc31ac735a55907ecb75b27",
+      "bytes": 1243,
+      "completion_status": "reported_stop",
+      "parse_status": "json_valid",
+      "secret_guard": "active_key_raw_and_decoded_json"
+    }
+  ],
+  "rejections": [
+    {
+      "row_index": 20,
+      "case": "event_accumulator",
+      "variant": "mutation_b",
+      "strategy": "feedback",
+      "seed": 0,
+      "decision_index": 1,
+      "request_id": "20:1",
+      "kind": "plan_budget",
+      "diagnostic": {
+        "code": "stimulus_budget_exceeded",
+        "requested_stimulus_cycles": 17,
+        "remaining_stimulus_cycles": 16,
+        "requested_new_cycles": 17,
+        "max_new_cycles": 16,
+        "replay_cycles": 0,
+        "simulation_multiplier": 1
+      },
+      "usage": {
+        "prompt_tokens": 4517,
+        "completion_tokens": 300,
+        "total_tokens": 4817,
+        "prompt_cache_hit_tokens": 1152,
+        "prompt_cache_miss_tokens": 3365
+      },
+      "response_status": "saved",
+      "response_artifact": {
+        "record_kind": "untrusted_model_decision",
+        "trusted": false,
+        "path": "untrusted_decisions/decision-002.json",
+        "sha256": "7c91a5ba75c7ce00ac915a5e580c2b95aa64884f3176eed276e933456c9eeb88",
+        "bytes": 1106,
+        "completion_status": "reported_stop",
+        "parse_status": "json_valid",
+        "secret_guard": "active_key_raw_and_decoded_json"
+      },
+      "response_sha256": "7c91a5ba75c7ce00ac915a5e580c2b95aa64884f3176eed276e933456c9eeb88",
+      "response_bytes": 1106,
+      "executed_after_recovery": true,
+      "recovered_to_schema": true
+    },
+    {
+      "row_index": 40,
+      "case": "valid_data_pipeline",
+      "variant": "reference",
+      "strategy": "no_feedback",
+      "seed": 1,
+      "decision_index": 0,
+      "request_id": "40:0",
+      "kind": "decision_format",
+      "diagnostic": {
+        "code": "json_invalid",
+        "errors": [
+          {
+            "type": "json_invalid",
+            "location": [],
+            "scope": "json",
+            "allowed_keys": [
+              "action",
+              "reason",
+              "vectors"
+            ]
+          }
+        ],
+        "hint": "Return one complete JSON object without Markdown or trailing text."
+      },
+      "usage": {
+        "prompt_tokens": 3102,
+        "completion_tokens": 780,
+        "total_tokens": 3882,
+        "prompt_cache_hit_tokens": 2944,
+        "prompt_cache_miss_tokens": 158
+      },
+      "response_status": "saved",
+      "response_artifact": {
+        "record_kind": "untrusted_model_decision",
+        "trusted": false,
+        "path": "untrusted_decisions/decision-001.txt",
+        "sha256": "4502430b34a0e82e9e51abaabbd68a47386d6f276ee94dacae0bf4df73bb128a",
+        "bytes": 2550,
+        "completion_status": "reported_stop",
+        "parse_status": "json_invalid",
+        "secret_guard": "active_key_raw_and_complete_json_strings"
+      },
+      "response_sha256": "4502430b34a0e82e9e51abaabbd68a47386d6f276ee94dacae0bf4df73bb128a",
+      "response_bytes": 2550,
+      "executed_after_recovery": true,
+      "recovered_to_schema": true
+    },
+    {
+      "row_index": 44,
+      "case": "event_accumulator",
+      "variant": "reference",
+      "strategy": "feedback",
+      "seed": 1,
+      "decision_index": 2,
+      "request_id": "44:2",
+      "kind": "plan_budget",
+      "diagnostic": {
+        "code": "stimulus_budget_exceeded",
+        "requested_stimulus_cycles": 19,
+        "remaining_stimulus_cycles": 10,
+        "requested_new_cycles": 19,
+        "max_new_cycles": 10,
+        "replay_cycles": 0,
+        "simulation_multiplier": 1
+      },
+      "usage": {
+        "prompt_tokens": 4593,
+        "completion_tokens": 555,
+        "total_tokens": 5148,
+        "prompt_cache_hit_tokens": 1152,
+        "prompt_cache_miss_tokens": 3441
+      },
+      "response_status": "saved",
+      "response_artifact": {
+        "record_kind": "untrusted_model_decision",
+        "trusted": false,
+        "path": "untrusted_decisions/decision-003.json",
+        "sha256": "fce59845af37fbc81d4ec44273dbd6921a9552c010a67cfe500509ff2b49ab04",
+        "bytes": 1863,
+        "completion_status": "reported_stop",
+        "parse_status": "json_valid",
+        "secret_guard": "active_key_raw_and_decoded_json"
+      },
+      "response_sha256": "fce59845af37fbc81d4ec44273dbd6921a9552c010a67cfe500509ff2b49ab04",
+      "response_bytes": 1863,
+      "executed_after_recovery": false
+    },
+    {
+      "row_index": 45,
+      "case": "event_accumulator",
+      "variant": "reference",
+      "strategy": "no_feedback",
+      "seed": 1,
+      "decision_index": 2,
+      "request_id": "45:2",
+      "kind": "plan_budget",
+      "diagnostic": {
+        "code": "stimulus_budget_exceeded",
+        "requested_stimulus_cycles": 19,
+        "remaining_stimulus_cycles": 11,
+        "requested_new_cycles": 19,
+        "max_new_cycles": 11,
+        "replay_cycles": 0,
+        "simulation_multiplier": 1
+      },
+      "usage": {
+        "prompt_tokens": 3247,
+        "completion_tokens": 311,
+        "total_tokens": 3558,
+        "prompt_cache_hit_tokens": 1152,
+        "prompt_cache_miss_tokens": 2095
+      },
+      "response_status": "saved",
+      "response_artifact": {
+        "record_kind": "untrusted_model_decision",
+        "trusted": false,
+        "path": "untrusted_decisions/decision-003.json",
+        "sha256": "6ede0d6342c966e5991fdf629e05745d9196cfa6c1ee1ca37b336b8d2dd12c47",
+        "bytes": 1132,
+        "completion_status": "reported_stop",
+        "parse_status": "json_valid",
+        "secret_guard": "active_key_raw_and_decoded_json"
+      },
+      "response_sha256": "6ede0d6342c966e5991fdf629e05745d9196cfa6c1ee1ca37b336b8d2dd12c47",
+      "response_bytes": 1132,
+      "executed_after_recovery": false
+    },
+    {
+      "row_index": 79,
+      "case": "event_accumulator",
+      "variant": "reference",
+      "strategy": "feedback",
+      "seed": 2,
+      "decision_index": 1,
+      "request_id": "79:1",
+      "kind": "plan_budget",
+      "diagnostic": {
+        "code": "stimulus_budget_exceeded",
+        "requested_stimulus_cycles": 11,
+        "remaining_stimulus_cycles": 9,
+        "requested_new_cycles": 11,
+        "max_new_cycles": 9,
+        "replay_cycles": 0,
+        "simulation_multiplier": 1
+      },
+      "usage": {
+        "prompt_tokens": 4900,
+        "completion_tokens": 290,
+        "total_tokens": 5190,
+        "prompt_cache_hit_tokens": 1152,
+        "prompt_cache_miss_tokens": 3748
+      },
+      "response_status": "saved",
+      "response_artifact": {
+        "record_kind": "untrusted_model_decision",
+        "trusted": false,
+        "path": "untrusted_decisions/decision-002.json",
+        "sha256": "fda49cad154761c34bb02a4127e021549e5ffa9c2e0d7121d749f606bb704c25",
+        "bytes": 973,
+        "completion_status": "reported_stop",
+        "parse_status": "json_valid",
+        "secret_guard": "active_key_raw_and_decoded_json"
+      },
+      "response_sha256": "fda49cad154761c34bb02a4127e021549e5ffa9c2e0d7121d749f606bb704c25",
+      "response_bytes": 973,
+      "executed_after_recovery": true,
+      "recovered_to_schema": true
+    },
+    {
+      "row_index": 107,
+      "case": "event_accumulator",
+      "variant": "mutation_c",
+      "strategy": "feedback",
+      "seed": 2,
+      "decision_index": 1,
+      "request_id": "107:1",
+      "kind": "plan_budget",
+      "diagnostic": {
+        "code": "stimulus_budget_exceeded",
+        "requested_stimulus_cycles": 18,
+        "remaining_stimulus_cycles": 10,
+        "requested_new_cycles": 18,
+        "max_new_cycles": 10,
+        "replay_cycles": 0,
+        "simulation_multiplier": 1
+      },
+      "usage": {
+        "prompt_tokens": 4981,
+        "completion_tokens": 297,
+        "total_tokens": 5278,
+        "prompt_cache_hit_tokens": 1152,
+        "prompt_cache_miss_tokens": 3829
+      },
+      "response_status": "saved",
+      "response_artifact": {
+        "record_kind": "untrusted_model_decision",
+        "trusted": false,
+        "path": "untrusted_decisions/decision-002.json",
+        "sha256": "151d3a2834df610ba6bb11ba796a164e70566d435ea311459f34933c8b93b4c7",
+        "bytes": 1119,
+        "completion_status": "reported_stop",
+        "parse_status": "json_valid",
+        "secret_guard": "active_key_raw_and_decoded_json"
+      },
+      "response_sha256": "151d3a2834df610ba6bb11ba796a164e70566d435ea311459f34933c8b93b4c7",
+      "response_bytes": 1119,
+      "executed_after_recovery": false
+    },
+    {
+      "row_index": 107,
+      "case": "event_accumulator",
+      "variant": "mutation_c",
+      "strategy": "feedback",
+      "seed": 2,
+      "decision_index": 2,
+      "request_id": "107:2",
+      "kind": "decision_format",
+      "diagnostic": {
+        "code": "schema_invalid",
+        "errors": [
+          {
+            "type": "extra_forbidden",
+            "location": [
+              "unknown_field"
+            ],
+            "scope": "root",
+            "allowed_keys": [
+              "action",
+              "reason",
+              "vectors"
+            ]
+          }
+        ],
+        "hint": "Use only action, reason and vectors; keep all fields within the decision schema."
+      },
+      "usage": {
+        "prompt_tokens": 5039,
+        "completion_tokens": 353,
+        "total_tokens": 5392,
+        "prompt_cache_hit_tokens": 3328,
+        "prompt_cache_miss_tokens": 1711
+      },
+      "response_status": "saved",
+      "response_artifact": {
+        "record_kind": "untrusted_model_decision",
+        "trusted": false,
+        "path": "untrusted_decisions/decision-003.json",
+        "sha256": "7364a47656e4c672260ad91118bfb8a23c0a7df9cdc31ac735a55907ecb75b27",
+        "bytes": 1243,
+        "completion_status": "reported_stop",
+        "parse_status": "json_valid",
+        "secret_guard": "active_key_raw_and_decoded_json"
+      },
+      "response_sha256": "7364a47656e4c672260ad91118bfb8a23c0a7df9cdc31ac735a55907ecb75b27",
+      "response_bytes": 1243,
+      "executed_after_recovery": false
+    }
+  ],
+  "recoveries": [
+    {
+      "row_index": 20,
+      "decision_index": 2,
+      "rejected_decision_indices": [
+        1
+      ],
+      "action": "append_vectors",
+      "executed_after_recovery": true
+    },
+    {
+      "row_index": 40,
+      "decision_index": 1,
+      "rejected_decision_indices": [
+        0
+      ],
+      "action": "append_vectors",
+      "executed_after_recovery": true
+    },
+    {
+      "row_index": 79,
+      "decision_index": 2,
+      "rejected_decision_indices": [
+        1
+      ],
+      "action": "append_vectors",
+      "executed_after_recovery": true
+    }
+  ]
+}
