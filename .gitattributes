@@ -67,6 +67,13 @@ docs/experiment/agent-recovery-validation-2026-10-05/r1/pytest.xml whitespace=-b
 *.sv text linguist-language=SystemVerilog
 
 # 新留出资产已按原字节测试与审核，保持其 CRLF/LF，避免 Git 转换破坏绑定。
+benchmarks/agent_module_holdout_20261005_v7/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+spec/agent_module_holdout_20261005_v7/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+spec/agent_budget_study_20261005/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/agent-budget-validation-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/agent-budget-study-live-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/review/agent-budget-prereg-review-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/review/agent-budget-study-review-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 benchmarks/agent_holdout_20261005/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 spec/agent_holdout_20261005/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 rtl/credit_guard.v -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

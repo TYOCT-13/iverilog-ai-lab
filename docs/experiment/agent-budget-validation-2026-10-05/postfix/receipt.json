@@ -1,0 +1,104 @@
+{
+  "schema": "agent-budget-source-validation-v1",
+  "started_at": "2026-10-05T01:15:08.975202+00:00",
+  "finished_at": "2026-10-05T01:15:51.058532+00:00",
+  "commands": [
+    {
+      "name": "pytest",
+      "command": [
+        "D:\\Users\\TYOCT\\anaconda3\\python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "tests/core/test_agent_budget_study.py",
+        "-q",
+        "--tb=short",
+        "--basetemp=C:/Users/TYOCT/AppData/Local/Temp/icarus-budget-source-postfix-20261005-r2",
+        "--junitxml=E:\\FPGA_WORK\\iverilog-ai-lab\\docs\\experiment\\agent-budget-validation-2026-10-05\\postfix\\pytest.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "mypy",
+      "command": [
+        "D:\\Users\\TYOCT\\anaconda3\\python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "mypy",
+        "src",
+        "ui",
+        "scripts"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "pytest": {
+    "tests": 34,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "passed": 34,
+  "fingerprinted_files": 207,
+  "changed_inputs": [],
+  "api_requests": 0,
+  "human_trial": false,
+  "H02_human_review": false,
+  "validation_scope": "post-dependency-fix targeted registration/baseline tests and full mypy, not another full pytest suite",
+  "external_Actions_run": false,
+  "portable_clean_clone_reproduction": false,
+  "earlier_focused_attempts": [
+    {
+      "tests": "budget/legacy/budget-agent focused a",
+      "passed": 66,
+      "failed": 21,
+      "cause": "root baseline clock used 10.0 instead of integer; root test excluded an explicitly released reset and counted checks as cycles",
+      "raw_temp_path": "C:/Users/TYOCT/AppData/Local/Temp/icarus-budget-study-focused-20261005-a",
+      "full_console_log_saved": false
+    },
+    {
+      "tests": "budget study focused b",
+      "passed": 29,
+      "failed": 5,
+      "cause": "root test reset and check-count assertions; all 72 genuine controls already executed without alarms",
+      "raw_temp_path": "C:/Users/TYOCT/AppData/Local/Temp/icarus-budget-study-focused-20261005-b",
+      "full_console_log_saved": false
+    },
+    {
+      "tests": "budget study focused c",
+      "passed": 34,
+      "failed": 0,
+      "raw_temp_path": "C:/Users/TYOCT/AppData/Local/Temp/icarus-budget-study-focused-20261005-c",
+      "full_console_log_saved": false
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "mypy.log",
+      "sha256": "a83a70edf408d123cd597d2aef487538650d1d33f5e9a95e4fc05d86733a72ec",
+      "bytes": 45
+    },
+    {
+      "path": "pytest.log",
+      "sha256": "80af2a3de41bf1daef657bc57d2a8b8fc4bd6c48cbb5e1c2451c6b981a4c30b4",
+      "bytes": 226
+    },
+    {
+      "path": "pytest.xml",
+      "sha256": "6b5ea8ae86b4f839c1e2cca670f43dcbd5b84dc29e8f8ccb2de73d25e5e682d9",
+      "bytes": 6000
+    },
+    {
+      "path": "source_fingerprint_after.json",
+      "sha256": "97f9c1e087fcdbd2ad5ae6e16d1a07bc4a4e96cf3b577a9d61a7f6c278994441",
+      "bytes": 22980
+    },
+    {
+      "path": "source_fingerprint_before.json",
+      "sha256": "97f9c1e087fcdbd2ad5ae6e16d1a07bc4a4e96cf3b577a9d61a7f6c278994441",
+      "bytes": 22980
+    }
+  ]
+}

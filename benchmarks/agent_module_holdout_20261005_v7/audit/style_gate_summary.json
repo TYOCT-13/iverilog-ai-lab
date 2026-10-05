@@ -1,0 +1,87 @@
+{
+  "schema": "copied-rtl-style-gate-summary-v1",
+  "delivery_ready": false,
+  "returncode": 1,
+  "errors": 616,
+  "strict_warnings": 0,
+  "checks": {
+    "compile": {
+      "ready": false,
+      "status": "failed",
+      "errors": 6,
+      "warnings": 0,
+      "files": 6,
+      "modules": 0,
+      "parse_errors": 6,
+      "source": "formatter_ast+verilog_quality_gate"
+    },
+    "ast": {
+      "ready": false,
+      "status": "failed",
+      "errors": 12,
+      "warnings": 0,
+      "files": 6,
+      "modules": 0,
+      "parse_errors": 6,
+      "formatter_errors": 6,
+      "source": "formatter_ast"
+    },
+    "readability": {
+      "ready": false,
+      "status": "failed",
+      "errors": 598,
+      "warnings": 0,
+      "source": "verilog_quality_gate",
+      "ok": false
+    },
+    "comment": {
+      "ready": false,
+      "status": "failed",
+      "errors": 12,
+      "warnings": 0,
+      "issues": 12,
+      "source": "comment_gate"
+    },
+    "naming": {
+      "ready": false,
+      "status": "failed",
+      "errors": 528,
+      "warnings": 0,
+      "source": "verilog_quality_gate"
+    },
+    "profile": {
+      "ready": false,
+      "status": "failed",
+      "errors": 6,
+      "warnings": 0,
+      "rulebook_path": "C:\\Users\\TYOCT\\.codex\\skills\\readable-verilog-generator\\assets\\verilog_style_rules.json",
+      "source": "style_profile+rulebook"
+    },
+    "testbench": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "include_testbench=false"
+    },
+    "toolchain": {
+      "ready": true,
+      "status": "not_requested",
+      "errors": 0,
+      "warnings": 0,
+      "source": "optional_validation_readiness",
+      "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+    }
+  },
+  "raw_records": [
+    {
+      "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-style/style_gate.json",
+      "sha256": "d630281c3f64a73470fd2e3c5c58b38eb7159b76101072a077d431194ea97420"
+    },
+    {
+      "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-style/style_gate.md",
+      "sha256": "febe6841d6c1d08cfb828f8dd5c4d28af1cc2a2646b6005053d493360fc8120f"
+    }
+  ],
+  "boundary": "Original byte-for-byte copied sources kept unchanged; static formatter/style failures are not simulator compile failures. Actual Icarus results are separately recorded."
+}

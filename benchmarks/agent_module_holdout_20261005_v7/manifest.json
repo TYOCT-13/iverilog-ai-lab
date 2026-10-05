@@ -1,0 +1,284 @@
+{
+  "schema": "agent-module-set-holdout-v1",
+  "created_from_revision": "1566459b475a3ab07c95e5e8502982a9b7a9ad49",
+  "asset_scope": "existing offline benchmark modules outside previously inspected controlled Agent cohorts",
+  "new_never_tested_designs": false,
+  "external_blind_test": false,
+  "new_independent_defect_authors": false,
+  "pretraining_unseen_claim": false,
+  "created_after_v7_freeze_claim": false,
+  "selection_rule": "For each selected type, use the first two defects in the existing benchmark manifest in original order before any new API evaluation, including both regardless of outcome",
+  "original_manifest_path": "benchmarks/manifest.json",
+  "original_manifest_sha256": "338f6a4f29f84dbe34e14223114d54f6e809b5dd9cd625e081a07f27c396d3f1",
+  "cycle_budget": 16,
+  "max_vectors_per_proposal": 12,
+  "max_accepted_vectors_total": 64,
+  "generic_testplan_max_vectors": 200,
+  "max_shared_requests": 3,
+  "reference_sampling": "per_cycle",
+  "sample_phase": "after",
+  "agent_plan_mode": "independent",
+  "baseline_path": "benchmarks/agent_module_holdout_20261005_v7/baselines.py",
+  "baseline_entrypoint": "baseline_factory",
+  "model_visibility": {
+    "included": [
+      "functional spec_path",
+      "explicit contract"
+    ],
+    "excluded": [
+      "RTL and source comments",
+      "private original defect IDs",
+      "manifest metadata",
+      "minimal witnesses",
+      "old results",
+      "new audit evidence"
+    ]
+  },
+  "cases": {
+    "edge_detector": {
+      "reference_rtl": "rtl/edge_detector.v",
+      "reference_sha256": "4c47149c3ae55110cd33fc085ff0005019392217c91e4a93a85f057157ef9f70",
+      "contract_path": "benchmarks/agent_module_holdout_20261005_v7/contracts/edge_detector_contract.json",
+      "contract_sha256": "1d810932e749c7a0611f40935d5050ba0a0b5b759fa66bf06e0c9eb39eba396a",
+      "original_contract_path": "examples/edge_detector_contract.json",
+      "original_contract_sha256": "1d810932e749c7a0611f40935d5050ba0a0b5b759fa66bf06e0c9eb39eba396a",
+      "original_spec_path": "spec/edge_detector_spec.md",
+      "original_spec_sha256": "84dfb7be3f4355ce4b9519daeb1fc0a32743f7c61e6a605472c29323f2ca31be",
+      "spec_path": "spec/agent_module_holdout_20261005_v7/edge_detector_spec.md",
+      "spec_sha256": "c02554fddd41c61b66a6600f20bd4f8f4bc31539ec82849104f8100657d92946",
+      "default_parameters": {},
+      "cycle_budget": 16,
+      "max_vectors_per_proposal": 12,
+      "max_accepted_vectors_total": 64,
+      "input_defaults": {
+        "rst_n": 1,
+        "signal_in": 0
+      },
+      "reset_outputs": {
+        "rising": 0
+      },
+      "timing_basis": "posedge sampled inputs; registered after output; active-low asynchronous reset and fresh automatic reset per episode",
+      "prior_offline_benchmark_known": true,
+      "targets": [
+        {
+          "variant": "reference",
+          "rtl": "benchmarks/agent_module_holdout_20261005_v7/targets/edge_detector/A.v",
+          "sha256": "4c47149c3ae55110cd33fc085ff0005019392217c91e4a93a85f057157ef9f70",
+          "original_path": "rtl/edge_detector.v",
+          "original_sha256": "4c47149c3ae55110cd33fc085ff0005019392217c91e4a93a85f057157ef9f70"
+        },
+        {
+          "variant": "mutation_b",
+          "rtl": "benchmarks/agent_module_holdout_20261005_v7/targets/edge_detector/B.v",
+          "sha256": "447f4847f6574cdeb0ff86998971fbc4fcef475a321ac8cc655ccc3b7e143a7e",
+          "original_path": "rtl/edge_detector_bug_falling_edge.v",
+          "original_sha256": "447f4847f6574cdeb0ff86998971fbc4fcef475a321ac8cc655ccc3b7e143a7e",
+          "original_manifest_defect_index": 74,
+          "metadata": {
+            "private_original_id": "edge_bug_falling_edge",
+            "private_original_note": "判决条件由 signal_in & ~signal_d 改成 ~signal_in & signal_d",
+            "original_defect_source_copied_without_rewriting": true,
+            "source_comments_may_identify_fault_and_are_not_model_visible": true,
+            "witness": {
+              "vectors": [
+                {
+                  "inputs": {
+                    "signal_in": 1
+                  },
+                  "cycles": 1
+                }
+              ],
+              "reference_after": [
+                1
+              ],
+              "mutant_after": [
+                0
+              ],
+              "stimulus_cycles": 1,
+              "basis": "After reset the sampled history is zero; the first high sample is a rising transition.",
+              "scope": "manually calculated minimal semantic witness, never baseline or API input"
+            }
+          }
+        },
+        {
+          "variant": "mutation_c",
+          "rtl": "benchmarks/agent_module_holdout_20261005_v7/targets/edge_detector/C.v",
+          "sha256": "c09ea8c8c489ab777a61511b96c0a1f8affcc1dfb9f63c26be1a75af8fadba01",
+          "original_path": "rtl/edge_detector_bug_two_cycle.v",
+          "original_sha256": "c09ea8c8c489ab777a61511b96c0a1f8affcc1dfb9f63c26be1a75af8fadba01",
+          "original_manifest_defect_index": 75,
+          "metadata": {
+            "private_original_id": "edge_bug_two_cycle",
+            "private_original_note": "漏掉 signal_d <= signal_in，历史寄存器恒为 0",
+            "original_defect_source_copied_without_rewriting": true,
+            "source_comments_may_identify_fault_and_are_not_model_visible": true,
+            "witness": {
+              "vectors": [
+                {
+                  "inputs": {
+                    "signal_in": 1
+                  },
+                  "cycles": 2
+                }
+              ],
+              "reference_after": [
+                1,
+                0
+              ],
+              "mutant_after": [
+                1,
+                1
+              ],
+              "stimulus_cycles": 2,
+              "basis": "Only the first sample in a continuous high run is a rising transition.",
+              "scope": "manually calculated minimal semantic witness, never baseline or API input"
+            }
+          }
+        }
+      ]
+    },
+    "pulse_stretcher": {
+      "reference_rtl": "rtl/pulse_stretcher.v",
+      "reference_sha256": "f490e4015f446e712fd7bfa75747568582ea310098af6dd6a43234e2a8fb00e9",
+      "contract_path": "benchmarks/agent_module_holdout_20261005_v7/contracts/pulse_stretcher_contract.json",
+      "contract_sha256": "f4ef0f778e7574e4170629a5271f1a278644cc6a7ee71536e5609a8893ae7341",
+      "original_contract_path": "examples/pulse_stretcher_contract.json",
+      "original_contract_sha256": "f4ef0f778e7574e4170629a5271f1a278644cc6a7ee71536e5609a8893ae7341",
+      "original_spec_path": "spec/pulse_stretcher_spec.md",
+      "original_spec_sha256": "07aaa2e8536afb128ae7fa8f111c7e4ff1cecc049b37abef29377053565ad970",
+      "spec_path": "spec/agent_module_holdout_20261005_v7/pulse_stretcher_spec.md",
+      "spec_sha256": "846862e3edfff2b59a061a7337530a093e9502060dbac6d29a7ea5dde09d9ccf",
+      "default_parameters": {
+        "WIDTH": 4
+      },
+      "cycle_budget": 16,
+      "max_vectors_per_proposal": 12,
+      "max_accepted_vectors_total": 64,
+      "input_defaults": {
+        "rst_n": 1,
+        "pulse_in": 0
+      },
+      "reset_outputs": {
+        "pulse_out": 0
+      },
+      "timing_basis": "posedge sampled inputs; registered after output; active-low asynchronous reset and fresh automatic reset per episode",
+      "prior_offline_benchmark_known": true,
+      "targets": [
+        {
+          "variant": "reference",
+          "rtl": "benchmarks/agent_module_holdout_20261005_v7/targets/pulse_stretcher/A.v",
+          "sha256": "f490e4015f446e712fd7bfa75747568582ea310098af6dd6a43234e2a8fb00e9",
+          "original_path": "rtl/pulse_stretcher.v",
+          "original_sha256": "f490e4015f446e712fd7bfa75747568582ea310098af6dd6a43234e2a8fb00e9"
+        },
+        {
+          "variant": "mutation_b",
+          "rtl": "benchmarks/agent_module_holdout_20261005_v7/targets/pulse_stretcher/B.v",
+          "sha256": "50dcff408f54976ec19174ba3c37dfff717e8e3bf3aef35b2b9149007d4294d0",
+          "original_path": "rtl/pulse_stretcher_bug_one_cycle_short.v",
+          "original_sha256": "50dcff408f54976ec19174ba3c37dfff717e8e3bf3aef35b2b9149007d4294d0",
+          "original_manifest_defect_index": 80,
+          "metadata": {
+            "private_original_id": "pstr_bug_one_cycle_short",
+            "private_original_note": "计数递减逻辑未改动，只有装载值少 1；三条长度检查同时失败",
+            "original_defect_source_copied_without_rewriting": true,
+            "source_comments_may_identify_fault_and_are_not_model_visible": true,
+            "witness": {
+              "vectors": [
+                {
+                  "inputs": {
+                    "pulse_in": 1
+                  },
+                  "cycles": 1
+                },
+                {
+                  "inputs": {
+                    "pulse_in": 0
+                  },
+                  "cycles": 3
+                }
+              ],
+              "reference_after": [
+                1,
+                1,
+                1,
+                1
+              ],
+              "mutant_after": [
+                1,
+                1,
+                1,
+                0
+              ],
+              "stimulus_cycles": 4,
+              "basis": "A default WIDTH4 window includes its triggering edge and three following edges.",
+              "scope": "manually calculated minimal semantic witness, never baseline or API input"
+            }
+          }
+        },
+        {
+          "variant": "mutation_c",
+          "rtl": "benchmarks/agent_module_holdout_20261005_v7/targets/pulse_stretcher/C.v",
+          "sha256": "352c6c61913ef64c783832ce2ff6670358c16636511831a5e8aa396d5ae983f4",
+          "original_path": "rtl/pulse_stretcher_bug_no_retrigger.v",
+          "original_sha256": "352c6c61913ef64c783832ce2ff6670358c16636511831a5e8aa396d5ae983f4",
+          "original_manifest_defect_index": 81,
+          "metadata": {
+            "private_original_id": "pstr_bug_no_retrigger",
+            "private_original_note": "装载条件加上 count==0；retrigger_extended2/3 与 hold_tail2/3 失败",
+            "original_defect_source_copied_without_rewriting": true,
+            "source_comments_may_identify_fault_and_are_not_model_visible": true,
+            "witness": {
+              "vectors": [
+                {
+                  "inputs": {
+                    "pulse_in": 1
+                  },
+                  "cycles": 1
+                },
+                {
+                  "inputs": {
+                    "pulse_in": 0
+                  },
+                  "cycles": 1
+                },
+                {
+                  "inputs": {
+                    "pulse_in": 1
+                  },
+                  "cycles": 1
+                },
+                {
+                  "inputs": {
+                    "pulse_in": 0
+                  },
+                  "cycles": 2
+                }
+              ],
+              "reference_after": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ],
+              "mutant_after": [
+                1,
+                1,
+                1,
+                1,
+                0
+              ],
+              "stimulus_cycles": 5,
+              "basis": "Every high input sample restarts the WIDTH4 interval; the latest trigger is at edge2.",
+              "scope": "manually calculated minimal semantic witness, never baseline or API input"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "baseline_sha256": "713ec62773b019b16e51626e7d13f2eb8767192d1311048bc92cbf31fc555361",
+  "membership_audit_path": "benchmarks/agent_module_holdout_20261005_v7/prior_agent_membership_audit.json",
+  "membership_audit_sha256": "7b977d9f532c5fcfc7dfe47d4c92868cca7dc2e8195add00361e6eb1a266f702"
+}

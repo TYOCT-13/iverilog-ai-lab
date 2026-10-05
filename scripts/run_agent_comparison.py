@@ -296,7 +296,7 @@ def summarize(rows: list[dict]) -> dict:
 
 
 def decision_records(index: int, trace: dict) -> list[dict]:
-    safe_fields = {"status", "error_type", "validation_error_types", "http_status", "finish_reason", "executed_round",
+    safe_fields = {"status", "schema_validation_status", "error_type", "validation_error_types", "http_status", "finish_reason", "executed_round",
                    "plan_validation_status", "plan_error", "retry_eligible", "decision_error", "policy_error_code",
                    "parse_status", "untrusted_response_status", "untrusted_response", "response_chars",
                    "response_bytes", "response_sha256"}

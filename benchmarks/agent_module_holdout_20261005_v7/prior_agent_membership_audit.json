@@ -1,0 +1,500 @@
+{
+  "schema": "agent-module-membership-readonly-audit-v1",
+  "inspected_reports": 26,
+  "retained_content": "case membership, strategy membership, row count and file SHA only; no model prompt/response retained",
+  "checked_at_revision": "1566459b475a3ab07c95e5e8502982a9b7a9ad49",
+  "excluded_from_prior_agent_cohorts": [
+    "edge_detector",
+    "pulse_stretcher"
+  ],
+  "previously_offline_benchmarked": true,
+  "pretraining_unseen_claim": false,
+  "preliminary_count_correction": {
+    "previous_message": 27,
+    "actual_json_files": 26,
+    "conclusion_changed": false
+  },
+  "records": [
+    {
+      "path": ".iverilog-ai/agent-comparison-live-20261004/preregistration.json",
+      "sha256": "16a2c00752e0355c19311338a1135644aa9f1ace95c9be675fd4363f8eb72b9e",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "strategies": [
+        "feedback",
+        "fixed",
+        "no_feedback",
+        "random",
+        "single"
+      ],
+      "row_count": 60
+    },
+    {
+      "path": ".iverilog-ai/agent-comparison-live-20261004/results.json",
+      "sha256": "12ddc895b3d930a915fdc3d4d9daa93ab09165f701d1454451866d89f38f4bdd",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "strategies": [
+        "feedback",
+        "fixed",
+        "no_feedback",
+        "random",
+        "single"
+      ],
+      "row_count": 60
+    },
+    {
+      "path": ".iverilog-ai/agent-comparison-live-chat-v2/preregistration.json",
+      "sha256": "f9646d70b3639f65af9e5b7c1c70be7a533d076c710bb329c185494f0623fa1b",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "strategies": [
+        "feedback",
+        "fixed",
+        "no_feedback",
+        "random",
+        "single"
+      ],
+      "row_count": 60
+    },
+    {
+      "path": ".iverilog-ai/agent-comparison-live-chat-v2/results.json",
+      "sha256": "bcc571029aca8ed9d78ee423bec2cda915440ee4f1de434544a1a4cef30b6d81",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "strategies": [
+        "feedback",
+        "fixed",
+        "no_feedback",
+        "random",
+        "single"
+      ],
+      "row_count": 60
+    },
+    {
+      "path": ".iverilog-ai/agent-comparison-offline-20261004-subagent/preregistration.json",
+      "sha256": "c9cbbb9b55589265fefd979729d80967259578fa2fd5f59c8178b558cf78dc36",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "strategies": [
+        "fixed",
+        "random"
+      ],
+      "row_count": 24
+    },
+    {
+      "path": ".iverilog-ai/agent-comparison-offline-20261004-subagent/results.json",
+      "sha256": "4395459f96f11f40d5c1ca5534dcdd9f7398cce3e340f13ce902266809fb673a",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "strategies": [
+        "fixed",
+        "random"
+      ],
+      "row_count": 24
+    },
+    {
+      "path": ".iverilog-ai/agent-comparison-v2-live-20261004/preregistration.json",
+      "sha256": "ca2cb3f75e61f0405c98f73b5b8e1a488e6f4d148fd003332c865d4c560bfb36",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "strategies": [
+        "feedback",
+        "feedback_no_coverage",
+        "fixed",
+        "no_feedback",
+        "protocol_random",
+        "random",
+        "single"
+      ],
+      "row_count": 252
+    },
+    {
+      "path": ".iverilog-ai/agent-comparison-v2-live-20261004/results.json",
+      "sha256": "9e498c55621514e8a47e5d9e24d04aa7fda1a834be56efcd2ad0b302b8546390",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "strategies": [
+        "feedback",
+        "feedback_no_coverage",
+        "fixed",
+        "no_feedback",
+        "protocol_random",
+        "random",
+        "single"
+      ],
+      "row_count": 252
+    },
+    {
+      "path": ".iverilog-ai/agent-comparison-v2-nonthinking-20261004/preregistration.json",
+      "sha256": "6fdd06c0f8e4bbdc2d23d91dca275157de85490df64c1ba5629dfb4dea2b2494",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "strategies": [
+        "feedback",
+        "feedback_no_coverage",
+        "fixed",
+        "no_feedback",
+        "protocol_random",
+        "random",
+        "single"
+      ],
+      "row_count": 252
+    },
+    {
+      "path": ".iverilog-ai/agent-comparison-v2-nonthinking-20261004/results.json",
+      "sha256": "15cc303d7a7b6f462c5394b4cb5f36606127709d0e71fc65058f0fc1f3251c01",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "strategies": [
+        "feedback",
+        "feedback_no_coverage",
+        "fixed",
+        "no_feedback",
+        "protocol_random",
+        "random",
+        "single"
+      ],
+      "row_count": 252
+    },
+    {
+      "path": ".iverilog-ai/agent-comparison-v2-nonthinking-20261004/summary.json",
+      "sha256": "a5950aa095ae6846a7ab60b4fe2f941c066c22793b914cdb9bd6e59b0b4132a2",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "strategies": [
+        "feedback",
+        "feedback_no_coverage",
+        "fixed",
+        "no_feedback",
+        "protocol_random",
+        "random",
+        "single"
+      ],
+      "row_count": 252
+    },
+    {
+      "path": ".iverilog-ai/agent-comparison-v4-smoke-20261004/preregistration.json",
+      "sha256": "b19d3c766e8759c50f49cc32a0c4ff9864ca1505f08cfac29704c90bbe02297e",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "strategies": [
+        "feedback",
+        "feedback_no_coverage",
+        "fixed",
+        "no_feedback",
+        "protocol_random",
+        "random",
+        "single"
+      ],
+      "row_count": 84
+    },
+    {
+      "path": ".iverilog-ai/agent-comparison-v4-smoke-20261004/results.json",
+      "sha256": "c46df250acfd2a665da204139b5b3beed7f6bba48dee847e26d2a052743b908d",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "strategies": [
+        "feedback",
+        "feedback_no_coverage",
+        "fixed",
+        "no_feedback",
+        "protocol_random",
+        "random",
+        "single"
+      ],
+      "row_count": 84
+    },
+    {
+      "path": ".iverilog-ai/agent-comparison-v4-smoke-20261004/summary.json",
+      "sha256": "ca088434fd908b125df078b3a1f2d7672d04e2fb4da2417de5d8565df401a81a",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "strategies": [
+        "feedback",
+        "feedback_no_coverage",
+        "fixed",
+        "no_feedback",
+        "protocol_random",
+        "random",
+        "single"
+      ],
+      "row_count": 84
+    },
+    {
+      "path": ".iverilog-ai/agent-comparison-v5-live-20261005/preregistration.json",
+      "sha256": "76b3d5bfb58b7c7ffa6c353c1036f423802e64a0598c70becca44b9985bc588c",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "strategies": [
+        "feedback",
+        "fixed",
+        "no_feedback",
+        "protocol_random",
+        "random"
+      ],
+      "row_count": 60
+    },
+    {
+      "path": ".iverilog-ai/agent-comparison-v5-live-20261005/results.json",
+      "sha256": "ba75a6a1ea75675244307927261ac13ce19cb21ff8a87171e8781d8ed6f342e8",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "strategies": [
+        "feedback",
+        "fixed",
+        "no_feedback",
+        "protocol_random",
+        "random"
+      ],
+      "row_count": 60
+    },
+    {
+      "path": ".iverilog-ai/agent-comparison-v5-live-20261005/summary.json",
+      "sha256": "91ea2b17dca81b878e9edb5fc8e2f39bac81f8ddde25a2d1c6763173d306ae2b",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "strategies": [
+        "feedback",
+        "fixed",
+        "no_feedback",
+        "protocol_random",
+        "random"
+      ],
+      "row_count": 60
+    },
+    {
+      "path": ".iverilog-ai/agent-holdout-study-live-20261005/preregistration.json",
+      "sha256": "b0a99cdf221ad4e9fe9ce5d92d9a9c877157646766a4197eca70fd209d010925",
+      "cases": [
+        "credit_guard",
+        "rotating_arbiter"
+      ],
+      "strategies": [
+        "feedback",
+        "fixed",
+        "no_feedback",
+        "protocol_random",
+        "random",
+        "single"
+      ],
+      "row_count": 108
+    },
+    {
+      "path": ".iverilog-ai/agent-holdout-study-live-20261005/results.json",
+      "sha256": "f7cba4da3026224534857265911bc0cff419d768c6ae331b7b99f9ebe161c209",
+      "cases": [
+        "credit_guard",
+        "rotating_arbiter"
+      ],
+      "strategies": [
+        "feedback",
+        "fixed",
+        "no_feedback",
+        "protocol_random",
+        "random",
+        "single"
+      ],
+      "row_count": 108
+    },
+    {
+      "path": ".iverilog-ai/agent-holdout-study-live-20261005/strict_summary.json",
+      "sha256": "cdf9367c63fe4836ad4cc4f419e0660384bf7325f003241a5b978a317778d847",
+      "cases": [
+        "credit_guard",
+        "rotating_arbiter"
+      ],
+      "strategies": [
+        "feedback",
+        "fixed",
+        "no_feedback",
+        "protocol_random",
+        "random",
+        "single"
+      ],
+      "row_count": 108
+    },
+    {
+      "path": ".iverilog-ai/agent-recovery-study-live-20261005/preregistration.json",
+      "sha256": "5cdb8ffc0eb88bbbb6942e316a3b76a184afff8b95de06f8929d678559adea07",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "strategies": [
+        "feedback",
+        "fixed",
+        "no_feedback",
+        "protocol_random",
+        "random",
+        "single"
+      ],
+      "row_count": 216
+    },
+    {
+      "path": ".iverilog-ai/agent-recovery-study-live-20261005/results.json",
+      "sha256": "c2ecd4ae44f2b0f10e6500c20bd56ce23c8faaa8ef84d193aa05bb724de6aeb5",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "strategies": [
+        "feedback",
+        "fixed",
+        "no_feedback",
+        "protocol_random",
+        "random",
+        "single"
+      ],
+      "row_count": 216
+    },
+    {
+      "path": ".iverilog-ai/agent-recovery-study-live-20261005/strict_summary.json",
+      "sha256": "cd04f6f84dd4b7ee2d12192a65a5a1880d224f1c8c92dcf5eef5ca5fee669fe1",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "strategies": [
+        "feedback",
+        "fixed",
+        "no_feedback",
+        "protocol_random",
+        "random",
+        "single"
+      ],
+      "row_count": 216
+    },
+    {
+      "path": ".iverilog-ai/agent-study-1m-live-20261005/preregistration.json",
+      "sha256": "3e66b4ec487e9a7682eb322dca413e05c2265f7f1180009a74c65778cb709c9b",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "strategies": [
+        "feedback",
+        "fixed",
+        "no_feedback",
+        "protocol_random",
+        "random",
+        "single"
+      ],
+      "row_count": 216
+    },
+    {
+      "path": ".iverilog-ai/agent-study-1m-live-20261005/results.json",
+      "sha256": "a71ebafc2b56638ce0d6694c455306f1eff9250eee27f63446e3120b56c98a38",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "strategies": [
+        "feedback",
+        "fixed",
+        "no_feedback",
+        "protocol_random",
+        "random",
+        "single"
+      ],
+      "row_count": 216
+    },
+    {
+      "path": ".iverilog-ai/agent-study-1m-live-20261005/strict_summary.json",
+      "sha256": "423d79472960cf9405306f21dc9b9ab4f74748fdf5abaf9cdf9a501abfc4ca84",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "strategies": [
+        "feedback",
+        "fixed",
+        "no_feedback",
+        "protocol_random",
+        "random",
+        "single"
+      ],
+      "row_count": 216
+    }
+  ]
+}

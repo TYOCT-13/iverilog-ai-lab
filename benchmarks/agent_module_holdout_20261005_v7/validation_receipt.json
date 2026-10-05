@@ -1,0 +1,1086 @@
+{
+  "schema": "agent-module-set-holdout-assets-validation-v1",
+  "generated_at_utc": "2026-10-05T01:09:20.171103+00:00",
+  "asset_manifest_sha256": "07ff08bf4a9050952b370724b6b4dc9568d170c3ee33a04933046b3b51f6456e",
+  "cases": [
+    "edge_detector",
+    "pulse_stretcher"
+  ],
+  "targets": 6,
+  "manual_existing_mutations": 4,
+  "old_agent_membership_reports": 26,
+  "scope": "existing offline benchmark modules outside previously inspected controlled Agent cohorts",
+  "new_agent_results_included": false,
+  "created_after_v7_freeze_claim": false,
+  "api_calls": 0,
+  "credentials_read": false,
+  "network_used": false,
+  "dependency_installations": 0,
+  "git_commits": 0,
+  "cumulative_stimulus_cycles": 16,
+  "max_vectors_per_proposal": 12,
+  "max_accepted_vectors_total": 64,
+  "max_shared_requests": 3,
+  "pytest_runs": [
+    {
+      "label": "r1",
+      "command": "D:/Users/TYOCT/anaconda3/python.exe -B -X utf8 -m pytest tests/core/test_agent_module_holdout_assets.py -q --basetemp .iverilog-ai/agent-module-holdout-assets-v7-20261005-r1 --junitxml .iverilog-ai/agent-module-holdout-assets-v7-20261005-r1.xml",
+      "xml_path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r1.xml",
+      "xml_sha256": "1009e8956b4a344d3f5e9eca99106be4c5981cd9a1965464d505e2aee8eb5fc9",
+      "tests": 81,
+      "failures": 4,
+      "errors": 0,
+      "skipped": 0,
+      "elapsed_seconds": 4.245
+    },
+    {
+      "label": "r2",
+      "command": "D:/Users/TYOCT/anaconda3/python.exe -B -X utf8 -m pytest tests/core/test_agent_module_holdout_assets.py -q -k registered_original_mutant --basetemp .iverilog-ai/agent-module-holdout-assets-v7-20261005-r2 --junitxml .iverilog-ai/agent-module-holdout-assets-v7-20261005-r2.xml",
+      "xml_path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r2.xml",
+      "xml_sha256": "fafbfd549bfefbb7f5f7bb326aba9ea86821770bb09168913369cbdbd2639df4",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "elapsed_seconds": 1.317
+    },
+    {
+      "label": "r3",
+      "command": "D:/Users/TYOCT/anaconda3/python.exe -B -X utf8 -m pytest tests/core/test_agent_module_holdout_assets.py -q --basetemp .iverilog-ai/agent-module-holdout-assets-v7-20261005-r3 --junitxml .iverilog-ai/agent-module-holdout-assets-v7-20261005-r3.xml",
+      "xml_path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3.xml",
+      "xml_sha256": "ef28ef9640d4a7806fa4989271b512b4b4ae8a6f0225229e33b07a2b60642aeb",
+      "tests": 81,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "elapsed_seconds": 3.992
+    }
+  ],
+  "initial_failure_disposition": "r1 preserved. Four test assertions wrongly expected status=failed. Production records already had warn mismatches and verdict=failed_checks; only new test/report status interpretation was corrected. No oracle, RTL, runner or Agent changes.",
+  "mypy": {
+    "files": 3,
+    "errors": 0,
+    "command": "D:/Users/TYOCT/anaconda3/python.exe -B -X utf8 -m mypy benchmarks/agent_module_holdout_20261005_v7/baselines.py benchmarks/agent_module_holdout_20261005_v7/semantics.py benchmarks/agent_module_holdout_20261005_v7/validation.py"
+  },
+  "actual_icarus": {
+    "pipeline_episodes": 28,
+    "direct_asynchronous_reset_runs": 2,
+    "compile_executions": 30,
+    "pipeline_cycle_observations": 330,
+    "pipeline_checks": 330,
+    "failed_functional_checks": 4,
+    "asynchronous_output_observations": 6,
+    "records": [
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_actual_default_baselines_0/actual/asset_validation.json",
+        "sha256": "d4ea928514424a28ec9a6ef627ecc4fef45fbe9aa940f0d331b6d631a22b1185",
+        "case": "edge_detector",
+        "rtl_sha256": "4c47149c3ae55110cd33fc085ff0005019392217c91e4a93a85f057157ef9f70",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 16,
+        "observed_cycles": 16,
+        "after": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_actual_default_baselines_1/actual/asset_validation.json",
+        "sha256": "410b74fcecc0332d9abc5298f563af879b2bd17566d480c1381ea5b684073e37",
+        "case": "pulse_stretcher",
+        "rtl_sha256": "f490e4015f446e712fd7bfa75747568582ea310098af6dd6a43234e2a8fb00e9",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 16,
+        "observed_cycles": 16,
+        "after": [
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_actual_default_baselines_10/actual/asset_validation.json",
+        "sha256": "85fbd225013b954a22a4b8caaaeb82b13137d2d52c24d1dd2bf1dba7a32a08c3",
+        "case": "edge_detector",
+        "rtl_sha256": "4c47149c3ae55110cd33fc085ff0005019392217c91e4a93a85f057157ef9f70",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 16,
+        "observed_cycles": 16,
+        "after": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_actual_default_baselines_11/actual/asset_validation.json",
+        "sha256": "d402b6348586e935cbcbc7e2dff884eaf3b40c0e0958086daaf652430699793b",
+        "case": "pulse_stretcher",
+        "rtl_sha256": "f490e4015f446e712fd7bfa75747568582ea310098af6dd6a43234e2a8fb00e9",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 16,
+        "observed_cycles": 16,
+        "after": [
+          0,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_actual_default_baselines_12/actual/asset_validation.json",
+        "sha256": "e70a0c53f283d0e69b6ffe44b5c38c2e49bb705e517def3b9b8ddc696cde2246",
+        "case": "edge_detector",
+        "rtl_sha256": "4c47149c3ae55110cd33fc085ff0005019392217c91e4a93a85f057157ef9f70",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 16,
+        "observed_cycles": 16,
+        "after": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_actual_default_baselines_13/actual/asset_validation.json",
+        "sha256": "55db19819b9c8919a6452d6ce7b6f15f4ae11db256fb167ac2ed57b5acb80994",
+        "case": "pulse_stretcher",
+        "rtl_sha256": "f490e4015f446e712fd7bfa75747568582ea310098af6dd6a43234e2a8fb00e9",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 16,
+        "observed_cycles": 16,
+        "after": [
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_actual_default_baselines_14/actual/asset_validation.json",
+        "sha256": "ed76758e54feba633ec159921ed2b2dab0ba0e7980fd8e94720a0068afe76281",
+        "case": "edge_detector",
+        "rtl_sha256": "4c47149c3ae55110cd33fc085ff0005019392217c91e4a93a85f057157ef9f70",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 16,
+        "observed_cycles": 16,
+        "after": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_actual_default_baselines_15/actual/asset_validation.json",
+        "sha256": "30f61d5d436e1c2f9bfcd6ea9afc5df6186f6d697a60e53fa5d72661bd93aa36",
+        "case": "pulse_stretcher",
+        "rtl_sha256": "f490e4015f446e712fd7bfa75747568582ea310098af6dd6a43234e2a8fb00e9",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 16,
+        "observed_cycles": 16,
+        "after": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_actual_default_baselines_16/actual/asset_validation.json",
+        "sha256": "f7d3c3cd27244aa283ea0e6a1f0a5507fdedc6e130bf94ae61b62c0d9ed1fd1b",
+        "case": "edge_detector",
+        "rtl_sha256": "4c47149c3ae55110cd33fc085ff0005019392217c91e4a93a85f057157ef9f70",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 16,
+        "observed_cycles": 16,
+        "after": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_actual_default_baselines_17/actual/asset_validation.json",
+        "sha256": "3601b581bb5902ec3a0e864fcb9e6124383a9e49f7bd6d2067282ae2be0692de",
+        "case": "pulse_stretcher",
+        "rtl_sha256": "f490e4015f446e712fd7bfa75747568582ea310098af6dd6a43234e2a8fb00e9",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 16,
+        "observed_cycles": 16,
+        "after": [
+          0,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_actual_default_baselines_2/actual/asset_validation.json",
+        "sha256": "5ef841b0afd70ffbdefcbc100c535b8b8333b53a6656c3e3fad530a84da3bda5",
+        "case": "edge_detector",
+        "rtl_sha256": "4c47149c3ae55110cd33fc085ff0005019392217c91e4a93a85f057157ef9f70",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 16,
+        "observed_cycles": 16,
+        "after": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_actual_default_baselines_3/actual/asset_validation.json",
+        "sha256": "a03a6d0512269719b1619febddc3b04fb78fc61e99dca66f143bc6bc3185784f",
+        "case": "pulse_stretcher",
+        "rtl_sha256": "f490e4015f446e712fd7bfa75747568582ea310098af6dd6a43234e2a8fb00e9",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 16,
+        "observed_cycles": 16,
+        "after": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_actual_default_baselines_4/actual/asset_validation.json",
+        "sha256": "fbb3f32d69446439716e31da3148c8d56eb5431ace6d9a9a772ad77f904db774",
+        "case": "edge_detector",
+        "rtl_sha256": "4c47149c3ae55110cd33fc085ff0005019392217c91e4a93a85f057157ef9f70",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 16,
+        "observed_cycles": 16,
+        "after": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_actual_default_baselines_5/actual/asset_validation.json",
+        "sha256": "32533f3a94344175e86228657ff7d162424f879b679e545a3c3c5934bbc8f2f9",
+        "case": "pulse_stretcher",
+        "rtl_sha256": "f490e4015f446e712fd7bfa75747568582ea310098af6dd6a43234e2a8fb00e9",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 16,
+        "observed_cycles": 16,
+        "after": [
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_actual_default_baselines_6/actual/asset_validation.json",
+        "sha256": "e9f9de90d21a8855a66031e29410a952853fcd94d8edcfc9dbe1135249d24aa7",
+        "case": "edge_detector",
+        "rtl_sha256": "4c47149c3ae55110cd33fc085ff0005019392217c91e4a93a85f057157ef9f70",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 16,
+        "observed_cycles": 16,
+        "after": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_actual_default_baselines_7/actual/asset_validation.json",
+        "sha256": "ce859a4699ae5923cf22d5820cc4792b66223ac5bbcdd500019b6fb5ac2aa61b",
+        "case": "pulse_stretcher",
+        "rtl_sha256": "f490e4015f446e712fd7bfa75747568582ea310098af6dd6a43234e2a8fb00e9",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 16,
+        "observed_cycles": 16,
+        "after": [
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_actual_default_baselines_8/actual/asset_validation.json",
+        "sha256": "3798377e4f4c6b551b59a110790a4c258218afcb54b10e0f4f9403951d82e496",
+        "case": "edge_detector",
+        "rtl_sha256": "4c47149c3ae55110cd33fc085ff0005019392217c91e4a93a85f057157ef9f70",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 16,
+        "observed_cycles": 16,
+        "after": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_actual_default_baselines_9/actual/asset_validation.json",
+        "sha256": "606b992bea97e235bfa2d996900c2d871fe1523e70558567cc7731aa2e694f2a",
+        "case": "pulse_stretcher",
+        "rtl_sha256": "f490e4015f446e712fd7bfa75747568582ea310098af6dd6a43234e2a8fb00e9",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 16,
+        "observed_cycles": 16,
+        "after": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_actual_manual_reset_and_r0/reset/asset_validation.json",
+        "sha256": "6f551861fedf0f002b4e2c217ca37a39e6381c180cba261226b9781aa43da973",
+        "case": "edge_detector",
+        "rtl_sha256": "4c47149c3ae55110cd33fc085ff0005019392217c91e4a93a85f057157ef9f70",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 9,
+        "observed_cycles": 9,
+        "after": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_actual_manual_reset_and_r1/reset/asset_validation.json",
+        "sha256": "cfa3d1dad709fc723a75b590d742ff26fdfd9d40d6092dfe1c1b4c34af4c8069",
+        "case": "pulse_stretcher",
+        "rtl_sha256": "f490e4015f446e712fd7bfa75747568582ea310098af6dd6a43234e2a8fb00e9",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 9,
+        "observed_cycles": 9,
+        "after": [
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_each_registered_original_0/correct/asset_validation.json",
+        "sha256": "d26cc5fb9a6750ed4bd12defaad21fb2f4368dea85e59b3b147bba60e8c35ca8",
+        "case": "edge_detector",
+        "rtl_sha256": "4c47149c3ae55110cd33fc085ff0005019392217c91e4a93a85f057157ef9f70",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 1,
+        "observed_cycles": 1,
+        "after": [
+          1
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_each_registered_original_0/mutant/asset_validation.json",
+        "sha256": "ea508d405616acf0dddbe29b186ab3a78d73c83e2324aac5d43b4c01b502074b",
+        "case": "edge_detector",
+        "rtl_sha256": "447f4847f6574cdeb0ff86998971fbc4fcef475a321ac8cc655ccc3b7e143a7e",
+        "status": "passed_with_warnings",
+        "verdict": "failed_checks",
+        "failure_count": 1,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 1,
+        "observed_cycles": 1,
+        "after": [
+          0
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_each_registered_original_1/correct/asset_validation.json",
+        "sha256": "c8797c0cb8298170496bd502d2ae99fdf15870c967c0184359fd1b474a39e6be",
+        "case": "edge_detector",
+        "rtl_sha256": "4c47149c3ae55110cd33fc085ff0005019392217c91e4a93a85f057157ef9f70",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 2,
+        "observed_cycles": 2,
+        "after": [
+          1,
+          0
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_each_registered_original_1/mutant/asset_validation.json",
+        "sha256": "d143c805e2d74941c0c6958e51d8b6b3ecfbad0f66ee3d62b9f70d618303c0a4",
+        "case": "edge_detector",
+        "rtl_sha256": "c09ea8c8c489ab777a61511b96c0a1f8affcc1dfb9f63c26be1a75af8fadba01",
+        "status": "passed_with_warnings",
+        "verdict": "failed_checks",
+        "failure_count": 1,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 2,
+        "observed_cycles": 2,
+        "after": [
+          1,
+          1
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_each_registered_original_2/correct/asset_validation.json",
+        "sha256": "e07ef11835a59b9bb65ad105ff22181de298b63547132a1784b5ad3f456fa4de",
+        "case": "pulse_stretcher",
+        "rtl_sha256": "f490e4015f446e712fd7bfa75747568582ea310098af6dd6a43234e2a8fb00e9",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 4,
+        "observed_cycles": 4,
+        "after": [
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_each_registered_original_2/mutant/asset_validation.json",
+        "sha256": "8c89075e6370a2da0d36a4468ea42161ffbf9662ff23ad778ad6ea6dfd4a7753",
+        "case": "pulse_stretcher",
+        "rtl_sha256": "50dcff408f54976ec19174ba3c37dfff717e8e3bf3aef35b2b9149007d4294d0",
+        "status": "passed_with_warnings",
+        "verdict": "failed_checks",
+        "failure_count": 1,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 4,
+        "observed_cycles": 4,
+        "after": [
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_each_registered_original_3/correct/asset_validation.json",
+        "sha256": "7252c9505573f32ead76125d4f8d875e996d0d32de349341a3d2849b82a38706",
+        "case": "pulse_stretcher",
+        "rtl_sha256": "f490e4015f446e712fd7bfa75747568582ea310098af6dd6a43234e2a8fb00e9",
+        "status": "passed",
+        "verdict": "passed",
+        "failure_count": 0,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 5,
+        "observed_cycles": 5,
+        "after": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_each_registered_original_3/mutant/asset_validation.json",
+        "sha256": "314d65ca4e54dc139e304f35336b4bc6143532eff83d6e7da65ee40a679fc625",
+        "case": "pulse_stretcher",
+        "rtl_sha256": "352c6c61913ef64c783832ce2ff6670358c16636511831a5e8aa396d5ae983f4",
+        "status": "passed_with_warnings",
+        "verdict": "failed_checks",
+        "failure_count": 1,
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "check_count": 5,
+        "observed_cycles": 5,
+        "after": [
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      }
+    ],
+    "asynchronous_records": [
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_actual_reset_assertion_cl0/asynchronous_reset_validation.json",
+        "sha256": "3f5721c878c65c57d1c72e933f63f5cc392717dd1b4dd66441536a8cfda95e74",
+        "case": "edge_detector",
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "stdout": "MODULE_HOLDOUT_RESET 0\nMODULE_HOLDOUT_ACTIVE 1\nMODULE_HOLDOUT_ASYNC 0\nE:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\agent-module-holdout-assets-v7-20261005-r3\\test_actual_reset_assertion_cl0\\tb_edge_detector_async_reset.v:11: $finish called at 8000 (1ps)\n"
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-r3/test_actual_reset_assertion_cl1/asynchronous_reset_validation.json",
+        "sha256": "734d503b8886ac55d676527b877de7b75f6c05e7cdcacff4514fdb08c7a978be",
+        "case": "pulse_stretcher",
+        "compile_returncode": 0,
+        "execution_returncode": 0,
+        "stdout": "MODULE_HOLDOUT_RESET 0\nMODULE_HOLDOUT_ACTIVE 1\nMODULE_HOLDOUT_ASYNC 0\nE:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\agent-module-holdout-assets-v7-20261005-r3\\test_actual_reset_assertion_cl1\\tb_pulse_stretcher_async_reset.v:11: $finish called at 8000 (1ps)\n"
+      }
+    ]
+  },
+  "pure_python_exhaustive_crosscheck": {
+    "input_words": 512,
+    "cycles_per_word": 8,
+    "actual_icarus_executions": 0,
+    "independent_algorithms": "transition truth table for edge; latest-trigger timestamp window for pulse versus core load/decrement model"
+  },
+  "style_gate": {
+    "schema": "copied-rtl-style-gate-summary-v1",
+    "delivery_ready": false,
+    "returncode": 1,
+    "errors": 616,
+    "strict_warnings": 0,
+    "checks": {
+      "compile": {
+        "ready": false,
+        "status": "failed",
+        "errors": 6,
+        "warnings": 0,
+        "files": 6,
+        "modules": 0,
+        "parse_errors": 6,
+        "source": "formatter_ast+verilog_quality_gate"
+      },
+      "ast": {
+        "ready": false,
+        "status": "failed",
+        "errors": 12,
+        "warnings": 0,
+        "files": 6,
+        "modules": 0,
+        "parse_errors": 6,
+        "formatter_errors": 6,
+        "source": "formatter_ast"
+      },
+      "readability": {
+        "ready": false,
+        "status": "failed",
+        "errors": 598,
+        "warnings": 0,
+        "source": "verilog_quality_gate",
+        "ok": false
+      },
+      "comment": {
+        "ready": false,
+        "status": "failed",
+        "errors": 12,
+        "warnings": 0,
+        "issues": 12,
+        "source": "comment_gate"
+      },
+      "naming": {
+        "ready": false,
+        "status": "failed",
+        "errors": 528,
+        "warnings": 0,
+        "source": "verilog_quality_gate"
+      },
+      "profile": {
+        "ready": false,
+        "status": "failed",
+        "errors": 6,
+        "warnings": 0,
+        "rulebook_path": "C:\\Users\\TYOCT\\.codex\\skills\\readable-verilog-generator\\assets\\verilog_style_rules.json",
+        "source": "style_profile+rulebook"
+      },
+      "testbench": {
+        "ready": true,
+        "status": "not_requested",
+        "errors": 0,
+        "warnings": 0,
+        "source": "include_testbench=false"
+      },
+      "toolchain": {
+        "ready": true,
+        "status": "not_requested",
+        "errors": 0,
+        "warnings": 0,
+        "source": "optional_validation_readiness",
+        "boundary": "simulation_execute_synthesis_remote_are_optional_toolchain_checks"
+      }
+    },
+    "raw_records": [
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-style/style_gate.json",
+        "sha256": "d630281c3f64a73470fd2e3c5c58b38eb7159b76101072a077d431194ea97420"
+      },
+      {
+        "path": ".iverilog-ai/agent-module-holdout-assets-v7-20261005-style/style_gate.md",
+        "sha256": "febe6841d6c1d08cfb828f8dd5c4d28af1cc2a2646b6005053d493360fc8120f"
+      }
+    ],
+    "boundary": "Original byte-for-byte copied sources kept unchanged; static formatter/style failures are not simulator compile failures. Actual Icarus results are separately recorded."
+  },
+  "limitations": [
+    "Existing offline benchmark modules and existing manually labelled mutations, not external blind tests or newly independent faults.",
+    "Prior Agent cohort absence does not prove pretraining novelty.",
+    "Default parameters only; no synthesis or remote validation.",
+    "Original copied RTL fails formatter-backed strict style gates; preserved byte-for-byte per task.",
+    "No real user study, human review or Agent API performance results in this asset receipt."
+  ],
+  "source_inputs": [
+    {
+      "path": "benchmarks/agent_module_holdout_20261005_v7/__pycache__/baselines.cpython-312.pyc",
+      "sha256": "fb26cecebbdd2ddd9de63152e48b4929af0ede78f5631db44d4664d2d5b49d12"
+    },
+    {
+      "path": "benchmarks/agent_module_holdout_20261005_v7/audit/style_gate_summary.json",
+      "sha256": "0fa225bbdf52b180c086215bfcb2c2975abf1e5f6cf910372223a54a23302e56"
+    },
+    {
+      "path": "benchmarks/agent_module_holdout_20261005_v7/baselines.py",
+      "sha256": "713ec62773b019b16e51626e7d13f2eb8767192d1311048bc92cbf31fc555361"
+    },
+    {
+      "path": "benchmarks/agent_module_holdout_20261005_v7/contracts/edge_detector_contract.json",
+      "sha256": "1d810932e749c7a0611f40935d5050ba0a0b5b759fa66bf06e0c9eb39eba396a"
+    },
+    {
+      "path": "benchmarks/agent_module_holdout_20261005_v7/contracts/pulse_stretcher_contract.json",
+      "sha256": "f4ef0f778e7574e4170629a5271f1a278644cc6a7ee71536e5609a8893ae7341"
+    },
+    {
+      "path": "benchmarks/agent_module_holdout_20261005_v7/manifest.json",
+      "sha256": "07ff08bf4a9050952b370724b6b4dc9568d170c3ee33a04933046b3b51f6456e"
+    },
+    {
+      "path": "benchmarks/agent_module_holdout_20261005_v7/prior_agent_membership_audit.json",
+      "sha256": "7b977d9f532c5fcfc7dfe47d4c92868cca7dc2e8195add00361e6eb1a266f702"
+    },
+    {
+      "path": "benchmarks/agent_module_holdout_20261005_v7/README.md",
+      "sha256": "4c31fbcf5a39f3eca96b1f7738cfc25f86505f963e435dd3a2b423b801815ba6"
+    },
+    {
+      "path": "benchmarks/agent_module_holdout_20261005_v7/semantics.py",
+      "sha256": "9e1af80a4354d42e82f26612811738203110b8a782c30d5302d6e074163679f6"
+    },
+    {
+      "path": "benchmarks/agent_module_holdout_20261005_v7/targets/edge_detector/A.v",
+      "sha256": "4c47149c3ae55110cd33fc085ff0005019392217c91e4a93a85f057157ef9f70"
+    },
+    {
+      "path": "benchmarks/agent_module_holdout_20261005_v7/targets/edge_detector/B.v",
+      "sha256": "447f4847f6574cdeb0ff86998971fbc4fcef475a321ac8cc655ccc3b7e143a7e"
+    },
+    {
+      "path": "benchmarks/agent_module_holdout_20261005_v7/targets/edge_detector/C.v",
+      "sha256": "c09ea8c8c489ab777a61511b96c0a1f8affcc1dfb9f63c26be1a75af8fadba01"
+    },
+    {
+      "path": "benchmarks/agent_module_holdout_20261005_v7/targets/pulse_stretcher/A.v",
+      "sha256": "f490e4015f446e712fd7bfa75747568582ea310098af6dd6a43234e2a8fb00e9"
+    },
+    {
+      "path": "benchmarks/agent_module_holdout_20261005_v7/targets/pulse_stretcher/B.v",
+      "sha256": "50dcff408f54976ec19174ba3c37dfff717e8e3bf3aef35b2b9149007d4294d0"
+    },
+    {
+      "path": "benchmarks/agent_module_holdout_20261005_v7/targets/pulse_stretcher/C.v",
+      "sha256": "352c6c61913ef64c783832ce2ff6670358c16636511831a5e8aa396d5ae983f4"
+    },
+    {
+      "path": "benchmarks/agent_module_holdout_20261005_v7/validation.py",
+      "sha256": "163e66394d20bd5117fd4d9c2f189848ec8808f5d245152e8d21d89eca2a6989"
+    },
+    {
+      "path": "benchmarks/manifest.json",
+      "sha256": "338f6a4f29f84dbe34e14223114d54f6e809b5dd9cd625e081a07f27c396d3f1"
+    },
+    {
+      "path": "examples/edge_detector_contract.json",
+      "sha256": "1d810932e749c7a0611f40935d5050ba0a0b5b759fa66bf06e0c9eb39eba396a"
+    },
+    {
+      "path": "examples/pulse_stretcher_contract.json",
+      "sha256": "f4ef0f778e7574e4170629a5271f1a278644cc6a7ee71536e5609a8893ae7341"
+    },
+    {
+      "path": "rtl/edge_detector.v",
+      "sha256": "4c47149c3ae55110cd33fc085ff0005019392217c91e4a93a85f057157ef9f70"
+    },
+    {
+      "path": "rtl/edge_detector_bug_falling_edge.v",
+      "sha256": "447f4847f6574cdeb0ff86998971fbc4fcef475a321ac8cc655ccc3b7e143a7e"
+    },
+    {
+      "path": "rtl/edge_detector_bug_two_cycle.v",
+      "sha256": "c09ea8c8c489ab777a61511b96c0a1f8affcc1dfb9f63c26be1a75af8fadba01"
+    },
+    {
+      "path": "rtl/pulse_stretcher.v",
+      "sha256": "f490e4015f446e712fd7bfa75747568582ea310098af6dd6a43234e2a8fb00e9"
+    },
+    {
+      "path": "rtl/pulse_stretcher_bug_no_retrigger.v",
+      "sha256": "352c6c61913ef64c783832ce2ff6670358c16636511831a5e8aa396d5ae983f4"
+    },
+    {
+      "path": "rtl/pulse_stretcher_bug_one_cycle_short.v",
+      "sha256": "50dcff408f54976ec19174ba3c37dfff717e8e3bf3aef35b2b9149007d4294d0"
+    },
+    {
+      "path": "spec/agent_module_holdout_20261005_v7/edge_detector_spec.md",
+      "sha256": "c02554fddd41c61b66a6600f20bd4f8f4bc31539ec82849104f8100657d92946"
+    },
+    {
+      "path": "spec/agent_module_holdout_20261005_v7/pulse_stretcher_spec.md",
+      "sha256": "846862e3edfff2b59a061a7337530a093e9502060dbac6d29a7ea5dde09d9ccf"
+    },
+    {
+      "path": "spec/edge_detector_spec.md",
+      "sha256": "84dfb7be3f4355ce4b9519daeb1fc0a32743f7c61e6a605472c29323f2ca31be"
+    },
+    {
+      "path": "spec/pulse_stretcher_spec.md",
+      "sha256": "07aaa2e8536afb128ae7fa8f111c7e4ff1cecc049b37abef29377053565ad970"
+    },
+    {
+      "path": "src/iverilog_ai/core/executor.py",
+      "sha256": "d4e352c0317c484a482ddead62b7b6461ad797836de852b88e7b7878f133aba9"
+    },
+    {
+      "path": "src/iverilog_ai/core/models.py",
+      "sha256": "8d7ff1db511d0e3ab90364e16fd5bb0d0c6159d0adf69c35d519fc7a64cd71d6"
+    },
+    {
+      "path": "src/iverilog_ai/core/pipeline.py",
+      "sha256": "3cf278b7df84f8d1e8d57786bc3b2485afab14ad5f1a1ce43b5eed657a9b9446"
+    },
+    {
+      "path": "src/iverilog_ai/core/reference_model.py",
+      "sha256": "561eaf956a660ac6f3cfb4b28ba04561e63cebef2cf8eac2089b5d3e76287219"
+    },
+    {
+      "path": "src/iverilog_ai/core/testbench.py",
+      "sha256": "17119e5851a95e0b065832e0aa03eaeebeb98b630722b66a28751ae7592c86c9"
+    },
+    {
+      "path": "tests/core/test_agent_module_holdout_assets.py",
+      "sha256": "3a4e9aa218728e9563fe53b4e197596ffc7bde384ba5dfa0ed23b0b633831b13"
+    }
+  ]
+}

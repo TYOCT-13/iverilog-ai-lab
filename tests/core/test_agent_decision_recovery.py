@@ -345,12 +345,18 @@ def test_format_recovery_keeps_command_oracle_and_twelve_vector_gates(tmp_path, 
 
 
 def test_corrected_plan_still_obeys_the_original_stimulus_budget(tmp_path):
-    service, stub = Scripted('{"action":', proposal(3), proposal()), CheckedStub()
+    service, stub = Scripted('{"action":', proposal(3), proposal(1)), CheckedStub()
     result = run(tmp_path, service, stub, limits=AgentLimits(max_rounds=1, max_requests=3, max_total_cycles=2))
-    assert result.stop_reason == "cycle_budget" and result.trajectory["requests_attempted"] == 2
-    assert not stub.plans and result.trajectory["stimulus_cycles_executed"] == 0
-    assert result.trajectory["automatic_reset_cycles_executed"] == 0 and len(service.responses) == 1
+    assert result.stop_reason == "round_budget" and result.trajectory["requests_attempted"] == 3
+    assert len(stub.plans) == 1 and result.trajectory["stimulus_cycles_executed"] == 1
+    assert result.trajectory["automatic_reset_cycles_executed"] == 2 and len(service.responses) == 0
     assert service.states[1]["remaining_stimulus_cycles"] == service.states[0]["remaining_stimulus_cycles"] == 2
+    assert service.states[2]["remaining_stimulus_cycles"] == 2
+    assert result.trajectory["decisions"][1]["schema_validation_status"] == "passed"
+    assert result.trajectory["decisions"][1]["plan_validation_status"] == "rejected"
+    assert "executed_round" not in result.trajectory["decisions"][1]
+    assert all(attempt["simulation_started"] is False and attempt["stimulus_cycles_executed"] == 0
+               for attempt in result.trajectory["failed_attempts"])
 
 
 def test_wall_clock_limit_is_rechecked_before_a_format_correction_request(tmp_path, monkeypatch):

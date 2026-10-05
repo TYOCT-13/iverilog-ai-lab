@@ -1,0 +1,19 @@
+{
+  "schema": "agent-budget-recovery-full-batch-v1",
+  "round_name": "bounded_budget_recovery_eight_module_batch_20261005",
+  "source_parent_revision": "1566459b475a3ab07c95e5e8502982a9b7a9ad49",
+  "agent_sha256": "b17db6882dc43899713c641f7134b820df606f31e02cd6d0ec037aac057189cb",
+  "system_prompt_sha256": "1e0b5c481a2e1184d8abcc8006a56e4e93170c36cb0b1c79e7c9a6f57e9aede5",
+  "token_cap": 1000000,
+  "token_scope": "all 432 registered tasks and all paid rejections in this one complete batch; input plus output",
+  "max_output_tokens_per_request": 4096,
+  "max_vectors_per_proposal": 12,
+  "max_accepted_vectors_total": 64,
+  "repeats": 3,
+  "strategies": ["fixed", "random", "protocol_random", "single", "feedback", "no_feedback"],
+  "cycle_budgets": {"sync_fifo": 16, "uart_tx": 48, "spi_master": 20, "handshake_stage": 8, "credit_guard": 16, "rotating_arbiter": 16, "edge_detector": 16, "pulse_stretcher": 16},
+  "cohorts": {"development": ["sync_fifo", "uart_tx", "spi_master", "handshake_stage"], "prior_internal_holdout": ["credit_guard", "rotating_arbiter"], "module_set_holdout": ["edge_detector", "pulse_stretcher"]},
+  "registered_rows": 432,
+  "theoretical_request_cap": 504,
+  "transport": {"endpoint": "https://api.deepseek.com", "model": "deepseek-flash", "wire_api": "chat_completions", "thinking_mode": "disabled", "stream": false, "timeout_seconds": 60, "automatic_transport_retry": false}
+}
