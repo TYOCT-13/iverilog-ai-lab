@@ -1,0 +1,165 @@
+{
+  "schema": "agent-port-feedback-result-review-packaging-v1",
+  "created_at": "2026-10-05T04:40:34.253418+00:00",
+  "source_revision": "a96933786c17986a739fc2da515db3294d6e8044",
+  "packager": "parent Codex; original core and author trace reviewers kept separately",
+  "original_review_bytes_unchanged": true,
+  "original_core_reviewer_non_feature_author": true,
+  "trace_reviewer_is_feature_code_author": true,
+  "human_trial": false,
+  "H02_human_review": false,
+  "external_independent_review": false,
+  "new_api_requests": 0,
+  "new_dut_runs": 0,
+  "core": {
+    "registered_rows": 432,
+    "executed_tasks": 414,
+    "rounds": 484,
+    "execution_sides": 968,
+    "output_checks": 30356,
+    "observed_cycles": 14912,
+    "strict_eligible": false
+  },
+  "trace": {
+    "registered_rows": 432,
+    "finished_rows": 432,
+    "traces": 216,
+    "counters": {
+      "raw_artifacts_examined": 305,
+      "raw_artifacts_verified": 305,
+      "schema_passed_decisions": 287,
+      "port_feedback_documents": 268,
+      "port_feedback_complete": 268,
+      "port_feedback_total_samples": 3244,
+      "port_feedback_returned_samples": 2203,
+      "port_feedback_omitted_samples": 1041,
+      "port_feedback_documents_with_omission": 78,
+      "port_feedback_documents_with_unknown_bits": 6,
+      "budget_rejected_decisions": 16,
+      "budget_rejected_paid_total_tokens": 58706,
+      "no_feedback_states": 117,
+      "traces_with_execution_after_budget_rejection": 9,
+      "shared_cap_all_rejections_without_execution": 9,
+      "detections_on_first_actual_episode": 99,
+      "format_rejected_decisions": 18,
+      "format_rejected_paid_total_tokens": 62066,
+      "detections_after_paid_format_rejection": 5,
+      "traces_with_execution_after_format_rejection": 12,
+      "detections_on_later_actual_episode": 4,
+      "schema_accepted_stops_without_new_execution": 1,
+      "detections_after_paid_budget_rejection": 4,
+      "preflight_rejected_decisions": 2,
+      "responses_without_raw_artifact": 9,
+      "reservation_rejected": 8
+    },
+    "accounting": {
+      "sent_requests": 306,
+      "ledger_not_sent_records": [],
+      "ledger_records": 306,
+      "ledger_matched_prefix": 306,
+      "ledger_remaining_unmatched_tail": 0,
+      "reported_tokens": 973149,
+      "unknown_reserved_tokens": 0,
+      "limit": 1000000
+    }
+  },
+  "clarification": {
+    "non_budget_legacy_preflight_rejections": 2,
+    "legacy_rows": [
+      225,
+      359
+    ],
+    "manifest_plan_preflight_rejections_only_counts_retry_eligible": true,
+    "paid_schema_counts": {
+      "passed": 287,
+      "rejected": 18,
+      "not_reached": 1
+    },
+    "not_sent_shared_cap_events": 8
+  },
+  "request_sha_is_canonical_sorted_json_not_archived_wire_order": true,
+  "artifacts": [
+    {
+      "path": "core-audit.json",
+      "sha256": "d6065c75dd3224b30f6d68874e32b0a940eca544935ea28f36f5707db0b1cd5e",
+      "bytes": 907490
+    },
+    {
+      "path": "trace-audit.json",
+      "sha256": "080d366592771f725dc887be002a606c5c798c62fe76c86b7d9dfe2bf0aa9749",
+      "bytes": 23155
+    },
+    {
+      "path": "core-supplement.json",
+      "sha256": "f6eb9633569e83b941536c0a51d75e175b7d12a7cfa501bce501d35373cf0e5e",
+      "bytes": 8112
+    },
+    {
+      "path": "review_sources.zip",
+      "sha256": "25acf6fdfdc09521ae5a43e474d6413525ca442c445ccdb5ec7a85baa53f6e94",
+      "bytes": 55462
+    }
+  ],
+  "review_sources": [
+    {
+      "original": ".tmp-codex/agent-v8-feedback-core-audit-20261005.py",
+      "entry": "agent-v8-feedback-core-audit-20261005.py",
+      "sha256": "d31da92f019a0383e357f2c583f15ee2ee8bb303bb8e98a3928521e7e5e701f9",
+      "bytes": 28832
+    },
+    {
+      "original": ".tmp-codex/agent-v8-feedback-core-audit-20261005-preparation.json",
+      "entry": "agent-v8-feedback-core-audit-20261005-preparation.json",
+      "sha256": "bc9e53ed03062c246d0de5f3ad19a2bb492e8cc4a2006ca9f85455cc5834e1b6",
+      "bytes": 727
+    },
+    {
+      "original": ".tmp-codex/agent-v8-feedback-core-audit-20261005-run-r1.log",
+      "entry": "agent-v8-feedback-core-audit-20261005-run-r1.log",
+      "sha256": "5df2f9c7ae105ecb47ef8e0f2971ced2cd1fed8bc20a29800fbd4c2aa35bdedb",
+      "bytes": 6399
+    },
+    {
+      "original": ".tmp-codex/agent-v8-feedback-core-audit-20261005-supplement.json",
+      "entry": "agent-v8-feedback-core-audit-20261005-supplement.json",
+      "sha256": "f6eb9633569e83b941536c0a51d75e175b7d12a7cfa501bce501d35373cf0e5e",
+      "bytes": 8112
+    },
+    {
+      "original": ".tmp-codex/v8-feedback-trace-audit-20261005.py",
+      "entry": "v8-feedback-trace-audit-20261005.py",
+      "sha256": "1977fea0c9bb13dd06ad29bfc6ee97671bda3ef22858c29f6decc9ff6dc99ec2",
+      "bytes": 49620
+    },
+    {
+      "original": ".tmp-codex/v8-feedback-trace-audit-20261005-tests.py",
+      "entry": "v8-feedback-trace-audit-20261005-tests.py",
+      "sha256": "259f4fea2abcde71dc1c98d8cbc93a37cb2042004bdaa8b6b37b7d0819c500a3",
+      "bytes": 14924
+    },
+    {
+      "original": ".tmp-codex/v8-feedback-trace-audit-20261005-first-tests.txt",
+      "entry": "v8-feedback-trace-audit-20261005-first-tests.txt",
+      "sha256": "33c8329e47d319196b0daacfc916874d72785305a119a470d4bbfc92dd530b7e",
+      "bytes": 101
+    },
+    {
+      "original": ".tmp-codex/v8-feedback-trace-audit-20261005-final-tests.txt",
+      "entry": "v8-feedback-trace-audit-20261005-final-tests.txt",
+      "sha256": "c28b3b403d4d13c569435c2b8e0011556cf1755fb2554eaedeb22292d93f4062",
+      "bytes": 101
+    },
+    {
+      "original": ".tmp-codex/v8-feedback-trace-audit-20261005-final-stdout.txt",
+      "entry": "v8-feedback-trace-audit-20261005-final-stdout.txt",
+      "sha256": "b91026179a4eeba1ec0642e26e1fbca58361ad21b4c70f1acd09fb9942e1bafe",
+      "bytes": 1144
+    },
+    {
+      "original": ".tmp-codex/v8-feedback-trace-audit-20261005-final.json",
+      "entry": "v8-feedback-trace-audit-20261005-final.json",
+      "sha256": "5ed5734a7fa2dddd295542b59387aca7e7574440eac1997feaf8e31b2ec45282",
+      "bytes": 278803
+    }
+  ]
+}

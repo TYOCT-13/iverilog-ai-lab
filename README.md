@@ -26,7 +26,9 @@
 
 - [操作与 UART 反例重放](docs/demo/ic_agent_v2_walkthrough.md)
 - [v7完整组别只读诊断](docs/experiment/agent_v7_diagnosis_2026-10-05.md)：0新模型/仿真。30普通拒绝为27顶层多余字段、3超12向量；信用/仲裁反馈47请求中28后续观察无端口过程，但42实际采样包均完整，240刺激拍含24显式复位且低于随机288拍；不能单因归结其4/12检出。
-- [v8完整对照事前方案（已验收待执行）](docs/experiment/agent_feedback_study_plan_2026-10-05.md)：通用真实stdout/来源绑定有界端口摘要、validator生成层级约束及独立复位规划说明已接入。[稳定源码验收](docs/experiment/agent_feedback_source_validation_2026-10-05.md)1858通过/2跳过/0失败错误、mypy87零问题、263指纹无变；[非实现者事前代理审查](docs/review/agent_feedback_prereg_review_2026-10-05.md)121项不同非DUT检查完成，131登记与66旧资产绑定一致。配置已具最终SHA，待本地提交与执行，尚无本批API请求或改善证明；沿用v7八模块/目标/顺序/预算/基线，432任务、504理论请求、共享1M。八类均已暴露，本轮不是新留出。
+- [v8八模块完整对照](docs/experiment/agent_feedback_study_live_2026-10-05.md)：冻结`a969337`，432任务完成；fixed/random/protocol_random/single/feedback/no_feedback各48缺陷检出48/32/48/29/37/37。反馈37与历史v7及本轮无反馈均持平，未证明整体改善；信用/仲裁8/12与随机持平，开发组20/24、edge/pulse9/12。八模块均已暴露，不是新留出。
+- [v8原件回执](docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json)与[独立预算账](docs/experiment/agent_feedback_study_budget_2026-10-05.json)：306实际收费请求、973149tokens、余26851，0未知/待结算；414执行/484轮/968侧，18零DUT，8项token_budget终态未发送，严格资格false；正确143/144执行、实际误报0，未执行项不算通过。18格式拒绝后12轨迹恢复执行/5检出，16预算拒绝后9轨迹执行/4检出，含无反馈，不作反馈因果结论。
+- [v8源码验收](docs/experiment/agent_feedback_source_validation_2026-10-05.md)、[事前审查](docs/review/agent_feedback_prereg_review_2026-10-05.md)及[结果双代理审计](docs/review/agent_feedback_study_review_2026-10-05.md)：1858通过/2跳过、mypy87、263指纹稳定；全量原件核验完成，非H02。268端口摘要均complete、46实付后续请求含端口反馈；305安全原文保留，1安全blocked不重建；两项既有非预算预检错误单列，不能将新retry预检0写成全零。
 - [v7八模块完整对照](docs/experiment/agent_budget_study_live_2026-10-05.md)：冻结`b9f7a6e`，432任务；fixed/random/protocol_random/single/feedback/no_feedback各48缺陷任务检出48/32/48/34/37/37。反馈与无反馈相同，低于两种人工基线；信用/仲裁子组反馈4/12也低于随机8/12，不能概括所有子组超随机或证明反馈因果、显著性/泛化。
 - [v7完整证据](docs/experiment/agent-budget-study-live-2026-10-05/receipt.json)：334请求、833216tokens，单一100万账本余166784，0未知/待结算；423实际执行、507轮/1014侧、9零DUT，严格资格false。30普通格式拒绝后17样本恢复执行、6检出均首实际轮；3预算拒绝全部在请求cap末尾，0后续真实恢复或检出。预算补提已实现，但本批真实收益未证，不用余额挑失败重跑。
 - [v7源码检查](docs/experiment/agent_budget_source_validation_2026-10-05.md)与[事前代理审查](docs/review/agent_budget_prereg_review_2026-10-05.md)：r1全量1716通过/2跳过、mypy85，但中途补改登记runner及对应test；补漏后r2定向34通过、mypy85、207指纹无变，没有冻结后全套重跑。旧credit/arb已API暴露；edge/pulse是旧离线基准、此前26份受控Agent cohort未含这两模块，本批仅作module-set-holdout子组，不是外部盲测。v7提示与旧四基准12段表示同时变化，不能同比归因。
@@ -50,6 +52,8 @@
 - [API 消息与格式修复说明](docs/experiment/deepseek_decision_v4_2026-10-04.md)：系统规则和状态采用独立消息，保持严格动作校验；新版本实测另列，旧结果不覆盖。
 
 旧v5 ZIP与28be1ed版正式PDF尚未包含新增短预算、六项诊断、上一轮1M、v6恢复及新模块留出实验。新1570全仓与历史1307/1170全仓、65/263定向测试不相加；新增记录按独立路径阅读。
+
+后续仅有两个新内部模块在私有准备中，尚未API执行或公共验收，不预填留出成功。
 
 使用服务商 API，不运行本地模型权重。内部合成新模块互斥留出已完成；真人试用、独立人工复核和外部独立盲测仍待完成；最新验收、提交材料及证据路径统一从 [资料索引](docs/INDEX.md) 进入。历史 83/83 等成绩仍属于原手写测试台和旧版本，不能当成这次 Agent 成绩。
 

@@ -1,0 +1,343 @@
+{
+  "schema": "v8-core-audit-supplement-v1",
+  "core_audit_sha256": "d6065c75dd3224b30f6d68874e32b0a940eca544935ea28f36f5707db0b1cd5e",
+  "tool_sha256": "d31da92f019a0383e357f2c583f15ee2ee8bb303bb8e98a3928521e7e5e701f9",
+  "console_log_sha256": "5df2f9c7ae105ecb47ef8e0f2971ced2cd1fed8bc20a29800fbd4c2aa35bdedb",
+  "full_audit_exit_code": 0,
+  "schema_status_counts": {
+    "passed": 287,
+    "rejected": 18,
+    "not_reached": 9
+  },
+  "no_feedback_states_three_none": 117,
+  "pre_http_budget_rejections": [
+    {
+      "row_index": 415,
+      "decision_index": 0,
+      "row_requests": 0,
+      "row_status": "token_budget",
+      "error_type": "TokenBudgetExceeded"
+    },
+    {
+      "row_index": 416,
+      "decision_index": 0,
+      "row_requests": 0,
+      "row_status": "token_budget",
+      "error_type": "TokenBudgetExceeded"
+    },
+    {
+      "row_index": 420,
+      "decision_index": 0,
+      "row_requests": 0,
+      "row_status": "token_budget",
+      "error_type": "TokenBudgetExceeded"
+    },
+    {
+      "row_index": 421,
+      "decision_index": 0,
+      "row_requests": 0,
+      "row_status": "token_budget",
+      "error_type": "TokenBudgetExceeded"
+    },
+    {
+      "row_index": 425,
+      "decision_index": 0,
+      "row_requests": 0,
+      "row_status": "token_budget",
+      "error_type": "TokenBudgetExceeded"
+    },
+    {
+      "row_index": 426,
+      "decision_index": 0,
+      "row_requests": 0,
+      "row_status": "token_budget",
+      "error_type": "TokenBudgetExceeded"
+    },
+    {
+      "row_index": 430,
+      "decision_index": 0,
+      "row_requests": 0,
+      "row_status": "token_budget",
+      "error_type": "TokenBudgetExceeded"
+    },
+    {
+      "row_index": 431,
+      "decision_index": 0,
+      "row_requests": 0,
+      "row_status": "token_budget",
+      "error_type": "TokenBudgetExceeded"
+    }
+  ],
+  "charged_response_count": 306,
+  "budget_rejections": [
+    {
+      "row_index": 4,
+      "decision_index": 2,
+      "code": "stimulus_budget_exceeded",
+      "later_actual_execution": false,
+      "later_rounds": [],
+      "task_detected": false
+    },
+    {
+      "row_index": 14,
+      "decision_index": 1,
+      "code": "stimulus_budget_exceeded",
+      "later_actual_execution": true,
+      "later_rounds": [
+        2
+      ],
+      "task_detected": false
+    },
+    {
+      "row_index": 29,
+      "decision_index": 0,
+      "code": "stimulus_budget_exceeded",
+      "later_actual_execution": false,
+      "later_rounds": [],
+      "task_detected": false
+    },
+    {
+      "row_index": 40,
+      "decision_index": 2,
+      "code": "stimulus_budget_exceeded",
+      "later_actual_execution": false,
+      "later_rounds": [],
+      "task_detected": false
+    },
+    {
+      "row_index": 46,
+      "decision_index": 2,
+      "code": "stimulus_budget_exceeded",
+      "later_actual_execution": false,
+      "later_rounds": [],
+      "task_detected": false
+    },
+    {
+      "row_index": 82,
+      "decision_index": 1,
+      "code": "stimulus_budget_exceeded",
+      "later_actual_execution": true,
+      "later_rounds": [
+        2
+      ],
+      "task_detected": false
+    },
+    {
+      "row_index": 113,
+      "decision_index": 0,
+      "code": "stimulus_budget_exceeded",
+      "later_actual_execution": false,
+      "later_rounds": [],
+      "task_detected": false
+    },
+    {
+      "row_index": 140,
+      "decision_index": 1,
+      "code": "stimulus_budget_exceeded",
+      "later_actual_execution": true,
+      "later_rounds": [
+        2
+      ],
+      "task_detected": false
+    },
+    {
+      "row_index": 173,
+      "decision_index": 1,
+      "code": "stimulus_budget_exceeded",
+      "later_actual_execution": true,
+      "later_rounds": [
+        2
+      ],
+      "task_detected": false
+    },
+    {
+      "row_index": 205,
+      "decision_index": 0,
+      "code": "stimulus_budget_exceeded",
+      "later_actual_execution": true,
+      "later_rounds": [
+        1
+      ],
+      "task_detected": true
+    },
+    {
+      "row_index": 267,
+      "decision_index": 0,
+      "code": "stimulus_budget_exceeded",
+      "later_actual_execution": true,
+      "later_rounds": [
+        1
+      ],
+      "task_detected": true
+    },
+    {
+      "row_index": 282,
+      "decision_index": 1,
+      "code": "stimulus_budget_exceeded",
+      "later_actual_execution": true,
+      "later_rounds": [
+        2
+      ],
+      "task_detected": true
+    },
+    {
+      "row_index": 368,
+      "decision_index": 2,
+      "code": "stimulus_budget_exceeded",
+      "later_actual_execution": false,
+      "later_rounds": [],
+      "task_detected": false
+    },
+    {
+      "row_index": 383,
+      "decision_index": 0,
+      "code": "stimulus_budget_exceeded",
+      "later_actual_execution": false,
+      "later_rounds": [],
+      "task_detected": false
+    },
+    {
+      "row_index": 395,
+      "decision_index": 1,
+      "code": "stimulus_budget_exceeded",
+      "later_actual_execution": true,
+      "later_rounds": [
+        2
+      ],
+      "task_detected": false
+    },
+    {
+      "row_index": 410,
+      "decision_index": 0,
+      "code": "stimulus_budget_exceeded",
+      "later_actual_execution": true,
+      "later_rounds": [
+        1
+      ],
+      "task_detected": true
+    }
+  ],
+  "format_rejections": [
+    {
+      "row_index": 55,
+      "decision_index": 0,
+      "later_actual_execution": false,
+      "task_detected": false
+    },
+    {
+      "row_index": 61,
+      "decision_index": 0,
+      "later_actual_execution": true,
+      "task_detected": true
+    },
+    {
+      "row_index": 114,
+      "decision_index": 0,
+      "later_actual_execution": true,
+      "task_detected": false
+    },
+    {
+      "row_index": 124,
+      "decision_index": 0,
+      "later_actual_execution": true,
+      "task_detected": true
+    },
+    {
+      "row_index": 129,
+      "decision_index": 1,
+      "later_actual_execution": true,
+      "task_detected": false
+    },
+    {
+      "row_index": 163,
+      "decision_index": 1,
+      "later_actual_execution": true,
+      "task_detected": false
+    },
+    {
+      "row_index": 178,
+      "decision_index": 1,
+      "later_actual_execution": true,
+      "task_detected": false
+    },
+    {
+      "row_index": 209,
+      "decision_index": 0,
+      "later_actual_execution": false,
+      "task_detected": false
+    },
+    {
+      "row_index": 210,
+      "decision_index": 0,
+      "later_actual_execution": true,
+      "task_detected": true
+    },
+    {
+      "row_index": 240,
+      "decision_index": 0,
+      "later_actual_execution": false,
+      "task_detected": false
+    },
+    {
+      "row_index": 296,
+      "decision_index": 1,
+      "later_actual_execution": true,
+      "task_detected": false
+    },
+    {
+      "row_index": 326,
+      "decision_index": 0,
+      "later_actual_execution": true,
+      "task_detected": false
+    },
+    {
+      "row_index": 332,
+      "decision_index": 0,
+      "later_actual_execution": true,
+      "task_detected": false
+    },
+    {
+      "row_index": 336,
+      "decision_index": 0,
+      "later_actual_execution": false,
+      "task_detected": false
+    },
+    {
+      "row_index": 337,
+      "decision_index": 0,
+      "later_actual_execution": true,
+      "task_detected": true
+    },
+    {
+      "row_index": 347,
+      "decision_index": 0,
+      "later_actual_execution": false,
+      "task_detected": false
+    },
+    {
+      "row_index": 401,
+      "decision_index": 0,
+      "later_actual_execution": true,
+      "task_detected": true
+    },
+    {
+      "row_index": 404,
+      "decision_index": 0,
+      "later_actual_execution": false,
+      "task_detected": false
+    }
+  ],
+  "budget_rejected_requests_later_executed": 9,
+  "budget_rejection_tasks_later_executed": 9,
+  "format_rejected_requests_later_executed": 12,
+  "format_rejection_tasks_later_executed": 12,
+  "sequential_reservations_within_limit": true,
+  "min_reservation_slack_tokens": 1014,
+  "max_completion_tokens": 1338,
+  "actual_correct_controls_executed": 143,
+  "registered_correct_controls": 144,
+  "source_edits": 0,
+  "new_api_requests": 0,
+  "new_dut_runs": 0,
+  "human_H02": false
+}

@@ -1,0 +1,873 @@
+{
+  "schema": "agent-port-feedback-trace-audit-v1",
+  "created_at": "2026-10-05T04:31:43.743938+00:00",
+  "status": "passed",
+  "final_batch": true,
+  "reviewer": {
+    "kind": "AI tool-assisted code-author trace audit",
+    "recovery_code_author": true,
+    "human_trial": false,
+    "independent_human_review": false,
+    "H02": false
+  },
+  "scope": "decision/plan budgets, paid usage order, raw byte identity, v8 format hierarchy, feedback isolation, bounded port projection and actual-episode detection timing",
+  "limitations": [
+    "Active API credential was not read; credential checks are runtime guard metadata plus prior guard tests, not a fresh credential scan.",
+    "DUT pipeline/oracle, all frozen inputs and ZIP reviewed separately; this tool reads trace bindings without rerunning DUT.",
+    "Recovery following a paid rejection is descriptive; it is not a causal effect of feedback.",
+    "Provider token usage is not a billing statement or currency cost.",
+    "Request-body SHA identifies the ledger's canonical sorted JSON bytes; wire-order HTTP bytes are not separately archived.",
+    "Port complete means a bound finite stream; at most twelve selected samples are feedback, not protocol coverage or correctness.",
+    "All eight modules were exposed in earlier Agent comparisons; no new holdout or independent human evidence.",
+    "Local synthetic/mechanical tests are separate from this natural API batch, not added to its capability denominator."
+  ],
+  "originals": {
+    "directory": ".iverilog-ai/agent-feedback-study-live-20261005",
+    "preregistration_sha256": "49fa4af43f616a70c6ff0ba905a912689da71abb4b45e013c70b42dd75721ff2",
+    "results_sha256": "0386a0a7407d9a0f3f74590e4eb54b6880759ca83954c46ee870c36eb959f99d",
+    "token_budget_sha256": "ceea9752de0595f4afe65ce432fb715451cf74534bd607d86a37fd08aaf55660",
+    "frozen_prompt_version": "verification-agent-v8-bounded-port-feedback",
+    "frozen_prompt_sha256": "3dd3f86f6f15b2367dc8f0913c5f3c7fe646782258093a148170f60200d6a26a"
+  },
+  "registered_rows": 432,
+  "finished_rows": 432,
+  "audited_agent_traces": 216,
+  "counters": {
+    "raw_artifacts_examined": 305,
+    "raw_artifacts_verified": 305,
+    "schema_passed_decisions": 287,
+    "port_feedback_documents": 268,
+    "port_feedback_complete": 268,
+    "port_feedback_total_samples": 3244,
+    "port_feedback_returned_samples": 2203,
+    "port_feedback_omitted_samples": 1041,
+    "port_feedback_documents_with_omission": 78,
+    "port_feedback_documents_with_unknown_bits": 6,
+    "budget_rejected_decisions": 16,
+    "budget_rejected_paid_total_tokens": 58706,
+    "no_feedback_states": 117,
+    "traces_with_execution_after_budget_rejection": 9,
+    "shared_cap_all_rejections_without_execution": 9,
+    "detections_on_first_actual_episode": 99,
+    "format_rejected_decisions": 18,
+    "format_rejected_paid_total_tokens": 62066,
+    "detections_after_paid_format_rejection": 5,
+    "traces_with_execution_after_format_rejection": 12,
+    "detections_on_later_actual_episode": 4,
+    "schema_accepted_stops_without_new_execution": 1,
+    "detections_after_paid_budget_rejection": 4,
+    "preflight_rejected_decisions": 2,
+    "responses_without_raw_artifact": 9,
+    "reservation_rejected": 8
+  },
+  "accounting": {
+    "sent_requests": 306,
+    "ledger_not_sent_records": [],
+    "ledger_records": 306,
+    "ledger_matched_prefix": 306,
+    "ledger_remaining_unmatched_tail": 0,
+    "reported_tokens": 973149,
+    "unknown_reserved_tokens": 0,
+    "limit": 1000000
+  },
+  "format_distribution": [
+    {
+      "case": "credit_guard",
+      "strategy": "feedback",
+      "request_position": 1,
+      "type": "json_invalid",
+      "scope": "json",
+      "safe_field": "root",
+      "count": 1
+    },
+    {
+      "case": "edge_detector",
+      "strategy": "feedback",
+      "request_position": 1,
+      "type": "extra_forbidden",
+      "scope": "root",
+      "safe_field": "unknown_field",
+      "count": 1
+    },
+    {
+      "case": "handshake_stage",
+      "strategy": "no_feedback",
+      "request_position": 1,
+      "type": "extra_forbidden",
+      "scope": "root",
+      "safe_field": "unknown_field",
+      "count": 2
+    },
+    {
+      "case": "handshake_stage",
+      "strategy": "no_feedback",
+      "request_position": 2,
+      "type": "extra_forbidden",
+      "scope": "root",
+      "safe_field": "name",
+      "count": 1
+    },
+    {
+      "case": "handshake_stage",
+      "strategy": "single",
+      "request_position": 1,
+      "type": "extra_forbidden",
+      "scope": "root",
+      "safe_field": "unknown_field",
+      "count": 1
+    },
+    {
+      "case": "pulse_stretcher",
+      "strategy": "no_feedback",
+      "request_position": 1,
+      "type": "extra_forbidden",
+      "scope": "root",
+      "safe_field": "unknown_field",
+      "count": 1
+    },
+    {
+      "case": "rotating_arbiter",
+      "strategy": "feedback",
+      "request_position": 2,
+      "type": "string_too_long",
+      "scope": "root",
+      "safe_field": "reason",
+      "count": 2
+    },
+    {
+      "case": "spi_master",
+      "strategy": "feedback",
+      "request_position": 1,
+      "type": "too_long",
+      "scope": "vectors",
+      "safe_field": "vectors",
+      "count": 1
+    },
+    {
+      "case": "spi_master",
+      "strategy": "no_feedback",
+      "request_position": 1,
+      "type": "too_long",
+      "scope": "vectors",
+      "safe_field": "vectors",
+      "count": 1
+    },
+    {
+      "case": "spi_master",
+      "strategy": "single",
+      "request_position": 1,
+      "type": "too_long",
+      "scope": "vectors",
+      "safe_field": "vectors",
+      "count": 1
+    },
+    {
+      "case": "sync_fifo",
+      "strategy": "feedback",
+      "request_position": 1,
+      "type": "extra_forbidden",
+      "scope": "root",
+      "safe_field": "unknown_field",
+      "count": 1
+    },
+    {
+      "case": "sync_fifo",
+      "strategy": "single",
+      "request_position": 1,
+      "type": "too_long",
+      "scope": "vectors",
+      "safe_field": "vectors",
+      "count": 2
+    },
+    {
+      "case": "uart_tx",
+      "strategy": "no_feedback",
+      "request_position": 2,
+      "type": "value_error",
+      "scope": "root",
+      "safe_field": "root",
+      "count": 1
+    },
+    {
+      "case": "uart_tx",
+      "strategy": "single",
+      "request_position": 1,
+      "type": "too_long",
+      "scope": "vectors",
+      "safe_field": "vectors",
+      "count": 2
+    }
+  ],
+  "fatal_distribution": [
+    {
+      "case": "edge_detector",
+      "strategy": "feedback",
+      "request_position": 1,
+      "code": "TokenBudgetExceeded",
+      "count": 1
+    },
+    {
+      "case": "edge_detector",
+      "strategy": "no_feedback",
+      "request_position": 1,
+      "code": "TokenBudgetExceeded",
+      "count": 1
+    },
+    {
+      "case": "edge_detector",
+      "strategy": "single",
+      "request_position": 1,
+      "code": "TokenBudgetExceeded",
+      "count": 1
+    },
+    {
+      "case": "pulse_stretcher",
+      "strategy": "feedback",
+      "request_position": 1,
+      "code": "TokenBudgetExceeded",
+      "count": 1
+    },
+    {
+      "case": "pulse_stretcher",
+      "strategy": "no_feedback",
+      "request_position": 1,
+      "code": "TokenBudgetExceeded",
+      "count": 1
+    },
+    {
+      "case": "pulse_stretcher",
+      "strategy": "no_feedback",
+      "request_position": 1,
+      "code": "uninspectable_json_strings",
+      "count": 1
+    },
+    {
+      "case": "pulse_stretcher",
+      "strategy": "single",
+      "request_position": 1,
+      "code": "TokenBudgetExceeded",
+      "count": 1
+    },
+    {
+      "case": "rotating_arbiter",
+      "strategy": "feedback",
+      "request_position": 1,
+      "code": "TokenBudgetExceeded",
+      "count": 1
+    },
+    {
+      "case": "rotating_arbiter",
+      "strategy": "no_feedback",
+      "request_position": 1,
+      "code": "TokenBudgetExceeded",
+      "count": 1
+    }
+  ],
+  "response_distribution": [
+    {
+      "status": "blocked",
+      "reason": "TokenBudgetExceeded",
+      "count": 8
+    },
+    {
+      "status": "blocked",
+      "reason": "uninspectable_json_strings",
+      "count": 1
+    },
+    {
+      "status": "saved",
+      "reason": "json_invalid",
+      "count": 1
+    },
+    {
+      "status": "saved",
+      "reason": "json_valid",
+      "count": 304
+    }
+  ],
+  "port_feedback_distribution": [
+    {
+      "case": "credit_guard",
+      "strategy": "feedback",
+      "status": "complete",
+      "count": 11
+    },
+    {
+      "case": "credit_guard",
+      "strategy": "no_feedback",
+      "status": "complete",
+      "count": 12
+    },
+    {
+      "case": "credit_guard",
+      "strategy": "single",
+      "status": "complete",
+      "count": 8
+    },
+    {
+      "case": "edge_detector",
+      "strategy": "feedback",
+      "status": "complete",
+      "count": 12
+    },
+    {
+      "case": "edge_detector",
+      "strategy": "no_feedback",
+      "status": "complete",
+      "count": 13
+    },
+    {
+      "case": "edge_detector",
+      "strategy": "single",
+      "status": "complete",
+      "count": 8
+    },
+    {
+      "case": "handshake_stage",
+      "strategy": "feedback",
+      "status": "complete",
+      "count": 14
+    },
+    {
+      "case": "handshake_stage",
+      "strategy": "no_feedback",
+      "status": "complete",
+      "count": 14
+    },
+    {
+      "case": "handshake_stage",
+      "strategy": "single",
+      "status": "complete",
+      "count": 8
+    },
+    {
+      "case": "pulse_stretcher",
+      "strategy": "feedback",
+      "status": "complete",
+      "count": 14
+    },
+    {
+      "case": "pulse_stretcher",
+      "strategy": "no_feedback",
+      "status": "complete",
+      "count": 11
+    },
+    {
+      "case": "pulse_stretcher",
+      "strategy": "single",
+      "status": "complete",
+      "count": 7
+    },
+    {
+      "case": "rotating_arbiter",
+      "strategy": "feedback",
+      "status": "complete",
+      "count": 17
+    },
+    {
+      "case": "rotating_arbiter",
+      "strategy": "no_feedback",
+      "status": "complete",
+      "count": 18
+    },
+    {
+      "case": "rotating_arbiter",
+      "strategy": "single",
+      "status": "complete",
+      "count": 9
+    },
+    {
+      "case": "spi_master",
+      "strategy": "feedback",
+      "status": "complete",
+      "count": 11
+    },
+    {
+      "case": "spi_master",
+      "strategy": "no_feedback",
+      "status": "complete",
+      "count": 11
+    },
+    {
+      "case": "spi_master",
+      "strategy": "single",
+      "status": "complete",
+      "count": 7
+    },
+    {
+      "case": "sync_fifo",
+      "strategy": "feedback",
+      "status": "complete",
+      "count": 12
+    },
+    {
+      "case": "sync_fifo",
+      "strategy": "no_feedback",
+      "status": "complete",
+      "count": 12
+    },
+    {
+      "case": "sync_fifo",
+      "strategy": "single",
+      "status": "complete",
+      "count": 7
+    },
+    {
+      "case": "uart_tx",
+      "strategy": "feedback",
+      "status": "complete",
+      "count": 14
+    },
+    {
+      "case": "uart_tx",
+      "strategy": "no_feedback",
+      "status": "complete",
+      "count": 11
+    },
+    {
+      "case": "uart_tx",
+      "strategy": "single",
+      "status": "complete",
+      "count": 7
+    }
+  ],
+  "budget_rejection_events": [
+    {
+      "sample": 4,
+      "case": "sync_fifo",
+      "strategy": "feedback",
+      "variant": "reference",
+      "request_position": 3,
+      "remaining_requests": 0,
+      "prior_actual_episodes": 2,
+      "plan_error": {
+        "code": "stimulus_budget_exceeded",
+        "requested_stimulus_cycles": 9,
+        "remaining_stimulus_cycles": 2,
+        "requested_new_cycles": 9,
+        "max_new_cycles": 2,
+        "replay_cycles": 0,
+        "simulation_multiplier": 1
+      },
+      "usage_total_tokens": 5118,
+      "later_actual_episodes": [],
+      "later_detection": null
+    },
+    {
+      "sample": 14,
+      "case": "spi_master",
+      "strategy": "feedback",
+      "variant": "reference",
+      "request_position": 2,
+      "remaining_requests": 1,
+      "prior_actual_episodes": 1,
+      "plan_error": {
+        "code": "stimulus_budget_exceeded",
+        "requested_stimulus_cycles": 2,
+        "remaining_stimulus_cycles": 1,
+        "requested_new_cycles": 2,
+        "max_new_cycles": 1,
+        "replay_cycles": 0,
+        "simulation_multiplier": 1
+      },
+      "usage_total_tokens": 5224,
+      "later_actual_episodes": [
+        {
+          "decision": 3,
+          "round": 2,
+          "cycles": 1,
+          "failures": 0,
+          "completed_reference_checks": true
+        }
+      ],
+      "later_detection": null
+    },
+    {
+      "sample": 29,
+      "case": "credit_guard",
+      "strategy": "single",
+      "variant": "reference",
+      "request_position": 1,
+      "remaining_requests": 0,
+      "prior_actual_episodes": 0,
+      "plan_error": {
+        "code": "stimulus_budget_exceeded",
+        "requested_stimulus_cycles": 25,
+        "remaining_stimulus_cycles": 16,
+        "requested_new_cycles": 25,
+        "max_new_cycles": 16,
+        "replay_cycles": 0,
+        "simulation_multiplier": 1
+      },
+      "usage_total_tokens": 3062,
+      "later_actual_episodes": [],
+      "later_detection": null
+    },
+    {
+      "sample": 40,
+      "case": "edge_detector",
+      "strategy": "feedback",
+      "variant": "reference",
+      "request_position": 3,
+      "remaining_requests": 0,
+      "prior_actual_episodes": 2,
+      "plan_error": {
+        "code": "stimulus_budget_exceeded",
+        "requested_stimulus_cycles": 3,
+        "remaining_stimulus_cycles": 2,
+        "requested_new_cycles": 3,
+        "max_new_cycles": 2,
+        "replay_cycles": 0,
+        "simulation_multiplier": 1
+      },
+      "usage_total_tokens": 3527,
+      "later_actual_episodes": [],
+      "later_detection": null
+    },
+    {
+      "sample": 46,
+      "case": "pulse_stretcher",
+      "strategy": "no_feedback",
+      "variant": "reference",
+      "request_position": 3,
+      "remaining_requests": 0,
+      "prior_actual_episodes": 2,
+      "plan_error": {
+        "code": "stimulus_budget_exceeded",
+        "requested_stimulus_cycles": 6,
+        "remaining_stimulus_cycles": 2,
+        "requested_new_cycles": 6,
+        "max_new_cycles": 2,
+        "replay_cycles": 0,
+        "simulation_multiplier": 1
+      },
+      "usage_total_tokens": 2773,
+      "later_actual_episodes": [],
+      "later_detection": null
+    },
+    {
+      "sample": 82,
+      "case": "rotating_arbiter",
+      "strategy": "feedback",
+      "variant": "mutation_b",
+      "request_position": 2,
+      "remaining_requests": 1,
+      "prior_actual_episodes": 1,
+      "plan_error": {
+        "code": "stimulus_budget_exceeded",
+        "requested_stimulus_cycles": 9,
+        "remaining_stimulus_cycles": 8,
+        "requested_new_cycles": 9,
+        "max_new_cycles": 8,
+        "replay_cycles": 0,
+        "simulation_multiplier": 1
+      },
+      "usage_total_tokens": 4478,
+      "later_actual_episodes": [
+        {
+          "decision": 3,
+          "round": 2,
+          "cycles": 8,
+          "failures": 0,
+          "completed_reference_checks": true
+        }
+      ],
+      "later_detection": null
+    },
+    {
+      "sample": 113,
+      "case": "spi_master",
+      "strategy": "single",
+      "variant": "spi_bug_done_missing",
+      "request_position": 1,
+      "remaining_requests": 0,
+      "prior_actual_episodes": 0,
+      "plan_error": {
+        "code": "stimulus_budget_exceeded",
+        "requested_stimulus_cycles": 22,
+        "remaining_stimulus_cycles": 20,
+        "requested_new_cycles": 22,
+        "max_new_cycles": 20,
+        "replay_cycles": 0,
+        "simulation_multiplier": 1
+      },
+      "usage_total_tokens": 3483,
+      "later_actual_episodes": [],
+      "later_detection": null
+    },
+    {
+      "sample": 140,
+      "case": "pulse_stretcher",
+      "strategy": "no_feedback",
+      "variant": "mutation_c",
+      "request_position": 2,
+      "remaining_requests": 1,
+      "prior_actual_episodes": 1,
+      "plan_error": {
+        "code": "stimulus_budget_exceeded",
+        "requested_stimulus_cycles": 5,
+        "remaining_stimulus_cycles": 3,
+        "requested_new_cycles": 5,
+        "max_new_cycles": 3,
+        "replay_cycles": 0,
+        "simulation_multiplier": 1
+      },
+      "usage_total_tokens": 2810,
+      "later_actual_episodes": [
+        {
+          "decision": 3,
+          "round": 2,
+          "cycles": 3,
+          "failures": 0,
+          "completed_reference_checks": true
+        }
+      ],
+      "later_detection": null
+    },
+    {
+      "sample": 173,
+      "case": "credit_guard",
+      "strategy": "feedback",
+      "variant": "reference",
+      "request_position": 2,
+      "remaining_requests": 1,
+      "prior_actual_episodes": 1,
+      "plan_error": {
+        "code": "stimulus_budget_exceeded",
+        "requested_stimulus_cycles": 12,
+        "remaining_stimulus_cycles": 10,
+        "requested_new_cycles": 12,
+        "max_new_cycles": 10,
+        "replay_cycles": 0,
+        "simulation_multiplier": 1
+      },
+      "usage_total_tokens": 3830,
+      "later_actual_episodes": [
+        {
+          "decision": 3,
+          "round": 2,
+          "cycles": 6,
+          "failures": 0,
+          "completed_reference_checks": true
+        }
+      ],
+      "later_detection": null
+    },
+    {
+      "sample": 205,
+      "case": "spi_master",
+      "strategy": "no_feedback",
+      "variant": "spi_bug_sclk_polarity",
+      "request_position": 1,
+      "remaining_requests": 2,
+      "prior_actual_episodes": 0,
+      "plan_error": {
+        "code": "stimulus_budget_exceeded",
+        "requested_stimulus_cycles": 21,
+        "remaining_stimulus_cycles": 20,
+        "requested_new_cycles": 21,
+        "max_new_cycles": 20,
+        "replay_cycles": 0,
+        "simulation_multiplier": 1
+      },
+      "usage_total_tokens": 3457,
+      "later_actual_episodes": [
+        {
+          "decision": 2,
+          "round": 1,
+          "cycles": 20,
+          "failures": 25,
+          "completed_reference_checks": true
+        }
+      ],
+      "later_detection": {
+        "decision": 2,
+        "round": 1,
+        "cycles": 20,
+        "failures": 25,
+        "completed_reference_checks": true
+      }
+    },
+    {
+      "sample": 267,
+      "case": "credit_guard",
+      "strategy": "feedback",
+      "variant": "mutation_c",
+      "request_position": 1,
+      "remaining_requests": 2,
+      "prior_actual_episodes": 0,
+      "plan_error": {
+        "code": "stimulus_budget_exceeded",
+        "requested_stimulus_cycles": 17,
+        "remaining_stimulus_cycles": 16,
+        "requested_new_cycles": 17,
+        "max_new_cycles": 16,
+        "replay_cycles": 0,
+        "simulation_multiplier": 1
+      },
+      "usage_total_tokens": 2824,
+      "later_actual_episodes": [
+        {
+          "decision": 2,
+          "round": 1,
+          "cycles": 16,
+          "failures": 3,
+          "completed_reference_checks": true
+        }
+      ],
+      "later_detection": {
+        "decision": 2,
+        "round": 1,
+        "cycles": 16,
+        "failures": 3,
+        "completed_reference_checks": true
+      }
+    },
+    {
+      "sample": 282,
+      "case": "pulse_stretcher",
+      "strategy": "feedback",
+      "variant": "mutation_c",
+      "request_position": 2,
+      "remaining_requests": 1,
+      "prior_actual_episodes": 1,
+      "plan_error": {
+        "code": "stimulus_budget_exceeded",
+        "requested_stimulus_cycles": 9,
+        "remaining_stimulus_cycles": 8,
+        "requested_new_cycles": 9,
+        "max_new_cycles": 8,
+        "replay_cycles": 0,
+        "simulation_multiplier": 1
+      },
+      "usage_total_tokens": 3873,
+      "later_actual_episodes": [
+        {
+          "decision": 3,
+          "round": 2,
+          "cycles": 8,
+          "failures": 2,
+          "completed_reference_checks": true
+        }
+      ],
+      "later_detection": {
+        "decision": 3,
+        "round": 2,
+        "cycles": 8,
+        "failures": 2,
+        "completed_reference_checks": true
+      }
+    },
+    {
+      "sample": 368,
+      "case": "rotating_arbiter",
+      "strategy": "feedback",
+      "variant": "mutation_b",
+      "request_position": 3,
+      "remaining_requests": 0,
+      "prior_actual_episodes": 2,
+      "plan_error": {
+        "code": "stimulus_budget_exceeded",
+        "requested_stimulus_cycles": 6,
+        "remaining_stimulus_cycles": 3,
+        "requested_new_cycles": 6,
+        "max_new_cycles": 3,
+        "replay_cycles": 0,
+        "simulation_multiplier": 1
+      },
+      "usage_total_tokens": 3926,
+      "later_actual_episodes": [],
+      "later_detection": null
+    },
+    {
+      "sample": 383,
+      "case": "pulse_stretcher",
+      "strategy": "single",
+      "variant": "mutation_b",
+      "request_position": 1,
+      "remaining_requests": 0,
+      "prior_actual_episodes": 0,
+      "plan_error": {
+        "code": "stimulus_budget_exceeded",
+        "requested_stimulus_cycles": 20,
+        "remaining_stimulus_cycles": 16,
+        "requested_new_cycles": 20,
+        "max_new_cycles": 16,
+        "replay_cycles": 0,
+        "simulation_multiplier": 1
+      },
+      "usage_total_tokens": 2679,
+      "later_actual_episodes": [],
+      "later_detection": null
+    },
+    {
+      "sample": 395,
+      "case": "uart_tx",
+      "strategy": "feedback",
+      "variant": "uart_bug_busy_never_clears",
+      "request_position": 2,
+      "remaining_requests": 1,
+      "prior_actual_episodes": 1,
+      "plan_error": {
+        "code": "stimulus_budget_exceeded",
+        "requested_stimulus_cycles": 42,
+        "remaining_stimulus_cycles": 41,
+        "requested_new_cycles": 42,
+        "max_new_cycles": 41,
+        "replay_cycles": 0,
+        "simulation_multiplier": 1
+      },
+      "usage_total_tokens": 5004,
+      "later_actual_episodes": [
+        {
+          "decision": 3,
+          "round": 2,
+          "cycles": 41,
+          "failures": 0,
+          "completed_reference_checks": true
+        }
+      ],
+      "later_detection": null
+    },
+    {
+      "sample": 410,
+      "case": "credit_guard",
+      "strategy": "feedback",
+      "variant": "mutation_c",
+      "request_position": 1,
+      "remaining_requests": 2,
+      "prior_actual_episodes": 0,
+      "plan_error": {
+        "code": "stimulus_budget_exceeded",
+        "requested_stimulus_cycles": 17,
+        "remaining_stimulus_cycles": 16,
+        "requested_new_cycles": 17,
+        "max_new_cycles": 16,
+        "replay_cycles": 0,
+        "simulation_multiplier": 1
+      },
+      "usage_total_tokens": 2638,
+      "later_actual_episodes": [
+        {
+          "decision": 2,
+          "round": 1,
+          "cycles": 9,
+          "failures": 1,
+          "completed_reference_checks": true
+        }
+      ],
+      "later_detection": {
+        "decision": 2,
+        "round": 1,
+        "cycles": 9,
+        "failures": 1,
+        "completed_reference_checks": true
+      }
+    }
+  ],
+  "errors": [],
+  "private_review": {
+    "path": ".tmp-codex/v8-feedback-trace-audit-20261005-final.json",
+    "sha256": "5ed5734a7fa2dddd295542b59387aca7e7574440eac1997feaf8e31b2ec45282"
+  }
+}
