@@ -1,0 +1,4 @@
+IVERILOG_AI_RESULT {"ok":false,"test_id":"paused","cycle":0,"signal":"o_count","expected":"0000","actual":"0001"}
+IVERILOG_AI_OBSERVATION {"cycle":0,"time_ns":26.000,"test_id":"paused","sample_phase":"after","inputs":{"i_clk":"1","i_rstn":"1","i_enable":"0","i_event":"1","i_clear":"0"},"outputs":{"o_count":"0001"}}
+IVERILOG_AI_SUMMARY {"checks":1,"failures":1,"cycles":1}
+C:\Users\TYOCT\AppData\Local\Temp\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\test_actual_generic_per_cycle_3\event_accumulator-B\tb_event_accumulator.v:51: $finish(1) called at 26000 (1ps)

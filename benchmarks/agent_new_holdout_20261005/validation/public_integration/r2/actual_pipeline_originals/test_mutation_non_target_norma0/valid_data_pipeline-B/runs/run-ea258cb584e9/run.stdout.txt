@@ -1,0 +1,9 @@
+IVERILOG_AI_RESULT {"ok":true,"test_id":"normal","cycle":0,"signal":"o_valid","expected":"0","actual":"0"}
+IVERILOG_AI_RESULT {"ok":true,"test_id":"normal","cycle":0,"signal":"o_data","expected":"00000000","actual":"00000000"}
+IVERILOG_AI_RESULT {"ok":true,"test_id":"normal","cycle":1,"signal":"o_valid","expected":"0","actual":"0"}
+IVERILOG_AI_RESULT {"ok":true,"test_id":"normal","cycle":1,"signal":"o_data","expected":"00000000","actual":"00000000"}
+IVERILOG_AI_RESULT {"ok":true,"test_id":"normal","cycle":2,"signal":"o_valid","expected":"0","actual":"0"}
+IVERILOG_AI_RESULT {"ok":true,"test_id":"normal","cycle":2,"signal":"o_data","expected":"00000000","actual":"00000000"}
+IVERILOG_AI_RESULT {"ok":true,"test_id":"normal","cycle":3,"signal":"o_valid","expected":"0","actual":"0"}
+IVERILOG_AI_RESULT {"ok":true,"test_id":"normal","cycle":3,"signal":"o_data","expected":"00000000","actual":"00000000"}
+IVERILOG_AI_SUMMARY {"checks":8,"failures":0,"cycles":4}

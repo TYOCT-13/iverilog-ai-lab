@@ -1,0 +1,7 @@
+IVERILOG_AI_RESULT {"ok":true,"test_id":"accept","cycle":0,"signal":"o_valid","expected":"0","actual":"0"}
+IVERILOG_AI_RESULT {"ok":true,"test_id":"accept","cycle":0,"signal":"o_data","expected":"00000000","actual":"00000000"}
+IVERILOG_AI_OBSERVATION {"cycle":0,"time_ns":26.000,"test_id":"accept","sample_phase":"after","inputs":{"i_clk":"1","i_rstn":"1","i_flush":"0","i_valid":"1","i_data":"10100101"},"outputs":{"o_valid":"0","o_data":"00000000"}}
+IVERILOG_AI_RESULT {"ok":true,"test_id":"next","cycle":1,"signal":"o_valid","expected":"1","actual":"1"}
+IVERILOG_AI_RESULT {"ok":true,"test_id":"next","cycle":1,"signal":"o_data","expected":"10100101","actual":"10100101"}
+IVERILOG_AI_OBSERVATION {"cycle":1,"time_ns":36.000,"test_id":"next","sample_phase":"after","inputs":{"i_clk":"1","i_rstn":"1","i_flush":"0","i_valid":"0","i_data":"10100101"},"outputs":{"o_valid":"1","o_data":"10100101"}}
+IVERILOG_AI_SUMMARY {"checks":4,"failures":0,"cycles":2}

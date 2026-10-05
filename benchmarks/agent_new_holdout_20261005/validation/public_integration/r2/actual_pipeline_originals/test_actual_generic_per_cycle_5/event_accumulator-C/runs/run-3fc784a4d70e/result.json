@@ -1,0 +1,110 @@
+{
+  "artifacts": {
+    "compile_stderr": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_5\\event_accumulator-C\\runs\\run-3fc784a4d70e\\compile.stderr.txt",
+    "compile_stdout": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_5\\event_accumulator-C\\runs\\run-3fc784a4d70e\\compile.stdout.txt",
+    "compile_vvp": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_5\\event_accumulator-C\\runs\\run-3fc784a4d70e\\compile.vvp",
+    "result_json": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_5\\event_accumulator-C\\runs\\run-3fc784a4d70e\\result.json",
+    "run_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_5\\event_accumulator-C\\runs\\run-3fc784a4d70e",
+    "run_stderr": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_5\\event_accumulator-C\\runs\\run-3fc784a4d70e\\run.stderr.txt",
+    "run_stdout": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_5\\event_accumulator-C\\runs\\run-3fc784a4d70e\\run.stdout.txt",
+    "vcd": ""
+  },
+  "compile": {
+    "command": [
+      "D:\\iverilog\\bin\\iverilog.exe",
+      "-g2012",
+      "-o",
+      "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_5\\event_accumulator-C\\runs\\run-3fc784a4d70e\\compile.vvp",
+      "-s",
+      "tb_event_accumulator",
+      "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\event_accumulator\\C\\event_accumulator.v",
+      "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_5\\event_accumulator-C\\tb_event_accumulator.v"
+    ],
+    "duration_ms": 44,
+    "error": null,
+    "output_truncated": false,
+    "returncode": 0,
+    "status": "passed",
+    "stderr": "",
+    "stdout": "",
+    "timed_out": false
+  },
+  "config": {
+    "allowed_roots": [
+      "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\event_accumulator\\C",
+      "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_5"
+    ],
+    "defines": [],
+    "include_dirs": [],
+    "iverilog_path": "D:\\iverilog\\bin\\iverilog.exe",
+    "keep_artifacts": true,
+    "language": "2012",
+    "output_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_5\\event_accumulator-C\\runs",
+    "rtl_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\event_accumulator\\C\\event_accumulator.v",
+    "rtl_sha256": "d07a85d4e8a27e5b04a54666f1fb504ea69d4c8136f5eb1c715688d6075cb0d4",
+    "testbench_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_5\\event_accumulator-C\\tb_event_accumulator.v",
+    "testbench_sha256": "a782949b0d646285597f8abb3986f3eceb8487083925ffa639e8edc0f1b35ef2",
+    "timeout_seconds": 30.0,
+    "top_module": "tb_event_accumulator",
+    "vvp_path": "D:\\iverilog\\bin\\vvp.exe"
+  },
+  "diagnostics": [],
+  "error": null,
+  "failures": [
+    {
+      "actual": "0001",
+      "cycle": 1,
+      "expected": "0000",
+      "message": "testbench assertion failed",
+      "severity": "warn",
+      "signal": "o_count",
+      "test_id": "clear"
+    }
+  ],
+  "finished_at": "2026-10-05T05:18:30.576778Z",
+  "passed": true,
+  "records": [
+    {
+      "actual": "0001",
+      "cycle": 0,
+      "expected": "0001",
+      "ok": true,
+      "severity": "info",
+      "signal": "o_count",
+      "test_id": "accept"
+    },
+    {
+      "actual": "0001",
+      "cycle": 1,
+      "expected": "0000",
+      "ok": false,
+      "severity": "warn",
+      "signal": "o_count",
+      "test_id": "clear"
+    }
+  ],
+  "run": {
+    "command": [
+      "D:\\iverilog\\bin\\vvp.exe",
+      "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_5\\event_accumulator-C\\runs\\run-3fc784a4d70e\\compile.vvp"
+    ],
+    "duration_ms": 15,
+    "error": null,
+    "output_truncated": false,
+    "returncode": 0,
+    "status": "passed",
+    "stderr": "",
+    "stdout": "IVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"accept\",\"cycle\":0,\"signal\":\"o_count\",\"expected\":\"0001\",\"actual\":\"0001\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":0,\"time_ns\":26.000,\"test_id\":\"accept\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_enable\":\"1\",\"i_event\":\"1\",\"i_clear\":\"0\"},\"outputs\":{\"o_count\":\"0001\"}}\nIVERILOG_AI_RESULT {\"ok\":false,\"test_id\":\"clear\",\"cycle\":1,\"signal\":\"o_count\",\"expected\":\"0000\",\"actual\":\"0001\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":1,\"time_ns\":36.000,\"test_id\":\"clear\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_enable\":\"0\",\"i_event\":\"0\",\"i_clear\":\"1\"},\"outputs\":{\"o_count\":\"0001\"}}\nIVERILOG_AI_SUMMARY {\"checks\":2,\"failures\":1,\"cycles\":2}\nC:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_5\\event_accumulator-C\\tb_event_accumulator.v:65: $finish(1) called at 36000 (1ps)\n",
+    "timed_out": false
+  },
+  "run_id": "3fc784a4d70e",
+  "schema_version": "1.0",
+  "started_at": "2026-10-05T05:18:30.509019Z",
+  "status": "passed_with_warnings",
+  "summary": {
+    "checks": 2,
+    "cycles": 2,
+    "failures": 1
+  },
+  "verdict": "failed_checks"
+}

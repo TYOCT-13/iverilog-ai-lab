@@ -1,0 +1,101 @@
+{
+  "artifacts": {
+    "compile_stderr": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_3\\event_accumulator-B\\runs\\run-939de85f283d\\compile.stderr.txt",
+    "compile_stdout": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_3\\event_accumulator-B\\runs\\run-939de85f283d\\compile.stdout.txt",
+    "compile_vvp": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_3\\event_accumulator-B\\runs\\run-939de85f283d\\compile.vvp",
+    "result_json": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_3\\event_accumulator-B\\runs\\run-939de85f283d\\result.json",
+    "run_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_3\\event_accumulator-B\\runs\\run-939de85f283d",
+    "run_stderr": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_3\\event_accumulator-B\\runs\\run-939de85f283d\\run.stderr.txt",
+    "run_stdout": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_3\\event_accumulator-B\\runs\\run-939de85f283d\\run.stdout.txt",
+    "vcd": ""
+  },
+  "compile": {
+    "command": [
+      "D:\\iverilog\\bin\\iverilog.exe",
+      "-g2012",
+      "-o",
+      "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_3\\event_accumulator-B\\runs\\run-939de85f283d\\compile.vvp",
+      "-s",
+      "tb_event_accumulator",
+      "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\event_accumulator\\B\\event_accumulator.v",
+      "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_3\\event_accumulator-B\\tb_event_accumulator.v"
+    ],
+    "duration_ms": 43,
+    "error": null,
+    "output_truncated": false,
+    "returncode": 0,
+    "status": "passed",
+    "stderr": "",
+    "stdout": "",
+    "timed_out": false
+  },
+  "config": {
+    "allowed_roots": [
+      "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\event_accumulator\\B",
+      "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_3"
+    ],
+    "defines": [],
+    "include_dirs": [],
+    "iverilog_path": "D:\\iverilog\\bin\\iverilog.exe",
+    "keep_artifacts": true,
+    "language": "2012",
+    "output_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_3\\event_accumulator-B\\runs",
+    "rtl_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\event_accumulator\\B\\event_accumulator.v",
+    "rtl_sha256": "65bb2c35aa123348348766232b48f2499556395f88a8015cb97713324a08b9f1",
+    "testbench_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_3\\event_accumulator-B\\tb_event_accumulator.v",
+    "testbench_sha256": "fa7b57738dc91c2b880be2f262ee291c365b74505a99201d99ece8f977a834d5",
+    "timeout_seconds": 30.0,
+    "top_module": "tb_event_accumulator",
+    "vvp_path": "D:\\iverilog\\bin\\vvp.exe"
+  },
+  "diagnostics": [],
+  "error": null,
+  "failures": [
+    {
+      "actual": "0001",
+      "cycle": 0,
+      "expected": "0000",
+      "message": "testbench assertion failed",
+      "severity": "warn",
+      "signal": "o_count",
+      "test_id": "paused"
+    }
+  ],
+  "finished_at": "2026-10-05T05:18:30.379939Z",
+  "passed": true,
+  "records": [
+    {
+      "actual": "0001",
+      "cycle": 0,
+      "expected": "0000",
+      "ok": false,
+      "severity": "warn",
+      "signal": "o_count",
+      "test_id": "paused"
+    }
+  ],
+  "run": {
+    "command": [
+      "D:\\iverilog\\bin\\vvp.exe",
+      "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_3\\event_accumulator-B\\runs\\run-939de85f283d\\compile.vvp"
+    ],
+    "duration_ms": 15,
+    "error": null,
+    "output_truncated": false,
+    "returncode": 0,
+    "status": "passed",
+    "stderr": "",
+    "stdout": "IVERILOG_AI_RESULT {\"ok\":false,\"test_id\":\"paused\",\"cycle\":0,\"signal\":\"o_count\",\"expected\":\"0000\",\"actual\":\"0001\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":0,\"time_ns\":26.000,\"test_id\":\"paused\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_enable\":\"0\",\"i_event\":\"1\",\"i_clear\":\"0\"},\"outputs\":{\"o_count\":\"0001\"}}\nIVERILOG_AI_SUMMARY {\"checks\":1,\"failures\":1,\"cycles\":1}\nC:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_3\\event_accumulator-B\\tb_event_accumulator.v:51: $finish(1) called at 26000 (1ps)\n",
+    "timed_out": false
+  },
+  "run_id": "939de85f283d",
+  "schema_version": "1.0",
+  "started_at": "2026-10-05T05:18:30.312152Z",
+  "status": "passed_with_warnings",
+  "summary": {
+    "checks": 1,
+    "cycles": 1,
+    "failures": 1
+  },
+  "verdict": "failed_checks"
+}

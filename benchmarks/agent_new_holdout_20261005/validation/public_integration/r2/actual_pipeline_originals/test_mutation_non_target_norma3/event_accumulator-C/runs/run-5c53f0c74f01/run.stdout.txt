@@ -1,0 +1,5 @@
+IVERILOG_AI_RESULT {"ok":true,"test_id":"normal","cycle":0,"signal":"o_count","expected":"0000","actual":"0000"}
+IVERILOG_AI_RESULT {"ok":true,"test_id":"normal","cycle":1,"signal":"o_count","expected":"0000","actual":"0000"}
+IVERILOG_AI_RESULT {"ok":true,"test_id":"normal","cycle":2,"signal":"o_count","expected":"0000","actual":"0000"}
+IVERILOG_AI_RESULT {"ok":true,"test_id":"normal","cycle":3,"signal":"o_count","expected":"0000","actual":"0000"}
+IVERILOG_AI_SUMMARY {"checks":4,"failures":0,"cycles":4}

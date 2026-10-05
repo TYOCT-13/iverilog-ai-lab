@@ -1,0 +1,6 @@
+IVERILOG_AI_RESULT {"ok":true,"test_id":"accept","cycle":0,"signal":"o_count","expected":"0001","actual":"0001"}
+IVERILOG_AI_OBSERVATION {"cycle":0,"time_ns":26.000,"test_id":"accept","sample_phase":"after","inputs":{"i_clk":"1","i_rstn":"1","i_enable":"1","i_event":"1","i_clear":"0"},"outputs":{"o_count":"0001"}}
+IVERILOG_AI_RESULT {"ok":false,"test_id":"clear","cycle":1,"signal":"o_count","expected":"0000","actual":"0001"}
+IVERILOG_AI_OBSERVATION {"cycle":1,"time_ns":36.000,"test_id":"clear","sample_phase":"after","inputs":{"i_clk":"1","i_rstn":"1","i_enable":"0","i_event":"0","i_clear":"1"},"outputs":{"o_count":"0001"}}
+IVERILOG_AI_SUMMARY {"checks":2,"failures":1,"cycles":2}
+C:\Users\TYOCT\AppData\Local\Temp\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\test_actual_generic_per_cycle_5\event_accumulator-C\tb_event_accumulator.v:65: $finish(1) called at 36000 (1ps)

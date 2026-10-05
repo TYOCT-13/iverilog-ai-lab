@@ -1,0 +1,2 @@
+{"mode": "execute", "freeze_status": "FROZEN", "registered_rows": 108, "defect_tasks_per_strategy": 12, "correct_tasks_per_strategy": 6, "theoretical_requests": 126, "shared_token_cap": 1000000}
+New internal holdout failed: ValueError: all registered inputs must be committed at the registered source revision

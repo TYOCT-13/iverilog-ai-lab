@@ -1,0 +1,128 @@
+{
+  "artifacts": {
+    "compile_stderr": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\runs\\run-ea53084ac645\\compile.stderr.txt",
+    "compile_stdout": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\runs\\run-ea53084ac645\\compile.stdout.txt",
+    "compile_vvp": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\runs\\run-ea53084ac645\\compile.vvp",
+    "result_json": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\runs\\run-ea53084ac645\\result.json",
+    "run_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\runs\\run-ea53084ac645",
+    "run_stderr": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\runs\\run-ea53084ac645\\run.stderr.txt",
+    "run_stdout": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\runs\\run-ea53084ac645\\run.stdout.txt",
+    "vcd": ""
+  },
+  "compile": {
+    "command": [
+      "D:\\iverilog\\bin\\iverilog.exe",
+      "-g2012",
+      "-o",
+      "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\runs\\run-ea53084ac645\\compile.vvp",
+      "-s",
+      "tb_valid_data_pipeline",
+      "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\valid_data_pipeline\\C\\valid_data_pipeline.v",
+      "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\tb_valid_data_pipeline.v"
+    ],
+    "duration_ms": 42,
+    "error": null,
+    "output_truncated": false,
+    "returncode": 0,
+    "status": "passed",
+    "stderr": "",
+    "stdout": "",
+    "timed_out": false
+  },
+  "config": {
+    "allowed_roots": [
+      "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\valid_data_pipeline\\C",
+      "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4"
+    ],
+    "defines": [],
+    "include_dirs": [],
+    "iverilog_path": "D:\\iverilog\\bin\\iverilog.exe",
+    "keep_artifacts": true,
+    "language": "2012",
+    "output_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\runs",
+    "rtl_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\valid_data_pipeline\\C\\valid_data_pipeline.v",
+    "rtl_sha256": "49b4e5832a7c001e16a0bac8dbc3c7c90d2a03eb9ec6b2f6ab26731343604713",
+    "testbench_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\tb_valid_data_pipeline.v",
+    "testbench_sha256": "ebbd3a2031b2fb07b2d181523b84a747e0fc597d5d84c967f9bd0162978feb56",
+    "timeout_seconds": 30.0,
+    "top_module": "tb_valid_data_pipeline",
+    "vvp_path": "D:\\iverilog\\bin\\vvp.exe"
+  },
+  "diagnostics": [],
+  "error": null,
+  "failures": [
+    {
+      "actual": "1",
+      "cycle": 1,
+      "expected": "0",
+      "message": "testbench assertion failed",
+      "severity": "warn",
+      "signal": "o_valid",
+      "test_id": "next"
+    }
+  ],
+  "finished_at": "2026-10-05T05:18:30.477128Z",
+  "passed": true,
+  "records": [
+    {
+      "actual": "0",
+      "cycle": 0,
+      "expected": "0",
+      "ok": true,
+      "severity": "info",
+      "signal": "o_valid",
+      "test_id": "accept"
+    },
+    {
+      "actual": "00000000",
+      "cycle": 0,
+      "expected": "00000000",
+      "ok": true,
+      "severity": "info",
+      "signal": "o_data",
+      "test_id": "accept"
+    },
+    {
+      "actual": "1",
+      "cycle": 1,
+      "expected": "0",
+      "ok": false,
+      "severity": "warn",
+      "signal": "o_valid",
+      "test_id": "next"
+    },
+    {
+      "actual": "00000000",
+      "cycle": 1,
+      "expected": "00000000",
+      "ok": true,
+      "severity": "info",
+      "signal": "o_data",
+      "test_id": "next"
+    }
+  ],
+  "run": {
+    "command": [
+      "D:\\iverilog\\bin\\vvp.exe",
+      "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\runs\\run-ea53084ac645\\compile.vvp"
+    ],
+    "duration_ms": 15,
+    "error": null,
+    "output_truncated": false,
+    "returncode": 0,
+    "status": "passed",
+    "stderr": "",
+    "stdout": "IVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"accept\",\"cycle\":0,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"0\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"accept\",\"cycle\":0,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":0,\"time_ns\":26.000,\"test_id\":\"accept\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"1\",\"i_data\":\"10100101\"},\"outputs\":{\"o_valid\":\"0\",\"o_data\":\"00000000\"}}\nIVERILOG_AI_RESULT {\"ok\":false,\"test_id\":\"next\",\"cycle\":1,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"1\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"next\",\"cycle\":1,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":1,\"time_ns\":36.000,\"test_id\":\"next\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"1\",\"i_valid\":\"0\",\"i_data\":\"10100101\"},\"outputs\":{\"o_valid\":\"1\",\"o_data\":\"00000000\"}}\nIVERILOG_AI_SUMMARY {\"checks\":4,\"failures\":1,\"cycles\":2}\nC:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\tb_valid_data_pipeline.v:79: $finish(1) called at 36000 (1ps)\n",
+    "timed_out": false
+  },
+  "run_id": "ea53084ac645",
+  "schema_version": "1.0",
+  "started_at": "2026-10-05T05:18:30.411071Z",
+  "status": "passed_with_warnings",
+  "summary": {
+    "checks": 4,
+    "cycles": 2,
+    "failures": 1
+  },
+  "verdict": "failed_checks"
+}

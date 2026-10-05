@@ -1,0 +1,3 @@
+IVERILOG_AI_RESULT {"ok":true,"test_id":"paused","cycle":0,"signal":"o_count","expected":"0000","actual":"0000"}
+IVERILOG_AI_OBSERVATION {"cycle":0,"time_ns":26.000,"test_id":"paused","sample_phase":"after","inputs":{"i_clk":"1","i_rstn":"1","i_enable":"0","i_event":"1","i_clear":"0"},"outputs":{"o_count":"0000"}}
+IVERILOG_AI_SUMMARY {"checks":1,"failures":0,"cycles":1}
