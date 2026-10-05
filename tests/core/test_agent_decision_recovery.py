@@ -153,7 +153,8 @@ def test_bad_field_locations_use_only_bounded_known_tokens(tmp_path):
     result = run(tmp_path, service)
     diagnostic = service.states[1]["latest_decision_error"]
     assert diagnostic["code"] == "schema_invalid"
-    assert diagnostic["errors"] == [{"type": "extra_forbidden", "location": ["unknown_field"]}]
+    assert diagnostic["errors"] == [{"type": "extra_forbidden", "location": ["unknown_field"],
+                                      "scope": "root", "allowed_keys": ["action", "reason", "vectors"]}]
     assert "ignore_policy" not in json.dumps(diagnostic) and "do-not-repeat" not in json.dumps(diagnostic)
 
 

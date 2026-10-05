@@ -1,0 +1,2244 @@
+{
+  "schema": "agent-v7-prior-readonly-diagnosis-v1",
+  "tasks": 108,
+  "agent_tasks": 54,
+  "agent_defect_tasks": 36,
+  "agent_correct_controls": 18,
+  "new_api_calls": 0,
+  "new_dut_executions": 0,
+  "credentials_read": false,
+  "new_model_scores": false,
+  "all_registered_prior_rows_included": true,
+  "aggregate": {
+    "fixed": {
+      "all": {
+        "tasks": 18,
+        "executed_tasks": 18,
+        "episodes": 18,
+        "stimulus_cycles": 288,
+        "manual_reset_cycles": 0,
+        "detected": 12,
+        "status": {
+          "not_detected": 6,
+          "detected": 12
+        },
+        "stop": {
+          "single_run": 18
+        },
+        "task_bin_presence_from_correct_spec": {
+          "acquire_above_zero": 9,
+          "acquire_at_zero": 9,
+          "acquire_request": 9,
+          "advance_selection": 9,
+          "contested_advance_repeated": 9,
+          "contested_hold": 9,
+          "contested_hold_repeated": 9,
+          "hold_selection": 9,
+          "idle_hold": 9,
+          "multi_request": 9,
+          "no_request": 9,
+          "pointer_wrap": 9,
+          "release_at_max": 9,
+          "release_below_max": 9,
+          "release_request": 9,
+          "simultaneous_hold": 9,
+          "simultaneous_hold_positive": 9,
+          "single_request": 9
+        }
+      },
+      "defects": {
+        "tasks": 12,
+        "executed_tasks": 12,
+        "episodes": 12,
+        "stimulus_cycles": 192,
+        "manual_reset_cycles": 0,
+        "detected": 12,
+        "status": {
+          "detected": 12
+        },
+        "stop": {
+          "single_run": 12
+        },
+        "task_bin_presence_from_correct_spec": {
+          "acquire_above_zero": 6,
+          "acquire_at_zero": 6,
+          "acquire_request": 6,
+          "advance_selection": 6,
+          "contested_advance_repeated": 6,
+          "contested_hold": 6,
+          "contested_hold_repeated": 6,
+          "hold_selection": 6,
+          "idle_hold": 6,
+          "multi_request": 6,
+          "no_request": 6,
+          "pointer_wrap": 6,
+          "release_at_max": 6,
+          "release_below_max": 6,
+          "release_request": 6,
+          "simultaneous_hold": 6,
+          "simultaneous_hold_positive": 6,
+          "single_request": 6
+        }
+      },
+      "by_case": {
+        "credit_guard": {
+          "tasks": 9,
+          "executed_tasks": 9,
+          "episodes": 9,
+          "stimulus_cycles": 144,
+          "manual_reset_cycles": 0,
+          "detected": 6,
+          "status": {
+            "not_detected": 3,
+            "detected": 6
+          },
+          "stop": {
+            "single_run": 9
+          },
+          "task_bin_presence_from_correct_spec": {
+            "acquire_above_zero": 9,
+            "acquire_at_zero": 9,
+            "acquire_request": 9,
+            "idle_hold": 9,
+            "release_at_max": 9,
+            "release_below_max": 9,
+            "release_request": 9,
+            "simultaneous_hold": 9,
+            "simultaneous_hold_positive": 9
+          }
+        },
+        "rotating_arbiter": {
+          "tasks": 9,
+          "executed_tasks": 9,
+          "episodes": 9,
+          "stimulus_cycles": 144,
+          "manual_reset_cycles": 0,
+          "detected": 6,
+          "status": {
+            "not_detected": 3,
+            "detected": 6
+          },
+          "stop": {
+            "single_run": 9
+          },
+          "task_bin_presence_from_correct_spec": {
+            "advance_selection": 9,
+            "contested_advance_repeated": 9,
+            "contested_hold": 9,
+            "contested_hold_repeated": 9,
+            "hold_selection": 9,
+            "multi_request": 9,
+            "no_request": 9,
+            "pointer_wrap": 9,
+            "single_request": 9
+          }
+        }
+      }
+    },
+    "random": {
+      "all": {
+        "tasks": 18,
+        "executed_tasks": 18,
+        "episodes": 18,
+        "stimulus_cycles": 288,
+        "manual_reset_cycles": 0,
+        "detected": 8,
+        "status": {
+          "not_detected": 10,
+          "detected": 8
+        },
+        "stop": {
+          "single_run": 18
+        },
+        "task_bin_presence_from_correct_spec": {
+          "acquire_above_zero": 9,
+          "acquire_request": 9,
+          "advance_selection": 9,
+          "contested_advance_repeated": 9,
+          "contested_hold": 9,
+          "hold_selection": 9,
+          "idle_hold": 9,
+          "multi_request": 9,
+          "no_request": 6,
+          "pointer_wrap": 9,
+          "release_below_max": 9,
+          "release_request": 9,
+          "simultaneous_hold": 9,
+          "simultaneous_hold_positive": 9,
+          "single_request": 9
+        }
+      },
+      "defects": {
+        "tasks": 12,
+        "executed_tasks": 12,
+        "episodes": 12,
+        "stimulus_cycles": 192,
+        "manual_reset_cycles": 0,
+        "detected": 8,
+        "status": {
+          "not_detected": 4,
+          "detected": 8
+        },
+        "stop": {
+          "single_run": 12
+        },
+        "task_bin_presence_from_correct_spec": {
+          "acquire_above_zero": 6,
+          "acquire_request": 6,
+          "advance_selection": 6,
+          "contested_advance_repeated": 6,
+          "contested_hold": 6,
+          "hold_selection": 6,
+          "idle_hold": 6,
+          "multi_request": 6,
+          "no_request": 4,
+          "pointer_wrap": 6,
+          "release_below_max": 6,
+          "release_request": 6,
+          "simultaneous_hold": 6,
+          "simultaneous_hold_positive": 6,
+          "single_request": 6
+        }
+      },
+      "by_case": {
+        "credit_guard": {
+          "tasks": 9,
+          "executed_tasks": 9,
+          "episodes": 9,
+          "stimulus_cycles": 144,
+          "manual_reset_cycles": 0,
+          "detected": 3,
+          "status": {
+            "not_detected": 6,
+            "detected": 3
+          },
+          "stop": {
+            "single_run": 9
+          },
+          "task_bin_presence_from_correct_spec": {
+            "acquire_above_zero": 9,
+            "acquire_request": 9,
+            "idle_hold": 9,
+            "release_below_max": 9,
+            "release_request": 9,
+            "simultaneous_hold": 9,
+            "simultaneous_hold_positive": 9
+          }
+        },
+        "rotating_arbiter": {
+          "tasks": 9,
+          "executed_tasks": 9,
+          "episodes": 9,
+          "stimulus_cycles": 144,
+          "manual_reset_cycles": 0,
+          "detected": 5,
+          "status": {
+            "not_detected": 4,
+            "detected": 5
+          },
+          "stop": {
+            "single_run": 9
+          },
+          "task_bin_presence_from_correct_spec": {
+            "advance_selection": 9,
+            "contested_advance_repeated": 9,
+            "contested_hold": 9,
+            "hold_selection": 9,
+            "multi_request": 9,
+            "no_request": 6,
+            "pointer_wrap": 9,
+            "single_request": 9
+          }
+        }
+      }
+    },
+    "protocol_random": {
+      "all": {
+        "tasks": 18,
+        "executed_tasks": 18,
+        "episodes": 18,
+        "stimulus_cycles": 288,
+        "manual_reset_cycles": 0,
+        "detected": 12,
+        "status": {
+          "not_detected": 6,
+          "detected": 12
+        },
+        "stop": {
+          "single_run": 18
+        },
+        "task_bin_presence_from_correct_spec": {
+          "acquire_above_zero": 9,
+          "acquire_at_zero": 9,
+          "acquire_request": 9,
+          "advance_selection": 9,
+          "contested_advance_repeated": 9,
+          "contested_hold": 9,
+          "contested_hold_repeated": 9,
+          "hold_selection": 9,
+          "idle_hold": 9,
+          "multi_request": 9,
+          "no_request": 9,
+          "pointer_wrap": 9,
+          "release_at_max": 9,
+          "release_below_max": 9,
+          "release_request": 9,
+          "simultaneous_hold": 9,
+          "simultaneous_hold_positive": 9,
+          "single_request": 9
+        }
+      },
+      "defects": {
+        "tasks": 12,
+        "executed_tasks": 12,
+        "episodes": 12,
+        "stimulus_cycles": 192,
+        "manual_reset_cycles": 0,
+        "detected": 12,
+        "status": {
+          "detected": 12
+        },
+        "stop": {
+          "single_run": 12
+        },
+        "task_bin_presence_from_correct_spec": {
+          "acquire_above_zero": 6,
+          "acquire_at_zero": 6,
+          "acquire_request": 6,
+          "advance_selection": 6,
+          "contested_advance_repeated": 6,
+          "contested_hold": 6,
+          "contested_hold_repeated": 6,
+          "hold_selection": 6,
+          "idle_hold": 6,
+          "multi_request": 6,
+          "no_request": 6,
+          "pointer_wrap": 6,
+          "release_at_max": 6,
+          "release_below_max": 6,
+          "release_request": 6,
+          "simultaneous_hold": 6,
+          "simultaneous_hold_positive": 6,
+          "single_request": 6
+        }
+      },
+      "by_case": {
+        "credit_guard": {
+          "tasks": 9,
+          "executed_tasks": 9,
+          "episodes": 9,
+          "stimulus_cycles": 144,
+          "manual_reset_cycles": 0,
+          "detected": 6,
+          "status": {
+            "not_detected": 3,
+            "detected": 6
+          },
+          "stop": {
+            "single_run": 9
+          },
+          "task_bin_presence_from_correct_spec": {
+            "acquire_above_zero": 9,
+            "acquire_at_zero": 9,
+            "acquire_request": 9,
+            "idle_hold": 9,
+            "release_at_max": 9,
+            "release_below_max": 9,
+            "release_request": 9,
+            "simultaneous_hold": 9,
+            "simultaneous_hold_positive": 9
+          }
+        },
+        "rotating_arbiter": {
+          "tasks": 9,
+          "executed_tasks": 9,
+          "episodes": 9,
+          "stimulus_cycles": 144,
+          "manual_reset_cycles": 0,
+          "detected": 6,
+          "status": {
+            "not_detected": 3,
+            "detected": 6
+          },
+          "stop": {
+            "single_run": 9
+          },
+          "task_bin_presence_from_correct_spec": {
+            "advance_selection": 9,
+            "contested_advance_repeated": 9,
+            "contested_hold": 9,
+            "contested_hold_repeated": 9,
+            "hold_selection": 9,
+            "multi_request": 9,
+            "no_request": 9,
+            "pointer_wrap": 9,
+            "single_request": 9
+          }
+        }
+      }
+    },
+    "single": {
+      "all": {
+        "tasks": 18,
+        "executed_tasks": 16,
+        "episodes": 16,
+        "stimulus_cycles": 114,
+        "manual_reset_cycles": 9,
+        "detected": 3,
+        "status": {
+          "not_detected": 13,
+          "request_budget": 2,
+          "detected": 3
+        },
+        "stop": {
+          "round_budget": 13,
+          "request_budget": 2,
+          "counterexample_found": 3
+        },
+        "task_bin_presence_from_correct_spec": {
+          "acquire_above_zero": 7,
+          "acquire_at_zero": 4,
+          "acquire_request": 7,
+          "advance_selection": 9,
+          "contested_hold": 1,
+          "hold_selection": 6,
+          "idle_hold": 6,
+          "manual_reset_cycles": 5,
+          "multi_request": 3,
+          "no_request": 8,
+          "pointer_wrap": 4,
+          "release_at_max": 1,
+          "release_below_max": 6,
+          "release_request": 6,
+          "simultaneous_hold": 6,
+          "simultaneous_hold_positive": 3,
+          "single_request": 9
+        }
+      },
+      "defects": {
+        "tasks": 12,
+        "executed_tasks": 11,
+        "episodes": 11,
+        "stimulus_cycles": 90,
+        "manual_reset_cycles": 5,
+        "detected": 3,
+        "status": {
+          "request_budget": 1,
+          "not_detected": 8,
+          "detected": 3
+        },
+        "stop": {
+          "request_budget": 1,
+          "round_budget": 8,
+          "counterexample_found": 3
+        },
+        "task_bin_presence_from_correct_spec": {
+          "acquire_above_zero": 5,
+          "acquire_at_zero": 3,
+          "acquire_request": 5,
+          "advance_selection": 6,
+          "contested_hold": 1,
+          "hold_selection": 4,
+          "idle_hold": 4,
+          "manual_reset_cycles": 3,
+          "multi_request": 2,
+          "no_request": 6,
+          "pointer_wrap": 4,
+          "release_at_max": 1,
+          "release_below_max": 5,
+          "release_request": 5,
+          "simultaneous_hold": 4,
+          "simultaneous_hold_positive": 1,
+          "single_request": 6
+        }
+      },
+      "by_case": {
+        "credit_guard": {
+          "tasks": 9,
+          "executed_tasks": 7,
+          "episodes": 7,
+          "stimulus_cycles": 63,
+          "manual_reset_cycles": 0,
+          "detected": 1,
+          "status": {
+            "not_detected": 6,
+            "request_budget": 2,
+            "detected": 1
+          },
+          "stop": {
+            "round_budget": 6,
+            "request_budget": 2,
+            "counterexample_found": 1
+          },
+          "task_bin_presence_from_correct_spec": {
+            "acquire_above_zero": 7,
+            "acquire_at_zero": 4,
+            "acquire_request": 7,
+            "idle_hold": 6,
+            "release_at_max": 1,
+            "release_below_max": 6,
+            "release_request": 6,
+            "simultaneous_hold": 6,
+            "simultaneous_hold_positive": 3
+          }
+        },
+        "rotating_arbiter": {
+          "tasks": 9,
+          "executed_tasks": 9,
+          "episodes": 9,
+          "stimulus_cycles": 51,
+          "manual_reset_cycles": 9,
+          "detected": 2,
+          "status": {
+            "not_detected": 7,
+            "detected": 2
+          },
+          "stop": {
+            "round_budget": 7,
+            "counterexample_found": 2
+          },
+          "task_bin_presence_from_correct_spec": {
+            "advance_selection": 9,
+            "contested_hold": 1,
+            "hold_selection": 6,
+            "manual_reset_cycles": 5,
+            "multi_request": 3,
+            "no_request": 8,
+            "pointer_wrap": 4,
+            "single_request": 9
+          }
+        }
+      }
+    },
+    "feedback": {
+      "all": {
+        "tasks": 18,
+        "executed_tasks": 18,
+        "episodes": 42,
+        "stimulus_cycles": 240,
+        "manual_reset_cycles": 24,
+        "detected": 4,
+        "status": {
+          "not_detected": 13,
+          "detected": 4,
+          "decision_format_error": 1
+        },
+        "stop": {
+          "cycle_budget": 4,
+          "round_budget": 7,
+          "model_stopped": 1,
+          "counterexample_found": 4,
+          "decision_format_error": 1,
+          "repeated_action": 1
+        },
+        "task_bin_presence_from_correct_spec": {
+          "acquire_above_zero": 8,
+          "acquire_at_zero": 4,
+          "acquire_request": 8,
+          "advance_selection": 9,
+          "contested_hold": 6,
+          "hold_selection": 9,
+          "idle_hold": 7,
+          "manual_reset_cycles": 11,
+          "multi_request": 9,
+          "no_request": 9,
+          "pointer_wrap": 6,
+          "release_at_max": 3,
+          "release_below_max": 9,
+          "release_request": 9,
+          "simultaneous_hold": 6,
+          "simultaneous_hold_positive": 6,
+          "single_request": 9
+        }
+      },
+      "defects": {
+        "tasks": 12,
+        "executed_tasks": 12,
+        "episodes": 26,
+        "stimulus_cycles": 150,
+        "manual_reset_cycles": 14,
+        "detected": 4,
+        "status": {
+          "not_detected": 8,
+          "detected": 4
+        },
+        "stop": {
+          "cycle_budget": 3,
+          "model_stopped": 1,
+          "counterexample_found": 4,
+          "repeated_action": 1,
+          "round_budget": 3
+        },
+        "task_bin_presence_from_correct_spec": {
+          "acquire_above_zero": 5,
+          "acquire_at_zero": 2,
+          "acquire_request": 5,
+          "advance_selection": 6,
+          "contested_hold": 3,
+          "hold_selection": 6,
+          "idle_hold": 4,
+          "manual_reset_cycles": 7,
+          "multi_request": 6,
+          "no_request": 6,
+          "pointer_wrap": 4,
+          "release_at_max": 2,
+          "release_below_max": 6,
+          "release_request": 6,
+          "simultaneous_hold": 4,
+          "simultaneous_hold_positive": 4,
+          "single_request": 6
+        }
+      },
+      "by_case": {
+        "credit_guard": {
+          "tasks": 9,
+          "executed_tasks": 9,
+          "episodes": 16,
+          "stimulus_cycles": 119,
+          "manual_reset_cycles": 8,
+          "detected": 2,
+          "status": {
+            "not_detected": 6,
+            "detected": 2,
+            "decision_format_error": 1
+          },
+          "stop": {
+            "cycle_budget": 4,
+            "counterexample_found": 2,
+            "decision_format_error": 1,
+            "repeated_action": 1,
+            "round_budget": 1
+          },
+          "task_bin_presence_from_correct_spec": {
+            "acquire_above_zero": 8,
+            "acquire_at_zero": 4,
+            "acquire_request": 8,
+            "idle_hold": 7,
+            "manual_reset_cycles": 4,
+            "release_at_max": 3,
+            "release_below_max": 9,
+            "release_request": 9,
+            "simultaneous_hold": 6,
+            "simultaneous_hold_positive": 6
+          }
+        },
+        "rotating_arbiter": {
+          "tasks": 9,
+          "executed_tasks": 9,
+          "episodes": 26,
+          "stimulus_cycles": 121,
+          "manual_reset_cycles": 16,
+          "detected": 2,
+          "status": {
+            "not_detected": 7,
+            "detected": 2
+          },
+          "stop": {
+            "round_budget": 6,
+            "model_stopped": 1,
+            "counterexample_found": 2
+          },
+          "task_bin_presence_from_correct_spec": {
+            "advance_selection": 9,
+            "contested_hold": 6,
+            "hold_selection": 9,
+            "manual_reset_cycles": 7,
+            "multi_request": 9,
+            "no_request": 9,
+            "pointer_wrap": 6,
+            "single_request": 9
+          }
+        }
+      }
+    },
+    "no_feedback": {
+      "all": {
+        "tasks": 18,
+        "executed_tasks": 18,
+        "episodes": 36,
+        "stimulus_cycles": 201,
+        "manual_reset_cycles": 20,
+        "detected": 6,
+        "status": {
+          "policy_error": 1,
+          "not_detected": 9,
+          "detected": 6,
+          "decision_format_error": 2
+        },
+        "stop": {
+          "policy_error": 1,
+          "round_budget": 7,
+          "counterexample_found": 6,
+          "request_budget": 2,
+          "decision_format_error": 2
+        },
+        "task_bin_presence_from_correct_spec": {
+          "acquire_above_zero": 7,
+          "acquire_at_zero": 6,
+          "acquire_request": 7,
+          "advance_selection": 9,
+          "contested_advance_repeated": 1,
+          "contested_hold": 3,
+          "hold_selection": 9,
+          "idle_hold": 6,
+          "manual_reset_cycles": 8,
+          "multi_request": 6,
+          "no_request": 9,
+          "pointer_wrap": 8,
+          "release_at_max": 2,
+          "release_below_max": 8,
+          "release_request": 8,
+          "simultaneous_hold": 7,
+          "simultaneous_hold_positive": 7,
+          "single_request": 9
+        }
+      },
+      "defects": {
+        "tasks": 12,
+        "executed_tasks": 12,
+        "episodes": 21,
+        "stimulus_cycles": 123,
+        "manual_reset_cycles": 10,
+        "detected": 6,
+        "status": {
+          "detected": 6,
+          "not_detected": 5,
+          "decision_format_error": 1
+        },
+        "stop": {
+          "counterexample_found": 6,
+          "round_budget": 3,
+          "request_budget": 2,
+          "decision_format_error": 1
+        },
+        "task_bin_presence_from_correct_spec": {
+          "acquire_above_zero": 4,
+          "acquire_at_zero": 4,
+          "acquire_request": 4,
+          "advance_selection": 6,
+          "contested_hold": 2,
+          "hold_selection": 6,
+          "idle_hold": 4,
+          "manual_reset_cycles": 4,
+          "multi_request": 4,
+          "no_request": 6,
+          "pointer_wrap": 5,
+          "release_at_max": 2,
+          "release_below_max": 6,
+          "release_request": 6,
+          "simultaneous_hold": 4,
+          "simultaneous_hold_positive": 4,
+          "single_request": 6
+        }
+      },
+      "by_case": {
+        "credit_guard": {
+          "tasks": 9,
+          "executed_tasks": 9,
+          "episodes": 13,
+          "stimulus_cycles": 89,
+          "manual_reset_cycles": 2,
+          "detected": 4,
+          "status": {
+            "policy_error": 1,
+            "detected": 4,
+            "not_detected": 2,
+            "decision_format_error": 2
+          },
+          "stop": {
+            "policy_error": 1,
+            "counterexample_found": 4,
+            "round_budget": 1,
+            "request_budget": 1,
+            "decision_format_error": 2
+          },
+          "task_bin_presence_from_correct_spec": {
+            "acquire_above_zero": 7,
+            "acquire_at_zero": 6,
+            "acquire_request": 7,
+            "idle_hold": 6,
+            "manual_reset_cycles": 1,
+            "release_at_max": 2,
+            "release_below_max": 8,
+            "release_request": 8,
+            "simultaneous_hold": 7,
+            "simultaneous_hold_positive": 7
+          }
+        },
+        "rotating_arbiter": {
+          "tasks": 9,
+          "executed_tasks": 9,
+          "episodes": 23,
+          "stimulus_cycles": 112,
+          "manual_reset_cycles": 18,
+          "detected": 2,
+          "status": {
+            "not_detected": 7,
+            "detected": 2
+          },
+          "stop": {
+            "round_budget": 6,
+            "counterexample_found": 2,
+            "request_budget": 1
+          },
+          "task_bin_presence_from_correct_spec": {
+            "advance_selection": 9,
+            "contested_advance_repeated": 1,
+            "contested_hold": 3,
+            "hold_selection": 9,
+            "manual_reset_cycles": 7,
+            "multi_request": 6,
+            "no_request": 9,
+            "pointer_wrap": 8,
+            "single_request": 9
+          }
+        }
+      }
+    }
+  },
+  "feedback_gap": {
+    "feedback_requests": 47,
+    "requests_with_prior_observation": 28,
+    "coverage_unsupported": 28,
+    "port_samples_present": 0,
+    "observation_keys": {
+      "checks": 28,
+      "expectation_source": 28,
+      "failure_samples": 28,
+      "failures": 28,
+      "functional_coverage": 28,
+      "run_id": 28,
+      "status": 28,
+      "verdict": 28,
+      "verification_status": 28
+    },
+    "counter_evidence": "Every actually executed prior episode has complete observed_samples; the omission is only from model state. Failure samples may include actual output values after a mismatch."
+  },
+  "scope": "Existing frozen v7 descriptive diagnosis, not causal or new performance evidence. Correct-spec bins here are offline diagnostic derived features, not production coverage claims or model-visible additions.",
+  "source_inputs": [
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\preregistration.json",
+      "sha256": "0ae79dbc7eba99c8de665f3e11c4af0c5f87a886057d6b04a4b7290c27416435"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\registered-inputs\\files\\examples\\credit_guard_contract.json",
+      "sha256": "57d570465c6a44bf0a80594e4b86ef27e8e6c4966a93f87b136901bc6ae07b2d"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\registered-inputs\\files\\examples\\rotating_arbiter_contract.json",
+      "sha256": "5cd2253935f311e3e10cdcf5c849df779aece0abed13ec2351f205219bef4349"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\registered-inputs\\files\\spec\\agent_holdout_20261005\\credit_guard_spec.md",
+      "sha256": "fb84ce7339bb5ef2069fe269ff84160d33d478462b41f50a18bd559f1e83ea36"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\registered-inputs\\files\\spec\\agent_holdout_20261005\\rotating_arbiter_spec.md",
+      "sha256": "99bfe04348fa8a2cf2304d76a5cd3d6608e457542e7b1fb6bccb42d0cabe5081"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\results.json",
+      "sha256": "4eb7e07c216281bd97e53c0ea259eabbf97578ceb2a259bc2fa74740d086ebb9"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-024\\agent\\agent_trajectory.json",
+      "sha256": "ce5557270664bd5b9574cdddc6b91a239a66022b8f8d4b8a87f3752a200ea1fe"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-024\\agent\\round-01\\observed_samples.json",
+      "sha256": "995fa45e2cd29e48dd0934a0023d5501f27700b00ba32b98f849b4676bd7c1dd"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-024\\agent\\round-01\\pipeline_result.json",
+      "sha256": "7ccf05a124d82d5f5515831edf2a46b85c1c13482407cf373e1cf2b2db10e0ad"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-024\\agent\\round-02\\observed_samples.json",
+      "sha256": "19ab05de82ff11a953c2f3540a2cdbb1cd08a53943235ac39e636114d52739ff"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-024\\agent\\round-02\\pipeline_result.json",
+      "sha256": "ad193b140816c5ffe92e6590bb8fe33c3dcc0f004e1e9573513938a4bd5ce0ca"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-025\\agent\\agent_trajectory.json",
+      "sha256": "ff8e28e05b2fcc650c33339c99aa3b92256a6b5b5758c434b75ae4d239863076"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-025\\agent\\round-01\\observed_samples.json",
+      "sha256": "f900a5ae86ae31447a1c3ba90d1aa68f8ef4cccdb231e2c742faa6dd988fe04c"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-025\\agent\\round-01\\pipeline_result.json",
+      "sha256": "228c7f4a3ab273f44dfdc2ac6c9a09e687b80eab66e56e8f872f06a613d632b7"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-026\\run\\observed_samples.json",
+      "sha256": "2b7c81b37d853c3ba244512f4a1292c32e568436554f179bfccb206ae3a7a97a"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-026\\run\\pipeline_result.json",
+      "sha256": "e7a3a7029db4afe0c46fa3fa08d5255a1afd426df4225b7d1e78ddd621a4e63d"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-027\\run\\observed_samples.json",
+      "sha256": "6fcd554387ce15bb360b5d6093376a47630f995b7fdca5971b65623053dad058"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-027\\run\\pipeline_result.json",
+      "sha256": "2c3f44d745d4b06a5b30e00f7608bf1a58a13680c7a021b75d446dd2bf8c3e74"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-028\\run\\observed_samples.json",
+      "sha256": "3201ed1f2eabaedf0707c49416d9253338519b827ca2e1cd7646525e76727cd2"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-028\\run\\pipeline_result.json",
+      "sha256": "52ff2b4435736312fe57cb7c765711c436d9a4b94b2a308a87598c66bfef1480"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-029\\agent\\agent_trajectory.json",
+      "sha256": "09299ba36277c11b343e63f1ff7e254ec3db32aa2f782483728f39150849f83c"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-029\\agent\\round-01\\observed_samples.json",
+      "sha256": "dde26822c3d90907b7b9cad80aba77fc084d6458e20131f7dd961c719d717779"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-029\\agent\\round-01\\pipeline_result.json",
+      "sha256": "3147e62df0062ffa78aad09541faf79c23a083732113e3d7f10fad51490f29f8"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-030\\agent\\agent_trajectory.json",
+      "sha256": "f5c9906a48d5dc219ed343e99611cb8fcb162acf9382ebbe8c611c690f8d6da5"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-030\\agent\\round-01\\observed_samples.json",
+      "sha256": "e7000f13e111009bebd3e8e9e2573b4c337bf3b0c894296baaf1807e17188787"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-030\\agent\\round-01\\pipeline_result.json",
+      "sha256": "2a04c6b9a3cf88cb7e37e53a9fe7c1911f8e467cd394b7c977d0a15910e0a8b7"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-030\\agent\\round-02\\observed_samples.json",
+      "sha256": "ab2f8be0473ce55ec4367915512182503b898de7196d68b480986d9d5dea7a58"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-030\\agent\\round-02\\pipeline_result.json",
+      "sha256": "aa3b26f07cccb74d6068b684d843d3aead674a9b977958aaaa288811a70d5a34"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-030\\agent\\round-03\\observed_samples.json",
+      "sha256": "3ca82a9ecaacc9f31df63679ffb417430b5efb6416406b120856dd7ad7740c94"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-030\\agent\\round-03\\pipeline_result.json",
+      "sha256": "d111f8ff7953b0fbf4f07c5ee42225f52730c2606a880971bb0f9a837a23caaa"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-031\\run\\observed_samples.json",
+      "sha256": "0eea6285331b8cb15543522fe2aa2aaacc3082be7b99d0fbd7f701d7c555369e"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-031\\run\\pipeline_result.json",
+      "sha256": "9dc75320d9242b1ab353bddc5458e42db0e4ee26dd37859a12491206a0b0ac05"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-032\\run\\observed_samples.json",
+      "sha256": "984056c44646f55d36a2ab9f5e92e06bfa99bbed1023bee512b8ad62cab3e272"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-032\\run\\pipeline_result.json",
+      "sha256": "391599680fa096cd6f7bec23e0160bb7acc2f24007752d87ed3a664345b1207a"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-033\\run\\observed_samples.json",
+      "sha256": "7ca89c0b8be57f7c8ef87ce9ccdbcdd6a18c30a05a58121e93df95348d705dd3"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-033\\run\\pipeline_result.json",
+      "sha256": "953cf482a72e5ee341a8ea24bfb95dbc94cf65292aa54d6be2e4acbf40f3bc96"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-034\\agent\\agent_trajectory.json",
+      "sha256": "f7944798cf8cd12e69b67ef6cf3cf19280df17a5cbe8512ff4573fb475f36abf"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-034\\agent\\round-01\\observed_samples.json",
+      "sha256": "7b58d84f776ce7741a16318d721d7d1e7fb5784f0771aa63060da1e8b22ebcd9"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-034\\agent\\round-01\\pipeline_result.json",
+      "sha256": "021a98d6c90c61eb069f4dc8c08b97a9a375d78eb47774ae058b3b05c0b43af9"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-035\\agent\\agent_trajectory.json",
+      "sha256": "a80b43aa16221ba01d51f14b9a25c1c7d64e5d58c432f9f54e713e78a264c8f2"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-035\\agent\\round-01\\observed_samples.json",
+      "sha256": "2fe288812380655e377574087fad8b3059ec3d7a17c75cfdb4ac6f587941e15d"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-035\\agent\\round-01\\pipeline_result.json",
+      "sha256": "90c0b0d943146a5b3d2f5016e71039bee5c7ec22225e244f30eca5b3fe9e7ded"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-035\\agent\\round-02\\observed_samples.json",
+      "sha256": "22251e088e78e2155e1cb4987291c3445f9b6bbd5134b03ba02cfbd5a62006b2"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-035\\agent\\round-02\\pipeline_result.json",
+      "sha256": "08018274e06bf65526b5bd73b4d190fde505cd3056534c8b27e5a7a901d03632"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-035\\agent\\round-03\\observed_samples.json",
+      "sha256": "67330c1d5dced0ad447b4928f9e6299053880a91e522b6c7a09f9427cc416378"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-035\\agent\\round-03\\pipeline_result.json",
+      "sha256": "6df91447ec844088a6f1c2dd37241087f60779ed66547ccc78662b8d3d1f2882"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-072\\agent\\agent_trajectory.json",
+      "sha256": "9af54e7a387ad52a4104e08dc85f7b83280aee7345f6a3894c2b1fd080eab648"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-072\\agent\\round-01\\observed_samples.json",
+      "sha256": "1cd5564b012fa7f1c26124819617dc442ccbc71b2a505176ad572f4f7042ca6d"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-072\\agent\\round-01\\pipeline_result.json",
+      "sha256": "1b79ab0ad3b50b133e3fd3560585ad9b126774bb96bea0fd870e9fe8b9f1e049"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-073\\run\\observed_samples.json",
+      "sha256": "35be55bc82756ffbdb2667f648481ac8e5499cb03152b6519439a477fb32fc7e"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-073\\run\\pipeline_result.json",
+      "sha256": "4e4fa4e4f883391aba8e99922e4c5342a7a2c6bcd25e6a0259a2885cfbaf8c58"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-074\\run\\observed_samples.json",
+      "sha256": "5747e76d1c2ad3ef799b8a5216f409b8ef614ca73cd7b66595f4abf4c5d9abbd"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-074\\run\\pipeline_result.json",
+      "sha256": "a72a12c26f8a3a640b8c884515d781079f05c5cc0a38cf99462daef9fdfa56f1"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-075\\run\\observed_samples.json",
+      "sha256": "d7f78d1a535c731f4910c08c65d478bf5715c640687743e16db5c3c7c5611fbd"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-075\\run\\pipeline_result.json",
+      "sha256": "e5afe1f239f96cf2b8dfc6a1ec8177e836ef1cc98f1d7dde9f3cc99b3590e5d3"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-076\\agent\\agent_trajectory.json",
+      "sha256": "b65ab7b2892b9d22d8f6a57f62053c56095b0cf992c1246a71b1d52eba0a9970"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-077\\agent\\agent_trajectory.json",
+      "sha256": "3f75de4be8334d3322ddac38d9d8cce822bee3126b597db964fbbe5b73e1bbe6"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-077\\agent\\round-01\\observed_samples.json",
+      "sha256": "536f7d118705bb89f725e7159c0264dd44bdb31e663abd4e91372f64f41c37b9"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-077\\agent\\round-01\\pipeline_result.json",
+      "sha256": "8270bf3f297e60ea11ab589efc789eddac7f1834ac22487664ff8e63f0c053d4"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-077\\agent\\round-02\\observed_samples.json",
+      "sha256": "487c45b966093a141188f5b9157b12cfa3655bc961e339de4a5f392dfc72e5b5"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-077\\agent\\round-02\\pipeline_result.json",
+      "sha256": "ba4476e54f4af2bf2f4ca08ee04868b2c297ff87e557123f79275cbbaa0d2083"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-078\\run\\observed_samples.json",
+      "sha256": "6d7e417fceeb5e8c93ff42717eb9bda128918262514299337afc3a56e2da9f2a"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-078\\run\\pipeline_result.json",
+      "sha256": "c9fa9031383dd1ec721d84eff5d8aae1781b5fcc11147bb4494721de78b7293d"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-079\\run\\observed_samples.json",
+      "sha256": "5f3e03018a7eb0b853ea8cc5f39c5ac4292f2d27c29f5f40e2d1db2eb17d5abe"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-079\\run\\pipeline_result.json",
+      "sha256": "d561ec2035cd83e4b8c6f299782f6c75d7f0cca27aa49fb44ee5e5e1b13669ef"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-080\\run\\observed_samples.json",
+      "sha256": "9a0d90ba30e7dfacf96917302a3bff26a4314d4168f218794e366d7f990cce51"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-080\\run\\pipeline_result.json",
+      "sha256": "7f9dd3bbe3d1b830748f56327dd68ffd1e14a57e0dd1cfe69e71891f6ba9b670"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-081\\agent\\agent_trajectory.json",
+      "sha256": "5f98c9867f27ff2da49dcfa414fc840df900dfe32ca6bf27e97a1a567c21d135"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-081\\agent\\round-01\\observed_samples.json",
+      "sha256": "f09dcd8df27af469214ebfb43fa42fb37b8217022179d9ffc6214860b85f0216"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-081\\agent\\round-01\\pipeline_result.json",
+      "sha256": "2cd7e04aa6ca0543936be6e3a08a06e1c405fec0015042fcd0204836b6742603"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-082\\agent\\agent_trajectory.json",
+      "sha256": "b9b6427846105c2776f2e4c3279727b72ea4c43e201920bf5aa3aa985f28a7c4"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-082\\agent\\round-01\\observed_samples.json",
+      "sha256": "2dadbd771fa69a5f2b3b720d2220f9002e5a77e55e9638b275540c11600d64e5"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-082\\agent\\round-01\\pipeline_result.json",
+      "sha256": "994d59ad862ce1cc8effd7b0c50257d799dd1e4ea3382aaed1d0dcba9df142f1"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-082\\agent\\round-02\\observed_samples.json",
+      "sha256": "6222f82f4618c9bb19e3ab67acb3e7220bc686ba6e97ce17630afd9ed37934e5"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-082\\agent\\round-02\\pipeline_result.json",
+      "sha256": "53d4c7069f5802241e8e9364468e9c90fc8325413549fb8f3039b0fd8f4497b3"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-083\\agent\\agent_trajectory.json",
+      "sha256": "bbaa5db2d7238cf5ac7fcf6dfa5e5e2551ee35f648d45d9cde3700c918376955"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-083\\agent\\round-01\\observed_samples.json",
+      "sha256": "5b7bc2e53c83bc65be4e0cb5dab196c8734a0e39b73bb1be7d3a91e80fe55db8"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-083\\agent\\round-01\\pipeline_result.json",
+      "sha256": "155cf75e5e731ff22ce124f83b58296b713baea0b83506f47f8e276d70fa15fe"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-083\\agent\\round-02\\observed_samples.json",
+      "sha256": "6a1164d5849e2f90b74053ff5bc5353af6b6f4bbbe52cae18dbfcc5137734ec9"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-083\\agent\\round-02\\pipeline_result.json",
+      "sha256": "22265db20e4425eb0ecb490d1219d1dba614ffa7e696b7ada3418784fef5164e"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-083\\agent\\round-03\\observed_samples.json",
+      "sha256": "62ef7546f6ba7410362038ed179dcbf1208bd1b4be2f0e019d343f3ccf151b53"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-083\\agent\\round-03\\pipeline_result.json",
+      "sha256": "8c2ef4f2236d2de4d17c26be0ce2a8900ee5bfe8005ceec4801326eb7058cc69"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-120\\run\\observed_samples.json",
+      "sha256": "4d08b08394449b3d401cd3f82e6090b435ea9bb931f929fc8c567be5790d3429"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-120\\run\\pipeline_result.json",
+      "sha256": "bd339d76a828546e4f10e6bff831fa64e1b618e7e00c7b3e2d4e7cbdd9a095c0"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-121\\run\\observed_samples.json",
+      "sha256": "b4ba08f0ae398936382b3e1d9ae6d476f19abf599ff65df95c1541b477609010"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-121\\run\\pipeline_result.json",
+      "sha256": "21a70a0a13f87bc131f7aaff164c071ba0e9b8cf88ea5934fdc7de827ecd1707"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-122\\run\\observed_samples.json",
+      "sha256": "236521ed66945ba5d2e0311e1dd38a1d3019619123410889f0bb62cb0adb4e7f"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-122\\run\\pipeline_result.json",
+      "sha256": "6c7868043579ccd0d421a7abbb0699cf19965b3827e642c231f0b6dad5da5cee"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-123\\agent\\agent_trajectory.json",
+      "sha256": "2f41cfea25bd426e97b335d409cfb9f533afac56ce42a9fc27a4932df253865a"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-123\\agent\\round-01\\observed_samples.json",
+      "sha256": "95bf9b2ef9549fb05069b3b75725cb57b7a3de509217f5128e2b0b631b5d3ff2"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-123\\agent\\round-01\\pipeline_result.json",
+      "sha256": "bc58dcfc3c89063948c355a77783dbaba744fb6e29d318a4a78d7bc413a0dc95"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-124\\agent\\agent_trajectory.json",
+      "sha256": "b6dc60f70b2f3b6548261ec9b8fe7248d44b4980e82c481130ce585bd32be8ca"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-124\\agent\\round-01\\observed_samples.json",
+      "sha256": "f3aea158389f522ac38a44a27a6aa943665b74ce71d64650961aeabdfb61eb92"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-124\\agent\\round-01\\pipeline_result.json",
+      "sha256": "7284b439d08c35152cc331aedfb3f5accfd694dfb92de5e4f9367c7ace9c5e6b"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-125\\agent\\agent_trajectory.json",
+      "sha256": "f51e3b5bd8007da58cbfa82883fee2df7c4778e0e08c2a8237e586e080f2a87e"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-125\\agent\\round-01\\observed_samples.json",
+      "sha256": "8e7b3ed9b379d12f0dc3a6e8c56ac3ab6412da403fec719c8519234a19e65805"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-125\\agent\\round-01\\pipeline_result.json",
+      "sha256": "133cc98292073a57d5770ce9fc22e9447fc1f1ca1a9fa5367e6fda4f938b9064"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-126\\run\\observed_samples.json",
+      "sha256": "f73cc305bd2b60c6877ad74a9c6b8c0c4d5ab0b87f6c0898eae17c287df85386"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-126\\run\\pipeline_result.json",
+      "sha256": "93cfb83eb8afc0b4374d871de2179fa9246ee86de690a1a3de226b5d171360c4"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-127\\run\\observed_samples.json",
+      "sha256": "77e111b12cddbd5fc999f70c7995919975e7b6ded053fc5100bc2f3de4e129bd"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-127\\run\\pipeline_result.json",
+      "sha256": "0d0d9679dbab891ca9b05ecd45de18bacc5fe035d8c3ab6615d8c917a5495721"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-128\\agent\\agent_trajectory.json",
+      "sha256": "47428a3ec389c1ce9ea99867646af7f4c941c2ca303995837e2eb10504b8d0e3"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-128\\agent\\round-01\\observed_samples.json",
+      "sha256": "1a1af0882edb30540d34714d914ab05ce4bf03c4be4f5a33046ec577891018cc"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-128\\agent\\round-01\\pipeline_result.json",
+      "sha256": "b0a85663cb46a0875e941ce4abb13e4279cf669a8298c58dcb49590e9353049c"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-129\\agent\\agent_trajectory.json",
+      "sha256": "ec4faa96b2da2e072fa5984509b68c5b47bdd8fadeeca85bca3d7c16dc39a974"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-129\\agent\\round-01\\observed_samples.json",
+      "sha256": "ddb404e143f4954b74ae1ea5f023c5d841fa28b7c5a2b171e02c595717c4ea30"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-129\\agent\\round-01\\pipeline_result.json",
+      "sha256": "45a1c57a0364016d02e3df87a645ec9676decb7c399d568b8943980e161a59c4"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-129\\agent\\round-02\\observed_samples.json",
+      "sha256": "ee5e63af2d22cb50ef2ca343c7fc8b2808f1af830b37ffbe1bb3b1ca87e1ed04"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-129\\agent\\round-02\\pipeline_result.json",
+      "sha256": "95cbe99329bbd3e1ba80524d35e26268ff569da878e016a66f4f318fce67708f"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-129\\agent\\round-03\\observed_samples.json",
+      "sha256": "65f55295fbee42c6bf75e963ca102eb6bf0a41a028fb912840073cfd45891216"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-129\\agent\\round-03\\pipeline_result.json",
+      "sha256": "43a6220acef7bb31b7bcad4b1f16dbea2990608513f1f20e27520b01b3e984d3"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-130\\agent\\agent_trajectory.json",
+      "sha256": "b6026dc6720d46b68bb369f05f46b7d6bf6563f1aa36db5e14f5c9f1cada57b2"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-130\\agent\\round-01\\observed_samples.json",
+      "sha256": "0cfa91f0a97506c3b898cc980092a361f250ccde57bcd710b0e3ac62ddd2b5d9"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-130\\agent\\round-01\\pipeline_result.json",
+      "sha256": "a035b2343a70d6dbd81716bb86cbe3f1e01410c16217408d89effb328bb8bc86"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-130\\agent\\round-02\\observed_samples.json",
+      "sha256": "07916b9b79c305746b8a41520afb6ec02508d9983646e23634c2543d0e8104bd"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-130\\agent\\round-02\\pipeline_result.json",
+      "sha256": "f2278f5a73b90c979cdb8cbadd6c8745a37567b36c474df1fcb1ae66708656f2"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-131\\run\\observed_samples.json",
+      "sha256": "5a6f97225d22978ca53caede2453e00fba68422e0d5e272692192bf1224484db"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-131\\run\\pipeline_result.json",
+      "sha256": "eb9101b8104acb49ec3ed71c2688aae8c46dbdd2bc61814690b0ea4949822039"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-168\\agent\\agent_trajectory.json",
+      "sha256": "d6f32be4a70efa1428395d796f6e1cf5fc36cdcc074c42ed346da7512b829ae0"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-168\\agent\\round-01\\observed_samples.json",
+      "sha256": "429833354f24311a1e30df818449c72e9a5b4e921002628489942d820f92d91e"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-168\\agent\\round-01\\pipeline_result.json",
+      "sha256": "ea750a84523d8352addb462250ee3f549d0c86b3415bac43e3af88e6f906ee19"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-168\\agent\\round-02\\observed_samples.json",
+      "sha256": "5c0f069bbff4cdec1ea67b3e01f052376ac5c26bf1c459032a0ccc7fa47050d6"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-168\\agent\\round-02\\pipeline_result.json",
+      "sha256": "943c5eaa39950600cbe68d0ce4b8b001ad8edec76a04be9eb6a9da735f09d0af"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-168\\agent\\round-03\\observed_samples.json",
+      "sha256": "9553975bca5e573122103c1efd2af295cb900f7e37b576bb47692761ccd40426"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-168\\agent\\round-03\\pipeline_result.json",
+      "sha256": "d3e30f84eb7d193053179426c9d7ae15147ccccc6d71a035b97f6c3cba2b0d21"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-169\\run\\observed_samples.json",
+      "sha256": "2b7c81b37d853c3ba244512f4a1292c32e568436554f179bfccb206ae3a7a97a"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-169\\run\\pipeline_result.json",
+      "sha256": "846b73b6760f51482a2cdbce5f8d74085e92fe99ce07bcd528a6e881b89f3df0"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-170\\run\\observed_samples.json",
+      "sha256": "743ab9aa1c3ab12cfbe1817793b1fdd333bfd106a340eff7e237cb091f3c104d"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-170\\run\\pipeline_result.json",
+      "sha256": "89ee66992c2bc099588321382af119095f27e572d8f8c06b9015abaa6351349c"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-171\\run\\observed_samples.json",
+      "sha256": "aaba11416092cc19c4ac81b9db7365ae68c55c0df037f0b5ccf967e8c4bc0258"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-171\\run\\pipeline_result.json",
+      "sha256": "5f8fa57c99eae436ff1381015ebea5f2788a93eae994c1416c5b0d1da86709b7"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-172\\agent\\agent_trajectory.json",
+      "sha256": "51deb7dee455cde1a372388da1c6fed01f96f5de902b24d12f3ed48683dd442d"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-173\\agent\\agent_trajectory.json",
+      "sha256": "0c177a353558240cedd777d65dae6c8512a2a89a9b246070acd2e91f8eefb91d"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-173\\agent\\round-01\\observed_samples.json",
+      "sha256": "2b6c43939f12a6898659af1d8b417aa8c8d9a0a4836e5c150c0cd6a394003d64"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-173\\agent\\round-01\\pipeline_result.json",
+      "sha256": "815f835e23e5164e90fd7d94828ba8429b2ec4f26820269951adc76fbac92785"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-173\\agent\\round-02\\observed_samples.json",
+      "sha256": "1171004f0360f5d4755d5fd16566967d6e7fe561531177ab58df836f0abe6535"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-173\\agent\\round-02\\pipeline_result.json",
+      "sha256": "2a8c560c8d5931b002b10a0a3d1e09a7a664c230c7217bae795095e25fca92ad"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-174\\run\\observed_samples.json",
+      "sha256": "0eea6285331b8cb15543522fe2aa2aaacc3082be7b99d0fbd7f701d7c555369e"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-174\\run\\pipeline_result.json",
+      "sha256": "d7d126678bd9b6a8853cc76d1e3eebca08dffc0f66b3b234e6eb29499feb8249"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-175\\run\\observed_samples.json",
+      "sha256": "910a1831a3215a4cdb9beafae5bcc41f7276e2b395f4fc2d72e92d408b9a781a"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-175\\run\\pipeline_result.json",
+      "sha256": "35775569c48108170c705cbfad8b073e1948b12b4721b0af8e99b2a5a26452f8"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-176\\run\\observed_samples.json",
+      "sha256": "300607c6cd2a0f02501d6249ecfb51064b5b98f9eb4d20eb5acb95cd1cfd8edb"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-176\\run\\pipeline_result.json",
+      "sha256": "751194636298e117764687fd1005b1256031ad74d9e1a795147da4362723bdc2"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-177\\agent\\agent_trajectory.json",
+      "sha256": "312ca6e13b321fade69a3c319b2cce1dc2ddf65aff4bfb0bd0882b6adb5f8e27"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-177\\agent\\round-01\\observed_samples.json",
+      "sha256": "ba0cd26f36079712764403df34352dba85837436c80c2f8871c29eb814d74b38"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-177\\agent\\round-01\\pipeline_result.json",
+      "sha256": "be5f242664deba9dc439ec8125d7cf6dbe6c3779c01c7acb2ad649ffa787dc3f"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-178\\agent\\agent_trajectory.json",
+      "sha256": "02908b9e80b9bccd5ab919e63a450fb9dd2a829e17e480b1b58ff7e0821038b0"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-178\\agent\\round-01\\observed_samples.json",
+      "sha256": "ba53bcd92d017372bc249e5331d5fe2eda1f2c495c8ebbc826a590b61ca581a8"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-178\\agent\\round-01\\pipeline_result.json",
+      "sha256": "9c7e2976260ca3586539cceb270520673f283ceff89c3c66880e7cf4f5019ead"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-178\\agent\\round-02\\observed_samples.json",
+      "sha256": "f7df7385b86c99a0a385add1e4f88ab21c9e981539dfd5fb02128f943b639819"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-178\\agent\\round-02\\pipeline_result.json",
+      "sha256": "21c8295276efa423da1cb0834529ce38dd70b07bfc7afbb61acbad48ef807b01"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-178\\agent\\round-03\\observed_samples.json",
+      "sha256": "6967333f536bdc1cba5c77ab940265e252e8a166adbf08ae4b4b7593afa7920e"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-178\\agent\\round-03\\pipeline_result.json",
+      "sha256": "8465fb36cdf1d6e9b48d3fc38214e9faa236a6a9546b273e5428dd314e40a6d8"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-179\\agent\\agent_trajectory.json",
+      "sha256": "8ccd0b230e728ae6cc95a2efd86791e59ee695dd365419a67f074b96d80c2f88"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-179\\agent\\round-01\\observed_samples.json",
+      "sha256": "4de553a616ba0dfb7272bf673a0e86f1a763ad6b2e14891ec28261d6540594fa"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-179\\agent\\round-01\\pipeline_result.json",
+      "sha256": "0f840a2a6514f446319de1f6c8f56873b9ebfa179dd34df8f8282964b0c22fa1"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-179\\agent\\round-02\\observed_samples.json",
+      "sha256": "f1bc212db386a9f297446a9b34f86e9bf9f97b938d65acff3f45e62b8defa28b"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-179\\agent\\round-02\\pipeline_result.json",
+      "sha256": "10852038ca11713a5038757e0896df420edb61c0ab20c3199d0b2cf4a4557c1d"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-179\\agent\\round-03\\observed_samples.json",
+      "sha256": "b9870a75e2a7044ecaae6e7ae09b68537c2383caa0934c164cc4c80a6cf12b2b"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-179\\agent\\round-03\\pipeline_result.json",
+      "sha256": "e47a45a32f89fc3de0b25ec9ba2891ec00e3516492e3ab2622f42626a622766e"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-216\\run\\observed_samples.json",
+      "sha256": "35be55bc82756ffbdb2667f648481ac8e5499cb03152b6519439a477fb32fc7e"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-216\\run\\pipeline_result.json",
+      "sha256": "b40e0825a63ec76600c2dae9f8f9cd463088dfdaaf416aa1e67bd2a352e733f7"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-217\\run\\observed_samples.json",
+      "sha256": "c552b79a82bfad2028bd936079251b98db78dd8d9296d93554b4f9d600953524"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-217\\run\\pipeline_result.json",
+      "sha256": "cdee196236c6223e0fada17dde1d6d569d3143ffdc54c7d505649aa4d0f5b73f"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-218\\run\\observed_samples.json",
+      "sha256": "0115ae0d19b52e7bc9cdf06b4a8be07b4af622cac07bd9607f55860e85107da6"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-218\\run\\pipeline_result.json",
+      "sha256": "37d1806beb09438373d01240c7a7ba8f6ec7b4fdb170d7cf7080959392659555"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-219\\agent\\agent_trajectory.json",
+      "sha256": "bebdc24a025bcf2d22e5e35e8d2e54804d4d334218c461f4e3c5055c92039930"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-219\\agent\\round-01\\observed_samples.json",
+      "sha256": "f9c311893d7d470ef31f9d8098a5715446448a5b276d8afc4ee650cd0c16543d"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-219\\agent\\round-01\\pipeline_result.json",
+      "sha256": "5e6ce04b36ccc38d3e688715045afffbb17997e475349c55a49985fef1cdbbd4"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-220\\agent\\agent_trajectory.json",
+      "sha256": "74b8ce1a2f9e5d8618b773273c6d68f179c482ab66397e9acbf2647399453f2f"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-220\\agent\\round-01\\observed_samples.json",
+      "sha256": "2613acab4965db35eaf985b163dc9810d76e615c5a38f414cde38f91bf15b3c5"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-220\\agent\\round-01\\pipeline_result.json",
+      "sha256": "d483238a04d71144bf5c488fdf9f2cc86d3b26b223b8780c9202d301fb488dbf"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-221\\agent\\agent_trajectory.json",
+      "sha256": "14f5cdb804dff6479841f6d0ac07b82b9f149e9291bb89a591e439a4440ab639"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-221\\agent\\round-01\\observed_samples.json",
+      "sha256": "cec96b3cd7feb05aa5c4e200e6ac839bd389ee23114e9b12db1237844b6a3c8b"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-221\\agent\\round-01\\pipeline_result.json",
+      "sha256": "9d6eb7b66d111e04ca72c071c9e110fe142d25ee45ad04de9c8aa76e9ccc6fbf"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-222\\run\\observed_samples.json",
+      "sha256": "ce7d9fb58f9cc1eb61caaa5f7f955c2f288bc8a4481c2e0c8e8efca9ef4374c4"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-222\\run\\pipeline_result.json",
+      "sha256": "b3d9b4585b3f2552ec294f7248bfd6458573245015c6aabec3c607c9e363bb85"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-223\\run\\observed_samples.json",
+      "sha256": "4403d38f48495131abc6b1764b8c40237959fefb74a46f1ac6bb0df252cd5ecf"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-223\\run\\pipeline_result.json",
+      "sha256": "0c0cdd0406fe9aa68f150c420bce1b2e35b52a2e261ce466456c86131be552ab"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-224\\agent\\agent_trajectory.json",
+      "sha256": "0fb33d4cd33d3eca73a3a71caa5b5193ca6e2a74d91429e7d8f72bd0127128f7"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-224\\agent\\round-01\\observed_samples.json",
+      "sha256": "88d9ac9212d291baf980ccddbd4d377abbf8915191b27974b88b3c535e0fbe92"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-224\\agent\\round-01\\pipeline_result.json",
+      "sha256": "44d97a61d896982d3db9dcdc03eaf01bed276ccbf5340896427a0cddeafad89c"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-225\\agent\\agent_trajectory.json",
+      "sha256": "63032a44cbd585c00bc4974de8c4b5c742024b987df79c5e5c9cd56b0f37d9a5"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-225\\agent\\round-01\\observed_samples.json",
+      "sha256": "310bc3006cf2a5522ee4372c57005275b022c21f3af9bc1aac6446f6a434f989"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-225\\agent\\round-01\\pipeline_result.json",
+      "sha256": "cadab5fe6c9daa7776f6d1f2387a23a07d7e1d8470021e3c142d24c5b622df03"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-225\\agent\\round-02\\observed_samples.json",
+      "sha256": "c89a2dd8b53e551b4bf9a6228a90144d29d2e9649c914e2a1e1fc4bd41573b2a"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-225\\agent\\round-02\\pipeline_result.json",
+      "sha256": "9c9bfd0cf2ec0f087f31afe82a19aab51dee9945a584da95fd1b73b10abd6780"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-225\\agent\\round-03\\observed_samples.json",
+      "sha256": "6dfbf3877b60b43b889a33f7cff224d96cbdb9bf5756e3d000ce3694b1bcff9f"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-225\\agent\\round-03\\pipeline_result.json",
+      "sha256": "760a9056e3d538183e8deb67822a78005bdd16d63166de9cf1e647162076a6d7"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-226\\agent\\agent_trajectory.json",
+      "sha256": "65ec59ab24b9413e759da77c544d90d1c5c0f282f19a46439d7f24c0582fde7f"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-226\\agent\\round-01\\observed_samples.json",
+      "sha256": "3b94d575e0b7b73cac96e32020f8212af9f66ed0a852577d5b46fc9b8af135d2"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-226\\agent\\round-01\\pipeline_result.json",
+      "sha256": "690818735109f17f82e71ee87687708c9d264bf796c0a5eaa2a436610a37c5ab"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-226\\agent\\round-02\\observed_samples.json",
+      "sha256": "c11e1c4df1052d2fdf24103791c6a7a3f95d63e17de55c465d63aaa9937441ca"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-226\\agent\\round-02\\pipeline_result.json",
+      "sha256": "919d3d4b8ec20b322db1780c726031fcb527e855657dc6bacea68347e217a93f"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-226\\agent\\round-03\\observed_samples.json",
+      "sha256": "29a31ef72e797a4a9b5e937df5cce1b044a677c0bb138ce367aef8cff81e9937"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-226\\agent\\round-03\\pipeline_result.json",
+      "sha256": "f9bc47867f563471ec16305ff9e6111ce4f512461a0470724974c60d609c2152"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-227\\run\\observed_samples.json",
+      "sha256": "6d7e417fceeb5e8c93ff42717eb9bda128918262514299337afc3a56e2da9f2a"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-227\\run\\pipeline_result.json",
+      "sha256": "7b31ce68318c79953558041fc7c83dbe820c56c509a0375e18617a0d938c27ff"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-264\\run\\observed_samples.json",
+      "sha256": "9edf26bf8f222b154f8728918e4d2de667cb888d7018d3fa32c3642a8ec9ae10"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-264\\run\\pipeline_result.json",
+      "sha256": "681423da23f5f038c787b311373849994fb4b761d59019ddc1f87d0e3b37b31d"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-265\\run\\observed_samples.json",
+      "sha256": "a959dbfe736b5d1cefecce915d4a8ecc4d9e3d1198484afa553428c2503e9531"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-265\\run\\pipeline_result.json",
+      "sha256": "32e8cf0f3788d1bc116205a7414cd8a646b2a55e0a54fc1c8a3277535af7d782"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-266\\agent\\agent_trajectory.json",
+      "sha256": "8b19753a7668037f7d39e505d5b1103f8c3beff181d913d511307e79bc2fca03"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-266\\agent\\round-01\\observed_samples.json",
+      "sha256": "b3e2dc44e02ddabd0dff8973e8afcf737ff95894290d1b0d71e96d1612d70d62"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-266\\agent\\round-01\\pipeline_result.json",
+      "sha256": "faf7781ad0a6de7600dad520bdf9c960954059933cfc6cf463ef5f845a735277"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-267\\agent\\agent_trajectory.json",
+      "sha256": "26c527c22cb1cce5955e08ee679cc86108a705dbee674194c2411b24b4579ca7"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-267\\agent\\round-01\\observed_samples.json",
+      "sha256": "0d93cfc9de17bbdf267152812c41f34d62ae19c016916ccdc48499b04b807219"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-267\\agent\\round-01\\pipeline_result.json",
+      "sha256": "0ebe756df7dccee90a89919fbabae257f2db0da65cec146046d5eee30e5906cc"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-268\\agent\\agent_trajectory.json",
+      "sha256": "86690bfd4e73360140c6173487eacdd661a6778e7faf5dd9fb906ddded966488"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-268\\agent\\round-01\\observed_samples.json",
+      "sha256": "d157fd26c1517a4b50784d40450066510d72eb107e87cf4f765ec6b27fb8aaca"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-268\\agent\\round-01\\pipeline_result.json",
+      "sha256": "deac900cba892b75b8e99030ec6c7f590ae44ad9c880519aceebdf99fc9e7d14"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-268\\agent\\round-02\\observed_samples.json",
+      "sha256": "b009f0368831546fdcf4669a4ac6eaceb2388be5beceb80286ddb2fd942b2fd5"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-268\\agent\\round-02\\pipeline_result.json",
+      "sha256": "9db59f0210397998b7f65bef031ab2b7e174da2b6c4d1c2dd8d139dc4b955db5"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-269\\run\\observed_samples.json",
+      "sha256": "4d08b08394449b3d401cd3f82e6090b435ea9bb931f929fc8c567be5790d3429"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-269\\run\\pipeline_result.json",
+      "sha256": "c537f316719f586b590e62064a955e6b6f044e582433f372082dd1fe8736343a"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-270\\run\\observed_samples.json",
+      "sha256": "b9e47dd7cc37b8e279c85d7725a2be2bf509dd949e4072484a4c080f969e4b16"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-270\\run\\pipeline_result.json",
+      "sha256": "46b692271235644074adef81d9ad63052d7dffbe58260cc3b13d040499ccafb5"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-271\\agent\\agent_trajectory.json",
+      "sha256": "2dea685deb3da8479ed065aea38f0c52e67d89824500224b7ea94eb1567f2f93"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-271\\agent\\round-01\\observed_samples.json",
+      "sha256": "118b42632032359a4f0858031f4b0280c6f02df13a8f73b2972a559b350ac16e"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-271\\agent\\round-01\\pipeline_result.json",
+      "sha256": "32e36345d707a9d61386c15f1de7d7927cf7d6211f059c3171590abbcbecdc90"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-272\\agent\\agent_trajectory.json",
+      "sha256": "75cbfb9e1f5240a46d59a523caff51ea35dc48d950ea9fe8e3e9992d998a8cf5"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-272\\agent\\round-01\\observed_samples.json",
+      "sha256": "9fd35ee1279f83852ce92558efd8d4817d0914e712b6920e8ebcd89d68bb60e9"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-272\\agent\\round-01\\pipeline_result.json",
+      "sha256": "1121cc40fe01769a48499ec8cb62fe5f87210f84634d6267a83cf2929d2cb8df"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-272\\agent\\round-02\\observed_samples.json",
+      "sha256": "f23a8726e0e27313dac034432211ca64f3a4a1fc643807fa6e95165041550b1f"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-272\\agent\\round-02\\pipeline_result.json",
+      "sha256": "9566c8b355922f56911ea896f4334288bf76226bb4d8406a90449890a08c8a12"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-272\\agent\\round-03\\observed_samples.json",
+      "sha256": "7753673aca0a359c235eca99ac5902a4efbbd019cdee625919ba095fbceb705a"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-272\\agent\\round-03\\pipeline_result.json",
+      "sha256": "b14f3796d7697a4e7adc6b0eebd18dbaa77b85bc18f5e8e09c4ce016cdde1781"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-273\\agent\\agent_trajectory.json",
+      "sha256": "8ba1e7dd866d733b7732865c542ac8c80f3c2e6df81d6789137a8ae9eaeaac73"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-273\\agent\\round-01\\observed_samples.json",
+      "sha256": "8a18127ca17b4325649432f4553efb92881cc24a6d15aa7b01141e62fed6b225"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-273\\agent\\round-01\\pipeline_result.json",
+      "sha256": "5fb223f179a2027acb859c22f68dfd254b6ac69799579025cde51bfb7497b8b4"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-274\\run\\observed_samples.json",
+      "sha256": "5a6f97225d22978ca53caede2453e00fba68422e0d5e272692192bf1224484db"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-274\\run\\pipeline_result.json",
+      "sha256": "1f4e28f8751653a1923399b994dde7adcc3b13ef066feccef50501a35269a404"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-275\\run\\observed_samples.json",
+      "sha256": "8e0f128f2dc8c858648697be4b9afc08580e44a89970ced2148ccd631348f43f"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-275\\run\\pipeline_result.json",
+      "sha256": "2104d9582cc274464ef3a5af3facdc689332dc41894de7acd7f9b41d9e72463e"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-312\\run\\observed_samples.json",
+      "sha256": "2b7c81b37d853c3ba244512f4a1292c32e568436554f179bfccb206ae3a7a97a"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-312\\run\\pipeline_result.json",
+      "sha256": "64af19430530ff272792af0dd2fc3576dad670152a7663f24b06eee98582055e"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-313\\run\\observed_samples.json",
+      "sha256": "61d816ad7392dc7d9b61b6717f030c60dbf6a0d7740e91c9af69ce6dc63069e2"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-313\\run\\pipeline_result.json",
+      "sha256": "194be69f344bce639e0260353250fadafcec60417ba9ec58ca43e543de5e3a3a"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-314\\run\\observed_samples.json",
+      "sha256": "aaba11416092cc19c4ac81b9db7365ae68c55c0df037f0b5ccf967e8c4bc0258"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-314\\run\\pipeline_result.json",
+      "sha256": "752fc2fc6b54bb0f378c2e805e3f082339f5c9d18dd8b143354a5dc3df5c4ade"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-315\\agent\\agent_trajectory.json",
+      "sha256": "e438e3a84f8365244e5a6348fca6314c23df8a293bda39752a7c5c652d675a1e"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-315\\agent\\round-01\\observed_samples.json",
+      "sha256": "22b2baad50ae3aebb356d5b2ed1e29ba00f0b1986274cd26e0773e650154db8b"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-315\\agent\\round-01\\pipeline_result.json",
+      "sha256": "dc19bd2b516cde21ff3c1de699b3de3755aed57638dcf661dd27a6110b2d2df4"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-316\\agent\\agent_trajectory.json",
+      "sha256": "6da5769edb75118240b81ebf8987e93a8382507fa29aed389a2878265521fe36"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-316\\agent\\round-01\\observed_samples.json",
+      "sha256": "d8e846901bf744f6c0ce1c6a60e38b36e853799fbda3ac7256f1b3bc3f45009d"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-316\\agent\\round-01\\pipeline_result.json",
+      "sha256": "afaccf7bbe4662451bfeea5015782c7adac22da1722a8178b22c36ad83b9418e"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-316\\agent\\round-02\\observed_samples.json",
+      "sha256": "8b5218df0517d45c51d2db4ee433d631de22f2f3587229cec8eef6490509f960"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-316\\agent\\round-02\\pipeline_result.json",
+      "sha256": "c0dfca719547e6a25f476b059208998aecad956b022debc7c3c25ef03cb7781c"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-316\\agent\\round-03\\observed_samples.json",
+      "sha256": "d086a95a82ca53258050b6234ad5aaaff7ef62fa21fd2028f77b34e5fa274374"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-316\\agent\\round-03\\pipeline_result.json",
+      "sha256": "39180bbb08ac45d9f2f0721cc67dd15be34b94c45636d20d86b4ce3fb56b0d33"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-317\\agent\\agent_trajectory.json",
+      "sha256": "fa5669eea4d33ccbc169a9126c164532fad6263000d6dff2af5f723b1b668d8d"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-317\\agent\\round-01\\observed_samples.json",
+      "sha256": "3d4bf2936f783844b91698583352b172ddb2a7c373fa467031026514c0fe7f36"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-317\\agent\\round-01\\pipeline_result.json",
+      "sha256": "2f11e2a24c347007aa149392a3eed45e1b95f712f5b38976cbdf3edfbe1e4688"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-317\\agent\\round-02\\observed_samples.json",
+      "sha256": "3f1a2d6ba74a6e48856b1a610c69a9bff854b5aeccab2d87e99f3661e9696a50"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-317\\agent\\round-02\\pipeline_result.json",
+      "sha256": "2d7e78d0db6eed78491aa9310e81aa872e16ada654f83ae78c5121f9d5f171dd"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-318\\run\\observed_samples.json",
+      "sha256": "337a6aedac398df8c077a29adf56146f4d1c99a13d9aac52d7b372909cfce6ae"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-318\\run\\pipeline_result.json",
+      "sha256": "e616deccd2d228df9637e7ac8818573afffb0790244502b20f493f5654bef0ba"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-319\\run\\observed_samples.json",
+      "sha256": "79cca2cd0748641066820bddcc279db8b87e479256911d316044d9a19033ad20"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-319\\run\\pipeline_result.json",
+      "sha256": "3202882571fa8791487ceab04f7fee676bcccd2f494ebaffb029626a77f7c8e2"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-320\\agent\\agent_trajectory.json",
+      "sha256": "36918e8f48b32e9735571362d4c9af9e2dc4807f3f5e50cbf773310f706e2817"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-320\\agent\\round-01\\observed_samples.json",
+      "sha256": "3add54226f3d6c4961173fea299b382748ab9eb278acc45f20ce0f3e0931ed89"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-320\\agent\\round-01\\pipeline_result.json",
+      "sha256": "7cf4f234b30003f7891e57702c26e66d23483391eb45677ca9e1722e702f1135"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-321\\agent\\agent_trajectory.json",
+      "sha256": "e7f73ba8baa53e816b3257ffb1cec536da27f6967df1c85709ffe876ade6435b"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-321\\agent\\round-01\\observed_samples.json",
+      "sha256": "46d17633868140b88d7ea35f2f266e30fc1eb81f7cf31f136840bd9c1b11caa8"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-321\\agent\\round-01\\pipeline_result.json",
+      "sha256": "87b369adb59781cd6d59ef731a1fc75ce7420b5105033f9285aa4b135bfa52a4"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-321\\agent\\round-02\\observed_samples.json",
+      "sha256": "3e2f7baec82e12ee35a59ffe141633d927cd800013f12aa3db213f637fbe6923"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-321\\agent\\round-02\\pipeline_result.json",
+      "sha256": "5c785625480ef4264c0040c186d2894987ae2f95029afc7f160538f0cd19aca2"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-321\\agent\\round-03\\observed_samples.json",
+      "sha256": "fdf7a55700877f0a984f9d80f6c46176bc7007fc3dea5979c9cb0e36fa76a28c"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-321\\agent\\round-03\\pipeline_result.json",
+      "sha256": "914837f4c2c605ca475efe6804e54b7ecf1bdb2a76f6ef90b904aea197700932"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-322\\agent\\agent_trajectory.json",
+      "sha256": "75e165301f875c08c1edf5590429c976a6ab8e522e0ba5ab16f8c9d69c9a73e1"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-322\\agent\\round-01\\observed_samples.json",
+      "sha256": "52bdd4778aefbc90eb99be86fc6fffb67b67c1fa9248ee22418dd2167eb9297d"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-322\\agent\\round-01\\pipeline_result.json",
+      "sha256": "498b16f1531485ca3c7a9b3a18a734e36c0c2385e6eddd4c736aeb483b5d3533"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-322\\agent\\round-02\\observed_samples.json",
+      "sha256": "a5f854ddbd4d046f9e2aa04644139ece36dcedae7ba0612bae9f0dc9bee08219"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-322\\agent\\round-02\\pipeline_result.json",
+      "sha256": "4731c3389cf648d8bd86fc7f13169e00de2ae5714f72fa3b4496db4dc15b2ef2"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-322\\agent\\round-03\\observed_samples.json",
+      "sha256": "e811c6f2d3e432dd7a914bff09929c8d9eb50e99741f3b35fe17903a2e58ab3c"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-322\\agent\\round-03\\pipeline_result.json",
+      "sha256": "cab19887613b99ad82ae7f86aefd1a473fdbe7b4ca38f297b304927f88dacbe6"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-323\\run\\observed_samples.json",
+      "sha256": "0eea6285331b8cb15543522fe2aa2aaacc3082be7b99d0fbd7f701d7c555369e"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-323\\run\\pipeline_result.json",
+      "sha256": "bac4866ad158c9929e9724370bb8f55f45093177ded039e047fda926240cfe67"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-360\\run\\observed_samples.json",
+      "sha256": "f2f49748cbafe78960686ca90677a84c3d1385388353fec5f686efe4201bea00"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-360\\run\\pipeline_result.json",
+      "sha256": "0dc7f3fb78fbf244b45a74d0f7c073bf621347cf55879c0fab8e3b85f498b711"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-361\\run\\observed_samples.json",
+      "sha256": "0115ae0d19b52e7bc9cdf06b4a8be07b4af622cac07bd9607f55860e85107da6"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-361\\run\\pipeline_result.json",
+      "sha256": "f51cd001cdf8e3ee7d062c5a9a85cc9c55e1e3c2632a18ffc6502eca6561ff74"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-362\\agent\\agent_trajectory.json",
+      "sha256": "c0b7f033ee4cb62f30edc9dd61f2e5defd08eaaa31c117cfabbedca22219b2d8"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-362\\agent\\round-01\\observed_samples.json",
+      "sha256": "f3181680bf62e7d636976338db60ead7c666ae9f39105802150f5a0808adab84"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-362\\agent\\round-01\\pipeline_result.json",
+      "sha256": "15ecbb5493dc8429f7e6d157e0cb5da6734c45dff54b7a7a0c009aa15ab04a36"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-363\\agent\\agent_trajectory.json",
+      "sha256": "e51824087eb42494113949f4aac02c1e26caefafe88e7fb8069693dba0517cd0"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-363\\agent\\round-01\\observed_samples.json",
+      "sha256": "11b82855f2d3a5cf77b50f4f972d1ab899ac4efd9a398491fc0e6f035e0b7e7e"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-363\\agent\\round-01\\pipeline_result.json",
+      "sha256": "15bd6040a75df609e2151d5c2ebab8270abd4436b1a3c5e4409e35df0184070a"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-363\\agent\\round-02\\observed_samples.json",
+      "sha256": "3149fb0bab2c9c86faf7a498c4504be9d3c0fab2173e397808627f5440220a2f"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-363\\agent\\round-02\\pipeline_result.json",
+      "sha256": "5713aba75d43b2d560ad9784cd3319e4bfabef2e24480682d435c37f1ef0bd97"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-364\\agent\\agent_trajectory.json",
+      "sha256": "cece3f72ee601bf51b0d1db0eb7944eaef5a55e2f68a2c41364291ef7ead2f40"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-364\\agent\\round-01\\observed_samples.json",
+      "sha256": "2a1731b7c19fea744814a8e758ce1fe67bec93b496e501c098e21fa3365c9fe2"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-364\\agent\\round-01\\pipeline_result.json",
+      "sha256": "15bfe3579e608a3681d4e5a235603b4ebe8e28f84ef3297a6f35a9a5ed541006"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-365\\run\\observed_samples.json",
+      "sha256": "35be55bc82756ffbdb2667f648481ac8e5499cb03152b6519439a477fb32fc7e"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-365\\run\\pipeline_result.json",
+      "sha256": "2b28a43c328de3345e73d8b600eadd8a9c55eeffc003306e795d05b0d7343ce5"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-366\\run\\observed_samples.json",
+      "sha256": "0310befe95980b7b1e213f97576a0f89ad90ae7499bb34553e29af0fecff54e8"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-366\\run\\pipeline_result.json",
+      "sha256": "e0daf8cf5f6d01c479d1d2cb04a82e967a639b6bbcf74c5e86b2ee3ab93c12f9"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-367\\agent\\agent_trajectory.json",
+      "sha256": "878f287fda72518d44dc3b1355b2964679887091d538775a3f251f5205b503a3"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-367\\agent\\round-01\\observed_samples.json",
+      "sha256": "cba554e99909566fbb6b3b9011e07a30ec6a86bae4dfb0dccce0e652911d82b4"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-367\\agent\\round-01\\pipeline_result.json",
+      "sha256": "b50639799c64a315071f12c79a46f99b1bec70b349fa435ee8aa735111a1ffc5"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-368\\agent\\agent_trajectory.json",
+      "sha256": "02807f3b949c976bd28206be25632349c25bf64578dd58019f218fd5d025a30c"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-368\\agent\\round-01\\observed_samples.json",
+      "sha256": "35bed4018479b3db797ac2a4bf0e654555daa4183a4866a1e7b0337676450565"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-368\\agent\\round-01\\pipeline_result.json",
+      "sha256": "26fb4b3bb239aaa5b7f4e4a016e235b3a1f83c2a2ef0b7a653c1a909ecf6658b"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-368\\agent\\round-02\\observed_samples.json",
+      "sha256": "5cf2af512e618a8dc3e29114ea1f0149db3f4c4b93089e6bc953d3a7badfaf4d"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-368\\agent\\round-02\\pipeline_result.json",
+      "sha256": "b296b1ec41eec997bea7a9538dc2e84e3d997c8a10320aba7ede2771d0c42d2f"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-368\\agent\\round-03\\observed_samples.json",
+      "sha256": "04ef76a6f857f5ad89d09f26f66417b7bbcce3c2d3c35917db8de38367c2f6a5"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-368\\agent\\round-03\\pipeline_result.json",
+      "sha256": "6da91ec5a58466294a632688d93d3c67fd7679957119cf39fde7867e817d6cb8"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-369\\agent\\agent_trajectory.json",
+      "sha256": "e5e544ea96c27dba9bced9fac13e47b4baf48bcbaddb4f96a41d06686b542370"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-369\\agent\\round-01\\observed_samples.json",
+      "sha256": "c525d78f49eaed7afde2fc1da3dbd82f65350b3b8b1052318fc3bc53fb6d4180"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-369\\agent\\round-01\\pipeline_result.json",
+      "sha256": "f43606ca4b5dd74e3684106a157b37c10f9f5c6b592520fd23b671154876712d"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-369\\agent\\round-02\\observed_samples.json",
+      "sha256": "a4b21933bd32c4c5e32b32a70d428909e762ffd65194f1b77f67c6cc025fdaae"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-369\\agent\\round-02\\pipeline_result.json",
+      "sha256": "fda2490b87d8d450788cd0a61c4a75958c6722d6c99db66eed13cd1c93a46e65"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-370\\run\\observed_samples.json",
+      "sha256": "6d7e417fceeb5e8c93ff42717eb9bda128918262514299337afc3a56e2da9f2a"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-370\\run\\pipeline_result.json",
+      "sha256": "2e3a1b8b973430c74fe2927bfde6633ec6f5bf3f01bf681974394820e2bb6fbe"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-371\\run\\observed_samples.json",
+      "sha256": "0a7231e88b762512a8f30f4f6c12dc06a0f63ae19b6c9779e057d5a9c57bea07"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-371\\run\\pipeline_result.json",
+      "sha256": "a14fc12bc2d96ba6d5cd14541ae363008db55b0be00789f1f1ba19711ecbc2f8"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-408\\run\\observed_samples.json",
+      "sha256": "a959dbfe736b5d1cefecce915d4a8ecc4d9e3d1198484afa553428c2503e9531"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-408\\run\\pipeline_result.json",
+      "sha256": "39feec7a87c07a50a7d7f960a8d8522591085fcd1e9935a4625dd65df3d84b1a"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-409\\agent\\agent_trajectory.json",
+      "sha256": "1e5a712b4f32116ceaff6fb714f9a9cebec2b344070b051925ee965cfb9deab6"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-409\\agent\\round-01\\observed_samples.json",
+      "sha256": "f05e2b7b616529d5e1d86049e62e035efc05691b597093e1f5e07f095e3f4b15"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-409\\agent\\round-01\\pipeline_result.json",
+      "sha256": "60d2db4521f79a6d1c839a8f727cf74963fc98f1de6d7a627e342e263b0cae7f"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-410\\agent\\agent_trajectory.json",
+      "sha256": "f153d43c72fcdfdb825b985123c2ca955183e67c2640e1479fb55989c86a1c42"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-410\\agent\\round-01\\observed_samples.json",
+      "sha256": "056c1d743e4187aaf12364182fb7bf710ee02189aaebccebb13d03b4f0359c15"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-410\\agent\\round-01\\pipeline_result.json",
+      "sha256": "e35c4c7f6e3b3309f451c0aee6cf54edbd47f5121b57effa03e4baa816bf67d7"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-410\\agent\\round-02\\observed_samples.json",
+      "sha256": "9a6c90c42508828dc07a4f5393f8a8aca58bd0b4f5a3226bf734d6236db7133d"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-410\\agent\\round-02\\pipeline_result.json",
+      "sha256": "d38ea84a8fbbff35000df734f6bdc0ded8bf6da2ca9e5cbae435bb48d3c87253"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-411\\agent\\agent_trajectory.json",
+      "sha256": "50c1df101e1e77b05388f2c9e4cf36e038f0654c0829f236470557eae45df358"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-411\\agent\\round-01\\observed_samples.json",
+      "sha256": "f721f5d38e842802cbeb913c08c15e7871d56cf9b4888a7533eb9c978ef88afa"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-411\\agent\\round-01\\pipeline_result.json",
+      "sha256": "e38336e17e84580bdea5cdf55f4b30870a5504e245c0975a045ad6a93fa83d8a"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-412\\run\\observed_samples.json",
+      "sha256": "4d08b08394449b3d401cd3f82e6090b435ea9bb931f929fc8c567be5790d3429"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-412\\run\\pipeline_result.json",
+      "sha256": "0310cd19cd7c64dbfe517860e895665265f6d4dce369046557f6db47a0755957"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-413\\run\\observed_samples.json",
+      "sha256": "600d4adbec8d7aa229350f1f6b6f6e9ec45aa34ed516a9ef1b9e619218d6780b"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-413\\run\\pipeline_result.json",
+      "sha256": "b0b39451b9905688c7d7d116cb279909d3d751601cb618958583870fbf4f5fbd"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-414\\agent\\agent_trajectory.json",
+      "sha256": "66504ddfcf895d9b8f09f3596f8f042f297596b948cbc9ac4dce45d7d0a302d3"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-414\\agent\\round-01\\observed_samples.json",
+      "sha256": "90e00db6abe00216d8370e38b5e05de5e495307bccbb6d583eb2fd01e9a4f46a"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-414\\agent\\round-01\\pipeline_result.json",
+      "sha256": "64dc41d73964b1ab570ec2596f4d71da5f391214785b0cd49739df5c73e66d3c"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-415\\agent\\agent_trajectory.json",
+      "sha256": "f4bcd81c056991fa17956b4276a14f3ccdcfe95dbcb6b4f00793937e782d1bc0"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-415\\agent\\round-01\\observed_samples.json",
+      "sha256": "234c2adeb2235a703858ce96c0af6234b66fc021c51e60c24fe03c72584788b6"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-415\\agent\\round-01\\pipeline_result.json",
+      "sha256": "19eb6e9847dfdfd4b041ec7a80af21308712f8e1f356b5bdef4a9a2b9367fe64"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-415\\agent\\round-02\\observed_samples.json",
+      "sha256": "9872cb3a18472de4e1735baf1c7307e7a3edafaa914af180fdfee679d15c4851"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-415\\agent\\round-02\\pipeline_result.json",
+      "sha256": "df3d408c78ce761b62827737729f9ff7e5e24bc9e132dec5dc059f0059fce068"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-415\\agent\\round-03\\observed_samples.json",
+      "sha256": "a69a916ddde5f3f4c7c053a51133d56d66d1efca49953bb1b672c15e5bcdba2b"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-415\\agent\\round-03\\pipeline_result.json",
+      "sha256": "47b6114cf5c8c60c2772b68279687db9ed3791f5f228059e099a81a04782d800"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-416\\agent\\agent_trajectory.json",
+      "sha256": "5e18274cac7b2dfb8c89b7665003ac329baae497016656f6bf4edadd670924fa"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-416\\agent\\round-01\\observed_samples.json",
+      "sha256": "e1e93998612bd654382e08f868faa1627483c74d1f9ab1727f5dd03eb63e2b59"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-416\\agent\\round-01\\pipeline_result.json",
+      "sha256": "10e939a6acc3f2907c9307d14e9a788d2739534ae5e2228437d67b2a40cda75b"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-416\\agent\\round-02\\observed_samples.json",
+      "sha256": "68b73f04a059dbbc42738716339b57acb5bb692ae257d7c40df6ca66a780a2e6"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-416\\agent\\round-02\\pipeline_result.json",
+      "sha256": "f913eb20ece4575747bb8009974d96c5adf0f88eca016aaf03e09afa96429709"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-416\\agent\\round-03\\observed_samples.json",
+      "sha256": "ae6e8628d83965eb98e7da545f28d8b85659abcfe6a8afb8ea0225373018c9b5"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-416\\agent\\round-03\\pipeline_result.json",
+      "sha256": "39aa06082bbc2c3294bf8b88254e865bd81851c80e8d3d8cb6b02f735090980f"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-417\\run\\observed_samples.json",
+      "sha256": "5a6f97225d22978ca53caede2453e00fba68422e0d5e272692192bf1224484db"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-417\\run\\pipeline_result.json",
+      "sha256": "f6a23eb45affa9ceb91af33ab9ec1f0c80f13a0495fa643da9e581a423f9c565"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-418\\run\\observed_samples.json",
+      "sha256": "98d719c11676cca7d678b82d6b78f78c8210c95a1d1e2dafbb14ede8b12d00ea"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-418\\run\\pipeline_result.json",
+      "sha256": "9a5448ad9ff4a1c2692489c439d1f6eb645ef82955fea3dc40c086e6819ce028"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-419\\run\\observed_samples.json",
+      "sha256": "c90c4109f6d245eb40aba67bc7539f73d2f4e1cba2055f32abe204f104c80da5"
+    },
+    {
+      "path": ".iverilog-ai\\agent-budget-study-live-20261005\\sample-419\\run\\pipeline_result.json",
+      "sha256": "4d12f81b6252ae7fec462e8ca4cc28eef0dc3e0b90476ba7b42a4f269d3975f3"
+    }
+  ]
+}

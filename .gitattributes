@@ -81,6 +81,17 @@ rtl/rotating_arbiter.v -text whitespace=blank-at-eol,blank-at-eof,space-before-t
 examples/credit_guard_contract.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 examples/rotating_arbiter_contract.json -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 tests/core/test_agent_holdout_assets.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# v8 诊断、源码验证及实验原件按采样/日志原字节保存。
+docs/experiment/agent-v7-diagnosis-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/agent-feedback-validation-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/agent-feedback-validation-2026-10-05/**/pytest.log whitespace=-blank-at-eol,cr-at-eol
+docs/experiment/agent-feedback-validation-2026-10-05/**/pytest.xml whitespace=-blank-at-eol,cr-at-eol
+docs/experiment/agent-feedback-study-live-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/review/agent-feedback-prereg-review-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/review/agent-feedback-study-review-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# 保留 v8 收集失败及审计器误拦日志的原始空白，不改写证据。
+docs/experiment/agent-feedback-validation-2026-10-05/components/agent/targeted-collection-failure.txt whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+docs/review/agent-feedback-prereg-review-2026-10-05/targeted-pytest.log whitespace=-blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 # 技能生成的四份失败审查原报告含尾空行，保留原件，仅豁免其 EOF 空白。
 benchmarks/agent_holdout_20261005/audit/credit-deliverable-first.md whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
 benchmarks/agent_holdout_20261005/audit/credit-deliverable-corrected.md whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol

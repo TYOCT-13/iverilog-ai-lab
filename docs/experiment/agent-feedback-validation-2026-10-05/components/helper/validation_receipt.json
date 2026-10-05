@@ -1,0 +1,81 @@
+{
+  "schema": "observation-feedback-helper-validation-v1",
+  "source_inputs": [
+    {
+      "path": "src/iverilog_ai/core/observation_feedback.py",
+      "sha256": "a72609f3f141ea7ffe997ce2d69f0528b308f0a257bdd133142e0bfca379284b"
+    },
+    {
+      "path": "tests/core/test_observation_feedback.py",
+      "sha256": "bb5df337abef19841b4213716740a625f16833ee72e4039b298f529e3c7a4017"
+    },
+    {
+      "path": ".tmp-codex/agent_v7_prior_diagnosis_20261005.py",
+      "sha256": "9ac35648fe692aba7751e431daa0a00490b8c864624dfc0c0533fa66a3d2ed93"
+    }
+  ],
+  "pytest": {
+    "tests": 51,
+    "passed": 51,
+    "failed": 0,
+    "skipped": 0,
+    "elapsed_seconds_junit": 1.255,
+    "reported_seconds": 1.35,
+    "xml": ".iverilog-ai\\agent-v7-prior-diagnosis-20261005\\helper-tests-r1.xml",
+    "xml_sha256": "a1ba61e437ce0ffa4dc119cb42f706ac2ad630a5b0e0063fe8fcba138cd5720a",
+    "tmp_outside_repo": "C:/Users/TYOCT/AppData/Local/Temp/icarus-port-feedback-20261005-r1",
+    "command": "D:/Users/TYOCT/anaconda3/python.exe -B -X utf8 -m pytest tests/core/test_observation_feedback.py -q --basetemp C:/Users/TYOCT/AppData/Local/Temp/icarus-port-feedback-20261005-r1 --junitxml .iverilog-ai/agent-v7-prior-diagnosis-20261005/helper-tests-r1.xml"
+  },
+  "mypy": {
+    "sources": 1,
+    "errors": 0,
+    "command": "D:/Users/TYOCT/anaconda3/python.exe -B -X utf8 -m mypy src/iverilog_ai/core/observation_feedback.py"
+  },
+  "real_icarus": {
+    "dut_executions": 2,
+    "cases": [
+      "credit_guard",
+      "rotating_arbiter"
+    ],
+    "stimulus_cycles": 23,
+    "source": "actual VerificationPipeline, per_cycle, capture_observations, existing correct RTL only",
+    "all_compile_run_codes": 0,
+    "output_feedback_complete": 2
+  },
+  "synthetic_unit_evidence": {
+    "not_actual_simulator_runs": true,
+    "purpose": "artifact integrity, complete stream validation, cap, unknown bits, generic contracts and fail-closed safety"
+  },
+  "api_calls": 0,
+  "credentials_read": false,
+  "new_model_scores": false,
+  "source_changes_outside_ownership": false,
+  "local_trust_boundary": "Consistency against the recorded executor process and input SHA, not a cryptographic proof against simultaneous replacement of all related local artifacts.",
+  "integration_first_mypy_failure": "Sibling recorded PortSpec/None name-reuse assignment error in early source; fixed driven_port before these passing tests. No failed simulator records were replaced.",
+  "diagnosis": {
+    "prior_tasks": 108,
+    "agent_tasks": 54,
+    "agent_defect_tasks": 36,
+    "agent_correct_controls": 18,
+    "new_api_calls": 0,
+    "new_dut_executions": 0,
+    "files": [
+      {
+        "path": ".iverilog-ai\\agent-v7-prior-diagnosis-20261005\\decision_audit.json",
+        "sha256": "cd1963d83dae928e8b996f7efdcb8f1cb5f46af019be7d2042aafd693d33e6f9"
+      },
+      {
+        "path": ".iverilog-ai\\agent-v7-prior-diagnosis-20261005\\diagnosis.md",
+        "sha256": "6117aeefe80559f691220d254d72539aef69da1b7b6b5d3fc1d700824b446fd4"
+      },
+      {
+        "path": ".iverilog-ai\\agent-v7-prior-diagnosis-20261005\\rows.json",
+        "sha256": "601158cd9ca693813d4772a0e23b14e21c338e02cdc12f8ebb37e53e63398b59"
+      },
+      {
+        "path": ".iverilog-ai\\agent-v7-prior-diagnosis-20261005\\summary.json",
+        "sha256": "012df30e91d5f7af4abb16ff804060abc79fbcbc77037248376de93f5f8041f3"
+      }
+    ]
+  }
+}

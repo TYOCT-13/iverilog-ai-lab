@@ -1,0 +1,41 @@
+{
+  "schema": "agent-v7-diagnostic-publication-v1",
+  "original_bytes_preserved": true,
+  "api_requests": 0,
+  "new_DUT_executions": 0,
+  "human_trial": false,
+  "H02_human_review": false,
+  "scope": "read-only whole-group diagnosis, not new performance or causal estimate",
+  "files": [
+    {
+      "path": "schema-diagnosis.json",
+      "source": ".iverilog-ai/agent-v7-schema-diagnosis-20261005/diagnosis.json",
+      "sha256": "f93fa26171ea41892482a6601ed4b4573e8cd81bf81c82cd36ab92c7bd2a7003",
+      "bytes": 37430
+    },
+    {
+      "path": "prior-summary.json",
+      "source": ".iverilog-ai/agent-v7-prior-diagnosis-20261005/summary.json",
+      "sha256": "012df30e91d5f7af4abb16ff804060abc79fbcbc77037248376de93f5f8041f3",
+      "bytes": 98916
+    },
+    {
+      "path": "prior-rows.json",
+      "source": ".iverilog-ai/agent-v7-prior-diagnosis-20261005/rows.json",
+      "sha256": "601158cd9ca693813d4772a0e23b14e21c338e02cdc12f8ebb37e53e63398b59",
+      "bytes": 359709
+    },
+    {
+      "path": "prior-decision-audit.json",
+      "source": ".iverilog-ai/agent-v7-prior-diagnosis-20261005/decision_audit.json",
+      "sha256": "cd1963d83dae928e8b996f7efdcb8f1cb5f46af019be7d2042aafd693d33e6f9",
+      "bytes": 90565
+    },
+    {
+      "path": "prior-diagnosis.md",
+      "source": ".iverilog-ai/agent-v7-prior-diagnosis-20261005/diagnosis.md",
+      "sha256": "6117aeefe80559f691220d254d72539aef69da1b7b6b5d3fc1d700824b446fd4",
+      "bytes": 3064
+    }
+  ]
+}

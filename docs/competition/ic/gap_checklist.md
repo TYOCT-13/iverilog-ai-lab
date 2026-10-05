@@ -1,6 +1,6 @@
 # AI＋集成电路：当前交付与剩余证据
 
-更新：2026-10-05。冻结`b9f7a6e`，v7八模块432任务完整批次结束；六组每48缺陷计数48/32/48/34/37/37。334请求/833216tokens、余166784；423执行/507轮/1014侧、9零DUT，严格资格false。预算补提已实现但本批3次拒绝均cap末尾，无真实后续恢复收益。r1全量1716/2但中途runner/test补漏，r2仅定向34+mypy85、207指纹无变；历史结果与正式材料边界保留。
+更新：2026-10-05。v8稳定源码验收1858通过/2跳过/0失败错误、mypy87零问题、263指纹不变，非实现者事前代理审查已完成；配置最终SHA就绪，待本地提交与执行，未请求本批API、未证明改善。最近完成批次冻结`b9f7a6e`，v7八模块432任务完整批次结束；六组每48缺陷计数48/32/48/34/37/37。334请求/833216tokens、余166784；423执行/507轮/1014侧、9零DUT，严格资格false。预算补提已实现但本批3次拒绝均cap末尾，无真实后续恢复收益。r1全量1716/2但中途runner/test补漏，r2仅定向34+mypy85、207指纹无变；历史结果与正式材料边界保留。
 
 ## 1. 按评分方向核对
 
@@ -9,6 +9,7 @@
 | 优先级 | 项目 | 已完成与限制 | 下一步 |
 |---|---|---|---|
 | P0 | 真实需求 | 任务卡与操作方案就绪，真实访谈/参与者原件未提供 | 实际找学习者和IP开发者试用，记录首次失败、协助、用时及授权 |
+| P0 | v8通用反馈与动作层级 | 已接入来源绑定端口摘要、validator层级结构及独立复位说明，源码验收和事前代理审查已完成；v7诊断保留无端口过程与完整采样/少用周期的相反证据 | 完成本地提交后按登记执行完整432任务；不预填API通过或改善，八模块均已暴露非新留出 |
 | P0 | API验证循环与预算拒绝 | v7机制已实现；30格式拒绝后17样本执行恢复/6首实际轮检出；3预算拒绝均原cap末尾，无后续执行或检出 | 真实预算恢复收益未证；后续完整新批次先单独预登记，检验有补提机会的情形，不用余额挑失败重跑或放宽schema |
 | P0 | 当前效果与留出边界 | 总计fixed/random/protocol/single/feedback/no_feedback为48/32/48/34/37/37；prior信用/仲裁feedback4/12低于random8/12；后两旧离线模块仅集合留出 | 反馈与无反馈持平且低于人工48，不称所有子组超随机或因果显著泛化；优先分析prior低检出，不掩盖子组差异 |
 | P0 | 规格与判据 | 四个开发模块及两个新模块的完整规格、FIFO独立deque检查及修复；外部人工SPEC由13/15补至15/15 | 人工审查支持范围；不能外推其他参数或称工业协议认证 |
@@ -19,7 +20,7 @@
 | P1 | 提交材料 | 留出轮/v6恢复/旧1M各自存档；旧28be1ed PDF/PPT与v5ZIP仍未含新增实验 | 同步正式材料、实际视频和真实远程地址；H01/H02仍需真实验证 |
 | P1 | 冻结交接 | 留出轮完整版原件ZIP/full_raw_manifest包含所有执行侧日志；历史v5包与c7/v4缺项边界不改写 | 异机完整复现仍未验证；新结果代理只读核验及主代理文书封装已完成，非H02 |
 
-最新入口：[v7完整报告](../../experiment/agent_budget_study_live_2026-10-05.md)、[回执](../../experiment/agent-budget-study-live-2026-10-05/receipt.json)、[子组汇总](../../experiment/agent-budget-study-live-2026-10-05/cohort_summaries.json)、[源码检查](../../experiment/agent_budget_source_validation_2026-10-05.md)、[事前代理审查](../../review/agent_budget_prereg_review_2026-10-05.md)。[结果全量代理复核及文书](../../review/agent_budget_study_review_2026-10-05.md)已完成；代码作者trace-audit非H02。历史：[c077留出](../../experiment/agent_holdout_study_live_2026-10-05.md)、[v6恢复](../../experiment/agent_recovery_study_live_2026-10-05.md)、[旧1M](../../experiment/agent_study_1m_live_2026-10-05.md)。
+已验收待本地提交与执行：[v8源码验收](../../experiment/agent_feedback_source_validation_2026-10-05.md)、[事前代理审查](../../review/agent_feedback_prereg_review_2026-10-05.md)、[v8事前方案](../../experiment/agent_feedback_study_plan_2026-10-05.md)。诊断：[v7完整组别只读诊断](../../experiment/agent_v7_diagnosis_2026-10-05.md)，0新增API/仿真；27顶层多余字段+3超12，prior端口反馈缺口不能单独解释4/12。最新实际结果：[v7完整报告](../../experiment/agent_budget_study_live_2026-10-05.md)、[回执](../../experiment/agent-budget-study-live-2026-10-05/receipt.json)、[子组汇总](../../experiment/agent-budget-study-live-2026-10-05/cohort_summaries.json)、[源码检查](../../experiment/agent_budget_source_validation_2026-10-05.md)、[事前代理审查](../../review/agent_budget_prereg_review_2026-10-05.md)。[结果全量代理复核及文书](../../review/agent_budget_study_review_2026-10-05.md)已完成；代码作者trace-audit非H02。历史：[c077留出](../../experiment/agent_holdout_study_live_2026-10-05.md)、[v6恢复](../../experiment/agent_recovery_study_live_2026-10-05.md)、[旧1M](../../experiment/agent_study_1m_live_2026-10-05.md)。
 
 v5全部60任务证据可核验，严格汇总资格true；仍有一次模型格式拒绝及一个无反馈漏检，不能说所有动作都成功。v4严格资格false和c7失败均保留，外部15/15来自人工补判据，不是API新发现。上述历史实验均为开发集；新内部合成留出另列，真人/H02仍为待补。
 

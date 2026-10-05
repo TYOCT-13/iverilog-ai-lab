@@ -4,7 +4,7 @@
 带盘符的除外。路径可用 `python scripts/check_doc_index.py` 校验是否仍然存在。
 
 - 仓库：`iverilog-ai-lab`，Apache-2.0；第三方资源保留各自许可；判定权威是 Icarus Verilog 12.0（`s20150603`）
-- 本次材料修订：**2026-10-05**；当前冻结源码`b9f7a6e`；v7八模块432任务已结束：六组各48缺陷为48/32/48/34/37/37，334请求/833216tokens，严格资格false，预算补提真实收益未证；历史`c07756f`内部合成模块互斥留出108任务/86请求/190387tokens、全仓1570/2；历史Agent v6恢复源码`9c3bd3c`，恢复轮216任务/138请求/378204tokens，独立每轮100万额度；上一轮`75f9baa`的216任务/145请求/399083tokens保持历史，历史短预算三重复144任务（入口`f54ae63`）与六项选样诊断（入口`bdc9e20`），不改旧v5一次重复60任务。v2提交PDF/答辩仍为 `28be1ed`，旧三重复 `c7bb280`、pilot `e9b7b8a`分别归档。最新实测与旧版正式材料不能混作同一版本（已查阅通知的提交截止2026-10-15 20:00北京时间）。
+- 本次材料修订：**2026-10-05**；最近完成批次冻结源码`b9f7a6e`；v8源码验收及事前审查已完成、配置最终SHA就绪，待本地提交/执行且未请求API；v7八模块432任务已结束：六组各48缺陷为48/32/48/34/37/37，334请求/833216tokens，严格资格false，预算补提真实收益未证；历史`c07756f`内部合成模块互斥留出108任务/86请求/190387tokens、全仓1570/2；历史Agent v6恢复源码`9c3bd3c`，恢复轮216任务/138请求/378204tokens，独立每轮100万额度；上一轮`75f9baa`的216任务/145请求/399083tokens保持历史，历史短预算三重复144任务（入口`f54ae63`）与六项选样诊断（入口`bdc9e20`），不改旧v5一次重复60任务。v2提交PDF/答辩仍为 `28be1ed`，旧三重复 `c7bb280`、pilot `e9b7b8a`分别归档。最新实测与旧版正式材料不能混作同一版本（已查阅通知的提交截止2026-10-15 20:00北京时间）。
 - 状态记号：**有效** = 当前口径，可直接对外引用；**历史** = 反映当时状态，只读归档，
   引用时必须带"旧口径"标注；**待补** = 尚未完成
 
@@ -15,7 +15,7 @@
 | 你想干什么 | 按顺序读 |
 |---|---|
 | 5 分钟了解这个项目 | `README.md` → `docs/project_overview.md` → `docs/competition/ic/report_draft.md` |
-| 准备 AI＋集成电路提交 | `docs/experiment/agent_holdout_study_live_2026-10-05.md` → `docs/competition/ic/gap_checklist.md` → `docs/competition/ic/v2/README.md`；正式v2文件尚未同步最新实测，真人/H02待真实原件 |
+| 准备 AI＋集成电路提交 | `docs/experiment/agent_budget_study_live_2026-10-05.md` → `docs/experiment/agent_v7_diagnosis_2026-10-05.md` → `docs/competition/ic/gap_checklist.md` → `docs/competition/ic/v2/README.md`；正式v2文件尚未同步最新实测，真人/H02待真实原件 |
 | 复核数字是否可信 | `docs/experiment/metric_inventory.md`（每个数字一行：口径/来源/时间/复现命令）→ `docs/competition/submission_gate_checklist.md` → 产物目录 |
 | IC提交当天照着做 | `docs/competition/ic/v2/README.md` → `docs/competition/ic/gap_checklist.md`；先核对所选赛道、真人/H02原件和团队字段 |
 | 组织真人试用与反馈 | `docs/trial/README.md` → `docs/trial/organizer_workflow.md`；发给参与者从 `docs/trial/participant_start.md` 开始 |
@@ -32,6 +32,9 @@
 | v2佐证源稿与PDF | `docs/competition/ic/v2/supporting_evidence.md`、`docs/competition/ic/ICARUS_佐证材料_v2.pdf` | 28be1ed版本；5页、约0.86MB；V01–V06真实来源，保留失败，尚未纳入v5 |
 | 最新材料入口与PDF回执 | `docs/competition/ic/v2/README.md`、`docs/competition/ic/v2/validation.json` | 名称15字符、简介172字符；全部14页渲染查看，文字可选择、身份元数据空 |
 | 最新答辩稿与构建来源 | `docs/competition/ic/ICARUS_答辩材料_v2.pptx`、`docs/competition/ic/ICARUS_答辩材料_v2.pdf`、`docs/competition/ic/defense_v2/README.md`、`docs/competition/ic/defense_v2/qa_report.json` | 12页，5原生表格/3原生图表/12页备注；PPTX可编辑，PDF图像式；逐页机器检查，不是独立人审 |
+| v7完整组别只读诊断 | `docs/experiment/agent_v7_diagnosis_2026-10-05.md`、`docs/experiment/agent-v7-diagnosis-2026-10-05/receipt.json` | 原诊断按字节复制，0新API/DUT；27顶层字段+3超12，端口反馈缺口与42完整采样/240对288拍反向证据并列 |
+| v8通用端口反馈（已验收待执行） | `docs/experiment/agent_feedback_study_plan_2026-10-05.md`、`scripts/run_agent_feedback_study.py`、`spec/agent_feedback_study_1m.json` | 配置最终SHA就绪、待本地提交与执行，未请求API/未证改善；沿用432任务/504理论请求/单一1M，八模块已暴露非新留出 |
+| v8稳定源码验收与事前审查 | `docs/experiment/agent_feedback_source_validation_2026-10-05.md`、`docs/review/agent_feedback_prereg_review_2026-10-05.md` | 1858/2skip/0fail/error、mypy87、263指纹无变；非实现者代理121不同非DUT检查，131登记/66旧资产/四旧账闭合；非H02或API成绩 |
 | v7八模块完整对照 | `docs/experiment/agent_budget_study_live_2026-10-05.md`、`docs/experiment/agent-budget-study-live-2026-10-05/receipt.json`、`docs/experiment/agent-budget-study-live-2026-10-05/strict_summary.json`、`docs/experiment/agent-budget-study-live-2026-10-05/cohort_summaries.json` | 432任务、各48缺陷为48/32/48/34/37/37；423执行、9零DUT、严格false；反馈并不优于无反馈，prior子组低于随机 |
 | v7预算与完整原件 | `docs/experiment/agent-budget-study-live-2026-10-05/token_budget.json`、`docs/experiment/agent-budget-study-live-2026-10-05/full_raw_manifest.json`、`docs/experiment/agent-budget-study-live-2026-10-05/full_raw_evidence.zip`、`docs/experiment/agent-budget-study-live-2026-10-05/source_byte_binding.json`、`docs/experiment/agent-budget-study-live-2026-10-05/trace_manifest.json` | 334请求/833216tokens/余166784；127快照无变，Git103exact+24仅换行不同；原字节需快照。结果代理核心全量核对与文书完成，非H02 |
 | v7结果代理复核 | `docs/review/agent_budget_study_review_2026-10-05.md`、`docs/review/agent-budget-study-review-2026-10-05/receipt.json`、`docs/review/agent-budget-study-review-2026-10-05/trace-audit.json` | 全量原件核对已完成；trace-audit由代码作者工具审，职责分列，均非H02 |

@@ -1,0 +1,71 @@
+........................................................................ [ 59%]
+...............................................EE                        [100%]
+=================================== ERRORS ====================================
+_ ERROR at setup of test_registration_keeps_all_three_cohorts_and_shared_cap __
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024241592A50>
+
+    @pytest.fixture
+    def isolated_registration(monkeypatch):
+        """Only the registration guard sees v7; execute binds real current bytes."""
+        relative = "src/iverilog_ai/ai/agent.py"
+        revision = "b9f7a6ed57b215208b790c3be32980862267aa49"
+        config = json.loads(study.CONFIG.read_text(encoding="utf-8"))
+        original_sha, original_prompt, original_version = study.sha, study.SYSTEM_PROMPT, study.PROMPT_VERSION
+>       source = subprocess.check_output(["git", "show", revision + ":" + relative], cwd=study.ROOT)
+
+tests\core\test_agent_budget_study.py:24: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+D:\Users\TYOCT\anaconda3\Lib\subprocess.py:466: in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+D:\Users\TYOCT\anaconda3\Lib\subprocess.py:548: in run
+    with Popen(*popenargs, **kwargs) as process:
+D:\Users\TYOCT\anaconda3\Lib\subprocess.py:1026: in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+D:\Users\TYOCT\anaconda3\Lib\subprocess.py:1534: in _execute_child
+    sys.audit("subprocess.Popen", executable, args, cwd, env)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+event = 'subprocess.Popen'
+args = (None, 'git show b9f7a6ed57b215208b790c3be32980862267aa49:src/iverilog_ai/ai/agent.py', 'E:\\FPGA_WORK\\iverilog-ai-lab', None)
+
+>   ???
+E   RuntimeError: DUT execution forbidden by review harness
+
+<stdin>:12: RuntimeError
+_____ ERROR at setup of test_no_api_budget_preserves_all_216_agent_tasks ______
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024241591FD0>
+
+    @pytest.fixture
+    def isolated_registration(monkeypatch):
+        """Only the registration guard sees v7; execute binds real current bytes."""
+        relative = "src/iverilog_ai/ai/agent.py"
+        revision = "b9f7a6ed57b215208b790c3be32980862267aa49"
+        config = json.loads(study.CONFIG.read_text(encoding="utf-8"))
+        original_sha, original_prompt, original_version = study.sha, study.SYSTEM_PROMPT, study.PROMPT_VERSION
+>       source = subprocess.check_output(["git", "show", revision + ":" + relative], cwd=study.ROOT)
+
+tests\core\test_agent_budget_study.py:24: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+D:\Users\TYOCT\anaconda3\Lib\subprocess.py:466: in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+D:\Users\TYOCT\anaconda3\Lib\subprocess.py:548: in run
+    with Popen(*popenargs, **kwargs) as process:
+D:\Users\TYOCT\anaconda3\Lib\subprocess.py:1026: in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+D:\Users\TYOCT\anaconda3\Lib\subprocess.py:1534: in _execute_child
+    sys.audit("subprocess.Popen", executable, args, cwd, env)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+event = 'subprocess.Popen'
+args = (None, 'git show b9f7a6ed57b215208b790c3be32980862267aa49:src/iverilog_ai/ai/agent.py', 'E:\\FPGA_WORK\\iverilog-ai-lab', None)
+
+>   ???
+E   RuntimeError: DUT execution forbidden by review harness
+
+<stdin>:12: RuntimeError
+=========================== short test summary info ===========================
+ERROR tests/core/test_agent_budget_study.py::test_registration_keeps_all_three_cohorts_and_shared_cap
+ERROR tests/core/test_agent_budget_study.py::test_no_api_budget_preserves_all_216_agent_tasks
+119 passed, 21 deselected, 2 errors in 7.06s

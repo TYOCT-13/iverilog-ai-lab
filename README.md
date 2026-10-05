@@ -25,6 +25,8 @@
 当前改造围绕四类数字 IP：FIFO、UART、SPI 和握手级。API Agent 提出测试激励；独立参考模型与 Icarus 裁决结果，真实端口采样计算 24 项命名功能场景。功能场景是有限事件观察，不是代码覆盖率或正确性证明。网页保留输入、运行记录和结果，可导出原 RTL、测试台及无需 API 的重放脚本。
 
 - [操作与 UART 反例重放](docs/demo/ic_agent_v2_walkthrough.md)
+- [v7完整组别只读诊断](docs/experiment/agent_v7_diagnosis_2026-10-05.md)：0新模型/仿真。30普通拒绝为27顶层多余字段、3超12向量；信用/仲裁反馈47请求中28后续观察无端口过程，但42实际采样包均完整，240刺激拍含24显式复位且低于随机288拍；不能单因归结其4/12检出。
+- [v8完整对照事前方案（已验收待执行）](docs/experiment/agent_feedback_study_plan_2026-10-05.md)：通用真实stdout/来源绑定有界端口摘要、validator生成层级约束及独立复位规划说明已接入。[稳定源码验收](docs/experiment/agent_feedback_source_validation_2026-10-05.md)1858通过/2跳过/0失败错误、mypy87零问题、263指纹无变；[非实现者事前代理审查](docs/review/agent_feedback_prereg_review_2026-10-05.md)121项不同非DUT检查完成，131登记与66旧资产绑定一致。配置已具最终SHA，待本地提交与执行，尚无本批API请求或改善证明；沿用v7八模块/目标/顺序/预算/基线，432任务、504理论请求、共享1M。八类均已暴露，本轮不是新留出。
 - [v7八模块完整对照](docs/experiment/agent_budget_study_live_2026-10-05.md)：冻结`b9f7a6e`，432任务；fixed/random/protocol_random/single/feedback/no_feedback各48缺陷任务检出48/32/48/34/37/37。反馈与无反馈相同，低于两种人工基线；信用/仲裁子组反馈4/12也低于随机8/12，不能概括所有子组超随机或证明反馈因果、显著性/泛化。
 - [v7完整证据](docs/experiment/agent-budget-study-live-2026-10-05/receipt.json)：334请求、833216tokens，单一100万账本余166784，0未知/待结算；423实际执行、507轮/1014侧、9零DUT，严格资格false。30普通格式拒绝后17样本恢复执行、6检出均首实际轮；3预算拒绝全部在请求cap末尾，0后续真实恢复或检出。预算补提已实现，但本批真实收益未证，不用余额挑失败重跑。
 - [v7源码检查](docs/experiment/agent_budget_source_validation_2026-10-05.md)与[事前代理审查](docs/review/agent_budget_prereg_review_2026-10-05.md)：r1全量1716通过/2跳过、mypy85，但中途补改登记runner及对应test；补漏后r2定向34通过、mypy85、207指纹无变，没有冻结后全套重跑。旧credit/arb已API暴露；edge/pulse是旧离线基准、此前26份受控Agent cohort未含这两模块，本批仅作module-set-holdout子组，不是外部盲测。v7提示与旧四基准12段表示同时变化，不能同比归因。

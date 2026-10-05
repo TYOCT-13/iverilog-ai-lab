@@ -1,0 +1,176 @@
+{
+  "schema": "agent-feedback-prereg-proxy-review-v1",
+  "date": "2026-10-05",
+  "status": "no_remaining_blocker_found_within_scope",
+  "reviewer": {
+    "kind": "AI readonly reviewer, not implementer of v8 feature",
+    "H02": false,
+    "independent_human_review": false
+  },
+  "candidate_source": {
+    "parent_revision": "c6ec97b7ce26984d3eb96734dca6d652f805a339",
+    "final_clean_commit_not_attested_here": true,
+    "agent_sha256": "bf8422840a97ed3360f0dac0ee0621fd605970d658521ce7bec0d57f3c8016ff",
+    "helper_sha256": "3586fa13bd2ab82668188dac48b1a3055a935ff87d66d6accd600938e1b621d6",
+    "system_prompt_sha256": "3dd3f86f6f15b2367dc8f0913c5f3c7fe646782258093a148170f60200d6a26a",
+    "system_prompt_characters": 4550,
+    "registered_files": 131,
+    "registered_hash_mismatches": 0,
+    "old_asset_bindings": 66,
+    "source_changes_during_own_checks": []
+  },
+  "scope": {
+    "registered_rows": 432,
+    "per_strategy": {
+      "fixed": {
+        "defects": 48,
+        "correct": 24
+      },
+      "random": {
+        "defects": 48,
+        "correct": 24
+      },
+      "protocol_random": {
+        "defects": 48,
+        "correct": 24
+      },
+      "single": {
+        "defects": 48,
+        "correct": 24
+      },
+      "feedback": {
+        "defects": 48,
+        "correct": 24
+      },
+      "no_feedback": {
+        "defects": 48,
+        "correct": 24
+      }
+    },
+    "theoretical_request_cap": 504,
+    "one_batch_input_plus_output_token_cap": 1000000,
+    "output_cap_per_request": 4096,
+    "max_vectors_per_proposal": 12,
+    "max_accepted_vectors_total": 64,
+    "same_v7_rows_order_seed_targets_specs_baselines_and_cycles": true,
+    "all_eight_modules_previously_exposed": true,
+    "new_external_holdout": false
+  },
+  "finding": {
+    "id": "V8-PREREG-01",
+    "status": "resolved",
+    "origin": "static review; no pre-fix synthetic exploit claimed",
+    "issue": "Initial helper did not compare actual execution config RTL/TB digests to bound artifact/provided digests",
+    "resolution": "Saved result_json compile/run/run_id and saved plus in-memory RTL/TB digests checked before packet/stdout reconstruction",
+    "regression_test": "test_replaced_testbench_and_synced_packet_provenance_do_not_rewrite_executed_input",
+    "actual_final_result": "passed among own non-DUT targeted checks"
+  },
+  "own_test_stages": [
+    {
+      "stage": "initial targeted run",
+      "passed": 119,
+      "deselected_real_dut_cases": 21,
+      "setup_errors": 2,
+      "error_cause": "Review audit hook matched iverilog substring in git show argument path, not actual executable; no production failure",
+      "source_changed": false,
+      "log": {
+        "path": "docs/review/agent-feedback-prereg-review-2026-10-05/targeted-pytest.log",
+        "sha256": "ef764fe090c311f8e240dfc46ad2898d7aca2291f37a98beb4990cb56b103c50",
+        "bytes": 3871
+      }
+    },
+    {
+      "stage": "two historical fixtures only after correcting private hook",
+      "passed": 2,
+      "failed": 0,
+      "source_changed": false,
+      "allowed_subprocess_executables": [
+        "git",
+        "git",
+        "git",
+        "git"
+      ],
+      "log": {
+        "path": "docs/review/agent-feedback-prereg-review-2026-10-05/historical-fixture-recheck.log",
+        "sha256": "124c61d8c28772466577623aaeabb5029b2494d1d8ec400ef32ab13b6429f9f8",
+        "bytes": 98
+      }
+    }
+  ],
+  "own_distinct_passing_non_dut_tests": 121,
+  "root_validation_separate": {
+    "executed_by": "root, not this reviewer",
+    "passed": 1858,
+    "skipped": 2,
+    "registered_tests": 1860,
+    "mypy_exit_code": 0,
+    "fingerprints_unchanged": 263,
+    "artifact_hashes_verified_by_this_reviewer": true,
+    "receipt": {
+      "path": "docs/experiment/agent-feedback-validation-2026-10-05/r1/receipt.json",
+      "sha256": "cf7c24ce52bb4aaded9e5d6878dc28f98b30a196e39b380995729492ab9fc83c",
+      "bytes": 2273
+    }
+  },
+  "data_boundaries": [
+    "Preregistration choice binding reads old preregistration, not historical result JSON; checked with Python read audit hook",
+    "Separate execution-closure guard reads only finished_at for decisions and old accounting totals, not prior detection scores; all four batches finished with zero pending/unknown, not charged to new cap",
+    "no_feedback hides observations and both diagnostic fields; own plan/budget and result-driven early stopping still present",
+    "actual capture remains enabled for all qualified builtin profiles, regardless of feedback delivery; typed external observer unchanged",
+    "uniform bounded sample selection is value/expected/failure independent; x/z retained, missing/tampered evidence empty/inconclusive",
+    "decision shape from validators; no schema relaxation; format and budget corrections share the same cap",
+    "no generalization, significance, superiority or historical single-factor causality attested"
+  ],
+  "new_activity": {
+    "real_api_requests": 0,
+    "new_dut_runs": 0,
+    "real_credentials_read": 0,
+    "production_source_edits": 0,
+    "human_trials": 0,
+    "git_commits": 0
+  },
+  "bindings": [
+    {
+      "path": "docs/review/agent_feedback_prereg_review_2026-10-05.md",
+      "sha256": "2db08b45ed815c84fd1e625e020e0f4eb9ed933f2793cbb71efe3e7c1a5d7550",
+      "bytes": 3068
+    },
+    {
+      "path": "docs/review/agent-feedback-prereg-review-2026-10-05/registration-check.json",
+      "sha256": "a01f5b0349447d07c01b77335bd51529e875ec883463fe1e4f9d89aefa5e3c36",
+      "bytes": 26647
+    },
+    {
+      "path": "scripts/run_agent_feedback_study.py",
+      "sha256": "f55dd52a5bfe203467d8a8d7b710a35a376d16203acb40f44abcff718fac3c49",
+      "bytes": 17216
+    },
+    {
+      "path": "spec/agent_feedback_study_1m.json",
+      "sha256": "80a7fa72faa6a86813522bece04c154a17bf89ab680a6f2cb000a44fba2e39a9",
+      "bytes": 1595
+    },
+    {
+      "path": "docs/experiment/agent_feedback_study_plan_2026-10-05.md",
+      "sha256": "24e8fa3fa749bcca72b346ec5354c9b5dd8a6ff757959e348fc6194f99813ed0",
+      "bytes": 5730
+    }
+  ],
+  "private_receipts": [
+    {
+      "path": ".iverilog-ai/agent-feedback-prereg-review-20261005/targeted-receipt.json",
+      "sha256": "42f98138e844caec2cdce1f6a1d9808dde3336c5de690f47cb2a611bb103616f",
+      "bytes": 3030
+    },
+    {
+      "path": ".iverilog-ai/agent-feedback-prereg-review-20261005/historical-fixture-recheck.json",
+      "sha256": "caafa400e9bab1f14d06f438f4a831d81055362dd639183e1ba17a4aa0f0b6e3",
+      "bytes": 2511
+    }
+  ],
+  "limitations": [
+    "Before real v8 API batch; no empirical v8 outcome claimed",
+    "No new DUT verification by this reviewer; other agents tests not relabeled as own",
+    "Strict RTL style and portable other-machine/human evidence remain outside this passing code/preregistration review"
+  ]
+}

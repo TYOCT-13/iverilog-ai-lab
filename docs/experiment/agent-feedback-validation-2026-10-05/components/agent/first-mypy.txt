@@ -1,0 +1,6 @@
+Command: D:/Users/TYOCT/anaconda3/python.exe -X utf8 -m mypy src/iverilog_ai/ai/agent.py
+Exit: 1
+src\iverilog_ai\core\observation_feedback.py:96: error: Incompatible types in assignment (expression has type "PortSpec | None", variable has type "PortSpec") [assignment]
+Found 1 error in 1 file (checked 1 source file)
+
+Recorded from the first tool output. Helper owner fixed the inferred variable-type conflict; this worker did not edit the helper.

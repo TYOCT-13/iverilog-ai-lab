@@ -1,0 +1,9 @@
+{
+  "schema": "helper-docstring-only-binding-v1",
+  "old_tested_source_sha256": "a72609f3f141ea7ffe997ce2d69f0528b308f0a257bdd133142e0bfca379284b",
+  "current_source_sha256": "3586fa13bd2ab82668188dac48b1a3055a935ff87d66d6accd600938e1b621d6",
+  "old_line_endings": "LF",
+  "only_content_change": "docstring correctly includes executor process record; functional code unchanged",
+  "reconstructed_old_bytes_match": true,
+  "current_source_changed_on_disk": false
+}

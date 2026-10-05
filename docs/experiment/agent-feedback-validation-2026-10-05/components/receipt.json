@@ -1,0 +1,84 @@
+{
+  "schema": "agent-feedback-component-log-publication-v1",
+  "original_bytes_preserved": true,
+  "api_requests": 0,
+  "human_trial": false,
+  "H02_human_review": false,
+  "not_a_combined_full_suite_count": true,
+  "items": [
+    {
+      "path": "agent/final-mypy.txt",
+      "source": ".tmp-codex/v8-logs/final-mypy.txt",
+      "sha256": "8e63ae22e8213e327a5e9cbd584067681681bd8ef7f25c869877887ccdcfc4ff",
+      "bytes": 43
+    },
+    {
+      "path": "agent/final-targeted-pytest.txt",
+      "source": ".tmp-codex/v8-logs/final-targeted-pytest.txt",
+      "sha256": "35bc2945944586d9adb2afaafeb839211a0a240212030e818d7120bca0654842",
+      "bytes": 690
+    },
+    {
+      "path": "agent/first-mypy.txt",
+      "source": ".tmp-codex/v8-logs/first-mypy.txt",
+      "sha256": "db41f75f342f1ad0aefba63edf3bb7349453b095aa88c45c2b212bfbe0ff6bb7",
+      "bytes": 448
+    },
+    {
+      "path": "agent/first-targeted-pytest.txt",
+      "source": ".tmp-codex/v8-logs/first-targeted-pytest.txt",
+      "sha256": "cc8ff25d2ca685045db26cb95d20aa1a46fec8a69c6278eb48f468e30a9f6e92",
+      "bytes": 859
+    },
+    {
+      "path": "agent/first-v8-integration.txt",
+      "source": ".tmp-codex/v8-logs/first-v8-integration.txt",
+      "sha256": "7bee78d8483ffa784190ae294de5dc873b8901e56e4a60b34e505606518eb773",
+      "bytes": 182
+    },
+    {
+      "path": "agent/prior-mypy.txt",
+      "source": ".tmp-codex/v8-logs/prior-mypy.txt",
+      "sha256": "8e63ae22e8213e327a5e9cbd584067681681bd8ef7f25c869877887ccdcfc4ff",
+      "bytes": 43
+    },
+    {
+      "path": "agent/prior-targeted-pytest.txt",
+      "source": ".tmp-codex/v8-logs/prior-targeted-pytest.txt",
+      "sha256": "99e0bcf610c997c9abffedf855855b1e499196a9ebde674881e9f094bab2bdfb",
+      "bytes": 690
+    },
+    {
+      "path": "agent/targeted-collection-failure.txt",
+      "source": ".tmp-codex/v8-logs/targeted-collection-failure.txt",
+      "sha256": "ac7bf64488f575d937842bbbd4a8410ca847c86ec000ec90dde451fb72f45b2c",
+      "bytes": 102
+    },
+    {
+      "path": "agent/validation_receipt.json",
+      "source": ".tmp-codex/v8-logs/validation_receipt.json",
+      "sha256": "6a1d8ed0c651b2937c154f7a218ba9fb7e41e5de94cc331ce012fc7bbc3a4c3d",
+      "bytes": 18094
+    },
+    {
+      "path": "helper/docstring-only-binding.json",
+      "source": ".tmp-codex/helper-docstring-only-binding-20261005.json",
+      "sha256": "a10ff7d80eb3a597e5cc22e72432fc6ab37145564167d2ef2838e6ed3323ad96",
+      "bytes": 464
+    },
+    {
+      "path": "helper/helper-tests-r1.xml",
+      "source": ".iverilog-ai/agent-v7-prior-diagnosis-20261005/helper-tests-r1.xml",
+      "sha256": "a1ba61e437ce0ffa4dc119cb42f706ac2ad630a5b0e0063fe8fcba138cd5720a",
+      "bytes": 8271
+    },
+    {
+      "path": "helper/validation_receipt.json",
+      "source": ".iverilog-ai/agent-v7-prior-diagnosis-20261005/helper_validation_receipt.json",
+      "sha256": "b930fe8d8be2e93127596c2edde4ec3e38d451b520b38c4dc1f5e6bee3aa8c2a",
+      "bytes": 3466
+    }
+  ],
+  "helper_source_change": "root docstring correction only; inverse reconstruction exactly matches original tested SHA",
+  "source_execution_receipts_reference_private_temporary_evidence": true
+}

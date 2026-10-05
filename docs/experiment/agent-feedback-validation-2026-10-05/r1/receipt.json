@@ -1,0 +1,79 @@
+{
+  "schema": "agent-feedback-source-validation-v1",
+  "started_at": "2026-10-05T03:46:26.519926+00:00",
+  "finished_at": "2026-10-05T03:51:08.394005+00:00",
+  "commands": [
+    {
+      "name": "pytest",
+      "command": [
+        "D:\\Users\\TYOCT\\anaconda3\\python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "-q",
+        "--tb=short",
+        "--basetemp=C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-feedback-source-20261005-r1-5bonkiuu\\pytest-tmp",
+        "--junitxml=E:\\FPGA_WORK\\iverilog-ai-lab\\docs\\experiment\\agent-feedback-validation-2026-10-05\\r1\\pytest.xml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "mypy",
+      "command": [
+        "D:\\Users\\TYOCT\\anaconda3\\python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "mypy",
+        "src",
+        "ui",
+        "scripts"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "pytest": {
+    "tests": 1860,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 2
+  },
+  "passed": 1858,
+  "fingerprinted_files": 263,
+  "changed_inputs": [],
+  "api_requests": 0,
+  "human_trial": false,
+  "H02_human_review": false,
+  "external_Actions_run": false,
+  "validation_scope": "full pytest and full mypy on stable current v8 worktree source",
+  "portable_clean_clone_reproduction": false,
+  "temporary_root": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-feedback-source-20261005-r1-5bonkiuu",
+  "artifacts": [
+    {
+      "path": "mypy.log",
+      "sha256": "e5e2f5ad00c77c77911b70e177d9653cd94b6f1b3f5cf2ec0ef3ae641b33f7f0",
+      "bytes": 45
+    },
+    {
+      "path": "pytest.log",
+      "sha256": "703dc93702e68369c107158fadceeba152da6c24e7d7ce522e2a1d416acc0d45",
+      "bytes": 2593
+    },
+    {
+      "path": "pytest.xml",
+      "sha256": "d21ed3c8e43a6a96f692b7ab2faf73c56e07a994e364b7006b04f0f366de8f78",
+      "bytes": 280629
+    },
+    {
+      "path": "source_fingerprint_after.json",
+      "sha256": "932ba1a5e530acb484d03e188ce1cc4f604ba6fdcb119df2f30d0e15f1c25b3a",
+      "bytes": 29715
+    },
+    {
+      "path": "source_fingerprint_before.json",
+      "sha256": "932ba1a5e530acb484d03e188ce1cc4f604ba6fdcb119df2f30d0e15f1c25b3a",
+      "bytes": 29715
+    }
+  ]
+}

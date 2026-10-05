@@ -82,7 +82,7 @@ def test_library_defaults_keep_append_and_vector_end_compatibility(tmp_path):
     assert result.trajectory["reference_sampling"] == "vector_end"
     assert pipeline.options[0]["reference_sampling"] == "vector_end"
     assert result.trajectory["prompt_version"] == PROMPT_VERSION
-    assert PROMPT_VERSION == "verification-agent-v7-bounded-budget-recovery"
+    assert PROMPT_VERSION == "verification-agent-v8-bounded-port-feedback"
 
 
 def test_append_does_not_request_when_replay_leaves_no_new_cycle(tmp_path):

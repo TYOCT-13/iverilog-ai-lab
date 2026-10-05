@@ -1,0 +1,12 @@
+Command: D:/Users/TYOCT/anaconda3/python.exe -X utf8 -m pytest tests/core/test_agent_decision_recovery.py tests/core/test_agent_budget_recovery.py tests/ai/test_agent_scheduling_v5.py tests/ai/test_agent.py tests/ai/test_agent_decision_v4.py -q --basetemp C:/Users/TYOCT/AppData/Local/Temp/icarus-v8-agent-precheck-20261005-a
+Exit: 1
+1 failed, 210 passed, 1 skipped in 11.51s
+
+FAILED tests/ai/test_agent_decision_v4.py::test_system_prompt_literal_examples_pass_the_real_decision_schema
+for marker in ("Valid append example", "Valid stop example"):
+    fragment = SYSTEM_PROMPT.split(marker, 1)[1]
+IndexError: list index out of range
+tests/ai/test_agent_decision_v4.py:144
+
+Skipped: Windows directory-symlink privilege unavailable (1314), existing v4 test.
+Recorded from the first tool output; no original test artifacts or historical experiment files edited.

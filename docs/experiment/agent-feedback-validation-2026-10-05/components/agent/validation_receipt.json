@@ -1,0 +1,266 @@
+{
+  "automatic_reset_cycles": 42,
+  "credential_file_reads": 0,
+  "live_api_requests": 0,
+  "mypy": {
+    "errors": 0,
+    "stdout": ".tmp-codex/v8-logs/final-mypy.txt"
+  },
+  "note": "Scripted-provider control/integration checks; not model gains, human trial or independent human H02.",
+  "prompt_version": "verification-agent-v8-bounded-port-feedback",
+  "record_kind": "AI_code_author_local_test_receipt",
+  "source_sha256": {
+    "src/iverilog_ai/ai/agent.py": "bf8422840a97ed3360f0dac0ee0621fd605970d658521ce7bec0d57f3c8016ff",
+    "src/iverilog_ai/core/observation_feedback.py": "3586fa13bd2ab82668188dac48b1a3055a935ff87d66d6accd600938e1b621d6",
+    "tests/ai/test_agent_scheduling_v5.py": "5f5138e274ba9c8c6df40ae7280e75e7655fb3e98591e4f17ee19db0faa1a9a8",
+    "tests/core/test_agent_budget_recovery.py": "8cd774564c926e9a50eeb0cdbd4e8e0c94d9f7060956e46260f0ed0eada783d8",
+    "tests/core/test_agent_decision_recovery.py": "a33cca363b24a30f08987894cb7cbe70be797f9b397d466778a424a98f22df72",
+    "tests/core/test_agent_feedback_v8.py": "2109cef7b4847e812ec45443ab1f382be42afcdb7be83ef4e8df08e9285282eb"
+  },
+  "state_shape_added_characters": 0,
+  "system_prompt_characters": 4550,
+  "system_prompt_sha256": "3dd3f86f6f15b2367dc8f0913c5f3c7fe646782258093a148170f60200d6a26a",
+  "system_shape_compact_characters": 852,
+  "targeted_pytest": {
+    "passed": 372,
+    "seconds": 18.36,
+    "skipped": 1,
+    "stdout": ".tmp-codex/v8-logs/final-targeted-pytest.txt"
+  },
+  "v8_checks": 80,
+  "v8_executions": [
+    {
+      "checks": 6,
+      "module": "sync_fifo",
+      "observed_samples_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_disabling_functional_cove0\\agent\\round-01\\observed_samples.json",
+      "observed_samples_sha256": "c9f08bb467baa83bfae4b6034e9e6d17c0aa46cb03e990cf435862b1973873ca",
+      "pipeline_result_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_disabling_functional_cove0\\agent\\round-01\\pipeline_result.json",
+      "pipeline_result_sha256": "411324c6d39f5f5e066410d37be57870d164e5aee549555e1a0f83c5a2dd4052",
+      "run_id": "c4d294d4ddcf",
+      "stdout_sha256": "a08f4ff8b1212275a14c8869340f1ace89e7ea547d72623f23ed223483a696e6",
+      "stimulus_cycles": 2
+    },
+    {
+      "checks": 6,
+      "module": "sync_fifo",
+      "observed_samples_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b0\\agent\\round-01\\observed_samples.json",
+      "observed_samples_sha256": "c9f08bb467baa83bfae4b6034e9e6d17c0aa46cb03e990cf435862b1973873ca",
+      "pipeline_result_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b0\\agent\\round-01\\pipeline_result.json",
+      "pipeline_result_sha256": "b16bb548e369ed2fa9aa136fe5e6c71dbef7012ff56169de642e2807409141fd",
+      "run_id": "04489878b0b2",
+      "stdout_sha256": "a08f4ff8b1212275a14c8869340f1ace89e7ea547d72623f23ed223483a696e6",
+      "stimulus_cycles": 2
+    },
+    {
+      "checks": 4,
+      "module": "uart_tx",
+      "observed_samples_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b1\\agent\\round-01\\observed_samples.json",
+      "observed_samples_sha256": "33aa38ba265626aeacd9fa771e2e9ceb1b70608db5955f36f78e8af03cadff49",
+      "pipeline_result_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b1\\agent\\round-01\\pipeline_result.json",
+      "pipeline_result_sha256": "d1e9aaeb06cf4e3c72fa191db8f807b50230dea49fed63981911121d5c8cdd1d",
+      "run_id": "9a79aee85324",
+      "stdout_sha256": "7743ac35d950d29e124360506ec1aecef35672b52001c0b68193941cf96ab5fd",
+      "stimulus_cycles": 2
+    },
+    {
+      "checks": 8,
+      "module": "spi_master",
+      "observed_samples_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b10\\agent\\round-01\\observed_samples.json",
+      "observed_samples_sha256": "5ffdfb237e5733bf0285f6f9e786f736ee669fece5be1b921c1a68c1aa70f645",
+      "pipeline_result_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b10\\agent\\round-01\\pipeline_result.json",
+      "pipeline_result_sha256": "9ea461b0730323af89058e9502a7a6752b97507d027099645a6d60a64aea84e8",
+      "run_id": "ae78d3d29730",
+      "stdout_sha256": "4ab08ea7a80a1defaaa86082560d62d0d1270f8829c396dfd24a8073c045fcc7",
+      "stimulus_cycles": 2
+    },
+    {
+      "checks": 6,
+      "module": "handshake_stage",
+      "observed_samples_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b11\\agent\\round-01\\observed_samples.json",
+      "observed_samples_sha256": "f0cbfc5d2636370ad6566be92c27ad178adc4b6ea7df05a0256c339734f1954d",
+      "pipeline_result_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b11\\agent\\round-01\\pipeline_result.json",
+      "pipeline_result_sha256": "dd5dfee65d2db13387b397604188d6d0807bfbd27a0f17128957ffd2813844ba",
+      "run_id": "95abad81e7b5",
+      "stdout_sha256": "f8ed3180439b275541f76b9dc6c6fbd0f38c111cd9090e9409a6f6126bc1a5a2",
+      "stimulus_cycles": 2
+    },
+    {
+      "checks": 2,
+      "module": "credit_guard",
+      "observed_samples_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b12\\agent\\round-01\\observed_samples.json",
+      "observed_samples_sha256": "95fef43f3a5a614f2d49a601eaeea64cdcb845114cf0bc2b7becb2f5e9573806",
+      "pipeline_result_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b12\\agent\\round-01\\pipeline_result.json",
+      "pipeline_result_sha256": "4f9d055421b5da7043499328705bfd8c760970edbfa164a2c86ce34ed34798c8",
+      "run_id": "114b26ea734d",
+      "stdout_sha256": "48ce8d228641a2093304b5f89c661b8ea923af29e06429a9f48166dd091c192d",
+      "stimulus_cycles": 2
+    },
+    {
+      "checks": 2,
+      "module": "rotating_arbiter",
+      "observed_samples_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b13\\agent\\round-01\\observed_samples.json",
+      "observed_samples_sha256": "3785f573050c7840e259f4cacfcf74df2dbb783e92323b8fd27685666b03abbc",
+      "pipeline_result_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b13\\agent\\round-01\\pipeline_result.json",
+      "pipeline_result_sha256": "dcd146e04302cf103e3227f0102791da19fca69d2e2d8b2ec31da1410d625d27",
+      "run_id": "7603f3bd043d",
+      "stdout_sha256": "1f696a858fb52e01f5138c93adb5ac241d138dcb555b057fd2d950853b8bdaa5",
+      "stimulus_cycles": 2
+    },
+    {
+      "checks": 2,
+      "module": "edge_detector",
+      "observed_samples_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b14\\agent\\round-01\\observed_samples.json",
+      "observed_samples_sha256": "9740f09db9ac3a4e370c1d7f0ba04f095316416fb39883f122d0176e3b210d09",
+      "pipeline_result_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b14\\agent\\round-01\\pipeline_result.json",
+      "pipeline_result_sha256": "56acc9ed75b8a73ee34675a918589ff813fe12bc0ec1269a511fa8a5497c7a5e",
+      "run_id": "506344add930",
+      "stdout_sha256": "7a86875773ce519ddedda092aa7b9bb1d3ce17226017a837caf5645d667d6c13",
+      "stimulus_cycles": 2
+    },
+    {
+      "checks": 2,
+      "module": "pulse_stretcher",
+      "observed_samples_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b15\\agent\\round-01\\observed_samples.json",
+      "observed_samples_sha256": "9067a629a033597e2702770a16fb351fc192614c7913759e64fde5324e8575ca",
+      "pipeline_result_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b15\\agent\\round-01\\pipeline_result.json",
+      "pipeline_result_sha256": "cc0aa3ac201b8c14464213713b0531d824db0efa4c4937d67da71f097196873a",
+      "run_id": "588886ad7a81",
+      "stdout_sha256": "5136c71ba1073bd9d507e49a74653a0a761948ed5a310700eea0332b3ff010a7",
+      "stimulus_cycles": 2
+    },
+    {
+      "checks": 8,
+      "module": "spi_master",
+      "observed_samples_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b2\\agent\\round-01\\observed_samples.json",
+      "observed_samples_sha256": "5ffdfb237e5733bf0285f6f9e786f736ee669fece5be1b921c1a68c1aa70f645",
+      "pipeline_result_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b2\\agent\\round-01\\pipeline_result.json",
+      "pipeline_result_sha256": "43636c611707ffba02483163bf4d27968156c09759f83f18ff666db5c0adf714",
+      "run_id": "b9c63b3a7c58",
+      "stdout_sha256": "4ab08ea7a80a1defaaa86082560d62d0d1270f8829c396dfd24a8073c045fcc7",
+      "stimulus_cycles": 2
+    },
+    {
+      "checks": 6,
+      "module": "handshake_stage",
+      "observed_samples_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b3\\agent\\round-01\\observed_samples.json",
+      "observed_samples_sha256": "f0cbfc5d2636370ad6566be92c27ad178adc4b6ea7df05a0256c339734f1954d",
+      "pipeline_result_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b3\\agent\\round-01\\pipeline_result.json",
+      "pipeline_result_sha256": "3f59f8b650afa2692c7c6567a11a4d361b3c5bdb7107f10ba42da00847e7cd4f",
+      "run_id": "9164ee6a5e88",
+      "stdout_sha256": "f8ed3180439b275541f76b9dc6c6fbd0f38c111cd9090e9409a6f6126bc1a5a2",
+      "stimulus_cycles": 2
+    },
+    {
+      "checks": 2,
+      "module": "credit_guard",
+      "observed_samples_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b4\\agent\\round-01\\observed_samples.json",
+      "observed_samples_sha256": "95fef43f3a5a614f2d49a601eaeea64cdcb845114cf0bc2b7becb2f5e9573806",
+      "pipeline_result_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b4\\agent\\round-01\\pipeline_result.json",
+      "pipeline_result_sha256": "eb77dba00daf149a681433f622b1f8b4d75024d3b75dc466672c0c6712758d3d",
+      "run_id": "e4eb2bc7f9b1",
+      "stdout_sha256": "48ce8d228641a2093304b5f89c661b8ea923af29e06429a9f48166dd091c192d",
+      "stimulus_cycles": 2
+    },
+    {
+      "checks": 2,
+      "module": "rotating_arbiter",
+      "observed_samples_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b5\\agent\\round-01\\observed_samples.json",
+      "observed_samples_sha256": "3785f573050c7840e259f4cacfcf74df2dbb783e92323b8fd27685666b03abbc",
+      "pipeline_result_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b5\\agent\\round-01\\pipeline_result.json",
+      "pipeline_result_sha256": "205b3f35725acff2fe524bb0b0986ed40db3f2dd55041a0fb9f9a5dd50172fc8",
+      "run_id": "9b4053c0149f",
+      "stdout_sha256": "1f696a858fb52e01f5138c93adb5ac241d138dcb555b057fd2d950853b8bdaa5",
+      "stimulus_cycles": 2
+    },
+    {
+      "checks": 2,
+      "module": "edge_detector",
+      "observed_samples_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b6\\agent\\round-01\\observed_samples.json",
+      "observed_samples_sha256": "9740f09db9ac3a4e370c1d7f0ba04f095316416fb39883f122d0176e3b210d09",
+      "pipeline_result_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b6\\agent\\round-01\\pipeline_result.json",
+      "pipeline_result_sha256": "d69a196b072f0034572cb8f845eef9ee754e2c67d014966872e20ea94968be8c",
+      "run_id": "0dfce946df7e",
+      "stdout_sha256": "7a86875773ce519ddedda092aa7b9bb1d3ce17226017a837caf5645d667d6c13",
+      "stimulus_cycles": 2
+    },
+    {
+      "checks": 2,
+      "module": "pulse_stretcher",
+      "observed_samples_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b7\\agent\\round-01\\observed_samples.json",
+      "observed_samples_sha256": "9067a629a033597e2702770a16fb351fc192614c7913759e64fde5324e8575ca",
+      "pipeline_result_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b7\\agent\\round-01\\pipeline_result.json",
+      "pipeline_result_sha256": "5bde3a1f7af4600c1ae5ad6b3444da09692ba6213553e8cecfa6a7090203705f",
+      "run_id": "768165a2dafe",
+      "stdout_sha256": "5136c71ba1073bd9d507e49a74653a0a761948ed5a310700eea0332b3ff010a7",
+      "stimulus_cycles": 2
+    },
+    {
+      "checks": 6,
+      "module": "sync_fifo",
+      "observed_samples_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b8\\agent\\round-01\\observed_samples.json",
+      "observed_samples_sha256": "c9f08bb467baa83bfae4b6034e9e6d17c0aa46cb03e990cf435862b1973873ca",
+      "pipeline_result_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b8\\agent\\round-01\\pipeline_result.json",
+      "pipeline_result_sha256": "f3dafaafae3f010c85709a083dcf90382fc699be8f24101ea3ca9b14e1755833",
+      "run_id": "ff9af936c85e",
+      "stdout_sha256": "a08f4ff8b1212275a14c8869340f1ace89e7ea547d72623f23ed223483a696e6",
+      "stimulus_cycles": 2
+    },
+    {
+      "checks": 4,
+      "module": "uart_tx",
+      "observed_samples_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b9\\agent\\round-01\\observed_samples.json",
+      "observed_samples_sha256": "33aa38ba265626aeacd9fa771e2e9ceb1b70608db5955f36f78e8af03cadff49",
+      "pipeline_result_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_eight_module_matrix_has_b9\\agent\\round-01\\pipeline_result.json",
+      "pipeline_result_sha256": "e0404e94c92887023b86acd478d63a75da6063e31c142d8547b19753b4b2b177",
+      "run_id": "887ebc978f9d",
+      "stdout_sha256": "7743ac35d950d29e124360506ec1aecef35672b52001c0b68193941cf96ab5fd",
+      "stimulus_cycles": 2
+    },
+    {
+      "checks": 3,
+      "module": "mod10_counter",
+      "observed_samples_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_previous_observed_ports_d0\\agent\\round-01\\observed_samples.json",
+      "observed_samples_sha256": "5fea6b3b9ef1a12d0718e131c45e467ed0646e4d63b6c0f23b20d6d3facd0a10",
+      "pipeline_result_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_previous_observed_ports_d0\\agent\\round-01\\pipeline_result.json",
+      "pipeline_result_sha256": "9be3f336e98cb8205294688b47c4792a198c3af227fe2c025932cbcbaf83bc77",
+      "run_id": "4c601d07d10b",
+      "stdout_sha256": "03c672bb809ba3831091af13d21df7949f9234808e8fb590f0e5a3464c8bbd22",
+      "stimulus_cycles": 3
+    },
+    {
+      "checks": 2,
+      "module": "mod10_counter",
+      "observed_samples_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_previous_observed_ports_d0\\agent\\round-02\\observed_samples.json",
+      "observed_samples_sha256": "b233c0f006b2ec189a52dd53eea90ae9347338fb11e26dbfbf73420bf92a1693",
+      "pipeline_result_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_previous_observed_ports_d0\\agent\\round-02\\pipeline_result.json",
+      "pipeline_result_sha256": "9f1538d348850b2f42230a58db30da02955f2dcd98492953c26e7b1187089c8c",
+      "run_id": "d07bd0c4e795",
+      "stdout_sha256": "7c5e22f0597e53a1c028331c252360d65ee4e8b4630eeb5797a9a2e697c2cb90",
+      "stimulus_cycles": 2
+    },
+    {
+      "checks": 3,
+      "module": "mod10_counter",
+      "observed_samples_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_previous_observed_ports_d1\\agent\\round-01\\observed_samples.json",
+      "observed_samples_sha256": "5fea6b3b9ef1a12d0718e131c45e467ed0646e4d63b6c0f23b20d6d3facd0a10",
+      "pipeline_result_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_previous_observed_ports_d1\\agent\\round-01\\pipeline_result.json",
+      "pipeline_result_sha256": "4c4187bb321f6912eea69168b88b58890b7d9bff0adbfb1feef770f13c00e798",
+      "run_id": "9bf480b5ae7a",
+      "stdout_sha256": "03c672bb809ba3831091af13d21df7949f9234808e8fb590f0e5a3464c8bbd22",
+      "stimulus_cycles": 3
+    },
+    {
+      "checks": 2,
+      "module": "mod10_counter",
+      "observed_samples_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_previous_observed_ports_d1\\agent\\round-02\\observed_samples.json",
+      "observed_samples_sha256": "b233c0f006b2ec189a52dd53eea90ae9347338fb11e26dbfbf73420bf92a1693",
+      "pipeline_result_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-v8-agent-final-20261005-c\\test_previous_observed_ports_d1\\agent\\round-02\\pipeline_result.json",
+      "pipeline_result_sha256": "755ab99c400646ca791af7b2c010534358fe4067f5b75553299db473704b4ec5",
+      "run_id": "9dc726306634",
+      "stdout_sha256": "7c5e22f0597e53a1c028331c252360d65ee4e8b4630eeb5797a9a2e697c2cb90",
+      "stimulus_cycles": 2
+    }
+  ],
+  "v8_real_icarus_executions": 21,
+  "v8_stimulus_cycles": 44
+}

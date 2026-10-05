@@ -369,4 +369,4 @@ def test_real_icarus_only_accepted_episodes_run_and_have_fresh_reset(tmp_path, s
     for decision in trace["decisions"]:
         if decision.get("plan_validation_status") == "rejected":
             assert "executed_round" not in decision
-    assert PROMPT_VERSION == trace["prompt_version"] == "verification-agent-v7-bounded-budget-recovery"
+    assert PROMPT_VERSION == trace["prompt_version"] == "verification-agent-v8-bounded-port-feedback"

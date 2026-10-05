@@ -1,0 +1,1391 @@
+{
+  "schema": "agent-v7-schema-diagnosis-v1",
+  "analysis_only": true,
+  "new_model_requests": 0,
+  "new_DUT_executions": 0,
+  "not_new_performance_or_budget_recovery_evidence": true,
+  "reviewer": "AI code-author tool analysis; not human trial or independent H02",
+  "source": {
+    "directory": ".iverilog-ai/agent-budget-study-live-20261005",
+    "preregistration_sha256": "0ae79dbc7eba99c8de665f3e11c4af0c5f87a886057d6b04a4b7290c27416435",
+    "results_sha256": "4eb7e07c216281bd97e53c0ea259eabbf97578ceb2a259bc2fa74740d086ebb9",
+    "agent_sha256": "b17db6882dc43899713c641f7134b820df606f31e02cd6d0ec037aac057189cb",
+    "schema_sha256": "cf0babeaea6d7a62aa374ca5467f56e8e0575d39407bcf79b57497dfc9e17b06"
+  },
+  "schema_rejections": {
+    "decisions": 30,
+    "categories": {
+      "extra_root_properties": 27,
+      "too_many_vectors": 3
+    },
+    "strategies": {
+      "feedback": 13,
+      "single": 5,
+      "no_feedback": 12
+    },
+    "modules": {
+      "uart_tx": 6,
+      "spi_master": 7,
+      "handshake_stage": 4,
+      "credit_guard": 7,
+      "edge_detector": 3,
+      "pulse_stretcher": 1,
+      "sync_fifo": 1,
+      "rotating_arbiter": 1
+    },
+    "request_positions": {
+      "2": 7,
+      "1": 17,
+      "3": 6
+    },
+    "projected_error_locations": {
+      "unknown_field": 12,
+      "vectors": 3,
+      "cycles": 15,
+      "sample_phase": 2
+    },
+    "safe_extra_property_occurrences": {
+      "vectors_count": 1,
+      "cycles": 15,
+      "sample_phase": 2
+    },
+    "all_extra_property_occurrences": 30
+  },
+  "fatal_guard": {
+    "decisions": 4,
+    "codes": {
+      "uninspectable_json_strings": 2,
+      "duplicate_json_key": 2
+    },
+    "strategies": {
+      "no_feedback": 3,
+      "feedback": 1
+    },
+    "modules": {
+      "credit_guard": 1,
+      "spi_master": 1,
+      "uart_tx": 1,
+      "pulse_stretcher": 1
+    },
+    "request_positions": {
+      "2": 2,
+      "1": 2
+    }
+  },
+  "findings": [
+    "27 decisions add root properties outside action/reason/vectors; vector fields such as cycles were promoted to root.",
+    "3 SPI proposals contain 17/18/17 vectors above the unchanged 12-vector schema cap.",
+    "4 fatal guard responses lack archived raw by design; exact duplicate/malformed substring cannot be reconstructed from hashes.",
+    "The frozen request uses JSON-object response format; valid JSON still failed the application decision schema.",
+    "Layer confusion is an inference from observed structure, not a causal attribution to a prompt sentence."
+  ],
+  "minimal_generic_proposals": [
+    "Generate compact root/vector field constraints from actual models and keep dynamic max_new_vectors explicit.",
+    "Show strict-validator-passing closed examples; state cycles/sample_phase belong inside each vector.",
+    "Tell planning to hold unchanged inputs using cycles, within the same vector/cycle limits; never compress or clip received proposals.",
+    "Add trusted scope/allowed-fields/count diagnostics without echoing unknown key names or exception strings.",
+    "Keep duplicate keys and uninspectable strings fatal; do not repair, fill defaults or archive unsafe bytes."
+  ],
+  "schema_cases": [
+    {
+      "sample": 9,
+      "case": "uart_tx",
+      "strategy": "feedback",
+      "request_position": 2,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "249a7c3dc0a20ebcb671689d61b7485f00a5570834ee3b36b3ef3e28302132d3",
+      "response_bytes": 498,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 1,
+        "safe_scalar_extra_values": {},
+        "vector_count": 2,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 6
+      },
+      "safe_snippet": "{}",
+      "executed_round": null
+    },
+    {
+      "sample": 13,
+      "case": "spi_master",
+      "strategy": "single",
+      "request_position": 1,
+      "stage": "decision_schema",
+      "category": "too_many_vectors",
+      "response_sha256": "ff0ca1f4c30e70f8daaf51ee03f9da6853b5381a85f33075dbf436140734b487",
+      "response_bytes": 1478,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "too_long",
+          "location": [
+            "vectors"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "too_long",
+          "location": [
+            "vectors"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [],
+        "extra_root_property_count": 0,
+        "withheld_key_count": 0,
+        "safe_scalar_extra_values": {},
+        "vector_count": 17,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 17
+      },
+      "safe_snippet": "{}",
+      "executed_round": null
+    },
+    {
+      "sample": 19,
+      "case": "handshake_stage",
+      "strategy": "feedback",
+      "request_position": 2,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "b891c4329b5c46d0501db8267e77fd64326c3125a2a142ba15ef00c18187e92b",
+      "response_bytes": 350,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        },
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "vectors_count"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [
+          "vectors_count"
+        ],
+        "extra_root_property_count": 2,
+        "withheld_key_count": 1,
+        "safe_scalar_extra_values": {
+          "vectors_count": 1
+        },
+        "vector_count": 1,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 1
+      },
+      "safe_snippet": "{\"vectors_count\":1}",
+      "executed_round": null
+    },
+    {
+      "sample": 61,
+      "case": "spi_master",
+      "strategy": "feedback",
+      "request_position": 1,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "1ed286dd689b7fc79db558cfe790b2bcb4cad6f37339899e27a10b8c0e9fcef9",
+      "response_bytes": 562,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [
+          "cycles"
+        ],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 0,
+        "safe_scalar_extra_values": {
+          "cycles": 0
+        },
+        "vector_count": 4,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 19
+      },
+      "safe_snippet": "{\"cycles\":0}",
+      "executed_round": null
+    },
+    {
+      "sample": 77,
+      "case": "credit_guard",
+      "strategy": "feedback",
+      "request_position": 2,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "7979d60f88b5fe2a80bab1a442c5a620b502498d418fbd6e48e27f90a0e671d7",
+      "response_bytes": 398,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 1,
+        "safe_scalar_extra_values": {},
+        "vector_count": 2,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 2
+      },
+      "safe_snippet": "{}",
+      "executed_round": null
+    },
+    {
+      "sample": 86,
+      "case": "edge_detector",
+      "strategy": "single",
+      "request_position": 1,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "fdd360083d64d5539048902e7ef414e9a1bb937bbe110f6a4c707ed7c633c6f9",
+      "response_bytes": 584,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 1,
+        "safe_scalar_extra_values": {},
+        "vector_count": 4,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 8
+      },
+      "safe_snippet": "{}",
+      "executed_round": null
+    },
+    {
+      "sample": 92,
+      "case": "pulse_stretcher",
+      "strategy": "feedback",
+      "request_position": 1,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "4026780dd9a664f62b19e883f579080db790f2c81b51296f2695a9bb9a45bf04",
+      "response_bytes": 593,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [
+          "cycles"
+        ],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 0,
+        "safe_scalar_extra_values": {
+          "cycles": 9
+        },
+        "vector_count": 4,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 9
+      },
+      "safe_snippet": "{\"cycles\":9}",
+      "executed_round": null
+    },
+    {
+      "sample": 98,
+      "case": "sync_fifo",
+      "strategy": "feedback",
+      "request_position": 1,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "e47cd85f8fd15670774d1317aaef96f279a7e77bd5f964dfe0ae31443d2a8272",
+      "response_bytes": 579,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 1,
+        "safe_scalar_extra_values": {},
+        "vector_count": 4,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 4
+      },
+      "safe_snippet": "{}",
+      "executed_round": null
+    },
+    {
+      "sample": 156,
+      "case": "spi_master",
+      "strategy": "single",
+      "request_position": 1,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "8b670f2b818648abbaeb918974a084e2f43e2d39c0ea600183403cf23a739748",
+      "response_bytes": 507,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [
+          "cycles"
+        ],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 0,
+        "safe_scalar_extra_values": {
+          "cycles": 18
+        },
+        "vector_count": 3,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 18
+      },
+      "safe_snippet": "{\"cycles\":18}",
+      "executed_round": null
+    },
+    {
+      "sample": 162,
+      "case": "handshake_stage",
+      "strategy": "feedback",
+      "request_position": 2,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "717ac73ff9ef7c0c88927185c006b77ff9c64ea060628af41c98ba36961a90a2",
+      "response_bytes": 566,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [
+          "cycles"
+        ],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 0,
+        "safe_scalar_extra_values": {
+          "cycles": 0
+        },
+        "vector_count": 3,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 3
+      },
+      "safe_snippet": "{\"cycles\":0}",
+      "executed_round": null
+    },
+    {
+      "sample": 163,
+      "case": "handshake_stage",
+      "strategy": "no_feedback",
+      "request_position": 1,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "9844943ef0889bc5d6b173d908c9c3e29ffb7ed9daf3ffecfcf5686d79ea27d7",
+      "response_bytes": 578,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [
+          "cycles"
+        ],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 0,
+        "safe_scalar_extra_values": {
+          "cycles": 3
+        },
+        "vector_count": 3,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 3
+      },
+      "safe_snippet": "{\"cycles\":3}",
+      "executed_round": null
+    },
+    {
+      "sample": 163,
+      "case": "handshake_stage",
+      "strategy": "no_feedback",
+      "request_position": 3,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "add5744f16d6ed5675f61cddfa14fb2d9b7ebedb37fc388ea351b333f421b427",
+      "response_bytes": 481,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        },
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "sample_phase"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        },
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "sample_phase"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [
+          "cycles",
+          "sample_phase"
+        ],
+        "extra_root_property_count": 2,
+        "withheld_key_count": 0,
+        "safe_scalar_extra_values": {
+          "cycles": 4,
+          "sample_phase": "after"
+        },
+        "vector_count": 2,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 4
+      },
+      "safe_snippet": "{\"cycles\":4,\"sample_phase\":\"after\"}",
+      "executed_round": null
+    },
+    {
+      "sample": 173,
+      "case": "credit_guard",
+      "strategy": "feedback",
+      "request_position": 3,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "d2bcc4455edf9d6d0ceee2880eb175ec55649f95cf032b34737e99487c4e7ccb",
+      "response_bytes": 279,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [
+          "cycles"
+        ],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 0,
+        "safe_scalar_extra_values": {
+          "cycles": 1
+        },
+        "vector_count": 1,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 1
+      },
+      "safe_snippet": "{\"cycles\":1}",
+      "executed_round": null
+    },
+    {
+      "sample": 183,
+      "case": "edge_detector",
+      "strategy": "feedback",
+      "request_position": 3,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "28b91906bc11598a26a3779797cc95e6d7deca98d0e764cc2ef51c943502bb49",
+      "response_bytes": 540,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        },
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "sample_phase"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        },
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "sample_phase"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [
+          "cycles",
+          "sample_phase"
+        ],
+        "extra_root_property_count": 2,
+        "withheld_key_count": 0,
+        "safe_scalar_extra_values": {
+          "cycles": 4,
+          "sample_phase": "after"
+        },
+        "vector_count": 3,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 4
+      },
+      "safe_snippet": "{\"cycles\":4,\"sample_phase\":\"after\"}",
+      "executed_round": null
+    },
+    {
+      "sample": 200,
+      "case": "uart_tx",
+      "strategy": "no_feedback",
+      "request_position": 1,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "5326fb6cfdef1a9cb724c421e431bdd28660d2c8bf42688851eb5b951a830d4c",
+      "response_bytes": 559,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 1,
+        "safe_scalar_extra_values": {},
+        "vector_count": 4,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 43
+      },
+      "safe_snippet": "{}",
+      "executed_round": null
+    },
+    {
+      "sample": 268,
+      "case": "credit_guard",
+      "strategy": "no_feedback",
+      "request_position": 1,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "4dea09328b988f18bd64d80fd3cc4ef707637d5675002aeb91a2bacf42e83880",
+      "response_bytes": 328,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 1,
+        "safe_scalar_extra_values": {},
+        "vector_count": 1,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 5
+      },
+      "safe_snippet": "{}",
+      "executed_round": null
+    },
+    {
+      "sample": 295,
+      "case": "uart_tx",
+      "strategy": "feedback",
+      "request_position": 1,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "6e56a562049d3787649fa11ffe632c9f2056dbeeb47fb9a858d61406a9ec45ba",
+      "response_bytes": 616,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [
+          "cycles"
+        ],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 0,
+        "safe_scalar_extra_values": {
+          "cycles": 43
+        },
+        "vector_count": 4,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 43
+      },
+      "safe_snippet": "{\"cycles\":43}",
+      "executed_round": null
+    },
+    {
+      "sample": 296,
+      "case": "uart_tx",
+      "strategy": "no_feedback",
+      "request_position": 1,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "8c01bc7de73044fd03f9047b0a9601fdce535be7218774fa41993e357172bfaf",
+      "response_bytes": 417,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 1,
+        "safe_scalar_extra_values": {},
+        "vector_count": 2,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 40
+      },
+      "safe_snippet": "{}",
+      "executed_round": null
+    },
+    {
+      "sample": 296,
+      "case": "uart_tx",
+      "strategy": "no_feedback",
+      "request_position": 3,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "067bb36d25b380cf46ca500a00b4110cf37b5efa221960a1197d6966b04aaf70",
+      "response_bytes": 413,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [
+          "cycles"
+        ],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 0,
+        "safe_scalar_extra_values": {
+          "cycles": 8
+        },
+        "vector_count": 2,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 8
+      },
+      "safe_snippet": "{\"cycles\":8}",
+      "executed_round": null
+    },
+    {
+      "sample": 317,
+      "case": "credit_guard",
+      "strategy": "no_feedback",
+      "request_position": 3,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "94424754d822b98250215370046d4f182f958340170d4181e2aa01f860cf6956",
+      "response_bytes": 602,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 1,
+        "safe_scalar_extra_values": {},
+        "vector_count": 4,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 4
+      },
+      "safe_snippet": "{}",
+      "executed_round": null
+    },
+    {
+      "sample": 326,
+      "case": "edge_detector",
+      "strategy": "feedback",
+      "request_position": 2,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "e19d18cb54552915cb32d81dfa71b80e3b5315ebe97c7edd6376e08ab3f03416",
+      "response_bytes": 507,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [
+          "cycles"
+        ],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 0,
+        "safe_scalar_extra_values": {
+          "cycles": 4
+        },
+        "vector_count": 3,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 4
+      },
+      "safe_snippet": "{\"cycles\":4}",
+      "executed_round": null
+    },
+    {
+      "sample": 347,
+      "case": "uart_tx",
+      "strategy": "single",
+      "request_position": 1,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "802547243d102a014bc95180a476e76955343ea1d6e2f6b168c4c250b324e27d",
+      "response_bytes": 750,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 1,
+        "safe_scalar_extra_values": {},
+        "vector_count": 6,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 43
+      },
+      "safe_snippet": "{}",
+      "executed_round": null
+    },
+    {
+      "sample": 348,
+      "case": "spi_master",
+      "strategy": "no_feedback",
+      "request_position": 1,
+      "stage": "decision_schema",
+      "category": "too_many_vectors",
+      "response_sha256": "982c26d73a1489b3fdbb105825e487e5c35168b45e41a46d90355ce198a9c991",
+      "response_bytes": 1518,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "too_long",
+          "location": [
+            "vectors"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "too_long",
+          "location": [
+            "vectors"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [],
+        "extra_root_property_count": 0,
+        "withheld_key_count": 0,
+        "safe_scalar_extra_values": {},
+        "vector_count": 18,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 18
+      },
+      "safe_snippet": "{}",
+      "executed_round": null
+    },
+    {
+      "sample": 348,
+      "case": "spi_master",
+      "strategy": "no_feedback",
+      "request_position": 2,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "9cdc3849cc434f933840baa04511f1f07bb5a39d8c2ed8f6993766acf808d82a",
+      "response_bytes": 547,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [
+          "cycles"
+        ],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 0,
+        "safe_scalar_extra_values": {
+          "cycles": 17
+        },
+        "vector_count": 3,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 17
+      },
+      "safe_snippet": "{\"cycles\":17}",
+      "executed_round": null
+    },
+    {
+      "sample": 363,
+      "case": "credit_guard",
+      "strategy": "feedback",
+      "request_position": 1,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "b4f252289001a7091f9768cc127d76c9f2e62708cc4bf855ad3fce3e69507cc3",
+      "response_bytes": 569,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 1,
+        "safe_scalar_extra_values": {},
+        "vector_count": 4,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 13
+      },
+      "safe_snippet": "{}",
+      "executed_round": null
+    },
+    {
+      "sample": 364,
+      "case": "credit_guard",
+      "strategy": "no_feedback",
+      "request_position": 1,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "8065877b20272360ac30435a0d6456d01e8af93bc6e7e294ef1760f9217592ed",
+      "response_bytes": 434,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [
+          "cycles"
+        ],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 0,
+        "safe_scalar_extra_values": {
+          "cycles": 6
+        },
+        "vector_count": 2,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 6
+      },
+      "safe_snippet": "{\"cycles\":6}",
+      "executed_round": null
+    },
+    {
+      "sample": 364,
+      "case": "credit_guard",
+      "strategy": "no_feedback",
+      "request_position": 3,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "ee5156a6bf95272c8e5087f61dea7cfe0b55bd664d5edb2a3344c90865e554e6",
+      "response_bytes": 547,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [
+          "cycles"
+        ],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 0,
+        "safe_scalar_extra_values": {
+          "cycles": 0
+        },
+        "vector_count": 3,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 9
+      },
+      "safe_snippet": "{\"cycles\":0}",
+      "executed_round": null
+    },
+    {
+      "sample": 369,
+      "case": "rotating_arbiter",
+      "strategy": "no_feedback",
+      "request_position": 2,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "e1a44377fd8143a9e57fca40abd1f29f19a1ab1d40a2c5a154ce0ee34548a4f5",
+      "response_bytes": 658,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "unknown_field"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 1,
+        "safe_scalar_extra_values": {},
+        "vector_count": 4,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 4
+      },
+      "safe_snippet": "{}",
+      "executed_round": null
+    },
+    {
+      "sample": 399,
+      "case": "spi_master",
+      "strategy": "single",
+      "request_position": 1,
+      "stage": "decision_schema",
+      "category": "too_many_vectors",
+      "response_sha256": "67153622fc81556326900ebc8e41e5ee144eb84739f016280894977d1de72485",
+      "response_bytes": 1472,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "too_long",
+          "location": [
+            "vectors"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "too_long",
+          "location": [
+            "vectors"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [],
+        "extra_root_property_count": 0,
+        "withheld_key_count": 0,
+        "safe_scalar_extra_values": {},
+        "vector_count": 17,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 17
+      },
+      "safe_snippet": "{}",
+      "executed_round": null
+    },
+    {
+      "sample": 400,
+      "case": "spi_master",
+      "strategy": "feedback",
+      "request_position": 1,
+      "stage": "decision_schema",
+      "category": "extra_root_properties",
+      "response_sha256": "7b08431cace813f5be542bf723573e1252cea19bc23b01fa81f38761d59af7fd",
+      "response_bytes": 416,
+      "schema_validation": "rejected",
+      "stored_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "revalidated_errors": [
+        {
+          "type": "extra_forbidden",
+          "location": [
+            "cycles"
+          ]
+        }
+      ],
+      "safe_shape": {
+        "extra_root_properties": [
+          "cycles"
+        ],
+        "extra_root_property_count": 1,
+        "withheld_key_count": 0,
+        "safe_scalar_extra_values": {
+          "cycles": 17
+        },
+        "vector_count": 2,
+        "all_vectors_have_cycles": true,
+        "vector_cycles_sum": 17
+      },
+      "safe_snippet": "{\"cycles\":17}",
+      "executed_round": null
+    }
+  ],
+  "fatal_cases": [
+    {
+      "sample": 25,
+      "case": "credit_guard",
+      "strategy": "no_feedback",
+      "request_position": 2,
+      "stage": "response_guard",
+      "policy_error_code": "uninspectable_json_strings",
+      "response_sha256": "a65b2db4d2b5fd1fb98758777dbe66d8f188aa938aa7ab19de33501fd66f1880",
+      "response_bytes": 517,
+      "finish_reason": "stop",
+      "raw_saved": false,
+      "retry_eligible": false,
+      "executed_round": null,
+      "exact_content_diagnosis": "unavailable: original unsafe raw was deliberately not archived"
+    },
+    {
+      "sample": 62,
+      "case": "spi_master",
+      "strategy": "no_feedback",
+      "request_position": 1,
+      "stage": "response_guard",
+      "policy_error_code": "duplicate_json_key",
+      "response_sha256": "58376b55f84f5452429d834154ab7f217597e9089eda599a4fd5b6cec249ae31",
+      "response_bytes": 393,
+      "finish_reason": "stop",
+      "raw_saved": false,
+      "retry_eligible": false,
+      "executed_round": null,
+      "exact_content_diagnosis": "unavailable: original unsafe raw was deliberately not archived"
+    },
+    {
+      "sample": 152,
+      "case": "uart_tx",
+      "strategy": "feedback",
+      "request_position": 2,
+      "stage": "response_guard",
+      "policy_error_code": "uninspectable_json_strings",
+      "response_sha256": "80ed6386f737f4596474ed544965978010daa82f782eeaf55f1c61c31852e0e5",
+      "response_bytes": 534,
+      "finish_reason": "stop",
+      "raw_saved": false,
+      "retry_eligible": false,
+      "executed_round": null,
+      "exact_content_diagnosis": "unavailable: original unsafe raw was deliberately not archived"
+    },
+    {
+      "sample": 332,
+      "case": "pulse_stretcher",
+      "strategy": "no_feedback",
+      "request_position": 1,
+      "stage": "response_guard",
+      "policy_error_code": "duplicate_json_key",
+      "response_sha256": "bc9bdef1aa604633dd995e1ed2cf08a3f22137a5a0764a4e4481a16b2d1729b9",
+      "response_bytes": 468,
+      "finish_reason": "stop",
+      "raw_saved": false,
+      "retry_eligible": false,
+      "executed_round": null,
+      "exact_content_diagnosis": "unavailable: original unsafe raw was deliberately not archived"
+    }
+  ]
+}
