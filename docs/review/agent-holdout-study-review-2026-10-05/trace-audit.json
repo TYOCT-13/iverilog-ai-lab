@@ -1,0 +1,113 @@
+{
+  "schema": "holdout-live-trace-integrity-proxy-v1",
+  "helper_correction": "Initial action-to-plan comparison incorrectly required original model vector names; executor deliberately renames them. Recheck compares all operative fields and unique final names; original helper retained.",
+  "real_api_requests": 0,
+  "new_DUT_runs": 0,
+  "counts": {
+    "trajectories": 54,
+    "decisions": 86,
+    "saved_json_valid": 85,
+    "schema_valid": 84,
+    "no_feedback_states_null": 36,
+    "blocked_response_unavailable_to_reparse": 1,
+    "schema_rejected_saved": 1
+  },
+  "first_request_same_for_each_case_strategy_across_all_targets_and_seeds": true,
+  "every_prompt_and_wire_messages_SHA_reconstructed": true,
+  "source_spec_and_contract_bound": true,
+  "events": [
+    {
+      "row_index": 14,
+      "decision_index": 0,
+      "status": "validated",
+      "case": "credit_guard",
+      "variant": "mutation_b",
+      "strategy": "single",
+      "seed": 0,
+      "stop_reason": "cycle_budget",
+      "requests": 1,
+      "executed_rounds": 0,
+      "executed_cycles": 0,
+      "proposal_cycles": 18,
+      "policy_error_code": null,
+      "format_error": null,
+      "response_status": "saved",
+      "response_sha256": "d66ec7ba58c94cee1038a0536a6b72efdf23439aacd7962b303743343b96835f",
+      "response_bytes": 973,
+      "tokens": 2119
+    },
+    {
+      "row_index": 50,
+      "decision_index": 1,
+      "status": "validated",
+      "case": "credit_guard",
+      "variant": "mutation_b",
+      "strategy": "feedback",
+      "seed": 1,
+      "stop_reason": "cycle_budget",
+      "requests": 2,
+      "executed_rounds": 1,
+      "executed_cycles": 7,
+      "proposal_cycles": 11,
+      "policy_error_code": null,
+      "format_error": null,
+      "response_status": "saved",
+      "response_sha256": "6cf1e12cf4dbd5d7a37c2e2ced62264c34765e425df34b692e88de59999c21cb",
+      "response_bytes": 638,
+      "tokens": 2439
+    },
+    {
+      "row_index": 51,
+      "decision_index": 2,
+      "status": "rejected",
+      "case": "credit_guard",
+      "variant": "mutation_b",
+      "strategy": "no_feedback",
+      "seed": 1,
+      "stop_reason": "policy_error",
+      "requests": 3,
+      "executed_rounds": 2,
+      "executed_cycles": 12,
+      "proposal_cycles": 0,
+      "policy_error_code": "duplicate_json_key",
+      "format_error": null,
+      "response_status": "blocked",
+      "response_sha256": "d87810e6caf6777d91037774bf77377079224569039f10ff52df8cc324b7bb2e",
+      "response_bytes": 480,
+      "tokens": 2187
+    },
+    {
+      "row_index": 75,
+      "decision_index": 1,
+      "status": "rejected",
+      "case": "credit_guard",
+      "variant": "reference",
+      "strategy": "no_feedback",
+      "seed": 2,
+      "stop_reason": "cycle_budget",
+      "requests": 3,
+      "executed_rounds": 2,
+      "executed_cycles": 16,
+      "proposal_cycles": 0,
+      "policy_error_code": null,
+      "format_error": {
+        "code": "schema_invalid",
+        "errors": [
+          {
+            "type": "extra_forbidden",
+            "location": [
+              "unknown_field"
+            ]
+          }
+        ],
+        "hint": "Use only action, reason and vectors; keep all fields within the decision schema."
+      },
+      "response_status": "saved",
+      "response_sha256": "76508b568bb1703cd9133673e8c0eff014f49bc60607a8e054c96605385aa348",
+      "response_bytes": 463,
+      "tokens": 2184
+    }
+  ],
+  "blocked_reply_limitation": "1 original response blocked by duplicate-key safety policy; only480-byte length/hash/guard status can be verified, raw content cannot be independently reparsed",
+  "no_feedback_boundary": "Explicit observation, plan error and format error hidden; own input plan, remaining budget and outcome-driven early stop persist"
+}

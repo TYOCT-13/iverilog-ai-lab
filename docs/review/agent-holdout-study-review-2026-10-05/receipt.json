@@ -1,0 +1,438 @@
+{
+  "schema": "agent-holdout-result-proxy-review-v1",
+  "packaged_at_utc": "2026-10-05T00:20:29.463170+00:00",
+  "readonly_audit_performed_by": "/root/conflict_status",
+  "document_packaged_by": "/root",
+  "audit_evidence_source": "original subagent machine audit files and its confirmed findings; no new experimental observations",
+  "human_trial": false,
+  "H02_human_review": false,
+  "external_independent_holdout": false,
+  "source_revision": "c07756fb74da69aa81dccff25a706947f7cee6bd",
+  "registered_tasks": 108,
+  "executed_tasks": 107,
+  "rounds": 136,
+  "execution_sides": 272,
+  "stdout_comparisons": 2838,
+  "review_new_api_requests": 0,
+  "review_new_DUT_runs": 0,
+  "strict_recomputation_equal": true,
+  "strict_comparison_eligible": false,
+  "frozen_inputs": 86,
+  "registered_snapshot_matches": true,
+  "commit_exact_files": 74,
+  "commit_line_ending_only_differences": [
+    {
+      "path": "scripts/run_strategy_experiment.py",
+      "frozen_sha256": "22889c50c07ff49da00c6278a88e8d710f1f708f1e4bf994f51ad82adee5c341",
+      "git_blob_sha256": "f167b9255fd1b706cb396563b048a8f0a6fff7ad2e5cc351e8ff1be1a16f4fbf",
+      "frozen_bytes": 48683,
+      "git_blob_bytes": 47817,
+      "newline_only": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/debug_server.py",
+      "frozen_sha256": "c49226654b90f2e507727491253c98ba5384aef156719908197fb88a6040dd0b",
+      "git_blob_sha256": "fc0b22ddd8c8de6fc2f251f4ccc81030e6cc2d7e81478002be66a02d1de3d541",
+      "frozen_bytes": 15282,
+      "git_blob_bytes": 14943,
+      "newline_only": true
+    },
+    {
+      "path": "src/iverilog_ai/core/__init__.py",
+      "frozen_sha256": "3e0c97ad848d7a60ab75803106040cfd5d449183d57db709f3ece01c9df4f151",
+      "git_blob_sha256": "14b915be380deb800e4a71324c6280ae577e542798ae2da82c7acf61f9753fb3",
+      "frozen_bytes": 4161,
+      "git_blob_bytes": 4035,
+      "newline_only": true
+    },
+    {
+      "path": "src/iverilog_ai/core/assertions.py",
+      "frozen_sha256": "024168b28e390e7586c91597a7ace8c6cae2dbe8b085d4d7380679892481734f",
+      "git_blob_sha256": "21f73aa00b4314f8921c6d6ea883c26cdc664150365ab6f906b4c68080702822",
+      "frozen_bytes": 10842,
+      "git_blob_bytes": 10640,
+      "newline_only": true
+    },
+    {
+      "path": "src/iverilog_ai/core/benchmark_cases.py",
+      "frozen_sha256": "f163c65450e27ba260a8e89a9b3f419b9a2fe23fff6917f77680d8c573f0f73a",
+      "git_blob_sha256": "d5de66b15f769e922c513cce802ed6b002641a5e04736ffab317e3e5dd0b1920",
+      "frozen_bytes": 5967,
+      "git_blob_bytes": 5849,
+      "newline_only": true
+    },
+    {
+      "path": "src/iverilog_ai/core/conventions.py",
+      "frozen_sha256": "772138a203fe2d738fb4a5d2067f1be7676c4adaec89aed4edc0958dc87cac5e",
+      "git_blob_sha256": "d29669c24f17b20d5d3d96a4a90b39cbf8a48a034fc89f722d7c51245e37b284",
+      "frozen_bytes": 20766,
+      "git_blob_bytes": 20255,
+      "newline_only": true
+    },
+    {
+      "path": "src/iverilog_ai/core/coverage.py",
+      "frozen_sha256": "8c85a3816842739f81d20782ba098aab3f17e2f21d0171800eb151802c47b4ca",
+      "git_blob_sha256": "0f14272181e461660692a3850c3c8b6b69c323017007ec99d782b3d67db28dda",
+      "frozen_bytes": 16726,
+      "git_blob_bytes": 16349,
+      "newline_only": true
+    },
+    {
+      "path": "src/iverilog_ai/core/models.py",
+      "frozen_sha256": "8d7ff1db511d0e3ab90364e16fd5bb0d0c6159d0adf69c35d519fc7a64cd71d6",
+      "git_blob_sha256": "72dcd1a4790fab4cfb3d216e82d5399f22b5daa435331a6da6f63020a79409ca",
+      "frozen_bytes": 34373,
+      "git_blob_bytes": 33558,
+      "newline_only": true
+    },
+    {
+      "path": "src/iverilog_ai/core/repair_compare.py",
+      "frozen_sha256": "fdee57ae6bf2ad9d4f07eb43a35de16ec19f77f2be2d47c85e73900ec7a68939",
+      "git_blob_sha256": "a61e7d10bade03839bd44fb80a16801eb029aa2d3d5e6ea243785f089271cd3f",
+      "frozen_bytes": 2526,
+      "git_blob_bytes": 2460,
+      "newline_only": true
+    },
+    {
+      "path": "src/iverilog_ai/core/report.py",
+      "frozen_sha256": "9564b749aeda1960957f3b20b1bca13e07c5e6fc3316c3aba2d1dffc7f5a0eac",
+      "git_blob_sha256": "f6d52f5b2d1214c4d001993e9f389fbdbdf2418685b3c94410a9f117b2d95c63",
+      "frozen_bytes": 27060,
+      "git_blob_bytes": 26503,
+      "newline_only": true
+    },
+    {
+      "path": "src/iverilog_ai/core/static_review.py",
+      "frozen_sha256": "ab14b88d043992bbc1c89bec500dfd6e43c3173d7834f8ff3ecfd458e0f6f66f",
+      "git_blob_sha256": "309d8ca70d7b68ff223eb72d512f799d29ce5921d6349701f5a3de5da61a87d9",
+      "frozen_bytes": 48269,
+      "git_blob_bytes": 47385,
+      "newline_only": true
+    },
+    {
+      "path": "src/iverilog_ai/core/vcd.py",
+      "frozen_sha256": "01b18b6af89df9ced4da013d8bdacefdf4417a2f7cc1e9f18aea88a9ef0f45f3",
+      "git_blob_sha256": "efcd8a49e388797e6515da308e4621cd1939f96429d2cf0c9205fd9bd2c57698",
+      "frozen_bytes": 31167,
+      "git_blob_bytes": 30466,
+      "newline_only": true
+    }
+  ],
+  "strategies": {
+    "fixed": {
+      "defect_tasks": 12,
+      "detected": 12,
+      "unique_detected": 4,
+      "per_repeat": [
+        4,
+        4,
+        4
+      ],
+      "correct_registered": 6,
+      "correct_executed": 6,
+      "correct_false_alarms": 0,
+      "executed_tasks": 18,
+      "rounds": 18,
+      "cycles": 288,
+      "requests": 0,
+      "first_detection_rounds": {
+        "1": 12
+      }
+    },
+    "random": {
+      "defect_tasks": 12,
+      "detected": 8,
+      "unique_detected": 3,
+      "per_repeat": [
+        3,
+        3,
+        2
+      ],
+      "correct_registered": 6,
+      "correct_executed": 6,
+      "correct_false_alarms": 0,
+      "executed_tasks": 18,
+      "rounds": 18,
+      "cycles": 288,
+      "requests": 0,
+      "first_detection_rounds": {
+        "1": 8
+      }
+    },
+    "protocol_random": {
+      "defect_tasks": 12,
+      "detected": 12,
+      "unique_detected": 4,
+      "per_repeat": [
+        4,
+        4,
+        4
+      ],
+      "correct_registered": 6,
+      "correct_executed": 6,
+      "correct_false_alarms": 0,
+      "executed_tasks": 18,
+      "rounds": 18,
+      "cycles": 288,
+      "requests": 0,
+      "first_detection_rounds": {
+        "1": 12
+      }
+    },
+    "single": {
+      "defect_tasks": 12,
+      "detected": 5,
+      "unique_detected": 3,
+      "per_repeat": [
+        1,
+        1,
+        3
+      ],
+      "correct_registered": 6,
+      "correct_executed": 6,
+      "correct_false_alarms": 0,
+      "executed_tasks": 17,
+      "rounds": 17,
+      "cycles": 110,
+      "requests": 18,
+      "first_detection_rounds": {
+        "1": 5
+      }
+    },
+    "feedback": {
+      "defect_tasks": 12,
+      "detected": 10,
+      "unique_detected": 4,
+      "per_repeat": [
+        4,
+        3,
+        3
+      ],
+      "correct_registered": 6,
+      "correct_executed": 6,
+      "correct_false_alarms": 0,
+      "executed_tasks": 18,
+      "rounds": 31,
+      "cycles": 213,
+      "requests": 32,
+      "first_detection_rounds": {
+        "1": 7,
+        "2": 3
+      }
+    },
+    "no_feedback": {
+      "defect_tasks": 12,
+      "detected": 9,
+      "unique_detected": 4,
+      "per_repeat": [
+        3,
+        3,
+        3
+      ],
+      "correct_registered": 6,
+      "correct_executed": 6,
+      "correct_false_alarms": 0,
+      "executed_tasks": 18,
+      "rounds": 34,
+      "cycles": 232,
+      "requests": 36,
+      "first_detection_rounds": {
+        "1": 5,
+        "2": 4
+      }
+    }
+  },
+  "archives": [
+    {
+      "path": "docs/experiment/agent-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+      "bytes": 5674412,
+      "sha256": "c27e201af697b333854c44477e7cebb3087d8c5a2acf7a851ff17c24a2753426",
+      "files": 4039,
+      "crc_verified": true,
+      "set_verified": true,
+      "all_bytes_equal": true,
+      "safe_member_names": true
+    },
+    {
+      "path": "docs/experiment/agent-holdout-study-live-2026-10-05/results.zip",
+      "bytes": 138456,
+      "sha256": "648f8ac67cdc95ecdccc6b5b9f1423ed71270a60657a111f7261d3b7b1f78976",
+      "files": 1,
+      "crc_verified": true,
+      "set_verified": true,
+      "all_bytes_equal": true,
+      "safe_member_names": true
+    },
+    {
+      "path": "docs/experiment/agent-holdout-study-live-2026-10-05/registered_inputs.zip",
+      "bytes": 539381,
+      "sha256": "13467c82362e3830951dd3120b27ebf0b64d54f57938a6ca4047b2619ea5490a",
+      "files": 87,
+      "crc_verified": true,
+      "set_verified": true,
+      "all_bytes_equal": true,
+      "safe_member_names": true
+    },
+    {
+      "path": "docs/experiment/agent-holdout-study-live-2026-10-05/traces_and_decisions.zip",
+      "bytes": 340794,
+      "sha256": "d3c419a73b76511e49fb70a642e9ec28da67b5c5b6df9fe1bed9398d302bd282",
+      "files": 139,
+      "crc_verified": true,
+      "set_verified": true,
+      "all_bytes_equal": true,
+      "safe_member_names": true
+    }
+  ],
+  "trace_counts": {
+    "trajectories": 54,
+    "decisions": 86,
+    "saved_json_valid": 85,
+    "schema_valid": 84,
+    "no_feedback_states_null": 36,
+    "blocked_response_unavailable_to_reparse": 1,
+    "schema_rejected_saved": 1
+  },
+  "events": [
+    {
+      "row_index": 14,
+      "decision_index": 0,
+      "status": "validated",
+      "case": "credit_guard",
+      "variant": "mutation_b",
+      "strategy": "single",
+      "seed": 0,
+      "stop_reason": "cycle_budget",
+      "requests": 1,
+      "executed_rounds": 0,
+      "executed_cycles": 0,
+      "proposal_cycles": 18,
+      "policy_error_code": null,
+      "format_error": null,
+      "response_status": "saved",
+      "response_sha256": "d66ec7ba58c94cee1038a0536a6b72efdf23439aacd7962b303743343b96835f",
+      "response_bytes": 973,
+      "tokens": 2119
+    },
+    {
+      "row_index": 50,
+      "decision_index": 1,
+      "status": "validated",
+      "case": "credit_guard",
+      "variant": "mutation_b",
+      "strategy": "feedback",
+      "seed": 1,
+      "stop_reason": "cycle_budget",
+      "requests": 2,
+      "executed_rounds": 1,
+      "executed_cycles": 7,
+      "proposal_cycles": 11,
+      "policy_error_code": null,
+      "format_error": null,
+      "response_status": "saved",
+      "response_sha256": "6cf1e12cf4dbd5d7a37c2e2ced62264c34765e425df34b692e88de59999c21cb",
+      "response_bytes": 638,
+      "tokens": 2439
+    },
+    {
+      "row_index": 51,
+      "decision_index": 2,
+      "status": "rejected",
+      "case": "credit_guard",
+      "variant": "mutation_b",
+      "strategy": "no_feedback",
+      "seed": 1,
+      "stop_reason": "policy_error",
+      "requests": 3,
+      "executed_rounds": 2,
+      "executed_cycles": 12,
+      "proposal_cycles": 0,
+      "policy_error_code": "duplicate_json_key",
+      "format_error": null,
+      "response_status": "blocked",
+      "response_sha256": "d87810e6caf6777d91037774bf77377079224569039f10ff52df8cc324b7bb2e",
+      "response_bytes": 480,
+      "tokens": 2187
+    },
+    {
+      "row_index": 75,
+      "decision_index": 1,
+      "status": "rejected",
+      "case": "credit_guard",
+      "variant": "reference",
+      "strategy": "no_feedback",
+      "seed": 2,
+      "stop_reason": "cycle_budget",
+      "requests": 3,
+      "executed_rounds": 2,
+      "executed_cycles": 16,
+      "proposal_cycles": 0,
+      "policy_error_code": null,
+      "format_error": {
+        "code": "schema_invalid",
+        "errors": [
+          {
+            "type": "extra_forbidden",
+            "location": [
+              "unknown_field"
+            ]
+          }
+        ],
+        "hint": "Use only action, reason and vectors; keep all fields within the decision schema."
+      },
+      "response_status": "saved",
+      "response_sha256": "76508b568bb1703cd9133673e8c0eff014f49bc60607a8e054c96605385aa348",
+      "response_bytes": 463,
+      "tokens": 2184
+    }
+  ],
+  "helper_correction": "Initial action-to-plan comparison incorrectly required original model vector names; executor deliberately renames them. Recheck compares all operative fields and unique final names; original helper retained.",
+  "budget_checked_during_packaging": {
+    "requests": 86,
+    "totals": {
+      "reported_tokens": 190387,
+      "unknown_reserved_tokens": 0,
+      "conservative_total": 190387,
+      "remaining_tokens": 809613,
+      "requests_known_usage": 86,
+      "requests_unknown_usage": 0
+    },
+    "round_limit": 1000000,
+    "real_currency_known": false
+  },
+  "limitations": [
+    "1 original response blocked by duplicate-key safety policy; only480-byte length/hash/guard status can be verified, raw content cannot be independently reparsed",
+    "Explicit observation, plan error and format error hidden; own input plan, remaining budget and outcome-driven early stop persist",
+    "internal synthetic modules; no broad industrial generalization",
+    "auxiliary strict RTL style gates remain failed",
+    "no human H02, extra real API/DUT execution, full test rerun, bill or portable reproduction"
+  ],
+  "main_report": {
+    "path": "docs/experiment/agent_holdout_study_live_2026-10-05.md",
+    "sha256": "4d9958bec06891e17a14691281dc815e5b607a02d9225de6790e1dbf9a25daa7",
+    "size_bytes": 12385
+  },
+  "review_report": {
+    "path": "docs/review/agent_holdout_study_review_2026-10-05.md",
+    "sha256": "95687699a81f6dba91260ae0ee976439a939a8a6ac33c4b2083194cfea3e3bc1",
+    "size_bytes": 5232
+  },
+  "experiment_receipt": {
+    "path": "docs/experiment/agent-holdout-study-live-2026-10-05/receipt.json",
+    "sha256": "db949b135dccdf462b89afc4b7c8c8b527b51444d72f4ba2727219e948b154a2"
+  },
+  "machine_audit_artifacts": [
+    {
+      "path": "core-audit.json",
+      "sha256": "2a69830a20e7e26b71275c1d35d580e597ec14fd915aeb1da09b39c1da874005",
+      "size_bytes": 156800,
+      "original": ".iverilog-ai/agent-holdout-result-review-20261005-r2/core-audit.json"
+    },
+    {
+      "path": "trace-audit.json",
+      "sha256": "ebba3887500d097ed92a858f6541c85899f0572f3b803c2016ff0c073d53b593",
+      "size_bytes": 3767,
+      "original": ".iverilog-ai/agent-holdout-result-review-20261005-r2/trace-audit.json"
+    }
+  ]
+}

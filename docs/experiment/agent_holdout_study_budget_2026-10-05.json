@@ -1,0 +1,32 @@
+{
+  "schema": "agent-per-round-budget-receipt-v1",
+  "round_name": "post_freeze_new_module_holdout_20261005",
+  "round_scope": "one complete preregistered evaluation batch; all API groups share the same 1M limit",
+  "round_limit": 1000000,
+  "round_totals": {
+    "reported_tokens": 190387,
+    "unknown_reserved_tokens": 0,
+    "conservative_total": 190387,
+    "remaining_tokens": 809613,
+    "requests_known_usage": 86,
+    "requests_unknown_usage": 0
+  },
+  "requests": 86,
+  "reported_prompt_tokens": 172545,
+  "reported_completion_tokens": 17842,
+  "requests_with_usage": 86,
+  "requests_without_usage": 0,
+  "theoretical_request_cap": 126,
+  "output_cap_per_request": 4096,
+  "thinking": "disabled",
+  "stream": false,
+  "automatic_transport_retries": 0,
+  "ordinary_format_reproposal_is_a_charged_new_request": true,
+  "historical_tokens_deducted_from_round": false,
+  "historical_360_request_limit_is_current": false,
+  "remaining_tokens_is_not_authorization_to_start_another_batch": true,
+  "actual_currency": null,
+  "provider_billing_receipt_supplied": false,
+  "raw_journal_sha256": "804139bf49211714b256066027a4aef04735b1422406b52769962aef008f5ed0",
+  "public_journal": "agent-holdout-study-live-2026-10-05/token_budget.json"
+}

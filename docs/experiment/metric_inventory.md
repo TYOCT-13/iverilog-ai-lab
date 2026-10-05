@@ -10,7 +10,7 @@
 - 追不到记录的，写"未复核"或"无记录"，不估算、不外推。
 
 初次核对：2026-09-29，HEAD `2b9594f`。本次口径修订：2026-10-05；保留原始实验文件，
-当前Agent v6与评测源码`9c3bd3c`；新恢复轮216任务/138请求/378204tokens见3.14，全仓1307/2。上一轮`75f9baa`（当时生产Agent/core为`4d8eafb`）六组216任务/145请求/399083tokens见3.13。历史生产完整回归1170/2，296项指纹无变；两测试文件随后格式修改与45项复测另列。旧v5逐拍/独立补测为1重复60任务；新增短预算三重复144任务与六项选样诊断单列在3.11/3.12。旧c7三重复、28be1ed烟测与e9b7b8a pilot分别归档，不能互换。当前正式v2 PDF仍属于28be1ed，旧v5 ZIP未含新增短预算、诊断、1M及v6恢复轮。
+当前冻结源码`c07756f`，内部合成新模块互斥留出108任务/86请求/190387tokens见3.15，全仓1570/2；历史Agent v6恢复源码`9c3bd3c`，恢复轮216任务/138请求/378204tokens见3.14，全仓1307/2。上一轮`75f9baa`（当时生产Agent/core为`4d8eafb`）六组216任务/145请求/399083tokens见3.13。历史生产完整回归1170/2，296项指纹无变；两测试文件随后格式修改与45项复测另列。旧v5逐拍/独立补测为1重复60任务；新增短预算三重复144任务与六项选样诊断单列在3.11/3.12。旧c7三重复、28be1ed烟测与e9b7b8a pilot分别归档，不能互换。当前正式v2 PDF仍属于28be1ed，旧v5 ZIP未含新增短预算、诊断、1M及v6恢复轮。
 
 ---
 
@@ -255,11 +255,11 @@ UART busy_never_clears仍漏检，提案5拍start全0，仅idle场景；发送�
 
 [本轮独立预算账](agent_study_1m_budget_2026-10-05.json)与[原始token守门账](agent-study-1m-live-2026-10-05/token_budget.json)：145真实请求、399083输入加输出tokens，上限1000000，剩600917；无未知usage、预算守门拒绝或超限，实付费用未知。用户澄清每轮Agent输入加输出≤100万tokens；历史857957不扣新轮，旧360总请求限制已撤销，历史账不回写。
 
-[入口定向65项测试](agent-study-1m-validation-2026-10-05/receipt.json)不与旧1170全仓结果相加；[只读代理复核](../review/agent_study_1m_review_2026-10-05.md)不是真人/H02。旧PDF、答辩和v5 ZIP尚未纳入本轮，真人试用、独立人审与新模块留出仍待真实证据。
+[入口定向65项测试](agent-study-1m-validation-2026-10-05/receipt.json)不与旧1170全仓结果相加；[只读代理复核](../review/agent_study_1m_review_2026-10-05.md)不是真人/H02。旧PDF、答辩和v5 ZIP尚未纳入本轮，该历史时点真人试用、独立人审与新模块留出仍待真实证据；后续内部留出另见3.15。
 
 ### 3.14 Agent v6受限格式恢复：六组三重复（2026-10-05）
 
-[本轮报告](agent_recovery_study_live_2026-10-05.md)、[回执](agent-recovery-study-live-2026-10-05/receipt.json)、[严格汇总](agent-recovery-study-live-2026-10-05/strict_summary.json)、[原文轨迹清单](agent-recovery-study-live-2026-10-05/trace_manifest.json)。当前冻结源码`9c3bd3c0cf9caa0fb95e6bbdee6147ae447e58cc`；不再将当前生产Agent称为4d8eafb。216登记任务，六组各24缺陷任务+12正确任务，三次重复；仍为开发集，没有独立留出或真人参与。
+[本轮报告](agent_recovery_study_live_2026-10-05.md)、[回执](agent-recovery-study-live-2026-10-05/receipt.json)、[严格汇总](agent-recovery-study-live-2026-10-05/strict_summary.json)、[原文轨迹清单](agent-recovery-study-live-2026-10-05/trace_manifest.json)。该历史恢复轮冻结源码`9c3bd3c0cf9caa0fb95e6bbdee6147ae447e58cc`；该轮已使用v6 Agent。216登记任务，六组各24缺陷任务+12正确任务，三次重复；仍为开发集，没有独立留出或真人参与。
 
 | 策略 | 检出/24 | 三次检出（各/8） | 平均率 | 请求 |
 |---|---:|---|---:|---:|
@@ -278,7 +278,28 @@ UART busy_never_clears仍漏检，提案5拍start全0，仅idle场景；发送�
 
 [本轮预算](agent_recovery_study_budget_2026-10-05.json)：138真实请求、378204输入加输出tokens（348617+29587），独立100万上限剩621796，138请求usage均已知，实付未知。普通格式补提计新付费请求，不是自动传输重试；余额本身不授权另开新批次。上一轮399083与旧857957均不扣本轮，历史360累计请求限制已撤销，历史账保留。
 
-[全仓r1/r2原件](agent-recovery-validation-2026-10-05/receipt.json)：r1因执行者把basetemp放仓库内导致3项失败，原件保留；r2用仓库外临时目录得到1307 passed/2 skipped/0 failed，mypy82源码0错误。不能与历史1170全仓或65/263定向测试相加。[代码代理审查](../review/agent_recovery_code_review_2026-10-05.md)已有；[结果只读代理复核](../review/agent_recovery_study_review_2026-10-05.md)已完成，不等于H02真人审核。旧PDF/ZIP未更新到本轮，真人/H02和独立新模块留出继续待验。
+[全仓r1/r2原件](agent-recovery-validation-2026-10-05/receipt.json)：r1因执行者把basetemp放仓库内导致3项失败，原件保留；r2用仓库外临时目录得到1307 passed/2 skipped/0 failed，mypy82源码0错误。不能与历史1170全仓或65/263定向测试相加。[代码代理审查](../review/agent_recovery_code_review_2026-10-05.md)已有；[结果只读代理复核](../review/agent_recovery_study_review_2026-10-05.md)已完成，不等于H02真人审核。旧PDF/ZIP未更新到本轮，该历史时点真人/H02和新模块留出待验；后续内部合成留出另见3.15。
+
+### 3.15 v6冻结后的内部合成模块互斥留出（2026-10-05）
+
+[主报告](agent_holdout_study_live_2026-10-05.md)、[回执](agent-holdout-study-live-2026-10-05/receipt.json)、[严格汇总](agent-holdout-study-live-2026-10-05/strict_summary.json)。源码冻结`c07756fb74da69aa81dccff25a706947f7cee6bd`；credit_guard、rotating_arbiter在v6 Agent冻结后生成，Agent算法与提示未修改、coverage未新增定制。它们构成内部合成的模块互斥留出；不是外部独立盲测、工业泛化或H02。四个不同人工缺陷×三重复，六组各12缺陷任务另加6正确目标，共108登记。
+
+| 策略 | 检出/12 | 三次检出（各/4） | 平均率 | 请求 |
+|---|---:|---|---:|---:|
+| fixed | 12/12 | 4、4、4 | 100% | 0 |
+| random | 8/12 | 3、3、2 | 66.67% | 0 |
+| protocol_random | 12/12 | 4、4、4 | 100% | 0 |
+| single | 5/12 | 1、1、3 | 41.67% | 18 |
+| feedback | 10/12 | 4、3、3 | 83.33% | 32 |
+| no_feedback | 9/12 | 3、3、3 | 75.00% | 36 |
+
+反馈比均匀随机仅多2个任务，仍低于fixed/protocol_random的12/12；不支持统计显著或反馈因果结论，不与历史开发集23/24合并。no_feedback的早停残余信号限制继续保留。
+
+107任务实际执行，136轮/272执行侧；86冻结快照校验通过、变化空，严格资格false。86项登记输入均与原字节快照及实际工作目录一致；其中74项与c07756f Git blob逐字节一致，12个历史文件仅CRLF/LF换行不同、无内容差异。源码提交不包含全部相同原字节，精确复现仍需登记快照，不能宣称仅凭提交或异机已完整复现。1项single（row14）周期超限全未执行，另1项no_feedback在已有执行后最终重复键安全fatal；所有失败和完整108分母保留。另有row50（credit_guard B / feedback / seed1）首轮7拍未检出，第二次合法schema提案11拍超过剩余9拍，以cycle_budget停止且第二提案未执行，2439tokens已计账；其最终not_detected保留首轮证据，不是额外全未执行，也不能将反馈两项未检出均称为执行完所有提案后的功能漏检。本批一次普通schema拒绝原文保留，正确控制row75实际恢复执行一次，重复键fatal一次；两次超周期提案分别为row14全未执行与row50部分执行。超剩余周期的安全提案目前仍立即停止；下一版可在原请求/周期预算内加入有界补提，再独立冻结重测，当前未实施或追加API。
+
+[本批独立预算](agent_holdout_study_budget_2026-10-05.json)：86真实请求、190387tokens（172545输入+17842输出），100万限额余809613，0未知usage；实付未知。历史费用与token不扣本批，余额不自动授权下一批。新公开[full_raw_manifest](agent-holdout-study-live-2026-10-05/full_raw_manifest.json)及完整版原件ZIP包含全部执行侧日志，仍未做异机完整复现。
+
+[完整回归](agent-holdout-validation-2026-10-05/receipt.json)为1570通过/2跳过/0失败，mypy83源；不与历史1307、1170或专项测试相加。[新增RTL严格风格门禁](../../benchmarks/agent_holdout_20261005/README.md)未通过，真实Icarus语义测试与风格门禁分别登记，不宣称全门禁通过。[事前只读代理审查](../review/agent_holdout_prereg_review_2026-10-05.md)已完成；[结果代理审查](../review/agent_holdout_study_review_2026-10-05.md)的核心只读核对已完成，未发现数字或原始逐拍矛盾；主代理已封装最终文书与[回执](../review/agent-holdout-study-review-2026-10-05/receipt.json)，保留两份代理原始机器记录，明确封装与核验职责，不是H02。旧正式PDF/PPT/v5ZIP尚未更新到本批，真人、H02、视频与真实远程地址仍待证据。
 
 ## 4. 在线模型实验（历史，探索性口径）
 

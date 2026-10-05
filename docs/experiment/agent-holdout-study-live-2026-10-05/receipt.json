@@ -1,0 +1,1086 @@
+{
+  "schema": "agent-holdout-full-receipt-v1",
+  "created_at_utc": "2026-10-04T23:54:50.467303+00:00",
+  "source_revision": "c07756fb74da69aa81dccff25a706947f7cee6bd",
+  "registered_tasks": 108,
+  "defect_tasks_per_strategy": 12,
+  "correct_tasks_per_strategy": 6,
+  "distinct_holdout_defects": 4,
+  "repeats": 3,
+  "independent_holdout": true,
+  "external_independent_holdout": false,
+  "human_trial": false,
+  "H02_human_review": false,
+  "requests": 86,
+  "tokens": {
+    "reported_tokens": 190387,
+    "unknown_reserved_tokens": 0,
+    "conservative_total": 190387,
+    "remaining_tokens": 809613,
+    "requests_known_usage": 86,
+    "requests_unknown_usage": 0
+  },
+  "round_token_cap": 1000000,
+  "executed_tasks": 107,
+  "audited_rounds": 136,
+  "pipeline_sides": 272,
+  "evidence_verified_tasks": 107,
+  "unexecuted_tasks": [
+    {
+      "row_index": 14,
+      "case": "credit_guard",
+      "variant": "mutation_b",
+      "strategy": "single",
+      "seed": 0,
+      "status": "cycle_budget"
+    }
+  ],
+  "frozen_inputs": 86,
+  "snapshot_verified": true,
+  "changed_inputs_at_finish": [],
+  "strict_comparison_eligible": false,
+  "schema_counts": {
+    "accepted": 84,
+    "rejected": 2
+  },
+  "format_rejections": 1,
+  "schema_recoveries": 1,
+  "recovered_rejection_requests": 1,
+  "executed_recovery_episodes": 1,
+  "retained_format_rejection_artifacts": 1,
+  "retained_response_artifacts": 85,
+  "malformed_retained_response_artifacts": 0,
+  "strategies": {
+    "fixed": {
+      "registered_defect_samples": 12,
+      "detected_samples": 12,
+      "unique_defects": 4,
+      "unique_detected": 4,
+      "unique_union_rate": 1.0,
+      "incomplete_or_undecidable": 0,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 6,
+        "detected": 12
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 4,
+          "detected": 4,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 4,
+          "detected": 4,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 4,
+          "detected": 4,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        }
+      ],
+      "repeat_detection_rate_mean": 1.0,
+      "repeat_detection_rate_min": 1.0,
+      "repeat_detection_rate_max": 1.0,
+      "requests": 0,
+      "usage_numeric_sum": {},
+      "requests_with_usage": 0,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 288,
+      "reference_audit_cycles_recorded": 288,
+      "reference_audit_cycles_attempted": 288,
+      "checks_recorded": 288,
+      "elapsed_seconds_recorded": 6.627,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "credit_guard",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.125
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.125
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 13,
+          "search_budget": 14,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.125
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.156
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.234
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.172
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 13,
+          "search_budget": 14,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.156
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.172
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.203
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.203
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 13,
+          "search_budget": 14,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.188
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.219
+        }
+      ]
+    },
+    "random": {
+      "registered_defect_samples": 12,
+      "detected_samples": 8,
+      "unique_defects": 4,
+      "unique_detected": 3,
+      "unique_union_rate": 0.75,
+      "incomplete_or_undecidable": 0,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 10,
+        "detected": 8
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 4,
+          "detected": 3,
+          "detection_rate": 0.75,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 4,
+          "detected": 3,
+          "detection_rate": 0.75,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 4,
+          "detected": 2,
+          "detection_rate": 0.5,
+          "incomplete_or_undecidable": 0
+        }
+      ],
+      "repeat_detection_rate_mean": 0.6666666666666666,
+      "repeat_detection_rate_min": 0.5,
+      "repeat_detection_rate_max": 0.75,
+      "requests": 0,
+      "usage_numeric_sum": {},
+      "requests_with_usage": 0,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 288,
+      "reference_audit_cycles_recorded": 288,
+      "reference_audit_cycles_attempted": 288,
+      "checks_recorded": 288,
+      "elapsed_seconds_recorded": 6.612,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 12,
+          "search_budget": 13,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.141
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 0,
+          "search_budget": 1,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.172
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.156
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 9,
+          "search_budget": 10,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.156
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.172
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.187
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 9,
+          "search_budget": 10,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.203
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.219
+        }
+      ]
+    },
+    "protocol_random": {
+      "registered_defect_samples": 12,
+      "detected_samples": 12,
+      "unique_defects": 4,
+      "unique_detected": 4,
+      "unique_union_rate": 1.0,
+      "incomplete_or_undecidable": 0,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 6,
+        "detected": 12
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 4,
+          "detected": 4,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 4,
+          "detected": 4,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 4,
+          "detected": 4,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        }
+      ],
+      "repeat_detection_rate_mean": 1.0,
+      "repeat_detection_rate_min": 1.0,
+      "repeat_detection_rate_max": 1.0,
+      "requests": 0,
+      "usage_numeric_sum": {},
+      "requests_with_usage": 0,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 288,
+      "reference_audit_cycles_recorded": 288,
+      "reference_audit_cycles_attempted": 288,
+      "checks_recorded": 288,
+      "elapsed_seconds_recorded": 6.671,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "credit_guard",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 14,
+          "search_budget": 15,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.125
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.156
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.141
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.157
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.172
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.172
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 12,
+          "search_budget": 13,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.156
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.171
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.187
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.187
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 12,
+          "search_budget": 13,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.25
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.219
+        }
+      ]
+    },
+    "single": {
+      "registered_defect_samples": 12,
+      "detected_samples": 5,
+      "unique_defects": 4,
+      "unique_detected": 3,
+      "unique_union_rate": 0.75,
+      "incomplete_or_undecidable": 1,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 12,
+        "cycle_budget": 1,
+        "detected": 5
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 4,
+          "detected": 1,
+          "detection_rate": 0.25,
+          "incomplete_or_undecidable": 1
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 4,
+          "detected": 1,
+          "detection_rate": 0.25,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 4,
+          "detected": 3,
+          "detection_rate": 0.75,
+          "incomplete_or_undecidable": 0
+        }
+      ],
+      "repeat_detection_rate_mean": 0.4166666666666667,
+      "repeat_detection_rate_min": 0.25,
+      "repeat_detection_rate_max": 0.75,
+      "requests": 18,
+      "usage_numeric_sum": {
+        "prompt_tokens": 33732,
+        "completion_tokens": 4312,
+        "total_tokens": 38044,
+        "prompt_cache_hit_tokens": 28416,
+        "prompt_cache_miss_tokens": 5316
+      },
+      "requests_with_usage": 18,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 110,
+      "reference_audit_cycles_recorded": 110,
+      "reference_audit_cycles_attempted": 110,
+      "checks_recorded": 110,
+      "elapsed_seconds_recorded": 31.828,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 12,
+          "search_budget": 13,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.641
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.734
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.625
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.562
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.843
+        }
+      ]
+    },
+    "feedback": {
+      "registered_defect_samples": 12,
+      "detected_samples": 10,
+      "unique_defects": 4,
+      "unique_detected": 4,
+      "unique_union_rate": 1.0,
+      "incomplete_or_undecidable": 0,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 8,
+        "detected": 10
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 4,
+          "detected": 4,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 4,
+          "detected": 3,
+          "detection_rate": 0.75,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 4,
+          "detected": 3,
+          "detection_rate": 0.75,
+          "incomplete_or_undecidable": 0
+        }
+      ],
+      "repeat_detection_rate_mean": 0.8333333333333334,
+      "repeat_detection_rate_min": 0.75,
+      "repeat_detection_rate_max": 1.0,
+      "requests": 32,
+      "usage_numeric_sum": {
+        "prompt_tokens": 66408,
+        "completion_tokens": 6725,
+        "total_tokens": 73133,
+        "prompt_cache_hit_tokens": 39424,
+        "prompt_cache_miss_tokens": 26984
+      },
+      "requests_with_usage": 32,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 213,
+      "reference_audit_cycles_recorded": 213,
+      "reference_audit_cycles_attempted": 213,
+      "checks_recorded": 213,
+      "elapsed_seconds_recorded": 51.327,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "credit_guard",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.406
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.328
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 14,
+          "search_budget": 15,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.281
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.891
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.953
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 8,
+          "search_budget": 9,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.219
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.391
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.516
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.547
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 10,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.844
+        }
+      ]
+    },
+    "no_feedback": {
+      "registered_defect_samples": 12,
+      "detected_samples": 9,
+      "unique_defects": 4,
+      "unique_detected": 4,
+      "unique_union_rate": 1.0,
+      "incomplete_or_undecidable": 1,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 8,
+        "detected": 9,
+        "policy_error": 1
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 4,
+          "detected": 3,
+          "detection_rate": 0.75,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 4,
+          "detected": 3,
+          "detection_rate": 0.75,
+          "incomplete_or_undecidable": 1
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 4,
+          "detected": 3,
+          "detection_rate": 0.75,
+          "incomplete_or_undecidable": 0
+        }
+      ],
+      "repeat_detection_rate_mean": 0.75,
+      "repeat_detection_rate_min": 0.75,
+      "repeat_detection_rate_max": 0.75,
+      "requests": 36,
+      "usage_numeric_sum": {
+        "prompt_tokens": 72405,
+        "completion_tokens": 6805,
+        "total_tokens": 79210,
+        "prompt_cache_hit_tokens": 44160,
+        "prompt_cache_miss_tokens": 28245
+      },
+      "requests_with_usage": 36,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 232,
+      "reference_audit_cycles_recorded": 232,
+      "reference_audit_cycles_attempted": 232,
+      "checks_recorded": 232,
+      "elapsed_seconds_recorded": 57.452,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "credit_guard",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.516
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 0,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.359
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.531
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 2,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 3.234
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 9,
+          "search_budget": 10,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.453
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 1,
+          "search_budget": 12,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.891
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 4,
+          "search_budget": 9,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.891
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 9,
+          "search_budget": 10,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.562
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.563
+        }
+      ]
+    }
+  },
+  "correct_controls": {
+    "fixed": {
+      "registered": 6,
+      "executed": 6,
+      "terminal_statuses": {
+        "not_detected": 6
+      },
+      "actual_false_alarms": 0
+    },
+    "random": {
+      "registered": 6,
+      "executed": 6,
+      "terminal_statuses": {
+        "not_detected": 6
+      },
+      "actual_false_alarms": 0
+    },
+    "protocol_random": {
+      "registered": 6,
+      "executed": 6,
+      "terminal_statuses": {
+        "not_detected": 6
+      },
+      "actual_false_alarms": 0
+    },
+    "single": {
+      "registered": 6,
+      "executed": 6,
+      "terminal_statuses": {
+        "not_detected": 6
+      },
+      "actual_false_alarms": 0
+    },
+    "feedback": {
+      "registered": 6,
+      "executed": 6,
+      "terminal_statuses": {
+        "not_detected": 6
+      },
+      "actual_false_alarms": 0
+    },
+    "no_feedback": {
+      "registered": 6,
+      "executed": 6,
+      "terminal_statuses": {
+        "not_detected": 6
+      },
+      "actual_false_alarms": 0
+    }
+  },
+  "defect_matrix": [
+    {
+      "case": "credit_guard",
+      "variant": "mutation_b",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 0,
+        "protocol_random": 3,
+        "single": 0,
+        "feedback": 2,
+        "no_feedback": 2
+      }
+    },
+    {
+      "case": "rotating_arbiter",
+      "variant": "mutation_b",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 2,
+        "protocol_random": 3,
+        "single": 1,
+        "feedback": 2,
+        "no_feedback": 1
+      }
+    },
+    {
+      "case": "credit_guard",
+      "variant": "mutation_c",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 3,
+        "protocol_random": 3,
+        "single": 3,
+        "feedback": 3,
+        "no_feedback": 3
+      }
+    },
+    {
+      "case": "rotating_arbiter",
+      "variant": "mutation_c",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 3,
+        "protocol_random": 3,
+        "single": 1,
+        "feedback": 3,
+        "no_feedback": 3
+      }
+    }
+  ],
+  "first_detection_rounds": {
+    "single": {
+      "1": 5
+    },
+    "feedback": {
+      "1": 7,
+      "2": 3
+    },
+    "no_feedback": {
+      "1": 5,
+      "2": 4
+    }
+  },
+  "started_at_utc": "2026-10-04T23:51:37.371590+00:00",
+  "finished_at_utc": "2026-10-04T23:54:23.073999+00:00",
+  "wall_seconds": 165.702409,
+  "source_results_sha256": "f7cba4da3026224534857265911bc0cff419d768c6ae331b7b99f9ebe161c209",
+  "source_summary_sha256": "cdf9367c63fe4836ad4cc4f419e0660384bf7325f003241a5b978a317778d847",
+  "complete_raw_evidence": ".iverilog-ai/agent-holdout-study-live-20261005/",
+  "public_copy_contains_all_execution_side_logs": true,
+  "public_copy_contains_api_trajectories_and_saved_responses": true,
+  "cost_currency": null,
+  "artifacts": [
+    {
+      "path": "preregistration.json",
+      "sha256": "b0a99cdf221ad4e9fe9ce5d92d9a9c877157646766a4197eca70fd209d010925",
+      "size_bytes": 80158
+    },
+    {
+      "path": "run_settings.json",
+      "sha256": "3386ad41007928febcf579d808a5cf03773435545de159b3f5acb43307779d57",
+      "size_bytes": 940
+    },
+    {
+      "path": "token_budget.json",
+      "sha256": "804139bf49211714b256066027a4aef04735b1422406b52769962aef008f5ed0",
+      "size_bytes": 28792
+    },
+    {
+      "path": "strict_summary.json",
+      "sha256": "cdf9367c63fe4836ad4cc4f419e0660384bf7325f003241a5b978a317778d847",
+      "size_bytes": 2414361
+    },
+    {
+      "path": "results.zip",
+      "sha256": "648f8ac67cdc95ecdccc6b5b9f1423ed71270a60657a111f7261d3b7b1f78976",
+      "size_bytes": 138456
+    },
+    {
+      "path": "specs/credit_guard_spec.md",
+      "sha256": "fb84ce7339bb5ef2069fe269ff84160d33d478462b41f50a18bd559f1e83ea36",
+      "size_bytes": 2938
+    },
+    {
+      "path": "specs/rotating_arbiter_spec.md",
+      "sha256": "99bfe04348fa8a2cf2304d76a5cd3d6608e457542e7b1fb6bccb42d0cabe5081",
+      "size_bytes": 3439
+    },
+    {
+      "path": "registered_inputs_manifest.json",
+      "sha256": "9e1ef46f937d3e2911a0c7ea4e6b735c08cee4f92ffcd60add4dcc12482c5c40",
+      "size_bytes": 23557
+    },
+    {
+      "path": "registered_inputs.zip",
+      "sha256": "13467c82362e3830951dd3120b27ebf0b64d54f57938a6ca4047b2619ea5490a",
+      "size_bytes": 539381
+    },
+    {
+      "path": "traces_and_decisions.zip",
+      "sha256": "d3c419a73b76511e49fb70a642e9ec28da67b5c5b6df9fe1bed9398d302bd282",
+      "size_bytes": 340794
+    },
+    {
+      "path": "trace_manifest.json",
+      "sha256": "17e1a423ab2cc68da42edf968c38e4093ff567b223429d9a9d2acbc46669f1cc",
+      "size_bytes": 55461
+    },
+    {
+      "path": "full_raw_manifest.json",
+      "sha256": "5e7b042bfc4536e7702e175872a4707c0478ac17a6fd8a32dde2a6d671037dc6",
+      "size_bytes": 758900
+    },
+    {
+      "path": "full_raw_evidence.zip",
+      "sha256": "c27e201af697b333854c44477e7cebb3087d8c5a2acf7a851ff17c24a2753426",
+      "size_bytes": 5674412
+    }
+  ]
+}

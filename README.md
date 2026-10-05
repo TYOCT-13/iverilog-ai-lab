@@ -25,7 +25,10 @@
 当前改造围绕四类数字 IP：FIFO、UART、SPI 和握手级。API Agent 提出测试激励；独立参考模型与 Icarus 裁决结果，真实端口采样计算 24 项命名功能场景。功能场景是有限事件观察，不是代码覆盖率或正确性证明。网页保留输入、运行记录和结果，可导出原 RTL、测试台及无需 API 的重放脚本。
 
 - [操作与 UART 反例重放](docs/demo/ic_agent_v2_walkthrough.md)
-- [v6受限格式恢复实测](docs/experiment/agent_recovery_study_live_2026-10-05.md)：当前源码`9c3bd3c`，216任务、三重复；fixed/random/protocol_random/single/feedback/no_feedback各24缺陷任务检出21/16/21/20/23/22。反馈23项均在首次实际仿真轮检出，未产生依赖已有仿真反馈的新增检出；prompt也改变，不能把计数较高归为反馈因果、显著性或泛化。
+- [新模块互斥留出实测](docs/experiment/agent_holdout_study_live_2026-10-05.md)：当前冻结`c07756f`，108任务；fixed/random/protocol_random/single/feedback/no_feedback各12缺陷任务检出12/8/12/5/10/9。credit_guard和rotating_arbiter在v6 Agent冻结后产生，Agent算法/提示未改、未新增定制coverage；这是内部合成模块留出，不是外部独立盲测或工业泛化。反馈仅比随机多2项，低于固定/协议随机，不能宣称显著或反馈因果。
+- [留出证据与预算](docs/experiment/agent-holdout-study-live-2026-10-05/receipt.json)：86请求、190387tokens，本批100万余809613、0未知usage；107/108执行、136轮/272侧，严格资格false。1项single周期超限未执行、1项已执行no_feedback最终重复键fatal均保留。公开full raw包含全部执行侧日志，异机完整复现未验证。
+- [留出批次工程验收](docs/experiment/agent-holdout-validation-2026-10-05/receipt.json)：1570通过、2跳过、0失败，mypy83源；[新增RTL严格风格门禁](benchmarks/agent_holdout_20261005/README.md)未通过，不能写全门禁通过。事前代理审查已完成，结果代理只读核验已完成，主代理已封装文书及原始机器回执；均不代替H02。
+- [v6受限格式恢复实测](docs/experiment/agent_recovery_study_live_2026-10-05.md)：历史冻结源码`9c3bd3c`，216任务、三重复；fixed/random/protocol_random/single/feedback/no_feedback各24缺陷任务检出21/16/21/20/23/22。反馈23项均在首次实际仿真轮检出，未产生依赖已有仿真反馈的新增检出；prompt也改变，不能把计数较高归为反馈因果、显著性或泛化。
 - [v6原件与预算](docs/experiment/agent-recovery-study-live-2026-10-05/receipt.json)：138请求、378204tokens/本轮100万，剩621796；212任务实际执行、229轮/458侧，4无执行保留，89快照无变化，严格资格false。10普通schema拒绝原JSON全部留存，后续5合法动作中4真实执行、1合法stop；3重复键安全fatal只留hash/长度。本轮没有json_invalid，新增txt归档仅经测试，旧row126缺失正文未补造。
 - [v6全仓验收](docs/experiment/agent-recovery-validation-2026-10-05/receipt.json)：1307通过、2跳过，mypy82源0错误；r1因仓库内临时测试目录误配置的3失败保留，r2改仓库外目录通过。已执行正确样本无误报，但反馈仅11/12正确任务执行，另有最终格式耗尽/重复键失败，不能称全部成功。
 - [上一轮100万tokens六组实测](docs/experiment/agent_study_1m_live_2026-10-05.md)：评测源码`75f9baa`、当时生产Agent/core为`4d8eafb`；216登记任务、三重复，fixed/random/protocol_random/single/feedback/no_feedback分别检出21/16/21/21/18/22个（各24缺陷任务）。该轮开发集计数三API组均高于均匀随机，但feedback低于single及no_feedback，不证明反馈有效、统计显著或泛化。212任务实际执行，9个policy_error中4项全无执行，严格资格false；全部分母保留。
@@ -41,9 +44,9 @@
 - [v5本地证据包](docs/competition/ic/evidence_pack_v5_2026-10-05.md)：完整v5时点原件、74份冻结输入和源码；仓库外真实反例重放108检查/16失败，另有独立子代理字节核查，均不代替真人或独立人审。
 - [API 消息与格式修复说明](docs/experiment/deepseek_decision_v4_2026-10-04.md)：系统规则和状态采用独立消息，保持严格动作校验；新版本实测另列，旧结果不覆盖。
 
-旧v5 ZIP与28be1ed版正式PDF尚未包含新增短预算、六项诊断、上一轮1M及本轮v6恢复实验。新1307全仓、历史1170全仓与65/263定向测试不相加；新增记录按独立路径阅读。
+旧v5 ZIP与28be1ed版正式PDF尚未包含新增短预算、六项诊断、上一轮1M、v6恢复及新模块留出实验。新1570全仓与历史1307/1170全仓、65/263定向测试不相加；新增记录按独立路径阅读。
 
-使用服务商 API，不运行本地模型权重。真人试用、独立人工复核和新模块留出评测仍待完成；最新验收、提交材料及证据路径统一从 [资料索引](docs/INDEX.md) 进入。历史 83/83 等成绩仍属于原手写测试台和旧版本，不能当成这次 Agent 成绩。
+使用服务商 API，不运行本地模型权重。内部合成新模块互斥留出已完成；真人试用、独立人工复核和外部独立盲测仍待完成；最新验收、提交材料及证据路径统一从 [资料索引](docs/INDEX.md) 进入。历史 83/83 等成绩仍属于原手写测试台和旧版本，不能当成这次 Agent 成绩。
 
 ## 快速开始
 
