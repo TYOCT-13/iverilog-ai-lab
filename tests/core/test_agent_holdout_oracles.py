@@ -208,7 +208,15 @@ def test_before_samples_do_not_claim_known_clocked_holdout_values(design):
 
 
 def test_old_fifteen_default_maps_and_profile_identities_remain_unchanged():
-    old_designs = sorted(AUTHORITATIVE - set(HOLDOUTS))
+    # Freeze the original cohort itself. New adapters must not dilute the
+    # historical defaults checksum or expand its denominator.
+    old_designs = sorted({
+        "mod10_counter", "simple_alu", "sequence_101_overlap",
+        "traffic_light_emergency", "sync_fifo", "uart_tx", "spi_master",
+        "handshake_stage", "debounce", "pwm", "mux4", "sync_reset",
+        "johnson_counter", "edge_detector", "pulse_stretcher",
+    })
+    assert set(old_designs) <= AUTHORITATIVE
     assert len(old_designs) == 15
     defaults = {name: INPUT_DEFAULTS[name] for name in old_designs}
     encoded = json.dumps(defaults, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()

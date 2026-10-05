@@ -1,0 +1,174 @@
+{
+  "schema_version": "1.0",
+  "design": "valid_data_pipeline",
+  "objective": "Verify correct default interface behavior and ordinary multi-cycle operations",
+  "clock_period_ns": 10,
+  "reset": {
+    "signal": "i_rstn",
+    "active_level": 0,
+    "synchronous": false,
+    "assert_cycles": 2
+  },
+  "sample_before_reset": false,
+  "pre_reset_expected": {},
+  "vectors": [
+    {
+      "name": "random_0",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 1,
+        "i_valid": 1,
+        "i_data": 20
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {},
+      "rationale": ""
+    },
+    {
+      "name": "random_1",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 1,
+        "i_valid": 1,
+        "i_data": 207
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {},
+      "rationale": ""
+    },
+    {
+      "name": "random_2",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 1,
+        "i_valid": 1,
+        "i_data": 183
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {},
+      "rationale": ""
+    },
+    {
+      "name": "random_3",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 0,
+        "i_valid": 0,
+        "i_data": 144
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {},
+      "rationale": ""
+    },
+    {
+      "name": "random_4",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 0,
+        "i_valid": 0,
+        "i_data": 128
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {},
+      "rationale": ""
+    },
+    {
+      "name": "random_5",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 0,
+        "i_valid": 1,
+        "i_data": 50
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {},
+      "rationale": ""
+    },
+    {
+      "name": "random_6",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 0,
+        "i_valid": 1,
+        "i_data": 241
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {},
+      "rationale": ""
+    },
+    {
+      "name": "random_7",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 0,
+        "i_valid": 1,
+        "i_data": 222
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {},
+      "rationale": ""
+    },
+    {
+      "name": "random_8",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 1,
+        "i_valid": 0,
+        "i_data": 244
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {},
+      "rationale": ""
+    },
+    {
+      "name": "random_9",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 1,
+        "i_valid": 1,
+        "i_data": 31
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {},
+      "rationale": ""
+    },
+    {
+      "name": "random_10",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 0,
+        "i_valid": 0,
+        "i_data": 204
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {},
+      "rationale": ""
+    },
+    {
+      "name": "random_11",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 0,
+        "i_valid": 1,
+        "i_data": 170
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {},
+      "rationale": ""
+    }
+  ],
+  "assumptions": [],
+  "assertions": []
+}

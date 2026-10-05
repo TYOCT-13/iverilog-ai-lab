@@ -1,0 +1,98 @@
+{
+  "model_input": false,
+  "purpose": "Offline semantic mutation controls only",
+  "witnesses": {
+    "valid_data_pipeline": {
+      "B": {
+        "id": "private-witness-B",
+        "kind": "private_witness",
+        "cycles": 2,
+        "segments": 2,
+        "mismatches": 2,
+        "first_mismatch": [
+          {
+            "task": "private-witness-B",
+            "cycle": 0,
+            "port": "o_valid",
+            "actual_bits": "1",
+            "expected": 0,
+            "input": {
+              "i_rstn": 1,
+              "i_flush": 0,
+              "i_valid": 1,
+              "i_data": 165
+            }
+          }
+        ]
+      },
+      "C": {
+        "id": "private-witness-C",
+        "kind": "private_witness",
+        "cycles": 3,
+        "segments": 3,
+        "mismatches": 1,
+        "first_mismatch": [
+          {
+            "task": "private-witness-C",
+            "cycle": 1,
+            "port": "o_valid",
+            "actual_bits": "1",
+            "expected": 0,
+            "input": {
+              "i_rstn": 1,
+              "i_flush": 1,
+              "i_valid": 0,
+              "i_data": 60
+            }
+          }
+        ]
+      }
+    },
+    "event_accumulator": {
+      "B": {
+        "id": "private-witness-B",
+        "kind": "private_witness",
+        "cycles": 1,
+        "segments": 1,
+        "mismatches": 1,
+        "first_mismatch": [
+          {
+            "task": "private-witness-B",
+            "cycle": 0,
+            "port": "o_count",
+            "actual_bits": "0001",
+            "expected": 0,
+            "input": {
+              "i_rstn": 1,
+              "i_enable": 0,
+              "i_event": 1,
+              "i_clear": 0
+            }
+          }
+        ]
+      },
+      "C": {
+        "id": "private-witness-C",
+        "kind": "private_witness",
+        "cycles": 2,
+        "segments": 2,
+        "mismatches": 1,
+        "first_mismatch": [
+          {
+            "task": "private-witness-C",
+            "cycle": 1,
+            "port": "o_count",
+            "actual_bits": "0001",
+            "expected": 0,
+            "input": {
+              "i_rstn": 1,
+              "i_enable": 0,
+              "i_event": 0,
+              "i_clear": 1
+            }
+          }
+        ]
+      }
+    }
+  }
+}

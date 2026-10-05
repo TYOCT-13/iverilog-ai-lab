@@ -1,0 +1,1448 @@
+{
+  "schema": "independent-internal-new-holdout-prereg-audit-v1",
+  "attempt": "r2",
+  "started_at": "2026-10-05T05:40:30.985253+00:00",
+  "finished_at": "2026-10-05T05:40:53.750951+00:00",
+  "auditor_role": "non-implementer same-team machine reviewer; not human/H02",
+  "tool_sha256": "49756ff0c217c4ff1defaaf467f3383fdab9eeb43f943e2af9665e91a5c9c475",
+  "unique_checks": 194,
+  "non_DUT_checks": 194,
+  "passed": 194,
+  "failed": 0,
+  "skipped": 0,
+  "actual_API_calls": 0,
+  "real_credential_reads": 0,
+  "actual_DUT_runs": 0,
+  "other_agents_tests_counted": false,
+  "mock_execution_is_functional_evidence": false,
+  "checks": [
+    {
+      "name": "anchors.current_and_git_blobs_and_imported_system",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "anchors.reject_current_drift.src/iverilog_ai/ai/agent.py",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "anchors.reject_current_drift.src/iverilog_ai/core/observation_feedback.py",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "anchors.reject_system_drift",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "registration.denominators_request_cap_and_rotation",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "registration.internal_holdout_limits",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "registration.snapshot_set_complete",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "registration.dry_run_has_no_external_access",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject.00.schema",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject.01.round_name",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject.02.token_cap",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject.03.max_output_tokens_per_request",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject.04.max_vectors_per_proposal",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject.05.max_accepted_vectors_total",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject.06.repeats",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject.07.registered_rows",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject.08.theoretical_request_cap",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject.09.agent_frozen_from_revision",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject.10.agent_prompt_version",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject.11.agent_sha256",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject.12.observation_feedback_sha256",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject.13.system_prompt_sha256",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject.14.strategies",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject.15.cycle_budgets",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject.16.token_scope",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject.17.freeze_status",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject.18.manifest_sha256",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject.19.token_cap",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject.20.repeats",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject.21.max_vectors_per_proposal",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject_transport.endpoint",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject_transport.model",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject_transport.wire_api",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject_transport.thinking_mode",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject_transport.stream",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject_transport.store",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject_transport.timeout_seconds",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.reject_transport.automatic_transport_retry",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "config.unfrozen_rejects_before_anchor_credential_output",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.complete_raw_asset_members",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.schema",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.missing_case",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.extra_case",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.missing_member",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.extra_member",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.bad_member_sha",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.bad_member_sha_shape",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.private_metadata_api_visible",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.baseline_path",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.baseline_sha",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.references_sha",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.prior_membership_sha",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.valid_data_pipeline.reference_rtl",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.valid_data_pipeline.contract_path",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.valid_data_pipeline.spec_path",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.valid_data_pipeline.default_parameters",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.valid_data_pipeline.cycle_budget",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.valid_data_pipeline.max_vectors_per_proposal",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.valid_data_pipeline.max_accepted_vectors_total",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.valid_data_pipeline.clock",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.valid_data_pipeline.reset",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.valid_data_pipeline.sampling",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.valid_data_pipeline.episodes",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.valid_data_pipeline.contract_sha256",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.valid_data_pipeline.missing_target",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.valid_data_pipeline.target_order",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.valid_data_pipeline.target_path",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.valid_data_pipeline.target_sha",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.event_accumulator.reference_rtl",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.event_accumulator.contract_path",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.event_accumulator.spec_path",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.event_accumulator.default_parameters",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.event_accumulator.cycle_budget",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.event_accumulator.max_vectors_per_proposal",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.event_accumulator.max_accepted_vectors_total",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.event_accumulator.clock",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.event_accumulator.reset",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.event_accumulator.sampling",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.event_accumulator.episodes",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.event_accumulator.contract_sha256",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.event_accumulator.missing_target",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.event_accumulator.target_order",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.event_accumulator.target_path",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.reject.event_accumulator.target_sha",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "manifest.identical_json_changed_bytes_rejected",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "baseline.public_only_geometry_determinism.valid_data_pipeline.fixed.0",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "baseline.public_only_geometry_determinism.valid_data_pipeline.fixed.1",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "baseline.public_only_geometry_determinism.valid_data_pipeline.fixed.2",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "baseline.public_only_geometry_determinism.valid_data_pipeline.random.0",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "baseline.public_only_geometry_determinism.valid_data_pipeline.random.1",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "baseline.public_only_geometry_determinism.valid_data_pipeline.random.2",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "baseline.public_only_geometry_determinism.valid_data_pipeline.protocol_random.0",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "baseline.public_only_geometry_determinism.valid_data_pipeline.protocol_random.1",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "baseline.public_only_geometry_determinism.valid_data_pipeline.protocol_random.2",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.valid_data_pipeline.width",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.valid_data_pipeline.signed",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.valid_data_pipeline.extra_port",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.valid_data_pipeline.direction",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.valid_data_pipeline.parameter",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.valid_data_pipeline.clock_alias",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.valid_data_pipeline.clock_period",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.valid_data_pipeline.clock_edge",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.valid_data_pipeline.reset_alias",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.valid_data_pipeline.reset_polarity",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.valid_data_pipeline.reset_sync",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.valid_data_pipeline.reset_length",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.valid_data_pipeline.initial",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.valid_data_pipeline.no_clock",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.valid_data_pipeline.no_reset",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_before_x_z_clock_and_unknown_port.valid_data_pipeline",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.name_or_raw_contract_never_authoritative.valid_data_pipeline",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "baseline.public_only_geometry_determinism.event_accumulator.fixed.0",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "baseline.public_only_geometry_determinism.event_accumulator.fixed.1",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "baseline.public_only_geometry_determinism.event_accumulator.fixed.2",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "baseline.public_only_geometry_determinism.event_accumulator.random.0",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "baseline.public_only_geometry_determinism.event_accumulator.random.1",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "baseline.public_only_geometry_determinism.event_accumulator.random.2",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "baseline.public_only_geometry_determinism.event_accumulator.protocol_random.0",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "baseline.public_only_geometry_determinism.event_accumulator.protocol_random.1",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "baseline.public_only_geometry_determinism.event_accumulator.protocol_random.2",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.event_accumulator.width",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.event_accumulator.signed",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.event_accumulator.extra_port",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.event_accumulator.direction",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.event_accumulator.parameter",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.event_accumulator.clock_alias",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.event_accumulator.clock_period",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.event_accumulator.clock_edge",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.event_accumulator.reset_alias",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.event_accumulator.reset_polarity",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.event_accumulator.reset_sync",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.event_accumulator.reset_length",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.event_accumulator.initial",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.event_accumulator.no_clock",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_fixed_contract.event_accumulator.no_reset",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.reject_before_x_z_clock_and_unknown_port.event_accumulator",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.name_or_raw_contract_never_authoritative.event_accumulator",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.manual_pipeline_capture_bubble_flush_reset",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.manual_event_permission_clear_wrap_reset",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "oracle.prior_17_pure_models_anchored_compatibility",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "history.five_original_preregs_and_accounting_only",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "admission.refuses_before_credentials_provider_output.unfrozen",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "admission.refuses_before_credentials_provider_output.existing_output",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "admission.refuses_before_credentials_provider_output.no_explicit_key",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "admission.refuses_before_credentials_provider_output.dirty_git",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "admission.refuses_before_credentials_provider_output.untracked_input",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "admission.refuses_before_credentials_provider_output.revision_drift",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "admission.refuses_before_credentials_provider_output.byte_drift",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "admission.refuses_before_credentials_provider_output.unfinished_history",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "history.synthetic_refusal.absent",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "history.synthetic_refusal.pending",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "history.synthetic_refusal.unfinished",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "history.synthetic_refusal.false_totals",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "history.synthetic_unknown_keeps_full_reservation",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "snapshot.all_registered_original_bytes",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "snapshot.changed_hash_refused_before_new_output",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "transport.entry_factory_and_execute_pins",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "transport.payload_and_attributes",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "transport.no_auto_retry.ProviderConnectionError",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "transport.no_auto_retry.TimeoutError",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "transport.no_auto_retry.ProviderHTTPError",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "transport.no_auto_retry.ValueError",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "budget.paid_rejection_unknown_and_cap",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.valid_data_pipeline.single.format_recover",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.valid_data_pipeline.single.plan_recover",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.valid_data_pipeline.single.all_format_rejected",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.valid_data_pipeline.single.three_rounds",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.valid_data_pipeline.single.early_failure",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.valid_data_pipeline.feedback.format_recover",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.valid_data_pipeline.feedback.plan_recover",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.valid_data_pipeline.feedback.all_format_rejected",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.valid_data_pipeline.feedback.three_rounds",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.valid_data_pipeline.feedback.early_failure",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.valid_data_pipeline.no_feedback.format_recover",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.valid_data_pipeline.no_feedback.plan_recover",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.valid_data_pipeline.no_feedback.all_format_rejected",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.valid_data_pipeline.no_feedback.three_rounds",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.valid_data_pipeline.no_feedback.early_failure",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.event_accumulator.single.format_recover",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.event_accumulator.single.plan_recover",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.event_accumulator.single.all_format_rejected",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.event_accumulator.single.three_rounds",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.event_accumulator.single.early_failure",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.event_accumulator.feedback.format_recover",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.event_accumulator.feedback.plan_recover",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.event_accumulator.feedback.all_format_rejected",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.event_accumulator.feedback.three_rounds",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.event_accumulator.feedback.early_failure",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.event_accumulator.no_feedback.format_recover",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.event_accumulator.no_feedback.plan_recover",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.event_accumulator.no_feedback.all_format_rejected",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.event_accumulator.no_feedback.three_rounds",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "agent.shared_limits_and_payload.event_accumulator.no_feedback.early_failure",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    },
+    {
+      "name": "final.registered_bytes_unchanged_after_non_DUT_checks",
+      "kind": "non_DUT_mechanical",
+      "status": "passed"
+    }
+  ],
+  "details": {
+    "registration.denominators_request_cap_and_rotation": {
+      "unique_rows": 108,
+      "defect_tasks_per_strategy": 12,
+      "correct_tasks_per_strategy": 6,
+      "theoretical_requests": 126
+    },
+    "registration.snapshot_set_complete": {
+      "source_and_input_count": 458,
+      "manifest_member_count": 400
+    },
+    "registration.dry_run_has_no_external_access": {
+      "mode": "dry_run",
+      "freeze_status": "FROZEN",
+      "registered_rows": 108,
+      "defect_tasks_per_strategy": 12,
+      "correct_tasks_per_strategy": 6,
+      "theoretical_requests": 126,
+      "shared_token_cap": 1000000
+    },
+    "manifest.complete_raw_asset_members": {
+      "closed_member_count": 400
+    },
+    "oracle.prior_17_pure_models_anchored_compatibility": {
+      "old_modules_compared": 17,
+      "vectors_per_module": 60,
+      "sampling_modes": [
+        "per_cycle",
+        "vector_end"
+      ],
+      "DUT_runs": 0
+    },
+    "history.five_original_preregs_and_accounting_only": {
+      "old_prereg_module_membership_only": [
+        {
+          "batch": "agent-study-1m-live-20261005",
+          "public_prereg_path": "docs/experiment/agent-study-1m-live-2026-10-05/preregistration.json",
+          "sha256": "3e66b4ec487e9a7682eb322dca413e05c2265f7f1180009a74c65778cb709c9b",
+          "module_set": [
+            "handshake_stage",
+            "spi_master",
+            "sync_fifo",
+            "uart_tx"
+          ]
+        },
+        {
+          "batch": "agent-recovery-study-live-20261005",
+          "public_prereg_path": "docs/experiment/agent-recovery-study-live-2026-10-05/preregistration.json",
+          "sha256": "5cdb8ffc0eb88bbbb6942e316a3b76a184afff8b95de06f8929d678559adea07",
+          "module_set": [
+            "handshake_stage",
+            "spi_master",
+            "sync_fifo",
+            "uart_tx"
+          ]
+        },
+        {
+          "batch": "agent-holdout-study-live-20261005",
+          "public_prereg_path": "docs/experiment/agent-holdout-study-live-2026-10-05/preregistration.json",
+          "sha256": "b0a99cdf221ad4e9fe9ce5d92d9a9c877157646766a4197eca70fd209d010925",
+          "module_set": [
+            "credit_guard",
+            "rotating_arbiter"
+          ]
+        },
+        {
+          "batch": "agent-budget-study-live-20261005",
+          "public_prereg_path": "docs/experiment/agent-budget-study-live-2026-10-05/preregistration.json",
+          "sha256": "0ae79dbc7eba99c8de665f3e11c4af0c5f87a886057d6b04a4b7290c27416435",
+          "module_set": [
+            "credit_guard",
+            "edge_detector",
+            "handshake_stage",
+            "pulse_stretcher",
+            "rotating_arbiter",
+            "spi_master",
+            "sync_fifo",
+            "uart_tx"
+          ]
+        },
+        {
+          "batch": "agent-feedback-study-live-20261005",
+          "public_prereg_path": "docs/experiment/agent-feedback-study-live-2026-10-05/preregistration.json",
+          "sha256": "49fa4af43f616a70c6ff0ba905a912689da71abb4b45e013c70b42dd75721ff2",
+          "module_set": [
+            "credit_guard",
+            "edge_detector",
+            "handshake_stage",
+            "pulse_stretcher",
+            "rotating_arbiter",
+            "spi_master",
+            "sync_fifo",
+            "uart_tx"
+          ]
+        }
+      ],
+      "accounting_only": [
+        {
+          "batch": "agent-study-1m-live-20261005",
+          "local_private_records": "verified_present",
+          "finished_at": "2026-10-04T20:45:15.255582+00:00",
+          "pending_requests": 0,
+          "unknown_usage_requests": 0,
+          "unknown_usage_records": [],
+          "tokens": {
+            "reported_tokens": 399083,
+            "unknown_reserved_tokens": 0,
+            "conservative_total": 399083,
+            "remaining_tokens": 600917,
+            "requests_known_usage": 145,
+            "requests_unknown_usage": 0
+          },
+          "journal_sha256": "43eb0a532fd7924f1421dbb168efa776eeaf13c7d32955b98fd232dc6d3ff274",
+          "results_sha256": "a71ebafc2b56638ce0d6694c455306f1eff9250eee27f63446e3120b56c98a38",
+          "historical_usage_charged_to_this_batch": false
+        },
+        {
+          "batch": "agent-recovery-study-live-20261005",
+          "local_private_records": "verified_present",
+          "finished_at": "2026-10-04T22:28:23.107371+00:00",
+          "pending_requests": 0,
+          "unknown_usage_requests": 0,
+          "unknown_usage_records": [],
+          "tokens": {
+            "reported_tokens": 378204,
+            "unknown_reserved_tokens": 0,
+            "conservative_total": 378204,
+            "remaining_tokens": 621796,
+            "requests_known_usage": 138,
+            "requests_unknown_usage": 0
+          },
+          "journal_sha256": "754de0d9d5587b4e7a5288800adbadc4794803e50f9c0361f4c31f5c5d0f7d7e",
+          "results_sha256": "c2ecd4ae44f2b0f10e6500c20bd56ce23c8faaa8ef84d193aa05bb724de6aeb5",
+          "historical_usage_charged_to_this_batch": false
+        },
+        {
+          "batch": "agent-holdout-study-live-20261005",
+          "local_private_records": "verified_present",
+          "finished_at": "2026-10-04T23:54:23.073999+00:00",
+          "pending_requests": 0,
+          "unknown_usage_requests": 0,
+          "unknown_usage_records": [],
+          "tokens": {
+            "reported_tokens": 190387,
+            "unknown_reserved_tokens": 0,
+            "conservative_total": 190387,
+            "remaining_tokens": 809613,
+            "requests_known_usage": 86,
+            "requests_unknown_usage": 0
+          },
+          "journal_sha256": "804139bf49211714b256066027a4aef04735b1422406b52769962aef008f5ed0",
+          "results_sha256": "f7cba4da3026224534857265911bc0cff419d768c6ae331b7b99f9ebe161c209",
+          "historical_usage_charged_to_this_batch": false
+        },
+        {
+          "batch": "agent-budget-study-live-20261005",
+          "local_private_records": "verified_present",
+          "finished_at": "2026-10-05T01:37:34.134317+00:00",
+          "pending_requests": 0,
+          "unknown_usage_requests": 0,
+          "unknown_usage_records": [],
+          "tokens": {
+            "reported_tokens": 833216,
+            "unknown_reserved_tokens": 0,
+            "conservative_total": 833216,
+            "remaining_tokens": 166784,
+            "requests_known_usage": 334,
+            "requests_unknown_usage": 0
+          },
+          "journal_sha256": "92fc58f7796865771708ba5606180e19a4fd67052680da7d7b6a41c8570a26f4",
+          "results_sha256": "4eb7e07c216281bd97e53c0ea259eabbf97578ceb2a259bc2fa74740d086ebb9",
+          "historical_usage_charged_to_this_batch": false
+        },
+        {
+          "batch": "agent-feedback-study-live-20261005",
+          "local_private_records": "verified_present",
+          "finished_at": "2026-10-05T04:28:29.066686+00:00",
+          "pending_requests": 0,
+          "unknown_usage_requests": 0,
+          "unknown_usage_records": [],
+          "tokens": {
+            "reported_tokens": 973149,
+            "unknown_reserved_tokens": 0,
+            "conservative_total": 973149,
+            "remaining_tokens": 26851,
+            "requests_known_usage": 306,
+            "requests_unknown_usage": 0
+          },
+          "journal_sha256": "ceea9752de0595f4afe65ce432fb715451cf74534bd607d86a37fd08aaf55660",
+          "results_sha256": "0386a0a7407d9a0f3f74590e4eb54b6880759ca83954c46ee870c36eb959f99d",
+          "historical_usage_charged_to_this_batch": false
+        }
+      ],
+      "old_scores_used_for_selection": false,
+      "old_score_fields_output": false
+    },
+    "snapshot.all_registered_original_bytes": {
+      "path": "registered-inputs/manifest.json",
+      "sha256": "f516a5fda999476538bb42fa51c1acdf13ae9c8c4fcc535b3196b951a762fb5c",
+      "file_count": 458
+    },
+    "transport.entry_factory_and_execute_pins": {
+      "provider_pins": {
+        "endpoint": "https://api.deepseek.com",
+        "model": "deepseek-flash",
+        "wire_api": "chat_completions",
+        "thinking_mode": "disabled",
+        "stream": false,
+        "store": false,
+        "timeout": 60,
+        "max_output_tokens": 4096,
+        "force_output_limit": true,
+        "request_limit": 3,
+        "allow_network": true,
+        "reasoning_effort": null
+      },
+      "credential_boundary": "fabricated callback only; no file/environment credential read",
+      "execute_boundary": "stub only; no API/DUT execution"
+    },
+    "transport.payload_and_attributes": {
+      "model": "deepseek-flash",
+      "messages": [
+        {
+          "role": "system",
+          "content": "fixed-system"
+        },
+        {
+          "role": "user",
+          "content": "public-state"
+        }
+      ],
+      "stream": false,
+      "response_format": {
+        "type": "json_object"
+      },
+      "thinking": {
+        "type": "disabled"
+      },
+      "max_tokens": 4096
+    },
+    "agent.shared_limits_and_payload.valid_data_pipeline.single.format_recover": {
+      "mock_requests": 1,
+      "stub_pipeline_calls": 0,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": false,
+      "stop_reason": "decision_format_error"
+    },
+    "agent.shared_limits_and_payload.valid_data_pipeline.single.plan_recover": {
+      "mock_requests": 1,
+      "stub_pipeline_calls": 0,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": false,
+      "stop_reason": "request_budget"
+    },
+    "agent.shared_limits_and_payload.valid_data_pipeline.single.all_format_rejected": {
+      "mock_requests": 1,
+      "stub_pipeline_calls": 0,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": false,
+      "stop_reason": "decision_format_error"
+    },
+    "agent.shared_limits_and_payload.valid_data_pipeline.single.three_rounds": {
+      "mock_requests": 1,
+      "stub_pipeline_calls": 1,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": false,
+      "stop_reason": "round_budget"
+    },
+    "agent.shared_limits_and_payload.valid_data_pipeline.single.early_failure": {
+      "mock_requests": 1,
+      "stub_pipeline_calls": 1,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": false,
+      "stop_reason": "counterexample_found"
+    },
+    "agent.shared_limits_and_payload.valid_data_pipeline.feedback.format_recover": {
+      "mock_requests": 3,
+      "stub_pipeline_calls": 1,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": false,
+      "stop_reason": "model_stopped"
+    },
+    "agent.shared_limits_and_payload.valid_data_pipeline.feedback.plan_recover": {
+      "mock_requests": 3,
+      "stub_pipeline_calls": 1,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": false,
+      "stop_reason": "model_stopped"
+    },
+    "agent.shared_limits_and_payload.valid_data_pipeline.feedback.all_format_rejected": {
+      "mock_requests": 3,
+      "stub_pipeline_calls": 0,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": false,
+      "stop_reason": "decision_format_error"
+    },
+    "agent.shared_limits_and_payload.valid_data_pipeline.feedback.three_rounds": {
+      "mock_requests": 3,
+      "stub_pipeline_calls": 3,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": false,
+      "stop_reason": "round_budget"
+    },
+    "agent.shared_limits_and_payload.valid_data_pipeline.feedback.early_failure": {
+      "mock_requests": 1,
+      "stub_pipeline_calls": 1,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": false,
+      "stop_reason": "counterexample_found"
+    },
+    "agent.shared_limits_and_payload.valid_data_pipeline.no_feedback.format_recover": {
+      "mock_requests": 3,
+      "stub_pipeline_calls": 1,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": true,
+      "stop_reason": "model_stopped"
+    },
+    "agent.shared_limits_and_payload.valid_data_pipeline.no_feedback.plan_recover": {
+      "mock_requests": 3,
+      "stub_pipeline_calls": 1,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": true,
+      "stop_reason": "model_stopped"
+    },
+    "agent.shared_limits_and_payload.valid_data_pipeline.no_feedback.all_format_rejected": {
+      "mock_requests": 3,
+      "stub_pipeline_calls": 0,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": true,
+      "stop_reason": "decision_format_error"
+    },
+    "agent.shared_limits_and_payload.valid_data_pipeline.no_feedback.three_rounds": {
+      "mock_requests": 3,
+      "stub_pipeline_calls": 3,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": true,
+      "stop_reason": "round_budget"
+    },
+    "agent.shared_limits_and_payload.valid_data_pipeline.no_feedback.early_failure": {
+      "mock_requests": 1,
+      "stub_pipeline_calls": 1,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": true,
+      "stop_reason": "counterexample_found"
+    },
+    "agent.shared_limits_and_payload.event_accumulator.single.format_recover": {
+      "mock_requests": 1,
+      "stub_pipeline_calls": 0,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": false,
+      "stop_reason": "decision_format_error"
+    },
+    "agent.shared_limits_and_payload.event_accumulator.single.plan_recover": {
+      "mock_requests": 1,
+      "stub_pipeline_calls": 0,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": false,
+      "stop_reason": "request_budget"
+    },
+    "agent.shared_limits_and_payload.event_accumulator.single.all_format_rejected": {
+      "mock_requests": 1,
+      "stub_pipeline_calls": 0,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": false,
+      "stop_reason": "decision_format_error"
+    },
+    "agent.shared_limits_and_payload.event_accumulator.single.three_rounds": {
+      "mock_requests": 1,
+      "stub_pipeline_calls": 1,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": false,
+      "stop_reason": "round_budget"
+    },
+    "agent.shared_limits_and_payload.event_accumulator.single.early_failure": {
+      "mock_requests": 1,
+      "stub_pipeline_calls": 1,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": false,
+      "stop_reason": "counterexample_found"
+    },
+    "agent.shared_limits_and_payload.event_accumulator.feedback.format_recover": {
+      "mock_requests": 3,
+      "stub_pipeline_calls": 1,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": false,
+      "stop_reason": "model_stopped"
+    },
+    "agent.shared_limits_and_payload.event_accumulator.feedback.plan_recover": {
+      "mock_requests": 3,
+      "stub_pipeline_calls": 1,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": false,
+      "stop_reason": "model_stopped"
+    },
+    "agent.shared_limits_and_payload.event_accumulator.feedback.all_format_rejected": {
+      "mock_requests": 3,
+      "stub_pipeline_calls": 0,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": false,
+      "stop_reason": "decision_format_error"
+    },
+    "agent.shared_limits_and_payload.event_accumulator.feedback.three_rounds": {
+      "mock_requests": 3,
+      "stub_pipeline_calls": 3,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": false,
+      "stop_reason": "round_budget"
+    },
+    "agent.shared_limits_and_payload.event_accumulator.feedback.early_failure": {
+      "mock_requests": 1,
+      "stub_pipeline_calls": 1,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": false,
+      "stop_reason": "counterexample_found"
+    },
+    "agent.shared_limits_and_payload.event_accumulator.no_feedback.format_recover": {
+      "mock_requests": 3,
+      "stub_pipeline_calls": 1,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": true,
+      "stop_reason": "model_stopped"
+    },
+    "agent.shared_limits_and_payload.event_accumulator.no_feedback.plan_recover": {
+      "mock_requests": 3,
+      "stub_pipeline_calls": 1,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": true,
+      "stop_reason": "model_stopped"
+    },
+    "agent.shared_limits_and_payload.event_accumulator.no_feedback.all_format_rejected": {
+      "mock_requests": 3,
+      "stub_pipeline_calls": 0,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": true,
+      "stop_reason": "decision_format_error"
+    },
+    "agent.shared_limits_and_payload.event_accumulator.no_feedback.three_rounds": {
+      "mock_requests": 3,
+      "stub_pipeline_calls": 3,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": true,
+      "stop_reason": "round_budget"
+    },
+    "agent.shared_limits_and_payload.event_accumulator.no_feedback.early_failure": {
+      "mock_requests": 1,
+      "stub_pipeline_calls": 1,
+      "actual_DUT_runs": 0,
+      "feedback_fields_None_on_every_no_feedback_state": true,
+      "stop_reason": "counterexample_found"
+    },
+    "actual_execute_precondition": {
+      "git_worktree_clean_now": false,
+      "registered_inputs_committed_and_clean_required_before_API": true,
+      "fresh_live_output_exists": false,
+      "credential_not_supplied_to_audit": true,
+      "API_execution_performed": false
+    }
+  }
+}

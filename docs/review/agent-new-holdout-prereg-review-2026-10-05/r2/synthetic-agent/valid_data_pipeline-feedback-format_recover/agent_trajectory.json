@@ -1,0 +1,667 @@
+{
+  "schema_version": "1.0",
+  "prompt_version": "verification-agent-v8-bounded-port-feedback",
+  "record_kind": "test_provider",
+  "model": "test",
+  "wire_api": null,
+  "thinking_mode": null,
+  "thinking_mode_source": "not_requested",
+  "feedback_enabled": true,
+  "functional_coverage_feedback_enabled": true,
+  "agent_plan_mode": "independent",
+  "reference_sampling": "per_cycle",
+  "cycle_budget_basis": "all_generated_stimulus_including_replay_and_paired_runs",
+  "automatic_reset_budget": "reported_separately_from_stimulus",
+  "simulation_multiplier": 1,
+  "evidence_mode": "pipeline_observation",
+  "execution_policy": "qualified_observer_or_sampling_guard_v1",
+  "port_observation_policy": "bound_actual_port_samples_v1",
+  "port_observation_feedback_enabled": true,
+  "started_at": "2026-10-05T05:40:53.151511+00:00",
+  "design_family": "valid_data_pipeline",
+  "objective": "independent mechanical control-flow fixture",
+  "rtl_sha256": "b3fc81d4fdf3a23cb38c710af7c6d278cfba9d3f52978492594263464e44d9bb",
+  "contract": {
+    "module": "valid_data_pipeline",
+    "ports": [
+      {
+        "name": "i_clk",
+        "direction": "input",
+        "width": 1,
+        "signed": false
+      },
+      {
+        "name": "i_rstn",
+        "direction": "input",
+        "width": 1,
+        "signed": false
+      },
+      {
+        "name": "i_flush",
+        "direction": "input",
+        "width": 1,
+        "signed": false
+      },
+      {
+        "name": "i_valid",
+        "direction": "input",
+        "width": 1,
+        "signed": false
+      },
+      {
+        "name": "i_data",
+        "direction": "input",
+        "width": 8,
+        "signed": false
+      },
+      {
+        "name": "o_valid",
+        "direction": "output",
+        "width": 1,
+        "signed": false
+      },
+      {
+        "name": "o_data",
+        "direction": "output",
+        "width": 8,
+        "signed": false
+      }
+    ],
+    "clock": {
+      "signal": "i_clk",
+      "period_ns": 10.0,
+      "edge": "posedge"
+    },
+    "reset": {
+      "signal": "i_rstn",
+      "active_level": 0,
+      "synchronous": false,
+      "assert_cycles": 2
+    }
+  },
+  "specification": "# valid_data_pipeline 正确行为规格 / Two-stage valid/data pipeline\n\n固定 8 位两级寄存流水，连续输入可每拍接受一个数据，无 ready 和反压。\n\n| 端口 | 方向 | 位宽 | 含义 |\n| --- | --- | --- | --- |\n| i_clk | input | 1 | 上升沿采样时钟 |\n| i_rstn | input | 1 | 异步低有效复位 |\n| i_flush | input | 1 | 当拍同步清空流水 |\n| i_valid | input | 1 | 当拍输入数据有效 |\n| i_data | input | 8 | 无符号输入数据，0–255 |\n| o_valid | output | 1 | 当拍输出数据有效 |\n| o_data | output | 8 | 有效输出数据；无效时固定为 0 |\n\n## 逐拍规则 / Edge semantics\n\n优先级依次为异步复位、同步 flush、正常流水。\n\n1. 未复位且 `i_flush=0` 时，某数据在 E0 的上升沿以 `i_valid=1` 被第一级接受，在 **下一上升沿 E1** 经过第二级后输出，`o_valid=1` 且 `o_data` 等于 E0 的 `i_data`。这里“两级”指 E0 捕获和 E1 输出两个寄存采样沿；不是再等待两个额外周期。\n2. E0 的 `i_valid=0` 表示空拍，E1 对应输出 `o_valid=0, o_data=0`。无效拍数据清零，不保持之前有效数据。\n3. 连续有效输入连续输出，顺序不变；输出当拍的有效标志与数据必须来自同一输入拍。\n4. `i_flush=1` 的上升沿，输出当拍即 `o_valid=0, o_data=0`，所有未交付数据被丢弃。当拍即使 `i_valid=1` 也不接受；解除 flush 后没有旧数据重新出现。\n5. 异步复位同样立即清空两级与全部输出。释放复位后按新的输入重新开始；未接受新数据前输出仍为零。\n\nA word accepted at E0 is emitted after E1. Invalid output cycles always carry zero data. Synchronous flush takes precedence over a valid input, clears both stages and the current outputs, and drops the input on that same edge. Reset is asynchronous and active low.\n\n## 正常时序例 / Correct timing example\n\n复位已释放；下表全部输出均为该沿 after 值。\n\n| 沿 | i_flush | i_valid | i_data | o_valid | o_data |\n| --- | --- | --- | --- | --- | --- |\n| E0 | 0 | 1 | A5 | 0 | 00 |\n| E1 | 0 | 1 | 3C | 1 | A5 |\n| E2 | 0 | 0 | 00 | 1 | 3C |\n| E3 | 0 | 0 | 00 | 0 | 00 |\n| E4 | 1 | 1 | 7E | 0 | 00 |\n| E5 | 0 | 0 | 00 | 0 | 00 |\n| E6 | 0 | 1 | 81 | 0 | 00 |\n| E7 | 0 | 0 | 00 | 1 | 81 |\n\n## 协议操作 / Protocol operations\n\n合理覆盖连续接受、有效/空拍交替、等待流水排空、清空时有/无在途数据、复位后的重新开始，以及 00/FF 和混合位数据。输入计划自主选择，不固定为某一组向量。\n\n## 时钟、复位与采样 / Clock, reset and sampling\n\n- 无可配置参数；固定接口位宽。`i_clk` 周期 10 ns，所有同步操作在上升沿发生。\n- `i_rstn` 为异步低有效复位。拉低后无需等待时钟，所有状态与输出归零。\n- 每个独立 episode 开始时自动拉低复位并经过 2 个上升沿，再释放复位；前一 episode 的电路状态不延续。\n- 新 episode 中 `i_rstn` 默认为 1，其余非时钟输入均为 0。一个 episode 内未重新指定的输入保持之前的值，不能把省略输入理解为自动归零。不得驱动自动时钟 `i_clk`。\n- 输入在上升沿前稳定；每一刺激拍在该上升沿的非阻塞更新完成后采集 **全部真实输出**（after）。不使用 before 采样，不把多拍向量只采最后一拍。\n- 每任务实际执行的所有 episode 共用 **24 个刺激拍**上限，每次提案最多 **12 个输入向量/段**。自动起始复位不计刺激拍；计划内显式复位拍计入。剩余预算以当前状态为准，不能依靠重新复位刷新任务预算。\n- 输入均为已知、合法位宽的整数或等价已知二进制值。输出是被测模块真实端口，不要求提案自行给出 expected。\n\nEach episode starts from a fresh asynchronous reset, followed by two asserted rising edges. Inputs omitted within an episode retain their previous values; fresh business defaults are zero. Sample all outputs after every rising edge. The entire task shares 24 stimulus cycles, with at most 12 input segments per proposal. Automatic reset does not replenish that shared stimulus budget.\n\n## WaveDrom 源数据 / Timing source\n\n下列 JSON 对应上面的正确时序表。当前环境缺少固定版本 WaveDrom 渲染器，尚未生成或验收 SVG。\n\n```json\n{\n  \"signal\": [\n    {\n      \"name\": \"i_clk\",\n      \"wave\": \"p.......\"\n    },\n    {\n      \"name\": \"i_rstn\",\n      \"wave\": \"1.......\"\n    },\n    {\n      \"name\": \"i_flush\",\n      \"wave\": \"0...10..\"\n    },\n    {\n      \"name\": \"i_valid\",\n      \"wave\": \"1.0.1010\"\n    },\n    {\n      \"name\": \"i_data\",\n      \"wave\": \"========\",\n      \"data\": [\n        \"A5\",\n        \"3C\",\n        \"00\",\n        \"00\",\n        \"7E\",\n        \"00\",\n        \"81\",\n        \"00\"\n      ]\n    },\n    {\n      \"name\": \"o_valid after\",\n      \"wave\": \"01.0...1\"\n    },\n    {\n      \"name\": \"o_data after\",\n      \"wave\": \"========\",\n      \"data\": [\n        \"00\",\n        \"A5\",\n        \"3C\",\n        \"00\",\n        \"00\",\n        \"00\",\n        \"00\",\n        \"81\"\n      ]\n    }\n  ],\n  \"head\": {\n    \"text\": \"E0 accepted → after E1 emitted; flush clears on its own edge\"\n  }\n}\n```\n",
+  "limits": {
+    "max_rounds": 3,
+    "max_requests": 3,
+    "max_vectors": 64,
+    "max_total_cycles": 24,
+    "max_output_tokens": 4096,
+    "request_timeout_seconds": 60,
+    "simulation_timeout_seconds": 30,
+    "wall_time_seconds": 240
+  },
+  "initial_plan_source": "api",
+  "initial_plan": null,
+  "rounds": [
+    {
+      "round": 1,
+      "plan": {
+        "schema_version": "1.0",
+        "design": "valid_data_pipeline",
+        "objective": "independent mechanical control-flow fixture",
+        "clock_period_ns": 10,
+        "reset": {
+          "signal": "i_rstn",
+          "active_level": 0,
+          "synchronous": false,
+          "assert_cycles": 2
+        },
+        "sample_before_reset": false,
+        "pre_reset_expected": {},
+        "vectors": [
+          {
+            "name": "agent_1_0",
+            "inputs": {
+              "i_valid": 1,
+              "i_data": 165
+            },
+            "cycles": 2,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": ""
+          }
+        ],
+        "assumptions": [],
+        "assertions": []
+      },
+      "agent_plan_mode": "independent",
+      "reference_sampling": "per_cycle",
+      "fresh_dut_instance": true,
+      "automatic_reset_cycles": 2,
+      "observation": {
+        "run_id": "synthetic-control-flow-only",
+        "status": "passed",
+        "verdict": "passed",
+        "expectation_source": "reference_model",
+        "verification_status": "reference_model",
+        "checks": 2,
+        "failures": 0,
+        "failure_samples": [],
+        "functional_coverage": {
+          "status": "unsupported",
+          "compact_model_feedback": {
+            "status": "unsupported",
+            "coverage": null
+          }
+        },
+        "port_observations": {
+          "synthetic_observation": true,
+          "samples": [
+            {
+              "cycle": 0
+            }
+          ]
+        }
+      },
+      "stimulus_cycles": 2,
+      "functional_coverage": {
+        "status": "unsupported",
+        "compact_model_feedback": {
+          "status": "unsupported",
+          "coverage": null
+        }
+      },
+      "candidate_stimulus_cycles": 2,
+      "baseline_stimulus_cycles": 0,
+      "pipeline_result": "round-01\\synthetic-pipeline.json"
+    }
+  ],
+  "decisions": [
+    {
+      "state": {
+        "design": "valid_data_pipeline",
+        "objective": "independent mechanical control-flow fixture",
+        "specification": "# valid_data_pipeline 正确行为规格 / Two-stage valid/data pipeline\n\n固定 8 位两级寄存流水，连续输入可每拍接受一个数据，无 ready 和反压。\n\n| 端口 | 方向 | 位宽 | 含义 |\n| --- | --- | --- | --- |\n| i_clk | input | 1 | 上升沿采样时钟 |\n| i_rstn | input | 1 | 异步低有效复位 |\n| i_flush | input | 1 | 当拍同步清空流水 |\n| i_valid | input | 1 | 当拍输入数据有效 |\n| i_data | input | 8 | 无符号输入数据，0–255 |\n| o_valid | output | 1 | 当拍输出数据有效 |\n| o_data | output | 8 | 有效输出数据；无效时固定为 0 |\n\n## 逐拍规则 / Edge semantics\n\n优先级依次为异步复位、同步 flush、正常流水。\n\n1. 未复位且 `i_flush=0` 时，某数据在 E0 的上升沿以 `i_valid=1` 被第一级接受，在 **下一上升沿 E1** 经过第二级后输出，`o_valid=1` 且 `o_data` 等于 E0 的 `i_data`。这里“两级”指 E0 捕获和 E1 输出两个寄存采样沿；不是再等待两个额外周期。\n2. E0 的 `i_valid=0` 表示空拍，E1 对应输出 `o_valid=0, o_data=0`。无效拍数据清零，不保持之前有效数据。\n3. 连续有效输入连续输出，顺序不变；输出当拍的有效标志与数据必须来自同一输入拍。\n4. `i_flush=1` 的上升沿，输出当拍即 `o_valid=0, o_data=0`，所有未交付数据被丢弃。当拍即使 `i_valid=1` 也不接受；解除 flush 后没有旧数据重新出现。\n5. 异步复位同样立即清空两级与全部输出。释放复位后按新的输入重新开始；未接受新数据前输出仍为零。\n\nA word accepted at E0 is emitted after E1. Invalid output cycles always carry zero data. Synchronous flush takes precedence over a valid input, clears both stages and the current outputs, and drops the input on that same edge. Reset is asynchronous and active low.\n\n## 正常时序例 / Correct timing example\n\n复位已释放；下表全部输出均为该沿 after 值。\n\n| 沿 | i_flush | i_valid | i_data | o_valid | o_data |\n| --- | --- | --- | --- | --- | --- |\n| E0 | 0 | 1 | A5 | 0 | 00 |\n| E1 | 0 | 1 | 3C | 1 | A5 |\n| E2 | 0 | 0 | 00 | 1 | 3C |\n| E3 | 0 | 0 | 00 | 0 | 00 |\n| E4 | 1 | 1 | 7E | 0 | 00 |\n| E5 | 0 | 0 | 00 | 0 | 00 |\n| E6 | 0 | 1 | 81 | 0 | 00 |\n| E7 | 0 | 0 | 00 | 1 | 81 |\n\n## 协议操作 / Protocol operations\n\n合理覆盖连续接受、有效/空拍交替、等待流水排空、清空时有/无在途数据、复位后的重新开始，以及 00/FF 和混合位数据。输入计划自主选择，不固定为某一组向量。\n\n## 时钟、复位与采样 / Clock, reset and sampling\n\n- 无可配置参数；固定接口位宽。`i_clk` 周期 10 ns，所有同步操作在上升沿发生。\n- `i_rstn` 为异步低有效复位。拉低后无需等待时钟，所有状态与输出归零。\n- 每个独立 episode 开始时自动拉低复位并经过 2 个上升沿，再释放复位；前一 episode 的电路状态不延续。\n- 新 episode 中 `i_rstn` 默认为 1，其余非时钟输入均为 0。一个 episode 内未重新指定的输入保持之前的值，不能把省略输入理解为自动归零。不得驱动自动时钟 `i_clk`。\n- 输入在上升沿前稳定；每一刺激拍在该上升沿的非阻塞更新完成后采集 **全部真实输出**（after）。不使用 before 采样，不把多拍向量只采最后一拍。\n- 每任务实际执行的所有 episode 共用 **24 个刺激拍**上限，每次提案最多 **12 个输入向量/段**。自动起始复位不计刺激拍；计划内显式复位拍计入。剩余预算以当前状态为准，不能依靠重新复位刷新任务预算。\n- 输入均为已知、合法位宽的整数或等价已知二进制值。输出是被测模块真实端口，不要求提案自行给出 expected。\n\nEach episode starts from a fresh asynchronous reset, followed by two asserted rising edges. Inputs omitted within an episode retain their previous values; fresh business defaults are zero. Sample all outputs after every rising edge. The entire task shares 24 stimulus cycles, with at most 12 input segments per proposal. Automatic reset does not replenish that shared stimulus budget.\n\n## WaveDrom 源数据 / Timing source\n\n下列 JSON 对应上面的正确时序表。当前环境缺少固定版本 WaveDrom 渲染器，尚未生成或验收 SVG。\n\n```json\n{\n  \"signal\": [\n    {\n      \"name\": \"i_clk\",\n      \"wave\": \"p.......\"\n    },\n    {\n      \"name\": \"i_rstn\",\n      \"wave\": \"1.......\"\n    },\n    {\n      \"name\": \"i_flush\",\n      \"wave\": \"0...10..\"\n    },\n    {\n      \"name\": \"i_valid\",\n      \"wave\": \"1.0.1010\"\n    },\n    {\n      \"name\": \"i_data\",\n      \"wave\": \"========\",\n      \"data\": [\n        \"A5\",\n        \"3C\",\n        \"00\",\n        \"00\",\n        \"7E\",\n        \"00\",\n        \"81\",\n        \"00\"\n      ]\n    },\n    {\n      \"name\": \"o_valid after\",\n      \"wave\": \"01.0...1\"\n    },\n    {\n      \"name\": \"o_data after\",\n      \"wave\": \"========\",\n      \"data\": [\n        \"00\",\n        \"A5\",\n        \"3C\",\n        \"00\",\n        \"00\",\n        \"00\",\n        \"00\",\n        \"81\"\n      ]\n    }\n  ],\n  \"head\": {\n    \"text\": \"E0 accepted → after E1 emitted; flush clears on its own edge\"\n  }\n}\n```\n",
+        "contract": {
+          "module": "valid_data_pipeline",
+          "ports": [
+            {
+              "name": "i_clk",
+              "direction": "input",
+              "width": 1,
+              "signed": false
+            },
+            {
+              "name": "i_rstn",
+              "direction": "input",
+              "width": 1,
+              "signed": false
+            },
+            {
+              "name": "i_flush",
+              "direction": "input",
+              "width": 1,
+              "signed": false
+            },
+            {
+              "name": "i_valid",
+              "direction": "input",
+              "width": 1,
+              "signed": false
+            },
+            {
+              "name": "i_data",
+              "direction": "input",
+              "width": 8,
+              "signed": false
+            },
+            {
+              "name": "o_valid",
+              "direction": "output",
+              "width": 1,
+              "signed": false
+            },
+            {
+              "name": "o_data",
+              "direction": "output",
+              "width": 8,
+              "signed": false
+            }
+          ],
+          "clock": {
+            "signal": "i_clk",
+            "period_ns": 10.0,
+            "edge": "posedge"
+          },
+          "reset": {
+            "signal": "i_rstn",
+            "active_level": 0,
+            "synchronous": false,
+            "assert_cycles": 2
+          }
+        },
+        "current_plan": null,
+        "observation": null,
+        "plan_error": null,
+        "latest_decision_error": null,
+        "agent_plan_mode": "independent",
+        "reference_sampling": "per_cycle",
+        "input_values_policy": "known_binary",
+        "auto_driven_inputs": [
+          "i_clk"
+        ],
+        "allowed_driven_inputs": [
+          "i_data",
+          "i_flush",
+          "i_rstn",
+          "i_valid"
+        ],
+        "next_execution": {
+          "fresh_dut_instance": true,
+          "circuit_state_continues": false,
+          "automatic_reset": {
+            "signal": "i_rstn",
+            "active_level": 0,
+            "synchronous": false,
+            "assert_cycles": 2
+          },
+          "prior_vectors_replayed": false,
+          "replay_cycles": 0,
+          "prior_input_levels_carried": false,
+          "automatic_reset_cycles_per_run": 2,
+          "automatic_reset_cycles_in_stimulus_budget": false
+        },
+        "remaining_rounds": 3,
+        "remaining_stimulus_cycles": 24,
+        "max_new_cycles": 24,
+        "max_new_vectors": 12,
+        "supported_sample_phases": [
+          "after"
+        ]
+      },
+      "prompt_sha256": "eb881187d86953367ae0cf61fc8ed412d68e8009bcf54ef137fb4625ac7cd48b",
+      "status": "rejected",
+      "message_format": "legacy_prompt",
+      "response_chars": 71,
+      "untrusted_response_status": "not_saved",
+      "response_bytes": 71,
+      "response_sha256": "2cb4e755653a32c71433ab1d3ebc6423f0e4786eba36e8299c94cc4b41fd31ef",
+      "parse_status": "json_valid",
+      "error_type": "ValidationError",
+      "validation_error_types": [
+        "literal_error"
+      ],
+      "schema_validation_status": "rejected",
+      "decision_error": {
+        "code": "schema_invalid",
+        "errors": [
+          {
+            "type": "literal_error",
+            "location": [
+              "action"
+            ],
+            "scope": "root",
+            "allowed_keys": [
+              "action",
+              "reason",
+              "vectors"
+            ]
+          }
+        ],
+        "hint": "Use only action, reason and vectors; keep all fields within the decision schema."
+      },
+      "retry_eligible": true,
+      "usage": null,
+      "finish_reason": null
+    },
+    {
+      "state": {
+        "design": "valid_data_pipeline",
+        "objective": "independent mechanical control-flow fixture",
+        "specification": "# valid_data_pipeline 正确行为规格 / Two-stage valid/data pipeline\n\n固定 8 位两级寄存流水，连续输入可每拍接受一个数据，无 ready 和反压。\n\n| 端口 | 方向 | 位宽 | 含义 |\n| --- | --- | --- | --- |\n| i_clk | input | 1 | 上升沿采样时钟 |\n| i_rstn | input | 1 | 异步低有效复位 |\n| i_flush | input | 1 | 当拍同步清空流水 |\n| i_valid | input | 1 | 当拍输入数据有效 |\n| i_data | input | 8 | 无符号输入数据，0–255 |\n| o_valid | output | 1 | 当拍输出数据有效 |\n| o_data | output | 8 | 有效输出数据；无效时固定为 0 |\n\n## 逐拍规则 / Edge semantics\n\n优先级依次为异步复位、同步 flush、正常流水。\n\n1. 未复位且 `i_flush=0` 时，某数据在 E0 的上升沿以 `i_valid=1` 被第一级接受，在 **下一上升沿 E1** 经过第二级后输出，`o_valid=1` 且 `o_data` 等于 E0 的 `i_data`。这里“两级”指 E0 捕获和 E1 输出两个寄存采样沿；不是再等待两个额外周期。\n2. E0 的 `i_valid=0` 表示空拍，E1 对应输出 `o_valid=0, o_data=0`。无效拍数据清零，不保持之前有效数据。\n3. 连续有效输入连续输出，顺序不变；输出当拍的有效标志与数据必须来自同一输入拍。\n4. `i_flush=1` 的上升沿，输出当拍即 `o_valid=0, o_data=0`，所有未交付数据被丢弃。当拍即使 `i_valid=1` 也不接受；解除 flush 后没有旧数据重新出现。\n5. 异步复位同样立即清空两级与全部输出。释放复位后按新的输入重新开始；未接受新数据前输出仍为零。\n\nA word accepted at E0 is emitted after E1. Invalid output cycles always carry zero data. Synchronous flush takes precedence over a valid input, clears both stages and the current outputs, and drops the input on that same edge. Reset is asynchronous and active low.\n\n## 正常时序例 / Correct timing example\n\n复位已释放；下表全部输出均为该沿 after 值。\n\n| 沿 | i_flush | i_valid | i_data | o_valid | o_data |\n| --- | --- | --- | --- | --- | --- |\n| E0 | 0 | 1 | A5 | 0 | 00 |\n| E1 | 0 | 1 | 3C | 1 | A5 |\n| E2 | 0 | 0 | 00 | 1 | 3C |\n| E3 | 0 | 0 | 00 | 0 | 00 |\n| E4 | 1 | 1 | 7E | 0 | 00 |\n| E5 | 0 | 0 | 00 | 0 | 00 |\n| E6 | 0 | 1 | 81 | 0 | 00 |\n| E7 | 0 | 0 | 00 | 1 | 81 |\n\n## 协议操作 / Protocol operations\n\n合理覆盖连续接受、有效/空拍交替、等待流水排空、清空时有/无在途数据、复位后的重新开始，以及 00/FF 和混合位数据。输入计划自主选择，不固定为某一组向量。\n\n## 时钟、复位与采样 / Clock, reset and sampling\n\n- 无可配置参数；固定接口位宽。`i_clk` 周期 10 ns，所有同步操作在上升沿发生。\n- `i_rstn` 为异步低有效复位。拉低后无需等待时钟，所有状态与输出归零。\n- 每个独立 episode 开始时自动拉低复位并经过 2 个上升沿，再释放复位；前一 episode 的电路状态不延续。\n- 新 episode 中 `i_rstn` 默认为 1，其余非时钟输入均为 0。一个 episode 内未重新指定的输入保持之前的值，不能把省略输入理解为自动归零。不得驱动自动时钟 `i_clk`。\n- 输入在上升沿前稳定；每一刺激拍在该上升沿的非阻塞更新完成后采集 **全部真实输出**（after）。不使用 before 采样，不把多拍向量只采最后一拍。\n- 每任务实际执行的所有 episode 共用 **24 个刺激拍**上限，每次提案最多 **12 个输入向量/段**。自动起始复位不计刺激拍；计划内显式复位拍计入。剩余预算以当前状态为准，不能依靠重新复位刷新任务预算。\n- 输入均为已知、合法位宽的整数或等价已知二进制值。输出是被测模块真实端口，不要求提案自行给出 expected。\n\nEach episode starts from a fresh asynchronous reset, followed by two asserted rising edges. Inputs omitted within an episode retain their previous values; fresh business defaults are zero. Sample all outputs after every rising edge. The entire task shares 24 stimulus cycles, with at most 12 input segments per proposal. Automatic reset does not replenish that shared stimulus budget.\n\n## WaveDrom 源数据 / Timing source\n\n下列 JSON 对应上面的正确时序表。当前环境缺少固定版本 WaveDrom 渲染器，尚未生成或验收 SVG。\n\n```json\n{\n  \"signal\": [\n    {\n      \"name\": \"i_clk\",\n      \"wave\": \"p.......\"\n    },\n    {\n      \"name\": \"i_rstn\",\n      \"wave\": \"1.......\"\n    },\n    {\n      \"name\": \"i_flush\",\n      \"wave\": \"0...10..\"\n    },\n    {\n      \"name\": \"i_valid\",\n      \"wave\": \"1.0.1010\"\n    },\n    {\n      \"name\": \"i_data\",\n      \"wave\": \"========\",\n      \"data\": [\n        \"A5\",\n        \"3C\",\n        \"00\",\n        \"00\",\n        \"7E\",\n        \"00\",\n        \"81\",\n        \"00\"\n      ]\n    },\n    {\n      \"name\": \"o_valid after\",\n      \"wave\": \"01.0...1\"\n    },\n    {\n      \"name\": \"o_data after\",\n      \"wave\": \"========\",\n      \"data\": [\n        \"00\",\n        \"A5\",\n        \"3C\",\n        \"00\",\n        \"00\",\n        \"00\",\n        \"00\",\n        \"81\"\n      ]\n    }\n  ],\n  \"head\": {\n    \"text\": \"E0 accepted → after E1 emitted; flush clears on its own edge\"\n  }\n}\n```\n",
+        "contract": {
+          "module": "valid_data_pipeline",
+          "ports": [
+            {
+              "name": "i_clk",
+              "direction": "input",
+              "width": 1,
+              "signed": false
+            },
+            {
+              "name": "i_rstn",
+              "direction": "input",
+              "width": 1,
+              "signed": false
+            },
+            {
+              "name": "i_flush",
+              "direction": "input",
+              "width": 1,
+              "signed": false
+            },
+            {
+              "name": "i_valid",
+              "direction": "input",
+              "width": 1,
+              "signed": false
+            },
+            {
+              "name": "i_data",
+              "direction": "input",
+              "width": 8,
+              "signed": false
+            },
+            {
+              "name": "o_valid",
+              "direction": "output",
+              "width": 1,
+              "signed": false
+            },
+            {
+              "name": "o_data",
+              "direction": "output",
+              "width": 8,
+              "signed": false
+            }
+          ],
+          "clock": {
+            "signal": "i_clk",
+            "period_ns": 10.0,
+            "edge": "posedge"
+          },
+          "reset": {
+            "signal": "i_rstn",
+            "active_level": 0,
+            "synchronous": false,
+            "assert_cycles": 2
+          }
+        },
+        "current_plan": null,
+        "observation": null,
+        "plan_error": null,
+        "latest_decision_error": {
+          "code": "schema_invalid",
+          "errors": [
+            {
+              "type": "literal_error",
+              "location": [
+                "action"
+              ],
+              "scope": "root",
+              "allowed_keys": [
+                "action",
+                "reason",
+                "vectors"
+              ]
+            }
+          ],
+          "hint": "Use only action, reason and vectors; keep all fields within the decision schema."
+        },
+        "agent_plan_mode": "independent",
+        "reference_sampling": "per_cycle",
+        "input_values_policy": "known_binary",
+        "auto_driven_inputs": [
+          "i_clk"
+        ],
+        "allowed_driven_inputs": [
+          "i_data",
+          "i_flush",
+          "i_rstn",
+          "i_valid"
+        ],
+        "next_execution": {
+          "fresh_dut_instance": true,
+          "circuit_state_continues": false,
+          "automatic_reset": {
+            "signal": "i_rstn",
+            "active_level": 0,
+            "synchronous": false,
+            "assert_cycles": 2
+          },
+          "prior_vectors_replayed": false,
+          "replay_cycles": 0,
+          "prior_input_levels_carried": false,
+          "automatic_reset_cycles_per_run": 2,
+          "automatic_reset_cycles_in_stimulus_budget": false
+        },
+        "remaining_rounds": 3,
+        "remaining_stimulus_cycles": 24,
+        "max_new_cycles": 24,
+        "max_new_vectors": 12,
+        "supported_sample_phases": [
+          "after"
+        ]
+      },
+      "prompt_sha256": "44cd21a85967abda273212d5c9d14a179ec9a653943c5bd7f6ecadae33530019",
+      "status": "validated",
+      "message_format": "legacy_prompt",
+      "response_chars": 143,
+      "untrusted_response_status": "not_saved",
+      "response_bytes": 143,
+      "response_sha256": "087fcecc58cdafca3725616e025da4ddd049a84a0be438ab47ea955e606ed77a",
+      "parse_status": "json_valid",
+      "schema_validation_status": "passed",
+      "action": {
+        "action": "append_vectors",
+        "reason": "public fixture",
+        "vectors": [
+          {
+            "name": "public",
+            "inputs": {
+              "i_valid": 1,
+              "i_data": 165
+            },
+            "cycles": 2,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": ""
+          }
+        ]
+      },
+      "usage": null,
+      "finish_reason": null,
+      "plan_validation_status": "passed",
+      "executed_round": 1
+    },
+    {
+      "state": {
+        "design": "valid_data_pipeline",
+        "objective": "independent mechanical control-flow fixture",
+        "specification": "# valid_data_pipeline 正确行为规格 / Two-stage valid/data pipeline\n\n固定 8 位两级寄存流水，连续输入可每拍接受一个数据，无 ready 和反压。\n\n| 端口 | 方向 | 位宽 | 含义 |\n| --- | --- | --- | --- |\n| i_clk | input | 1 | 上升沿采样时钟 |\n| i_rstn | input | 1 | 异步低有效复位 |\n| i_flush | input | 1 | 当拍同步清空流水 |\n| i_valid | input | 1 | 当拍输入数据有效 |\n| i_data | input | 8 | 无符号输入数据，0–255 |\n| o_valid | output | 1 | 当拍输出数据有效 |\n| o_data | output | 8 | 有效输出数据；无效时固定为 0 |\n\n## 逐拍规则 / Edge semantics\n\n优先级依次为异步复位、同步 flush、正常流水。\n\n1. 未复位且 `i_flush=0` 时，某数据在 E0 的上升沿以 `i_valid=1` 被第一级接受，在 **下一上升沿 E1** 经过第二级后输出，`o_valid=1` 且 `o_data` 等于 E0 的 `i_data`。这里“两级”指 E0 捕获和 E1 输出两个寄存采样沿；不是再等待两个额外周期。\n2. E0 的 `i_valid=0` 表示空拍，E1 对应输出 `o_valid=0, o_data=0`。无效拍数据清零，不保持之前有效数据。\n3. 连续有效输入连续输出，顺序不变；输出当拍的有效标志与数据必须来自同一输入拍。\n4. `i_flush=1` 的上升沿，输出当拍即 `o_valid=0, o_data=0`，所有未交付数据被丢弃。当拍即使 `i_valid=1` 也不接受；解除 flush 后没有旧数据重新出现。\n5. 异步复位同样立即清空两级与全部输出。释放复位后按新的输入重新开始；未接受新数据前输出仍为零。\n\nA word accepted at E0 is emitted after E1. Invalid output cycles always carry zero data. Synchronous flush takes precedence over a valid input, clears both stages and the current outputs, and drops the input on that same edge. Reset is asynchronous and active low.\n\n## 正常时序例 / Correct timing example\n\n复位已释放；下表全部输出均为该沿 after 值。\n\n| 沿 | i_flush | i_valid | i_data | o_valid | o_data |\n| --- | --- | --- | --- | --- | --- |\n| E0 | 0 | 1 | A5 | 0 | 00 |\n| E1 | 0 | 1 | 3C | 1 | A5 |\n| E2 | 0 | 0 | 00 | 1 | 3C |\n| E3 | 0 | 0 | 00 | 0 | 00 |\n| E4 | 1 | 1 | 7E | 0 | 00 |\n| E5 | 0 | 0 | 00 | 0 | 00 |\n| E6 | 0 | 1 | 81 | 0 | 00 |\n| E7 | 0 | 0 | 00 | 1 | 81 |\n\n## 协议操作 / Protocol operations\n\n合理覆盖连续接受、有效/空拍交替、等待流水排空、清空时有/无在途数据、复位后的重新开始，以及 00/FF 和混合位数据。输入计划自主选择，不固定为某一组向量。\n\n## 时钟、复位与采样 / Clock, reset and sampling\n\n- 无可配置参数；固定接口位宽。`i_clk` 周期 10 ns，所有同步操作在上升沿发生。\n- `i_rstn` 为异步低有效复位。拉低后无需等待时钟，所有状态与输出归零。\n- 每个独立 episode 开始时自动拉低复位并经过 2 个上升沿，再释放复位；前一 episode 的电路状态不延续。\n- 新 episode 中 `i_rstn` 默认为 1，其余非时钟输入均为 0。一个 episode 内未重新指定的输入保持之前的值，不能把省略输入理解为自动归零。不得驱动自动时钟 `i_clk`。\n- 输入在上升沿前稳定；每一刺激拍在该上升沿的非阻塞更新完成后采集 **全部真实输出**（after）。不使用 before 采样，不把多拍向量只采最后一拍。\n- 每任务实际执行的所有 episode 共用 **24 个刺激拍**上限，每次提案最多 **12 个输入向量/段**。自动起始复位不计刺激拍；计划内显式复位拍计入。剩余预算以当前状态为准，不能依靠重新复位刷新任务预算。\n- 输入均为已知、合法位宽的整数或等价已知二进制值。输出是被测模块真实端口，不要求提案自行给出 expected。\n\nEach episode starts from a fresh asynchronous reset, followed by two asserted rising edges. Inputs omitted within an episode retain their previous values; fresh business defaults are zero. Sample all outputs after every rising edge. The entire task shares 24 stimulus cycles, with at most 12 input segments per proposal. Automatic reset does not replenish that shared stimulus budget.\n\n## WaveDrom 源数据 / Timing source\n\n下列 JSON 对应上面的正确时序表。当前环境缺少固定版本 WaveDrom 渲染器，尚未生成或验收 SVG。\n\n```json\n{\n  \"signal\": [\n    {\n      \"name\": \"i_clk\",\n      \"wave\": \"p.......\"\n    },\n    {\n      \"name\": \"i_rstn\",\n      \"wave\": \"1.......\"\n    },\n    {\n      \"name\": \"i_flush\",\n      \"wave\": \"0...10..\"\n    },\n    {\n      \"name\": \"i_valid\",\n      \"wave\": \"1.0.1010\"\n    },\n    {\n      \"name\": \"i_data\",\n      \"wave\": \"========\",\n      \"data\": [\n        \"A5\",\n        \"3C\",\n        \"00\",\n        \"00\",\n        \"7E\",\n        \"00\",\n        \"81\",\n        \"00\"\n      ]\n    },\n    {\n      \"name\": \"o_valid after\",\n      \"wave\": \"01.0...1\"\n    },\n    {\n      \"name\": \"o_data after\",\n      \"wave\": \"========\",\n      \"data\": [\n        \"00\",\n        \"A5\",\n        \"3C\",\n        \"00\",\n        \"00\",\n        \"00\",\n        \"00\",\n        \"81\"\n      ]\n    }\n  ],\n  \"head\": {\n    \"text\": \"E0 accepted → after E1 emitted; flush clears on its own edge\"\n  }\n}\n```\n",
+        "contract": {
+          "module": "valid_data_pipeline",
+          "ports": [
+            {
+              "name": "i_clk",
+              "direction": "input",
+              "width": 1,
+              "signed": false
+            },
+            {
+              "name": "i_rstn",
+              "direction": "input",
+              "width": 1,
+              "signed": false
+            },
+            {
+              "name": "i_flush",
+              "direction": "input",
+              "width": 1,
+              "signed": false
+            },
+            {
+              "name": "i_valid",
+              "direction": "input",
+              "width": 1,
+              "signed": false
+            },
+            {
+              "name": "i_data",
+              "direction": "input",
+              "width": 8,
+              "signed": false
+            },
+            {
+              "name": "o_valid",
+              "direction": "output",
+              "width": 1,
+              "signed": false
+            },
+            {
+              "name": "o_data",
+              "direction": "output",
+              "width": 8,
+              "signed": false
+            }
+          ],
+          "clock": {
+            "signal": "i_clk",
+            "period_ns": 10.0,
+            "edge": "posedge"
+          },
+          "reset": {
+            "signal": "i_rstn",
+            "active_level": 0,
+            "synchronous": false,
+            "assert_cycles": 2
+          }
+        },
+        "current_plan": {
+          "schema_version": "1.0",
+          "design": "valid_data_pipeline",
+          "objective": "independent mechanical control-flow fixture",
+          "clock_period_ns": 10,
+          "reset": {
+            "signal": "i_rstn",
+            "active_level": 0,
+            "synchronous": false,
+            "assert_cycles": 2
+          },
+          "sample_before_reset": false,
+          "pre_reset_expected": {},
+          "vectors": [
+            {
+              "name": "agent_1_0",
+              "inputs": {
+                "i_valid": 1,
+                "i_data": 165
+              },
+              "cycles": 2,
+              "sample_phase": "after",
+              "expected": {},
+              "rationale": ""
+            }
+          ],
+          "assumptions": [],
+          "assertions": []
+        },
+        "observation": {
+          "run_id": "synthetic-control-flow-only",
+          "status": "passed",
+          "verdict": "passed",
+          "expectation_source": "reference_model",
+          "verification_status": "reference_model",
+          "checks": 2,
+          "failures": 0,
+          "failure_samples": [],
+          "functional_coverage": {
+            "status": "unsupported",
+            "coverage": null
+          },
+          "port_observations": {
+            "synthetic_observation": true,
+            "samples": [
+              {
+                "cycle": 0
+              }
+            ]
+          }
+        },
+        "plan_error": null,
+        "latest_decision_error": null,
+        "agent_plan_mode": "independent",
+        "reference_sampling": "per_cycle",
+        "input_values_policy": "known_binary",
+        "auto_driven_inputs": [
+          "i_clk"
+        ],
+        "allowed_driven_inputs": [
+          "i_data",
+          "i_flush",
+          "i_rstn",
+          "i_valid"
+        ],
+        "next_execution": {
+          "fresh_dut_instance": true,
+          "circuit_state_continues": false,
+          "automatic_reset": {
+            "signal": "i_rstn",
+            "active_level": 0,
+            "synchronous": false,
+            "assert_cycles": 2
+          },
+          "prior_vectors_replayed": false,
+          "replay_cycles": 0,
+          "prior_input_levels_carried": false,
+          "automatic_reset_cycles_per_run": 2,
+          "automatic_reset_cycles_in_stimulus_budget": false
+        },
+        "remaining_rounds": 2,
+        "remaining_stimulus_cycles": 22,
+        "max_new_cycles": 22,
+        "max_new_vectors": 12,
+        "supported_sample_phases": [
+          "after"
+        ]
+      },
+      "prompt_sha256": "a8ecf0b049c8545e36abe968b82f4b475094ab54bc7d73a6b994fc2302db694b",
+      "status": "validated",
+      "message_format": "legacy_prompt",
+      "response_chars": 70,
+      "untrusted_response_status": "not_saved",
+      "response_bytes": 70,
+      "response_sha256": "d11174f60df3c9f8b2ec3601d88647bed7d5d412f38e34faa175f57df1f38ea2",
+      "parse_status": "json_valid",
+      "schema_validation_status": "passed",
+      "action": {
+        "action": "stop",
+        "reason": "public fixture complete",
+        "vectors": []
+      },
+      "usage": null,
+      "finish_reason": null
+    }
+  ],
+  "failed_attempts": [
+    {
+      "stage": "decision_validation",
+      "error_type": "ValidationError",
+      "error": {
+        "code": "schema_invalid",
+        "errors": [
+          {
+            "type": "literal_error",
+            "location": [
+              "action"
+            ],
+            "scope": "root",
+            "allowed_keys": [
+              "action",
+              "reason",
+              "vectors"
+            ]
+          }
+        ],
+        "hint": "Use only action, reason and vectors; keep all fields within the decision schema."
+      },
+      "decision_index": 1,
+      "simulation_started": false,
+      "stimulus_cycles_executed": 0
+    }
+  ],
+  "requests_attempted": 3,
+  "accepted_vectors": 1,
+  "latest_plan_error": null,
+  "latest_decision_error": null,
+  "decision_format_rejections": 1,
+  "plan_budget_rejections": 0,
+  "automatic_reset_cycles_executed": 2,
+  "stimulus_cycles_executed": 2,
+  "stop_reason": "model_stopped",
+  "candidate_stimulus_cycles_executed": 2,
+  "baseline_stimulus_cycles_executed": 0,
+  "port_observation_capture_enabled": true,
+  "elapsed_seconds": 0.016,
+  "finished_at": "2026-10-05T05:40:53.167192+00:00"
+}

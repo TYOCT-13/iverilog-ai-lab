@@ -1,0 +1,10 @@
+{
+  "status": "failed",
+  "actual_command": "D:/Users/TYOCT/anaconda3/python.exe -B -X utf8 .tmp-codex/agent-new-holdout-preparation-20261005/repair_private_style.py",
+  "returncode": 1,
+  "error_type": "AssertionError",
+  "cause": "The formatter normalizes a one-bit condition to i_flush == 1'b1, so the old unnormalized condition fragment did not match for the private C mutation.",
+  "reference_rtl_behavior_failure": false,
+  "original_r1_source_snapshot": "snapshots/r1/targets",
+  "resume_policy": "Read saved original source, then regenerate the same single semantic operator against normalized correct source. Never alter or erase the original r1 gate or mechanical evidence."
+}

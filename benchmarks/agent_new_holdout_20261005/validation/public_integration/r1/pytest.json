@@ -1,0 +1,23 @@
+{
+  "argv": [
+    "D:\\Users\\TYOCT\\anaconda3\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01",
+    "--junitxml",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\public_integration\\r1\\pytest.xml",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\tests\\core\\test_agent_new_holdout_assets.py",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\tests\\core\\test_agent_new_holdout_oracles.py"
+  ],
+  "returncode": 1,
+  "duration_seconds": 4.938,
+  "stdout_sha256": "e50ee9cbcda85710954ceeda92b0cd1d8a600756421482825232803847539c03",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

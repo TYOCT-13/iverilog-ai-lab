@@ -1,0 +1,39 @@
+{
+  "schema": "agent-round-token-budget-v1",
+  "limit": 1000000,
+  "scope": "one_registered_batch_input_plus_output",
+  "reservation_rule": "2 * serialized UTF-8 request bytes + 4096 framing margin + max_tokens",
+  "reservation_is_tokenizer_proof": false,
+  "halted": false,
+  "records": [
+    {
+      "id": 0,
+      "status": "known_usage",
+      "reserved_tokens": 8614,
+      "charged_tokens": 108,
+      "request_sha256": "14ca2eea69d6f18f7df10dadc748ba15b99f5ec0bc5c2178b00c35ac62ccdf84",
+      "request_bytes": 211,
+      "output_cap": 4096,
+      "prompt_tokens": 101,
+      "completion_tokens": 7
+    },
+    {
+      "id": 1,
+      "status": "unknown_usage",
+      "reserved_tokens": 8614,
+      "charged_tokens": 0,
+      "request_sha256": "14ca2eea69d6f18f7df10dadc748ba15b99f5ec0bc5c2178b00c35ac62ccdf84",
+      "request_bytes": 211,
+      "output_cap": 4096,
+      "usage_status": "missing"
+    }
+  ],
+  "totals": {
+    "reported_tokens": 108,
+    "unknown_reserved_tokens": 8614,
+    "conservative_total": 8722,
+    "remaining_tokens": 991278,
+    "requests_known_usage": 1,
+    "requests_unknown_usage": 1
+  }
+}

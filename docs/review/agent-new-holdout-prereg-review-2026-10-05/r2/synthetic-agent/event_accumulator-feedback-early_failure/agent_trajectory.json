@@ -1,0 +1,307 @@
+{
+  "schema_version": "1.0",
+  "prompt_version": "verification-agent-v8-bounded-port-feedback",
+  "record_kind": "test_provider",
+  "model": "test",
+  "wire_api": null,
+  "thinking_mode": null,
+  "thinking_mode_source": "not_requested",
+  "feedback_enabled": true,
+  "functional_coverage_feedback_enabled": true,
+  "agent_plan_mode": "independent",
+  "reference_sampling": "per_cycle",
+  "cycle_budget_basis": "all_generated_stimulus_including_replay_and_paired_runs",
+  "automatic_reset_budget": "reported_separately_from_stimulus",
+  "simulation_multiplier": 1,
+  "evidence_mode": "pipeline_observation",
+  "execution_policy": "qualified_observer_or_sampling_guard_v1",
+  "port_observation_policy": "bound_actual_port_samples_v1",
+  "port_observation_feedback_enabled": true,
+  "started_at": "2026-10-05T05:40:53.475256+00:00",
+  "design_family": "event_accumulator",
+  "objective": "independent mechanical control-flow fixture",
+  "rtl_sha256": "4f8137509bc2116624f8c444f5e6d0bca319f6b2993371610dd2c2432c44d071",
+  "contract": {
+    "module": "event_accumulator",
+    "ports": [
+      {
+        "name": "i_clk",
+        "direction": "input",
+        "width": 1,
+        "signed": false
+      },
+      {
+        "name": "i_rstn",
+        "direction": "input",
+        "width": 1,
+        "signed": false
+      },
+      {
+        "name": "i_enable",
+        "direction": "input",
+        "width": 1,
+        "signed": false
+      },
+      {
+        "name": "i_event",
+        "direction": "input",
+        "width": 1,
+        "signed": false
+      },
+      {
+        "name": "i_clear",
+        "direction": "input",
+        "width": 1,
+        "signed": false
+      },
+      {
+        "name": "o_count",
+        "direction": "output",
+        "width": 4,
+        "signed": false
+      }
+    ],
+    "clock": {
+      "signal": "i_clk",
+      "period_ns": 10.0,
+      "edge": "posedge"
+    },
+    "reset": {
+      "signal": "i_rstn",
+      "active_level": 0,
+      "synchronous": false,
+      "assert_cycles": 2
+    }
+  },
+  "specification": "# event_accumulator 正确行为规格 / Enabled event accumulator\n\n固定 4 位事件累计器，适合本地事件统计；结果为自最近复位或清除以来被接受事件数的模 16 值。\n\n| 端口 | 方向 | 位宽 | 含义 |\n| --- | --- | --- | --- |\n| i_clk | input | 1 | 上升沿采样时钟 |\n| i_rstn | input | 1 | 异步低有效复位 |\n| i_enable | input | 1 | 当拍事件累计许可 |\n| i_event | input | 1 | 当拍存在一个事件 |\n| i_clear | input | 1 | 同步清除计数，独立于 enable |\n| o_count | output | 4 | 无符号累计结果，0–15 |\n\n## 逐拍规则 / Edge semantics\n\n优先级依次为异步复位、同步 clear、接受事件、保持。\n\n1. 异步复位立即使 `o_count=0`。\n2. 未复位且 `i_clear=1` 的上升沿，`o_count=0`，不论 `i_enable` 是 0 还是 1；当拍即使同时有事件也不累计。\n3. 未复位、`i_clear=0` 且 `i_enable=1, i_event=1` 时，接受当拍一个事件。after 输出等于以前累计数加 1 模 16，即 15 的后继是 0。\n4. 其他输入组合保持计数。事件高电平持续 N 拍且每拍均获许可，就计入 N 个事件；不做只在上升变化时计数的边沿检测。\n5. 清除解除后从 0 继续累计，不保留清除前数量。\n\nThe counter records accepted event edges modulo 16. Clear is synchronous, independent of enable, and takes priority over an event. A sustained enabled event counts once on each rising clock edge; this module is not an event-edge detector.\n\n## 正常时序例 / Correct timing example\n\n复位已释放，从 0 开始。输出均为该沿 after 值。\n\n| 沿 | i_enable | i_event | i_clear | o_count |\n| --- | --- | --- | --- | --- |\n| E0 | 1 | 1 | 0 | 1 |\n| E1 | 1 | 0 | 0 | 1 |\n| E2 | 0 | 1 | 0 | 1 |\n| E3 | 0 | 0 | 1 | 0 |\n| E4 | 1 | 1 | 1 | 0 |\n| E5 | 1 | 1 | 0 | 1 |\n| E6 | 1 | 1 | 0 | 2 |\n| E7 | 0 | 0 | 0 | 2 |\n\n## 协议操作 / Protocol operations\n\n合理覆盖许可/事件的四种组合、连续累计、暂停保持、清除与其他控制同时出现、复位后重新累计及模 16 环回。输入计划自主选择，正常语义不预设任何缺陷名称或目标。\n\n## 时钟、复位与采样 / Clock, reset and sampling\n\n- 无可配置参数；固定接口位宽。`i_clk` 周期 10 ns，所有同步操作在上升沿发生。\n- `i_rstn` 为异步低有效复位。拉低后无需等待时钟，所有状态与输出归零。\n- 每个独立 episode 开始时自动拉低复位并经过 2 个上升沿，再释放复位；前一 episode 的电路状态不延续。\n- 新 episode 中 `i_rstn` 默认为 1，其余非时钟输入均为 0。一个 episode 内未重新指定的输入保持之前的值，不能把省略输入理解为自动归零。不得驱动自动时钟 `i_clk`。\n- 输入在上升沿前稳定；每一刺激拍在该上升沿的非阻塞更新完成后采集 **全部真实输出**（after）。不使用 before 采样，不把多拍向量只采最后一拍。\n- 每任务实际执行的所有 episode 共用 **24 个刺激拍**上限，每次提案最多 **12 个输入向量/段**。自动起始复位不计刺激拍；计划内显式复位拍计入。剩余预算以当前状态为准，不能依靠重新复位刷新任务预算。\n- 输入均为已知、合法位宽的整数或等价已知二进制值。输出是被测模块真实端口，不要求提案自行给出 expected。\n\nEach episode starts from a fresh asynchronous reset, followed by two asserted rising edges. Inputs omitted within an episode retain their previous values; fresh business defaults are zero. Sample all outputs after every rising edge. The entire task shares 24 stimulus cycles, with at most 12 input segments per proposal. Automatic reset does not replenish that shared stimulus budget.\n\n## WaveDrom 源数据 / Timing source\n\n下列 JSON 对应上面的正确时序表。当前环境缺少固定版本 WaveDrom 渲染器，尚未生成或验收 SVG。\n\n```json\n{\n  \"signal\": [\n    {\n      \"name\": \"i_clk\",\n      \"wave\": \"p.......\"\n    },\n    {\n      \"name\": \"i_rstn\",\n      \"wave\": \"1.......\"\n    },\n    {\n      \"name\": \"i_enable\",\n      \"wave\": \"1.0.1..0\"\n    },\n    {\n      \"name\": \"i_event\",\n      \"wave\": \"10101..0\"\n    },\n    {\n      \"name\": \"i_clear\",\n      \"wave\": \"0..1.0..\"\n    },\n    {\n      \"name\": \"o_count after\",\n      \"wave\": \"========\",\n      \"data\": [\n        \"1\",\n        \"1\",\n        \"1\",\n        \"0\",\n        \"0\",\n        \"1\",\n        \"2\",\n        \"2\"\n      ]\n    }\n  ],\n  \"head\": {\n    \"text\": \"clear independent of enable; accepted edges counted modulo 16\"\n  }\n}\n```\n",
+  "limits": {
+    "max_rounds": 3,
+    "max_requests": 3,
+    "max_vectors": 64,
+    "max_total_cycles": 24,
+    "max_output_tokens": 4096,
+    "request_timeout_seconds": 60,
+    "simulation_timeout_seconds": 30,
+    "wall_time_seconds": 240
+  },
+  "initial_plan_source": "api",
+  "initial_plan": null,
+  "rounds": [
+    {
+      "round": 1,
+      "plan": {
+        "schema_version": "1.0",
+        "design": "event_accumulator",
+        "objective": "independent mechanical control-flow fixture",
+        "clock_period_ns": 10,
+        "reset": {
+          "signal": "i_rstn",
+          "active_level": 0,
+          "synchronous": false,
+          "assert_cycles": 2
+        },
+        "sample_before_reset": false,
+        "pre_reset_expected": {},
+        "vectors": [
+          {
+            "name": "agent_1_0",
+            "inputs": {
+              "i_enable": 1,
+              "i_event": 1
+            },
+            "cycles": 2,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": ""
+          }
+        ],
+        "assumptions": [],
+        "assertions": []
+      },
+      "agent_plan_mode": "independent",
+      "reference_sampling": "per_cycle",
+      "fresh_dut_instance": true,
+      "automatic_reset_cycles": 2,
+      "observation": {
+        "run_id": "synthetic-control-flow-only",
+        "status": "passed",
+        "verdict": "passed",
+        "expectation_source": "reference_model",
+        "verification_status": "reference_model",
+        "checks": 2,
+        "failures": 1,
+        "failure_samples": [],
+        "functional_coverage": {
+          "status": "unsupported",
+          "compact_model_feedback": {
+            "status": "unsupported",
+            "coverage": null
+          }
+        },
+        "port_observations": {
+          "synthetic_observation": true,
+          "samples": [
+            {
+              "cycle": 0
+            }
+          ]
+        }
+      },
+      "stimulus_cycles": 2,
+      "functional_coverage": {
+        "status": "unsupported",
+        "compact_model_feedback": {
+          "status": "unsupported",
+          "coverage": null
+        }
+      },
+      "candidate_stimulus_cycles": 2,
+      "baseline_stimulus_cycles": 0,
+      "pipeline_result": "round-01\\synthetic-pipeline.json"
+    }
+  ],
+  "decisions": [
+    {
+      "state": {
+        "design": "event_accumulator",
+        "objective": "independent mechanical control-flow fixture",
+        "specification": "# event_accumulator 正确行为规格 / Enabled event accumulator\n\n固定 4 位事件累计器，适合本地事件统计；结果为自最近复位或清除以来被接受事件数的模 16 值。\n\n| 端口 | 方向 | 位宽 | 含义 |\n| --- | --- | --- | --- |\n| i_clk | input | 1 | 上升沿采样时钟 |\n| i_rstn | input | 1 | 异步低有效复位 |\n| i_enable | input | 1 | 当拍事件累计许可 |\n| i_event | input | 1 | 当拍存在一个事件 |\n| i_clear | input | 1 | 同步清除计数，独立于 enable |\n| o_count | output | 4 | 无符号累计结果，0–15 |\n\n## 逐拍规则 / Edge semantics\n\n优先级依次为异步复位、同步 clear、接受事件、保持。\n\n1. 异步复位立即使 `o_count=0`。\n2. 未复位且 `i_clear=1` 的上升沿，`o_count=0`，不论 `i_enable` 是 0 还是 1；当拍即使同时有事件也不累计。\n3. 未复位、`i_clear=0` 且 `i_enable=1, i_event=1` 时，接受当拍一个事件。after 输出等于以前累计数加 1 模 16，即 15 的后继是 0。\n4. 其他输入组合保持计数。事件高电平持续 N 拍且每拍均获许可，就计入 N 个事件；不做只在上升变化时计数的边沿检测。\n5. 清除解除后从 0 继续累计，不保留清除前数量。\n\nThe counter records accepted event edges modulo 16. Clear is synchronous, independent of enable, and takes priority over an event. A sustained enabled event counts once on each rising clock edge; this module is not an event-edge detector.\n\n## 正常时序例 / Correct timing example\n\n复位已释放，从 0 开始。输出均为该沿 after 值。\n\n| 沿 | i_enable | i_event | i_clear | o_count |\n| --- | --- | --- | --- | --- |\n| E0 | 1 | 1 | 0 | 1 |\n| E1 | 1 | 0 | 0 | 1 |\n| E2 | 0 | 1 | 0 | 1 |\n| E3 | 0 | 0 | 1 | 0 |\n| E4 | 1 | 1 | 1 | 0 |\n| E5 | 1 | 1 | 0 | 1 |\n| E6 | 1 | 1 | 0 | 2 |\n| E7 | 0 | 0 | 0 | 2 |\n\n## 协议操作 / Protocol operations\n\n合理覆盖许可/事件的四种组合、连续累计、暂停保持、清除与其他控制同时出现、复位后重新累计及模 16 环回。输入计划自主选择，正常语义不预设任何缺陷名称或目标。\n\n## 时钟、复位与采样 / Clock, reset and sampling\n\n- 无可配置参数；固定接口位宽。`i_clk` 周期 10 ns，所有同步操作在上升沿发生。\n- `i_rstn` 为异步低有效复位。拉低后无需等待时钟，所有状态与输出归零。\n- 每个独立 episode 开始时自动拉低复位并经过 2 个上升沿，再释放复位；前一 episode 的电路状态不延续。\n- 新 episode 中 `i_rstn` 默认为 1，其余非时钟输入均为 0。一个 episode 内未重新指定的输入保持之前的值，不能把省略输入理解为自动归零。不得驱动自动时钟 `i_clk`。\n- 输入在上升沿前稳定；每一刺激拍在该上升沿的非阻塞更新完成后采集 **全部真实输出**（after）。不使用 before 采样，不把多拍向量只采最后一拍。\n- 每任务实际执行的所有 episode 共用 **24 个刺激拍**上限，每次提案最多 **12 个输入向量/段**。自动起始复位不计刺激拍；计划内显式复位拍计入。剩余预算以当前状态为准，不能依靠重新复位刷新任务预算。\n- 输入均为已知、合法位宽的整数或等价已知二进制值。输出是被测模块真实端口，不要求提案自行给出 expected。\n\nEach episode starts from a fresh asynchronous reset, followed by two asserted rising edges. Inputs omitted within an episode retain their previous values; fresh business defaults are zero. Sample all outputs after every rising edge. The entire task shares 24 stimulus cycles, with at most 12 input segments per proposal. Automatic reset does not replenish that shared stimulus budget.\n\n## WaveDrom 源数据 / Timing source\n\n下列 JSON 对应上面的正确时序表。当前环境缺少固定版本 WaveDrom 渲染器，尚未生成或验收 SVG。\n\n```json\n{\n  \"signal\": [\n    {\n      \"name\": \"i_clk\",\n      \"wave\": \"p.......\"\n    },\n    {\n      \"name\": \"i_rstn\",\n      \"wave\": \"1.......\"\n    },\n    {\n      \"name\": \"i_enable\",\n      \"wave\": \"1.0.1..0\"\n    },\n    {\n      \"name\": \"i_event\",\n      \"wave\": \"10101..0\"\n    },\n    {\n      \"name\": \"i_clear\",\n      \"wave\": \"0..1.0..\"\n    },\n    {\n      \"name\": \"o_count after\",\n      \"wave\": \"========\",\n      \"data\": [\n        \"1\",\n        \"1\",\n        \"1\",\n        \"0\",\n        \"0\",\n        \"1\",\n        \"2\",\n        \"2\"\n      ]\n    }\n  ],\n  \"head\": {\n    \"text\": \"clear independent of enable; accepted edges counted modulo 16\"\n  }\n}\n```\n",
+        "contract": {
+          "module": "event_accumulator",
+          "ports": [
+            {
+              "name": "i_clk",
+              "direction": "input",
+              "width": 1,
+              "signed": false
+            },
+            {
+              "name": "i_rstn",
+              "direction": "input",
+              "width": 1,
+              "signed": false
+            },
+            {
+              "name": "i_enable",
+              "direction": "input",
+              "width": 1,
+              "signed": false
+            },
+            {
+              "name": "i_event",
+              "direction": "input",
+              "width": 1,
+              "signed": false
+            },
+            {
+              "name": "i_clear",
+              "direction": "input",
+              "width": 1,
+              "signed": false
+            },
+            {
+              "name": "o_count",
+              "direction": "output",
+              "width": 4,
+              "signed": false
+            }
+          ],
+          "clock": {
+            "signal": "i_clk",
+            "period_ns": 10.0,
+            "edge": "posedge"
+          },
+          "reset": {
+            "signal": "i_rstn",
+            "active_level": 0,
+            "synchronous": false,
+            "assert_cycles": 2
+          }
+        },
+        "current_plan": null,
+        "observation": null,
+        "plan_error": null,
+        "latest_decision_error": null,
+        "agent_plan_mode": "independent",
+        "reference_sampling": "per_cycle",
+        "input_values_policy": "known_binary",
+        "auto_driven_inputs": [
+          "i_clk"
+        ],
+        "allowed_driven_inputs": [
+          "i_clear",
+          "i_enable",
+          "i_event",
+          "i_rstn"
+        ],
+        "next_execution": {
+          "fresh_dut_instance": true,
+          "circuit_state_continues": false,
+          "automatic_reset": {
+            "signal": "i_rstn",
+            "active_level": 0,
+            "synchronous": false,
+            "assert_cycles": 2
+          },
+          "prior_vectors_replayed": false,
+          "replay_cycles": 0,
+          "prior_input_levels_carried": false,
+          "automatic_reset_cycles_per_run": 2,
+          "automatic_reset_cycles_in_stimulus_budget": false
+        },
+        "remaining_rounds": 3,
+        "remaining_stimulus_cycles": 24,
+        "max_new_cycles": 24,
+        "max_new_vectors": 12,
+        "supported_sample_phases": [
+          "after"
+        ]
+      },
+      "prompt_sha256": "973f44ff0ab58084756838a00caedeaeada55e7e6ce033b74f678875610f99db",
+      "status": "validated",
+      "message_format": "legacy_prompt",
+      "response_chars": 143,
+      "untrusted_response_status": "not_saved",
+      "response_bytes": 143,
+      "response_sha256": "3684c8b03726a1bab43eba53779a7255c5500bd0bee735794d3237e0b77b991d",
+      "parse_status": "json_valid",
+      "schema_validation_status": "passed",
+      "action": {
+        "action": "append_vectors",
+        "reason": "public fixture",
+        "vectors": [
+          {
+            "name": "public",
+            "inputs": {
+              "i_enable": 1,
+              "i_event": 1
+            },
+            "cycles": 2,
+            "sample_phase": "after",
+            "expected": {},
+            "rationale": ""
+          }
+        ]
+      },
+      "usage": null,
+      "finish_reason": null,
+      "plan_validation_status": "passed",
+      "executed_round": 1
+    }
+  ],
+  "failed_attempts": [],
+  "requests_attempted": 1,
+  "accepted_vectors": 1,
+  "latest_plan_error": null,
+  "latest_decision_error": null,
+  "decision_format_rejections": 0,
+  "plan_budget_rejections": 0,
+  "automatic_reset_cycles_executed": 2,
+  "stimulus_cycles_executed": 2,
+  "stop_reason": "counterexample_found",
+  "candidate_stimulus_cycles_executed": 2,
+  "baseline_stimulus_cycles_executed": 0,
+  "port_observation_capture_enabled": true,
+  "elapsed_seconds": 0.015,
+  "finished_at": "2026-10-05T05:40:53.483259+00:00"
+}

@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "design": "valid_data_pipeline",
+  "objective": "fixed public contract semantic acceptance",
+  "clock_period_ns": 10,
+  "reset": {},
+  "sample_before_reset": false,
+  "pre_reset_expected": {},
+  "vectors": [
+    {
+      "name": "accept",
+      "inputs": {
+        "i_valid": 1,
+        "i_data": 165
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {},
+      "rationale": ""
+    },
+    {
+      "name": "next",
+      "inputs": {
+        "i_valid": 0
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {},
+      "rationale": ""
+    }
+  ],
+  "assumptions": [],
+  "assertions": []
+}

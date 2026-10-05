@@ -1,0 +1,18 @@
+[
+  {
+    "variant": "B",
+    "private_operator": "event-enable-gate-removed",
+    "before": "\t\tend else if(i_enable == 1'b1 && i_event == 1'b1)begin",
+    "after": "\t\tend else if(i_event == 1'b1)begin",
+    "single_semantic_location": true,
+    "API_visible": false
+  },
+  {
+    "variant": "C",
+    "private_operator": "clear-incorrectly-qualified-by-enable",
+    "before": "\t\tend else if(i_clear == 1'b1)begin",
+    "after": "\t\tend else if(i_clear == 1'b1 && i_enable == 1'b1)begin",
+    "single_semantic_location": true,
+    "API_visible": false
+  }
+]

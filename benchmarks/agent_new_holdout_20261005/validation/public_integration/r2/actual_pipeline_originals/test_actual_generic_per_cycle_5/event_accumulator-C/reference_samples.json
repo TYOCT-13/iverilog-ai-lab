@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "source": "independent_reference_model",
+  "status": "generated",
+  "reference_sampling": "per_cycle",
+  "profile": "builtin-reference-per-cycle-v1:event_accumulator",
+  "expected_cycles": 2,
+  "expected_checks": 2,
+  "provenance": {
+    "rtl_sha256": "d07a85d4e8a27e5b04a54666f1fb504ea69d4c8136f5eb1c715688d6075cb0d4",
+    "plan_sha256": "95c93bf4da753dd2b133d84279fd9dab07cdd4b52d41779d2fa3943670ba33ee",
+    "contract_sha256": "f4962c457edd81bb44ce941fe0e3ed82d6f62c33dfb536bb0010a8c526b7f236",
+    "testbench_sha256": "a782949b0d646285597f8abb3986f3eceb8487083925ffa639e8edc0f1b35ef2",
+    "reference_model_sha256": "ef177904f5f4c4fad51a3c1508775a3f6de247945220d2fa4ba317b98b5a7763"
+  },
+  "samples": [
+    {
+      "cycle": 0,
+      "test_id": "accept",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "0001"
+      }
+    },
+    {
+      "cycle": 1,
+      "test_id": "clear",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "0000"
+      }
+    }
+  ],
+  "limitations": [
+    "Generated expectations are separate from actual simulation observations",
+    "The original plan is not expanded; each sample uses one reference state transition",
+    "Only supported builtin profiles and after sampling are authoritative",
+    "Initial contract reset is applied; these cycles exclude reset and pre_reset assertions"
+  ]
+}

@@ -1,0 +1,1186 @@
+{
+  "schema": "private-new-synthetic-holdout-validation-v1",
+  "status": "passed",
+  "reference_examples": [
+    {
+      "case": "valid_data_pipeline",
+      "check": "hand_calculated_spec_example",
+      "cycles": 8,
+      "passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "check": "hand_calculated_spec_example",
+      "cycles": 8,
+      "passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "check": "hand_calculated_mod16_boundary",
+      "cycles": 17,
+      "passed": true
+    },
+    {
+      "case": "valid_data_pipeline",
+      "check": "reset_idle_zero",
+      "cycles": 3,
+      "passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "check": "reset_idle_zero",
+      "cycles": 3,
+      "passed": true
+    },
+    {
+      "check": "auto_clock",
+      "passed": true
+    },
+    {
+      "check": "unknown_port",
+      "passed": true
+    },
+    {
+      "check": "boolean",
+      "passed": true
+    },
+    {
+      "check": "over_budget",
+      "passed": true
+    },
+    {
+      "check": "over_segments",
+      "passed": true
+    },
+    {
+      "check": "zero_cycles",
+      "passed": true
+    },
+    {
+      "case": "valid_data_pipeline",
+      "check": "unknown_input_rejected",
+      "passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "check": "unknown_input_rejected",
+      "passed": true
+    }
+  ],
+  "single_location_controls": [
+    {
+      "case": "valid_data_pipeline",
+      "variant": "B",
+      "single_replacement": true,
+      "non_target_source_bytes_identical": true
+    },
+    {
+      "case": "valid_data_pipeline",
+      "variant": "C",
+      "single_replacement": true,
+      "non_target_source_bytes_identical": true
+    },
+    {
+      "case": "event_accumulator",
+      "variant": "B",
+      "single_replacement": true,
+      "non_target_source_bytes_identical": true
+    },
+    {
+      "case": "event_accumulator",
+      "variant": "C",
+      "single_replacement": true,
+      "non_target_source_bytes_identical": true
+    }
+  ],
+  "tool_versions": {
+    "iverilog_version": {
+      "argv": [
+        "D:\\iverilog\\bin\\iverilog.exe",
+        "-V"
+      ],
+      "returncode": 0,
+      "duration_seconds": 0.078,
+      "stdout_sha256": "d9ddad2697eb0b4283441d77c6c5cd38703195f98381279cadf38a0c7de613fe",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "vvp_version": {
+      "argv": [
+        "D:\\iverilog\\bin\\vvp.exe",
+        "-V"
+      ],
+      "returncode": 0,
+      "duration_seconds": 0.016,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "5d4d6acafd484339b03eea535de5cc65bac849fad98c7d6dedfa5fa86ae9d940"
+    }
+  },
+  "target_summaries": [
+    {
+      "case": "valid_data_pipeline",
+      "variant": "A",
+      "rtl_sha256": "8b021d3627b5078b4e1524c8c0d8430efa72242d950b07d7dcb66575e1dc2aee",
+      "contract_sha256": "145bbe75cd58c8d43e4a0864f4ae23a485f46cd8c7de47fcb63f5c1a1900684d",
+      "testbench_sha256": "9427d474f59c5c25233df58e7278d56162edc7d41378b730ead679e6e1c7967c",
+      "compile": {
+        "argv": [
+          "D:\\iverilog\\bin\\iverilog.exe",
+          "-g2001",
+          "-s",
+          "tb_valid_data_pipeline",
+          "-o",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\validation\\r2\\valid_data_pipeline\\A\\simulation.vvp",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\targets\\valid_data_pipeline\\A\\valid_data_pipeline.v",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\validation\\r2\\valid_data_pipeline\\A\\tb_valid_data_pipeline.v"
+        ],
+        "returncode": 0,
+        "duration_seconds": 0.438,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "tasks": 582,
+      "stimulus_cycles": 3136,
+      "run": {
+        "argv": [
+          "D:\\iverilog\\bin\\vvp.exe",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\validation\\r2\\valid_data_pipeline\\A\\simulation.vvp"
+        ],
+        "returncode": 0,
+        "duration_seconds": 0.078,
+        "stdout_sha256": "b1ea559123cecb4e9b02b883adbee0eb3583af6dc81c1afc710eeca91b856a9e",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "packets_complete": true,
+      "async_reset": {
+        "passed": true,
+        "observations": [
+          {
+            "time_ns": 52000,
+            "outputs": {
+              "o_valid": "0",
+              "o_data": "00000000"
+            }
+          }
+        ]
+      },
+      "status": "compared",
+      "checks": 6272,
+      "mismatches": 0,
+      "matched_tasks": 582,
+      "first_mismatch_samples": []
+    },
+    {
+      "case": "valid_data_pipeline",
+      "variant": "B",
+      "rtl_sha256": "faa1e4ccbeb6ceca3bd1153a376bdbddbafc573adff43cb0712784001141d515",
+      "contract_sha256": "145bbe75cd58c8d43e4a0864f4ae23a485f46cd8c7de47fcb63f5c1a1900684d",
+      "testbench_sha256": "9427d474f59c5c25233df58e7278d56162edc7d41378b730ead679e6e1c7967c",
+      "compile": {
+        "argv": [
+          "D:\\iverilog\\bin\\iverilog.exe",
+          "-g2001",
+          "-s",
+          "tb_valid_data_pipeline",
+          "-o",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\validation\\r2\\valid_data_pipeline\\B\\simulation.vvp",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\targets\\valid_data_pipeline\\B\\valid_data_pipeline.v",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\validation\\r2\\valid_data_pipeline\\B\\tb_valid_data_pipeline.v"
+        ],
+        "returncode": 0,
+        "duration_seconds": 0.406,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "tasks": 582,
+      "stimulus_cycles": 3136,
+      "run": {
+        "argv": [
+          "D:\\iverilog\\bin\\vvp.exe",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\validation\\r2\\valid_data_pipeline\\B\\simulation.vvp"
+        ],
+        "returncode": 0,
+        "duration_seconds": 0.078,
+        "stdout_sha256": "25dba2914a1c944883d8ed807fbd524f2935e2d17678eed3b7109e52e23fb9a0",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "packets_complete": true,
+      "async_reset": {
+        "passed": true,
+        "observations": [
+          {
+            "time_ns": 52000,
+            "outputs": {
+              "o_valid": "0",
+              "o_data": "00000000"
+            }
+          }
+        ]
+      },
+      "status": "compared",
+      "checks": 6272,
+      "mismatches": 974,
+      "matched_tasks": 81,
+      "first_mismatch_samples": [
+        {
+          "task": "control-word-0001",
+          "cycle": 3,
+          "port": "o_valid",
+          "actual_bits": "1",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 0,
+            "i_valid": 1,
+            "i_data": 130
+          }
+        },
+        {
+          "task": "control-word-0004",
+          "cycle": 2,
+          "port": "o_valid",
+          "actual_bits": "1",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 0,
+            "i_valid": 1,
+            "i_data": 150
+          }
+        },
+        {
+          "task": "control-word-0004",
+          "cycle": 3,
+          "port": "o_valid",
+          "actual_bits": "0",
+          "expected": 1,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 0,
+            "i_valid": 0,
+            "i_data": 187
+          }
+        },
+        {
+          "task": "control-word-0005",
+          "cycle": 2,
+          "port": "o_valid",
+          "actual_bits": "1",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 0,
+            "i_valid": 1,
+            "i_data": 169
+          }
+        },
+        {
+          "task": "control-word-0006",
+          "cycle": 2,
+          "port": "o_valid",
+          "actual_bits": "1",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 0,
+            "i_valid": 1,
+            "i_data": 188
+          }
+        },
+        {
+          "task": "control-word-0007",
+          "cycle": 2,
+          "port": "o_valid",
+          "actual_bits": "1",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 0,
+            "i_valid": 1,
+            "i_data": 207
+          }
+        },
+        {
+          "task": "control-word-0009",
+          "cycle": 3,
+          "port": "o_valid",
+          "actual_bits": "1",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 0,
+            "i_valid": 1,
+            "i_data": 26
+          }
+        },
+        {
+          "task": "control-word-0013",
+          "cycle": 3,
+          "port": "o_valid",
+          "actual_bits": "1",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 0,
+            "i_valid": 1,
+            "i_data": 102
+          }
+        },
+        {
+          "task": "control-word-0016",
+          "cycle": 1,
+          "port": "o_valid",
+          "actual_bits": "1",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 0,
+            "i_valid": 1,
+            "i_data": 85
+          }
+        },
+        {
+          "task": "control-word-0016",
+          "cycle": 2,
+          "port": "o_valid",
+          "actual_bits": "0",
+          "expected": 1,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 0,
+            "i_valid": 0,
+            "i_data": 122
+          }
+        },
+        {
+          "task": "control-word-0017",
+          "cycle": 1,
+          "port": "o_valid",
+          "actual_bits": "1",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 0,
+            "i_valid": 1,
+            "i_data": 104
+          }
+        },
+        {
+          "task": "control-word-0017",
+          "cycle": 2,
+          "port": "o_valid",
+          "actual_bits": "0",
+          "expected": 1,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 0,
+            "i_valid": 0,
+            "i_data": 141
+          }
+        }
+      ]
+    },
+    {
+      "case": "valid_data_pipeline",
+      "variant": "C",
+      "rtl_sha256": "0e9fafe043a5c58d729154889434d2387c23af1ca51cbad54edbe379bef6784f",
+      "contract_sha256": "145bbe75cd58c8d43e4a0864f4ae23a485f46cd8c7de47fcb63f5c1a1900684d",
+      "testbench_sha256": "9427d474f59c5c25233df58e7278d56162edc7d41378b730ead679e6e1c7967c",
+      "compile": {
+        "argv": [
+          "D:\\iverilog\\bin\\iverilog.exe",
+          "-g2001",
+          "-s",
+          "tb_valid_data_pipeline",
+          "-o",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\validation\\r2\\valid_data_pipeline\\C\\simulation.vvp",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\targets\\valid_data_pipeline\\C\\valid_data_pipeline.v",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\validation\\r2\\valid_data_pipeline\\C\\tb_valid_data_pipeline.v"
+        ],
+        "returncode": 0,
+        "duration_seconds": 0.406,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "tasks": 582,
+      "stimulus_cycles": 3136,
+      "run": {
+        "argv": [
+          "D:\\iverilog\\bin\\vvp.exe",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\validation\\r2\\valid_data_pipeline\\C\\simulation.vvp"
+        ],
+        "returncode": 0,
+        "duration_seconds": 0.078,
+        "stdout_sha256": "3fbee4f35925e22355c45d5dab9cbf1a9f91b80d949db942fe875b94e7e98c81",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "packets_complete": true,
+      "async_reset": {
+        "passed": true,
+        "observations": [
+          {
+            "time_ns": 52000,
+            "outputs": {
+              "o_valid": "0",
+              "o_data": "00000000"
+            }
+          }
+        ]
+      },
+      "status": "compared",
+      "checks": 6272,
+      "mismatches": 185,
+      "matched_tasks": 433,
+      "first_mismatch_samples": [
+        {
+          "task": "control-word-0006",
+          "cycle": 3,
+          "port": "o_valid",
+          "actual_bits": "1",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 1,
+            "i_valid": 0,
+            "i_data": 225
+          }
+        },
+        {
+          "task": "control-word-0007",
+          "cycle": 3,
+          "port": "o_valid",
+          "actual_bits": "1",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 1,
+            "i_valid": 1,
+            "i_data": 244
+          }
+        },
+        {
+          "task": "control-word-0022",
+          "cycle": 3,
+          "port": "o_valid",
+          "actual_bits": "1",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 1,
+            "i_valid": 0,
+            "i_data": 17
+          }
+        },
+        {
+          "task": "control-word-0023",
+          "cycle": 3,
+          "port": "o_valid",
+          "actual_bits": "1",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 1,
+            "i_valid": 1,
+            "i_data": 36
+          }
+        },
+        {
+          "task": "control-word-0024",
+          "cycle": 2,
+          "port": "o_valid",
+          "actual_bits": "1",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 1,
+            "i_valid": 0,
+            "i_data": 18
+          }
+        },
+        {
+          "task": "control-word-0025",
+          "cycle": 2,
+          "port": "o_valid",
+          "actual_bits": "1",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 1,
+            "i_valid": 0,
+            "i_data": 37
+          }
+        },
+        {
+          "task": "control-word-0026",
+          "cycle": 2,
+          "port": "o_valid",
+          "actual_bits": "1",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 1,
+            "i_valid": 0,
+            "i_data": 56
+          }
+        },
+        {
+          "task": "control-word-0027",
+          "cycle": 2,
+          "port": "o_valid",
+          "actual_bits": "1",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 1,
+            "i_valid": 0,
+            "i_data": 75
+          }
+        },
+        {
+          "task": "control-word-0028",
+          "cycle": 2,
+          "port": "o_valid",
+          "actual_bits": "1",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 1,
+            "i_valid": 1,
+            "i_data": 94
+          }
+        },
+        {
+          "task": "control-word-0029",
+          "cycle": 2,
+          "port": "o_valid",
+          "actual_bits": "1",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 1,
+            "i_valid": 1,
+            "i_data": 113
+          }
+        },
+        {
+          "task": "control-word-0030",
+          "cycle": 2,
+          "port": "o_valid",
+          "actual_bits": "1",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 1,
+            "i_valid": 1,
+            "i_data": 132
+          }
+        },
+        {
+          "task": "control-word-0031",
+          "cycle": 2,
+          "port": "o_valid",
+          "actual_bits": "1",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_flush": 1,
+            "i_valid": 1,
+            "i_data": 151
+          }
+        }
+      ]
+    },
+    {
+      "case": "event_accumulator",
+      "variant": "A",
+      "rtl_sha256": "010c18adf5036cfb357d0e38f622ecba1ddf8cea3facc496363b6db31ac8dc09",
+      "contract_sha256": "8ddb36e0c9b928020a01e8534c3cdc92d5a8c8fab5c6b336454ca661ce3277b5",
+      "testbench_sha256": "0fd208ceda0546832c4a18efda5fafdff3e94355d7fddb0ad17916c682a54dda",
+      "compile": {
+        "argv": [
+          "D:\\iverilog\\bin\\iverilog.exe",
+          "-g2001",
+          "-s",
+          "tb_event_accumulator",
+          "-o",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\validation\\r2\\event_accumulator\\A\\simulation.vvp",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\targets\\event_accumulator\\A\\event_accumulator.v",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\validation\\r2\\event_accumulator\\A\\tb_event_accumulator.v"
+        ],
+        "returncode": 0,
+        "duration_seconds": 4.828,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "tasks": 4166,
+      "stimulus_cycles": 17988,
+      "run": {
+        "argv": [
+          "D:\\iverilog\\bin\\vvp.exe",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\validation\\r2\\event_accumulator\\A\\simulation.vvp"
+        ],
+        "returncode": 0,
+        "duration_seconds": 0.36,
+        "stdout_sha256": "eba2e1edef78b414af2ef4d95ce509aaf06cde4bfa3fbb1756670f30b9990735",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "packets_complete": true,
+      "async_reset": {
+        "passed": true,
+        "observations": [
+          {
+            "time_ns": 52000,
+            "outputs": {
+              "o_count": "0000"
+            }
+          }
+        ]
+      },
+      "status": "compared",
+      "checks": 17988,
+      "mismatches": 0,
+      "matched_tasks": 4166,
+      "first_mismatch_samples": []
+    },
+    {
+      "case": "event_accumulator",
+      "variant": "B",
+      "rtl_sha256": "0c0aedbec68e7f93c4e8e06b5f341f6f13aebb72ab23120479a5924a203b4317",
+      "contract_sha256": "8ddb36e0c9b928020a01e8534c3cdc92d5a8c8fab5c6b336454ca661ce3277b5",
+      "testbench_sha256": "0fd208ceda0546832c4a18efda5fafdff3e94355d7fddb0ad17916c682a54dda",
+      "compile": {
+        "argv": [
+          "D:\\iverilog\\bin\\iverilog.exe",
+          "-g2001",
+          "-s",
+          "tb_event_accumulator",
+          "-o",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\validation\\r2\\event_accumulator\\B\\simulation.vvp",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\targets\\event_accumulator\\B\\event_accumulator.v",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\validation\\r2\\event_accumulator\\B\\tb_event_accumulator.v"
+        ],
+        "returncode": 0,
+        "duration_seconds": 4.828,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "tasks": 4166,
+      "stimulus_cycles": 17988,
+      "run": {
+        "argv": [
+          "D:\\iverilog\\bin\\vvp.exe",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\validation\\r2\\event_accumulator\\B\\simulation.vvp"
+        ],
+        "returncode": 0,
+        "duration_seconds": 0.344,
+        "stdout_sha256": "0553d26ad5d67965a7a6fc0f76e454887be1f79c4eee394bd557dfeed8fa556a",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "packets_complete": true,
+      "async_reset": {
+        "passed": true,
+        "observations": [
+          {
+            "time_ns": 52000,
+            "outputs": {
+              "o_count": "0000"
+            }
+          }
+        ]
+      },
+      "status": "compared",
+      "checks": 17988,
+      "mismatches": 3132,
+      "matched_tasks": 2412,
+      "first_mismatch_samples": [
+        {
+          "task": "control-word-0002",
+          "cycle": 3,
+          "port": "o_count",
+          "actual_bits": "0001",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 0,
+            "i_event": 1,
+            "i_clear": 0
+          }
+        },
+        {
+          "task": "control-word-0010",
+          "cycle": 3,
+          "port": "o_count",
+          "actual_bits": "0001",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 0,
+            "i_event": 1,
+            "i_clear": 0
+          }
+        },
+        {
+          "task": "control-word-0016",
+          "cycle": 2,
+          "port": "o_count",
+          "actual_bits": "0001",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 0,
+            "i_event": 1,
+            "i_clear": 0
+          }
+        },
+        {
+          "task": "control-word-0016",
+          "cycle": 3,
+          "port": "o_count",
+          "actual_bits": "0001",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 0,
+            "i_event": 0,
+            "i_clear": 0
+          }
+        },
+        {
+          "task": "control-word-0017",
+          "cycle": 2,
+          "port": "o_count",
+          "actual_bits": "0001",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 0,
+            "i_event": 1,
+            "i_clear": 0
+          }
+        },
+        {
+          "task": "control-word-0018",
+          "cycle": 2,
+          "port": "o_count",
+          "actual_bits": "0001",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 0,
+            "i_event": 1,
+            "i_clear": 0
+          }
+        },
+        {
+          "task": "control-word-0018",
+          "cycle": 3,
+          "port": "o_count",
+          "actual_bits": "0010",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 0,
+            "i_event": 1,
+            "i_clear": 0
+          }
+        },
+        {
+          "task": "control-word-0019",
+          "cycle": 2,
+          "port": "o_count",
+          "actual_bits": "0001",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 0,
+            "i_event": 1,
+            "i_clear": 0
+          }
+        },
+        {
+          "task": "control-word-0020",
+          "cycle": 2,
+          "port": "o_count",
+          "actual_bits": "0001",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 0,
+            "i_event": 1,
+            "i_clear": 0
+          }
+        },
+        {
+          "task": "control-word-0020",
+          "cycle": 3,
+          "port": "o_count",
+          "actual_bits": "0001",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 1,
+            "i_event": 0,
+            "i_clear": 0
+          }
+        },
+        {
+          "task": "control-word-0021",
+          "cycle": 2,
+          "port": "o_count",
+          "actual_bits": "0001",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 0,
+            "i_event": 1,
+            "i_clear": 0
+          }
+        },
+        {
+          "task": "control-word-0022",
+          "cycle": 2,
+          "port": "o_count",
+          "actual_bits": "0001",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 0,
+            "i_event": 1,
+            "i_clear": 0
+          }
+        }
+      ]
+    },
+    {
+      "case": "event_accumulator",
+      "variant": "C",
+      "rtl_sha256": "bdfffb533bf0ee03db105b5495d59eae2ad4c6627d252cf125aced34886980f9",
+      "contract_sha256": "8ddb36e0c9b928020a01e8534c3cdc92d5a8c8fab5c6b336454ca661ce3277b5",
+      "testbench_sha256": "0fd208ceda0546832c4a18efda5fafdff3e94355d7fddb0ad17916c682a54dda",
+      "compile": {
+        "argv": [
+          "D:\\iverilog\\bin\\iverilog.exe",
+          "-g2001",
+          "-s",
+          "tb_event_accumulator",
+          "-o",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\validation\\r2\\event_accumulator\\C\\simulation.vvp",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\targets\\event_accumulator\\C\\event_accumulator.v",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\validation\\r2\\event_accumulator\\C\\tb_event_accumulator.v"
+        ],
+        "returncode": 0,
+        "duration_seconds": 4.782,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "tasks": 4166,
+      "stimulus_cycles": 17988,
+      "run": {
+        "argv": [
+          "D:\\iverilog\\bin\\vvp.exe",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\validation\\r2\\event_accumulator\\C\\simulation.vvp"
+        ],
+        "returncode": 0,
+        "duration_seconds": 0.359,
+        "stdout_sha256": "0b8a6fbd14a5513f15507c18735d0899a6bda344a0d6d15d10ed59b9306f7cb5",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "packets_complete": true,
+      "async_reset": {
+        "passed": true,
+        "observations": [
+          {
+            "time_ns": 52000,
+            "outputs": {
+              "o_count": "0000"
+            }
+          }
+        ]
+      },
+      "status": "compared",
+      "checks": 17988,
+      "mismatches": 980,
+      "matched_tasks": 3639,
+      "first_mismatch_samples": [
+        {
+          "task": "control-word-0049",
+          "cycle": 3,
+          "port": "o_count",
+          "actual_bits": "0001",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 0,
+            "i_event": 0,
+            "i_clear": 1
+          }
+        },
+        {
+          "task": "control-word-0051",
+          "cycle": 3,
+          "port": "o_count",
+          "actual_bits": "0001",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 0,
+            "i_event": 1,
+            "i_clear": 1
+          }
+        },
+        {
+          "task": "control-word-0113",
+          "cycle": 3,
+          "port": "o_count",
+          "actual_bits": "0001",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 0,
+            "i_event": 0,
+            "i_clear": 1
+          }
+        },
+        {
+          "task": "control-word-0115",
+          "cycle": 3,
+          "port": "o_count",
+          "actual_bits": "0001",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 0,
+            "i_event": 1,
+            "i_clear": 1
+          }
+        },
+        {
+          "task": "control-word-0177",
+          "cycle": 3,
+          "port": "o_count",
+          "actual_bits": "0001",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 0,
+            "i_event": 0,
+            "i_clear": 1
+          }
+        },
+        {
+          "task": "control-word-0179",
+          "cycle": 3,
+          "port": "o_count",
+          "actual_bits": "0001",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 0,
+            "i_event": 1,
+            "i_clear": 1
+          }
+        },
+        {
+          "task": "control-word-0241",
+          "cycle": 3,
+          "port": "o_count",
+          "actual_bits": "0001",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 0,
+            "i_event": 0,
+            "i_clear": 1
+          }
+        },
+        {
+          "task": "control-word-0243",
+          "cycle": 3,
+          "port": "o_count",
+          "actual_bits": "0001",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 0,
+            "i_event": 1,
+            "i_clear": 1
+          }
+        },
+        {
+          "task": "control-word-0305",
+          "cycle": 3,
+          "port": "o_count",
+          "actual_bits": "0001",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 0,
+            "i_event": 0,
+            "i_clear": 1
+          }
+        },
+        {
+          "task": "control-word-0307",
+          "cycle": 3,
+          "port": "o_count",
+          "actual_bits": "0001",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 0,
+            "i_event": 1,
+            "i_clear": 1
+          }
+        },
+        {
+          "task": "control-word-0369",
+          "cycle": 3,
+          "port": "o_count",
+          "actual_bits": "0001",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 0,
+            "i_event": 0,
+            "i_clear": 1
+          }
+        },
+        {
+          "task": "control-word-0371",
+          "cycle": 3,
+          "port": "o_count",
+          "actual_bits": "0001",
+          "expected": 0,
+          "input": {
+            "i_rstn": 1,
+            "i_enable": 0,
+            "i_event": 1,
+            "i_clear": 1
+          }
+        }
+      ]
+    }
+  ],
+  "private_witnesses": [
+    {
+      "case": "valid_data_pipeline",
+      "variant": "B",
+      "witness": {
+        "id": "private-witness-B",
+        "kind": "private_witness",
+        "cycles": 2,
+        "segments": 2,
+        "mismatches": 2,
+        "first_mismatch": [
+          {
+            "task": "private-witness-B",
+            "cycle": 0,
+            "port": "o_valid",
+            "actual_bits": "1",
+            "expected": 0,
+            "input": {
+              "i_rstn": 1,
+              "i_flush": 0,
+              "i_valid": 1,
+              "i_data": 165
+            }
+          }
+        ]
+      },
+      "non_target_matching_tasks": 81,
+      "functional_not_compile_failure": true
+    },
+    {
+      "case": "valid_data_pipeline",
+      "variant": "C",
+      "witness": {
+        "id": "private-witness-C",
+        "kind": "private_witness",
+        "cycles": 3,
+        "segments": 3,
+        "mismatches": 1,
+        "first_mismatch": [
+          {
+            "task": "private-witness-C",
+            "cycle": 1,
+            "port": "o_valid",
+            "actual_bits": "1",
+            "expected": 0,
+            "input": {
+              "i_rstn": 1,
+              "i_flush": 1,
+              "i_valid": 0,
+              "i_data": 60
+            }
+          }
+        ]
+      },
+      "non_target_matching_tasks": 433,
+      "functional_not_compile_failure": true
+    },
+    {
+      "case": "event_accumulator",
+      "variant": "B",
+      "witness": {
+        "id": "private-witness-B",
+        "kind": "private_witness",
+        "cycles": 1,
+        "segments": 1,
+        "mismatches": 1,
+        "first_mismatch": [
+          {
+            "task": "private-witness-B",
+            "cycle": 0,
+            "port": "o_count",
+            "actual_bits": "0001",
+            "expected": 0,
+            "input": {
+              "i_rstn": 1,
+              "i_enable": 0,
+              "i_event": 1,
+              "i_clear": 0
+            }
+          }
+        ]
+      },
+      "non_target_matching_tasks": 2412,
+      "functional_not_compile_failure": true
+    },
+    {
+      "case": "event_accumulator",
+      "variant": "C",
+      "witness": {
+        "id": "private-witness-C",
+        "kind": "private_witness",
+        "cycles": 2,
+        "segments": 2,
+        "mismatches": 1,
+        "first_mismatch": [
+          {
+            "task": "private-witness-C",
+            "cycle": 1,
+            "port": "o_count",
+            "actual_bits": "0001",
+            "expected": 0,
+            "input": {
+              "i_rstn": 1,
+              "i_enable": 0,
+              "i_event": 0,
+              "i_clear": 1
+            }
+          }
+        ]
+      },
+      "non_target_matching_tasks": 3639,
+      "functional_not_compile_failure": true
+    }
+  ],
+  "API_calls": 0,
+  "API_keys_read": false,
+  "v8_results_read": false,
+  "total_iverilog_compile_calls": 6,
+  "total_vvp_execution_calls": 6,
+  "task_cycle_cap": 24,
+  "proposal_segment_cap": 12,
+  "duration_seconds": 28.235,
+  "interpretation": "Internal synthetic-module preparation; mechanical Icarus comparison, not an Agent score, human trial, independent human review or external blind test."
+}

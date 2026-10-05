@@ -128,15 +128,13 @@ def test_input_defaults_cover_every_input_port():
     不需要默认值。
     """
 
-    import json
-    from pathlib import Path
-
+    from iverilog_ai.ai.debug_provider import bundled_contract
     from iverilog_ai.core.reference_model import INPUT_DEFAULTS
 
-    root = Path(__file__).parents[2]
     assert set(INPUT_DEFAULTS) == SUPPORTED
     for case in sorted(SUPPORTED):
-        contract = json.loads((root / f"examples/{case}_contract.json").read_text(encoding="utf-8"))
+        contract = bundled_contract(case)
+        assert contract.get("module") == case
         clock = (contract.get("clock") or {}).get("signal")
         expected = {
             port["name"]

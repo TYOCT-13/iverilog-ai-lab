@@ -1,0 +1,24 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\TYOCT\.codex\skills\readable-verilog-generator\scripts\python\workflow\cli.py", line 119, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "C:\Users\TYOCT\.codex\skills\readable-verilog-generator\scripts\python\workflow\cli.py", line 104, in main
+    return int(args.func(args))
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\TYOCT\.codex\skills\readable-verilog-generator\scripts\python\workflow\cli_generation_commands.py", line 133, in cmd_write_spec
+    dict_report = write_spec_bundle(  # 统一写出规范、WaveDrom JSON 与 SVG 结果
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TYOCT\.codex\skills\readable-verilog-generator\scripts\python\workflow\spec_document.py", line 1464, in write_spec_bundle
+    list_wave_outputs = _write_waveforms(module_value, dict_paths, renderer, runtime_settings)  # 当前模块波形报告
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TYOCT\.codex\skills\readable-verilog-generator\scripts\python\workflow\spec_document.py", line 1282, in _write_waveforms
+    dict_render = render_waveform_with_settings(  # 统一当前图的 runtime 与替身渲染结果
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TYOCT\.codex\skills\readable-verilog-generator\scripts\python\workflow\spec_document_io.py", line 55, in render_waveform_with_settings
+    return func_renderer(path_json, path_svg, settings=runtime_settings)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\TYOCT\.codex\skills\readable-verilog-generator\scripts\python\toolchain\wavedrom_runtime.py", line 1098, in render_waveform
+    raise FileNotFoundError("> ERR: [Python] renderer executable was not found.")
+FileNotFoundError: > ERR: [Python] renderer executable was not found.

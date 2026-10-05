@@ -1,0 +1,216 @@
+{
+  "schema_version": "1.0",
+  "source": "independent_reference_model",
+  "status": "generated",
+  "reference_sampling": "per_cycle",
+  "profile": "builtin-reference-per-cycle-v1:event_accumulator",
+  "expected_cycles": 24,
+  "expected_checks": 24,
+  "provenance": {
+    "rtl_sha256": "4f8137509bc2116624f8c444f5e6d0bca319f6b2993371610dd2c2432c44d071",
+    "plan_sha256": "2cc00e61265be1d74e3fba011bcee8660f9c77f0f3ab6fbb3e19e23c3747248c",
+    "contract_sha256": "f4962c457edd81bb44ce941fe0e3ed82d6f62c33dfb536bb0010a8c526b7f236",
+    "testbench_sha256": "4144cf80b76c659cf9f8ef1d6ab89b85a45d22ac13bfbbff872130845eceeb28",
+    "reference_model_sha256": "ef177904f5f4c4fad51a3c1508775a3f6de247945220d2fa4ba317b98b5a7763"
+  },
+  "samples": [
+    {
+      "cycle": 0,
+      "test_id": "protocol_random_0",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "0000"
+      }
+    },
+    {
+      "cycle": 1,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "0001"
+      }
+    },
+    {
+      "cycle": 2,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "0010"
+      }
+    },
+    {
+      "cycle": 3,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "0011"
+      }
+    },
+    {
+      "cycle": 4,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "0100"
+      }
+    },
+    {
+      "cycle": 5,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "0101"
+      }
+    },
+    {
+      "cycle": 6,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "0110"
+      }
+    },
+    {
+      "cycle": 7,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "0111"
+      }
+    },
+    {
+      "cycle": 8,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "1000"
+      }
+    },
+    {
+      "cycle": 9,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "1001"
+      }
+    },
+    {
+      "cycle": 10,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "1010"
+      }
+    },
+    {
+      "cycle": 11,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "1011"
+      }
+    },
+    {
+      "cycle": 12,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "1100"
+      }
+    },
+    {
+      "cycle": 13,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "1101"
+      }
+    },
+    {
+      "cycle": 14,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "1110"
+      }
+    },
+    {
+      "cycle": 15,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "1111"
+      }
+    },
+    {
+      "cycle": 16,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "0000"
+      }
+    },
+    {
+      "cycle": 17,
+      "test_id": "protocol_random_2",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "0000"
+      }
+    },
+    {
+      "cycle": 18,
+      "test_id": "protocol_random_2",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "0000"
+      }
+    },
+    {
+      "cycle": 19,
+      "test_id": "protocol_random_3",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "0000"
+      }
+    },
+    {
+      "cycle": 20,
+      "test_id": "protocol_random_4",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "0001"
+      }
+    },
+    {
+      "cycle": 21,
+      "test_id": "protocol_random_4",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "0010"
+      }
+    },
+    {
+      "cycle": 22,
+      "test_id": "protocol_random_5",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "0010"
+      }
+    },
+    {
+      "cycle": 23,
+      "test_id": "protocol_random_5",
+      "sample_phase": "after",
+      "expected": {
+        "o_count": "0010"
+      }
+    }
+  ],
+  "limitations": [
+    "Generated expectations are separate from actual simulation observations",
+    "The original plan is not expanded; each sample uses one reference state transition",
+    "Only supported builtin profiles and after sampling are authoritative",
+    "Initial contract reset is applied; these cycles exclude reset and pre_reset assertions"
+  ]
+}

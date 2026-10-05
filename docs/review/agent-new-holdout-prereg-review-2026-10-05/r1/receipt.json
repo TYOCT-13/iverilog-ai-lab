@@ -1,0 +1,29 @@
+{
+  "schema": "independent-internal-new-holdout-prereg-audit-v1",
+  "attempt": "r1",
+  "started_at": "2026-10-05T05:39:41.791251+00:00",
+  "finished_at": "2026-10-05T05:39:42.112669+00:00",
+  "auditor_role": "non-implementer same-team machine reviewer; not human/H02",
+  "tool_sha256": "d1a7a7ecd8907e1bf53d5423ca7c41faec3ed91267d7af996afc839cf6760168",
+  "unique_checks": 1,
+  "non_DUT_checks": 1,
+  "passed": 0,
+  "failed": 1,
+  "skipped": 0,
+  "actual_API_calls": 0,
+  "real_credential_reads": 0,
+  "actual_DUT_runs": 0,
+  "other_agents_tests_counted": false,
+  "mock_execution_is_functional_evidence": false,
+  "checks": [
+    {
+      "name": "audit.infrastructure_or_final_freeze_precondition",
+      "kind": "non_DUT_mechanical",
+      "status": "failed",
+      "error_type": "AssertionError",
+      "error": "only read-only Git subprocesses are allowed in this audit",
+      "traceback": "Traceback (most recent call last):\n  File \"E:\\FPGA_WORK\\iverilog-ai-lab\\docs\\review\\agent-new-holdout-prereg-review-2026-10-05\\audit_preregistration.py\", line 130, in main\n    registration = entry.preregister_new_holdout(require_frozen=True)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\FPGA_WORK\\iverilog-ai-lab\\scripts\\run_agent_new_holdout_study.py\", line 169, in preregister_new_holdout\n    validate_frozen_agent()\n  File \"E:\\FPGA_WORK\\iverilog-ai-lab\\scripts\\run_agent_new_holdout_study.py\", line 95, in validate_frozen_agent\n    if sha(registered_source_path(relative)) != digest or _digest(_git(\"show\", FROZEN_REVISION + \":\" + relative)) != digest:\n                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\FPGA_WORK\\iverilog-ai-lab\\scripts\\run_agent_new_holdout_study.py\", line 55, in _git\n    return subprocess.check_output([\"git\", *arguments], cwd=ROOT)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Users\\TYOCT\\anaconda3\\Lib\\subprocess.py\", line 466, in check_output\n    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Users\\TYOCT\\anaconda3\\Lib\\subprocess.py\", line 548, in run\n    with Popen(*popenargs, **kwargs) as process:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\Users\\TYOCT\\anaconda3\\Lib\\subprocess.py\", line 1026, in __init__\n    self._execute_child(args, executable, preexec_fn, close_fds,\n  File \"D:\\Users\\TYOCT\\anaconda3\\Lib\\subprocess.py\", line 1534, in _execute_child\n    sys.audit(\"subprocess.Popen\", executable, args, cwd, env)\n  File \"E:\\FPGA_WORK\\iverilog-ai-lab\\docs\\review\\agent-new-holdout-prereg-review-2026-10-05\\audit_preregistration.py\", line 82, in process_guard\n    raise AssertionError(\"only read-only Git subprocesses are allowed in this audit\")\nAssertionError: only read-only Git subprocesses are allowed in this audit\n"
+    }
+  ],
+  "details": {}
+}

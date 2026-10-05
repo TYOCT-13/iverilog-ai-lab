@@ -10,7 +10,7 @@ from urllib.request import Request, urlopen
 
 import pytest
 
-from iverilog_ai.ai.debug_provider import DeterministicLocalProvider, known_designs
+from iverilog_ai.ai.debug_provider import DeterministicLocalProvider, bundled_contract, known_designs
 from iverilog_ai.ai.debug_server import build_plan_response, create_server, extract_request
 from iverilog_ai.ai.provider import OpenAICompatibleProvider
 from iverilog_ai.ai.schema import TestPlan
@@ -271,7 +271,8 @@ CUSTOM_CONTRACT = {
 def _realistic_prompt(case: str) -> str:
     """按 `plan_tests` 的真实拼法构造提示词（规则文本 + 末尾合约 + Schema）。"""
 
-    contract = json.loads((ROOT / "examples" / f"{case}_contract.json").read_text(encoding="utf-8"))
+    contract = bundled_contract(case)
+    assert contract.get("module") == case
     context, _manifest = rules_context(ROOT, case, contract)
     return (
         "Return JSON only. No markdown, commands, paths, or executable code. "
@@ -379,7 +380,8 @@ def test_custom_contract_without_bundled_case_is_allowed():
 def test_every_bundled_case_gets_real_stimulus_from_a_bare_provider(case):
     """15 个内置案例逐个验证：预算内必须有驱动真实端口名的激励。"""
 
-    contract = json.loads((ROOT / "examples" / f"{case}_contract.json").read_text(encoding="utf-8"))
+    contract = bundled_contract(case)
+    assert contract.get("module") == case
     input_ports = {
         str(port["name"]) for port in contract["ports"] if str(port.get("direction")) == "input"
     }

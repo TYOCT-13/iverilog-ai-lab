@@ -1,0 +1,146 @@
+{
+  "schema_version": "1.0",
+  "design": "valid_data_pipeline",
+  "objective": "Verify correct default interface behavior and ordinary multi-cycle operations",
+  "clock_period_ns": 10,
+  "reset": {
+    "signal": "i_rstn",
+    "active_level": 0,
+    "synchronous": false,
+    "assert_cycles": 2
+  },
+  "sample_before_reset": false,
+  "pre_reset_expected": {},
+  "vectors": [
+    {
+      "name": "fixed_0",
+      "inputs": {
+        "i_rstn": 1,
+        "i_valid": 0,
+        "i_data": 0,
+        "i_flush": 0
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": 0,
+        "o_data": 0
+      },
+      "rationale": ""
+    },
+    {
+      "name": "fixed_1",
+      "inputs": {
+        "i_rstn": 1,
+        "i_valid": 1,
+        "i_data": 165,
+        "i_flush": 0
+      },
+      "cycles": 4,
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": 1,
+        "o_data": 165
+      },
+      "rationale": ""
+    },
+    {
+      "name": "fixed_2",
+      "inputs": {
+        "i_rstn": 1,
+        "i_valid": 0,
+        "i_data": 0,
+        "i_flush": 0
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": 0,
+        "o_data": 0
+      },
+      "rationale": ""
+    },
+    {
+      "name": "fixed_3",
+      "inputs": {
+        "i_rstn": 1,
+        "i_valid": 1,
+        "i_data": 60,
+        "i_flush": 0
+      },
+      "cycles": 4,
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": 1,
+        "o_data": 60
+      },
+      "rationale": ""
+    },
+    {
+      "name": "fixed_4",
+      "inputs": {
+        "i_rstn": 1,
+        "i_valid": 1,
+        "i_data": 126,
+        "i_flush": 1
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": 0,
+        "o_data": 0
+      },
+      "rationale": ""
+    },
+    {
+      "name": "fixed_5",
+      "inputs": {
+        "i_rstn": 1,
+        "i_valid": 0,
+        "i_data": 0,
+        "i_flush": 0
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": 0,
+        "o_data": 0
+      },
+      "rationale": ""
+    },
+    {
+      "name": "fixed_6",
+      "inputs": {
+        "i_rstn": 1,
+        "i_valid": 1,
+        "i_data": 129,
+        "i_flush": 0
+      },
+      "cycles": 4,
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": 1,
+        "o_data": 129
+      },
+      "rationale": ""
+    },
+    {
+      "name": "fixed_7",
+      "inputs": {
+        "i_rstn": 1,
+        "i_valid": 0,
+        "i_data": 0,
+        "i_flush": 0
+      },
+      "cycles": 4,
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": 0,
+        "o_data": 0
+      },
+      "rationale": ""
+    }
+  ],
+  "assumptions": [],
+  "assertions": []
+}

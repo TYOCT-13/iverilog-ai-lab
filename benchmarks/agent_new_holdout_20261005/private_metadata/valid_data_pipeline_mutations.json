@@ -1,0 +1,18 @@
+[
+  {
+    "variant": "B",
+    "private_operator": "current-input-valid-in-output-stage",
+    "before": "\t\t\tvalid_o <= flag_capture_valid;      // 更新当前输出有效标志",
+    "after": "\t\t\tvalid_o <= i_valid;                 // 更新当前输出有效标志",
+    "single_semantic_location": true,
+    "API_visible": false
+  },
+  {
+    "variant": "C",
+    "private_operator": "output-valid-flush-control-disabled",
+    "before": "\t\tend else if(i_flush == 1'b1)begin\n\t\t\tvalid_o <= 1'b0;                    // 清空请求当拍禁止数据投递",
+    "after": "\t\tend else if(1'b0 == 1'b1)begin\n\t\t\tvalid_o <= 1'b0;                    // 清空请求当拍禁止数据投递",
+    "single_semantic_location": true,
+    "API_visible": false
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "design": "valid_data_pipeline",
+  "objective": "fixed public contract semantic acceptance",
+  "clock_period_ns": 10,
+  "reset": {},
+  "sample_before_reset": false,
+  "pre_reset_expected": {},
+  "vectors": [
+    {
+      "name": "normal",
+      "inputs": {
+        "i_valid": 0,
+        "i_flush": 0
+      },
+      "cycles": 4,
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": 0,
+        "o_data": 0
+      },
+      "rationale": ""
+    }
+  ],
+  "assumptions": [],
+  "assertions": []
+}

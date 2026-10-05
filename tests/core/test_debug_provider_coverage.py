@@ -4,7 +4,7 @@
 
 1. `core.reference_model.SUPPORTED`（有没有参考模型）；
 2. `ai.debug_provider._INPUT_STEPS`（有没有确定性激励）；
-3. `examples/<case>_contract.json` 里真实存在的输入端口名。
+3. 内置案例合约里真实存在的输入端口名（原 examples 与显式新模块路径）。
 
 曾经的问题正是这一类：`KNOWN_DESIGNS` 在调试服务里另写了一份手抄名单，
 而新案例只加进其中一份就会出现"服务端拒绝一个已支持的案例"或"生成空计划"。
@@ -13,21 +13,16 @@
 
 from __future__ import annotations
 
-import json
-from pathlib import Path
-
 import pytest
 
 from iverilog_ai.ai.debug_provider import (
     _EXTRA_CYCLES,
     _INPUT_STEPS,
     _TRAILING_STIMULUS,
+    bundled_contract,
     known_designs,
 )
 from iverilog_ai.core.reference_model import INPUT_DEFAULTS, SUPPORTED
-
-ROOT = Path(__file__).resolve().parents[2]
-
 
 def test_debug_provider_covers_every_supported_design():
     assert known_designs() == set(SUPPORTED), (
@@ -37,8 +32,8 @@ def test_debug_provider_covers_every_supported_design():
 
 
 def _contract_inputs(case: str) -> set[str]:
-    path = ROOT / "examples" / f"{case}_contract.json"
-    payload = json.loads(path.read_text(encoding="utf-8"))
+    payload = bundled_contract(case)
+    assert payload.get("module") == case, f"{case} 的内置合约缺失或模块名不符"
     return {
         str(port["name"])
         for port in payload.get("ports", [])

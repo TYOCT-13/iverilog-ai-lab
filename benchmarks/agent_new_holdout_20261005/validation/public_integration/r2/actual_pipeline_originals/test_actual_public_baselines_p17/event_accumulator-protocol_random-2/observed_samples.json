@@ -1,0 +1,405 @@
+{
+  "schema_version": "1.0",
+  "source": "testbench_sample_statement",
+  "status": "complete",
+  "expected_cycles": 24,
+  "observed_cycles": 24,
+  "errors": [],
+  "provenance": {
+    "rtl_sha256": "4f8137509bc2116624f8c444f5e6d0bca319f6b2993371610dd2c2432c44d071",
+    "contract_sha256": "f4962c457edd81bb44ce941fe0e3ed82d6f62c33dfb536bb0010a8c526b7f236",
+    "plan_sha256": "c5ba7c9892984ff9e045cf77cabfdf1ec7df848ff07f97624ae2fa5a29cd7235",
+    "testbench_sha256": "9eedbe482503269223e328cefe55e70a1d8394b0180374d09681e1de7de828d3"
+  },
+  "samples": [
+    {
+      "cycle": 0,
+      "time_ns": 26.0,
+      "test_id": "protocol_random_0",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "0",
+        "i_event": "0",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "0000"
+      }
+    },
+    {
+      "cycle": 1,
+      "time_ns": 36.0,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "1",
+        "i_event": "1",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "0001"
+      }
+    },
+    {
+      "cycle": 2,
+      "time_ns": 46.0,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "1",
+        "i_event": "1",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "0010"
+      }
+    },
+    {
+      "cycle": 3,
+      "time_ns": 56.0,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "1",
+        "i_event": "1",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "0011"
+      }
+    },
+    {
+      "cycle": 4,
+      "time_ns": 66.0,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "1",
+        "i_event": "1",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "0100"
+      }
+    },
+    {
+      "cycle": 5,
+      "time_ns": 76.0,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "1",
+        "i_event": "1",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "0101"
+      }
+    },
+    {
+      "cycle": 6,
+      "time_ns": 86.0,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "1",
+        "i_event": "1",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "0110"
+      }
+    },
+    {
+      "cycle": 7,
+      "time_ns": 96.0,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "1",
+        "i_event": "1",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "0111"
+      }
+    },
+    {
+      "cycle": 8,
+      "time_ns": 106.0,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "1",
+        "i_event": "1",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "1000"
+      }
+    },
+    {
+      "cycle": 9,
+      "time_ns": 116.0,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "1",
+        "i_event": "1",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "1001"
+      }
+    },
+    {
+      "cycle": 10,
+      "time_ns": 126.0,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "1",
+        "i_event": "1",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "1010"
+      }
+    },
+    {
+      "cycle": 11,
+      "time_ns": 136.0,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "1",
+        "i_event": "1",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "1011"
+      }
+    },
+    {
+      "cycle": 12,
+      "time_ns": 146.0,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "1",
+        "i_event": "1",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "1100"
+      }
+    },
+    {
+      "cycle": 13,
+      "time_ns": 156.0,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "1",
+        "i_event": "1",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "1101"
+      }
+    },
+    {
+      "cycle": 14,
+      "time_ns": 166.0,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "1",
+        "i_event": "1",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "1110"
+      }
+    },
+    {
+      "cycle": 15,
+      "time_ns": 176.0,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "1",
+        "i_event": "1",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "1111"
+      }
+    },
+    {
+      "cycle": 16,
+      "time_ns": 186.0,
+      "test_id": "protocol_random_1",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "1",
+        "i_event": "1",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "0000"
+      }
+    },
+    {
+      "cycle": 17,
+      "time_ns": 196.0,
+      "test_id": "protocol_random_2",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "0",
+        "i_event": "0",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "0000"
+      }
+    },
+    {
+      "cycle": 18,
+      "time_ns": 206.0,
+      "test_id": "protocol_random_2",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "0",
+        "i_event": "0",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "0000"
+      }
+    },
+    {
+      "cycle": 19,
+      "time_ns": 216.0,
+      "test_id": "protocol_random_3",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "0",
+        "i_event": "0",
+        "i_clear": "1"
+      },
+      "outputs": {
+        "o_count": "0000"
+      }
+    },
+    {
+      "cycle": 20,
+      "time_ns": 226.0,
+      "test_id": "protocol_random_4",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "1",
+        "i_event": "1",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "0001"
+      }
+    },
+    {
+      "cycle": 21,
+      "time_ns": 236.0,
+      "test_id": "protocol_random_4",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "1",
+        "i_event": "1",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "0010"
+      }
+    },
+    {
+      "cycle": 22,
+      "time_ns": 246.0,
+      "test_id": "protocol_random_5",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "0",
+        "i_event": "0",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "0010"
+      }
+    },
+    {
+      "cycle": 23,
+      "time_ns": 256.0,
+      "test_id": "protocol_random_5",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "0",
+        "i_event": "0",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "0010"
+      }
+    }
+  ],
+  "limitations": [
+    "Port observations are not assertion checks or proof of correctness",
+    "Unknown x/z bits remain unknown",
+    "Stimulus cycles exclude initial reset"
+  ]
+}

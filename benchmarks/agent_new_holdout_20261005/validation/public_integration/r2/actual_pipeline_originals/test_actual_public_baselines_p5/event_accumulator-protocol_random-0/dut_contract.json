@@ -1,0 +1,52 @@
+{
+  "clock": {
+    "edge": "posedge",
+    "period_ns": 10.0,
+    "signal": "i_clk"
+  },
+  "module": "event_accumulator",
+  "ports": [
+    {
+      "direction": "input",
+      "name": "i_clk",
+      "signed": false,
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "name": "i_rstn",
+      "signed": false,
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "name": "i_enable",
+      "signed": false,
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "name": "i_event",
+      "signed": false,
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "name": "i_clear",
+      "signed": false,
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "name": "o_count",
+      "signed": false,
+      "width": 4
+    }
+  ],
+  "reset": {
+    "active_level": 0,
+    "assert_cycles": 2,
+    "signal": "i_rstn",
+    "synchronous": false
+  }
+}

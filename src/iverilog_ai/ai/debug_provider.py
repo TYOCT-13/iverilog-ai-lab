@@ -86,6 +86,20 @@ _INPUT_STEPS: dict[str, list[dict[str, list[Any]]]] = {
         {"request": [15, 15, 15, 15, 0, 5, 10, 9, 2, 8],
          "advance": [1, 1, 1, 1, 1, 0, 1, 1, 0, 1]},
     ],
+    "valid_data_pipeline": [
+        # Correct public interface operations: consecutive transfers, bubbles,
+        # and flush. This offline table is not an API or capability baseline.
+        {"i_valid": [1, 1, 0, 1, 1, 0, 1, 0],
+         "i_data": [0, 165, 60, 255, 1, 128, 126, 0],
+         "i_flush": [0, 0, 0, 0, 1, 0, 0, 0]},
+    ],
+    "event_accumulator": [
+        # Sustained accepted events, disabled hold, and independent clear
+        # follow the correct specification without consulting mutations.
+        {"i_enable": [1] * 18 + [0, 0, 0, 1, 1, 0],
+         "i_event": [1] * 18 + [1, 0, 1, 1, 0, 0],
+         "i_clear": [0] * 20 + [1, 0, 0, 0]},
+    ],
 }
 
 # 每类案例的复位后额外稳定周期，用来让状态机推进到可观测状态。
@@ -213,6 +227,10 @@ _DESIGN_RE = re.compile(r"Design:\s*([A-Za-z_][A-Za-z0-9_$]*)")
 _CONTRACT_MARKERS = ("--- DUT contract ---", "DUT context:")
 #: 仓库内自带的合约目录（`examples/<case>_contract.json`）。
 _REPO_ROOT = Path(__file__).resolve().parents[3]
+_ADDITIONAL_CONTRACTS = {
+    "valid_data_pipeline": "benchmarks/agent_new_holdout_20261005/contracts/valid_data_pipeline_contract.json",
+    "event_accumulator": "benchmarks/agent_new_holdout_20261005/contracts/event_accumulator_contract.json",
+}
 
 
 def _json_object_at(text: str, start: int) -> dict[str, Any] | None:
@@ -278,7 +296,7 @@ def extract_request(
 
 
 def bundled_contract(design: str) -> dict[str, Any]:
-    """读取仓库自带的 ``examples/<design>_contract.json``；不存在时返回空字典。
+    """读取内置案例或显式登记的新模块合约；不存在时返回空字典。
 
     离线路径需要端口方向与位宽才能施加激励。提示词没带 contract 时（例如调用方
     只传了规则文本），就从仓库里取该案例的合约——调试服务的定位就是"服务内置案例"。
@@ -286,7 +304,7 @@ def bundled_contract(design: str) -> dict[str, Any]:
 
     if not isinstance(design, str) or not design or any(ch in design for ch in "/\\:*?\"<>|"):
         return {}
-    path = _REPO_ROOT / "examples" / f"{design}_contract.json"
+    path = _REPO_ROOT / _ADDITIONAL_CONTRACTS.get(design, f"examples/{design}_contract.json")
     if not path.is_file():
         return {}
     try:

@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "source": "independent_reference_model",
+  "status": "generated",
+  "reference_sampling": "per_cycle",
+  "profile": "builtin-reference-per-cycle-v1:valid_data_pipeline",
+  "expected_cycles": 4,
+  "expected_checks": 8,
+  "provenance": {
+    "rtl_sha256": "49b4e5832a7c001e16a0bac8dbc3c7c90d2a03eb9ec6b2f6ab26731343604713",
+    "plan_sha256": "d86e62613462e2dbea59c0943a779b62de9f1ae199c9aa02d507e17c8e072698",
+    "contract_sha256": "344bd74e2909a684dd9d316dccc2aca36e76dc7b69f3b8a8dee2c9959546b907",
+    "testbench_sha256": "0facb0675c3c52d325fe1f0339e17e56087c39dec39ab2f22cb8b919cf2a3125",
+    "reference_model_sha256": "ef177904f5f4c4fad51a3c1508775a3f6de247945220d2fa4ba317b98b5a7763"
+  },
+  "samples": [
+    {
+      "cycle": 0,
+      "test_id": "normal",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 1,
+      "test_id": "normal",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "1",
+        "o_data": "00111100"
+      }
+    },
+    {
+      "cycle": 2,
+      "test_id": "normal",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "1",
+        "o_data": "00111100"
+      }
+    },
+    {
+      "cycle": 3,
+      "test_id": "normal",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "1",
+        "o_data": "00111100"
+      }
+    }
+  ],
+  "limitations": [
+    "Generated expectations are separate from actual simulation observations",
+    "The original plan is not expanded; each sample uses one reference state transition",
+    "Only supported builtin profiles and after sampling are authoritative",
+    "Initial contract reset is applied; these cycles exclude reset and pre_reset assertions"
+  ]
+}

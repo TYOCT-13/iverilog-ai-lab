@@ -1,0 +1,138 @@
+........................................................................ [  3%]
+............s........................................................... [  7%]
+...................F..............F..................................... [ 10%]
+........................................................................ [ 14%]
+........................................................................ [ 17%]
+........................................................................ [ 21%]
+....................................................F..............F...F [ 24%]
+..............F......................................................... [ 28%]
+........................................................................ [ 31%]
+........................................................................ [ 35%]
+........................................................................ [ 39%]
+........................................................................ [ 42%]
+........................................................................ [ 46%]
+........................................................................ [ 49%]
+........................................................................ [ 53%]
+........................................................................ [ 56%]
+........................................................................ [ 60%]
+........................................................................ [ 63%]
+........................................................................ [ 67%]
+........................................................................ [ 70%]
+........................................................................ [ 74%]
+...........................................................F.F.......... [ 78%]
+...............................................................F........ [ 81%]
+......F...........................s..................................... [ 85%]
+........................................................................ [ 88%]
+........................................................................ [ 92%]
+........................................................................ [ 95%]
+........................................................................ [ 99%]
+.............                                                            [100%]
+================================== FAILURES ===================================
+_ test_every_bundled_case_gets_real_stimulus_from_a_bare_provider[event_accumulator] _
+tests\ai\test_debug_interface.py:382: in test_every_bundled_case_gets_real_stimulus_from_a_bare_provider
+    contract = json.loads((ROOT / "examples" / f"{case}_contract.json").read_text(encoding="utf-8"))
+D:\Users\TYOCT\anaconda3\Lib\pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+D:\Users\TYOCT\anaconda3\Lib\pathlib.py:1013: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+E   FileNotFoundError: [Errno 2] No such file or directory: 'E:\\FPGA_WORK\\iverilog-ai-lab\\examples\\event_accumulator_contract.json'
+_ test_every_bundled_case_gets_real_stimulus_from_a_bare_provider[valid_data_pipeline] _
+tests\ai\test_debug_interface.py:382: in test_every_bundled_case_gets_real_stimulus_from_a_bare_provider
+    contract = json.loads((ROOT / "examples" / f"{case}_contract.json").read_text(encoding="utf-8"))
+D:\Users\TYOCT\anaconda3\Lib\pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+D:\Users\TYOCT\anaconda3\Lib\pathlib.py:1013: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+E   FileNotFoundError: [Errno 2] No such file or directory: 'E:\\FPGA_WORK\\iverilog-ai-lab\\examples\\valid_data_pipeline_contract.json'
+_ test_capture_is_enabled_for_every_supported_builtin_profile_even_without_feedback[True-event_accumulator] _
+tests\core\test_agent_feedback_v8.py:209: in test_capture_is_enabled_for_every_supported_builtin_profile_even_without_feedback
+    contract = contract_for(module)
+tests\core\test_agent_feedback_v8.py:75: in contract_for
+    return DutContract.from_dict(json.loads((ROOT / "examples" / f"{module}_contract.json").read_bytes()))
+D:\Users\TYOCT\anaconda3\Lib\pathlib.py:1019: in read_bytes
+    with self.open(mode='rb') as f:
+D:\Users\TYOCT\anaconda3\Lib\pathlib.py:1013: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+E   FileNotFoundError: [Errno 2] No such file or directory: 'E:\\FPGA_WORK\\iverilog-ai-lab\\examples\\event_accumulator_contract.json'
+_ test_capture_is_enabled_for_every_supported_builtin_profile_even_without_feedback[True-valid_data_pipeline] _
+tests\core\test_agent_feedback_v8.py:209: in test_capture_is_enabled_for_every_supported_builtin_profile_even_without_feedback
+    contract = contract_for(module)
+tests\core\test_agent_feedback_v8.py:75: in contract_for
+    return DutContract.from_dict(json.loads((ROOT / "examples" / f"{module}_contract.json").read_bytes()))
+D:\Users\TYOCT\anaconda3\Lib\pathlib.py:1019: in read_bytes
+    with self.open(mode='rb') as f:
+D:\Users\TYOCT\anaconda3\Lib\pathlib.py:1013: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+E   FileNotFoundError: [Errno 2] No such file or directory: 'E:\\FPGA_WORK\\iverilog-ai-lab\\examples\\valid_data_pipeline_contract.json'
+_ test_capture_is_enabled_for_every_supported_builtin_profile_even_without_feedback[False-event_accumulator] _
+tests\core\test_agent_feedback_v8.py:209: in test_capture_is_enabled_for_every_supported_builtin_profile_even_without_feedback
+    contract = contract_for(module)
+tests\core\test_agent_feedback_v8.py:75: in contract_for
+    return DutContract.from_dict(json.loads((ROOT / "examples" / f"{module}_contract.json").read_bytes()))
+D:\Users\TYOCT\anaconda3\Lib\pathlib.py:1019: in read_bytes
+    with self.open(mode='rb') as f:
+D:\Users\TYOCT\anaconda3\Lib\pathlib.py:1013: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+E   FileNotFoundError: [Errno 2] No such file or directory: 'E:\\FPGA_WORK\\iverilog-ai-lab\\examples\\event_accumulator_contract.json'
+_ test_capture_is_enabled_for_every_supported_builtin_profile_even_without_feedback[False-valid_data_pipeline] _
+tests\core\test_agent_feedback_v8.py:209: in test_capture_is_enabled_for_every_supported_builtin_profile_even_without_feedback
+    contract = contract_for(module)
+tests\core\test_agent_feedback_v8.py:75: in contract_for
+    return DutContract.from_dict(json.loads((ROOT / "examples" / f"{module}_contract.json").read_bytes()))
+D:\Users\TYOCT\anaconda3\Lib\pathlib.py:1019: in read_bytes
+    with self.open(mode='rb') as f:
+D:\Users\TYOCT\anaconda3\Lib\pathlib.py:1013: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+E   FileNotFoundError: [Errno 2] No such file or directory: 'E:\\FPGA_WORK\\iverilog-ai-lab\\examples\\valid_data_pipeline_contract.json'
+_________________ test_input_defaults_cover_every_input_port __________________
+tests\core\test_reference_model_cases.py:139: in test_input_defaults_cover_every_input_port
+    contract = json.loads((root / f"examples/{case}_contract.json").read_text(encoding="utf-8"))
+D:\Users\TYOCT\anaconda3\Lib\pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+D:\Users\TYOCT\anaconda3\Lib\pathlib.py:1013: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+E   FileNotFoundError: [Errno 2] No such file or directory: 'E:\\FPGA_WORK\\iverilog-ai-lab\\examples\\event_accumulator_contract.json'
+_______________ test_probe_vectors_cover_every_supported_design _______________
+tests\core\test_reference_model_coverage.py:63: in test_probe_vectors_cover_every_supported_design
+    assert set(PROBE_VECTORS) == set(SUPPORTED), (
+E   AssertionError: 参考模型支持的设计与本文件的探针向量不一致：缺少 ['event_accumulator', 'valid_data_pipeline']，多余 []
+E   assert {'credit_guar...counter', ...} == {'credit_guar...counter', ...}
+E     Extra items in the right set:
+E     'valid_data_pipeline'
+E     'event_accumulator'
+E     Use -v to get more diff
+_ test_all_default_builtin_profiles_match_actual_rtl_cycle_by_cycle[event_accumulator] _
+tests\core\test_reference_per_cycle.py:176: in test_all_default_builtin_profiles_match_actual_rtl_cycle_by_cycle
+    contract = _contract(design)
+tests\core\test_reference_per_cycle.py:27: in _contract
+    return DutContract.from_dict(json.loads((ROOT / f"examples/{design}_contract.json").read_text(encoding="utf-8")))
+D:\Users\TYOCT\anaconda3\Lib\pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+D:\Users\TYOCT\anaconda3\Lib\pathlib.py:1013: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+E   FileNotFoundError: [Errno 2] No such file or directory: 'E:\\FPGA_WORK\\iverilog-ai-lab\\examples\\event_accumulator_contract.json'
+_ test_all_default_builtin_profiles_match_actual_rtl_cycle_by_cycle[valid_data_pipeline] _
+tests\core\test_reference_per_cycle.py:176: in test_all_default_builtin_profiles_match_actual_rtl_cycle_by_cycle
+    contract = _contract(design)
+tests\core\test_reference_per_cycle.py:27: in _contract
+    return DutContract.from_dict(json.loads((ROOT / f"examples/{design}_contract.json").read_text(encoding="utf-8")))
+D:\Users\TYOCT\anaconda3\Lib\pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+D:\Users\TYOCT\anaconda3\Lib\pathlib.py:1013: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+E   FileNotFoundError: [Errno 2] No such file or directory: 'E:\\FPGA_WORK\\iverilog-ai-lab\\examples\\valid_data_pipeline_contract.json'
+- generated xml file: E:\FPGA_WORK\iverilog-ai-lab\docs\experiment\agent-new-holdout-validation-2026-10-05\r1\pytest.xml -
+=========================== short test summary info ===========================
+SKIPPED [1] tests\ai\test_agent_decision_v4.py:327: directory symlinks unavailable: 1314
+SKIPPED [1] tests\core\test_rule_assertions.py:55: 推荐断言表当前为空：没有可验证的条目（见 core/rule_assertions.py 的说明）
+FAILED tests/ai/test_debug_interface.py::test_every_bundled_case_gets_real_stimulus_from_a_bare_provider[event_accumulator]
+FAILED tests/ai/test_debug_interface.py::test_every_bundled_case_gets_real_stimulus_from_a_bare_provider[valid_data_pipeline]
+FAILED tests/core/test_agent_feedback_v8.py::test_capture_is_enabled_for_every_supported_builtin_profile_even_without_feedback[True-event_accumulator]
+FAILED tests/core/test_agent_feedback_v8.py::test_capture_is_enabled_for_every_supported_builtin_profile_even_without_feedback[True-valid_data_pipeline]
+FAILED tests/core/test_agent_feedback_v8.py::test_capture_is_enabled_for_every_supported_builtin_profile_even_without_feedback[False-event_accumulator]
+FAILED tests/core/test_agent_feedback_v8.py::test_capture_is_enabled_for_every_supported_builtin_profile_even_without_feedback[False-valid_data_pipeline]
+FAILED tests/core/test_reference_model_cases.py::test_input_defaults_cover_every_input_port
+FAILED tests/core/test_reference_model_coverage.py::test_probe_vectors_cover_every_supported_design
+FAILED tests/core/test_reference_per_cycle.py::test_all_default_builtin_profiles_match_actual_rtl_cycle_by_cycle[event_accumulator]
+FAILED tests/core/test_reference_per_cycle.py::test_all_default_builtin_profiles_match_actual_rtl_cycle_by_cycle[valid_data_pipeline]
+10 failed, 2017 passed, 2 skipped in 288.60s (0:04:48)

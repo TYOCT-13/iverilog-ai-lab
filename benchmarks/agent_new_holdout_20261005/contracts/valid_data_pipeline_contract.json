@@ -1,0 +1,52 @@
+{
+  "module": "valid_data_pipeline",
+  "parameters": {},
+  "ports": [
+    {
+      "name": "i_clk",
+      "direction": "input",
+      "width": 1
+    },
+    {
+      "name": "i_rstn",
+      "direction": "input",
+      "width": 1
+    },
+    {
+      "name": "i_flush",
+      "direction": "input",
+      "width": 1
+    },
+    {
+      "name": "i_valid",
+      "direction": "input",
+      "width": 1
+    },
+    {
+      "name": "i_data",
+      "direction": "input",
+      "width": 8
+    },
+    {
+      "name": "o_valid",
+      "direction": "output",
+      "width": 1
+    },
+    {
+      "name": "o_data",
+      "direction": "output",
+      "width": 8
+    }
+  ],
+  "clock": {
+    "signal": "i_clk",
+    "period_ns": 10,
+    "edge": "posedge"
+  },
+  "reset": {
+    "signal": "i_rstn",
+    "active_level": 0,
+    "synchronous": false,
+    "assert_cycles": 2
+  }
+}

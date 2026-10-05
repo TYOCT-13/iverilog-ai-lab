@@ -1,0 +1,4 @@
+........................................................................ [ 69%]
+................................                                         [100%]
+- generated xml file: E:\FPGA_WORK\iverilog-ai-lab\.tmp-codex\agent-new-holdout-preparation-20261005\public_integration\r2\pytest.xml -
+104 passed in 3.96s

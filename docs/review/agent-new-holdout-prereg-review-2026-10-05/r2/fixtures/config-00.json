@@ -1,0 +1,41 @@
+{
+  "schema": "other",
+  "round_name": "v8_new_internal_synthetic_module_holdout_20261005",
+  "freeze_status": "FROZEN",
+  "manifest_sha256": "5ce3a52275d0ac833f45c6387adce86d3fc2a59756028b8a7e54d530a9ee9770",
+  "agent_frozen_from_revision": "a96933786c17986a739fc2da515db3294d6e8044",
+  "agent_prompt_version": "verification-agent-v8-bounded-port-feedback",
+  "agent_sha256": "bf8422840a97ed3360f0dac0ee0621fd605970d658521ce7bec0d57f3c8016ff",
+  "observation_feedback_sha256": "3586fa13bd2ab82668188dac48b1a3055a935ff87d66d6accd600938e1b621d6",
+  "system_prompt_sha256": "3dd3f86f6f15b2367dc8f0913c5f3c7fe646782258093a148170f60200d6a26a",
+  "token_cap": 1000000,
+  "token_scope": "this complete independent 108-task batch; input plus output, including paid rejected requests; historical usage is not deducted",
+  "max_output_tokens_per_request": 4096,
+  "max_vectors_per_proposal": 12,
+  "max_accepted_vectors_total": 64,
+  "repeats": 3,
+  "strategies": [
+    "fixed",
+    "random",
+    "protocol_random",
+    "single",
+    "feedback",
+    "no_feedback"
+  ],
+  "cycle_budgets": {
+    "valid_data_pipeline": 24,
+    "event_accumulator": 24
+  },
+  "registered_rows": 108,
+  "theoretical_request_cap": 126,
+  "transport": {
+    "endpoint": "https://api.deepseek.com",
+    "model": "deepseek-flash",
+    "wire_api": "chat_completions",
+    "thinking_mode": "disabled",
+    "stream": false,
+    "store": false,
+    "timeout_seconds": 60,
+    "automatic_transport_retry": false
+  }
+}

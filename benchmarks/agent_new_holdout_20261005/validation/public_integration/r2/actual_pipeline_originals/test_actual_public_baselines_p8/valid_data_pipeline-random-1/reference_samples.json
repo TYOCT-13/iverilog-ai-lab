@@ -1,0 +1,240 @@
+{
+  "schema_version": "1.0",
+  "source": "independent_reference_model",
+  "status": "generated",
+  "reference_sampling": "per_cycle",
+  "profile": "builtin-reference-per-cycle-v1:valid_data_pipeline",
+  "expected_cycles": 24,
+  "expected_checks": 48,
+  "provenance": {
+    "rtl_sha256": "b3fc81d4fdf3a23cb38c710af7c6d278cfba9d3f52978492594263464e44d9bb",
+    "plan_sha256": "3346f7e4145ae451178453afab9ee9248a1d4f2d85595256d7a2b914f36c8262",
+    "contract_sha256": "344bd74e2909a684dd9d316dccc2aca36e76dc7b69f3b8a8dee2c9959546b907",
+    "testbench_sha256": "c5790a4831092e67aa99f7627f5823f04519c8ea48477b8d439f8c2b22bc821c",
+    "reference_model_sha256": "ef177904f5f4c4fad51a3c1508775a3f6de247945220d2fa4ba317b98b5a7763"
+  },
+  "samples": [
+    {
+      "cycle": 0,
+      "test_id": "random_0",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 1,
+      "test_id": "random_0",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 2,
+      "test_id": "random_1",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 3,
+      "test_id": "random_1",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "1",
+        "o_data": "11100110"
+      }
+    },
+    {
+      "cycle": 4,
+      "test_id": "random_2",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 5,
+      "test_id": "random_2",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 6,
+      "test_id": "random_3",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 7,
+      "test_id": "random_3",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "1",
+        "o_data": "00001110"
+      }
+    },
+    {
+      "cycle": 8,
+      "test_id": "random_4",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 9,
+      "test_id": "random_4",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 10,
+      "test_id": "random_5",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 11,
+      "test_id": "random_5",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 12,
+      "test_id": "random_6",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 13,
+      "test_id": "random_6",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "1",
+        "o_data": "00001111"
+      }
+    },
+    {
+      "cycle": 14,
+      "test_id": "random_7",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "1",
+        "o_data": "00001111"
+      }
+    },
+    {
+      "cycle": 15,
+      "test_id": "random_7",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 16,
+      "test_id": "random_8",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 17,
+      "test_id": "random_8",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 18,
+      "test_id": "random_9",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 19,
+      "test_id": "random_9",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 20,
+      "test_id": "random_10",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 21,
+      "test_id": "random_10",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 22,
+      "test_id": "random_11",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 23,
+      "test_id": "random_11",
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    }
+  ],
+  "limitations": [
+    "Generated expectations are separate from actual simulation observations",
+    "The original plan is not expanded; each sample uses one reference state transition",
+    "Only supported builtin profiles and after sampling are authoritative",
+    "Initial contract reset is applied; these cycles exclude reset and pre_reset assertions"
+  ]
+}

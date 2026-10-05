@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "design": "event_accumulator",
+  "objective": "fixed public contract semantic acceptance",
+  "clock_period_ns": 10,
+  "reset": {},
+  "sample_before_reset": false,
+  "pre_reset_expected": {},
+  "vectors": [
+    {
+      "name": "normal",
+      "inputs": {
+        "i_enable": 1,
+        "i_event": 1,
+        "i_clear": 0
+      },
+      "cycles": 4,
+      "sample_phase": "after",
+      "expected": {},
+      "rationale": ""
+    }
+  ],
+  "assumptions": [],
+  "assertions": []
+}

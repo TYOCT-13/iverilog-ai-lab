@@ -1,0 +1,927 @@
+{
+  "artifacts": {
+    "authoritative_plan": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10\\valid_data_pipeline-protocol_random-1\\authoritative_plan.json",
+    "dut_contract": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10\\valid_data_pipeline-protocol_random-1\\dut_contract.json",
+    "observed_samples": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10\\valid_data_pipeline-protocol_random-1\\observed_samples.json",
+    "output_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10\\valid_data_pipeline-protocol_random-1",
+    "pipeline_result": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10\\valid_data_pipeline-protocol_random-1\\pipeline_result.json",
+    "reference_samples": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10\\valid_data_pipeline-protocol_random-1\\reference_samples.json",
+    "result_json": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10\\valid_data_pipeline-protocol_random-1\\runs\\run-6dde01644976\\result.json",
+    "run_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10\\valid_data_pipeline-protocol_random-1\\runs\\run-6dde01644976",
+    "testbench": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10\\valid_data_pipeline-protocol_random-1\\tb_valid_data_pipeline.v",
+    "testplan": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10\\valid_data_pipeline-protocol_random-1\\testplan.json",
+    "vcd": ""
+  },
+  "contract": {
+    "clock": {
+      "edge": "posedge",
+      "period_ns": 10.0,
+      "signal": "i_clk"
+    },
+    "module": "valid_data_pipeline",
+    "ports": [
+      {
+        "direction": "input",
+        "name": "i_clk",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "input",
+        "name": "i_rstn",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "input",
+        "name": "i_flush",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "input",
+        "name": "i_valid",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "input",
+        "name": "i_data",
+        "signed": false,
+        "width": 8
+      },
+      {
+        "direction": "output",
+        "name": "o_valid",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "output",
+        "name": "o_data",
+        "signed": false,
+        "width": 8
+      }
+    ],
+    "reset": {
+      "active_level": 0,
+      "assert_cycles": 2,
+      "signal": "i_rstn",
+      "synchronous": false
+    }
+  },
+  "coverage": {
+    "checks": {
+      "covered": 48,
+      "percent": 100.0,
+      "total": 48
+    },
+    "definition": "测试计划执行覆盖率；不代表 RTL 代码覆盖率",
+    "per_signal": {
+      "o_data": {
+        "covered": 24,
+        "percent": 100.0,
+        "total": 24
+      },
+      "o_valid": {
+        "covered": 24,
+        "percent": 100.0,
+        "total": 24
+      }
+    },
+    "vectors": {
+      "covered": 8,
+      "percent": 100.0,
+      "total": 8
+    }
+  },
+  "created_at": "2026-10-05T05:18:32.271298Z",
+  "failure_explanations": [],
+  "plan": {
+    "assertions": [],
+    "assumptions": [],
+    "clock_period_ns": 10,
+    "design": "valid_data_pipeline",
+    "objective": "Verify correct default interface behavior and ordinary multi-cycle operations",
+    "pre_reset_expected": {},
+    "reset": {
+      "active_level": 0,
+      "assert_cycles": 2,
+      "signal": "i_rstn",
+      "synchronous": false
+    },
+    "sample_before_reset": false,
+    "schema_version": "1.0",
+    "vectors": [
+      {
+        "cycles": 1,
+        "expected": {},
+        "inputs": {
+          "i_data": 0,
+          "i_flush": 0,
+          "i_rstn": 1,
+          "i_valid": 0
+        },
+        "name": "protocol_random_0",
+        "rationale": "",
+        "sample_phase": "after"
+      },
+      {
+        "cycles": 4,
+        "expected": {},
+        "inputs": {
+          "i_data": 32,
+          "i_flush": 0,
+          "i_rstn": 1,
+          "i_valid": 1
+        },
+        "name": "protocol_random_1",
+        "rationale": "",
+        "sample_phase": "after"
+      },
+      {
+        "cycles": 2,
+        "expected": {},
+        "inputs": {
+          "i_data": 60,
+          "i_flush": 0,
+          "i_rstn": 1,
+          "i_valid": 0
+        },
+        "name": "protocol_random_2",
+        "rationale": "",
+        "sample_phase": "after"
+      },
+      {
+        "cycles": 3,
+        "expected": {},
+        "inputs": {
+          "i_data": 230,
+          "i_flush": 0,
+          "i_rstn": 1,
+          "i_valid": 1
+        },
+        "name": "protocol_random_3",
+        "rationale": "",
+        "sample_phase": "after"
+      },
+      {
+        "cycles": 1,
+        "expected": {},
+        "inputs": {
+          "i_data": 107,
+          "i_flush": 1,
+          "i_rstn": 1,
+          "i_valid": 1
+        },
+        "name": "protocol_random_4",
+        "rationale": "",
+        "sample_phase": "after"
+      },
+      {
+        "cycles": 2,
+        "expected": {},
+        "inputs": {
+          "i_data": 0,
+          "i_flush": 0,
+          "i_rstn": 1,
+          "i_valid": 0
+        },
+        "name": "protocol_random_5",
+        "rationale": "",
+        "sample_phase": "after"
+      },
+      {
+        "cycles": 2,
+        "expected": {},
+        "inputs": {
+          "i_data": 249,
+          "i_flush": 0,
+          "i_rstn": 1,
+          "i_valid": 1
+        },
+        "name": "protocol_random_6",
+        "rationale": "",
+        "sample_phase": "after"
+      },
+      {
+        "cycles": 9,
+        "expected": {},
+        "inputs": {
+          "i_data": 0,
+          "i_flush": 0,
+          "i_rstn": 1,
+          "i_valid": 0
+        },
+        "name": "protocol_random_7",
+        "rationale": "",
+        "sample_phase": "after"
+      }
+    ]
+  },
+  "schema_version": "1.0",
+  "simulation": {
+    "artifacts": {
+      "compile_stderr": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10\\valid_data_pipeline-protocol_random-1\\runs\\run-6dde01644976\\compile.stderr.txt",
+      "compile_stdout": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10\\valid_data_pipeline-protocol_random-1\\runs\\run-6dde01644976\\compile.stdout.txt",
+      "compile_vvp": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10\\valid_data_pipeline-protocol_random-1\\runs\\run-6dde01644976\\compile.vvp",
+      "result_json": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10\\valid_data_pipeline-protocol_random-1\\runs\\run-6dde01644976\\result.json",
+      "run_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10\\valid_data_pipeline-protocol_random-1\\runs\\run-6dde01644976",
+      "run_stderr": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10\\valid_data_pipeline-protocol_random-1\\runs\\run-6dde01644976\\run.stderr.txt",
+      "run_stdout": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10\\valid_data_pipeline-protocol_random-1\\runs\\run-6dde01644976\\run.stdout.txt",
+      "vcd": ""
+    },
+    "compile": {
+      "command": [
+        "D:\\iverilog\\bin\\iverilog.exe",
+        "-g2012",
+        "-o",
+        "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10\\valid_data_pipeline-protocol_random-1\\runs\\run-6dde01644976\\compile.vvp",
+        "-s",
+        "tb_valid_data_pipeline",
+        "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\valid_data_pipeline\\A\\valid_data_pipeline.v",
+        "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10\\valid_data_pipeline-protocol_random-1\\tb_valid_data_pipeline.v"
+      ],
+      "duration_ms": 56,
+      "error": null,
+      "output_truncated": false,
+      "returncode": 0,
+      "status": "passed",
+      "stderr": "",
+      "stdout": "",
+      "timed_out": false
+    },
+    "config": {
+      "allowed_roots": [
+        "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\valid_data_pipeline\\A",
+        "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10"
+      ],
+      "coverage": {
+        "checks": {
+          "covered": 48,
+          "percent": 100.0,
+          "total": 48
+        },
+        "definition": "测试计划执行覆盖率；不代表 RTL 代码覆盖率",
+        "per_signal": {
+          "o_data": {
+            "covered": 24,
+            "percent": 100.0,
+            "total": 24
+          },
+          "o_valid": {
+            "covered": 24,
+            "percent": 100.0,
+            "total": 24
+          }
+        },
+        "vectors": {
+          "covered": 8,
+          "percent": 100.0,
+          "total": 8
+        }
+      },
+      "cross_validation": {
+        "ai_expected_mismatch": false,
+        "independent_sources": 1,
+        "sources": [
+          "iverilog",
+          "reference_model"
+        ],
+        "status": "consistent"
+      },
+      "defines": [],
+      "include_dirs": [],
+      "iverilog_path": "D:\\iverilog\\bin\\iverilog.exe",
+      "keep_artifacts": true,
+      "language": "2012",
+      "observed_samples": {
+        "errors": [],
+        "expected_cycles": 24,
+        "limitations": [
+          "Port observations are not assertion checks or proof of correctness",
+          "Unknown x/z bits remain unknown",
+          "Stimulus cycles exclude initial reset"
+        ],
+        "observed_cycles": 24,
+        "provenance": {
+          "contract_sha256": "344bd74e2909a684dd9d316dccc2aca36e76dc7b69f3b8a8dee2c9959546b907",
+          "plan_sha256": "ebe71f82ea485e9acf2f465891be719751b9d73317aa2819ffe24ba8422621e4",
+          "rtl_sha256": "b3fc81d4fdf3a23cb38c710af7c6d278cfba9d3f52978492594263464e44d9bb",
+          "testbench_sha256": "4514f0909b1a708acd984412be07608f331ae41c735a16f97c6ce8b7bd29abdf"
+        },
+        "schema_version": "1.0",
+        "sha256": "90a8e3e51b956cb305faabb07082773bb590e503ac34c4890ca2656086e0e689",
+        "source": "testbench_sample_statement",
+        "status": "complete"
+      },
+      "oracle": {
+        "ai_expectations_used_for_checking": false,
+        "authoritative_vectors": 8,
+        "checked": 8,
+        "checked_expected": 0,
+        "consistency_rate": null,
+        "design": "valid_data_pipeline",
+        "evidence_level": "reference_model",
+        "expectation_evidence_level": "reference_model",
+        "expectation_source": "reference_model",
+        "matched_expected": 0,
+        "plans_with_expectations": 0,
+        "reference_check_schedule": [
+          {
+            "cycles": 1,
+            "first_cycle": 0,
+            "signals": [
+              "o_valid",
+              "o_data"
+            ],
+            "test_id": "protocol_random_0"
+          },
+          {
+            "cycles": 4,
+            "first_cycle": 1,
+            "signals": [
+              "o_valid",
+              "o_data"
+            ],
+            "test_id": "protocol_random_1"
+          },
+          {
+            "cycles": 2,
+            "first_cycle": 5,
+            "signals": [
+              "o_valid",
+              "o_data"
+            ],
+            "test_id": "protocol_random_2"
+          },
+          {
+            "cycles": 3,
+            "first_cycle": 7,
+            "signals": [
+              "o_valid",
+              "o_data"
+            ],
+            "test_id": "protocol_random_3"
+          },
+          {
+            "cycles": 1,
+            "first_cycle": 10,
+            "signals": [
+              "o_valid",
+              "o_data"
+            ],
+            "test_id": "protocol_random_4"
+          },
+          {
+            "cycles": 2,
+            "first_cycle": 11,
+            "signals": [
+              "o_valid",
+              "o_data"
+            ],
+            "test_id": "protocol_random_5"
+          },
+          {
+            "cycles": 2,
+            "first_cycle": 13,
+            "signals": [
+              "o_valid",
+              "o_data"
+            ],
+            "test_id": "protocol_random_6"
+          },
+          {
+            "cycles": 9,
+            "first_cycle": 15,
+            "signals": [
+              "o_valid",
+              "o_data"
+            ],
+            "test_id": "protocol_random_7"
+          }
+        ],
+        "reference_policy": "builtin",
+        "reference_samples": {
+          "expected_checks": 48,
+          "expected_cycles": 24,
+          "limitations": [
+            "Generated expectations are separate from actual simulation observations",
+            "The original plan is not expanded; each sample uses one reference state transition",
+            "Only supported builtin profiles and after sampling are authoritative",
+            "Initial contract reset is applied; these cycles exclude reset and pre_reset assertions"
+          ],
+          "profile": "builtin-reference-per-cycle-v1:valid_data_pipeline",
+          "provenance": {
+            "contract_sha256": "344bd74e2909a684dd9d316dccc2aca36e76dc7b69f3b8a8dee2c9959546b907",
+            "plan_sha256": "ebe71f82ea485e9acf2f465891be719751b9d73317aa2819ffe24ba8422621e4",
+            "reference_model_sha256": "ef177904f5f4c4fad51a3c1508775a3f6de247945220d2fa4ba317b98b5a7763",
+            "rtl_sha256": "b3fc81d4fdf3a23cb38c710af7c6d278cfba9d3f52978492594263464e44d9bb",
+            "testbench_sha256": "4514f0909b1a708acd984412be07608f331ae41c735a16f97c6ce8b7bd29abdf"
+          },
+          "reference_sampling": "per_cycle",
+          "schema_version": "1.0",
+          "sha256": "704715906c9b180d909898f0c1e9542a88d55f30cffde67d70f54c3b9c259086",
+          "source": "independent_reference_model",
+          "status": "generated"
+        },
+        "reference_sampling": "per_cycle",
+        "status": "passed",
+        "uncheckable_expected": [],
+        "warnings": []
+      },
+      "output_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10\\valid_data_pipeline-protocol_random-1\\runs",
+      "reference_sampling": "per_cycle",
+      "rtl_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\valid_data_pipeline\\A\\valid_data_pipeline.v",
+      "rtl_sha256": "b3fc81d4fdf3a23cb38c710af7c6d278cfba9d3f52978492594263464e44d9bb",
+      "structured_assertions": {
+        "checked": 0,
+        "failed": 0,
+        "passed": 0,
+        "results": [],
+        "status": "skipped"
+      },
+      "synthesis": {
+        "skipped_reason": "未启用综合证据层（run_synthesis=False）",
+        "status": "not_run"
+      },
+      "testbench_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10\\valid_data_pipeline-protocol_random-1\\tb_valid_data_pipeline.v",
+      "testbench_sha256": "4514f0909b1a708acd984412be07608f331ae41c735a16f97c6ce8b7bd29abdf",
+      "timeout_seconds": 30.0,
+      "top_module": "tb_valid_data_pipeline",
+      "vcd_analysis": {
+        "status": "not_available"
+      },
+      "verification_status": "verified",
+      "vvp_path": "D:\\iverilog\\bin\\vvp.exe"
+    },
+    "diagnostics": [],
+    "error": null,
+    "failures": [],
+    "finished_at": "2026-10-05T05:18:32.265656Z",
+    "passed": true,
+    "records": [
+      {
+        "actual": "0",
+        "cycle": 0,
+        "expected": "0",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_0"
+      },
+      {
+        "actual": "00000000",
+        "cycle": 0,
+        "expected": "00000000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_0"
+      },
+      {
+        "actual": "0",
+        "cycle": 1,
+        "expected": "0",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_1"
+      },
+      {
+        "actual": "00000000",
+        "cycle": 1,
+        "expected": "00000000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_1"
+      },
+      {
+        "actual": "1",
+        "cycle": 2,
+        "expected": "1",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_1"
+      },
+      {
+        "actual": "00100000",
+        "cycle": 2,
+        "expected": "00100000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_1"
+      },
+      {
+        "actual": "1",
+        "cycle": 3,
+        "expected": "1",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_1"
+      },
+      {
+        "actual": "00100000",
+        "cycle": 3,
+        "expected": "00100000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_1"
+      },
+      {
+        "actual": "1",
+        "cycle": 4,
+        "expected": "1",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_1"
+      },
+      {
+        "actual": "00100000",
+        "cycle": 4,
+        "expected": "00100000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_1"
+      },
+      {
+        "actual": "1",
+        "cycle": 5,
+        "expected": "1",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_2"
+      },
+      {
+        "actual": "00100000",
+        "cycle": 5,
+        "expected": "00100000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_2"
+      },
+      {
+        "actual": "0",
+        "cycle": 6,
+        "expected": "0",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_2"
+      },
+      {
+        "actual": "00000000",
+        "cycle": 6,
+        "expected": "00000000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_2"
+      },
+      {
+        "actual": "0",
+        "cycle": 7,
+        "expected": "0",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_3"
+      },
+      {
+        "actual": "00000000",
+        "cycle": 7,
+        "expected": "00000000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_3"
+      },
+      {
+        "actual": "1",
+        "cycle": 8,
+        "expected": "1",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_3"
+      },
+      {
+        "actual": "11100110",
+        "cycle": 8,
+        "expected": "11100110",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_3"
+      },
+      {
+        "actual": "1",
+        "cycle": 9,
+        "expected": "1",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_3"
+      },
+      {
+        "actual": "11100110",
+        "cycle": 9,
+        "expected": "11100110",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_3"
+      },
+      {
+        "actual": "0",
+        "cycle": 10,
+        "expected": "0",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_4"
+      },
+      {
+        "actual": "00000000",
+        "cycle": 10,
+        "expected": "00000000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_4"
+      },
+      {
+        "actual": "0",
+        "cycle": 11,
+        "expected": "0",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_5"
+      },
+      {
+        "actual": "00000000",
+        "cycle": 11,
+        "expected": "00000000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_5"
+      },
+      {
+        "actual": "0",
+        "cycle": 12,
+        "expected": "0",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_5"
+      },
+      {
+        "actual": "00000000",
+        "cycle": 12,
+        "expected": "00000000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_5"
+      },
+      {
+        "actual": "0",
+        "cycle": 13,
+        "expected": "0",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_6"
+      },
+      {
+        "actual": "00000000",
+        "cycle": 13,
+        "expected": "00000000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_6"
+      },
+      {
+        "actual": "1",
+        "cycle": 14,
+        "expected": "1",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_6"
+      },
+      {
+        "actual": "11111001",
+        "cycle": 14,
+        "expected": "11111001",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_6"
+      },
+      {
+        "actual": "1",
+        "cycle": 15,
+        "expected": "1",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_7"
+      },
+      {
+        "actual": "11111001",
+        "cycle": 15,
+        "expected": "11111001",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_7"
+      },
+      {
+        "actual": "0",
+        "cycle": 16,
+        "expected": "0",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_7"
+      },
+      {
+        "actual": "00000000",
+        "cycle": 16,
+        "expected": "00000000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_7"
+      },
+      {
+        "actual": "0",
+        "cycle": 17,
+        "expected": "0",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_7"
+      },
+      {
+        "actual": "00000000",
+        "cycle": 17,
+        "expected": "00000000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_7"
+      },
+      {
+        "actual": "0",
+        "cycle": 18,
+        "expected": "0",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_7"
+      },
+      {
+        "actual": "00000000",
+        "cycle": 18,
+        "expected": "00000000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_7"
+      },
+      {
+        "actual": "0",
+        "cycle": 19,
+        "expected": "0",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_7"
+      },
+      {
+        "actual": "00000000",
+        "cycle": 19,
+        "expected": "00000000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_7"
+      },
+      {
+        "actual": "0",
+        "cycle": 20,
+        "expected": "0",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_7"
+      },
+      {
+        "actual": "00000000",
+        "cycle": 20,
+        "expected": "00000000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_7"
+      },
+      {
+        "actual": "0",
+        "cycle": 21,
+        "expected": "0",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_7"
+      },
+      {
+        "actual": "00000000",
+        "cycle": 21,
+        "expected": "00000000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_7"
+      },
+      {
+        "actual": "0",
+        "cycle": 22,
+        "expected": "0",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_7"
+      },
+      {
+        "actual": "00000000",
+        "cycle": 22,
+        "expected": "00000000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_7"
+      },
+      {
+        "actual": "0",
+        "cycle": 23,
+        "expected": "0",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "protocol_random_7"
+      },
+      {
+        "actual": "00000000",
+        "cycle": 23,
+        "expected": "00000000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "protocol_random_7"
+      }
+    ],
+    "run": {
+      "command": [
+        "D:\\iverilog\\bin\\vvp.exe",
+        "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10\\valid_data_pipeline-protocol_random-1\\runs\\run-6dde01644976\\compile.vvp"
+      ],
+      "duration_ms": 17,
+      "error": null,
+      "output_truncated": false,
+      "returncode": 0,
+      "status": "passed",
+      "stderr": "",
+      "stdout": "IVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_0\",\"cycle\":0,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"0\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_0\",\"cycle\":0,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":0,\"time_ns\":26.000,\"test_id\":\"protocol_random_0\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"0\",\"i_data\":\"00000000\"},\"outputs\":{\"o_valid\":\"0\",\"o_data\":\"00000000\"}}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_1\",\"cycle\":1,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"0\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_1\",\"cycle\":1,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":1,\"time_ns\":36.000,\"test_id\":\"protocol_random_1\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"1\",\"i_data\":\"00100000\"},\"outputs\":{\"o_valid\":\"0\",\"o_data\":\"00000000\"}}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_1\",\"cycle\":2,\"signal\":\"o_valid\",\"expected\":\"1\",\"actual\":\"1\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_1\",\"cycle\":2,\"signal\":\"o_data\",\"expected\":\"00100000\",\"actual\":\"00100000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":2,\"time_ns\":46.000,\"test_id\":\"protocol_random_1\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"1\",\"i_data\":\"00100000\"},\"outputs\":{\"o_valid\":\"1\",\"o_data\":\"00100000\"}}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_1\",\"cycle\":3,\"signal\":\"o_valid\",\"expected\":\"1\",\"actual\":\"1\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_1\",\"cycle\":3,\"signal\":\"o_data\",\"expected\":\"00100000\",\"actual\":\"00100000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":3,\"time_ns\":56.000,\"test_id\":\"protocol_random_1\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"1\",\"i_data\":\"00100000\"},\"outputs\":{\"o_valid\":\"1\",\"o_data\":\"00100000\"}}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_1\",\"cycle\":4,\"signal\":\"o_valid\",\"expected\":\"1\",\"actual\":\"1\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_1\",\"cycle\":4,\"signal\":\"o_data\",\"expected\":\"00100000\",\"actual\":\"00100000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":4,\"time_ns\":66.000,\"test_id\":\"protocol_random_1\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"1\",\"i_data\":\"00100000\"},\"outputs\":{\"o_valid\":\"1\",\"o_data\":\"00100000\"}}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_2\",\"cycle\":5,\"signal\":\"o_valid\",\"expected\":\"1\",\"actual\":\"1\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_2\",\"cycle\":5,\"signal\":\"o_data\",\"expected\":\"00100000\",\"actual\":\"00100000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":5,\"time_ns\":76.000,\"test_id\":\"protocol_random_2\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"0\",\"i_data\":\"00111100\"},\"outputs\":{\"o_valid\":\"1\",\"o_data\":\"00100000\"}}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_2\",\"cycle\":6,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"0\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_2\",\"cycle\":6,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":6,\"time_ns\":86.000,\"test_id\":\"protocol_random_2\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"0\",\"i_data\":\"00111100\"},\"outputs\":{\"o_valid\":\"0\",\"o_data\":\"00000000\"}}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_3\",\"cycle\":7,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"0\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_3\",\"cycle\":7,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":7,\"time_ns\":96.000,\"test_id\":\"protocol_random_3\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"1\",\"i_data\":\"11100110\"},\"outputs\":{\"o_valid\":\"0\",\"o_data\":\"00000000\"}}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_3\",\"cycle\":8,\"signal\":\"o_valid\",\"expected\":\"1\",\"actual\":\"1\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_3\",\"cycle\":8,\"signal\":\"o_data\",\"expected\":\"11100110\",\"actual\":\"11100110\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":8,\"time_ns\":106.000,\"test_id\":\"protocol_random_3\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"1\",\"i_data\":\"11100110\"},\"outputs\":{\"o_valid\":\"1\",\"o_data\":\"11100110\"}}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_3\",\"cycle\":9,\"signal\":\"o_valid\",\"expected\":\"1\",\"actual\":\"1\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_3\",\"cycle\":9,\"signal\":\"o_data\",\"expected\":\"11100110\",\"actual\":\"11100110\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":9,\"time_ns\":116.000,\"test_id\":\"protocol_random_3\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"1\",\"i_data\":\"11100110\"},\"outputs\":{\"o_valid\":\"1\",\"o_data\":\"11100110\"}}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_4\",\"cycle\":10,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"0\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_4\",\"cycle\":10,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":10,\"time_ns\":126.000,\"test_id\":\"protocol_random_4\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"1\",\"i_valid\":\"1\",\"i_data\":\"01101011\"},\"outputs\":{\"o_valid\":\"0\",\"o_data\":\"00000000\"}}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_5\",\"cycle\":11,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"0\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_5\",\"cycle\":11,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":11,\"time_ns\":136.000,\"test_id\":\"protocol_random_5\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"0\",\"i_data\":\"00000000\"},\"outputs\":{\"o_valid\":\"0\",\"o_data\":\"00000000\"}}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_5\",\"cycle\":12,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"0\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_5\",\"cycle\":12,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":12,\"time_ns\":146.000,\"test_id\":\"protocol_random_5\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"0\",\"i_data\":\"00000000\"},\"outputs\":{\"o_valid\":\"0\",\"o_data\":\"00000000\"}}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_6\",\"cycle\":13,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"0\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_6\",\"cycle\":13,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":13,\"time_ns\":156.000,\"test_id\":\"protocol_random_6\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"1\",\"i_data\":\"11111001\"},\"outputs\":{\"o_valid\":\"0\",\"o_data\":\"00000000\"}}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_6\",\"cycle\":14,\"signal\":\"o_valid\",\"expected\":\"1\",\"actual\":\"1\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_6\",\"cycle\":14,\"signal\":\"o_data\",\"expected\":\"11111001\",\"actual\":\"11111001\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":14,\"time_ns\":166.000,\"test_id\":\"protocol_random_6\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"1\",\"i_data\":\"11111001\"},\"outputs\":{\"o_valid\":\"1\",\"o_data\":\"11111001\"}}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_7\",\"cycle\":15,\"signal\":\"o_valid\",\"expected\":\"1\",\"actual\":\"1\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_7\",\"cycle\":15,\"signal\":\"o_data\",\"expected\":\"11111001\",\"actual\":\"11111001\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":15,\"time_ns\":176.000,\"test_id\":\"protocol_random_7\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"0\",\"i_data\":\"00000000\"},\"outputs\":{\"o_valid\":\"1\",\"o_data\":\"11111001\"}}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_7\",\"cycle\":16,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"0\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_7\",\"cycle\":16,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":16,\"time_ns\":186.000,\"test_id\":\"protocol_random_7\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"0\",\"i_data\":\"00000000\"},\"outputs\":{\"o_valid\":\"0\",\"o_data\":\"00000000\"}}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_7\",\"cycle\":17,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"0\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_7\",\"cycle\":17,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":17,\"time_ns\":196.000,\"test_id\":\"protocol_random_7\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"0\",\"i_data\":\"00000000\"},\"outputs\":{\"o_valid\":\"0\",\"o_data\":\"00000000\"}}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_7\",\"cycle\":18,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"0\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_7\",\"cycle\":18,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":18,\"time_ns\":206.000,\"test_id\":\"protocol_random_7\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"0\",\"i_data\":\"00000000\"},\"outputs\":{\"o_valid\":\"0\",\"o_data\":\"00000000\"}}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_7\",\"cycle\":19,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"0\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_7\",\"cycle\":19,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":19,\"time_ns\":216.000,\"test_id\":\"protocol_random_7\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"0\",\"i_data\":\"00000000\"},\"outputs\":{\"o_valid\":\"0\",\"o_data\":\"00000000\"}}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_7\",\"cycle\":20,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"0\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_7\",\"cycle\":20,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":20,\"time_ns\":226.000,\"test_id\":\"protocol_random_7\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"0\",\"i_data\":\"00000000\"},\"outputs\":{\"o_valid\":\"0\",\"o_data\":\"00000000\"}}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_7\",\"cycle\":21,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"0\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_7\",\"cycle\":21,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":21,\"time_ns\":236.000,\"test_id\":\"protocol_random_7\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"0\",\"i_data\":\"00000000\"},\"outputs\":{\"o_valid\":\"0\",\"o_data\":\"00000000\"}}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_7\",\"cycle\":22,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"0\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_7\",\"cycle\":22,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":22,\"time_ns\":246.000,\"test_id\":\"protocol_random_7\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"0\",\"i_data\":\"00000000\"},\"outputs\":{\"o_valid\":\"0\",\"o_data\":\"00000000\"}}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_7\",\"cycle\":23,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"0\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"protocol_random_7\",\"cycle\":23,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":23,\"time_ns\":256.000,\"test_id\":\"protocol_random_7\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"0\",\"i_data\":\"00000000\"},\"outputs\":{\"o_valid\":\"0\",\"o_data\":\"00000000\"}}\nIVERILOG_AI_SUMMARY {\"checks\":48,\"failures\":0,\"cycles\":24}\n",
+      "timed_out": false
+    },
+    "run_id": "6dde01644976",
+    "schema_version": "1.0",
+    "started_at": "2026-10-05T05:18:32.181245Z",
+    "status": "passed",
+    "summary": {
+      "checks": 48,
+      "cycles": 24,
+      "failures": 0
+    },
+    "verdict": "passed"
+  },
+  "synthesis": {
+    "skipped_reason": "未启用综合证据层（run_synthesis=False）",
+    "status": "not_run"
+  },
+  "testbench_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_public_baselines_p10\\valid_data_pipeline-protocol_random-1\\tb_valid_data_pipeline.v"
+}

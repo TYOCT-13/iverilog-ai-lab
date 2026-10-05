@@ -1,0 +1,67 @@
+{
+  "schema": "private-new-holdout-skill-checks-v1",
+  "deliverable_gate": {
+    "argv": [
+      "D:\\Users\\TYOCT\\anaconda3\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "C:\\Users\\TYOCT\\.codex\\skills\\readable-verilog-generator\\scripts\\python\\validation\\generated_deliverable_gate.py",
+      "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\targets",
+      "--spec",
+      "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\spec_document.json",
+      "--json",
+      "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\skill_checks\\r1\\deliverable_gate.json",
+      "--markdown",
+      "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\skill_checks\\r1\\deliverable_gate.md"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.656,
+    "stdout_sha256": "988af32405487ab2503778108a3dc412470f8e8accdb7c89626e2e864e05bfae",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "renderer_dependency": {
+    "argv": [
+      "D:\\Users\\TYOCT\\anaconda3\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "C:\\Users\\TYOCT\\.codex\\skills\\readable-verilog-generator\\scripts\\python\\toolchain\\wavedrom_runtime.py",
+      "check"
+    ],
+    "returncode": 1,
+    "duration_seconds": 1.187,
+    "stdout_sha256": "3ba9099a0d7f80425a51638e7efa66fc2faaa03bc7cb07de4eefc5f90e0a92c6",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "registered_write_spec": {
+    "argv": [
+      "D:\\Users\\TYOCT\\anaconda3\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "scripts.python.workflow.cli",
+      "write-spec",
+      "--spec",
+      "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\spec_document.json",
+      "--out-dir",
+      "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\skill_checks\\r1\\rendered_bundle",
+      "--source",
+      "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\targets\\valid_data_pipeline\\A\\valid_data_pipeline.v",
+      "--source",
+      "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\targets\\event_accumulator\\A\\event_accumulator.v",
+      "--language",
+      "zh",
+      "--no-state"
+    ],
+    "returncode": 2,
+    "duration_seconds": 0.86,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "29b52af8118c3e8cd95642d81e03a84912fd0fa26bee5bcb0617fa6c07bf5c82"
+  },
+  "installed_dependencies": false,
+  "remote_or_vivado_runs": 0,
+  "API_calls": 0,
+  "interpretation": "Actual strict evidence, not a fabricated all-green readiness assertion; renderer failure is retained separately from Icarus."
+}

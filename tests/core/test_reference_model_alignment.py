@@ -204,6 +204,28 @@ ALIGNED_CASES: dict[str, dict[str, object]] = {
         "declarations": ["wire [3:0] grant;"],
         "observed": ("grant",),
     },
+    "valid_data_pipeline": {
+        "rtl": "benchmarks/agent_new_holdout_20261005/targets/valid_data_pipeline/A/valid_data_pipeline.v",
+        "contract": "benchmarks/agent_new_holdout_20261005/contracts/valid_data_pipeline_contract.json",
+        "top": "valid_data_pipeline",
+        "instance": "valid_data_pipeline dut(.i_clk(clk),.i_rstn(i_rstn),.i_flush(i_flush),"
+                    ".i_valid(i_valid),.i_data(i_data),.o_valid(o_valid),.o_data(o_data));",
+        "inputs": {"i_rstn": "reg", "i_flush": "reg", "i_valid": "reg", "i_data": "reg [7:0]"},
+        "outputs": {"o_valid": "b", "o_data": "h"},
+        "declarations": ["wire o_valid; wire [7:0] o_data;"],
+        "observed": ("o_valid", "o_data"),
+    },
+    "event_accumulator": {
+        "rtl": "benchmarks/agent_new_holdout_20261005/targets/event_accumulator/A/event_accumulator.v",
+        "contract": "benchmarks/agent_new_holdout_20261005/contracts/event_accumulator_contract.json",
+        "top": "event_accumulator",
+        "instance": "event_accumulator dut(.i_clk(clk),.i_rstn(i_rstn),.i_enable(i_enable),"
+                    ".i_event(i_event),.i_clear(i_clear),.o_count(o_count));",
+        "inputs": {"i_rstn": "reg", "i_enable": "reg", "i_event": "reg", "i_clear": "reg"},
+        "outputs": {"o_count": "h"},
+        "declarations": ["wire [3:0] o_count;"],
+        "observed": ("o_count",),
+    },
 }
 
 
@@ -317,7 +339,10 @@ def _model_trace(case: str, vectors: list[dict], warmup: list[dict], contract: d
     for vector in warmup + vectors:
         for _ in range(int(vector.get("cycles", 1))):
             rows.append(dict(state.step(vector["inputs"], 1)))
-    rows.pop()
+    # Preserve the legacy comparison boundary; the new adapters compare every
+    # row against this explicit testbench, including its final sampled edge.
+    if "contract" not in ALIGNED_CASES[case]:
+        rows.pop()
     return rows
 
 
@@ -327,7 +352,8 @@ def test_aligned_models_match_rtl_cycle_by_cycle(tmp_path):
 
     for case, spec in ALIGNED_CASES.items():
         assert case in AUTHORITATIVE, f"{case} 已对齐但未加入 AUTHORITATIVE"
-        contract = json.loads((ROOT / f"examples/{case}_contract.json").read_text(encoding="utf-8"))
+        contract_path = ROOT / str(spec.get("contract", f"examples/{case}_contract.json"))
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
         prompt = "Design: %s DUT context: %s Schema: {}" % (case, json.dumps(contract, ensure_ascii=False))
         rtl = ROOT / str(spec["rtl"])
         observed = list(spec["observed"])  # type: ignore[arg-type]
@@ -337,6 +363,8 @@ def test_aligned_models_match_rtl_cycle_by_cycle(tmp_path):
             warmup = _warmup_vectors(case, contract)
             rtl_rows = _rtl_trace(case, vectors, warmup, rtl, tmp_path)
             model_rows = _model_trace(case, vectors, warmup, contract)
+            if "contract" in spec:
+                assert len(rtl_rows) == len(model_rows), f"{case} 新模块必须比较全部采样拍"
             # 生成式 testbench 在最后一个向量之后 `$finish`，末尾那个时钟沿只在
             # 对齐测试台里留下采样；因此 RTL 序列可能比模型多一拍尾部，比较范围
             # 取两者较短的长度。

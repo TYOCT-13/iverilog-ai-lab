@@ -1,0 +1,34 @@
+{
+  "raw_originals_unchanged": true,
+  "scope": "worker mechanical preparation was UNFROZEN; this is not the later complete source acceptance",
+  "api_calls": 0,
+  "dut_runs": 0,
+  "real_credential_read": false,
+  "human_review": false,
+  "originals": [
+    {
+      "name": "pytest-mechanical-final-v1.log",
+      "original": ".tmp-codex/agent-new-holdout-entry-preparation-20261005/pytest-mechanical-final-v1.log",
+      "sha256": "ff5d4062173391ea8b55c9cf3a5f23b831e8ea92870897328b54d9cc494cbd5b",
+      "bytes": 102
+    },
+    {
+      "name": "mypy-entry-final-v1.log",
+      "original": ".tmp-codex/agent-new-holdout-entry-preparation-20261005/mypy-entry-final-v1.log",
+      "sha256": "8e63ae22e8213e327a5e9cbd584067681681bd8ef7f25c869877887ccdcfc4ff",
+      "bytes": 43
+    },
+    {
+      "name": "dry-run-final-v1.log",
+      "original": ".tmp-codex/agent-new-holdout-entry-preparation-20261005/dry-run-final-v1.log",
+      "sha256": "4626807497b2c5cae83066678595f5e83907b3058cd35a778172652516dbf3ac",
+      "bytes": 198
+    },
+    {
+      "name": "mechanical-entry-receipt-v1.json",
+      "original": ".tmp-codex/agent-new-holdout-entry-preparation-20261005/mechanical-entry-receipt-v1.json",
+      "sha256": "7d7c597a204fe64ae91976fb6dd6c0acad1d4824b2d810ba0c2195c2f6ffd71c",
+      "bytes": 1448
+    }
+  ]
+}

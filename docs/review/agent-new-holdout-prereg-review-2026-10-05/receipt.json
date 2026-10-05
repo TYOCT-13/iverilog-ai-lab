@@ -1,0 +1,142 @@
+{
+  "schema": "agent-new-holdout-prereg-review-final-v1",
+  "finished_at": "2026-10-05T05:53:22.180770+00:00",
+  "reviewer": "non-implementer same-team machine reviewer",
+  "human_review": false,
+  "H02": false,
+  "scope": "internal controlled synthetic module-set holdout preregistration only",
+  "verdict": "mechanical_and_evidence_checks_passed_pending_committed_clean_execution_admission",
+  "source_revision": "2f124e7681e386952fd44a529eaafbc1ca7ff825",
+  "source_revision_meaning": "candidate base HEAD; not claimed to be an already committed candidate",
+  "agent_frozen_from_revision": "a96933786c17986a739fc2da515db3294d6e8044",
+  "registered_rows": 108,
+  "registered_originals": 458,
+  "manifest_members": 400,
+  "final_successful_unique_non_DUT_checks": 202,
+  "independent_control_flow_checks": 194,
+  "distinct_final_evidence_closure_checks": 8,
+  "historical_attempt_infrastructure_failures": 1,
+  "all_attempts_distinct_check_identities": 203,
+  "actual_API_calls": 0,
+  "real_credential_reads": 0,
+  "actual_DUT_runs": 0,
+  "root_pytest_executed_by_reviewer": false,
+  "root_passed": 2033,
+  "root_skipped": 2,
+  "root_failed": 0,
+  "root_mypy_sources": 88,
+  "style_delivery_ready": false,
+  "WaveDrom_svg_ready": false,
+  "final_evidence_checks": [
+    {
+      "name": "seal.final_candidate_unchanged",
+      "status": "passed",
+      "kind": "non_DUT_evidence_closure"
+    },
+    {
+      "name": "seal.independent_attempts_originals",
+      "status": "passed",
+      "kind": "non_DUT_evidence_closure"
+    },
+    {
+      "name": "seal.root_validation_originals_and_r1_failures",
+      "status": "passed",
+      "kind": "non_DUT_evidence_closure"
+    },
+    {
+      "name": "seal.root_xml_stdout_and_mypy",
+      "status": "passed",
+      "kind": "non_DUT_evidence_closure"
+    },
+    {
+      "name": "seal.root_final_source_matches_current_bytes",
+      "status": "passed",
+      "kind": "non_DUT_evidence_closure"
+    },
+    {
+      "name": "seal.public_zip_crc_members_and_original_bytes",
+      "status": "passed",
+      "kind": "non_DUT_evidence_closure"
+    },
+    {
+      "name": "seal.style_matrix_and_renderer_failure",
+      "status": "passed",
+      "kind": "non_DUT_evidence_closure"
+    },
+    {
+      "name": "seal.five_historical_originals_remain_closed",
+      "status": "passed",
+      "kind": "non_DUT_evidence_closure"
+    }
+  ],
+  "details": {
+    "seal.final_candidate_unchanged": {
+      "manifest_members": 400,
+      "registered_originals": 458,
+      "source_revision_is_candidate_base_HEAD": "2f124e7681e386952fd44a529eaafbc1ca7ff825",
+      "current_git_worktree_clean": false,
+      "new_live_output_exists": false
+    },
+    "seal.independent_attempts_originals": {
+      "r1_infrastructure_failed": 1,
+      "r2_distinct_non_DUT_passed": 194
+    },
+    "seal.root_validation_originals_and_r1_failures": {
+      "root_r1_passed": 2017,
+      "root_r1_failed": 10,
+      "root_r1_skipped": 2,
+      "root_r2_originals_sha_valid": true
+    },
+    "seal.root_xml_stdout_and_mypy": {
+      "root_pytest": {
+        "tests": 2035,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 2
+      },
+      "root_passed": 2033,
+      "root_mypy_sources": 88,
+      "not_counted_as_auditor_executed_pytest": true
+    },
+    "seal.root_final_source_matches_current_bytes": {
+      "root_fingerprinted_files": 535,
+      "same_current_bytes": true
+    },
+    "seal.public_zip_crc_members_and_original_bytes": {
+      "archive_sha256": "7a8f4d85ec0b97c9bd2d21633a07f63aba9e1ab11b2e86d5332791e16fb2dc0e",
+      "bytes": 1040454,
+      "CRC_and_every_original_SHA_independently_verified": true,
+      "members": 459
+    },
+    "seal.style_matrix_and_renderer_failure": {
+      "matrix": {
+        "compile": "passed",
+        "ast": "passed",
+        "readability": "failed",
+        "comment": "passed",
+        "naming": "failed",
+        "profile": "passed",
+        "testbench": "not_requested",
+        "toolchain": "not_requested"
+      },
+      "delivery_ready": false,
+      "VG013": 3,
+      "VG146": 9,
+      "WaveDrom_renderer_missing": "wavedrom@3.6.1"
+    },
+    "seal.five_historical_originals_remain_closed": {
+      "five_preregs_and_ledgers_unchanged": true,
+      "actual_unknown_requests": 0,
+      "charged_against_new_cap": false
+    }
+  },
+  "artifact_bindings": {
+    "path": "artifact-bindings.json",
+    "sha256": "6863886f20d066e71b6f1a99a9c43fab96bcfa82d6be22119a6d8bf35844ad01"
+  },
+  "review_report": {
+    "path": "docs/review/agent_new_holdout_prereg_review_2026-10-05.md",
+    "sha256": "5ecb625a86ce258e0a3d666c1db11d95460dde79039c705b022175da9ea16e43"
+  },
+  "finalize_tool_sha256": "cb6aea95e7147794eb72f19036842d0298b0319afc92544c52f66b09f168c97c"
+}

@@ -11,12 +11,10 @@
 
 from __future__ import annotations
 
-import json
-from pathlib import Path
-
 import pytest
 
 from iverilog_ai.ai.schema import TestPlan
+from iverilog_ai.ai.debug_provider import bundled_contract
 from iverilog_ai.core.contracts import DutContract
 from iverilog_ai.core.reference_model import (
     AUTHORITATIVE,
@@ -27,8 +25,6 @@ from iverilog_ai.core.reference_model import (
     completed_inputs,
     reference_expectations,
 )
-
-ROOT = Path(__file__).resolve().parents[2]
 
 #: 每个设计一组"能产生确定可观测输出"的向量（值只求合法，不求覆盖边界）。
 PROBE_VECTORS: dict[str, list[dict]] = {
@@ -49,12 +45,15 @@ PROBE_VECTORS: dict[str, list[dict]] = {
     "pulse_stretcher": [{"inputs": {"rst_n": 1, "pulse_in": 1}, "cycles": 2}],
     "credit_guard": [{"inputs": {"rst_n": 1, "acquire": 1, "release_req": 0}, "cycles": 2}],
     "rotating_arbiter": [{"inputs": {"rst_n": 1, "request": 15, "advance": 1}, "cycles": 3}],
+    "valid_data_pipeline": [{"inputs": {"i_rstn": 1, "i_valid": 1, "i_data": 165, "i_flush": 0}, "cycles": 2}],
+    "event_accumulator": [{"inputs": {"i_rstn": 1, "i_enable": 1, "i_event": 1, "i_clear": 0}, "cycles": 2}],
 }
 
 
 def _contract(case: str) -> DutContract:
-    path = ROOT / "examples" / f"{case}_contract.json"
-    return DutContract.from_dict(json.loads(path.read_text(encoding="utf-8")))
+    payload = bundled_contract(case)
+    assert payload.get("module") == case
+    return DutContract.from_dict(payload)
 
 
 def test_probe_vectors_cover_every_supported_design():

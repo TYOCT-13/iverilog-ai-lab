@@ -1,0 +1,362 @@
+{
+  "schema": "private-new-holdout-baseline-validation-v1",
+  "status": "passed",
+  "checks": [
+    {
+      "case": "valid_data_pipeline",
+      "strategy": "fixed",
+      "seed": 0,
+      "deterministic": true,
+      "cap_passed": true
+    },
+    {
+      "case": "valid_data_pipeline",
+      "strategy": "fixed",
+      "seed": 1,
+      "deterministic": true,
+      "cap_passed": true
+    },
+    {
+      "case": "valid_data_pipeline",
+      "strategy": "fixed",
+      "seed": 2,
+      "deterministic": true,
+      "cap_passed": true
+    },
+    {
+      "case": "valid_data_pipeline",
+      "strategy": "random",
+      "seed": 0,
+      "deterministic": true,
+      "cap_passed": true
+    },
+    {
+      "case": "valid_data_pipeline",
+      "strategy": "random",
+      "seed": 1,
+      "deterministic": true,
+      "cap_passed": true
+    },
+    {
+      "case": "valid_data_pipeline",
+      "strategy": "random",
+      "seed": 2,
+      "deterministic": true,
+      "cap_passed": true
+    },
+    {
+      "case": "valid_data_pipeline",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "deterministic": true,
+      "cap_passed": true
+    },
+    {
+      "case": "valid_data_pipeline",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "deterministic": true,
+      "cap_passed": true
+    },
+    {
+      "case": "valid_data_pipeline",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "deterministic": true,
+      "cap_passed": true
+    },
+    {
+      "case": "valid_data_pipeline",
+      "check": "rejected_bad_argument_0",
+      "passed": true
+    },
+    {
+      "case": "valid_data_pipeline",
+      "check": "rejected_bad_argument_1",
+      "passed": true
+    },
+    {
+      "case": "valid_data_pipeline",
+      "check": "rejected_bad_argument_2",
+      "passed": true
+    },
+    {
+      "case": "valid_data_pipeline",
+      "check": "rejected_bad_argument_3",
+      "passed": true
+    },
+    {
+      "case": "valid_data_pipeline",
+      "check": "rejected_bad_argument_4",
+      "passed": true
+    },
+    {
+      "case": "valid_data_pipeline",
+      "check": "rejected_bad_argument_5",
+      "passed": true
+    },
+    {
+      "case": "valid_data_pipeline",
+      "check": "rejected_bad_argument_6",
+      "passed": true
+    },
+    {
+      "case": "valid_data_pipeline",
+      "check": "rejected_contract_parameters",
+      "passed": true
+    },
+    {
+      "case": "valid_data_pipeline",
+      "check": "rejected_contract_ports",
+      "passed": true
+    },
+    {
+      "case": "valid_data_pipeline",
+      "check": "rejected_contract_clock",
+      "passed": true
+    },
+    {
+      "case": "valid_data_pipeline",
+      "check": "rejected_contract_reset",
+      "passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "strategy": "fixed",
+      "seed": 0,
+      "deterministic": true,
+      "cap_passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "strategy": "fixed",
+      "seed": 1,
+      "deterministic": true,
+      "cap_passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "strategy": "fixed",
+      "seed": 2,
+      "deterministic": true,
+      "cap_passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "strategy": "random",
+      "seed": 0,
+      "deterministic": true,
+      "cap_passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "strategy": "random",
+      "seed": 1,
+      "deterministic": true,
+      "cap_passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "strategy": "random",
+      "seed": 2,
+      "deterministic": true,
+      "cap_passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "strategy": "protocol_random",
+      "seed": 0,
+      "deterministic": true,
+      "cap_passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "strategy": "protocol_random",
+      "seed": 1,
+      "deterministic": true,
+      "cap_passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "strategy": "protocol_random",
+      "seed": 2,
+      "deterministic": true,
+      "cap_passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "check": "rejected_bad_argument_0",
+      "passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "check": "rejected_bad_argument_1",
+      "passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "check": "rejected_bad_argument_2",
+      "passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "check": "rejected_bad_argument_3",
+      "passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "check": "rejected_bad_argument_4",
+      "passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "check": "rejected_bad_argument_5",
+      "passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "check": "rejected_bad_argument_6",
+      "passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "check": "rejected_contract_parameters",
+      "passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "check": "rejected_contract_ports",
+      "passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "check": "rejected_contract_clock",
+      "passed": true
+    },
+    {
+      "case": "event_accumulator",
+      "check": "rejected_contract_reset",
+      "passed": true
+    }
+  ],
+  "file_inputs_during_factory": [
+    "E:/FPGA_WORK/iverilog-ai-lab/.tmp-codex/agent-new-holdout-preparation-20261005/spec/event_accumulator_spec.md",
+    "E:/FPGA_WORK/iverilog-ai-lab/.tmp-codex/agent-new-holdout-preparation-20261005/spec/valid_data_pipeline_spec.md"
+  ],
+  "observed_factory_file_reads": 36,
+  "only_correct_spec_file_inputs": true,
+  "no_target_manifest_witness_or_result_read_by_factory": true,
+  "actual_targets": [
+    {
+      "case": "valid_data_pipeline",
+      "variant": "A",
+      "rtl_sha256": "8b021d3627b5078b4e1524c8c0d8430efa72242d950b07d7dcb66575e1dc2aee",
+      "contract_sha256": "145bbe75cd58c8d43e4a0864f4ae23a485f46cd8c7de47fcb63f5c1a1900684d",
+      "testbench_sha256": "8d19501d4ffa4e912716d7ee13be2d4ca53230503c51f729acca78f849aa05e8",
+      "compile": {
+        "argv": [
+          "D:\\iverilog\\bin\\iverilog.exe",
+          "-g2001",
+          "-s",
+          "tb_valid_data_pipeline",
+          "-o",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\baseline_validation\\r2\\valid_data_pipeline\\A\\simulation.vvp",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\targets\\valid_data_pipeline\\A\\valid_data_pipeline.v",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\baseline_validation\\r2\\valid_data_pipeline\\A\\tb_valid_data_pipeline.v"
+        ],
+        "returncode": 0,
+        "duration_seconds": 0.078,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "tasks": 9,
+      "stimulus_cycles": 216,
+      "run": {
+        "argv": [
+          "D:\\iverilog\\bin\\vvp.exe",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\baseline_validation\\r2\\valid_data_pipeline\\A\\simulation.vvp"
+        ],
+        "returncode": 0,
+        "duration_seconds": 0.016,
+        "stdout_sha256": "41349cd6d32d075e7f4f59dfea06093afe30edd71306f64deae6ed1549f4f98f",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "packets_complete": true,
+      "async_reset": {
+        "passed": true,
+        "observations": [
+          {
+            "time_ns": 52000,
+            "outputs": {
+              "o_valid": "0",
+              "o_data": "00000000"
+            }
+          }
+        ]
+      },
+      "status": "compared",
+      "checks": 432,
+      "mismatches": 0,
+      "matched_tasks": 9,
+      "first_mismatch_samples": []
+    },
+    {
+      "case": "event_accumulator",
+      "variant": "A",
+      "rtl_sha256": "010c18adf5036cfb357d0e38f622ecba1ddf8cea3facc496363b6db31ac8dc09",
+      "contract_sha256": "8ddb36e0c9b928020a01e8534c3cdc92d5a8c8fab5c6b336454ca661ce3277b5",
+      "testbench_sha256": "77bc814d4c178b0f5558e99ebc36cc31583c607c697616ed4493bcda5cd1b049",
+      "compile": {
+        "argv": [
+          "D:\\iverilog\\bin\\iverilog.exe",
+          "-g2001",
+          "-s",
+          "tb_event_accumulator",
+          "-o",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\baseline_validation\\r2\\event_accumulator\\A\\simulation.vvp",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\targets\\event_accumulator\\A\\event_accumulator.v",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\baseline_validation\\r2\\event_accumulator\\A\\tb_event_accumulator.v"
+        ],
+        "returncode": 0,
+        "duration_seconds": 0.063,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "tasks": 9,
+      "stimulus_cycles": 216,
+      "run": {
+        "argv": [
+          "D:\\iverilog\\bin\\vvp.exe",
+          "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\baseline_validation\\r2\\event_accumulator\\A\\simulation.vvp"
+        ],
+        "returncode": 0,
+        "duration_seconds": 0.015,
+        "stdout_sha256": "0cfb636686b5ccab5e08f0c4cf2ab5e9ef8e38c4a412524f9aa6d4124708f175",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "packets_complete": true,
+      "async_reset": {
+        "passed": true,
+        "observations": [
+          {
+            "time_ns": 52000,
+            "outputs": {
+              "o_count": "0000"
+            }
+          }
+        ]
+      },
+      "status": "compared",
+      "checks": 216,
+      "mismatches": 0,
+      "matched_tasks": 9,
+      "first_mismatch_samples": []
+    }
+  ],
+  "baseline_factory_sha256": "0efeaac7d9413482aa359c04dba4bc3babf8fedc9dfbb6e2d3c4caa0563350a9",
+  "API_calls": 0,
+  "v8_results_read": false,
+  "compile_calls": 2,
+  "vvp_calls": 2,
+  "interpretation": "Three local plan generators, not API or Agent results; independent private reference functions remain the observer."
+}

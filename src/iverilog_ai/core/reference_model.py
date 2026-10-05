@@ -21,6 +21,7 @@ SUPPORTED = {
     "sync_fifo", "uart_tx", "spi_master", "handshake_stage", "debounce", "pwm", "mux4", "sync_reset",
     "johnson_counter", "edge_detector", "pulse_stretcher",
     "credit_guard", "rotating_arbiter",
+    "valid_data_pipeline", "event_accumulator",
 }
 
 # 可作为**权威预言机**的设计：这些模型已逐项对照参考 RTL 的手写 testbench 验证过，
@@ -52,6 +53,8 @@ AUTHORITATIVE: frozenset[str] = frozenset({
     "pulse_stretcher",
     "credit_guard",
     "rotating_arbiter",
+    "valid_data_pipeline",
+    "event_accumulator",
 })
 
 # 内置案例的**输入端口默认值**：单一事实来源。
@@ -82,11 +85,14 @@ INPUT_DEFAULTS: dict[str, dict[str, Any]] = {
     "pulse_stretcher": {"rst_n": 1, "pulse_in": 0},
     "credit_guard": {"rst_n": 1, "acquire": 0, "release_req": 0},
     "rotating_arbiter": {"rst_n": 1, "request": 0, "advance": 0},
+    "valid_data_pipeline": {"i_rstn": 1, "i_flush": 0, "i_valid": 0, "i_data": 0},
+    "event_accumulator": {"i_rstn": 1, "i_enable": 0, "i_event": 0, "i_clear": 0},
 }
 
 # 新增留出设计的参考值只对固定合约开放，不能只凭同名字符串把外部
 # 任意接口/参数当作权威。既有十五类参考模型的兼容调用保持不变。
-_FIXED_HOLDOUT_DESIGNS = frozenset({"credit_guard", "rotating_arbiter"})
+_NEW_INTERNAL_HOLDOUT_DESIGNS = frozenset({"valid_data_pipeline", "event_accumulator"})
+_FIXED_HOLDOUT_DESIGNS = frozenset({"credit_guard", "rotating_arbiter"}) | _NEW_INTERNAL_HOLDOUT_DESIGNS
 
 
 class ReferenceSamplingError(ValueError):
@@ -125,6 +131,8 @@ _PER_CYCLE_DATA_PORTS: dict[str, tuple[dict[str, int], dict[str, int]]] = {
     "pulse_stretcher": ({"pulse_in": 1}, {"pulse_out": 1}),
     "credit_guard": ({"acquire": 1, "release_req": 1}, {"credits": 3}),
     "rotating_arbiter": ({"request": 4, "advance": 1}, {"grant": 4}),
+    "valid_data_pipeline": ({"i_flush": 1, "i_valid": 1, "i_data": 8}, {"o_valid": 1, "o_data": 8}),
+    "event_accumulator": ({"i_enable": 1, "i_event": 1, "i_clear": 1}, {"o_count": 4}),
 }
 
 
@@ -142,12 +150,17 @@ def reference_sampling_profile(contract: DutContract) -> str | None:
         if contract.clock is not None or contract.reset is not None:
             return None
     else:
-        reset_signal = "ext_rst_n" if contract.module == "sync_reset" else "rst_n"
-        inputs.update({"clk": 1, reset_signal: 1})
+        new_internal = contract.module in _NEW_INTERNAL_HOLDOUT_DESIGNS
+        clock_signal = "i_clk" if new_internal else "clk"
+        reset_signal = "i_rstn" if new_internal else "ext_rst_n" if contract.module == "sync_reset" else "rst_n"
+        inputs.update({clock_signal: 1, reset_signal: 1})
         clock, reset = contract.clock, contract.reset
-        if (clock is None or clock.signal != "clk" or clock.edge != "posedge"
+        if (clock is None or clock.signal != clock_signal or clock.edge != "posedge"
                 or clock.period_ns <= 2 or reset is None or reset.signal != reset_signal
                 or reset.active_level != 0 or reset.synchronous):
+            return None
+        if new_internal and (clock.period_ns != 10 or reset.assert_cycles != 2
+                             or any(port.initial is not None for port in contract.ports)):
             return None
     ports = {name: ("input", width) for name, width in inputs.items()}
     ports.update({name: ("output", width) for name, width in outputs.items()})
@@ -224,6 +237,12 @@ class _DesignState:
         self.pulse_count, self.pulse_out = 0, 0
         self.credits = 3
         self.arbiter_pointer, self.arbiter_grant = 0, 0
+        # 新内部合成模块的语义不复制 RTL 寄存器链/递加器：
+        # 流水用到期令牌投递，计数用自清除以来接受事件的集合基数。
+        self.new_holdout_edge = 0
+        self.pipeline_due_tokens: dict[int, int] = {}
+        self.pipeline_outputs = {"o_valid": 0, "o_data": 0}
+        self.event_accepted_edges: set[int] = set()
 
     def step(self, inputs: Mapping[str, Any], cycles: int) -> dict[str, Any]:
         """把单个向量推进 ``cycles`` 个周期，返回该向量结束时的可观测输出。
@@ -249,6 +268,32 @@ class _DesignState:
             rst, enable = int(inputs.get("rst_n", inputs.get("reset", 1))), int(inputs.get("enable", 0))
             for _ in range(cycles): self.state = 0 if rst == 0 else ((self.state + 1) % 10 if enable else self.state)
             return {"count": self.state}
+        if design == "valid_data_pipeline":
+            rst, flush = int(inputs["i_rstn"]), int(inputs["i_flush"])
+            valid, data = int(inputs["i_valid"]), int(inputs["i_data"])
+            for _ in range(cycles):
+                edge = self.new_holdout_edge
+                if rst == 0 or flush:
+                    self.pipeline_due_tokens.clear()
+                    self.pipeline_outputs = {"o_valid": 0, "o_data": 0}
+                else:
+                    delivered = self.pipeline_due_tokens.pop(edge, None)
+                    self.pipeline_outputs = {"o_valid": int(delivered is not None),
+                                             "o_data": 0 if delivered is None else delivered}
+                    if valid:
+                        self.pipeline_due_tokens[edge + 1] = data
+                self.new_holdout_edge += 1
+            return dict(self.pipeline_outputs)
+        if design == "event_accumulator":
+            rst, clear = int(inputs["i_rstn"]), int(inputs["i_clear"])
+            enabled, event = int(inputs["i_enable"]), int(inputs["i_event"])
+            for _ in range(cycles):
+                if rst == 0 or clear:
+                    self.event_accepted_edges.clear()
+                elif enabled and event:
+                    self.event_accepted_edges.add(self.new_holdout_edge)
+                self.new_holdout_edge += 1
+            return {"o_count": len(self.event_accepted_edges) % 16}
         if design == "credit_guard":
             rst = int(inputs.get("rst_n", 1))
             acquire, release = int(inputs.get("acquire", 0)), int(inputs.get("release_req", 0))
@@ -487,6 +532,16 @@ def reference_expectations(
         return {}
     if _unsupported_sampling(plan, plan_design):
         return {}
+    if plan_design in _NEW_INTERNAL_HOLDOUT_DESIGNS:
+        # 新模型的 vector_end 也沿用逐拍路径的已知位解析和完整合约约束；
+        # 不凭名字、字典合约或无法解码的 X/Z 返回权威数字。
+        if not isinstance(plan, TestPlan) or not isinstance(contract, DutContract):
+            return {}
+        try:
+            cycle_table = reference_cycle_expectations(plan, contract)
+        except ReferenceSamplingError:
+            return {}
+        return {name: dict(rows[-1]) for name, rows in cycle_table.items()}
     port_names: set[str] | None = None
     if contract is not None:
         ports = _get(contract, "ports", None)

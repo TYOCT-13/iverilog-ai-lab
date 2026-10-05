@@ -1,0 +1,333 @@
+{
+  "artifacts": {
+    "authoritative_plan": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma2\\event_accumulator-B\\authoritative_plan.json",
+    "dut_contract": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma2\\event_accumulator-B\\dut_contract.json",
+    "output_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma2\\event_accumulator-B",
+    "pipeline_result": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma2\\event_accumulator-B\\pipeline_result.json",
+    "reference_samples": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma2\\event_accumulator-B\\reference_samples.json",
+    "result_json": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma2\\event_accumulator-B\\runs\\run-aab4742ebb08\\result.json",
+    "run_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma2\\event_accumulator-B\\runs\\run-aab4742ebb08",
+    "testbench": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma2\\event_accumulator-B\\tb_event_accumulator.v",
+    "testplan": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma2\\event_accumulator-B\\testplan.json",
+    "vcd": ""
+  },
+  "contract": {
+    "clock": {
+      "edge": "posedge",
+      "period_ns": 10.0,
+      "signal": "i_clk"
+    },
+    "module": "event_accumulator",
+    "ports": [
+      {
+        "direction": "input",
+        "name": "i_clk",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "input",
+        "name": "i_rstn",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "input",
+        "name": "i_enable",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "input",
+        "name": "i_event",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "input",
+        "name": "i_clear",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "output",
+        "name": "o_count",
+        "signed": false,
+        "width": 4
+      }
+    ],
+    "reset": {
+      "active_level": 0,
+      "assert_cycles": 2,
+      "signal": "i_rstn",
+      "synchronous": false
+    }
+  },
+  "coverage": {
+    "checks": {
+      "covered": 4,
+      "percent": 100.0,
+      "total": 4
+    },
+    "definition": "测试计划执行覆盖率；不代表 RTL 代码覆盖率",
+    "per_signal": {
+      "o_count": {
+        "covered": 4,
+        "percent": 100.0,
+        "total": 4
+      }
+    },
+    "vectors": {
+      "covered": 1,
+      "percent": 100.0,
+      "total": 1
+    }
+  },
+  "created_at": "2026-10-05T05:18:30.873480Z",
+  "failure_explanations": [],
+  "plan": {
+    "assertions": [],
+    "assumptions": [],
+    "clock_period_ns": 10,
+    "design": "event_accumulator",
+    "objective": "fixed public contract semantic acceptance",
+    "pre_reset_expected": {},
+    "reset": {},
+    "sample_before_reset": false,
+    "schema_version": "1.0",
+    "vectors": [
+      {
+        "cycles": 4,
+        "expected": {},
+        "inputs": {
+          "i_clear": 0,
+          "i_enable": 1,
+          "i_event": 1
+        },
+        "name": "normal",
+        "rationale": "",
+        "sample_phase": "after"
+      }
+    ]
+  },
+  "schema_version": "1.0",
+  "simulation": {
+    "artifacts": {
+      "compile_stderr": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma2\\event_accumulator-B\\runs\\run-aab4742ebb08\\compile.stderr.txt",
+      "compile_stdout": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma2\\event_accumulator-B\\runs\\run-aab4742ebb08\\compile.stdout.txt",
+      "compile_vvp": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma2\\event_accumulator-B\\runs\\run-aab4742ebb08\\compile.vvp",
+      "result_json": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma2\\event_accumulator-B\\runs\\run-aab4742ebb08\\result.json",
+      "run_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma2\\event_accumulator-B\\runs\\run-aab4742ebb08",
+      "run_stderr": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma2\\event_accumulator-B\\runs\\run-aab4742ebb08\\run.stderr.txt",
+      "run_stdout": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma2\\event_accumulator-B\\runs\\run-aab4742ebb08\\run.stdout.txt",
+      "vcd": ""
+    },
+    "compile": {
+      "command": [
+        "D:\\iverilog\\bin\\iverilog.exe",
+        "-g2012",
+        "-o",
+        "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma2\\event_accumulator-B\\runs\\run-aab4742ebb08\\compile.vvp",
+        "-s",
+        "tb_event_accumulator",
+        "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\event_accumulator\\B\\event_accumulator.v",
+        "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma2\\event_accumulator-B\\tb_event_accumulator.v"
+      ],
+      "duration_ms": 43,
+      "error": null,
+      "output_truncated": false,
+      "returncode": 0,
+      "status": "passed",
+      "stderr": "",
+      "stdout": "",
+      "timed_out": false
+    },
+    "config": {
+      "allowed_roots": [
+        "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\event_accumulator\\B",
+        "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma2"
+      ],
+      "coverage": {
+        "checks": {
+          "covered": 4,
+          "percent": 100.0,
+          "total": 4
+        },
+        "definition": "测试计划执行覆盖率；不代表 RTL 代码覆盖率",
+        "per_signal": {
+          "o_count": {
+            "covered": 4,
+            "percent": 100.0,
+            "total": 4
+          }
+        },
+        "vectors": {
+          "covered": 1,
+          "percent": 100.0,
+          "total": 1
+        }
+      },
+      "cross_validation": {
+        "ai_expected_mismatch": false,
+        "independent_sources": 1,
+        "sources": [
+          "iverilog",
+          "reference_model"
+        ],
+        "status": "consistent"
+      },
+      "defines": [],
+      "include_dirs": [],
+      "iverilog_path": "D:\\iverilog\\bin\\iverilog.exe",
+      "keep_artifacts": true,
+      "language": "2012",
+      "oracle": {
+        "ai_expectations_used_for_checking": false,
+        "authoritative_vectors": 1,
+        "checked": 1,
+        "checked_expected": 0,
+        "consistency_rate": null,
+        "design": "event_accumulator",
+        "evidence_level": "reference_model",
+        "expectation_evidence_level": "reference_model",
+        "expectation_source": "reference_model",
+        "matched_expected": 0,
+        "plans_with_expectations": 0,
+        "reference_check_schedule": [
+          {
+            "cycles": 4,
+            "first_cycle": 0,
+            "signals": [
+              "o_count"
+            ],
+            "test_id": "normal"
+          }
+        ],
+        "reference_policy": "builtin",
+        "reference_samples": {
+          "expected_checks": 4,
+          "expected_cycles": 4,
+          "limitations": [
+            "Generated expectations are separate from actual simulation observations",
+            "The original plan is not expanded; each sample uses one reference state transition",
+            "Only supported builtin profiles and after sampling are authoritative",
+            "Initial contract reset is applied; these cycles exclude reset and pre_reset assertions"
+          ],
+          "profile": "builtin-reference-per-cycle-v1:event_accumulator",
+          "provenance": {
+            "contract_sha256": "f4962c457edd81bb44ce941fe0e3ed82d6f62c33dfb536bb0010a8c526b7f236",
+            "plan_sha256": "99e4ef77da5e8686fa5c41930322cf829d0c3b2ea72044a3cd2cd99541100207",
+            "reference_model_sha256": "ef177904f5f4c4fad51a3c1508775a3f6de247945220d2fa4ba317b98b5a7763",
+            "rtl_sha256": "65bb2c35aa123348348766232b48f2499556395f88a8015cb97713324a08b9f1",
+            "testbench_sha256": "c9a4e2654a995cb15f1ee01eaca3a466c3a637eb55a910a6c405998e83f7936a"
+          },
+          "reference_sampling": "per_cycle",
+          "schema_version": "1.0",
+          "sha256": "4ef56b911be04cde513e75ed26db05149f0aec06a20a9a3c972cf566996334cd",
+          "source": "independent_reference_model",
+          "status": "generated"
+        },
+        "reference_sampling": "per_cycle",
+        "status": "passed",
+        "uncheckable_expected": [],
+        "warnings": []
+      },
+      "output_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma2\\event_accumulator-B\\runs",
+      "reference_sampling": "per_cycle",
+      "rtl_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\event_accumulator\\B\\event_accumulator.v",
+      "rtl_sha256": "65bb2c35aa123348348766232b48f2499556395f88a8015cb97713324a08b9f1",
+      "structured_assertions": {
+        "checked": 0,
+        "failed": 0,
+        "passed": 0,
+        "results": [],
+        "status": "skipped"
+      },
+      "synthesis": {
+        "skipped_reason": "未启用综合证据层（run_synthesis=False）",
+        "status": "not_run"
+      },
+      "testbench_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma2\\event_accumulator-B\\tb_event_accumulator.v",
+      "testbench_sha256": "c9a4e2654a995cb15f1ee01eaca3a466c3a637eb55a910a6c405998e83f7936a",
+      "timeout_seconds": 30.0,
+      "top_module": "tb_event_accumulator",
+      "vcd_analysis": {
+        "status": "not_available"
+      },
+      "verification_status": "verified",
+      "vvp_path": "D:\\iverilog\\bin\\vvp.exe"
+    },
+    "diagnostics": [],
+    "error": null,
+    "failures": [],
+    "finished_at": "2026-10-05T05:18:30.872480Z",
+    "passed": true,
+    "records": [
+      {
+        "actual": "0001",
+        "cycle": 0,
+        "expected": "0001",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_count",
+        "test_id": "normal"
+      },
+      {
+        "actual": "0010",
+        "cycle": 1,
+        "expected": "0010",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_count",
+        "test_id": "normal"
+      },
+      {
+        "actual": "0011",
+        "cycle": 2,
+        "expected": "0011",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_count",
+        "test_id": "normal"
+      },
+      {
+        "actual": "0100",
+        "cycle": 3,
+        "expected": "0100",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_count",
+        "test_id": "normal"
+      }
+    ],
+    "run": {
+      "command": [
+        "D:\\iverilog\\bin\\vvp.exe",
+        "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma2\\event_accumulator-B\\runs\\run-aab4742ebb08\\compile.vvp"
+      ],
+      "duration_ms": 15,
+      "error": null,
+      "output_truncated": false,
+      "returncode": 0,
+      "status": "passed",
+      "stderr": "",
+      "stdout": "IVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"normal\",\"cycle\":0,\"signal\":\"o_count\",\"expected\":\"0001\",\"actual\":\"0001\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"normal\",\"cycle\":1,\"signal\":\"o_count\",\"expected\":\"0010\",\"actual\":\"0010\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"normal\",\"cycle\":2,\"signal\":\"o_count\",\"expected\":\"0011\",\"actual\":\"0011\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"normal\",\"cycle\":3,\"signal\":\"o_count\",\"expected\":\"0100\",\"actual\":\"0100\"}\nIVERILOG_AI_SUMMARY {\"checks\":4,\"failures\":0,\"cycles\":4}\n",
+      "timed_out": false
+    },
+    "run_id": "aab4742ebb08",
+    "schema_version": "1.0",
+    "started_at": "2026-10-05T05:18:30.805283Z",
+    "status": "passed",
+    "summary": {
+      "checks": 4,
+      "cycles": 4,
+      "failures": 0
+    },
+    "verdict": "passed"
+  },
+  "synthesis": {
+    "skipped_reason": "未启用综合证据层（run_synthesis=False）",
+    "status": "not_run"
+  },
+  "testbench_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma2\\event_accumulator-B\\tb_event_accumulator.v"
+}

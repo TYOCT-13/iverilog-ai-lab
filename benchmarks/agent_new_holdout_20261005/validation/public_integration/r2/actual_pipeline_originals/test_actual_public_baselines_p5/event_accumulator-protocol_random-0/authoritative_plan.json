@@ -1,0 +1,108 @@
+{
+  "schema_version": "1.0",
+  "design": "event_accumulator",
+  "objective": "Verify correct default interface behavior and ordinary multi-cycle operations",
+  "clock_period_ns": 10,
+  "reset": {
+    "signal": "i_rstn",
+    "active_level": 0,
+    "synchronous": false,
+    "assert_cycles": 2
+  },
+  "sample_before_reset": false,
+  "pre_reset_expected": {},
+  "vectors": [
+    {
+      "name": "protocol_random_0",
+      "inputs": {
+        "i_rstn": 1,
+        "i_enable": 0,
+        "i_event": 0,
+        "i_clear": 0
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "o_count": 0
+      },
+      "rationale": ""
+    },
+    {
+      "name": "protocol_random_1",
+      "inputs": {
+        "i_rstn": 1,
+        "i_enable": 1,
+        "i_event": 1,
+        "i_clear": 0
+      },
+      "cycles": 17,
+      "sample_phase": "after",
+      "expected": {
+        "o_count": 1
+      },
+      "rationale": ""
+    },
+    {
+      "name": "protocol_random_2",
+      "inputs": {
+        "i_rstn": 1,
+        "i_enable": 0,
+        "i_event": 1,
+        "i_clear": 0
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {
+        "o_count": 1
+      },
+      "rationale": ""
+    },
+    {
+      "name": "protocol_random_3",
+      "inputs": {
+        "i_rstn": 1,
+        "i_enable": 0,
+        "i_event": 0,
+        "i_clear": 1
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "o_count": 0
+      },
+      "rationale": ""
+    },
+    {
+      "name": "protocol_random_4",
+      "inputs": {
+        "i_rstn": 1,
+        "i_enable": 1,
+        "i_event": 1,
+        "i_clear": 0
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {
+        "o_count": 2
+      },
+      "rationale": ""
+    },
+    {
+      "name": "protocol_random_5",
+      "inputs": {
+        "i_rstn": 1,
+        "i_enable": 0,
+        "i_event": 0,
+        "i_clear": 0
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "o_count": 2
+      },
+      "rationale": ""
+    }
+  ],
+  "assumptions": [],
+  "assertions": []
+}

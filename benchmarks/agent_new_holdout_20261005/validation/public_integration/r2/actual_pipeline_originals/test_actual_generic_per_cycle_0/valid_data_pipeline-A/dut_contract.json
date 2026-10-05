@@ -1,0 +1,58 @@
+{
+  "clock": {
+    "edge": "posedge",
+    "period_ns": 10.0,
+    "signal": "i_clk"
+  },
+  "module": "valid_data_pipeline",
+  "ports": [
+    {
+      "direction": "input",
+      "name": "i_clk",
+      "signed": false,
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "name": "i_rstn",
+      "signed": false,
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "name": "i_flush",
+      "signed": false,
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "name": "i_valid",
+      "signed": false,
+      "width": 1
+    },
+    {
+      "direction": "input",
+      "name": "i_data",
+      "signed": false,
+      "width": 8
+    },
+    {
+      "direction": "output",
+      "name": "o_valid",
+      "signed": false,
+      "width": 1
+    },
+    {
+      "direction": "output",
+      "name": "o_data",
+      "signed": false,
+      "width": 8
+    }
+  ],
+  "reset": {
+    "active_level": 0,
+    "assert_cycles": 2,
+    "signal": "i_rstn",
+    "synchronous": false
+  }
+}

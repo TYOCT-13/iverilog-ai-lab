@@ -1,0 +1,210 @@
+{
+  "schema_version": "1.0",
+  "design": "valid_data_pipeline",
+  "objective": "Verify correct default interface behavior and ordinary multi-cycle operations",
+  "clock_period_ns": 10,
+  "reset": {
+    "signal": "i_rstn",
+    "active_level": 0,
+    "synchronous": false,
+    "assert_cycles": 2
+  },
+  "sample_before_reset": false,
+  "pre_reset_expected": {},
+  "vectors": [
+    {
+      "name": "random_0",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 0,
+        "i_valid": 0,
+        "i_data": 43
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": 0,
+        "o_data": 0
+      },
+      "rationale": ""
+    },
+    {
+      "name": "random_1",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 1,
+        "i_valid": 0,
+        "i_data": 157
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": 0,
+        "o_data": 0
+      },
+      "rationale": ""
+    },
+    {
+      "name": "random_2",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 1,
+        "i_valid": 0,
+        "i_data": 18
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": 0,
+        "o_data": 0
+      },
+      "rationale": ""
+    },
+    {
+      "name": "random_3",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 0,
+        "i_valid": 1,
+        "i_data": 201
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": 1,
+        "o_data": 201
+      },
+      "rationale": ""
+    },
+    {
+      "name": "random_4",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 1,
+        "i_valid": 1,
+        "i_data": 137
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": 0,
+        "o_data": 0
+      },
+      "rationale": ""
+    },
+    {
+      "name": "random_5",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 0,
+        "i_valid": 0,
+        "i_data": 186
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": 0,
+        "o_data": 0
+      },
+      "rationale": ""
+    },
+    {
+      "name": "random_6",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 1,
+        "i_valid": 1,
+        "i_data": 194
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": 0,
+        "o_data": 0
+      },
+      "rationale": ""
+    },
+    {
+      "name": "random_7",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 1,
+        "i_valid": 0,
+        "i_data": 90
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": 0,
+        "o_data": 0
+      },
+      "rationale": ""
+    },
+    {
+      "name": "random_8",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 0,
+        "i_valid": 0,
+        "i_data": 12
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": 0,
+        "o_data": 0
+      },
+      "rationale": ""
+    },
+    {
+      "name": "random_9",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 0,
+        "i_valid": 1,
+        "i_data": 88
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": 1,
+        "o_data": 88
+      },
+      "rationale": ""
+    },
+    {
+      "name": "random_10",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 0,
+        "i_valid": 1,
+        "i_data": 93
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": 1,
+        "o_data": 93
+      },
+      "rationale": ""
+    },
+    {
+      "name": "random_11",
+      "inputs": {
+        "i_rstn": 1,
+        "i_flush": 1,
+        "i_valid": 1,
+        "i_data": 186
+      },
+      "cycles": 2,
+      "sample_phase": "after",
+      "expected": {
+        "o_valid": 0,
+        "o_data": 0
+      },
+      "rationale": ""
+    }
+  ],
+  "assumptions": [],
+  "assertions": []
+}

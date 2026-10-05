@@ -15,6 +15,7 @@ from iverilog_ai.ai.agent import (
     decision_shape_constraints, run_verification_agent,
 )
 from iverilog_ai.ai.schema import TestVector as Vector
+from iverilog_ai.ai.debug_provider import bundled_contract
 from iverilog_ai.core.contracts import DutContract
 from iverilog_ai.core.pipeline import VerificationPipeline
 from iverilog_ai.core.reference_model import AUTHORITATIVE, INPUT_DEFAULTS, reference_sampling_profile
@@ -72,7 +73,9 @@ class CheckedStub:
 
 
 def contract_for(module):
-    return DutContract.from_dict(json.loads((ROOT / "examples" / f"{module}_contract.json").read_bytes()))
+    payload = bundled_contract(module)
+    assert payload.get("module") == module
+    return DutContract.from_dict(payload)
 
 
 def proposal(cycles=2, *, inputs=None, count=1):
@@ -86,8 +89,11 @@ def stop():
 
 
 def run(tmp_path, service, *, module="mod10_counter", pipeline=None, contract=None, **options):
+    rtl = (ROOT / f"benchmarks/agent_new_holdout_20261005/targets/{module}/A/{module}.v"
+           if module in {"valid_data_pipeline", "event_accumulator"}
+           else ROOT / "rtl" / f"{module}.v")
     return run_verification_agent(
-        provider=service, contract=contract or contract_for(module), rtl_path=ROOT / "rtl" / f"{module}.v",
+        provider=service, contract=contract or contract_for(module), rtl_path=rtl,
         output_dir=tmp_path / "agent", objective="local generic feedback integration",
         pipeline=pipeline or CheckedStub(), agent_plan_mode="independent",
         limits=options.pop("limits", AgentLimits(max_rounds=3, max_requests=3, max_total_cycles=16)),

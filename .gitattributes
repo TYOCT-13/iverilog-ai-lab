@@ -92,6 +92,21 @@ docs/review/agent-feedback-study-review-2026-10-05/** -text whitespace=blank-at-
 # 保留 v8 收集失败及审计器误拦日志的原始空白，不改写证据。
 docs/experiment/agent-feedback-validation-2026-10-05/components/agent/targeted-collection-failure.txt whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
 docs/review/agent-feedback-prereg-review-2026-10-05/targeted-pytest.log whitespace=-blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# 新合成模块及原始验证/实验记录保持原字节；在事前验收前确定规则。
+benchmarks/agent_new_holdout_20261005/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+benchmarks/agent_new_holdout_20261005/validation/style/r*/deliverable_gate.md whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+benchmarks/agent_new_holdout_20261005/validation/**/*.log whitespace=-blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+benchmarks/agent_new_holdout_20261005/validation/**/*.xml whitespace=-blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+spec/agent_new_holdout_20261005/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/agent-new-holdout-validation-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/agent-new-holdout-validation-2026-10-05/**/*.log whitespace=-blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/agent-new-holdout-validation-2026-10-05/**/*.xml whitespace=-blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/agent-new-holdout-study-live-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/review/agent-new-holdout-prereg-review-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/review/agent-new-holdout-prereg-review-2026-10-05/**/*.log whitespace=-blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+docs/review/agent-new-holdout-prereg-review-2026-10-05/**/*.xml whitespace=-blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+docs/review/agent-new-holdout-study-review-2026-10-05/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/review/agent-new-holdout-study-review-2026-10-05/**/*.log whitespace=-blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
 # 技能生成的四份失败审查原报告含尾空行，保留原件，仅豁免其 EOF 空白。
 benchmarks/agent_holdout_20261005/audit/credit-deliverable-first.md whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
 benchmarks/agent_holdout_20261005/audit/credit-deliverable-corrected.md whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol

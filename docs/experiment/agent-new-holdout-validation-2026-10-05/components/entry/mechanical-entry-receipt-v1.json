@@ -1,0 +1,28 @@
+{
+  "mechanical_only": true,
+  "API_calls": 0,
+  "DUT_runs": 0,
+  "real_key_reads": 0,
+  "pytest_passed": 55,
+  "mypy": "success: one source file",
+  "source_revision": "2f124e7681e386952fd44a529eaafbc1ca7ff825",
+  "freeze_status": "UNFROZEN",
+  "config_manifest_sha256": null,
+  "provisional_manifest_sha256_not_a_freeze": "5ce3a52275d0ac833f45c6387adce86d3fc2a59756028b8a7e54d530a9ee9770",
+  "registered_rows": 108,
+  "theoretical_requests": 126,
+  "registered_original_files": 458,
+  "owned_files_sha256": {
+    "scripts/run_agent_new_holdout_study.py": "345ed579a919b9556f5471259715390fb6308a8efed43062937841994c05c289",
+    "spec/agent_new_holdout_study_1m_v8.json": "743e70ba81d84c974b389b8fb2327f77183d5dc0418d4eaafd91d6a798d9da64",
+    "docs/experiment/agent_new_holdout_study_plan_2026-10-05.md": "dbc7efc327b71804ae36ff0516f392adc9ab79eb243e8a19e93a5b7ae5b0a724",
+    "tests/core/test_agent_new_holdout_study.py": "ccba5763b19c56405aa3573a8814ee245acbeecc639b8fd7ea420cdc38996582"
+  },
+  "frozen_sources_sha256": {
+    "src/iverilog_ai/ai/agent.py": "bf8422840a97ed3360f0dac0ee0621fd605970d658521ce7bec0d57f3c8016ff",
+    "src/iverilog_ai/core/observation_feedback.py": "3586fa13bd2ab82668188dac48b1a3055a935ff87d66d6accd600938e1b621d6"
+  },
+  "system_prompt_sha256": "3dd3f86f6f15b2367dc8f0913c5f3c7fe646782258093a148170f60200d6a26a",
+  "fresh_live_output_absent": true,
+  "owned_source_bytes_stable": true
+}

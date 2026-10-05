@@ -1,0 +1,138 @@
+{
+  "schema": "private-new-module-prior-membership-v1",
+  "registered_completed_cohorts": [
+    {
+      "path": "docs/experiment/agent-budget-study-live-2026-10-05/preregistration.json",
+      "sha256": "0ae79dbc7eba99c8de665f3e11c4af0c5f87a886057d6b04a4b7290c27416435",
+      "cases": [
+        "credit_guard",
+        "edge_detector",
+        "handshake_stage",
+        "pulse_stretcher",
+        "rotating_arbiter",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "rows": 432
+    },
+    {
+      "path": "docs/experiment/agent-comparison-v2-2026-10-04/preregistration.json",
+      "sha256": "6fdd06c0f8e4bbdc2d23d91dca275157de85490df64c1ba5629dfb4dea2b2494",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "rows": 252
+    },
+    {
+      "path": "docs/experiment/agent-comparison-v4-smoke-2026-10-04/preregistration.json",
+      "sha256": "b19d3c766e8759c50f49cc32a0c4ff9864ca1505f08cfac29704c90bbe02297e",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "rows": 84
+    },
+    {
+      "path": "docs/experiment/agent-comparison-v5-live-2026-10-05/preregistration.json",
+      "sha256": "76b3d5bfb58b7c7ffa6c353c1036f423802e64a0598c70becca44b9985bc588c",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "rows": 60
+    },
+    {
+      "path": "docs/experiment/agent-holdout-study-live-2026-10-05/preregistration.json",
+      "sha256": "b0a99cdf221ad4e9fe9ce5d92d9a9c877157646766a4197eca70fd209d010925",
+      "cases": [
+        "credit_guard",
+        "rotating_arbiter"
+      ],
+      "rows": 108
+    },
+    {
+      "path": "docs/experiment/agent-recovery-study-live-2026-10-05/preregistration.json",
+      "sha256": "5cdb8ffc0eb88bbbb6942e316a3b76a184afff8b95de06f8929d678559adea07",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "rows": 216
+    },
+    {
+      "path": "docs/experiment/agent-smoke-diagnostic-2026-10-05/preregistration.json",
+      "sha256": "4cc5cbc5adebf8446f7159a1021c68ad930a9f71a4a0194565257795e87b8d0d",
+      "cases": [
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "rows": 6
+    },
+    {
+      "path": "docs/experiment/agent-smoke-live-2026-10-05/preregistration.json",
+      "sha256": "71a36686edda32ca55b42db7b5442a9fd353a344b32b3270aeebbf43cbca2d7c",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "rows": 144
+    },
+    {
+      "path": "docs/experiment/agent-study-1m-live-2026-10-05/preregistration.json",
+      "sha256": "3e66b4ec487e9a7682eb322dca413e05c2265f7f1180009a74c65778cb709c9b",
+      "cases": [
+        "handshake_stage",
+        "spi_master",
+        "sync_fifo",
+        "uart_tx"
+      ],
+      "rows": 216
+    },
+    {
+      "path": "docs/experiment/application-uart-v2-2026-10-04/preregistration.json",
+      "sha256": "a76c0d918a75accc3236dc352ac6247641288e91fb65a07659e6eb76fcd50abb",
+      "cases": [
+        "uart_tx"
+      ],
+      "rows": 3
+    }
+  ],
+  "rtl_module_names": [
+    "credit_guard",
+    "debounce",
+    "edge_detector",
+    "handshake_stage",
+    "johnson_counter",
+    "mod10_counter",
+    "mux4",
+    "pulse_stretcher",
+    "pwm",
+    "rotating_arbiter",
+    "sequence_101_overlap",
+    "simple_alu",
+    "spi_master",
+    "sync_fifo",
+    "sync_reset",
+    "traffic_light_emergency",
+    "uart_tx"
+  ],
+  "selected_modules": [
+    "valid_data_pipeline",
+    "event_accumulator"
+  ],
+  "current_v8_results_read": false,
+  "scope": "Public completed preregistrations and standard RTL module names only; not a proof of training novelty or universal absence from all informal/API discussions."
+}

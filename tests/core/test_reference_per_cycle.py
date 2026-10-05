@@ -9,6 +9,7 @@ from pathlib import Path
 import pytest
 
 from iverilog_ai.ai.debug_server import build_plan_response
+from iverilog_ai.ai.debug_provider import bundled_contract
 from iverilog_ai.ai.schema import TestPlan as Plan
 from iverilog_ai.core.contracts import DutContract
 from iverilog_ai.core.models import ResultStatus
@@ -24,7 +25,9 @@ TOOLS = locate_tools()
 
 
 def _contract(design: str) -> DutContract:
-    return DutContract.from_dict(json.loads((ROOT / f"examples/{design}_contract.json").read_text(encoding="utf-8")))
+    payload = bundled_contract(design)
+    assert payload.get("module") == design
+    return DutContract.from_dict(payload)
 
 
 def _plan(design: str, vectors: list[dict]) -> Plan:
@@ -180,7 +183,9 @@ def test_all_default_builtin_profiles_match_actual_rtl_cycle_by_cycle(tmp_path, 
     payload["sample_before_reset"] = False
     plan = Plan.model_validate(payload)
     original = plan.model_dump(mode="json")
-    result = _run(plan, f"rtl/{design}.v", tmp_path / design)
+    rtl = (f"benchmarks/agent_new_holdout_20261005/targets/{design}/A/{design}.v"
+           if design in {"valid_data_pipeline", "event_accumulator"} else f"rtl/{design}.v")
+    result = _run(plan, rtl, tmp_path / design)
     expected_cycles = sum(vector.cycles for vector in plan.vectors)
     assert result.status is ResultStatus.PASSED, [failure.to_dict() for failure in result.failures[:3]]
     assert result.simulation.check_count == expected_cycles * len(contract.outputs)

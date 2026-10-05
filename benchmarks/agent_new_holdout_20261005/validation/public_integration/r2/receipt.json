@@ -1,0 +1,51 @@
+{
+  "schema": "new-internal-holdout-public-integration-run-v1",
+  "pytest": {
+    "argv": [
+      "D:\\Users\\TYOCT\\anaconda3\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b",
+      "--junitxml",
+      "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\public_integration\\r2\\pytest.xml",
+      "E:\\FPGA_WORK\\iverilog-ai-lab\\tests\\core\\test_agent_new_holdout_assets.py",
+      "E:\\FPGA_WORK\\iverilog-ai-lab\\tests\\core\\test_agent_new_holdout_oracles.py"
+    ],
+    "returncode": 0,
+    "duration_seconds": 4.469,
+    "stdout_sha256": "19bc7e9afedd01dcdc6a40f8335dc2059e8fb34ed1ca6820f17965830a1c164f",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "mypy": {
+    "argv": [
+      "D:\\Users\\TYOCT\\anaconda3\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "mypy",
+      "--follow-imports=skip",
+      "--cache-dir",
+      "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\public_integration\\r2\\mypy_cache",
+      "E:\\FPGA_WORK\\iverilog-ai-lab\\src\\iverilog_ai\\core\\reference_model.py",
+      "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\baselines.py",
+      "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\reference_models.py"
+    ],
+    "returncode": 0,
+    "duration_seconds": 1.797,
+    "stdout_sha256": "281a094c39385b4d7b53e5db635f52158036861433c2a4975b9039e77a627a24",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "external_test_temp": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b",
+  "API_calls": 0,
+  "API_keys_read": false,
+  "only_new_tests_selected": true,
+  "whole_repository_regression": false
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "design": "event_accumulator",
+  "objective": "fixed public contract semantic acceptance",
+  "clock_period_ns": 10,
+  "reset": {},
+  "sample_before_reset": false,
+  "pre_reset_expected": {},
+  "vectors": [
+    {
+      "name": "accept",
+      "inputs": {
+        "i_enable": 1,
+        "i_event": 1
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "o_count": 1
+      },
+      "rationale": ""
+    },
+    {
+      "name": "clear",
+      "inputs": {
+        "i_enable": 0,
+        "i_event": 0,
+        "i_clear": 1
+      },
+      "cycles": 1,
+      "sample_phase": "after",
+      "expected": {
+        "o_count": 0
+      },
+      "rationale": ""
+    }
+  ],
+  "assumptions": [],
+  "assertions": []
+}

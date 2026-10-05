@@ -1,0 +1,385 @@
+{
+  "artifacts": {
+    "authoritative_plan": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma0\\valid_data_pipeline-B\\authoritative_plan.json",
+    "dut_contract": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma0\\valid_data_pipeline-B\\dut_contract.json",
+    "output_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma0\\valid_data_pipeline-B",
+    "pipeline_result": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma0\\valid_data_pipeline-B\\pipeline_result.json",
+    "reference_samples": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma0\\valid_data_pipeline-B\\reference_samples.json",
+    "result_json": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma0\\valid_data_pipeline-B\\runs\\run-ea258cb584e9\\result.json",
+    "run_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma0\\valid_data_pipeline-B\\runs\\run-ea258cb584e9",
+    "testbench": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma0\\valid_data_pipeline-B\\tb_valid_data_pipeline.v",
+    "testplan": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma0\\valid_data_pipeline-B\\testplan.json",
+    "vcd": ""
+  },
+  "contract": {
+    "clock": {
+      "edge": "posedge",
+      "period_ns": 10.0,
+      "signal": "i_clk"
+    },
+    "module": "valid_data_pipeline",
+    "ports": [
+      {
+        "direction": "input",
+        "name": "i_clk",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "input",
+        "name": "i_rstn",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "input",
+        "name": "i_flush",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "input",
+        "name": "i_valid",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "input",
+        "name": "i_data",
+        "signed": false,
+        "width": 8
+      },
+      {
+        "direction": "output",
+        "name": "o_valid",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "output",
+        "name": "o_data",
+        "signed": false,
+        "width": 8
+      }
+    ],
+    "reset": {
+      "active_level": 0,
+      "assert_cycles": 2,
+      "signal": "i_rstn",
+      "synchronous": false
+    }
+  },
+  "coverage": {
+    "checks": {
+      "covered": 8,
+      "percent": 100.0,
+      "total": 8
+    },
+    "definition": "测试计划执行覆盖率；不代表 RTL 代码覆盖率",
+    "per_signal": {
+      "o_data": {
+        "covered": 4,
+        "percent": 100.0,
+        "total": 4
+      },
+      "o_valid": {
+        "covered": 4,
+        "percent": 100.0,
+        "total": 4
+      }
+    },
+    "vectors": {
+      "covered": 1,
+      "percent": 100.0,
+      "total": 1
+    }
+  },
+  "created_at": "2026-10-05T05:18:30.678338Z",
+  "failure_explanations": [],
+  "plan": {
+    "assertions": [],
+    "assumptions": [],
+    "clock_period_ns": 10,
+    "design": "valid_data_pipeline",
+    "objective": "fixed public contract semantic acceptance",
+    "pre_reset_expected": {},
+    "reset": {},
+    "sample_before_reset": false,
+    "schema_version": "1.0",
+    "vectors": [
+      {
+        "cycles": 4,
+        "expected": {},
+        "inputs": {
+          "i_flush": 0,
+          "i_valid": 0
+        },
+        "name": "normal",
+        "rationale": "",
+        "sample_phase": "after"
+      }
+    ]
+  },
+  "schema_version": "1.0",
+  "simulation": {
+    "artifacts": {
+      "compile_stderr": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma0\\valid_data_pipeline-B\\runs\\run-ea258cb584e9\\compile.stderr.txt",
+      "compile_stdout": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma0\\valid_data_pipeline-B\\runs\\run-ea258cb584e9\\compile.stdout.txt",
+      "compile_vvp": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma0\\valid_data_pipeline-B\\runs\\run-ea258cb584e9\\compile.vvp",
+      "result_json": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma0\\valid_data_pipeline-B\\runs\\run-ea258cb584e9\\result.json",
+      "run_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma0\\valid_data_pipeline-B\\runs\\run-ea258cb584e9",
+      "run_stderr": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma0\\valid_data_pipeline-B\\runs\\run-ea258cb584e9\\run.stderr.txt",
+      "run_stdout": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma0\\valid_data_pipeline-B\\runs\\run-ea258cb584e9\\run.stdout.txt",
+      "vcd": ""
+    },
+    "compile": {
+      "command": [
+        "D:\\iverilog\\bin\\iverilog.exe",
+        "-g2012",
+        "-o",
+        "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma0\\valid_data_pipeline-B\\runs\\run-ea258cb584e9\\compile.vvp",
+        "-s",
+        "tb_valid_data_pipeline",
+        "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\valid_data_pipeline\\B\\valid_data_pipeline.v",
+        "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma0\\valid_data_pipeline-B\\tb_valid_data_pipeline.v"
+      ],
+      "duration_ms": 44,
+      "error": null,
+      "output_truncated": false,
+      "returncode": 0,
+      "status": "passed",
+      "stderr": "",
+      "stdout": "",
+      "timed_out": false
+    },
+    "config": {
+      "allowed_roots": [
+        "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\valid_data_pipeline\\B",
+        "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma0"
+      ],
+      "coverage": {
+        "checks": {
+          "covered": 8,
+          "percent": 100.0,
+          "total": 8
+        },
+        "definition": "测试计划执行覆盖率；不代表 RTL 代码覆盖率",
+        "per_signal": {
+          "o_data": {
+            "covered": 4,
+            "percent": 100.0,
+            "total": 4
+          },
+          "o_valid": {
+            "covered": 4,
+            "percent": 100.0,
+            "total": 4
+          }
+        },
+        "vectors": {
+          "covered": 1,
+          "percent": 100.0,
+          "total": 1
+        }
+      },
+      "cross_validation": {
+        "ai_expected_mismatch": false,
+        "independent_sources": 1,
+        "sources": [
+          "iverilog",
+          "reference_model"
+        ],
+        "status": "consistent"
+      },
+      "defines": [],
+      "include_dirs": [],
+      "iverilog_path": "D:\\iverilog\\bin\\iverilog.exe",
+      "keep_artifacts": true,
+      "language": "2012",
+      "oracle": {
+        "ai_expectations_used_for_checking": false,
+        "authoritative_vectors": 1,
+        "checked": 1,
+        "checked_expected": 0,
+        "consistency_rate": null,
+        "design": "valid_data_pipeline",
+        "evidence_level": "reference_model",
+        "expectation_evidence_level": "reference_model",
+        "expectation_source": "reference_model",
+        "matched_expected": 0,
+        "plans_with_expectations": 0,
+        "reference_check_schedule": [
+          {
+            "cycles": 4,
+            "first_cycle": 0,
+            "signals": [
+              "o_valid",
+              "o_data"
+            ],
+            "test_id": "normal"
+          }
+        ],
+        "reference_policy": "builtin",
+        "reference_samples": {
+          "expected_checks": 8,
+          "expected_cycles": 4,
+          "limitations": [
+            "Generated expectations are separate from actual simulation observations",
+            "The original plan is not expanded; each sample uses one reference state transition",
+            "Only supported builtin profiles and after sampling are authoritative",
+            "Initial contract reset is applied; these cycles exclude reset and pre_reset assertions"
+          ],
+          "profile": "builtin-reference-per-cycle-v1:valid_data_pipeline",
+          "provenance": {
+            "contract_sha256": "344bd74e2909a684dd9d316dccc2aca36e76dc7b69f3b8a8dee2c9959546b907",
+            "plan_sha256": "30eede97f13c1ce116a13c6a2784ecd1ae3ce4065d5d8a7e465708fdb1730e10",
+            "reference_model_sha256": "ef177904f5f4c4fad51a3c1508775a3f6de247945220d2fa4ba317b98b5a7763",
+            "rtl_sha256": "ff53d3f422e174a8758b8e6f1a8ff1d3c729ee694c9fd392330a3af7798fc3b0",
+            "testbench_sha256": "91116f342a7147df469442a34d4676783156bc91a31bac1fdd9a234eeeea6e93"
+          },
+          "reference_sampling": "per_cycle",
+          "schema_version": "1.0",
+          "sha256": "eb6a6a9f548a86aab19efaad32fc4aecdb59316b82f7bf088f59749d3d849883",
+          "source": "independent_reference_model",
+          "status": "generated"
+        },
+        "reference_sampling": "per_cycle",
+        "status": "passed",
+        "uncheckable_expected": [],
+        "warnings": []
+      },
+      "output_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma0\\valid_data_pipeline-B\\runs",
+      "reference_sampling": "per_cycle",
+      "rtl_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\valid_data_pipeline\\B\\valid_data_pipeline.v",
+      "rtl_sha256": "ff53d3f422e174a8758b8e6f1a8ff1d3c729ee694c9fd392330a3af7798fc3b0",
+      "structured_assertions": {
+        "checked": 0,
+        "failed": 0,
+        "passed": 0,
+        "results": [],
+        "status": "skipped"
+      },
+      "synthesis": {
+        "skipped_reason": "未启用综合证据层（run_synthesis=False）",
+        "status": "not_run"
+      },
+      "testbench_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma0\\valid_data_pipeline-B\\tb_valid_data_pipeline.v",
+      "testbench_sha256": "91116f342a7147df469442a34d4676783156bc91a31bac1fdd9a234eeeea6e93",
+      "timeout_seconds": 30.0,
+      "top_module": "tb_valid_data_pipeline",
+      "vcd_analysis": {
+        "status": "not_available"
+      },
+      "verification_status": "verified",
+      "vvp_path": "D:\\iverilog\\bin\\vvp.exe"
+    },
+    "diagnostics": [],
+    "error": null,
+    "failures": [],
+    "finished_at": "2026-10-05T05:18:30.677338Z",
+    "passed": true,
+    "records": [
+      {
+        "actual": "0",
+        "cycle": 0,
+        "expected": "0",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "normal"
+      },
+      {
+        "actual": "00000000",
+        "cycle": 0,
+        "expected": "00000000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "normal"
+      },
+      {
+        "actual": "0",
+        "cycle": 1,
+        "expected": "0",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "normal"
+      },
+      {
+        "actual": "00000000",
+        "cycle": 1,
+        "expected": "00000000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "normal"
+      },
+      {
+        "actual": "0",
+        "cycle": 2,
+        "expected": "0",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "normal"
+      },
+      {
+        "actual": "00000000",
+        "cycle": 2,
+        "expected": "00000000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "normal"
+      },
+      {
+        "actual": "0",
+        "cycle": 3,
+        "expected": "0",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "normal"
+      },
+      {
+        "actual": "00000000",
+        "cycle": 3,
+        "expected": "00000000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "normal"
+      }
+    ],
+    "run": {
+      "command": [
+        "D:\\iverilog\\bin\\vvp.exe",
+        "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma0\\valid_data_pipeline-B\\runs\\run-ea258cb584e9\\compile.vvp"
+      ],
+      "duration_ms": 16,
+      "error": null,
+      "output_truncated": false,
+      "returncode": 0,
+      "status": "passed",
+      "stderr": "",
+      "stdout": "IVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"normal\",\"cycle\":0,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"0\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"normal\",\"cycle\":0,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"normal\",\"cycle\":1,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"0\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"normal\",\"cycle\":1,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"normal\",\"cycle\":2,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"0\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"normal\",\"cycle\":2,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"normal\",\"cycle\":3,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"0\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"normal\",\"cycle\":3,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_SUMMARY {\"checks\":8,\"failures\":0,\"cycles\":4}\n",
+      "timed_out": false
+    },
+    "run_id": "ea258cb584e9",
+    "schema_version": "1.0",
+    "started_at": "2026-10-05T05:18:30.607115Z",
+    "status": "passed",
+    "summary": {
+      "checks": 8,
+      "cycles": 4,
+      "failures": 0
+    },
+    "verdict": "passed"
+  },
+  "synthesis": {
+    "skipped_reason": "未启用综合证据层（run_synthesis=False）",
+    "status": "not_run"
+  },
+  "testbench_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_mutation_non_target_norma0\\valid_data_pipeline-B\\tb_valid_data_pipeline.v"
+}

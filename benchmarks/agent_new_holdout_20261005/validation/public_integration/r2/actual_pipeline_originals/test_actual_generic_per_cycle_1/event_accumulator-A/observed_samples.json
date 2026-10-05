@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "source": "testbench_sample_statement",
+  "status": "complete",
+  "expected_cycles": 1,
+  "observed_cycles": 1,
+  "errors": [],
+  "provenance": {
+    "rtl_sha256": "4f8137509bc2116624f8c444f5e6d0bca319f6b2993371610dd2c2432c44d071",
+    "contract_sha256": "f4962c457edd81bb44ce941fe0e3ed82d6f62c33dfb536bb0010a8c526b7f236",
+    "plan_sha256": "0d8c14f8272e7fc0754aa6fa6d70b5064cd9025b254a2df7bedffcb4b9cf66f0",
+    "testbench_sha256": "fa7b57738dc91c2b880be2f262ee291c365b74505a99201d99ece8f977a834d5"
+  },
+  "samples": [
+    {
+      "cycle": 0,
+      "time_ns": 26.0,
+      "test_id": "paused",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_enable": "0",
+        "i_event": "1",
+        "i_clear": "0"
+      },
+      "outputs": {
+        "o_count": "0000"
+      }
+    }
+  ],
+  "limitations": [
+    "Port observations are not assertion checks or proof of correctness",
+    "Unknown x/z bits remain unknown",
+    "Stimulus cycles exclude initial reset"
+  ]
+}

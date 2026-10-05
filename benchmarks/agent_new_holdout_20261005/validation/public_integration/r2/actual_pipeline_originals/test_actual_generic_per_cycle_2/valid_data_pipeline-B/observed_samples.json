@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "source": "testbench_sample_statement",
+  "status": "complete",
+  "expected_cycles": 2,
+  "observed_cycles": 2,
+  "errors": [],
+  "provenance": {
+    "rtl_sha256": "ff53d3f422e174a8758b8e6f1a8ff1d3c729ee694c9fd392330a3af7798fc3b0",
+    "contract_sha256": "344bd74e2909a684dd9d316dccc2aca36e76dc7b69f3b8a8dee2c9959546b907",
+    "plan_sha256": "82e1a0a1ec09ac9b64a4c37bb3f2f2b05d8030dfe17bc4650b4724ade832fddf",
+    "testbench_sha256": "d89ce783afe05e1e12e1e24b2a858241ffd24a30c4a74baf30888bab421f8937"
+  },
+  "samples": [
+    {
+      "cycle": 0,
+      "time_ns": 26.0,
+      "test_id": "accept",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "0",
+        "i_valid": "1",
+        "i_data": "10100101"
+      },
+      "outputs": {
+        "o_valid": "1",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 1,
+      "time_ns": 36.0,
+      "test_id": "next",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "0",
+        "i_valid": "0",
+        "i_data": "10100101"
+      },
+      "outputs": {
+        "o_valid": "0",
+        "o_data": "10100101"
+      }
+    }
+  ],
+  "limitations": [
+    "Port observations are not assertion checks or proof of correctness",
+    "Unknown x/z bits remain unknown",
+    "Stimulus cycles exclude initial reset"
+  ]
+}

@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="28" skipped="0" tests="104" time="4.322" timestamp="2026-10-05T13:17:10.292551" hostname="DESKTOP-52MFNUK"><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_member_and_resource_hashes_bind_all_formal_files" time="0.026" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_two_variants_are_exact_single_source_replacements_with_same_interface[valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_two_variants_are_exact_single_source_replacements_with_same_interface[event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_correct_specs_include_full_fixed_timing_and_no_private_label_or_witness[valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_correct_specs_include_full_fixed_timing_and_no_private_label_or_witness[event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_reads_only_correct_spec_and_meets_identical_caps[0-fixed-valid_data_pipeline]" time="0.003" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_reads_only_correct_spec_and_meets_identical_caps[0-fixed-event_accumulator]" time="0.002" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_reads_only_correct_spec_and_meets_identical_caps[0-random-valid_data_pipeline]" time="0.002" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_reads_only_correct_spec_and_meets_identical_caps[0-random-event_accumulator]" time="0.002" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_reads_only_correct_spec_and_meets_identical_caps[0-protocol_random-valid_data_pipeline]" time="0.002" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_reads_only_correct_spec_and_meets_identical_caps[0-protocol_random-event_accumulator]" time="0.002" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_reads_only_correct_spec_and_meets_identical_caps[1-fixed-valid_data_pipeline]" time="0.003" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_reads_only_correct_spec_and_meets_identical_caps[1-fixed-event_accumulator]" time="0.002" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_reads_only_correct_spec_and_meets_identical_caps[1-random-valid_data_pipeline]" time="0.002" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_reads_only_correct_spec_and_meets_identical_caps[1-random-event_accumulator]" time="0.002" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_reads_only_correct_spec_and_meets_identical_caps[1-protocol_random-valid_data_pipeline]" time="0.002" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_reads_only_correct_spec_and_meets_identical_caps[1-protocol_random-event_accumulator]" time="0.002" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_reads_only_correct_spec_and_meets_identical_caps[2-fixed-valid_data_pipeline]" time="0.002" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_reads_only_correct_spec_and_meets_identical_caps[2-fixed-event_accumulator]" time="0.002" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_reads_only_correct_spec_and_meets_identical_caps[2-random-valid_data_pipeline]" time="0.002" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_reads_only_correct_spec_and_meets_identical_caps[2-random-event_accumulator]" time="0.002" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_reads_only_correct_spec_and_meets_identical_caps[2-protocol_random-valid_data_pipeline]" time="0.002" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_reads_only_correct_spec_and_meets_identical_caps[2-protocol_random-event_accumulator]" time="0.002" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_rejects_wrong_arguments[case-valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_rejects_wrong_arguments[case-event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_rejects_wrong_arguments[strategy-valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_rejects_wrong_arguments[strategy-event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_rejects_wrong_arguments[negative_seed-valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_rejects_wrong_arguments[negative_seed-event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_rejects_wrong_arguments[boolean_seed-valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_rejects_wrong_arguments[boolean_seed-event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_rejects_wrong_arguments[short_cycles-valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_rejects_wrong_arguments[short_cycles-event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_rejects_wrong_arguments[float_cycles-valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_rejects_wrong_arguments[float_cycles-event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_rejects_wrong_arguments[raw_contract-valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_baseline_factory_rejects_wrong_arguments[raw_contract-event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_assets" name="test_private_reference_functions_validate_known_inputs_and_zero_word_is_valid_data" time="0.000" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_pipeline_correct_manual_table_capture_emit_bubble_flush_and_resume" time="0.002" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_counter_correct_manual_table_permission_hold_clear_and_mod16_wrap" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_fixed_profile_implicit_defaults_reset_held_inputs_and_independent_episode[valid_data_pipeline]" time="0.002" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_fixed_profile_implicit_defaults_reset_held_inputs_and_independent_episode[event_accumulator]" time="0.002" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[parameter-valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[parameter-event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[signed-valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[signed-event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[width-valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[width-event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[inout-valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[inout-event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[extra_port-valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[extra_port-event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[clock_edge-valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[clock_edge-event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[clock_period-valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[clock_period-event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[clock_alias-valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[clock_alias-event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[reset_sync-valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[reset_sync-event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[reset_polarity-valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[reset_polarity-event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[reset_length-valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[reset_length-event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[reset_alias-valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[reset_alias-event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[initial-valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[initial-event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[no_clock-valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[no_clock-event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[no_reset-valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_new_authoritative_values_require_complete_exact_fixed_contract[no_reset-event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_legacy_name_only_and_raw_contract_never_select_new_authority[valid_data_pipeline]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_legacy_name_only_and_raw_contract_never_select_new_authority[event_accumulator]" time="0.001" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_before_unknown_and_clock_driving_fail_closed[valid_data_pipeline]" time="0.004" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_before_unknown_and_clock_driving_fail_closed[event_accumulator]" time="0.004" /><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_generic_per_cycle_pipeline_correct_and_semantic_mutation_controls[A-valid_data_pipeline]" time="0.114"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_generic_per_cycle_0')
+case = 'valid_data_pipeline', variant = 'A'
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("variant", ("A", "B", "C"))
+    def test_actual_generic_per_cycle_pipeline_correct_and_semantic_mutation_controls(tmp_path, case, variant):
+        stimulus = witness(case, "B" if variant == "A" else variant)
+        original = stimulus.model_dump()
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / variant / f"{case}.v", tmp_path / f"{case}-{variant}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+        assert result.simulation.compile.returncode == 0 and result.simulation.run.returncode == 0
+        assert result.status is (ResultStatus.PASSED if variant == "A" else ResultStatus.FAILED)
+        assert result.simulation.check_count == sum(vector.cycles for vector in stimulus.vectors) * len(contract(case).outputs)
+        assert result.plan is stimulus and stimulus.model_dump() == original
+        packet = json.loads(Path(result.artifacts["observed_samples"]).read_text(encoding="utf-8"))
+        assert packet["status"] == "complete" and packet["expected_cycles"] == packet["observed_cycles"] == sum(vector.cycles for vector in stimulus.vectors)
+        expected_failures = 0 if variant == "A" else 2 if case == CASES[0] and variant == "B" else 1
+&gt;       assert result.simulation.failure_count == expected_failures
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:168: AttributeError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_generic_per_cycle_pipeline_correct_and_semantic_mutation_controls[A-event_accumulator]" time="0.099"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_generic_per_cycle_1')
+case = 'event_accumulator', variant = 'A'
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("variant", ("A", "B", "C"))
+    def test_actual_generic_per_cycle_pipeline_correct_and_semantic_mutation_controls(tmp_path, case, variant):
+        stimulus = witness(case, "B" if variant == "A" else variant)
+        original = stimulus.model_dump()
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / variant / f"{case}.v", tmp_path / f"{case}-{variant}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+        assert result.simulation.compile.returncode == 0 and result.simulation.run.returncode == 0
+        assert result.status is (ResultStatus.PASSED if variant == "A" else ResultStatus.FAILED)
+        assert result.simulation.check_count == sum(vector.cycles for vector in stimulus.vectors) * len(contract(case).outputs)
+        assert result.plan is stimulus and stimulus.model_dump() == original
+        packet = json.loads(Path(result.artifacts["observed_samples"]).read_text(encoding="utf-8"))
+        assert packet["status"] == "complete" and packet["expected_cycles"] == packet["observed_cycles"] == sum(vector.cycles for vector in stimulus.vectors)
+        expected_failures = 0 if variant == "A" else 2 if case == CASES[0] and variant == "B" else 1
+&gt;       assert result.simulation.failure_count == expected_failures
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:168: AttributeError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_generic_per_cycle_pipeline_correct_and_semantic_mutation_controls[B-valid_data_pipeline]" time="0.101"><failure message="AssertionError: assert &lt;ResultStatus.PASSED_WITH_WARNINGS: 'passed_with_warnings'&gt; is &lt;ResultStatus.FAILED: 'failed'&gt;&#10; +  where &lt;ResultStatus.PASSED_WITH_WARNINGS: 'passed_with_warnings'&gt; = PipelineResult(plan=TestPlan(schema_version='1.0', design='valid_data_pipeline', objective='fixed public contract sema...d_at='2026-10-05T05:17:11.534564Z', synthesis={'status': 'not_run', 'skipped_reason': '未启用综合证据层（run_synthesis=False）'}).status">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_generic_per_cycle_2')
+case = 'valid_data_pipeline', variant = 'B'
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("variant", ("A", "B", "C"))
+    def test_actual_generic_per_cycle_pipeline_correct_and_semantic_mutation_controls(tmp_path, case, variant):
+        stimulus = witness(case, "B" if variant == "A" else variant)
+        original = stimulus.model_dump()
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / variant / f"{case}.v", tmp_path / f"{case}-{variant}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+        assert result.simulation.compile.returncode == 0 and result.simulation.run.returncode == 0
+&gt;       assert result.status is (ResultStatus.PASSED if variant == "A" else ResultStatus.FAILED)
+E       AssertionError: assert &lt;ResultStatus.PASSED_WITH_WARNINGS: 'passed_with_warnings'&gt; is &lt;ResultStatus.FAILED: 'failed'&gt;
+E        +  where &lt;ResultStatus.PASSED_WITH_WARNINGS: 'passed_with_warnings'&gt; = PipelineResult(plan=TestPlan(schema_version='1.0', design='valid_data_pipeline', objective='fixed public contract sema...d_at='2026-10-05T05:17:11.534564Z', synthesis={'status': 'not_run', 'skipped_reason': '未启用综合证据层（run_synthesis=False）'}).status
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:162: AssertionError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_generic_per_cycle_pipeline_correct_and_semantic_mutation_controls[B-event_accumulator]" time="0.099"><failure message="AssertionError: assert &lt;ResultStatus.PASSED_WITH_WARNINGS: 'passed_with_warnings'&gt; is &lt;ResultStatus.FAILED: 'failed'&gt;&#10; +  where &lt;ResultStatus.PASSED_WITH_WARNINGS: 'passed_with_warnings'&gt; = PipelineResult(plan=TestPlan(schema_version='1.0', design='event_accumulator', objective='fixed public contract semant...d_at='2026-10-05T05:17:11.642985Z', synthesis={'status': 'not_run', 'skipped_reason': '未启用综合证据层（run_synthesis=False）'}).status">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_generic_per_cycle_3')
+case = 'event_accumulator', variant = 'B'
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("variant", ("A", "B", "C"))
+    def test_actual_generic_per_cycle_pipeline_correct_and_semantic_mutation_controls(tmp_path, case, variant):
+        stimulus = witness(case, "B" if variant == "A" else variant)
+        original = stimulus.model_dump()
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / variant / f"{case}.v", tmp_path / f"{case}-{variant}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+        assert result.simulation.compile.returncode == 0 and result.simulation.run.returncode == 0
+&gt;       assert result.status is (ResultStatus.PASSED if variant == "A" else ResultStatus.FAILED)
+E       AssertionError: assert &lt;ResultStatus.PASSED_WITH_WARNINGS: 'passed_with_warnings'&gt; is &lt;ResultStatus.FAILED: 'failed'&gt;
+E        +  where &lt;ResultStatus.PASSED_WITH_WARNINGS: 'passed_with_warnings'&gt; = PipelineResult(plan=TestPlan(schema_version='1.0', design='event_accumulator', objective='fixed public contract semant...d_at='2026-10-05T05:17:11.642985Z', synthesis={'status': 'not_run', 'skipped_reason': '未启用综合证据层（run_synthesis=False）'}).status
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:162: AssertionError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_generic_per_cycle_pipeline_correct_and_semantic_mutation_controls[C-valid_data_pipeline]" time="0.104"><failure message="AssertionError: assert &lt;ResultStatus.PASSED_WITH_WARNINGS: 'passed_with_warnings'&gt; is &lt;ResultStatus.FAILED: 'failed'&gt;&#10; +  where &lt;ResultStatus.PASSED_WITH_WARNINGS: 'passed_with_warnings'&gt; = PipelineResult(plan=TestPlan(schema_version='1.0', design='valid_data_pipeline', objective='fixed public contract sema...d_at='2026-10-05T05:17:11.756592Z', synthesis={'status': 'not_run', 'skipped_reason': '未启用综合证据层（run_synthesis=False）'}).status">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_generic_per_cycle_4')
+case = 'valid_data_pipeline', variant = 'C'
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("variant", ("A", "B", "C"))
+    def test_actual_generic_per_cycle_pipeline_correct_and_semantic_mutation_controls(tmp_path, case, variant):
+        stimulus = witness(case, "B" if variant == "A" else variant)
+        original = stimulus.model_dump()
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / variant / f"{case}.v", tmp_path / f"{case}-{variant}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+        assert result.simulation.compile.returncode == 0 and result.simulation.run.returncode == 0
+&gt;       assert result.status is (ResultStatus.PASSED if variant == "A" else ResultStatus.FAILED)
+E       AssertionError: assert &lt;ResultStatus.PASSED_WITH_WARNINGS: 'passed_with_warnings'&gt; is &lt;ResultStatus.FAILED: 'failed'&gt;
+E        +  where &lt;ResultStatus.PASSED_WITH_WARNINGS: 'passed_with_warnings'&gt; = PipelineResult(plan=TestPlan(schema_version='1.0', design='valid_data_pipeline', objective='fixed public contract sema...d_at='2026-10-05T05:17:11.756592Z', synthesis={'status': 'not_run', 'skipped_reason': '未启用综合证据层（run_synthesis=False）'}).status
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:162: AssertionError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_generic_per_cycle_pipeline_correct_and_semantic_mutation_controls[C-event_accumulator]" time="0.100"><failure message="AssertionError: assert &lt;ResultStatus.PASSED_WITH_WARNINGS: 'passed_with_warnings'&gt; is &lt;ResultStatus.FAILED: 'failed'&gt;&#10; +  where &lt;ResultStatus.PASSED_WITH_WARNINGS: 'passed_with_warnings'&gt; = PipelineResult(plan=TestPlan(schema_version='1.0', design='event_accumulator', objective='fixed public contract semant...d_at='2026-10-05T05:17:11.866977Z', synthesis={'status': 'not_run', 'skipped_reason': '未启用综合证据层（run_synthesis=False）'}).status">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_generic_per_cycle_5')
+case = 'event_accumulator', variant = 'C'
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("variant", ("A", "B", "C"))
+    def test_actual_generic_per_cycle_pipeline_correct_and_semantic_mutation_controls(tmp_path, case, variant):
+        stimulus = witness(case, "B" if variant == "A" else variant)
+        original = stimulus.model_dump()
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / variant / f"{case}.v", tmp_path / f"{case}-{variant}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+        assert result.simulation.compile.returncode == 0 and result.simulation.run.returncode == 0
+&gt;       assert result.status is (ResultStatus.PASSED if variant == "A" else ResultStatus.FAILED)
+E       AssertionError: assert &lt;ResultStatus.PASSED_WITH_WARNINGS: 'passed_with_warnings'&gt; is &lt;ResultStatus.FAILED: 'failed'&gt;
+E        +  where &lt;ResultStatus.PASSED_WITH_WARNINGS: 'passed_with_warnings'&gt; = PipelineResult(plan=TestPlan(schema_version='1.0', design='event_accumulator', objective='fixed public contract semant...d_at='2026-10-05T05:17:11.866977Z', synthesis={'status': 'not_run', 'skipped_reason': '未启用综合证据层（run_synthesis=False）'}).status
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:162: AssertionError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_mutation_non_target_normal_controls_pass[valid_data_pipeline-B]" time="0.101"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_mutation_non_target_norma0')
+case = 'valid_data_pipeline', variant = 'B'
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case,variant", [(case, variant) for case in CASES for variant in ("B", "C")])
+    def test_mutation_non_target_normal_controls_pass(tmp_path, case, variant):
+        inputs = {"i_valid": 0, "i_flush": 0} if case == CASES[0] and variant == "B" else {"i_valid": 1, "i_data": 0x3C, "i_flush": 0} if case == CASES[0] else {"i_enable": 1, "i_event": 1, "i_clear": 0} if variant == "B" else {"i_enable": 1, "i_event": 1, "i_clear": 1}
+        stimulus = plan(case, [{"name": "normal", "inputs": inputs, "cycles": 4}])
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / variant / f"{case}.v", tmp_path / f"{case}-{variant}",
+            reference_sampling="per_cycle", emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+&gt;       assert result.status is ResultStatus.PASSED and result.simulation.failure_count == 0
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:178: AttributeError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_mutation_non_target_normal_controls_pass[valid_data_pipeline-C]" time="0.099"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_mutation_non_target_norma1')
+case = 'valid_data_pipeline', variant = 'C'
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case,variant", [(case, variant) for case in CASES for variant in ("B", "C")])
+    def test_mutation_non_target_normal_controls_pass(tmp_path, case, variant):
+        inputs = {"i_valid": 0, "i_flush": 0} if case == CASES[0] and variant == "B" else {"i_valid": 1, "i_data": 0x3C, "i_flush": 0} if case == CASES[0] else {"i_enable": 1, "i_event": 1, "i_clear": 0} if variant == "B" else {"i_enable": 1, "i_event": 1, "i_clear": 1}
+        stimulus = plan(case, [{"name": "normal", "inputs": inputs, "cycles": 4}])
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / variant / f"{case}.v", tmp_path / f"{case}-{variant}",
+            reference_sampling="per_cycle", emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+&gt;       assert result.status is ResultStatus.PASSED and result.simulation.failure_count == 0
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:178: AttributeError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_mutation_non_target_normal_controls_pass[event_accumulator-B]" time="0.098"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_mutation_non_target_norma2')
+case = 'event_accumulator', variant = 'B'
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case,variant", [(case, variant) for case in CASES for variant in ("B", "C")])
+    def test_mutation_non_target_normal_controls_pass(tmp_path, case, variant):
+        inputs = {"i_valid": 0, "i_flush": 0} if case == CASES[0] and variant == "B" else {"i_valid": 1, "i_data": 0x3C, "i_flush": 0} if case == CASES[0] else {"i_enable": 1, "i_event": 1, "i_clear": 0} if variant == "B" else {"i_enable": 1, "i_event": 1, "i_clear": 1}
+        stimulus = plan(case, [{"name": "normal", "inputs": inputs, "cycles": 4}])
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / variant / f"{case}.v", tmp_path / f"{case}-{variant}",
+            reference_sampling="per_cycle", emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+&gt;       assert result.status is ResultStatus.PASSED and result.simulation.failure_count == 0
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:178: AttributeError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_mutation_non_target_normal_controls_pass[event_accumulator-C]" time="0.097"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_mutation_non_target_norma3')
+case = 'event_accumulator', variant = 'C'
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case,variant", [(case, variant) for case in CASES for variant in ("B", "C")])
+    def test_mutation_non_target_normal_controls_pass(tmp_path, case, variant):
+        inputs = {"i_valid": 0, "i_flush": 0} if case == CASES[0] and variant == "B" else {"i_valid": 1, "i_data": 0x3C, "i_flush": 0} if case == CASES[0] else {"i_enable": 1, "i_event": 1, "i_clear": 0} if variant == "B" else {"i_enable": 1, "i_event": 1, "i_clear": 1}
+        stimulus = plan(case, [{"name": "normal", "inputs": inputs, "cycles": 4}])
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / variant / f"{case}.v", tmp_path / f"{case}-{variant}",
+            reference_sampling="per_cycle", emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+&gt;       assert result.status is ResultStatus.PASSED and result.simulation.failure_count == 0
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:178: AttributeError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_public_baselines_per_cycle_correct_controls_are_eligible[0-fixed-valid_data_pipeline]" time="0.120"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_public_baselines_p0')
+case = 'valid_data_pipeline', strategy = 'fixed', seed = 0
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("strategy", ("fixed", "random", "protocol_random"))
+    @pytest.mark.parametrize("seed", (0, 1, 2))
+    def test_actual_public_baselines_per_cycle_correct_controls_are_eligible(tmp_path, case, strategy, seed):
+        module_spec = importlib.util.spec_from_file_location("new_holdout_public_baselines", ASSETS / "baselines.py")
+        assert module_spec and module_spec.loader
+        baselines = importlib.util.module_from_spec(module_spec)
+        module_spec.loader.exec_module(baselines)
+        stimulus = baselines.baseline_factory(case, strategy, seed, contract(case), 24)
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / "A" / f"{case}.v", tmp_path / f"{case}-{strategy}-{seed}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+&gt;       assert result.status is ResultStatus.PASSED and result.simulation.failure_count == 0
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:193: AttributeError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_public_baselines_per_cycle_correct_controls_are_eligible[0-fixed-event_accumulator]" time="0.115"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_public_baselines_p1')
+case = 'event_accumulator', strategy = 'fixed', seed = 0
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("strategy", ("fixed", "random", "protocol_random"))
+    @pytest.mark.parametrize("seed", (0, 1, 2))
+    def test_actual_public_baselines_per_cycle_correct_controls_are_eligible(tmp_path, case, strategy, seed):
+        module_spec = importlib.util.spec_from_file_location("new_holdout_public_baselines", ASSETS / "baselines.py")
+        assert module_spec and module_spec.loader
+        baselines = importlib.util.module_from_spec(module_spec)
+        module_spec.loader.exec_module(baselines)
+        stimulus = baselines.baseline_factory(case, strategy, seed, contract(case), 24)
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / "A" / f"{case}.v", tmp_path / f"{case}-{strategy}-{seed}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+&gt;       assert result.status is ResultStatus.PASSED and result.simulation.failure_count == 0
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:193: AttributeError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_public_baselines_per_cycle_correct_controls_are_eligible[0-random-valid_data_pipeline]" time="0.120"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_public_baselines_p2')
+case = 'valid_data_pipeline', strategy = 'random', seed = 0
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("strategy", ("fixed", "random", "protocol_random"))
+    @pytest.mark.parametrize("seed", (0, 1, 2))
+    def test_actual_public_baselines_per_cycle_correct_controls_are_eligible(tmp_path, case, strategy, seed):
+        module_spec = importlib.util.spec_from_file_location("new_holdout_public_baselines", ASSETS / "baselines.py")
+        assert module_spec and module_spec.loader
+        baselines = importlib.util.module_from_spec(module_spec)
+        module_spec.loader.exec_module(baselines)
+        stimulus = baselines.baseline_factory(case, strategy, seed, contract(case), 24)
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / "A" / f"{case}.v", tmp_path / f"{case}-{strategy}-{seed}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+&gt;       assert result.status is ResultStatus.PASSED and result.simulation.failure_count == 0
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:193: AttributeError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_public_baselines_per_cycle_correct_controls_are_eligible[0-random-event_accumulator]" time="0.115"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_public_baselines_p3')
+case = 'event_accumulator', strategy = 'random', seed = 0
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("strategy", ("fixed", "random", "protocol_random"))
+    @pytest.mark.parametrize("seed", (0, 1, 2))
+    def test_actual_public_baselines_per_cycle_correct_controls_are_eligible(tmp_path, case, strategy, seed):
+        module_spec = importlib.util.spec_from_file_location("new_holdout_public_baselines", ASSETS / "baselines.py")
+        assert module_spec and module_spec.loader
+        baselines = importlib.util.module_from_spec(module_spec)
+        module_spec.loader.exec_module(baselines)
+        stimulus = baselines.baseline_factory(case, strategy, seed, contract(case), 24)
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / "A" / f"{case}.v", tmp_path / f"{case}-{strategy}-{seed}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+&gt;       assert result.status is ResultStatus.PASSED and result.simulation.failure_count == 0
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:193: AttributeError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_public_baselines_per_cycle_correct_controls_are_eligible[0-protocol_random-valid_data_pipeline]" time="0.120"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_public_baselines_p4')
+case = 'valid_data_pipeline', strategy = 'protocol_random', seed = 0
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("strategy", ("fixed", "random", "protocol_random"))
+    @pytest.mark.parametrize("seed", (0, 1, 2))
+    def test_actual_public_baselines_per_cycle_correct_controls_are_eligible(tmp_path, case, strategy, seed):
+        module_spec = importlib.util.spec_from_file_location("new_holdout_public_baselines", ASSETS / "baselines.py")
+        assert module_spec and module_spec.loader
+        baselines = importlib.util.module_from_spec(module_spec)
+        module_spec.loader.exec_module(baselines)
+        stimulus = baselines.baseline_factory(case, strategy, seed, contract(case), 24)
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / "A" / f"{case}.v", tmp_path / f"{case}-{strategy}-{seed}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+&gt;       assert result.status is ResultStatus.PASSED and result.simulation.failure_count == 0
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:193: AttributeError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_public_baselines_per_cycle_correct_controls_are_eligible[0-protocol_random-event_accumulator]" time="0.113"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_public_baselines_p5')
+case = 'event_accumulator', strategy = 'protocol_random', seed = 0
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("strategy", ("fixed", "random", "protocol_random"))
+    @pytest.mark.parametrize("seed", (0, 1, 2))
+    def test_actual_public_baselines_per_cycle_correct_controls_are_eligible(tmp_path, case, strategy, seed):
+        module_spec = importlib.util.spec_from_file_location("new_holdout_public_baselines", ASSETS / "baselines.py")
+        assert module_spec and module_spec.loader
+        baselines = importlib.util.module_from_spec(module_spec)
+        module_spec.loader.exec_module(baselines)
+        stimulus = baselines.baseline_factory(case, strategy, seed, contract(case), 24)
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / "A" / f"{case}.v", tmp_path / f"{case}-{strategy}-{seed}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+&gt;       assert result.status is ResultStatus.PASSED and result.simulation.failure_count == 0
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:193: AttributeError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_public_baselines_per_cycle_correct_controls_are_eligible[1-fixed-valid_data_pipeline]" time="0.121"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_public_baselines_p6')
+case = 'valid_data_pipeline', strategy = 'fixed', seed = 1
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("strategy", ("fixed", "random", "protocol_random"))
+    @pytest.mark.parametrize("seed", (0, 1, 2))
+    def test_actual_public_baselines_per_cycle_correct_controls_are_eligible(tmp_path, case, strategy, seed):
+        module_spec = importlib.util.spec_from_file_location("new_holdout_public_baselines", ASSETS / "baselines.py")
+        assert module_spec and module_spec.loader
+        baselines = importlib.util.module_from_spec(module_spec)
+        module_spec.loader.exec_module(baselines)
+        stimulus = baselines.baseline_factory(case, strategy, seed, contract(case), 24)
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / "A" / f"{case}.v", tmp_path / f"{case}-{strategy}-{seed}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+&gt;       assert result.status is ResultStatus.PASSED and result.simulation.failure_count == 0
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:193: AttributeError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_public_baselines_per_cycle_correct_controls_are_eligible[1-fixed-event_accumulator]" time="0.113"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_public_baselines_p7')
+case = 'event_accumulator', strategy = 'fixed', seed = 1
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("strategy", ("fixed", "random", "protocol_random"))
+    @pytest.mark.parametrize("seed", (0, 1, 2))
+    def test_actual_public_baselines_per_cycle_correct_controls_are_eligible(tmp_path, case, strategy, seed):
+        module_spec = importlib.util.spec_from_file_location("new_holdout_public_baselines", ASSETS / "baselines.py")
+        assert module_spec and module_spec.loader
+        baselines = importlib.util.module_from_spec(module_spec)
+        module_spec.loader.exec_module(baselines)
+        stimulus = baselines.baseline_factory(case, strategy, seed, contract(case), 24)
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / "A" / f"{case}.v", tmp_path / f"{case}-{strategy}-{seed}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+&gt;       assert result.status is ResultStatus.PASSED and result.simulation.failure_count == 0
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:193: AttributeError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_public_baselines_per_cycle_correct_controls_are_eligible[1-random-valid_data_pipeline]" time="0.120"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_public_baselines_p8')
+case = 'valid_data_pipeline', strategy = 'random', seed = 1
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("strategy", ("fixed", "random", "protocol_random"))
+    @pytest.mark.parametrize("seed", (0, 1, 2))
+    def test_actual_public_baselines_per_cycle_correct_controls_are_eligible(tmp_path, case, strategy, seed):
+        module_spec = importlib.util.spec_from_file_location("new_holdout_public_baselines", ASSETS / "baselines.py")
+        assert module_spec and module_spec.loader
+        baselines = importlib.util.module_from_spec(module_spec)
+        module_spec.loader.exec_module(baselines)
+        stimulus = baselines.baseline_factory(case, strategy, seed, contract(case), 24)
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / "A" / f"{case}.v", tmp_path / f"{case}-{strategy}-{seed}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+&gt;       assert result.status is ResultStatus.PASSED and result.simulation.failure_count == 0
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:193: AttributeError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_public_baselines_per_cycle_correct_controls_are_eligible[1-random-event_accumulator]" time="0.113"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_public_baselines_p9')
+case = 'event_accumulator', strategy = 'random', seed = 1
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("strategy", ("fixed", "random", "protocol_random"))
+    @pytest.mark.parametrize("seed", (0, 1, 2))
+    def test_actual_public_baselines_per_cycle_correct_controls_are_eligible(tmp_path, case, strategy, seed):
+        module_spec = importlib.util.spec_from_file_location("new_holdout_public_baselines", ASSETS / "baselines.py")
+        assert module_spec and module_spec.loader
+        baselines = importlib.util.module_from_spec(module_spec)
+        module_spec.loader.exec_module(baselines)
+        stimulus = baselines.baseline_factory(case, strategy, seed, contract(case), 24)
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / "A" / f"{case}.v", tmp_path / f"{case}-{strategy}-{seed}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+&gt;       assert result.status is ResultStatus.PASSED and result.simulation.failure_count == 0
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:193: AttributeError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_public_baselines_per_cycle_correct_controls_are_eligible[1-protocol_random-valid_data_pipeline]" time="0.118"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_public_baselines_p10')
+case = 'valid_data_pipeline', strategy = 'protocol_random', seed = 1
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("strategy", ("fixed", "random", "protocol_random"))
+    @pytest.mark.parametrize("seed", (0, 1, 2))
+    def test_actual_public_baselines_per_cycle_correct_controls_are_eligible(tmp_path, case, strategy, seed):
+        module_spec = importlib.util.spec_from_file_location("new_holdout_public_baselines", ASSETS / "baselines.py")
+        assert module_spec and module_spec.loader
+        baselines = importlib.util.module_from_spec(module_spec)
+        module_spec.loader.exec_module(baselines)
+        stimulus = baselines.baseline_factory(case, strategy, seed, contract(case), 24)
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / "A" / f"{case}.v", tmp_path / f"{case}-{strategy}-{seed}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+&gt;       assert result.status is ResultStatus.PASSED and result.simulation.failure_count == 0
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:193: AttributeError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_public_baselines_per_cycle_correct_controls_are_eligible[1-protocol_random-event_accumulator]" time="0.115"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_public_baselines_p11')
+case = 'event_accumulator', strategy = 'protocol_random', seed = 1
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("strategy", ("fixed", "random", "protocol_random"))
+    @pytest.mark.parametrize("seed", (0, 1, 2))
+    def test_actual_public_baselines_per_cycle_correct_controls_are_eligible(tmp_path, case, strategy, seed):
+        module_spec = importlib.util.spec_from_file_location("new_holdout_public_baselines", ASSETS / "baselines.py")
+        assert module_spec and module_spec.loader
+        baselines = importlib.util.module_from_spec(module_spec)
+        module_spec.loader.exec_module(baselines)
+        stimulus = baselines.baseline_factory(case, strategy, seed, contract(case), 24)
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / "A" / f"{case}.v", tmp_path / f"{case}-{strategy}-{seed}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+&gt;       assert result.status is ResultStatus.PASSED and result.simulation.failure_count == 0
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:193: AttributeError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_public_baselines_per_cycle_correct_controls_are_eligible[2-fixed-valid_data_pipeline]" time="0.119"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_public_baselines_p12')
+case = 'valid_data_pipeline', strategy = 'fixed', seed = 2
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("strategy", ("fixed", "random", "protocol_random"))
+    @pytest.mark.parametrize("seed", (0, 1, 2))
+    def test_actual_public_baselines_per_cycle_correct_controls_are_eligible(tmp_path, case, strategy, seed):
+        module_spec = importlib.util.spec_from_file_location("new_holdout_public_baselines", ASSETS / "baselines.py")
+        assert module_spec and module_spec.loader
+        baselines = importlib.util.module_from_spec(module_spec)
+        module_spec.loader.exec_module(baselines)
+        stimulus = baselines.baseline_factory(case, strategy, seed, contract(case), 24)
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / "A" / f"{case}.v", tmp_path / f"{case}-{strategy}-{seed}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+&gt;       assert result.status is ResultStatus.PASSED and result.simulation.failure_count == 0
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:193: AttributeError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_public_baselines_per_cycle_correct_controls_are_eligible[2-fixed-event_accumulator]" time="0.110"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_public_baselines_p13')
+case = 'event_accumulator', strategy = 'fixed', seed = 2
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("strategy", ("fixed", "random", "protocol_random"))
+    @pytest.mark.parametrize("seed", (0, 1, 2))
+    def test_actual_public_baselines_per_cycle_correct_controls_are_eligible(tmp_path, case, strategy, seed):
+        module_spec = importlib.util.spec_from_file_location("new_holdout_public_baselines", ASSETS / "baselines.py")
+        assert module_spec and module_spec.loader
+        baselines = importlib.util.module_from_spec(module_spec)
+        module_spec.loader.exec_module(baselines)
+        stimulus = baselines.baseline_factory(case, strategy, seed, contract(case), 24)
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / "A" / f"{case}.v", tmp_path / f"{case}-{strategy}-{seed}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+&gt;       assert result.status is ResultStatus.PASSED and result.simulation.failure_count == 0
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:193: AttributeError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_public_baselines_per_cycle_correct_controls_are_eligible[2-random-valid_data_pipeline]" time="0.120"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_public_baselines_p14')
+case = 'valid_data_pipeline', strategy = 'random', seed = 2
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("strategy", ("fixed", "random", "protocol_random"))
+    @pytest.mark.parametrize("seed", (0, 1, 2))
+    def test_actual_public_baselines_per_cycle_correct_controls_are_eligible(tmp_path, case, strategy, seed):
+        module_spec = importlib.util.spec_from_file_location("new_holdout_public_baselines", ASSETS / "baselines.py")
+        assert module_spec and module_spec.loader
+        baselines = importlib.util.module_from_spec(module_spec)
+        module_spec.loader.exec_module(baselines)
+        stimulus = baselines.baseline_factory(case, strategy, seed, contract(case), 24)
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / "A" / f"{case}.v", tmp_path / f"{case}-{strategy}-{seed}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+&gt;       assert result.status is ResultStatus.PASSED and result.simulation.failure_count == 0
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:193: AttributeError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_public_baselines_per_cycle_correct_controls_are_eligible[2-random-event_accumulator]" time="0.113"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_public_baselines_p15')
+case = 'event_accumulator', strategy = 'random', seed = 2
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("strategy", ("fixed", "random", "protocol_random"))
+    @pytest.mark.parametrize("seed", (0, 1, 2))
+    def test_actual_public_baselines_per_cycle_correct_controls_are_eligible(tmp_path, case, strategy, seed):
+        module_spec = importlib.util.spec_from_file_location("new_holdout_public_baselines", ASSETS / "baselines.py")
+        assert module_spec and module_spec.loader
+        baselines = importlib.util.module_from_spec(module_spec)
+        module_spec.loader.exec_module(baselines)
+        stimulus = baselines.baseline_factory(case, strategy, seed, contract(case), 24)
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / "A" / f"{case}.v", tmp_path / f"{case}-{strategy}-{seed}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+&gt;       assert result.status is ResultStatus.PASSED and result.simulation.failure_count == 0
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:193: AttributeError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_public_baselines_per_cycle_correct_controls_are_eligible[2-protocol_random-valid_data_pipeline]" time="0.120"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_public_baselines_p16')
+case = 'valid_data_pipeline', strategy = 'protocol_random', seed = 2
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("strategy", ("fixed", "random", "protocol_random"))
+    @pytest.mark.parametrize("seed", (0, 1, 2))
+    def test_actual_public_baselines_per_cycle_correct_controls_are_eligible(tmp_path, case, strategy, seed):
+        module_spec = importlib.util.spec_from_file_location("new_holdout_public_baselines", ASSETS / "baselines.py")
+        assert module_spec and module_spec.loader
+        baselines = importlib.util.module_from_spec(module_spec)
+        module_spec.loader.exec_module(baselines)
+        stimulus = baselines.baseline_factory(case, strategy, seed, contract(case), 24)
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / "A" / f"{case}.v", tmp_path / f"{case}-{strategy}-{seed}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+&gt;       assert result.status is ResultStatus.PASSED and result.simulation.failure_count == 0
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:193: AttributeError</failure></testcase><testcase classname="tests.core.test_agent_new_holdout_oracles" name="test_actual_public_baselines_per_cycle_correct_controls_are_eligible[2-protocol_random-event_accumulator]" time="0.113"><failure message="AttributeError: 'SimulationResult' object has no attribute 'failure_count'">tmp_path = WindowsPath('C:/Users/TYOCT/AppData/Local/Temp/icarus-new-holdout-public-r1-6ba808a7571245ad9c4383f8cde2eb01/test_actual_public_baselines_p17')
+case = 'event_accumulator', strategy = 'protocol_random', seed = 2
+
+    @pytest.mark.skipif(not TOOLS.can_simulate, reason="Icarus unavailable")
+    @pytest.mark.parametrize("case", CASES)
+    @pytest.mark.parametrize("strategy", ("fixed", "random", "protocol_random"))
+    @pytest.mark.parametrize("seed", (0, 1, 2))
+    def test_actual_public_baselines_per_cycle_correct_controls_are_eligible(tmp_path, case, strategy, seed):
+        module_spec = importlib.util.spec_from_file_location("new_holdout_public_baselines", ASSETS / "baselines.py")
+        assert module_spec and module_spec.loader
+        baselines = importlib.util.module_from_spec(module_spec)
+        module_spec.loader.exec_module(baselines)
+        stimulus = baselines.baseline_factory(case, strategy, seed, contract(case), 24)
+        result = VerificationPipeline().run(stimulus, contract(case), ASSETS / "targets" / case / "A" / f"{case}.v", tmp_path / f"{case}-{strategy}-{seed}",
+            reference_sampling="per_cycle", capture_observations=True, emit_vcd=False, iverilog_path=TOOLS.iverilog, vvp_path=TOOLS.vvp)
+&gt;       assert result.status is ResultStatus.PASSED and result.simulation.failure_count == 0
+E       AttributeError: 'SimulationResult' object has no attribute 'failure_count'
+
+..\..\tests\core\test_agent_new_holdout_oracles.py:193: AttributeError</failure></testcase></testsuite></testsuites>

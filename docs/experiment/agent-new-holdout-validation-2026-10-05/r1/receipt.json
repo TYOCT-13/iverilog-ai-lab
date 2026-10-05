@@ -1,0 +1,79 @@
+{
+  "schema": "agent-new-holdout-source-validation-v1",
+  "started_at": "2026-10-05T05:28:24.557170+00:00",
+  "finished_at": "2026-10-05T05:33:18.221085+00:00",
+  "commands": [
+    {
+      "name": "pytest",
+      "command": [
+        "D:\\Users\\TYOCT\\anaconda3\\python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "-q",
+        "--tb=short",
+        "--basetemp=C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-source-20261005-r1-5ogqodii\\pytest-tmp",
+        "--junitxml=E:\\FPGA_WORK\\iverilog-ai-lab\\docs\\experiment\\agent-new-holdout-validation-2026-10-05\\r1\\pytest.xml"
+      ],
+      "exit_code": 1
+    },
+    {
+      "name": "mypy",
+      "command": [
+        "D:\\Users\\TYOCT\\anaconda3\\python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "mypy",
+        "src",
+        "ui",
+        "scripts"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "pytest": {
+    "tests": 2029,
+    "failures": 10,
+    "errors": 0,
+    "skipped": 2
+  },
+  "passed": 2017,
+  "fingerprinted_files": 535,
+  "changed_inputs": [],
+  "api_requests": 0,
+  "human_trial": false,
+  "H02_human_review": false,
+  "external_Actions_run": false,
+  "validation_scope": "full pytest and full mypy on stable new-module oracle adapters and frozen Agent v8 worktree source",
+  "portable_clean_clone_reproduction": false,
+  "temporary_root": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-source-20261005-r1-5ogqodii",
+  "artifacts": [
+    {
+      "path": "mypy.log",
+      "sha256": "2d6b7f9cae097fc3f2c1c10271e54a3a798b57b405db1a0d5dde32a9a17b4ec7",
+      "bytes": 45
+    },
+    {
+      "path": "pytest.log",
+      "sha256": "db7da4539cc908ad5862d010d3c7b6d43294f42f2258d99bf4334f8ba4466e3f",
+      "bytes": 11722
+    },
+    {
+      "path": "pytest.xml",
+      "sha256": "d982608c384d950f6ff1f532f5338ce54d4f8b4413e10c11f2d16ca67e81181e",
+      "bytes": 318321
+    },
+    {
+      "path": "source_fingerprint_after.json",
+      "sha256": "7a2e28f5bc8353c16077af95a136d01bd572e85571119365a1fb9d9479ccacc9",
+      "bytes": 93226
+    },
+    {
+      "path": "source_fingerprint_before.json",
+      "sha256": "7a2e28f5bc8353c16077af95a136d01bd572e85571119365a1fb9d9479ccacc9",
+      "bytes": 93226
+    }
+  ]
+}

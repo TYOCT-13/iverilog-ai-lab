@@ -1,0 +1,30 @@
+{
+  "schema": "new-core-adapter-pre-authority-alignment-v1",
+  "status": "passed",
+  "actual_port_checks": 24260,
+  "cases": [
+    {
+      "case": "valid_data_pipeline",
+      "tasks": 582,
+      "cycles": 3136,
+      "zero_differences": true,
+      "current_rtl_sha256": "b3fc81d4fdf3a23cb38c710af7c6d278cfba9d3f52978492594263464e44d9bb",
+      "r2_compiled_source_sha256": "8b021d3627b5078b4e1524c8c0d8430efa72242d950b07d7dcb66575e1dc2aee",
+      "final_token_text_unchanged": true
+    },
+    {
+      "case": "event_accumulator",
+      "tasks": 4166,
+      "cycles": 17988,
+      "zero_differences": true,
+      "current_rtl_sha256": "4f8137509bc2116624f8c444f5e6d0bca319f6b2993371610dd2c2432c44d071",
+      "r2_compiled_source_sha256": "010c18adf5036cfb357d0e38f622ecba1ddf8cea3facc496363b6db31ac8dc09",
+      "final_token_text_unchanged": true
+    }
+  ],
+  "model_added_to_authority_during_check": false,
+  "new_simulator_runs": 0,
+  "API_calls": 0,
+  "reference_model_sha256": "8be1b49dbde3578fe7e72370058445dcaeedd9751775b6182aeac2f36ced85be",
+  "mechanism": "Independent state adapter matches every preserved real r2 after sample; final RTL pass changes comments/layout only and its noncomment token text is equal."
+}

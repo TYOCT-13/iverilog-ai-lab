@@ -1,0 +1,90 @@
+{
+  "schema": "new-internal-synthetic-fixed-module-specs-v1",
+  "cases": {
+    "valid_data_pipeline": {
+      "reference_rtl": "benchmarks/agent_new_holdout_20261005/targets/valid_data_pipeline/A/valid_data_pipeline.v",
+      "reference_sha256": "b3fc81d4fdf3a23cb38c710af7c6d278cfba9d3f52978492594263464e44d9bb",
+      "contract_path": "benchmarks/agent_new_holdout_20261005/contracts/valid_data_pipeline_contract.json",
+      "contract_sha256": "145bbe75cd58c8d43e4a0864f4ae23a485f46cd8c7de47fcb63f5c1a1900684d",
+      "spec_path": "spec/agent_new_holdout_20261005/valid_data_pipeline_spec.md",
+      "spec_sha256": "94045a833fa947eb2e1fca5088e000ccfd2e28ad523c08826c562b9e6b87a71a",
+      "default_parameters": {},
+      "cycle_budget": 24,
+      "max_vectors_per_proposal": 12,
+      "max_accepted_vectors_total": 64,
+      "clock": {
+        "signal": "i_clk",
+        "period_ns": 10,
+        "edge": "posedge"
+      },
+      "reset": {
+        "signal": "i_rstn",
+        "active_level": 0,
+        "synchronous": false,
+        "assert_cycles": 2
+      },
+      "sampling": "per_cycle_after",
+      "episodes": "fresh_automatic_reset_no_state_continuation",
+      "targets": [
+        {
+          "variant": "reference",
+          "rtl": "benchmarks/agent_new_holdout_20261005/targets/valid_data_pipeline/A/valid_data_pipeline.v",
+          "sha256": "b3fc81d4fdf3a23cb38c710af7c6d278cfba9d3f52978492594263464e44d9bb"
+        },
+        {
+          "variant": "mutation_b",
+          "rtl": "benchmarks/agent_new_holdout_20261005/targets/valid_data_pipeline/B/valid_data_pipeline.v",
+          "sha256": "ff53d3f422e174a8758b8e6f1a8ff1d3c729ee694c9fd392330a3af7798fc3b0"
+        },
+        {
+          "variant": "mutation_c",
+          "rtl": "benchmarks/agent_new_holdout_20261005/targets/valid_data_pipeline/C/valid_data_pipeline.v",
+          "sha256": "49b4e5832a7c001e16a0bac8dbc3c7c90d2a03eb9ec6b2f6ab26731343604713"
+        }
+      ]
+    },
+    "event_accumulator": {
+      "reference_rtl": "benchmarks/agent_new_holdout_20261005/targets/event_accumulator/A/event_accumulator.v",
+      "reference_sha256": "4f8137509bc2116624f8c444f5e6d0bca319f6b2993371610dd2c2432c44d071",
+      "contract_path": "benchmarks/agent_new_holdout_20261005/contracts/event_accumulator_contract.json",
+      "contract_sha256": "8ddb36e0c9b928020a01e8534c3cdc92d5a8c8fab5c6b336454ca661ce3277b5",
+      "spec_path": "spec/agent_new_holdout_20261005/event_accumulator_spec.md",
+      "spec_sha256": "93e13226df4eb0323f1ae31316c1370934ec5faddc7f801f352d2f18971db515",
+      "default_parameters": {},
+      "cycle_budget": 24,
+      "max_vectors_per_proposal": 12,
+      "max_accepted_vectors_total": 64,
+      "clock": {
+        "signal": "i_clk",
+        "period_ns": 10,
+        "edge": "posedge"
+      },
+      "reset": {
+        "signal": "i_rstn",
+        "active_level": 0,
+        "synchronous": false,
+        "assert_cycles": 2
+      },
+      "sampling": "per_cycle_after",
+      "episodes": "fresh_automatic_reset_no_state_continuation",
+      "targets": [
+        {
+          "variant": "reference",
+          "rtl": "benchmarks/agent_new_holdout_20261005/targets/event_accumulator/A/event_accumulator.v",
+          "sha256": "4f8137509bc2116624f8c444f5e6d0bca319f6b2993371610dd2c2432c44d071"
+        },
+        {
+          "variant": "mutation_b",
+          "rtl": "benchmarks/agent_new_holdout_20261005/targets/event_accumulator/B/event_accumulator.v",
+          "sha256": "65bb2c35aa123348348766232b48f2499556395f88a8015cb97713324a08b9f1"
+        },
+        {
+          "variant": "mutation_c",
+          "rtl": "benchmarks/agent_new_holdout_20261005/targets/event_accumulator/C/event_accumulator.v",
+          "sha256": "d07a85d4e8a27e5b04a54666f1fb504ea69d4c8136f5eb1c715688d6075cb0d4"
+        }
+      ]
+    }
+  },
+  "model_inputs": "Correct spec text and exact DutContract only; never private metadata, RTL, witnesses, local outcomes or labels."
+}

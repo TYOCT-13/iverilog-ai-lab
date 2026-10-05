@@ -1,0 +1,414 @@
+{
+  "artifacts": {
+    "authoritative_plan": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\authoritative_plan.json",
+    "dut_contract": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\dut_contract.json",
+    "observed_samples": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\observed_samples.json",
+    "output_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C",
+    "pipeline_result": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\pipeline_result.json",
+    "reference_samples": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\reference_samples.json",
+    "result_json": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\runs\\run-ea53084ac645\\result.json",
+    "run_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\runs\\run-ea53084ac645",
+    "testbench": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\tb_valid_data_pipeline.v",
+    "testplan": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\testplan.json",
+    "vcd": ""
+  },
+  "contract": {
+    "clock": {
+      "edge": "posedge",
+      "period_ns": 10.0,
+      "signal": "i_clk"
+    },
+    "module": "valid_data_pipeline",
+    "ports": [
+      {
+        "direction": "input",
+        "name": "i_clk",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "input",
+        "name": "i_rstn",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "input",
+        "name": "i_flush",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "input",
+        "name": "i_valid",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "input",
+        "name": "i_data",
+        "signed": false,
+        "width": 8
+      },
+      {
+        "direction": "output",
+        "name": "o_valid",
+        "signed": false,
+        "width": 1
+      },
+      {
+        "direction": "output",
+        "name": "o_data",
+        "signed": false,
+        "width": 8
+      }
+    ],
+    "reset": {
+      "active_level": 0,
+      "assert_cycles": 2,
+      "signal": "i_rstn",
+      "synchronous": false
+    }
+  },
+  "coverage": {
+    "checks": {
+      "covered": 4,
+      "percent": 100.0,
+      "total": 4
+    },
+    "definition": "测试计划执行覆盖率；不代表 RTL 代码覆盖率",
+    "per_signal": {
+      "o_data": {
+        "covered": 2,
+        "percent": 100.0,
+        "total": 2
+      },
+      "o_valid": {
+        "covered": 2,
+        "percent": 100.0,
+        "total": 2
+      }
+    },
+    "vectors": {
+      "covered": 2,
+      "percent": 100.0,
+      "total": 2
+    }
+  },
+  "created_at": "2026-10-05T05:18:30.481129Z",
+  "failure_explanations": [
+    {
+      "failure": {
+        "actual": "1",
+        "cycle": 1,
+        "expected": "0",
+        "message": "testbench assertion failed",
+        "severity": "warn",
+        "signal": "o_valid",
+        "test_id": "next"
+      },
+      "fingerprint": "85acd026a29e2861",
+      "summary": "测试“next”在第 1 周期检查信号 o_valid失败：期望 “0”，实际 “1”。断言信息：testbench assertion failed。失败指纹 85acd026a29e2861；可用相同 DUT、TestPlan 和 Icarus 工具重新运行复现。"
+    }
+  ],
+  "plan": {
+    "assertions": [],
+    "assumptions": [],
+    "clock_period_ns": 10,
+    "design": "valid_data_pipeline",
+    "objective": "fixed public contract semantic acceptance",
+    "pre_reset_expected": {},
+    "reset": {},
+    "sample_before_reset": false,
+    "schema_version": "1.0",
+    "vectors": [
+      {
+        "cycles": 1,
+        "expected": {},
+        "inputs": {
+          "i_data": 165,
+          "i_valid": 1
+        },
+        "name": "accept",
+        "rationale": "",
+        "sample_phase": "after"
+      },
+      {
+        "cycles": 1,
+        "expected": {},
+        "inputs": {
+          "i_flush": 1,
+          "i_valid": 0
+        },
+        "name": "next",
+        "rationale": "",
+        "sample_phase": "after"
+      }
+    ]
+  },
+  "schema_version": "1.0",
+  "simulation": {
+    "artifacts": {
+      "compile_stderr": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\runs\\run-ea53084ac645\\compile.stderr.txt",
+      "compile_stdout": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\runs\\run-ea53084ac645\\compile.stdout.txt",
+      "compile_vvp": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\runs\\run-ea53084ac645\\compile.vvp",
+      "result_json": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\runs\\run-ea53084ac645\\result.json",
+      "run_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\runs\\run-ea53084ac645",
+      "run_stderr": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\runs\\run-ea53084ac645\\run.stderr.txt",
+      "run_stdout": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\runs\\run-ea53084ac645\\run.stdout.txt",
+      "vcd": ""
+    },
+    "compile": {
+      "command": [
+        "D:\\iverilog\\bin\\iverilog.exe",
+        "-g2012",
+        "-o",
+        "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\runs\\run-ea53084ac645\\compile.vvp",
+        "-s",
+        "tb_valid_data_pipeline",
+        "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\valid_data_pipeline\\C\\valid_data_pipeline.v",
+        "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\tb_valid_data_pipeline.v"
+      ],
+      "duration_ms": 42,
+      "error": null,
+      "output_truncated": false,
+      "returncode": 0,
+      "status": "passed",
+      "stderr": "",
+      "stdout": "",
+      "timed_out": false
+    },
+    "config": {
+      "allowed_roots": [
+        "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\valid_data_pipeline\\C",
+        "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4"
+      ],
+      "coverage": {
+        "checks": {
+          "covered": 4,
+          "percent": 100.0,
+          "total": 4
+        },
+        "definition": "测试计划执行覆盖率；不代表 RTL 代码覆盖率",
+        "per_signal": {
+          "o_data": {
+            "covered": 2,
+            "percent": 100.0,
+            "total": 2
+          },
+          "o_valid": {
+            "covered": 2,
+            "percent": 100.0,
+            "total": 2
+          }
+        },
+        "vectors": {
+          "covered": 2,
+          "percent": 100.0,
+          "total": 2
+        }
+      },
+      "cross_validation": {
+        "ai_expected_mismatch": false,
+        "independent_sources": 1,
+        "sources": [
+          "iverilog",
+          "reference_model"
+        ],
+        "status": "consistent"
+      },
+      "defines": [],
+      "include_dirs": [],
+      "iverilog_path": "D:\\iverilog\\bin\\iverilog.exe",
+      "keep_artifacts": true,
+      "language": "2012",
+      "observed_samples": {
+        "errors": [],
+        "expected_cycles": 2,
+        "limitations": [
+          "Port observations are not assertion checks or proof of correctness",
+          "Unknown x/z bits remain unknown",
+          "Stimulus cycles exclude initial reset"
+        ],
+        "observed_cycles": 2,
+        "provenance": {
+          "contract_sha256": "344bd74e2909a684dd9d316dccc2aca36e76dc7b69f3b8a8dee2c9959546b907",
+          "plan_sha256": "d3b3bd5e7a49c49dfa894da1f5c900d0c7a8b8b4f1a99435e537a7a58793ace7",
+          "rtl_sha256": "49b4e5832a7c001e16a0bac8dbc3c7c90d2a03eb9ec6b2f6ab26731343604713",
+          "testbench_sha256": "ebbd3a2031b2fb07b2d181523b84a747e0fc597d5d84c967f9bd0162978feb56"
+        },
+        "schema_version": "1.0",
+        "sha256": "70c75fc3a58b35814ea13b988905297aec668fa3b884b6a34e571a5df08a333e",
+        "source": "testbench_sample_statement",
+        "status": "complete"
+      },
+      "oracle": {
+        "ai_expectations_used_for_checking": false,
+        "authoritative_vectors": 2,
+        "checked": 2,
+        "checked_expected": 0,
+        "consistency_rate": null,
+        "design": "valid_data_pipeline",
+        "evidence_level": "reference_model",
+        "expectation_evidence_level": "reference_model",
+        "expectation_source": "reference_model",
+        "matched_expected": 0,
+        "plans_with_expectations": 0,
+        "reference_check_schedule": [
+          {
+            "cycles": 1,
+            "first_cycle": 0,
+            "signals": [
+              "o_valid",
+              "o_data"
+            ],
+            "test_id": "accept"
+          },
+          {
+            "cycles": 1,
+            "first_cycle": 1,
+            "signals": [
+              "o_valid",
+              "o_data"
+            ],
+            "test_id": "next"
+          }
+        ],
+        "reference_policy": "builtin",
+        "reference_samples": {
+          "expected_checks": 4,
+          "expected_cycles": 2,
+          "limitations": [
+            "Generated expectations are separate from actual simulation observations",
+            "The original plan is not expanded; each sample uses one reference state transition",
+            "Only supported builtin profiles and after sampling are authoritative",
+            "Initial contract reset is applied; these cycles exclude reset and pre_reset assertions"
+          ],
+          "profile": "builtin-reference-per-cycle-v1:valid_data_pipeline",
+          "provenance": {
+            "contract_sha256": "344bd74e2909a684dd9d316dccc2aca36e76dc7b69f3b8a8dee2c9959546b907",
+            "plan_sha256": "d3b3bd5e7a49c49dfa894da1f5c900d0c7a8b8b4f1a99435e537a7a58793ace7",
+            "reference_model_sha256": "ef177904f5f4c4fad51a3c1508775a3f6de247945220d2fa4ba317b98b5a7763",
+            "rtl_sha256": "49b4e5832a7c001e16a0bac8dbc3c7c90d2a03eb9ec6b2f6ab26731343604713",
+            "testbench_sha256": "ebbd3a2031b2fb07b2d181523b84a747e0fc597d5d84c967f9bd0162978feb56"
+          },
+          "reference_sampling": "per_cycle",
+          "schema_version": "1.0",
+          "sha256": "a34fd07f573107b7dbd6e9d52452744c135346d540549c0e2689d9632673a056",
+          "source": "independent_reference_model",
+          "status": "generated"
+        },
+        "reference_sampling": "per_cycle",
+        "status": "passed",
+        "uncheckable_expected": [],
+        "warnings": []
+      },
+      "output_dir": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\runs",
+      "reference_sampling": "per_cycle",
+      "rtl_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\valid_data_pipeline\\C\\valid_data_pipeline.v",
+      "rtl_sha256": "49b4e5832a7c001e16a0bac8dbc3c7c90d2a03eb9ec6b2f6ab26731343604713",
+      "structured_assertions": {
+        "checked": 0,
+        "failed": 0,
+        "passed": 0,
+        "results": [],
+        "status": "skipped"
+      },
+      "synthesis": {
+        "skipped_reason": "未启用综合证据层（run_synthesis=False）",
+        "status": "not_run"
+      },
+      "testbench_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\tb_valid_data_pipeline.v",
+      "testbench_sha256": "ebbd3a2031b2fb07b2d181523b84a747e0fc597d5d84c967f9bd0162978feb56",
+      "timeout_seconds": 30.0,
+      "top_module": "tb_valid_data_pipeline",
+      "vcd_analysis": {
+        "status": "not_available"
+      },
+      "verification_status": "verified",
+      "vvp_path": "D:\\iverilog\\bin\\vvp.exe"
+    },
+    "diagnostics": [],
+    "error": null,
+    "failures": [
+      {
+        "actual": "1",
+        "cycle": 1,
+        "expected": "0",
+        "message": "testbench assertion failed",
+        "severity": "warn",
+        "signal": "o_valid",
+        "test_id": "next"
+      }
+    ],
+    "finished_at": "2026-10-05T05:18:30.477128Z",
+    "passed": true,
+    "records": [
+      {
+        "actual": "0",
+        "cycle": 0,
+        "expected": "0",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_valid",
+        "test_id": "accept"
+      },
+      {
+        "actual": "00000000",
+        "cycle": 0,
+        "expected": "00000000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "accept"
+      },
+      {
+        "actual": "1",
+        "cycle": 1,
+        "expected": "0",
+        "ok": false,
+        "severity": "warn",
+        "signal": "o_valid",
+        "test_id": "next"
+      },
+      {
+        "actual": "00000000",
+        "cycle": 1,
+        "expected": "00000000",
+        "ok": true,
+        "severity": "info",
+        "signal": "o_data",
+        "test_id": "next"
+      }
+    ],
+    "run": {
+      "command": [
+        "D:\\iverilog\\bin\\vvp.exe",
+        "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\runs\\run-ea53084ac645\\compile.vvp"
+      ],
+      "duration_ms": 15,
+      "error": null,
+      "output_truncated": false,
+      "returncode": 0,
+      "status": "passed",
+      "stderr": "",
+      "stdout": "IVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"accept\",\"cycle\":0,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"0\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"accept\",\"cycle\":0,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":0,\"time_ns\":26.000,\"test_id\":\"accept\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"0\",\"i_valid\":\"1\",\"i_data\":\"10100101\"},\"outputs\":{\"o_valid\":\"0\",\"o_data\":\"00000000\"}}\nIVERILOG_AI_RESULT {\"ok\":false,\"test_id\":\"next\",\"cycle\":1,\"signal\":\"o_valid\",\"expected\":\"0\",\"actual\":\"1\"}\nIVERILOG_AI_RESULT {\"ok\":true,\"test_id\":\"next\",\"cycle\":1,\"signal\":\"o_data\",\"expected\":\"00000000\",\"actual\":\"00000000\"}\nIVERILOG_AI_OBSERVATION {\"cycle\":1,\"time_ns\":36.000,\"test_id\":\"next\",\"sample_phase\":\"after\",\"inputs\":{\"i_clk\":\"1\",\"i_rstn\":\"1\",\"i_flush\":\"1\",\"i_valid\":\"0\",\"i_data\":\"10100101\"},\"outputs\":{\"o_valid\":\"1\",\"o_data\":\"00000000\"}}\nIVERILOG_AI_SUMMARY {\"checks\":4,\"failures\":1,\"cycles\":2}\nC:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\tb_valid_data_pipeline.v:79: $finish(1) called at 36000 (1ps)\n",
+      "timed_out": false
+    },
+    "run_id": "ea53084ac645",
+    "schema_version": "1.0",
+    "started_at": "2026-10-05T05:18:30.411071Z",
+    "status": "passed_with_warnings",
+    "summary": {
+      "checks": 4,
+      "cycles": 2,
+      "failures": 1
+    },
+    "verdict": "failed_checks"
+  },
+  "synthesis": {
+    "skipped_reason": "未启用综合证据层（run_synthesis=False）",
+    "status": "not_run"
+  },
+  "testbench_path": "C:\\Users\\TYOCT\\AppData\\Local\\Temp\\icarus-new-holdout-public-r2-c6d33efd5c2a45e586ce3bcee090824b\\test_actual_generic_per_cycle_4\\valid_data_pipeline-C\\tb_valid_data_pipeline.v"
+}

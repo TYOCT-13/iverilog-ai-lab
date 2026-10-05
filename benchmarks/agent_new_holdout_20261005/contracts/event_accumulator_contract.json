@@ -1,0 +1,47 @@
+{
+  "module": "event_accumulator",
+  "parameters": {},
+  "ports": [
+    {
+      "name": "i_clk",
+      "direction": "input",
+      "width": 1
+    },
+    {
+      "name": "i_rstn",
+      "direction": "input",
+      "width": 1
+    },
+    {
+      "name": "i_enable",
+      "direction": "input",
+      "width": 1
+    },
+    {
+      "name": "i_event",
+      "direction": "input",
+      "width": 1
+    },
+    {
+      "name": "i_clear",
+      "direction": "input",
+      "width": 1
+    },
+    {
+      "name": "o_count",
+      "direction": "output",
+      "width": 4
+    }
+  ],
+  "clock": {
+    "signal": "i_clk",
+    "period_ns": 10,
+    "edge": "posedge"
+  },
+  "reset": {
+    "signal": "i_rstn",
+    "active_level": 0,
+    "synchronous": false,
+    "assert_cycles": 2
+  }
+}

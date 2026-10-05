@@ -1,0 +1,1 @@
+> ERR: [Python] CLI 输入错误: > ERR: [Python] > ERR: [Python] modules[0].interfaces.ports[0].role must be a non-empty string.

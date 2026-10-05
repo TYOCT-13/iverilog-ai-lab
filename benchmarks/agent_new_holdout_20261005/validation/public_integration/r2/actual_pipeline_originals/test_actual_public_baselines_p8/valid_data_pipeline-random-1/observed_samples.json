@@ -1,0 +1,429 @@
+{
+  "schema_version": "1.0",
+  "source": "testbench_sample_statement",
+  "status": "complete",
+  "expected_cycles": 24,
+  "observed_cycles": 24,
+  "errors": [],
+  "provenance": {
+    "rtl_sha256": "b3fc81d4fdf3a23cb38c710af7c6d278cfba9d3f52978492594263464e44d9bb",
+    "contract_sha256": "344bd74e2909a684dd9d316dccc2aca36e76dc7b69f3b8a8dee2c9959546b907",
+    "plan_sha256": "3346f7e4145ae451178453afab9ee9248a1d4f2d85595256d7a2b914f36c8262",
+    "testbench_sha256": "c5790a4831092e67aa99f7627f5823f04519c8ea48477b8d439f8c2b22bc821c"
+  },
+  "samples": [
+    {
+      "cycle": 0,
+      "time_ns": 26.0,
+      "test_id": "random_0",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "0",
+        "i_valid": "0",
+        "i_data": "10000010"
+      },
+      "outputs": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 1,
+      "time_ns": 36.0,
+      "test_id": "random_0",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "0",
+        "i_valid": "0",
+        "i_data": "10000010"
+      },
+      "outputs": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 2,
+      "time_ns": 46.0,
+      "test_id": "random_1",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "0",
+        "i_valid": "1",
+        "i_data": "11100110"
+      },
+      "outputs": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 3,
+      "time_ns": 56.0,
+      "test_id": "random_1",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "0",
+        "i_valid": "1",
+        "i_data": "11100110"
+      },
+      "outputs": {
+        "o_valid": "1",
+        "o_data": "11100110"
+      }
+    },
+    {
+      "cycle": 4,
+      "time_ns": 66.0,
+      "test_id": "random_2",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "1",
+        "i_valid": "1",
+        "i_data": "01101011"
+      },
+      "outputs": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 5,
+      "time_ns": 76.0,
+      "test_id": "random_2",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "1",
+        "i_valid": "1",
+        "i_data": "01101011"
+      },
+      "outputs": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 6,
+      "time_ns": 86.0,
+      "test_id": "random_3",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "0",
+        "i_valid": "1",
+        "i_data": "00001110"
+      },
+      "outputs": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 7,
+      "time_ns": 96.0,
+      "test_id": "random_3",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "0",
+        "i_valid": "1",
+        "i_data": "00001110"
+      },
+      "outputs": {
+        "o_valid": "1",
+        "o_data": "00001110"
+      }
+    },
+    {
+      "cycle": 8,
+      "time_ns": 106.0,
+      "test_id": "random_4",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "1",
+        "i_valid": "1",
+        "i_data": "00000001"
+      },
+      "outputs": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 9,
+      "time_ns": 116.0,
+      "test_id": "random_4",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "1",
+        "i_valid": "1",
+        "i_data": "00000001"
+      },
+      "outputs": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 10,
+      "time_ns": 126.0,
+      "test_id": "random_5",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "1",
+        "i_valid": "1",
+        "i_data": "01110101"
+      },
+      "outputs": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 11,
+      "time_ns": 136.0,
+      "test_id": "random_5",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "1",
+        "i_valid": "1",
+        "i_data": "01110101"
+      },
+      "outputs": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 12,
+      "time_ns": 146.0,
+      "test_id": "random_6",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "0",
+        "i_valid": "1",
+        "i_data": "00001111"
+      },
+      "outputs": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 13,
+      "time_ns": 156.0,
+      "test_id": "random_6",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "0",
+        "i_valid": "1",
+        "i_data": "00001111"
+      },
+      "outputs": {
+        "o_valid": "1",
+        "o_data": "00001111"
+      }
+    },
+    {
+      "cycle": 14,
+      "time_ns": 166.0,
+      "test_id": "random_7",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "0",
+        "i_valid": "0",
+        "i_data": "00000100"
+      },
+      "outputs": {
+        "o_valid": "1",
+        "o_data": "00001111"
+      }
+    },
+    {
+      "cycle": 15,
+      "time_ns": 176.0,
+      "test_id": "random_7",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "0",
+        "i_valid": "0",
+        "i_data": "00000100"
+      },
+      "outputs": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 16,
+      "time_ns": 186.0,
+      "test_id": "random_8",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "1",
+        "i_valid": "0",
+        "i_data": "11011000"
+      },
+      "outputs": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 17,
+      "time_ns": 196.0,
+      "test_id": "random_8",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "1",
+        "i_valid": "0",
+        "i_data": "11011000"
+      },
+      "outputs": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 18,
+      "time_ns": 206.0,
+      "test_id": "random_9",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "0",
+        "i_valid": "0",
+        "i_data": "11100000"
+      },
+      "outputs": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 19,
+      "time_ns": 216.0,
+      "test_id": "random_9",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "0",
+        "i_valid": "0",
+        "i_data": "11100000"
+      },
+      "outputs": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 20,
+      "time_ns": 226.0,
+      "test_id": "random_10",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "1",
+        "i_valid": "0",
+        "i_data": "10110000"
+      },
+      "outputs": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 21,
+      "time_ns": 236.0,
+      "test_id": "random_10",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "1",
+        "i_valid": "0",
+        "i_data": "10110000"
+      },
+      "outputs": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 22,
+      "time_ns": 246.0,
+      "test_id": "random_11",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "0",
+        "i_valid": "0",
+        "i_data": "11101011"
+      },
+      "outputs": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    },
+    {
+      "cycle": 23,
+      "time_ns": 256.0,
+      "test_id": "random_11",
+      "sample_phase": "after",
+      "inputs": {
+        "i_clk": "1",
+        "i_rstn": "1",
+        "i_flush": "0",
+        "i_valid": "0",
+        "i_data": "11101011"
+      },
+      "outputs": {
+        "o_valid": "0",
+        "o_data": "00000000"
+      }
+    }
+  ],
+  "limitations": [
+    "Port observations are not assertion checks or proof of correctness",
+    "Unknown x/z bits remain unknown",
+    "Stimulus cycles exclude initial reset"
+  ]
+}
