@@ -1,0 +1,301 @@
+{
+  "schema": "agent-budget-study-result-proxy-review-v1",
+  "date": "2026-10-05",
+  "status": "passed_with_reported_limits",
+  "reviewer": {
+    "core": "AI proxy readonly evidence review",
+    "trace": "separate AI recovery-code-author tool audit",
+    "human": false,
+    "H02": false
+  },
+  "source_revision": "b9f7a6ed57b215208b790c3be32980862267aa49",
+  "scope": {
+    "registered_rows": 432,
+    "unique_rows": 432,
+    "executed_tasks": 423,
+    "episodes": 507,
+    "execution_sides": 1014,
+    "strict_summary_recomputed_equal": true,
+    "strict_eligible": false,
+    "zero_execution_rows": [
+      13,
+      62,
+      76,
+      86,
+      156,
+      172,
+      332,
+      347,
+      399
+    ],
+    "correct_controls_registered": 144,
+    "correct_controls_executed": 140,
+    "executed_correct_false_alarm_tasks": 0,
+    "per_side_stimulus_cycles": 7346,
+    "per_side_output_checks": 14957,
+    "total_output_checks": 29914,
+    "vcd_files": 1014,
+    "matched_vcd_port_samples": 88126,
+    "same_timestamp_ambiguities": 0
+  },
+  "results": {
+    "order": [
+      "fixed",
+      "random",
+      "protocol_random",
+      "single",
+      "feedback",
+      "no_feedback"
+    ],
+    "defect_denominator_per_strategy": 48,
+    "detections": [
+      48,
+      32,
+      48,
+      34,
+      37,
+      37
+    ],
+    "cohorts": {
+      "development": {
+        "fixed": {
+          "registered_defects": 24,
+          "detected": 24
+        },
+        "random": {
+          "registered_defects": 24,
+          "detected": 15
+        },
+        "protocol_random": {
+          "registered_defects": 24,
+          "detected": 24
+        },
+        "single": {
+          "registered_defects": 24,
+          "detected": 22
+        },
+        "feedback": {
+          "registered_defects": 24,
+          "detected": 22
+        },
+        "no_feedback": {
+          "registered_defects": 24,
+          "detected": 21
+        }
+      },
+      "module_set_holdout": {
+        "fixed": {
+          "registered_defects": 12,
+          "detected": 12
+        },
+        "random": {
+          "registered_defects": 12,
+          "detected": 9
+        },
+        "protocol_random": {
+          "registered_defects": 12,
+          "detected": 12
+        },
+        "single": {
+          "registered_defects": 12,
+          "detected": 9
+        },
+        "feedback": {
+          "registered_defects": 12,
+          "detected": 11
+        },
+        "no_feedback": {
+          "registered_defects": 12,
+          "detected": 10
+        }
+      },
+      "prior_internal_holdout": {
+        "fixed": {
+          "registered_defects": 12,
+          "detected": 12
+        },
+        "random": {
+          "registered_defects": 12,
+          "detected": 8
+        },
+        "protocol_random": {
+          "registered_defects": 12,
+          "detected": 12
+        },
+        "single": {
+          "registered_defects": 12,
+          "detected": 3
+        },
+        "feedback": {
+          "registered_defects": 12,
+          "detected": 4
+        },
+        "no_feedback": {
+          "registered_defects": 12,
+          "detected": 6
+        }
+      }
+    }
+  },
+  "frozen_inputs": {
+    "count": 127,
+    "snapshot_registration_working_bytes_equal": true,
+    "git_blob_exact": 103,
+    "git_blob_newline_only": 24,
+    "content_differences": 0,
+    "public_source_byte_binding_each_entry_checked": true,
+    "git_checkout_alone_byte_identical_claim": false
+  },
+  "archives": [
+    {
+      "path": "docs/experiment/agent-budget-study-live-2026-10-05/full_raw_evidence.zip",
+      "sha256": "d2d7df662de9633044946a51063c03a1364f2c0b69315dcb65eba8f784f72269",
+      "bytes": 22239237,
+      "files": 14876,
+      "crc_set_safe_paths_all_bytes_verified": true
+    },
+    {
+      "path": "docs/experiment/agent-budget-study-live-2026-10-05/results.zip",
+      "sha256": "4eb5fa7b2a4fea74beb79728711670957211cbb403868ab98a44ecb004acbcdc",
+      "bytes": 874935,
+      "files": 1,
+      "crc_set_safe_paths_all_bytes_verified": true
+    },
+    {
+      "path": "docs/experiment/agent-budget-study-live-2026-10-05/registered_inputs.zip",
+      "sha256": "211be05f7f025978aa473a219ada126dd95235d6440eb6fa5a10a0484c23d056",
+      "bytes": 421723,
+      "files": 128,
+      "crc_set_safe_paths_all_bytes_verified": true
+    },
+    {
+      "path": "docs/experiment/agent-budget-study-live-2026-10-05/traces_and_decisions.zip",
+      "sha256": "b15b80e57b0638c23d3bba516b9717b3d5e11dd3ac5e2311b5da180a07fd9e7d",
+      "bytes": 1849808,
+      "files": 546,
+      "crc_set_safe_paths_all_bytes_verified": true
+    }
+  ],
+  "accounting": {
+    "actual_requests": 334,
+    "known_usage": 334,
+    "reported_prompt_plus_completion_tokens": 833216,
+    "unknown_reserved_tokens": 0,
+    "remaining_tokens": 166784,
+    "single_batch_limit": 1000000,
+    "actual_row_usage_and_ledger_totals_cross_checked": true,
+    "cache_subcounts_not_double_counted": true,
+    "currency_bill_verified": false
+  },
+  "trace_boundary": {
+    "separate_author_audit_status": "passed",
+    "agent_traces": 216,
+    "no_feedback_states": 124,
+    "safe_raw_responses": 330,
+    "blocked_originals_unavailable": 4,
+    "format_rejections": 30,
+    "budget_rejections": 3,
+    "budget_rejections_followed_by_execution": 0,
+    "format_rejected_requests_followed_by_execution": 18,
+    "distinct_tasks_executed_after_format_rejection": 17,
+    "trace_authors_not_independent_human": true,
+    "request_order_and_guard_branch_attestation": "See separately authored trace-audit.json; this core review cross-checked its original hashes and accounting totals, without repeating that complete trace pass"
+  },
+  "limitations": [
+    "9 no-execution tasks remain in complete denominators; strict eligibility false",
+    "No successful post-budget-rejection recovery observed in this live batch",
+    "Feedback 37/48 equals no_feedback; both below fixed and protocol_random 48/48",
+    "prior_internal_holdout feedback 4/12 and no_feedback 6/12 are below random 8/12",
+    "Module-set holdout was previously offline tested; not externally blind, independently authored, or unseen by model pretraining",
+    "Concurrent prompt and baseline changes prevent single-factor historical causality",
+    "No new DUT/API execution or complete test-suite rerun by this audit; executable frozen summary reused and raw evidence independently cross-checked",
+    "Strict RTL style, independent human H02 and other-machine reproduction remain unverified/not passed as previously disclosed",
+    "Unavailable guarded original responses cannot be reconstructed or independently re-inspected"
+  ],
+  "new_activity": {
+    "real_api_requests": 0,
+    "new_dut_runs": 0,
+    "real_credentials_read": 0,
+    "production_or_original_edits": 0,
+    "new_human_trials": 0
+  },
+  "bindings": [
+    {
+      "path": "docs/experiment/agent_budget_study_live_2026-10-05.md",
+      "sha256": "87126d6444272570ea5017fc356ee273937655125ff0d760de674146588868af",
+      "bytes": 12093
+    },
+    {
+      "path": "docs/review/agent_budget_study_review_2026-10-05.md",
+      "sha256": "7c43063fbac79ecb8a341237ef5fd7bf129ece6808f9ed733be774f106e97ad1",
+      "bytes": 2778
+    },
+    {
+      "path": "docs/review/agent-budget-study-review-2026-10-05/core-audit.json",
+      "sha256": "7eb3bc14d28c5a8060737a71f7ae177714af78e768432326d7328dd09b9e1d76",
+      "bytes": 811450
+    },
+    {
+      "path": "docs/review/agent-budget-study-review-2026-10-05/input-audit.json",
+      "sha256": "2488cade06d5afb995b0e89975d857f452c15baa946e66fac1a88b9e3f487330",
+      "bytes": 8793
+    },
+    {
+      "path": "docs/review/agent-budget-study-review-2026-10-05/trace-audit.json",
+      "sha256": "cc94bc8e47965fee146a73ebf7ae3f48c5c35f2e98372fd61b5dcc584a1cc0a6",
+      "bytes": 2671
+    },
+    {
+      "path": "docs/experiment/agent-budget-study-live-2026-10-05/receipt.json",
+      "sha256": "8249bb39542e86d5ac460640a6349599a59119f2f444c3bf691aad7566229e7b",
+      "bytes": 181481
+    },
+    {
+      "path": "docs/experiment/agent-budget-study-live-2026-10-05/source_byte_binding.json",
+      "sha256": "894fe68c09881c13d2fb28721febbbf41c5be6154adbf111c7b2628b5b4640e0",
+      "bytes": 36460
+    },
+    {
+      "path": "docs/experiment/agent-budget-study-live-2026-10-05/full_raw_manifest.json",
+      "sha256": "a93a47f26ddfd3fa986af8c09c325d72189dcd03dbba3811d931d1ad586619d7",
+      "bytes": 2787905
+    },
+    {
+      "path": ".iverilog-ai/agent-budget-study-live-20261005/results.json",
+      "sha256": "4eb7e07c216281bd97e53c0ea259eabbf97578ceb2a259bc2fa74740d086ebb9",
+      "bytes": 14994048
+    },
+    {
+      "path": ".iverilog-ai/agent-budget-study-live-20261005/preregistration.json",
+      "sha256": "0ae79dbc7eba99c8de665f3e11c4af0c5f87a886057d6b04a4b7290c27416435",
+      "bytes": 272766
+    },
+    {
+      "path": ".iverilog-ai/agent-budget-study-live-20261005/strict_summary.json",
+      "sha256": "75d255ac8122ebf4ddcee42224049f1e9f584bf136bc3e5c24c458dfd39e80bc",
+      "bytes": 15051428
+    },
+    {
+      "path": ".iverilog-ai/agent-budget-study-live-20261005/token_budget.json",
+      "sha256": "92fc58f7796865771708ba5606180e19a4fd67052680da7d7b6a41c8570a26f4",
+      "bytes": 110783
+    },
+    {
+      "path": ".tmp-codex/agent-v7-budget-core-audit-20261005.py",
+      "sha256": "793f69103b675726e036ed3f10e78ded6bc062eac1ab65a80848026607e3efa5",
+      "bytes": 19067
+    }
+  ],
+  "private_originals": [
+    {
+      "path": ".iverilog-ai/agent-budget-result-review-20261005-r1/core-audit.json",
+      "sha256": "7eb3bc14d28c5a8060737a71f7ae177714af78e768432326d7328dd09b9e1d76",
+      "bytes": 811450
+    },
+    {
+      "path": ".iverilog-ai/agent-budget-result-review-20261005-r1/input-audit.json",
+      "sha256": "2488cade06d5afb995b0e89975d857f452c15baa946e66fac1a88b9e3f487330",
+      "bytes": 8793
+    }
+  ]
+}

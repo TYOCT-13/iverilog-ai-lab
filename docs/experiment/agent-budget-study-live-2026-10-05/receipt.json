@@ -1,0 +1,6140 @@
+{
+  "schema": "agent-budget-full-receipt-v1",
+  "created_at_utc": "2026-10-05T01:38:52.405096+00:00",
+  "source_revision": "b9f7a6ed57b215208b790c3be32980862267aa49",
+  "registered_tasks": 432,
+  "defect_tasks_per_strategy": 48,
+  "correct_tasks_per_strategy": 24,
+  "distinct_registered_defects": 16,
+  "repeats": 3,
+  "independent_holdout": false,
+  "external_independent_holdout": false,
+  "human_trial": false,
+  "H02_human_review": false,
+  "requests": 334,
+  "tokens": {
+    "reported_tokens": 833216,
+    "unknown_reserved_tokens": 0,
+    "conservative_total": 833216,
+    "remaining_tokens": 166784,
+    "requests_known_usage": 334,
+    "requests_unknown_usage": 0
+  },
+  "round_token_cap": 1000000,
+  "executed_tasks": 423,
+  "audited_rounds": 507,
+  "pipeline_sides": 1014,
+  "evidence_verified_tasks": 423,
+  "unexecuted_tasks": [
+    {
+      "row_index": 13,
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 0,
+      "status": "decision_format_error"
+    },
+    {
+      "row_index": 62,
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "strategy": "no_feedback",
+      "seed": 0,
+      "status": "policy_error"
+    },
+    {
+      "row_index": 76,
+      "case": "credit_guard",
+      "variant": "mutation_b",
+      "strategy": "single",
+      "seed": 0,
+      "status": "request_budget"
+    },
+    {
+      "row_index": 86,
+      "case": "edge_detector",
+      "variant": "mutation_b",
+      "strategy": "single",
+      "seed": 0,
+      "status": "decision_format_error"
+    },
+    {
+      "row_index": 156,
+      "case": "spi_master",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 1,
+      "status": "decision_format_error"
+    },
+    {
+      "row_index": 172,
+      "case": "credit_guard",
+      "variant": "reference",
+      "strategy": "single",
+      "seed": 1,
+      "status": "request_budget"
+    },
+    {
+      "row_index": 332,
+      "case": "pulse_stretcher",
+      "variant": "reference",
+      "strategy": "no_feedback",
+      "seed": 2,
+      "status": "policy_error"
+    },
+    {
+      "row_index": 347,
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "strategy": "single",
+      "seed": 2,
+      "status": "decision_format_error"
+    },
+    {
+      "row_index": 399,
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "strategy": "single",
+      "seed": 2,
+      "status": "decision_format_error"
+    }
+  ],
+  "frozen_inputs": 127,
+  "snapshot_verified": true,
+  "changed_inputs_at_finish": [],
+  "strict_comparison_eligible": false,
+  "schema_counts": {
+    "passed": 300,
+    "rejected": 30,
+    "not_reached": 4
+  },
+  "format_rejections": 30,
+  "plan_budget_rejections": 3,
+  "plan_preflight_rejections": 0,
+  "charged_reproposal_opportunities": 33,
+  "recoveries": 17,
+  "recovered_rejection_requests": 18,
+  "executed_recovery_episodes": 17,
+  "retained_rejection_artifacts": 33,
+  "retained_response_artifacts": 330,
+  "malformed_retained_response_artifacts": 0,
+  "cohorts": {
+    "development": [
+      "sync_fifo",
+      "uart_tx",
+      "spi_master",
+      "handshake_stage"
+    ],
+    "prior_internal_holdout": [
+      "credit_guard",
+      "rotating_arbiter"
+    ],
+    "module_set_holdout": [
+      "edge_detector",
+      "pulse_stretcher"
+    ]
+  },
+  "cohort_summaries": {
+    "development": {
+      "fixed": {
+        "registered_defect_samples": 24,
+        "detected_samples": 24,
+        "unique_defects": 8,
+        "unique_detected": 8,
+        "unique_union_rate": 1.0,
+        "incomplete_or_undecidable": 0,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "not_detected": 12,
+          "detected": 24
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 8,
+            "detected": 8,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 8,
+            "detected": 8,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 8,
+            "detected": 8,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          }
+        ],
+        "repeat_detection_rate_mean": 1.0,
+        "repeat_detection_rate_min": 1.0,
+        "repeat_detection_rate_max": 1.0,
+        "requests": 0,
+        "usage_numeric_sum": {},
+        "requests_with_usage": 0,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 828,
+        "reference_audit_cycles_recorded": 828,
+        "reference_audit_cycles_attempted": 828,
+        "checks_recorded": 2232,
+        "elapsed_seconds_recorded": 44.949,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_full_off_by_one",
+            "repeat": 0,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.282
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_msb_first",
+            "repeat": 0,
+            "cycle": 12,
+            "search_budget": 13,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.297
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_sclk_polarity",
+            "repeat": 0,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.281
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_ready_ignores_out_ready",
+            "repeat": 0,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.265
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_write_when_full",
+            "repeat": 0,
+            "cycle": 7,
+            "search_budget": 8,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.282
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_busy_never_clears",
+            "repeat": 0,
+            "cycle": 40,
+            "search_budget": 41,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.39
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_done_missing",
+            "repeat": 0,
+            "cycle": 15,
+            "search_budget": 16,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.328
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_valid_not_cleared",
+            "repeat": 0,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.297
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_full_off_by_one",
+            "repeat": 1,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.453
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_msb_first",
+            "repeat": 1,
+            "cycle": 12,
+            "search_budget": 13,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.5
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_sclk_polarity",
+            "repeat": 1,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.531
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_ready_ignores_out_ready",
+            "repeat": 1,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.485
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_write_when_full",
+            "repeat": 1,
+            "cycle": 7,
+            "search_budget": 8,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.5
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_busy_never_clears",
+            "repeat": 1,
+            "cycle": 40,
+            "search_budget": 41,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.578
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_done_missing",
+            "repeat": 1,
+            "cycle": 15,
+            "search_budget": 16,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.5
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_valid_not_cleared",
+            "repeat": 1,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.531
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_full_off_by_one",
+            "repeat": 2,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.64
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_msb_first",
+            "repeat": 2,
+            "cycle": 12,
+            "search_budget": 13,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.671
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_sclk_polarity",
+            "repeat": 2,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.703
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_ready_ignores_out_ready",
+            "repeat": 2,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.656
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_write_when_full",
+            "repeat": 2,
+            "cycle": 7,
+            "search_budget": 8,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.719
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_busy_never_clears",
+            "repeat": 2,
+            "cycle": 40,
+            "search_budget": 41,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.735
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_done_missing",
+            "repeat": 2,
+            "cycle": 15,
+            "search_budget": 16,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.719
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_valid_not_cleared",
+            "repeat": 2,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.703
+          }
+        ]
+      },
+      "random": {
+        "registered_defect_samples": 24,
+        "detected_samples": 15,
+        "unique_defects": 8,
+        "unique_detected": 7,
+        "unique_union_rate": 0.875,
+        "incomplete_or_undecidable": 0,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "not_detected": 21,
+          "detected": 15
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 8,
+            "detected": 5,
+            "detection_rate": 0.625,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 8,
+            "detected": 5,
+            "detection_rate": 0.625,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 8,
+            "detected": 5,
+            "detection_rate": 0.625,
+            "incomplete_or_undecidable": 0
+          }
+        ],
+        "repeat_detection_rate_mean": 0.625,
+        "repeat_detection_rate_min": 0.625,
+        "repeat_detection_rate_max": 0.625,
+        "requests": 0,
+        "usage_numeric_sum": {},
+        "requests_with_usage": 0,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 828,
+        "reference_audit_cycles_recorded": 828,
+        "reference_audit_cycles_attempted": 828,
+        "checks_recorded": 2232,
+        "elapsed_seconds_recorded": 44.593,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_sclk_polarity",
+            "repeat": 0,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.281
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_ready_ignores_out_ready",
+            "repeat": 0,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.25
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_busy_never_clears",
+            "repeat": 0,
+            "cycle": 40,
+            "search_budget": 41,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.422
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_done_missing",
+            "repeat": 0,
+            "cycle": 15,
+            "search_budget": 16,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.328
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_valid_not_cleared",
+            "repeat": 0,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.329
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_full_off_by_one",
+            "repeat": 1,
+            "cycle": 8,
+            "search_budget": 9,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.453
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_msb_first",
+            "repeat": 1,
+            "cycle": 8,
+            "search_budget": 9,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.516
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_sclk_polarity",
+            "repeat": 1,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.563
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_busy_never_clears",
+            "repeat": 1,
+            "cycle": 44,
+            "search_budget": 45,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.516
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_done_missing",
+            "repeat": 1,
+            "cycle": 17,
+            "search_budget": 18,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.5
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_full_off_by_one",
+            "repeat": 2,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.625
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_msb_first",
+            "repeat": 2,
+            "cycle": 16,
+            "search_budget": 17,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.672
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_sclk_polarity",
+            "repeat": 2,
+            "cycle": 7,
+            "search_budget": 8,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.656
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_ready_ignores_out_ready",
+            "repeat": 2,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.671
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_valid_not_cleared",
+            "repeat": 2,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.719
+          }
+        ]
+      },
+      "protocol_random": {
+        "registered_defect_samples": 24,
+        "detected_samples": 24,
+        "unique_defects": 8,
+        "unique_detected": 8,
+        "unique_union_rate": 1.0,
+        "incomplete_or_undecidable": 0,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "not_detected": 12,
+          "detected": 24
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 8,
+            "detected": 8,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 8,
+            "detected": 8,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 8,
+            "detected": 8,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          }
+        ],
+        "repeat_detection_rate_mean": 1.0,
+        "repeat_detection_rate_min": 1.0,
+        "repeat_detection_rate_max": 1.0,
+        "requests": 0,
+        "usage_numeric_sum": {},
+        "requests_with_usage": 0,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 828,
+        "reference_audit_cycles_recorded": 828,
+        "reference_audit_cycles_attempted": 828,
+        "checks_recorded": 2232,
+        "elapsed_seconds_recorded": 45.094,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_full_off_by_one",
+            "repeat": 0,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.219
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_msb_first",
+            "repeat": 0,
+            "cycle": 8,
+            "search_budget": 9,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.406
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_sclk_polarity",
+            "repeat": 0,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.281
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_ready_ignores_out_ready",
+            "repeat": 0,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.344
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_write_when_full",
+            "repeat": 0,
+            "cycle": 7,
+            "search_budget": 8,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.297
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_busy_never_clears",
+            "repeat": 0,
+            "cycle": 40,
+            "search_budget": 41,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.422
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_done_missing",
+            "repeat": 0,
+            "cycle": 15,
+            "search_budget": 16,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.359
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_valid_not_cleared",
+            "repeat": 0,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.329
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_full_off_by_one",
+            "repeat": 1,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.454
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_msb_first",
+            "repeat": 1,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.484
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_sclk_polarity",
+            "repeat": 1,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.594
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_ready_ignores_out_ready",
+            "repeat": 1,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.5
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_write_when_full",
+            "repeat": 1,
+            "cycle": 7,
+            "search_budget": 8,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.516
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_busy_never_clears",
+            "repeat": 1,
+            "cycle": 40,
+            "search_budget": 41,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.532
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_done_missing",
+            "repeat": 1,
+            "cycle": 15,
+            "search_budget": 16,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.516
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_valid_not_cleared",
+            "repeat": 1,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.516
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_full_off_by_one",
+            "repeat": 2,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.625
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_msb_first",
+            "repeat": 2,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.719
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_sclk_polarity",
+            "repeat": 2,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.688
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_ready_ignores_out_ready",
+            "repeat": 2,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.672
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_write_when_full",
+            "repeat": 2,
+            "cycle": 6,
+            "search_budget": 7,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.704
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_busy_never_clears",
+            "repeat": 2,
+            "cycle": 40,
+            "search_budget": 41,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.781
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_done_missing",
+            "repeat": 2,
+            "cycle": 15,
+            "search_budget": 16,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.765
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_valid_not_cleared",
+            "repeat": 2,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.735
+          }
+        ]
+      },
+      "single": {
+        "registered_defect_samples": 24,
+        "detected_samples": 22,
+        "unique_defects": 8,
+        "unique_detected": 8,
+        "unique_union_rate": 1.0,
+        "incomplete_or_undecidable": 2,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "not_detected": 10,
+          "decision_format_error": 4,
+          "detected": 22
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 8,
+            "detected": 8,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 8,
+            "detected": 8,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 8,
+            "detected": 6,
+            "detection_rate": 0.75,
+            "incomplete_or_undecidable": 2
+          }
+        ],
+        "repeat_detection_rate_mean": 0.9166666666666666,
+        "repeat_detection_rate_min": 0.75,
+        "repeat_detection_rate_max": 1.0,
+        "requests": 36,
+        "usage_numeric_sum": {
+          "prompt_tokens": 88560,
+          "completion_tokens": 8993,
+          "total_tokens": 97553,
+          "prompt_cache_hit_tokens": 74336,
+          "prompt_cache_miss_tokens": 14224
+        },
+        "requests_with_usage": 36,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 604,
+        "reference_audit_cycles_recorded": 604,
+        "reference_audit_cycles_attempted": 604,
+        "checks_recorded": 1568,
+        "elapsed_seconds_recorded": 77.608,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_full_off_by_one",
+            "repeat": 0,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.578
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_msb_first",
+            "repeat": 0,
+            "cycle": 7,
+            "search_budget": 8,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.109
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_sclk_polarity",
+            "repeat": 0,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.516
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_ready_ignores_out_ready",
+            "repeat": 0,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.672
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_write_when_full",
+            "repeat": 0,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.656
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_busy_never_clears",
+            "repeat": 0,
+            "cycle": 40,
+            "search_budget": 41,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.359
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_done_missing",
+            "repeat": 0,
+            "cycle": 16,
+            "search_budget": 17,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.391
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_valid_not_cleared",
+            "repeat": 0,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.5
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_full_off_by_one",
+            "repeat": 1,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.187
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_msb_first",
+            "repeat": 1,
+            "cycle": 7,
+            "search_budget": 8,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.218
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_sclk_polarity",
+            "repeat": 1,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.281
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_ready_ignores_out_ready",
+            "repeat": 1,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.109
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_write_when_full",
+            "repeat": 1,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.625
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_busy_never_clears",
+            "repeat": 1,
+            "cycle": 40,
+            "search_budget": 41,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.125
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_done_missing",
+            "repeat": 1,
+            "cycle": 15,
+            "search_budget": 16,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.172
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_valid_not_cleared",
+            "repeat": 1,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.75
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_full_off_by_one",
+            "repeat": 2,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 2.016
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_sclk_polarity",
+            "repeat": 2,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.296
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_ready_ignores_out_ready",
+            "repeat": 2,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.531
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_write_when_full",
+            "repeat": 2,
+            "cycle": 7,
+            "search_budget": 8,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 2.187
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_busy_never_clears",
+            "repeat": 2,
+            "cycle": 40,
+            "search_budget": 41,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.5
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_valid_not_cleared",
+            "repeat": 2,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.437
+          }
+        ]
+      },
+      "feedback": {
+        "registered_defect_samples": 24,
+        "detected_samples": 22,
+        "unique_defects": 8,
+        "unique_detected": 8,
+        "unique_union_rate": 1.0,
+        "incomplete_or_undecidable": 0,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "not_detected": 13,
+          "detected": 22,
+          "policy_error": 1
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 8,
+            "detected": 6,
+            "detection_rate": 0.75,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 8,
+            "detected": 8,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 8,
+            "detected": 8,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          }
+        ],
+        "repeat_detection_rate_mean": 0.9166666666666666,
+        "repeat_detection_rate_min": 0.75,
+        "repeat_detection_rate_max": 1.0,
+        "requests": 59,
+        "usage_numeric_sum": {
+          "prompt_tokens": 161479,
+          "completion_tokens": 11159,
+          "total_tokens": 172638,
+          "prompt_cache_hit_tokens": 96096,
+          "prompt_cache_miss_tokens": 65383
+        },
+        "requests_with_usage": 59,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 735,
+        "reference_audit_cycles_recorded": 735,
+        "reference_audit_cycles_attempted": 735,
+        "checks_recorded": 1971,
+        "elapsed_seconds_recorded": 115.453,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_full_off_by_one",
+            "repeat": 0,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.453
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_msb_first",
+            "repeat": 0,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.844
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_sclk_polarity",
+            "repeat": 0,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 2.437
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_ready_ignores_out_ready",
+            "repeat": 0,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.672
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_write_when_full",
+            "repeat": 0,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 2.859
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_valid_not_cleared",
+            "repeat": 0,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.282
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_full_off_by_one",
+            "repeat": 1,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.688
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_msb_first",
+            "repeat": 1,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.609
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_sclk_polarity",
+            "repeat": 1,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.953
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_ready_ignores_out_ready",
+            "repeat": 1,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.281
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_write_when_full",
+            "repeat": 1,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.296
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_busy_never_clears",
+            "repeat": 1,
+            "cycle": 42,
+            "search_budget": 43,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.359
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_done_missing",
+            "repeat": 1,
+            "cycle": 15,
+            "search_budget": 16,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.64
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_valid_not_cleared",
+            "repeat": 1,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.406
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_full_off_by_one",
+            "repeat": 2,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 2.125
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_msb_first",
+            "repeat": 2,
+            "cycle": 7,
+            "search_budget": 8,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.562
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_sclk_polarity",
+            "repeat": 2,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.406
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_ready_ignores_out_ready",
+            "repeat": 2,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.407
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_write_when_full",
+            "repeat": 2,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.625
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_busy_never_clears",
+            "repeat": 2,
+            "cycle": 43,
+            "search_budget": 44,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.344
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_done_missing",
+            "repeat": 2,
+            "cycle": 15,
+            "search_budget": 16,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 2.234
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_valid_not_cleared",
+            "repeat": 2,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.813
+          }
+        ]
+      },
+      "no_feedback": {
+        "registered_defect_samples": 24,
+        "detected_samples": 21,
+        "unique_defects": 8,
+        "unique_detected": 8,
+        "unique_union_rate": 1.0,
+        "incomplete_or_undecidable": 1,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "not_detected": 12,
+          "detected": 21,
+          "policy_error": 1,
+          "decision_format_error": 2
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 8,
+            "detected": 6,
+            "detection_rate": 0.75,
+            "incomplete_or_undecidable": 1
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 8,
+            "detected": 7,
+            "detection_rate": 0.875,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 8,
+            "detected": 8,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          }
+        ],
+        "repeat_detection_rate_mean": 0.875,
+        "repeat_detection_rate_min": 0.75,
+        "repeat_detection_rate_max": 1.0,
+        "requests": 55,
+        "usage_numeric_sum": {
+          "prompt_tokens": 138944,
+          "completion_tokens": 11076,
+          "total_tokens": 150020,
+          "prompt_cache_hit_tokens": 104660,
+          "prompt_cache_miss_tokens": 34284
+        },
+        "requests_with_usage": 55,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 718,
+        "reference_audit_cycles_recorded": 718,
+        "reference_audit_cycles_attempted": 718,
+        "checks_recorded": 1917,
+        "elapsed_seconds_recorded": 113.609,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_full_off_by_one",
+            "repeat": 0,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 2.016
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_msb_first",
+            "repeat": 0,
+            "cycle": 7,
+            "search_budget": 8,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.531
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_ready_ignores_out_ready",
+            "repeat": 0,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.922
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_write_when_full",
+            "repeat": 0,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.625
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_done_missing",
+            "repeat": 0,
+            "cycle": 15,
+            "search_budget": 16,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.921
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_valid_not_cleared",
+            "repeat": 0,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.453
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_full_off_by_one",
+            "repeat": 1,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.093
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_msb_first",
+            "repeat": 1,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 2.359
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_sclk_polarity",
+            "repeat": 1,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.219
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_ready_ignores_out_ready",
+            "repeat": 1,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.313
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_write_when_full",
+            "repeat": 1,
+            "cycle": 7,
+            "search_budget": 8,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 2.485
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_busy_never_clears",
+            "repeat": 1,
+            "cycle": 41,
+            "search_budget": 42,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.281
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_valid_not_cleared",
+            "repeat": 1,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.75
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_full_off_by_one",
+            "repeat": 2,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.25
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_msb_first",
+            "repeat": 2,
+            "cycle": 7,
+            "search_budget": 8,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.406
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_sclk_polarity",
+            "repeat": 2,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 4.813
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_ready_ignores_out_ready",
+            "repeat": 2,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.5
+          },
+          {
+            "case": "sync_fifo",
+            "variant": "fifo_bug_write_when_full",
+            "repeat": 2,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.422
+          },
+          {
+            "case": "uart_tx",
+            "variant": "uart_bug_busy_never_clears",
+            "repeat": 2,
+            "cycle": 40,
+            "search_budget": 41,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.375
+          },
+          {
+            "case": "spi_master",
+            "variant": "spi_bug_done_missing",
+            "repeat": 2,
+            "cycle": 18,
+            "search_budget": 19,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.688
+          },
+          {
+            "case": "handshake_stage",
+            "variant": "hs_bug_valid_not_cleared",
+            "repeat": 2,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.704
+          }
+        ]
+      }
+    },
+    "prior_internal_holdout": {
+      "feedback": {
+        "registered_defect_samples": 12,
+        "detected_samples": 4,
+        "unique_defects": 4,
+        "unique_detected": 2,
+        "unique_union_rate": 0.5,
+        "incomplete_or_undecidable": 0,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "not_detected": 13,
+          "detected": 4,
+          "decision_format_error": 1
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 4,
+            "detected": 2,
+            "detection_rate": 0.5,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 4,
+            "detected": 2,
+            "detection_rate": 0.5,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 4,
+            "detected": 0,
+            "detection_rate": 0.0,
+            "incomplete_or_undecidable": 0
+          }
+        ],
+        "repeat_detection_rate_mean": 0.3333333333333333,
+        "repeat_detection_rate_min": 0.0,
+        "repeat_detection_rate_max": 0.5,
+        "requests": 47,
+        "usage_numeric_sum": {
+          "prompt_tokens": 103279,
+          "completion_tokens": 8942,
+          "total_tokens": 112221,
+          "prompt_cache_hit_tokens": 52096,
+          "prompt_cache_miss_tokens": 51183
+        },
+        "requests_with_usage": 47,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 240,
+        "reference_audit_cycles_recorded": 240,
+        "reference_audit_cycles_attempted": 240,
+        "checks_recorded": 240,
+        "elapsed_seconds_recorded": 97.222,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "credit_guard",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 7,
+            "search_budget": 8,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.391
+          },
+          {
+            "case": "rotating_arbiter",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 3,
+            "search_budget": 12,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 5.563
+          },
+          {
+            "case": "credit_guard",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 9,
+            "search_budget": 10,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.297
+          },
+          {
+            "case": "rotating_arbiter",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 2,
+            "search_budget": 12,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 5.89
+          }
+        ]
+      },
+      "no_feedback": {
+        "registered_defect_samples": 12,
+        "detected_samples": 6,
+        "unique_defects": 4,
+        "unique_detected": 3,
+        "unique_union_rate": 0.75,
+        "incomplete_or_undecidable": 1,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "policy_error": 1,
+          "not_detected": 9,
+          "detected": 6,
+          "decision_format_error": 2
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 4,
+            "detected": 3,
+            "detection_rate": 0.75,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 4,
+            "detected": 2,
+            "detection_rate": 0.5,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 4,
+            "detected": 1,
+            "detection_rate": 0.25,
+            "incomplete_or_undecidable": 1
+          }
+        ],
+        "repeat_detection_rate_mean": 0.5,
+        "repeat_detection_rate_min": 0.25,
+        "repeat_detection_rate_max": 0.75,
+        "requests": 42,
+        "usage_numeric_sum": {
+          "prompt_tokens": 86858,
+          "completion_tokens": 8120,
+          "total_tokens": 94978,
+          "prompt_cache_hit_tokens": 51328,
+          "prompt_cache_miss_tokens": 35530
+        },
+        "requests_with_usage": 42,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 201,
+        "reference_audit_cycles_recorded": 201,
+        "reference_audit_cycles_attempted": 201,
+        "checks_recorded": 201,
+        "elapsed_seconds_recorded": 86.842,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "credit_guard",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.422
+          },
+          {
+            "case": "credit_guard",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 13,
+            "search_budget": 14,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.141
+          },
+          {
+            "case": "rotating_arbiter",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 3,
+            "search_budget": 8,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 3.64
+          },
+          {
+            "case": "credit_guard",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.734
+          },
+          {
+            "case": "rotating_arbiter",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 6,
+            "search_budget": 7,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.281
+          },
+          {
+            "case": "credit_guard",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.782
+          }
+        ]
+      },
+      "fixed": {
+        "registered_defect_samples": 12,
+        "detected_samples": 12,
+        "unique_defects": 4,
+        "unique_detected": 4,
+        "unique_union_rate": 1.0,
+        "incomplete_or_undecidable": 0,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "not_detected": 6,
+          "detected": 12
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          }
+        ],
+        "repeat_detection_rate_mean": 1.0,
+        "repeat_detection_rate_min": 1.0,
+        "repeat_detection_rate_max": 1.0,
+        "requests": 0,
+        "usage_numeric_sum": {},
+        "requests_with_usage": 0,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 288,
+        "reference_audit_cycles_recorded": 288,
+        "reference_audit_cycles_attempted": 288,
+        "checks_recorded": 288,
+        "elapsed_seconds_recorded": 23.341,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "credit_guard",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.265
+          },
+          {
+            "case": "rotating_arbiter",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.265
+          },
+          {
+            "case": "credit_guard",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 13,
+            "search_budget": 14,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.313
+          },
+          {
+            "case": "rotating_arbiter",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.328
+          },
+          {
+            "case": "credit_guard",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.531
+          },
+          {
+            "case": "rotating_arbiter",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.5
+          },
+          {
+            "case": "credit_guard",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 13,
+            "search_budget": 14,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.516
+          },
+          {
+            "case": "rotating_arbiter",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.5
+          },
+          {
+            "case": "credit_guard",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.671
+          },
+          {
+            "case": "rotating_arbiter",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.719
+          },
+          {
+            "case": "credit_guard",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 13,
+            "search_budget": 14,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.781
+          },
+          {
+            "case": "rotating_arbiter",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.734
+          }
+        ]
+      },
+      "random": {
+        "registered_defect_samples": 12,
+        "detected_samples": 8,
+        "unique_defects": 4,
+        "unique_detected": 3,
+        "unique_union_rate": 0.75,
+        "incomplete_or_undecidable": 0,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "not_detected": 10,
+          "detected": 8
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 4,
+            "detected": 3,
+            "detection_rate": 0.75,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 4,
+            "detected": 3,
+            "detection_rate": 0.75,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 4,
+            "detected": 2,
+            "detection_rate": 0.5,
+            "incomplete_or_undecidable": 0
+          }
+        ],
+        "repeat_detection_rate_mean": 0.6666666666666666,
+        "repeat_detection_rate_min": 0.5,
+        "repeat_detection_rate_max": 0.75,
+        "requests": 0,
+        "usage_numeric_sum": {},
+        "requests_with_usage": 0,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 288,
+        "reference_audit_cycles_recorded": 288,
+        "reference_audit_cycles_attempted": 288,
+        "checks_recorded": 288,
+        "elapsed_seconds_recorded": 23.22,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "rotating_arbiter",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 12,
+            "search_budget": 13,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.25
+          },
+          {
+            "case": "credit_guard",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 0,
+            "search_budget": 1,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.344
+          },
+          {
+            "case": "rotating_arbiter",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.328
+          },
+          {
+            "case": "rotating_arbiter",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 9,
+            "search_budget": 10,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.468
+          },
+          {
+            "case": "credit_guard",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.5
+          },
+          {
+            "case": "rotating_arbiter",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.547
+          },
+          {
+            "case": "credit_guard",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 9,
+            "search_budget": 10,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.782
+          },
+          {
+            "case": "rotating_arbiter",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.734
+          }
+        ]
+      },
+      "protocol_random": {
+        "registered_defect_samples": 12,
+        "detected_samples": 12,
+        "unique_defects": 4,
+        "unique_detected": 4,
+        "unique_union_rate": 1.0,
+        "incomplete_or_undecidable": 0,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "not_detected": 6,
+          "detected": 12
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          }
+        ],
+        "repeat_detection_rate_mean": 1.0,
+        "repeat_detection_rate_min": 1.0,
+        "repeat_detection_rate_max": 1.0,
+        "requests": 0,
+        "usage_numeric_sum": {},
+        "requests_with_usage": 0,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 288,
+        "reference_audit_cycles_recorded": 288,
+        "reference_audit_cycles_attempted": 288,
+        "checks_recorded": 288,
+        "elapsed_seconds_recorded": 22.982,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "credit_guard",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 14,
+            "search_budget": 15,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.25
+          },
+          {
+            "case": "rotating_arbiter",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.25
+          },
+          {
+            "case": "credit_guard",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.328
+          },
+          {
+            "case": "rotating_arbiter",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.313
+          },
+          {
+            "case": "credit_guard",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.484
+          },
+          {
+            "case": "rotating_arbiter",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.469
+          },
+          {
+            "case": "credit_guard",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 12,
+            "search_budget": 13,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.484
+          },
+          {
+            "case": "rotating_arbiter",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.531
+          },
+          {
+            "case": "credit_guard",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.687
+          },
+          {
+            "case": "rotating_arbiter",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.656
+          },
+          {
+            "case": "credit_guard",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 12,
+            "search_budget": 13,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.765
+          },
+          {
+            "case": "rotating_arbiter",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.766
+          }
+        ]
+      },
+      "single": {
+        "registered_defect_samples": 12,
+        "detected_samples": 3,
+        "unique_defects": 4,
+        "unique_detected": 2,
+        "unique_union_rate": 0.5,
+        "incomplete_or_undecidable": 1,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "not_detected": 13,
+          "request_budget": 2,
+          "detected": 3
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 4,
+            "detected": 1,
+            "detection_rate": 0.25,
+            "incomplete_or_undecidable": 1
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 4,
+            "detected": 1,
+            "detection_rate": 0.25,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 4,
+            "detected": 1,
+            "detection_rate": 0.25,
+            "incomplete_or_undecidable": 0
+          }
+        ],
+        "repeat_detection_rate_mean": 0.25,
+        "repeat_detection_rate_min": 0.25,
+        "repeat_detection_rate_max": 0.25,
+        "requests": 18,
+        "usage_numeric_sum": {
+          "prompt_tokens": 34434,
+          "completion_tokens": 4540,
+          "total_tokens": 38974,
+          "prompt_cache_hit_tokens": 29184,
+          "prompt_cache_miss_tokens": 5250
+        },
+        "requests_with_usage": 18,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 114,
+        "reference_audit_cycles_recorded": 114,
+        "reference_audit_cycles_attempted": 114,
+        "checks_recorded": 114,
+        "elapsed_seconds_recorded": 39.141999999999996,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "rotating_arbiter",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 6,
+            "search_budget": 7,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.547
+          },
+          {
+            "case": "rotating_arbiter",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 6,
+            "search_budget": 7,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.547
+          },
+          {
+            "case": "credit_guard",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.407
+          }
+        ]
+      }
+    },
+    "module_set_holdout": {
+      "fixed": {
+        "registered_defect_samples": 12,
+        "detected_samples": 12,
+        "unique_defects": 4,
+        "unique_detected": 4,
+        "unique_union_rate": 1.0,
+        "incomplete_or_undecidable": 0,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "not_detected": 6,
+          "detected": 12
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          }
+        ],
+        "repeat_detection_rate_mean": 1.0,
+        "repeat_detection_rate_min": 1.0,
+        "repeat_detection_rate_max": 1.0,
+        "requests": 0,
+        "usage_numeric_sum": {},
+        "requests_with_usage": 0,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 288,
+        "reference_audit_cycles_recorded": 288,
+        "reference_audit_cycles_attempted": 288,
+        "checks_recorded": 288,
+        "elapsed_seconds_recorded": 23.142,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "edge_detector",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.375
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.25
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.328
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 11,
+            "search_budget": 12,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.329
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.484
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.484
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.532
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 11,
+            "search_budget": 12,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.515
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.656
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.656
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.719
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 11,
+            "search_budget": 12,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.766
+          }
+        ]
+      },
+      "random": {
+        "registered_defect_samples": 12,
+        "detected_samples": 9,
+        "unique_defects": 4,
+        "unique_detected": 4,
+        "unique_union_rate": 1.0,
+        "incomplete_or_undecidable": 0,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "not_detected": 9,
+          "detected": 9
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 4,
+            "detected": 3,
+            "detection_rate": 0.75,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 4,
+            "detected": 3,
+            "detection_rate": 0.75,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 4,
+            "detected": 3,
+            "detection_rate": 0.75,
+            "incomplete_or_undecidable": 0
+          }
+        ],
+        "repeat_detection_rate_mean": 0.75,
+        "repeat_detection_rate_min": 0.75,
+        "repeat_detection_rate_max": 0.75,
+        "requests": 0,
+        "usage_numeric_sum": {},
+        "requests_with_usage": 0,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 288,
+        "reference_audit_cycles_recorded": 288,
+        "reference_audit_cycles_attempted": 288,
+        "checks_recorded": 288,
+        "elapsed_seconds_recorded": 23.627,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "edge_detector",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 0,
+            "search_budget": 1,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.25
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.328
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.344
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.5
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.547
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 12,
+            "search_budget": 13,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.516
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 6,
+            "search_budget": 7,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.797
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 13,
+            "search_budget": 14,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.703
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 7,
+            "search_budget": 8,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.766
+          }
+        ]
+      },
+      "protocol_random": {
+        "registered_defect_samples": 12,
+        "detected_samples": 12,
+        "unique_defects": 4,
+        "unique_detected": 4,
+        "unique_union_rate": 1.0,
+        "incomplete_or_undecidable": 0,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "not_detected": 6,
+          "detected": 12
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          }
+        ],
+        "repeat_detection_rate_mean": 1.0,
+        "repeat_detection_rate_min": 1.0,
+        "repeat_detection_rate_max": 1.0,
+        "requests": 0,
+        "usage_numeric_sum": {},
+        "requests_with_usage": 0,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 288,
+        "reference_audit_cycles_recorded": 288,
+        "reference_audit_cycles_attempted": 288,
+        "checks_recorded": 288,
+        "elapsed_seconds_recorded": 23.029,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "edge_detector",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.296
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.25
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.328
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 11,
+            "search_budget": 12,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.312
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.484
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.5
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.531
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 10,
+            "search_budget": 11,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.578
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.672
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.656
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.765
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 10,
+            "search_budget": 11,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.719
+          }
+        ]
+      },
+      "single": {
+        "registered_defect_samples": 12,
+        "detected_samples": 9,
+        "unique_defects": 4,
+        "unique_detected": 4,
+        "unique_union_rate": 1.0,
+        "incomplete_or_undecidable": 1,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "not_detected": 8,
+          "decision_format_error": 1,
+          "detected": 9
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 4,
+            "detected": 2,
+            "detection_rate": 0.5,
+            "incomplete_or_undecidable": 1
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 4,
+            "detected": 3,
+            "detection_rate": 0.75,
+            "incomplete_or_undecidable": 0
+          }
+        ],
+        "repeat_detection_rate_mean": 0.75,
+        "repeat_detection_rate_min": 0.5,
+        "repeat_detection_rate_max": 1.0,
+        "requests": 18,
+        "usage_numeric_sum": {
+          "prompt_tokens": 33948,
+          "completion_tokens": 3688,
+          "total_tokens": 37636,
+          "prompt_cache_hit_tokens": 28664,
+          "prompt_cache_miss_tokens": 5284
+        },
+        "requests_with_usage": 18,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 153,
+        "reference_audit_cycles_recorded": 153,
+        "reference_audit_cycles_attempted": 153,
+        "checks_recorded": 153,
+        "elapsed_seconds_recorded": 38.388,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.171
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.562
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.421
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.281
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.203
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 6,
+            "search_budget": 7,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.047
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 0,
+            "search_budget": 1,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.656
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.14
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.125
+          }
+        ]
+      },
+      "feedback": {
+        "registered_defect_samples": 12,
+        "detected_samples": 11,
+        "unique_defects": 4,
+        "unique_detected": 4,
+        "unique_union_rate": 1.0,
+        "incomplete_or_undecidable": 0,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "not_detected": 6,
+          "detected": 11,
+          "decision_format_error": 1
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 4,
+            "detected": 3,
+            "detection_rate": 0.75,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          }
+        ],
+        "repeat_detection_rate_mean": 0.9166666666666666,
+        "repeat_detection_rate_min": 0.75,
+        "repeat_detection_rate_max": 1.0,
+        "requests": 32,
+        "usage_numeric_sum": {
+          "prompt_tokens": 66139,
+          "completion_tokens": 5242,
+          "total_tokens": 71381,
+          "prompt_cache_hit_tokens": 40056,
+          "prompt_cache_miss_tokens": 26083
+        },
+        "requests_with_usage": 32,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 200,
+        "reference_audit_cycles_recorded": 200,
+        "reference_audit_cycles_attempted": 200,
+        "checks_recorded": 200,
+        "elapsed_seconds_recorded": 64.42099999999999,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "edge_detector",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.25
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 2.093
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.157
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 1,
+            "search_budget": 2,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.187
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 11,
+            "search_budget": 12,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.531
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 4,
+            "search_budget": 5,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.266
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 6,
+            "search_budget": 15,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 3.781
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.437
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.375
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.75
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 4,
+            "search_budget": 12,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 3.64
+          }
+        ]
+      },
+      "no_feedback": {
+        "registered_defect_samples": 12,
+        "detected_samples": 10,
+        "unique_defects": 4,
+        "unique_detected": 4,
+        "unique_union_rate": 1.0,
+        "incomplete_or_undecidable": 0,
+        "reference_false_alarm_samples": 0,
+        "reference_target_false_alarms": 0,
+        "variant_reference_audit_rejections": 0,
+        "status_counts": {
+          "not_detected": 7,
+          "detected": 10,
+          "policy_error": 1
+        },
+        "per_repeat": [
+          {
+            "repeat": 0,
+            "registered_defects": 4,
+            "detected": 3,
+            "detection_rate": 0.75,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 1,
+            "registered_defects": 4,
+            "detected": 4,
+            "detection_rate": 1.0,
+            "incomplete_or_undecidable": 0
+          },
+          {
+            "repeat": 2,
+            "registered_defects": 4,
+            "detected": 3,
+            "detection_rate": 0.75,
+            "incomplete_or_undecidable": 0
+          }
+        ],
+        "repeat_detection_rate_mean": 0.8333333333333334,
+        "repeat_detection_rate_min": 0.75,
+        "repeat_detection_rate_max": 1.0,
+        "requests": 27,
+        "usage_numeric_sum": {
+          "prompt_tokens": 53040,
+          "completion_tokens": 4775,
+          "total_tokens": 57815,
+          "prompt_cache_hit_tokens": 38007,
+          "prompt_cache_miss_tokens": 15033
+        },
+        "requests_with_usage": 27,
+        "requests_without_usage": 0,
+        "search_cycles_recorded": 169,
+        "reference_audit_cycles_recorded": 169,
+        "reference_audit_cycles_attempted": 169,
+        "checks_recorded": 169,
+        "elapsed_seconds_recorded": 51.111,
+        "missing_elapsed_samples": 0,
+        "first_detection": [
+          {
+            "case": "edge_detector",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.093
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_b",
+            "repeat": 0,
+            "cycle": 5,
+            "search_budget": 6,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.234
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_c",
+            "repeat": 0,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.313
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.281
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_b",
+            "repeat": 1,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 0.953
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 3,
+            "search_budget": 4,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.312
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_c",
+            "repeat": 1,
+            "cycle": 4,
+            "search_budget": 14,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 3.391
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.359
+          },
+          {
+            "case": "pulse_stretcher",
+            "variant": "mutation_b",
+            "repeat": 2,
+            "cycle": 7,
+            "search_budget": 8,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.156
+          },
+          {
+            "case": "edge_detector",
+            "variant": "mutation_c",
+            "repeat": 2,
+            "cycle": 2,
+            "search_budget": 3,
+            "elapsed_seconds": null,
+            "result_available_elapsed_seconds": 1.187
+          }
+        ]
+      }
+    }
+  },
+  "source_byte_binding_counts": {
+    "exact": 103,
+    "newline_only": 24
+  },
+  "strategies": {
+    "fixed": {
+      "registered_defect_samples": 48,
+      "detected_samples": 48,
+      "unique_defects": 16,
+      "unique_detected": 16,
+      "unique_union_rate": 1.0,
+      "incomplete_or_undecidable": 0,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 24,
+        "detected": 48
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 16,
+          "detected": 16,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 16,
+          "detected": 16,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 16,
+          "detected": 16,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        }
+      ],
+      "repeat_detection_rate_mean": 1.0,
+      "repeat_detection_rate_min": 1.0,
+      "repeat_detection_rate_max": 1.0,
+      "requests": 0,
+      "usage_numeric_sum": {},
+      "requests_with_usage": 0,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 1404,
+      "reference_audit_cycles_recorded": 1404,
+      "reference_audit_cycles_attempted": 1404,
+      "checks_recorded": 2808,
+      "elapsed_seconds_recorded": 91.432,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.282
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 0,
+          "cycle": 12,
+          "search_budget": 13,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.297
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 0,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.281
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.265
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.265
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.265
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.375
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.25
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 0,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.282
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 0,
+          "cycle": 40,
+          "search_budget": 41,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.39
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 0,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.328
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.297
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 13,
+          "search_budget": 14,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.313
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.328
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.328
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 11,
+          "search_budget": 12,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.329
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.453
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 1,
+          "cycle": 12,
+          "search_budget": 13,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.5
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 1,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.531
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.485
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.531
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.5
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.484
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.484
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 1,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.5
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 1,
+          "cycle": 40,
+          "search_budget": 41,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.578
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 1,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.5
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 1,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.531
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 13,
+          "search_budget": 14,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.516
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.5
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.532
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 11,
+          "search_budget": 12,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.515
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.64
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 2,
+          "cycle": 12,
+          "search_budget": 13,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.671
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 2,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.703
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.656
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.671
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.719
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.656
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.656
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 2,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.719
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 2,
+          "cycle": 40,
+          "search_budget": 41,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.735
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 2,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.719
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 2,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.703
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 13,
+          "search_budget": 14,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.781
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.734
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.719
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 11,
+          "search_budget": 12,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.766
+        }
+      ]
+    },
+    "random": {
+      "registered_defect_samples": 48,
+      "detected_samples": 32,
+      "unique_defects": 16,
+      "unique_detected": 14,
+      "unique_union_rate": 0.875,
+      "incomplete_or_undecidable": 0,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 40,
+        "detected": 32
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 16,
+          "detected": 11,
+          "detection_rate": 0.6875,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 16,
+          "detected": 11,
+          "detection_rate": 0.6875,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 16,
+          "detected": 10,
+          "detection_rate": 0.625,
+          "incomplete_or_undecidable": 0
+        }
+      ],
+      "repeat_detection_rate_mean": 0.6666666666666666,
+      "repeat_detection_rate_min": 0.625,
+      "repeat_detection_rate_max": 0.6875,
+      "requests": 0,
+      "usage_numeric_sum": {},
+      "requests_with_usage": 0,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 1404,
+      "reference_audit_cycles_recorded": 1404,
+      "reference_audit_cycles_attempted": 1404,
+      "checks_recorded": 2808,
+      "elapsed_seconds_recorded": 91.44,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 0,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.281
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 0,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.25
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 12,
+          "search_budget": 13,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.25
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 0,
+          "search_budget": 1,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.25
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 0,
+          "cycle": 40,
+          "search_budget": 41,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.422
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 0,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.328
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.329
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 0,
+          "search_budget": 1,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.344
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.328
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.328
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.344
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 1,
+          "cycle": 8,
+          "search_budget": 9,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.453
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 1,
+          "cycle": 8,
+          "search_budget": 9,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.516
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.563
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 9,
+          "search_budget": 10,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.468
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.5
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 1,
+          "cycle": 44,
+          "search_budget": 45,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.516
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 1,
+          "cycle": 17,
+          "search_budget": 18,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.5
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.5
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.547
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.547
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 12,
+          "search_budget": 13,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.516
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 2,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.625
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 2,
+          "cycle": 16,
+          "search_budget": 17,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.672
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 2,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.656
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 2,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.671
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.797
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 13,
+          "search_budget": 14,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.703
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.719
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 9,
+          "search_budget": 10,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.782
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.734
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.766
+        }
+      ]
+    },
+    "protocol_random": {
+      "registered_defect_samples": 48,
+      "detected_samples": 48,
+      "unique_defects": 16,
+      "unique_detected": 16,
+      "unique_union_rate": 1.0,
+      "incomplete_or_undecidable": 0,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 24,
+        "detected": 48
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 16,
+          "detected": 16,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 16,
+          "detected": 16,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 16,
+          "detected": 16,
+          "detection_rate": 1.0,
+          "incomplete_or_undecidable": 0
+        }
+      ],
+      "repeat_detection_rate_mean": 1.0,
+      "repeat_detection_rate_min": 1.0,
+      "repeat_detection_rate_max": 1.0,
+      "requests": 0,
+      "usage_numeric_sum": {},
+      "requests_with_usage": 0,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 1404,
+      "reference_audit_cycles_recorded": 1404,
+      "reference_audit_cycles_attempted": 1404,
+      "checks_recorded": 2808,
+      "elapsed_seconds_recorded": 91.105,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.219
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 0,
+          "cycle": 8,
+          "search_budget": 9,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.406
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 0,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.281
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.344
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 14,
+          "search_budget": 15,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.25
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.25
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.296
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.25
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 0,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.297
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 0,
+          "cycle": 40,
+          "search_budget": 41,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.422
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 0,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.359
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.329
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.328
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.313
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.328
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 11,
+          "search_budget": 12,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.312
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.454
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 1,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.484
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 1,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.594
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 1,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.5
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.484
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.469
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.484
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.5
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 1,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.516
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 1,
+          "cycle": 40,
+          "search_budget": 41,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.532
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 1,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.516
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 1,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.516
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 12,
+          "search_budget": 13,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.484
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.531
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.531
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 10,
+          "search_budget": 11,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.578
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.625
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 2,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.719
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 2,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.688
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.672
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.687
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.656
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.672
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.656
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 2,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.704
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 2,
+          "cycle": 40,
+          "search_budget": 41,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.781
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 2,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.765
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 2,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.735
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 12,
+          "search_budget": 13,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.765
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.766
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.765
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 10,
+          "search_budget": 11,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.719
+        }
+      ]
+    },
+    "single": {
+      "registered_defect_samples": 48,
+      "detected_samples": 34,
+      "unique_defects": 16,
+      "unique_detected": 14,
+      "unique_union_rate": 0.875,
+      "incomplete_or_undecidable": 4,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 31,
+        "decision_format_error": 5,
+        "detected": 34,
+        "request_budget": 2
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 16,
+          "detected": 11,
+          "detection_rate": 0.6875,
+          "incomplete_or_undecidable": 2
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 16,
+          "detected": 13,
+          "detection_rate": 0.8125,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 16,
+          "detected": 10,
+          "detection_rate": 0.625,
+          "incomplete_or_undecidable": 2
+        }
+      ],
+      "repeat_detection_rate_mean": 0.7083333333333334,
+      "repeat_detection_rate_min": 0.625,
+      "repeat_detection_rate_max": 0.8125,
+      "requests": 72,
+      "usage_numeric_sum": {
+        "prompt_tokens": 156942,
+        "completion_tokens": 17221,
+        "total_tokens": 174163,
+        "prompt_cache_hit_tokens": 132184,
+        "prompt_cache_miss_tokens": 24758
+      },
+      "requests_with_usage": 72,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 871,
+      "reference_audit_cycles_recorded": 871,
+      "reference_audit_cycles_attempted": 871,
+      "checks_recorded": 1835,
+      "elapsed_seconds_recorded": 155.138,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 0,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.578
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 0,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.109
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 0,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.516
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 0,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.672
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.171
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.656
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 0,
+          "cycle": 40,
+          "search_budget": 41,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.359
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 0,
+          "cycle": 16,
+          "search_budget": 17,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.391
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 0,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.5
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.547
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.562
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 1,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.187
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 1,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.218
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 1,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.281
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 1,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.109
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.421
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.281
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 1,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.625
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 1,
+          "cycle": 40,
+          "search_budget": 41,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.125
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 1,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.172
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 1,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.75
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.547
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.203
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.047
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 2,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.016
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 2,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.296
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 2,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.531
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.407
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 0,
+          "search_budget": 1,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.656
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.14
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 2,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.187
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 2,
+          "cycle": 40,
+          "search_budget": 41,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.5
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 2,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.437
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.125
+        }
+      ]
+    },
+    "feedback": {
+      "registered_defect_samples": 48,
+      "detected_samples": 37,
+      "unique_defects": 16,
+      "unique_detected": 14,
+      "unique_union_rate": 0.875,
+      "incomplete_or_undecidable": 0,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 32,
+        "detected": 37,
+        "policy_error": 1,
+        "decision_format_error": 2
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 16,
+          "detected": 11,
+          "detection_rate": 0.6875,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 16,
+          "detected": 14,
+          "detection_rate": 0.875,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 16,
+          "detected": 12,
+          "detection_rate": 0.75,
+          "incomplete_or_undecidable": 0
+        }
+      ],
+      "repeat_detection_rate_mean": 0.7708333333333334,
+      "repeat_detection_rate_min": 0.6875,
+      "repeat_detection_rate_max": 0.875,
+      "requests": 138,
+      "usage_numeric_sum": {
+        "prompt_tokens": 330897,
+        "completion_tokens": 25343,
+        "total_tokens": 356240,
+        "prompt_cache_hit_tokens": 188248,
+        "prompt_cache_miss_tokens": 142649
+      },
+      "requests_with_usage": 138,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 1175,
+      "reference_audit_cycles_recorded": 1175,
+      "reference_audit_cycles_attempted": 1175,
+      "checks_recorded": 2411,
+      "elapsed_seconds_recorded": 277.096,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 0,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.453
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.844
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 0,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.437
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.672
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.25
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.093
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.859
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.282
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.391
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 12,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 5.563
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.157
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 1,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.688
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 1,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.609
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 1,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.953
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.281
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.187
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 11,
+          "search_budget": 12,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.531
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 1,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.296
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 1,
+          "cycle": 42,
+          "search_budget": 43,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.359
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 1,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.64
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 1,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.406
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 9,
+          "search_budget": 10,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.297
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 2,
+          "search_budget": 12,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 5.89
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.266
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 6,
+          "search_budget": 15,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 3.781
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 2,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.125
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 2,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.562
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 2,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.406
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.407
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.437
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.375
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 2,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.625
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 2,
+          "cycle": 43,
+          "search_budget": 44,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.344
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 2,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.234
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.813
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.75
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 4,
+          "search_budget": 12,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 3.64
+        }
+      ]
+    },
+    "no_feedback": {
+      "registered_defect_samples": 48,
+      "detected_samples": 37,
+      "unique_defects": 16,
+      "unique_detected": 15,
+      "unique_union_rate": 0.9375,
+      "incomplete_or_undecidable": 2,
+      "reference_false_alarm_samples": 0,
+      "reference_target_false_alarms": 0,
+      "variant_reference_audit_rejections": 0,
+      "status_counts": {
+        "not_detected": 28,
+        "policy_error": 3,
+        "detected": 37,
+        "decision_format_error": 4
+      },
+      "per_repeat": [
+        {
+          "repeat": 0,
+          "registered_defects": 16,
+          "detected": 12,
+          "detection_rate": 0.75,
+          "incomplete_or_undecidable": 1
+        },
+        {
+          "repeat": 1,
+          "registered_defects": 16,
+          "detected": 13,
+          "detection_rate": 0.8125,
+          "incomplete_or_undecidable": 0
+        },
+        {
+          "repeat": 2,
+          "registered_defects": 16,
+          "detected": 12,
+          "detection_rate": 0.75,
+          "incomplete_or_undecidable": 1
+        }
+      ],
+      "repeat_detection_rate_mean": 0.7708333333333334,
+      "repeat_detection_rate_min": 0.75,
+      "repeat_detection_rate_max": 0.8125,
+      "requests": 124,
+      "usage_numeric_sum": {
+        "prompt_tokens": 278842,
+        "completion_tokens": 23971,
+        "total_tokens": 302813,
+        "prompt_cache_hit_tokens": 193995,
+        "prompt_cache_miss_tokens": 84847
+      },
+      "requests_with_usage": 124,
+      "requests_without_usage": 0,
+      "search_cycles_recorded": 1088,
+      "reference_audit_cycles_recorded": 1088,
+      "reference_audit_cycles_attempted": 1088,
+      "checks_recorded": 2287,
+      "elapsed_seconds_recorded": 251.562,
+      "missing_elapsed_samples": 0,
+      "first_detection": [
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 0,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.016
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 0,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.531
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.922
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.422
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.093
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_b",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.234
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 0,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.625
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 0,
+          "cycle": 15,
+          "search_budget": 16,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.921
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 0,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.453
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 13,
+          "search_budget": 14,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.141
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 3.64
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_c",
+          "repeat": 0,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.313
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 1,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.093
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 1,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.359
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 1,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.219
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.313
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.734
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.281
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_b",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 0.953
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 1,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 2.485
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 1,
+          "cycle": 41,
+          "search_budget": 42,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.281
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 1,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.75
+        },
+        {
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 6,
+          "search_budget": 7,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.281
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 3,
+          "search_budget": 4,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.312
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_c",
+          "repeat": 1,
+          "cycle": 4,
+          "search_budget": 14,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 3.391
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "repeat": 2,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.25
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "repeat": 2,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.406
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "repeat": 2,
+          "cycle": 1,
+          "search_budget": 2,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 4.813
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_ready_ignores_out_ready",
+          "repeat": 2,
+          "cycle": 4,
+          "search_budget": 5,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.5
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.359
+        },
+        {
+          "case": "pulse_stretcher",
+          "variant": "mutation_b",
+          "repeat": 2,
+          "cycle": 7,
+          "search_budget": 8,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.156
+        },
+        {
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "repeat": 2,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.422
+        },
+        {
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "repeat": 2,
+          "cycle": 40,
+          "search_budget": 41,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.375
+        },
+        {
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "repeat": 2,
+          "cycle": 18,
+          "search_budget": 19,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.688
+        },
+        {
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "repeat": 2,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.704
+        },
+        {
+          "case": "credit_guard",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 5,
+          "search_budget": 6,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.782
+        },
+        {
+          "case": "edge_detector",
+          "variant": "mutation_c",
+          "repeat": 2,
+          "cycle": 2,
+          "search_budget": 3,
+          "elapsed_seconds": null,
+          "result_available_elapsed_seconds": 1.187
+        }
+      ]
+    }
+  },
+  "correct_controls": {
+    "fixed": {
+      "registered": 24,
+      "executed": 24,
+      "terminal_statuses": {
+        "not_detected": 24
+      },
+      "actual_false_alarms": 0
+    },
+    "random": {
+      "registered": 24,
+      "executed": 24,
+      "terminal_statuses": {
+        "not_detected": 24
+      },
+      "actual_false_alarms": 0
+    },
+    "protocol_random": {
+      "registered": 24,
+      "executed": 24,
+      "terminal_statuses": {
+        "not_detected": 24
+      },
+      "actual_false_alarms": 0
+    },
+    "single": {
+      "registered": 24,
+      "executed": 21,
+      "terminal_statuses": {
+        "not_detected": 21,
+        "decision_format_error": 2,
+        "request_budget": 1
+      },
+      "actual_false_alarms": 0
+    },
+    "feedback": {
+      "registered": 24,
+      "executed": 24,
+      "terminal_statuses": {
+        "not_detected": 21,
+        "policy_error": 1,
+        "decision_format_error": 2
+      },
+      "actual_false_alarms": 0
+    },
+    "no_feedback": {
+      "registered": 24,
+      "executed": 23,
+      "terminal_statuses": {
+        "not_detected": 19,
+        "policy_error": 2,
+        "decision_format_error": 3
+      },
+      "actual_false_alarms": 0
+    }
+  },
+  "defect_matrix": [
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_full_off_by_one",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 2,
+        "protocol_random": 3,
+        "single": 3,
+        "feedback": 3,
+        "no_feedback": 3
+      }
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_msb_first",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 2,
+        "protocol_random": 3,
+        "single": 2,
+        "feedback": 3,
+        "no_feedback": 3
+      }
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_sclk_polarity",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 3,
+        "protocol_random": 3,
+        "single": 3,
+        "feedback": 3,
+        "no_feedback": 2
+      }
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_ready_ignores_out_ready",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 2,
+        "protocol_random": 3,
+        "single": 3,
+        "feedback": 3,
+        "no_feedback": 3
+      }
+    },
+    {
+      "case": "credit_guard",
+      "variant": "mutation_b",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 0,
+        "protocol_random": 3,
+        "single": 1,
+        "feedback": 0,
+        "no_feedback": 2
+      }
+    },
+    {
+      "case": "rotating_arbiter",
+      "variant": "mutation_b",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 2,
+        "protocol_random": 3,
+        "single": 0,
+        "feedback": 0,
+        "no_feedback": 0
+      }
+    },
+    {
+      "case": "edge_detector",
+      "variant": "mutation_b",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 3,
+        "protocol_random": 3,
+        "single": 2,
+        "feedback": 3,
+        "no_feedback": 3
+      }
+    },
+    {
+      "case": "pulse_stretcher",
+      "variant": "mutation_b",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 1,
+        "protocol_random": 3,
+        "single": 3,
+        "feedback": 3,
+        "no_feedback": 3
+      }
+    },
+    {
+      "case": "sync_fifo",
+      "variant": "fifo_bug_write_when_full",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 0,
+        "protocol_random": 3,
+        "single": 3,
+        "feedback": 3,
+        "no_feedback": 3
+      }
+    },
+    {
+      "case": "uart_tx",
+      "variant": "uart_bug_busy_never_clears",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 2,
+        "protocol_random": 3,
+        "single": 3,
+        "feedback": 2,
+        "no_feedback": 2
+      }
+    },
+    {
+      "case": "spi_master",
+      "variant": "spi_bug_done_missing",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 2,
+        "protocol_random": 3,
+        "single": 2,
+        "feedback": 2,
+        "no_feedback": 2
+      }
+    },
+    {
+      "case": "handshake_stage",
+      "variant": "hs_bug_valid_not_cleared",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 2,
+        "protocol_random": 3,
+        "single": 3,
+        "feedback": 3,
+        "no_feedback": 3
+      }
+    },
+    {
+      "case": "credit_guard",
+      "variant": "mutation_c",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 3,
+        "protocol_random": 3,
+        "single": 0,
+        "feedback": 2,
+        "no_feedback": 2
+      }
+    },
+    {
+      "case": "rotating_arbiter",
+      "variant": "mutation_c",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 3,
+        "protocol_random": 3,
+        "single": 2,
+        "feedback": 2,
+        "no_feedback": 2
+      }
+    },
+    {
+      "case": "edge_detector",
+      "variant": "mutation_c",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 3,
+        "protocol_random": 3,
+        "single": 3,
+        "feedback": 3,
+        "no_feedback": 3
+      }
+    },
+    {
+      "case": "pulse_stretcher",
+      "variant": "mutation_c",
+      "detected_by_strategy": {
+        "fixed": 3,
+        "random": 2,
+        "protocol_random": 3,
+        "single": 1,
+        "feedback": 2,
+        "no_feedback": 1
+      }
+    }
+  ],
+  "first_detection_rounds": {
+    "single": {
+      "1": 34
+    },
+    "feedback": {
+      "1": 33,
+      "3": 2,
+      "2": 2
+    },
+    "no_feedback": {
+      "1": 35,
+      "2": 2
+    }
+  },
+  "started_at_utc": "2026-10-05T01:19:09.785512+00:00",
+  "finished_at_utc": "2026-10-05T01:37:34.134317+00:00",
+  "wall_seconds": 1104.348805,
+  "source_results_sha256": "4eb7e07c216281bd97e53c0ea259eabbf97578ceb2a259bc2fa74740d086ebb9",
+  "source_summary_sha256": "75d255ac8122ebf4ddcee42224049f1e9f584bf136bc3e5c24c458dfd39e80bc",
+  "complete_raw_evidence": ".iverilog-ai/agent-budget-study-live-20261005/",
+  "public_copy_contains_all_execution_side_logs": true,
+  "public_copy_contains_api_trajectories_and_saved_responses": true,
+  "cost_currency": null,
+  "artifacts": [
+    {
+      "path": "preregistration.json",
+      "sha256": "0ae79dbc7eba99c8de665f3e11c4af0c5f87a886057d6b04a4b7290c27416435",
+      "size_bytes": 272766
+    },
+    {
+      "path": "run_settings.json",
+      "sha256": "3ddb94bd07db846c7ff2685a1560d247cd9534158906df4602b676b5ea2db790",
+      "size_bytes": 968
+    },
+    {
+      "path": "token_budget.json",
+      "sha256": "92fc58f7796865771708ba5606180e19a4fd67052680da7d7b6a41c8570a26f4",
+      "size_bytes": 110783
+    },
+    {
+      "path": "strict_summary.json",
+      "sha256": "75d255ac8122ebf4ddcee42224049f1e9f584bf136bc3e5c24c458dfd39e80bc",
+      "size_bytes": 15051428
+    },
+    {
+      "path": "results.zip",
+      "sha256": "4eb5fa7b2a4fea74beb79728711670957211cbb403868ab98a44ecb004acbcdc",
+      "size_bytes": 874935
+    },
+    {
+      "path": "specs/sync_fifo_spec.md",
+      "sha256": "4e932c00a88af5a4d80617c1cc09040a259bed1d5f7f17bdafec6833d547c0c3",
+      "size_bytes": 5969
+    },
+    {
+      "path": "specs/uart_tx_spec.md",
+      "sha256": "68e0f9f0317f3eab50c8a93717f7a0aa44bbb6bc21c257fe27f163541e097863",
+      "size_bytes": 5417
+    },
+    {
+      "path": "specs/spi_master_spec.md",
+      "sha256": "2c4f8e45d417f1017501018211509324584a5c145ef68f98065a5f5d3a9c62fd",
+      "size_bytes": 5418
+    },
+    {
+      "path": "specs/handshake_stage_spec.md",
+      "sha256": "07a1f5b6015185007f1f69c380e0bd5830a29a3f86403cb5dd51d83a3a5973ed",
+      "size_bytes": 5251
+    },
+    {
+      "path": "specs/credit_guard_spec.md",
+      "sha256": "fb84ce7339bb5ef2069fe269ff84160d33d478462b41f50a18bd559f1e83ea36",
+      "size_bytes": 2938
+    },
+    {
+      "path": "specs/rotating_arbiter_spec.md",
+      "sha256": "99bfe04348fa8a2cf2304d76a5cd3d6608e457542e7b1fb6bccb42d0cabe5081",
+      "size_bytes": 3439
+    },
+    {
+      "path": "specs/edge_detector_spec.md",
+      "sha256": "c02554fddd41c61b66a6600f20bd4f8f4bc31539ec82849104f8100657d92946",
+      "size_bytes": 3222
+    },
+    {
+      "path": "specs/pulse_stretcher_spec.md",
+      "sha256": "846862e3edfff2b59a061a7337530a093e9502060dbac6d29a7ea5dde09d9ccf",
+      "size_bytes": 3722
+    },
+    {
+      "path": "registered_inputs_manifest.json",
+      "sha256": "da1596eba9cd689b6c1365426caa9af5638fa8357f603d76102b782395d2a62a",
+      "size_bytes": 34144
+    },
+    {
+      "path": "registered_inputs.zip",
+      "sha256": "211be05f7f025978aa473a219ada126dd95235d6440eb6fa5a10a0484c23d056",
+      "size_bytes": 421723
+    },
+    {
+      "path": "traces_and_decisions.zip",
+      "sha256": "b15b80e57b0638c23d3bba516b9717b3d5e11dd3ac5e2311b5da180a07fd9e7d",
+      "size_bytes": 1849808
+    },
+    {
+      "path": "trace_manifest.json",
+      "sha256": "f38a4cce7e90afacc263e142893d90a26f0f2502e70f9ff206be6db3a19db9cb",
+      "size_bytes": 260175
+    },
+    {
+      "path": "full_raw_manifest.json",
+      "sha256": "a93a47f26ddfd3fa986af8c09c325d72189dcd03dbba3811d931d1ad586619d7",
+      "size_bytes": 2787905
+    },
+    {
+      "path": "full_raw_evidence.zip",
+      "sha256": "d2d7df662de9633044946a51063c03a1364f2c0b69315dcb65eba8f784f72269",
+      "size_bytes": 22239237
+    },
+    {
+      "path": "cohort_summaries.json",
+      "sha256": "9d2e1feeebb4f3c9311dd0e829c63b8ea619953e9cd0819aa73db3fa97c28c1e",
+      "size_bytes": 90783
+    },
+    {
+      "path": "source_byte_binding.json",
+      "sha256": "894fe68c09881c13d2fb28721febbbf41c5be6154adbf111c7b2628b5b4640e0",
+      "size_bytes": 36460
+    }
+  ]
+}

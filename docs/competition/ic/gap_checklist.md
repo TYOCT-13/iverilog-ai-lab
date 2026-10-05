@@ -1,6 +1,6 @@
 # AI＋集成电路：当前交付与剩余证据
 
-更新：2026-10-05。当前冻结`c07756f`，新增内部合成模块互斥留出108任务/86请求/190387tokens，本批100万限额余809613。107任务实际执行、136轮/272侧，严格资格false，全部失败保留。完整回归1570通过/2跳过/0失败、mypy83；新增严格RTL风格门禁未通过。历史v6恢复23/24、上一轮1M和旧PDF/PPT/ZIP分别保留，测试数量不相加。
+更新：2026-10-05。冻结`b9f7a6e`，v7八模块432任务完整批次结束；六组每48缺陷计数48/32/48/34/37/37。334请求/833216tokens、余166784；423执行/507轮/1014侧、9零DUT，严格资格false。预算补提已实现但本批3次拒绝均cap末尾，无真实后续恢复收益。r1全量1716/2但中途runner/test补漏，r2仅定向34+mypy85、207指纹无变；历史结果与正式材料边界保留。
 
 ## 1. 按评分方向核对
 
@@ -9,17 +9,17 @@
 | 优先级 | 项目 | 已完成与限制 | 下一步 |
 |---|---|---|---|
 | P0 | 真实需求 | 任务卡与操作方案就绪，真实访谈/参与者原件未提供 | 实际找学习者和IP开发者试用，记录首次失败、协助、用时及授权 |
-| P0 | API验证循环与预算拒绝 | 历史恢复轮为10普通拒绝/5合法恢复/3重复键；本批普通schema拒绝1次原文保留、正确控制row75实际恢复1次、重复键fatal1次；两次超周期提案为row14全未执行、row50已有7拍后11拍超剩9而停止 | 超剩余周期的安全提案仍立即停止；下一版在原请求/周期预算内有界补提并单独冻结重测，尚未修复或追加API；不把row50第二提案当已执行 |
-| P0 | 新模块留出效果 | v6冻结后生成credit_guard/rotating_arbiter，未改Agent算法/提示或定制coverage；六组各12缺陷任务为12/8/12/5/10/9 | 内部合成模块互斥留出已做，外部独立盲测/工业泛化仍未证；反馈只比随机多2且低于固定/协议随机，不宣称因果显著 |
+| P0 | API验证循环与预算拒绝 | v7机制已实现；30格式拒绝后17样本执行恢复/6首实际轮检出；3预算拒绝均原cap末尾，无后续执行或检出 | 真实预算恢复收益未证；后续完整新批次先单独预登记，检验有补提机会的情形，不用余额挑失败重跑或放宽schema |
+| P0 | 当前效果与留出边界 | 总计fixed/random/protocol/single/feedback/no_feedback为48/32/48/34/37/37；prior信用/仲裁feedback4/12低于random8/12；后两旧离线模块仅集合留出 | 反馈与无反馈持平且低于人工48，不称所有子组超随机或因果显著泛化；优先分析prior低检出，不掩盖子组差异 |
 | P0 | 规格与判据 | 四个开发模块及两个新模块的完整规格、FIFO独立deque检查及修复；外部人工SPEC由13/15补至15/15 | 人工审查支持范围；不能外推其他参数或称工业协议认证 |
-| P0 | 证据完整性 | 108登记、107执行、136轮/272侧、86快照无变，严格false；row14全未执行；row50有首轮证据、后续超周期未执行并计2439tokens；另1项已执行no_feedback最终重复键fatal | 全部失败保留，不把反馈两项未检出都称完整功能漏检；公开full raw含执行侧日志，非异机复现/H02 |
+| P0 | 本批证据完整性 | 432登记/423执行/507轮/1014侧，正确140/144执行误报0但4未执行，总9零DUT严格false；330安全原文、4安全blocked | 全分母保留；127快照无变、Git103exact/24仅换行需快照，不能称全部正确控制成功或纯checkout精确复现 |
 | P0 | 独立人工复核 | 多轮只读子代理复核发现并复测真实问题；H02真实审核仍未完成 | 找非对应功能实现者按规格、变体、判据、结果和统计核验并签确认 |
 | P1 | 应用演示 | 历史v5 UART小包在仓库外重放108检查/16失败，结构stdout一致；离线512周期和338/48另存；v5三尺寸UI58/58、非默认设置保持 | 组织真人任务，录制3–5分钟视频；旧浏览器验收不写成v6复测，解包重放不计新的API请求或真人结果 |
-| P1 | 工程门禁 | 新批次全仓1570/2skip/0fail、mypy83；新增严格RTL风格门禁未通过，详见基准README | 分别披露语义检查与风格门禁，不称全门禁通过；历史1307/1170与专项测试不相加 |
+| P1 | 工程门禁 | r1全量1716/2、mypy85但runner/test中途补漏；r2定向34与全mypy85、207指纹不变 | 不称冻结后全套重跑，不相加测试数；旧严格RTL风格门禁未通过仍保留 |
 | P1 | 提交材料 | 留出轮/v6恢复/旧1M各自存档；旧28be1ed PDF/PPT与v5ZIP仍未含新增实验 | 同步正式材料、实际视频和真实远程地址；H01/H02仍需真实验证 |
 | P1 | 冻结交接 | 留出轮完整版原件ZIP/full_raw_manifest包含所有执行侧日志；历史v5包与c7/v4缺项边界不改写 | 异机完整复现仍未验证；新结果代理只读核验及主代理文书封装已完成，非H02 |
 
-最新来源：[留出实测](../../experiment/agent_holdout_study_live_2026-10-05.md)、[真实回执](../../experiment/agent-holdout-study-live-2026-10-05/receipt.json)、[预算](../../experiment/agent_holdout_study_budget_2026-10-05.json)、[工程回归](../../experiment/agent-holdout-validation-2026-10-05/receipt.json)、[风格门禁限制](../../../benchmarks/agent_holdout_20261005/README.md)、[事前代理审查](../../review/agent_holdout_prereg_review_2026-10-05.md)。[结果代理复核](../../review/agent_holdout_study_review_2026-10-05.md)只读核验完成，主代理已封装文书并保留原始机器记录，不计H02。历史：[v6恢复](../../experiment/agent_recovery_study_live_2026-10-05.md)、[上一轮1M](../../experiment/agent_study_1m_live_2026-10-05.md)、[短预算三重复](../../experiment/agent_smoke_live_2026-10-05.md)、[六项诊断](../../experiment/agent_smoke_diagnostic_2026-10-05.md)。
+最新入口：[v7完整报告](../../experiment/agent_budget_study_live_2026-10-05.md)、[回执](../../experiment/agent-budget-study-live-2026-10-05/receipt.json)、[子组汇总](../../experiment/agent-budget-study-live-2026-10-05/cohort_summaries.json)、[源码检查](../../experiment/agent_budget_source_validation_2026-10-05.md)、[事前代理审查](../../review/agent_budget_prereg_review_2026-10-05.md)。[结果全量代理复核及文书](../../review/agent_budget_study_review_2026-10-05.md)已完成；代码作者trace-audit非H02。历史：[c077留出](../../experiment/agent_holdout_study_live_2026-10-05.md)、[v6恢复](../../experiment/agent_recovery_study_live_2026-10-05.md)、[旧1M](../../experiment/agent_study_1m_live_2026-10-05.md)。
 
 v5全部60任务证据可核验，严格汇总资格true；仍有一次模型格式拒绝及一个无反馈漏检，不能说所有动作都成功。v4严格资格false和c7失败均保留，外部15/15来自人工补判据，不是API新发现。上述历史实验均为开发集；新内部合成留出另列，真人/H02仍为待补。
 

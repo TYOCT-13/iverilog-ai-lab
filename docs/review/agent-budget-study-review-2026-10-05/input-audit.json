@@ -1,0 +1,216 @@
+{
+  "schema": "v7-budget-frozen-input-audit-v1",
+  "source_revision": "b9f7a6ed57b215208b790c3be32980862267aa49",
+  "input_count": 127,
+  "snapshot_registration_working_bytes_equal": true,
+  "git_blob_exact_files": 103,
+  "git_blob_differences": [
+    {
+      "path": "benchmarks/manifest.json",
+      "snapshot_sha256": "338f6a4f29f84dbe34e14223114d54f6e809b5dd9cd625e081a07f27c396d3f1",
+      "git_blob_sha256": "69588340e651472219e9a765c947af43891d975c196625f8500aed21b7de3936",
+      "snapshot_bytes": 28158,
+      "git_blob_bytes": 27355,
+      "newline_only": true
+    },
+    {
+      "path": "rtl/handshake_stage.v",
+      "snapshot_sha256": "40128340f967f8143bdb55ddfac689a94b7639ac8f175b7b9a4164fb8b531791",
+      "git_blob_sha256": "759e8d2e5c196d744427ce3fe11e33a925392edd86905a1221a2ac4a0ac03b51",
+      "snapshot_bytes": 472,
+      "git_blob_bytes": 467,
+      "newline_only": true
+    },
+    {
+      "path": "rtl/handshake_stage_bug_ready_ignores_out_ready.v",
+      "snapshot_sha256": "e52ec6619bcc2b049daff7973c85460482b8ae6bb4b806208a6840442cd9f1d1",
+      "git_blob_sha256": "5fd09fcccc80f58ad5a3fbefdcf898e5188726546b18cc19aa851afd8da7f772",
+      "snapshot_bytes": 587,
+      "git_blob_bytes": 581,
+      "newline_only": true
+    },
+    {
+      "path": "rtl/handshake_stage_bug_valid_not_cleared.v",
+      "snapshot_sha256": "3f9519c49b4fcb196f4bdee1021d84b922af252be3580d0093b30fef3da68502",
+      "git_blob_sha256": "a228090adcf48606b96e1aa3f9731e37f25598b66027c571a4717645c0e60d7d",
+      "snapshot_bytes": 601,
+      "git_blob_bytes": 595,
+      "newline_only": true
+    },
+    {
+      "path": "rtl/spi_master.v",
+      "snapshot_sha256": "8cacdb94472eb7446f0df05ac201f88e1c7e5c46dd01a484b4996b099835c9dd",
+      "git_blob_sha256": "fa06d6a6849eb2d544d608746a7954bca2869d7bc791d8c074e4a48c9d2c421b",
+      "snapshot_bytes": 684,
+      "git_blob_bytes": 679,
+      "newline_only": true
+    },
+    {
+      "path": "rtl/spi_master_bug_done_missing.v",
+      "snapshot_sha256": "eb194c5f8a88c41111f5cdfb6bb8c67057182448c040691d196ed9bf8376fedf",
+      "git_blob_sha256": "5a70ec079edeeab918991814ed66dc96037c6a267a97df0a357cc0c9698f55a4",
+      "snapshot_bytes": 794,
+      "git_blob_bytes": 788,
+      "newline_only": true
+    },
+    {
+      "path": "rtl/spi_master_bug_sclk_polarity.v",
+      "snapshot_sha256": "b3c7cb08949d062faaf20811d7d4693ab7a6bf65ce878dbe1a0df15e69fc57f8",
+      "git_blob_sha256": "9bbccc4d7ffe874769297259a5d40529cf7c8533d176fde9b4930833cebba56e",
+      "snapshot_bytes": 794,
+      "git_blob_bytes": 788,
+      "newline_only": true
+    },
+    {
+      "path": "rtl/uart_tx.v",
+      "snapshot_sha256": "2b6d636a399169bcaa4fdabd9661daedbfde28c42c3bc9f76104db2c371e1193",
+      "git_blob_sha256": "aeb0af1fac1a61d694054bee17f866736ad132f27638cb7ed42c6ce727f3868d",
+      "snapshot_bytes": 620,
+      "git_blob_bytes": 615,
+      "newline_only": true
+    },
+    {
+      "path": "rtl/uart_tx_bug_busy_never_clears.v",
+      "snapshot_sha256": "24b4caa23ac9b7dd2db45401acf781b1641e7eb800c55f32b78cbd6b65c7ffed",
+      "git_blob_sha256": "d256127ea79ad03cce3ce9b86b716f528b7403be11a137753db5acdce779a6cb",
+      "snapshot_bytes": 733,
+      "git_blob_bytes": 727,
+      "newline_only": true
+    },
+    {
+      "path": "rtl/uart_tx_bug_msb_first.v",
+      "snapshot_sha256": "93b638a980c2ecf591163f954fd72f5210088c1bf2dda5ab9dbef65c479bd334",
+      "git_blob_sha256": "900a95867408d877317ed16aee40a8a74b989931a750816c43724555528b443d",
+      "snapshot_bytes": 725,
+      "git_blob_bytes": 719,
+      "newline_only": true
+    },
+    {
+      "path": "scripts/run_strategy_experiment.py",
+      "snapshot_sha256": "22889c50c07ff49da00c6278a88e8d710f1f708f1e4bf994f51ad82adee5c341",
+      "git_blob_sha256": "f167b9255fd1b706cb396563b048a8f0a6fff7ad2e5cc351e8ff1be1a16f4fbf",
+      "snapshot_bytes": 48683,
+      "git_blob_bytes": 47817,
+      "newline_only": true
+    },
+    {
+      "path": "src/iverilog_ai/ai/debug_server.py",
+      "snapshot_sha256": "c49226654b90f2e507727491253c98ba5384aef156719908197fb88a6040dd0b",
+      "git_blob_sha256": "fc0b22ddd8c8de6fc2f251f4ccc81030e6cc2d7e81478002be66a02d1de3d541",
+      "snapshot_bytes": 15282,
+      "git_blob_bytes": 14943,
+      "newline_only": true
+    },
+    {
+      "path": "src/iverilog_ai/core/__init__.py",
+      "snapshot_sha256": "3e0c97ad848d7a60ab75803106040cfd5d449183d57db709f3ece01c9df4f151",
+      "git_blob_sha256": "14b915be380deb800e4a71324c6280ae577e542798ae2da82c7acf61f9753fb3",
+      "snapshot_bytes": 4161,
+      "git_blob_bytes": 4035,
+      "newline_only": true
+    },
+    {
+      "path": "src/iverilog_ai/core/assertions.py",
+      "snapshot_sha256": "024168b28e390e7586c91597a7ace8c6cae2dbe8b085d4d7380679892481734f",
+      "git_blob_sha256": "21f73aa00b4314f8921c6d6ea883c26cdc664150365ab6f906b4c68080702822",
+      "snapshot_bytes": 10842,
+      "git_blob_bytes": 10640,
+      "newline_only": true
+    },
+    {
+      "path": "src/iverilog_ai/core/benchmark_cases.py",
+      "snapshot_sha256": "f163c65450e27ba260a8e89a9b3f419b9a2fe23fff6917f77680d8c573f0f73a",
+      "git_blob_sha256": "d5de66b15f769e922c513cce802ed6b002641a5e04736ffab317e3e5dd0b1920",
+      "snapshot_bytes": 5967,
+      "git_blob_bytes": 5849,
+      "newline_only": true
+    },
+    {
+      "path": "src/iverilog_ai/core/conventions.py",
+      "snapshot_sha256": "772138a203fe2d738fb4a5d2067f1be7676c4adaec89aed4edc0958dc87cac5e",
+      "git_blob_sha256": "d29669c24f17b20d5d3d96a4a90b39cbf8a48a034fc89f722d7c51245e37b284",
+      "snapshot_bytes": 20766,
+      "git_blob_bytes": 20255,
+      "newline_only": true
+    },
+    {
+      "path": "src/iverilog_ai/core/coverage.py",
+      "snapshot_sha256": "8c85a3816842739f81d20782ba098aab3f17e2f21d0171800eb151802c47b4ca",
+      "git_blob_sha256": "0f14272181e461660692a3850c3c8b6b69c323017007ec99d782b3d67db28dda",
+      "snapshot_bytes": 16726,
+      "git_blob_bytes": 16349,
+      "newline_only": true
+    },
+    {
+      "path": "src/iverilog_ai/core/models.py",
+      "snapshot_sha256": "8d7ff1db511d0e3ab90364e16fd5bb0d0c6159d0adf69c35d519fc7a64cd71d6",
+      "git_blob_sha256": "72dcd1a4790fab4cfb3d216e82d5399f22b5daa435331a6da6f63020a79409ca",
+      "snapshot_bytes": 34373,
+      "git_blob_bytes": 33558,
+      "newline_only": true
+    },
+    {
+      "path": "src/iverilog_ai/core/repair_compare.py",
+      "snapshot_sha256": "fdee57ae6bf2ad9d4f07eb43a35de16ec19f77f2be2d47c85e73900ec7a68939",
+      "git_blob_sha256": "a61e7d10bade03839bd44fb80a16801eb029aa2d3d5e6ea243785f089271cd3f",
+      "snapshot_bytes": 2526,
+      "git_blob_bytes": 2460,
+      "newline_only": true
+    },
+    {
+      "path": "src/iverilog_ai/core/report.py",
+      "snapshot_sha256": "9564b749aeda1960957f3b20b1bca13e07c5e6fc3316c3aba2d1dffc7f5a0eac",
+      "git_blob_sha256": "f6d52f5b2d1214c4d001993e9f389fbdbdf2418685b3c94410a9f117b2d95c63",
+      "snapshot_bytes": 27060,
+      "git_blob_bytes": 26503,
+      "newline_only": true
+    },
+    {
+      "path": "src/iverilog_ai/core/static_review.py",
+      "snapshot_sha256": "ab14b88d043992bbc1c89bec500dfd6e43c3173d7834f8ff3ecfd458e0f6f66f",
+      "git_blob_sha256": "309d8ca70d7b68ff223eb72d512f799d29ce5921d6349701f5a3de5da61a87d9",
+      "snapshot_bytes": 48269,
+      "git_blob_bytes": 47385,
+      "newline_only": true
+    },
+    {
+      "path": "src/iverilog_ai/core/vcd.py",
+      "snapshot_sha256": "01b18b6af89df9ced4da013d8bdacefdf4417a2f7cc1e9f18aea88a9ef0f45f3",
+      "git_blob_sha256": "efcd8a49e388797e6515da308e4621cd1939f96429d2cf0c9205fd9bd2c57698",
+      "snapshot_bytes": 31167,
+      "git_blob_bytes": 30466,
+      "newline_only": true
+    },
+    {
+      "path": "rtl/edge_detector.v",
+      "snapshot_sha256": "4c47149c3ae55110cd33fc085ff0005019392217c91e4a93a85f057157ef9f70",
+      "git_blob_sha256": "0474c82a05e9ed9157e6261d7a1f4cea2a4b7592ae255ec7e4adad95e73fb637",
+      "snapshot_bytes": 396,
+      "git_blob_bytes": 387,
+      "newline_only": true
+    },
+    {
+      "path": "rtl/pulse_stretcher.v",
+      "snapshot_sha256": "f490e4015f446e712fd7bfa75747568582ea310098af6dd6a43234e2a8fb00e9",
+      "git_blob_sha256": "14f9d557ca54cd8db517e60d5f7908c771f15752cd2d937fc7d42e15468e13ad",
+      "snapshot_bytes": 534,
+      "git_blob_bytes": 523,
+      "newline_only": true
+    }
+  ],
+  "artifacts": [
+    {
+      "path": ".iverilog-ai/agent-budget-study-live-20261005/preregistration.json",
+      "sha256": "0ae79dbc7eba99c8de665f3e11c4af0c5f87a886057d6b04a4b7290c27416435",
+      "bytes": 272766
+    },
+    {
+      "path": ".iverilog-ai/agent-budget-study-live-20261005/registered-inputs/manifest.json",
+      "sha256": "da1596eba9cd689b6c1365426caa9af5638fa8357f603d76102b782395d2a62a",
+      "bytes": 34144
+    }
+  ],
+  "real_api_requests": 0,
+  "new_dut_runs": 0,
+  "human_review": false
+}

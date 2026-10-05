@@ -1,0 +1,25 @@
+{
+  "preregistration_sha256": "0ae79dbc7eba99c8de665f3e11c4af0c5f87a886057d6b04a4b7290c27416435",
+  "wire_api": "chat_completions",
+  "thinking_mode": "disabled",
+  "thinking_mode_meaning": "explicit_request",
+  "endpoint_host": "api.deepseek.com",
+  "model": "deepseek-flash",
+  "max_output_tokens": 4096,
+  "total_request_cap": 504,
+  "request_timeout_seconds": 60,
+  "stream": false,
+  "iverilog": "D:/iverilog/bin/iverilog.exe",
+  "vvp": "D:/iverilog/bin/vvp.exe",
+  "profile": "v3",
+  "max_output_chars": 2000000,
+  "prompt_profile_sha256": "a40101cdd82429750169f8145a6de91a9e82fff8aa84c7bb31d03626b91e208b",
+  "baseline_factory": "scripts.agent_budget_study_baselines.budget_baseline",
+  "reference_sampling": "per_cycle",
+  "agent_plan_mode": "independent",
+  "frozen_inputs": {
+    "path": "registered-inputs/manifest.json",
+    "sha256": "da1596eba9cd689b6c1365426caa9af5638fa8357f603d76102b782395d2a62a",
+    "file_count": 127
+  }
+}

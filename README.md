@@ -25,7 +25,10 @@
 当前改造围绕四类数字 IP：FIFO、UART、SPI 和握手级。API Agent 提出测试激励；独立参考模型与 Icarus 裁决结果，真实端口采样计算 24 项命名功能场景。功能场景是有限事件观察，不是代码覆盖率或正确性证明。网页保留输入、运行记录和结果，可导出原 RTL、测试台及无需 API 的重放脚本。
 
 - [操作与 UART 反例重放](docs/demo/ic_agent_v2_walkthrough.md)
-- [新模块互斥留出实测](docs/experiment/agent_holdout_study_live_2026-10-05.md)：当前冻结`c07756f`，108任务；fixed/random/protocol_random/single/feedback/no_feedback各12缺陷任务检出12/8/12/5/10/9。credit_guard和rotating_arbiter在v6 Agent冻结后产生，Agent算法/提示未改、未新增定制coverage；这是内部合成模块留出，不是外部独立盲测或工业泛化。反馈仅比随机多2项，低于固定/协议随机，不能宣称显著或反馈因果。
+- [v7八模块完整对照](docs/experiment/agent_budget_study_live_2026-10-05.md)：冻结`b9f7a6e`，432任务；fixed/random/protocol_random/single/feedback/no_feedback各48缺陷任务检出48/32/48/34/37/37。反馈与无反馈相同，低于两种人工基线；信用/仲裁子组反馈4/12也低于随机8/12，不能概括所有子组超随机或证明反馈因果、显著性/泛化。
+- [v7完整证据](docs/experiment/agent-budget-study-live-2026-10-05/receipt.json)：334请求、833216tokens，单一100万账本余166784，0未知/待结算；423实际执行、507轮/1014侧、9零DUT，严格资格false。30普通格式拒绝后17样本恢复执行、6检出均首实际轮；3预算拒绝全部在请求cap末尾，0后续真实恢复或检出。预算补提已实现，但本批真实收益未证，不用余额挑失败重跑。
+- [v7源码检查](docs/experiment/agent_budget_source_validation_2026-10-05.md)与[事前代理审查](docs/review/agent_budget_prereg_review_2026-10-05.md)：r1全量1716通过/2跳过、mypy85，但中途补改登记runner及对应test；补漏后r2定向34通过、mypy85、207指纹无变，没有冻结后全套重跑。旧credit/arb已API暴露；edge/pulse是旧离线基准、此前26份受控Agent cohort未含这两模块，本批仅作module-set-holdout子组，不是外部盲测。v7提示与旧四基准12段表示同时变化，不能同比归因。
+- [新模块互斥留出实测](docs/experiment/agent_holdout_study_live_2026-10-05.md)：历史冻结`c07756f`，108任务；fixed/random/protocol_random/single/feedback/no_feedback各12缺陷任务检出12/8/12/5/10/9。credit_guard和rotating_arbiter在v6 Agent冻结后产生，Agent算法/提示未改、未新增定制coverage；这是内部合成模块留出，不是外部独立盲测或工业泛化。反馈仅比随机多2项，低于固定/协议随机，不能宣称显著或反馈因果。
 - [留出证据与预算](docs/experiment/agent-holdout-study-live-2026-10-05/receipt.json)：86请求、190387tokens，本批100万余809613、0未知usage；107/108执行、136轮/272侧，严格资格false。1项single周期超限未执行、1项已执行no_feedback最终重复键fatal均保留。公开full raw包含全部执行侧日志，异机完整复现未验证。
 - [留出批次工程验收](docs/experiment/agent-holdout-validation-2026-10-05/receipt.json)：1570通过、2跳过、0失败，mypy83源；[新增RTL严格风格门禁](benchmarks/agent_holdout_20261005/README.md)未通过，不能写全门禁通过。事前代理审查已完成，结果代理只读核验已完成，主代理已封装文书及原始机器回执；均不代替H02。
 - [v6受限格式恢复实测](docs/experiment/agent_recovery_study_live_2026-10-05.md)：历史冻结源码`9c3bd3c`，216任务、三重复；fixed/random/protocol_random/single/feedback/no_feedback各24缺陷任务检出21/16/21/20/23/22。反馈23项均在首次实际仿真轮检出，未产生依赖已有仿真反馈的新增检出；prompt也改变，不能把计数较高归为反馈因果、显著性或泛化。

@@ -1,0 +1,33 @@
+{
+  "schema": "agent-per-round-budget-receipt-v1",
+  "round_name": "bounded_budget_recovery_eight_module_batch_20261005",
+  "round_scope": "one complete preregistered evaluation batch; all API groups share the same 1M limit",
+  "round_limit": 1000000,
+  "round_totals": {
+    "reported_tokens": 833216,
+    "unknown_reserved_tokens": 0,
+    "conservative_total": 833216,
+    "remaining_tokens": 166784,
+    "requests_known_usage": 334,
+    "requests_unknown_usage": 0
+  },
+  "requests": 334,
+  "reported_prompt_tokens": 766681,
+  "reported_completion_tokens": 66535,
+  "requests_with_usage": 334,
+  "requests_without_usage": 0,
+  "theoretical_request_cap": 504,
+  "output_cap_per_request": 4096,
+  "thinking": "disabled",
+  "stream": false,
+  "automatic_transport_retries": 0,
+  "ordinary_format_reproposal_is_a_charged_new_request": true,
+  "budget_reproposal_is_a_charged_new_request": true,
+  "historical_tokens_deducted_from_round": false,
+  "historical_360_request_limit_is_current": false,
+  "remaining_tokens_is_not_authorization_to_start_another_batch": true,
+  "actual_currency": null,
+  "provider_billing_receipt_supplied": false,
+  "raw_journal_sha256": "92fc58f7796865771708ba5606180e19a4fd67052680da7d7b6a41c8570a26f4",
+  "public_journal": "agent-budget-study-live-2026-10-05/token_budget.json"
+}
