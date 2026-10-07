@@ -1,0 +1,1066 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/udsvah03",
+    "id": "udsvah03",
+    "slide": 9,
+    "layoutId": "/ppt/slideLayouts/slideLayout1.xml",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#1C2023",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ICARUS charcoal cyan",
+    "colors": {
+      "accent1": "#00C8E8",
+      "accent2": "#738188",
+      "accent3": "#B3BDC2",
+      "accent4": "#CFD8DC",
+      "accent5": "#343C40",
+      "accent6": "#7A858A",
+      "dk1": "#111517",
+      "lt1": "#F1F3F4",
+      "dk2": "#1C2023",
+      "lt2": "#D0D9DD",
+      "hlink": "#00C8E8",
+      "folHlink": "#00C8E8"
+    },
+    "fontScheme": {
+      "name": "Office",
+      "majorFont": {
+        "latinTypeface": "Calibri Light",
+        "eastAsianTypeface": "Calibri Light",
+        "complexScriptTypeface": "Calibri Light"
+      },
+      "minorFont": {
+        "latinTypeface": "Calibri",
+        "eastAsianTypeface": "Calibri",
+        "complexScriptTypeface": "Calibri"
+      }
+    },
+    "typefaces": [
+      "Bahnschrift",
+      "Calibri",
+      "Calibri Light",
+      "Noto Sans SC"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout1.xml",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cnu1kzyd",
+      "id": "14",
+      "name": "原件绑定与机器审计",
+      "bbox": [
+        64,
+        46,
+        1060,
+        70
+      ],
+      "geometry": "rect",
+      "text": "原件绑定与机器审计",
+      "textPreview": "原件绑定与机器审计",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "原件绑定与机器审计"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "原件绑定与机器审计",
+          "resolvedTextStyle": {
+            "fontSize": 46,
+            "typeface": "Noto Sans SC",
+            "color": "#F1F3F4",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "原件绑定与机器审计",
+              "fontSize": 46,
+              "typeface": "Noto Sans SC",
+              "color": "#F1F3F4",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1cfmhgne",
+      "id": "2",
+      "bbox": [
+        64,
+        131,
+        1150,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#566168",
+      "lineWidth": 1
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0b65obm9",
+      "id": "3",
+      "name": "09",
+      "bbox": [
+        1158,
+        48,
+        64,
+        54
+      ],
+      "geometry": "rect",
+      "text": "09",
+      "textPreview": "09",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "09"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "09",
+          "resolvedTextStyle": {
+            "fontSize": 34,
+            "typeface": "Bahnschrift",
+            "color": "#00C8E8",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "09",
+              "fontSize": 34,
+              "typeface": "Bahnschrift",
+              "color": "#00C8E8",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/nex4jq5k",
+      "id": "4",
+      "name": "458 登记输入\n冻结快照",
+      "bbox": [
+        68,
+        198,
+        238,
+        98
+      ],
+      "geometry": "rect",
+      "text": "458 登记输入\n冻结快照",
+      "textPreview": "458 登记输入 | 冻结快照",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "458 登记输入"
+          },
+          {
+            "index": 2,
+            "text": "冻结快照"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "458 登记输入",
+          "resolvedTextStyle": {
+            "fontSize": 31,
+            "typeface": "Noto Sans SC",
+            "color": "#F1F3F4",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "458 登记输入",
+              "fontSize": 31,
+              "typeface": "Noto Sans SC",
+              "color": "#F1F3F4",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "冻结快照",
+          "resolvedTextStyle": {
+            "fontSize": 31,
+            "typeface": "Noto Sans SC",
+            "color": "#F1F3F4",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "冻结快照",
+              "fontSize": 31,
+              "typeface": "Noto Sans SC",
+              "color": "#F1F3F4",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/mdonql4z",
+      "id": "5",
+      "name": "4,359 raw 文件\n真实执行与请求",
+      "bbox": [
+        370,
+        198,
+        238,
+        98
+      ],
+      "geometry": "rect",
+      "text": "4,359 raw 文件\n真实执行与请求",
+      "textPreview": "4,359 raw 文件 | 真实执行与请求",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "4,359 raw 文件"
+          },
+          {
+            "index": 2,
+            "text": "真实执行与请求"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "4,359 raw 文件",
+          "resolvedTextStyle": {
+            "fontSize": 31,
+            "typeface": "Noto Sans SC",
+            "color": "#F1F3F4",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "4,359 raw 文件",
+              "fontSize": 31,
+              "typeface": "Noto Sans SC",
+              "color": "#F1F3F4",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "真实执行与请求",
+          "resolvedTextStyle": {
+            "fontSize": 31,
+            "typeface": "Noto Sans SC",
+            "color": "#F1F3F4",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "真实执行与请求",
+              "fontSize": 31,
+              "typeface": "Noto Sans SC",
+              "color": "#F1F3F4",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/9gzml0nq",
+      "id": "6",
+      "name": "manifest 与 ZIP\n保留原字节",
+      "bbox": [
+        672,
+        198,
+        238,
+        98
+      ],
+      "geometry": "rect",
+      "text": "manifest 与 ZIP\n保留原字节",
+      "textPreview": "manifest 与 ZIP | 保留原字节",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "manifest 与"
+          },
+          {
+            "index": 2,
+            "text": "ZIP"
+          },
+          {
+            "index": 3,
+            "text": "保留原字节"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "manifest 与 ZIP",
+          "resolvedTextStyle": {
+            "fontSize": 31,
+            "typeface": "Noto Sans SC",
+            "color": "#F1F3F4",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "manifest 与 ZIP",
+              "fontSize": 31,
+              "typeface": "Noto Sans SC",
+              "color": "#F1F3F4",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "保留原字节",
+          "resolvedTextStyle": {
+            "fontSize": 31,
+            "typeface": "Noto Sans SC",
+            "color": "#F1F3F4",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "保留原字节",
+              "fontSize": 31,
+              "typeface": "Noto Sans SC",
+              "color": "#F1F3F4",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ofq5svm5",
+      "id": "7",
+      "name": "逐项绑定核验\n失败一并保留",
+      "bbox": [
+        974,
+        198,
+        238,
+        98
+      ],
+      "geometry": "rect",
+      "text": "逐项绑定核验\n失败一并保留",
+      "textPreview": "逐项绑定核验 | 失败一并保留",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "逐项绑定核验"
+          },
+          {
+            "index": 2,
+            "text": "失败一并保留"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "逐项绑定核验",
+          "resolvedTextStyle": {
+            "fontSize": 31,
+            "typeface": "Noto Sans SC",
+            "color": "#F1F3F4",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "逐项绑定核验",
+              "fontSize": 31,
+              "typeface": "Noto Sans SC",
+              "color": "#F1F3F4",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "失败一并保留",
+          "resolvedTextStyle": {
+            "fontSize": 31,
+            "typeface": "Noto Sans SC",
+            "color": "#F1F3F4",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "失败一并保留",
+              "fontSize": 31,
+              "typeface": "Noto Sans SC",
+              "color": "#F1F3F4",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/87a18zqt",
+      "id": "21",
+      "bbox": [
+        306,
+        247,
+        64,
+        0
+      ],
+      "geometry": "straightConnector1",
+      "lineColor": "#00C8E8",
+      "lineWidth": 2
+    },
+    {
+      "order": 9,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/76h0zup8",
+      "id": "22",
+      "bbox": [
+        608,
+        247,
+        64,
+        0
+      ],
+      "geometry": "straightConnector1",
+      "lineColor": "#00C8E8",
+      "lineWidth": 2
+    },
+    {
+      "order": 10,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ml8j6p8n",
+      "id": "23",
+      "bbox": [
+        910,
+        247,
+        64,
+        0
+      ],
+      "geometry": "straightConnector1",
+      "lineColor": "#00C8E8",
+      "lineWidth": 2
+    },
+    {
+      "order": 11,
+      "kind": "table",
+      "scope": "slide",
+      "aid": "tb/ihk72hc7",
+      "id": "24",
+      "bbox": [
+        68,
+        356,
+        1138,
+        188
+      ],
+      "text": "机器审计 | 范围 | 身份\n核心审计 | 2,192 项检查 | 非实现者代理\n轨迹审计 | 54 轨迹 / 87 请求 | entry 代码作者",
+      "textPreview": "机器审计 | 范围 | 身份 | 核心审计 | 2,192 项检查 | 非实现者代理 | 轨迹审计 | 54 轨迹 / 87 请求 | entry 代码作者",
+      "rows": 3,
+      "cols": 3,
+      "cells": [
+        {
+          "index": 1,
+          "row": 1,
+          "column": 1,
+          "bbox": [
+            68,
+            356,
+            282,
+            62.67
+          ],
+          "text": "机器审计",
+          "textPreview": "机器审计",
+          "fillColor": "#111517",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "机器审计",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "机器审计",
+                  "fontSize": 25,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "row": 1,
+          "column": 2,
+          "bbox": [
+            350,
+            356,
+            520,
+            62.67
+          ],
+          "text": "范围",
+          "textPreview": "范围",
+          "fillColor": "#111517",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "范围",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "范围",
+                  "fontSize": 25,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "row": 1,
+          "column": 3,
+          "bbox": [
+            870,
+            356,
+            336,
+            62.67
+          ],
+          "text": "身份",
+          "textPreview": "身份",
+          "fillColor": "#111517",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "身份",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "身份",
+                  "fontSize": 25,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "row": 2,
+          "column": 1,
+          "bbox": [
+            68,
+            418.67,
+            282,
+            62.67
+          ],
+          "text": "核心审计",
+          "textPreview": "核心审计",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "核心审计",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "核心审计",
+                  "fontSize": 28,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "row": 2,
+          "column": 2,
+          "bbox": [
+            350,
+            418.67,
+            520,
+            62.67
+          ],
+          "text": "2,192 项检查",
+          "textPreview": "2,192 项检查",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "2,192 项检查",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "2,192 项检查",
+                  "fontSize": 28,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "row": 2,
+          "column": 3,
+          "bbox": [
+            870,
+            418.67,
+            336,
+            62.67
+          ],
+          "text": "非实现者代理",
+          "textPreview": "非实现者代理",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "非实现者代理",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "非实现者代理",
+                  "fontSize": 28,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 7,
+          "row": 3,
+          "column": 1,
+          "bbox": [
+            68,
+            481.33,
+            282,
+            62.67
+          ],
+          "text": "轨迹审计",
+          "textPreview": "轨迹审计",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "轨迹审计",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "轨迹审计",
+                  "fontSize": 28,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 8,
+          "row": 3,
+          "column": 2,
+          "bbox": [
+            350,
+            481.33,
+            520,
+            62.67
+          ],
+          "text": "54 轨迹 / 87 请求",
+          "textPreview": "54 轨迹 / 87 请求",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "54 轨迹 / 87 请求",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "54 轨迹 / 87 请求",
+                  "fontSize": 28,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 9,
+          "row": 3,
+          "column": 3,
+          "bbox": [
+            870,
+            481.33,
+            336,
+            62.67
+          ],
+          "text": "entry 代码作者",
+          "textPreview": "entry 代码作者",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "entry 代码作者",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "entry 代码作者",
+                  "fontSize": 28,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 12,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/2xsjepgb",
+      "id": "12",
+      "name": "strict=true 仅表示证据资格",
+      "bbox": [
+        68,
+        581,
+        1134,
+        48
+      ],
+      "geometry": "rect",
+      "text": "strict=true 仅表示证据资格",
+      "textPreview": "strict=true 仅表示证据资格",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "strict=true 仅表示证据资格"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "strict=true 仅表示证据资格",
+          "resolvedTextStyle": {
+            "fontSize": 31,
+            "typeface": "Noto Sans SC",
+            "color": "#F1F3F4",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "strict=true 仅表示证据资格",
+              "fontSize": 31,
+              "typeface": "Noto Sans SC",
+              "color": "#F1F3F4",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 13,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3y107axw",
+      "id": "13",
+      "name": "机器审计非真人 / H02。Git 446 exact、12 仅",
+      "bbox": [
+        64,
+        630,
+        1150,
+        62
+      ],
+      "geometry": "rect",
+      "text": "机器审计非真人 / H02。Git 446 exact、12 仅换行差异，原始登记快照仍为权威",
+      "textPreview": "机器审计非真人 / H02。Git 446 exact、12 仅换行差异，原始登记快照仍为权威",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "机器审计非真人 / H02。Git 446 exact、12 仅换行差异，原始登记快照仍为权威"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "机器审计非真人 / H02。Git 446 exact、12 仅换行差异，原始登记快照仍为权威",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "typeface": "Noto Sans SC",
+            "color": "#B3BDC2"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "机器审计非真人 / H02。Git 446 exact、12 仅换行差异，原始登记快照仍为权威",
+              "fontSize": 23,
+              "typeface": "Noto Sans SC",
+              "color": "#B3BDC2"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

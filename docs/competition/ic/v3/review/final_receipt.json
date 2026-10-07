@@ -1,0 +1,1252 @@
+{
+  "schema": "icarus-v3-final-material-delivery-review-v1",
+  "created_at_utc": "2026-10-07T09:27:06.263231+00:00",
+  "client_delivery_date": "2026-10-07",
+  "artifact_production_date": "2026-10-05",
+  "evidence_base_commit": "f632b0a83d7a63256af767eab73c91477384cc44",
+  "status": "passed_with_explicit_evidence_and_application_limitations",
+  "check_groups": [
+    {
+      "attempt": "facts-r1",
+      "result": {
+        "path": "docs/competition/ic/v3/review/facts-r1/result.json",
+        "sha256": "08a06bb1166982d734a20f3c442258635969a6ab071d7808a69c5fd31ddc7a62",
+        "bytes": 95878
+      },
+      "receipt": {
+        "path": "docs/competition/ic/v3/review/facts-r1/receipt.json",
+        "sha256": "15ab25e016f56bfc25e782831c9afc5290feab5a4105afcd8645ea6a3edeba02",
+        "bytes": 889
+      },
+      "passed_check_units": 296,
+      "failed_check_units": 0
+    },
+    {
+      "attempt": "text-r3",
+      "result": {
+        "path": "docs/competition/ic/v3/review/text-r3/result.json",
+        "sha256": "79fd1fb711f2c5f63b1e2bb15de8fd308007dc1600e0a69073535e9f81807d60",
+        "bytes": 102356
+      },
+      "receipt": {
+        "path": "docs/competition/ic/v3/review/text-r3/receipt.json",
+        "sha256": "dc9e3264c3e6408b8853c6c4468d8c1cdf9dbd79cbb8101d3545998aa32e9dab",
+        "bytes": 600
+      },
+      "passed_check_units": 88,
+      "failed_check_units": 0
+    },
+    {
+      "attempt": "outputs-r3",
+      "result": {
+        "path": "docs/competition/ic/v3/review/outputs-r3/result.json",
+        "sha256": "945aac62c2e05c81fab3387659bca4aa16e9f769c74dc2a3eb9cec780460faa6",
+        "bytes": 236908
+      },
+      "receipt": {
+        "path": "docs/competition/ic/v3/review/outputs-r3/receipt.json",
+        "sha256": "c117f4167f3ee8a30e0c7c93a22ed490f66b94958db508d18a4d877534f40c78",
+        "bytes": 680
+      },
+      "passed_check_units": 165,
+      "failed_check_units": 0
+    }
+  ],
+  "groups_not_summed_or_counted_as_model_samples": true,
+  "new_API_requests": 0,
+  "credential_file_reads_by_this_sealer": 0,
+  "new_DUT_executions": 0,
+  "new_engineering_tests": 0,
+  "historical_experiment_or_ledger_rewritten": false,
+  "formal_human_review": false,
+  "submission_uploaded": false,
+  "root_acceptance": {
+    "reviewer": "root AI material packager, not an independent human",
+    "root_actual_visual_inspection_complete": true,
+    "actual_individual_pages_viewed": 28,
+    "page_records": [
+      {
+        "document": "technical_report",
+        "page": 1,
+        "PNG": {
+          "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-01.png",
+          "sha256": "df81d9e8ac31b81232ef36af94759b8f9d287605a789cb583efbdf99f1db8351",
+          "bytes": 289225
+        },
+        "actual_root_viewing": true,
+        "basis": "Actual individual image inspection in prior root turns, recorded in r2 validation; original rendered bytes rechecked at sealing",
+        "finding": "Text, figures, tables and page context readable; no observed overlap or clipping"
+      },
+      {
+        "document": "technical_report",
+        "page": 2,
+        "PNG": {
+          "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-02.png",
+          "sha256": "5299d92863a74fabd9cea04851ab42c8935573cce3208fd2f75667a38e612091",
+          "bytes": 260450
+        },
+        "actual_root_viewing": true,
+        "basis": "Actual individual image inspection in prior root turns, recorded in r2 validation; original rendered bytes rechecked at sealing",
+        "finding": "Text, figures, tables and page context readable; no observed overlap or clipping"
+      },
+      {
+        "document": "technical_report",
+        "page": 3,
+        "PNG": {
+          "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-03.png",
+          "sha256": "06b97af6f8fbf0cc76529a7e0245a86945f8ed8fe99844fc351c4fe4553c41c5",
+          "bytes": 279057
+        },
+        "actual_root_viewing": true,
+        "basis": "Actual individual image inspection in prior root turns, recorded in r2 validation; original rendered bytes rechecked at sealing",
+        "finding": "Text, figures, tables and page context readable; no observed overlap or clipping"
+      },
+      {
+        "document": "technical_report",
+        "page": 4,
+        "PNG": {
+          "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-04.png",
+          "sha256": "daeea5ce7b92ede905fa181680cef3be6cdfe8b86c21293a3bd6014137d2916a",
+          "bytes": 278830
+        },
+        "actual_root_viewing": true,
+        "basis": "Actual individual image inspection in prior root turns, recorded in r2 validation; original rendered bytes rechecked at sealing",
+        "finding": "Text, figures, tables and page context readable; no observed overlap or clipping"
+      },
+      {
+        "document": "technical_report",
+        "page": 5,
+        "PNG": {
+          "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-05.png",
+          "sha256": "66761c68ad28052b3cc305cb90a84da0771f90d83132ca825c01d2eb1e966a42",
+          "bytes": 233640
+        },
+        "actual_root_viewing": true,
+        "basis": "Actual individual image inspection in prior root turns, recorded in r2 validation; original rendered bytes rechecked at sealing",
+        "finding": "Text, figures, tables and page context readable; no observed overlap or clipping"
+      },
+      {
+        "document": "technical_report",
+        "page": 6,
+        "PNG": {
+          "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-06.png",
+          "sha256": "fddc9a5d846b303e1355e6f09c1c7f94dd423ac8fa85c7da22953566f80ff238",
+          "bytes": 186151
+        },
+        "actual_root_viewing": true,
+        "basis": "Actual individual image inspection in prior root turns, recorded in r2 validation; original rendered bytes rechecked at sealing",
+        "finding": "Text, figures, tables and page context readable; no observed overlap or clipping"
+      },
+      {
+        "document": "technical_report",
+        "page": 7,
+        "PNG": {
+          "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-07.png",
+          "sha256": "cfa0ae55ded001ab63683263f9d912b76a45ad67c5d6c73103d7ab673bc9f4d8",
+          "bytes": 235167
+        },
+        "actual_root_viewing": true,
+        "basis": "Actual individual image inspection in prior root turns, recorded in r2 validation; original rendered bytes rechecked at sealing",
+        "finding": "Text, figures, tables and page context readable; no observed overlap or clipping"
+      },
+      {
+        "document": "technical_report",
+        "page": 8,
+        "PNG": {
+          "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-08.png",
+          "sha256": "ab926c9cf51b53e8746286c1fff3a8c72ce2c7c8ac36a67b73147587cfada617",
+          "bytes": 283334
+        },
+        "actual_root_viewing": true,
+        "basis": "Actual individual image inspection in prior root turns, recorded in r2 validation; original rendered bytes rechecked at sealing",
+        "finding": "Text, figures, tables and page context readable; no observed overlap or clipping"
+      },
+      {
+        "document": "technical_report",
+        "page": 9,
+        "PNG": {
+          "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-09.png",
+          "sha256": "aa46c6f583fdaf316af4c28f08b7d09c2eced3caa826b0d65b1c40f8a0f64e75",
+          "bytes": 172788
+        },
+        "actual_root_viewing": true,
+        "basis": "Actual individual image inspection in prior root turns, recorded in r2 validation; original rendered bytes rechecked at sealing",
+        "finding": "Text, figures, tables and page context readable; no observed overlap or clipping"
+      },
+      {
+        "document": "technical_report",
+        "page": 10,
+        "PNG": {
+          "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-10.png",
+          "sha256": "b60b780b34a8ce7109a12ab83cb481e63752f1826d7a47acf56e0cd6ba66c3d0",
+          "bytes": 312378
+        },
+        "actual_root_viewing": true,
+        "basis": "Actual individual image inspection in prior root turns, recorded in r2 validation; original rendered bytes rechecked at sealing",
+        "finding": "Text, figures, tables and page context readable; no observed overlap or clipping"
+      },
+      {
+        "document": "supporting_evidence",
+        "page": 1,
+        "PNG": {
+          "path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-01.png",
+          "sha256": "63cf1aeff5eccb5f0bc105e4d78a7b7e65f06275d095880d728940ed3548d126",
+          "bytes": 226365
+        },
+        "actual_root_viewing": true,
+        "basis": "Actual individual image inspection in prior root turns, recorded in r2 validation; original rendered bytes rechecked at sealing",
+        "finding": "Text, figures, tables and page context readable; no observed overlap or clipping"
+      },
+      {
+        "document": "supporting_evidence",
+        "page": 2,
+        "PNG": {
+          "path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-02.png",
+          "sha256": "d4b7cee7570185dd271b9a1662c805c823e7ae4e33aa1fc00eac388fd2c968e8",
+          "bytes": 260607
+        },
+        "actual_root_viewing": true,
+        "basis": "Actual individual image inspection in prior root turns, recorded in r2 validation; original rendered bytes rechecked at sealing",
+        "finding": "Text, figures, tables and page context readable; no observed overlap or clipping"
+      },
+      {
+        "document": "supporting_evidence",
+        "page": 3,
+        "PNG": {
+          "path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-03.png",
+          "sha256": "2eb3f49b15d36b79e6e5324a3fc2c681013ba337b2c87e55e59e7f2bb4dc331b",
+          "bytes": 218504
+        },
+        "actual_root_viewing": true,
+        "basis": "Actual individual image inspection in prior root turns, recorded in r2 validation; original rendered bytes rechecked at sealing",
+        "finding": "Text, figures, tables and page context readable; no observed overlap or clipping"
+      },
+      {
+        "document": "supporting_evidence",
+        "page": 4,
+        "PNG": {
+          "path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-04.png",
+          "sha256": "59d186a28fed37420c1739d14c7b2d8e64cf6854e57e2961e0318c184ca9aefd",
+          "bytes": 225413
+        },
+        "actual_root_viewing": true,
+        "basis": "Actual individual image inspection in prior root turns, recorded in r2 validation; original rendered bytes rechecked at sealing",
+        "finding": "Text, figures, tables and page context readable; no observed overlap or clipping"
+      },
+      {
+        "document": "supporting_evidence",
+        "page": 5,
+        "PNG": {
+          "path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-05.png",
+          "sha256": "efe151e2586ed0f1e02094a54a3113cfecdb8bb930c217e207e62e998830d450",
+          "bytes": 242762
+        },
+        "actual_root_viewing": true,
+        "basis": "Actual individual image inspection in prior root turns, recorded in r2 validation; original rendered bytes rechecked at sealing",
+        "finding": "Text, figures, tables and page context readable; no observed overlap or clipping"
+      },
+      {
+        "document": "supporting_evidence",
+        "page": 6,
+        "PNG": {
+          "path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-06.png",
+          "sha256": "1a0edb0b9c203c99cbd8b9e4580526ee227fe1f7848ba063e84818885c8b444e",
+          "bytes": 261268
+        },
+        "actual_root_viewing": true,
+        "basis": "Actual individual image inspection in prior root turns, recorded in r2 validation; original rendered bytes rechecked at sealing",
+        "finding": "Text, figures, tables and page context readable; no observed overlap or clipping"
+      },
+      {
+        "document": "defense",
+        "page": 1,
+        "PNG": {
+          "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-01.png",
+          "sha256": "b455e8c2f37f359ace22fc64dc1f2914e8b3b0be906f06c57928abdf9380e331",
+          "bytes": 105337
+        },
+        "actual_root_viewing": true,
+        "basis": "Root individually viewed slides 1-8 in preceding turns and slides 9-12 in 2026-10-07 continuation; some earlier tool views resized the full image. Complete source bytes equal the public PNG",
+        "finding": "Native tables/charts, numerical caveats and typography legible; no observed clipped text, overlapping objects or numerical conflict"
+      },
+      {
+        "document": "defense",
+        "page": 2,
+        "PNG": {
+          "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-02.png",
+          "sha256": "e159d18abc34af5d6f07737fdc53aab703c1912be1e006d3dede2ec32bd7c926",
+          "bytes": 168256
+        },
+        "actual_root_viewing": true,
+        "basis": "Root individually viewed slides 1-8 in preceding turns and slides 9-12 in 2026-10-07 continuation; some earlier tool views resized the full image. Complete source bytes equal the public PNG",
+        "finding": "Native tables/charts, numerical caveats and typography legible; no observed clipped text, overlapping objects or numerical conflict"
+      },
+      {
+        "document": "defense",
+        "page": 3,
+        "PNG": {
+          "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-03.png",
+          "sha256": "cbe10cd7ed6080efbfa5c8e672b44401f83143733885691eb3510da4c1e4b62a",
+          "bytes": 162355
+        },
+        "actual_root_viewing": true,
+        "basis": "Root individually viewed slides 1-8 in preceding turns and slides 9-12 in 2026-10-07 continuation; some earlier tool views resized the full image. Complete source bytes equal the public PNG",
+        "finding": "Native tables/charts, numerical caveats and typography legible; no observed clipped text, overlapping objects or numerical conflict"
+      },
+      {
+        "document": "defense",
+        "page": 4,
+        "PNG": {
+          "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-04.png",
+          "sha256": "f68e35e7979d8197be726270ad118cde713bfbdaba48f99cd2a6d29336b9dcce",
+          "bytes": 171496
+        },
+        "actual_root_viewing": true,
+        "basis": "Root individually viewed slides 1-8 in preceding turns and slides 9-12 in 2026-10-07 continuation; some earlier tool views resized the full image. Complete source bytes equal the public PNG",
+        "finding": "Native tables/charts, numerical caveats and typography legible; no observed clipped text, overlapping objects or numerical conflict"
+      },
+      {
+        "document": "defense",
+        "page": 5,
+        "PNG": {
+          "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-05.png",
+          "sha256": "99aa73ff8f18aa7af6de85451ff37524966a4ab06c5e0c91669114e2579dfdc7",
+          "bytes": 178530
+        },
+        "actual_root_viewing": true,
+        "basis": "Root individually viewed slides 1-8 in preceding turns and slides 9-12 in 2026-10-07 continuation; some earlier tool views resized the full image. Complete source bytes equal the public PNG",
+        "finding": "Native tables/charts, numerical caveats and typography legible; no observed clipped text, overlapping objects or numerical conflict"
+      },
+      {
+        "document": "defense",
+        "page": 6,
+        "PNG": {
+          "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-06.png",
+          "sha256": "04c756210c4d53dced7d811f2d7ec92d5f25b299161aa716872dd33ce9b91868",
+          "bytes": 170734
+        },
+        "actual_root_viewing": true,
+        "basis": "Root individually viewed slides 1-8 in preceding turns and slides 9-12 in 2026-10-07 continuation; some earlier tool views resized the full image. Complete source bytes equal the public PNG",
+        "finding": "Native tables/charts, numerical caveats and typography legible; no observed clipped text, overlapping objects or numerical conflict"
+      },
+      {
+        "document": "defense",
+        "page": 7,
+        "PNG": {
+          "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-07.png",
+          "sha256": "ec8cd54013709a8299ec885203b97f6b34c62235daaab2c8f99625d3fb565589",
+          "bytes": 177984
+        },
+        "actual_root_viewing": true,
+        "basis": "Root individually viewed slides 1-8 in preceding turns and slides 9-12 in 2026-10-07 continuation; some earlier tool views resized the full image. Complete source bytes equal the public PNG",
+        "finding": "Native tables/charts, numerical caveats and typography legible; no observed clipped text, overlapping objects or numerical conflict"
+      },
+      {
+        "document": "defense",
+        "page": 8,
+        "PNG": {
+          "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-08.png",
+          "sha256": "2275c4842ebb6654c142ee2a11d167127b7b59d4668e405b942100dc139052f0",
+          "bytes": 166154
+        },
+        "actual_root_viewing": true,
+        "basis": "Root individually viewed slides 1-8 in preceding turns and slides 9-12 in 2026-10-07 continuation; some earlier tool views resized the full image. Complete source bytes equal the public PNG",
+        "finding": "Native tables/charts, numerical caveats and typography legible; no observed clipped text, overlapping objects or numerical conflict"
+      },
+      {
+        "document": "defense",
+        "page": 9,
+        "PNG": {
+          "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-09.png",
+          "sha256": "b2f045447920885db832cf0720fc23db4658600005bbf67b7bde002848d3b0e6",
+          "bytes": 172823
+        },
+        "actual_root_viewing": true,
+        "basis": "Root individually viewed slides 1-8 in preceding turns and slides 9-12 in 2026-10-07 continuation; some earlier tool views resized the full image. Complete source bytes equal the public PNG",
+        "finding": "Native tables/charts, numerical caveats and typography legible; no observed clipped text, overlapping objects or numerical conflict"
+      },
+      {
+        "document": "defense",
+        "page": 10,
+        "PNG": {
+          "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-10.png",
+          "sha256": "542fb130d4dd4646ce6c91549cf51f725223019bd0c64ec16d259db09ec2ce22",
+          "bytes": 194409
+        },
+        "actual_root_viewing": true,
+        "basis": "Root individually viewed slides 1-8 in preceding turns and slides 9-12 in 2026-10-07 continuation; some earlier tool views resized the full image. Complete source bytes equal the public PNG",
+        "finding": "Native tables/charts, numerical caveats and typography legible; no observed clipped text, overlapping objects or numerical conflict"
+      },
+      {
+        "document": "defense",
+        "page": 11,
+        "PNG": {
+          "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-11.png",
+          "sha256": "4e67ab84dfbf75e31808b9bfbcb6f5d60260a0095de6eff3ee09381aa400fd6b",
+          "bytes": 148520
+        },
+        "actual_root_viewing": true,
+        "basis": "Root individually viewed slides 1-8 in preceding turns and slides 9-12 in 2026-10-07 continuation; some earlier tool views resized the full image. Complete source bytes equal the public PNG",
+        "finding": "Native tables/charts, numerical caveats and typography legible; no observed clipped text, overlapping objects or numerical conflict"
+      },
+      {
+        "document": "defense",
+        "page": 12,
+        "PNG": {
+          "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-12.png",
+          "sha256": "0d8cdef2ef3bf92408e7040e08cdb2d44160a2b08064380eeab8ab033414c20d",
+          "bytes": 179925
+        },
+        "actual_root_viewing": true,
+        "basis": "Root individually viewed slides 1-8 in preceding turns and slides 9-12 in 2026-10-07 continuation; some earlier tool views resized the full image. Complete source bytes equal the public PNG",
+        "finding": "Native tables/charts, numerical caveats and typography legible; no observed clipped text, overlapping objects or numerical conflict"
+      }
+    ],
+    "claim_context_review_complete": true,
+    "context_basis": "Read candidate lines in context, verified fixed/new/old denominators and full failed-task evidence; no causal, industrial, independently blind or human claims added",
+    "unresolved_visual_findings": [],
+    "original_pending_mechanical_fields_preserved": true,
+    "human_trial": false,
+    "H02_human_review": false,
+    "Native_Office_verified": false
+  },
+  "PDFs": [
+    {
+      "artifact": {
+        "path": "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+        "sha256": "4bb214297d189ccbf446dd12e9bc848bffd216601c1c315241f6cb3bcc87f6a3",
+        "bytes": 470762
+      },
+      "pages": 10,
+      "selectable_text": true
+    },
+    {
+      "artifact": {
+        "path": "docs/competition/ic/ICARUS_佐证材料_v3.pdf",
+        "sha256": "7fe5fe5aa78d654dc4e212cd25e2f2b202418d1d7a32d96ce755d8361a8e0dda",
+        "bytes": 260009
+      },
+      "pages": 6,
+      "selectable_text": true
+    },
+    {
+      "artifact": {
+        "path": "docs/competition/ic/ICARUS_答辩材料_v3.pdf",
+        "sha256": "80f2fadd2304fdb7d0d7695520242239e9e31c0dbaac9db2f96e5e108fddf580",
+        "bytes": 1407201
+      },
+      "pages": 12,
+      "selectable_text": false
+    }
+  ],
+  "editable_PPTX": {
+    "path": "docs/competition/ic/ICARUS_答辩材料_v3.pptx",
+    "sha256": "03a1cf9a47bb95576054725baf34b73a041d953983ba31ca3f8ad4c5ac8db76c",
+    "bytes": 71117
+  },
+  "submission_counts": {
+    "name_unicode_characters": 15,
+    "intro_unicode_characters": 201,
+    "count_method": "all Unicode characters, including punctuation and Latin letters; plain text only"
+  },
+  "material_data": {
+    "path": "docs/competition/ic/v3/material_data.json",
+    "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+    "bytes": 30806
+  },
+  "current_source_bindings": [
+    {
+      "path": "docs/competition/ic/v3/review/facts-r1/result.json",
+      "sha256": "08a06bb1166982d734a20f3c442258635969a6ab071d7808a69c5fd31ddc7a62",
+      "bytes": 95878
+    },
+    {
+      "path": "docs/competition/ic/v3/review/facts-r1/receipt.json",
+      "sha256": "15ab25e016f56bfc25e782831c9afc5290feab5a4105afcd8645ea6a3edeba02",
+      "bytes": 889
+    },
+    {
+      "path": "docs/competition/ic/v3/review/facts-r1/log.json",
+      "sha256": "108fdaf9f6d90a4f2b18d44c2c9b5d99fea1cc917d53628ddb4c22f808f1d9bb",
+      "bytes": 278
+    },
+    {
+      "path": "docs/competition/ic/v3/review/audit_material_data.py",
+      "sha256": "bd25da629ae282a70332e5c026a15e017ea61ce85701b4c4e985b143b9da00a9",
+      "bytes": 14407
+    },
+    {
+      "path": "docs/competition/ic/v3/material_data.json",
+      "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+      "bytes": 30806
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+      "sha256": "4751fe084711d6ed4f0d02212e715079803671a7b3605b6150679a8ee9096a65",
+      "bytes": 63381
+    },
+    {
+      "path": "docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json",
+      "sha256": "2640b137f35f1a206a47136516ebd1f9db7c3a5832ce1deadf2a8f374ac02937",
+      "bytes": 182267
+    },
+    {
+      "path": "docs/experiment/agent_new_holdout_study_budget_2026-10-05.json",
+      "sha256": "4f4bd6d305057c277b716825e69befe5895a69027ca1770d3a22c33f776cdf6b",
+      "bytes": 1310
+    },
+    {
+      "path": "docs/review/agent-new-holdout-study-review-2026-10-05/receipt.json",
+      "sha256": "9377514673af710917a62ca219949c13c5794195360b76b6d76d4e43b330abdf",
+      "bytes": 126464
+    },
+    {
+      "path": "docs/competition/ic/defense_v2/data.json",
+      "sha256": "a2b0f3133d210921be7eda8a4a5573f80b2a90f03a8bb8053bd5e4409819cb59",
+      "bytes": 9974
+    },
+    {
+      "path": "docs/review/agent-new-holdout-study-review-2026-10-05/core-audit.json",
+      "sha256": "8ebd9ec792bf6a909155adb54a9647abab0f387aefde0f94c089cd7d870e24c4",
+      "bytes": 1100354
+    },
+    {
+      "path": "docs/review/agent-new-holdout-study-review-2026-10-05/trace-audit.json",
+      "sha256": "bf2c5294d10a507f09e0630c09d4a7f922dd08e559efe668d857ffbb94f6ca9b",
+      "bytes": 1393100
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json",
+      "sha256": "e00d4b08cd596a0c3bdcc9d7aae4892a95a740ec7349d80130bdfa5bc7d43c57",
+      "bytes": 876138
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-validation-2026-10-05/r2/receipt.json",
+      "sha256": "80829ed0d47c65ccc7c6c285be5979296d33cb1b57c8a1c62c86cbd38008cdba",
+      "bytes": 2321
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-validation-2026-10-05/r2/mypy.log",
+      "sha256": "2d6b7f9cae097fc3f2c1c10271e54a3a798b57b405db1a0d5dde32a9a17b4ec7",
+      "bytes": 45
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-validation-2026-10-05/r2/pytest.log",
+      "sha256": "ab4a6acc77ff8f15d77abaeb34b0663c40d53b03d126059a114fd2efa8a278c9",
+      "bytes": 2839
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-validation-2026-10-05/r2/pytest.xml",
+      "sha256": "95c5b2feb61f596fb08ec8a1da6f08569eb49f85df30cab2d455581a811e8fb7",
+      "bytes": 310875
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-validation-2026-10-05/r2/source_fingerprint_after.json",
+      "sha256": "f1b5e35f02aad7872b80bed1cab906a699ba695f0a1122a46389ce3b6065c7ad",
+      "bytes": 93226
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-validation-2026-10-05/r2/source_fingerprint_before.json",
+      "sha256": "f1b5e35f02aad7872b80bed1cab906a699ba695f0a1122a46389ce3b6065c7ad",
+      "bytes": 93226
+    },
+    {
+      "path": "benchmarks/agent_new_holdout_20261005/validation/style/r3/deliverable_gate.json",
+      "sha256": "990f2d6e4f62e44cc33acd4317d2638c68eac17df1c6207e28e76ef9678c798c",
+      "bytes": 1095493
+    },
+    {
+      "path": "docs/competition/ic/v3/review/text-r3/result.json",
+      "sha256": "79fd1fb711f2c5f63b1e2bb15de8fd308007dc1600e0a69073535e9f81807d60",
+      "bytes": 102356
+    },
+    {
+      "path": "docs/competition/ic/v3/review/text-r3/receipt.json",
+      "sha256": "dc9e3264c3e6408b8853c6c4468d8c1cdf9dbd79cbb8101d3545998aa32e9dab",
+      "bytes": 600
+    },
+    {
+      "path": "docs/competition/ic/v3/review/text-r3/log.json",
+      "sha256": "646711f8c0fa0b01e86d8a68347de93407b84f1b0cfd5b7d4f21e6b1ebf9a0c5",
+      "bytes": 236
+    },
+    {
+      "path": "docs/competition/ic/v3/review/audit_text_tables_v2.py",
+      "sha256": "40030b9ce66e2519af9adb4b529d262f95149e7b0715769138e6c5e4569ed41c",
+      "bytes": 8073
+    },
+    {
+      "path": "docs/competition/ic/v3/technical_report.md",
+      "sha256": "3cbef290973e831bd38e9155b59edc3e1f2b2131183711ca8aff796e3a933a90",
+      "bytes": 18979
+    },
+    {
+      "path": "docs/competition/ic/v3/supporting_evidence.md",
+      "sha256": "2054a83999c02c7ce73c5fbcd7e31c2d275a5596bb026b273ce00a3c5b1b0fda",
+      "bytes": 12205
+    },
+    {
+      "path": "docs/competition/ic/v3/README.md",
+      "sha256": "5f1962b42a691321531f8fd5b4e444da504eb454b282f045f2adb5cf9c92ed93",
+      "bytes": 6305
+    },
+    {
+      "path": "docs/competition/ic/v3/submission_copy.md",
+      "sha256": "c463d4e1c29b13a58d8ce8d725315b897314c0cd87917bd333020780219c8a3c",
+      "bytes": 1926
+    },
+    {
+      "path": "docs/competition/ic/submission_figures/architecture.png",
+      "sha256": "8898808e4fc2f68c82197a914fcd9551abb946dff1954ae94782ba3fb58fcbf8",
+      "bytes": 112642
+    },
+    {
+      "path": "docs/experiment/protocol_oracle_improvements_2026-10-04.md",
+      "sha256": "1d279b78128d7b2e40f07d59be0c33a5adb529f20e39b18369c85bdcda3a66aa",
+      "bytes": 11457
+    },
+    {
+      "path": "docs/competition/ic/v3/assets/new108_detection.png",
+      "sha256": "99490de698c607a41ba93670b7e4f3aaf03e05976f3c56ffab2f2a3f6d7af984",
+      "bytes": 57381
+    },
+    {
+      "path": "docs/experiment/agent_new_holdout_study_live_2026-10-05.md",
+      "sha256": "b678c31d1697393f37caa6138eab29a3007a899ae6b8989ac5b258153cceaad4",
+      "bytes": 9383
+    },
+    {
+      "path": "docs/experiment/agent_feedback_study_live_2026-10-05.md",
+      "sha256": "27156b90341d1f699d715eacf06834b85db1b5df5403401294a433deb6c9f31c",
+      "bytes": 11833
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/trace_manifest.json",
+      "sha256": "3bef02272b0f065660d070052117ff3daf65c09bdd270d108dfdeb4546a49a0f",
+      "bytes": 65370
+    },
+    {
+      "path": "docs/experiment/functional_coverage_2026-10-04.md",
+      "sha256": "ade2900931c9c2573453f3a450878d1d0af2b4e44c90330d8dac5a011ce6c566",
+      "bytes": 10605
+    },
+    {
+      "path": "docs/experiment/agent_new_holdout_source_validation_2026-10-05.md",
+      "sha256": "11df83d811e2939bb95ed9fea975cba974135b6b97e63c4e297ccced04d02d1e",
+      "bytes": 3030
+    },
+    {
+      "path": "docs/review/agent_new_holdout_study_review_2026-10-05.md",
+      "sha256": "7dc898d556b4c61e433e2d442511c51f8045acfd2bd7d1a55ea768f7ce4a3ed8",
+      "bytes": 6536
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+      "sha256": "cd9ddc98b4b11062e3d820b475419335450d2e29fd54b300fa13c03643b13375",
+      "bytes": 7027646
+    },
+    {
+      "path": "docs/competition/ic/v3/rules_validation.json",
+      "sha256": "ec44e293b16ef871f25bec8a6b527c1cfe07f612ccc389ac8a39a13d2516b95d",
+      "bytes": 1483
+    },
+    {
+      "path": "docs/experiment/agent_new_holdout_study_plan_2026-10-05.md",
+      "sha256": "dbc7efc327b71804ae36ff0516f392adc9ab79eb243e8a19e93a5b7ae5b0a724",
+      "bytes": 6196
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/preregistration.json",
+      "sha256": "45a151529e2f2e1960f54696386db1ee5574e27dd0b688aad50afb432971b83f",
+      "bytes": 195253
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/token_budget.json",
+      "sha256": "7277cb7ae7aee2dc7d546dcd2ae3ad75e487e7f9c06f0b6ce88d9bf351aa7e8f",
+      "bytes": 29209
+    },
+    {
+      "path": "docs/experiment/agent_feedback_study_budget_2026-10-05.json",
+      "sha256": "136e36068a376267949ead5cda172de4db5acb9bdc610dadcb3267b5341c7d22",
+      "bytes": 1310
+    },
+    {
+      "path": "docs/review/agent_feedback_study_review_2026-10-05.md",
+      "sha256": "f23c51818a57701365ec07935e06ac40fd43a987487a706f658cd9a1c4e30e19",
+      "bytes": 4338
+    },
+    {
+      "path": "docs/experiment/metric_inventory.md",
+      "sha256": "62b3c0421901706446e17c3f9d2873a4c9e2d42785fd785941f403ed96922c5f",
+      "bytes": 61835
+    },
+    {
+      "path": "benchmarks/agent_new_holdout_20261005/README.md",
+      "sha256": "5b0e122ec920f78cb6f0f2ab56c4f22f15286608da21038dc504eb49e13e80f5",
+      "bytes": 3209
+    },
+    {
+      "path": "docs/review/agent_new_holdout_prereg_review_2026-10-05.md",
+      "sha256": "5ecb625a86ce258e0a3d666c1db11d95460dde79039c705b022175da9ea16e43",
+      "bytes": 11880
+    },
+    {
+      "path": "docs/experiment/ic_agent_v4_validation_2026-10-04.md",
+      "sha256": "d84cd5633adc82925f3ede348af8db0a3a12c76187ad409dfe0bbec19552a7d1",
+      "bytes": 3785
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/registered_inputs.zip",
+      "sha256": "b881df1a99012c29d3e205dfae31476d995be1e4cfd91967a362c65ef297f4ee",
+      "bytes": 1023930
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/source_byte_binding.json",
+      "sha256": "c02e53b79b6d31a48e989691fe521b7fe1f1cb2f6d73ea90df93dcc8d129417a",
+      "bytes": 180623
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/strict_summary.json",
+      "sha256": "d0fb0195aa7747919e5e3be5d3cd6947ab5653f8f7a3cd27d9031bab7b2f82b9",
+      "bytes": 3087950
+    },
+    {
+      "path": "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+      "sha256": "4bb214297d189ccbf446dd12e9bc848bffd216601c1c315241f6cb3bcc87f6a3",
+      "bytes": 470762
+    },
+    {
+      "path": "docs/competition/ic/ICARUS_佐证材料_v3.pdf",
+      "sha256": "7fe5fe5aa78d654dc4e212cd25e2f2b202418d1d7a32d96ce755d8361a8e0dda",
+      "bytes": 260009
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/speaker_notes.md",
+      "sha256": "4c5ffd627555d360d35f835b0430f826190811054ca808694420167c9bdff3f4",
+      "bytes": 13978
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/qa_questions.md",
+      "sha256": "eff1640e279bc92c739bfc2533161e74fe5cac1ae43d187429e41ac7e67aee95",
+      "bytes": 5843
+    },
+    {
+      "path": "docs/competition/ic/ICARUS_答辩材料_v3.pdf",
+      "sha256": "80f2fadd2304fdb7d0d7695520242239e9e31c0dbaac9db2f96e5e108fddf580",
+      "bytes": 1407201
+    },
+    {
+      "path": "docs/competition/ic/ICARUS_答辩材料_v3.pptx",
+      "sha256": "03a1cf9a47bb95576054725baf34b73a041d953983ba31ca3f8ad4c5ac8db76c",
+      "bytes": 71117
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/README.md",
+      "sha256": "76960ecbf49fade9a59f8bc9c80ac09666caa1b232e550e180fa6f2c6a43ccf6",
+      "bytes": 4621
+    },
+    {
+      "path": "docs/competition/ic/v3/validation.json",
+      "sha256": "fa661f4abd28a327f49ed8f364913488b51ef6c29b72f2756b982c0b4935cfd9",
+      "bytes": 21282
+    },
+    {
+      "path": "docs/competition/ic/v3/build_materials.py",
+      "sha256": "e09203ca7728e8be409ed44e3af3c7c30126887c3181fbd8007715a3ad161125",
+      "bytes": 9274
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/qa_report.json",
+      "sha256": "97efb7bb24bca2ca938648b6f56529a92d7af0d41a9b4db5b9bbde614e23439b",
+      "bytes": 21997
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/finalization_summary.json",
+      "sha256": "c2db6e50a46a720f1df90fee2a888c8a56e6001e7ba8f810d813c402f01a2bce",
+      "bytes": 3680
+    },
+    {
+      "path": "docs/review/ic_materials_v3_review_2026-10-07.md",
+      "sha256": "374de5deb409c687264cfba4818e4675382ead971adf542f03fe9573928cdb2f",
+      "bytes": 6835
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/result.json",
+      "sha256": "945aac62c2e05c81fab3387659bca4aa16e9f769c74dc2a3eb9cec780460faa6",
+      "bytes": 236908
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/receipt.json",
+      "sha256": "c117f4167f3ee8a30e0c7c93a22ed490f66b94958db508d18a4d877534f40c78",
+      "bytes": 680
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/log.json",
+      "sha256": "35731188a65d03b971b7b5b11019f5f0dc83dac816dada2c3f522788a0fa2015",
+      "bytes": 260
+    },
+    {
+      "path": "docs/competition/ic/v3/review/audit_material_outputs_v2.py",
+      "sha256": "06cf478adc9d783b283041e731ee4c4b733e6150884a3f44c9aa06424ac6bb76",
+      "bytes": 26915
+    },
+    {
+      "path": ".iverilog-ai/ic-materials-v3-rule-check/ic_rules.pdf",
+      "sha256": "af33abb3da8178ca3e1c60ea2041ea60244b58e917d8adb92a856439afa09e3d",
+      "bytes": 224745
+    },
+    {
+      "path": ".iverilog-ai/ic-materials-v3-rule-check/ic_outline.pdf",
+      "sha256": "6a4db4e3ffb016c83b4cf020139ed6a98069aea938c2dfa524f4ea1d33884354",
+      "bytes": 152425
+    },
+    {
+      "path": "docs/competition/ic/v3/assets/chart_source.json",
+      "sha256": "8111076f6f2a9e8b84a0f85075457ac9c41e20881443fd2d3332307e7cc7e3eb",
+      "bytes": 701
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/data.json",
+      "sha256": "8cebcbe26c4835a5795b7e9840073c6c19f194050e77fe7baec1ef91065c4173",
+      "bytes": 3120
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/source_checksums.json",
+      "sha256": "dbcd29d942ecc4f06c7f76acef8c5dc0268777445f564270a00d3c5a97af0b53",
+      "bytes": 32256
+    },
+    {
+      "path": ".iverilog-ai/protocol-oracle-fifo-20261004-before/evidence.json",
+      "sha256": "220a5fd98db833a5d6d5608a7e66d0902cafb5acdc60e085e5ddbbef58edee93",
+      "bytes": 28803
+    },
+    {
+      "path": ".iverilog-ai/protocol-oracle-fifo-20261004-after-final/evidence.json",
+      "sha256": "159d827d6905ddd2ffbe35f4390ee32c5be2a9197c551d673dc7bf0fc6281beb",
+      "bytes": 22321
+    },
+    {
+      "path": ".iverilog-ai/external/replay-20261004-protocol-v2/evidence.json",
+      "sha256": "d392f4a582f30f5551848b519c86d5a628be7f44f002d4f8e9418645e6b7f3cb",
+      "bytes": 141618
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/registered_inputs_manifest.json",
+      "sha256": "f516a5fda999476538bb42fa51c1acdf13ae9c8c4fcc535b3196b951a762fb5c",
+      "bytes": 223120
+    },
+    {
+      "path": "spec/agent_new_holdout_20261005/valid_data_pipeline_spec.md",
+      "sha256": "94045a833fa947eb2e1fca5088e000ccfd2e28ad523c08826c562b9e6b87a71a",
+      "bytes": 5202
+    },
+    {
+      "path": "spec/agent_new_holdout_20261005/event_accumulator_spec.md",
+      "sha256": "93e13226df4eb0323f1ae31316c1370934ec5faddc7f801f352d2f18971db515",
+      "bytes": 4573
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/build_defense.mjs",
+      "sha256": "2e81f09c723c5388e9caf11153fd5fce9d83585b2bc352f9974531ff3d2ae0d7",
+      "bytes": 24513
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/strip_pptx_metadata.py",
+      "sha256": "6d8aeccb736cf89579deb8d6a2698ced4e45bd4158048a008e7b2c46f075c842",
+      "bytes": 1133
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/create_image_pdf.py",
+      "sha256": "ef09d165546e20b3c56127dc53b096bf35d7af7f80ce03df13ce9eba39f550ed",
+      "bytes": 1270
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/inspect_artifacts.py",
+      "sha256": "eb108ec725cf8a3fcca475714c8ec2c97e994a6c87fae8ec1c50b5ea8279b02a",
+      "bytes": 4468
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/assets/README.md",
+      "sha256": "2085d17a50082d6d633eaf427fb312b83c3e018418e48eea95782f6b30116c50",
+      "bytes": 699
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/finalization_receipt.original.json",
+      "sha256": "3802e4d47d00ca5f545db725501fab1799ed387c8a8713df7803740fa7104a77",
+      "bytes": 9527
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-01.png",
+      "sha256": "68d6ef25e6b92f4f63a68aa87bce8f3a5fd2dffa51ab229240fc6d6f0fe017be",
+      "bytes": 199162
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-02.png",
+      "sha256": "ae5e30b193fea58f396c46c5ce16833745ca87854d637a21be7e916b7b4927ae",
+      "bytes": 171455
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-03.png",
+      "sha256": "bc1325468d09dd9247aea0b69215de61ce3c2c80ad992f94112befa89fdaff90",
+      "bytes": 181916
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-04.png",
+      "sha256": "6fc6c2605ca2e20ba3de828d679ec007c1da47f4c438e0014c76e6fa65dc122c",
+      "bytes": 177780
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-05.png",
+      "sha256": "60509d06f2af77606f854716a5be18920568b3449021f120ad3fc17d34e073ca",
+      "bytes": 152524
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-06.png",
+      "sha256": "ecadf0cf3391be06376d3fe7ec4d0c7f2050eb6d7ca59088d947fb2d3a1ce7e7",
+      "bytes": 131157
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-07.png",
+      "sha256": "f2e7fa6fadedb7d128e449c40f332d708f45b911e4de0d7deff6ed9cbdd74dcf",
+      "bytes": 157405
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-08.png",
+      "sha256": "b2e57ae6a3a44531496f73e2adb8ce88929e7ee6b1b46c28a34396ed6a55b43a",
+      "bytes": 187049
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-09.png",
+      "sha256": "eb40d2bb5eaad76ff83f79768361bc0176d94f6d2f6a98c53beba7321379addb",
+      "bytes": 123046
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-10.png",
+      "sha256": "7d0039a832be1cb5596ff09827ccd944bdd93a9f1cc4ca3461ca5c0a296b27ab",
+      "bytes": 205731
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/supporting_evidence-render/page-01.png",
+      "sha256": "0f78571ed672649c277e96a981f8e55e312213218182036673837b4fb23f5d6d",
+      "bytes": 158849
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/supporting_evidence-render/page-02.png",
+      "sha256": "dc52e2e3e9936bab97fdc6de7dd28d56b4392c60c5f6e004b8f36a1938a3fcd3",
+      "bytes": 173740
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/supporting_evidence-render/page-03.png",
+      "sha256": "d1665ff2d0fe94a0f50f32062432338a3e532bc20db275eb71d6d9ebba27c002",
+      "bytes": 151538
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/supporting_evidence-render/page-04.png",
+      "sha256": "276da6ed68661f1f4916fd161404469040ab94c9ec4687c20b0cf0f9de0e2e97",
+      "bytes": 151733
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/supporting_evidence-render/page-05.png",
+      "sha256": "2562a0bdd60f8554de6c230c0bde23039e48744a804e1245e3b265efc155b867",
+      "bytes": 162810
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/supporting_evidence-render/page-06.png",
+      "sha256": "34c82752f0233fe2ad95d8986c3f42bc02cb3a706bc533bf9cc5a354b45e467e",
+      "bytes": 176476
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-01.png",
+      "sha256": "ee2f68a516e4f1a2401d9f9deb8d58b8431650a0fee4e010f998990d05fed763",
+      "bytes": 70465
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-02.png",
+      "sha256": "52b9dcd9f7b63dedef96b5c9ba616a535bab4f7eca464edef9d3b598cf4679e8",
+      "bytes": 136950
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-03.png",
+      "sha256": "53f199988f6b6a3ab51a3df29e864465dce6c9e9586ec5dc1db559a98377536f",
+      "bytes": 129710
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-04.png",
+      "sha256": "53b480a5dbe9f3b4472c4b68ad15b9c8ed5517eaf6ce837bf676acadc83401b2",
+      "bytes": 139263
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-05.png",
+      "sha256": "94681701cfc8cbb97e2059febe8759920bbec8735649e7a1c2d035afe8451b9e",
+      "bytes": 145392
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-06.png",
+      "sha256": "29219b246e564bed5620c4cb401f7d0fb063302ffa5d7f57dac39d4803850afa",
+      "bytes": 136233
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-07.png",
+      "sha256": "d3b816ab176a83005d84063073077e5809d8cd829dc9291747630702fdaa52e4",
+      "bytes": 143662
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-08.png",
+      "sha256": "d41d91f57b88533481fc239e5211eb1fb0856cb49953e2f3382dd8518c2dd4bd",
+      "bytes": 135173
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-09.png",
+      "sha256": "c5d4242188f1b11bf6b8f3e317612b7b795a1b2bcfcd1a7117729dd8d5367873",
+      "bytes": 139936
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-10.png",
+      "sha256": "fcee4922c24260eaa8bd5103f4af10e0e94341dc376a938dd960876d664a6b4b",
+      "bytes": 153314
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-11.png",
+      "sha256": "e10832294b09955855fe55cf4e905434901c0e05059096edf857b9bd9862a03f",
+      "bytes": 121005
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-12.png",
+      "sha256": "cd094bbec80522c7253169a5c6861ec326048f40a207c812fbca8699c338eb07",
+      "bytes": 145549
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-01.png",
+      "sha256": "b455e8c2f37f359ace22fc64dc1f2914e8b3b0be906f06c57928abdf9380e331",
+      "bytes": 105337
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-02.png",
+      "sha256": "e159d18abc34af5d6f07737fdc53aab703c1912be1e006d3dede2ec32bd7c926",
+      "bytes": 168256
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-03.png",
+      "sha256": "cbe10cd7ed6080efbfa5c8e672b44401f83143733885691eb3510da4c1e4b62a",
+      "bytes": 162355
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-04.png",
+      "sha256": "f68e35e7979d8197be726270ad118cde713bfbdaba48f99cd2a6d29336b9dcce",
+      "bytes": 171496
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-05.png",
+      "sha256": "99aa73ff8f18aa7af6de85451ff37524966a4ab06c5e0c91669114e2579dfdc7",
+      "bytes": 178530
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-06.png",
+      "sha256": "04c756210c4d53dced7d811f2d7ec92d5f25b299161aa716872dd33ce9b91868",
+      "bytes": 170734
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-07.png",
+      "sha256": "ec8cd54013709a8299ec885203b97f6b34c62235daaab2c8f99625d3fb565589",
+      "bytes": 177984
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-08.png",
+      "sha256": "2275c4842ebb6654c142ee2a11d167127b7b59d4668e405b942100dc139052f0",
+      "bytes": 166154
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-09.png",
+      "sha256": "b2f045447920885db832cf0720fc23db4658600005bbf67b7bde002848d3b0e6",
+      "bytes": 172823
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-10.png",
+      "sha256": "542fb130d4dd4646ce6c91549cf51f725223019bd0c64ec16d259db09ec2ce22",
+      "bytes": 194409
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-11.png",
+      "sha256": "4e67ab84dfbf75e31808b9bfbcb6f5d60260a0095de6eff3ee09381aa400fd6b",
+      "bytes": 148520
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-12.png",
+      "sha256": "0d8cdef2ef3bf92408e7040e08cdb2d44160a2b08064380eeab8ab033414c20d",
+      "bytes": 179925
+    },
+    {
+      "path": "docs/competition/ic/v3/review/report_visual_review_r2.json",
+      "sha256": "ef648f0cbd91ae3e17dc99ec9400a3c14eaa275cd85276f139ca197749865e0b",
+      "bytes": 12081
+    },
+    {
+      "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-01.png",
+      "sha256": "df81d9e8ac31b81232ef36af94759b8f9d287605a789cb583efbdf99f1db8351",
+      "bytes": 289225
+    },
+    {
+      "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-02.png",
+      "sha256": "5299d92863a74fabd9cea04851ab42c8935573cce3208fd2f75667a38e612091",
+      "bytes": 260450
+    },
+    {
+      "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-03.png",
+      "sha256": "06b97af6f8fbf0cc76529a7e0245a86945f8ed8fe99844fc351c4fe4553c41c5",
+      "bytes": 279057
+    },
+    {
+      "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-04.png",
+      "sha256": "daeea5ce7b92ede905fa181680cef3be6cdfe8b86c21293a3bd6014137d2916a",
+      "bytes": 278830
+    },
+    {
+      "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-05.png",
+      "sha256": "66761c68ad28052b3cc305cb90a84da0771f90d83132ca825c01d2eb1e966a42",
+      "bytes": 233640
+    },
+    {
+      "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-06.png",
+      "sha256": "fddc9a5d846b303e1355e6f09c1c7f94dd423ac8fa85c7da22953566f80ff238",
+      "bytes": 186151
+    },
+    {
+      "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-07.png",
+      "sha256": "cfa0ae55ded001ab63683263f9d912b76a45ad67c5d6c73103d7ab673bc9f4d8",
+      "bytes": 235167
+    },
+    {
+      "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-08.png",
+      "sha256": "ab926c9cf51b53e8746286c1fff3a8c72ce2c7c8ac36a67b73147587cfada617",
+      "bytes": 283334
+    },
+    {
+      "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-09.png",
+      "sha256": "aa46c6f583fdaf316af4c28f08b7d09c2eced3caa826b0d65b1c40f8a0f64e75",
+      "bytes": 172788
+    },
+    {
+      "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-10.png",
+      "sha256": "b60b780b34a8ce7109a12ab83cb481e63752f1826d7a47acf56e0cd6ba66c3d0",
+      "bytes": 312378
+    },
+    {
+      "path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-01.png",
+      "sha256": "63cf1aeff5eccb5f0bc105e4d78a7b7e65f06275d095880d728940ed3548d126",
+      "bytes": 226365
+    },
+    {
+      "path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-02.png",
+      "sha256": "d4b7cee7570185dd271b9a1662c805c823e7ae4e33aa1fc00eac388fd2c968e8",
+      "bytes": 260607
+    },
+    {
+      "path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-03.png",
+      "sha256": "2eb3f49b15d36b79e6e5324a3fc2c681013ba337b2c87e55e59e7f2bb4dc331b",
+      "bytes": 218504
+    },
+    {
+      "path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-04.png",
+      "sha256": "59d186a28fed37420c1739d14c7b2d8e64cf6854e57e2961e0318c184ca9aefd",
+      "bytes": 225413
+    },
+    {
+      "path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-05.png",
+      "sha256": "efe151e2586ed0f1e02094a54a3113cfecdb8bb930c217e207e62e998830d450",
+      "bytes": 242762
+    },
+    {
+      "path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-06.png",
+      "sha256": "1a0edb0b9c203c99cbd8b9e4580526ee227fe1f7848ba063e84818885c8b444e",
+      "bytes": 261268
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-01.png",
+      "sha256": "b455e8c2f37f359ace22fc64dc1f2914e8b3b0be906f06c57928abdf9380e331",
+      "bytes": 105337
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-02.png",
+      "sha256": "e159d18abc34af5d6f07737fdc53aab703c1912be1e006d3dede2ec32bd7c926",
+      "bytes": 168256
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-03.png",
+      "sha256": "cbe10cd7ed6080efbfa5c8e672b44401f83143733885691eb3510da4c1e4b62a",
+      "bytes": 162355
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-04.png",
+      "sha256": "f68e35e7979d8197be726270ad118cde713bfbdaba48f99cd2a6d29336b9dcce",
+      "bytes": 171496
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-05.png",
+      "sha256": "99aa73ff8f18aa7af6de85451ff37524966a4ab06c5e0c91669114e2579dfdc7",
+      "bytes": 178530
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-06.png",
+      "sha256": "04c756210c4d53dced7d811f2d7ec92d5f25b299161aa716872dd33ce9b91868",
+      "bytes": 170734
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-07.png",
+      "sha256": "ec8cd54013709a8299ec885203b97f6b34c62235daaab2c8f99625d3fb565589",
+      "bytes": 177984
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-08.png",
+      "sha256": "2275c4842ebb6654c142ee2a11d167127b7b59d4668e405b942100dc139052f0",
+      "bytes": 166154
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-09.png",
+      "sha256": "b2f045447920885db832cf0720fc23db4658600005bbf67b7bde002848d3b0e6",
+      "bytes": 172823
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-10.png",
+      "sha256": "542fb130d4dd4646ce6c91549cf51f725223019bd0c64ec16d259db09ec2ce22",
+      "bytes": 194409
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-11.png",
+      "sha256": "4e67ab84dfbf75e31808b9bfbcb6f5d60260a0095de6eff3ee09381aa400fd6b",
+      "bytes": 148520
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-12.png",
+      "sha256": "0d8cdef2ef3bf92408e7040e08cdb2d44160a2b08064380eeab8ab033414c20d",
+      "bytes": 179925
+    },
+    {
+      "path": "README.md",
+      "sha256": "4504419c834816aec39cabbfe67e28b2b6df728a42eaee181d5380258ee81ab4",
+      "bytes": 26134
+    },
+    {
+      "path": "docs/INDEX.md",
+      "sha256": "f9a90abc5094eec48ebb605a00f88acfa21bc2fd32c88cc6f9990b13257228d8",
+      "bytes": 44399
+    },
+    {
+      "path": "docs/competition/ic/gap_checklist.md",
+      "sha256": "ae6470c10c46d4d05d2b49c629249f05c0f58b3c9362eda189cb5bda0c0a7cf3",
+      "bytes": 10968
+    },
+    {
+      "path": "docs/competition/ic/v3/review/seal_material_review.py",
+      "sha256": "2f4a785f2022c9eaf8923bf313723e793e845dbee90aea3f43d074cbb0b81dc0",
+      "bytes": 10136
+    }
+  ],
+  "limitations": [
+    "Image-only defense PDF; edit the PPTX",
+    "Native Office not verified",
+    "No real participant or H02 records",
+    "No independent external blind test, hardware or complete other-machine reproduction",
+    "Real team number and actual upload not supplied",
+    "12 strict RTL style findings and WaveDrom dependency gap belong to the frozen evaluated source"
+  ]
+}

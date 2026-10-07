@@ -1,0 +1,245 @@
+{
+  "schema": "icarus-defense-v3-source-byte-snapshot-v1",
+  "captured_at_utc": "2026-10-05T07:59:25.545Z",
+  "revision": "r1",
+  "material_source_sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+  "evidence_base_commit": "f632b0a83d7a63256af767eab73c91477384cc44",
+  "live_API_requests": 0,
+  "credential_file_reads": 0,
+  "DUT_executions": 0,
+  "engineering_tests_reexecuted": 0,
+  "independent_human_review": false,
+  "items": [
+    {
+      "key": "final_material_data",
+      "relative_path": "docs/competition/ic/v3/material_data.json",
+      "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+      "size_bytes": 30806,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/competition/ic/v3/material_data.json"
+    },
+    {
+      "key": "new108_receipt",
+      "relative_path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+      "sha256": "4751fe084711d6ed4f0d02212e715079803671a7b3605b6150679a8ee9096a65",
+      "size_bytes": 63381,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json"
+    },
+    {
+      "key": "old432_receipt",
+      "relative_path": "docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json",
+      "sha256": "2640b137f35f1a206a47136516ebd1f9db7c3a5832ce1deadf2a8f374ac02937",
+      "size_bytes": 182267,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json"
+    },
+    {
+      "key": "new108_budget",
+      "relative_path": "docs/experiment/agent_new_holdout_study_budget_2026-10-05.json",
+      "sha256": "4f4bd6d305057c277b716825e69befe5895a69027ca1770d3a22c33f776cdf6b",
+      "size_bytes": 1310,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/experiment/agent_new_holdout_study_budget_2026-10-05.json"
+    },
+    {
+      "key": "new108_review",
+      "relative_path": "docs/review/agent-new-holdout-study-review-2026-10-05/receipt.json",
+      "sha256": "9377514673af710917a62ca219949c13c5794195360b76b6d76d4e43b330abdf",
+      "size_bytes": 126464,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/review/agent-new-holdout-study-review-2026-10-05/receipt.json"
+    },
+    {
+      "key": "historical_v2_material_data",
+      "relative_path": "docs/competition/ic/defense_v2/data.json",
+      "sha256": "a2b0f3133d210921be7eda8a4a5573f80b2a90f03a8bb8053bd5e4409819cb59",
+      "size_bytes": 9974,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/competition/ic/defense_v2/data.json"
+    },
+    {
+      "key": "core_audit",
+      "relative_path": "docs/review/agent-new-holdout-study-review-2026-10-05/core-audit.json",
+      "sha256": "8ebd9ec792bf6a909155adb54a9647abab0f387aefde0f94c089cd7d870e24c4",
+      "size_bytes": 1100354,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/review/agent-new-holdout-study-review-2026-10-05/core-audit.json"
+    },
+    {
+      "key": "trace_audit",
+      "relative_path": "docs/review/agent-new-holdout-study-review-2026-10-05/trace-audit.json",
+      "sha256": "bf2c5294d10a507f09e0630c09d4a7f922dd08e559efe668d857ffbb94f6ca9b",
+      "size_bytes": 1393100,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/review/agent-new-holdout-study-review-2026-10-05/trace-audit.json"
+    },
+    {
+      "key": "source_document",
+      "relative_path": "docs/experiment/agent_new_holdout_study_live_2026-10-05.md",
+      "sha256": "b678c31d1697393f37caa6138eab29a3007a899ae6b8989ac5b258153cceaad4",
+      "size_bytes": 9383,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/experiment/agent_new_holdout_study_live_2026-10-05.md"
+    },
+    {
+      "key": "source_document",
+      "relative_path": "docs/experiment/agent_new_holdout_study_plan_2026-10-05.md",
+      "sha256": "dbc7efc327b71804ae36ff0516f392adc9ab79eb243e8a19e93a5b7ae5b0a724",
+      "size_bytes": 6196,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/experiment/agent_new_holdout_study_plan_2026-10-05.md"
+    },
+    {
+      "key": "source_document",
+      "relative_path": "docs/experiment/agent_new_holdout_source_validation_2026-10-05.md",
+      "sha256": "11df83d811e2939bb95ed9fea975cba974135b6b97e63c4e297ccced04d02d1e",
+      "size_bytes": 3030,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/experiment/agent_new_holdout_source_validation_2026-10-05.md"
+    },
+    {
+      "key": "source_document",
+      "relative_path": "docs/review/agent_new_holdout_study_review_2026-10-05.md",
+      "sha256": "7dc898d556b4c61e433e2d442511c51f8045acfd2bd7d1a55ea768f7ce4a3ed8",
+      "size_bytes": 6536,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/review/agent_new_holdout_study_review_2026-10-05.md"
+    },
+    {
+      "key": "source_document",
+      "relative_path": "docs/experiment/agent_feedback_study_live_2026-10-05.md",
+      "sha256": "27156b90341d1f699d715eacf06834b85db1b5df5403401294a433deb6c9f31c",
+      "size_bytes": 11833,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/experiment/agent_feedback_study_live_2026-10-05.md"
+    },
+    {
+      "key": "source_document",
+      "relative_path": "docs/experiment/protocol_oracle_improvements_2026-10-04.md",
+      "sha256": "1d279b78128d7b2e40f07d59be0c33a5adb529f20e39b18369c85bdcda3a66aa",
+      "size_bytes": 11457,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/experiment/protocol_oracle_improvements_2026-10-04.md"
+    },
+    {
+      "key": "source_document",
+      "relative_path": "docs/experiment/functional_coverage_2026-10-04.md",
+      "sha256": "ade2900931c9c2573453f3a450878d1d0af2b4e44c90330d8dac5a011ce6c566",
+      "size_bytes": 10605,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/experiment/functional_coverage_2026-10-04.md"
+    },
+    {
+      "key": "source_document",
+      "relative_path": "docs/experiment/ic_agent_v4_validation_2026-10-04.md",
+      "sha256": "d84cd5633adc82925f3ede348af8db0a3a12c76187ad409dfe0bbec19552a7d1",
+      "size_bytes": 3785,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/experiment/ic_agent_v4_validation_2026-10-04.md"
+    },
+    {
+      "key": "fifo_before",
+      "relative_path": ".iverilog-ai/protocol-oracle-fifo-20261004-before/evidence.json",
+      "sha256": "220a5fd98db833a5d6d5608a7e66d0902cafb5acdc60e085e5ddbbef58edee93",
+      "size_bytes": 28803,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/.iverilog-ai/protocol-oracle-fifo-20261004-before/evidence.json"
+    },
+    {
+      "key": "fifo_after",
+      "relative_path": ".iverilog-ai/protocol-oracle-fifo-20261004-after-final/evidence.json",
+      "sha256": "159d827d6905ddd2ffbe35f4390ee32c5be2a9197c551d673dc7bf0fc6281beb",
+      "size_bytes": 22321,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/.iverilog-ai/protocol-oracle-fifo-20261004-after-final/evidence.json"
+    },
+    {
+      "key": "external_spec_replay",
+      "relative_path": ".iverilog-ai/external/replay-20261004-protocol-v2/evidence.json",
+      "sha256": "d392f4a582f30f5551848b519c86d5a628be7f44f002d4f8e9418645e6b7f3cb",
+      "size_bytes": 141618,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/.iverilog-ai/external/replay-20261004-protocol-v2/evidence.json"
+    },
+    {
+      "key": "new_public_manifest",
+      "relative_path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json",
+      "sha256": "e00d4b08cd596a0c3bdcc9d7aae4892a95a740ec7349d80130bdfa5bc7d43c57",
+      "size_bytes": 876138,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json"
+    },
+    {
+      "key": "new_trace_manifest",
+      "relative_path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/trace_manifest.json",
+      "sha256": "3bef02272b0f065660d070052117ff3daf65c09bdd270d108dfdeb4546a49a0f",
+      "size_bytes": 65370,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/experiment/agent-new-holdout-study-live-2026-10-05/trace_manifest.json"
+    },
+    {
+      "key": "new_registered_inputs_manifest",
+      "relative_path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/registered_inputs_manifest.json",
+      "sha256": "f516a5fda999476538bb42fa51c1acdf13ae9c8c4fcc535b3196b951a762fb5c",
+      "size_bytes": 223120,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/experiment/agent-new-holdout-study-live-2026-10-05/registered_inputs_manifest.json"
+    },
+    {
+      "key": "new_source_byte_binding",
+      "relative_path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/source_byte_binding.json",
+      "sha256": "c02e53b79b6d31a48e989691fe521b7fe1f1cb2f6d73ea90df93dcc8d129417a",
+      "size_bytes": 180623,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/experiment/agent-new-holdout-study-live-2026-10-05/source_byte_binding.json"
+    },
+    {
+      "key": "pipeline_public_spec",
+      "relative_path": "spec/agent_new_holdout_20261005/valid_data_pipeline_spec.md",
+      "sha256": "94045a833fa947eb2e1fca5088e000ccfd2e28ad523c08826c562b9e6b87a71a",
+      "size_bytes": 5202,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/spec/agent_new_holdout_20261005/valid_data_pipeline_spec.md"
+    },
+    {
+      "key": "accumulator_public_spec",
+      "relative_path": "spec/agent_new_holdout_20261005/event_accumulator_spec.md",
+      "sha256": "93e13226df4eb0323f1ae31316c1370934ec5faddc7f801f352d2f18971db515",
+      "size_bytes": 4573,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/spec/agent_new_holdout_20261005/event_accumulator_spec.md"
+    },
+    {
+      "key": "authoring_source",
+      "relative_path": "docs/competition/ic/defense_v3/data.json",
+      "sha256": "8cebcbe26c4835a5795b7e9840073c6c19f194050e77fe7baec1ef91065c4173",
+      "size_bytes": 3120,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/competition/ic/defense_v3/data.json"
+    },
+    {
+      "key": "authoring_source",
+      "relative_path": "docs/competition/ic/defense_v3/build_defense.mjs",
+      "sha256": "bce05fe6067b09a94897c06676e0c89550b916a6a07d46f231f53b985edf1c6a",
+      "size_bytes": 24562,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/competition/ic/defense_v3/build_defense.mjs"
+    },
+    {
+      "key": "authoring_source",
+      "relative_path": "docs/competition/ic/defense_v3/speaker_notes.md",
+      "sha256": "4c5ffd627555d360d35f835b0430f826190811054ca808694420167c9bdff3f4",
+      "size_bytes": 13978,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/competition/ic/defense_v3/speaker_notes.md"
+    },
+    {
+      "key": "authoring_source",
+      "relative_path": "docs/competition/ic/defense_v3/qa_questions.md",
+      "sha256": "eff1640e279bc92c739bfc2533161e74fe5cac1ae43d187429e41ac7e67aee95",
+      "size_bytes": 5843,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/competition/ic/defense_v3/qa_questions.md"
+    },
+    {
+      "key": "authoring_source",
+      "relative_path": "docs/competition/ic/defense_v3/strip_pptx_metadata.py",
+      "sha256": "6d8aeccb736cf89579deb8d6a2698ced4e45bd4158048a008e7b2c46f075c842",
+      "size_bytes": 1133,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/competition/ic/defense_v3/strip_pptx_metadata.py"
+    },
+    {
+      "key": "authoring_source",
+      "relative_path": "docs/competition/ic/defense_v3/create_image_pdf.py",
+      "sha256": "ef09d165546e20b3c56127dc53b096bf35d7af7f80ce03df13ce9eba39f550ed",
+      "size_bytes": 1270,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/competition/ic/defense_v3/create_image_pdf.py"
+    },
+    {
+      "key": "authoring_source",
+      "relative_path": "docs/competition/ic/defense_v3/inspect_artifacts.py",
+      "sha256": "1fb523f4ba6235c5d04fb5e351a9cacc1e31e2b78d2f742be60f19c0752aaa2f",
+      "size_bytes": 4281,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/competition/ic/defense_v3/inspect_artifacts.py"
+    },
+    {
+      "key": "authoring_source",
+      "relative_path": "docs/competition/ic/defense_v3/assets/README.md",
+      "sha256": "2085d17a50082d6d633eaf427fb312b83c3e018418e48eea95782f6b30116c50",
+      "size_bytes": 699,
+      "private_snapshot": ".iverilog-ai/defense-v3-build/r1/source-snapshot/docs/competition/ic/defense_v3/assets/README.md"
+    }
+  ]
+}

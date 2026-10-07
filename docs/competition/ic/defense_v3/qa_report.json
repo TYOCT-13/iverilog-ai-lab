@@ -1,0 +1,570 @@
+{
+  "schema": "icarus-defense-v3-final-artifact-qa-v1",
+  "created_at_utc": "2026-10-05T08:19:23.711499+00:00",
+  "status": "passed_with_explicit_application_limitations",
+  "material_source_sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+  "source_checksums": {
+    "path": "docs/competition/ic/defense_v3/source_checksums.json",
+    "sha256": "dbcd29d942ecc4f06c7f76acef8c5dc0268777445f564270a00d3c5a97af0b53",
+    "size_bytes": 32256
+  },
+  "artifacts": {
+    "PPTX": {
+      "path": "docs/competition/ic/ICARUS_答辩材料_v3.pptx",
+      "sha256": "03a1cf9a47bb95576054725baf34b73a041d953983ba31ca3f8ad4c5ac8db76c",
+      "size_bytes": 71117
+    },
+    "PDF": {
+      "path": "docs/competition/ic/ICARUS_答辩材料_v3.pdf",
+      "sha256": "80f2fadd2304fdb7d0d7695520242239e9e31c0dbaac9db2f96e5e108fddf580",
+      "size_bytes": 1407201
+    }
+  },
+  "slides": 12,
+  "PDF_pages": 12,
+  "PDF_image_only": true,
+  "editable_native_chart_count": 3,
+  "literal_embedded_workbook_count": 3,
+  "editable_native_table_count": 7,
+  "native_chart_values_checked": [
+    {
+      "part": "ppt/slides/charts/chart1.xml",
+      "values_in_native_cache_order": [
+        10.0,
+        11.0,
+        8.0,
+        8.0,
+        10.0,
+        12.0
+      ]
+    },
+    {
+      "part": "ppt/slides/charts/chart2.xml",
+      "values_in_native_cache_order": [
+        0.0,
+        66.0
+      ]
+    },
+    {
+      "part": "ppt/slides/charts/chart3.xml",
+      "values_in_native_cache_order": [
+        15.0,
+        13.0
+      ]
+    }
+  ],
+  "native_chart_owner_slides": [
+    6,
+    11
+  ],
+  "native_table_owner_slides": [
+    4,
+    5,
+    7,
+    8,
+    9,
+    10,
+    12
+  ],
+  "all_12_final_PPTX_slides_reimported_and_rendered": true,
+  "all_12_final_PNGs_individually_viewed": true,
+  "render_size_pixels": [
+    2560,
+    1440
+  ],
+  "all_12_PDF_pages_rerendered_pixel_identical_to_PPTX_PNG": true,
+  "PDF_document_metadata_empty": true,
+  "PPTX_core_metadata_empty": true,
+  "reviewer_kind": "authoring_agent; also experiment entry code author",
+  "independent_review_of_entry_author": false,
+  "human_review": false,
+  "H02": false,
+  "native_Office_open_edit_or_slideshow_verified": false,
+  "google_slides_verified": false,
+  "unresolved_visual_findings": [],
+  "visual_observations": [
+    {
+      "slide": 1,
+      "status": "viewed_no_visual_issue",
+      "observation": "匿名文字封面，中文与英文可读，无署名机构队号",
+      "artifacts": {
+        "slide": 1,
+        "PNG": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-01.png",
+            "sha256": "b455e8c2f37f359ace22fc64dc1f2914e8b3b0be906f06c57928abdf9380e331",
+            "size_bytes": 105337
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-01.png",
+            "sha256": "b455e8c2f37f359ace22fc64dc1f2914e8b3b0be906f06c57928abdf9380e331",
+            "size_bytes": 105337
+          }
+        },
+        "layout": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-01.layout.json",
+            "sha256": "4a2271db24c1ce1aedd448647c2effdf3b9c8e0aa919b559267fbdf80bf64312",
+            "size_bytes": 8993
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-01.layout.json",
+            "sha256": "4a2271db24c1ce1aedd448647c2effdf3b9c8e0aa919b559267fbdf80bf64312",
+            "size_bytes": 8993
+          }
+        },
+        "PDF_rerender": {
+          "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-01.png",
+          "sha256": "a0d36ce13149ff5d20202e4794817b4e73cfacdca3ed6c6a5116817189595991",
+          "size_bytes": 92804
+        }
+      }
+    },
+    {
+      "slide": 2,
+      "status": "viewed_no_visual_issue",
+      "observation": "两栏公开合约要点和使用对象清晰，限制文字完整",
+      "artifacts": {
+        "slide": 2,
+        "PNG": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-02.png",
+            "sha256": "e159d18abc34af5d6f07737fdc53aab703c1912be1e006d3dede2ec32bd7c926",
+            "size_bytes": 168256
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-02.png",
+            "sha256": "e159d18abc34af5d6f07737fdc53aab703c1912be1e006d3dede2ec32bd7c926",
+            "size_bytes": 168256
+          }
+        },
+        "layout": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-02.layout.json",
+            "sha256": "e0a88897041d0d53db7287e79eb3dffef8f02831a823e488bb13291f2d49f4e2",
+            "size_bytes": 18398
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-02.layout.json",
+            "sha256": "e0a88897041d0d53db7287e79eb3dffef8f02831a823e488bb13291f2d49f4e2",
+            "size_bytes": 18398
+          }
+        },
+        "PDF_rerender": {
+          "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-02.png",
+          "sha256": "baeac8b6664c49db17a02fc74012e6811c31edfb56b657936881f90ff3125633",
+          "size_bytes": 150857
+        }
+      }
+    },
+    {
+      "slide": 3,
+      "status": "viewed_no_visual_issue",
+      "observation": "五阶段原生流程箭头完整，公开输入和私有信息边界可读",
+      "artifacts": {
+        "slide": 3,
+        "PNG": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-03.png",
+            "sha256": "cbe10cd7ed6080efbfa5c8e672b44401f83143733885691eb3510da4c1e4b62a",
+            "size_bytes": 162355
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-03.png",
+            "sha256": "cbe10cd7ed6080efbfa5c8e672b44401f83143733885691eb3510da4c1e4b62a",
+            "size_bytes": 162355
+          }
+        },
+        "layout": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-03.layout.json",
+            "sha256": "d072a0645b5b7d8c7c23fda2259ebaac3577ebde9955d63758f5e81940915315",
+            "size_bytes": 26318
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-03.layout.json",
+            "sha256": "d072a0645b5b7d8c7c23fda2259ebaac3577ebde9955d63758f5e81940915315",
+            "size_bytes": 26318
+          }
+        },
+        "PDF_rerender": {
+          "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-03.png",
+          "sha256": "9b8b510ff26f1532bdc40307c1aa076c828503f008930d19aae4a713287ff0f0",
+          "size_bytes": 146341
+        }
+      }
+    },
+    {
+      "slide": 4,
+      "status": "viewed_no_visual_issue",
+      "observation": "两新模块原生表格与108算式完整，同团队及选型时间戳限制可见",
+      "artifacts": {
+        "slide": 4,
+        "PNG": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-04.png",
+            "sha256": "f68e35e7979d8197be726270ad118cde713bfbdaba48f99cd2a6d29336b9dcce",
+            "size_bytes": 171496
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-04.png",
+            "sha256": "f68e35e7979d8197be726270ad118cde713bfbdaba48f99cd2a6d29336b9dcce",
+            "size_bytes": 171496
+          }
+        },
+        "layout": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-04.layout.json",
+            "sha256": "ac58e62432cd5bafccc055b66c91c03df2db74adc9981b91471bd91c652c3168",
+            "size_bytes": 18577
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-04.layout.json",
+            "sha256": "ac58e62432cd5bafccc055b66c91c03df2db74adc9981b91471bd91c652c3168",
+            "size_bytes": 18577
+          }
+        },
+        "PDF_rerender": {
+          "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-04.png",
+          "sha256": "cd2e44426688d4ce99075a9cf0efa63f8b62da178b122cc894a4bec39b59ae3c",
+          "size_bytes": 152169
+        }
+      }
+    },
+    {
+      "slide": 5,
+      "status": "viewed_no_visual_issue",
+      "observation": "339624和87请求及预算表可读，收费补提共用cap、未知0明确",
+      "artifacts": {
+        "slide": 5,
+        "PNG": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-05.png",
+            "sha256": "99aa73ff8f18aa7af6de85451ff37524966a4ab06c5e0c91669114e2579dfdc7",
+            "size_bytes": 178530
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-05.png",
+            "sha256": "99aa73ff8f18aa7af6de85451ff37524966a4ab06c5e0c91669114e2579dfdc7",
+            "size_bytes": 178530
+          }
+        },
+        "layout": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-05.layout.json",
+            "sha256": "f40f9d0927572c338ff158b31a7b860c8bb2e97226fd247f11fcf147c7473a26",
+            "size_bytes": 26981
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-05.layout.json",
+            "sha256": "f40f9d0927572c338ff158b31a7b860c8bb2e97226fd247f11fcf147c7473a26",
+            "size_bytes": 26981
+          }
+        },
+        "PDF_rerender": {
+          "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-05.png",
+          "sha256": "6ca53f333e5a87ec487d8fd57ecd13a9083d6ce5f85e145d2e1dc51220892a1f",
+          "size_bytes": 158076
+        }
+      }
+    },
+    {
+      "slide": 6,
+      "status": "viewed_no_visual_issue",
+      "observation": "六策略原生图表值12/10/8/8/11/10与0–12轴完整，固定最好与因果限制可见",
+      "artifacts": {
+        "slide": 6,
+        "PNG": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-06.png",
+            "sha256": "04c756210c4d53dced7d811f2d7ec92d5f25b299161aa716872dd33ce9b91868",
+            "size_bytes": 170734
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-06.png",
+            "sha256": "04c756210c4d53dced7d811f2d7ec92d5f25b299161aa716872dd33ce9b91868",
+            "size_bytes": 170734
+          }
+        },
+        "layout": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-06.layout.json",
+            "sha256": "e17625b9d9ec3d32584204802d386247416a0af029ad24628adc6b61941e51cc",
+            "size_bytes": 16363
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-06.layout.json",
+            "sha256": "e17625b9d9ec3d32584204802d386247416a0af029ad24628adc6b61941e51cc",
+            "size_bytes": 16363
+          }
+        },
+        "PDF_rerender": {
+          "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-06.png",
+          "sha256": "14bbb207d038c55bcddde9dee89fbba9ae26926e0e661be61dff0ca7b9ae2ad5",
+          "size_bytes": 152263
+        }
+      }
+    },
+    {
+      "slide": 7,
+      "status": "viewed_no_visual_issue",
+      "observation": "保存反馈与真正发送STATE数分开，31个无反馈STATE隔离和unsupported可见",
+      "artifacts": {
+        "slide": 7,
+        "PNG": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-07.png",
+            "sha256": "ec8cd54013709a8299ec885203b97f6b34c62235daaab2c8f99625d3fb565589",
+            "size_bytes": 177984
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-07.png",
+            "sha256": "ec8cd54013709a8299ec885203b97f6b34c62235daaab2c8f99625d3fb565589",
+            "size_bytes": 177984
+          }
+        },
+        "layout": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-07.layout.json",
+            "sha256": "665bf3b2581a5ce762c6896b2dcf9204d8133fe7db9c4f8ba18f6956195cb17d",
+            "size_bytes": 20589
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-07.layout.json",
+            "sha256": "665bf3b2581a5ce762c6896b2dcf9204d8133fe7db9c4f8ba18f6956195cb17d",
+            "size_bytes": 20589
+          }
+        },
+        "PDF_rerender": {
+          "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-07.png",
+          "sha256": "67b939eb8b261c19d50ae72a6b593a2a525700139aca448021d518bae44954e7",
+          "size_bytes": 158474
+        }
+      }
+    },
+    {
+      "slide": 8,
+      "status": "viewed_no_visual_issue",
+      "observation": "付费拒绝子集表与第108行14拍后终态格式失败完整，保留分母",
+      "artifacts": {
+        "slide": 8,
+        "PNG": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-08.png",
+            "sha256": "2275c4842ebb6654c142ee2a11d167127b7b59d4668e405b942100dc139052f0",
+            "size_bytes": 166154
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-08.png",
+            "sha256": "2275c4842ebb6654c142ee2a11d167127b7b59d4668e405b942100dc139052f0",
+            "size_bytes": 166154
+          }
+        },
+        "layout": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-08.layout.json",
+            "sha256": "2a673238bb887afff4f2f7aea79d758f9a585b18532d813e1bba2adca53c0b59",
+            "size_bytes": 21223
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-08.layout.json",
+            "sha256": "2a673238bb887afff4f2f7aea79d758f9a585b18532d813e1bba2adca53c0b59",
+            "size_bytes": 21223
+          }
+        },
+        "PDF_rerender": {
+          "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-08.png",
+          "sha256": "e3de35d051199f4e462b7088f01660a25bba4f19684566f740a39a46c6a941c9",
+          "size_bytes": 148998
+        }
+      }
+    },
+    {
+      "slide": 9,
+      "status": "viewed_no_visual_issue",
+      "observation": "原件证据流程和核心/entry作者身份分开，strict资格限制可见",
+      "artifacts": {
+        "slide": 9,
+        "PNG": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-09.png",
+            "sha256": "b2f045447920885db832cf0720fc23db4658600005bbf67b7bde002848d3b0e6",
+            "size_bytes": 172823
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-09.png",
+            "sha256": "b2f045447920885db832cf0720fc23db4658600005bbf67b7bde002848d3b0e6",
+            "size_bytes": 172823
+          }
+        },
+        "layout": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-09.layout.json",
+            "sha256": "e8bdba0ffd8c5553c61260e2b2b46946e0abedb163f28047dfc28d8001da8bf9",
+            "size_bytes": 25441
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-09.layout.json",
+            "sha256": "e8bdba0ffd8c5553c61260e2b2b46946e0abedb163f28047dfc28d8001da8bf9",
+            "size_bytes": 25441
+          }
+        },
+        "PDF_rerender": {
+          "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-09.png",
+          "sha256": "8cca816d44da961fbd64b75e18bb5412ee0586db16e61e5f754786d0a9d32df6",
+          "size_bytes": 154660
+        }
+      }
+    },
+    {
+      "slide": 10,
+      "status": "viewed_no_visual_issue",
+      "observation": "旧432独立页、全48分母、414实际/18无DUT及143/144正确任务明确",
+      "artifacts": {
+        "slide": 10,
+        "PNG": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-10.png",
+            "sha256": "542fb130d4dd4646ce6c91549cf51f725223019bd0c64ec16d259db09ec2ce22",
+            "size_bytes": 194409
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-10.png",
+            "sha256": "542fb130d4dd4646ce6c91549cf51f725223019bd0c64ec16d259db09ec2ce22",
+            "size_bytes": 194409
+          }
+        },
+        "layout": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-10.layout.json",
+            "sha256": "7a61345bcc14e8b91f4bf2ac0021b6f4beac284ca96ec38fc72ac1f87c7e5c09",
+            "size_bytes": 29008
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-10.layout.json",
+            "sha256": "7a61345bcc14e8b91f4bf2ac0021b6f4beac284ca96ec38fc72ac1f87c7e5c09",
+            "size_bytes": 29008
+          }
+        },
+        "PDF_rerender": {
+          "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-10.png",
+          "sha256": "f0d0bcdd4b840805a07f6f870043d37a2229ac87576772c707ec92765aa3988f",
+          "size_bytes": 172540
+        }
+      }
+    },
+    {
+      "slide": 11,
+      "status": "viewed_no_visual_issue",
+      "observation": "FIFO 66→0与人工SPEC 13→15的两图值、轴和手工范围可见，不记AI成绩",
+      "artifacts": {
+        "slide": 11,
+        "PNG": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-11.png",
+            "sha256": "4e67ab84dfbf75e31808b9bfbcb6f5d60260a0095de6eff3ee09381aa400fd6b",
+            "size_bytes": 148520
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-11.png",
+            "sha256": "4e67ab84dfbf75e31808b9bfbcb6f5d60260a0095de6eff3ee09381aa400fd6b",
+            "size_bytes": 148520
+          }
+        },
+        "layout": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-11.layout.json",
+            "sha256": "347b435d4403bf8b90ba231545102beeb3a5e8316fcf6d747c06a08a7d1110f1",
+            "size_bytes": 16996
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-11.layout.json",
+            "sha256": "347b435d4403bf8b90ba231545102beeb3a5e8316fcf6d747c06a08a7d1110f1",
+            "size_bytes": 16996
+          }
+        },
+        "PDF_rerender": {
+          "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-11.png",
+          "sha256": "ed0e6101f83821382a4b1e0eab75fc0896cdf641a4e7b3a907ac4beaf0f59d73",
+          "size_bytes": 131380
+        }
+      }
+    },
+    {
+      "slide": 12,
+      "status": "viewed_no_visual_issue",
+      "observation": "工程记录、缺失证据、残项和截止完整，不将机器记录视作真人/H02",
+      "artifacts": {
+        "slide": 12,
+        "PNG": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-12.png",
+            "sha256": "0d8cdef2ef3bf92408e7040e08cdb2d44160a2b08064380eeab8ab033414c20d",
+            "size_bytes": 179925
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-12.png",
+            "sha256": "0d8cdef2ef3bf92408e7040e08cdb2d44160a2b08064380eeab8ab033414c20d",
+            "size_bytes": 179925
+          }
+        },
+        "layout": {
+          "original": {
+            "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-12.layout.json",
+            "sha256": "e08dd37e5368037fef177685e905503294aa603578136900719fe3cfc1338341",
+            "size_bytes": 18821
+          },
+          "published": {
+            "path": "docs/competition/ic/defense_v3/assets/final_slides/slide-12.layout.json",
+            "sha256": "e08dd37e5368037fef177685e905503294aa603578136900719fe3cfc1338341",
+            "size_bytes": 18821
+          }
+        },
+        "PDF_rerender": {
+          "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-12.png",
+          "sha256": "0207033609bdd6707ffb559791dff72174f622ea84f6b940b847326c2e6577b3",
+          "size_bytes": 159630
+        }
+      }
+    }
+  ],
+  "original_machine_report": {
+    "original": {
+      "path": ".iverilog-ai/defense-v3-build/r3/artifact_machine_qa.json",
+      "sha256": "f2502a78454e0327adce6d77a40cbad87d2011061bf652fc328b5c8cbaac840a",
+      "size_bytes": 7703
+    },
+    "published": {
+      "path": "docs/competition/ic/defense_v3/artifact_machine_qa.original.json",
+      "sha256": "f2502a78454e0327adce6d77a40cbad87d2011061bf652fc328b5c8cbaac840a",
+      "size_bytes": 7703
+    }
+  },
+  "original_machine_report_visual_pending_meaning": "The original builder report preceded this actual per-slide authoring-agent visual inspection; it was preserved unchanged",
+  "original_finalization_receipt": {
+    "original": {
+      "path": ".iverilog-ai/defense-v3-build/r3/defense-r3.validation.json",
+      "sha256": "3802e4d47d00ca5f545db725501fab1799ed387c8a8713df7803740fa7104a77",
+      "size_bytes": 9527
+    },
+    "published": {
+      "path": "docs/competition/ic/defense_v3/finalization_receipt.original.json",
+      "sha256": "3802e4d47d00ca5f545db725501fab1799ed387c8a8713df7803740fa7104a77",
+      "size_bytes": 9527
+    }
+  },
+  "native_table_arithmetic_scope": {
+    "native_tables": 7,
+    "eligible_automatic_sum_tables": 0,
+    "checked_column_count": 0,
+    "displayed_token_and_denominator_equations_checked_by_builder": true,
+    "all_7_tables_automatic_arithmetic_pass_claim": false
+  },
+  "materials_only": true,
+  "new_API_requests": 0,
+  "credential_file_reads": 0,
+  "DUT_executions": 0,
+  "engineering_tests_reexecuted": 0,
+  "commits": 0,
+  "pushes": 0
+}

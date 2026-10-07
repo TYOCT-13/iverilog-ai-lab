@@ -1,0 +1,733 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/jyx0ra1s",
+    "id": "jyx0ra1s",
+    "slide": 4,
+    "layoutId": "/ppt/slideLayouts/slideLayout1.xml",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#1C2023",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ICARUS charcoal cyan",
+    "colors": {
+      "accent1": "#00C8E8",
+      "accent2": "#738188",
+      "accent3": "#B3BDC2",
+      "accent4": "#CFD8DC",
+      "accent5": "#343C40",
+      "accent6": "#7A858A",
+      "dk1": "#111517",
+      "lt1": "#F1F3F4",
+      "dk2": "#1C2023",
+      "lt2": "#D0D9DD",
+      "hlink": "#00C8E8",
+      "folHlink": "#00C8E8"
+    },
+    "fontScheme": {
+      "name": "Office",
+      "majorFont": {
+        "latinTypeface": "Calibri Light",
+        "eastAsianTypeface": "Calibri Light",
+        "complexScriptTypeface": "Calibri Light"
+      },
+      "minorFont": {
+        "latinTypeface": "Calibri",
+        "eastAsianTypeface": "Calibri",
+        "complexScriptTypeface": "Calibri"
+      }
+    },
+    "typefaces": [
+      "Bahnschrift",
+      "Calibri",
+      "Calibri Light",
+      "Noto Sans SC"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout1.xml",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/3ihk3et8",
+      "id": "8",
+      "name": "新内部模块集合留出",
+      "bbox": [
+        64,
+        46,
+        1060,
+        70
+      ],
+      "geometry": "rect",
+      "text": "新内部模块集合留出",
+      "textPreview": "新内部模块集合留出",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "新内部模块集合留出"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "新内部模块集合留出",
+          "resolvedTextStyle": {
+            "fontSize": 46,
+            "typeface": "Noto Sans SC",
+            "color": "#F1F3F4",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "新内部模块集合留出",
+              "fontSize": 46,
+              "typeface": "Noto Sans SC",
+              "color": "#F1F3F4",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1cj2d8b6",
+      "id": "2",
+      "bbox": [
+        64,
+        131,
+        1150,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#566168",
+      "lineWidth": 1
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0ba143al",
+      "id": "3",
+      "name": "04",
+      "bbox": [
+        1158,
+        48,
+        64,
+        54
+      ],
+      "geometry": "rect",
+      "text": "04",
+      "textPreview": "04",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "04"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "04",
+          "resolvedTextStyle": {
+            "fontSize": 34,
+            "typeface": "Bahnschrift",
+            "color": "#00C8E8",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "04",
+              "fontSize": 34,
+              "typeface": "Bahnschrift",
+              "color": "#00C8E8",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/rm1k7yt4",
+      "id": "4",
+      "name": "108 项全部实际执行",
+      "bbox": [
+        68,
+        171,
+        1114,
+        65
+      ],
+      "geometry": "rect",
+      "text": "108 项全部实际执行",
+      "textPreview": "108 项全部实际执行",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "108 项全部实际执行"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "108 项全部实际执行",
+          "resolvedTextStyle": {
+            "fontSize": 42,
+            "typeface": "Noto Sans SC",
+            "color": "#F1F3F4",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "108 项全部实际执行",
+              "fontSize": 42,
+              "typeface": "Noto Sans SC",
+              "color": "#F1F3F4",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "table",
+      "scope": "slide",
+      "aid": "tb/vylcj6do",
+      "id": "9",
+      "bbox": [
+        68,
+        271,
+        1138,
+        215
+      ],
+      "text": "新模块 | 公开合约要点 | 目标与重复\nvalid/data 流水线 | 8 bit、两级、flush 优先 | 正确 / B / C，各 3 次\n事件累计器 | 4 bit 模 16、clear 优先 | 正确 / B / C，各 3 次",
+      "textPreview": "新模块 | 公开合约要点 | 目标与重复 | valid/data 流水线 | 8 bit、两级、flush 优先 | 正确 / B / C，各 3 次 | 事件累计器 | 4 bit 模 16、clear 优先 | 正确 / B / C，各 3 次",
+      "rows": 3,
+      "cols": 3,
+      "cells": [
+        {
+          "index": 1,
+          "row": 1,
+          "column": 1,
+          "bbox": [
+            68,
+            271,
+            270,
+            71.67
+          ],
+          "text": "新模块",
+          "textPreview": "新模块",
+          "fillColor": "#111517",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "新模块",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "新模块",
+                  "fontSize": 25,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "row": 1,
+          "column": 2,
+          "bbox": [
+            338,
+            271,
+            490,
+            71.67
+          ],
+          "text": "公开合约要点",
+          "textPreview": "公开合约要点",
+          "fillColor": "#111517",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "公开合约要点",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "公开合约要点",
+                  "fontSize": 25,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "row": 1,
+          "column": 3,
+          "bbox": [
+            828,
+            271,
+            378,
+            71.67
+          ],
+          "text": "目标与重复",
+          "textPreview": "目标与重复",
+          "fillColor": "#111517",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "目标与重复",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "目标与重复",
+                  "fontSize": 25,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "row": 2,
+          "column": 1,
+          "bbox": [
+            68,
+            342.67,
+            270,
+            71.67
+          ],
+          "text": "valid/data 流水线",
+          "textPreview": "valid/data 流水线",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "valid/data 流水线",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "valid/data 流水线",
+                  "fontSize": 27,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "row": 2,
+          "column": 2,
+          "bbox": [
+            338,
+            342.67,
+            490,
+            71.67
+          ],
+          "text": "8 bit、两级、flush 优先",
+          "textPreview": "8 bit、两级、flush 优先",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "8 bit、两级、flush 优先",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "8 bit、两级、flush 优先",
+                  "fontSize": 27,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "row": 2,
+          "column": 3,
+          "bbox": [
+            828,
+            342.67,
+            378,
+            71.67
+          ],
+          "text": "正确 / B / C，各 3 次",
+          "textPreview": "正确 / B / C，各 3 次",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "正确 / B / C，各 3 次",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "正确 / B / C，各 3 次",
+                  "fontSize": 27,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 7,
+          "row": 3,
+          "column": 1,
+          "bbox": [
+            68,
+            414.33,
+            270,
+            71.67
+          ],
+          "text": "事件累计器",
+          "textPreview": "事件累计器",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "事件累计器",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "事件累计器",
+                  "fontSize": 27,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 8,
+          "row": 3,
+          "column": 2,
+          "bbox": [
+            338,
+            414.33,
+            490,
+            71.67
+          ],
+          "text": "4 bit 模 16、clear 优先",
+          "textPreview": "4 bit 模 16、clear 优先",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "4 bit 模 16、clear 优先",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "4 bit 模 16、clear 优先",
+                  "fontSize": 27,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 9,
+          "row": 3,
+          "column": 3,
+          "bbox": [
+            828,
+            414.33,
+            378,
+            71.67
+          ],
+          "text": "正确 / B / C，各 3 次",
+          "textPreview": "正确 / B / C，各 3 次",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "正确 / B / C，各 3 次",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "正确 / B / C，各 3 次",
+                  "fontSize": 27,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/doj29oba",
+      "id": "6",
+      "name": "2 模块 × 3 目标 × 3 重复 × 6 策略 = 108 ",
+      "bbox": [
+        68,
+        522,
+        1138,
+        58
+      ],
+      "geometry": "rect",
+      "text": "2 模块 × 3 目标 × 3 重复 × 6 策略 = 108 任务",
+      "textPreview": "2 模块 × 3 目标 × 3 重复 × 6 策略 = 108 任务",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "2 模块 × 3 目标 × 3 重复 × 6 策略 = 108 任务"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "2 模块 × 3 目标 × 3 重复 × 6 策略 = 108 任务",
+          "resolvedTextStyle": {
+            "fontSize": 33,
+            "typeface": "Noto Sans SC",
+            "color": "#00C8E8",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "2 模块 × 3 目标 × 3 重复 × 6 策略 = 108 任务",
+              "fontSize": 33,
+              "typeface": "Noto Sans SC",
+              "color": "#00C8E8",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sna103ap",
+      "id": "7",
+      "name": "每策略 4 不同缺陷 × 3 重复 = 12 缺陷任务，另有 6",
+      "bbox": [
+        64,
+        606,
+        1150,
+        62
+      ],
+      "geometry": "rect",
+      "text": "每策略 4 不同缺陷 × 3 重复 = 12 缺陷任务，另有 6 正确任务\n同团队合成设计，无独立选型时间戳、外部盲测或预训练未见证明",
+      "textPreview": "每策略 4 不同缺陷 × 3 重复 = 12 缺陷任务，另有 6 正确任务 | 同团队合成设计，无独立选型时间戳、外部盲测或预训练未见证明",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 2,
+        "lines": [
+          {
+            "index": 1,
+            "text": "每策略 4 不同缺陷 × 3 重复 = 12 缺陷任务，另有 6 正确任务"
+          },
+          {
+            "index": 2,
+            "text": "同团队合成设计，无独立选型时间戳、外部盲测或预训练未见证明"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "每策略 4 不同缺陷 × 3 重复 = 12 缺陷任务，另有 6 正确任务",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "typeface": "Noto Sans SC",
+            "color": "#B3BDC2"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "每策略 4 不同缺陷 × 3 重复 = 12 缺陷任务，另有 6 正确任务",
+              "fontSize": 23,
+              "typeface": "Noto Sans SC",
+              "color": "#B3BDC2"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "同团队合成设计，无独立选型时间戳、外部盲测或预训练未见证明",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "typeface": "Noto Sans SC",
+            "color": "#B3BDC2"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "同团队合成设计，无独立选型时间戳、外部盲测或预训练未见证明",
+              "fontSize": 23,
+              "typeface": "Noto Sans SC",
+              "color": "#B3BDC2"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

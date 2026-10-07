@@ -1,0 +1,3607 @@
+{
+  "schema": "ic-v3-final-materials-mechanical-review-v1",
+  "created_at_utc": "2026-10-07T09:17:53.852197+00:00",
+  "mechanical_checks_passed": true,
+  "unique_material_output_check_units": 165,
+  "failed_check_units": 0,
+  "scope": "Final Markdown/PDF/PPTX facts and metadata candidates, chart bindings, original rules and read-only page rendering. Context/visual reviewer acceptance is separate.",
+  "reviewer": "AI machine reviewer, not formal independent human H02",
+  "checks": [
+    {
+      "id": "sealed_source/new108_receipt",
+      "status": "passed"
+    },
+    {
+      "id": "sealed_source/old432_receipt",
+      "status": "passed"
+    },
+    {
+      "id": "sealed_source/new108_budget",
+      "status": "passed"
+    },
+    {
+      "id": "sealed_source/new108_review",
+      "status": "passed"
+    },
+    {
+      "id": "sealed_source/historical_v2_material_data",
+      "status": "passed"
+    },
+    {
+      "id": "sealed_source/core_audit",
+      "status": "passed"
+    },
+    {
+      "id": "sealed_source/trace_audit",
+      "status": "passed"
+    },
+    {
+      "id": "official_original_rules_and_outline",
+      "status": "passed"
+    },
+    {
+      "id": "new108_chart_data_and_png_binding",
+      "status": "passed"
+    },
+    {
+      "id": "source/technical_report",
+      "status": "passed"
+    },
+    {
+      "id": "source/supporting_evidence",
+      "status": "passed"
+    },
+    {
+      "id": "source/README",
+      "status": "passed"
+    },
+    {
+      "id": "source/submission_copy",
+      "status": "passed"
+    },
+    {
+      "id": "source/defense_speaker_notes",
+      "status": "passed"
+    },
+    {
+      "id": "source/defense_qa_questions",
+      "status": "passed"
+    },
+    {
+      "id": "source/defense_README",
+      "status": "passed"
+    },
+    {
+      "id": "defense_authoring_material_data_binding",
+      "status": "passed"
+    },
+    {
+      "id": "defense_authoring_data_sha",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/competition/ic/v3/material_data.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/competition/ic/v3/material_data.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/experiment/agent_new_holdout_study_budget_2026-10-05.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/experiment/agent_new_holdout_study_budget_2026-10-05.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/review/agent-new-holdout-study-review-2026-10-05/receipt.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/review/agent-new-holdout-study-review-2026-10-05/receipt.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/competition/ic/defense_v2/data.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/competition/ic/defense_v2/data.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/review/agent-new-holdout-study-review-2026-10-05/core-audit.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/review/agent-new-holdout-study-review-2026-10-05/core-audit.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/review/agent-new-holdout-study-review-2026-10-05/trace-audit.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/review/agent-new-holdout-study-review-2026-10-05/trace-audit.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/experiment/agent_new_holdout_study_live_2026-10-05.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/experiment/agent_new_holdout_study_live_2026-10-05.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/experiment/agent_new_holdout_study_plan_2026-10-05.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/experiment/agent_new_holdout_study_plan_2026-10-05.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/experiment/agent_new_holdout_source_validation_2026-10-05.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/experiment/agent_new_holdout_source_validation_2026-10-05.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/review/agent_new_holdout_study_review_2026-10-05.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/review/agent_new_holdout_study_review_2026-10-05.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/experiment/agent_feedback_study_live_2026-10-05.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/experiment/agent_feedback_study_live_2026-10-05.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/experiment/protocol_oracle_improvements_2026-10-04.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/experiment/protocol_oracle_improvements_2026-10-04.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/experiment/functional_coverage_2026-10-04.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/experiment/functional_coverage_2026-10-04.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/experiment/ic_agent_v4_validation_2026-10-04.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/experiment/ic_agent_v4_validation_2026-10-04.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/.iverilog-ai/protocol-oracle-fifo-20261004-before/evidence.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/.iverilog-ai/protocol-oracle-fifo-20261004-before/evidence.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/.iverilog-ai/protocol-oracle-fifo-20261004-after-final/evidence.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/.iverilog-ai/protocol-oracle-fifo-20261004-after-final/evidence.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/.iverilog-ai/external/replay-20261004-protocol-v2/evidence.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/.iverilog-ai/external/replay-20261004-protocol-v2/evidence.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/experiment/agent-new-holdout-study-live-2026-10-05/trace_manifest.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/experiment/agent-new-holdout-study-live-2026-10-05/trace_manifest.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/experiment/agent-new-holdout-study-live-2026-10-05/registered_inputs_manifest.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/experiment/agent-new-holdout-study-live-2026-10-05/registered_inputs_manifest.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/experiment/agent-new-holdout-study-live-2026-10-05/source_byte_binding.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/experiment/agent-new-holdout-study-live-2026-10-05/source_byte_binding.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/spec/agent_new_holdout_20261005/valid_data_pipeline_spec.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/spec/agent_new_holdout_20261005/valid_data_pipeline_spec.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/spec/agent_new_holdout_20261005/event_accumulator_spec.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/spec/agent_new_holdout_20261005/event_accumulator_spec.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/competition/ic/defense_v3/data.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/competition/ic/defense_v3/data.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/competition/ic/defense_v3/build_defense.mjs",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/competition/ic/defense_v3/build_defense.mjs",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/competition/ic/defense_v3/speaker_notes.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/competition/ic/defense_v3/speaker_notes.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/competition/ic/defense_v3/qa_questions.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/competition/ic/defense_v3/qa_questions.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/competition/ic/defense_v3/strip_pptx_metadata.py",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/competition/ic/defense_v3/strip_pptx_metadata.py",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/competition/ic/defense_v3/create_image_pdf.py",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/competition/ic/defense_v3/create_image_pdf.py",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/competition/ic/defense_v3/inspect_artifacts.py",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/competition/ic/defense_v3/inspect_artifacts.py",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_sha/docs/competition/ic/defense_v3/assets/README.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_source_bytes/docs/competition/ic/defense_v3/assets/README.md",
+      "status": "passed"
+    },
+    {
+      "id": "defense_public_receipt_sha/docs/competition/ic/ICARUS_答辩材料_v3.pptx",
+      "status": "passed"
+    },
+    {
+      "id": "defense_public_receipt_sha/docs/competition/ic/ICARUS_答辩材料_v3.pdf",
+      "status": "passed"
+    },
+    {
+      "id": "defense_public_receipt_sha/docs/competition/ic/defense_v3/finalization_receipt.original.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_public_receipt_sha/docs/competition/ic/defense_v3/qa_report.json",
+      "status": "passed"
+    },
+    {
+      "id": "defense_public_receipt_sha/docs/competition/ic/defense_v3/source_checksums.json",
+      "status": "passed"
+    },
+    {
+      "id": "pdf/technical_report",
+      "status": "passed"
+    },
+    {
+      "id": "pdf/supporting_evidence",
+      "status": "passed"
+    },
+    {
+      "id": "pdf/defense",
+      "status": "passed"
+    },
+    {
+      "id": "pptx/structure_metadata_and_text",
+      "status": "passed"
+    },
+    {
+      "id": "pptx/native_tables_charts_and_literal_workbooks_facts",
+      "status": "passed"
+    },
+    {
+      "id": "defense_pdf_vs_pptx_page_count",
+      "status": "passed"
+    },
+    {
+      "id": "defense_pdf_pixels_vs_native_deck_render",
+      "status": "passed"
+    },
+    {
+      "id": "PDF_build_material_data_binding",
+      "status": "passed"
+    },
+    {
+      "id": "build_source_sha/docs/competition/ic/v3/technical_report.md",
+      "status": "passed"
+    },
+    {
+      "id": "build_pdf_sha/docs/competition/ic/ICARUS_技术方案_v3.pdf",
+      "status": "passed"
+    },
+    {
+      "id": "build_source_sha/docs/competition/ic/v3/supporting_evidence.md",
+      "status": "passed"
+    },
+    {
+      "id": "build_pdf_sha/docs/competition/ic/ICARUS_佐证材料_v3.pdf",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/v3/material_data.json",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/experiment/agent_new_holdout_study_budget_2026-10-05.json",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/review/agent-new-holdout-study-review-2026-10-05/receipt.json",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/defense_v2/data.json",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/review/agent-new-holdout-study-review-2026-10-05/core-audit.json",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/review/agent-new-holdout-study-review-2026-10-05/trace-audit.json",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/v3/rules_validation.json",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/.iverilog-ai/ic-materials-v3-rule-check/ic_rules.pdf",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/.iverilog-ai/ic-materials-v3-rule-check/ic_outline.pdf",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/v3/assets/chart_source.json",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/v3/assets/new108_detection.png",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/v3/technical_report.md",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/v3/supporting_evidence.md",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/v3/README.md",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/v3/submission_copy.md",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/defense_v3/speaker_notes.md",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/defense_v3/qa_questions.md",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/defense_v3/README.md",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/defense_v3/data.json",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/defense_v3/finalization_summary.json",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/defense_v3/source_checksums.json",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/experiment/agent_new_holdout_study_live_2026-10-05.md",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/experiment/agent_new_holdout_study_plan_2026-10-05.md",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/experiment/agent_new_holdout_source_validation_2026-10-05.md",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/review/agent_new_holdout_study_review_2026-10-05.md",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/experiment/agent_feedback_study_live_2026-10-05.md",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/experiment/protocol_oracle_improvements_2026-10-04.md",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/experiment/functional_coverage_2026-10-04.md",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/experiment/ic_agent_v4_validation_2026-10-04.md",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/.iverilog-ai/protocol-oracle-fifo-20261004-before/evidence.json",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/.iverilog-ai/protocol-oracle-fifo-20261004-after-final/evidence.json",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/.iverilog-ai/external/replay-20261004-protocol-v2/evidence.json",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/experiment/agent-new-holdout-study-live-2026-10-05/trace_manifest.json",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/experiment/agent-new-holdout-study-live-2026-10-05/registered_inputs_manifest.json",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/experiment/agent-new-holdout-study-live-2026-10-05/source_byte_binding.json",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/spec/agent_new_holdout_20261005/valid_data_pipeline_spec.md",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/spec/agent_new_holdout_20261005/event_accumulator_spec.md",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/defense_v3/build_defense.mjs",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/defense_v3/strip_pptx_metadata.py",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/defense_v3/create_image_pdf.py",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/defense_v3/inspect_artifacts.py",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/defense_v3/assets/README.md",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/ICARUS_答辩材料_v3.pptx",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/ICARUS_答辩材料_v3.pdf",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/defense_v3/finalization_receipt.original.json",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/defense_v3/qa_report.json",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/ICARUS_技术方案_v3.pdf",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/ICARUS_佐证材料_v3.pdf",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/.iverilog-ai/defense-v3-build/r3/final-render/slide-01.png",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/.iverilog-ai/defense-v3-build/r3/final-render/slide-02.png",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/.iverilog-ai/defense-v3-build/r3/final-render/slide-03.png",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/.iverilog-ai/defense-v3-build/r3/final-render/slide-04.png",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/.iverilog-ai/defense-v3-build/r3/final-render/slide-05.png",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/.iverilog-ai/defense-v3-build/r3/final-render/slide-06.png",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/.iverilog-ai/defense-v3-build/r3/final-render/slide-07.png",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/.iverilog-ai/defense-v3-build/r3/final-render/slide-08.png",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/.iverilog-ai/defense-v3-build/r3/final-render/slide-09.png",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/.iverilog-ai/defense-v3-build/r3/final-render/slide-10.png",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/.iverilog-ai/defense-v3-build/r3/final-render/slide-11.png",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/.iverilog-ai/defense-v3-build/r3/final-render/slide-12.png",
+      "status": "passed"
+    },
+    {
+      "id": "artifact_unchanged/docs/competition/ic/v3/validation.json",
+      "status": "passed"
+    }
+  ],
+  "rules": {
+    "receipt": {
+      "path": "docs/competition/ic/v3/rules_validation.json",
+      "sha256": "ec44e293b16ef871f25bec8a6b527c1cfe07f612ccc389ac8a39a13d2516b95d",
+      "bytes": 1483
+    },
+    "sources": [
+      {
+        "source": {
+          "path": ".iverilog-ai/ic-materials-v3-rule-check/ic_rules.pdf",
+          "sha256": "af33abb3da8178ca3e1c60ea2041ea60244b58e917d8adb92a856439afa09e3d",
+          "bytes": 224745
+        },
+        "url": "https://www.aicomp.cn/wp-content/uploads/2026/07/%E9%99%84%E4%BB%B61AIC%C2%B7AI%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E7%AB%9E%E8%B5%9B%E8%A7%84%E5%88%99%E5%8F%8A%E4%BD%9C%E5%93%81%E6%8F%90%E4%BA%A4%E8%A6%81%E6%B1%82.pdf",
+        "pages": 2,
+        "text": "第八届全球校园人工智能算法精英大赛·算法主题赛\n— 1 —\n附件1\nAIC·AI+集成电路竞赛规则及作品提交要求\n一、比赛赛制\n主题赛采用“初赛-复赛-总决赛”三级赛制，不分赛区，所有参赛作品统一评审。\n复赛等同省级赛事，复赛一、二等奖获奖作品推荐参加全国总决赛。\n二、作品要求\n（一）原创性与真实性：参赛成果必须为原创，拥有自主知识产权或已获得合法\n授权，且成果相关数据、案例等内容真实可靠，若引用他人技术、算法或数据，需在\n参赛材料中明确标注并取得合法授权。作品内容需符合国家法律法规、社会道德规范，\n不得涉及敏感、违法信息。严禁伪造、抄袭，一经发现，取消参赛资格。\n（二）创新性与先进性：作品在AI+集成电路应用等方面具有显著创新性，与同\n类成果相比，在技术指标、应用效果等方面具备先进性，能够体现AI+集成电路的前\n沿发展方向。\n（三）实用性与成熟度：作品须具备实际应用价值，已在实际场景中应用并取得\n良好效果，展示清晰的应用案例和数据证明，或者应具备向实际应用转化的潜力和可\n行性方案。\n（四）完整性与规范性：严格依照作品材料规范要求提交相关材料，任何不符合\n要求的提交都可能影响作品的评审成绩甚至导致参赛资格丧失。材料内容应详实、逻\n辑清晰，格式规范，能够全面展示作品的核心内容、创新点、应用价值和发展前景。\n（五）公平性：为保证评审工作的公平、公正性，大赛作品材料（作品方案、演\n示视频、答辩PPT 等）中均不得出现参赛团队所在学校名称、LOGO 与指导教师信\n息。\n三、作品材料规范\n参赛团队需在大赛报名系统中按要求完成作品材料的提交，逾期未提交或提交材\n料不完整、不符合规范的，视为自动放弃参赛资格。\n作品材料包括：作品名称、作品简介、技术方案、演示视频、答辩PPT、佐证材\n料、作品其他材料链接等，提交规范如下：\n1. 作品名称：由参赛团队根据作品内容自主拟定，简洁清晰，突出主题，长度\n不超过20 字。\n2. 作品简介：以简洁清晰的语言突出核心亮点，可按照“问题-方案-效果-应用”\n的逻辑撰写，兼顾技术深度与可读性，字数不超过300 字。\n3. 技术方案：参照提供的模板与大纲撰写，需完整阐述核心内容。文件统一保\n存为PDF 格式，文件大小不得超过10M 。作品方案模板下载：\n\n第八届全球校园人工智能算法精英大赛·算法主题赛\n— 2 —\nhttps://pan.baidu.com/s/1Ar9fYa25nI8yimHqi5o3hg?pwd=2026\n4. 演示视频（若有）：视频格式限定为MP4，时长需严格控制在3-5 分钟之间，\n大小300 MB 以内，清晰展示作品功能、实现流程与应用效果。\n5. 答辩PPT：PPT 内容应全面涵盖作品信息、背景、核心技术、创新点、应用\n前景等核心内容（不同赛题展示侧重点有所不同），文件统一保存为PDF 格式。\n6. 佐证材料：用于证明作品真实性、创新性与应用成效，可包括专利证书、软\n件著作权证书、论文录用/发表证明（首页）、企业合作意向书、用户反馈、试点应\n用证明等，合并为一个PDF 文件提交。\n7. 作品其他材料链接：将完整代码包、大型工程文件、高清图纸等非涉密大容\n量文件可存放在一个文件夹中并上传至百度网盘，在相应栏目中提交有效分享链接，\n网盘内所有文件统一命名格式为：参赛团队编号-赛题名称-作品名称-XX（材料名\n称）。针对存在知识产权泄露风险的材料，不强制要求完整上传，参赛队伍可仅上传\n指标折线图、性能对比截图、核心代码片段、图纸局部效果图等可视化材料。若赛事\n评审存在成果真实性争议，组委会将单独联系参赛团队进行核验。\n材料链接示例：https://pan.baidu.com/s/14fIQlieNuM5eUDbOYIDMDQ?pwd=AIC8\n（分享时设置永久有效、自动生成提取码）\n参赛团队编号-赛题名称-作品名称/（根目录文件夹）\n├─参赛团队编号-赛题名称-作品名称-XX（材料名称）\n四、评分规则\nAIC 主题赛评分规则-AI+集成电路\n评分项目\n评分细则\n分值\n需求分析\n（30 分）\n问题剖析深入全面，需求调研方法科学，需求把握准确，得21-30 分；\n需求分析较完整，但存在部分不足，得11-20 分；\n需求分析不清晰，得0-10 分。\n30\n创新性\n（30 分）\n具有想象力，定义全新范式。提出业内鲜见的AI 应用模式，在算法、架\n构或交互逻辑上有重大突破；技术选型极具前瞻性，具备显著的行业示范\n效应，得21-30 分；\n具备改进型创新。在现有技术基础上进行深度二次开发，形成差异化方\n案；技术路线合理，有效解决了特定痛点，具备实用价值，得11-20 分。\n简单模仿或套用。缺乏独立思考，多为对成熟通用模型的低门槛调用，未\n见实质性突破，与场景契合度低，得0-10 分\n30\n应用成效\n（30 分）\n成果显著，效益突出，数据详实，得21-30 分；\n有一定成果，但效益不明显，得11-20 分；\n成效不显著，得0-10 分。\n30\n总结与展望\n（10 分）\n总结全面准确，展望合理且具有前瞻性，得7-10 分；\n总结展望较完整但深度不足，得4-6 分；\n内容简略、缺乏价值，得0-3 分。\n10\n"
+      },
+      {
+        "source": {
+          "path": ".iverilog-ai/ic-materials-v3-rule-check/ic_outline.pdf",
+          "sha256": "6a4db4e3ffb016c83b4cf020139ed6a98069aea938c2dfa524f4ea1d33884354",
+          "bytes": 152425
+        },
+        "url": "https://www.aicomp.cn/wp-content/uploads/2026/07/%E9%99%84%E4%BB%B62AIC%C2%B7AI%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A%E5%8F%82%E8%80%83%E5%A4%A7%E7%BA%B2.pdf",
+        "pages": 2,
+        "text": "第八届全球校园人工智能算法精英大赛·算法主题赛\n— 1 —\n附件2\nAIC·AI+集成电路技术报告参考大纲\n一、作品概述\n1. 背景介绍：阐述作品所属行业、领域现状，点明存在的问题或机遇，说明作\n品的必要性与重要性。\n2. 目标定位：清晰界定作品目标，包括预期解决的具体问题、达成的技术指标\n或结果指标、产生的经济或社会效益等。没有经济效益可以不写，不影响作品成绩。\n二、需求分析\n1. 问题剖析：深入分析作品要解决的具体问题，从多维度挖掘问题本质，明确\n问题的关键难点与痛点。\n2. 需求调研：通过调查、访谈、市场分析、文献研究、现场试验等方式，收集\n分析目标用户、行业或某个应用场景需求，或者是自己在学习、科研工作中的发现的\n需求，或者是承担某个纵向（横向）项目中的需求等，整理归纳功能、性能、体验等\n方面的具体要求。\n三、AI 技术工具选择与运用\n结合作品需求，说明如何选择合适的人工智能技术与工具。如果参赛团队自行研\n发的软硬产品或系统完成需求目标，主要说明产品主要采用了哪些人工智能技术、开\n发平台或环境，产品的功能和技术指标等；如果参赛团队运用人工智能工具完成需求\n目标，需说明选择的人工智能工具名称（如第三方软硬件产品或系统、大模型、智能\n体等）、选型依据等等。\n四、项目实施\n1. 实施方案设计：制定实施的具体方案，包括实施步骤、时间计划、资源配置、\n团队分工等内容。\n2. 关键技术实现/AI 工具运用：描述实施过程中的关键技术环节，如数据采集与\n处理、模型训练与优化、系统开发与部署等，展示技术实现/AI 工具运用细节与创新\n点。\n五、应用成效\n1. 成果展示：呈现作品取得的实际成果，如功能实现情况、技术指标达成数据、\n产品或服务的应用案例等。\n2. 效益分析：从经济效益、社会效益、学科建设与科学研究效益等方面，分析\n作品带来的积极影响，如成本降低比例、效率提升幅度、科研成果产出等。\n六、总结与展望\n1. 经验总结：回顾实施过程，总结成功经验与不足之处，提炼作品在应用创新\n方面的关键要点。\n\n第八届全球校园人工智能算法精英大赛·算法主题赛\n— 2 —\n2. 未来规划：结合相关行业发展趋势与项目实际情况，提出未来改进方向、功\n能拓展计划或商业推广策略。\n七、附录\n1. 数据资料：提供实施过程中涉及的原始数据、处理后的数据及数据来源说明。\n2. 代码与模型：附上关键算法代码、模型文件及相关说明文档。\n3. 参考文献：列出研发过程中参考的技术文档、学术论文、专利文献等资料，\n注明出处。\n4. 其他材料：如有专利证书、检测报告、用户使用证明等材料，一律作为佐证\n材料进行上传。\n"
+      }
+    ],
+    "interpretation": "Manually reviewed full extracted rules/outline: optional video; user feedback may be supporting evidence, not compulsory human H01/H02. Learning/research needs are permitted; economic benefits may be omitted.",
+    "deadline_basis": "2026-10-15 20:00 from root 2026-10-05 read of official notice/4756; deadline is not stated in these two original PDFs.",
+    "current_audit_network_requests": 0
+  },
+  "chart": {
+    "data": "docs/competition/ic/v3/material_data.json",
+    "data_sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+    "chart": "docs/competition/ic/v3/assets/new108_detection.png",
+    "chart_sha256": "99490de698c607a41ba93670b7e4f3aaf03e05976f3c56ffab2f2a3f6d7af984",
+    "strategy_ids": [
+      "fixed",
+      "random",
+      "protocol_random",
+      "single",
+      "feedback",
+      "no_feedback"
+    ],
+    "values": [
+      12,
+      10,
+      8,
+      8,
+      11,
+      10
+    ],
+    "denominator_per_strategy": 12,
+    "distinct_defects": 4,
+    "repeats": 3,
+    "error_bars": "not used; descriptive repeated-task counts, not independent-sample inference",
+    "font": "msyh.ttc"
+  },
+  "sources": {
+    "technical_report": {
+      "artifact": {
+        "path": "docs/competition/ic/v3/technical_report.md",
+        "sha256": "3cbef290973e831bd38e9155b59edc3e1f2b2131183711ca8aff796e3a933a90",
+        "bytes": 18979
+      },
+      "characters": 9271,
+      "headings": [
+        "# ICARUS数字IP验证智能体",
+        "## 一、作品概述",
+        "### 1.1 本版实证摘要",
+        "## 二、需求分析",
+        "### 2.1 从学习与开发任务出发",
+        "### 2.2 用户操作与验收目标",
+        "## 三、AI技术工具选择与运用",
+        "### 3.1 API规划与工具裁决",
+        "### 3.2 受限恢复与共享用量",
+        "## 四、项目实施",
+        "### 4.1 从合约到实际每拍输出",
+        "### 4.2 可用反馈来自真实执行",
+        "### 4.3 正确规格与独立判据",
+        "### 4.4 先检查判据自身",
+        "## 五、应用成效",
+        "### 5.1 最新两模块完整受控批次",
+        "### 5.2 历史八模块完整对照单列",
+        "### 5.3 失败与消耗是结果的一部分",
+        "## 六、总结与展望",
+        "### 6.1 可复用的作品贡献",
+        "### 6.2 适用范围与下一步",
+        "## 七、附录",
+        "### 7.1 本版证据索引",
+        "### 7.2 版本与原字节",
+        "### 7.3 运行与证据复查",
+        "### 7.4 官方来源与提交口径"
+      ],
+      "claims_for_context_review": [
+        {
+          "line": 37,
+          "text": "本作品从自身学习和研发中的上述问题提出需求，面向正在编写模块测试的学习者和开发者。需求分析不使用虚构访谈、人员反馈或经济收益。目标是让测试建议可执行、结果可解释、失败可交接。"
+        },
+        {
+          "line": 174,
+          "text": "| 留出与统计 | 两模块与五个历史受控批次模块集合互斥；同团队合成，非外部盲测、独立作者或预训练未见。无独立时间戳证明选型早于旧成绩；扩大外部设计与重复后再评价泛化 |"
+        },
+        {
+          "line": 181,
+          "text": "本作品定位为API辅助的模块验证工具。最新结果说明闭环可执行、可交接，同时固定基线仍领先，尚不足以支持显著性、反馈因果或工业泛化结论。下一阶段先补外部设计的明确规格和独立审查，再开展真实人员使用与异机交接。真人/H02是本项目拟补强的证据，并非自行增加的官方必交条件。"
+        }
+      ],
+      "text": "<!-- header: ICARUS · AI+集成电路 -->\n<!-- doctitle: 数字IP验证智能体 / 技术方案 v3 -->\n\n# ICARUS数字IP验证智能体\n\n技术方案 · v3 · 2026-10-05\n\n## 一、作品概述\n\nICARUS面向数字IP开发中的模块级功能验证，把自然语言规格、API测试规划与真实Verilog仿真接成可复查的工作流程。使用者选择案例或上传RTL，说明验证目标并提供接口合约；Agent提出受约束的激励计划，独立参考模型与Icarus Verilog逐拍判定，保存反例、失败原因、原始响应及用量。\n\n作品使用DeepSeek API，不训练或部署本地模型权重。模型负责提出测试，执行器负责校验和运行，判据负责给出结论。可运行的接口、完整错误记录、共享额度和离线交接是本作品的主要贡献。\n\n![图1 受控验证流程](../submission_figures/architecture.png)\n\n图1展示职责分工。当前受控实验的补测计划均以新episode执行并自动复位；上一轮电路状态不会延续到下一轮。历史计划保存在轨迹中，供模型规划和审核。\n\n### 1.1 本版实证摘要\n\n| 范围 | 已取得的结果 |\n|---|---|\n| 两个内部合成新模块 | 108任务全部实际执行，134轮、268实际与正确参考执行侧 |\n| 缺陷比较 | 四个不同人工缺陷各重复三次；反馈11/12、随机10/12、固定12/12 |\n| 正确控制 | 六策略共36/36实际执行，误报0 |\n| API及用量 | 87请求，339624输入加输出tokens，未知与待结算均0 |\n\n本版事实来自封存的[共享数据](material_data.json)及原始回执。最新实验实际源码为`20400fa`，Agent、端口反馈helper和系统提示保持此前`a969337`的冻结字节。材料制作没有新增模型请求或仿真成绩。\n\n<!-- pagebreak -->\n\n## 二、需求分析\n\n### 2.1 从学习与开发任务出发\n\n数字IP的功能错误往往来自边界和多输入交互：缓存空满时的请求是否接受、有效数据遇到清空时如何处理、事件累计何时清零，以及一次操作需要观察多少拍。只看一段波形或少量最终输出，容易漏掉中间状态；测试失败后，需求、激励与判断依据又常散落在不同文件中。\n\n本作品从自身学习和研发中的上述问题提出需求，面向正在编写模块测试的学习者和开发者。需求分析不使用虚构访谈、人员反馈或经济收益。目标是让测试建议可执行、结果可解释、失败可交接。\n\n| 实际任务 | 所需能力 | 本作品的对应实现 |\n|---|---|---|\n| 把自然语言需求变成输入 | 明确端口、宽度与协议约束 | 规格文本、DutContract与严格TestPlan |\n| 探索边界和多周期路径 | 控制激励长度，观察过程 | 受限API规划、独立补测、逐拍采样 |\n| 区分工具失败与设计反例 | 分层记录判定 | 格式、预检、执行、输出差异分别留存 |\n| 重现并交给他人复核 | 保留原输入与工具证据 | SHA绑定、日志、波形及离线证据包 |\n\n### 2.2 用户操作与验收目标\n\n网页提供案例选择、自定义RTL上传、验证目标、计划生成、仿真、规则审查和运行档案。操作成功应留下明确的计划及实际结果；失败应说明停止阶段，并保留已执行部分。切换页面和同会话rerun应保留输入与结果，长输出可以正常阅读。\n\n对验证能力采用实际正确控制与人工语义变体比较；对交接能力检查输入原字节、执行记录和归档一致性；对使用效果区分机器操作、真实人员反馈及外部部署。当前成绩以内部模块实验和本机工程验收为依据。\n\n<!-- pagebreak -->\n\n## 三、AI技术工具选择与运用\n\n### 3.1 API规划与工具裁决\n\n本次使用DeepSeek接口记录中的`deepseek-flash`模型，对应本次用户选择“4.1f”。服务商完成模型推理，本机运行测试台生成、Icarus编译仿真、独立参考与证据管理。模型不生成裁决用的期望输出，也不直接执行任意程序。\n\n系统规则与用户状态分开传递。模型状态包含正确规格、明确合约、可驱动输入、历史计划、自身剩余额度及策略允许的反馈。内部实验不向模型提供目标RTL、缺陷标签、私有见证、参考源码或旧成绩。\n\n| 层次 | 输入与职责 | 输出 |\n|---|---|---|\n| API Agent | 读取规格与当前状态，提出激励或停止 | 严格动作结构：action、reason、vectors |\n| 计划校验器 | 检查名称、数值、宽度、时钟、采样与预算 | 可执行计划或固定错误码 |\n| 执行器 | 生成测试台，运行Icarus，捕获端口 | 真实日志、波形、采样和执行状态 |\n| 独立判据 | 按正确规格逐拍复算输出 | 检出、未检出或证据不足 |\n\n### 3.2 受限恢复与共享用量\n\n普通格式错误和可恢复的计划预算错误，只有在请求额度允许时才能重新提案。错误动作不会被静默裁剪或执行；原始响应、拒绝原因与用量仍保存。预检错误反馈采用固定安全代码和受信字段，不回传任意源码或异常原文。\n\n本次完整批次所有API组共享100万输入加输出tokens，最大输出4096tokens，请求非流式、thinking disabled、超时60秒，自动传输重试为0。格式拒绝与预算拒绝后的重新提案是新的收费请求。缺少usage时保留预留额度，不能据空记录把未知消耗当零；缓存字段不重复相加。\n\n作品使用轨迹来审核模型行为，没有对这些轨迹进行权重训练。API凭据在使用者本机私下配置，不随材料或证据包发布。\n\n<!-- pagebreak -->\n\n## 四、项目实施\n\n### 4.1 从合约到实际每拍输出\n\n实现由网页/命令行入口、Agent调度、测试计划校验、测试台生成、Icarus执行、参考判据和证据导出组成。合约明确时钟、复位、端口方向与位宽；测试计划只驱动允许的输入，时钟由工具生成。\n\n当前比较使用独立episode：每个合法新计划重新建立DUT、自动复位，然后按计划施加刺激。一个输入段持续多拍时，工具在每一拍边沿之后检查全部真实输出；不会只比较段末而遗漏中间差异。刺激周期累计受限，正确参考的审核执行侧另列，不混成模型搜索次数。\n\n两类新模块只在固定完整合约上取得权威参考：无参数、固定端口、10ns上升沿时钟、异步低有效复位且自动复位两拍。错误位宽、额外端口、改变复位或时钟、before采样和未知输入不能获得这套参考的授权。旧模块支持范围保持原有门禁。\n\n### 4.2 可用反馈来自真实执行\n\n通用端口摘要读取明确合约中的真实端口，保留完整位串及X/Z，按端点与均匀间隔确定最多12个时间样本，并给出省略数量。它不读取期望值、不推测内部状态、不按最能暴露缺陷的位置选择样本。\n\n摘要交叉绑定计划、合约、RTL、测试台与已保存的执行记录，重解析stdout并核对采样包。缺工件、内容错配、采样缺行、顺序冲突或未完成执行，返回证据不足和安全错误码，不补造端口值。这是本地来源一致性检查；如果所有相关原件同时被伪造，本地SHA不能独立证明真实性。\n\n新两模块有80轮完整端口摘要，实际20个收费请求收到了端口反馈。无反馈策略的31次请求不接收观察和拒绝诊断，但仍知道自身计划、预算并受执行器早停影响。\n\n<!-- pagebreak -->\n\n### 4.3 正确规格与独立判据\n\n| 新模块 | 固定正确行为 | 共同计划限制 |\n|---|---|---|\n| 两级有效数据流水 | 8位数据，连续有效输入、空泡、flush优先；无效输出数据清零 | 每任务累计24刺激拍，每提案最多12输入段 |\n| 许可事件累计器 | 4位模16累计；仅许可事件增加，clear不受enable限制且优先 | 累计接受最多64向量，最多3共享请求 |\n\n状态默认保持输入，独立episode自动复位。single策略仅1请求；反馈和无反馈最多3请求，格式拒绝也占请求。参考模型采用与RTL寄存器实现不同的语义表达，再用真实逐拍输出对齐。\n\n原四类开发配置另有24项有限功能场景：FIFO7、UART6、SPI6、握手5。它们来自真实采样规则，是有限事件观察，不是代码覆盖率或正确性证明。两类新模块没有新增定制bins，其功能覆盖状态为unsupported/unknown。\n\n### 4.4 先检查判据自身\n\nFIFO曾在同拍接受读写时出现占用量错误。独立队列按边沿前空满条件决定接受，队列长度在同时接受时保持不变；它未复制RTL的计数赋值顺序。在76刺激拍、228输出比较中，修复前66项差异，修复后0。修正基线和重新产生的单点变体均独立保存。\n\n外部有限规格补齐UART位持续时间及busy释放检查后，同字节24目标中的15个人工变体检出由13提升到15。三正确、三等价改写无误报，三编译失败保持不可判定。收益来自人工补判据，范围包括三个外部模块类别，不记为AI新增发现。[判据原件](../../../experiment/protocol_oracle_improvements_2026-10-04.md)\n\n<!-- pagebreak -->\n\n## 五、应用成效\n\n### 5.1 最新两模块完整受控批次\n\nAgent、helper与系统提示先冻结于`a969337`，再加入两类新合成模块和独立参考适配；实际执行源码为`20400fa`。每模块正确目标与两个语义变体，三次重复、六策略，共108任务。每策略分母为四个不同人工缺陷各重复三次，即12缺陷任务，另有6正确控制。\n\n![图2 最新两模块六策略检出](assets/new108_detection.png)\n\n| 策略 | 检出/12 | 三次检出各/4 | API请求 |\n|---|---:|---|---:|\n| 固定测试 | 12 | 4/4/4 | 0 |\n| 均匀随机 | 10 | 4/3/3 | 0 |\n| 协议随机 | 8 | 4/2/2 | 0 |\n| 单次API | 8 | 2/2/4 | 18 |\n| 反馈Agent | 11 | 4/4/3 | 38 |\n| 无反馈Agent | 10 | 3/3/4 | 31 |\n\n108任务均有实际执行，共134轮、268实际与正确参考执行侧；36/36正确控制无误报。反馈多轮检出中6项发生在首轮、5项发生在第二轮，展示闭环能够产生后续可执行补测。固定测试仍最好；反馈比随机和无反馈各多1任务，这只是该受控样本的描述性差值。[完整报告](../../../experiment/agent_new_holdout_study_live_2026-10-05.md)\n\n<!-- pagebreak -->\n\n### 5.2 历史八模块完整对照单列\n\n此前`a969337`八模块批次包含432任务，各策略48缺陷任务来自16不同缺陷×3重复，另24正确控制。模块均已暴露，不能改称最新留出；不同任务集合不拼接分母。\n\n| 策略 | 历史检出/48 | API请求 | 输入加输出tokens |\n|---|---:|---:|---:|\n| 固定测试 | 48 | 0 | 0 |\n| 均匀随机 | 32 | 0 | 0 |\n| 协议随机 | 48 | 0 | 0 |\n| 单次API | 29 | 70 | 205503 |\n| 反馈Agent | 37 | 122 | 426581 |\n| 无反馈Agent | 37 | 114 | 341065 |\n\n历史批次414任务实际执行、18零DUT，484轮/968执行侧，严格比较资格false；正确控制143/144实际执行、误报0，未执行的1项不算通过。306请求、973149tokens，未知/pending0；共享账本晚序任务受到额度限制。反馈与无反馈同为37/48，未产生整体优越性证据。[历史报告](../../../experiment/agent_feedback_study_live_2026-10-05.md)\n\n### 5.3 失败与消耗是结果的一部分\n\n最新批次85个动作通过schema、2个格式拒绝；5个计划预算拒绝属于schema通过后的预检子集，不能与85/2相加为请求总数。预算拒绝后2任务实际执行、1检出；格式拒绝后1任务有2轮实际执行、0检出。第108任务最终格式失败，此前1轮14刺激拍仍完整保存并留在分母。\n\n最新批次87请求使用301910输入和37714输出tokens，合计339624，本批100万剩660376，未知/pending均0。历史用量不扣本批；这不是实付金额，余额也未用于挑选失败单独补成绩。严格比较资格true说明双侧证据完整，并不表示所有动作都成功。\n\n<!-- pagebreak -->\n\n## 六、总结与展望\n\n### 6.1 可复用的作品贡献\n\n作品实现了四项可复查能力：把规格转换为受控计划；在实际逐拍仿真中独立判定；把格式、预算、工具和设计错误分层留存；把原始输入与反例交接为无需新增API的证据。通用端口事实适用于明确合约，无需为每个新模块把缺陷见证写进提示词。\n\n源码验收为2033通过、2跳过、0失败，mypy检查88文件零问题，535项指纹前后无变。结果审计由非实现者核心核验和入口作者轨迹核验分工完成；核心2192不同非DUT检查全部通过，作者另查54轨迹/87请求。工程测试与审查检查不相加，它们不替代真人效果。\n\n### 6.2 适用范围与下一步\n\n| 边界或待补证据 | 当前事实与下一步 |\n|---|---|\n| 留出与统计 | 两模块与五个历史受控批次模块集合互斥；同团队合成，非外部盲测、独立作者或预训练未见。无独立时间戳证明选型早于旧成绩；扩大外部设计与重复后再评价泛化 |\n| 功能能力 | 当前是有限模块级功能验证，无硬件、复杂SoC、物理/时序签核或工业部署证明 |\n| 人员效果 | 真人试用与H02人工复核无真实原件；后续记录需求、用时、协助、异议和授权，不补造人数或签署 |\n| 样式与可视化 | 新资产仍有12样式问题，WaveDrom固定依赖缺失；补齐后保存新的门禁原件 |\n| 环境与发布 | 异机、外部Actions、真实远程地址和实体手机未实证；原生Office打开尚未核验 |\n| 经济与推广 | 未取得服务商账单，未测量收益或推广规模；不填写推测金额和效率百分比 |\n\n本作品定位为API辅助的模块验证工具。最新结果说明闭环可执行、可交接，同时固定基线仍领先，尚不足以支持显著性、反馈因果或工业泛化结论。下一阶段先补外部设计的明确规格和独立审查，再开展真实人员使用与异机交接。真人/H02是本项目拟补强的证据，并非自行增加的官方必交条件。\n\n<!-- pagebreak -->\n\n以下为附录\n\n## 七、附录\n\n### 7.1 本版证据索引\n\n下列编号对应本版合并佐证，不复用旧材料的成绩编号。\n\n| 编号 | 原始来源 | 对应内容 |\n|---|---|---|\n| V31 | [最新报告](../../../experiment/agent_new_holdout_study_live_2026-10-05.md)、[回执](../../../experiment/agent-new-holdout-study-live-2026-10-05/receipt.json) | 新108任务、六策略与正确控制 |\n| V32 | [预算](../../../experiment/agent_new_holdout_study_budget_2026-10-05.json)、[轨迹清单](../../../experiment/agent-new-holdout-study-live-2026-10-05/trace_manifest.json) | 请求、格式、恢复与全部用量 |\n| V33 | [历史432报告](../../../experiment/agent_feedback_study_live_2026-10-05.md)、[回执](../../../experiment/agent-feedback-study-live-2026-10-05/receipt.json) | 历史分母、失败及额度限制 |\n| V34 | [独立判据](../../../experiment/protocol_oracle_improvements_2026-10-04.md)、[功能场景](../../../experiment/functional_coverage_2026-10-04.md) | FIFO纠错、外部有限规格与24场景范围 |\n| V35 | [源码验收](../../../experiment/agent_new_holdout_source_validation_2026-10-05.md)、[结果审计](../../../review/agent_new_holdout_study_review_2026-10-05.md) | 测试、固定合约和双机器核验 |\n| V36 | [完整原件包](../../../experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip)、[完整清单](../../../experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json) | 原始输入、执行侧与交接依据 |\n\n### 7.2 版本与原字节\n\n| 层次 | 精确版本或依据 |\n|---|---|\n| 最新实验源码 | `20400fa7dca0c9804a96b1eb9842956782a9e81f` |\n| Agent/helper/系统提示锚定 | `a96933786c17986a739fc2da515db3294d6e8044` |\n| 材料证据基点 | `f632b0a83d7a63256af767eab73c91477384cc44` |\n\n458冻结输入原字节在执行结束时没有变化。Git核对446精确相等、12仅换行不同，零内容差异；精确复现使用注册快照，而不是假定任意checkout字节完全相同。材料另有数据源和构建回执，不能把材料版本等同于实验源码版本。\n\n<!-- pagebreak -->\n\n### 7.3 运行与证据复查\n\n主要实现路径为`src/iverilog_ai/ai/agent.py`（决策与轮次调度）、`src/iverilog_ai/core/executor.py`（受控Icarus执行）、`src/iverilog_ai/core/reference_model.py`（独立逐拍期望）及`src/iverilog_ai/core/observation_feedback.py`（真实端口反馈与来源核对）。本作品使用API推理，没有本地模型权重交付。\n\n安装项目依赖与Icarus后，网页入口为：\n\n```powershell\n$env:PYTHONPATH = \"src\"\npython -m streamlit run ui/app.py --server.port 8600\n```\n\n使用者可先选择内置案例离线运行，再自行配置API，进入受限验证循环。API参数与执行模式应以本次保存的设置为准；启用网络规划不意味着自动获得独立判据，外部RTL仍需明确合约和可核验的参考。\n\n建议按以下顺序复查本版证据：\n\n1. 阅读事前方案与登记，核对任务成员、六策略、三个重复和完整分母。\n2. 使用完整原件清单核对ZIP成员、SHA和458注册输入，不用摘要替代原件。\n3. 检查任务轨迹、每轮计划、实际/正确参考两侧日志、波形和停止原因；失败与不可判定不删除。\n4. 分别核对token预算账、原始响应、核心审计和作者轨迹审计。离线查看或重放不计新的模型成绩。\n\n### 7.4 官方来源与提交口径\n\n本稿按官方七节大纲编写；要求以2026-10-05实际核对的官方来源为准：\n\n- [主题赛通知](https://www.aicomp.cn/notice/4756.html)\n- [竞赛规则与作品提交要求](https://www.aicomp.cn/wp-content/uploads/2026/07/%E9%99%84%E4%BB%B61AIC%C2%B7AI%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E7%AB%9E%E8%B5%9B%E8%A7%84%E5%88%99%E5%8F%8A%E4%BD%9C%E5%93%81%E6%8F%90%E4%BA%A4%E8%A6%81%E6%B1%82.pdf)\n- [技术报告参考大纲](https://www.aicomp.cn/wp-content/uploads/2026/07/%E9%99%84%E4%BB%B62AIC%C2%B7AI%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A%E5%8F%82%E8%80%83%E5%A4%A7%E7%BA%B2.pdf)\n\n可读官方入口：https://www.aicomp.cn/notice/4756.html。规则和大纲由该通知的官方附件进入；本版只读核对原件见[rules_validation.json](rules_validation.json)。\n\nIcarus官方工具资料：https://steveicarus.github.io/iverilog/。具体编译、执行与输出结论以本项目保存的实际工具日志为准；模型名称以实发设置和响应记录为准。\n\n技术方案PDF不超过10MB；答辩提交PDF，佐证合并为一份PDF。视频为可选佐证，如提供应为MP4、3至5分钟、不超过300MB。报名、队号和实际上传回执由提交者核实；本稿不伪造身份字段或提交完成状态。\n",
+      "candidate_lines_are_not_automatic_failures": true
+    },
+    "supporting_evidence": {
+      "artifact": {
+        "path": "docs/competition/ic/v3/supporting_evidence.md",
+        "sha256": "2054a83999c02c7ce73c5fbcd7e31c2d275a5596bb026b273ce00a3c5b1b0fda",
+        "bytes": 12205
+      },
+      "characters": 7032,
+      "headings": [
+        "# ICARUS数字IP验证智能体",
+        "## V31 最新两模块完整受控实验",
+        "## V32 原始响应、恢复与共享预算",
+        "## V33 历史八模块对照与失败边界",
+        "## V34 独立规格、判据及有限场景",
+        "### FIFO独立队列反例",
+        "### 外部有限规格控制",
+        "## V35 工程验收与双机器审查",
+        "### 源码与输入字节",
+        "### 结果审查职责",
+        "## V36 完整交接与事实边界"
+      ],
+      "claims_for_context_review": [
+        {
+          "line": 166,
+          "text": "本次留出只表示两个模块与五个历史受控API模块集合互斥。设计与语义变体由同团队产生，没有独立时间证据证明选型早于旧v8成绩；不作外部盲测、独立作者、预训练未见或工业泛化声明。"
+        }
+      ],
+      "text": "<!-- header: ICARUS · Verification Evidence / 验证佐证 -->\n<!-- doctitle: 数字IP验证智能体 / 佐证材料 v3 -->\n\n# ICARUS数字IP验证智能体\n\n合并佐证 · v3 · 2026-10-05\n\n## V31 最新两模块完整受控实验\n\n实际源码`20400fa`；Agent/helper/导入后系统提示保持此前`a969337`的冻结字节。新模块为两级有效数据流水和许可事件模16累计器，均由同团队合成，各正确目标和两个语义变体。它们与五个历史受控API批次的模块集合互斥。\n\n| 实验要素 | 登记与实际结果 |\n|---|---|\n| 任务成员 | 两模块×三目标×三重复×六策略＝108任务 |\n| 缺陷分母 | 每策略12任务＝4个不同人工缺陷×3重复 |\n| 正确控制 | 每策略6任务，合计36/36实际执行、误报0 |\n| 周期与段数 | 所有episode累计最多24刺激拍；每提案最多12段，累计接受64向量 |\n| 执行方式 | 独立episode自动复位，全部输出每刺激拍after判定 |\n| 实际执行 | 108/108任务、134轮、268实际与正确参考执行侧；零DUT任务0 |\n\n| 策略 | 检出/12 | 各重复/4 | API请求 | tokens |\n|---|---:|---|---:|---:|\n| 固定测试 | 12 | 4/4/4 | 0 | 0 |\n| 均匀随机 | 10 | 4/3/3 | 0 | 0 |\n| 协议随机 | 8 | 4/2/2 | 0 | 0 |\n| 单次API | 8 | 2/2/4 | 18 | 61529 |\n| 反馈Agent | 11 | 4/4/3 | 38 | 166073 |\n| 无反馈Agent | 10 | 3/3/4 | 31 | 112022 |\n\n实际时间为2026-10-05 05:59:49至06:04:02 UTC。反馈比随机和无反馈各多1任务，固定仍为12/12；样本小且模型提案未成对固定，不作显著性或因果结论。每策略跨重复并集均为4/4，不用该并集替换12任务的主指标。\n\n来源：[事前方案](../../../experiment/agent_new_holdout_study_plan_2026-10-05.md)、[实际登记](../../../experiment/agent-new-holdout-study-live-2026-10-05/preregistration.json)、[主报告](../../../experiment/agent_new_holdout_study_live_2026-10-05.md)、[回执](../../../experiment/agent-new-holdout-study-live-2026-10-05/receipt.json)。\n\n<!-- pagebreak -->\n\n## V32 原始响应、恢复与共享预算\n\nAPI实发记录为DeepSeek/`deepseek-flash`，thinking disabled、非流式、store false、60秒超时、4096输出上限、自动传输重试0。single最多1请求；feedback和no_feedback最多3共享请求，拒绝后的补提也消耗请求与用量。\n\n| 口径 | 实际数量与解释 |\n|---|---|\n| 收费请求 | 87，理论上限126 |\n| 输入/输出tokens | 301910 / 37714；合计339624 |\n| 独立批次上限 | 1000000；剩660376，未知/pending0 |\n| 动作schema | 85通过 / 2拒绝 |\n| 计划预算拒绝 | 5；属于schema通过后的预检子集，不与85/2相加 |\n| 其他预检 | 本批有标/无标legacy非预算预检均0 |\n| 格式恢复 | 2拒绝后1任务有2实际轮，0检出 |\n| 预算恢复 | 5拒绝后2任务实际执行，1检出 |\n\n第108任务在反馈组最终以格式失败停止，此前已有1轮14刺激拍。该任务没有被删去或改记成功。严格比较资格true仅表示可比较执行证据完整；它不等于动作全通过。\n\n87份响应原文均留存，其中86份可解析JSON、1份畸形正文。格式拒绝已付9274tokens，预算拒绝已付23991tokens，均纳入339624总账，不单独补加。缺usage时的额度保留由门禁测试验证；本批实际未知记录为0。未提供服务商账单，不转换为实付金额。\n\n真实端口摘要有80轮、826采样，其中701返回、125按固定规则省略。实际20个收费请求STATE收到端口摘要；31次no_feedback请求的观察、计划错误和最新决策错误均隐藏。采样落盘数量不写成模型全部看过的数量。\n\n来源：[预算回执](../../../experiment/agent_new_holdout_study_budget_2026-10-05.json)、[原账](../../../experiment/agent-new-holdout-study-live-2026-10-05/token_budget.json)、[轨迹清单](../../../experiment/agent-new-holdout-study-live-2026-10-05/trace_manifest.json)、[作者轨迹审计](../../../review/agent-new-holdout-study-review-2026-10-05/trace-audit.json)。历史用量不扣本批额度，余额未用于挑失败单独重跑。\n\n<!-- pagebreak -->\n\n## V33 历史八模块对照与失败边界\n\n此页仅披露此前`a969337`的八模块432任务完整批次。每策略48缺陷任务来自16不同缺陷×3重复，另24正确控制；模块均已暴露，不是本版两模块的新留出。\n\n| 策略 | 历史检出/48 | 各重复/16 | 请求 | tokens |\n|---|---:|---|---:|---:|\n| 固定测试 | 48 | 16/16/16 | 0 | 0 |\n| 均匀随机 | 32 | 11/11/10 | 0 | 0 |\n| 协议随机 | 48 | 16/16/16 | 0 | 0 |\n| 单次API | 29 | 12/10/7 | 70 | 205503 |\n| 反馈Agent | 37 | 11/16/10 | 122 | 426581 |\n| 无反馈Agent | 37 | 12/14/11 | 114 | 341065 |\n\n| 完整性或限制 | 历史事实 |\n|---|---|\n| 实际任务 | 414/432，18零DUT；484轮/968执行侧 |\n| 正确控制 | 143/144实际执行，误报0；1未执行不记通过 |\n| 严格比较资格 | false；失败和未执行全部保留分母 |\n| API总账 | 306请求、973149tokens、余26851，未知/pending0 |\n| 格式/预算恢复 | 18格式拒绝后12轨迹执行/5检出；16预算拒绝后9轨迹执行/4检出 |\n\n该批共享额度晚序任务受限；另有225/359两项既有非预算预检错误单列。反馈与无反馈同为37/48，不能概括所有子组更好，也不能将新108任务并入旧分母获得更高主指标。\n\n旧批次结果审计已核对全部968侧，保存历史131快照及Git107exact/24仅换行不同。它们属于该版原件，不覆盖最新458快照。\n\n来源：[历史完整报告](../../../experiment/agent_feedback_study_live_2026-10-05.md)、[回执](../../../experiment/agent-feedback-study-live-2026-10-05/receipt.json)、[独立预算](../../../experiment/agent_feedback_study_budget_2026-10-05.json)、[历史审计](../../../review/agent_feedback_study_review_2026-10-05.md)。更早c7、v4与其他批次保留在[主指标清单](../../../experiment/metric_inventory.md)，不拼接版本或分母。\n\n<!-- pagebreak -->\n\n## V34 独立规格、判据及有限场景\n\n### FIFO独立队列反例\n\n旧FIFO与旧参考曾同时保留同拍计数错误。独立队列按边沿前空满条件决定读写接受；中间占用下同时接受读写后队列长度应保持。\n\n| 语义场景 | 独立规格给出的结果 |\n|---|---|\n| 原队列含25、66，同时读出并写入99 | 读值25；新队列66、99；占用量2保持2 |\n| 后续队列填满 | full必须与独立队列长度一致 |\n| 76拍真实重放 | 228输出比较；修复前66差异，修复后0 |\n\n旧基线、修正基线、重新生成的两个单点变体与首次失败均保留。它证明判据链也需要独立检查；结果属于人工语义分析和实现修正，不是本轮API增益。\n\n### 外部有限规格控制\n\n| 同字节24目标 | 数量 | 补判据后的结论 |\n|---|---:|---|\n| 正确参考 | 3 | 无误报 |\n| 历史人工变体 | 15 | 15检出，原判据13检出 |\n| 等价改写 | 3 | 无误报 |\n| 编译失败控制 | 3 | 不可判定 |\n\n外部类别为UART RX、UART TX和优先编码器。人工补齐UART位持续时间、busy期限和恢复检查后，完整15变体口径从13/15到15/15；不能把全部15项说成UART TX，也不称上游真实缺陷或独立留出。\n\n原四开发配置24功能场景分别为FIFO7、UART6、SPI6、握手5，只检查有限采样事件。新流水和累计器的功能覆盖状态仍是unsupported/unknown；实际逐拍输出检查另有明确独立判据。\n\n来源：[协议与判据修正原件](../../../experiment/protocol_oracle_improvements_2026-10-04.md)、[功能场景说明](../../../experiment/functional_coverage_2026-10-04.md)、[新资产与语义验证](../../../../benchmarks/agent_new_holdout_20261005/README.md)。\n\n<!-- pagebreak -->\n\n## V35 工程验收与双机器审查\n\n### 源码与输入字节\n\n| 验收 | 实际记录 |\n|---|---|\n| 完整pytest r2 | 2033通过、2跳过、0失败错误 |\n| 类型检查 | mypy 88源文件、零问题 |\n| 验收指纹 | 535项前后无变 |\n| API冻结输入 | 458原字节执行后无变 |\n| Git对照 | 446exact、12仅换行不同、0内容差异 |\n\n初次全仓2017通过/10失败/2跳过保留，问题为旧测试路径与新参考探针适配；修后重新完整运行。两跳过为Windows目录符号链接权限1314及推荐断言表为空，不算通过。资产104项、入口55项、事前202不同非DUT检查与全仓重叠，不相加。\n\n### 结果审查职责\n\n| 审查主体 | 已封存的实际核验 |\n|---|---|\n| 非对应功能实现者的核心机器审查 | 2192不同非DUT检查通过；重算6214输出值、核对27434 VCD端口值、108任务/134轮/268侧、36正确控制与预算 |\n| 入口作者的轨迹机器审查 | 54 Agent轨迹、87请求、原文与状态、恢复及no_feedback隐藏核验，未见矛盾 |\n| 主任务文书封装 | 原机器记录职责分列；review_sources.zip的351成员CRC与全部SHA通过 |\n\n审查检查不等于pytest测试数；审查没有新增API或DUT执行，也不计入真人/H02。完整原件四ZIP及4359raw成员已核对，来源绑定是本地一致性证据。\n\n历史网页记录单独属于`28be1ed`：三种桌面浏览器视口含390×844模拟手机宽度，无横溢出，离线UART29向量/58比较/0差异、切页保留，全程0API/0真人。这不是新版API界面验收。\n\n来源：[源码验收](../../../experiment/agent_new_holdout_source_validation_2026-10-05.md)、[事前审查](../../../review/agent_new_holdout_prereg_review_2026-10-05.md)、[结果文书](../../../review/agent_new_holdout_study_review_2026-10-05.md)、[审计回执](../../../review/agent-new-holdout-study-review-2026-10-05/receipt.json)、[历史浏览器](../../../experiment/ic_agent_v4_validation_2026-10-04.md)。\n\n<!-- pagebreak -->\n\n## V36 完整交接与事实边界\n\n资料目录为`docs/experiment/agent-new-holdout-study-live-2026-10-05/`：`receipt.json`索引执行与统计，`full_raw_evidence.zip`保存完整原件，`full_raw_manifest.json`记录成员及SHA，`registered_inputs.zip`保存注册输入原字节。拿到PDF后可按该目录与文件名定位配套资料。\n\n| 原件入口 | 可复查内容 |\n|---|---|\n| [完整原件ZIP](../../../experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip) | 全部执行侧、API轨迹和保存的响应 |\n| [完整原件清单](../../../experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json) | 原件SHA、大小和成员集合 |\n| [注册输入包](../../../experiment/agent-new-holdout-study-live-2026-10-05/registered_inputs.zip) | 458输入原字节及来源 |\n| [字节绑定](../../../experiment/agent-new-holdout-study-live-2026-10-05/source_byte_binding.json) | Git与实际快照的exact/newline-only差异 |\n| [严格汇总](../../../experiment/agent-new-holdout-study-live-2026-10-05/strict_summary.json) | 全任务分母、执行资格及失败 |\n| [共享材料数据](material_data.json) | 本版数字来源及原始回执SHA |\n\n本地证据基点为`f632b0a`，实验源码为`20400fa`，Agent/helper/系统提示锚定`a969337`；三者职责不同。请求SHA绑定规范化JSON，未另外保存HTTP wire-order字节，不补造缺失的原文。\n\n本次留出只表示两个模块与五个历史受控API模块集合互斥。设计与语义变体由同团队产生，没有独立时间证据证明选型早于旧v8成绩；不作外部盲测、独立作者、预训练未见或工业泛化声明。\n\n| 尚未补强的证据 | 目前状态 |\n|---|---|\n| 严格样式与图形生成 | 12项样式问题；WaveDrom 3.6.1缺依赖 |\n| 真实人员与人工审核 | H01/H02无真实原件，不以机器审查代替 |\n| 外部环境 | 异机、外部Actions、实体手机与原生Office未实证 |\n| 实体应用与经济效果 | 无硬件/工业部署证明，无账单、收益或推广数据 |\n| 发布和视频 | 真实远程地址、实际录屏及系统上传回执待提交者办理 |\n\n以上是本项目证据范围，不是额外增加的官方硬门槛。此材料不伪造人员、队号、签字或提交完成状态；公开时按匿名要求核对文件内容和元数据。\n",
+      "candidate_lines_are_not_automatic_failures": true
+    },
+    "README": {
+      "artifact": {
+        "path": "docs/competition/ic/v3/README.md",
+        "sha256": "5f1962b42a691321531f8fd5b4e444da504eb454b282f045f2adb5cf9c92ed93",
+        "bytes": 6305
+      },
+      "characters": 3451,
+      "headings": [
+        "# ICARUS AI＋集成电路材料 v3",
+        "## 文件与当前制作状态",
+        "## 最终PDF验收",
+        "## 最终答辩与材料复核",
+        "## 新旧实验口径",
+        "## 提交前实际检查",
+        "## 仍待补强"
+      ],
+      "claims_for_context_review": [
+        {
+          "line": 52,
+          "text": "两个批次不拼分母，历史账不扣本批100万额度。最新固定12/12仍最好，反馈仅比随机及无反馈多1任务，不能作显著性/因果/工业泛化结论。真人试用/H02没有真实原件，机器审查与工程验收已有封存原件；各类证据分别登记，真人/H02不是官方额外必交项。"
+        }
+      ],
+      "text": "# ICARUS AI＋集成电路材料 v3\n\n本版同步至2026-10-05最新两模块完整API批次；不覆盖历史v2文件。所有数字来自[material_data.json](material_data.json)及其中绑定的封存回执，材料制作0新增API/0新增DUT执行。\n\n## 文件与当前制作状态\n\n| 内容 | 文本源 | 目标文件 | 当前状态 |\n|---|---|---|---|\n| 技术方案 | [technical_report.md](technical_report.md) | [技术方案PDF](../ICARUS_技术方案_v3.pdf) | r2实际10页（正文8）、470762字节；逐页查看通过 |\n| 合并佐证 | [supporting_evidence.md](supporting_evidence.md) | [合并佐证PDF](../ICARUS_佐证材料_v3.pdf) | r2实际6页、260009字节；逐页查看通过 |\n| 答辩材料 | [逐页讲稿](../defense_v3/speaker_notes.md)、[追问与证据](../defense_v3/qa_questions.md) | [答辩PDF](../ICARUS_答辩材料_v3.pdf)、[可编辑PPTX](../ICARUS_答辩材料_v3.pptx) | r3实际12页；全部逐页查看通过；PDF图像式 |\n| 报名名称与简介 | [submission_copy.md](submission_copy.md) | 报名系统文本 | 本地字数检查后使用；尚未上传 |\n| 事实与来源 | [material_data.json](material_data.json) | 构建引用 | 由封存receipt导出，不等同新的实验 |\n\n源稿以`<!-- pagebreak -->`分节，页数以最终PDF为准。10页技术方案与6页佐证是本版编排，官方规则没有给IC报告设置页数硬上限。PDF导出后应记录构建命令、字体、文件大小、元数据、逐页PNG与QA回执；正文改动后重新渲染。答辩构建、原件和失败尝试见[答辩制作记录](../defense_v3/README.md)。产物生成日期为2026-10-05，本地交付整理日期为2026-10-07。\n\n## 最终PDF验收\n\n[r2构建与逐页QA回执](validation.json)已记录两份PDF共16页实际查看通过，文字可选择、字体已嵌入、身份元数据为空、文字bbox出界0，两个提交格式检查均通过。r1全部16页已查看；r2的14张未改PNG与所看r1字节一致，两张新增末页再次实际查看。r2补全代码和资料路径，没有更改实验数字。PDF验收不计新的模型效果或真人/H02。\n\n构建入口为[build_materials.py](build_materials.py)。重新构建使用新的attempt编号，例如：\n\n```powershell\npython docs/competition/ic/v3/build_materials.py --attempt r3\n```\n\n当前正式结果为r2，历史r1/r2的PNG和中间件保留在`.iverilog-ai/ic-materials-v3-build/`对应目录。新构建须重新核验实际输出，不能沿用r2通过声明；旧转换器未修改。\n\n| r2文件 | SHA-256 |\n|---|---|\n| 技术方案PDF | `4bb214297d189ccbf446dd12e9bc848bffd216601c1c315241f6cb3bcc87f6a3` |\n| 合并佐证PDF | `7fe5fe5aa78d654dc4e212cd25e2f2b202418d1d7a32d96ce755d8361a8e0dda` |\n\n## 最终答辩与材料复核\n\n答辩PDF为1407201字节，可编辑PPTX为71117字节。共12页，含7个原生表格、3个原生图表、3份嵌入式数值工作簿及12页备注。完整PNG从正式PPTX重导入生成；PDF逐页渲染与这些PNG的RGB像素全部一致。制作代理和主代理均已实际查看全部12页；这不等同于在原生Office中打开、编辑或放映。\n\n| r3文件 | SHA-256 |\n|---|---|\n| 答辩PDF | `80f2fadd2304fdb7d0d7695520242239e9e31c0dbaac9db2f96e5e108fddf580` |\n| 可编辑PPTX | `03a1cf9a47bb95576054725baf34b73a041d953983ba31ca3f8ad4c5ac8db76c` |\n\n结构与制作边界见[答辩QA](../defense_v3/qa_report.json)及[答辩封装回执](../defense_v3/finalization_summary.json)；事实、文本和终版产物的机器复核见[材料复核记录](../../../review/ic_materials_v3_review_2026-10-07.md)。机器复核不计新的工程测试、真人试用或独立人工H02，重复检查不累计为新样本。\n\n## 新旧实验口径\n\n| 批次 | 版本、分母与结论 |\n|---|---|\n| 最新两模块108 | 源20400fa，Agent/helper/系统提示a969337；六组各12为12/10/8/8/11/10，36/36正确实际执行0误报；严格true但1终态格式失败；87请求/339624tokens |\n| 历史八模块432 | 源a969337；六组各48为48/32/48/29/37/37；414实际、18零DUT，严格false；306请求/973149tokens，保留未执行控制 |\n\n两个批次不拼分母，历史账不扣本批100万额度。最新固定12/12仍最好，反馈仅比随机及无反馈多1任务，不能作显著性/因果/工业泛化结论。真人试用/H02没有真实原件，机器审查与工程验收已有封存原件；各类证据分别登记，真人/H02不是官方额外必交项。\n\n## 提交前实际检查\n\n官方要求于2026-10-05核对，原链接见[共享规则数据](material_data.json)及[技术方案附录](technical_report.md)。通知截止2026-10-15 20:00北京时间。\n\n1. 确认报名赛题与转赛道状态，核对真实队号，不填虚构编号或签署。\n2. 导出技术PDF（≤10MB）、答辩PDF和一份合并佐证PDF，检查实际页数、可读性、字体和下载。\n3. 网盘资料按官方格式“参赛团队编号-赛题名称-作品名称-XX（材料名称）”命名；系统单文件字段以系统要求为准，共享目录与文件均应含完整字段。队号和正式赛题名称未确认前用本版项目文件名，不伪造字段。检查正文、图片、页眉页脚及PDF元数据没有机构身份、标志或导师信息；技术源稿的匿名检查应覆盖学校/大学/学院等身份关键词，但不能据关键词误把普通技术术语改坏。\n4. 如提供视频，录制真实过程和限制，MP4、3至5分钟、≤300MB。视频是可选佐证，不把未录制说成已完成。\n5. 本地文件检查通过后，再由提交者实际上传或提供有效分享链接、提取码与有效期，使用干净浏览器验证下载，并保留系统回执。\n\n## 仍待补强\n\n新资产12样式问题与WaveDrom缺依赖保留原失败；异机、外部Actions、实体手机、原生Office、硬件、真人/H02、账单和推广效果未实证。真实远程仓库尚未确定。源稿如实注明这些边界，不能把它们改写成已通过。\n\n完整证据入口：[最新报告](../../../experiment/agent_new_holdout_study_live_2026-10-05.md)、[完整原件](../../../experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip)、[双机器审计](../../../review/agent_new_holdout_study_review_2026-10-05.md)。\n",
+      "candidate_lines_are_not_automatic_failures": true
+    },
+    "submission_copy": {
+      "artifact": {
+        "path": "docs/competition/ic/v3/submission_copy.md",
+        "sha256": "c463d4e1c29b13a58d8ce8d725315b897314c0cd87917bd333020780219c8a3c",
+        "bytes": 1926
+      },
+      "characters": 796,
+      "headings": [
+        "# v3报名与提交用文本",
+        "## 作品名称",
+        "## 项目简介",
+        "## 实际提交步骤"
+      ],
+      "claims_for_context_review": [],
+      "text": "# v3报名与提交用文本\n\n## 作品名称\n\nICARUS数字IP验证智能体\n\n## 项目简介\n\n面向数字IP开发中的边界和多周期验证，ICARUS通过DeepSeek API生成受约束的测试计划，由独立参考模型和Icarus Verilog逐拍判定，保存原始响应、用量及反例证据。支持案例与RTL上传、规则审查、验证循环和离线导出。新两模块受控批次108任务均实际执行，反馈策略检出11/12，固定12/12；36项正确控制无误报。作品未训练模型权重，当前实证限于内部合成模块，保留漏检和格式失败。\n\n## 实际提交步骤\n\n1. 确认系统中的AI＋集成电路赛题、真实队号和转赛道状态。名称限20字符、简介限300字符，本地计数通过后复制上述纯文本。\n2. 使用本版实际导出并逐页检查的技术方案PDF（≤10MB）、答辩PDF和合并佐证PDF；源稿与PDF版本一致，旧v2不覆盖。\n3. 网盘资料按“参赛团队编号-赛题名称-作品名称-XX（材料名称）”完整命名，共享目录和文件均适用。例如技术方案文件保留真实团队编号、系统中的正式赛题名称、上述作品名称和“技术方案”四个字段；队号未确认前不伪造。系统单文件上传字段以系统要求为准。正文、封面、图像与元数据按匿名要求检查，不写身份标识或虚构签署。\n4. 如提供可选视频，录制真实操作，MP4、3至5分钟、≤300MB；未提供不写成已录。真人/H02是待补强证据，非本项目另加的官方硬必交条件。\n5. 在截止2026-10-15 20:00北京时间前实际办理上传。若使用分享链接，核对提取码、有效期与干净浏览器下载，保存系统成功回执。本文件只提供文案和步骤，不表示已经提交。\n\n格式与官方来源：[规则数据](material_data.json)、[主题赛通知](https://www.aicomp.cn/notice/4756.html)。\n",
+      "candidate_lines_are_not_automatic_failures": true
+    },
+    "defense_speaker_notes": {
+      "artifact": {
+        "path": "docs/competition/ic/defense_v3/speaker_notes.md",
+        "sha256": "4c5ffd627555d360d35f835b0430f826190811054ca808694420167c9bdff3f4",
+        "bytes": 13978
+      },
+      "characters": 7230,
+      "headings": [
+        "# ICARUS 答辩讲稿 v3",
+        "## 01 ICARUS",
+        "## 02 数字 IP 的验证需求",
+        "## 03 API 规划与仿真裁决",
+        "## 04 新内部模块集合留出",
+        "## 05 共享请求与执行预算",
+        "## 06 新108任务的六策略检出",
+        "## 07 实际端口事实与无反馈对照",
+        "## 08 付费拒绝与真实执行",
+        "## 09 原件绑定与机器审计",
+        "## 10 旧v8的开发与复用集合",
+        "## 11 判据独立性的规格案例",
+        "## 12 证据边界与交付"
+      ],
+      "claims_for_context_review": [
+        {
+          "line": 25,
+          "text": "这一批登记 2 个新模块，每个模块包含正确、B、C 三个目标，采用 3 次重复和 6 种策略，合计 108 任务。每种策略有 4 个不同缺陷乘 3 次重复，即 12 个缺陷任务，另有 6 个正确任务。新模块成员与此前五个受控 API 批次不重叠，Agent、helper 和 System 在新模块生成前已经冻结。设计、变体和实验仍来自同一团队，因此这里称内部模块集合留出。没有独立时间戳证明选型早于旧 v8 成绩，也没有外部盲测或预训练未见证明。不能把内部成员不重叠扩大解释为外部独立评估。"
+        },
+        {
+          "line": 59,
+          "text": "两类审计身份要分开。核心审计由非实现者代理完成 2,192 个机器检查，包括 1,923 加 269；这仍不是真人独立人审。轨迹审计由实验 entry 代码作者检查 54 条轨迹和 87 次请求，明确非独立于入口作者、非 H02。核心输出重算 6,214 项、VCD 端口值核对 27,434 项；这些数字分别表示有限机器证据，不等于真人评测人数。所有机器审计都没有追加 API 或 DUT。"
+        },
+        {
+          "line": 73,
+          "text": "右侧是同字节冻结的外部历史候选集合，24 个候选包含 15 个人工变体、3 个正确基线、3 个等价改写和 3 个编译失败控制。补全人工 UART TX 计时 SPEC 后，15 个人工变体的检出从 13/15 变为 15/15。正确和等价控制没有误报，编译控制单列。它来自同作者的两个仓库，有限流程，不是独立外部盲测，更不是 AI 成绩或 AI 自动发现缺陷的证明。此页所有历史数字只说明规格独立性和受支持判据修复。"
+        },
+        {
+          "line": 79,
+          "text": "现有机器工程记录为 2,033 通过、2 跳过、0 失败，mypy 88 源文件零错，535 个冻结指纹无变化。这是工程回归记录，不是 AI 效果或真人验收。范围限于已审计合约与参数、有限刺激拍和有限输出采样。新模块属于同团队合成集合，没有外部盲测、预训练未见、因果或普适收益证明。硬件验证、异机 Actions、真人试用和独立人工 H02 原件尚未提供；12 项严格 RTL 样式残项和 WaveDrom 3.6.1 缺失仍披露，不能填假想通过。真人和 H02 是内部证据完善项，官方规则未将它们列为硬门槛。"
+        }
+      ],
+      "text": "# ICARUS 答辩讲稿 v3\n\n建议用 7–9 分钟讲述主线，追问时展开证据定位。下列每页正文进入 PPTX 演讲者备注。材料匿名，不填写机构、成员、署名、签字或队号。数据冻结于材料事实源，答辩材料制作没有追加 API、读取凭据或重新运行 DUT。\n\n## 01 ICARUS\n\nICARUS 是面向数字 IP 的验证智能体。它让第三方模型 API 根据正确规格和完整接口合约建议测试输入，由本地受控执行器生成测试台，使用真实 Icarus 仿真，再由独立于模型建议的判据解释结果。作品的可评估贡献是把测试规划、执行权限、预算和原件留存接成一个受控闭环。我们没有训练或微调基础模型，也没有提供本地模型权重。用户请求的模型名称是 4.1f，服务返回的模型标识为 deepseek-flash。接下来分别说明架构、新模块实验、真实失败和证据边界。\n\n证据定位：docs/competition/ic/v3/material_data.json 的 api、uses_third_party_api_only、trained_or_finetuned_weights。新实验源码为 20400fa7dca0c9804a96b1eb9842956782a9e81f，核心 Agent/helper/System 先冻结于 a96933786c17986a739fc2da515db3294d6e8044。\n\n## 02 数字 IP 的验证需求\n\n需求来自本项目的实际合约、执行日志和失败记录分析，没有虚构用户访谈、效率百分比或真人计时。以两项新合约为例，valid/data 流水线需要检验两级延迟、flush 优先级及 invalid 时输出归零；事件累计器需要检验使能条件、四位模 16 回绕和 clear 不受 enable 限制。一个能编译运行的输入序列仍可能遗漏这些边界。工具面向数字电路学习者、小型 IP 开发者和技术复核人员，提供可以回指输入、采样点和输出差异的记录。\n\n证据定位：spec/agent_new_holdout_20261005/valid_data_pipeline_spec.md、event_accumulator_spec.md。旧 FIFO 及 UART 规格改进见 docs/experiment/protocol_oracle_improvements_2026-10-04.md。适用范围只覆盖已审计的合约与参数，不能扩展到任意 SoC 或物理签核。\n\n## 03 API 规划与仿真裁决\n\n图中各阶段均为可编辑原生对象。模型只收到正确规格、完整接口合约、允许驱动的输入、自己的计划、剩余预算及允许的执行反馈。它不能修改目标 RTL、判据、执行命令或受支持设计的期望值，私有变体 RTL、目标标签、路径和 witness 不进入请求。执行器先做动作格式、输入权限和预算检查，再实际仿真。每个实际 episode 具有独立 DUT 实例和自动复位，随后在正确 RTL 上独立重放同一计划并比较每个 after-edge 采样的全部输出。新接口包含 i_clk 和异步低有效 i_rstn，周期 10ns，自动复位 2 拍。\n\n证据定位：src/iverilog_ai/ai/agent.py、src/iverilog_ai/core/pipeline.py、scripts/run_agent_new_holdout_study.py。逐请求 canonical body SHA、消息 SHA 与原件绑定见 docs/review/agent-new-holdout-study-review-2026-10-05/trace-audit.json。账本保留的是 canonical JSON SHA，原始 HTTP wire-order body 字节未单独存档。\n\n## 04 新内部模块集合留出\n\n这一批登记 2 个新模块，每个模块包含正确、B、C 三个目标，采用 3 次重复和 6 种策略，合计 108 任务。每种策略有 4 个不同缺陷乘 3 次重复，即 12 个缺陷任务，另有 6 个正确任务。新模块成员与此前五个受控 API 批次不重叠，Agent、helper 和 System 在新模块生成前已经冻结。设计、变体和实验仍来自同一团队，因此这里称内部模块集合留出。没有独立时间戳证明选型早于旧 v8 成绩，也没有外部盲测或预训练未见证明。不能把内部成员不重叠扩大解释为外部独立评估。\n\n证据定位：docs/experiment/agent_new_holdout_study_plan_2026-10-05.md、spec/agent_new_holdout_study_1m_v8.json、benchmarks/agent_new_holdout_20261005/manifest.json。三项核心冻结 SHA 和原字节快照由新实验审计核对。所有 108 项均已真实执行。\n\n## 05 共享请求与执行预算\n\n新批使用独立的 1,000,000 input+output token 上限，不扣历史用量，也不用于补齐旧失败行。实际 87 次收费请求，输入 301,910、输出 37,714，合计 339,624 reported tokens，unknown 和 pending 均为零。这个数字是服务方报告的 token 用量，不是货币账单。单次 API 至多 1 请求和 1 实际 episode；反馈与无反馈各至多 3 个共享请求和 3 个实际 episode。格式错误和周期预算拒绝后的补提均是收费新请求，仍共用原任务上限。每个任务累计刺激拍至多 24，每次提案至多 12 向量，累计接受至多 64。独立自动复位和正确 RTL 重放成本单列。传输配置为 thinking disabled、非流式、4096 输出上限、60 秒超时和零自动重试。\n\n证据定位：docs/experiment/agent_new_holdout_study_budget_2026-10-05.json、新公开 token_budget.json、preregistration.json、run_settings.json。理论请求上限 126 不是实际请求数。剩余预算不授权追加独立补批，store=False 是客户端配置而非第三方数据保留行为的证明。\n\n## 06 新108任务的六策略检出\n\n条形图直接使用原生图表和嵌入式 literal workbook，分母统一为每策略 12 个登记缺陷任务。固定测试 12、均匀随机 10、协议随机 8、单次 API 8、反馈 Agent 11、无反馈 10。固定测试最好。反馈比均匀随机和无反馈各多 1 项，但只有 4 个不同缺陷和 3 次重复，预算、提案及早停行为也不同，因此不能声称因果、显著性或普适工业收益。全部 36 个正确任务实际执行且没有误报。strict=true 只表示内部完整证据资格满足，并不表示全部动作成功，第 108 行仍以终态格式失败留在完整分母。\n\n证据定位：docs/experiment/agent-new-holdout-study-live-2026-10-05/strict_summary.json、receipt.json。每策略 repeated detections 分别为固定 4/4/4、均匀随机 4/3/3、协议随机 4/2/2、单次 API 2/2/4、反馈 4/4/3、无反馈 3/3/4。不同重复不视为不同独立缺陷。首次实际检出 episode：单次 API 首轮 8；反馈首轮 6、第二轮 5；无反馈首轮 8、第二轮 1、第三轮 1。后续 episode 实际找到反例说明闭环有可观察行为，不能据此证明反馈因果。\n\n## 07 实际端口事实与无反馈对照\n\n80 个 Agent 实际 episode 都保存了完整端口反馈文档。原始有限采样共有 826 点，helper 返回 701 点、省略 125 点。每份最多 12 个端点及等间隔样本，省略和 X/Z 语义保留，实际这批没有 X/Z。这是有限绑定端口流的 complete，不能表示所有设计行为完整覆盖。保存反馈文档和真正发送给模型的反馈 STATE 要分开：只有反馈策略的 20 个后续已发送 STATE 带端口事实，合计返回 180 点、省略 12 点。无反馈的 31 个已发送 STATE 中 observation、plan_error、latest_decision_error 全为 None，但其中 12 个仍保留自己的 current_plan 和减少后的预算，执行器也仍早停。两个新模块的功能覆盖状态是 unsupported/unknown，不补造命名 bins。24 个命名 bins 只属于旧四个配置。\n\n证据定位：trace-audit.json 的 paid_model_state_port_facts 和 helper 重建计数，新 receipt.json 的 port_observation_episodes。helper 绑定 RTL、plan、contract、TB、采样包、stdout 与执行结果，端口投影不含期望值和私有路径。X/Z 的保留机制由既有审计验证，本轮材料没有重新执行测试。\n\n## 08 付费拒绝与真实执行\n\n所有 87 个原 API 响应都保存，其中 86 个可解析 JSON、1 个不可解析；不隐藏 paid failure。85 个响应通过 schema、2 个格式拒绝。5 个预算拒绝属于 schema 通过的子集，不能加到 85 和 2 之上形成 92 请求。预算拒绝花费 23,991 tokens，其中 2 个任务后续真正执行，1 个后续检出。格式拒绝花费 9,274 tokens，其中 1 个任务后续执行 2 个 episode，没有后续检出。legacy preflight 有标与无标均为零，不能只数 retry_eligible 就宣称其它拒绝为零。\n\n第 108 行，即 zero-based index 107，对应 event_accumulator、mutation_c、反馈策略、seed 2。请求 1 实际执行 14 拍且没有检出，请求 2 因剩余刺激预算拒绝，请求 3 格式拒绝后达到原 3 请求上限，终态为 decision_format_error。它有 1 个实际 episode、证据核验有效，仍作为未检出失败保留在分母。拒绝后的执行和检出只作描述，不构成反馈的因果收益。\n\n证据定位：trace-audit.json 的 all_paid_rejection_events、explicit_error_classification、traces[sample=107]；原轨迹 sample-107/agent/agent_trajectory.json 与原响应在公开 traces_and_decisions.zip 和 full_raw_evidence.zip 中。\n\n## 09 原件绑定与机器审计\n\n证据链从冻结输入快照开始，绑定 458 项登记输入，实际保存 4,359 个 raw 文件。公开 full_raw_manifest 与 ZIP 使用原字节，未把格式失败改写成成功。压缩 raw archive 为 7,027,646 字节，未压缩原文件总量 64,589,914 字节，两者口径不同。Git 绑定 446 项 exact、12 项只存在换行差异，因此原始登记快照仍为权威，不能声称干净 checkout 每字节相同。\n\n两类审计身份要分开。核心审计由非实现者代理完成 2,192 个机器检查，包括 1,923 加 269；这仍不是真人独立人审。轨迹审计由实验 entry 代码作者检查 54 条轨迹和 87 次请求，明确非独立于入口作者、非 H02。核心输出重算 6,214 项、VCD 端口值核对 27,434 项；这些数字分别表示有限机器证据，不等于真人评测人数。所有机器审计都没有追加 API 或 DUT。\n\n证据定位：docs/review/agent-new-holdout-study-review-2026-10-05/core-audit.json、trace-audit.json、receipt.json；新 full_raw_manifest.json、registered_inputs_manifest.json、source_byte_binding.json。source_checksums.json 保存本材料实际引用原件及 authoring source 的 SHA。\n\n## 10 旧v8的开发与复用集合\n\n旧 v8 批次登记 432 任务、414 实际执行，18 个没有 DUT episode。每策略缺陷分母为 48，检出依次为 48、32、48、29、37、37；306 请求、973,149 tokens。144 个正确任务中 143 实际执行，没有实际误报，1 个未执行，所以不能写成 144/144 都通过。strict=false 表示该批完整证据资格不满足，未执行和其它失败仍保留。旧表与新 108 的模块集合、缺陷分母和预算不同，不合并为一个总检出率，也不画同一增益趋势。新 1M 批预算独立，不补跑旧 token_budget 失败行。\n\n证据定位：docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json、strict_summary.json、docs/experiment/agent_feedback_study_live_2026-10-05.md。旧源码冻结为 a96933786c17986a739fc2da515db3294d6e8044。本页保持旧批身份与真实失败，不代表新模块的旧版本成绩。\n\n## 11 判据独立性的规格案例\n\n这一页说明为什么判据不能只依赖模型的自述。FIFO 旧 RTL 与旧 reference model 曾共享计数错误。独立 deque 规格检查发现中间占用时同时接受读写，占用量应净零改变。第 5 拍读 25、写 99 后，队列从 [25,66] 变为 [66,99]，占用量仍为 2。第 7 拍首次出现 full 端口差异，旧实现为 0、队列应为 1、修复后为 1。同一 76 拍、228 次输出比较，差异从 66 变为 0。\n\n右侧是同字节冻结的外部历史候选集合，24 个候选包含 15 个人工变体、3 个正确基线、3 个等价改写和 3 个编译失败控制。补全人工 UART TX 计时 SPEC 后，15 个人工变体的检出从 13/15 变为 15/15。正确和等价控制没有误报，编译控制单列。它来自同作者的两个仓库，有限流程，不是独立外部盲测，更不是 AI 成绩或 AI 自动发现缺陷的证明。此页所有历史数字只说明规格独立性和受支持判据修复。\n\n证据定位：docs/experiment/protocol_oracle_improvements_2026-10-04.md，旧 FIFO before/after evidence.json 与 external/replay-20261004-protocol-v2/evidence.json 的原 SHA 随本材料绑定。没有新增 DUT 重放。\n\n## 12 证据边界与交付\n\n现有机器工程记录为 2,033 通过、2 跳过、0 失败，mypy 88 源文件零错，535 个冻结指纹无变化。这是工程回归记录，不是 AI 效果或真人验收。范围限于已审计合约与参数、有限刺激拍和有限输出采样。新模块属于同团队合成集合，没有外部盲测、预训练未见、因果或普适收益证明。硬件验证、异机 Actions、真人试用和独立人工 H02 原件尚未提供；12 项严格 RTL 样式残项和 WaveDrom 3.6.1 缺失仍披露，不能填假想通过。真人和 H02 是内部证据完善项，官方规则未将它们列为硬门槛。\n\n投递材料按官方要求组织：技术方案 PDF 不超过 10MB，答辩交 PDF，佐证合并为一份 PDF，视频可选为 3–5 分钟 MP4、不超过 300MB，截止 2026 年 10 月 15 日 20:00。本答辩 PDF 为图像式导出，编辑请使用 PPTX。最终目标是让每个数字、失败与限制都有可定位原件，后续扩展必须用新的预登记实验说明。\n\n官方来源：material_data.json 的 rules，核验日期 2026-10-05。通知 https://www.aicomp.cn/notice/4756.html ，规则和技术报告大纲的完整官方 URL 保存在该事实源并写入此页备注。最终投递文件名按真实队号-赛题名称-作品名称-材料名称组织，目前未提供真实队号，所以保留内部 v3 文件名而不填虚构编号。工程来源：docs/experiment/agent_new_holdout_source_validation_2026-10-05.md。当前未在 Microsoft PowerPoint/LibreOffice/Google Slides 打开验证，不能将 artifact-tool 预览等同于 Native Office 验收。\n\n",
+      "candidate_lines_are_not_automatic_failures": true
+    },
+    "defense_qa_questions": {
+      "artifact": {
+        "path": "docs/competition/ic/defense_v3/qa_questions.md",
+        "sha256": "eff1640e279bc92c739bfc2533161e74fe5cac1ae43d187429e41ac7e67aee95",
+        "bytes": 5843
+      },
+      "characters": 2815,
+      "headings": [
+        "# ICARUS v3 常见追问与证据定位"
+      ],
+      "claims_for_context_review": [
+        {
+          "line": 15,
+          "text": "   新成员与此前五个受控 API 批次不重叠，Agent/helper/System 在模块生成前已冻结。设计与变体仍由同团队制作，没有独立时间戳证明选型早于旧成绩，不能声称外部盲测或预训练未见。"
+        }
+      ],
+      "text": "# ICARUS v3 常见追问与证据定位\n\n下列回答用于答辩讨论，不替代原件。材料制作本身没有追加 API、读取凭据或运行 DUT。\n\n1. **模型会判断自己生成的期望值吗？**  \n   新批只允许追加输入或停止。受支持合约的全部输出由冻结参考判据逐周期检查，并在正确 RTL 上独立重放。模型收到公开规格和完整合约，不收到私有目标 RTL、变体标签、witness 或路径。证据见 trace-audit.json 的模型状态及 body SHA 绑定。\n\n2. **strict=true 是不是表示 108 行都成功？**  \n   它表示内部完整证据资格满足。108 行均执行，但第 108 行终态 decision_format_error，仍有此前 14 拍实际执行且保留未检出分母。不能把资格字段解释为动作全部成功。\n\n3. **反馈 11/12 是否证明比随机更好？**  \n   固定测试为 12/12 最好，均匀随机和无反馈各 10/12。4 个不同缺陷、3 次重复的差异只有 1 个任务，不支持因果、显著性或普适工业收益。重复不等于增加不同缺陷数量。\n\n4. **两新模块真的是外部盲测吗？**  \n   新成员与此前五个受控 API 批次不重叠，Agent/helper/System 在模块生成前已冻结。设计与变体仍由同团队制作，没有独立时间戳证明选型早于旧成绩，不能声称外部盲测或预训练未见。\n\n5. **为什么不把旧 432 与新 108 合并？**  \n   两批模块集合、缺陷分母和预算不同。旧每策略 48，新每策略 12，旧有 18 个零 DUT 项且 strict=false。两个批次保留各自完整分母，不能画成单因素增益趋势。\n\n6. **格式拒绝后会无限重试吗？**  \n   单次 API 仍至多 1 请求，反馈/无反馈至多 3 个共享请求。格式和预算补提都收费且计入原 cap，传输自动重试为 0。5 预算拒绝与 2 格式拒绝均在原任务上限中，没有独立补批。\n\n7. **85+2+5 为什么大于 87？**  \n   85 是 schema 通过，2 是 schema 拒绝。5 个预算拒绝是 85 个 schema 通过中的子集，属于后续计划预算拒绝，不能当成额外请求。\n\n8. **付费失败保存了吗？**  \n   87 原响应全部保存，86 可解析 JSON、1 不可解析。预算拒绝收费 23,991 tokens，格式拒绝收费 9,274 tokens。失败 raw、停止原因与账本一起进入 full_raw ZIP 和 manifest，不改写成成功。\n\n9. **端口 feedback 的 complete 有多完整？**  \n   只表示一个有限且 SHA 绑定的实际流。80 文档共 826 原采样，返回 701、省略 125，每份最多 12 点端点加等间隔。它不表示全部路径、全部参数或代码覆盖完整。\n\n10. **无反馈是不是彻底什么都不知道？**  \n    31 个已发送 STATE 的 observation、plan_error、latest_decision_error 为 None。自身历史计划、预算和执行器 early-stop 保留，其中 12 个状态仍有当前计划和减少后预算。这是受控对照，不是移除所有信息。\n\n11. **24 个 bins 也覆盖两新模块吗？**  \n    没有。24 bins 只覆盖旧四配置。两个新模块返回 unsupported/unknown，不补造 bins，也不宣称代码覆盖率。\n\n12. **第三方模型具体是什么？**  \n    用户请求 4.1f，第三方 DeepSeek API 返回 deepseek-flash。thinking disabled、非流式、4096 输出上限、60 秒超时、0 自动传输重试。作品未训练或微调权重，未提供本地基础模型。\n\n13. **339,624 tokens 就是货币花费吗？**  \n    不是。301,910 输入加 37,714 输出等于服务方 reported total，未知和 pending 为 0。没有服务商货币账单，不换算成未经核对的价格或节省比例。缓存字段不重复计入 total。\n\n14. **审计是否独立真人审核？**  \n    核心审计是非实现者代理的 2,192 项机器检查。轨迹审计由 entry 作者检查 54 条轨迹、87 请求，明确非独立于入口作者。两者都不是真人、独立人审或 H02。\n\n15. **原件能逐字节绑定 Git 吗？**  \n    458 登记输入中 446 与 Git blob exact，12 仅有换行差异。原始登记快照为权威，不能声称 clean checkout 每字节一致。4,359 raw 文件通过 manifest 与公开 ZIP 原字节核验。\n\n16. **FIFO 和 13/15→15/15 是 Agent 的成绩吗？**  \n    不是。FIFO 是人工独立 deque 规格检查后修复 RTL 与模型。外部 15 个历史人工变体的提升来自人工 UART TX 计时 SPEC 补全，在同字节输入上复放。原始来源来自同作者仓库，不是新外部盲测。\n\n17. **真实网页截图为什么没放最新验证页？**  \n    历史浏览器记录对应 28be1ed，0 API、桌面视口模拟、没有真人参加。v3 不用它冒充最新在线验证。本材料用新108的真实轨迹、计划和账本作为主要证据。\n\n18. **还缺什么？**  \n    硬件、异机 Actions、真人试用、独立人审原件未提供。严格 RTL 样式仍有 12 项，WaveDrom 3.6.1 缺失。机器工程 2033 pass/2 skip、mypy 88 和 535 指纹不变不能填补这些证据缺口。\n\n19. **真人/H02 是官方硬门槛吗？**  \n    官方规则未列为硬门槛。它们是项目内部补强证据项，目前如实未提供。官方要求见最终材料事实源中的通知、规则 PDF、技术大纲 PDF。\n\n20. **答辩 PDF 可编辑吗？**  \n    它由正式 PPTX 的完整 slide PNG 导出，是图像 PDF。PPTX 的正文、流程、表格和图表保留原生可编辑对象，图表嵌入 literal workbook。未做 Native Office 打开/编辑测试，需在目标机器进行最终展示检查。\n\n21. **正式提交文件名怎么填写？**  \n    按真实队号-赛题名称-作品名称-材料名称组织。真实队号尚未提供，内部文件暂称 ICARUS_答辩材料_v3，不以假队号替代。匿名页面也不填写机构、署名或签字。\n\n",
+      "candidate_lines_are_not_automatic_failures": true
+    },
+    "defense_README": {
+      "artifact": {
+        "path": "docs/competition/ic/defense_v3/README.md",
+        "sha256": "76960ecbf49fade9a59f8bc9c80ac09666caa1b232e550e180fa6f2c6a43ccf6",
+        "bytes": 4621
+      },
+      "characters": 2494,
+      "headings": [
+        "# ICARUS 答辩材料 v3",
+        "## 实际使用的制作命令",
+        "## 保留的尝试与检查口径",
+        "## 正式投递"
+      ],
+      "claims_for_context_review": [
+        {
+          "line": 15,
+          "text": "& 'C:/Users/TYOCT/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe' 'docs/competition/ic/defense_v3/build_defense.mjs' *> '.iverilog-ai/defense-v3-build/r3-build.log'"
+        },
+        {
+          "line": 25,
+          "text": "& 'C:/Users/TYOCT/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe' -X utf8 'docs/competition/ic/defense_v3/publish_final.py' r3 *> '.iverilog-ai/defense-v3-build/r3-publication.log'"
+        }
+      ],
+      "text": "# ICARUS 答辩材料 v3\n\n正式内部产物为 ../ICARUS_答辩材料_v3.pptx 和同名 PDF，共12页。PPTX保留原生正文、流程对象、7个表格、3个图表及3份嵌入式literal workbook。PDF从正式PPTX的完整slide PNG导出，是图像PDF，编辑请用PPTX。两份正式文件的文档身份元数据已清空，页面不填写机构、署名、签字或假队号。\n\n事实源为 ../v3/material_data.json，SHA-256为33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4。它绑定新108、旧432、预算、审计和工程原件。source_checksums.json绑定本次实际读取的原字节及制作工具；speaker_notes.md是逐页讲稿，并已进入PPTX备注；qa_questions.md提供21个追问的回答和证据定位。\n\n新108与旧432在不同页呈现，不合并分母或画增益趋势。固定测试在新批中检出最多，反馈与随机/无反馈只差1项，不声称因果、显著性或普适收益。第108行实际执行后的终态格式失败、付费拒绝、原响应保存、内部同团队集合属性和无反馈信息边界均在页面或讲稿中保留。历史FIFO与人工SPEC案例没有记作AI表现。\n\n## 实际使用的制作命令\n\n在E:/FPGA_WORK/iverilog-ai-lab的PowerShell中，r3的完整构建命令为：\n\n~~~powershell\n$env:DEFENSE_V3_REVISION = 'r3'\n& 'C:/Users/TYOCT/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node.exe' 'docs/competition/ic/defense_v3/build_defense.mjs' *> '.iverilog-ai/defense-v3-build/r3-build.log'\n~~~\n\n构建使用JavaScript ES模块@oai/artifact-tool，调用finalizePresentation，设置materializeLiteralChartWorkbooks: true，然后重新导入正式PPTX，将全部12页输出为2560×1440完整PNG。原生图表、表格、图表缓存/工作簿、页面尺寸和字体策略分别核验。图表工作簿是本材料数值的literal快照，不是历史原工作簿或源公式保留的证明。\n\n检查器使用预装bundled Python的pypdf、Pillow与pypdfium2，不安装软件。它把最终PDF的全部12页重新渲染，同尺寸RGB像素与正式PPTX的PNG全部一致。制作代理随后逐页实看了正式12页，检查数字、轴范围、中文字符、布局及限制文字。正式PNG位于assets/final_slides/；私有原渲染位于.iverilog-ai/defense-v3-build/r3/final-render/。\n\n确认视觉检查后，实际发布命令为：\n\n~~~powershell\n& 'C:/Users/TYOCT/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe' -X utf8 'docs/competition/ic/defense_v3/publish_final.py' r3 *> '.iverilog-ai/defense-v3-build/r3-publication.log'\n~~~\n\n命令只核验和复制材料，不访问网络、凭据或仿真工具。已存在的revision、日志和正式文件不可覆盖。重新制作需使用全新revision，并重新渲染、逐页检查后生成新的材料版本；不要重跑r1/r2/r3或用这一发布器覆盖已闭合正式文件。\n\n## 保留的尝试与检查口径\n\nr1因把“必须保留原工作簿”策略误用于新literal数据而失败。修复是移除不适用的原工作簿来源策略，仍保留literal workbook materialization。r2的PPTX finalize、全部slide PNG和图像PDF已成功，后续检查因bundled Python无fitz而失败。r3改用已有的pypdfium2，同时修复artifact-tool图表part路径匹配后全链完成。build_attempts/保存各次原日志、当时工具和数据字节；私有目录还保留全部candidate、原件快照及失败流程。\n\nqa_report.json是结构检查与制作代理的逐页视觉检查记录；finalization_summary.json摘要正式文件与检查边界。原生表格总数为7，通用算术检查器没有找到可无歧义自动求和的表，因此其checked_column_count为0；预算等明确算式由builder对冻结事实源核验，不能写成7表算术全检。\n\n没有在Microsoft PowerPoint、LibreOffice或Google Slides中打开、编辑或放映测试。artifact-tool的重导入和预览不能代替Native Office验收。制作代理不是独立真人/H02，亦是本项目entry作者。材料制作追加API、读取凭据、DUT执行、工程测试、提交、推送均为0。\n\n## 正式投递\n\n官方要求见事实源的rules及第12页备注中的通知、规则PDF与技术大纲URL。截止为2026-10-15 20:00；方案PDF不超过10MB，答辩为PDF，佐证合为一份PDF，视频可选。投递文件名按“真实队号-赛题名称-作品名称-XX（材料名称）”组织。真实队号尚未提供，当前仅保留请求的内部v3文件名，不填写虚构编号。目标展示机器仍需做Native Office实际显示检查。\n",
+      "candidate_lines_are_not_automatic_failures": true
+    }
+  },
+  "documents": {
+    "technical_report": {
+      "artifact": {
+        "path": "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+        "sha256": "4bb214297d189ccbf446dd12e9bc848bffd216601c1c315241f6cb3bcc87f6a3",
+        "bytes": 470762
+      },
+      "role": "technical_report",
+      "pages": 10,
+      "metadata": {
+        "format": "PDF 1.7",
+        "title": "",
+        "author": "",
+        "subject": "",
+        "keywords": "",
+        "creator": "",
+        "producer": "",
+        "creationDate": "",
+        "modDate": "",
+        "trapped": "",
+        "encryption": null
+      },
+      "page_records": [
+        {
+          "page": 1,
+          "size_points": [
+            0.0,
+            0.0,
+            595.0,
+            842.0
+          ],
+          "text_characters": 687,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-01.png",
+            "sha256": "68d6ef25e6b92f4f63a68aa87bce8f3a5fd2dffa51ab229240fc6d6f0fe017be",
+            "bytes": 199162
+          },
+          "fonts": [
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            },
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": [],
+          "text": "ICARUS数字IP验证智能体\n技术方案 ∙ v3 ∙ 2026-10-05\n一、作品概述\nICARUS面向数字IP开发中的模块级功能验证，把自然语言规格、API测试规划与真实Verilog仿真接成可\n复查的工作流程。使用者选择案例或上传RTL，说明验证目标并提供接口合约；Agent提出受约束的激励\n计划，独立参考模型与Icarus Verilog逐拍判定，保存反例、失败原因、原始响应及用量。\n作品使用DeepSeek API，不训练或部署本地模型权重。模型负责提出测试，执行器负责校验和运行，判\n据负责给出结论。可运行的接口、完整错误记录、共享额度和离线交接是本作品的主要贡献。\n图1 受控验证流程\n图1展示职责分工。当前受控实验的补测计划均以新episode执行并自动复位；上一轮电路状态不会延续\n到下一轮。历史计划保存在轨迹中，供模型规划和审核。\n1.1 本版实证摘要\n范围\n已取得的结果\n两个内部合成新模块\n108任务全部实际执行，134轮、268实际与正确\n参考执行侧\n缺陷比较\n四个不同人工缺陷各重复三次；反馈11/12、随机\n10/12、固定12/12\n正确控制\n六策略共36/36实际执行，误报0\nAPI及用量\n87请求，339624输入加输出tokens，未知与待结\n算均0\n本版事实来自封存的共享数据及原始回执。最新实验实际源码为20400fa，Agent、端口反馈helper和系\n统提示保持此前a969337的冻结字节。材料制作没有新增模型请求或仿真成绩。\nICARUS ∙ AI+集成电路\n数字IP验证智能体 / 技术方案 v3\n1 / 10\n"
+        },
+        {
+          "page": 2,
+          "size_points": [
+            0.0,
+            0.0,
+            595.0,
+            842.0
+          ],
+          "text_characters": 696,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-02.png",
+            "sha256": "ae5e30b193fea58f396c46c5ce16833745ca87854d637a21be7e916b7b4927ae",
+            "bytes": 171455
+          },
+          "fonts": [
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            },
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": [],
+          "text": "二、需求分析\n2.1 从学习与开发任务出发\n数字IP的功能错误往往来自边界和多输入交互：缓存空满时的请求是否接受、有效数据遇到清空时如何处\n理、事件累计何时清零，以及一次操作需要观察多少拍。只看一段波形或少量最终输出，容易漏掉中间状\n态；测试失败后，需求、激励与判断依据又常散落在不同文件中。\n本作品从自身学习和研发中的上述问题提出需求，面向正在编写模块测试的学习者和开发者。需求分析不\n使用虚构访谈、人员反馈或经济收益。目标是让测试建议可执行、结果可解释、失败可交接。\n实际任务\n所需能力\n本作品的对应实现\n把自然语言需求变成输入\n明确端口、宽度与协议约束\n规格文本、DutContract与严格\nTestPlan\n探索边界和多周期路径\n控制激励长度，观察过程\n受限API规划、独立补测、逐拍采\n样\n区分工具失败与设计反例\n分层记录判定\n格式、预检、执行、输出差异分别\n留存\n重现并交给他人复核\n保留原输入与工具证据\nSHA绑定、日志、波形及离线证据\n包\n2.2 用户操作与验收目标\n网页提供案例选择、自定义RTL上传、验证目标、计划生成、仿真、规则审查和运行档案。操作成功应留\n下明确的计划及实际结果；失败应说明停止阶段，并保留已执行部分。切换页面和同会话rerun应保留输\n入与结果，长输出可以正常阅读。\n对验证能力采用实际正确控制与人工语义变体比较；对交接能力检查输入原字节、执行记录和归档一致\n性；对使用效果区分机器操作、真实人员反馈及外部部署。当前成绩以内部模块实验和本机工程验收为依\n据。\nICARUS ∙ AI+集成电路\n数字IP验证智能体 / 技术方案 v3\n2 / 10\n"
+        },
+        {
+          "page": 3,
+          "size_points": [
+            0.0,
+            0.0,
+            595.0,
+            842.0
+          ],
+          "text_characters": 786,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-03.png",
+            "sha256": "bc1325468d09dd9247aea0b69215de61ce3c2c80ad992f94112befa89fdaff90",
+            "bytes": 181916
+          },
+          "fonts": [
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            },
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": [],
+          "text": "三、AI技术工具选择与运用\n3.1 API规划与工具裁决\n本次使用DeepSeek接口记录中的deepseek-flash模型，对应本次用户选择“4.1f”。服务商完成模型推\n理，本机运行测试台生成、Icarus编译仿真、独立参考与证据管理。模型不生成裁决用的期望输出，也不\n直接执行任意程序。\n系统规则与用户状态分开传递。模型状态包含正确规格、明确合约、可驱动输入、历史计划、自身剩余额\n度及策略允许的反馈。内部实验不向模型提供目标RTL、缺陷标签、私有见证、参考源码或旧成绩。\n层次\n输入与职责\n输出\nAPI Agent\n读取规格与当前状态，提出激励或\n停止\n严格动作结构：action、reason、\nvectors\n计划校验器\n检查名称、数值、宽度、时钟、采\n样与预算\n可执行计划或固定错误码\n执行器\n生成测试台，运行Icarus，捕获端\n口\n真实日志、波形、采样和执行状态\n独立判据\n按正确规格逐拍复算输出\n检出、未检出或证据不足\n3.2 受限恢复与共享用量\n普通格式错误和可恢复的计划预算错误，只有在请求额度允许时才能重新提案。错误动作不会被静默裁剪\n或执行；原始响应、拒绝原因与用量仍保存。预检错误反馈采用固定安全代码和受信字段，不回传任意源\n码或异常原文。\n本次完整批次所有API组共享100万输入加输出tokens，最大输出4096tokens，请求非流式、thinking\ndisabled、超时60秒，自动传输重试为0。格式拒绝与预算拒绝后的重新提案是新的收费请求。缺少\nusage时保留预留额度，不能据空记录把未知消耗当零；缓存字段不重复相加。\n作品使用轨迹来审核模型行为，没有对这些轨迹进行权重训练。API凭据在使用者本机私下配置，不随材\n料或证据包发布。\nICARUS ∙ AI+集成电路\n数字IP验证智能体 / 技术方案 v3\n3 / 10\n"
+        },
+        {
+          "page": 4,
+          "size_points": [
+            0.0,
+            0.0,
+            595.0,
+            842.0
+          ],
+          "text_characters": 720,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-04.png",
+            "sha256": "6fc6c2605ca2e20ba3de828d679ec007c1da47f4c438e0014c76e6fa65dc122c",
+            "bytes": 177780
+          },
+          "fonts": [
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            },
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": [],
+          "text": "四、项目实施\n4.1 从合约到实际每拍输出\n实现由网页/命令行入口、Agent调度、测试计划校验、测试台生成、Icarus执行、参考判据和证据导出\n组成。合约明确时钟、复位、端口方向与位宽；测试计划只驱动允许的输入，时钟由工具生成。\n当前比较使用独立episode：每个合法新计划重新建立DUT、自动复位，然后按计划施加刺激。一个输入\n段持续多拍时，工具在每一拍边沿之后检查全部真实输出；不会只比较段末而遗漏中间差异。刺激周期累\n计受限，正确参考的审核执行侧另列，不混成模型搜索次数。\n两类新模块只在固定完整合约上取得权威参考：无参数、固定端口、10ns上升沿时钟、异步低有效复位\n且自动复位两拍。错误位宽、额外端口、改变复位或时钟、before采样和未知输入不能获得这套参考的\n授权。旧模块支持范围保持原有门禁。\n4.2 可用反馈来自真实执行\n通用端口摘要读取明确合约中的真实端口，保留完整位串及X/Z，按端点与均匀间隔确定最多12个时间样\n本，并给出省略数量。它不读取期望值、不推测内部状态、不按最能暴露缺陷的位置选择样本。\n摘要交叉绑定计划、合约、RTL、测试台与已保存的执行记录，重解析stdout并核对采样包。缺工件、内\n容错配、采样缺行、顺序冲突或未完成执行，返回证据不足和安全错误码，不补造端口值。这是本地来源\n一致性检查；如果所有相关原件同时被伪造，本地SHA不能独立证明真实性。\n新两模块有80轮完整端口摘要，实际20个收费请求收到了端口反馈。无反馈策略的31次请求不接收观察\n和拒绝诊断，但仍知道自身计划、预算并受执行器早停影响。\nICARUS ∙ AI+集成电路\n数字IP验证智能体 / 技术方案 v3\n4 / 10\n"
+        },
+        {
+          "page": 5,
+          "size_points": [
+            0.0,
+            0.0,
+            595.0,
+            842.0
+          ],
+          "text_characters": 671,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-05.png",
+            "sha256": "60509d06f2af77606f854716a5be18920568b3449021f120ad3fc17d34e073ca",
+            "bytes": 152524
+          },
+          "fonts": [
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            },
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": [],
+          "text": "4.3 正确规格与独立判据\n新模块\n固定正确行为\n共同计划限制\n两级有效数据流水\n8位数据，连续有效输入、空泡、\nflush优先；无效输出数据清零\n每任务累计24刺激拍，每提案最多\n12输入段\n许可事件累计器\n4位模16累计；仅许可事件增加，\nclear不受enable限制且优先\n累计接受最多64向量，最多3共享\n请求\n状态默认保持输入，独立episode自动复位。single策略仅1请求；反馈和无反馈最多3请求，格式拒绝也\n占请求。参考模型采用与RTL寄存器实现不同的语义表达，再用真实逐拍输出对齐。\n原四类开发配置另有24项有限功能场景：FIFO7、UART6、SPI6、握手5。它们来自真实采样规则，是有\n限事件观察，不是代码覆盖率或正确性证明。两类新模块没有新增定制bins，其功能覆盖状态为\nunsupported/unknown。\n4.4 先检查判据自身\nFIFO曾在同拍接受读写时出现占用量错误。独立队列按边沿前空满条件决定接受，队列长度在同时接受\n时保持不变；它未复制RTL的计数赋值顺序。在76刺激拍、228输出比较中，修复前66项差异，修复后\n0。修正基线和重新产生的单点变体均独立保存。\n外部有限规格补齐UART位持续时间及busy释放检查后，同字节24目标中的15个人工变体检出由13提升\n到15。三正确、三等价改写无误报，三编译失败保持不可判定。收益来自人工补判据，范围包括三个外\n部模块类别，不记为AI新增发现。判据原件\nICARUS ∙ AI+集成电路\n数字IP验证智能体 / 技术方案 v3\n5 / 10\n"
+        },
+        {
+          "page": 6,
+          "size_points": [
+            0.0,
+            0.0,
+            595.0,
+            842.0
+          ],
+          "text_characters": 471,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-06.png",
+            "sha256": "ecadf0cf3391be06376d3fe7ec4d0c7f2050eb6d7ca59088d947fb2d3a1ce7e7",
+            "bytes": 131157
+          },
+          "fonts": [
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            },
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": [],
+          "text": "五、应用成效\n5.1 最新两模块完整受控批次\nAgent、helper与系统提示先冻结于a969337，再加入两类新合成模块和独立参考适配；实际执行源码\n为20400fa。每模块正确目标与两个语义变体，三次重复、六策略，共108任务。每策略分母为四个不同\n人工缺陷各重复三次，即12缺陷任务，另有6正确控制。\n图2 最新两模块六策略检出\n策略\n检出/12\n三次检出各/4\nAPI请求\n固定测试\n12\n4/4/4\n0\n均匀随机\n10\n4/3/3\n0\n协议随机\n8\n4/2/2\n0\n单次API\n8\n2/2/4\n18\n反馈Agent\n11\n4/4/3\n38\n无反馈Agent\n10\n3/3/4\n31\n108任务均有实际执行，共134轮、268实际与正确参考执行侧；36/36正确控制无误报。反馈多轮检出\n中6项发生在首轮、5项发生在第二轮，展示闭环能够产生后续可执行补测。固定测试仍最好；反馈比随\n机和无反馈各多1任务，这只是该受控样本的描述性差值。完整报告\nICARUS ∙ AI+集成电路\n数字IP验证智能体 / 技术方案 v3\n6 / 10\n"
+        },
+        {
+          "page": 7,
+          "size_points": [
+            0.0,
+            0.0,
+            595.0,
+            842.0
+          ],
+          "text_characters": 716,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-07.png",
+            "sha256": "f2e7fa6fadedb7d128e449c40f332d708f45b911e4de0d7deff6ed9cbdd74dcf",
+            "bytes": 157405
+          },
+          "fonts": [
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            },
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": [],
+          "text": "5.2 历史八模块完整对照单列\n此前a969337八模块批次包含432任务，各策略48缺陷任务来自16不同缺陷×3重复，另24正确控制。模\n块均已暴露，不能改称最新留出；不同任务集合不拼接分母。\n策略\n历史检出/48\nAPI请求\n输入加输出tokens\n固定测试\n48\n0\n0\n均匀随机\n32\n0\n0\n协议随机\n48\n0\n0\n单次API\n29\n70\n205503\n反馈Agent\n37\n122\n426581\n无反馈Agent\n37\n114\n341065\n历史批次414任务实际执行、18零DUT，484轮/968执行侧，严格比较资格false；正确控制143/144实\n际执行、误报0，未执行的1项不算通过。306请求、973149tokens，未知/pending0；共享账本晚序任\n务受到额度限制。反馈与无反馈同为37/48，未产生整体优越性证据。历史报告\n5.3 失败与消耗是结果的一部分\n最新批次85个动作通过schema、2个格式拒绝；5个计划预算拒绝属于schema通过后的预检子集，不能\n与85/2相加为请求总数。预算拒绝后2任务实际执行、1检出；格式拒绝后1任务有2轮实际执行、0检\n出。第108任务最终格式失败，此前1轮14刺激拍仍完整保存并留在分母。\n最新批次87请求使用301910输入和37714输出tokens，合计339624，本批100万剩660376，未知\n/pending均0。历史用量不扣本批；这不是实付金额，余额也未用于挑选失败单独补成绩。严格比较资格\ntrue说明双侧证据完整，并不表示所有动作都成功。\nICARUS ∙ AI+集成电路\n数字IP验证智能体 / 技术方案 v3\n7 / 10\n"
+        },
+        {
+          "page": 8,
+          "size_points": [
+            0.0,
+            0.0,
+            595.0,
+            842.0
+          ],
+          "text_characters": 794,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-08.png",
+            "sha256": "b2e57ae6a3a44531496f73e2adb8ce88929e7ee6b1b46c28a34396ed6a55b43a",
+            "bytes": 187049
+          },
+          "fonts": [
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            },
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": [],
+          "text": "六、总结与展望\n6.1 可复用的作品贡献\n作品实现了四项可复查能力：把规格转换为受控计划；在实际逐拍仿真中独立判定；把格式、预算、工具\n和设计错误分层留存；把原始输入与反例交接为无需新增API的证据。通用端口事实适用于明确合约，无\n需为每个新模块把缺陷见证写进提示词。\n源码验收为2033通过、2跳过、0失败，mypy检查88文件零问题，535项指纹前后无变。结果审计由非\n实现者核心核验和入口作者轨迹核验分工完成；核心2192不同非DUT检查全部通过，作者另查54轨迹\n/87请求。工程测试与审查检查不相加，它们不替代真人效果。\n6.2 适用范围与下一步\n边界或待补证据\n当前事实与下一步\n留出与统计\n两模块与五个历史受控批次模块集合互斥；同团队\n合成，非外部盲测、独立作者或预训练未见。无独\n立时间戳证明选型早于旧成绩；扩大外部设计与重\n复后再评价泛化\n功能能力\n当前是有限模块级功能验证，无硬件、复杂SoC、\n物理/时序签核或工业部署证明\n人员效果\n真人试用与H02人工复核无真实原件；后续记录需\n求、用时、协助、异议和授权，不补造人数或签署\n样式与可视化\n新资产仍有12样式问题，WaveDrom固定依赖缺\n失；补齐后保存新的门禁原件\n环境与发布\n异机、外部Actions、真实远程地址和实体手机未\n实证；原生Office打开尚未核验\n经济与推广\n未取得服务商账单，未测量收益或推广规模；不填\n写推测金额和效率百分比\n本作品定位为API辅助的模块验证工具。最新结果说明闭环可执行、可交接，同时固定基线仍领先，尚不\n足以支持显著性、反馈因果或工业泛化结论。下一阶段先补外部设计的明确规格和独立审查，再开展真实\n人员使用与异机交接。真人/H02是本项目拟补强的证据，并非自行增加的官方必交条件。\nICARUS ∙ AI+集成电路\n数字IP验证智能体 / 技术方案 v3\n8 / 10\n"
+        },
+        {
+          "page": 9,
+          "size_points": [
+            0.0,
+            0.0,
+            595.0,
+            842.0
+          ],
+          "text_characters": 576,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-09.png",
+            "sha256": "eb40d2bb5eaad76ff83f79768361bc0176d94f6d2f6a98c53beba7321379addb",
+            "bytes": 123046
+          },
+          "fonts": [
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            },
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": [],
+          "text": "以下为附录\n七、附录\n7.1 本版证据索引\n下列编号对应本版合并佐证，不复用旧材料的成绩编号。\n编号\n原始来源\n对应内容\nV31\n最新报告、回执\n新108任务、六策略与正确控制\nV32\n预算、轨迹清单\n请求、格式、恢复与全部用量\nV33\n历史432报告、回执\n历史分母、失败及额度限制\nV34\n独立判据、功能场景\nFIFO纠错、外部有限规格与24场\n景范围\nV35\n源码验收、结果审计\n测试、固定合约和双机器核验\nV36\n完整原件包、完整清单\n原始输入、执行侧与交接依据\n7.2 版本与原字节\n层次\n精确版本或依据\n最新实验源码\n20400fa7dca0c9804a96b1eb9842956782a9e8\n1f\nAgent/helper/系统提示锚定\na96933786c17986a739fc2da515db3294d6e80\n44\n材料证据基点\nf632b0a83d7a63256af767eab73c91477384cc4\n4\n458冻结输入原字节在执行结束时没有变化。Git核对446精确相等、12仅换行不同，零内容差异；精确\n复现使用注册快照，而不是假定任意checkout字节完全相同。材料另有数据源和构建回执，不能把材料\n版本等同于实验源码版本。\nICARUS ∙ AI+集成电路\n数字IP验证智能体 / 技术方案 v3\n9 / 10\n"
+        },
+        {
+          "page": 10,
+          "size_points": [
+            0.0,
+            0.0,
+            595.0,
+            842.0
+          ],
+          "text_characters": 1047,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-10.png",
+            "sha256": "7d0039a832be1cb5596ff09827ccd944bdd93a9f1cc4ca3461ca5c0a296b27ab",
+            "bytes": 205731
+          },
+          "fonts": [
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            },
+            {
+              "name": "Consolas Regular",
+              "type": "Type0",
+              "embedded": true
+            },
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": [],
+          "text": "7.3 运行与证据复查\n主要实现路径为src/iverilog_ai/ai/agent.py（决策与轮次调度）、src/iverilog_ai/core/executor.py（\n受控Icarus执行）、src/iverilog_ai/core/reference_model.py（独立逐拍期望）及\nsrc/iverilog_ai/core/observation_feedback.py（真实端口反馈与来源核对）。本作品使用API推理，\n没有本地模型权重交付。\n安装项目依赖与Icarus后，网页入口为：\n$env:PYTHONPATH = \"src\"\npython ‐m streamlit run ui/app.py ‐‐server.port 8600\n使用者可先选择内置案例离线运行，再自行配置API，进入受限验证循环。API参数与执行模式应以本次\n保存的设置为准；启用网络规划不意味着自动获得独立判据，外部RTL仍需明确合约和可核验的参考。\n建议按以下顺序复查本版证据：\n1.\n阅读事前方案与登记，核对任务成员、六策略、三个重复和完整分母。\n2.\n使用完整原件清单核对ZIP成员、SHA和458注册输入，不用摘要替代原件。\n3.\n检查任务轨迹、每轮计划、实际/正确参考两侧日志、波形和停止原因；失败与不可判定不删除。\n4.\n分别核对token预算账、原始响应、核心审计和作者轨迹审计。离线查看或重放不计新的模型成绩。\n7.4 官方来源与提交口径\n本稿按官方七节大纲编写；要求以2026-10-05实际核对的官方来源为准：\n•\n主题赛通知\n•\n竞赛规则与作品提交要求\n•\n技术报告参考大纲\n可读官方入口：https://www.aicomp.cn/notice/4756.html。规则和大纲由该通知的官方附件进入；本\n版只读核对原件见rules_validation.json。\nIcarus官方工具资料：https://steveicarus.github.io/iverilog/。具体编译、执行与输出结论以本项目保\n存的实际工具日志为准；模型名称以实发设置和响应记录为准。\n技术方案PDF不超过10MB；答辩提交PDF，佐证合并为一份PDF。视频为可选佐证，如提供应为MP4、\n3至5分钟、不超过300MB。报名、队号和实际上传回执由提交者核实；本稿不伪造身份字段或提交完成\n状态。\nICARUS ∙ AI+集成电路\n数字IP验证智能体 / 技术方案 v3\n10 / 10\n"
+        }
+      ],
+      "readable_selectable_text": true,
+      "raster_slide_pdf": false,
+      "visual_acceptance": "pending explicit reviewer image inspection",
+      "render_backend": "PyMuPDF read-only page render; does not re-export original PDF"
+    },
+    "supporting_evidence": {
+      "artifact": {
+        "path": "docs/competition/ic/ICARUS_佐证材料_v3.pdf",
+        "sha256": "7fe5fe5aa78d654dc4e212cd25e2f2b202418d1d7a32d96ce755d8361a8e0dda",
+        "bytes": 260009
+      },
+      "role": "supporting_evidence",
+      "pages": 6,
+      "metadata": {
+        "format": "PDF 1.7",
+        "title": "",
+        "author": "",
+        "subject": "",
+        "keywords": "",
+        "creator": "",
+        "producer": "",
+        "creationDate": "",
+        "modDate": "",
+        "trapped": "",
+        "encryption": null
+      },
+      "page_records": [
+        {
+          "page": 1,
+          "size_points": [
+            0.0,
+            0.0,
+            595.0,
+            842.0
+          ],
+          "text_characters": 756,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/supporting_evidence-render/page-01.png",
+            "sha256": "0f78571ed672649c277e96a981f8e55e312213218182036673837b4fb23f5d6d",
+            "bytes": 158849
+          },
+          "fonts": [
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            },
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": [],
+          "text": "ICARUS数字IP验证智能体\n合并佐证 ∙ v3 ∙ 2026-10-05\nV31 最新两模块完整受控实验\n实际源码20400fa；Agent/helper/导入后系统提示保持此前a969337的冻结字节。新模块为两级有效数\n据流水和许可事件模16累计器，均由同团队合成，各正确目标和两个语义变体。它们与五个历史受控API\n批次的模块集合互斥。\n实验要素\n登记与实际结果\n任务成员\n两模块×三目标×三重复×六策略＝108任务\n缺陷分母\n每策略12任务＝4个不同人工缺陷×3重复\n正确控制\n每策略6任务，合计36/36实际执行、误报0\n周期与段数\n所有episode累计最多24刺激拍；每提案最多12\n段，累计接受64向量\n执行方式\n独立episode自动复位，全部输出每刺激拍after判\n定\n实际执行\n108/108任务、134轮、268实际与正确参考执行\n侧；零DUT任务0\n策略\n检出/12\n各重复/4\nAPI请求\ntokens\n固定测试\n12\n4/4/4\n0\n0\n均匀随机\n10\n4/3/3\n0\n0\n协议随机\n8\n4/2/2\n0\n0\n单次API\n8\n2/2/4\n18\n61529\n反馈Agent\n11\n4/4/3\n38\n166073\n无反馈Agent\n10\n3/3/4\n31\n112022\n实际时间为2026-10-05 05:59:49至06:04:02 UTC。反馈比随机和无反馈各多1任务，固定仍为12/12；\n样本小且模型提案未成对固定，不作显著性或因果结论。每策略跨重复并集均为4/4，不用该并集替换12\n任务的主指标。\n来源：事前方案、实际登记、主报告、回执。\nICARUS ∙ Verification Evidence / 验证佐证\n数字IP验证智能体 / 佐证材料 v3\n1 / 6\n"
+        },
+        {
+          "page": 2,
+          "size_points": [
+            0.0,
+            0.0,
+            595.0,
+            842.0
+          ],
+          "text_characters": 831,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/supporting_evidence-render/page-02.png",
+            "sha256": "dc52e2e3e9936bab97fdc6de7dd28d56b4392c60c5f6e004b8f36a1938a3fcd3",
+            "bytes": 173740
+          },
+          "fonts": [
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            },
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": [],
+          "text": "V32 原始响应、恢复与共享预算\nAPI实发记录为DeepSeek/deepseek-flash，thinking disabled、非流式、store false、60秒超时、\n4096输出上限、自动传输重试0。single最多1请求；feedback和no_feedback最多3共享请求，拒绝后\n的补提也消耗请求与用量。\n口径\n实际数量与解释\n收费请求\n87，理论上限126\n输入/输出tokens\n301910 / 37714；合计339624\n独立批次上限\n1000000；剩660376，未知/pending0\n动作schema\n85通过 / 2拒绝\n计划预算拒绝\n5；属于schema通过后的预检子集，不与85/2相\n加\n其他预检\n本批有标/无标legacy非预算预检均0\n格式恢复\n2拒绝后1任务有2实际轮，0检出\n预算恢复\n5拒绝后2任务实际执行，1检出\n第108任务在反馈组最终以格式失败停止，此前已有1轮14刺激拍。该任务没有被删去或改记成功。严格\n比较资格true仅表示可比较执行证据完整；它不等于动作全通过。\n87份响应原文均留存，其中86份可解析JSON、1份畸形正文。格式拒绝已付9274tokens，预算拒绝已\n付23991tokens，均纳入339624总账，不单独补加。缺usage时的额度保留由门禁测试验证；本批实际\n未知记录为0。未提供服务商账单，不转换为实付金额。\n真实端口摘要有80轮、826采样，其中701返回、125按固定规则省略。实际20个收费请求STATE收到端\n口摘要；31次no_feedback请求的观察、计划错误和最新决策错误均隐藏。采样落盘数量不写成模型全\n部看过的数量。\n来源：预算回执、原账、轨迹清单、作者轨迹审计。历史用量不扣本批额度，余额未用于挑失败单独重\n跑。\nICARUS ∙ Verification Evidence / 验证佐证\n数字IP验证智能体 / 佐证材料 v3\n2 / 6\n"
+        },
+        {
+          "page": 3,
+          "size_points": [
+            0.0,
+            0.0,
+            595.0,
+            842.0
+          ],
+          "text_characters": 740,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/supporting_evidence-render/page-03.png",
+            "sha256": "d1665ff2d0fe94a0f50f32062432338a3e532bc20db275eb71d6d9ebba27c002",
+            "bytes": 151538
+          },
+          "fonts": [
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            },
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": [],
+          "text": "V33 历史八模块对照与失败边界\n此页仅披露此前a969337的八模块432任务完整批次。每策略48缺陷任务来自16不同缺陷×3重复，另24\n正确控制；模块均已暴露，不是本版两模块的新留出。\n策略\n历史检出/48\n各重复/16\n请求\ntokens\n固定测试\n48\n16/16/16\n0\n0\n均匀随机\n32\n11/11/10\n0\n0\n协议随机\n48\n16/16/16\n0\n0\n单次API\n29\n12/10/7\n70\n205503\n反馈Agent\n37\n11/16/10\n122\n426581\n无反馈Agent\n37\n12/14/11\n114\n341065\n完整性或限制\n历史事实\n实际任务\n414/432，18零DUT；484轮/968执行侧\n正确控制\n143/144实际执行，误报0；1未执行不记通过\n严格比较资格\nfalse；失败和未执行全部保留分母\nAPI总账\n306请求、973149tokens、余26851，未知\n/pending0\n格式/预算恢复\n18格式拒绝后12轨迹执行/5检出；16预算拒绝后9\n轨迹执行/4检出\n该批共享额度晚序任务受限；另有225/359两项既有非预算预检错误单列。反馈与无反馈同为37/48，不\n能概括所有子组更好，也不能将新108任务并入旧分母获得更高主指标。\n旧批次结果审计已核对全部968侧，保存历史131快照及Git107exact/24仅换行不同。它们属于该版原\n件，不覆盖最新458快照。\n来源：历史完整报告、回执、独立预算、历史审计。更早c7、v4与其他批次保留在主指标清单，不拼接\n版本或分母。\nICARUS ∙ Verification Evidence / 验证佐证\n数字IP验证智能体 / 佐证材料 v3\n3 / 6\n"
+        },
+        {
+          "page": 4,
+          "size_points": [
+            0.0,
+            0.0,
+            595.0,
+            842.0
+          ],
+          "text_characters": 662,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/supporting_evidence-render/page-04.png",
+            "sha256": "276da6ed68661f1f4916fd161404469040ab94c9ec4687c20b0cf0f9de0e2e97",
+            "bytes": 151733
+          },
+          "fonts": [
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            },
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": [],
+          "text": "V34 独立规格、判据及有限场景\nFIFO独立队列反例\n旧FIFO与旧参考曾同时保留同拍计数错误。独立队列按边沿前空满条件决定读写接受；中间占用下同时\n接受读写后队列长度应保持。\n语义场景\n独立规格给出的结果\n原队列含25、66，同时读出并写入99\n读值25；新队列66、99；占用量2保持2\n后续队列填满\nfull必须与独立队列长度一致\n76拍真实重放\n228输出比较；修复前66差异，修复后0\n旧基线、修正基线、重新生成的两个单点变体与首次失败均保留。它证明判据链也需要独立检查；结果属\n于人工语义分析和实现修正，不是本轮API增益。\n外部有限规格控制\n同字节24目标\n数量\n补判据后的结论\n正确参考\n3\n无误报\n历史人工变体\n15\n15检出，原判据13检出\n等价改写\n3\n无误报\n编译失败控制\n3\n不可判定\n外部类别为UART RX、UART TX和优先编码器。人工补齐UART位持续时间、busy期限和恢复检查后，\n完整15变体口径从13/15到15/15；不能把全部15项说成UART TX，也不称上游真实缺陷或独立留出。\n原四开发配置24功能场景分别为FIFO7、UART6、SPI6、握手5，只检查有限采样事件。新流水和累计器\n的功能覆盖状态仍是unsupported/unknown；实际逐拍输出检查另有明确独立判据。\n来源：协议与判据修正原件、功能场景说明、新资产与语义验证。\nICARUS ∙ Verification Evidence / 验证佐证\n数字IP验证智能体 / 佐证材料 v3\n4 / 6\n"
+        },
+        {
+          "page": 5,
+          "size_points": [
+            0.0,
+            0.0,
+            595.0,
+            842.0
+          ],
+          "text_characters": 759,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/supporting_evidence-render/page-05.png",
+            "sha256": "2562a0bdd60f8554de6c230c0bde23039e48744a804e1245e3b265efc155b867",
+            "bytes": 162810
+          },
+          "fonts": [
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            },
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": [],
+          "text": "V35 工程验收与双机器审查\n源码与输入字节\n验收\n实际记录\n完整pytest r2\n2033通过、2跳过、0失败错误\n类型检查\nmypy 88源文件、零问题\n验收指纹\n535项前后无变\nAPI冻结输入\n458原字节执行后无变\nGit对照\n446exact、12仅换行不同、0内容差异\n初次全仓2017通过/10失败/2跳过保留，问题为旧测试路径与新参考探针适配；修后重新完整运行。两跳\n过为Windows目录符号链接权限1314及推荐断言表为空，不算通过。资产104项、入口55项、事前202\n不同非DUT检查与全仓重叠，不相加。\n结果审查职责\n审查主体\n已封存的实际核验\n非对应功能实现者的核心机器审查\n2192不同非DUT检查通过；重算6214输出值、核\n对27434 VCD端口值、108任务/134轮/268侧、\n36正确控制与预算\n入口作者的轨迹机器审查\n54 Agent轨迹、87请求、原文与状态、恢复及\nno_feedback隐藏核验，未见矛盾\n主任务文书封装\n原机器记录职责分列；review_sources.zip的351\n成员CRC与全部SHA通过\n审查检查不等于pytest测试数；审查没有新增API或DUT执行，也不计入真人/H02。完整原件四ZIP及\n4359raw成员已核对，来源绑定是本地一致性证据。\n历史网页记录单独属于28be1ed：三种桌面浏览器视口含390×844模拟手机宽度，无横溢出，离线\nUART29向量/58比较/0差异、切页保留，全程0API/0真人。这不是新版API界面验收。\n来源：源码验收、事前审查、结果文书、审计回执、历史浏览器。\nICARUS ∙ Verification Evidence / 验证佐证\n数字IP验证智能体 / 佐证材料 v3\n5 / 6\n"
+        },
+        {
+          "page": 6,
+          "size_points": [
+            0.0,
+            0.0,
+            595.0,
+            842.0
+          ],
+          "text_characters": 876,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/supporting_evidence-render/page-06.png",
+            "sha256": "34c82752f0233fe2ad95d8986c3f42bc02cb3a706bc533bf9cc5a354b45e467e",
+            "bytes": 176476
+          },
+          "fonts": [
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            },
+            {
+              "name": "Microsoft YaHei Regular",
+              "type": "Type0",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": [],
+          "text": "V36 完整交接与事实边界\n资料目录为docs/experiment/agent-new-holdout-study-live-2026-10-05/：receipt.json索引执行与\n统计，full_raw_evidence.zip保存完整原件，full_raw_manifest.json记录成员及SHA，\nregistered_inputs.zip保存注册输入原字节。拿到PDF后可按该目录与文件名定位配套资料。\n原件入口\n可复查内容\n完整原件ZIP\n全部执行侧、API轨迹和保存的响应\n完整原件清单\n原件SHA、大小和成员集合\n注册输入包\n458输入原字节及来源\n字节绑定\nGit与实际快照的exact/newline-only差异\n严格汇总\n全任务分母、执行资格及失败\n共享材料数据\n本版数字来源及原始回执SHA\n本地证据基点为f632b0a，实验源码为20400fa，Agent/helper/系统提示锚定a969337；三者职责不\n同。请求SHA绑定规范化JSON，未另外保存HTTP wire-order字节，不补造缺失的原文。\n本次留出只表示两个模块与五个历史受控API模块集合互斥。设计与语义变体由同团队产生，没有独立时\n间证据证明选型早于旧v8成绩；不作外部盲测、独立作者、预训练未见或工业泛化声明。\n尚未补强的证据\n目前状态\n严格样式与图形生成\n12项样式问题；WaveDrom 3.6.1缺依赖\n真实人员与人工审核\nH01/H02无真实原件，不以机器审查代替\n外部环境\n异机、外部Actions、实体手机与原生Office未实\n证\n实体应用与经济效果\n无硬件/工业部署证明，无账单、收益或推广数据\n发布和视频\n真实远程地址、实际录屏及系统上传回执待提交者\n办理\n以上是本项目证据范围，不是额外增加的官方硬门槛。此材料不伪造人员、队号、签字或提交完成状态；\n公开时按匿名要求核对文件内容和元数据。\nICARUS ∙ Verification Evidence / 验证佐证\n数字IP验证智能体 / 佐证材料 v3\n6 / 6\n"
+        }
+      ],
+      "readable_selectable_text": true,
+      "raster_slide_pdf": false,
+      "visual_acceptance": "pending explicit reviewer image inspection",
+      "render_backend": "PyMuPDF read-only page render; does not re-export original PDF"
+    },
+    "defense": {
+      "artifact": {
+        "path": "docs/competition/ic/ICARUS_答辩材料_v3.pdf",
+        "sha256": "80f2fadd2304fdb7d0d7695520242239e9e31c0dbaac9db2f96e5e108fddf580",
+        "bytes": 1407201
+      },
+      "role": "defense",
+      "pages": 12,
+      "metadata": {
+        "format": "PDF 1.3",
+        "title": "",
+        "author": "",
+        "subject": "",
+        "keywords": "",
+        "creator": "",
+        "producer": "",
+        "creationDate": "",
+        "modDate": "",
+        "trapped": "",
+        "encryption": null
+      },
+      "page_records": [
+        {
+          "page": 1,
+          "size_points": [
+            0.0,
+            0.0,
+            960.0,
+            540.0
+          ],
+          "text_characters": 0,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-01.png",
+            "sha256": "ee2f68a516e4f1a2401d9f9deb8d58b8431650a0fee4e010f998990d05fed763",
+            "bytes": 70465
+          },
+          "fonts": [
+            {
+              "name": "Helvetica",
+              "type": "Type1",
+              "embedded": false
+            }
+          ],
+          "outside_page_text": [],
+          "text": ""
+        },
+        {
+          "page": 2,
+          "size_points": [
+            0.0,
+            0.0,
+            960.0,
+            540.0
+          ],
+          "text_characters": 0,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-02.png",
+            "sha256": "52b9dcd9f7b63dedef96b5c9ba616a535bab4f7eca464edef9d3b598cf4679e8",
+            "bytes": 136950
+          },
+          "fonts": [
+            {
+              "name": "Helvetica",
+              "type": "Type1",
+              "embedded": false
+            }
+          ],
+          "outside_page_text": [],
+          "text": ""
+        },
+        {
+          "page": 3,
+          "size_points": [
+            0.0,
+            0.0,
+            960.0,
+            540.0
+          ],
+          "text_characters": 0,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-03.png",
+            "sha256": "53f199988f6b6a3ab51a3df29e864465dce6c9e9586ec5dc1db559a98377536f",
+            "bytes": 129710
+          },
+          "fonts": [
+            {
+              "name": "Helvetica",
+              "type": "Type1",
+              "embedded": false
+            }
+          ],
+          "outside_page_text": [],
+          "text": ""
+        },
+        {
+          "page": 4,
+          "size_points": [
+            0.0,
+            0.0,
+            960.0,
+            540.0
+          ],
+          "text_characters": 0,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-04.png",
+            "sha256": "53b480a5dbe9f3b4472c4b68ad15b9c8ed5517eaf6ce837bf676acadc83401b2",
+            "bytes": 139263
+          },
+          "fonts": [
+            {
+              "name": "Helvetica",
+              "type": "Type1",
+              "embedded": false
+            }
+          ],
+          "outside_page_text": [],
+          "text": ""
+        },
+        {
+          "page": 5,
+          "size_points": [
+            0.0,
+            0.0,
+            960.0,
+            540.0
+          ],
+          "text_characters": 0,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-05.png",
+            "sha256": "94681701cfc8cbb97e2059febe8759920bbec8735649e7a1c2d035afe8451b9e",
+            "bytes": 145392
+          },
+          "fonts": [
+            {
+              "name": "Helvetica",
+              "type": "Type1",
+              "embedded": false
+            }
+          ],
+          "outside_page_text": [],
+          "text": ""
+        },
+        {
+          "page": 6,
+          "size_points": [
+            0.0,
+            0.0,
+            960.0,
+            540.0
+          ],
+          "text_characters": 0,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-06.png",
+            "sha256": "29219b246e564bed5620c4cb401f7d0fb063302ffa5d7f57dac39d4803850afa",
+            "bytes": 136233
+          },
+          "fonts": [
+            {
+              "name": "Helvetica",
+              "type": "Type1",
+              "embedded": false
+            }
+          ],
+          "outside_page_text": [],
+          "text": ""
+        },
+        {
+          "page": 7,
+          "size_points": [
+            0.0,
+            0.0,
+            960.0,
+            540.0
+          ],
+          "text_characters": 0,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-07.png",
+            "sha256": "d3b816ab176a83005d84063073077e5809d8cd829dc9291747630702fdaa52e4",
+            "bytes": 143662
+          },
+          "fonts": [
+            {
+              "name": "Helvetica",
+              "type": "Type1",
+              "embedded": false
+            }
+          ],
+          "outside_page_text": [],
+          "text": ""
+        },
+        {
+          "page": 8,
+          "size_points": [
+            0.0,
+            0.0,
+            960.0,
+            540.0
+          ],
+          "text_characters": 0,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-08.png",
+            "sha256": "d41d91f57b88533481fc239e5211eb1fb0856cb49953e2f3382dd8518c2dd4bd",
+            "bytes": 135173
+          },
+          "fonts": [
+            {
+              "name": "Helvetica",
+              "type": "Type1",
+              "embedded": false
+            }
+          ],
+          "outside_page_text": [],
+          "text": ""
+        },
+        {
+          "page": 9,
+          "size_points": [
+            0.0,
+            0.0,
+            960.0,
+            540.0
+          ],
+          "text_characters": 0,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-09.png",
+            "sha256": "c5d4242188f1b11bf6b8f3e317612b7b795a1b2bcfcd1a7117729dd8d5367873",
+            "bytes": 139936
+          },
+          "fonts": [
+            {
+              "name": "Helvetica",
+              "type": "Type1",
+              "embedded": false
+            }
+          ],
+          "outside_page_text": [],
+          "text": ""
+        },
+        {
+          "page": 10,
+          "size_points": [
+            0.0,
+            0.0,
+            960.0,
+            540.0
+          ],
+          "text_characters": 0,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-10.png",
+            "sha256": "fcee4922c24260eaa8bd5103f4af10e0e94341dc376a938dd960876d664a6b4b",
+            "bytes": 153314
+          },
+          "fonts": [
+            {
+              "name": "Helvetica",
+              "type": "Type1",
+              "embedded": false
+            }
+          ],
+          "outside_page_text": [],
+          "text": ""
+        },
+        {
+          "page": 11,
+          "size_points": [
+            0.0,
+            0.0,
+            960.0,
+            540.0
+          ],
+          "text_characters": 0,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-11.png",
+            "sha256": "e10832294b09955855fe55cf4e905434901c0e05059096edf857b9bd9862a03f",
+            "bytes": 121005
+          },
+          "fonts": [
+            {
+              "name": "Helvetica",
+              "type": "Type1",
+              "embedded": false
+            }
+          ],
+          "outside_page_text": [],
+          "text": ""
+        },
+        {
+          "page": 12,
+          "size_points": [
+            0.0,
+            0.0,
+            960.0,
+            540.0
+          ],
+          "text_characters": 0,
+          "png": {
+            "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-12.png",
+            "sha256": "cd094bbec80522c7253169a5c6861ec326048f40a207c812fbca8699c338eb07",
+            "bytes": 145549
+          },
+          "fonts": [
+            {
+              "name": "Helvetica",
+              "type": "Type1",
+              "embedded": false
+            }
+          ],
+          "outside_page_text": [],
+          "text": ""
+        }
+      ],
+      "readable_selectable_text": false,
+      "raster_slide_pdf": true,
+      "visual_acceptance": "pending explicit reviewer image inspection",
+      "render_backend": "PyMuPDF read-only page render; does not re-export original PDF"
+    }
+  },
+  "presentation": {
+    "artifact": {
+      "path": "docs/competition/ic/ICARUS_答辩材料_v3.pptx",
+      "sha256": "03a1cf9a47bb95576054725baf34b73a041d953983ba31ca3f8ad4c5ac8db76c",
+      "bytes": 71117
+    },
+    "zip_members": 74,
+    "crc_all_members_passed": true,
+    "pages": 12,
+    "slide_size": {
+      "cx": "12192000",
+      "cy": "6858000"
+    },
+    "metadata": {},
+    "slides": [
+      {
+        "slide": 1,
+        "xml": "ppt/slides/slide1.xml",
+        "text": "ICARUS\n数字 IP 验证智能体\n第三方 API 建议测试输入\n真实 Icarus 仿真与独立判据核验\nAI+集成电路    2026-10-05",
+        "text_runs": 5,
+        "native_tables": [],
+        "native_chart_references": 0,
+        "native_shapes": 5,
+        "picture_shapes": 0
+      },
+      {
+        "slide": 2,
+        "xml": "ppt/slides/slide2.xml",
+        "text": "数字 IP 的验证需求\n02\n可运行的输入仍可能遗漏时序边界\nvalid/data 流水线\n两级延迟与 valid/data 对齐\nflush 优先、invalid 数据归零\n事件累计器\n使能条件与模 16 回绕\nclear 不受 enable 限制\n使用对象：数字电路学习者、小型 IP 开发者、技术复核人员\n需求来自本项目合约与执行记录。未提供行业访谈人数或真人计时结果",
+        "text_runs": 11,
+        "native_tables": [],
+        "native_chart_references": 0,
+        "native_shapes": 11,
+        "picture_shapes": 0
+      },
+      {
+        "slide": 3,
+        "xml": "ppt/slides/slide3.xml",
+        "text": "API 规划与仿真裁决\n03\n正确规格\n完整合约\n第三方 API\n提议输入\n权限与预算\n检查\n真实 Icarus\n实际执行\n独立判据\n逐拍比较\n模型接收\n公开接口、自己的计划、剩余预算\n实际执行摘要与绑定的端口采样\n模型动作\n追加输入或停止\n目标 RTL、私有变体标签、路径和 witness 不进入 API。正确 RTL 逐 episode 独立重放",
+        "text_runs": 18,
+        "native_tables": [],
+        "native_chart_references": 0,
+        "native_shapes": 14,
+        "picture_shapes": 0
+      },
+      {
+        "slide": 4,
+        "xml": "ppt/slides/slide4.xml",
+        "text": "新内部模块集合留出\n04\n108 项全部实际执行\n新模块\n公开合约要点\n目标与重复\nvalid/data 流水线\n8 bit、两级、flush 优先\n正确 / B / C，各 3 次\n事件累计器\n4 bit 模 16、clear 优先\n正确 / B / C，各 3 次\n2 模块 × 3 目标 × 3 重复 × 6 策略 = 108 任务\n每策略 4 不同缺陷 × 3 重复 = 12 缺陷任务，另有 6 正确任务\n同团队合成设计，无独立选型时间戳、外部盲测或预训练未见证明",
+        "text_runs": 15,
+        "native_tables": [
+          [
+            [
+              "新模块",
+              "公开合约要点",
+              "目标与重复"
+            ],
+            [
+              "valid/data 流水线",
+              "8 bit、两级、flush 优先",
+              "正确 / B / C，各 3 次"
+            ],
+            [
+              "事件累计器",
+              "4 bit 模 16、clear 优先",
+              "正确 / B / C，各 3 次"
+            ]
+          ]
+        ],
+        "native_chart_references": 0,
+        "native_shapes": 6,
+        "picture_shapes": 0
+      },
+      {
+        "slide": 5,
+        "xml": "ppt/slides/slide5.xml",
+        "text": "共享请求与执行预算\n05\n339,624\nreported tokens\n独立单批上限 1,000,000\n87 次收费请求\n输入 301,910\n输出 37,714\n统一约束\n单次 API\n反馈 / 无反馈\n共享请求上限\n1\n3\n实际 episode 上限\n1\n3\n累计刺激拍上限\n24\n24\n每次提案 / 累计接受\n12 / 64\n12 / 64\n格式与预算补提仍收费，共用原任务上限\n0 unknown / pending，0 自动传输重试。自动复位与正确 RTL 重放成本单列",
+        "text_runs": 25,
+        "native_tables": [
+          [
+            [
+              "统一约束",
+              "单次 API",
+              "反馈 / 无反馈"
+            ],
+            [
+              "共享请求上限",
+              "1",
+              "3"
+            ],
+            [
+              "实际 episode 上限",
+              "1",
+              "3"
+            ],
+            [
+              "累计刺激拍上限",
+              "24",
+              "24"
+            ],
+            [
+              "每次提案 / 累计接受",
+              "12 / 64",
+              "12 / 64"
+            ]
+          ]
+        ],
+        "native_chart_references": 0,
+        "native_shapes": 9,
+        "picture_shapes": 0
+      },
+      {
+        "slide": 6,
+        "xml": "ppt/slides/slide6.xml",
+        "text": "新108任务的六策略检出\n06\n11 / 12\n反馈 Agent\n固定测试 12 / 12 最好\n随机与无反馈各 10 / 12\n反馈：首轮 6 / 次轮 5\n无反馈：首轮 8 / 后续 2\n仅多检出 1 项，不支持因果或显著性\n分母：4 不同缺陷 × 3 重复 = 12。另有 36/36 正确实际执行，0 实际误报",
+        "text_runs": 10,
+        "native_tables": [],
+        "native_chart_references": 1,
+        "native_shapes": 9,
+        "picture_shapes": 0
+      },
+      {
+        "slide": 7,
+        "xml": "ppt/slides/slide7.xml",
+        "text": "实际端口事实与无反馈对照\n07\n20\n已发送 feedback STATE\n带真实端口事实\n证据口径\n实际值\n保存的端口文档\n80\n原始 / 返回 / 省略采样\n826 / 701 / 125\n模型实际收到返回 / 省略\n180 / 12\n每份最多 12 个端点与等间隔样本，保留省略和 X/Z\n31 个无反馈 STATE 的三项诊断全部 None\n自身计划、预算与执行器早停仍保留。两新模块覆盖 unsupported/unknown，未补造 bins",
+        "text_runs": 16,
+        "native_tables": [
+          [
+            [
+              "证据口径",
+              "实际值"
+            ],
+            [
+              "保存的端口文档",
+              "80"
+            ],
+            [
+              "原始 / 返回 / 省略采样",
+              "826 / 701 / 125"
+            ],
+            [
+              "模型实际收到返回 / 省略",
+              "180 / 12"
+            ]
+          ]
+        ],
+        "native_chart_references": 0,
+        "native_shapes": 8,
+        "picture_shapes": 0
+      },
+      {
+        "slide": 8,
+        "xml": "ppt/slides/slide8.xml",
+        "text": "付费拒绝与真实执行\n08\n拒绝类\n收费请求\n后续执行任务\n后续检出任务\n预算拒绝（schema 通过子集）\n5\n2\n1\n动作格式拒绝\n2\n1\n0\n第 108 行：实际执行后，终态格式失败\n请求 1 执行 14 拍    请求 2 预算拒绝    请求 3 格式拒绝\ndecision_format_error，未检出，仍计入完整分母\n85 schema 通过 / 2 拒绝，预算 5 是通过子集。87 原回复保存，86 可解析 / 1 不解析",
+        "text_runs": 18,
+        "native_tables": [
+          [
+            [
+              "拒绝类",
+              "收费请求",
+              "后续执行任务",
+              "后续检出任务"
+            ],
+            [
+              "预算拒绝（schema 通过子集）",
+              "5",
+              "2",
+              "1"
+            ],
+            [
+              "动作格式拒绝",
+              "2",
+              "1",
+              "0"
+            ]
+          ]
+        ],
+        "native_chart_references": 0,
+        "native_shapes": 7,
+        "picture_shapes": 0
+      },
+      {
+        "slide": 9,
+        "xml": "ppt/slides/slide9.xml",
+        "text": "原件绑定与机器审计\n09\n458 登记输入\n冻结快照\n4,359 raw 文件\n真实执行与请求\nmanifest 与 ZIP\n保留原字节\n逐项绑定核验\n失败一并保留\n机器审计\n范围\n身份\n核心审计\n2,192 项检查\n非实现者代理\n轨迹审计\n54 轨迹 / 87 请求\nentry 代码作者\nstrict=true 仅表示证据资格\n机器审计非真人 / H02。Git 446 exact、12 仅换行差异，原始登记快照仍为权威",
+        "text_runs": 21,
+        "native_tables": [
+          [
+            [
+              "机器审计",
+              "范围",
+              "身份"
+            ],
+            [
+              "核心审计",
+              "2,192 项检查",
+              "非实现者代理"
+            ],
+            [
+              "轨迹审计",
+              "54 轨迹 / 87 请求",
+              "entry 代码作者"
+            ]
+          ]
+        ],
+        "native_chart_references": 0,
+        "native_shapes": 9,
+        "picture_shapes": 0
+      },
+      {
+        "slide": 10,
+        "xml": "ppt/slides/slide10.xml",
+        "text": "旧v8的开发与复用集合\n10\n432 注册 / 414 实际执行 / 18 无 DUT\n策略\n旧批检出 / 48\nAPI 请求\n固定测试\n48 / 48\n0\n均匀随机\n32 / 48\n0\n协议随机\n48 / 48\n0\n单次 API\n29 / 48\n70\n反馈 Agent\n37 / 48\n122\n无反馈 Agent\n37 / 48\n114\n306 请求\n973,149 tokens\nstrict=false\n正确任务 143 / 144 实际执行\n0 实际误报，1 未执行\n两批模块集合、分母与预算不同，不合并，也不作增益趋势图。旧失败没有补跑",
+        "text_runs": 30,
+        "native_tables": [
+          [
+            [
+              "策略",
+              "旧批检出 / 48",
+              "API 请求"
+            ],
+            [
+              "固定测试",
+              "48 / 48",
+              "0"
+            ],
+            [
+              "均匀随机",
+              "32 / 48",
+              "0"
+            ],
+            [
+              "协议随机",
+              "48 / 48",
+              "0"
+            ],
+            [
+              "单次 API",
+              "29 / 48",
+              "70"
+            ],
+            [
+              "反馈 Agent",
+              "37 / 48",
+              "122"
+            ],
+            [
+              "无反馈 Agent",
+              "37 / 48",
+              "114"
+            ]
+          ]
+        ],
+        "native_chart_references": 0,
+        "native_shapes": 7,
+        "picture_shapes": 0
+      },
+      {
+        "slide": 11,
+        "xml": "ppt/slides/slide11.xml",
+        "text": "判据独立性的规格案例\n11\nFIFO 独立队列检查\n76 拍 / 228 次比较\n中间占用同时读写，占用量保持\n外部人工计时 SPEC\n同字节 15 人工变体 / 24 候选\n13/15 至 15/15 来自人工 SPEC 补全\n此页是人工规格与实现修复案例。外部有限集合来自同作者仓库，不作 AI 表现统计",
+        "text_runs": 9,
+        "native_tables": [],
+        "native_chart_references": 2,
+        "native_shapes": 10,
+        "picture_shapes": 0
+      },
+      {
+        "slide": 12,
+        "xml": "ppt/slides/slide12.xml",
+        "text": "证据边界与交付\n12\n2,033 pass / 2 skip    mypy 88 源文件零错\n535 冻结指纹无变化，工程记录不等于 AI 或真人验收\n边界\n当前证据\n适用范围\n已审计合约 / 参数、有限拍数与有限端口采样\n尚未提供\n硬件、异机 Actions、真人试用、独立人工 H02\n已披露残项\n12 项严格 RTL 样式 / WaveDrom 3.6.1 缺失\n截止 2026-10-15 20:00\n方案 PDF ≤10MB，答辩 PDF，佐证合一 PDF，视频可选。真人 / H02 非官方硬门槛",
+        "text_runs": 14,
+        "native_tables": [
+          [
+            [
+              "边界",
+              "当前证据"
+            ],
+            [
+              "适用范围",
+              "已审计合约 / 参数、有限拍数与有限端口采样"
+            ],
+            [
+              "尚未提供",
+              "硬件、异机 Actions、真人试用、独立人工 H02"
+            ],
+            [
+              "已披露残项",
+              "12 项严格 RTL 样式 / WaveDrom 3.6.1 缺失"
+            ]
+          ]
+        ],
+        "native_chart_references": 0,
+        "native_shapes": 7,
+        "picture_shapes": 0
+      }
+    ],
+    "charts": [
+      {
+        "path": "ppt/slides/charts/chart1.xml",
+        "series": [
+          {
+            "labels": [
+              "无反馈 Agent",
+              "反馈 Agent",
+              "单次 API",
+              "协议随机",
+              "均匀随机",
+              "固定测试"
+            ],
+            "values": [
+              "10",
+              "11",
+              "8",
+              "8",
+              "10",
+              "12"
+            ]
+          }
+        ],
+        "relationships": [
+          {
+            "id": "rIdChartSnapshot1",
+            "target": "../../embeddings/chart-data-snapshot-001.xlsx",
+            "resolved_path": "ppt/embeddings/chart-data-snapshot-001.xlsx"
+          }
+        ],
+        "error_bars": 0,
+        "value_axis_min": [
+          "0"
+        ],
+        "value_axis_max": [
+          "12"
+        ]
+      },
+      {
+        "path": "ppt/slides/charts/chart2.xml",
+        "series": [
+          {
+            "labels": [
+              "修复后",
+              "修复前"
+            ],
+            "values": [
+              "0",
+              "66"
+            ]
+          }
+        ],
+        "relationships": [
+          {
+            "id": "rIdChartSnapshot1",
+            "target": "../../embeddings/chart-data-snapshot-002.xlsx",
+            "resolved_path": "ppt/embeddings/chart-data-snapshot-002.xlsx"
+          }
+        ],
+        "error_bars": 0,
+        "value_axis_min": [
+          "0"
+        ],
+        "value_axis_max": [
+          "80"
+        ]
+      },
+      {
+        "path": "ppt/slides/charts/chart3.xml",
+        "series": [
+          {
+            "labels": [
+              "补全计时后",
+              "旧人工规格"
+            ],
+            "values": [
+              "15",
+              "13"
+            ]
+          }
+        ],
+        "relationships": [
+          {
+            "id": "rIdChartSnapshot1",
+            "target": "../../embeddings/chart-data-snapshot-003.xlsx",
+            "resolved_path": "ppt/embeddings/chart-data-snapshot-003.xlsx"
+          }
+        ],
+        "error_bars": 0,
+        "value_axis_min": [
+          "0"
+        ],
+        "value_axis_max": [
+          "15"
+        ]
+      }
+    ],
+    "notes": [
+      {
+        "path": "ppt/notesSlides/notesSlide1.xml",
+        "text": "ICARUS 是面向数字 IP 的验证智能体。它让第三方模型 API 根据正确规格和完整接口合约建议测试输入，由本地受控执行器生成测试台，使用真实 Icarus 仿真，再由独立于模型建议的判据解释结果。作品的可评估贡献是把测试规划、执行权限、预算和原件留存接成一个受控闭环。我们没有训练或微调基础模型，也没有提供本地模型权重。用户请求的模型名称是 4.1f，服务返回的模型标识为 deepseek-flash。接下来分别说明架构、新模块实验、真实失败和证据边界。\n\n证据定位：docs/competition/ic/v3/material_data.json 的 api、uses_third_party_api_only、trained_or_finetuned_weights。新实验源码为 20400fa7dca0c9804a96b1eb9842956782a9e81f，核心 Agent/helper/System 先冻结于 a96933786c17986a739fc2da515db3294d6e8044。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n不使用虚构机构、队号、签字或真人参与记录"
+      },
+      {
+        "path": "ppt/notesSlides/notesSlide10.xml",
+        "text": "旧 v8 批次登记 432 任务、414 实际执行，18 个没有 DUT episode。每策略缺陷分母为 48，检出依次为 48、32、48、29、37、37；306 请求、973,149 tokens。144 个正确任务中 143 实际执行，没有实际误报，1 个未执行，所以不能写成 144/144 都通过。strict=false 表示该批完整证据资格不满足，未执行和其它失败仍保留。旧表与新 108 的模块集合、缺陷分母和预算不同，不合并为一个总检出率，也不画同一增益趋势。新 1M 批预算独立，不补跑旧 token_budget 失败行。\n\n证据定位：docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json、strict_summary.json、docs/experiment/agent_feedback_study_live_2026-10-05.md。旧源码冻结为 a96933786c17986a739fc2da515db3294d6e8044。本页保持旧批身份与真实失败，不代表新模块的旧版本成绩。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n"
+      },
+      {
+        "path": "ppt/notesSlides/notesSlide11.xml",
+        "text": "这一页说明为什么判据不能只依赖模型的自述。FIFO 旧 RTL 与旧 reference model 曾共享计数错误。独立 deque 规格检查发现中间占用时同时接受读写，占用量应净零改变。第 5 拍读 25、写 99 后，队列从 [25,66] 变为 [66,99]，占用量仍为 2。第 7 拍首次出现 full 端口差异，旧实现为 0、队列应为 1、修复后为 1。同一 76 拍、228 次输出比较，差异从 66 变为 0。\n\n右侧是同字节冻结的外部历史候选集合，24 个候选包含 15 个人工变体、3 个正确基线、3 个等价改写和 3 个编译失败控制。补全人工 UART TX 计时 SPEC 后，15 个人工变体的检出从 13/15 变为 15/15。正确和等价控制没有误报，编译控制单列。它来自同作者的两个仓库，有限流程，不是独立外部盲测，更不是 AI 成绩或 AI 自动发现缺陷的证明。此页所有历史数字只说明规格独立性和受支持判据修复。\n\n证据定位：docs/experiment/protocol_oracle_improvements_2026-10-04.md，旧 FIFO before/after evidence.json 与 external/replay-20261004-protocol-v2/evidence.json 的原 SHA 随本材料绑定。没有新增 DUT 重放。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n"
+      },
+      {
+        "path": "ppt/notesSlides/notesSlide12.xml",
+        "text": "现有机器工程记录为 2,033 通过、2 跳过、0 失败，mypy 88 源文件零错，535 个冻结指纹无变化。这是工程回归记录，不是 AI 效果或真人验收。范围限于已审计合约与参数、有限刺激拍和有限输出采样。新模块属于同团队合成集合，没有外部盲测、预训练未见、因果或普适收益证明。硬件验证、异机 Actions、真人试用和独立人工 H02 原件尚未提供；12 项严格 RTL 样式残项和 WaveDrom 3.6.1 缺失仍披露，不能填假想通过。真人和 H02 是内部证据完善项，官方规则未将它们列为硬门槛。\n\n投递材料按官方要求组织：技术方案 PDF 不超过 10MB，答辩交 PDF，佐证合并为一份 PDF，视频可选为 3–5 分钟 MP4、不超过 300MB，截止 2026 年 10 月 15 日 20:00。本答辩 PDF 为图像式导出，编辑请使用 PPTX。最终目标是让每个数字、失败与限制都有可定位原件，后续扩展必须用新的预登记实验说明。\n\n官方来源：material_data.json 的 rules，核验日期 2026-10-05。通知 https://www.aicomp.cn/notice/4756.html ，规则和技术报告大纲的完整官方 URL 保存在该事实源并写入此页备注。最终投递文件名按真实队号-赛题名称-作品名称-材料名称组织，目前未提供真实队号，所以保留内部 v3 文件名而不填虚构编号。工程来源：docs/experiment/agent_new_holdout_source_validation_2026-10-05.md。当前未在 Microsoft PowerPoint/LibreOffice/Google Slides 打开验证，不能将 artifact-tool 预览等同于 Native Office 验收。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n官方通知：https://www.aicomp.cn/notice/4756.html\n规则 PDF：https://www.aicomp.cn/wp-content/uploads/2026/07/%E9%99%84%E4%BB%B61AIC%C2%B7AI%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E7%AB%9E%E8%B5%9B%E8%A7%84%E5%88%99%E5%8F%8A%E4%BD%9C%E5%93%81%E6%8F%90%E4%BA%A4%E8%A6%81%E6%B1%82.pdf\n参考大纲 PDF：https://www.aicomp.cn/wp-content/uploads/2026/07/%E9%99%84%E4%BB%B62AIC%C2%B7AI%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A%E5%8F%82%E8%80%83%E5%A4%A7%E7%BA%B2.pdf"
+      },
+      {
+        "path": "ppt/notesSlides/notesSlide2.xml",
+        "text": "需求来自本项目的实际合约、执行日志和失败记录分析，没有虚构用户访谈、效率百分比或真人计时。以两项新合约为例，valid/data 流水线需要检验两级延迟、flush 优先级及 invalid 时输出归零；事件累计器需要检验使能条件、四位模 16 回绕和 clear 不受 enable 限制。一个能编译运行的输入序列仍可能遗漏这些边界。工具面向数字电路学习者、小型 IP 开发者和技术复核人员，提供可以回指输入、采样点和输出差异的记录。\n\n证据定位：spec/agent_new_holdout_20261005/valid_data_pipeline_spec.md、event_accumulator_spec.md。旧 FIFO 及 UART 规格改进见 docs/experiment/protocol_oracle_improvements_2026-10-04.md。适用范围只覆盖已审计的合约与参数，不能扩展到任意 SoC 或物理签核。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n"
+      },
+      {
+        "path": "ppt/notesSlides/notesSlide3.xml",
+        "text": "图中各阶段均为可编辑原生对象。模型只收到正确规格、完整接口合约、允许驱动的输入、自己的计划、剩余预算及允许的执行反馈。它不能修改目标 RTL、判据、执行命令或受支持设计的期望值，私有变体 RTL、目标标签、路径和 witness 不进入请求。执行器先做动作格式、输入权限和预算检查，再实际仿真。每个实际 episode 具有独立 DUT 实例和自动复位，随后在正确 RTL 上独立重放同一计划并比较每个 after-edge 采样的全部输出。新接口包含 i_clk 和异步低有效 i_rstn，周期 10ns，自动复位 2 拍。\n\n证据定位：src/iverilog_ai/ai/agent.py、src/iverilog_ai/core/pipeline.py、scripts/run_agent_new_holdout_study.py。逐请求 canonical body SHA、消息 SHA 与原件绑定见 docs/review/agent-new-holdout-study-review-2026-10-05/trace-audit.json。账本保留的是 canonical JSON SHA，原始 HTTP wire-order body 字节未单独存档。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n"
+      },
+      {
+        "path": "ppt/notesSlides/notesSlide4.xml",
+        "text": "这一批登记 2 个新模块，每个模块包含正确、B、C 三个目标，采用 3 次重复和 6 种策略，合计 108 任务。每种策略有 4 个不同缺陷乘 3 次重复，即 12 个缺陷任务，另有 6 个正确任务。新模块成员与此前五个受控 API 批次不重叠，Agent、helper 和 System 在新模块生成前已经冻结。设计、变体和实验仍来自同一团队，因此这里称内部模块集合留出。没有独立时间戳证明选型早于旧 v8 成绩，也没有外部盲测或预训练未见证明。不能把内部成员不重叠扩大解释为外部独立评估。\n\n证据定位：docs/experiment/agent_new_holdout_study_plan_2026-10-05.md、spec/agent_new_holdout_study_1m_v8.json、benchmarks/agent_new_holdout_20261005/manifest.json。三项核心冻结 SHA 和原字节快照由新实验审计核对。所有 108 项均已真实执行。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n"
+      },
+      {
+        "path": "ppt/notesSlides/notesSlide5.xml",
+        "text": "新批使用独立的 1,000,000 input+output token 上限，不扣历史用量，也不用于补齐旧失败行。实际 87 次收费请求，输入 301,910、输出 37,714，合计 339,624 reported tokens，unknown 和 pending 均为零。这个数字是服务方报告的 token 用量，不是货币账单。单次 API 至多 1 请求和 1 实际 episode；反馈与无反馈各至多 3 个共享请求和 3 个实际 episode。格式错误和周期预算拒绝后的补提均是收费新请求，仍共用原任务上限。每个任务累计刺激拍至多 24，每次提案至多 12 向量，累计接受至多 64。独立自动复位和正确 RTL 重放成本单列。传输配置为 thinking disabled、非流式、4096 输出上限、60 秒超时和零自动重试。\n\n证据定位：docs/experiment/agent_new_holdout_study_budget_2026-10-05.json、新公开 token_budget.json、preregistration.json、run_settings.json。理论请求上限 126 不是实际请求数。剩余预算不授权追加独立补批，store=False 是客户端配置而非第三方数据保留行为的证明。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n"
+      },
+      {
+        "path": "ppt/notesSlides/notesSlide6.xml",
+        "text": "条形图直接使用原生图表和嵌入式 literal workbook，分母统一为每策略 12 个登记缺陷任务。固定测试 12、均匀随机 10、协议随机 8、单次 API 8、反馈 Agent 11、无反馈 10。固定测试最好。反馈比均匀随机和无反馈各多 1 项，但只有 4 个不同缺陷和 3 次重复，预算、提案及早停行为也不同，因此不能声称因果、显著性或普适工业收益。全部 36 个正确任务实际执行且没有误报。strict=true 只表示内部完整证据资格满足，并不表示全部动作成功，第 108 行仍以终态格式失败留在完整分母。\n\n证据定位：docs/experiment/agent-new-holdout-study-live-2026-10-05/strict_summary.json、receipt.json。每策略 repeated detections 分别为固定 4/4/4、均匀随机 4/3/3、协议随机 4/2/2、单次 API 2/2/4、反馈 4/4/3、无反馈 3/3/4。不同重复不视为不同独立缺陷。首次实际检出 episode：单次 API 首轮 8；反馈首轮 6、第二轮 5；无反馈首轮 8、第二轮 1、第三轮 1。后续 episode 实际找到反例说明闭环有可观察行为，不能据此证明反馈因果。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n"
+      },
+      {
+        "path": "ppt/notesSlides/notesSlide7.xml",
+        "text": "80 个 Agent 实际 episode 都保存了完整端口反馈文档。原始有限采样共有 826 点，helper 返回 701 点、省略 125 点。每份最多 12 个端点及等间隔样本，省略和 X/Z 语义保留，实际这批没有 X/Z。这是有限绑定端口流的 complete，不能表示所有设计行为完整覆盖。保存反馈文档和真正发送给模型的反馈 STATE 要分开：只有反馈策略的 20 个后续已发送 STATE 带端口事实，合计返回 180 点、省略 12 点。无反馈的 31 个已发送 STATE 中 observation、plan_error、latest_decision_error 全为 None，但其中 12 个仍保留自己的 current_plan 和减少后的预算，执行器也仍早停。两个新模块的功能覆盖状态是 unsupported/unknown，不补造命名 bins。24 个命名 bins 只属于旧四个配置。\n\n证据定位：trace-audit.json 的 paid_model_state_port_facts 和 helper 重建计数，新 receipt.json 的 port_observation_episodes。helper 绑定 RTL、plan、contract、TB、采样包、stdout 与执行结果，端口投影不含期望值和私有路径。X/Z 的保留机制由既有审计验证，本轮材料没有重新执行测试。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n"
+      },
+      {
+        "path": "ppt/notesSlides/notesSlide8.xml",
+        "text": "所有 87 个原 API 响应都保存，其中 86 个可解析 JSON、1 个不可解析；不隐藏 paid failure。85 个响应通过 schema、2 个格式拒绝。5 个预算拒绝属于 schema 通过的子集，不能加到 85 和 2 之上形成 92 请求。预算拒绝花费 23,991 tokens，其中 2 个任务后续真正执行，1 个后续检出。格式拒绝花费 9,274 tokens，其中 1 个任务后续执行 2 个 episode，没有后续检出。legacy preflight 有标与无标均为零，不能只数 retry_eligible 就宣称其它拒绝为零。\n\n第 108 行，即 zero-based index 107，对应 event_accumulator、mutation_c、反馈策略、seed 2。请求 1 实际执行 14 拍且没有检出，请求 2 因剩余刺激预算拒绝，请求 3 格式拒绝后达到原 3 请求上限，终态为 decision_format_error。它有 1 个实际 episode、证据核验有效，仍作为未检出失败保留在分母。拒绝后的执行和检出只作描述，不构成反馈的因果收益。\n\n证据定位：trace-audit.json 的 all_paid_rejection_events、explicit_error_classification、traces[sample=107]；原轨迹 sample-107/agent/agent_trajectory.json 与原响应在公开 traces_and_decisions.zip 和 full_raw_evidence.zip 中。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n"
+      },
+      {
+        "path": "ppt/notesSlides/notesSlide9.xml",
+        "text": "证据链从冻结输入快照开始，绑定 458 项登记输入，实际保存 4,359 个 raw 文件。公开 full_raw_manifest 与 ZIP 使用原字节，未把格式失败改写成成功。压缩 raw archive 为 7,027,646 字节，未压缩原文件总量 64,589,914 字节，两者口径不同。Git 绑定 446 项 exact、12 项只存在换行差异，因此原始登记快照仍为权威，不能声称干净 checkout 每字节相同。\n\n两类审计身份要分开。核心审计由非实现者代理完成 2,192 个机器检查，包括 1,923 加 269；这仍不是真人独立人审。轨迹审计由实验 entry 代码作者检查 54 条轨迹和 87 次请求，明确非独立于入口作者、非 H02。核心输出重算 6,214 项、VCD 端口值核对 27,434 项；这些数字分别表示有限机器证据，不等于真人评测人数。所有机器审计都没有追加 API 或 DUT。\n\n证据定位：docs/review/agent-new-holdout-study-review-2026-10-05/core-audit.json、trace-audit.json、receipt.json；新 full_raw_manifest.json、registered_inputs_manifest.json、source_byte_binding.json。source_checksums.json 保存本材料实际引用原件及 authoring source 的 SHA。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n"
+      }
+    ],
+    "embedded_workbooks": [
+      {
+        "path": "ppt/embeddings/chart-data-snapshot-001.xlsx",
+        "bytes": 1562,
+        "sha256": "b8ebdcdf3b93ff5cb68aefef7573012b13f4dbf0b6b932c0c31e5d07217a6941",
+        "crc_passed": true,
+        "metadata": {},
+        "sheets": [
+          {
+            "path": "xl/worksheets/sheet1.xml",
+            "cells": [
+              {
+                "reference": "A1",
+                "type": "inlineStr",
+                "value": "Category",
+                "formula": null
+              },
+              {
+                "reference": "B1",
+                "type": "inlineStr",
+                "value": "实际观测",
+                "formula": null
+              },
+              {
+                "reference": "A2",
+                "type": "inlineStr",
+                "value": "无反馈 Agent",
+                "formula": null
+              },
+              {
+                "reference": "B2",
+                "type": null,
+                "value": "10",
+                "formula": null
+              },
+              {
+                "reference": "A3",
+                "type": "inlineStr",
+                "value": "反馈 Agent",
+                "formula": null
+              },
+              {
+                "reference": "B3",
+                "type": null,
+                "value": "11",
+                "formula": null
+              },
+              {
+                "reference": "A4",
+                "type": "inlineStr",
+                "value": "单次 API",
+                "formula": null
+              },
+              {
+                "reference": "B4",
+                "type": null,
+                "value": "8",
+                "formula": null
+              },
+              {
+                "reference": "A5",
+                "type": "inlineStr",
+                "value": "协议随机",
+                "formula": null
+              },
+              {
+                "reference": "B5",
+                "type": null,
+                "value": "8",
+                "formula": null
+              },
+              {
+                "reference": "A6",
+                "type": "inlineStr",
+                "value": "均匀随机",
+                "formula": null
+              },
+              {
+                "reference": "B6",
+                "type": null,
+                "value": "10",
+                "formula": null
+              },
+              {
+                "reference": "A7",
+                "type": "inlineStr",
+                "value": "固定测试",
+                "formula": null
+              },
+              {
+                "reference": "B7",
+                "type": null,
+                "value": "12",
+                "formula": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path": "ppt/embeddings/chart-data-snapshot-002.xlsx",
+        "bytes": 1474,
+        "sha256": "6236938d2b1004c032b61d7b62ce2d4a8ff366381f41af801dffdb44b9e4e58d",
+        "crc_passed": true,
+        "metadata": {},
+        "sheets": [
+          {
+            "path": "xl/worksheets/sheet1.xml",
+            "cells": [
+              {
+                "reference": "A1",
+                "type": "inlineStr",
+                "value": "Category",
+                "formula": null
+              },
+              {
+                "reference": "B1",
+                "type": "inlineStr",
+                "value": "实际观测",
+                "formula": null
+              },
+              {
+                "reference": "A2",
+                "type": "inlineStr",
+                "value": "修复后",
+                "formula": null
+              },
+              {
+                "reference": "B2",
+                "type": null,
+                "value": "0",
+                "formula": null
+              },
+              {
+                "reference": "A3",
+                "type": "inlineStr",
+                "value": "修复前",
+                "formula": null
+              },
+              {
+                "reference": "B3",
+                "type": null,
+                "value": "66",
+                "formula": null
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path": "ppt/embeddings/chart-data-snapshot-003.xlsx",
+        "bytes": 1493,
+        "sha256": "d3c49f3f919e2a554e090a38e718d7c9ac6f06a112805a6d1ef16ee0c3454789",
+        "crc_passed": true,
+        "metadata": {},
+        "sheets": [
+          {
+            "path": "xl/worksheets/sheet1.xml",
+            "cells": [
+              {
+                "reference": "A1",
+                "type": "inlineStr",
+                "value": "Category",
+                "formula": null
+              },
+              {
+                "reference": "B1",
+                "type": "inlineStr",
+                "value": "实际观测",
+                "formula": null
+              },
+              {
+                "reference": "A2",
+                "type": "inlineStr",
+                "value": "补全计时后",
+                "formula": null
+              },
+              {
+                "reference": "B2",
+                "type": null,
+                "value": "15",
+                "formula": null
+              },
+              {
+                "reference": "A3",
+                "type": "inlineStr",
+                "value": "旧人工规格",
+                "formula": null
+              },
+              {
+                "reference": "B3",
+                "type": null,
+                "value": "13",
+                "formula": null
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "members": [
+      {
+        "path": "docProps/core.xml",
+        "bytes": 145,
+        "sha256": "732800fa0cdc5a41069a7340e00244afbfb19214de26696ccdd465b71d4a776c",
+        "crc32": "9ff710f4"
+      },
+      {
+        "path": "docProps/app.xml",
+        "bytes": 439,
+        "sha256": "df36e472fdf35de2316c1458e41c32af3b697201d913d0d64c3f2c1379e2ad1b",
+        "crc32": "80ae1f72"
+      },
+      {
+        "path": "ppt/presentation.xml",
+        "bytes": 2054,
+        "sha256": "3346af3a3a5c0ee6d08ff3a2b6100546fc7a43c64448d860efe48740b672bb0f",
+        "crc32": "f85e112f"
+      },
+      {
+        "path": "ppt/theme/theme1.xml",
+        "bytes": 4657,
+        "sha256": "87c09b93b4b6e0b40077fd046288d408b3f8e49abd170589a963bc87b2053f9c",
+        "crc32": "b6528628"
+      },
+      {
+        "path": "ppt/slideMasters/slideMaster1.xml",
+        "bytes": 7510,
+        "sha256": "c3817248302327a9125426e2352116c9b246ca1ac3a11b86cf696403dcfa4d19",
+        "crc32": "ec315d94"
+      },
+      {
+        "path": "ppt/slideMasters/theme/theme2.xml",
+        "bytes": 4657,
+        "sha256": "87c09b93b4b6e0b40077fd046288d408b3f8e49abd170589a963bc87b2053f9c",
+        "crc32": "b6528628"
+      },
+      {
+        "path": "ppt/slideLayouts/slideLayout1.xml",
+        "bytes": 380,
+        "sha256": "2300fbb688968eebb7a1858e65f8aae0da29e9c5cefc4607fdc04101568c6b62",
+        "crc32": "30a4884c"
+      },
+      {
+        "path": "ppt/notesMasters/notesMaster1.xml",
+        "bytes": 4047,
+        "sha256": "67e34238b0ae378d2b06825cab5051767fe5c55010ccc2f8c4bc250056068e22",
+        "crc32": "ae176e59"
+      },
+      {
+        "path": "ppt/notesMasters/theme/theme3.xml",
+        "bytes": 4657,
+        "sha256": "87c09b93b4b6e0b40077fd046288d408b3f8e49abd170589a963bc87b2053f9c",
+        "crc32": "b6528628"
+      },
+      {
+        "path": "ppt/presProps.xml",
+        "bytes": 660,
+        "sha256": "1db4fc10ae1c50c0bf989e54950b4489fbe1ce68105fa850073337ef8e043f5f",
+        "crc32": "40f0c8dc"
+      },
+      {
+        "path": "ppt/tableStyles.xml",
+        "bytes": 164,
+        "sha256": "eefe8607728a909fd3cf65c0e18a5abf20526c77e5d206950696a268edd823c8",
+        "crc32": "54fd1d9c"
+      },
+      {
+        "path": "ppt/slides/slide1.xml",
+        "bytes": 8770,
+        "sha256": "9367eccafa659ac70ba2c559f79a3e44c6bcfd76ae2e606406877635931b6c61",
+        "crc32": "a1ec0217"
+      },
+      {
+        "path": "ppt/notesSlides/notesSlide1.xml",
+        "bytes": 3561,
+        "sha256": "33bf09eb6b8e052b0aeb5b81f5a92e75990569d51b019ee6ef360b9ad2c114ce",
+        "crc32": "ff64edc0"
+      },
+      {
+        "path": "ppt/slides/slide2.xml",
+        "bytes": 18749,
+        "sha256": "72f5dab770b434a1f1459f5e8c96d9a323f6cf7756750307d694411460b8d84f",
+        "crc32": "af6c5d2a"
+      },
+      {
+        "path": "ppt/notesSlides/notesSlide2.xml",
+        "bytes": 3476,
+        "sha256": "ea55aa89cd55962337cb801647ee644152c2cfb13261f7a12197c75c1fd76cf7",
+        "crc32": "062a3cc5"
+      },
+      {
+        "path": "ppt/slides/slide3.xml",
+        "bytes": 28498,
+        "sha256": "e7a657536ae13482bae40d999dd85d70fd2478dacd64fc5233dec2d4544c358a",
+        "crc32": "02bda2c9"
+      },
+      {
+        "path": "ppt/notesSlides/notesSlide3.xml",
+        "bytes": 3624,
+        "sha256": "01ed9487da7be6d4322600cf4ff74cb1d1554344d2a77f4fcaac9de88d367c4b",
+        "crc32": "1d4a886e"
+      },
+      {
+        "path": "ppt/slides/slide4.xml",
+        "bytes": 15042,
+        "sha256": "36890831a046781c9e7686099772fcee016c6612185ce4767bcc3d48ff211a0a",
+        "crc32": "19312281"
+      },
+      {
+        "path": "ppt/notesSlides/notesSlide4.xml",
+        "bytes": 3520,
+        "sha256": "c1cd45ff5ee08f133274991bcf5049575d3b2bd22e7ece8a61dd5da39ac55ed8",
+        "crc32": "60c16c54"
+      },
+      {
+        "path": "ppt/slides/slide5.xml",
+        "bytes": 22791,
+        "sha256": "394c6338955b2bcdd7313ca5fabe83ccdaf06ac212b46c797412fb40a72c6597",
+        "crc32": "95a9e6e9"
+      },
+      {
+        "path": "ppt/notesSlides/notesSlide5.xml",
+        "bytes": 3716,
+        "sha256": "5f413b080c4dcbc3fd1dc34e4ae5873adb6c45744e01c85a95ee39218ff16064",
+        "crc32": "ae2c0e2c"
+      },
+      {
+        "path": "ppt/slides/slide6.xml",
+        "bytes": 16694,
+        "sha256": "8002476383777b47aeae213f7fd278ef4f63fdd1eec72edd23ba1a4397926b57",
+        "crc32": "cb4a86de"
+      },
+      {
+        "path": "ppt/slides/charts/chart1.xml",
+        "bytes": 4929,
+        "sha256": "daf1bdbdb665910f2b37ce833208983bd4cb65af40467ebf706ac6cc65564214",
+        "crc32": "a2276fe0"
+      },
+      {
+        "path": "ppt/notesSlides/notesSlide6.xml",
+        "bytes": 3784,
+        "sha256": "6956594fae18a8d6b0ffbb850762b355eed2b95e08d315318716ab286f25abe1",
+        "crc32": "f9f717e9"
+      },
+      {
+        "path": "ppt/slides/slide7.xml",
+        "bytes": 17927,
+        "sha256": "d45a493c7c121449e56cab82cef6f0503bc82e50dfe32fb3c02271968e59faf0",
+        "crc32": "74b270e0"
+      },
+      {
+        "path": "ppt/notesSlides/notesSlide7.xml",
+        "bytes": 3806,
+        "sha256": "442fe39aad2d9c0376136d5c6db45b5f065140ecb542aefae8585f431fa78ad7",
+        "crc32": "d54fe585"
+      },
+      {
+        "path": "ppt/slides/slide8.xml",
+        "bytes": 17427,
+        "sha256": "3de777018e8b000f0ae21eaf26c4eb4491f3a4d51aa2bba97f767a2ab234a3b7",
+        "crc32": "0f46bfe9"
+      },
+      {
+        "path": "ppt/notesSlides/notesSlide8.xml",
+        "bytes": 4062,
+        "sha256": "6f946deff4bc74aa3e64961127c20e2d5c6f2fa891994317ad6ca0bda1c7cc5c",
+        "crc32": "2d67472a"
+      },
+      {
+        "path": "ppt/slides/slide9.xml",
+        "bytes": 23630,
+        "sha256": "4538e289e87b0fa6df42560f2c2df92757d9de2b92edd4e58c38f3f51b755d77",
+        "crc32": "4d593751"
+      },
+      {
+        "path": "ppt/notesSlides/notesSlide9.xml",
+        "bytes": 4015,
+        "sha256": "6f554545f55be162a06665232be26acb913e6d1eab06960d24a75d5b2f718a2f",
+        "crc32": "89d01685"
+      },
+      {
+        "path": "ppt/slides/slide10.xml",
+        "bytes": 22571,
+        "sha256": "8633811825f3c6f3cab0817094cefda7d81d3e4edd55ffda1e57cf1563462c9b",
+        "crc32": "da6670c7"
+      },
+      {
+        "path": "ppt/notesSlides/notesSlide10.xml",
+        "bytes": 3517,
+        "sha256": "edf2a8bb231f7e657a6588948039b0fa62473a63871d8d7f841789b4693439ac",
+        "crc32": "032c2802"
+      },
+      {
+        "path": "ppt/slides/slide11.xml",
+        "bytes": 18095,
+        "sha256": "811010c0a4d86aba6721a666f1eca620d457f86a3408f4e504fee4c69cf66414",
+        "crc32": "f6ac3678"
+      },
+      {
+        "path": "ppt/slides/charts/chart2.xml",
+        "bytes": 4419,
+        "sha256": "ff39b3b0ba41d757ae9f600a3a476b1e154715ea5bb8146f34e87c258299a510",
+        "crc32": "4b3fbe3f"
+      },
+      {
+        "path": "ppt/slides/charts/chart3.xml",
+        "bytes": 4431,
+        "sha256": "9aace0659b955780c449687229f54a6192cf3fb1f953c5de7f5e411ccc13c9cf",
+        "crc32": "b8b59439"
+      },
+      {
+        "path": "ppt/notesSlides/notesSlide11.xml",
+        "bytes": 4020,
+        "sha256": "7b84ac53e2973fb1d614381f620ec8a4cd0fc298358137d51ca0e437ee0b9ad8",
+        "crc32": "c8d96158"
+      },
+      {
+        "path": "ppt/slides/slide12.xml",
+        "bytes": 15821,
+        "sha256": "686be088a4403f8892bddda39aceeec767c12eabd5504ff530cfc0f395b74a69",
+        "crc32": "aec9e409"
+      },
+      {
+        "path": "ppt/notesSlides/notesSlide12.xml",
+        "bytes": 5123,
+        "sha256": "719a0e38cc7ae326f98b876ee1b435f4e269e5df3c3e886fd9426e68422d89bc",
+        "crc32": "bc6037d8"
+      },
+      {
+        "path": "_rels/.rels",
+        "bytes": 622,
+        "sha256": "6c3ea4b8d7570c8d5f6c8aa3f1cc74f102e618a25442f04622f783b5ab4c361d",
+        "crc32": "8bd572d8"
+      },
+      {
+        "path": "ppt/notesMasters/_rels/notesMaster1.xml.rels",
+        "bytes": 305,
+        "sha256": "4484f97bdd2e71bc51dda264efd6cdaa31ba7c992ac8b8be537d67b876d5ab1d",
+        "crc32": "66960c12"
+      },
+      {
+        "path": "ppt/notesSlides/_rels/notesSlide1.xml.rels",
+        "bytes": 463,
+        "sha256": "9fe3d4c57eddffca776aab5c39caf764774076d2a96e299e84b8317789e22dde",
+        "crc32": "e777383f"
+      },
+      {
+        "path": "ppt/notesSlides/_rels/notesSlide10.xml.rels",
+        "bytes": 464,
+        "sha256": "d919616d598a6d66900cf40df5b7de33bb16a0411f35337376bf1a11823c8d5e",
+        "crc32": "9520a596"
+      },
+      {
+        "path": "ppt/notesSlides/_rels/notesSlide11.xml.rels",
+        "bytes": 464,
+        "sha256": "b52759a9c375f05d5033b8bd29916e30996fa367c75afe7e422de008cfcc5586",
+        "crc32": "17ab72bc"
+      },
+      {
+        "path": "ppt/notesSlides/_rels/notesSlide12.xml.rels",
+        "bytes": 464,
+        "sha256": "57b1afe70d877e343a79414bab2b6b01bbb5fdfb825f32ca37229bf8b7a1da95",
+        "crc32": "73883f82"
+      },
+      {
+        "path": "ppt/notesSlides/_rels/notesSlide2.xml.rels",
+        "bytes": 463,
+        "sha256": "56f6f2b5547c7bddc2e6075e56cebc8bbda2618557dd21da381df7c77519e122",
+        "crc32": "d35bf3af"
+      },
+      {
+        "path": "ppt/notesSlides/_rels/notesSlide3.xml.rels",
+        "bytes": 463,
+        "sha256": "340a4141c7fb6cb2078a3136956fcb5c97eb7b5e6f6a55bf9ef97a76c7994686",
+        "crc32": "f782d676"
+      },
+      {
+        "path": "ppt/notesSlides/_rels/notesSlide4.xml.rels",
+        "bytes": 463,
+        "sha256": "f1a515749402146041222e0c292e6942bd247de6ba3f218d97238b17b256a0b4",
+        "crc32": "8106dc90"
+      },
+      {
+        "path": "ppt/notesSlides/_rels/notesSlide5.xml.rels",
+        "bytes": 463,
+        "sha256": "a595f597350928bfddbbfe194d92aafb1021651b311b4c612fa770d4377612b5",
+        "crc32": "6edfdc90"
+      },
+      {
+        "path": "ppt/notesSlides/_rels/notesSlide6.xml.rels",
+        "bytes": 463,
+        "sha256": "7e1145894989463abfa6782d29d86737e30ea1d8475d487c899c4d7d3f86867b",
+        "crc32": "e6973488"
+      },
+      {
+        "path": "ppt/notesSlides/_rels/notesSlide7.xml.rels",
+        "bytes": 463,
+        "sha256": "8e65be2d5b663200582c620d1c2632669c470ce8d3546b4772d73ad2f2d20ae7",
+        "crc32": "49b0d371"
+      },
+      {
+        "path": "ppt/notesSlides/_rels/notesSlide8.xml.rels",
+        "bytes": 463,
+        "sha256": "ee3a0f6ac1276b62531cbdd2ab5a93b1248ee46c856c27ef292b760e3e60e912",
+        "crc32": "5b2cb67d"
+      },
+      {
+        "path": "ppt/notesSlides/_rels/notesSlide9.xml.rels",
+        "bytes": 463,
+        "sha256": "4d559476be5ee916ff339d6ecd1b2d93c738bf5426ff8b0cf5b3685c8230c6ed",
+        "crc32": "accef5d3"
+      },
+      {
+        "path": "ppt/_rels/presentation.xml.rels",
+        "bytes": 2767,
+        "sha256": "478a19aa09be54a86cbda27aa1f0040f25813a4a7f84a3afb0820d3547c157f6",
+        "crc32": "8be4e32c"
+      },
+      {
+        "path": "ppt/slideLayouts/_rels/slideLayout1.xml.rels",
+        "bytes": 311,
+        "sha256": "c714d3b1239c517dfcf1c3e593dee1c52603d9579f50de7ed8a9641fa985424e",
+        "crc32": "a05f5e4b"
+      },
+      {
+        "path": "ppt/slideMasters/_rels/slideMaster1.xml.rels",
+        "bytes": 475,
+        "sha256": "331d2750a912795d8c546999c003989c70897e12056d30a50465d0d4b54ddf94",
+        "crc32": "6eaa149c"
+      },
+      {
+        "path": "ppt/slides/_rels/slide1.xml.rels",
+        "bytes": 478,
+        "sha256": "f104d6fce93c5523d7008471bf5a0b03c9e8937b5ceea4a5472b9e85543c3bda",
+        "crc32": "19d09b22"
+      },
+      {
+        "path": "ppt/slides/_rels/slide10.xml.rels",
+        "bytes": 479,
+        "sha256": "5e5ef965c4381373545151bc1b3f36507cb47a0be162cf335ed4d34d1b36af85",
+        "crc32": "6ab92f78"
+      },
+      {
+        "path": "ppt/slides/_rels/slide11.xml.rels",
+        "bytes": 797,
+        "sha256": "a8971299522655178af753508c48c2b55ab657d4340fc3684a83c9d047994596",
+        "crc32": "786918aa"
+      },
+      {
+        "path": "ppt/slides/_rels/slide12.xml.rels",
+        "bytes": 479,
+        "sha256": "932439b2e420adc49b78e95db9d7f21d83031680fc58c9e805b8ee30f0dac54b",
+        "crc32": "20f3ecb9"
+      },
+      {
+        "path": "ppt/slides/_rels/slide2.xml.rels",
+        "bytes": 478,
+        "sha256": "a7c642a5deca2579610ccf365d6ada551be4cebc403be13dfb020919b9dd815a",
+        "crc32": "31dac08f"
+      },
+      {
+        "path": "ppt/slides/_rels/slide3.xml.rels",
+        "bytes": 478,
+        "sha256": "64d45f3d8a2d44afb6df426236b6606706a776e8a9940f1c2e891878273c27b5",
+        "crc32": "3e2134e4"
+      },
+      {
+        "path": "ppt/slides/_rels/slide4.xml.rels",
+        "bytes": 478,
+        "sha256": "dc6b399d6220b247cf5e87bb7dfbb6c9257bc9a31f2dca7909bd09ec651f18bd",
+        "crc32": "4bc7860c"
+      },
+      {
+        "path": "ppt/slides/_rels/slide5.xml.rels",
+        "bytes": 478,
+        "sha256": "ecb39d03802b0db38ac608269eb553105e172f509ff18f8a71e686c784ced6ab",
+        "crc32": "c4221f03"
+      },
+      {
+        "path": "ppt/slides/_rels/slide6.xml.rels",
+        "bytes": 637,
+        "sha256": "414805d62998aa002f2eb8bd754e3de6d4c7169f16840eab5d0a77f07bc24176",
+        "crc32": "bf342759"
+      },
+      {
+        "path": "ppt/slides/_rels/slide7.xml.rels",
+        "bytes": 478,
+        "sha256": "7def344f3d0495ac5b319c6ebc14a4eee1610736f4f63d6d81969768082de777",
+        "crc32": "fcbef2bf"
+      },
+      {
+        "path": "ppt/slides/_rels/slide8.xml.rels",
+        "bytes": 478,
+        "sha256": "2e89d9879f8bbbb5da462ccbedc5e7bb7c734828d591d2838719ae69057dbcc3",
+        "crc32": "60fef790"
+      },
+      {
+        "path": "ppt/slides/_rels/slide9.xml.rels",
+        "bytes": 478,
+        "sha256": "b63ef6d79d8902b416ecb7bd304a1dd4629cd842d460a1df21ab3a7853667db6",
+        "crc32": "31efc8eb"
+      },
+      {
+        "path": "[Content_Types].xml",
+        "bytes": 5431,
+        "sha256": "fd59629e23bc03ccc9747b3d1faf8969aadf0c1cfa80cbd11841856edf918f69",
+        "crc32": "6acb52cd"
+      },
+      {
+        "path": "ppt/embeddings/chart-data-snapshot-001.xlsx",
+        "bytes": 1562,
+        "sha256": "b8ebdcdf3b93ff5cb68aefef7573012b13f4dbf0b6b932c0c31e5d07217a6941",
+        "crc32": "8949fd6e"
+      },
+      {
+        "path": "ppt/slides/charts/_rels/chart1.xml.rels",
+        "bytes": 276,
+        "sha256": "08d9a730b9d55a57141192c8ffdf07d56687ac3b98e8afe58707157f5369d5af",
+        "crc32": "afc0ef4e"
+      },
+      {
+        "path": "ppt/embeddings/chart-data-snapshot-002.xlsx",
+        "bytes": 1474,
+        "sha256": "6236938d2b1004c032b61d7b62ce2d4a8ff366381f41af801dffdb44b9e4e58d",
+        "crc32": "adda238a"
+      },
+      {
+        "path": "ppt/slides/charts/_rels/chart2.xml.rels",
+        "bytes": 276,
+        "sha256": "68115ab9999b1dc383cf32895a0c7fc443ded8adddc8a60d4cc8b69bd8bab27b",
+        "crc32": "9a2d591d"
+      },
+      {
+        "path": "ppt/embeddings/chart-data-snapshot-003.xlsx",
+        "bytes": 1493,
+        "sha256": "d3c49f3f919e2a554e090a38e718d7c9ac6f06a112805a6d1ef16ee0c3454789",
+        "crc32": "72120fb9"
+      },
+      {
+        "path": "ppt/slides/charts/_rels/chart3.xml.rels",
+        "bytes": 276,
+        "sha256": "2347e0511cd42389af538e25bd0e4b052e45c1454cc31e4b8b8621b26e832702",
+        "crc32": "3fa6c913"
+      }
+    ],
+    "native_table_owner_slides": [
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      12
+    ],
+    "native_chart_owner_slides": [
+      6,
+      11
+    ],
+    "native_Office_rendering_verified": false,
+    "boundary": "Read-only OOXML content/metadata/CRC inspection; no PowerPoint opening, re-export or platform-font layout proof."
+  },
+  "presentation_fact_check": {
+    "charts_and_literals": [
+      {
+        "chart": "ppt/slides/charts/chart1.xml",
+        "pairs": [
+          [
+            "无反馈 Agent",
+            10.0
+          ],
+          [
+            "反馈 Agent",
+            11.0
+          ],
+          [
+            "单次 API",
+            8.0
+          ],
+          [
+            "协议随机",
+            8.0
+          ],
+          [
+            "均匀随机",
+            10.0
+          ],
+          [
+            "固定测试",
+            12.0
+          ]
+        ],
+        "workbook": "ppt/embeddings/chart-data-snapshot-001.xlsx",
+        "kind": "new108: each strategy denominator 12 = 4 distinct defects x 3 repeats"
+      },
+      {
+        "chart": "ppt/slides/charts/chart2.xml",
+        "pairs": [
+          [
+            "修复后",
+            0.0
+          ],
+          [
+            "修复前",
+            66.0
+          ]
+        ],
+        "workbook": "ppt/embeddings/chart-data-snapshot-002.xlsx",
+        "kind": "manual FIFO specification repair: raw differences; not Agent gain"
+      },
+      {
+        "chart": "ppt/slides/charts/chart3.xml",
+        "pairs": [
+          [
+            "补全计时后",
+            15.0
+          ],
+          [
+            "旧人工规格",
+            13.0
+          ]
+        ],
+        "workbook": "ppt/embeddings/chart-data-snapshot-003.xlsx",
+        "kind": "manual external finite specification repair: 15 artificial variants; not Agent gain"
+      }
+    ],
+    "native_table_slides": [
+      4,
+      5,
+      7,
+      8,
+      9,
+      10,
+      12
+    ],
+    "all_cache_and_workbook_values_match": true,
+    "native_structure_found": true,
+    "native_Office_verified": false
+  },
+  "defense_image_check": {
+    "PDF": {
+      "path": "docs/competition/ic/ICARUS_答辩材料_v3.pdf",
+      "sha256": "80f2fadd2304fdb7d0d7695520242239e9e31c0dbaac9db2f96e5e108fddf580",
+      "bytes": 1407201
+    },
+    "pages": 12,
+    "records": [
+      {
+        "page": 1,
+        "native_deck_render_png": {
+          "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-01.png",
+          "sha256": "b455e8c2f37f359ace22fc64dc1f2914e8b3b0be906f06c57928abdf9380e331",
+          "bytes": 105337
+        },
+        "PDF_embedded_image_pixel_identical": true,
+        "size_pixels": [
+          2560,
+          1440
+        ]
+      },
+      {
+        "page": 2,
+        "native_deck_render_png": {
+          "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-02.png",
+          "sha256": "e159d18abc34af5d6f07737fdc53aab703c1912be1e006d3dede2ec32bd7c926",
+          "bytes": 168256
+        },
+        "PDF_embedded_image_pixel_identical": true,
+        "size_pixels": [
+          2560,
+          1440
+        ]
+      },
+      {
+        "page": 3,
+        "native_deck_render_png": {
+          "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-03.png",
+          "sha256": "cbe10cd7ed6080efbfa5c8e672b44401f83143733885691eb3510da4c1e4b62a",
+          "bytes": 162355
+        },
+        "PDF_embedded_image_pixel_identical": true,
+        "size_pixels": [
+          2560,
+          1440
+        ]
+      },
+      {
+        "page": 4,
+        "native_deck_render_png": {
+          "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-04.png",
+          "sha256": "f68e35e7979d8197be726270ad118cde713bfbdaba48f99cd2a6d29336b9dcce",
+          "bytes": 171496
+        },
+        "PDF_embedded_image_pixel_identical": true,
+        "size_pixels": [
+          2560,
+          1440
+        ]
+      },
+      {
+        "page": 5,
+        "native_deck_render_png": {
+          "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-05.png",
+          "sha256": "99aa73ff8f18aa7af6de85451ff37524966a4ab06c5e0c91669114e2579dfdc7",
+          "bytes": 178530
+        },
+        "PDF_embedded_image_pixel_identical": true,
+        "size_pixels": [
+          2560,
+          1440
+        ]
+      },
+      {
+        "page": 6,
+        "native_deck_render_png": {
+          "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-06.png",
+          "sha256": "04c756210c4d53dced7d811f2d7ec92d5f25b299161aa716872dd33ce9b91868",
+          "bytes": 170734
+        },
+        "PDF_embedded_image_pixel_identical": true,
+        "size_pixels": [
+          2560,
+          1440
+        ]
+      },
+      {
+        "page": 7,
+        "native_deck_render_png": {
+          "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-07.png",
+          "sha256": "ec8cd54013709a8299ec885203b97f6b34c62235daaab2c8f99625d3fb565589",
+          "bytes": 177984
+        },
+        "PDF_embedded_image_pixel_identical": true,
+        "size_pixels": [
+          2560,
+          1440
+        ]
+      },
+      {
+        "page": 8,
+        "native_deck_render_png": {
+          "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-08.png",
+          "sha256": "2275c4842ebb6654c142ee2a11d167127b7b59d4668e405b942100dc139052f0",
+          "bytes": 166154
+        },
+        "PDF_embedded_image_pixel_identical": true,
+        "size_pixels": [
+          2560,
+          1440
+        ]
+      },
+      {
+        "page": 9,
+        "native_deck_render_png": {
+          "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-09.png",
+          "sha256": "b2f045447920885db832cf0720fc23db4658600005bbf67b7bde002848d3b0e6",
+          "bytes": 172823
+        },
+        "PDF_embedded_image_pixel_identical": true,
+        "size_pixels": [
+          2560,
+          1440
+        ]
+      },
+      {
+        "page": 10,
+        "native_deck_render_png": {
+          "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-10.png",
+          "sha256": "542fb130d4dd4646ce6c91549cf51f725223019bd0c64ec16d259db09ec2ce22",
+          "bytes": 194409
+        },
+        "PDF_embedded_image_pixel_identical": true,
+        "size_pixels": [
+          2560,
+          1440
+        ]
+      },
+      {
+        "page": 11,
+        "native_deck_render_png": {
+          "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-11.png",
+          "sha256": "4e67ab84dfbf75e31808b9bfbcb6f5d60260a0095de6eff3ee09381aa400fd6b",
+          "bytes": 148520
+        },
+        "PDF_embedded_image_pixel_identical": true,
+        "size_pixels": [
+          2560,
+          1440
+        ]
+      },
+      {
+        "page": 12,
+        "native_deck_render_png": {
+          "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-12.png",
+          "sha256": "0d8cdef2ef3bf92408e7040e08cdb2d44160a2b08064380eeab8ab033414c20d",
+          "bytes": 179925
+        },
+        "PDF_embedded_image_pixel_identical": true,
+        "size_pixels": [
+          2560,
+          1440
+        ]
+      }
+    ],
+    "method": "read-only extraction of embedded PDF image; RGB pixel comparison with the actually inspected complete native-deck render, no PDF re-export"
+  },
+  "artifacts": [
+    {
+      "path": "docs/competition/ic/v3/material_data.json",
+      "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+      "bytes": 30806
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+      "sha256": "4751fe084711d6ed4f0d02212e715079803671a7b3605b6150679a8ee9096a65",
+      "bytes": 63381
+    },
+    {
+      "path": "docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json",
+      "sha256": "2640b137f35f1a206a47136516ebd1f9db7c3a5832ce1deadf2a8f374ac02937",
+      "bytes": 182267
+    },
+    {
+      "path": "docs/experiment/agent_new_holdout_study_budget_2026-10-05.json",
+      "sha256": "4f4bd6d305057c277b716825e69befe5895a69027ca1770d3a22c33f776cdf6b",
+      "bytes": 1310
+    },
+    {
+      "path": "docs/review/agent-new-holdout-study-review-2026-10-05/receipt.json",
+      "sha256": "9377514673af710917a62ca219949c13c5794195360b76b6d76d4e43b330abdf",
+      "bytes": 126464
+    },
+    {
+      "path": "docs/competition/ic/defense_v2/data.json",
+      "sha256": "a2b0f3133d210921be7eda8a4a5573f80b2a90f03a8bb8053bd5e4409819cb59",
+      "bytes": 9974
+    },
+    {
+      "path": "docs/review/agent-new-holdout-study-review-2026-10-05/core-audit.json",
+      "sha256": "8ebd9ec792bf6a909155adb54a9647abab0f387aefde0f94c089cd7d870e24c4",
+      "bytes": 1100354
+    },
+    {
+      "path": "docs/review/agent-new-holdout-study-review-2026-10-05/trace-audit.json",
+      "sha256": "bf2c5294d10a507f09e0630c09d4a7f922dd08e559efe668d857ffbb94f6ca9b",
+      "bytes": 1393100
+    },
+    {
+      "path": "docs/competition/ic/v3/rules_validation.json",
+      "sha256": "ec44e293b16ef871f25bec8a6b527c1cfe07f612ccc389ac8a39a13d2516b95d",
+      "bytes": 1483
+    },
+    {
+      "path": ".iverilog-ai/ic-materials-v3-rule-check/ic_rules.pdf",
+      "sha256": "af33abb3da8178ca3e1c60ea2041ea60244b58e917d8adb92a856439afa09e3d",
+      "bytes": 224745
+    },
+    {
+      "path": ".iverilog-ai/ic-materials-v3-rule-check/ic_outline.pdf",
+      "sha256": "6a4db4e3ffb016c83b4cf020139ed6a98069aea938c2dfa524f4ea1d33884354",
+      "bytes": 152425
+    },
+    {
+      "path": "docs/competition/ic/v3/assets/chart_source.json",
+      "sha256": "8111076f6f2a9e8b84a0f85075457ac9c41e20881443fd2d3332307e7cc7e3eb",
+      "bytes": 701
+    },
+    {
+      "path": "docs/competition/ic/v3/assets/new108_detection.png",
+      "sha256": "99490de698c607a41ba93670b7e4f3aaf03e05976f3c56ffab2f2a3f6d7af984",
+      "bytes": 57381
+    },
+    {
+      "path": "docs/competition/ic/v3/technical_report.md",
+      "sha256": "3cbef290973e831bd38e9155b59edc3e1f2b2131183711ca8aff796e3a933a90",
+      "bytes": 18979
+    },
+    {
+      "path": "docs/competition/ic/v3/supporting_evidence.md",
+      "sha256": "2054a83999c02c7ce73c5fbcd7e31c2d275a5596bb026b273ce00a3c5b1b0fda",
+      "bytes": 12205
+    },
+    {
+      "path": "docs/competition/ic/v3/README.md",
+      "sha256": "5f1962b42a691321531f8fd5b4e444da504eb454b282f045f2adb5cf9c92ed93",
+      "bytes": 6305
+    },
+    {
+      "path": "docs/competition/ic/v3/submission_copy.md",
+      "sha256": "c463d4e1c29b13a58d8ce8d725315b897314c0cd87917bd333020780219c8a3c",
+      "bytes": 1926
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/speaker_notes.md",
+      "sha256": "4c5ffd627555d360d35f835b0430f826190811054ca808694420167c9bdff3f4",
+      "bytes": 13978
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/qa_questions.md",
+      "sha256": "eff1640e279bc92c739bfc2533161e74fe5cac1ae43d187429e41ac7e67aee95",
+      "bytes": 5843
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/README.md",
+      "sha256": "76960ecbf49fade9a59f8bc9c80ac09666caa1b232e550e180fa6f2c6a43ccf6",
+      "bytes": 4621
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/data.json",
+      "sha256": "8cebcbe26c4835a5795b7e9840073c6c19f194050e77fe7baec1ef91065c4173",
+      "bytes": 3120
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/finalization_summary.json",
+      "sha256": "c2db6e50a46a720f1df90fee2a888c8a56e6001e7ba8f810d813c402f01a2bce",
+      "bytes": 3680
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/source_checksums.json",
+      "sha256": "dbcd29d942ecc4f06c7f76acef8c5dc0268777445f564270a00d3c5a97af0b53",
+      "bytes": 32256
+    },
+    {
+      "path": "docs/experiment/agent_new_holdout_study_live_2026-10-05.md",
+      "sha256": "b678c31d1697393f37caa6138eab29a3007a899ae6b8989ac5b258153cceaad4",
+      "bytes": 9383
+    },
+    {
+      "path": "docs/experiment/agent_new_holdout_study_plan_2026-10-05.md",
+      "sha256": "dbc7efc327b71804ae36ff0516f392adc9ab79eb243e8a19e93a5b7ae5b0a724",
+      "bytes": 6196
+    },
+    {
+      "path": "docs/experiment/agent_new_holdout_source_validation_2026-10-05.md",
+      "sha256": "11df83d811e2939bb95ed9fea975cba974135b6b97e63c4e297ccced04d02d1e",
+      "bytes": 3030
+    },
+    {
+      "path": "docs/review/agent_new_holdout_study_review_2026-10-05.md",
+      "sha256": "7dc898d556b4c61e433e2d442511c51f8045acfd2bd7d1a55ea768f7ce4a3ed8",
+      "bytes": 6536
+    },
+    {
+      "path": "docs/experiment/agent_feedback_study_live_2026-10-05.md",
+      "sha256": "27156b90341d1f699d715eacf06834b85db1b5df5403401294a433deb6c9f31c",
+      "bytes": 11833
+    },
+    {
+      "path": "docs/experiment/protocol_oracle_improvements_2026-10-04.md",
+      "sha256": "1d279b78128d7b2e40f07d59be0c33a5adb529f20e39b18369c85bdcda3a66aa",
+      "bytes": 11457
+    },
+    {
+      "path": "docs/experiment/functional_coverage_2026-10-04.md",
+      "sha256": "ade2900931c9c2573453f3a450878d1d0af2b4e44c90330d8dac5a011ce6c566",
+      "bytes": 10605
+    },
+    {
+      "path": "docs/experiment/ic_agent_v4_validation_2026-10-04.md",
+      "sha256": "d84cd5633adc82925f3ede348af8db0a3a12c76187ad409dfe0bbec19552a7d1",
+      "bytes": 3785
+    },
+    {
+      "path": ".iverilog-ai/protocol-oracle-fifo-20261004-before/evidence.json",
+      "sha256": "220a5fd98db833a5d6d5608a7e66d0902cafb5acdc60e085e5ddbbef58edee93",
+      "bytes": 28803
+    },
+    {
+      "path": ".iverilog-ai/protocol-oracle-fifo-20261004-after-final/evidence.json",
+      "sha256": "159d827d6905ddd2ffbe35f4390ee32c5be2a9197c551d673dc7bf0fc6281beb",
+      "bytes": 22321
+    },
+    {
+      "path": ".iverilog-ai/external/replay-20261004-protocol-v2/evidence.json",
+      "sha256": "d392f4a582f30f5551848b519c86d5a628be7f44f002d4f8e9418645e6b7f3cb",
+      "bytes": 141618
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json",
+      "sha256": "e00d4b08cd596a0c3bdcc9d7aae4892a95a740ec7349d80130bdfa5bc7d43c57",
+      "bytes": 876138
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/trace_manifest.json",
+      "sha256": "3bef02272b0f065660d070052117ff3daf65c09bdd270d108dfdeb4546a49a0f",
+      "bytes": 65370
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/registered_inputs_manifest.json",
+      "sha256": "f516a5fda999476538bb42fa51c1acdf13ae9c8c4fcc535b3196b951a762fb5c",
+      "bytes": 223120
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/source_byte_binding.json",
+      "sha256": "c02e53b79b6d31a48e989691fe521b7fe1f1cb2f6d73ea90df93dcc8d129417a",
+      "bytes": 180623
+    },
+    {
+      "path": "spec/agent_new_holdout_20261005/valid_data_pipeline_spec.md",
+      "sha256": "94045a833fa947eb2e1fca5088e000ccfd2e28ad523c08826c562b9e6b87a71a",
+      "bytes": 5202
+    },
+    {
+      "path": "spec/agent_new_holdout_20261005/event_accumulator_spec.md",
+      "sha256": "93e13226df4eb0323f1ae31316c1370934ec5faddc7f801f352d2f18971db515",
+      "bytes": 4573
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/build_defense.mjs",
+      "sha256": "2e81f09c723c5388e9caf11153fd5fce9d83585b2bc352f9974531ff3d2ae0d7",
+      "bytes": 24513
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/strip_pptx_metadata.py",
+      "sha256": "6d8aeccb736cf89579deb8d6a2698ced4e45bd4158048a008e7b2c46f075c842",
+      "bytes": 1133
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/create_image_pdf.py",
+      "sha256": "ef09d165546e20b3c56127dc53b096bf35d7af7f80ce03df13ce9eba39f550ed",
+      "bytes": 1270
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/inspect_artifacts.py",
+      "sha256": "eb108ec725cf8a3fcca475714c8ec2c97e994a6c87fae8ec1c50b5ea8279b02a",
+      "bytes": 4468
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/assets/README.md",
+      "sha256": "2085d17a50082d6d633eaf427fb312b83c3e018418e48eea95782f6b30116c50",
+      "bytes": 699
+    },
+    {
+      "path": "docs/competition/ic/ICARUS_答辩材料_v3.pptx",
+      "sha256": "03a1cf9a47bb95576054725baf34b73a041d953983ba31ca3f8ad4c5ac8db76c",
+      "bytes": 71117
+    },
+    {
+      "path": "docs/competition/ic/ICARUS_答辩材料_v3.pdf",
+      "sha256": "80f2fadd2304fdb7d0d7695520242239e9e31c0dbaac9db2f96e5e108fddf580",
+      "bytes": 1407201
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/finalization_receipt.original.json",
+      "sha256": "3802e4d47d00ca5f545db725501fab1799ed387c8a8713df7803740fa7104a77",
+      "bytes": 9527
+    },
+    {
+      "path": "docs/competition/ic/defense_v3/qa_report.json",
+      "sha256": "97efb7bb24bca2ca938648b6f56529a92d7af0d41a9b4db5b9bbde614e23439b",
+      "bytes": 21997
+    },
+    {
+      "path": "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+      "sha256": "4bb214297d189ccbf446dd12e9bc848bffd216601c1c315241f6cb3bcc87f6a3",
+      "bytes": 470762
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-01.png",
+      "sha256": "68d6ef25e6b92f4f63a68aa87bce8f3a5fd2dffa51ab229240fc6d6f0fe017be",
+      "bytes": 199162
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-02.png",
+      "sha256": "ae5e30b193fea58f396c46c5ce16833745ca87854d637a21be7e916b7b4927ae",
+      "bytes": 171455
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-03.png",
+      "sha256": "bc1325468d09dd9247aea0b69215de61ce3c2c80ad992f94112befa89fdaff90",
+      "bytes": 181916
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-04.png",
+      "sha256": "6fc6c2605ca2e20ba3de828d679ec007c1da47f4c438e0014c76e6fa65dc122c",
+      "bytes": 177780
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-05.png",
+      "sha256": "60509d06f2af77606f854716a5be18920568b3449021f120ad3fc17d34e073ca",
+      "bytes": 152524
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-06.png",
+      "sha256": "ecadf0cf3391be06376d3fe7ec4d0c7f2050eb6d7ca59088d947fb2d3a1ce7e7",
+      "bytes": 131157
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-07.png",
+      "sha256": "f2e7fa6fadedb7d128e449c40f332d708f45b911e4de0d7deff6ed9cbdd74dcf",
+      "bytes": 157405
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-08.png",
+      "sha256": "b2e57ae6a3a44531496f73e2adb8ce88929e7ee6b1b46c28a34396ed6a55b43a",
+      "bytes": 187049
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-09.png",
+      "sha256": "eb40d2bb5eaad76ff83f79768361bc0176d94f6d2f6a98c53beba7321379addb",
+      "bytes": 123046
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/technical_report-render/page-10.png",
+      "sha256": "7d0039a832be1cb5596ff09827ccd944bdd93a9f1cc4ca3461ca5c0a296b27ab",
+      "bytes": 205731
+    },
+    {
+      "path": "docs/competition/ic/ICARUS_佐证材料_v3.pdf",
+      "sha256": "7fe5fe5aa78d654dc4e212cd25e2f2b202418d1d7a32d96ce755d8361a8e0dda",
+      "bytes": 260009
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/supporting_evidence-render/page-01.png",
+      "sha256": "0f78571ed672649c277e96a981f8e55e312213218182036673837b4fb23f5d6d",
+      "bytes": 158849
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/supporting_evidence-render/page-02.png",
+      "sha256": "dc52e2e3e9936bab97fdc6de7dd28d56b4392c60c5f6e004b8f36a1938a3fcd3",
+      "bytes": 173740
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/supporting_evidence-render/page-03.png",
+      "sha256": "d1665ff2d0fe94a0f50f32062432338a3e532bc20db275eb71d6d9ebba27c002",
+      "bytes": 151538
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/supporting_evidence-render/page-04.png",
+      "sha256": "276da6ed68661f1f4916fd161404469040ab94c9ec4687c20b0cf0f9de0e2e97",
+      "bytes": 151733
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/supporting_evidence-render/page-05.png",
+      "sha256": "2562a0bdd60f8554de6c230c0bde23039e48744a804e1245e3b265efc155b867",
+      "bytes": 162810
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/supporting_evidence-render/page-06.png",
+      "sha256": "34c82752f0233fe2ad95d8986c3f42bc02cb3a706bc533bf9cc5a354b45e467e",
+      "bytes": 176476
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-01.png",
+      "sha256": "ee2f68a516e4f1a2401d9f9deb8d58b8431650a0fee4e010f998990d05fed763",
+      "bytes": 70465
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-02.png",
+      "sha256": "52b9dcd9f7b63dedef96b5c9ba616a535bab4f7eca464edef9d3b598cf4679e8",
+      "bytes": 136950
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-03.png",
+      "sha256": "53f199988f6b6a3ab51a3df29e864465dce6c9e9586ec5dc1db559a98377536f",
+      "bytes": 129710
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-04.png",
+      "sha256": "53b480a5dbe9f3b4472c4b68ad15b9c8ed5517eaf6ce837bf676acadc83401b2",
+      "bytes": 139263
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-05.png",
+      "sha256": "94681701cfc8cbb97e2059febe8759920bbec8735649e7a1c2d035afe8451b9e",
+      "bytes": 145392
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-06.png",
+      "sha256": "29219b246e564bed5620c4cb401f7d0fb063302ffa5d7f57dac39d4803850afa",
+      "bytes": 136233
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-07.png",
+      "sha256": "d3b816ab176a83005d84063073077e5809d8cd829dc9291747630702fdaa52e4",
+      "bytes": 143662
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-08.png",
+      "sha256": "d41d91f57b88533481fc239e5211eb1fb0856cb49953e2f3382dd8518c2dd4bd",
+      "bytes": 135173
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-09.png",
+      "sha256": "c5d4242188f1b11bf6b8f3e317612b7b795a1b2bcfcd1a7117729dd8d5367873",
+      "bytes": 139936
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-10.png",
+      "sha256": "fcee4922c24260eaa8bd5103f4af10e0e94341dc376a938dd960876d664a6b4b",
+      "bytes": 153314
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-11.png",
+      "sha256": "e10832294b09955855fe55cf4e905434901c0e05059096edf857b9bd9862a03f",
+      "bytes": 121005
+    },
+    {
+      "path": "docs/competition/ic/v3/review/outputs-r3/defense-render/page-12.png",
+      "sha256": "cd094bbec80522c7253169a5c6861ec326048f40a207c812fbca8699c338eb07",
+      "bytes": 145549
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-01.png",
+      "sha256": "b455e8c2f37f359ace22fc64dc1f2914e8b3b0be906f06c57928abdf9380e331",
+      "bytes": 105337
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-02.png",
+      "sha256": "e159d18abc34af5d6f07737fdc53aab703c1912be1e006d3dede2ec32bd7c926",
+      "bytes": 168256
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-03.png",
+      "sha256": "cbe10cd7ed6080efbfa5c8e672b44401f83143733885691eb3510da4c1e4b62a",
+      "bytes": 162355
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-04.png",
+      "sha256": "f68e35e7979d8197be726270ad118cde713bfbdaba48f99cd2a6d29336b9dcce",
+      "bytes": 171496
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-05.png",
+      "sha256": "99aa73ff8f18aa7af6de85451ff37524966a4ab06c5e0c91669114e2579dfdc7",
+      "bytes": 178530
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-06.png",
+      "sha256": "04c756210c4d53dced7d811f2d7ec92d5f25b299161aa716872dd33ce9b91868",
+      "bytes": 170734
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-07.png",
+      "sha256": "ec8cd54013709a8299ec885203b97f6b34c62235daaab2c8f99625d3fb565589",
+      "bytes": 177984
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-08.png",
+      "sha256": "2275c4842ebb6654c142ee2a11d167127b7b59d4668e405b942100dc139052f0",
+      "bytes": 166154
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-09.png",
+      "sha256": "b2f045447920885db832cf0720fc23db4658600005bbf67b7bde002848d3b0e6",
+      "bytes": 172823
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-10.png",
+      "sha256": "542fb130d4dd4646ce6c91549cf51f725223019bd0c64ec16d259db09ec2ce22",
+      "bytes": 194409
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-11.png",
+      "sha256": "4e67ab84dfbf75e31808b9bfbcb6f5d60260a0095de6eff3ee09381aa400fd6b",
+      "bytes": 148520
+    },
+    {
+      "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-12.png",
+      "sha256": "0d8cdef2ef3bf92408e7040e08cdb2d44160a2b08064380eeab8ab033414c20d",
+      "bytes": 179925
+    },
+    {
+      "path": "docs/competition/ic/v3/validation.json",
+      "sha256": "fa661f4abd28a327f49ed8f364913488b51ef6c29b72f2756b982c0b4935cfd9",
+      "bytes": 21282
+    }
+  ],
+  "new_API_requests": 0,
+  "credentials_read": 0,
+  "new_DUT_runs": 0,
+  "new_source_tests": 0,
+  "reperformed_core_2192_checks": false,
+  "native_Office_verified": false,
+  "visual_review_complete": false,
+  "final_claim_review_complete": false,
+  "new_read_only_PDF_page_renders": 28
+}

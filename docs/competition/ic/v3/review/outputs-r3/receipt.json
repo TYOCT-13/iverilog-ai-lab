@@ -1,0 +1,21 @@
+{
+  "schema": "ic-v3-output-audit-attempt-v1",
+  "result": {
+    "path": "docs/competition/ic/v3/review/outputs-r3/result.json",
+    "sha256": "945aac62c2e05c81fab3387659bca4aa16e9f769c74dc2a3eb9cec780460faa6",
+    "bytes": 236908
+  },
+  "log": {
+    "path": "docs/competition/ic/v3/review/outputs-r3/log.json",
+    "sha256": "35731188a65d03b971b7b5b11019f5f0dc83dac816dada2c3f522788a0fa2015",
+    "bytes": 260
+  },
+  "tool": {
+    "path": "docs/competition/ic/v3/review/audit_material_outputs_v2.py",
+    "sha256": "06cf478adc9d783b283041e731ee4c4b733e6150884a3f44c9aa06424ac6bb76",
+    "bytes": 26915
+  },
+  "new_API_requests": 0,
+  "credentials_read": 0,
+  "new_DUT_runs": 0
+}

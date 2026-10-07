@@ -1,0 +1,1106 @@
+{
+  "artifact": {
+    "path": "docs/competition/ic/ICARUS_答辩材料_v3.pptx",
+    "sha256": "03a1cf9a47bb95576054725baf34b73a041d953983ba31ca3f8ad4c5ac8db76c",
+    "bytes": 71117
+  },
+  "zip_members": 74,
+  "crc_all_members_passed": true,
+  "pages": 12,
+  "slide_size": {
+    "cx": "12192000",
+    "cy": "6858000"
+  },
+  "metadata": {},
+  "slides": [
+    {
+      "slide": 1,
+      "xml": "ppt/slides/slide1.xml",
+      "text": "ICARUS\n数字 IP 验证智能体\n第三方 API 建议测试输入\n真实 Icarus 仿真与独立判据核验\nAI+集成电路    2026-10-05",
+      "text_runs": 5,
+      "native_tables": [],
+      "native_chart_references": 0,
+      "native_shapes": 5,
+      "picture_shapes": 0
+    },
+    {
+      "slide": 2,
+      "xml": "ppt/slides/slide2.xml",
+      "text": "数字 IP 的验证需求\n02\n可运行的输入仍可能遗漏时序边界\nvalid/data 流水线\n两级延迟与 valid/data 对齐\nflush 优先、invalid 数据归零\n事件累计器\n使能条件与模 16 回绕\nclear 不受 enable 限制\n使用对象：数字电路学习者、小型 IP 开发者、技术复核人员\n需求来自本项目合约与执行记录。未提供行业访谈人数或真人计时结果",
+      "text_runs": 11,
+      "native_tables": [],
+      "native_chart_references": 0,
+      "native_shapes": 11,
+      "picture_shapes": 0
+    },
+    {
+      "slide": 3,
+      "xml": "ppt/slides/slide3.xml",
+      "text": "API 规划与仿真裁决\n03\n正确规格\n完整合约\n第三方 API\n提议输入\n权限与预算\n检查\n真实 Icarus\n实际执行\n独立判据\n逐拍比较\n模型接收\n公开接口、自己的计划、剩余预算\n实际执行摘要与绑定的端口采样\n模型动作\n追加输入或停止\n目标 RTL、私有变体标签、路径和 witness 不进入 API。正确 RTL 逐 episode 独立重放",
+      "text_runs": 18,
+      "native_tables": [],
+      "native_chart_references": 0,
+      "native_shapes": 14,
+      "picture_shapes": 0
+    },
+    {
+      "slide": 4,
+      "xml": "ppt/slides/slide4.xml",
+      "text": "新内部模块集合留出\n04\n108 项全部实际执行\n新模块\n公开合约要点\n目标与重复\nvalid/data 流水线\n8 bit、两级、flush 优先\n正确 / B / C，各 3 次\n事件累计器\n4 bit 模 16、clear 优先\n正确 / B / C，各 3 次\n2 模块 × 3 目标 × 3 重复 × 6 策略 = 108 任务\n每策略 4 不同缺陷 × 3 重复 = 12 缺陷任务，另有 6 正确任务\n同团队合成设计，无独立选型时间戳、外部盲测或预训练未见证明",
+      "text_runs": 15,
+      "native_tables": [
+        [
+          [
+            "新模块",
+            "公开合约要点",
+            "目标与重复"
+          ],
+          [
+            "valid/data 流水线",
+            "8 bit、两级、flush 优先",
+            "正确 / B / C，各 3 次"
+          ],
+          [
+            "事件累计器",
+            "4 bit 模 16、clear 优先",
+            "正确 / B / C，各 3 次"
+          ]
+        ]
+      ],
+      "native_chart_references": 0,
+      "native_shapes": 6,
+      "picture_shapes": 0
+    },
+    {
+      "slide": 5,
+      "xml": "ppt/slides/slide5.xml",
+      "text": "共享请求与执行预算\n05\n339,624\nreported tokens\n独立单批上限 1,000,000\n87 次收费请求\n输入 301,910\n输出 37,714\n统一约束\n单次 API\n反馈 / 无反馈\n共享请求上限\n1\n3\n实际 episode 上限\n1\n3\n累计刺激拍上限\n24\n24\n每次提案 / 累计接受\n12 / 64\n12 / 64\n格式与预算补提仍收费，共用原任务上限\n0 unknown / pending，0 自动传输重试。自动复位与正确 RTL 重放成本单列",
+      "text_runs": 25,
+      "native_tables": [
+        [
+          [
+            "统一约束",
+            "单次 API",
+            "反馈 / 无反馈"
+          ],
+          [
+            "共享请求上限",
+            "1",
+            "3"
+          ],
+          [
+            "实际 episode 上限",
+            "1",
+            "3"
+          ],
+          [
+            "累计刺激拍上限",
+            "24",
+            "24"
+          ],
+          [
+            "每次提案 / 累计接受",
+            "12 / 64",
+            "12 / 64"
+          ]
+        ]
+      ],
+      "native_chart_references": 0,
+      "native_shapes": 9,
+      "picture_shapes": 0
+    },
+    {
+      "slide": 6,
+      "xml": "ppt/slides/slide6.xml",
+      "text": "新108任务的六策略检出\n06\n11 / 12\n反馈 Agent\n固定测试 12 / 12 最好\n随机与无反馈各 10 / 12\n反馈：首轮 6 / 次轮 5\n无反馈：首轮 8 / 后续 2\n仅多检出 1 项，不支持因果或显著性\n分母：4 不同缺陷 × 3 重复 = 12。另有 36/36 正确实际执行，0 实际误报",
+      "text_runs": 10,
+      "native_tables": [],
+      "native_chart_references": 1,
+      "native_shapes": 9,
+      "picture_shapes": 0
+    },
+    {
+      "slide": 7,
+      "xml": "ppt/slides/slide7.xml",
+      "text": "实际端口事实与无反馈对照\n07\n20\n已发送 feedback STATE\n带真实端口事实\n证据口径\n实际值\n保存的端口文档\n80\n原始 / 返回 / 省略采样\n826 / 701 / 125\n模型实际收到返回 / 省略\n180 / 12\n每份最多 12 个端点与等间隔样本，保留省略和 X/Z\n31 个无反馈 STATE 的三项诊断全部 None\n自身计划、预算与执行器早停仍保留。两新模块覆盖 unsupported/unknown，未补造 bins",
+      "text_runs": 16,
+      "native_tables": [
+        [
+          [
+            "证据口径",
+            "实际值"
+          ],
+          [
+            "保存的端口文档",
+            "80"
+          ],
+          [
+            "原始 / 返回 / 省略采样",
+            "826 / 701 / 125"
+          ],
+          [
+            "模型实际收到返回 / 省略",
+            "180 / 12"
+          ]
+        ]
+      ],
+      "native_chart_references": 0,
+      "native_shapes": 8,
+      "picture_shapes": 0
+    },
+    {
+      "slide": 8,
+      "xml": "ppt/slides/slide8.xml",
+      "text": "付费拒绝与真实执行\n08\n拒绝类\n收费请求\n后续执行任务\n后续检出任务\n预算拒绝（schema 通过子集）\n5\n2\n1\n动作格式拒绝\n2\n1\n0\n第 108 行：实际执行后，终态格式失败\n请求 1 执行 14 拍    请求 2 预算拒绝    请求 3 格式拒绝\ndecision_format_error，未检出，仍计入完整分母\n85 schema 通过 / 2 拒绝，预算 5 是通过子集。87 原回复保存，86 可解析 / 1 不解析",
+      "text_runs": 18,
+      "native_tables": [
+        [
+          [
+            "拒绝类",
+            "收费请求",
+            "后续执行任务",
+            "后续检出任务"
+          ],
+          [
+            "预算拒绝（schema 通过子集）",
+            "5",
+            "2",
+            "1"
+          ],
+          [
+            "动作格式拒绝",
+            "2",
+            "1",
+            "0"
+          ]
+        ]
+      ],
+      "native_chart_references": 0,
+      "native_shapes": 7,
+      "picture_shapes": 0
+    },
+    {
+      "slide": 9,
+      "xml": "ppt/slides/slide9.xml",
+      "text": "原件绑定与机器审计\n09\n458 登记输入\n冻结快照\n4,359 raw 文件\n真实执行与请求\nmanifest 与 ZIP\n保留原字节\n逐项绑定核验\n失败一并保留\n机器审计\n范围\n身份\n核心审计\n2,192 项检查\n非实现者代理\n轨迹审计\n54 轨迹 / 87 请求\nentry 代码作者\nstrict=true 仅表示证据资格\n机器审计非真人 / H02。Git 446 exact、12 仅换行差异，原始登记快照仍为权威",
+      "text_runs": 21,
+      "native_tables": [
+        [
+          [
+            "机器审计",
+            "范围",
+            "身份"
+          ],
+          [
+            "核心审计",
+            "2,192 项检查",
+            "非实现者代理"
+          ],
+          [
+            "轨迹审计",
+            "54 轨迹 / 87 请求",
+            "entry 代码作者"
+          ]
+        ]
+      ],
+      "native_chart_references": 0,
+      "native_shapes": 9,
+      "picture_shapes": 0
+    },
+    {
+      "slide": 10,
+      "xml": "ppt/slides/slide10.xml",
+      "text": "旧v8的开发与复用集合\n10\n432 注册 / 414 实际执行 / 18 无 DUT\n策略\n旧批检出 / 48\nAPI 请求\n固定测试\n48 / 48\n0\n均匀随机\n32 / 48\n0\n协议随机\n48 / 48\n0\n单次 API\n29 / 48\n70\n反馈 Agent\n37 / 48\n122\n无反馈 Agent\n37 / 48\n114\n306 请求\n973,149 tokens\nstrict=false\n正确任务 143 / 144 实际执行\n0 实际误报，1 未执行\n两批模块集合、分母与预算不同，不合并，也不作增益趋势图。旧失败没有补跑",
+      "text_runs": 30,
+      "native_tables": [
+        [
+          [
+            "策略",
+            "旧批检出 / 48",
+            "API 请求"
+          ],
+          [
+            "固定测试",
+            "48 / 48",
+            "0"
+          ],
+          [
+            "均匀随机",
+            "32 / 48",
+            "0"
+          ],
+          [
+            "协议随机",
+            "48 / 48",
+            "0"
+          ],
+          [
+            "单次 API",
+            "29 / 48",
+            "70"
+          ],
+          [
+            "反馈 Agent",
+            "37 / 48",
+            "122"
+          ],
+          [
+            "无反馈 Agent",
+            "37 / 48",
+            "114"
+          ]
+        ]
+      ],
+      "native_chart_references": 0,
+      "native_shapes": 7,
+      "picture_shapes": 0
+    },
+    {
+      "slide": 11,
+      "xml": "ppt/slides/slide11.xml",
+      "text": "判据独立性的规格案例\n11\nFIFO 独立队列检查\n76 拍 / 228 次比较\n中间占用同时读写，占用量保持\n外部人工计时 SPEC\n同字节 15 人工变体 / 24 候选\n13/15 至 15/15 来自人工 SPEC 补全\n此页是人工规格与实现修复案例。外部有限集合来自同作者仓库，不作 AI 表现统计",
+      "text_runs": 9,
+      "native_tables": [],
+      "native_chart_references": 2,
+      "native_shapes": 10,
+      "picture_shapes": 0
+    },
+    {
+      "slide": 12,
+      "xml": "ppt/slides/slide12.xml",
+      "text": "证据边界与交付\n12\n2,033 pass / 2 skip    mypy 88 源文件零错\n535 冻结指纹无变化，工程记录不等于 AI 或真人验收\n边界\n当前证据\n适用范围\n已审计合约 / 参数、有限拍数与有限端口采样\n尚未提供\n硬件、异机 Actions、真人试用、独立人工 H02\n已披露残项\n12 项严格 RTL 样式 / WaveDrom 3.6.1 缺失\n截止 2026-10-15 20:00\n方案 PDF ≤10MB，答辩 PDF，佐证合一 PDF，视频可选。真人 / H02 非官方硬门槛",
+      "text_runs": 14,
+      "native_tables": [
+        [
+          [
+            "边界",
+            "当前证据"
+          ],
+          [
+            "适用范围",
+            "已审计合约 / 参数、有限拍数与有限端口采样"
+          ],
+          [
+            "尚未提供",
+            "硬件、异机 Actions、真人试用、独立人工 H02"
+          ],
+          [
+            "已披露残项",
+            "12 项严格 RTL 样式 / WaveDrom 3.6.1 缺失"
+          ]
+        ]
+      ],
+      "native_chart_references": 0,
+      "native_shapes": 7,
+      "picture_shapes": 0
+    }
+  ],
+  "charts": [
+    {
+      "path": "ppt/slides/charts/chart1.xml",
+      "series": [
+        {
+          "labels": [
+            "无反馈 Agent",
+            "反馈 Agent",
+            "单次 API",
+            "协议随机",
+            "均匀随机",
+            "固定测试"
+          ],
+          "values": [
+            "10",
+            "11",
+            "8",
+            "8",
+            "10",
+            "12"
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "id": "rIdChartSnapshot1",
+          "target": "../../embeddings/chart-data-snapshot-001.xlsx",
+          "resolved_path": "ppt/embeddings/chart-data-snapshot-001.xlsx"
+        }
+      ],
+      "error_bars": 0,
+      "value_axis_min": [
+        "0"
+      ],
+      "value_axis_max": [
+        "12"
+      ]
+    },
+    {
+      "path": "ppt/slides/charts/chart2.xml",
+      "series": [
+        {
+          "labels": [
+            "修复后",
+            "修复前"
+          ],
+          "values": [
+            "0",
+            "66"
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "id": "rIdChartSnapshot1",
+          "target": "../../embeddings/chart-data-snapshot-002.xlsx",
+          "resolved_path": "ppt/embeddings/chart-data-snapshot-002.xlsx"
+        }
+      ],
+      "error_bars": 0,
+      "value_axis_min": [
+        "0"
+      ],
+      "value_axis_max": [
+        "80"
+      ]
+    },
+    {
+      "path": "ppt/slides/charts/chart3.xml",
+      "series": [
+        {
+          "labels": [
+            "补全计时后",
+            "旧人工规格"
+          ],
+          "values": [
+            "15",
+            "13"
+          ]
+        }
+      ],
+      "relationships": [
+        {
+          "id": "rIdChartSnapshot1",
+          "target": "../../embeddings/chart-data-snapshot-003.xlsx",
+          "resolved_path": "ppt/embeddings/chart-data-snapshot-003.xlsx"
+        }
+      ],
+      "error_bars": 0,
+      "value_axis_min": [
+        "0"
+      ],
+      "value_axis_max": [
+        "15"
+      ]
+    }
+  ],
+  "notes": [
+    {
+      "path": "ppt/notesSlides/notesSlide1.xml",
+      "text": "ICARUS 是面向数字 IP 的验证智能体。它让第三方模型 API 根据正确规格和完整接口合约建议测试输入，由本地受控执行器生成测试台，使用真实 Icarus 仿真，再由独立于模型建议的判据解释结果。作品的可评估贡献是把测试规划、执行权限、预算和原件留存接成一个受控闭环。我们没有训练或微调基础模型，也没有提供本地模型权重。用户请求的模型名称是 4.1f，服务返回的模型标识为 deepseek-flash。接下来分别说明架构、新模块实验、真实失败和证据边界。\n\n证据定位：docs/competition/ic/v3/material_data.json 的 api、uses_third_party_api_only、trained_or_finetuned_weights。新实验源码为 20400fa7dca0c9804a96b1eb9842956782a9e81f，核心 Agent/helper/System 先冻结于 a96933786c17986a739fc2da515db3294d6e8044。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n不使用虚构机构、队号、签字或真人参与记录"
+    },
+    {
+      "path": "ppt/notesSlides/notesSlide10.xml",
+      "text": "旧 v8 批次登记 432 任务、414 实际执行，18 个没有 DUT episode。每策略缺陷分母为 48，检出依次为 48、32、48、29、37、37；306 请求、973,149 tokens。144 个正确任务中 143 实际执行，没有实际误报，1 个未执行，所以不能写成 144/144 都通过。strict=false 表示该批完整证据资格不满足，未执行和其它失败仍保留。旧表与新 108 的模块集合、缺陷分母和预算不同，不合并为一个总检出率，也不画同一增益趋势。新 1M 批预算独立，不补跑旧 token_budget 失败行。\n\n证据定位：docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json、strict_summary.json、docs/experiment/agent_feedback_study_live_2026-10-05.md。旧源码冻结为 a96933786c17986a739fc2da515db3294d6e8044。本页保持旧批身份与真实失败，不代表新模块的旧版本成绩。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n"
+    },
+    {
+      "path": "ppt/notesSlides/notesSlide11.xml",
+      "text": "这一页说明为什么判据不能只依赖模型的自述。FIFO 旧 RTL 与旧 reference model 曾共享计数错误。独立 deque 规格检查发现中间占用时同时接受读写，占用量应净零改变。第 5 拍读 25、写 99 后，队列从 [25,66] 变为 [66,99]，占用量仍为 2。第 7 拍首次出现 full 端口差异，旧实现为 0、队列应为 1、修复后为 1。同一 76 拍、228 次输出比较，差异从 66 变为 0。\n\n右侧是同字节冻结的外部历史候选集合，24 个候选包含 15 个人工变体、3 个正确基线、3 个等价改写和 3 个编译失败控制。补全人工 UART TX 计时 SPEC 后，15 个人工变体的检出从 13/15 变为 15/15。正确和等价控制没有误报，编译控制单列。它来自同作者的两个仓库，有限流程，不是独立外部盲测，更不是 AI 成绩或 AI 自动发现缺陷的证明。此页所有历史数字只说明规格独立性和受支持判据修复。\n\n证据定位：docs/experiment/protocol_oracle_improvements_2026-10-04.md，旧 FIFO before/after evidence.json 与 external/replay-20261004-protocol-v2/evidence.json 的原 SHA 随本材料绑定。没有新增 DUT 重放。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n"
+    },
+    {
+      "path": "ppt/notesSlides/notesSlide12.xml",
+      "text": "现有机器工程记录为 2,033 通过、2 跳过、0 失败，mypy 88 源文件零错，535 个冻结指纹无变化。这是工程回归记录，不是 AI 效果或真人验收。范围限于已审计合约与参数、有限刺激拍和有限输出采样。新模块属于同团队合成集合，没有外部盲测、预训练未见、因果或普适收益证明。硬件验证、异机 Actions、真人试用和独立人工 H02 原件尚未提供；12 项严格 RTL 样式残项和 WaveDrom 3.6.1 缺失仍披露，不能填假想通过。真人和 H02 是内部证据完善项，官方规则未将它们列为硬门槛。\n\n投递材料按官方要求组织：技术方案 PDF 不超过 10MB，答辩交 PDF，佐证合并为一份 PDF，视频可选为 3–5 分钟 MP4、不超过 300MB，截止 2026 年 10 月 15 日 20:00。本答辩 PDF 为图像式导出，编辑请使用 PPTX。最终目标是让每个数字、失败与限制都有可定位原件，后续扩展必须用新的预登记实验说明。\n\n官方来源：material_data.json 的 rules，核验日期 2026-10-05。通知 https://www.aicomp.cn/notice/4756.html ，规则和技术报告大纲的完整官方 URL 保存在该事实源并写入此页备注。最终投递文件名按真实队号-赛题名称-作品名称-材料名称组织，目前未提供真实队号，所以保留内部 v3 文件名而不填虚构编号。工程来源：docs/experiment/agent_new_holdout_source_validation_2026-10-05.md。当前未在 Microsoft PowerPoint/LibreOffice/Google Slides 打开验证，不能将 artifact-tool 预览等同于 Native Office 验收。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n官方通知：https://www.aicomp.cn/notice/4756.html\n规则 PDF：https://www.aicomp.cn/wp-content/uploads/2026/07/%E9%99%84%E4%BB%B61AIC%C2%B7AI%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E7%AB%9E%E8%B5%9B%E8%A7%84%E5%88%99%E5%8F%8A%E4%BD%9C%E5%93%81%E6%8F%90%E4%BA%A4%E8%A6%81%E6%B1%82.pdf\n参考大纲 PDF：https://www.aicomp.cn/wp-content/uploads/2026/07/%E9%99%84%E4%BB%B62AIC%C2%B7AI%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A%E5%8F%82%E8%80%83%E5%A4%A7%E7%BA%B2.pdf"
+    },
+    {
+      "path": "ppt/notesSlides/notesSlide2.xml",
+      "text": "需求来自本项目的实际合约、执行日志和失败记录分析，没有虚构用户访谈、效率百分比或真人计时。以两项新合约为例，valid/data 流水线需要检验两级延迟、flush 优先级及 invalid 时输出归零；事件累计器需要检验使能条件、四位模 16 回绕和 clear 不受 enable 限制。一个能编译运行的输入序列仍可能遗漏这些边界。工具面向数字电路学习者、小型 IP 开发者和技术复核人员，提供可以回指输入、采样点和输出差异的记录。\n\n证据定位：spec/agent_new_holdout_20261005/valid_data_pipeline_spec.md、event_accumulator_spec.md。旧 FIFO 及 UART 规格改进见 docs/experiment/protocol_oracle_improvements_2026-10-04.md。适用范围只覆盖已审计的合约与参数，不能扩展到任意 SoC 或物理签核。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n"
+    },
+    {
+      "path": "ppt/notesSlides/notesSlide3.xml",
+      "text": "图中各阶段均为可编辑原生对象。模型只收到正确规格、完整接口合约、允许驱动的输入、自己的计划、剩余预算及允许的执行反馈。它不能修改目标 RTL、判据、执行命令或受支持设计的期望值，私有变体 RTL、目标标签、路径和 witness 不进入请求。执行器先做动作格式、输入权限和预算检查，再实际仿真。每个实际 episode 具有独立 DUT 实例和自动复位，随后在正确 RTL 上独立重放同一计划并比较每个 after-edge 采样的全部输出。新接口包含 i_clk 和异步低有效 i_rstn，周期 10ns，自动复位 2 拍。\n\n证据定位：src/iverilog_ai/ai/agent.py、src/iverilog_ai/core/pipeline.py、scripts/run_agent_new_holdout_study.py。逐请求 canonical body SHA、消息 SHA 与原件绑定见 docs/review/agent-new-holdout-study-review-2026-10-05/trace-audit.json。账本保留的是 canonical JSON SHA，原始 HTTP wire-order body 字节未单独存档。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n"
+    },
+    {
+      "path": "ppt/notesSlides/notesSlide4.xml",
+      "text": "这一批登记 2 个新模块，每个模块包含正确、B、C 三个目标，采用 3 次重复和 6 种策略，合计 108 任务。每种策略有 4 个不同缺陷乘 3 次重复，即 12 个缺陷任务，另有 6 个正确任务。新模块成员与此前五个受控 API 批次不重叠，Agent、helper 和 System 在新模块生成前已经冻结。设计、变体和实验仍来自同一团队，因此这里称内部模块集合留出。没有独立时间戳证明选型早于旧 v8 成绩，也没有外部盲测或预训练未见证明。不能把内部成员不重叠扩大解释为外部独立评估。\n\n证据定位：docs/experiment/agent_new_holdout_study_plan_2026-10-05.md、spec/agent_new_holdout_study_1m_v8.json、benchmarks/agent_new_holdout_20261005/manifest.json。三项核心冻结 SHA 和原字节快照由新实验审计核对。所有 108 项均已真实执行。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n"
+    },
+    {
+      "path": "ppt/notesSlides/notesSlide5.xml",
+      "text": "新批使用独立的 1,000,000 input+output token 上限，不扣历史用量，也不用于补齐旧失败行。实际 87 次收费请求，输入 301,910、输出 37,714，合计 339,624 reported tokens，unknown 和 pending 均为零。这个数字是服务方报告的 token 用量，不是货币账单。单次 API 至多 1 请求和 1 实际 episode；反馈与无反馈各至多 3 个共享请求和 3 个实际 episode。格式错误和周期预算拒绝后的补提均是收费新请求，仍共用原任务上限。每个任务累计刺激拍至多 24，每次提案至多 12 向量，累计接受至多 64。独立自动复位和正确 RTL 重放成本单列。传输配置为 thinking disabled、非流式、4096 输出上限、60 秒超时和零自动重试。\n\n证据定位：docs/experiment/agent_new_holdout_study_budget_2026-10-05.json、新公开 token_budget.json、preregistration.json、run_settings.json。理论请求上限 126 不是实际请求数。剩余预算不授权追加独立补批，store=False 是客户端配置而非第三方数据保留行为的证明。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n"
+    },
+    {
+      "path": "ppt/notesSlides/notesSlide6.xml",
+      "text": "条形图直接使用原生图表和嵌入式 literal workbook，分母统一为每策略 12 个登记缺陷任务。固定测试 12、均匀随机 10、协议随机 8、单次 API 8、反馈 Agent 11、无反馈 10。固定测试最好。反馈比均匀随机和无反馈各多 1 项，但只有 4 个不同缺陷和 3 次重复，预算、提案及早停行为也不同，因此不能声称因果、显著性或普适工业收益。全部 36 个正确任务实际执行且没有误报。strict=true 只表示内部完整证据资格满足，并不表示全部动作成功，第 108 行仍以终态格式失败留在完整分母。\n\n证据定位：docs/experiment/agent-new-holdout-study-live-2026-10-05/strict_summary.json、receipt.json。每策略 repeated detections 分别为固定 4/4/4、均匀随机 4/3/3、协议随机 4/2/2、单次 API 2/2/4、反馈 4/4/3、无反馈 3/3/4。不同重复不视为不同独立缺陷。首次实际检出 episode：单次 API 首轮 8；反馈首轮 6、第二轮 5；无反馈首轮 8、第二轮 1、第三轮 1。后续 episode 实际找到反例说明闭环有可观察行为，不能据此证明反馈因果。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n"
+    },
+    {
+      "path": "ppt/notesSlides/notesSlide7.xml",
+      "text": "80 个 Agent 实际 episode 都保存了完整端口反馈文档。原始有限采样共有 826 点，helper 返回 701 点、省略 125 点。每份最多 12 个端点及等间隔样本，省略和 X/Z 语义保留，实际这批没有 X/Z。这是有限绑定端口流的 complete，不能表示所有设计行为完整覆盖。保存反馈文档和真正发送给模型的反馈 STATE 要分开：只有反馈策略的 20 个后续已发送 STATE 带端口事实，合计返回 180 点、省略 12 点。无反馈的 31 个已发送 STATE 中 observation、plan_error、latest_decision_error 全为 None，但其中 12 个仍保留自己的 current_plan 和减少后的预算，执行器也仍早停。两个新模块的功能覆盖状态是 unsupported/unknown，不补造命名 bins。24 个命名 bins 只属于旧四个配置。\n\n证据定位：trace-audit.json 的 paid_model_state_port_facts 和 helper 重建计数，新 receipt.json 的 port_observation_episodes。helper 绑定 RTL、plan、contract、TB、采样包、stdout 与执行结果，端口投影不含期望值和私有路径。X/Z 的保留机制由既有审计验证，本轮材料没有重新执行测试。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n"
+    },
+    {
+      "path": "ppt/notesSlides/notesSlide8.xml",
+      "text": "所有 87 个原 API 响应都保存，其中 86 个可解析 JSON、1 个不可解析；不隐藏 paid failure。85 个响应通过 schema、2 个格式拒绝。5 个预算拒绝属于 schema 通过的子集，不能加到 85 和 2 之上形成 92 请求。预算拒绝花费 23,991 tokens，其中 2 个任务后续真正执行，1 个后续检出。格式拒绝花费 9,274 tokens，其中 1 个任务后续执行 2 个 episode，没有后续检出。legacy preflight 有标与无标均为零，不能只数 retry_eligible 就宣称其它拒绝为零。\n\n第 108 行，即 zero-based index 107，对应 event_accumulator、mutation_c、反馈策略、seed 2。请求 1 实际执行 14 拍且没有检出，请求 2 因剩余刺激预算拒绝，请求 3 格式拒绝后达到原 3 请求上限，终态为 decision_format_error。它有 1 个实际 episode、证据核验有效，仍作为未检出失败保留在分母。拒绝后的执行和检出只作描述，不构成反馈的因果收益。\n\n证据定位：trace-audit.json 的 all_paid_rejection_events、explicit_error_classification、traces[sample=107]；原轨迹 sample-107/agent/agent_trajectory.json 与原响应在公开 traces_and_decisions.zip 和 full_raw_evidence.zip 中。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n"
+    },
+    {
+      "path": "ppt/notesSlides/notesSlide9.xml",
+      "text": "证据链从冻结输入快照开始，绑定 458 项登记输入，实际保存 4,359 个 raw 文件。公开 full_raw_manifest 与 ZIP 使用原字节，未把格式失败改写成成功。压缩 raw archive 为 7,027,646 字节，未压缩原文件总量 64,589,914 字节，两者口径不同。Git 绑定 446 项 exact、12 项只存在换行差异，因此原始登记快照仍为权威，不能声称干净 checkout 每字节相同。\n\n两类审计身份要分开。核心审计由非实现者代理完成 2,192 个机器检查，包括 1,923 加 269；这仍不是真人独立人审。轨迹审计由实验 entry 代码作者检查 54 条轨迹和 87 次请求，明确非独立于入口作者、非 H02。核心输出重算 6,214 项、VCD 端口值核对 27,434 项；这些数字分别表示有限机器证据，不等于真人评测人数。所有机器审计都没有追加 API 或 DUT。\n\n证据定位：docs/review/agent-new-holdout-study-review-2026-10-05/core-audit.json、trace-audit.json、receipt.json；新 full_raw_manifest.json、registered_inputs_manifest.json、source_byte_binding.json。source_checksums.json 保存本材料实际引用原件及 authoring source 的 SHA。\n\n材料事实源：docs/competition/ic/v3/material_data.json\n事实源 SHA-256：33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4\n主要原件：docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json\n"
+    }
+  ],
+  "embedded_workbooks": [
+    {
+      "path": "ppt/embeddings/chart-data-snapshot-001.xlsx",
+      "bytes": 1562,
+      "sha256": "b8ebdcdf3b93ff5cb68aefef7573012b13f4dbf0b6b932c0c31e5d07217a6941",
+      "crc_passed": true,
+      "metadata": {},
+      "sheets": [
+        {
+          "path": "xl/worksheets/sheet1.xml",
+          "cells": [
+            {
+              "reference": "A1",
+              "type": "inlineStr",
+              "value": "Category",
+              "formula": null
+            },
+            {
+              "reference": "B1",
+              "type": "inlineStr",
+              "value": "实际观测",
+              "formula": null
+            },
+            {
+              "reference": "A2",
+              "type": "inlineStr",
+              "value": "无反馈 Agent",
+              "formula": null
+            },
+            {
+              "reference": "B2",
+              "type": null,
+              "value": "10",
+              "formula": null
+            },
+            {
+              "reference": "A3",
+              "type": "inlineStr",
+              "value": "反馈 Agent",
+              "formula": null
+            },
+            {
+              "reference": "B3",
+              "type": null,
+              "value": "11",
+              "formula": null
+            },
+            {
+              "reference": "A4",
+              "type": "inlineStr",
+              "value": "单次 API",
+              "formula": null
+            },
+            {
+              "reference": "B4",
+              "type": null,
+              "value": "8",
+              "formula": null
+            },
+            {
+              "reference": "A5",
+              "type": "inlineStr",
+              "value": "协议随机",
+              "formula": null
+            },
+            {
+              "reference": "B5",
+              "type": null,
+              "value": "8",
+              "formula": null
+            },
+            {
+              "reference": "A6",
+              "type": "inlineStr",
+              "value": "均匀随机",
+              "formula": null
+            },
+            {
+              "reference": "B6",
+              "type": null,
+              "value": "10",
+              "formula": null
+            },
+            {
+              "reference": "A7",
+              "type": "inlineStr",
+              "value": "固定测试",
+              "formula": null
+            },
+            {
+              "reference": "B7",
+              "type": null,
+              "value": "12",
+              "formula": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "ppt/embeddings/chart-data-snapshot-002.xlsx",
+      "bytes": 1474,
+      "sha256": "6236938d2b1004c032b61d7b62ce2d4a8ff366381f41af801dffdb44b9e4e58d",
+      "crc_passed": true,
+      "metadata": {},
+      "sheets": [
+        {
+          "path": "xl/worksheets/sheet1.xml",
+          "cells": [
+            {
+              "reference": "A1",
+              "type": "inlineStr",
+              "value": "Category",
+              "formula": null
+            },
+            {
+              "reference": "B1",
+              "type": "inlineStr",
+              "value": "实际观测",
+              "formula": null
+            },
+            {
+              "reference": "A2",
+              "type": "inlineStr",
+              "value": "修复后",
+              "formula": null
+            },
+            {
+              "reference": "B2",
+              "type": null,
+              "value": "0",
+              "formula": null
+            },
+            {
+              "reference": "A3",
+              "type": "inlineStr",
+              "value": "修复前",
+              "formula": null
+            },
+            {
+              "reference": "B3",
+              "type": null,
+              "value": "66",
+              "formula": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "ppt/embeddings/chart-data-snapshot-003.xlsx",
+      "bytes": 1493,
+      "sha256": "d3c49f3f919e2a554e090a38e718d7c9ac6f06a112805a6d1ef16ee0c3454789",
+      "crc_passed": true,
+      "metadata": {},
+      "sheets": [
+        {
+          "path": "xl/worksheets/sheet1.xml",
+          "cells": [
+            {
+              "reference": "A1",
+              "type": "inlineStr",
+              "value": "Category",
+              "formula": null
+            },
+            {
+              "reference": "B1",
+              "type": "inlineStr",
+              "value": "实际观测",
+              "formula": null
+            },
+            {
+              "reference": "A2",
+              "type": "inlineStr",
+              "value": "补全计时后",
+              "formula": null
+            },
+            {
+              "reference": "B2",
+              "type": null,
+              "value": "15",
+              "formula": null
+            },
+            {
+              "reference": "A3",
+              "type": "inlineStr",
+              "value": "旧人工规格",
+              "formula": null
+            },
+            {
+              "reference": "B3",
+              "type": null,
+              "value": "13",
+              "formula": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "members": [
+    {
+      "path": "docProps/core.xml",
+      "bytes": 145,
+      "sha256": "732800fa0cdc5a41069a7340e00244afbfb19214de26696ccdd465b71d4a776c",
+      "crc32": "9ff710f4"
+    },
+    {
+      "path": "docProps/app.xml",
+      "bytes": 439,
+      "sha256": "df36e472fdf35de2316c1458e41c32af3b697201d913d0d64c3f2c1379e2ad1b",
+      "crc32": "80ae1f72"
+    },
+    {
+      "path": "ppt/presentation.xml",
+      "bytes": 2054,
+      "sha256": "3346af3a3a5c0ee6d08ff3a2b6100546fc7a43c64448d860efe48740b672bb0f",
+      "crc32": "f85e112f"
+    },
+    {
+      "path": "ppt/theme/theme1.xml",
+      "bytes": 4657,
+      "sha256": "87c09b93b4b6e0b40077fd046288d408b3f8e49abd170589a963bc87b2053f9c",
+      "crc32": "b6528628"
+    },
+    {
+      "path": "ppt/slideMasters/slideMaster1.xml",
+      "bytes": 7510,
+      "sha256": "c3817248302327a9125426e2352116c9b246ca1ac3a11b86cf696403dcfa4d19",
+      "crc32": "ec315d94"
+    },
+    {
+      "path": "ppt/slideMasters/theme/theme2.xml",
+      "bytes": 4657,
+      "sha256": "87c09b93b4b6e0b40077fd046288d408b3f8e49abd170589a963bc87b2053f9c",
+      "crc32": "b6528628"
+    },
+    {
+      "path": "ppt/slideLayouts/slideLayout1.xml",
+      "bytes": 380,
+      "sha256": "2300fbb688968eebb7a1858e65f8aae0da29e9c5cefc4607fdc04101568c6b62",
+      "crc32": "30a4884c"
+    },
+    {
+      "path": "ppt/notesMasters/notesMaster1.xml",
+      "bytes": 4047,
+      "sha256": "67e34238b0ae378d2b06825cab5051767fe5c55010ccc2f8c4bc250056068e22",
+      "crc32": "ae176e59"
+    },
+    {
+      "path": "ppt/notesMasters/theme/theme3.xml",
+      "bytes": 4657,
+      "sha256": "87c09b93b4b6e0b40077fd046288d408b3f8e49abd170589a963bc87b2053f9c",
+      "crc32": "b6528628"
+    },
+    {
+      "path": "ppt/presProps.xml",
+      "bytes": 660,
+      "sha256": "1db4fc10ae1c50c0bf989e54950b4489fbe1ce68105fa850073337ef8e043f5f",
+      "crc32": "40f0c8dc"
+    },
+    {
+      "path": "ppt/tableStyles.xml",
+      "bytes": 164,
+      "sha256": "eefe8607728a909fd3cf65c0e18a5abf20526c77e5d206950696a268edd823c8",
+      "crc32": "54fd1d9c"
+    },
+    {
+      "path": "ppt/slides/slide1.xml",
+      "bytes": 8770,
+      "sha256": "9367eccafa659ac70ba2c559f79a3e44c6bcfd76ae2e606406877635931b6c61",
+      "crc32": "a1ec0217"
+    },
+    {
+      "path": "ppt/notesSlides/notesSlide1.xml",
+      "bytes": 3561,
+      "sha256": "33bf09eb6b8e052b0aeb5b81f5a92e75990569d51b019ee6ef360b9ad2c114ce",
+      "crc32": "ff64edc0"
+    },
+    {
+      "path": "ppt/slides/slide2.xml",
+      "bytes": 18749,
+      "sha256": "72f5dab770b434a1f1459f5e8c96d9a323f6cf7756750307d694411460b8d84f",
+      "crc32": "af6c5d2a"
+    },
+    {
+      "path": "ppt/notesSlides/notesSlide2.xml",
+      "bytes": 3476,
+      "sha256": "ea55aa89cd55962337cb801647ee644152c2cfb13261f7a12197c75c1fd76cf7",
+      "crc32": "062a3cc5"
+    },
+    {
+      "path": "ppt/slides/slide3.xml",
+      "bytes": 28498,
+      "sha256": "e7a657536ae13482bae40d999dd85d70fd2478dacd64fc5233dec2d4544c358a",
+      "crc32": "02bda2c9"
+    },
+    {
+      "path": "ppt/notesSlides/notesSlide3.xml",
+      "bytes": 3624,
+      "sha256": "01ed9487da7be6d4322600cf4ff74cb1d1554344d2a77f4fcaac9de88d367c4b",
+      "crc32": "1d4a886e"
+    },
+    {
+      "path": "ppt/slides/slide4.xml",
+      "bytes": 15042,
+      "sha256": "36890831a046781c9e7686099772fcee016c6612185ce4767bcc3d48ff211a0a",
+      "crc32": "19312281"
+    },
+    {
+      "path": "ppt/notesSlides/notesSlide4.xml",
+      "bytes": 3520,
+      "sha256": "c1cd45ff5ee08f133274991bcf5049575d3b2bd22e7ece8a61dd5da39ac55ed8",
+      "crc32": "60c16c54"
+    },
+    {
+      "path": "ppt/slides/slide5.xml",
+      "bytes": 22791,
+      "sha256": "394c6338955b2bcdd7313ca5fabe83ccdaf06ac212b46c797412fb40a72c6597",
+      "crc32": "95a9e6e9"
+    },
+    {
+      "path": "ppt/notesSlides/notesSlide5.xml",
+      "bytes": 3716,
+      "sha256": "5f413b080c4dcbc3fd1dc34e4ae5873adb6c45744e01c85a95ee39218ff16064",
+      "crc32": "ae2c0e2c"
+    },
+    {
+      "path": "ppt/slides/slide6.xml",
+      "bytes": 16694,
+      "sha256": "8002476383777b47aeae213f7fd278ef4f63fdd1eec72edd23ba1a4397926b57",
+      "crc32": "cb4a86de"
+    },
+    {
+      "path": "ppt/slides/charts/chart1.xml",
+      "bytes": 4929,
+      "sha256": "daf1bdbdb665910f2b37ce833208983bd4cb65af40467ebf706ac6cc65564214",
+      "crc32": "a2276fe0"
+    },
+    {
+      "path": "ppt/notesSlides/notesSlide6.xml",
+      "bytes": 3784,
+      "sha256": "6956594fae18a8d6b0ffbb850762b355eed2b95e08d315318716ab286f25abe1",
+      "crc32": "f9f717e9"
+    },
+    {
+      "path": "ppt/slides/slide7.xml",
+      "bytes": 17927,
+      "sha256": "d45a493c7c121449e56cab82cef6f0503bc82e50dfe32fb3c02271968e59faf0",
+      "crc32": "74b270e0"
+    },
+    {
+      "path": "ppt/notesSlides/notesSlide7.xml",
+      "bytes": 3806,
+      "sha256": "442fe39aad2d9c0376136d5c6db45b5f065140ecb542aefae8585f431fa78ad7",
+      "crc32": "d54fe585"
+    },
+    {
+      "path": "ppt/slides/slide8.xml",
+      "bytes": 17427,
+      "sha256": "3de777018e8b000f0ae21eaf26c4eb4491f3a4d51aa2bba97f767a2ab234a3b7",
+      "crc32": "0f46bfe9"
+    },
+    {
+      "path": "ppt/notesSlides/notesSlide8.xml",
+      "bytes": 4062,
+      "sha256": "6f946deff4bc74aa3e64961127c20e2d5c6f2fa891994317ad6ca0bda1c7cc5c",
+      "crc32": "2d67472a"
+    },
+    {
+      "path": "ppt/slides/slide9.xml",
+      "bytes": 23630,
+      "sha256": "4538e289e87b0fa6df42560f2c2df92757d9de2b92edd4e58c38f3f51b755d77",
+      "crc32": "4d593751"
+    },
+    {
+      "path": "ppt/notesSlides/notesSlide9.xml",
+      "bytes": 4015,
+      "sha256": "6f554545f55be162a06665232be26acb913e6d1eab06960d24a75d5b2f718a2f",
+      "crc32": "89d01685"
+    },
+    {
+      "path": "ppt/slides/slide10.xml",
+      "bytes": 22571,
+      "sha256": "8633811825f3c6f3cab0817094cefda7d81d3e4edd55ffda1e57cf1563462c9b",
+      "crc32": "da6670c7"
+    },
+    {
+      "path": "ppt/notesSlides/notesSlide10.xml",
+      "bytes": 3517,
+      "sha256": "edf2a8bb231f7e657a6588948039b0fa62473a63871d8d7f841789b4693439ac",
+      "crc32": "032c2802"
+    },
+    {
+      "path": "ppt/slides/slide11.xml",
+      "bytes": 18095,
+      "sha256": "811010c0a4d86aba6721a666f1eca620d457f86a3408f4e504fee4c69cf66414",
+      "crc32": "f6ac3678"
+    },
+    {
+      "path": "ppt/slides/charts/chart2.xml",
+      "bytes": 4419,
+      "sha256": "ff39b3b0ba41d757ae9f600a3a476b1e154715ea5bb8146f34e87c258299a510",
+      "crc32": "4b3fbe3f"
+    },
+    {
+      "path": "ppt/slides/charts/chart3.xml",
+      "bytes": 4431,
+      "sha256": "9aace0659b955780c449687229f54a6192cf3fb1f953c5de7f5e411ccc13c9cf",
+      "crc32": "b8b59439"
+    },
+    {
+      "path": "ppt/notesSlides/notesSlide11.xml",
+      "bytes": 4020,
+      "sha256": "7b84ac53e2973fb1d614381f620ec8a4cd0fc298358137d51ca0e437ee0b9ad8",
+      "crc32": "c8d96158"
+    },
+    {
+      "path": "ppt/slides/slide12.xml",
+      "bytes": 15821,
+      "sha256": "686be088a4403f8892bddda39aceeec767c12eabd5504ff530cfc0f395b74a69",
+      "crc32": "aec9e409"
+    },
+    {
+      "path": "ppt/notesSlides/notesSlide12.xml",
+      "bytes": 5123,
+      "sha256": "719a0e38cc7ae326f98b876ee1b435f4e269e5df3c3e886fd9426e68422d89bc",
+      "crc32": "bc6037d8"
+    },
+    {
+      "path": "_rels/.rels",
+      "bytes": 622,
+      "sha256": "6c3ea4b8d7570c8d5f6c8aa3f1cc74f102e618a25442f04622f783b5ab4c361d",
+      "crc32": "8bd572d8"
+    },
+    {
+      "path": "ppt/notesMasters/_rels/notesMaster1.xml.rels",
+      "bytes": 305,
+      "sha256": "4484f97bdd2e71bc51dda264efd6cdaa31ba7c992ac8b8be537d67b876d5ab1d",
+      "crc32": "66960c12"
+    },
+    {
+      "path": "ppt/notesSlides/_rels/notesSlide1.xml.rels",
+      "bytes": 463,
+      "sha256": "9fe3d4c57eddffca776aab5c39caf764774076d2a96e299e84b8317789e22dde",
+      "crc32": "e777383f"
+    },
+    {
+      "path": "ppt/notesSlides/_rels/notesSlide10.xml.rels",
+      "bytes": 464,
+      "sha256": "d919616d598a6d66900cf40df5b7de33bb16a0411f35337376bf1a11823c8d5e",
+      "crc32": "9520a596"
+    },
+    {
+      "path": "ppt/notesSlides/_rels/notesSlide11.xml.rels",
+      "bytes": 464,
+      "sha256": "b52759a9c375f05d5033b8bd29916e30996fa367c75afe7e422de008cfcc5586",
+      "crc32": "17ab72bc"
+    },
+    {
+      "path": "ppt/notesSlides/_rels/notesSlide12.xml.rels",
+      "bytes": 464,
+      "sha256": "57b1afe70d877e343a79414bab2b6b01bbb5fdfb825f32ca37229bf8b7a1da95",
+      "crc32": "73883f82"
+    },
+    {
+      "path": "ppt/notesSlides/_rels/notesSlide2.xml.rels",
+      "bytes": 463,
+      "sha256": "56f6f2b5547c7bddc2e6075e56cebc8bbda2618557dd21da381df7c77519e122",
+      "crc32": "d35bf3af"
+    },
+    {
+      "path": "ppt/notesSlides/_rels/notesSlide3.xml.rels",
+      "bytes": 463,
+      "sha256": "340a4141c7fb6cb2078a3136956fcb5c97eb7b5e6f6a55bf9ef97a76c7994686",
+      "crc32": "f782d676"
+    },
+    {
+      "path": "ppt/notesSlides/_rels/notesSlide4.xml.rels",
+      "bytes": 463,
+      "sha256": "f1a515749402146041222e0c292e6942bd247de6ba3f218d97238b17b256a0b4",
+      "crc32": "8106dc90"
+    },
+    {
+      "path": "ppt/notesSlides/_rels/notesSlide5.xml.rels",
+      "bytes": 463,
+      "sha256": "a595f597350928bfddbbfe194d92aafb1021651b311b4c612fa770d4377612b5",
+      "crc32": "6edfdc90"
+    },
+    {
+      "path": "ppt/notesSlides/_rels/notesSlide6.xml.rels",
+      "bytes": 463,
+      "sha256": "7e1145894989463abfa6782d29d86737e30ea1d8475d487c899c4d7d3f86867b",
+      "crc32": "e6973488"
+    },
+    {
+      "path": "ppt/notesSlides/_rels/notesSlide7.xml.rels",
+      "bytes": 463,
+      "sha256": "8e65be2d5b663200582c620d1c2632669c470ce8d3546b4772d73ad2f2d20ae7",
+      "crc32": "49b0d371"
+    },
+    {
+      "path": "ppt/notesSlides/_rels/notesSlide8.xml.rels",
+      "bytes": 463,
+      "sha256": "ee3a0f6ac1276b62531cbdd2ab5a93b1248ee46c856c27ef292b760e3e60e912",
+      "crc32": "5b2cb67d"
+    },
+    {
+      "path": "ppt/notesSlides/_rels/notesSlide9.xml.rels",
+      "bytes": 463,
+      "sha256": "4d559476be5ee916ff339d6ecd1b2d93c738bf5426ff8b0cf5b3685c8230c6ed",
+      "crc32": "accef5d3"
+    },
+    {
+      "path": "ppt/_rels/presentation.xml.rels",
+      "bytes": 2767,
+      "sha256": "478a19aa09be54a86cbda27aa1f0040f25813a4a7f84a3afb0820d3547c157f6",
+      "crc32": "8be4e32c"
+    },
+    {
+      "path": "ppt/slideLayouts/_rels/slideLayout1.xml.rels",
+      "bytes": 311,
+      "sha256": "c714d3b1239c517dfcf1c3e593dee1c52603d9579f50de7ed8a9641fa985424e",
+      "crc32": "a05f5e4b"
+    },
+    {
+      "path": "ppt/slideMasters/_rels/slideMaster1.xml.rels",
+      "bytes": 475,
+      "sha256": "331d2750a912795d8c546999c003989c70897e12056d30a50465d0d4b54ddf94",
+      "crc32": "6eaa149c"
+    },
+    {
+      "path": "ppt/slides/_rels/slide1.xml.rels",
+      "bytes": 478,
+      "sha256": "f104d6fce93c5523d7008471bf5a0b03c9e8937b5ceea4a5472b9e85543c3bda",
+      "crc32": "19d09b22"
+    },
+    {
+      "path": "ppt/slides/_rels/slide10.xml.rels",
+      "bytes": 479,
+      "sha256": "5e5ef965c4381373545151bc1b3f36507cb47a0be162cf335ed4d34d1b36af85",
+      "crc32": "6ab92f78"
+    },
+    {
+      "path": "ppt/slides/_rels/slide11.xml.rels",
+      "bytes": 797,
+      "sha256": "a8971299522655178af753508c48c2b55ab657d4340fc3684a83c9d047994596",
+      "crc32": "786918aa"
+    },
+    {
+      "path": "ppt/slides/_rels/slide12.xml.rels",
+      "bytes": 479,
+      "sha256": "932439b2e420adc49b78e95db9d7f21d83031680fc58c9e805b8ee30f0dac54b",
+      "crc32": "20f3ecb9"
+    },
+    {
+      "path": "ppt/slides/_rels/slide2.xml.rels",
+      "bytes": 478,
+      "sha256": "a7c642a5deca2579610ccf365d6ada551be4cebc403be13dfb020919b9dd815a",
+      "crc32": "31dac08f"
+    },
+    {
+      "path": "ppt/slides/_rels/slide3.xml.rels",
+      "bytes": 478,
+      "sha256": "64d45f3d8a2d44afb6df426236b6606706a776e8a9940f1c2e891878273c27b5",
+      "crc32": "3e2134e4"
+    },
+    {
+      "path": "ppt/slides/_rels/slide4.xml.rels",
+      "bytes": 478,
+      "sha256": "dc6b399d6220b247cf5e87bb7dfbb6c9257bc9a31f2dca7909bd09ec651f18bd",
+      "crc32": "4bc7860c"
+    },
+    {
+      "path": "ppt/slides/_rels/slide5.xml.rels",
+      "bytes": 478,
+      "sha256": "ecb39d03802b0db38ac608269eb553105e172f509ff18f8a71e686c784ced6ab",
+      "crc32": "c4221f03"
+    },
+    {
+      "path": "ppt/slides/_rels/slide6.xml.rels",
+      "bytes": 637,
+      "sha256": "414805d62998aa002f2eb8bd754e3de6d4c7169f16840eab5d0a77f07bc24176",
+      "crc32": "bf342759"
+    },
+    {
+      "path": "ppt/slides/_rels/slide7.xml.rels",
+      "bytes": 478,
+      "sha256": "7def344f3d0495ac5b319c6ebc14a4eee1610736f4f63d6d81969768082de777",
+      "crc32": "fcbef2bf"
+    },
+    {
+      "path": "ppt/slides/_rels/slide8.xml.rels",
+      "bytes": 478,
+      "sha256": "2e89d9879f8bbbb5da462ccbedc5e7bb7c734828d591d2838719ae69057dbcc3",
+      "crc32": "60fef790"
+    },
+    {
+      "path": "ppt/slides/_rels/slide9.xml.rels",
+      "bytes": 478,
+      "sha256": "b63ef6d79d8902b416ecb7bd304a1dd4629cd842d460a1df21ab3a7853667db6",
+      "crc32": "31efc8eb"
+    },
+    {
+      "path": "[Content_Types].xml",
+      "bytes": 5431,
+      "sha256": "fd59629e23bc03ccc9747b3d1faf8969aadf0c1cfa80cbd11841856edf918f69",
+      "crc32": "6acb52cd"
+    },
+    {
+      "path": "ppt/embeddings/chart-data-snapshot-001.xlsx",
+      "bytes": 1562,
+      "sha256": "b8ebdcdf3b93ff5cb68aefef7573012b13f4dbf0b6b932c0c31e5d07217a6941",
+      "crc32": "8949fd6e"
+    },
+    {
+      "path": "ppt/slides/charts/_rels/chart1.xml.rels",
+      "bytes": 276,
+      "sha256": "08d9a730b9d55a57141192c8ffdf07d56687ac3b98e8afe58707157f5369d5af",
+      "crc32": "afc0ef4e"
+    },
+    {
+      "path": "ppt/embeddings/chart-data-snapshot-002.xlsx",
+      "bytes": 1474,
+      "sha256": "6236938d2b1004c032b61d7b62ce2d4a8ff366381f41af801dffdb44b9e4e58d",
+      "crc32": "adda238a"
+    },
+    {
+      "path": "ppt/slides/charts/_rels/chart2.xml.rels",
+      "bytes": 276,
+      "sha256": "68115ab9999b1dc383cf32895a0c7fc443ded8adddc8a60d4cc8b69bd8bab27b",
+      "crc32": "9a2d591d"
+    },
+    {
+      "path": "ppt/embeddings/chart-data-snapshot-003.xlsx",
+      "bytes": 1493,
+      "sha256": "d3c49f3f919e2a554e090a38e718d7c9ac6f06a112805a6d1ef16ee0c3454789",
+      "crc32": "72120fb9"
+    },
+    {
+      "path": "ppt/slides/charts/_rels/chart3.xml.rels",
+      "bytes": 276,
+      "sha256": "2347e0511cd42389af538e25bd0e4b052e45c1454cc31e4b8b8621b26e832702",
+      "crc32": "3fa6c913"
+    }
+  ],
+  "native_table_owner_slides": [
+    4,
+    5,
+    7,
+    8,
+    9,
+    10,
+    12
+  ],
+  "native_chart_owner_slides": [
+    6,
+    11
+  ],
+  "native_Office_rendering_verified": false,
+  "boundary": "Read-only OOXML content/metadata/CRC inspection; no PowerPoint opening, re-export or platform-font layout proof."
+}

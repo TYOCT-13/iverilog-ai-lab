@@ -1,0 +1,10 @@
+{
+  "fact_consistency_passed": true,
+  "unique_material_check_units": 296,
+  "failed": [],
+  "result": {
+    "path": "docs/competition/ic/v3/review/facts-r1/result.json",
+    "sha256": "08a06bb1166982d734a20f3c442258635969a6ab071d7808a69c5fd31ddc7a62",
+    "bytes": 95878
+  }
+}

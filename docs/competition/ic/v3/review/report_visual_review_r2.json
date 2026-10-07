@@ -1,0 +1,233 @@
+{
+  "schema": "icarus-v3-report-visual-review-v1",
+  "created_at_utc": "2026-10-05T08:05:34.322261+00:00",
+  "reviewer": "AI machine reviewer, not a human H02",
+  "scope": "Final r2 technical PDF 10 pages and supporting PDF 6 pages, all individually inspected",
+  "validation_binding": {
+    "path": "docs/competition/ic/v3/validation.json",
+    "sha256": "fa661f4abd28a327f49ed8f364913488b51ef6c29b72f2756b982c0b4935cfd9",
+    "bytes": 21282
+  },
+  "pdfs": [
+    {
+      "path": "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+      "sha256": "4bb214297d189ccbf446dd12e9bc848bffd216601c1c315241f6cb3bcc87f6a3",
+      "bytes": 470762
+    },
+    {
+      "path": "docs/competition/ic/ICARUS_佐证材料_v3.pdf",
+      "sha256": "7fe5fe5aa78d654dc4e212cd25e2f2b202418d1d7a32d96ce755d8361a8e0dda",
+      "bytes": 260009
+    }
+  ],
+  "actual_pages_viewed": 16,
+  "pages": [
+    {
+      "pdf": "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+      "page": 1,
+      "page_png": {
+        "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-01.png",
+        "sha256": "df81d9e8ac31b81232ef36af94759b8f9d287605a789cb583efbdf99f1db8351",
+        "bytes": 289225
+      },
+      "actually_viewed": true,
+      "tool": "tools.view_image on each complete original r2 PNG, not only a thumbnail contact sheet",
+      "findings": "Readable text/tables and intact page numbering; no observed clipped glyphs, overlap or identity markings. Figure/table values and limitations were checked in their page context."
+    },
+    {
+      "pdf": "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+      "page": 2,
+      "page_png": {
+        "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-02.png",
+        "sha256": "5299d92863a74fabd9cea04851ab42c8935573cce3208fd2f75667a38e612091",
+        "bytes": 260450
+      },
+      "actually_viewed": true,
+      "tool": "tools.view_image on each complete original r2 PNG, not only a thumbnail contact sheet",
+      "findings": "Readable text/tables and intact page numbering; no observed clipped glyphs, overlap or identity markings. Figure/table values and limitations were checked in their page context."
+    },
+    {
+      "pdf": "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+      "page": 3,
+      "page_png": {
+        "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-03.png",
+        "sha256": "06b97af6f8fbf0cc76529a7e0245a86945f8ed8fe99844fc351c4fe4553c41c5",
+        "bytes": 279057
+      },
+      "actually_viewed": true,
+      "tool": "tools.view_image on each complete original r2 PNG, not only a thumbnail contact sheet",
+      "findings": "Readable text/tables and intact page numbering; no observed clipped glyphs, overlap or identity markings. Figure/table values and limitations were checked in their page context."
+    },
+    {
+      "pdf": "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+      "page": 4,
+      "page_png": {
+        "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-04.png",
+        "sha256": "daeea5ce7b92ede905fa181680cef3be6cdfe8b86c21293a3bd6014137d2916a",
+        "bytes": 278830
+      },
+      "actually_viewed": true,
+      "tool": "tools.view_image on each complete original r2 PNG, not only a thumbnail contact sheet",
+      "findings": "Readable text/tables and intact page numbering; no observed clipped glyphs, overlap or identity markings. Figure/table values and limitations were checked in their page context."
+    },
+    {
+      "pdf": "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+      "page": 5,
+      "page_png": {
+        "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-05.png",
+        "sha256": "66761c68ad28052b3cc305cb90a84da0771f90d83132ca825c01d2eb1e966a42",
+        "bytes": 233640
+      },
+      "actually_viewed": true,
+      "tool": "tools.view_image on each complete original r2 PNG, not only a thumbnail contact sheet",
+      "findings": "Readable text/tables and intact page numbering; no observed clipped glyphs, overlap or identity markings. Figure/table values and limitations were checked in their page context."
+    },
+    {
+      "pdf": "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+      "page": 6,
+      "page_png": {
+        "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-06.png",
+        "sha256": "fddc9a5d846b303e1355e6f09c1c7f94dd423ac8fa85c7da22953566f80ff238",
+        "bytes": 186151
+      },
+      "actually_viewed": true,
+      "tool": "tools.view_image on each complete original r2 PNG, not only a thumbnail contact sheet",
+      "findings": "Readable text/tables and intact page numbering; no observed clipped glyphs, overlap or identity markings. Figure/table values and limitations were checked in their page context."
+    },
+    {
+      "pdf": "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+      "page": 7,
+      "page_png": {
+        "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-07.png",
+        "sha256": "cfa0ae55ded001ab63683263f9d912b76a45ad67c5d6c73103d7ab673bc9f4d8",
+        "bytes": 235167
+      },
+      "actually_viewed": true,
+      "tool": "tools.view_image on each complete original r2 PNG, not only a thumbnail contact sheet",
+      "findings": "Readable text/tables and intact page numbering; no observed clipped glyphs, overlap or identity markings. Figure/table values and limitations were checked in their page context."
+    },
+    {
+      "pdf": "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+      "page": 8,
+      "page_png": {
+        "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-08.png",
+        "sha256": "ab926c9cf51b53e8746286c1fff3a8c72ce2c7c8ac36a67b73147587cfada617",
+        "bytes": 283334
+      },
+      "actually_viewed": true,
+      "tool": "tools.view_image on each complete original r2 PNG, not only a thumbnail contact sheet",
+      "findings": "Readable text/tables and intact page numbering; no observed clipped glyphs, overlap or identity markings. Figure/table values and limitations were checked in their page context."
+    },
+    {
+      "pdf": "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+      "page": 9,
+      "page_png": {
+        "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-09.png",
+        "sha256": "aa46c6f583fdaf316af4c28f08b7d09c2eced3caa826b0d65b1c40f8a0f64e75",
+        "bytes": 172788
+      },
+      "actually_viewed": true,
+      "tool": "tools.view_image on each complete original r2 PNG, not only a thumbnail contact sheet",
+      "findings": "Readable text/tables and intact page numbering; no observed clipped glyphs, overlap or identity markings. Figure/table values and limitations were checked in their page context."
+    },
+    {
+      "pdf": "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+      "page": 10,
+      "page_png": {
+        "path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-10.png",
+        "sha256": "b60b780b34a8ce7109a12ab83cb481e63752f1826d7a47acf56e0cd6ba66c3d0",
+        "bytes": 312378
+      },
+      "actually_viewed": true,
+      "tool": "tools.view_image on each complete original r2 PNG, not only a thumbnail contact sheet",
+      "findings": "Readable text/tables and intact page numbering; no observed clipped glyphs, overlap or identity markings. Figure/table values and limitations were checked in their page context."
+    },
+    {
+      "pdf": "docs/competition/ic/ICARUS_佐证材料_v3.pdf",
+      "page": 1,
+      "page_png": {
+        "path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-01.png",
+        "sha256": "63cf1aeff5eccb5f0bc105e4d78a7b7e65f06275d095880d728940ed3548d126",
+        "bytes": 226365
+      },
+      "actually_viewed": true,
+      "tool": "tools.view_image on each complete original r2 PNG, not only a thumbnail contact sheet",
+      "findings": "Readable text/tables and intact page numbering; no observed clipped glyphs, overlap or identity markings. Figure/table values and limitations were checked in their page context."
+    },
+    {
+      "pdf": "docs/competition/ic/ICARUS_佐证材料_v3.pdf",
+      "page": 2,
+      "page_png": {
+        "path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-02.png",
+        "sha256": "d4b7cee7570185dd271b9a1662c805c823e7ae4e33aa1fc00eac388fd2c968e8",
+        "bytes": 260607
+      },
+      "actually_viewed": true,
+      "tool": "tools.view_image on each complete original r2 PNG, not only a thumbnail contact sheet",
+      "findings": "Readable text/tables and intact page numbering; no observed clipped glyphs, overlap or identity markings. Figure/table values and limitations were checked in their page context."
+    },
+    {
+      "pdf": "docs/competition/ic/ICARUS_佐证材料_v3.pdf",
+      "page": 3,
+      "page_png": {
+        "path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-03.png",
+        "sha256": "2eb3f49b15d36b79e6e5324a3fc2c681013ba337b2c87e55e59e7f2bb4dc331b",
+        "bytes": 218504
+      },
+      "actually_viewed": true,
+      "tool": "tools.view_image on each complete original r2 PNG, not only a thumbnail contact sheet",
+      "findings": "Readable text/tables and intact page numbering; no observed clipped glyphs, overlap or identity markings. Figure/table values and limitations were checked in their page context."
+    },
+    {
+      "pdf": "docs/competition/ic/ICARUS_佐证材料_v3.pdf",
+      "page": 4,
+      "page_png": {
+        "path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-04.png",
+        "sha256": "59d186a28fed37420c1739d14c7b2d8e64cf6854e57e2961e0318c184ca9aefd",
+        "bytes": 225413
+      },
+      "actually_viewed": true,
+      "tool": "tools.view_image on each complete original r2 PNG, not only a thumbnail contact sheet",
+      "findings": "Readable text/tables and intact page numbering; no observed clipped glyphs, overlap or identity markings. Figure/table values and limitations were checked in their page context."
+    },
+    {
+      "pdf": "docs/competition/ic/ICARUS_佐证材料_v3.pdf",
+      "page": 5,
+      "page_png": {
+        "path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-05.png",
+        "sha256": "efe151e2586ed0f1e02094a54a3113cfecdb8bb930c217e207e62e998830d450",
+        "bytes": 242762
+      },
+      "actually_viewed": true,
+      "tool": "tools.view_image on each complete original r2 PNG, not only a thumbnail contact sheet",
+      "findings": "Readable text/tables and intact page numbering; no observed clipped glyphs, overlap or identity markings. Figure/table values and limitations were checked in their page context."
+    },
+    {
+      "pdf": "docs/competition/ic/ICARUS_佐证材料_v3.pdf",
+      "page": 6,
+      "page_png": {
+        "path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-06.png",
+        "sha256": "1a0edb0b9c203c99cbd8b9e4580526ee227fe1f7848ba063e84818885c8b444e",
+        "bytes": 261268
+      },
+      "actually_viewed": true,
+      "tool": "tools.view_image on each complete original r2 PNG, not only a thumbnail contact sheet",
+      "findings": "Readable text/tables and intact page numbering; no observed clipped glyphs, overlap or identity markings. Figure/table values and limitations were checked in their page context."
+    }
+  ],
+  "chart_review": {
+    "path": "docs/competition/ic/v3/assets/new108_detection.png",
+    "actual_image_viewed": true,
+    "baseline_zero": true,
+    "strategy_values": "12/10/8/8/11/10, each labelled N/12",
+    "descriptor": "4 distinct defects x 3 repetitions; no error bars or causal/significance claim"
+  },
+  "technical_page_1_architecture": "Roles and archive loop are legible; generic diagram is not described as a new UI screenshot or experiment output.",
+  "scope_boundary": "Deck pages are not covered by this record and remain pending. This review does not establish human usability or native Office rendering.",
+  "new_API_requests": 0,
+  "credentials_read": 0,
+  "new_DUT_runs": 0,
+  "new_source_tests": 0,
+  "new_PDF_renders": 0,
+  "reperformed_core_2192_checks": false
+}

@@ -1,0 +1,49 @@
+{
+  "schema": "icarus-defense-v3-authoring-v1",
+  "material_source": "docs/competition/ic/v3/material_data.json",
+  "material_source_sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+  "slide_count": 12,
+  "design": {
+    "canvas_pixels": [1280, 720],
+    "body_font": "Noto Sans SC",
+    "display_font": "Bahnschrift",
+    "background": "#1C2023",
+    "text": "#F1F3F4",
+    "muted": "#B3BDC2",
+    "accent": "#00C8E8",
+    "no_stock_or_generated_visuals": true,
+    "native_editable_diagrams": true
+  },
+  "slides": [
+    {"number": 1, "title": "ICARUS", "purpose": "作品概述与工具边界"},
+    {"number": 2, "title": "数字 IP 的验证需求", "purpose": "公开合约中的时序与优先级需求"},
+    {"number": 3, "title": "API 规划与仿真裁决", "purpose": "可编辑架构与权限分工"},
+    {"number": 4, "title": "新内部模块集合留出", "purpose": "新108的登记范围与留出含义"},
+    {"number": 5, "title": "共享请求与执行预算", "purpose": "独立1M批预算与收费补提"},
+    {"number": 6, "title": "新108任务的六策略检出", "purpose": "统一12缺陷分母的可编辑图表"},
+    {"number": 7, "title": "实际端口事实与无反馈对照", "purpose": "已保存反馈与已发送STATE分开"},
+    {"number": 8, "title": "付费拒绝与真实执行", "purpose": "失败保留与第108行实例"},
+    {"number": 9, "title": "原件绑定与机器审计", "purpose": "真实证据链与审计身份"},
+    {"number": 10, "title": "旧v8的开发与复用集合", "purpose": "旧432结果独立列示"},
+    {"number": 11, "title": "判据独立性的规格案例", "purpose": "FIFO与外部人工SPEC的限定收益"},
+    {"number": 12, "title": "证据边界与交付", "purpose": "工程检查、未提供证据和官方格式"}
+  ],
+  "extra_original_sources": {
+    "fifo_before": ".iverilog-ai/protocol-oracle-fifo-20261004-before/evidence.json",
+    "fifo_after": ".iverilog-ai/protocol-oracle-fifo-20261004-after-final/evidence.json",
+    "external_spec_replay": ".iverilog-ai/external/replay-20261004-protocol-v2/evidence.json",
+    "new_public_manifest": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json",
+    "new_trace_manifest": "docs/experiment/agent-new-holdout-study-live-2026-10-05/trace_manifest.json",
+    "new_registered_inputs_manifest": "docs/experiment/agent-new-holdout-study-live-2026-10-05/registered_inputs_manifest.json",
+    "new_source_byte_binding": "docs/experiment/agent-new-holdout-study-live-2026-10-05/source_byte_binding.json",
+    "pipeline_public_spec": "spec/agent_new_holdout_20261005/valid_data_pipeline_spec.md",
+    "accumulator_public_spec": "spec/agent_new_holdout_20261005/event_accumulator_spec.md"
+  },
+  "historical_ui_used": false,
+  "API_calls_for_materials": 0,
+  "credential_reads_for_materials": 0,
+  "DUT_runs_for_materials": 0,
+  "engineering_tests_reexecuted_for_materials": 0,
+  "notes": "所有数字读取最终材料事实源并与来源SHA绑定。不同批次不合并分母。此材料不新增实验或真人证据。"
+}
+

@@ -1,0 +1,26 @@
+{
+  "schema": "ic-v3-material-fact-attempt-receipt-v1",
+  "result": {
+    "path": "docs/competition/ic/v3/review/facts-r1/result.json",
+    "sha256": "08a06bb1166982d734a20f3c442258635969a6ab071d7808a69c5fd31ddc7a62",
+    "bytes": 95878
+  },
+  "log": {
+    "path": "docs/competition/ic/v3/review/facts-r1/log.json",
+    "sha256": "108fdaf9f6d90a4f2b18d44c2c9b5d99fea1cc917d53628ddb4c22f808f1d9bb",
+    "bytes": 278
+  },
+  "tool": {
+    "path": "docs/competition/ic/v3/review/audit_material_data.py",
+    "sha256": "bd25da629ae282a70332e5c026a15e017ea61ce85701b4c4e985b143b9da00a9",
+    "bytes": 14407
+  },
+  "source_snapshot": {
+    "path": "docs/competition/ic/v3/review/facts-r1/material_data.original.json",
+    "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+    "bytes": 30806
+  },
+  "new_API_requests": 0,
+  "credentials_read": 0,
+  "new_DUT_runs": 0
+}

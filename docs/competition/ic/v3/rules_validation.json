@@ -1,0 +1,33 @@
+{
+  "schema": "icarus-official-ic-rules-read-v3",
+  "checked_at_utc": "2026-10-05T07:40:21.510698+00:00",
+  "operation": "read-only official reference retrieval, not authored submission PDFs",
+  "sources": [
+    {
+      "url": "https://www.aicomp.cn/wp-content/uploads/2026/07/%E9%99%84%E4%BB%B61AIC%C2%B7AI%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E7%AB%9E%E8%B5%9B%E8%A7%84%E5%88%99%E5%8F%8A%E4%BD%9C%E5%93%81%E6%8F%90%E4%BA%A4%E8%A6%81%E6%B1%82.pdf",
+      "http_status": 200,
+      "retrieval": "saved",
+      "path": ".iverilog-ai/ic-materials-v3-rule-check/ic_rules.pdf",
+      "bytes": 224745,
+      "sha256": "af33abb3da8178ca3e1c60ea2041ea60244b58e917d8adb92a856439afa09e3d",
+      "pages": 2,
+      "text_contains_10M": true,
+      "text_contains_optional_video": true,
+      "text_contains_H02": false
+    },
+    {
+      "url": "https://www.aicomp.cn/wp-content/uploads/2026/07/%E9%99%84%E4%BB%B62AIC%C2%B7AI%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A%E5%8F%82%E8%80%83%E5%A4%A7%E7%BA%B2.pdf",
+      "http_status": 200,
+      "retrieval": "saved",
+      "path": ".iverilog-ai/ic-materials-v3-rule-check/ic_outline.pdf",
+      "bytes": 152425,
+      "sha256": "6a4db4e3ffb016c83b4cf020139ed6a98069aea938c2dfa524f4ea1d33884354",
+      "pages": 2,
+      "text_contains_10M": false,
+      "text_contains_optional_video": false,
+      "text_contains_H02": false
+    }
+  ],
+  "new_API_requests": 0,
+  "new_DUT_runs": 0
+}

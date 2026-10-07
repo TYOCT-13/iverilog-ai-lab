@@ -4,7 +4,7 @@
 带盘符的除外。路径可用 `python scripts/check_doc_index.py` 校验是否仍然存在。
 
 - 仓库：`iverilog-ai-lab`，Apache-2.0；第三方资源保留各自许可；判定权威是 Icarus Verilog 12.0（`s20150603`）
-- 本次材料修订：**2026-10-05**；最新两模块批次实际源码`20400fa`，Agent/helper/系统提示仍冻结`a969337`；108任务全部执行，六组各12缺陷检出12/10/8/8/11/10，87请求/339624tokens，严格资格true但保留1终态格式失败；双机器审计完成，非H02。历史v8八模块432任务六组48/32/48/29/37/37，306请求/973149tokens、18零DUT、严格资格false，双代理审计完成但非H02；历史v7八模块432任务已结束：六组各48缺陷为48/32/48/34/37/37，334请求/833216tokens，严格资格false，预算补提真实收益未证；历史`c07756f`内部合成模块互斥留出108任务/86请求/190387tokens、全仓1570/2；历史Agent v6恢复源码`9c3bd3c`，恢复轮216任务/138请求/378204tokens，独立每轮100万额度；上一轮`75f9baa`的216任务/145请求/399083tokens保持历史，历史短预算三重复144任务（入口`f54ae63`）与六项选样诊断（入口`bdc9e20`），不改旧v5一次重复60任务。v2提交PDF/答辩仍为 `28be1ed`，旧三重复 `c7bb280`、pilot `e9b7b8a`分别归档。最新实测与旧版正式材料不能混作同一版本（已查阅通知的提交截止2026-10-15 20:00北京时间）。
+- 本次交付整理：**2026-10-07**；实验及v3产物日期为2026-10-05；最新两模块批次实际源码`20400fa`，Agent/helper/系统提示仍冻结`a969337`；108任务全部执行，六组各12缺陷检出12/10/8/8/11/10，87请求/339624tokens，严格资格true但保留1终态格式失败；双机器审计完成，非H02。历史v8八模块432任务六组48/32/48/29/37/37，306请求/973149tokens、18零DUT、严格资格false，双代理审计完成但非H02；历史v7八模块432任务已结束：六组各48缺陷为48/32/48/34/37/37，334请求/833216tokens，严格资格false，预算补提真实收益未证；历史`c07756f`内部合成模块互斥留出108任务/86请求/190387tokens、全仓1570/2；历史Agent v6恢复源码`9c3bd3c`，恢复轮216任务/138请求/378204tokens，独立每轮100万额度；上一轮`75f9baa`的216任务/145请求/399083tokens保持历史，历史短预算三重复144任务（入口`f54ae63`）与六项选样诊断（入口`bdc9e20`），不改旧v5一次重复60任务。当前v3提交PDF/答辩已同步最新两模块，历史v2仍为 `28be1ed`，旧三重复 `c7bb280`、pilot `e9b7b8a`分别归档。最新实测与旧版正式材料不能混作同一版本（已查阅通知的提交截止2026-10-15 20:00北京时间）。
 - 状态记号：**有效** = 当前口径，可直接对外引用；**历史** = 反映当时状态，只读归档，
   引用时必须带"旧口径"标注；**待补** = 尚未完成
 
@@ -15,9 +15,9 @@
 | 你想干什么 | 按顺序读 |
 |---|---|
 | 5 分钟了解这个项目 | `README.md` → `docs/project_overview.md` → `docs/competition/ic/report_draft.md` |
-| 准备 AI＋集成电路提交 | `docs/experiment/agent_new_holdout_study_live_2026-10-05.md` → `docs/experiment/metric_inventory.md` → `docs/competition/ic/gap_checklist.md` → `docs/competition/ic/v2/README.md`；正式v2文件尚未同步最新实测，真人/H02待真实原件 |
+| 准备 AI＋集成电路提交 | `docs/experiment/agent_new_holdout_study_live_2026-10-05.md` → `docs/experiment/metric_inventory.md` → `docs/competition/ic/gap_checklist.md` → `docs/competition/ic/v3/README.md`；v3已同步最新实测，真人/H02待真实原件 |
 | 复核数字是否可信 | `docs/experiment/metric_inventory.md`（每个数字一行：口径/来源/时间/复现命令）→ `docs/competition/submission_gate_checklist.md` → 产物目录 |
-| IC提交当天照着做 | `docs/competition/ic/v2/README.md` → `docs/competition/ic/gap_checklist.md`；先核对所选赛道、真人/H02原件和团队字段 |
+| IC提交当天照着做 | `docs/competition/ic/v3/README.md` → `docs/competition/ic/v3/submission_copy.md` → `docs/competition/ic/gap_checklist.md`；核对所选赛道、真实队号、匿名要求及上传回执，真人/H02不是官方额外必交项 |
 | 组织真人试用与反馈 | `docs/trial/README.md` → `docs/trial/organizer_workflow.md`；发给参与者从 `docs/trial/participant_start.md` 开始 |
 
 ---
@@ -28,10 +28,15 @@
 
 | 材料 | 路径 | 状态 |
 |---|---|---|
-| v2技术方案源稿与PDF | `docs/competition/ic/v2/technical_report.md`、`docs/competition/ic/ICARUS_技术方案_v2.pdf` | 28be1ed版本；9页/正文8页，约1.02MB；尚未纳入v5，真人/H02事实待补 |
-| v2佐证源稿与PDF | `docs/competition/ic/v2/supporting_evidence.md`、`docs/competition/ic/ICARUS_佐证材料_v2.pdf` | 28be1ed版本；5页、约0.86MB；V01–V06真实来源，保留失败，尚未纳入v5 |
-| 最新材料入口与PDF回执 | `docs/competition/ic/v2/README.md`、`docs/competition/ic/v2/validation.json` | 名称15字符、简介172字符；全部14页渲染查看，文字可选择、身份元数据空 |
-| 最新答辩稿与构建来源 | `docs/competition/ic/ICARUS_答辩材料_v2.pptx`、`docs/competition/ic/ICARUS_答辩材料_v2.pdf`、`docs/competition/ic/defense_v2/README.md`、`docs/competition/ic/defense_v2/qa_report.json` | 12页，5原生表格/3原生图表/12页备注；PPTX可编辑，PDF图像式；逐页机器检查，不是独立人审 |
+| v3技术方案源稿与PDF | `docs/competition/ic/v3/technical_report.md`、`docs/competition/ic/ICARUS_技术方案_v3.pdf` | 最新两模块108与历史432单列；10页/正文8页，470762字节；文字可选择、字体嵌入、身份元数据空 |
+| v3合并佐证源稿与PDF | `docs/competition/ic/v3/supporting_evidence.md`、`docs/competition/ic/ICARUS_佐证材料_v3.pdf` | 6页、260009字节；原件、预算、失败与限制分别列证据入口 |
+| v3材料入口、报名文本与PDF回执 | `docs/competition/ic/v3/README.md`、`docs/competition/ic/v3/submission_copy.md`、`docs/competition/ic/v3/validation.json` | 名称15字符、简介201字符；两份PDF共16页实际查看通过，尚未上传 |
+| v3答辩稿与构建来源 | `docs/competition/ic/ICARUS_答辩材料_v3.pptx`、`docs/competition/ic/ICARUS_答辩材料_v3.pdf`、`docs/competition/ic/defense_v3/README.md`、`docs/competition/ic/defense_v3/finalization_summary.json` | 12页；7原生表格/3原生图表/3嵌入式数值工作簿/12页备注；PPTX可编辑、PDF图像式，全部实际查看；原生Office未验 |
+| v3事实与材料机器复核 | `docs/competition/ic/v3/material_data.json`、`docs/review/ic_materials_v3_review_2026-10-07.md`、`docs/competition/ic/v3/review/final_receipt.json` | 绑定封存实测，不增加API或DUT；材料复核与旧2192/2033检查分别计量，非真人/H02 |
+| 历史v2技术方案源稿与PDF | `docs/competition/ic/v2/technical_report.md`、`docs/competition/ic/ICARUS_技术方案_v2.pdf` | 28be1ed版本；9页/正文8页，约1.02MB；尚未纳入v5，真人/H02事实待补 |
+| 历史v2佐证源稿与PDF | `docs/competition/ic/v2/supporting_evidence.md`、`docs/competition/ic/ICARUS_佐证材料_v2.pdf` | 28be1ed版本；5页、约0.86MB；V01–V06真实来源，保留失败，尚未纳入v5 |
+| 历史v2材料入口与PDF回执 | `docs/competition/ic/v2/README.md`、`docs/competition/ic/v2/validation.json` | 名称15字符、简介172字符；全部14页渲染查看，文字可选择、身份元数据空 |
+| 历史v2答辩稿与构建来源 | `docs/competition/ic/ICARUS_答辩材料_v2.pptx`、`docs/competition/ic/ICARUS_答辩材料_v2.pdf`、`docs/competition/ic/defense_v2/README.md`、`docs/competition/ic/defense_v2/qa_report.json` | 12页，5原生表格/3原生图表/12页备注；PPTX可编辑，PDF图像式；逐页机器检查，不是独立人审 |
 | 最新两模块内部留出 | [报告](experiment/agent_new_holdout_study_live_2026-10-05.md)、[回执](experiment/agent-new-holdout-study-live-2026-10-05/receipt.json)、[严格汇总](experiment/agent-new-holdout-study-live-2026-10-05/strict_summary.json) | 20400fa；108任务全部执行/134episode/268侧；六组各12缺陷检出12/10/8/8/11/10，分母为4不同缺陷×3重复；36/36正确控制无误报，严格true但1终态格式失败 |
 | 最新预算与完整原件 | [独立预算](experiment/agent_new_holdout_study_budget_2026-10-05.json)、[完整原件ZIP](experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip)、[原件清单](experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json)、[字节绑定](experiment/agent-new-holdout-study-live-2026-10-05/source_byte_binding.json) | 87请求/339624tokens/余660376，未知/pending0，历史不扣本批1M；458快照无变、Git446exact/12仅换行，精确重放须用快照，异机待验 |
 | 最新方案、源码验收与事前审查 | [方案](experiment/agent_new_holdout_study_plan_2026-10-05.md)、[登记](experiment/agent-new-holdout-study-live-2026-10-05/preregistration.json)、[源码验收](experiment/agent_new_holdout_source_validation_2026-10-05.md)、[事前机器审查](review/agent_new_holdout_prereg_review_2026-10-05.md) | 2033通过/2跳过、mypy88、535指纹无变；非实现者202不同非DUT检查，不与全仓相加。Agent/helper/系统提示保持a969337；12样式问题、WaveDrom缺依赖仍在 |
@@ -291,17 +296,17 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 
 ---
 
-## 7. 尚未完成（都需要仓库之外的动作）
+## 7. 交付状态与仓库外工作
 
 | 项 | 状态 | 卡在哪 |
 |---|---|---|
-| 正式v2 PDF/PPT同步最新实测 | 待补 | 当前仍为28be1ed材料；需分别列历史432与最新108任务，不把机器审计写成真人/H02 |
+| 正式v3 PDF/PPT同步最新实测 | 已完成 | 技术方案10页、合并佐证6页、答辩12页；新108与旧432分列，机器复核非真人/H02；历史v2原样保留 |
 | `CITATION.cff` 真实地址 | 待补 | 当前先完成本地 Git；公开仓库地址尚未确定，保留占位，不捏造链接 |
 | 真人试用与复测记录 | 待补 | 建议安排 3–5 名不同角色试用者；材料就绪，尚待实际收集；不是官方人数硬要求 |
-| 3–5 分钟演示视频 | 待补 | 需要录制；脚本 `docs/demo/demo_script.md` |
+| 3–5 分钟演示视频 | 待补，可选佐证 | 实际录制后再登记；脚本 `docs/demo/demo_script.md` |
 | 外部独立复核 | 待补 | 3 个基线与 21 个候选待真人逐条复核；记录关系、协助、分歧与不可判定 |
 | GitHub Action 外部调用验证 | 待补 | 需要一个调用方仓库 |
-| 原开源报告正文 21 页 | 历史取舍 | 原赛道稿正文21页；旧IC工作稿正文9页，最新v2正文8页；各版本分别计量 |
+| 原开源报告正文 21 页 | 历史取舍 | 原赛道稿正文21页；旧IC工作稿正文9页，历史v2正文8页、当前v3正文8页；各版本分别计量 |
 
 试用与复核的完整入口见 §3.1。v1 原始表和汇总脚本保留兼容，新记录不覆盖旧表；缺少真人反馈、独立审核或视频时继续标注待补。
 

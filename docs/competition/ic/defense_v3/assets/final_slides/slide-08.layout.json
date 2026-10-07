@@ -1,0 +1,862 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/fu1gfa1s",
+    "id": "fu1gfa1s",
+    "slide": 8,
+    "layoutId": "/ppt/slideLayouts/slideLayout1.xml",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#1C2023",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ICARUS charcoal cyan",
+    "colors": {
+      "accent1": "#00C8E8",
+      "accent2": "#738188",
+      "accent3": "#B3BDC2",
+      "accent4": "#CFD8DC",
+      "accent5": "#343C40",
+      "accent6": "#7A858A",
+      "dk1": "#111517",
+      "lt1": "#F1F3F4",
+      "dk2": "#1C2023",
+      "lt2": "#D0D9DD",
+      "hlink": "#00C8E8",
+      "folHlink": "#00C8E8"
+    },
+    "fontScheme": {
+      "name": "Office",
+      "majorFont": {
+        "latinTypeface": "Calibri Light",
+        "eastAsianTypeface": "Calibri Light",
+        "complexScriptTypeface": "Calibri Light"
+      },
+      "minorFont": {
+        "latinTypeface": "Calibri",
+        "eastAsianTypeface": "Calibri",
+        "complexScriptTypeface": "Calibri"
+      }
+    },
+    "typefaces": [
+      "Bahnschrift",
+      "Calibri",
+      "Calibri Light",
+      "Noto Sans SC"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout1.xml",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/id0fu50z",
+      "id": "9",
+      "name": "付费拒绝与真实执行",
+      "bbox": [
+        64,
+        46,
+        1060,
+        70
+      ],
+      "geometry": "rect",
+      "text": "付费拒绝与真实执行",
+      "textPreview": "付费拒绝与真实执行",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "付费拒绝与真实执行"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "付费拒绝与真实执行",
+          "resolvedTextStyle": {
+            "fontSize": 46,
+            "typeface": "Noto Sans SC",
+            "color": "#F1F3F4",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "付费拒绝与真实执行",
+              "fontSize": 46,
+              "typeface": "Noto Sans SC",
+              "color": "#F1F3F4",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/18byd4zy",
+      "id": "2",
+      "bbox": [
+        64,
+        131,
+        1150,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#566168",
+      "lineWidth": 1
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/g72x4zyd",
+      "id": "3",
+      "name": "08",
+      "bbox": [
+        1158,
+        48,
+        64,
+        54
+      ],
+      "geometry": "rect",
+      "text": "08",
+      "textPreview": "08",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "08"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "08",
+          "resolvedTextStyle": {
+            "fontSize": 34,
+            "typeface": "Bahnschrift",
+            "color": "#00C8E8",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "08",
+              "fontSize": 34,
+              "typeface": "Bahnschrift",
+              "color": "#00C8E8",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "table",
+      "scope": "slide",
+      "aid": "tb/v29wvm5o",
+      "id": "10",
+      "bbox": [
+        68,
+        177,
+        1138,
+        194
+      ],
+      "text": "拒绝类 | 收费请求 | 后续执行任务 | 后续检出任务\n预算拒绝（schema 通过子集） | 5 | 2 | 1\n动作格式拒绝 | 2 | 1 | 0",
+      "textPreview": "拒绝类 | 收费请求 | 后续执行任务 | 后续检出任务 | 预算拒绝（schema 通过子集） | 5 | 2 | 1 | 动作格式拒绝 | 2 | 1 | 0",
+      "rows": 3,
+      "cols": 4,
+      "cells": [
+        {
+          "index": 1,
+          "row": 1,
+          "column": 1,
+          "bbox": [
+            68,
+            177,
+            518,
+            64.67
+          ],
+          "text": "拒绝类",
+          "textPreview": "拒绝类",
+          "fillColor": "#111517",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "拒绝类",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "拒绝类",
+                  "fontSize": 25,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "row": 1,
+          "column": 2,
+          "bbox": [
+            586,
+            177,
+            160,
+            64.67
+          ],
+          "text": "收费请求",
+          "textPreview": "收费请求",
+          "fillColor": "#111517",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "收费请求",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "收费请求",
+                  "fontSize": 25,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "row": 1,
+          "column": 3,
+          "bbox": [
+            746,
+            177,
+            240,
+            64.67
+          ],
+          "text": "后续执行任务",
+          "textPreview": "后续执行任务",
+          "fillColor": "#111517",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "后续执行任务",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "后续执行任务",
+                  "fontSize": 25,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "row": 1,
+          "column": 4,
+          "bbox": [
+            986,
+            177,
+            220,
+            64.67
+          ],
+          "text": "后续检出任务",
+          "textPreview": "后续检出任务",
+          "fillColor": "#111517",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "后续检出任务",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "后续检出任务",
+                  "fontSize": 25,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "row": 2,
+          "column": 1,
+          "bbox": [
+            68,
+            241.67,
+            518,
+            64.67
+          ],
+          "text": "预算拒绝（schema 通过子集）",
+          "textPreview": "预算拒绝（schema 通过子集）",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "预算拒绝（schema 通过子集）",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "预算拒绝（schema 通过子集）",
+                  "fontSize": 27,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "row": 2,
+          "column": 2,
+          "bbox": [
+            586,
+            241.67,
+            160,
+            64.67
+          ],
+          "text": "5",
+          "textPreview": "5",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "5",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "5",
+                  "fontSize": 27,
+                  "typeface": "Noto Sans SC",
+                  "color": "#00C8E8"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 7,
+          "row": 2,
+          "column": 3,
+          "bbox": [
+            746,
+            241.67,
+            240,
+            64.67
+          ],
+          "text": "2",
+          "textPreview": "2",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "2",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "2",
+                  "fontSize": 27,
+                  "typeface": "Noto Sans SC",
+                  "color": "#00C8E8"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 8,
+          "row": 2,
+          "column": 4,
+          "bbox": [
+            986,
+            241.67,
+            220,
+            64.67
+          ],
+          "text": "1",
+          "textPreview": "1",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "1",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "1",
+                  "fontSize": 27,
+                  "typeface": "Noto Sans SC",
+                  "color": "#00C8E8"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 9,
+          "row": 3,
+          "column": 1,
+          "bbox": [
+            68,
+            306.33,
+            518,
+            64.67
+          ],
+          "text": "动作格式拒绝",
+          "textPreview": "动作格式拒绝",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "动作格式拒绝",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "动作格式拒绝",
+                  "fontSize": 27,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 10,
+          "row": 3,
+          "column": 2,
+          "bbox": [
+            586,
+            306.33,
+            160,
+            64.67
+          ],
+          "text": "2",
+          "textPreview": "2",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "2",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "2",
+                  "fontSize": 27,
+                  "typeface": "Noto Sans SC",
+                  "color": "#00C8E8"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 11,
+          "row": 3,
+          "column": 3,
+          "bbox": [
+            746,
+            306.33,
+            240,
+            64.67
+          ],
+          "text": "1",
+          "textPreview": "1",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "1",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "1",
+                  "fontSize": 27,
+                  "typeface": "Noto Sans SC",
+                  "color": "#00C8E8"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 12,
+          "row": 3,
+          "column": 4,
+          "bbox": [
+            986,
+            306.33,
+            220,
+            64.67
+          ],
+          "text": "0",
+          "textPreview": "0",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "0",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "0",
+                  "fontSize": 27,
+                  "typeface": "Noto Sans SC",
+                  "color": "#00C8E8"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/6h0fypgb",
+      "id": "5",
+      "name": "第 108 行：实际执行后，终态格式失败",
+      "bbox": [
+        68,
+        412,
+        1140,
+        57
+      ],
+      "geometry": "rect",
+      "text": "第 108 行：实际执行后，终态格式失败",
+      "textPreview": "第 108 行：实际执行后，终态格式失败",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "第 108 行：实际执行后，终态格式失败"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "第 108 行：实际执行后，终态格式失败",
+          "resolvedTextStyle": {
+            "fontSize": 34,
+            "typeface": "Noto Sans SC",
+            "color": "#F1F3F4",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "第 108 行：实际执行后，终态格式失败",
+              "fontSize": 34,
+              "typeface": "Noto Sans SC",
+              "color": "#F1F3F4",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tkby9kzm",
+      "id": "6",
+      "name": "请求 1 执行 14 拍    请求 2 预算拒绝    请求 ",
+      "bbox": [
+        68,
+        486,
+        1139,
+        55
+      ],
+      "geometry": "rect",
+      "text": "请求 1 执行 14 拍    请求 2 预算拒绝    请求 3 格式拒绝",
+      "textPreview": "请求 1 执行 14 拍    请求 2 预算拒绝    请求 3 格式拒绝",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "请求 1 执行 14 拍    请求 2 预算拒绝    请求 3 格式拒绝"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "请求 1 执行 14 拍    请求 2 预算拒绝    请求 3 格式拒绝",
+          "resolvedTextStyle": {
+            "fontSize": 29,
+            "typeface": "Noto Sans SC",
+            "color": "#B3BDC2"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "请求 1 执行 14 拍    请求 2 预算拒绝    请求 3 格式拒绝",
+              "fontSize": 29,
+              "typeface": "Noto Sans SC",
+              "color": "#B3BDC2"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sjix0zy1",
+      "id": "7",
+      "name": "decision_format_error，未检出，仍计入完整分",
+      "bbox": [
+        68,
+        552,
+        1138,
+        61
+      ],
+      "geometry": "rect",
+      "text": "decision_format_error，未检出，仍计入完整分母",
+      "textPreview": "decision_format_error，未检出，仍计入完整分母",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "decision_format_error，未检出，仍计入完整分母"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "decision_format_error，未检出，仍计入完整分母",
+          "resolvedTextStyle": {
+            "fontSize": 30,
+            "typeface": "Noto Sans SC",
+            "color": "#00C8E8",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "decision_format_error，未检出，仍计入完整分母",
+              "fontSize": 30,
+              "typeface": "Noto Sans SC",
+              "color": "#00C8E8",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/je9g3ahk",
+      "id": "8",
+      "name": "85 schema 通过 / 2 拒绝，预算 5 是通过子集。8",
+      "bbox": [
+        64,
+        630,
+        1150,
+        62
+      ],
+      "geometry": "rect",
+      "text": "85 schema 通过 / 2 拒绝，预算 5 是通过子集。87 原回复保存，86 可解析 / 1 不解析",
+      "textPreview": "85 schema 通过 / 2 拒绝，预算 5 是通过子集。87 原回复保存，86 可解析 / 1 不解析",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "85 schema 通过 / 2 拒绝，预算 5 是通过子集。87 原回复保存，86 可解析 / 1 不解析"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "85 schema 通过 / 2 拒绝，预算 5 是通过子集。87 原回复保存，86 可解析 / 1 不解析",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "typeface": "Noto Sans SC",
+            "color": "#B3BDC2"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "85 schema 通过 / 2 拒绝，预算 5 是通过子集。87 原回复保存，86 可解析 / 1 不解析",
+              "fontSize": 23,
+              "typeface": "Noto Sans SC",
+              "color": "#B3BDC2"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

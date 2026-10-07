@@ -13,6 +13,14 @@
 *.jpg binary
 *.pdf binary
 *.zip binary
+docs/competition/ic/*_v3.pptx binary
+
+# v3提交材料与制作/复核原件已绑定SHA，保留CRLF或LF原字节，不重写旧实验。
+docs/competition/ic/v3/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/competition/ic/defense_v3/** -text whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+# 已冻结答辩源保留EOF空行；问答稿每个题目后的两个空格为Markdown硬换行。
+docs/competition/ic/defense_v3/qa_questions.md whitespace=-blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+docs/competition/ic/defense_v3/build_attempts/**/qa_questions.md whitespace=-blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
 
 # 本轮公开实验原件按字节保存，避免换行转换破坏已登记的 SHA-256。
 docs/experiment/agent-comparison-chat-2026-10-04/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

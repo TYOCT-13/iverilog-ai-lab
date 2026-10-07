@@ -1,0 +1,2739 @@
+{
+  "schema": "icarus-v3-text-table-review-v1",
+  "created_at_utc": "2026-10-05T08:03:11.510254+00:00",
+  "unique_text_check_units": 80,
+  "passed_check_units": 80,
+  "failed_check_units": 0,
+  "checks": [
+    {
+      "id": "table_identity/technical_new",
+      "status": "passed",
+      "detail": [
+        [
+          "固定测试",
+          "12",
+          "4/4/4",
+          "0"
+        ],
+        [
+          "均匀随机",
+          "10",
+          "4/3/3",
+          "0"
+        ],
+        [
+          "协议随机",
+          "8",
+          "4/2/2",
+          "0"
+        ],
+        [
+          "单次API",
+          "8",
+          "2/2/4",
+          "18"
+        ],
+        [
+          "反馈Agent",
+          "11",
+          "4/4/3",
+          "38"
+        ],
+        [
+          "无反馈Agent",
+          "10",
+          "3/3/4",
+          "31"
+        ]
+      ]
+    },
+    {
+      "id": "table_row_count/technical_new",
+      "status": "passed",
+      "detail": {
+        "actual": 6,
+        "expected": 6
+      }
+    },
+    {
+      "id": "table_row/technical_new/1",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "固定测试",
+          "12",
+          "4/4/4",
+          "0"
+        ],
+        "expected": [
+          "固定测试",
+          "12",
+          "4/4/4",
+          "0"
+        ]
+      }
+    },
+    {
+      "id": "table_row/technical_new/2",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "均匀随机",
+          "10",
+          "4/3/3",
+          "0"
+        ],
+        "expected": [
+          "均匀随机",
+          "10",
+          "4/3/3",
+          "0"
+        ]
+      }
+    },
+    {
+      "id": "table_row/technical_new/3",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "协议随机",
+          "8",
+          "4/2/2",
+          "0"
+        ],
+        "expected": [
+          "协议随机",
+          "8",
+          "4/2/2",
+          "0"
+        ]
+      }
+    },
+    {
+      "id": "table_row/technical_new/4",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "单次API",
+          "8",
+          "2/2/4",
+          "18"
+        ],
+        "expected": [
+          "单次API",
+          "8",
+          "2/2/4",
+          "18"
+        ]
+      }
+    },
+    {
+      "id": "table_row/technical_new/5",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "反馈Agent",
+          "11",
+          "4/4/3",
+          "38"
+        ],
+        "expected": [
+          "反馈Agent",
+          "11",
+          "4/4/3",
+          "38"
+        ]
+      }
+    },
+    {
+      "id": "table_row/technical_new/6",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "无反馈Agent",
+          "10",
+          "3/3/4",
+          "31"
+        ],
+        "expected": [
+          "无反馈Agent",
+          "10",
+          "3/3/4",
+          "31"
+        ]
+      }
+    },
+    {
+      "id": "table_identity/technical_old",
+      "status": "passed",
+      "detail": [
+        [
+          "固定测试",
+          "48",
+          "0",
+          "0"
+        ],
+        [
+          "均匀随机",
+          "32",
+          "0",
+          "0"
+        ],
+        [
+          "协议随机",
+          "48",
+          "0",
+          "0"
+        ],
+        [
+          "单次API",
+          "29",
+          "70",
+          "205503"
+        ],
+        [
+          "反馈Agent",
+          "37",
+          "122",
+          "426581"
+        ],
+        [
+          "无反馈Agent",
+          "37",
+          "114",
+          "341065"
+        ]
+      ]
+    },
+    {
+      "id": "table_row_count/technical_old",
+      "status": "passed",
+      "detail": {
+        "actual": 6,
+        "expected": 6
+      }
+    },
+    {
+      "id": "table_row/technical_old/1",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "固定测试",
+          "48",
+          "0",
+          "0"
+        ],
+        "expected": [
+          "固定测试",
+          "48",
+          "0",
+          "0"
+        ]
+      }
+    },
+    {
+      "id": "table_row/technical_old/2",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "均匀随机",
+          "32",
+          "0",
+          "0"
+        ],
+        "expected": [
+          "均匀随机",
+          "32",
+          "0",
+          "0"
+        ]
+      }
+    },
+    {
+      "id": "table_row/technical_old/3",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "协议随机",
+          "48",
+          "0",
+          "0"
+        ],
+        "expected": [
+          "协议随机",
+          "48",
+          "0",
+          "0"
+        ]
+      }
+    },
+    {
+      "id": "table_row/technical_old/4",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "单次API",
+          "29",
+          "70",
+          "205503"
+        ],
+        "expected": [
+          "单次API",
+          "29",
+          "70",
+          "205503"
+        ]
+      }
+    },
+    {
+      "id": "table_row/technical_old/5",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "反馈Agent",
+          "37",
+          "122",
+          "426581"
+        ],
+        "expected": [
+          "反馈Agent",
+          "37",
+          "122",
+          "426581"
+        ]
+      }
+    },
+    {
+      "id": "table_row/technical_old/6",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "无反馈Agent",
+          "37",
+          "114",
+          "341065"
+        ],
+        "expected": [
+          "无反馈Agent",
+          "37",
+          "114",
+          "341065"
+        ]
+      }
+    },
+    {
+      "id": "table_identity/supporting_new",
+      "status": "passed",
+      "detail": [
+        [
+          "固定测试",
+          "12",
+          "4/4/4",
+          "0",
+          "0"
+        ],
+        [
+          "均匀随机",
+          "10",
+          "4/3/3",
+          "0",
+          "0"
+        ],
+        [
+          "协议随机",
+          "8",
+          "4/2/2",
+          "0",
+          "0"
+        ],
+        [
+          "单次API",
+          "8",
+          "2/2/4",
+          "18",
+          "61529"
+        ],
+        [
+          "反馈Agent",
+          "11",
+          "4/4/3",
+          "38",
+          "166073"
+        ],
+        [
+          "无反馈Agent",
+          "10",
+          "3/3/4",
+          "31",
+          "112022"
+        ]
+      ]
+    },
+    {
+      "id": "table_row_count/supporting_new",
+      "status": "passed",
+      "detail": {
+        "actual": 6,
+        "expected": 6
+      }
+    },
+    {
+      "id": "table_row/supporting_new/1",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "固定测试",
+          "12",
+          "4/4/4",
+          "0",
+          "0"
+        ],
+        "expected": [
+          "固定测试",
+          "12",
+          "4/4/4",
+          "0",
+          "0"
+        ]
+      }
+    },
+    {
+      "id": "table_row/supporting_new/2",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "均匀随机",
+          "10",
+          "4/3/3",
+          "0",
+          "0"
+        ],
+        "expected": [
+          "均匀随机",
+          "10",
+          "4/3/3",
+          "0",
+          "0"
+        ]
+      }
+    },
+    {
+      "id": "table_row/supporting_new/3",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "协议随机",
+          "8",
+          "4/2/2",
+          "0",
+          "0"
+        ],
+        "expected": [
+          "协议随机",
+          "8",
+          "4/2/2",
+          "0",
+          "0"
+        ]
+      }
+    },
+    {
+      "id": "table_row/supporting_new/4",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "单次API",
+          "8",
+          "2/2/4",
+          "18",
+          "61529"
+        ],
+        "expected": [
+          "单次API",
+          "8",
+          "2/2/4",
+          "18",
+          "61529"
+        ]
+      }
+    },
+    {
+      "id": "table_row/supporting_new/5",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "反馈Agent",
+          "11",
+          "4/4/3",
+          "38",
+          "166073"
+        ],
+        "expected": [
+          "反馈Agent",
+          "11",
+          "4/4/3",
+          "38",
+          "166073"
+        ]
+      }
+    },
+    {
+      "id": "table_row/supporting_new/6",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "无反馈Agent",
+          "10",
+          "3/3/4",
+          "31",
+          "112022"
+        ],
+        "expected": [
+          "无反馈Agent",
+          "10",
+          "3/3/4",
+          "31",
+          "112022"
+        ]
+      }
+    },
+    {
+      "id": "table_identity/supporting_old",
+      "status": "passed",
+      "detail": [
+        [
+          "固定测试",
+          "48",
+          "16/16/16",
+          "0",
+          "0"
+        ],
+        [
+          "均匀随机",
+          "32",
+          "11/11/10",
+          "0",
+          "0"
+        ],
+        [
+          "协议随机",
+          "48",
+          "16/16/16",
+          "0",
+          "0"
+        ],
+        [
+          "单次API",
+          "29",
+          "12/10/7",
+          "70",
+          "205503"
+        ],
+        [
+          "反馈Agent",
+          "37",
+          "11/16/10",
+          "122",
+          "426581"
+        ],
+        [
+          "无反馈Agent",
+          "37",
+          "12/14/11",
+          "114",
+          "341065"
+        ]
+      ]
+    },
+    {
+      "id": "table_row_count/supporting_old",
+      "status": "passed",
+      "detail": {
+        "actual": 6,
+        "expected": 6
+      }
+    },
+    {
+      "id": "table_row/supporting_old/1",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "固定测试",
+          "48",
+          "16/16/16",
+          "0",
+          "0"
+        ],
+        "expected": [
+          "固定测试",
+          "48",
+          "16/16/16",
+          "0",
+          "0"
+        ]
+      }
+    },
+    {
+      "id": "table_row/supporting_old/2",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "均匀随机",
+          "32",
+          "11/11/10",
+          "0",
+          "0"
+        ],
+        "expected": [
+          "均匀随机",
+          "32",
+          "11/11/10",
+          "0",
+          "0"
+        ]
+      }
+    },
+    {
+      "id": "table_row/supporting_old/3",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "协议随机",
+          "48",
+          "16/16/16",
+          "0",
+          "0"
+        ],
+        "expected": [
+          "协议随机",
+          "48",
+          "16/16/16",
+          "0",
+          "0"
+        ]
+      }
+    },
+    {
+      "id": "table_row/supporting_old/4",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "单次API",
+          "29",
+          "12/10/7",
+          "70",
+          "205503"
+        ],
+        "expected": [
+          "单次API",
+          "29",
+          "12/10/7",
+          "70",
+          "205503"
+        ]
+      }
+    },
+    {
+      "id": "table_row/supporting_old/5",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "反馈Agent",
+          "37",
+          "11/16/10",
+          "122",
+          "426581"
+        ],
+        "expected": [
+          "反馈Agent",
+          "37",
+          "11/16/10",
+          "122",
+          "426581"
+        ]
+      }
+    },
+    {
+      "id": "table_row/supporting_old/6",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "无反馈Agent",
+          "37",
+          "12/14/11",
+          "114",
+          "341065"
+        ],
+        "expected": [
+          "无反馈Agent",
+          "37",
+          "12/14/11",
+          "114",
+          "341065"
+        ]
+      }
+    },
+    {
+      "id": "submission_name_matches_material_data",
+      "status": "passed",
+      "detail": {
+        "actual": "ICARUS数字IP验证智能体",
+        "expected": "ICARUS数字IP验证智能体"
+      }
+    },
+    {
+      "id": "submission_name_length",
+      "status": "passed",
+      "detail": {
+        "actual": true,
+        "expected": true
+      }
+    },
+    {
+      "id": "submission_intro_length",
+      "status": "passed",
+      "detail": {
+        "actual": true,
+        "expected": true
+      }
+    },
+    {
+      "id": "seven_section_outline",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "作品概述",
+          "需求分析",
+          "AI技术工具选择与运用",
+          "项目实施",
+          "应用成效",
+          "总结与展望",
+          "附录"
+        ],
+        "expected": [
+          "作品概述",
+          "需求分析",
+          "AI技术工具选择与运用",
+          "项目实施",
+          "应用成效",
+          "总结与展望",
+          "附录"
+        ]
+      }
+    },
+    {
+      "id": "six_supporting_sections",
+      "status": "passed",
+      "detail": {
+        "actual": [
+          "31",
+          "32",
+          "33",
+          "34",
+          "35",
+          "36"
+        ],
+        "expected": [
+          "31",
+          "32",
+          "33",
+          "34",
+          "35",
+          "36"
+        ]
+      }
+    },
+    {
+      "id": "README_correct_machine_vs_human_originals",
+      "status": "passed",
+      "detail": {
+        "actual": false,
+        "expected": false
+      }
+    },
+    {
+      "id": "local_citation_targets/technical_report",
+      "status": "passed",
+      "detail": [
+        {
+          "label": "图1 受控验证流程",
+          "target": "../submission_figures/architecture.png",
+          "artifact": {
+            "path": "docs/competition/ic/submission_figures/architecture.png",
+            "sha256": "8898808e4fc2f68c82197a914fcd9551abb946dff1954ae94782ba3fb58fcbf8",
+            "bytes": 112642
+          }
+        },
+        {
+          "label": "共享数据",
+          "target": "material_data.json",
+          "artifact": {
+            "path": "docs/competition/ic/v3/material_data.json",
+            "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+            "bytes": 30806
+          }
+        },
+        {
+          "label": "判据原件",
+          "target": "../../../experiment/protocol_oracle_improvements_2026-10-04.md",
+          "artifact": {
+            "path": "docs/experiment/protocol_oracle_improvements_2026-10-04.md",
+            "sha256": "1d279b78128d7b2e40f07d59be0c33a5adb529f20e39b18369c85bdcda3a66aa",
+            "bytes": 11457
+          }
+        },
+        {
+          "label": "图2 最新两模块六策略检出",
+          "target": "assets/new108_detection.png",
+          "artifact": {
+            "path": "docs/competition/ic/v3/assets/new108_detection.png",
+            "sha256": "99490de698c607a41ba93670b7e4f3aaf03e05976f3c56ffab2f2a3f6d7af984",
+            "bytes": 57381
+          }
+        },
+        {
+          "label": "完整报告",
+          "target": "../../../experiment/agent_new_holdout_study_live_2026-10-05.md",
+          "artifact": {
+            "path": "docs/experiment/agent_new_holdout_study_live_2026-10-05.md",
+            "sha256": "b678c31d1697393f37caa6138eab29a3007a899ae6b8989ac5b258153cceaad4",
+            "bytes": 9383
+          }
+        },
+        {
+          "label": "历史报告",
+          "target": "../../../experiment/agent_feedback_study_live_2026-10-05.md",
+          "artifact": {
+            "path": "docs/experiment/agent_feedback_study_live_2026-10-05.md",
+            "sha256": "27156b90341d1f699d715eacf06834b85db1b5df5403401294a433deb6c9f31c",
+            "bytes": 11833
+          }
+        },
+        {
+          "label": "最新报告",
+          "target": "../../../experiment/agent_new_holdout_study_live_2026-10-05.md",
+          "artifact": {
+            "path": "docs/experiment/agent_new_holdout_study_live_2026-10-05.md",
+            "sha256": "b678c31d1697393f37caa6138eab29a3007a899ae6b8989ac5b258153cceaad4",
+            "bytes": 9383
+          }
+        },
+        {
+          "label": "回执",
+          "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+          "artifact": {
+            "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+            "sha256": "4751fe084711d6ed4f0d02212e715079803671a7b3605b6150679a8ee9096a65",
+            "bytes": 63381
+          }
+        },
+        {
+          "label": "预算",
+          "target": "../../../experiment/agent_new_holdout_study_budget_2026-10-05.json",
+          "artifact": {
+            "path": "docs/experiment/agent_new_holdout_study_budget_2026-10-05.json",
+            "sha256": "4f4bd6d305057c277b716825e69befe5895a69027ca1770d3a22c33f776cdf6b",
+            "bytes": 1310
+          }
+        },
+        {
+          "label": "轨迹清单",
+          "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/trace_manifest.json",
+          "artifact": {
+            "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/trace_manifest.json",
+            "sha256": "3bef02272b0f065660d070052117ff3daf65c09bdd270d108dfdeb4546a49a0f",
+            "bytes": 65370
+          }
+        },
+        {
+          "label": "历史432报告",
+          "target": "../../../experiment/agent_feedback_study_live_2026-10-05.md",
+          "artifact": {
+            "path": "docs/experiment/agent_feedback_study_live_2026-10-05.md",
+            "sha256": "27156b90341d1f699d715eacf06834b85db1b5df5403401294a433deb6c9f31c",
+            "bytes": 11833
+          }
+        },
+        {
+          "label": "回执",
+          "target": "../../../experiment/agent-feedback-study-live-2026-10-05/receipt.json",
+          "artifact": {
+            "path": "docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json",
+            "sha256": "2640b137f35f1a206a47136516ebd1f9db7c3a5832ce1deadf2a8f374ac02937",
+            "bytes": 182267
+          }
+        },
+        {
+          "label": "独立判据",
+          "target": "../../../experiment/protocol_oracle_improvements_2026-10-04.md",
+          "artifact": {
+            "path": "docs/experiment/protocol_oracle_improvements_2026-10-04.md",
+            "sha256": "1d279b78128d7b2e40f07d59be0c33a5adb529f20e39b18369c85bdcda3a66aa",
+            "bytes": 11457
+          }
+        },
+        {
+          "label": "功能场景",
+          "target": "../../../experiment/functional_coverage_2026-10-04.md",
+          "artifact": {
+            "path": "docs/experiment/functional_coverage_2026-10-04.md",
+            "sha256": "ade2900931c9c2573453f3a450878d1d0af2b4e44c90330d8dac5a011ce6c566",
+            "bytes": 10605
+          }
+        },
+        {
+          "label": "源码验收",
+          "target": "../../../experiment/agent_new_holdout_source_validation_2026-10-05.md",
+          "artifact": {
+            "path": "docs/experiment/agent_new_holdout_source_validation_2026-10-05.md",
+            "sha256": "11df83d811e2939bb95ed9fea975cba974135b6b97e63c4e297ccced04d02d1e",
+            "bytes": 3030
+          }
+        },
+        {
+          "label": "结果审计",
+          "target": "../../../review/agent_new_holdout_study_review_2026-10-05.md",
+          "artifact": {
+            "path": "docs/review/agent_new_holdout_study_review_2026-10-05.md",
+            "sha256": "7dc898d556b4c61e433e2d442511c51f8045acfd2bd7d1a55ea768f7ce4a3ed8",
+            "bytes": 6536
+          }
+        },
+        {
+          "label": "完整原件包",
+          "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+          "artifact": {
+            "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+            "sha256": "cd9ddc98b4b11062e3d820b475419335450d2e29fd54b300fa13c03643b13375",
+            "bytes": 7027646
+          }
+        },
+        {
+          "label": "完整清单",
+          "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json",
+          "artifact": {
+            "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json",
+            "sha256": "e00d4b08cd596a0c3bdcc9d7aae4892a95a740ec7349d80130bdfa5bc7d43c57",
+            "bytes": 876138
+          }
+        },
+        {
+          "label": "主题赛通知",
+          "target": "https://www.aicomp.cn/notice/4756.html",
+          "scope": "external URL recorded; no network check in this audit"
+        },
+        {
+          "label": "竞赛规则与作品提交要求",
+          "target": "https://www.aicomp.cn/wp-content/uploads/2026/07/%E9%99%84%E4%BB%B61AIC%C2%B7AI%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E7%AB%9E%E8%B5%9B%E8%A7%84%E5%88%99%E5%8F%8A%E4%BD%9C%E5%93%81%E6%8F%90%E4%BA%A4%E8%A6%81%E6%B1%82.pdf",
+          "scope": "external URL recorded; no network check in this audit"
+        },
+        {
+          "label": "技术报告参考大纲",
+          "target": "https://www.aicomp.cn/wp-content/uploads/2026/07/%E9%99%84%E4%BB%B62AIC%C2%B7AI%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A%E5%8F%82%E8%80%83%E5%A4%A7%E7%BA%B2.pdf",
+          "scope": "external URL recorded; no network check in this audit"
+        },
+        {
+          "label": "rules_validation.json",
+          "target": "rules_validation.json",
+          "artifact": {
+            "path": "docs/competition/ic/v3/rules_validation.json",
+            "sha256": "ec44e293b16ef871f25bec8a6b527c1cfe07f612ccc389ac8a39a13d2516b95d",
+            "bytes": 1483
+          }
+        }
+      ]
+    },
+    {
+      "id": "local_citation_targets/supporting_evidence",
+      "status": "passed",
+      "detail": [
+        {
+          "label": "事前方案",
+          "target": "../../../experiment/agent_new_holdout_study_plan_2026-10-05.md",
+          "artifact": {
+            "path": "docs/experiment/agent_new_holdout_study_plan_2026-10-05.md",
+            "sha256": "dbc7efc327b71804ae36ff0516f392adc9ab79eb243e8a19e93a5b7ae5b0a724",
+            "bytes": 6196
+          }
+        },
+        {
+          "label": "实际登记",
+          "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/preregistration.json",
+          "artifact": {
+            "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/preregistration.json",
+            "sha256": "45a151529e2f2e1960f54696386db1ee5574e27dd0b688aad50afb432971b83f",
+            "bytes": 195253
+          }
+        },
+        {
+          "label": "主报告",
+          "target": "../../../experiment/agent_new_holdout_study_live_2026-10-05.md",
+          "artifact": {
+            "path": "docs/experiment/agent_new_holdout_study_live_2026-10-05.md",
+            "sha256": "b678c31d1697393f37caa6138eab29a3007a899ae6b8989ac5b258153cceaad4",
+            "bytes": 9383
+          }
+        },
+        {
+          "label": "回执",
+          "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+          "artifact": {
+            "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+            "sha256": "4751fe084711d6ed4f0d02212e715079803671a7b3605b6150679a8ee9096a65",
+            "bytes": 63381
+          }
+        },
+        {
+          "label": "预算回执",
+          "target": "../../../experiment/agent_new_holdout_study_budget_2026-10-05.json",
+          "artifact": {
+            "path": "docs/experiment/agent_new_holdout_study_budget_2026-10-05.json",
+            "sha256": "4f4bd6d305057c277b716825e69befe5895a69027ca1770d3a22c33f776cdf6b",
+            "bytes": 1310
+          }
+        },
+        {
+          "label": "原账",
+          "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/token_budget.json",
+          "artifact": {
+            "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/token_budget.json",
+            "sha256": "7277cb7ae7aee2dc7d546dcd2ae3ad75e487e7f9c06f0b6ce88d9bf351aa7e8f",
+            "bytes": 29209
+          }
+        },
+        {
+          "label": "轨迹清单",
+          "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/trace_manifest.json",
+          "artifact": {
+            "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/trace_manifest.json",
+            "sha256": "3bef02272b0f065660d070052117ff3daf65c09bdd270d108dfdeb4546a49a0f",
+            "bytes": 65370
+          }
+        },
+        {
+          "label": "作者轨迹审计",
+          "target": "../../../review/agent-new-holdout-study-review-2026-10-05/trace-audit.json",
+          "artifact": {
+            "path": "docs/review/agent-new-holdout-study-review-2026-10-05/trace-audit.json",
+            "sha256": "bf2c5294d10a507f09e0630c09d4a7f922dd08e559efe668d857ffbb94f6ca9b",
+            "bytes": 1393100
+          }
+        },
+        {
+          "label": "历史完整报告",
+          "target": "../../../experiment/agent_feedback_study_live_2026-10-05.md",
+          "artifact": {
+            "path": "docs/experiment/agent_feedback_study_live_2026-10-05.md",
+            "sha256": "27156b90341d1f699d715eacf06834b85db1b5df5403401294a433deb6c9f31c",
+            "bytes": 11833
+          }
+        },
+        {
+          "label": "回执",
+          "target": "../../../experiment/agent-feedback-study-live-2026-10-05/receipt.json",
+          "artifact": {
+            "path": "docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json",
+            "sha256": "2640b137f35f1a206a47136516ebd1f9db7c3a5832ce1deadf2a8f374ac02937",
+            "bytes": 182267
+          }
+        },
+        {
+          "label": "独立预算",
+          "target": "../../../experiment/agent_feedback_study_budget_2026-10-05.json",
+          "artifact": {
+            "path": "docs/experiment/agent_feedback_study_budget_2026-10-05.json",
+            "sha256": "136e36068a376267949ead5cda172de4db5acb9bdc610dadcb3267b5341c7d22",
+            "bytes": 1310
+          }
+        },
+        {
+          "label": "历史审计",
+          "target": "../../../review/agent_feedback_study_review_2026-10-05.md",
+          "artifact": {
+            "path": "docs/review/agent_feedback_study_review_2026-10-05.md",
+            "sha256": "f23c51818a57701365ec07935e06ac40fd43a987487a706f658cd9a1c4e30e19",
+            "bytes": 4338
+          }
+        },
+        {
+          "label": "主指标清单",
+          "target": "../../../experiment/metric_inventory.md",
+          "artifact": {
+            "path": "docs/experiment/metric_inventory.md",
+            "sha256": "81377a8621a62dda0a52b02479c27f0898e7964ec3a70f55725baf80ce03cab4",
+            "bytes": 59495
+          }
+        },
+        {
+          "label": "协议与判据修正原件",
+          "target": "../../../experiment/protocol_oracle_improvements_2026-10-04.md",
+          "artifact": {
+            "path": "docs/experiment/protocol_oracle_improvements_2026-10-04.md",
+            "sha256": "1d279b78128d7b2e40f07d59be0c33a5adb529f20e39b18369c85bdcda3a66aa",
+            "bytes": 11457
+          }
+        },
+        {
+          "label": "功能场景说明",
+          "target": "../../../experiment/functional_coverage_2026-10-04.md",
+          "artifact": {
+            "path": "docs/experiment/functional_coverage_2026-10-04.md",
+            "sha256": "ade2900931c9c2573453f3a450878d1d0af2b4e44c90330d8dac5a011ce6c566",
+            "bytes": 10605
+          }
+        },
+        {
+          "label": "新资产与语义验证",
+          "target": "../../../../benchmarks/agent_new_holdout_20261005/README.md",
+          "artifact": {
+            "path": "benchmarks/agent_new_holdout_20261005/README.md",
+            "sha256": "5b0e122ec920f78cb6f0f2ab56c4f22f15286608da21038dc504eb49e13e80f5",
+            "bytes": 3209
+          }
+        },
+        {
+          "label": "源码验收",
+          "target": "../../../experiment/agent_new_holdout_source_validation_2026-10-05.md",
+          "artifact": {
+            "path": "docs/experiment/agent_new_holdout_source_validation_2026-10-05.md",
+            "sha256": "11df83d811e2939bb95ed9fea975cba974135b6b97e63c4e297ccced04d02d1e",
+            "bytes": 3030
+          }
+        },
+        {
+          "label": "事前审查",
+          "target": "../../../review/agent_new_holdout_prereg_review_2026-10-05.md",
+          "artifact": {
+            "path": "docs/review/agent_new_holdout_prereg_review_2026-10-05.md",
+            "sha256": "5ecb625a86ce258e0a3d666c1db11d95460dde79039c705b022175da9ea16e43",
+            "bytes": 11880
+          }
+        },
+        {
+          "label": "结果文书",
+          "target": "../../../review/agent_new_holdout_study_review_2026-10-05.md",
+          "artifact": {
+            "path": "docs/review/agent_new_holdout_study_review_2026-10-05.md",
+            "sha256": "7dc898d556b4c61e433e2d442511c51f8045acfd2bd7d1a55ea768f7ce4a3ed8",
+            "bytes": 6536
+          }
+        },
+        {
+          "label": "审计回执",
+          "target": "../../../review/agent-new-holdout-study-review-2026-10-05/receipt.json",
+          "artifact": {
+            "path": "docs/review/agent-new-holdout-study-review-2026-10-05/receipt.json",
+            "sha256": "9377514673af710917a62ca219949c13c5794195360b76b6d76d4e43b330abdf",
+            "bytes": 126464
+          }
+        },
+        {
+          "label": "历史浏览器",
+          "target": "../../../experiment/ic_agent_v4_validation_2026-10-04.md",
+          "artifact": {
+            "path": "docs/experiment/ic_agent_v4_validation_2026-10-04.md",
+            "sha256": "d84cd5633adc82925f3ede348af8db0a3a12c76187ad409dfe0bbec19552a7d1",
+            "bytes": 3785
+          }
+        },
+        {
+          "label": "完整原件ZIP",
+          "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+          "artifact": {
+            "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+            "sha256": "cd9ddc98b4b11062e3d820b475419335450d2e29fd54b300fa13c03643b13375",
+            "bytes": 7027646
+          }
+        },
+        {
+          "label": "完整原件清单",
+          "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json",
+          "artifact": {
+            "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json",
+            "sha256": "e00d4b08cd596a0c3bdcc9d7aae4892a95a740ec7349d80130bdfa5bc7d43c57",
+            "bytes": 876138
+          }
+        },
+        {
+          "label": "注册输入包",
+          "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/registered_inputs.zip",
+          "artifact": {
+            "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/registered_inputs.zip",
+            "sha256": "b881df1a99012c29d3e205dfae31476d995be1e4cfd91967a362c65ef297f4ee",
+            "bytes": 1023930
+          }
+        },
+        {
+          "label": "字节绑定",
+          "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/source_byte_binding.json",
+          "artifact": {
+            "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/source_byte_binding.json",
+            "sha256": "c02e53b79b6d31a48e989691fe521b7fe1f1cb2f6d73ea90df93dcc8d129417a",
+            "bytes": 180623
+          }
+        },
+        {
+          "label": "严格汇总",
+          "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/strict_summary.json",
+          "artifact": {
+            "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/strict_summary.json",
+            "sha256": "d0fb0195aa7747919e5e3be5d3cd6947ab5653f8f7a3cd27d9031bab7b2f82b9",
+            "bytes": 3087950
+          }
+        },
+        {
+          "label": "共享材料数据",
+          "target": "material_data.json",
+          "artifact": {
+            "path": "docs/competition/ic/v3/material_data.json",
+            "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+            "bytes": 30806
+          }
+        }
+      ]
+    },
+    {
+      "id": "local_citation_targets/README",
+      "status": "passed",
+      "detail": [
+        {
+          "label": "material_data.json",
+          "target": "material_data.json",
+          "artifact": {
+            "path": "docs/competition/ic/v3/material_data.json",
+            "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+            "bytes": 30806
+          }
+        },
+        {
+          "label": "technical_report.md",
+          "target": "technical_report.md",
+          "artifact": {
+            "path": "docs/competition/ic/v3/technical_report.md",
+            "sha256": "3cbef290973e831bd38e9155b59edc3e1f2b2131183711ca8aff796e3a933a90",
+            "bytes": 18979
+          }
+        },
+        {
+          "label": "技术方案PDF",
+          "target": "../ICARUS_技术方案_v3.pdf",
+          "artifact": {
+            "path": "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+            "sha256": "4bb214297d189ccbf446dd12e9bc848bffd216601c1c315241f6cb3bcc87f6a3",
+            "bytes": 470762
+          }
+        },
+        {
+          "label": "supporting_evidence.md",
+          "target": "supporting_evidence.md",
+          "artifact": {
+            "path": "docs/competition/ic/v3/supporting_evidence.md",
+            "sha256": "2054a83999c02c7ce73c5fbcd7e31c2d275a5596bb026b273ce00a3c5b1b0fda",
+            "bytes": 12205
+          }
+        },
+        {
+          "label": "合并佐证PDF",
+          "target": "../ICARUS_佐证材料_v3.pdf",
+          "artifact": {
+            "path": "docs/competition/ic/ICARUS_佐证材料_v3.pdf",
+            "sha256": "7fe5fe5aa78d654dc4e212cd25e2f2b202418d1d7a32d96ce755d8361a8e0dda",
+            "bytes": 260009
+          }
+        },
+        {
+          "label": "submission_copy.md",
+          "target": "submission_copy.md",
+          "artifact": {
+            "path": "docs/competition/ic/v3/submission_copy.md",
+            "sha256": "c463d4e1c29b13a58d8ce8d725315b897314c0cd87917bd333020780219c8a3c",
+            "bytes": 1926
+          }
+        },
+        {
+          "label": "material_data.json",
+          "target": "material_data.json",
+          "artifact": {
+            "path": "docs/competition/ic/v3/material_data.json",
+            "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+            "bytes": 30806
+          }
+        },
+        {
+          "label": "r2构建与逐页QA回执",
+          "target": "validation.json",
+          "artifact": {
+            "path": "docs/competition/ic/v3/validation.json",
+            "sha256": "fa661f4abd28a327f49ed8f364913488b51ef6c29b72f2756b982c0b4935cfd9",
+            "bytes": 21282
+          }
+        },
+        {
+          "label": "build_materials.py",
+          "target": "build_materials.py",
+          "artifact": {
+            "path": "docs/competition/ic/v3/build_materials.py",
+            "sha256": "e09203ca7728e8be409ed44e3af3c7c30126887c3181fbd8007715a3ad161125",
+            "bytes": 9274
+          }
+        },
+        {
+          "label": "共享规则数据",
+          "target": "material_data.json",
+          "artifact": {
+            "path": "docs/competition/ic/v3/material_data.json",
+            "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+            "bytes": 30806
+          }
+        },
+        {
+          "label": "技术方案附录",
+          "target": "technical_report.md",
+          "artifact": {
+            "path": "docs/competition/ic/v3/technical_report.md",
+            "sha256": "3cbef290973e831bd38e9155b59edc3e1f2b2131183711ca8aff796e3a933a90",
+            "bytes": 18979
+          }
+        },
+        {
+          "label": "最新报告",
+          "target": "../../../experiment/agent_new_holdout_study_live_2026-10-05.md",
+          "artifact": {
+            "path": "docs/experiment/agent_new_holdout_study_live_2026-10-05.md",
+            "sha256": "b678c31d1697393f37caa6138eab29a3007a899ae6b8989ac5b258153cceaad4",
+            "bytes": 9383
+          }
+        },
+        {
+          "label": "完整原件",
+          "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+          "artifact": {
+            "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+            "sha256": "cd9ddc98b4b11062e3d820b475419335450d2e29fd54b300fa13c03643b13375",
+            "bytes": 7027646
+          }
+        },
+        {
+          "label": "双机器审计",
+          "target": "../../../review/agent_new_holdout_study_review_2026-10-05.md",
+          "artifact": {
+            "path": "docs/review/agent_new_holdout_study_review_2026-10-05.md",
+            "sha256": "7dc898d556b4c61e433e2d442511c51f8045acfd2bd7d1a55ea768f7ce4a3ed8",
+            "bytes": 6536
+          }
+        }
+      ]
+    },
+    {
+      "id": "local_citation_targets/submission_copy",
+      "status": "passed",
+      "detail": [
+        {
+          "label": "规则数据",
+          "target": "material_data.json",
+          "artifact": {
+            "path": "docs/competition/ic/v3/material_data.json",
+            "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+            "bytes": 30806
+          }
+        },
+        {
+          "label": "主题赛通知",
+          "target": "https://www.aicomp.cn/notice/4756.html",
+          "scope": "external URL recorded; no network check in this audit"
+        }
+      ]
+    },
+    {
+      "id": "unchanged/docs/competition/ic/v3/material_data.json",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/competition/ic/v3/material_data.json",
+          "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+          "bytes": 30806
+        },
+        "expected": {
+          "path": "docs/competition/ic/v3/material_data.json",
+          "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+          "bytes": 30806
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/competition/ic/v3/technical_report.md",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/competition/ic/v3/technical_report.md",
+          "sha256": "3cbef290973e831bd38e9155b59edc3e1f2b2131183711ca8aff796e3a933a90",
+          "bytes": 18979
+        },
+        "expected": {
+          "path": "docs/competition/ic/v3/technical_report.md",
+          "sha256": "3cbef290973e831bd38e9155b59edc3e1f2b2131183711ca8aff796e3a933a90",
+          "bytes": 18979
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/competition/ic/v3/supporting_evidence.md",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/competition/ic/v3/supporting_evidence.md",
+          "sha256": "2054a83999c02c7ce73c5fbcd7e31c2d275a5596bb026b273ce00a3c5b1b0fda",
+          "bytes": 12205
+        },
+        "expected": {
+          "path": "docs/competition/ic/v3/supporting_evidence.md",
+          "sha256": "2054a83999c02c7ce73c5fbcd7e31c2d275a5596bb026b273ce00a3c5b1b0fda",
+          "bytes": 12205
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/competition/ic/v3/README.md",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/competition/ic/v3/README.md",
+          "sha256": "7a633fef44fce8a9d9c3b1f6bf375ea654036d4d84804a2611b1a0b05f0534f0",
+          "bytes": 4985
+        },
+        "expected": {
+          "path": "docs/competition/ic/v3/README.md",
+          "sha256": "7a633fef44fce8a9d9c3b1f6bf375ea654036d4d84804a2611b1a0b05f0534f0",
+          "bytes": 4985
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/competition/ic/v3/submission_copy.md",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/competition/ic/v3/submission_copy.md",
+          "sha256": "c463d4e1c29b13a58d8ce8d725315b897314c0cd87917bd333020780219c8a3c",
+          "bytes": 1926
+        },
+        "expected": {
+          "path": "docs/competition/ic/v3/submission_copy.md",
+          "sha256": "c463d4e1c29b13a58d8ce8d725315b897314c0cd87917bd333020780219c8a3c",
+          "bytes": 1926
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/competition/ic/submission_figures/architecture.png",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/competition/ic/submission_figures/architecture.png",
+          "sha256": "8898808e4fc2f68c82197a914fcd9551abb946dff1954ae94782ba3fb58fcbf8",
+          "bytes": 112642
+        },
+        "expected": {
+          "path": "docs/competition/ic/submission_figures/architecture.png",
+          "sha256": "8898808e4fc2f68c82197a914fcd9551abb946dff1954ae94782ba3fb58fcbf8",
+          "bytes": 112642
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/experiment/protocol_oracle_improvements_2026-10-04.md",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/experiment/protocol_oracle_improvements_2026-10-04.md",
+          "sha256": "1d279b78128d7b2e40f07d59be0c33a5adb529f20e39b18369c85bdcda3a66aa",
+          "bytes": 11457
+        },
+        "expected": {
+          "path": "docs/experiment/protocol_oracle_improvements_2026-10-04.md",
+          "sha256": "1d279b78128d7b2e40f07d59be0c33a5adb529f20e39b18369c85bdcda3a66aa",
+          "bytes": 11457
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/competition/ic/v3/assets/new108_detection.png",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/competition/ic/v3/assets/new108_detection.png",
+          "sha256": "99490de698c607a41ba93670b7e4f3aaf03e05976f3c56ffab2f2a3f6d7af984",
+          "bytes": 57381
+        },
+        "expected": {
+          "path": "docs/competition/ic/v3/assets/new108_detection.png",
+          "sha256": "99490de698c607a41ba93670b7e4f3aaf03e05976f3c56ffab2f2a3f6d7af984",
+          "bytes": 57381
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/experiment/agent_new_holdout_study_live_2026-10-05.md",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/experiment/agent_new_holdout_study_live_2026-10-05.md",
+          "sha256": "b678c31d1697393f37caa6138eab29a3007a899ae6b8989ac5b258153cceaad4",
+          "bytes": 9383
+        },
+        "expected": {
+          "path": "docs/experiment/agent_new_holdout_study_live_2026-10-05.md",
+          "sha256": "b678c31d1697393f37caa6138eab29a3007a899ae6b8989ac5b258153cceaad4",
+          "bytes": 9383
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/experiment/agent_feedback_study_live_2026-10-05.md",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/experiment/agent_feedback_study_live_2026-10-05.md",
+          "sha256": "27156b90341d1f699d715eacf06834b85db1b5df5403401294a433deb6c9f31c",
+          "bytes": 11833
+        },
+        "expected": {
+          "path": "docs/experiment/agent_feedback_study_live_2026-10-05.md",
+          "sha256": "27156b90341d1f699d715eacf06834b85db1b5df5403401294a433deb6c9f31c",
+          "bytes": 11833
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+          "sha256": "4751fe084711d6ed4f0d02212e715079803671a7b3605b6150679a8ee9096a65",
+          "bytes": 63381
+        },
+        "expected": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+          "sha256": "4751fe084711d6ed4f0d02212e715079803671a7b3605b6150679a8ee9096a65",
+          "bytes": 63381
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/experiment/agent_new_holdout_study_budget_2026-10-05.json",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/experiment/agent_new_holdout_study_budget_2026-10-05.json",
+          "sha256": "4f4bd6d305057c277b716825e69befe5895a69027ca1770d3a22c33f776cdf6b",
+          "bytes": 1310
+        },
+        "expected": {
+          "path": "docs/experiment/agent_new_holdout_study_budget_2026-10-05.json",
+          "sha256": "4f4bd6d305057c277b716825e69befe5895a69027ca1770d3a22c33f776cdf6b",
+          "bytes": 1310
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/experiment/agent-new-holdout-study-live-2026-10-05/trace_manifest.json",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/trace_manifest.json",
+          "sha256": "3bef02272b0f065660d070052117ff3daf65c09bdd270d108dfdeb4546a49a0f",
+          "bytes": 65370
+        },
+        "expected": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/trace_manifest.json",
+          "sha256": "3bef02272b0f065660d070052117ff3daf65c09bdd270d108dfdeb4546a49a0f",
+          "bytes": 65370
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json",
+          "sha256": "2640b137f35f1a206a47136516ebd1f9db7c3a5832ce1deadf2a8f374ac02937",
+          "bytes": 182267
+        },
+        "expected": {
+          "path": "docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json",
+          "sha256": "2640b137f35f1a206a47136516ebd1f9db7c3a5832ce1deadf2a8f374ac02937",
+          "bytes": 182267
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/experiment/functional_coverage_2026-10-04.md",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/experiment/functional_coverage_2026-10-04.md",
+          "sha256": "ade2900931c9c2573453f3a450878d1d0af2b4e44c90330d8dac5a011ce6c566",
+          "bytes": 10605
+        },
+        "expected": {
+          "path": "docs/experiment/functional_coverage_2026-10-04.md",
+          "sha256": "ade2900931c9c2573453f3a450878d1d0af2b4e44c90330d8dac5a011ce6c566",
+          "bytes": 10605
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/experiment/agent_new_holdout_source_validation_2026-10-05.md",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/experiment/agent_new_holdout_source_validation_2026-10-05.md",
+          "sha256": "11df83d811e2939bb95ed9fea975cba974135b6b97e63c4e297ccced04d02d1e",
+          "bytes": 3030
+        },
+        "expected": {
+          "path": "docs/experiment/agent_new_holdout_source_validation_2026-10-05.md",
+          "sha256": "11df83d811e2939bb95ed9fea975cba974135b6b97e63c4e297ccced04d02d1e",
+          "bytes": 3030
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/review/agent_new_holdout_study_review_2026-10-05.md",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/review/agent_new_holdout_study_review_2026-10-05.md",
+          "sha256": "7dc898d556b4c61e433e2d442511c51f8045acfd2bd7d1a55ea768f7ce4a3ed8",
+          "bytes": 6536
+        },
+        "expected": {
+          "path": "docs/review/agent_new_holdout_study_review_2026-10-05.md",
+          "sha256": "7dc898d556b4c61e433e2d442511c51f8045acfd2bd7d1a55ea768f7ce4a3ed8",
+          "bytes": 6536
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+          "sha256": "cd9ddc98b4b11062e3d820b475419335450d2e29fd54b300fa13c03643b13375",
+          "bytes": 7027646
+        },
+        "expected": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+          "sha256": "cd9ddc98b4b11062e3d820b475419335450d2e29fd54b300fa13c03643b13375",
+          "bytes": 7027646
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json",
+          "sha256": "e00d4b08cd596a0c3bdcc9d7aae4892a95a740ec7349d80130bdfa5bc7d43c57",
+          "bytes": 876138
+        },
+        "expected": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json",
+          "sha256": "e00d4b08cd596a0c3bdcc9d7aae4892a95a740ec7349d80130bdfa5bc7d43c57",
+          "bytes": 876138
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/competition/ic/v3/rules_validation.json",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/competition/ic/v3/rules_validation.json",
+          "sha256": "ec44e293b16ef871f25bec8a6b527c1cfe07f612ccc389ac8a39a13d2516b95d",
+          "bytes": 1483
+        },
+        "expected": {
+          "path": "docs/competition/ic/v3/rules_validation.json",
+          "sha256": "ec44e293b16ef871f25bec8a6b527c1cfe07f612ccc389ac8a39a13d2516b95d",
+          "bytes": 1483
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/experiment/agent_new_holdout_study_plan_2026-10-05.md",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/experiment/agent_new_holdout_study_plan_2026-10-05.md",
+          "sha256": "dbc7efc327b71804ae36ff0516f392adc9ab79eb243e8a19e93a5b7ae5b0a724",
+          "bytes": 6196
+        },
+        "expected": {
+          "path": "docs/experiment/agent_new_holdout_study_plan_2026-10-05.md",
+          "sha256": "dbc7efc327b71804ae36ff0516f392adc9ab79eb243e8a19e93a5b7ae5b0a724",
+          "bytes": 6196
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/experiment/agent-new-holdout-study-live-2026-10-05/preregistration.json",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/preregistration.json",
+          "sha256": "45a151529e2f2e1960f54696386db1ee5574e27dd0b688aad50afb432971b83f",
+          "bytes": 195253
+        },
+        "expected": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/preregistration.json",
+          "sha256": "45a151529e2f2e1960f54696386db1ee5574e27dd0b688aad50afb432971b83f",
+          "bytes": 195253
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/experiment/agent-new-holdout-study-live-2026-10-05/token_budget.json",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/token_budget.json",
+          "sha256": "7277cb7ae7aee2dc7d546dcd2ae3ad75e487e7f9c06f0b6ce88d9bf351aa7e8f",
+          "bytes": 29209
+        },
+        "expected": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/token_budget.json",
+          "sha256": "7277cb7ae7aee2dc7d546dcd2ae3ad75e487e7f9c06f0b6ce88d9bf351aa7e8f",
+          "bytes": 29209
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/review/agent-new-holdout-study-review-2026-10-05/trace-audit.json",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/review/agent-new-holdout-study-review-2026-10-05/trace-audit.json",
+          "sha256": "bf2c5294d10a507f09e0630c09d4a7f922dd08e559efe668d857ffbb94f6ca9b",
+          "bytes": 1393100
+        },
+        "expected": {
+          "path": "docs/review/agent-new-holdout-study-review-2026-10-05/trace-audit.json",
+          "sha256": "bf2c5294d10a507f09e0630c09d4a7f922dd08e559efe668d857ffbb94f6ca9b",
+          "bytes": 1393100
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/experiment/agent_feedback_study_budget_2026-10-05.json",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/experiment/agent_feedback_study_budget_2026-10-05.json",
+          "sha256": "136e36068a376267949ead5cda172de4db5acb9bdc610dadcb3267b5341c7d22",
+          "bytes": 1310
+        },
+        "expected": {
+          "path": "docs/experiment/agent_feedback_study_budget_2026-10-05.json",
+          "sha256": "136e36068a376267949ead5cda172de4db5acb9bdc610dadcb3267b5341c7d22",
+          "bytes": 1310
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/review/agent_feedback_study_review_2026-10-05.md",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/review/agent_feedback_study_review_2026-10-05.md",
+          "sha256": "f23c51818a57701365ec07935e06ac40fd43a987487a706f658cd9a1c4e30e19",
+          "bytes": 4338
+        },
+        "expected": {
+          "path": "docs/review/agent_feedback_study_review_2026-10-05.md",
+          "sha256": "f23c51818a57701365ec07935e06ac40fd43a987487a706f658cd9a1c4e30e19",
+          "bytes": 4338
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/experiment/metric_inventory.md",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/experiment/metric_inventory.md",
+          "sha256": "81377a8621a62dda0a52b02479c27f0898e7964ec3a70f55725baf80ce03cab4",
+          "bytes": 59495
+        },
+        "expected": {
+          "path": "docs/experiment/metric_inventory.md",
+          "sha256": "81377a8621a62dda0a52b02479c27f0898e7964ec3a70f55725baf80ce03cab4",
+          "bytes": 59495
+        }
+      }
+    },
+    {
+      "id": "unchanged/benchmarks/agent_new_holdout_20261005/README.md",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "benchmarks/agent_new_holdout_20261005/README.md",
+          "sha256": "5b0e122ec920f78cb6f0f2ab56c4f22f15286608da21038dc504eb49e13e80f5",
+          "bytes": 3209
+        },
+        "expected": {
+          "path": "benchmarks/agent_new_holdout_20261005/README.md",
+          "sha256": "5b0e122ec920f78cb6f0f2ab56c4f22f15286608da21038dc504eb49e13e80f5",
+          "bytes": 3209
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/review/agent_new_holdout_prereg_review_2026-10-05.md",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/review/agent_new_holdout_prereg_review_2026-10-05.md",
+          "sha256": "5ecb625a86ce258e0a3d666c1db11d95460dde79039c705b022175da9ea16e43",
+          "bytes": 11880
+        },
+        "expected": {
+          "path": "docs/review/agent_new_holdout_prereg_review_2026-10-05.md",
+          "sha256": "5ecb625a86ce258e0a3d666c1db11d95460dde79039c705b022175da9ea16e43",
+          "bytes": 11880
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/review/agent-new-holdout-study-review-2026-10-05/receipt.json",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/review/agent-new-holdout-study-review-2026-10-05/receipt.json",
+          "sha256": "9377514673af710917a62ca219949c13c5794195360b76b6d76d4e43b330abdf",
+          "bytes": 126464
+        },
+        "expected": {
+          "path": "docs/review/agent-new-holdout-study-review-2026-10-05/receipt.json",
+          "sha256": "9377514673af710917a62ca219949c13c5794195360b76b6d76d4e43b330abdf",
+          "bytes": 126464
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/experiment/ic_agent_v4_validation_2026-10-04.md",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/experiment/ic_agent_v4_validation_2026-10-04.md",
+          "sha256": "d84cd5633adc82925f3ede348af8db0a3a12c76187ad409dfe0bbec19552a7d1",
+          "bytes": 3785
+        },
+        "expected": {
+          "path": "docs/experiment/ic_agent_v4_validation_2026-10-04.md",
+          "sha256": "d84cd5633adc82925f3ede348af8db0a3a12c76187ad409dfe0bbec19552a7d1",
+          "bytes": 3785
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/experiment/agent-new-holdout-study-live-2026-10-05/registered_inputs.zip",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/registered_inputs.zip",
+          "sha256": "b881df1a99012c29d3e205dfae31476d995be1e4cfd91967a362c65ef297f4ee",
+          "bytes": 1023930
+        },
+        "expected": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/registered_inputs.zip",
+          "sha256": "b881df1a99012c29d3e205dfae31476d995be1e4cfd91967a362c65ef297f4ee",
+          "bytes": 1023930
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/experiment/agent-new-holdout-study-live-2026-10-05/source_byte_binding.json",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/source_byte_binding.json",
+          "sha256": "c02e53b79b6d31a48e989691fe521b7fe1f1cb2f6d73ea90df93dcc8d129417a",
+          "bytes": 180623
+        },
+        "expected": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/source_byte_binding.json",
+          "sha256": "c02e53b79b6d31a48e989691fe521b7fe1f1cb2f6d73ea90df93dcc8d129417a",
+          "bytes": 180623
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/experiment/agent-new-holdout-study-live-2026-10-05/strict_summary.json",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/strict_summary.json",
+          "sha256": "d0fb0195aa7747919e5e3be5d3cd6947ab5653f8f7a3cd27d9031bab7b2f82b9",
+          "bytes": 3087950
+        },
+        "expected": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/strict_summary.json",
+          "sha256": "d0fb0195aa7747919e5e3be5d3cd6947ab5653f8f7a3cd27d9031bab7b2f82b9",
+          "bytes": 3087950
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/competition/ic/ICARUS_技术方案_v3.pdf",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+          "sha256": "4bb214297d189ccbf446dd12e9bc848bffd216601c1c315241f6cb3bcc87f6a3",
+          "bytes": 470762
+        },
+        "expected": {
+          "path": "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+          "sha256": "4bb214297d189ccbf446dd12e9bc848bffd216601c1c315241f6cb3bcc87f6a3",
+          "bytes": 470762
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/competition/ic/ICARUS_佐证材料_v3.pdf",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/competition/ic/ICARUS_佐证材料_v3.pdf",
+          "sha256": "7fe5fe5aa78d654dc4e212cd25e2f2b202418d1d7a32d96ce755d8361a8e0dda",
+          "bytes": 260009
+        },
+        "expected": {
+          "path": "docs/competition/ic/ICARUS_佐证材料_v3.pdf",
+          "sha256": "7fe5fe5aa78d654dc4e212cd25e2f2b202418d1d7a32d96ce755d8361a8e0dda",
+          "bytes": 260009
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/competition/ic/v3/validation.json",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/competition/ic/v3/validation.json",
+          "sha256": "fa661f4abd28a327f49ed8f364913488b51ef6c29b72f2756b982c0b4935cfd9",
+          "bytes": 21282
+        },
+        "expected": {
+          "path": "docs/competition/ic/v3/validation.json",
+          "sha256": "fa661f4abd28a327f49ed8f364913488b51ef6c29b72f2756b982c0b4935cfd9",
+          "bytes": 21282
+        }
+      }
+    },
+    {
+      "id": "unchanged/docs/competition/ic/v3/build_materials.py",
+      "status": "passed",
+      "detail": {
+        "actual": {
+          "path": "docs/competition/ic/v3/build_materials.py",
+          "sha256": "e09203ca7728e8be409ed44e3af3c7c30126887c3181fbd8007715a3ad161125",
+          "bytes": 9274
+        },
+        "expected": {
+          "path": "docs/competition/ic/v3/build_materials.py",
+          "sha256": "e09203ca7728e8be409ed44e3af3c7c30126887c3181fbd8007715a3ad161125",
+          "bytes": 9274
+        }
+      }
+    }
+  ],
+  "citations": {
+    "technical_report": [
+      {
+        "label": "图1 受控验证流程",
+        "target": "../submission_figures/architecture.png",
+        "artifact": {
+          "path": "docs/competition/ic/submission_figures/architecture.png",
+          "sha256": "8898808e4fc2f68c82197a914fcd9551abb946dff1954ae94782ba3fb58fcbf8",
+          "bytes": 112642
+        }
+      },
+      {
+        "label": "共享数据",
+        "target": "material_data.json",
+        "artifact": {
+          "path": "docs/competition/ic/v3/material_data.json",
+          "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+          "bytes": 30806
+        }
+      },
+      {
+        "label": "判据原件",
+        "target": "../../../experiment/protocol_oracle_improvements_2026-10-04.md",
+        "artifact": {
+          "path": "docs/experiment/protocol_oracle_improvements_2026-10-04.md",
+          "sha256": "1d279b78128d7b2e40f07d59be0c33a5adb529f20e39b18369c85bdcda3a66aa",
+          "bytes": 11457
+        }
+      },
+      {
+        "label": "图2 最新两模块六策略检出",
+        "target": "assets/new108_detection.png",
+        "artifact": {
+          "path": "docs/competition/ic/v3/assets/new108_detection.png",
+          "sha256": "99490de698c607a41ba93670b7e4f3aaf03e05976f3c56ffab2f2a3f6d7af984",
+          "bytes": 57381
+        }
+      },
+      {
+        "label": "完整报告",
+        "target": "../../../experiment/agent_new_holdout_study_live_2026-10-05.md",
+        "artifact": {
+          "path": "docs/experiment/agent_new_holdout_study_live_2026-10-05.md",
+          "sha256": "b678c31d1697393f37caa6138eab29a3007a899ae6b8989ac5b258153cceaad4",
+          "bytes": 9383
+        }
+      },
+      {
+        "label": "历史报告",
+        "target": "../../../experiment/agent_feedback_study_live_2026-10-05.md",
+        "artifact": {
+          "path": "docs/experiment/agent_feedback_study_live_2026-10-05.md",
+          "sha256": "27156b90341d1f699d715eacf06834b85db1b5df5403401294a433deb6c9f31c",
+          "bytes": 11833
+        }
+      },
+      {
+        "label": "最新报告",
+        "target": "../../../experiment/agent_new_holdout_study_live_2026-10-05.md",
+        "artifact": {
+          "path": "docs/experiment/agent_new_holdout_study_live_2026-10-05.md",
+          "sha256": "b678c31d1697393f37caa6138eab29a3007a899ae6b8989ac5b258153cceaad4",
+          "bytes": 9383
+        }
+      },
+      {
+        "label": "回执",
+        "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+        "artifact": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+          "sha256": "4751fe084711d6ed4f0d02212e715079803671a7b3605b6150679a8ee9096a65",
+          "bytes": 63381
+        }
+      },
+      {
+        "label": "预算",
+        "target": "../../../experiment/agent_new_holdout_study_budget_2026-10-05.json",
+        "artifact": {
+          "path": "docs/experiment/agent_new_holdout_study_budget_2026-10-05.json",
+          "sha256": "4f4bd6d305057c277b716825e69befe5895a69027ca1770d3a22c33f776cdf6b",
+          "bytes": 1310
+        }
+      },
+      {
+        "label": "轨迹清单",
+        "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/trace_manifest.json",
+        "artifact": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/trace_manifest.json",
+          "sha256": "3bef02272b0f065660d070052117ff3daf65c09bdd270d108dfdeb4546a49a0f",
+          "bytes": 65370
+        }
+      },
+      {
+        "label": "历史432报告",
+        "target": "../../../experiment/agent_feedback_study_live_2026-10-05.md",
+        "artifact": {
+          "path": "docs/experiment/agent_feedback_study_live_2026-10-05.md",
+          "sha256": "27156b90341d1f699d715eacf06834b85db1b5df5403401294a433deb6c9f31c",
+          "bytes": 11833
+        }
+      },
+      {
+        "label": "回执",
+        "target": "../../../experiment/agent-feedback-study-live-2026-10-05/receipt.json",
+        "artifact": {
+          "path": "docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json",
+          "sha256": "2640b137f35f1a206a47136516ebd1f9db7c3a5832ce1deadf2a8f374ac02937",
+          "bytes": 182267
+        }
+      },
+      {
+        "label": "独立判据",
+        "target": "../../../experiment/protocol_oracle_improvements_2026-10-04.md",
+        "artifact": {
+          "path": "docs/experiment/protocol_oracle_improvements_2026-10-04.md",
+          "sha256": "1d279b78128d7b2e40f07d59be0c33a5adb529f20e39b18369c85bdcda3a66aa",
+          "bytes": 11457
+        }
+      },
+      {
+        "label": "功能场景",
+        "target": "../../../experiment/functional_coverage_2026-10-04.md",
+        "artifact": {
+          "path": "docs/experiment/functional_coverage_2026-10-04.md",
+          "sha256": "ade2900931c9c2573453f3a450878d1d0af2b4e44c90330d8dac5a011ce6c566",
+          "bytes": 10605
+        }
+      },
+      {
+        "label": "源码验收",
+        "target": "../../../experiment/agent_new_holdout_source_validation_2026-10-05.md",
+        "artifact": {
+          "path": "docs/experiment/agent_new_holdout_source_validation_2026-10-05.md",
+          "sha256": "11df83d811e2939bb95ed9fea975cba974135b6b97e63c4e297ccced04d02d1e",
+          "bytes": 3030
+        }
+      },
+      {
+        "label": "结果审计",
+        "target": "../../../review/agent_new_holdout_study_review_2026-10-05.md",
+        "artifact": {
+          "path": "docs/review/agent_new_holdout_study_review_2026-10-05.md",
+          "sha256": "7dc898d556b4c61e433e2d442511c51f8045acfd2bd7d1a55ea768f7ce4a3ed8",
+          "bytes": 6536
+        }
+      },
+      {
+        "label": "完整原件包",
+        "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+        "artifact": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+          "sha256": "cd9ddc98b4b11062e3d820b475419335450d2e29fd54b300fa13c03643b13375",
+          "bytes": 7027646
+        }
+      },
+      {
+        "label": "完整清单",
+        "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json",
+        "artifact": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json",
+          "sha256": "e00d4b08cd596a0c3bdcc9d7aae4892a95a740ec7349d80130bdfa5bc7d43c57",
+          "bytes": 876138
+        }
+      },
+      {
+        "label": "主题赛通知",
+        "target": "https://www.aicomp.cn/notice/4756.html",
+        "scope": "external URL recorded; no network check in this audit"
+      },
+      {
+        "label": "竞赛规则与作品提交要求",
+        "target": "https://www.aicomp.cn/wp-content/uploads/2026/07/%E9%99%84%E4%BB%B61AIC%C2%B7AI%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E7%AB%9E%E8%B5%9B%E8%A7%84%E5%88%99%E5%8F%8A%E4%BD%9C%E5%93%81%E6%8F%90%E4%BA%A4%E8%A6%81%E6%B1%82.pdf",
+        "scope": "external URL recorded; no network check in this audit"
+      },
+      {
+        "label": "技术报告参考大纲",
+        "target": "https://www.aicomp.cn/wp-content/uploads/2026/07/%E9%99%84%E4%BB%B62AIC%C2%B7AI%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A%E5%8F%82%E8%80%83%E5%A4%A7%E7%BA%B2.pdf",
+        "scope": "external URL recorded; no network check in this audit"
+      },
+      {
+        "label": "rules_validation.json",
+        "target": "rules_validation.json",
+        "artifact": {
+          "path": "docs/competition/ic/v3/rules_validation.json",
+          "sha256": "ec44e293b16ef871f25bec8a6b527c1cfe07f612ccc389ac8a39a13d2516b95d",
+          "bytes": 1483
+        }
+      }
+    ],
+    "supporting_evidence": [
+      {
+        "label": "事前方案",
+        "target": "../../../experiment/agent_new_holdout_study_plan_2026-10-05.md",
+        "artifact": {
+          "path": "docs/experiment/agent_new_holdout_study_plan_2026-10-05.md",
+          "sha256": "dbc7efc327b71804ae36ff0516f392adc9ab79eb243e8a19e93a5b7ae5b0a724",
+          "bytes": 6196
+        }
+      },
+      {
+        "label": "实际登记",
+        "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/preregistration.json",
+        "artifact": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/preregistration.json",
+          "sha256": "45a151529e2f2e1960f54696386db1ee5574e27dd0b688aad50afb432971b83f",
+          "bytes": 195253
+        }
+      },
+      {
+        "label": "主报告",
+        "target": "../../../experiment/agent_new_holdout_study_live_2026-10-05.md",
+        "artifact": {
+          "path": "docs/experiment/agent_new_holdout_study_live_2026-10-05.md",
+          "sha256": "b678c31d1697393f37caa6138eab29a3007a899ae6b8989ac5b258153cceaad4",
+          "bytes": 9383
+        }
+      },
+      {
+        "label": "回执",
+        "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+        "artifact": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+          "sha256": "4751fe084711d6ed4f0d02212e715079803671a7b3605b6150679a8ee9096a65",
+          "bytes": 63381
+        }
+      },
+      {
+        "label": "预算回执",
+        "target": "../../../experiment/agent_new_holdout_study_budget_2026-10-05.json",
+        "artifact": {
+          "path": "docs/experiment/agent_new_holdout_study_budget_2026-10-05.json",
+          "sha256": "4f4bd6d305057c277b716825e69befe5895a69027ca1770d3a22c33f776cdf6b",
+          "bytes": 1310
+        }
+      },
+      {
+        "label": "原账",
+        "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/token_budget.json",
+        "artifact": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/token_budget.json",
+          "sha256": "7277cb7ae7aee2dc7d546dcd2ae3ad75e487e7f9c06f0b6ce88d9bf351aa7e8f",
+          "bytes": 29209
+        }
+      },
+      {
+        "label": "轨迹清单",
+        "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/trace_manifest.json",
+        "artifact": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/trace_manifest.json",
+          "sha256": "3bef02272b0f065660d070052117ff3daf65c09bdd270d108dfdeb4546a49a0f",
+          "bytes": 65370
+        }
+      },
+      {
+        "label": "作者轨迹审计",
+        "target": "../../../review/agent-new-holdout-study-review-2026-10-05/trace-audit.json",
+        "artifact": {
+          "path": "docs/review/agent-new-holdout-study-review-2026-10-05/trace-audit.json",
+          "sha256": "bf2c5294d10a507f09e0630c09d4a7f922dd08e559efe668d857ffbb94f6ca9b",
+          "bytes": 1393100
+        }
+      },
+      {
+        "label": "历史完整报告",
+        "target": "../../../experiment/agent_feedback_study_live_2026-10-05.md",
+        "artifact": {
+          "path": "docs/experiment/agent_feedback_study_live_2026-10-05.md",
+          "sha256": "27156b90341d1f699d715eacf06834b85db1b5df5403401294a433deb6c9f31c",
+          "bytes": 11833
+        }
+      },
+      {
+        "label": "回执",
+        "target": "../../../experiment/agent-feedback-study-live-2026-10-05/receipt.json",
+        "artifact": {
+          "path": "docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json",
+          "sha256": "2640b137f35f1a206a47136516ebd1f9db7c3a5832ce1deadf2a8f374ac02937",
+          "bytes": 182267
+        }
+      },
+      {
+        "label": "独立预算",
+        "target": "../../../experiment/agent_feedback_study_budget_2026-10-05.json",
+        "artifact": {
+          "path": "docs/experiment/agent_feedback_study_budget_2026-10-05.json",
+          "sha256": "136e36068a376267949ead5cda172de4db5acb9bdc610dadcb3267b5341c7d22",
+          "bytes": 1310
+        }
+      },
+      {
+        "label": "历史审计",
+        "target": "../../../review/agent_feedback_study_review_2026-10-05.md",
+        "artifact": {
+          "path": "docs/review/agent_feedback_study_review_2026-10-05.md",
+          "sha256": "f23c51818a57701365ec07935e06ac40fd43a987487a706f658cd9a1c4e30e19",
+          "bytes": 4338
+        }
+      },
+      {
+        "label": "主指标清单",
+        "target": "../../../experiment/metric_inventory.md",
+        "artifact": {
+          "path": "docs/experiment/metric_inventory.md",
+          "sha256": "81377a8621a62dda0a52b02479c27f0898e7964ec3a70f55725baf80ce03cab4",
+          "bytes": 59495
+        }
+      },
+      {
+        "label": "协议与判据修正原件",
+        "target": "../../../experiment/protocol_oracle_improvements_2026-10-04.md",
+        "artifact": {
+          "path": "docs/experiment/protocol_oracle_improvements_2026-10-04.md",
+          "sha256": "1d279b78128d7b2e40f07d59be0c33a5adb529f20e39b18369c85bdcda3a66aa",
+          "bytes": 11457
+        }
+      },
+      {
+        "label": "功能场景说明",
+        "target": "../../../experiment/functional_coverage_2026-10-04.md",
+        "artifact": {
+          "path": "docs/experiment/functional_coverage_2026-10-04.md",
+          "sha256": "ade2900931c9c2573453f3a450878d1d0af2b4e44c90330d8dac5a011ce6c566",
+          "bytes": 10605
+        }
+      },
+      {
+        "label": "新资产与语义验证",
+        "target": "../../../../benchmarks/agent_new_holdout_20261005/README.md",
+        "artifact": {
+          "path": "benchmarks/agent_new_holdout_20261005/README.md",
+          "sha256": "5b0e122ec920f78cb6f0f2ab56c4f22f15286608da21038dc504eb49e13e80f5",
+          "bytes": 3209
+        }
+      },
+      {
+        "label": "源码验收",
+        "target": "../../../experiment/agent_new_holdout_source_validation_2026-10-05.md",
+        "artifact": {
+          "path": "docs/experiment/agent_new_holdout_source_validation_2026-10-05.md",
+          "sha256": "11df83d811e2939bb95ed9fea975cba974135b6b97e63c4e297ccced04d02d1e",
+          "bytes": 3030
+        }
+      },
+      {
+        "label": "事前审查",
+        "target": "../../../review/agent_new_holdout_prereg_review_2026-10-05.md",
+        "artifact": {
+          "path": "docs/review/agent_new_holdout_prereg_review_2026-10-05.md",
+          "sha256": "5ecb625a86ce258e0a3d666c1db11d95460dde79039c705b022175da9ea16e43",
+          "bytes": 11880
+        }
+      },
+      {
+        "label": "结果文书",
+        "target": "../../../review/agent_new_holdout_study_review_2026-10-05.md",
+        "artifact": {
+          "path": "docs/review/agent_new_holdout_study_review_2026-10-05.md",
+          "sha256": "7dc898d556b4c61e433e2d442511c51f8045acfd2bd7d1a55ea768f7ce4a3ed8",
+          "bytes": 6536
+        }
+      },
+      {
+        "label": "审计回执",
+        "target": "../../../review/agent-new-holdout-study-review-2026-10-05/receipt.json",
+        "artifact": {
+          "path": "docs/review/agent-new-holdout-study-review-2026-10-05/receipt.json",
+          "sha256": "9377514673af710917a62ca219949c13c5794195360b76b6d76d4e43b330abdf",
+          "bytes": 126464
+        }
+      },
+      {
+        "label": "历史浏览器",
+        "target": "../../../experiment/ic_agent_v4_validation_2026-10-04.md",
+        "artifact": {
+          "path": "docs/experiment/ic_agent_v4_validation_2026-10-04.md",
+          "sha256": "d84cd5633adc82925f3ede348af8db0a3a12c76187ad409dfe0bbec19552a7d1",
+          "bytes": 3785
+        }
+      },
+      {
+        "label": "完整原件ZIP",
+        "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+        "artifact": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+          "sha256": "cd9ddc98b4b11062e3d820b475419335450d2e29fd54b300fa13c03643b13375",
+          "bytes": 7027646
+        }
+      },
+      {
+        "label": "完整原件清单",
+        "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json",
+        "artifact": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json",
+          "sha256": "e00d4b08cd596a0c3bdcc9d7aae4892a95a740ec7349d80130bdfa5bc7d43c57",
+          "bytes": 876138
+        }
+      },
+      {
+        "label": "注册输入包",
+        "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/registered_inputs.zip",
+        "artifact": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/registered_inputs.zip",
+          "sha256": "b881df1a99012c29d3e205dfae31476d995be1e4cfd91967a362c65ef297f4ee",
+          "bytes": 1023930
+        }
+      },
+      {
+        "label": "字节绑定",
+        "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/source_byte_binding.json",
+        "artifact": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/source_byte_binding.json",
+          "sha256": "c02e53b79b6d31a48e989691fe521b7fe1f1cb2f6d73ea90df93dcc8d129417a",
+          "bytes": 180623
+        }
+      },
+      {
+        "label": "严格汇总",
+        "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/strict_summary.json",
+        "artifact": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/strict_summary.json",
+          "sha256": "d0fb0195aa7747919e5e3be5d3cd6947ab5653f8f7a3cd27d9031bab7b2f82b9",
+          "bytes": 3087950
+        }
+      },
+      {
+        "label": "共享材料数据",
+        "target": "material_data.json",
+        "artifact": {
+          "path": "docs/competition/ic/v3/material_data.json",
+          "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+          "bytes": 30806
+        }
+      }
+    ],
+    "README": [
+      {
+        "label": "material_data.json",
+        "target": "material_data.json",
+        "artifact": {
+          "path": "docs/competition/ic/v3/material_data.json",
+          "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+          "bytes": 30806
+        }
+      },
+      {
+        "label": "technical_report.md",
+        "target": "technical_report.md",
+        "artifact": {
+          "path": "docs/competition/ic/v3/technical_report.md",
+          "sha256": "3cbef290973e831bd38e9155b59edc3e1f2b2131183711ca8aff796e3a933a90",
+          "bytes": 18979
+        }
+      },
+      {
+        "label": "技术方案PDF",
+        "target": "../ICARUS_技术方案_v3.pdf",
+        "artifact": {
+          "path": "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+          "sha256": "4bb214297d189ccbf446dd12e9bc848bffd216601c1c315241f6cb3bcc87f6a3",
+          "bytes": 470762
+        }
+      },
+      {
+        "label": "supporting_evidence.md",
+        "target": "supporting_evidence.md",
+        "artifact": {
+          "path": "docs/competition/ic/v3/supporting_evidence.md",
+          "sha256": "2054a83999c02c7ce73c5fbcd7e31c2d275a5596bb026b273ce00a3c5b1b0fda",
+          "bytes": 12205
+        }
+      },
+      {
+        "label": "合并佐证PDF",
+        "target": "../ICARUS_佐证材料_v3.pdf",
+        "artifact": {
+          "path": "docs/competition/ic/ICARUS_佐证材料_v3.pdf",
+          "sha256": "7fe5fe5aa78d654dc4e212cd25e2f2b202418d1d7a32d96ce755d8361a8e0dda",
+          "bytes": 260009
+        }
+      },
+      {
+        "label": "submission_copy.md",
+        "target": "submission_copy.md",
+        "artifact": {
+          "path": "docs/competition/ic/v3/submission_copy.md",
+          "sha256": "c463d4e1c29b13a58d8ce8d725315b897314c0cd87917bd333020780219c8a3c",
+          "bytes": 1926
+        }
+      },
+      {
+        "label": "material_data.json",
+        "target": "material_data.json",
+        "artifact": {
+          "path": "docs/competition/ic/v3/material_data.json",
+          "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+          "bytes": 30806
+        }
+      },
+      {
+        "label": "r2构建与逐页QA回执",
+        "target": "validation.json",
+        "artifact": {
+          "path": "docs/competition/ic/v3/validation.json",
+          "sha256": "fa661f4abd28a327f49ed8f364913488b51ef6c29b72f2756b982c0b4935cfd9",
+          "bytes": 21282
+        }
+      },
+      {
+        "label": "build_materials.py",
+        "target": "build_materials.py",
+        "artifact": {
+          "path": "docs/competition/ic/v3/build_materials.py",
+          "sha256": "e09203ca7728e8be409ed44e3af3c7c30126887c3181fbd8007715a3ad161125",
+          "bytes": 9274
+        }
+      },
+      {
+        "label": "共享规则数据",
+        "target": "material_data.json",
+        "artifact": {
+          "path": "docs/competition/ic/v3/material_data.json",
+          "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+          "bytes": 30806
+        }
+      },
+      {
+        "label": "技术方案附录",
+        "target": "technical_report.md",
+        "artifact": {
+          "path": "docs/competition/ic/v3/technical_report.md",
+          "sha256": "3cbef290973e831bd38e9155b59edc3e1f2b2131183711ca8aff796e3a933a90",
+          "bytes": 18979
+        }
+      },
+      {
+        "label": "最新报告",
+        "target": "../../../experiment/agent_new_holdout_study_live_2026-10-05.md",
+        "artifact": {
+          "path": "docs/experiment/agent_new_holdout_study_live_2026-10-05.md",
+          "sha256": "b678c31d1697393f37caa6138eab29a3007a899ae6b8989ac5b258153cceaad4",
+          "bytes": 9383
+        }
+      },
+      {
+        "label": "完整原件",
+        "target": "../../../experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+        "artifact": {
+          "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+          "sha256": "cd9ddc98b4b11062e3d820b475419335450d2e29fd54b300fa13c03643b13375",
+          "bytes": 7027646
+        }
+      },
+      {
+        "label": "双机器审计",
+        "target": "../../../review/agent_new_holdout_study_review_2026-10-05.md",
+        "artifact": {
+          "path": "docs/review/agent_new_holdout_study_review_2026-10-05.md",
+          "sha256": "7dc898d556b4c61e433e2d442511c51f8045acfd2bd7d1a55ea768f7ce4a3ed8",
+          "bytes": 6536
+        }
+      }
+    ],
+    "submission_copy": [
+      {
+        "label": "规则数据",
+        "target": "material_data.json",
+        "artifact": {
+          "path": "docs/competition/ic/v3/material_data.json",
+          "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+          "bytes": 30806
+        }
+      },
+      {
+        "label": "主题赛通知",
+        "target": "https://www.aicomp.cn/notice/4756.html",
+        "scope": "external URL recorded; no network check in this audit"
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "docs/competition/ic/v3/material_data.json",
+      "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+      "bytes": 30806
+    },
+    {
+      "path": "docs/competition/ic/v3/technical_report.md",
+      "sha256": "3cbef290973e831bd38e9155b59edc3e1f2b2131183711ca8aff796e3a933a90",
+      "bytes": 18979
+    },
+    {
+      "path": "docs/competition/ic/v3/supporting_evidence.md",
+      "sha256": "2054a83999c02c7ce73c5fbcd7e31c2d275a5596bb026b273ce00a3c5b1b0fda",
+      "bytes": 12205
+    },
+    {
+      "path": "docs/competition/ic/v3/README.md",
+      "sha256": "7a633fef44fce8a9d9c3b1f6bf375ea654036d4d84804a2611b1a0b05f0534f0",
+      "bytes": 4985
+    },
+    {
+      "path": "docs/competition/ic/v3/submission_copy.md",
+      "sha256": "c463d4e1c29b13a58d8ce8d725315b897314c0cd87917bd333020780219c8a3c",
+      "bytes": 1926
+    },
+    {
+      "path": "docs/competition/ic/submission_figures/architecture.png",
+      "sha256": "8898808e4fc2f68c82197a914fcd9551abb946dff1954ae94782ba3fb58fcbf8",
+      "bytes": 112642
+    },
+    {
+      "path": "docs/experiment/protocol_oracle_improvements_2026-10-04.md",
+      "sha256": "1d279b78128d7b2e40f07d59be0c33a5adb529f20e39b18369c85bdcda3a66aa",
+      "bytes": 11457
+    },
+    {
+      "path": "docs/competition/ic/v3/assets/new108_detection.png",
+      "sha256": "99490de698c607a41ba93670b7e4f3aaf03e05976f3c56ffab2f2a3f6d7af984",
+      "bytes": 57381
+    },
+    {
+      "path": "docs/experiment/agent_new_holdout_study_live_2026-10-05.md",
+      "sha256": "b678c31d1697393f37caa6138eab29a3007a899ae6b8989ac5b258153cceaad4",
+      "bytes": 9383
+    },
+    {
+      "path": "docs/experiment/agent_feedback_study_live_2026-10-05.md",
+      "sha256": "27156b90341d1f699d715eacf06834b85db1b5df5403401294a433deb6c9f31c",
+      "bytes": 11833
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+      "sha256": "4751fe084711d6ed4f0d02212e715079803671a7b3605b6150679a8ee9096a65",
+      "bytes": 63381
+    },
+    {
+      "path": "docs/experiment/agent_new_holdout_study_budget_2026-10-05.json",
+      "sha256": "4f4bd6d305057c277b716825e69befe5895a69027ca1770d3a22c33f776cdf6b",
+      "bytes": 1310
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/trace_manifest.json",
+      "sha256": "3bef02272b0f065660d070052117ff3daf65c09bdd270d108dfdeb4546a49a0f",
+      "bytes": 65370
+    },
+    {
+      "path": "docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json",
+      "sha256": "2640b137f35f1a206a47136516ebd1f9db7c3a5832ce1deadf2a8f374ac02937",
+      "bytes": 182267
+    },
+    {
+      "path": "docs/experiment/functional_coverage_2026-10-04.md",
+      "sha256": "ade2900931c9c2573453f3a450878d1d0af2b4e44c90330d8dac5a011ce6c566",
+      "bytes": 10605
+    },
+    {
+      "path": "docs/experiment/agent_new_holdout_source_validation_2026-10-05.md",
+      "sha256": "11df83d811e2939bb95ed9fea975cba974135b6b97e63c4e297ccced04d02d1e",
+      "bytes": 3030
+    },
+    {
+      "path": "docs/review/agent_new_holdout_study_review_2026-10-05.md",
+      "sha256": "7dc898d556b4c61e433e2d442511c51f8045acfd2bd7d1a55ea768f7ce4a3ed8",
+      "bytes": 6536
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+      "sha256": "cd9ddc98b4b11062e3d820b475419335450d2e29fd54b300fa13c03643b13375",
+      "bytes": 7027646
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json",
+      "sha256": "e00d4b08cd596a0c3bdcc9d7aae4892a95a740ec7349d80130bdfa5bc7d43c57",
+      "bytes": 876138
+    },
+    {
+      "path": "docs/competition/ic/v3/rules_validation.json",
+      "sha256": "ec44e293b16ef871f25bec8a6b527c1cfe07f612ccc389ac8a39a13d2516b95d",
+      "bytes": 1483
+    },
+    {
+      "path": "docs/experiment/agent_new_holdout_study_plan_2026-10-05.md",
+      "sha256": "dbc7efc327b71804ae36ff0516f392adc9ab79eb243e8a19e93a5b7ae5b0a724",
+      "bytes": 6196
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/preregistration.json",
+      "sha256": "45a151529e2f2e1960f54696386db1ee5574e27dd0b688aad50afb432971b83f",
+      "bytes": 195253
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/token_budget.json",
+      "sha256": "7277cb7ae7aee2dc7d546dcd2ae3ad75e487e7f9c06f0b6ce88d9bf351aa7e8f",
+      "bytes": 29209
+    },
+    {
+      "path": "docs/review/agent-new-holdout-study-review-2026-10-05/trace-audit.json",
+      "sha256": "bf2c5294d10a507f09e0630c09d4a7f922dd08e559efe668d857ffbb94f6ca9b",
+      "bytes": 1393100
+    },
+    {
+      "path": "docs/experiment/agent_feedback_study_budget_2026-10-05.json",
+      "sha256": "136e36068a376267949ead5cda172de4db5acb9bdc610dadcb3267b5341c7d22",
+      "bytes": 1310
+    },
+    {
+      "path": "docs/review/agent_feedback_study_review_2026-10-05.md",
+      "sha256": "f23c51818a57701365ec07935e06ac40fd43a987487a706f658cd9a1c4e30e19",
+      "bytes": 4338
+    },
+    {
+      "path": "docs/experiment/metric_inventory.md",
+      "sha256": "81377a8621a62dda0a52b02479c27f0898e7964ec3a70f55725baf80ce03cab4",
+      "bytes": 59495
+    },
+    {
+      "path": "benchmarks/agent_new_holdout_20261005/README.md",
+      "sha256": "5b0e122ec920f78cb6f0f2ab56c4f22f15286608da21038dc504eb49e13e80f5",
+      "bytes": 3209
+    },
+    {
+      "path": "docs/review/agent_new_holdout_prereg_review_2026-10-05.md",
+      "sha256": "5ecb625a86ce258e0a3d666c1db11d95460dde79039c705b022175da9ea16e43",
+      "bytes": 11880
+    },
+    {
+      "path": "docs/review/agent-new-holdout-study-review-2026-10-05/receipt.json",
+      "sha256": "9377514673af710917a62ca219949c13c5794195360b76b6d76d4e43b330abdf",
+      "bytes": 126464
+    },
+    {
+      "path": "docs/experiment/ic_agent_v4_validation_2026-10-04.md",
+      "sha256": "d84cd5633adc82925f3ede348af8db0a3a12c76187ad409dfe0bbec19552a7d1",
+      "bytes": 3785
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/registered_inputs.zip",
+      "sha256": "b881df1a99012c29d3e205dfae31476d995be1e4cfd91967a362c65ef297f4ee",
+      "bytes": 1023930
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/source_byte_binding.json",
+      "sha256": "c02e53b79b6d31a48e989691fe521b7fe1f1cb2f6d73ea90df93dcc8d129417a",
+      "bytes": 180623
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/strict_summary.json",
+      "sha256": "d0fb0195aa7747919e5e3be5d3cd6947ab5653f8f7a3cd27d9031bab7b2f82b9",
+      "bytes": 3087950
+    },
+    {
+      "path": "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+      "sha256": "4bb214297d189ccbf446dd12e9bc848bffd216601c1c315241f6cb3bcc87f6a3",
+      "bytes": 470762
+    },
+    {
+      "path": "docs/competition/ic/ICARUS_佐证材料_v3.pdf",
+      "sha256": "7fe5fe5aa78d654dc4e212cd25e2f2b202418d1d7a32d96ce755d8361a8e0dda",
+      "bytes": 260009
+    },
+    {
+      "path": "docs/competition/ic/v3/validation.json",
+      "sha256": "fa661f4abd28a327f49ed8f364913488b51ef6c29b72f2756b982c0b4935cfd9",
+      "bytes": 21282
+    },
+    {
+      "path": "docs/competition/ic/v3/build_materials.py",
+      "sha256": "e09203ca7728e8be409ed44e3af3c7c30126887c3181fbd8007715a3ad161125",
+      "bytes": 9274
+    }
+  ],
+  "submission_counts": {
+    "name_unicode_characters": 15,
+    "intro_unicode_characters": 201,
+    "count_method": "all Unicode characters, including punctuation and Latin letters; plain text only"
+  },
+  "scope": "Four complete six-strategy tables are compared row-by-row against sealed material facts; all local Markdown citations must exist. Prose meaning and external URL reachability are separate.",
+  "new_API_requests": 0,
+  "credentials_read": 0,
+  "new_DUT_runs": 0,
+  "new_source_tests": 0,
+  "external_url_requests": 0,
+  "H02_human_review": false
+}

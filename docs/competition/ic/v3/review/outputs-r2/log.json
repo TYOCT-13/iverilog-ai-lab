@@ -1,0 +1,10 @@
+{
+  "mechanical_checks_passed": true,
+  "units": 165,
+  "failed": [],
+  "result": {
+    "path": "docs/competition/ic/v3/review/outputs-r2/result.json",
+    "sha256": "b8725a4fd32342c24c49f9158a7dd40093ce3600a4bc6971f745e8409006ad78",
+    "bytes": 235534
+  }
+}

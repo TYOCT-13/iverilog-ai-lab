@@ -1,0 +1,10 @@
+{
+  "units": 88,
+  "passed": 88,
+  "failed": [],
+  "result": {
+    "path": "docs/competition/ic/v3/review/text-r3/result.json",
+    "sha256": "79fd1fb711f2c5f63b1e2bb15de8fd308007dc1600e0a69073535e9f81807d60",
+    "bytes": 102356
+  }
+}

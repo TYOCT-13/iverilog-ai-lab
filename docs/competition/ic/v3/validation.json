@@ -1,0 +1,569 @@
+{
+  "schema": "icarus-ic-material-pdf-validation-v3",
+  "attempt": "r2",
+  "built_at_utc": "2026-10-05T07:58:06.415624+00:00",
+  "evidence_base_commit": "f632b0a83d7a63256af767eab73c91477384cc44",
+  "new_API_requests": 0,
+  "new_DUT_runs": 0,
+  "human_trial_or_H02": false,
+  "renderer": {
+    "path": "scripts/markdown_to_pdf.py",
+    "sha256": "7f59d3991d0e383d6b01e489243cf4ec70e877e38ab7422b57d4910b67f7ddfc"
+  },
+  "material_data": {
+    "path": "docs/competition/ic/v3/material_data.json",
+    "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4"
+  },
+  "visual_review": "passed after actual individual PNG inspection; final r2 pages verified against earlier inspected pages and changed final pages viewed again",
+  "documents": [
+    {
+      "source": "docs/competition/ic/v3/technical_report.md",
+      "source_sha256": "3cbef290973e831bd38e9155b59edc3e1f2b2131183711ca8aff796e3a933a90",
+      "pdf": "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+      "pdf_sha256": "4bb214297d189ccbf446dd12e9bc848bffd216601c1c315241f6cb3bcc87f6a3",
+      "bytes": 470762,
+      "pages": 10,
+      "selectable_text": true,
+      "metadata": {
+        "format": "PDF 1.7",
+        "title": "",
+        "author": "",
+        "subject": "",
+        "keywords": "",
+        "creator": "",
+        "producer": "",
+        "creationDate": "",
+        "modDate": "",
+        "trapped": "",
+        "encryption": null
+      },
+      "render_backend": "Poppler pdftoppm",
+      "page_records": [
+        {
+          "page": 1,
+          "png_path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-01.png",
+          "png_sha256": "df81d9e8ac31b81232ef36af94759b8f9d287605a789cb583efbdf99f1db8351",
+          "text_characters": 687,
+          "fonts": [
+            {
+              "xref": 8,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            },
+            {
+              "xref": 8,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": []
+        },
+        {
+          "page": 2,
+          "png_path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-02.png",
+          "png_sha256": "5299d92863a74fabd9cea04851ab42c8935573cce3208fd2f75667a38e612091",
+          "text_characters": 696,
+          "fonts": [
+            {
+              "xref": 8,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            },
+            {
+              "xref": 8,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": []
+        },
+        {
+          "page": 3,
+          "png_path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-03.png",
+          "png_sha256": "06b97af6f8fbf0cc76529a7e0245a86945f8ed8fe99844fc351c4fe4553c41c5",
+          "text_characters": 786,
+          "fonts": [
+            {
+              "xref": 8,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            },
+            {
+              "xref": 8,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": []
+        },
+        {
+          "page": 4,
+          "png_path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-04.png",
+          "png_sha256": "daeea5ce7b92ede905fa181680cef3be6cdfe8b86c21293a3bd6014137d2916a",
+          "text_characters": 720,
+          "fonts": [
+            {
+              "xref": 8,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            },
+            {
+              "xref": 8,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": []
+        },
+        {
+          "page": 5,
+          "png_path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-05.png",
+          "png_sha256": "66761c68ad28052b3cc305cb90a84da0771f90d83132ca825c01d2eb1e966a42",
+          "text_characters": 671,
+          "fonts": [
+            {
+              "xref": 8,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            },
+            {
+              "xref": 8,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": []
+        },
+        {
+          "page": 6,
+          "png_path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-06.png",
+          "png_sha256": "fddc9a5d846b303e1355e6f09c1c7f94dd423ac8fa85c7da22953566f80ff238",
+          "text_characters": 471,
+          "fonts": [
+            {
+              "xref": 8,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            },
+            {
+              "xref": 8,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": []
+        },
+        {
+          "page": 7,
+          "png_path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-07.png",
+          "png_sha256": "cfa0ae55ded001ab63683263f9d912b76a45ad67c5d6c73103d7ab673bc9f4d8",
+          "text_characters": 716,
+          "fonts": [
+            {
+              "xref": 8,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            },
+            {
+              "xref": 8,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": []
+        },
+        {
+          "page": 8,
+          "png_path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-08.png",
+          "png_sha256": "ab926c9cf51b53e8746286c1fff3a8c72ce2c7c8ac36a67b73147587cfada617",
+          "text_characters": 794,
+          "fonts": [
+            {
+              "xref": 8,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            },
+            {
+              "xref": 8,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": []
+        },
+        {
+          "page": 9,
+          "png_path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-09.png",
+          "png_sha256": "aa46c6f583fdaf316af4c28f08b7d09c2eced3caa826b0d65b1c40f8a0f64e75",
+          "text_characters": 576,
+          "fonts": [
+            {
+              "xref": 8,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            },
+            {
+              "xref": 8,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": []
+        },
+        {
+          "page": 10,
+          "png_path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report/page-10.png",
+          "png_sha256": "b60b780b34a8ce7109a12ab83cb481e63752f1826d7a47acf56e0cd6ba66c3d0",
+          "text_characters": 1047,
+          "fonts": [
+            {
+              "xref": 8,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            },
+            {
+              "xref": 25,
+              "type": "Type0",
+              "name": "Consolas Regular",
+              "embedded": true
+            },
+            {
+              "xref": 8,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": []
+        }
+      ],
+      "source_unchanged_after_build": true,
+      "submission_check": {
+        "ok": true,
+        "body_pages": 8,
+        "stdout_path": ".iverilog-ai/ic-materials-v3-build/r2/technical_report-submission-check.stdout.json",
+        "stdout_sha256": "e3b2f4e7f2f04515320a3d7994b1a66f623c5dc14e7a50329ffdfc3a5476e0ef",
+        "page_limit_note": "The script default 15-page recommendation is generic; it is not a newly claimed AI+IC official hard limit"
+      }
+    },
+    {
+      "source": "docs/competition/ic/v3/supporting_evidence.md",
+      "source_sha256": "2054a83999c02c7ce73c5fbcd7e31c2d275a5596bb026b273ce00a3c5b1b0fda",
+      "pdf": "docs/competition/ic/ICARUS_佐证材料_v3.pdf",
+      "pdf_sha256": "7fe5fe5aa78d654dc4e212cd25e2f2b202418d1d7a32d96ce755d8361a8e0dda",
+      "bytes": 260009,
+      "pages": 6,
+      "selectable_text": true,
+      "metadata": {
+        "format": "PDF 1.7",
+        "title": "",
+        "author": "",
+        "subject": "",
+        "keywords": "",
+        "creator": "",
+        "producer": "",
+        "creationDate": "",
+        "modDate": "",
+        "trapped": "",
+        "encryption": null
+      },
+      "render_backend": "Poppler pdftoppm",
+      "page_records": [
+        {
+          "page": 1,
+          "png_path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-01.png",
+          "png_sha256": "63cf1aeff5eccb5f0bc105e4d78a7b7e65f06275d095880d728940ed3548d126",
+          "text_characters": 756,
+          "fonts": [
+            {
+              "xref": 4,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            },
+            {
+              "xref": 4,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": []
+        },
+        {
+          "page": 2,
+          "png_path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-02.png",
+          "png_sha256": "d4b7cee7570185dd271b9a1662c805c823e7ae4e33aa1fc00eac388fd2c968e8",
+          "text_characters": 831,
+          "fonts": [
+            {
+              "xref": 4,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            },
+            {
+              "xref": 4,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": []
+        },
+        {
+          "page": 3,
+          "png_path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-03.png",
+          "png_sha256": "2eb3f49b15d36b79e6e5324a3fc2c681013ba337b2c87e55e59e7f2bb4dc331b",
+          "text_characters": 740,
+          "fonts": [
+            {
+              "xref": 4,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            },
+            {
+              "xref": 4,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": []
+        },
+        {
+          "page": 4,
+          "png_path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-04.png",
+          "png_sha256": "59d186a28fed37420c1739d14c7b2d8e64cf6854e57e2961e0318c184ca9aefd",
+          "text_characters": 662,
+          "fonts": [
+            {
+              "xref": 4,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            },
+            {
+              "xref": 4,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": []
+        },
+        {
+          "page": 5,
+          "png_path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-05.png",
+          "png_sha256": "efe151e2586ed0f1e02094a54a3113cfecdb8bb930c217e207e62e998830d450",
+          "text_characters": 759,
+          "fonts": [
+            {
+              "xref": 4,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            },
+            {
+              "xref": 4,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": []
+        },
+        {
+          "page": 6,
+          "png_path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence/page-06.png",
+          "png_sha256": "1a0edb0b9c203c99cbd8b9e4580526ee227fe1f7848ba063e84818885c8b444e",
+          "text_characters": 876,
+          "fonts": [
+            {
+              "xref": 4,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            },
+            {
+              "xref": 4,
+              "type": "Type0",
+              "name": "Microsoft YaHei Regular",
+              "embedded": true
+            }
+          ],
+          "outside_page_text": []
+        }
+      ],
+      "source_unchanged_after_build": true,
+      "submission_check": {
+        "ok": true,
+        "body_pages": 6,
+        "stdout_path": ".iverilog-ai/ic-materials-v3-build/r2/supporting_evidence-submission-check.stdout.json",
+        "stdout_sha256": "434a2d1365e575b6c1667dc9bc94e29f95883155bbbccc305fa71aa394abb53e",
+        "page_limit_note": "The script default 15-page recommendation is generic; it is not a newly claimed AI+IC official hard limit"
+      }
+    }
+  ],
+  "actual_visual_inspection": [
+    {
+      "document": "technical_report",
+      "page": 1,
+      "sha256": "df81d9e8ac31b81232ef36af94759b8f9d287605a789cb583efbdf99f1db8351",
+      "basis": "r1 page viewed individually; final r2 rendered PNG is byte-identical",
+      "layout_observation": "Chinese glyphs, tables, figure/caption, headers and page footer readable; no visible overlap or clipping",
+      "accepted": true
+    },
+    {
+      "document": "technical_report",
+      "page": 2,
+      "sha256": "5299d92863a74fabd9cea04851ab42c8935573cce3208fd2f75667a38e612091",
+      "basis": "r1 page viewed individually; final r2 rendered PNG is byte-identical",
+      "layout_observation": "Chinese glyphs, tables, figure/caption, headers and page footer readable; no visible overlap or clipping",
+      "accepted": true
+    },
+    {
+      "document": "technical_report",
+      "page": 3,
+      "sha256": "06b97af6f8fbf0cc76529a7e0245a86945f8ed8fe99844fc351c4fe4553c41c5",
+      "basis": "r1 page viewed individually; final r2 rendered PNG is byte-identical",
+      "layout_observation": "Chinese glyphs, tables, figure/caption, headers and page footer readable; no visible overlap or clipping",
+      "accepted": true
+    },
+    {
+      "document": "technical_report",
+      "page": 4,
+      "sha256": "daeea5ce7b92ede905fa181680cef3be6cdfe8b86c21293a3bd6014137d2916a",
+      "basis": "r1 page viewed individually; final r2 rendered PNG is byte-identical",
+      "layout_observation": "Chinese glyphs, tables, figure/caption, headers and page footer readable; no visible overlap or clipping",
+      "accepted": true
+    },
+    {
+      "document": "technical_report",
+      "page": 5,
+      "sha256": "66761c68ad28052b3cc305cb90a84da0771f90d83132ca825c01d2eb1e966a42",
+      "basis": "r1 page viewed individually; final r2 rendered PNG is byte-identical",
+      "layout_observation": "Chinese glyphs, tables, figure/caption, headers and page footer readable; no visible overlap or clipping",
+      "accepted": true
+    },
+    {
+      "document": "technical_report",
+      "page": 6,
+      "sha256": "fddc9a5d846b303e1355e6f09c1c7f94dd423ac8fa85c7da22953566f80ff238",
+      "basis": "r1 page viewed individually; final r2 rendered PNG is byte-identical",
+      "layout_observation": "Chinese glyphs, tables, figure/caption, headers and page footer readable; no visible overlap or clipping",
+      "accepted": true
+    },
+    {
+      "document": "technical_report",
+      "page": 7,
+      "sha256": "cfa0ae55ded001ab63683263f9d912b76a45ad67c5d6c73103d7ab673bc9f4d8",
+      "basis": "r1 page viewed individually; final r2 rendered PNG is byte-identical",
+      "layout_observation": "Chinese glyphs, tables, figure/caption, headers and page footer readable; no visible overlap or clipping",
+      "accepted": true
+    },
+    {
+      "document": "technical_report",
+      "page": 8,
+      "sha256": "ab926c9cf51b53e8746286c1fff3a8c72ce2c7c8ac36a67b73147587cfada617",
+      "basis": "r1 page viewed individually; final r2 rendered PNG is byte-identical",
+      "layout_observation": "Chinese glyphs, tables, figure/caption, headers and page footer readable; no visible overlap or clipping",
+      "accepted": true
+    },
+    {
+      "document": "technical_report",
+      "page": 9,
+      "sha256": "aa46c6f583fdaf316af4c28f08b7d09c2eced3caa826b0d65b1c40f8a0f64e75",
+      "basis": "r1 page viewed individually; final r2 rendered PNG is byte-identical",
+      "layout_observation": "Chinese glyphs, tables, figure/caption, headers and page footer readable; no visible overlap or clipping",
+      "accepted": true
+    },
+    {
+      "document": "technical_report",
+      "page": 10,
+      "sha256": "b60b780b34a8ce7109a12ab83cb481e63752f1826d7a47acf56e0cd6ba66c3d0",
+      "basis": "final r2 page viewed individually after source-location additions",
+      "layout_observation": "Chinese glyphs, tables, figure/caption, headers and page footer readable; no visible overlap or clipping",
+      "accepted": true
+    },
+    {
+      "document": "supporting_evidence",
+      "page": 1,
+      "sha256": "63cf1aeff5eccb5f0bc105e4d78a7b7e65f06275d095880d728940ed3548d126",
+      "basis": "r1 page viewed individually; final r2 rendered PNG is byte-identical",
+      "layout_observation": "Chinese glyphs, tables, figure/caption, headers and page footer readable; no visible overlap or clipping",
+      "accepted": true
+    },
+    {
+      "document": "supporting_evidence",
+      "page": 2,
+      "sha256": "d4b7cee7570185dd271b9a1662c805c823e7ae4e33aa1fc00eac388fd2c968e8",
+      "basis": "r1 page viewed individually; final r2 rendered PNG is byte-identical",
+      "layout_observation": "Chinese glyphs, tables, figure/caption, headers and page footer readable; no visible overlap or clipping",
+      "accepted": true
+    },
+    {
+      "document": "supporting_evidence",
+      "page": 3,
+      "sha256": "2eb3f49b15d36b79e6e5324a3fc2c681013ba337b2c87e55e59e7f2bb4dc331b",
+      "basis": "r1 page viewed individually; final r2 rendered PNG is byte-identical",
+      "layout_observation": "Chinese glyphs, tables, figure/caption, headers and page footer readable; no visible overlap or clipping",
+      "accepted": true
+    },
+    {
+      "document": "supporting_evidence",
+      "page": 4,
+      "sha256": "59d186a28fed37420c1739d14c7b2d8e64cf6854e57e2961e0318c184ca9aefd",
+      "basis": "r1 page viewed individually; final r2 rendered PNG is byte-identical",
+      "layout_observation": "Chinese glyphs, tables, figure/caption, headers and page footer readable; no visible overlap or clipping",
+      "accepted": true
+    },
+    {
+      "document": "supporting_evidence",
+      "page": 5,
+      "sha256": "efe151e2586ed0f1e02094a54a3113cfecdb8bb930c217e207e62e998830d450",
+      "basis": "r1 page viewed individually; final r2 rendered PNG is byte-identical",
+      "layout_observation": "Chinese glyphs, tables, figure/caption, headers and page footer readable; no visible overlap or clipping",
+      "accepted": true
+    },
+    {
+      "document": "supporting_evidence",
+      "page": 6,
+      "sha256": "1a0edb0b9c203c99cbd8b9e4580526ee227fe1f7848ba063e84818885c8b444e",
+      "basis": "final r2 page viewed individually after source-location additions",
+      "layout_observation": "Chinese glyphs, tables, figure/caption, headers and page footer readable; no visible overlap or clipping",
+      "accepted": true
+    }
+  ],
+  "reviewed_at_utc": "2026-10-05T07:59:46.145207+00:00",
+  "reviewer": "root agent, material packager; machine visual QA, not H02 or user testing",
+  "sources_unchanged": true,
+  "production_renderer_modified": false,
+  "native_Office_verified": false,
+  "report_pages": {
+    "total": 10,
+    "body": 8,
+    "appendix": 2
+  },
+  "pdf_original_metadata_has_no_identity_fields": true
+}

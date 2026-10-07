@@ -1,0 +1,18 @@
+{
+  "schema": "icarus-v3-text-review-attempt-v1",
+  "tool": {
+    "path": "docs/competition/ic/v3/review/audit_text_tables_v2.py",
+    "sha256": "40030b9ce66e2519af9adb4b529d262f95149e7b0715769138e6c5e4569ed41c",
+    "bytes": 8073
+  },
+  "result": {
+    "path": "docs/competition/ic/v3/review/text-r2/result.json",
+    "sha256": "94bf6e6d0945d63acd8c6b1c6f8949bed6f8c4d8cabfa0e6d3ac44ec70b57788",
+    "bytes": 91118
+  },
+  "log": {
+    "path": "docs/competition/ic/v3/review/text-r2/log.json",
+    "sha256": "ca8085ae7be41bfa6fbc525bdb745f7589cbe6c6740ac957514f5a68fd10fe86",
+    "bytes": 235
+  }
+}

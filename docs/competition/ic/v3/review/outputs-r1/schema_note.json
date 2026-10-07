@@ -1,0 +1,14 @@
+{
+  "schema": "icarus-v3-output-review-record-correction-v1",
+  "original_attempt": "outputs-r1",
+  "actual_check_units": 165,
+  "actual_failed_check_units": 0,
+  "issue": "The sources display object reused README as a dictionary key for v3/README.md and defense_v3/README.md. The latter replaced the former's displayed full text. Both source/check units and both byte bindings remain present and passed in the original result, and the separate text-r2 record covers v3/README.md.",
+  "effect": "A report-structure ambiguity, not an altered artifact or failed mechanical check.",
+  "originals_preserved": "Original tool, result, log and receipt retained without replacement; original tool copied inside this attempt.",
+  "correction": "Separate audit_material_outputs_v2.py uses defense_speaker_notes, defense_qa_questions and defense_README keys. A fresh outputs-r2 run will retain seven complete source-document records.",
+  "counting": "R1 and R2 repeat the same 165 check identities and are not added as 330 distinct checks.",
+  "new_API_requests": 0,
+  "credentials_read": 0,
+  "new_DUT_runs": 0
+}

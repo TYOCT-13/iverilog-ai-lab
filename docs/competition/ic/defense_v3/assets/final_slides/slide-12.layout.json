@@ -1,0 +1,744 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/8f2psfyx",
+    "id": "8f2psfyx",
+    "slide": 12,
+    "layoutId": "/ppt/slideLayouts/slideLayout1.xml",
+    "layoutName": "Title Slide",
+    "layoutType": "title",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "masterLayoutName": "Master",
+    "backgroundColor": "#1C2023",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "ICARUS charcoal cyan",
+    "colors": {
+      "accent1": "#00C8E8",
+      "accent2": "#738188",
+      "accent3": "#B3BDC2",
+      "accent4": "#CFD8DC",
+      "accent5": "#343C40",
+      "accent6": "#7A858A",
+      "dk1": "#111517",
+      "lt1": "#F1F3F4",
+      "dk2": "#1C2023",
+      "lt2": "#D0D9DD",
+      "hlink": "#00C8E8",
+      "folHlink": "#00C8E8"
+    },
+    "fontScheme": {
+      "name": "Office",
+      "majorFont": {
+        "latinTypeface": "Calibri Light",
+        "eastAsianTypeface": "Calibri Light",
+        "complexScriptTypeface": "Calibri Light"
+      },
+      "minorFont": {
+        "latinTypeface": "Calibri",
+        "eastAsianTypeface": "Calibri",
+        "complexScriptTypeface": "Calibri"
+      }
+    },
+    "typefaces": [
+      "Bahnschrift",
+      "Calibri",
+      "Calibri Light",
+      "Noto Sans SC"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout1.xml",
+      "name": "Title Slide",
+      "type": "title",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": []
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "name": "Master",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/a543mx4r",
+      "id": "9",
+      "name": "证据边界与交付",
+      "bbox": [
+        64,
+        46,
+        1060,
+        70
+      ],
+      "geometry": "rect",
+      "text": "证据边界与交付",
+      "textPreview": "证据边界与交付",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "证据边界与交付"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "证据边界与交付",
+          "resolvedTextStyle": {
+            "fontSize": 46,
+            "typeface": "Noto Sans SC",
+            "color": "#F1F3F4",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "证据边界与交付",
+              "fontSize": 46,
+              "typeface": "Noto Sans SC",
+              "color": "#F1F3F4",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1gbm9s3a",
+      "id": "2",
+      "bbox": [
+        64,
+        131,
+        1150,
+        0
+      ],
+      "geometry": "line",
+      "lineColor": "#566168",
+      "lineWidth": 1
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0f2lgnmp",
+      "id": "3",
+      "name": "12",
+      "bbox": [
+        1158,
+        48,
+        64,
+        54
+      ],
+      "geometry": "rect",
+      "text": "12",
+      "textPreview": "12",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "12"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "12",
+          "resolvedTextStyle": {
+            "fontSize": 34,
+            "typeface": "Bahnschrift",
+            "color": "#00C8E8",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "12",
+              "fontSize": 34,
+              "typeface": "Bahnschrift",
+              "color": "#00C8E8",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ra943il8",
+      "id": "4",
+      "name": "2,033 pass / 2 skip    mypy 88 源",
+      "bbox": [
+        68,
+        172,
+        1138,
+        58
+      ],
+      "geometry": "rect",
+      "text": "2,033 pass / 2 skip    mypy 88 源文件零错",
+      "textPreview": "2,033 pass / 2 skip    mypy 88 源文件零错",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "2,033 pass / 2 skip    mypy 88 源文件零错"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "2,033 pass / 2 skip    mypy 88 源文件零错",
+          "resolvedTextStyle": {
+            "fontSize": 37,
+            "typeface": "Noto Sans SC",
+            "color": "#00C8E8",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "2,033 pass / 2 skip    mypy 88 源文件零错",
+              "fontSize": 37,
+              "typeface": "Noto Sans SC",
+              "color": "#00C8E8",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/q903ad4n",
+      "id": "5",
+      "name": "535 冻结指纹无变化，工程记录不等于 AI 或真人验收",
+      "bbox": [
+        68,
+        244,
+        1138,
+        52
+      ],
+      "geometry": "rect",
+      "text": "535 冻结指纹无变化，工程记录不等于 AI 或真人验收",
+      "textPreview": "535 冻结指纹无变化，工程记录不等于 AI 或真人验收",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "535 冻结指纹无变化，工程记录不等于 AI 或真人验收"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "535 冻结指纹无变化，工程记录不等于 AI 或真人验收",
+          "resolvedTextStyle": {
+            "fontSize": 28,
+            "typeface": "Noto Sans SC",
+            "color": "#B3BDC2"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "535 冻结指纹无变化，工程记录不等于 AI 或真人验收",
+              "fontSize": 28,
+              "typeface": "Noto Sans SC",
+              "color": "#B3BDC2"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 6,
+      "kind": "table",
+      "scope": "slide",
+      "aid": "tb/3ilgzeds",
+      "id": "10",
+      "bbox": [
+        68,
+        332,
+        1138,
+        216
+      ],
+      "text": "边界 | 当前证据\n适用范围 | 已审计合约 / 参数、有限拍数与有限端口采样\n尚未提供 | 硬件、异机 Actions、真人试用、独立人工 H02\n已披露残项 | 12 项严格 RTL 样式 / WaveDrom 3.6.1 缺失",
+      "textPreview": "边界 | 当前证据 | 适用范围 | 已审计合约 / 参数、有限拍数与有限端口采样 | 尚未提供 | 硬件、异机 Actions、真人试用、独立人工 H02 | 已披露残项 | 12 项严格 RTL 样式 / WaveDrom 3.6.1 缺失",
+      "rows": 4,
+      "cols": 2,
+      "cells": [
+        {
+          "index": 1,
+          "row": 1,
+          "column": 1,
+          "bbox": [
+            68,
+            332,
+            240,
+            54
+          ],
+          "text": "边界",
+          "textPreview": "边界",
+          "fillColor": "#111517",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "边界",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "边界",
+                  "fontSize": 25,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "row": 1,
+          "column": 2,
+          "bbox": [
+            308,
+            332,
+            898,
+            54
+          ],
+          "text": "当前证据",
+          "textPreview": "当前证据",
+          "fillColor": "#111517",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "当前证据",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "当前证据",
+                  "fontSize": 25,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4",
+                  "bold": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "row": 2,
+          "column": 1,
+          "bbox": [
+            68,
+            386,
+            240,
+            54
+          ],
+          "text": "适用范围",
+          "textPreview": "适用范围",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "适用范围",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "适用范围",
+                  "fontSize": 27,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "row": 2,
+          "column": 2,
+          "bbox": [
+            308,
+            386,
+            898,
+            54
+          ],
+          "text": "已审计合约 / 参数、有限拍数与有限端口采样",
+          "textPreview": "已审计合约 / 参数、有限拍数与有限端口采样",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "已审计合约 / 参数、有限拍数与有限端口采样",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "已审计合约 / 参数、有限拍数与有限端口采样",
+                  "fontSize": 27,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "row": 3,
+          "column": 1,
+          "bbox": [
+            68,
+            440,
+            240,
+            54
+          ],
+          "text": "尚未提供",
+          "textPreview": "尚未提供",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "尚未提供",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "尚未提供",
+                  "fontSize": 27,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "row": 3,
+          "column": 2,
+          "bbox": [
+            308,
+            440,
+            898,
+            54
+          ],
+          "text": "硬件、异机 Actions、真人试用、独立人工 H02",
+          "textPreview": "硬件、异机 Actions、真人试用、独立人工 H02",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "硬件、异机 Actions、真人试用、独立人工 H02",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "硬件、异机 Actions、真人试用、独立人工 H02",
+                  "fontSize": 27,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 7,
+          "row": 4,
+          "column": 1,
+          "bbox": [
+            68,
+            494,
+            240,
+            54
+          ],
+          "text": "已披露残项",
+          "textPreview": "已披露残项",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "已披露残项",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "已披露残项",
+                  "fontSize": 27,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "index": 8,
+          "row": 4,
+          "column": 2,
+          "bbox": [
+            308,
+            494,
+            898,
+            54
+          ],
+          "text": "12 项严格 RTL 样式 / WaveDrom 3.6.1 缺失",
+          "textPreview": "12 项严格 RTL 样式 / WaveDrom 3.6.1 缺失",
+          "fillColor": "#1C2023",
+          "paragraphs": [
+            {
+              "index": 1,
+              "text": "12 项严格 RTL 样式 / WaveDrom 3.6.1 缺失",
+              "runs": [
+                {
+                  "index": 1,
+                  "text": "12 项严格 RTL 样式 / WaveDrom 3.6.1 缺失",
+                  "fontSize": 27,
+                  "typeface": "Noto Sans SC",
+                  "color": "#F1F3F4"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "order": 7,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/sb2lcnmd",
+      "id": "7",
+      "name": "截止 2026-10-15 20:00",
+      "bbox": [
+        68,
+        588,
+        1141,
+        49
+      ],
+      "geometry": "rect",
+      "text": "截止 2026-10-15 20:00",
+      "textPreview": "截止 2026-10-15 20:00",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "截止 2026-10-15 20:00"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "截止 2026-10-15 20:00",
+          "resolvedTextStyle": {
+            "fontSize": 31,
+            "typeface": "Noto Sans SC",
+            "color": "#F1F3F4",
+            "bold": true
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "截止 2026-10-15 20:00",
+              "fontSize": 31,
+              "typeface": "Noto Sans SC",
+              "color": "#F1F3F4",
+              "bold": true
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/b6d4f2lc",
+      "id": "8",
+      "name": "方案 PDF ≤10MB，答辩 PDF，佐证合一 PDF，视频可",
+      "bbox": [
+        64,
+        646,
+        1150,
+        62
+      ],
+      "geometry": "rect",
+      "text": "方案 PDF ≤10MB，答辩 PDF，佐证合一 PDF，视频可选。真人 / H02 非官方硬门槛",
+      "textPreview": "方案 PDF ≤10MB，答辩 PDF，佐证合一 PDF，视频可选。真人 / H02 非官方硬门槛",
+      "resolvedFontSize": 24,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 24,
+        "typeface": "Calibri",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "方案 PDF ≤10MB，答辩 PDF，佐证合一 PDF，视频可选。真人 / H02 非官方硬门槛"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "方案 PDF ≤10MB，答辩 PDF，佐证合一 PDF，视频可选。真人 / H02 非官方硬门槛",
+          "resolvedTextStyle": {
+            "fontSize": 23,
+            "typeface": "Noto Sans SC",
+            "color": "#B3BDC2"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "方案 PDF ≤10MB，答辩 PDF，佐证合一 PDF，视频可选。真人 / H02 非官方硬门槛",
+              "fontSize": 23,
+              "typeface": "Noto Sans SC",
+              "color": "#B3BDC2"
+            }
+          ],
+          "bulletCharacter": "",
+          "marginLeft": 0
+        }
+      ],
+      "lineWidth": 0
+    }
+  ],
+  "composeRuns": []
+}

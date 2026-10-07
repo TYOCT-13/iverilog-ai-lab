@@ -1,0 +1,109 @@
+{
+  "schema": "icarus-defense-v3-finalization-summary-v1",
+  "revision": "r3",
+  "status": "passed_with_explicit_application_limitations",
+  "formal_human_reviewed": false,
+  "native_application_open_verified": false,
+  "artifacts": {
+    "PPTX": {
+      "path": "docs/competition/ic/ICARUS_答辩材料_v3.pptx",
+      "sha256": "03a1cf9a47bb95576054725baf34b73a041d953983ba31ca3f8ad4c5ac8db76c",
+      "size_bytes": 71117
+    },
+    "PDF": {
+      "path": "docs/competition/ic/ICARUS_答辩材料_v3.pdf",
+      "sha256": "80f2fadd2304fdb7d0d7695520242239e9e31c0dbaac9db2f96e5e108fddf580",
+      "size_bytes": 1407201
+    }
+  },
+  "slide_count": 12,
+  "PDF_page_count": 12,
+  "PDF_image_only": true,
+  "font_policy": {
+    "basis": "design",
+    "approvedFamilies": [
+      "Noto Sans SC",
+      "Bahnschrift"
+    ],
+    "scriptFonts": {},
+    "referenceSha256": null,
+    "referenceFontsVerifiedInEncodedText": false,
+    "checked_text_script_count": 283,
+    "native_font_rendering_verified": false,
+    "observed_font_families": [
+      "Bahnschrift",
+      "Noto Sans SC"
+    ],
+    "observed_font_use_counts": {
+      "Bahnschrift": 15,
+      "Noto Sans SC": 268
+    },
+    "passed": true,
+    "performed": true
+  },
+  "native_table_owner_slides": [
+    4,
+    5,
+    7,
+    8,
+    9,
+    10,
+    12
+  ],
+  "native_chart_owner_slides": [
+    6,
+    11
+  ],
+  "native_chart_count": 3,
+  "native_table_count": 7,
+  "literal_workbooks": 3,
+  "native_table_arithmetic_checked_column_count": 0,
+  "literal_workbook_claim": "New literal snapshots of the frozen slide data; original source workbooks/formulas were not preserved or claimed",
+  "package_findings": 0,
+  "layout_findings": 0,
+  "layout_warnings": 0,
+  "finalization_receipt": {
+    "path": "docs/competition/ic/defense_v3/finalization_receipt.original.json",
+    "sha256": "3802e4d47d00ca5f545db725501fab1799ed387c8a8713df7803740fa7104a77",
+    "size_bytes": 9527
+  },
+  "QA_report": {
+    "path": "docs/competition/ic/defense_v3/qa_report.json",
+    "sha256": "97efb7bb24bca2ca938648b6f56529a92d7af0d41a9b4db5b9bbde614e23439b",
+    "size_bytes": 21997
+  },
+  "source_checksums": {
+    "path": "docs/competition/ic/defense_v3/source_checksums.json",
+    "sha256": "dbcd29d942ecc4f06c7f76acef8c5dc0268777445f564270a00d3c5a97af0b53",
+    "size_bytes": 32256
+  },
+  "final_slide_PNG_directory": "docs/competition/ic/defense_v3/assets/final_slides",
+  "private_final_slide_PNG_directory": ".iverilog-ai/defense-v3-build/r3/final-render",
+  "failed_attempts_preserved": [
+    {
+      "revision": "r1",
+      "status": "failed",
+      "limitation": "literal snapshot conflicted with required original workbook policy",
+      "repair": "Remove inapplicable original-source-workbook policy; keep literal materialization true"
+    },
+    {
+      "revision": "r2",
+      "status": "failed_after_PPTX_finalize_and_PDF_export",
+      "limitation": "bundled Python has no fitz",
+      "repair": "Use already installed pypdfium2; match artifact-tool chart part paths"
+    },
+    {
+      "revision": "r3",
+      "status": "completed",
+      "limitation": null,
+      "repair": null
+    }
+  ],
+  "boundary": "Structure, cache/workbook agreement, artifact-tool import/render and authoring-agent visual QA; no Native Office or independent human/H02 validation",
+  "submission_filename_status": "Internal v3 names retained; real team number not supplied; use real-team-number–topic–work–material on submission",
+  "source_material_data_sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+  "new_API_requests": 0,
+  "credential_file_reads": 0,
+  "DUT_executions": 0,
+  "engineering_tests_reexecuted": 0
+}

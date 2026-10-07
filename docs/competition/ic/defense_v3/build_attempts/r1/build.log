@@ -1,0 +1,26 @@
+{"stage":"export_candidate","revision":"r1","slides":12,"fonts":["Noto Sans SC","Bahnschrift"]}
+Inspect result written to file: E:\FPGA_WORK\iverilog-ai-lab\.iverilog-ai\defense-v3-build\r1\candidate-export.pptx.inspect.ndjson
+Anonymous candidate metadata cleared before finalization
+{"stage":"finalizePresentation","required_native_tables":[4,5,7,8,9,10,12],"required_native_charts":[6,11]}
+file:///C:/Users/TYOCT/.codex/plugins/cache/openai-primary-runtime/presentations/26.909.12148/skills/presentations/container_tools/artifact_tool_utils.mjs:483
+  const error = new Error(`${message}${details ? `\n${details.slice(0, 8000)}` : ""}`, {
+                ^
+
+Error: chart-data-snapshot validator did not pass
+{"error": "A literal snapshot cannot preserve expressly required original source formulas or workbook", "error_category": "SnapshotError", "ok": false}
+    at processFailure (file:///C:/Users/TYOCT/.codex/plugins/cache/openai-primary-runtime/presentations/26.909.12148/skills/presentations/container_tools/artifact_tool_utils.mjs:483:17)
+    at executeOptionalValidator (file:///C:/Users/TYOCT/.codex/plugins/cache/openai-primary-runtime/presentations/26.909.12148/skills/presentations/container_tools/artifact_tool_utils.mjs:541:11)
+    at preparePortableChartData (file:///C:/Users/TYOCT/.codex/plugins/cache/openai-primary-runtime/presentations/26.909.12148/skills/presentations/container_tools/artifact_tool_utils.mjs:746:22)
+    at async finalizePresentation (file:///C:/Users/TYOCT/.codex/plugins/cache/openai-primary-runtime/presentations/26.909.12148/skills/presentations/container_tools/artifact_tool_utils.mjs:933:24)
+    at async file:///E:/FPGA_WORK/iverilog-ai-lab/docs/competition/ic/defense_v3/build_defense.mjs:316:14 {
+  code: 'PRESENTATION_VALIDATION_FAILED',
+  validator: 'chart-data-snapshot',
+  exitCode: 2,
+  signal: null,
+  stdout: '',
+  stderr: '{"error": "A literal snapshot cannot preserve expressly required original source formulas or workbook", "error_category": "SnapshotError", "ok": false}\r\n',
+  report: undefined,
+  [cause]: undefined
+}
+
+Node.js v24.19.0

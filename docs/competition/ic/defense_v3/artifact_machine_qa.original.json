@@ -1,0 +1,225 @@
+{
+  "schema": "icarus-defense-v3-artifact-machine-qa-v1",
+  "slides": 12,
+  "PPTX": {
+    "path": ".iverilog-ai/defense-v3-build/r3/final/defense-r3.pptx",
+    "sha256": "03a1cf9a47bb95576054725baf34b73a041d953983ba31ca3f8ad4c5ac8db76c",
+    "size_bytes": 71117
+  },
+  "PDF": {
+    "path": ".iverilog-ai/defense-v3-build/r3/final/defense-r3.pdf",
+    "sha256": "80f2fadd2304fdb7d0d7695520242239e9e31c0dbaac9db2f96e5e108fddf580",
+    "size_bytes": 1407201
+  },
+  "PDF_image_only": true,
+  "PDF_document_metadata_empty": true,
+  "PPTX_core_metadata_empty": true,
+  "native_chart_files": 3,
+  "embedded_literal_workbooks": 3,
+  "native_chart_owner_slides": [
+    6,
+    11
+  ],
+  "native_table_owner_slides": [
+    4,
+    5,
+    7,
+    8,
+    9,
+    10,
+    12
+  ],
+  "font_counts": {
+    "Bahnschrift": 60,
+    "Noto Sans SC": 544
+  },
+  "native_Office_open_or_edit_test": false,
+  "google_slides_test": false,
+  "visual_inspection_pending": true,
+  "renders": [
+    {
+      "slide": 1,
+      "pptx_slide_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-01.png",
+        "sha256": "b455e8c2f37f359ace22fc64dc1f2914e8b3b0be906f06c57928abdf9380e331",
+        "size_bytes": 105337
+      },
+      "pdf_page_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-01.png",
+        "sha256": "a0d36ce13149ff5d20202e4794817b4e73cfacdca3ed6c6a5116817189595991",
+        "size_bytes": 92804
+      },
+      "pixel_identical": true,
+      "maximum_channel_difference": 0
+    },
+    {
+      "slide": 2,
+      "pptx_slide_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-02.png",
+        "sha256": "e159d18abc34af5d6f07737fdc53aab703c1912be1e006d3dede2ec32bd7c926",
+        "size_bytes": 168256
+      },
+      "pdf_page_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-02.png",
+        "sha256": "baeac8b6664c49db17a02fc74012e6811c31edfb56b657936881f90ff3125633",
+        "size_bytes": 150857
+      },
+      "pixel_identical": true,
+      "maximum_channel_difference": 0
+    },
+    {
+      "slide": 3,
+      "pptx_slide_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-03.png",
+        "sha256": "cbe10cd7ed6080efbfa5c8e672b44401f83143733885691eb3510da4c1e4b62a",
+        "size_bytes": 162355
+      },
+      "pdf_page_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-03.png",
+        "sha256": "9b8b510ff26f1532bdc40307c1aa076c828503f008930d19aae4a713287ff0f0",
+        "size_bytes": 146341
+      },
+      "pixel_identical": true,
+      "maximum_channel_difference": 0
+    },
+    {
+      "slide": 4,
+      "pptx_slide_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-04.png",
+        "sha256": "f68e35e7979d8197be726270ad118cde713bfbdaba48f99cd2a6d29336b9dcce",
+        "size_bytes": 171496
+      },
+      "pdf_page_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-04.png",
+        "sha256": "cd2e44426688d4ce99075a9cf0efa63f8b62da178b122cc894a4bec39b59ae3c",
+        "size_bytes": 152169
+      },
+      "pixel_identical": true,
+      "maximum_channel_difference": 0
+    },
+    {
+      "slide": 5,
+      "pptx_slide_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-05.png",
+        "sha256": "99aa73ff8f18aa7af6de85451ff37524966a4ab06c5e0c91669114e2579dfdc7",
+        "size_bytes": 178530
+      },
+      "pdf_page_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-05.png",
+        "sha256": "6ca53f333e5a87ec487d8fd57ecd13a9083d6ce5f85e145d2e1dc51220892a1f",
+        "size_bytes": 158076
+      },
+      "pixel_identical": true,
+      "maximum_channel_difference": 0
+    },
+    {
+      "slide": 6,
+      "pptx_slide_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-06.png",
+        "sha256": "04c756210c4d53dced7d811f2d7ec92d5f25b299161aa716872dd33ce9b91868",
+        "size_bytes": 170734
+      },
+      "pdf_page_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-06.png",
+        "sha256": "14bbb207d038c55bcddde9dee89fbba9ae26926e0e661be61dff0ca7b9ae2ad5",
+        "size_bytes": 152263
+      },
+      "pixel_identical": true,
+      "maximum_channel_difference": 0
+    },
+    {
+      "slide": 7,
+      "pptx_slide_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-07.png",
+        "sha256": "ec8cd54013709a8299ec885203b97f6b34c62235daaab2c8f99625d3fb565589",
+        "size_bytes": 177984
+      },
+      "pdf_page_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-07.png",
+        "sha256": "67b939eb8b261c19d50ae72a6b593a2a525700139aca448021d518bae44954e7",
+        "size_bytes": 158474
+      },
+      "pixel_identical": true,
+      "maximum_channel_difference": 0
+    },
+    {
+      "slide": 8,
+      "pptx_slide_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-08.png",
+        "sha256": "2275c4842ebb6654c142ee2a11d167127b7b59d4668e405b942100dc139052f0",
+        "size_bytes": 166154
+      },
+      "pdf_page_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-08.png",
+        "sha256": "e3de35d051199f4e462b7088f01660a25bba4f19684566f740a39a46c6a941c9",
+        "size_bytes": 148998
+      },
+      "pixel_identical": true,
+      "maximum_channel_difference": 0
+    },
+    {
+      "slide": 9,
+      "pptx_slide_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-09.png",
+        "sha256": "b2f045447920885db832cf0720fc23db4658600005bbf67b7bde002848d3b0e6",
+        "size_bytes": 172823
+      },
+      "pdf_page_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-09.png",
+        "sha256": "8cca816d44da961fbd64b75e18bb5412ee0586db16e61e5f754786d0a9d32df6",
+        "size_bytes": 154660
+      },
+      "pixel_identical": true,
+      "maximum_channel_difference": 0
+    },
+    {
+      "slide": 10,
+      "pptx_slide_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-10.png",
+        "sha256": "542fb130d4dd4646ce6c91549cf51f725223019bd0c64ec16d259db09ec2ce22",
+        "size_bytes": 194409
+      },
+      "pdf_page_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-10.png",
+        "sha256": "f0d0bcdd4b840805a07f6f870043d37a2229ac87576772c707ec92765aa3988f",
+        "size_bytes": 172540
+      },
+      "pixel_identical": true,
+      "maximum_channel_difference": 0
+    },
+    {
+      "slide": 11,
+      "pptx_slide_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-11.png",
+        "sha256": "4e67ab84dfbf75e31808b9bfbcb6f5d60260a0095de6eff3ee09381aa400fd6b",
+        "size_bytes": 148520
+      },
+      "pdf_page_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-11.png",
+        "sha256": "ed0e6101f83821382a4b1e0eab75fc0896cdf641a4e7b3a907ac4beaf0f59d73",
+        "size_bytes": 131380
+      },
+      "pixel_identical": true,
+      "maximum_channel_difference": 0
+    },
+    {
+      "slide": 12,
+      "pptx_slide_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/final-render/slide-12.png",
+        "sha256": "0d8cdef2ef3bf92408e7040e08cdb2d44160a2b08064380eeab8ab033414c20d",
+        "size_bytes": 179925
+      },
+      "pdf_page_png": {
+        "path": ".iverilog-ai/defense-v3-build/r3/pdf-render/slide-12.png",
+        "sha256": "0207033609bdd6707ffb559791dff72174f622ea84f6b940b847326c2e6577b3",
+        "size_bytes": 159630
+      },
+      "pixel_identical": true,
+      "maximum_channel_difference": 0
+    }
+  ],
+  "API_requests": 0,
+  "credential_file_reads": 0,
+  "DUT_executions": 0,
+  "engineering_tests_reexecuted": 0
+}

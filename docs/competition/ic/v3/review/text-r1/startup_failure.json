@@ -1,0 +1,17 @@
+{
+  "schema": "icarus-v3-audit-startup-failure-v1",
+  "attempt": "text-r1",
+  "command": "D:/Users/TYOCT/anaconda3/python.exe -B -X utf8 docs/competition/ic/v3/review/audit_text_tables.py --attempt text-r1 --final-text-authorized",
+  "status": "auditor_startup_error",
+  "check_units_executed": 0,
+  "error_type": "KeyError",
+  "error_message": "usage",
+  "cause": "The unrun auditor incorrectly assumed strategy.usage; the sealed material facts use usage_numeric_sum. This is an audit-tool bug and not a data failure.",
+  "original_tool_copy": "docs/competition/ic/v3/review/text-r1/audit_text_tables.original.py",
+  "traceback_verbatim": "Traceback (most recent call last):\n  File \"E:\\FPGA_WORK\\iverilog-ai-lab\\docs\\competition\\ic\\v3\\review\\audit_text_tables.py\", line 147, in <module>\n    if __name__=='__main__':raise SystemExit(main())\n                                             ^^^^^^\n  File \"E:\\FPGA_WORK\\iverilog-ai-lab\\docs\\competition\\ic\\v3\\review\\audit_text_tables.py\", line 110, in main\n    ('technical_old',documents['technical_report'],['策略','历史检出/48','API请求','输入加输出tokens'],expected_rows(old,False,True)),\n                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\FPGA_WORK\\iverilog-ai-lab\\docs\\competition\\ic\\v3\\review\\audit_text_tables.py\", line 75, in expected_rows\n    if with_tokens:cells.append(str(row['usage']['total_tokens']))\n                                    ~~~^^^^^^^^^\nKeyError: 'usage'\n",
+  "recording_basis": "Combined command output returned by the shell tool; transcribed verbatim after the failed invocation because the auditor failed before emitting its result JSON. No original material bytes were modified.",
+  "correction": "Separate audit_text_tables_v2.py reads usage_numeric_sum; zero-request rows explicitly use zero aggregate tokens. Whitespace in strategy labels is normalized only for display-table comparison. Rerun uses a fresh text-r2 directory.",
+  "new_API_requests": 0,
+  "credentials_read": 0,
+  "new_DUT_runs": 0
+}
