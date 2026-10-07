@@ -1,7 +1,7 @@
 # 资料索引（Icarus 智测 / iverilog-ai-lab）
 
-这一份是**全部材料的入口**。当前准备转入 AI＋集成电路赛道，优先阅读下方 IC 材料；原开源赛道报告继续保留，提交时须核对所选赛道。所有路径都相对仓库根 `E:\FPGA_WORK\iverilog-ai-lab`，
-带盘符的除外。路径可用 `python scripts/check_doc_index.py` 校验是否仍然存在。
+这一份是**全部材料的入口**。当前准备转入 AI＋集成电路赛道，优先阅读下方 IC 材料；原开源赛道报告继续保留，提交时须核对所选赛道。仓库材料路径相对当前克隆的根目录，
+可用 `python scripts/check_doc_index.py` 校验。本机运行产物、快捷方式和外部目录统一见 `docs/local_artifacts.md`；它们不随 Git 分发，不计为可克隆材料。
 
 - 仓库：`iverilog-ai-lab`，Apache-2.0；第三方资源保留各自许可；判定权威是 Icarus Verilog 12.0（`s20150603`）
 - 2026-10-07维护补充：[独立RTL版本与公开重放](experiment/rtl_style_maintenance_2026-10-07.md)已完成；6源严格静态门禁0/0，首次与公开重放各36次DUT、每次5115输出比较一致，18规格文件逐字节重建。0新API，原模型成绩与v3材料不变；两项官方门禁仍not_requested。
@@ -72,10 +72,10 @@
 | 历史v5全仓与浏览器验收 | `docs/experiment/ic_agent_v5_validation_2026-10-05.md`、`docs/experiment/ic-agent-v5-validation-2026-10-05/validation.json`、`docs/experiment/ic-agent-v5-validation-2026-10-05/browser/results.json` | 1170/2skip，296指纹无变；两测试文件末尾格式变化和45项复测单列；三尺寸、UART58/58、非默认设置切页保持 |
 | v5独立代理代码检查 | `docs/review/ic_v5_code_review_2026-10-05.md` | 发现并复测执行指纹/失败记录绑定、非法逐拍提案和登记路径问题；0API，非H02 |
 | v5时点历史累计API预算 | `docs/experiment/ic_agent_v5_api_budget_2026-10-05.json` | 当时已知317响应，加旧1保守318/360、剩42；后续历史试验曾用满360；现已撤销该累计限制，新1M轮单独记账；旧账不覆盖 |
-| v5完整原件交接包 | `docs/competition/ic/evidence_pack_v5_2026-10-05.md`、`docs/competition/ic/evidence_pack_v5_2026-10-05.json`、`.iverilog-ai/ic-agent-v5-evidence-20261005.zip` | 48,306,453字节；3,281项文件SHA/CRC通过，74/74输入冻结；未含新增短预算、六项诊断、1M和v6恢复轮，旧c7/v4包另存 |
+| v5完整原件交接包 | `docs/competition/ic/evidence_pack_v5_2026-10-05.md`、`docs/competition/ic/evidence_pack_v5_2026-10-05.json`、[本机产物，未随 Git 提供](local_artifacts.md) | 48,306,453字节；3,281项文件SHA/CRC通过，74/74输入冻结；未含新增短预算、六项诊断、1M和v6恢复轮，旧c7/v4包另存 |
 | v5包外实际反例重放 | `docs/experiment/ic-agent-v5-pack-replay-2026-10-05/receipt.json`、`docs/experiment/ic-agent-v5-pack-replay-2026-10-05/stdout.log`、`docs/experiment/ic-agent-v5-pack-replay-2026-10-05/run.stdout.txt` | 从历史v5 ZIP解13文件至仓库外新目录；108检查/16失败、0API、结构记录与原件一致；同机已有工具，非真人/异机 |
 | v5包后独立代理核查 | `docs/review/ic_v5_pack_review_2026-10-05.md`、`docs/review/ic-v5-pack-review-2026-10-05/receipt.json` | CRC/3,281项SHA、74快照、60任务/150执行侧、41请求和预算一致；仅浮点尾差，非H02、异机或新API |
-| 历史c7/v4冻结交接包 | `docs/competition/ic/evidence_pack_v4_2026-10-04.md`、`docs/competition/ic/evidence_pack_v4_2026-10-04.json`、`.iverilog-ai/ic-agent-v4-evidence-20261004.zip` | 127,448,982字节；10,330项文件SHA/CRC通过；281登记中280精确匹配，1早期计划MD未恢复；完整结果及失败保留 |
+| 历史c7/v4冻结交接包 | `docs/competition/ic/evidence_pack_v4_2026-10-04.md`、`docs/competition/ic/evidence_pack_v4_2026-10-04.json`、[本机产物，未随 Git 提供](local_artifacts.md) | 127,448,982字节；10,330项文件SHA/CRC通过；281登记中280精确匹配，1早期计划MD未恢复；完整结果及失败保留 |
 | 历史v4包后代理字节核查 | `docs/review/ic_v4_pack_review_2026-10-04.md`、`docs/review/ic-v4-pack-review-2026-10-04/receipt.json` | CRC/10,330项SHA与280输入均匹配；4 Git归档重新导出字节一致，预期CRLF差异明记；不是H02或异机 |
 | 新包内反例实际重放 | `docs/experiment/ic-agent-v4-pack-replay-2026-10-04/receipt.json`、`docs/experiment/ic-agent-v4-pack-replay-2026-10-04/stdout.log`、`docs/experiment/ic-agent-v4-pack-replay-2026-10-04/stderr.log` | 从外层ZIP取内层小包，在新目录运行包内replay.py；338比较/48失败，failed_checks，0API；同机已有工具，不是异机或真人 |
 | v4单重复API烟测 | `docs/experiment/agent_comparison_v4_smoke_2026-10-04.md`、`docs/experiment/agent-comparison-v4-smoke-2026-10-04/receipt.json` | 84行、94请求、94/94动作校验；反馈6/8，随机8/8；1正确基线执行失败、严格资格false |
@@ -128,8 +128,8 @@
 | 提交前门禁清单 | `docs/competition/submission_gate_checklist.md` | 有效 | 逐项状态 + 证据 + 还差什么 |
 | 交付快照 | `docs/competition/final_delivery_snapshot.md` | 历史 | 2026-10-01 的主指标、证据包与当时外部依赖 |
 | 演示视频脚本 | `docs/demo/demo_script.md` | 有效 | **视频尚未录制** |
-| 证据包（正式，历史快照） | `G:\iai-evidence-pack-final[.zip]` | 历史 | 2026-10-01 核验为 8 文件 / 11.1 KB，sha256 已复核；本轮未重新生成，不能视为当前代码的完整复现包 |
-| 证据包（演练） | `G:\iai-evidence-pack[.zip]` | 历史 | 9 文件 / 25.7 KB，含 `waveform.vcd` 样例 |
+| 证据包（正式，历史快照） | [本机产物，未随 Git 提供](local_artifacts.md) | 历史 | 2026-10-01 核验为 8 文件 / 11.1 KB，sha256 已复核；本轮未重新生成，不能视为当前代码的完整复现包 |
+| 证据包（演练） | [本机产物，未随 Git 提供](local_artifacts.md) | 历史 | 9 文件 / 25.7 KB，含 `waveform.vcd` 样例 |
 | 证据包结构说明 | `docs/demo/evidence_pack_guide.md` | 部分历史 | 包结构可参考；旧按钮描述以当前 T08 任务卡与录制指南为准 |
 | 引用信息 | `CITATION.cff` | **待补** | `repository-code` 仍是 `example.invalid`，是提交体检里唯一的 error |
 | 开源与合规清单 | `docs/competition/opensource_resource_list.md` | 有效 | 第三方来源与许可 |
@@ -145,8 +145,8 @@
 |---|---|
 | 口径定义（预算按规格定、执行前归一化、不可判定按未检出、参考告警作废） | `docs/experiment/experiment_plan.md` |
 | **指标总账（每个数字一行）** | `docs/experiment/metric_inventory.md` §3 |
-| 离线三组产物（fixed 1 轮 / random 与 ai-Mock 各 5 轮） | `.iverilog-ai/strategy-fair-5rounds/strategy_matrix.json` |
-| **真实在线模型原始产物（deepseek-flash，10 轮，seed 0–9）** | `.iverilog-ai/strategy-online-flash/strategy_matrix.json` |
+| 离线三组产物（fixed 1 轮 / random 与 ai-Mock 各 5 轮） | [本机产物，未随 Git 提供](local_artifacts.md) |
+| **真实在线模型原始产物（deepseek-flash，10 轮，seed 0–9）** | [本机产物，未随 Git 提供](local_artifacts.md) |
 | **seed 0–4 事后子集重算（online / random / Mock 各 5 轮）** | `docs/experiment/matched-budget-2026-10-04/README.md`、`docs/experiment/matched-budget-2026-10-04/summary.json`、`docs/experiment/matched-budget-2026-10-04/selected_runs.json` |
 | 只读重算脚本（不调用模型） | `scripts/summarize_matched_budget.py` |
 | 运行脚本 | `scripts/run_strategy_experiment.py` |
@@ -166,13 +166,13 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 
 | 内容 | 位置 | 状态 |
 |---|---|---|
-| 消融矩阵（三组离线实测 + 并集推导，83 缺陷；不证明 LLM 增益） | `.iverilog-ai/ablation-matrix/`；脚本 `scripts/run_ablation_matrix.py` | 有效 |
-| 基准矩阵（2026-10-01 复跑：参考 15 个误报 0、缺陷 83/83、不可判定 0） | `.iverilog-ai/matrix-final/`；脚本 `scripts/run_benchmark_matrix.py` | 有效 |
+| 消融矩阵（三组离线实测 + 并集推导，83 缺陷；不证明 LLM 增益） | [本机产物，未随 Git 提供](local_artifacts.md)；脚本 `scripts/run_ablation_matrix.py` | 有效 |
+| 基准矩阵（2026-10-01 复跑：参考 15 个误报 0、缺陷 83/83、不可判定 0） | [本机产物，未随 Git 提供](local_artifacts.md)；脚本 `scripts/run_benchmark_matrix.py` | 有效 |
 | 缺陷基准清单（15 分类 / 83 缺陷） | `benchmarks/manifest.json` | 有效 |
 | 参考模型对齐（15/15 逐拍零差异） | `docs/reference_model_alignment.md` | 有效 |
 | 分层证据说明 | `docs/layered_evidence.md` | 有效 |
-| 管线矩阵 | `.iverilog-ai/pipeline-matrix/`；`scripts/run_pipeline_matrix.py` | 有效 |
-| 综合检查（Yosys 可选） | `.iverilog-ai/synthesis-matrix/`；`scripts/run_synthesis_matrix.py` | 有效 |
+| 管线矩阵 | [本机产物，未随 Git 提供](local_artifacts.md)；`scripts/run_pipeline_matrix.py` | 有效 |
+| 综合检查（Yosys 可选） | [本机产物，未随 Git 提供](local_artifacts.md)；`scripts/run_synthesis_matrix.py` | 有效 |
 
 ### 2.3 外部模块（第三方 RTL）验证
 
@@ -180,7 +180,7 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 |---|---|
 | 方案与支持范围 | `docs/experiment/external_modules.md` |
 | 结果（15/15 变体判"不同"、3 个等价改写判"一致"、3 个编不过判 `inconclusive`） | `docs/experiment/external_results.md` |
-| 抓取与来源固定 | `scripts/fetch_external_modules.py`、`.iverilog-ai/external/manifest.json` |
+| 抓取与来源固定 | `scripts/fetch_external_modules.py`、[本机产物，未随 Git 提供](local_artifacts.md) |
 | 逐案例检查 | `scripts/check_external_module.py` |
 
 ### 2.4 历史（旧口径）实验——只读，不得与新口径并列比较
@@ -190,7 +190,7 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 | 双模型 10 次重复（flash 97.0% / pro 95.5%） | `docs/experiment/model_comparison_2026-09-12.md`、`docs/experiment/model_comparison_2026-09-11.md` |
 | 首测（11 案例、256 次仿真） | `docs/experiment/online_model_experiment_2026-09-10.md` |
 | R10 口径 | `docs/experiment/online_model_r10_2026-09-12.md`、`docs/experiment/model_comparison_r10.md`、`docs/experiment/model_comparison.md` |
-| 旧原始产物 | `.iverilog-ai/model-compare-*/`、`.iverilog-ai/online-experiment-real*/` |
+| 旧原始产物 | [本机产物，未随 Git 提供](local_artifacts.md)、[本机产物，未随 Git 提供](local_artifacts.md) |
 
 ---
 
@@ -209,7 +209,8 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 | 进阶 | `docs/manual/02_advanced.md` | 有效 |
 | 深入原理 | `docs/manual/03_deep.md` | 有效 |
 | 按目标查手册 | `docs/manual/04_by_goal.md` | 有效 |
-| 10 分钟复现（含干净环境实测：安装 52.5 s、健康检查 200） | `docs/reproduce_in_10_minutes.md` | 有效 |
+| 当前干净克隆与离线复核 | `docs/reproduce_current.md` | 当前指南；长路径、锁依赖、核心流程及同机/异机边界 |
+| 2026-09-29 的 10 分钟复核快照 | `docs/reproduce_in_10_minutes.md` | 历史；当时测试和索引数量，不代表当前版本 |
 | 服务对象与专门适配 | `docs/target_users.md` | 有效 |
 | 四层结论词表（运行/比对/结论/对比） | `src/iverilog_ai/core/labels.py` | 有效 |
 | 静态规则 | `docs/static_rules.md` | 有效 |
@@ -219,7 +220,7 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 | 调试接口 | `docs/debug_interface.md` | 有效 |
 | 开源约定库 | `docs/opensource_conventions.md`、`data/opensource_conventions.json` | 有效 |
 | 网页启动 / 停止 | `start_ui.cmd`、`stop_ui.cmd`、`start_ui.ps1`、`stop_ui.ps1` | 有效 |
-| 图形面板（免命令行） | `IcarusPanel.exe`、`Icarus 智测面板.lnk`、`启动网页演示.lnk`、`停止网页演示.lnk`、`tools/service_panel/` | 有效 |
+| 图形面板（免命令行） | `IcarusPanel.exe`、[本机产物，未随 Git 提供](local_artifacts.md)、[本机产物，未随 Git 提供](local_artifacts.md)、[本机产物，未随 Git 提供](local_artifacts.md)、`tools/service_panel/` | 有效 |
 | GitHub Action | `action.yml`、`docs/upstream/verify-diff-action.md` | 部分：静态检查过，外部调用未验 |
 | 第三方许可 | `THIRD_PARTY.md`、`NOTICE`、`LICENSE` | 有效 |
 
@@ -290,12 +291,7 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 
 ## 6. 结构与可视化数据库（normify）
 
-结构库在**仓库之外**，随结构一起回档：
-
-- 目录：`E:\FPGA_WORK\Ti60F225_DemoBoard_v4\10_Ti60f225_sc431hai2hdmi_demo\Ti60f225_sc431hai2hdmi_v3\normify-iverilog-ai-lab`
-- 规模：**157 模块 / 216 API / 53 依赖 / 25 布局 / 0 error**（含 9 条变更记录）
-- 打开：该目录下的 `normify.html`（逐层下钻、悬停介绍、深链接、双语）
-- 维护：源码或文档改动后 `normify_sync` → 刷新指纹 → `normify_change_close`（0 error 强制）
+旧 normify 结构库在作者电脑的其他项目目录，不是本项目的运行依赖。位置、旧统计和可用性见 [本机清单](local_artifacts.md)；不得把原电脑上的文件存在当作其他机器已复现。
 
 ---
 

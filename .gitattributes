@@ -128,3 +128,19 @@ docs/experiment/rtl-spec-rendering-2026-10-07/reproduction/*.txt whitespace=blan
 docs/experiment/rtl-spec-rendering-2026-10-07/bundle/**/*.md whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
 # 独立维护版本与原始复现证据保持原字节；原实验目录不变。
 benchmarks/rtl_style_maintenance_20261007/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# 14份旧登记输入原为CRLF；保留其真实原字节，避免干净克隆破坏既有SHA。
+benchmarks/manifest.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+rtl/edge_detector.v -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+rtl/pulse_stretcher.v -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+rtl/sync_fifo_bug_full_off_by_one.v -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+rtl/sync_fifo_bug_write_when_full.v -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+rtl/handshake_stage.v -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+rtl/handshake_stage_bug_ready_ignores_out_ready.v -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+rtl/handshake_stage_bug_valid_not_cleared.v -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+rtl/spi_master.v -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+rtl/spi_master_bug_done_missing.v -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+rtl/spi_master_bug_sclk_polarity.v -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+rtl/uart_tx.v -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+rtl/uart_tx_bug_busy_never_clears.v -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+rtl/uart_tx_bug_msb_first.v -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

@@ -30,7 +30,8 @@ ui = [
 # PyMuPDF(fitz) 与 Pillow 不是可选的：渲染器测试与图标测试在模块级 import 它们。
 dev = [
   "pytest>=7.4",
-  "mypy>=1.8",
+  # 固定已验收的检查器版本；新版推断规则须另行验证，不能改写冻结Agent的字节。
+  "mypy==1.11.2",
   "PyMuPDF>=1.23",
   "Pillow>=10.0",
   # PyYAML：GitHub Action 定义的那 10 条测试在模块级 importorskip("yaml")，

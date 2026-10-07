@@ -266,7 +266,8 @@ class YosysSynthRunner:
         return str(self.config.rtl_path.resolve()).replace("\\", "/")
 
     def _script(self) -> str:
-        rtl = self._rtl_argument()
+        # Yosys 还会解析 -p 内部的命令；文件名需单独引用，避免空格或分号拆开路径。
+        rtl = json.dumps(self._rtl_argument(), ensure_ascii=False)
         parts = [
             f"read_verilog -sv {rtl}",
             f"hierarchy -top {self.config.top}",

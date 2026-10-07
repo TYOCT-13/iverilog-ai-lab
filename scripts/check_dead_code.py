@@ -25,7 +25,10 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SKIP_PARTS = {".git", ".iverilog-ai", ".dsh-tmp", "__pycache__", "build", "dist", "node_modules"}
+SKIP_PARTS = {
+    ".git", ".iverilog-ai", ".dsh-tmp", "__pycache__", "build", "dist", "node_modules",
+    ".venv", "venv", ".tmp-codex", ".tmp-test", ".ci-runs", ".mypy_cache",
+}
 TERMINATORS = (ast.Return, ast.Raise, ast.Break, ast.Continue)
 
 

@@ -944,7 +944,7 @@ def test_no_python_file_has_unreachable_code():
 
     findings: list[str] = []
     for path in sorted(ROOT.rglob("*.py")):
-        if {".git", ".iverilog-ai", ".dsh-tmp", "__pycache__"} & set(path.parts):
+        if check_dead_code.SKIP_PARTS & set(path.parts):
             continue
         if path.resolve() == Path(check_dead_code.__file__).resolve():
             continue

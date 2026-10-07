@@ -202,3 +202,19 @@ def test_synth_result_serializes_to_json(tmp_path):
     assert payload["status"] == "passed"
     assert payload["cells"] and isinstance(payload["cells"][0], dict)
     assert "不代表时序收敛" in payload["disclaimer"]
+
+
+@pytest.mark.skipif(not YOSYS, reason="未安装 Yosys")
+def test_rtl_path_with_spaces_and_semicolon_is_one_filename(tmp_path):
+    """仓库和上传目录含空格、分号时，实际综合仍读取同一份源码。"""
+
+    rtl_dir = tmp_path / "RTL files ; input"
+    rtl_dir.mkdir()
+    rtl = rtl_dir / "pwm design.v"
+    rtl.write_bytes((ROOT / "rtl" / "pwm.v").read_bytes())
+    result = YosysSynthRunner(
+        SynthConfig(rtl_path=rtl, top="pwm", work_dir=tmp_path / "synth output")
+    ).run()
+    assert result.status == "passed", result.to_dict()
+    assert result.synthesizable is True
+    assert result.cell_count is not None and result.cell_count > 0
