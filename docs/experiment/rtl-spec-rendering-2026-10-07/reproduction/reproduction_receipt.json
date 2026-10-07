@@ -1,0 +1,97 @@
+{
+  "created_at_utc": "2026-10-07T11:03:49.290961+00:00",
+  "status": "passed",
+  "commands": [
+    {
+      "label": "renderer-check",
+      "argv": [
+        "D:\\Users\\TYOCT\\anaconda3\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "scripts.python.toolchain.wavedrom_runtime",
+        "--settings",
+        "C:\\Users\\TYOCT\\.codex\\skills\\readable-verilog-generator\\config\\defaults.json",
+        "check"
+      ],
+      "cwd": "E:\\FPGA_WORK\\iverilog-ai-lab",
+      "pythonpath": "C:\\Users\\TYOCT\\.codex\\skills\\readable-verilog-generator",
+      "returncode": 0,
+      "duration_seconds": 1.391,
+      "stdout_sha256": "3906d6a6035877e1178c217d72c3592c96dbdd44b266b897cbec75b301b937f4",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "write-spec",
+      "argv": [
+        "D:\\Users\\TYOCT\\anaconda3\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "scripts.python.workflow.cli",
+        "write-spec",
+        "--spec",
+        "E:\\FPGA_WORK\\iverilog-ai-lab\\docs\\experiment\\rtl-spec-rendering-2026-10-07\\inputs\\render_spec_document.json",
+        "--out-dir",
+        "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\spec-reproduction-r1\\bundle",
+        "--source",
+        "E:\\FPGA_WORK\\iverilog-ai-lab\\docs\\experiment\\rtl-spec-rendering-2026-10-07\\inputs\\targets\\event_accumulator\\A\\event_accumulator.v",
+        "--source",
+        "E:\\FPGA_WORK\\iverilog-ai-lab\\docs\\experiment\\rtl-spec-rendering-2026-10-07\\inputs\\targets\\valid_data_pipeline\\A\\valid_data_pipeline.v",
+        "--language",
+        "zh",
+        "--no-state"
+      ],
+      "cwd": "E:\\FPGA_WORK\\iverilog-ai-lab",
+      "pythonpath": "C:\\Users\\TYOCT\\.codex\\skills\\readable-verilog-generator",
+      "returncode": 0,
+      "duration_seconds": 0.766,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "comparisons": [
+    {
+      "path": "spec/targets/event_accumulator/A/event_accumulator_spec.md",
+      "expected_sha256": "3c378d8ecff32f6f4f3502a2f4a8dc94356fb802fd91e58c24054621c04bf34a",
+      "actual_sha256": "3c378d8ecff32f6f4f3502a2f4a8dc94356fb802fd91e58c24054621c04bf34a",
+      "matches": true
+    },
+    {
+      "path": "spec/targets/event_accumulator/A/waveforms/event_accumulator_normal-operation.json5",
+      "expected_sha256": "2290eaef673f8baeae63dddb0ccc77ed3dc981e12dfa4ab1c6de884acd025b3d",
+      "actual_sha256": "2290eaef673f8baeae63dddb0ccc77ed3dc981e12dfa4ab1c6de884acd025b3d",
+      "matches": true
+    },
+    {
+      "path": "spec/targets/event_accumulator/A/waveforms/event_accumulator_normal-operation.svg",
+      "expected_sha256": "33fb58ed4252d24557dd460dc382d84e9fad2c0dbedfac17ef9ffeacf864e027",
+      "actual_sha256": "33fb58ed4252d24557dd460dc382d84e9fad2c0dbedfac17ef9ffeacf864e027",
+      "matches": true
+    },
+    {
+      "path": "spec/targets/valid_data_pipeline/A/valid_data_pipeline_spec.md",
+      "expected_sha256": "6c0f6ba2ed7ab67c9e689d7bf1a96dc62747e325d89709e94ebbf0a4cddd78b2",
+      "actual_sha256": "6c0f6ba2ed7ab67c9e689d7bf1a96dc62747e325d89709e94ebbf0a4cddd78b2",
+      "matches": true
+    },
+    {
+      "path": "spec/targets/valid_data_pipeline/A/waveforms/valid_data_pipeline_normal-operation.json5",
+      "expected_sha256": "6e85848979aae0ea0b8e9662b7fc1f30694c08820e407b131afd57a9099ea7b1",
+      "actual_sha256": "6e85848979aae0ea0b8e9662b7fc1f30694c08820e407b131afd57a9099ea7b1",
+      "matches": true
+    },
+    {
+      "path": "spec/targets/valid_data_pipeline/A/waveforms/valid_data_pipeline_normal-operation.svg",
+      "expected_sha256": "194662bc532b97695a6a06fe9ada59d8a7c35e1b9d877937148909995c7dca5e",
+      "actual_sha256": "194662bc532b97695a6a06fe9ada59d8a7c35e1b9d877937148909995c7dca5e",
+      "matches": true
+    }
+  ],
+  "new_model_api_requests": 0,
+  "new_dut_executions": 0,
+  "scope": "local declared-spec rendering; not a new simulation or model study",
+  "installation_performed": false
+}

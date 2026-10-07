@@ -4,6 +4,8 @@
 
 ## 当前进度
 
+- 2026-10-07 RTL维护版：[六份源码与公开复现](docs/experiment/rtl_style_maintenance_2026-10-07.md)已完成，严格静态门禁0错误/0警告；首次与公开版重放各36次DUT，每次5115输出值比较一致，18份规格文件逐字节重建。B/C故意缺陷保留，0新增模型API，不改变旧实验分母或v3材料。
+- 2026-10-07原版规格图补充：WaveDrom 3.6.1已安装并通过实际渲染检查；两个新模块的正确A版本已生成同名规格、SVG和浏览器截图，[本地复现与原件](docs/experiment/rtl_spec_rendering_2026-10-07.md)另存。该渲染部分0新增模型API/DUT。
 - 阶段一确定性验证闭环：已完成并有真实 Icarus/vvp 证据。
 - 阶段二 AI 测试规划：离线 MockProvider、OpenAI-compatible provider、严格 JSON 校验和重试，以及“计划→testbench→Icarus/vvp”确定性流水线均已完成。
 - 阶段三基准与评测：**15 个案例、83 个缺陷变体**，最近一次固定矩阵实跑 **83/83 检出、参考误报 0、不可判定 0**。常用 FPGA 案例（FIFO、UART、SPI、握手、去抖、PWM、多路选择器、同步复位、约翰逊计数器、上升沿检测器）均配有专门的边界 testbench 与缺陷基准。
@@ -28,7 +30,7 @@
 - [最新两模块内部留出](docs/experiment/agent_new_holdout_study_live_2026-10-05.md)：实际源码`20400fa`，Agent/helper/系统提示保持`a969337`。`valid_data_pipeline`与`event_accumulator`共108任务全部实际执行；fixed/random/protocol_random/single/feedback/no_feedback分别检出12/10/8/8/11/10（各12缺陷任务，来自4个不同人工缺陷×3重复）。反馈仅比随机和无反馈多1项，固定仍12/12，不作显著性、因果或工业泛化结论。
 - [最新原件回执](docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json)、[完整原件包](docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip)与[独立预算账](docs/experiment/agent_new_holdout_study_budget_2026-10-05.json)：134实际episode/268执行侧，36/36正确控制无误报，严格比较资格true；仍有1终态格式失败，全部分母保留。87请求、339624输入加输出tokens，本批100万剩660376，未知/pending均0，历史用量不扣本批。458原字节快照无变，Git446精确/12仅换行不同，精确重放以快照为准。
 - [最新源码验收](docs/experiment/agent_new_holdout_source_validation_2026-10-05.md)、[方案](docs/experiment/agent_new_holdout_study_plan_2026-10-05.md)及[事前机器审查](docs/review/agent_new_holdout_prereg_review_2026-10-05.md)：2033通过/2跳过、mypy88、535指纹无变；非实现者202不同非DUT检查另列、不相加。两个新模块与五个历史受控API批次的模块集合互斥，仍是同团队合成设计和缺陷；没有独立时间证据支持选型早于旧v8成绩，也不代表外部盲测、独立作者或预训练未见。
-- [最新结果双机器审计](docs/review/agent_new_holdout_study_review_2026-10-05.md)：非实现者核心2192不同非DUT检查全部通过，作者轨迹核验已封存、无矛盾；检查数不与2033项测试相加，均不是H02。新资产仍有12项严格样式问题，WaveDrom缺依赖，不能称全门禁通过。
+- [最新结果双机器审计](docs/review/agent_new_holdout_study_review_2026-10-05.md)：非实现者核心2192不同非DUT检查全部通过，作者轨迹核验已封存、无矛盾；检查数不与2033项测试相加，均不是H02。原资产12项严格样式问题保留；2026-10-07另存通过的维护版，WaveDrom缺依赖已解决，仍不能称八项门禁全通过。
 - [v7完整组别只读诊断](docs/experiment/agent_v7_diagnosis_2026-10-05.md)：0新模型/仿真。30普通拒绝为27顶层多余字段、3超12向量；信用/仲裁反馈47请求中28后续观察无端口过程，但42实际采样包均完整，240刺激拍含24显式复位且低于随机288拍；不能单因归结其4/12检出。
 - [v8八模块完整对照](docs/experiment/agent_feedback_study_live_2026-10-05.md)：冻结`a969337`，432任务完成；fixed/random/protocol_random/single/feedback/no_feedback各48缺陷检出48/32/48/29/37/37。反馈37与历史v7及本轮无反馈均持平，未证明整体改善；信用/仲裁8/12与随机持平，开发组20/24、edge/pulse9/12。八模块均已暴露，不是新留出。
 - [v8原件回执](docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json)与[独立预算账](docs/experiment/agent_feedback_study_budget_2026-10-05.json)：306实际收费请求、973149tokens、余26851，0未知/待结算；414执行/484轮/968侧，18零DUT，8项token_budget终态未发送，严格资格false；正确143/144执行、实际误报0，未执行项不算通过。18格式拒绝后12轨迹恢复执行/5检出，16预算拒绝后9轨迹执行/4检出，含无反馈，不作反馈因果结论。

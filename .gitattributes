@@ -120,3 +120,11 @@ benchmarks/agent_holdout_20261005/audit/credit-deliverable-first.md whitespace=b
 benchmarks/agent_holdout_20261005/audit/credit-deliverable-corrected.md whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
 benchmarks/agent_holdout_20261005/audit/arbiter-deliverable-first.md whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
 benchmarks/agent_holdout_20261005/audit/arbiter-deliverable-corrected.md whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+# 2026-10-07 渲染原件、日志和来源副本保持原字节；不改写历史证据。
+docs/experiment/rtl-spec-rendering-2026-10-07/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/rtl-spec-rendering-2026-10-07/commands/**/*.txt whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/rtl-spec-rendering-2026-10-07/publication_attempts/** whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/rtl-spec-rendering-2026-10-07/reproduction/*.txt whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+docs/experiment/rtl-spec-rendering-2026-10-07/bundle/**/*.md whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+# 独立维护版本与原始复现证据保持原字节；原实验目录不变。
+benchmarks/rtl_style_maintenance_20261007/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

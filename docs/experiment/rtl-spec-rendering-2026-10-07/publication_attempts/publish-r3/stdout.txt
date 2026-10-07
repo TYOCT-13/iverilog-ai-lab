@@ -1,0 +1,2 @@
+{"material_binding_counts": {"original_commit_path": 124, "same_bytes_public_alias_at_material_commit": 12, "retained_snapshot_archive": 21}, "retained_archive_members": 21}
+{"published": "E:\\FPGA_WORK\\iverilog-ai-lab\\docs\\experiment\\rtl-spec-rendering-2026-10-07", "byte_identical_copies": 25, "closed_attempts_members": 77, "two_svg_checks": true, "frozen_v3_bindings_verified": 157}

@@ -1,0 +1,41 @@
+{
+  "signal": [
+    {
+      "name": "i_clk",
+      "wave": "p......."
+    },
+    {
+      "name": "i_rstn",
+      "wave": "1......."
+    },
+    {
+      "name": "i_enable",
+      "wave": "1.0.1..0"
+    },
+    {
+      "name": "i_event",
+      "wave": "10101..0"
+    },
+    {
+      "name": "i_clear",
+      "wave": "0..1.0.."
+    },
+    {
+      "name": "o_count after",
+      "wave": "========",
+      "data": [
+        "1",
+        "1",
+        "2",
+        "0",
+        "0",
+        "1",
+        "2",
+        "2"
+      ]
+    }
+  ],
+  "head": {
+    "text": "event B"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "schema": "rtl-maintenance-independent-review-attempt-failure-v1",
+  "audit_attempt": "review-r2 attempt1",
+  "status": "failed_before_report_publication",
+  "reason": "Auditor assumed every public_replay.zip member was under public-replay-r1; actual archive intentionally also retains replay-command-r1 and publication-command-r1 logs.",
+  "exception": "ValueError: 'replay-command-r1\\exit.json' is not in the subpath of 'public-replay-r1'",
+  "source_or_experiment_changes": false,
+  "new_DUT_executions": 0,
+  "API_requests": 0,
+  "resolution": "Compare each preserved archive path against its original relative to the preflight evidence base, after validating allowed roots."
+}

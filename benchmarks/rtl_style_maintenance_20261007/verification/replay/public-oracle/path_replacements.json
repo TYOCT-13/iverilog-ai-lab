@@ -1,0 +1,47 @@
+{
+  "path_replacement_count": 8,
+  "all_non_path_AST_elements_unchanged": true,
+  "vectors_predicates_and_comparisons_changed": false,
+  "edits": [
+    {
+      "original_expression": "'E:/FPGA_WORK/iverilog-ai-lab/src'",
+      "replacement_expression": "str(project_root / 'src')",
+      "reason": "project source import location only"
+    },
+    {
+      "original_expression": "Path('E:/FPGA_WORK/iverilog-ai-lab')",
+      "replacement_expression": "project_root",
+      "reason": "project root only"
+    },
+    {
+      "original_expression": "root / '.iverilog-ai/ic-engineering-preflight-20261007/candidate-r3'",
+      "replacement_expression": "package_root",
+      "reason": "package root only"
+    },
+    {
+      "original_expression": "work / 'gate-r3/deliverable_gate.json'",
+      "replacement_expression": "gate_path",
+      "reason": "fresh official gate result location only"
+    },
+    {
+      "original_expression": "'attempt-r3/targets'",
+      "replacement_expression": "'targets'",
+      "reason": "candidate source location only"
+    },
+    {
+      "original_expression": "work / 'validation/public-oracle'",
+      "replacement_expression": "output_root / 'validation/public-oracle'",
+      "reason": "result location only"
+    },
+    {
+      "original_expression": "work / 'validation/public-oracle/progress.json'",
+      "replacement_expression": "output_root / 'validation/public-oracle/progress.json'",
+      "reason": "result location only"
+    },
+    {
+      "original_expression": "work / 'validation/public-oracle/summary.json'",
+      "replacement_expression": "output_root / 'validation/public-oracle/summary.json'",
+      "reason": "result location only"
+    }
+  ]
+}

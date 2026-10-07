@@ -1,0 +1,17 @@
+{
+  "command": [
+    "D:\\Users\\TYOCT\\anaconda3\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\rtl_style_maintenance_20261007\\publishable_reproduce.py",
+    "--out-dir",
+    ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1",
+    "--mode",
+    "all",
+    "--skill-root",
+    "C:/Users/TYOCT/.codex/skills/readable-verilog-generator"
+  ],
+  "cwd": "E:\\FPGA_WORK\\iverilog-ai-lab",
+  "exit_code": 0
+}

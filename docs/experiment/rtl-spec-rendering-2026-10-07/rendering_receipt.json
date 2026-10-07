@@ -1,0 +1,134 @@
+{
+  "schema": "icarus-rtl-spec-rendering-v1",
+  "client_date": "2026-10-07",
+  "created_at_utc": "2026-10-07T10:59:14.732161+00:00",
+  "status": "renderer_and_two_A_spec_bundles_complete",
+  "base_commit": "77d0c2f9d009696def1da895a50b4a69c6345f3d",
+  "renderer": {
+    "minimum_node_version": "20.0.0",
+    "missing": [],
+    "node": {
+      "ok": true,
+      "path": "D:\\node_js\\node.EXE",
+      "version": "24.21.0"
+    },
+    "npm": {
+      "ok": true,
+      "path": "D:\\node_js\\npm.CMD",
+      "version": "11.19.0"
+    },
+    "ok": true,
+    "package": "wavedrom",
+    "required_version": "3.6.1",
+    "smoke": {
+      "bytes": 51389,
+      "ok": true,
+      "requested": true,
+      "status": "passed"
+    },
+    "wavedrom": {
+      "ok": true,
+      "path": "C:\\Users\\TYOCT\\AppData\\Roaming\\npm\\wavedrom.CMD",
+      "version": "3.6.1"
+    }
+  },
+  "workflow_returncode": 0,
+  "declared_diagrams": 2,
+  "correct_A_sources": 2,
+  "original_rtl_modified": false,
+  "old_results_or_materials_rewritten": false,
+  "new_model_api_requests": 0,
+  "new_dut_executions_for_rendering": 0,
+  "diagram_kind": "declared normal-operation specification, not measured simulator output",
+  "initial_condition": "Reset has completed before the first shown active edge.",
+  "input_edit": "Only two wavejson.head.text fields shortened; all other JSON fields unchanged.",
+  "svg_checks": [
+    {
+      "path": "bundle/spec/targets/event_accumulator/A/waveforms/event_accumulator_normal-operation.svg",
+      "sha256": "33fb58ed4252d24557dd460dc382d84e9fad2c0dbedfac17ef9ffeacf864e027",
+      "width": 492,
+      "height": 226,
+      "viewBox": "-32 0 492 226",
+      "missing_internal_references": [],
+      "external_asset_references": [],
+      "labels": [
+        "Clear wins; 4-bit count",
+        "i_clk",
+        "i_rstn",
+        "i_enable",
+        "i_event",
+        "i_clear",
+        "o_count after",
+        "1",
+        "1",
+        "1",
+        "0",
+        "0",
+        "1",
+        "2",
+        "2"
+      ]
+    },
+    {
+      "path": "bundle/spec/targets/valid_data_pipeline/A/waveforms/valid_data_pipeline_normal-operation.svg",
+      "sha256": "194662bc532b97695a6a06fe9ada59d8a7c35e1b9d877937148909995c7dca5e",
+      "width": 472,
+      "height": 256,
+      "viewBox": "-32 0 472 256",
+      "missing_internal_references": [],
+      "external_asset_references": [],
+      "labels": [
+        "E0 capture → E1 output; flush wins",
+        "i_clk",
+        "i_rstn",
+        "i_flush",
+        "i_valid",
+        "i_data",
+        "A5",
+        "3C",
+        "00",
+        "00",
+        "7E",
+        "00",
+        "81",
+        "00",
+        "o_valid after",
+        "o_data after",
+        "00",
+        "A5",
+        "3C",
+        "00",
+        "00",
+        "00",
+        "00",
+        "81"
+      ]
+    }
+  ],
+  "root_visual_review": {
+    "reviewer_kind": "authoring AI; not human H02",
+    "browser": "Codex in-app browser",
+    "actual_individual_browser_screenshots_viewed": 2,
+    "titles_ports_values_visible_without_glyph_clipping": true,
+    "final_screenshot_paths": [
+      "visual/event_accumulator_normal-operation.png",
+      "visual/valid_data_pipeline_normal-operation.png"
+    ],
+    "bbox_diagnostic": "Raw text rectangles include indentation whitespace; potential outside values retained, not labeled as zero warnings.",
+    "earlier_failures_retained": [
+      "spec-render-r1: wrong workspace exit 2",
+      "spec-render-r2: long heading clipped in browser",
+      "spec-render-r2/visual-check-r1: MuPDF SVG CSS rendering unsuitable"
+    ]
+  },
+  "limitations": [
+    "Only correct A sources receive these two declared diagrams.",
+    "Normal-operation pictures do not demonstrate reset pulses or wraparound.",
+    "Original six-source r3 style gate still has 12 recorded issues.",
+    "Private failed style candidates are not accepted RTL.",
+    "No new model effectiveness, human trial, external CI, hardware timing or independent human review claim."
+  ],
+  "copies_sha256": "3209ee2802af0cd2dec30e4e87ea40a78ebd3f929ff6dd98b500ebfe93e55b25",
+  "closed_attempts_manifest_sha256": "a59672fe2c21e11489d5593be1db60464f4089883a2e1f835e369c31452bfa25",
+  "v3_snapshot_binding_sha256": "f5d0e87fa5d9adee938c22f5f5f5e7f635c08ab2c38aa3f7b00514d202ce7160"
+}

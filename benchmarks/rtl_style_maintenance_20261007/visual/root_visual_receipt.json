@@ -1,0 +1,90 @@
+{
+  "client_date": "2026-10-07",
+  "created_at_utc": "2026-10-07T11:23:11.779322+00:00",
+  "reviewer": "root authoring AI; not human H02",
+  "status": "all_6_final_browser_views_accepted",
+  "rows": [
+    {
+      "module": "event_accumulator",
+      "variant": "A",
+      "svg": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\event_accumulator\\A\\waveforms\\event_accumulator_variant-behavior.svg",
+      "svg_sha256": "bca3cf4d9452ff9ef5365f0c7ddaec9e65647685682be482f7878fb1f9fb4ff2",
+      "screenshot": "event_accumulator_A.png",
+      "screenshot_sha256": "317e5699b91e5520bf68c238bdcd801914c5b02ab918a5475c2ef9c48b31ab29",
+      "geometry": "event_accumulator_A.geometry.json",
+      "geometry_sha256": "c9f8c36e324c1cf49809baf9d143f1ac22f42dfdb1c9c2aad6181f090f09b1f4",
+      "actual_individual_browser_viewed": true,
+      "visible_title_ports_values_complete": true,
+      "redundant_same_binary_state_notches_absent": true
+    },
+    {
+      "module": "event_accumulator",
+      "variant": "B",
+      "svg": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\event_accumulator\\B\\waveforms\\event_accumulator_variant-behavior.svg",
+      "svg_sha256": "42c032e216c1ee81cabf16c56dc63006fe934174f5d5ed1df7e57ac75b5b25e8",
+      "screenshot": "event_accumulator_B.png",
+      "screenshot_sha256": "906706d842aaee76460551e30a2c382edb38dfb2991ee9d42827ed3eb1c90a47",
+      "geometry": "event_accumulator_B.geometry.json",
+      "geometry_sha256": "867618c0650657062e5093b19f1f955b12a67c1a807ef88396baa31d7b0167dd",
+      "actual_individual_browser_viewed": true,
+      "visible_title_ports_values_complete": true,
+      "redundant_same_binary_state_notches_absent": true
+    },
+    {
+      "module": "event_accumulator",
+      "variant": "C",
+      "svg": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\event_accumulator\\C\\waveforms\\event_accumulator_variant-behavior.svg",
+      "svg_sha256": "b71f3dfc008341836861367d2189d5ffc441cda314d69bdc86101795a1cf31a7",
+      "screenshot": "event_accumulator_C.png",
+      "screenshot_sha256": "8a12c1a0ee03098af28feacc4b66d9c3689b3f29ca2fee00107d47892e560691",
+      "geometry": "event_accumulator_C.geometry.json",
+      "geometry_sha256": "99e759ce9a956622210f283cf7de69d2bdf9c328c28e9cb692c6d702006b0f7f",
+      "actual_individual_browser_viewed": true,
+      "visible_title_ports_values_complete": true,
+      "redundant_same_binary_state_notches_absent": true
+    },
+    {
+      "module": "valid_data_pipeline",
+      "variant": "A",
+      "svg": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\valid_data_pipeline\\A\\waveforms\\valid_data_pipeline_variant-behavior.svg",
+      "svg_sha256": "86614988b3b83423f7e35ad4a581cc6632c7cb0b30501d008ed23f0ddef2adb7",
+      "screenshot": "valid_data_pipeline_A.png",
+      "screenshot_sha256": "f69bf302c8c35146f8ddc1c64e9828b558664ea28bdc1833fadef108ea06c295",
+      "geometry": "valid_data_pipeline_A.geometry.json",
+      "geometry_sha256": "23a754f81eb8dee0f7abfe4bc4782503de725c1487c51ac4ef11edc3da2adaa7",
+      "actual_individual_browser_viewed": true,
+      "visible_title_ports_values_complete": true,
+      "redundant_same_binary_state_notches_absent": true
+    },
+    {
+      "module": "valid_data_pipeline",
+      "variant": "B",
+      "svg": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\valid_data_pipeline\\B\\waveforms\\valid_data_pipeline_variant-behavior.svg",
+      "svg_sha256": "2ec6137244a6fc69306c77b06b1f239be7b4c4a5aca0e7eac8b388345d7e0a14",
+      "screenshot": "valid_data_pipeline_B.png",
+      "screenshot_sha256": "051c4aa7b2f318aa2f324fd46494db6abc6c5b6633c53a2cc2111c27a14bf556",
+      "geometry": "valid_data_pipeline_B.geometry.json",
+      "geometry_sha256": "325a678e3e60c196d7c6b7a74f1f8075f77c338d21e8c3487b8394978b10cf0a",
+      "actual_individual_browser_viewed": true,
+      "visible_title_ports_values_complete": true,
+      "redundant_same_binary_state_notches_absent": true
+    },
+    {
+      "module": "valid_data_pipeline",
+      "variant": "C",
+      "svg": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\valid_data_pipeline\\C\\waveforms\\valid_data_pipeline_variant-behavior.svg",
+      "svg_sha256": "a9f8b6d445f51b2e2e8b990035766f332aac7c764df4cb63c8094cee6db36050",
+      "screenshot": "valid_data_pipeline_C.png",
+      "screenshot_sha256": "2695775c157b1666ad66d4854296c5b952bf4431b8a3c8467274548a203f09ef",
+      "geometry": "valid_data_pipeline_C.geometry.json",
+      "geometry_sha256": "0851043f4bd64ed59d99489757cfb9e73150acf73704211a9a3ccc5b23bdc0a4",
+      "actual_individual_browser_viewed": true,
+      "visible_title_ports_values_complete": true,
+      "redundant_same_binary_state_notches_absent": true
+    }
+  ],
+  "prior_views_retained": "style-visual-r1: 6 screenshots; pipeline i_valid/o_valid redundant-state glyphs found",
+  "geometry_warning_policy": "Raw text bounding boxes include whitespace and potential outside diagnostics are retained; no zero-warning claim",
+  "new_DUT_runs_from_visual_review": 0,
+  "new_API_requests": 0
+}

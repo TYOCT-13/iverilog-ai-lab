@@ -1,0 +1,401 @@
+{
+  "schema": "rtl-style-maintenance-publication-copy-v1",
+  "created_at_utc": "2026-10-07T11:59:32.804503+00:00",
+  "source_commit": "77d0c2f9d009696def1da895a50b4a69c6345f3d",
+  "verified_original_bound_members": 623,
+  "preserved_unbound_followup_files": 16,
+  "closed_candidate_archive_members": 640,
+  "closed_visual_archive_members": 33,
+  "copied_file_count": 64,
+  "copied_files": [
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/attempt-r3/targets/event_accumulator/A/event_accumulator.v",
+      "public_path": "targets/event_accumulator/A/event_accumulator.v",
+      "bytes": 3660,
+      "sha256": "2143c7373e2cacf96584aef0d9347043321b09554ee812a8058180b08c48afaa"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/originals/event_accumulator/A/event_accumulator.v",
+      "public_path": "originals/event_accumulator/A/event_accumulator.v",
+      "bytes": 3287,
+      "sha256": "4f8137509bc2116624f8c444f5e6d0bca319f6b2993371610dd2c2432c44d071"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/diagram-encoding-r1/bundle/spec/targets/event_accumulator/A/event_accumulator_spec.md",
+      "public_path": "spec/targets/event_accumulator/A/event_accumulator_spec.md",
+      "bytes": 3185,
+      "sha256": "e646d50d02ae3dcdfe8b9292818bd3c306cc73933bac95c0b51d45f2893cc72f"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/diagram-encoding-r1/bundle/spec/targets/event_accumulator/A/waveforms/event_accumulator_variant-behavior.json5",
+      "public_path": "spec/targets/event_accumulator/A/waveforms/event_accumulator_variant-behavior.json5",
+      "bytes": 611,
+      "sha256": "a88f0ca254e16fea1d4dbe2a48b6b761479ba12c95fbb8508e03bc0d275a91c6"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/diagram-encoding-r1/bundle/spec/targets/event_accumulator/A/waveforms/event_accumulator_variant-behavior.svg",
+      "public_path": "spec/targets/event_accumulator/A/waveforms/event_accumulator_variant-behavior.svg",
+      "bytes": 59910,
+      "sha256": "bca3cf4d9452ff9ef5365f0c7ddaec9e65647685682be482f7878fb1f9fb4ff2"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/attempt-r3/targets/event_accumulator/B/event_accumulator.v",
+      "public_path": "targets/event_accumulator/B/event_accumulator.v",
+      "bytes": 3483,
+      "sha256": "963e7a00570b317bdaed2e32ea0714420e8c78a6a112f98c60f9f1e8ac3e96aa"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/originals/event_accumulator/B/event_accumulator.v",
+      "public_path": "originals/event_accumulator/B/event_accumulator.v",
+      "bytes": 3267,
+      "sha256": "65bb2c35aa123348348766232b48f2499556395f88a8015cb97713324a08b9f1"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/diagram-encoding-r1/bundle/spec/targets/event_accumulator/B/event_accumulator_spec.md",
+      "public_path": "spec/targets/event_accumulator/B/event_accumulator_spec.md",
+      "bytes": 3253,
+      "sha256": "c5a917af717a125b8f11d87a8041dae12db3ba6a761b4d06c2335aef6a2f36c4"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/diagram-encoding-r1/bundle/spec/targets/event_accumulator/B/waveforms/event_accumulator_variant-behavior.json5",
+      "public_path": "spec/targets/event_accumulator/B/waveforms/event_accumulator_variant-behavior.json5",
+      "bytes": 611,
+      "sha256": "e425bfb5ea7818c8158b8f6206a6d67d31a9c5a29ca94056ee702bd6528555c4"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/diagram-encoding-r1/bundle/spec/targets/event_accumulator/B/waveforms/event_accumulator_variant-behavior.svg",
+      "public_path": "spec/targets/event_accumulator/B/waveforms/event_accumulator_variant-behavior.svg",
+      "bytes": 59910,
+      "sha256": "42c032e216c1ee81cabf16c56dc63006fe934174f5d5ed1df7e57ac75b5b25e8"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/attempt-r3/targets/event_accumulator/C/event_accumulator.v",
+      "public_path": "targets/event_accumulator/C/event_accumulator.v",
+      "bytes": 3856,
+      "sha256": "e75ee16c112895afe833ff8968ccf704683a569f61c2218bd9dd783d13bdd5c8"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/originals/event_accumulator/C/event_accumulator.v",
+      "public_path": "originals/event_accumulator/C/event_accumulator.v",
+      "bytes": 3307,
+      "sha256": "d07a85d4e8a27e5b04a54666f1fb504ea69d4c8136f5eb1c715688d6075cb0d4"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/diagram-encoding-r1/bundle/spec/targets/event_accumulator/C/event_accumulator_spec.md",
+      "public_path": "spec/targets/event_accumulator/C/event_accumulator_spec.md",
+      "bytes": 3266,
+      "sha256": "371111b9cd455c45da075834aacedb957795e5c21985ed9c15f2ca16c721bbdf"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/diagram-encoding-r1/bundle/spec/targets/event_accumulator/C/waveforms/event_accumulator_variant-behavior.json5",
+      "public_path": "spec/targets/event_accumulator/C/waveforms/event_accumulator_variant-behavior.json5",
+      "bytes": 611,
+      "sha256": "fe948f1a732dfe64308602efe3eb41b462e492565022e054caf7fa577890386a"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/diagram-encoding-r1/bundle/spec/targets/event_accumulator/C/waveforms/event_accumulator_variant-behavior.svg",
+      "public_path": "spec/targets/event_accumulator/C/waveforms/event_accumulator_variant-behavior.svg",
+      "bytes": 59910,
+      "sha256": "b71f3dfc008341836861367d2189d5ffc441cda314d69bdc86101795a1cf31a7"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/attempt-r3/targets/valid_data_pipeline/A/valid_data_pipeline.v",
+      "public_path": "targets/valid_data_pipeline/A/valid_data_pipeline.v",
+      "bytes": 5343,
+      "sha256": "56686f9b8e66f9536cbc4087f0424657e2dc5d91d530d1919f036840cd81c48b"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/originals/valid_data_pipeline/A/valid_data_pipeline.v",
+      "public_path": "originals/valid_data_pipeline/A/valid_data_pipeline.v",
+      "bytes": 5045,
+      "sha256": "b3fc81d4fdf3a23cb38c710af7c6d278cfba9d3f52978492594263464e44d9bb"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/diagram-encoding-r1/bundle/spec/targets/valid_data_pipeline/A/valid_data_pipeline_spec.md",
+      "public_path": "spec/targets/valid_data_pipeline/A/valid_data_pipeline_spec.md",
+      "bytes": 3305,
+      "sha256": "99e12dcb583666954b3c2168c88037c63bd381072332e38e7821ab16ba390268"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/diagram-encoding-r1/bundle/spec/targets/valid_data_pipeline/A/waveforms/valid_data_pipeline_variant-behavior.json5",
+      "public_path": "spec/targets/valid_data_pipeline/A/waveforms/valid_data_pipeline_variant-behavior.json5",
+      "bytes": 838,
+      "sha256": "820f20ce3f05f67703bdf5f892d821500a8b37b255977c6e9bf51739bb588d90"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/diagram-encoding-r1/bundle/spec/targets/valid_data_pipeline/A/waveforms/valid_data_pipeline_variant-behavior.svg",
+      "public_path": "spec/targets/valid_data_pipeline/A/waveforms/valid_data_pipeline_variant-behavior.svg",
+      "bytes": 62276,
+      "sha256": "86614988b3b83423f7e35ad4a581cc6632c7cb0b30501d008ed23f0ddef2adb7"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/attempt-r3/targets/valid_data_pipeline/B/valid_data_pipeline.v",
+      "public_path": "targets/valid_data_pipeline/B/valid_data_pipeline.v",
+      "bytes": 5370,
+      "sha256": "2ea07cbd93ccb50783fea9e4194647b46f2c34e92beeb711275eaf6d576b4cd4"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/originals/valid_data_pipeline/B/valid_data_pipeline.v",
+      "public_path": "originals/valid_data_pipeline/B/valid_data_pipeline.v",
+      "bytes": 5045,
+      "sha256": "ff53d3f422e174a8758b8e6f1a8ff1d3c729ee694c9fd392330a3af7798fc3b0"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/diagram-encoding-r1/bundle/spec/targets/valid_data_pipeline/B/valid_data_pipeline_spec.md",
+      "public_path": "spec/targets/valid_data_pipeline/B/valid_data_pipeline_spec.md",
+      "bytes": 3448,
+      "sha256": "3fed366d33b39dd927d40e9282dc1636f47f2d52083e83de865828e2f2c15d0a"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/diagram-encoding-r1/bundle/spec/targets/valid_data_pipeline/B/waveforms/valid_data_pipeline_variant-behavior.json5",
+      "public_path": "spec/targets/valid_data_pipeline/B/waveforms/valid_data_pipeline_variant-behavior.json5",
+      "bytes": 838,
+      "sha256": "6c0c6d64eaf4b4c19adfeb6796b3e3c4d25e32877fdc32af045e19531369454e"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/diagram-encoding-r1/bundle/spec/targets/valid_data_pipeline/B/waveforms/valid_data_pipeline_variant-behavior.svg",
+      "public_path": "spec/targets/valid_data_pipeline/B/waveforms/valid_data_pipeline_variant-behavior.svg",
+      "bytes": 62276,
+      "sha256": "2ec6137244a6fc69306c77b06b1f239be7b4c4a5aca0e7eac8b388345d7e0a14"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/attempt-r3/targets/valid_data_pipeline/C/valid_data_pipeline.v",
+      "public_path": "targets/valid_data_pipeline/C/valid_data_pipeline.v",
+      "bytes": 5358,
+      "sha256": "e62f684e9fb22bba3acd53a22073aec3c99bb4faac44c79fd67dc5661807565d"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/originals/valid_data_pipeline/C/valid_data_pipeline.v",
+      "public_path": "originals/valid_data_pipeline/C/valid_data_pipeline.v",
+      "bytes": 5042,
+      "sha256": "49b4e5832a7c001e16a0bac8dbc3c7c90d2a03eb9ec6b2f6ab26731343604713"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/diagram-encoding-r1/bundle/spec/targets/valid_data_pipeline/C/valid_data_pipeline_spec.md",
+      "public_path": "spec/targets/valid_data_pipeline/C/valid_data_pipeline_spec.md",
+      "bytes": 3438,
+      "sha256": "94bfdaa03308e5ea37577bff59eedbd2fd6627b652560f4370917160a11cd5ca"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/diagram-encoding-r1/bundle/spec/targets/valid_data_pipeline/C/waveforms/valid_data_pipeline_variant-behavior.json5",
+      "public_path": "spec/targets/valid_data_pipeline/C/waveforms/valid_data_pipeline_variant-behavior.json5",
+      "bytes": 838,
+      "sha256": "c0d925656cd82c0b97b83cc358c4c843b9fe941131f6e08dd776115e49030b88"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/diagram-encoding-r1/bundle/spec/targets/valid_data_pipeline/C/waveforms/valid_data_pipeline_variant-behavior.svg",
+      "public_path": "spec/targets/valid_data_pipeline/C/waveforms/valid_data_pipeline_variant-behavior.svg",
+      "bytes": 62276,
+      "sha256": "a9f8b6d445f51b2e2e8b990035766f332aac7c764df4cb63c8094cee6db36050"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/diagram-encoding-r1/input/A.spec.json",
+      "public_path": "verification/spec-input/A.spec.json",
+      "bytes": 10073,
+      "sha256": "3e408360fd537f14414f3769217159397359de48d0162770a2305d7d862970b5"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/diagram-encoding-r1/input/B.spec.json",
+      "public_path": "verification/spec-input/B.spec.json",
+      "bytes": 10286,
+      "sha256": "ee5db320cfdebb5d3a6c35e105043992be332bb8f3ee84f596288fa23bde34ae"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/diagram-encoding-r1/input/C.spec.json",
+      "public_path": "verification/spec-input/C.spec.json",
+      "bytes": 10289,
+      "sha256": "ceda73ca2b9094349a3a3bf75b212a5fb40bb7efd2049609306f82450ee96676"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/validation/public-oracle/job-source.txt",
+      "public_path": "verification/public-oracle/job-source.txt",
+      "bytes": 5223,
+      "sha256": "4a783e9a102f09c2d420ba4cfe7e6706b550ab93254a6364e09a6ea3c52a64c9"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/validation/four-state/job-source.txt",
+      "public_path": "verification/four-state/job-source.txt",
+      "bytes": 7242,
+      "sha256": "19455ebc4bc3503def8a8b137796fff106578423e2d89690588b5eb178e1d652"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/publishable_reproduce.py",
+      "public_path": "publishable_reproduce.py",
+      "bytes": 17448,
+      "sha256": "38875701441d98930254d3087b1a8797b47efa8af491fbf2e273fea4ab583f54"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/publishable_inputs.json",
+      "public_path": "publishable_inputs.json",
+      "bytes": 16592,
+      "sha256": "f2cd0e9be5c815c01f2840e2fcff0251fdc3e757df3ee6e92a12cd21dd29fdf4"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/final_receipt-r2-complete.json",
+      "public_path": "verification/original-run/final_receipt-r2-complete.json",
+      "bytes": 27539,
+      "sha256": "919ecfc51caebbbb4f038fc6466d18a3dca40491776d80945bdf5fde43843067"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/final_receipt-r2-complete.md",
+      "public_path": "verification/original-run/final_receipt-r2-complete.md",
+      "bytes": 7908,
+      "sha256": "d8ab3c9c58ea27833a8251328e38d12ed04748c4eee73f9e919c5369b87ffad3"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/gate-r3/deliverable_gate.json",
+      "public_path": "verification/original-run/gate-r3/deliverable_gate.json",
+      "bytes": 828858,
+      "sha256": "680baf49297711320b948d0d7f6bc86b9b39888cba8b599cc3d1e123c2b74109"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/gate-r3/deliverable_gate.md",
+      "public_path": "verification/original-run/gate-r3/deliverable_gate.md",
+      "bytes": 254,
+      "sha256": "fba3baee186cd8565bedc729dac3092786749eb27818783bdbbd08ca0ad99f42"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/validation/public-oracle/summary.json",
+      "public_path": "verification/original-run/validation/public-oracle/summary.json",
+      "bytes": 10159,
+      "sha256": "b966d1e624383520b055398ff51b42ba9d04b47473e7e0b81134d826d5b985c2"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/validation/four-state/summary.json",
+      "public_path": "verification/original-run/validation/four-state/summary.json",
+      "bytes": 24049,
+      "sha256": "d2a649c5ae59a5738aee5606089e5f58cd58888272a3e2082d6d05cbe44ac0e2"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/diagram-encoding-r1/encoding_equivalence.json",
+      "public_path": "verification/original-run/diagram-encoding-r1/encoding_equivalence.json",
+      "bytes": 16624,
+      "sha256": "a34b2b092b4b7a4248b63586f88762b3c0d8d0a0010cf151179d1959e1e24de2"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/diagram-encoding-r1/rendered_bundle_validation.json",
+      "public_path": "verification/original-run/diagram-encoding-r1/rendered_bundle_validation.json",
+      "bytes": 19373,
+      "sha256": "55847724b297b7b4b7f5f31b9a89eee585f4a0f71f93ce253ddeaec9da7880c8"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/risk_review.json",
+      "public_path": "verification/original-run/risk_review.json",
+      "bytes": 6512,
+      "sha256": "8e493ff681f2676bd7c6678ea8c25be93365df92ec48bdaee1d7275680bb47ab"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/operation_cones.json",
+      "public_path": "verification/original-run/operation_cones.json",
+      "bytes": 28226,
+      "sha256": "ab6722a4992681f5612e2ec2ae6188e21e1017f88abd012be76dd922ee24706f"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/publishable_entrypoint_receipt.json",
+      "public_path": "verification/original-run/publishable_entrypoint_receipt.json",
+      "bytes": 2411,
+      "sha256": "5cffbad52f2019bc9c7f52083c67357141b033010aa5acba1e8dbd66a5924bad"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/publishable_entrypoint_checks.json",
+      "public_path": "verification/original-run/publishable_entrypoint_checks.json",
+      "bytes": 4472,
+      "sha256": "dff76bf6984e120497fbd7eebcff3c54fff5a39d2716081bbe20cf680c3886f2"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/candidate-r3/publishable_inputs.md",
+      "public_path": "verification/original-run/publishable_inputs.md",
+      "bytes": 7403,
+      "sha256": "24cae6da3769951e4d4cea0e2eb9fc757eff61807cc39fd5635ecf9ba13040d8"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/style-visual-r2/event_accumulator_A.png",
+      "public_path": "visual/event_accumulator_A.png",
+      "bytes": 14762,
+      "sha256": "317e5699b91e5520bf68c238bdcd801914c5b02ab918a5475c2ef9c48b31ab29"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/style-visual-r2/event_accumulator_A.geometry.json",
+      "public_path": "visual/event_accumulator_A.geometry.json",
+      "bytes": 2305,
+      "sha256": "c9f8c36e324c1cf49809baf9d143f1ac22f42dfdb1c9c2aad6181f090f09b1f4"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/style-visual-r2/event_accumulator_B.png",
+      "public_path": "visual/event_accumulator_B.png",
+      "bytes": 14843,
+      "sha256": "906706d842aaee76460551e30a2c382edb38dfb2991ee9d42827ed3eb1c90a47"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/style-visual-r2/event_accumulator_B.geometry.json",
+      "public_path": "visual/event_accumulator_B.geometry.json",
+      "bytes": 2307,
+      "sha256": "867618c0650657062e5093b19f1f955b12a67c1a807ef88396baa31d7b0167dd"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/style-visual-r2/event_accumulator_C.png",
+      "public_path": "visual/event_accumulator_C.png",
+      "bytes": 14741,
+      "sha256": "8a12c1a0ee03098af28feacc4b66d9c3689b3f29ca2fee00107d47892e560691"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/style-visual-r2/event_accumulator_C.geometry.json",
+      "public_path": "visual/event_accumulator_C.geometry.json",
+      "bytes": 2307,
+      "sha256": "99e759ce9a956622210f283cf7de69d2bdf9c328c28e9cb692c6d702006b0f7f"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/style-visual-r2/valid_data_pipeline_A.png",
+      "public_path": "visual/valid_data_pipeline_A.png",
+      "bytes": 20292,
+      "sha256": "f69bf302c8c35146f8ddc1c64e9828b558664ea28bdc1833fadef108ea06c295"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/style-visual-r2/valid_data_pipeline_A.geometry.json",
+      "public_path": "visual/valid_data_pipeline_A.geometry.json",
+      "bytes": 3775,
+      "sha256": "23a754f81eb8dee0f7abfe4bc4782503de725c1487c51ac4ef11edc3da2adaa7"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/style-visual-r2/valid_data_pipeline_B.png",
+      "public_path": "visual/valid_data_pipeline_B.png",
+      "bytes": 20373,
+      "sha256": "051c4aa7b2f318aa2f324fd46494db6abc6c5b6633c53a2cc2111c27a14bf556"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/style-visual-r2/valid_data_pipeline_B.geometry.json",
+      "public_path": "visual/valid_data_pipeline_B.geometry.json",
+      "bytes": 3769,
+      "sha256": "325a678e3e60c196d7c6b7a74f1f8075f77c338d21e8c3487b8394978b10cf0a"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/style-visual-r2/valid_data_pipeline_C.png",
+      "public_path": "visual/valid_data_pipeline_C.png",
+      "bytes": 20470,
+      "sha256": "2695775c157b1666ad66d4854296c5b952bf4431b8a3c8467274548a203f09ef"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/style-visual-r2/valid_data_pipeline_C.geometry.json",
+      "public_path": "visual/valid_data_pipeline_C.geometry.json",
+      "bytes": 3771,
+      "sha256": "0851043f4bd64ed59d99489757cfb9e73150acf73704211a9a3ccc5b23bdc0a4"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/style-visual-r2/root_visual_receipt.json",
+      "public_path": "visual/root_visual_receipt.json",
+      "bytes": 5649,
+      "sha256": "8584d1e79e59cd53b5ee8cb2cab30c6310133c32ebe9a8f48c13af79a26c8ca9"
+    },
+    {
+      "source": ".tmp-codex/publish_rtl_style_maintenance_20261007.py",
+      "public_path": "verification/publication/publish_sources.py",
+      "bytes": 6856,
+      "sha256": "9280bea2369029db53a234a2871e5262dea160a16ec4d6ccf9552bd73c147565"
+    }
+  ],
+  "all_copies_byte_identical": true,
+  "API_requests": 0,
+  "new_DUT_executions": 0,
+  "public_all_replay_not_yet_run": true,
+  "original_source_and_experiment_results_changed": false
+}

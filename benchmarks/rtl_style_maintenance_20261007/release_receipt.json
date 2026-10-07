@@ -1,0 +1,175 @@
+{
+  "schema": "rtl-style-maintenance-release-v1",
+  "created_at_utc": "2026-10-07T12:07:52.914269+00:00",
+  "client_date": "2026-10-07",
+  "status": "public_complete_replay_passed",
+  "source_commit": "77d0c2f9d009696def1da895a50b4a69c6345f3d",
+  "official_gate_states": {
+    "compile": "passed",
+    "ast": "passed",
+    "readability": "passed",
+    "comment": "passed",
+    "naming": "passed",
+    "profile": "passed",
+    "testbench": "not_requested",
+    "toolchain": "not_requested"
+  },
+  "source_errors": 0,
+  "source_strict_warnings": 0,
+  "gate_simulation_import_or_rewrite_performed": false,
+  "original_private_DUT_executions": 36,
+  "public_repeat_DUT_executions": 36,
+  "maintenance_phase_total_DUT_executions": 72,
+  "public_oracle_output_comparisons_per_run": 171,
+  "four_state_output_comparisons_per_run": 4944,
+  "paired_output_value_comparisons_per_run": 5115,
+  "all_comparisons_equal_in_each_run": true,
+  "repeated_vectors_are_new_independent_samples": false,
+  "API_requests": 0,
+  "included_in_old_model_scores_or_tests": false,
+  "intentional_variant_failures_per_side": {
+    "event_accumulator/A": 0,
+    "event_accumulator/B": 1,
+    "event_accumulator/C": 1,
+    "valid_data_pipeline/A": 0,
+    "valid_data_pipeline/B": 5,
+    "valid_data_pipeline/C": 1
+  },
+  "four_state_driver_executor_verdict": "inconclusive",
+  "four_state_driver_builtin_checks": 0,
+  "four_state_result_decided_by": "explicit external row-by-row original/candidate comparison",
+  "spec_files_reproduced_byte_identically": 18,
+  "spec_bindings": [
+    {
+      "public_path": "spec/targets/event_accumulator/A/event_accumulator_spec.md",
+      "bytes": 3185,
+      "sha256": "e646d50d02ae3dcdfe8b9292818bd3c306cc73933bac95c0b51d45f2893cc72f",
+      "reproduced_byte_identical": true
+    },
+    {
+      "public_path": "spec/targets/event_accumulator/A/waveforms/event_accumulator_variant-behavior.json5",
+      "bytes": 611,
+      "sha256": "a88f0ca254e16fea1d4dbe2a48b6b761479ba12c95fbb8508e03bc0d275a91c6",
+      "reproduced_byte_identical": true
+    },
+    {
+      "public_path": "spec/targets/event_accumulator/A/waveforms/event_accumulator_variant-behavior.svg",
+      "bytes": 59910,
+      "sha256": "bca3cf4d9452ff9ef5365f0c7ddaec9e65647685682be482f7878fb1f9fb4ff2",
+      "reproduced_byte_identical": true
+    },
+    {
+      "public_path": "spec/targets/event_accumulator/B/event_accumulator_spec.md",
+      "bytes": 3253,
+      "sha256": "c5a917af717a125b8f11d87a8041dae12db3ba6a761b4d06c2335aef6a2f36c4",
+      "reproduced_byte_identical": true
+    },
+    {
+      "public_path": "spec/targets/event_accumulator/B/waveforms/event_accumulator_variant-behavior.json5",
+      "bytes": 611,
+      "sha256": "e425bfb5ea7818c8158b8f6206a6d67d31a9c5a29ca94056ee702bd6528555c4",
+      "reproduced_byte_identical": true
+    },
+    {
+      "public_path": "spec/targets/event_accumulator/B/waveforms/event_accumulator_variant-behavior.svg",
+      "bytes": 59910,
+      "sha256": "42c032e216c1ee81cabf16c56dc63006fe934174f5d5ed1df7e57ac75b5b25e8",
+      "reproduced_byte_identical": true
+    },
+    {
+      "public_path": "spec/targets/event_accumulator/C/event_accumulator_spec.md",
+      "bytes": 3266,
+      "sha256": "371111b9cd455c45da075834aacedb957795e5c21985ed9c15f2ca16c721bbdf",
+      "reproduced_byte_identical": true
+    },
+    {
+      "public_path": "spec/targets/event_accumulator/C/waveforms/event_accumulator_variant-behavior.json5",
+      "bytes": 611,
+      "sha256": "fe948f1a732dfe64308602efe3eb41b462e492565022e054caf7fa577890386a",
+      "reproduced_byte_identical": true
+    },
+    {
+      "public_path": "spec/targets/event_accumulator/C/waveforms/event_accumulator_variant-behavior.svg",
+      "bytes": 59910,
+      "sha256": "b71f3dfc008341836861367d2189d5ffc441cda314d69bdc86101795a1cf31a7",
+      "reproduced_byte_identical": true
+    },
+    {
+      "public_path": "spec/targets/valid_data_pipeline/A/valid_data_pipeline_spec.md",
+      "bytes": 3305,
+      "sha256": "99e12dcb583666954b3c2168c88037c63bd381072332e38e7821ab16ba390268",
+      "reproduced_byte_identical": true
+    },
+    {
+      "public_path": "spec/targets/valid_data_pipeline/A/waveforms/valid_data_pipeline_variant-behavior.json5",
+      "bytes": 838,
+      "sha256": "820f20ce3f05f67703bdf5f892d821500a8b37b255977c6e9bf51739bb588d90",
+      "reproduced_byte_identical": true
+    },
+    {
+      "public_path": "spec/targets/valid_data_pipeline/A/waveforms/valid_data_pipeline_variant-behavior.svg",
+      "bytes": 62276,
+      "sha256": "86614988b3b83423f7e35ad4a581cc6632c7cb0b30501d008ed23f0ddef2adb7",
+      "reproduced_byte_identical": true
+    },
+    {
+      "public_path": "spec/targets/valid_data_pipeline/B/valid_data_pipeline_spec.md",
+      "bytes": 3448,
+      "sha256": "3fed366d33b39dd927d40e9282dc1636f47f2d52083e83de865828e2f2c15d0a",
+      "reproduced_byte_identical": true
+    },
+    {
+      "public_path": "spec/targets/valid_data_pipeline/B/waveforms/valid_data_pipeline_variant-behavior.json5",
+      "bytes": 838,
+      "sha256": "6c0c6d64eaf4b4c19adfeb6796b3e3c4d25e32877fdc32af045e19531369454e",
+      "reproduced_byte_identical": true
+    },
+    {
+      "public_path": "spec/targets/valid_data_pipeline/B/waveforms/valid_data_pipeline_variant-behavior.svg",
+      "bytes": 62276,
+      "sha256": "2ec6137244a6fc69306c77b06b1f239be7b4c4a5aca0e7eac8b388345d7e0a14",
+      "reproduced_byte_identical": true
+    },
+    {
+      "public_path": "spec/targets/valid_data_pipeline/C/valid_data_pipeline_spec.md",
+      "bytes": 3438,
+      "sha256": "94bfdaa03308e5ea37577bff59eedbd2fd6627b652560f4370917160a11cd5ca",
+      "reproduced_byte_identical": true
+    },
+    {
+      "public_path": "spec/targets/valid_data_pipeline/C/waveforms/valid_data_pipeline_variant-behavior.json5",
+      "bytes": 838,
+      "sha256": "c0d925656cd82c0b97b83cc358c4c843b9fe941131f6e08dd776115e49030b88",
+      "reproduced_byte_identical": true
+    },
+    {
+      "public_path": "spec/targets/valid_data_pipeline/C/waveforms/valid_data_pipeline_variant-behavior.svg",
+      "bytes": 62276,
+      "sha256": "a9f8b6d445f51b2e2e8b990035766f332aac7c764df4cb63c8094cee6db36050",
+      "reproduced_byte_identical": true
+    }
+  ],
+  "original_bound_worker_files_unchanged": 623,
+  "public_required_inputs_unchanged": 35,
+  "actual_final_browser_diagrams_reviewed": 6,
+  "public_replay_archive_members": 473,
+  "evidence": [
+    "publication_copy_manifest.json",
+    "closed_candidate_attempts_manifest.json",
+    "closed_visual_attempts_manifest.json",
+    "public_replay_manifest.json",
+    "replay_copy_manifest.json",
+    "visual/root_visual_receipt.json",
+    "verification/original-run/final_receipt-r2-complete.json",
+    "verification/replay/replay_receipt.json"
+  ],
+  "limitations": [
+    "Actual replay was on the same host from public files; no clean clone or second-host claim.",
+    "Official gate testbench/toolchain remain not_requested; real Icarus evidence is separate.",
+    "A correct; B/C retain deliberate functional defects and fail the correct oracle.",
+    "Finite mixed-state and reset samples are not formal equivalence or exhaustive data proof.",
+    "No synthesis, physical timing, hardware, external Actions or new API study was run.",
+    "AI authoring and review are not real user trials or human H02.",
+    "Frozen benchmarks, experiment outcomes, PDF/PPTX and original receipts remain unchanged."
+  ]
+}

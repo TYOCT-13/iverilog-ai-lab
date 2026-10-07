@@ -1,0 +1,14 @@
+{
+  "command": [
+    "D:/Users/TYOCT/anaconda3/python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\publish_rtl_spec_rendering_20261007.py"
+  ],
+  "exit_code": 1,
+  "tool_result_traceback": "Traceback (most recent call last):\n  File \"E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\publish_rtl_spec_rendering_20261007.py\", line 135, in <module>\n    assert len(header) == 3 and header[1] == 'blob', binding['path']\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: .iverilog-ai/ic-materials-v3-rule-check/ic_rules.pdf\n",
+  "capture_kind": "transcribed tool result; not reconstructed original stderr",
+  "failure": "Incorrect assumption that every frozen material source is tracked by Git",
+  "repair": "Separate committed blobs from retained local snapshots; verify both against immutable receipt"
+}

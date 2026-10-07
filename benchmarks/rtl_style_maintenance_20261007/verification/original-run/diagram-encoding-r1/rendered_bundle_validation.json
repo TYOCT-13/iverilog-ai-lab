@@ -1,0 +1,780 @@
+{
+  "schema": "wavedrom-rendered-encoding-equivalence-v1",
+  "status": "passed",
+  "records": [
+    {
+      "module": "event_accumulator",
+      "variant": "A",
+      "actual_rendered_json_equals_corrected_spec": true,
+      "same_per_cycle_values": true,
+      "all_non_wave_diagram_fields_unchanged": true,
+      "valid_SVG_XML": true,
+      "changed_signals": [],
+      "spec": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\event_accumulator\\A\\event_accumulator_spec.md",
+      "wavejson": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\event_accumulator\\A\\waveforms\\event_accumulator_variant-behavior.json5",
+      "svg": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\event_accumulator\\A\\waveforms\\event_accumulator_variant-behavior.svg",
+      "browser_visual_review": "pending parent actual browser review"
+    },
+    {
+      "module": "event_accumulator",
+      "variant": "B",
+      "actual_rendered_json_equals_corrected_spec": true,
+      "same_per_cycle_values": true,
+      "all_non_wave_diagram_fields_unchanged": true,
+      "valid_SVG_XML": true,
+      "changed_signals": [],
+      "spec": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\event_accumulator\\B\\event_accumulator_spec.md",
+      "wavejson": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\event_accumulator\\B\\waveforms\\event_accumulator_variant-behavior.json5",
+      "svg": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\event_accumulator\\B\\waveforms\\event_accumulator_variant-behavior.svg",
+      "browser_visual_review": "pending parent actual browser review"
+    },
+    {
+      "module": "event_accumulator",
+      "variant": "C",
+      "actual_rendered_json_equals_corrected_spec": true,
+      "same_per_cycle_values": true,
+      "all_non_wave_diagram_fields_unchanged": true,
+      "valid_SVG_XML": true,
+      "changed_signals": [],
+      "spec": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\event_accumulator\\C\\event_accumulator_spec.md",
+      "wavejson": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\event_accumulator\\C\\waveforms\\event_accumulator_variant-behavior.json5",
+      "svg": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\event_accumulator\\C\\waveforms\\event_accumulator_variant-behavior.svg",
+      "browser_visual_review": "pending parent actual browser review"
+    },
+    {
+      "module": "valid_data_pipeline",
+      "variant": "A",
+      "actual_rendered_json_equals_corrected_spec": true,
+      "same_per_cycle_values": true,
+      "all_non_wave_diagram_fields_unchanged": true,
+      "valid_SVG_XML": true,
+      "changed_signals": [
+        "i_valid",
+        "o_valid after"
+      ],
+      "spec": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\valid_data_pipeline\\A\\valid_data_pipeline_spec.md",
+      "wavejson": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\valid_data_pipeline\\A\\waveforms\\valid_data_pipeline_variant-behavior.json5",
+      "svg": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\valid_data_pipeline\\A\\waveforms\\valid_data_pipeline_variant-behavior.svg",
+      "browser_visual_review": "pending parent actual browser review"
+    },
+    {
+      "module": "valid_data_pipeline",
+      "variant": "B",
+      "actual_rendered_json_equals_corrected_spec": true,
+      "same_per_cycle_values": true,
+      "all_non_wave_diagram_fields_unchanged": true,
+      "valid_SVG_XML": true,
+      "changed_signals": [
+        "i_valid",
+        "o_valid after"
+      ],
+      "spec": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\valid_data_pipeline\\B\\valid_data_pipeline_spec.md",
+      "wavejson": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\valid_data_pipeline\\B\\waveforms\\valid_data_pipeline_variant-behavior.json5",
+      "svg": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\valid_data_pipeline\\B\\waveforms\\valid_data_pipeline_variant-behavior.svg",
+      "browser_visual_review": "pending parent actual browser review"
+    },
+    {
+      "module": "valid_data_pipeline",
+      "variant": "C",
+      "actual_rendered_json_equals_corrected_spec": true,
+      "same_per_cycle_values": true,
+      "all_non_wave_diagram_fields_unchanged": true,
+      "valid_SVG_XML": true,
+      "changed_signals": [
+        "i_valid",
+        "o_valid after"
+      ],
+      "spec": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\valid_data_pipeline\\C\\valid_data_pipeline_spec.md",
+      "wavejson": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\valid_data_pipeline\\C\\waveforms\\valid_data_pipeline_variant-behavior.json5",
+      "svg": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\diagram-encoding-r1\\bundle\\spec\\targets\\valid_data_pipeline\\C\\waveforms\\valid_data_pipeline_variant-behavior.svg",
+      "browser_visual_review": "pending parent actual browser review"
+    }
+  ],
+  "binary_signal_comparisons": [
+    {
+      "module": "event_accumulator",
+      "variant": "A",
+      "signal": "i_rstn",
+      "original_wave": "1.......",
+      "corrected_wave": "1.......",
+      "original_per_cycle_values": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "corrected_per_cycle_values": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "passed": true
+    },
+    {
+      "module": "event_accumulator",
+      "variant": "A",
+      "signal": "i_enable",
+      "original_wave": "1.0.1..0",
+      "corrected_wave": "1.0.1..0",
+      "original_per_cycle_values": [
+        "1",
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0"
+      ],
+      "corrected_per_cycle_values": [
+        "1",
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0"
+      ],
+      "passed": true
+    },
+    {
+      "module": "event_accumulator",
+      "variant": "A",
+      "signal": "i_event",
+      "original_wave": "10101..0",
+      "corrected_wave": "10101..0",
+      "original_per_cycle_values": [
+        "1",
+        "0",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0"
+      ],
+      "corrected_per_cycle_values": [
+        "1",
+        "0",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0"
+      ],
+      "passed": true
+    },
+    {
+      "module": "event_accumulator",
+      "variant": "A",
+      "signal": "i_clear",
+      "original_wave": "0..1.0..",
+      "corrected_wave": "0..1.0..",
+      "original_per_cycle_values": [
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      "corrected_per_cycle_values": [
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      "passed": true
+    },
+    {
+      "module": "event_accumulator",
+      "variant": "B",
+      "signal": "i_rstn",
+      "original_wave": "1.......",
+      "corrected_wave": "1.......",
+      "original_per_cycle_values": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "corrected_per_cycle_values": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "passed": true
+    },
+    {
+      "module": "event_accumulator",
+      "variant": "B",
+      "signal": "i_enable",
+      "original_wave": "1.0.1..0",
+      "corrected_wave": "1.0.1..0",
+      "original_per_cycle_values": [
+        "1",
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0"
+      ],
+      "corrected_per_cycle_values": [
+        "1",
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0"
+      ],
+      "passed": true
+    },
+    {
+      "module": "event_accumulator",
+      "variant": "B",
+      "signal": "i_event",
+      "original_wave": "10101..0",
+      "corrected_wave": "10101..0",
+      "original_per_cycle_values": [
+        "1",
+        "0",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0"
+      ],
+      "corrected_per_cycle_values": [
+        "1",
+        "0",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0"
+      ],
+      "passed": true
+    },
+    {
+      "module": "event_accumulator",
+      "variant": "B",
+      "signal": "i_clear",
+      "original_wave": "0..1.0..",
+      "corrected_wave": "0..1.0..",
+      "original_per_cycle_values": [
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      "corrected_per_cycle_values": [
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      "passed": true
+    },
+    {
+      "module": "event_accumulator",
+      "variant": "C",
+      "signal": "i_rstn",
+      "original_wave": "1.......",
+      "corrected_wave": "1.......",
+      "original_per_cycle_values": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "corrected_per_cycle_values": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "passed": true
+    },
+    {
+      "module": "event_accumulator",
+      "variant": "C",
+      "signal": "i_enable",
+      "original_wave": "1.0.1..0",
+      "corrected_wave": "1.0.1..0",
+      "original_per_cycle_values": [
+        "1",
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0"
+      ],
+      "corrected_per_cycle_values": [
+        "1",
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0"
+      ],
+      "passed": true
+    },
+    {
+      "module": "event_accumulator",
+      "variant": "C",
+      "signal": "i_event",
+      "original_wave": "10101..0",
+      "corrected_wave": "10101..0",
+      "original_per_cycle_values": [
+        "1",
+        "0",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0"
+      ],
+      "corrected_per_cycle_values": [
+        "1",
+        "0",
+        "1",
+        "0",
+        "1",
+        "1",
+        "1",
+        "0"
+      ],
+      "passed": true
+    },
+    {
+      "module": "event_accumulator",
+      "variant": "C",
+      "signal": "i_clear",
+      "original_wave": "0..1.0..",
+      "corrected_wave": "0..1.0..",
+      "original_per_cycle_values": [
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      "corrected_per_cycle_values": [
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      "passed": true
+    },
+    {
+      "module": "valid_data_pipeline",
+      "variant": "A",
+      "signal": "i_rstn",
+      "original_wave": "1.......",
+      "corrected_wave": "1.......",
+      "original_per_cycle_values": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "corrected_per_cycle_values": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "passed": true
+    },
+    {
+      "module": "valid_data_pipeline",
+      "variant": "A",
+      "signal": "i_flush",
+      "original_wave": "010....1",
+      "corrected_wave": "010....1",
+      "original_per_cycle_values": [
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      "corrected_per_cycle_values": [
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      "passed": true
+    },
+    {
+      "module": "valid_data_pipeline",
+      "variant": "A",
+      "signal": "i_valid",
+      "original_wave": "10011001",
+      "corrected_wave": "10.1.0.1",
+      "original_per_cycle_values": [
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0",
+        "1"
+      ],
+      "corrected_per_cycle_values": [
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0",
+        "1"
+      ],
+      "passed": true
+    },
+    {
+      "module": "valid_data_pipeline",
+      "variant": "A",
+      "signal": "o_valid after",
+      "original_wave": "00001100",
+      "corrected_wave": "0...1.0.",
+      "original_per_cycle_values": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0"
+      ],
+      "corrected_per_cycle_values": [
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0"
+      ],
+      "passed": true
+    },
+    {
+      "module": "valid_data_pipeline",
+      "variant": "B",
+      "signal": "i_rstn",
+      "original_wave": "1.......",
+      "corrected_wave": "1.......",
+      "original_per_cycle_values": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "corrected_per_cycle_values": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "passed": true
+    },
+    {
+      "module": "valid_data_pipeline",
+      "variant": "B",
+      "signal": "i_flush",
+      "original_wave": "010....1",
+      "corrected_wave": "010....1",
+      "original_per_cycle_values": [
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      "corrected_per_cycle_values": [
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      "passed": true
+    },
+    {
+      "module": "valid_data_pipeline",
+      "variant": "B",
+      "signal": "i_valid",
+      "original_wave": "10011001",
+      "corrected_wave": "10.1.0.1",
+      "original_per_cycle_values": [
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0",
+        "1"
+      ],
+      "corrected_per_cycle_values": [
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0",
+        "1"
+      ],
+      "passed": true
+    },
+    {
+      "module": "valid_data_pipeline",
+      "variant": "B",
+      "signal": "o_valid after",
+      "original_wave": "10011000",
+      "corrected_wave": "10.1.0..",
+      "original_per_cycle_values": [
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      "corrected_per_cycle_values": [
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      "passed": true
+    },
+    {
+      "module": "valid_data_pipeline",
+      "variant": "C",
+      "signal": "i_rstn",
+      "original_wave": "1.......",
+      "corrected_wave": "1.......",
+      "original_per_cycle_values": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "corrected_per_cycle_values": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "passed": true
+    },
+    {
+      "module": "valid_data_pipeline",
+      "variant": "C",
+      "signal": "i_flush",
+      "original_wave": "010....1",
+      "corrected_wave": "010....1",
+      "original_per_cycle_values": [
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      "corrected_per_cycle_values": [
+        "0",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      "passed": true
+    },
+    {
+      "module": "valid_data_pipeline",
+      "variant": "C",
+      "signal": "i_valid",
+      "original_wave": "10011001",
+      "corrected_wave": "10.1.0.1",
+      "original_per_cycle_values": [
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0",
+        "1"
+      ],
+      "corrected_per_cycle_values": [
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0",
+        "1"
+      ],
+      "passed": true
+    },
+    {
+      "module": "valid_data_pipeline",
+      "variant": "C",
+      "signal": "o_valid after",
+      "original_wave": "01001100",
+      "corrected_wave": "010.1.0.",
+      "original_per_cycle_values": [
+        "0",
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0"
+      ],
+      "corrected_per_cycle_values": [
+        "0",
+        "1",
+        "0",
+        "0",
+        "1",
+        "1",
+        "0",
+        "0"
+      ],
+      "passed": true
+    }
+  ],
+  "binary_signal_count": 24,
+  "changed_binary_signal_count": 6,
+  "original_companion_files_checked_unchanged": 21,
+  "unchanged_final_RTL_count": 6,
+  "unchanged_frozen_original_RTL_count": 6,
+  "registered_render_exitcodes": [
+    0,
+    0,
+    0
+  ],
+  "additional_DUT_executions": 0,
+  "additional_API_requests": 0,
+  "browser_visual_review": "pending parent actual browser review"
+}

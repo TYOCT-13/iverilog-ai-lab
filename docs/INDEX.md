@@ -4,6 +4,7 @@
 带盘符的除外。路径可用 `python scripts/check_doc_index.py` 校验是否仍然存在。
 
 - 仓库：`iverilog-ai-lab`，Apache-2.0；第三方资源保留各自许可；判定权威是 Icarus Verilog 12.0（`s20150603`）
+- 2026-10-07维护补充：[独立RTL版本与公开重放](experiment/rtl_style_maintenance_2026-10-07.md)已完成；6源严格静态门禁0/0，首次与公开重放各36次DUT、每次5115输出比较一致，18规格文件逐字节重建。0新API，原模型成绩与v3材料不变；两项官方门禁仍not_requested。
 - 本次交付整理：**2026-10-07**；实验及v3产物日期为2026-10-05；最新两模块批次实际源码`20400fa`，Agent/helper/系统提示仍冻结`a969337`；108任务全部执行，六组各12缺陷检出12/10/8/8/11/10，87请求/339624tokens，严格资格true但保留1终态格式失败；双机器审计完成，非H02。历史v8八模块432任务六组48/32/48/29/37/37，306请求/973149tokens、18零DUT、严格资格false，双代理审计完成但非H02；历史v7八模块432任务已结束：六组各48缺陷为48/32/48/34/37/37，334请求/833216tokens，严格资格false，预算补提真实收益未证；历史`c07756f`内部合成模块互斥留出108任务/86请求/190387tokens、全仓1570/2；历史Agent v6恢复源码`9c3bd3c`，恢复轮216任务/138请求/378204tokens，独立每轮100万额度；上一轮`75f9baa`的216任务/145请求/399083tokens保持历史，历史短预算三重复144任务（入口`f54ae63`）与六项选样诊断（入口`bdc9e20`），不改旧v5一次重复60任务。当前v3提交PDF/答辩已同步最新两模块，历史v2仍为 `28be1ed`，旧三重复 `c7bb280`、pilot `e9b7b8a`分别归档。最新实测与旧版正式材料不能混作同一版本（已查阅通知的提交截止2026-10-15 20:00北京时间）。
 - 状态记号：**有效** = 当前口径，可直接对外引用；**历史** = 反映当时状态，只读归档，
   引用时必须带"旧口径"标注；**待补** = 尚未完成
@@ -33,13 +34,15 @@
 | v3材料入口、报名文本与PDF回执 | `docs/competition/ic/v3/README.md`、`docs/competition/ic/v3/submission_copy.md`、`docs/competition/ic/v3/validation.json` | 名称15字符、简介201字符；两份PDF共16页实际查看通过，尚未上传 |
 | v3答辩稿与构建来源 | `docs/competition/ic/ICARUS_答辩材料_v3.pptx`、`docs/competition/ic/ICARUS_答辩材料_v3.pdf`、`docs/competition/ic/defense_v3/README.md`、`docs/competition/ic/defense_v3/finalization_summary.json` | 12页；7原生表格/3原生图表/3嵌入式数值工作簿/12页备注；PPTX可编辑、PDF图像式，全部实际查看；原生Office未验 |
 | v3事实与材料机器复核 | `docs/competition/ic/v3/material_data.json`、`docs/review/ic_materials_v3_review_2026-10-07.md`、`docs/competition/ic/v3/review/final_receipt.json` | 绑定封存实测，不增加API或DUT；材料复核与旧2192/2033检查分别计量，非真人/H02 |
+| 2026-10-07规格渲染补充 | [报告](experiment/rtl_spec_rendering_2026-10-07.md)、[规格与SVG](experiment/rtl-spec-rendering-2026-10-07/README.md)、[回执](experiment/rtl-spec-rendering-2026-10-07/rendering_receipt.json)、[本地复现](experiment/rtl-spec-rendering-2026-10-07/reproduction/reproduction_receipt.json) | WaveDrom3.6.1实际smoke通过；两A规格图浏览器查看，6文件重建逐字节一致；0新增API/DUT，不改变原12项样式问题或v3材料 |
+| 独立RTL维护版与真实重放 | [报告](experiment/rtl_style_maintenance_2026-10-07.md)、[源码/规格/工具](../benchmarks/rtl_style_maintenance_20261007/README.md)、[发布回执](../benchmarks/rtl_style_maintenance_20261007/release_receipt.json)、[公开重放](../benchmarks/rtl_style_maintenance_20261007/verification/replay/replay_receipt.json) | 6源静态gate0错误/0警告，6项passed/2项not_requested；原与新双侧输出相同，72执行为36+同组36，18规格字节相同；B/C故意缺陷保留，0API，不是新模型成绩 |
 | 历史v2技术方案源稿与PDF | `docs/competition/ic/v2/technical_report.md`、`docs/competition/ic/ICARUS_技术方案_v2.pdf` | 28be1ed版本；9页/正文8页，约1.02MB；尚未纳入v5，真人/H02事实待补 |
 | 历史v2佐证源稿与PDF | `docs/competition/ic/v2/supporting_evidence.md`、`docs/competition/ic/ICARUS_佐证材料_v2.pdf` | 28be1ed版本；5页、约0.86MB；V01–V06真实来源，保留失败，尚未纳入v5 |
 | 历史v2材料入口与PDF回执 | `docs/competition/ic/v2/README.md`、`docs/competition/ic/v2/validation.json` | 名称15字符、简介172字符；全部14页渲染查看，文字可选择、身份元数据空 |
 | 历史v2答辩稿与构建来源 | `docs/competition/ic/ICARUS_答辩材料_v2.pptx`、`docs/competition/ic/ICARUS_答辩材料_v2.pdf`、`docs/competition/ic/defense_v2/README.md`、`docs/competition/ic/defense_v2/qa_report.json` | 12页，5原生表格/3原生图表/12页备注；PPTX可编辑，PDF图像式；逐页机器检查，不是独立人审 |
 | 最新两模块内部留出 | [报告](experiment/agent_new_holdout_study_live_2026-10-05.md)、[回执](experiment/agent-new-holdout-study-live-2026-10-05/receipt.json)、[严格汇总](experiment/agent-new-holdout-study-live-2026-10-05/strict_summary.json) | 20400fa；108任务全部执行/134episode/268侧；六组各12缺陷检出12/10/8/8/11/10，分母为4不同缺陷×3重复；36/36正确控制无误报，严格true但1终态格式失败 |
 | 最新预算与完整原件 | [独立预算](experiment/agent_new_holdout_study_budget_2026-10-05.json)、[完整原件ZIP](experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip)、[原件清单](experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json)、[字节绑定](experiment/agent-new-holdout-study-live-2026-10-05/source_byte_binding.json) | 87请求/339624tokens/余660376，未知/pending0，历史不扣本批1M；458快照无变、Git446exact/12仅换行，精确重放须用快照，异机待验 |
-| 最新方案、源码验收与事前审查 | [方案](experiment/agent_new_holdout_study_plan_2026-10-05.md)、[登记](experiment/agent-new-holdout-study-live-2026-10-05/preregistration.json)、[源码验收](experiment/agent_new_holdout_source_validation_2026-10-05.md)、[事前机器审查](review/agent_new_holdout_prereg_review_2026-10-05.md) | 2033通过/2跳过、mypy88、535指纹无变；非实现者202不同非DUT检查，不与全仓相加。Agent/helper/系统提示保持a969337；12样式问题、WaveDrom缺依赖仍在 |
+| 最新方案、源码验收与事前审查 | [方案](experiment/agent_new_holdout_study_plan_2026-10-05.md)、[登记](experiment/agent-new-holdout-study-live-2026-10-05/preregistration.json)、[源码验收](experiment/agent_new_holdout_source_validation_2026-10-05.md)、[事前机器审查](review/agent_new_holdout_prereg_review_2026-10-05.md) | 2033通过/2跳过、mypy88、535指纹无变；非实现者202不同非DUT检查，不与全仓相加。Agent/helper/系统提示保持a969337；原12样式问题保留，WaveDrom缺依赖于2026-10-07另存解决记录 |
 | 最新结果双机器审计 | [审计文书](review/agent_new_holdout_study_review_2026-10-05.md)、[审计回执](review/agent-new-holdout-study-review-2026-10-05/receipt.json) | 核心2192不同非DUT检查全部通过，作者轨迹核验封存、无矛盾，均非H02；不与2033项测试相加。两模块仅内部集合留出，非外部盲测、独立作者或预训练未见；反馈比随机/无反馈仅多1任务，固定仍12/12 |
 | v7完整组别只读诊断 | `docs/experiment/agent_v7_diagnosis_2026-10-05.md`、`docs/experiment/agent-v7-diagnosis-2026-10-05/receipt.json` | 原诊断按字节复制，0新API/DUT；27顶层字段+3超12，端口反馈缺口与42完整采样/240对288拍反向证据并列 |
 | v8八模块完整对照 | `docs/experiment/agent_feedback_study_live_2026-10-05.md`、`docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json`、`docs/experiment/agent-feedback-study-live-2026-10-05/strict_summary.json` | a969337；432任务六组48/32/48/29/37/37；414执行/484轮/968侧、18零DUT、严格false；反馈未超历史或无反馈37，八模块已暴露非新留出 |
@@ -247,7 +250,7 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 
 ## 4. 工程门禁（当前记录与历史快照）
 
-最新检查见 [两模块源码验收](experiment/agent_new_holdout_source_validation_2026-10-05.md)：2033通过/2跳过/0失败错误、mypy88、535指纹无变；首次全仓2017通过/10失败/2跳过原件保留。历史v8为1858/2，历史v7 r1全量1716/2但runner/test中途补漏，r2仅定向34与全mypy85、207指纹无变，不称冻结后全套回归；旧留出批次1570/2另存。新资产12项严格RTL样式问题和WaveDrom缺依赖未解决，不能称全部门禁通过；浏览器仍引用各历史版本原件。
+最新检查见 [两模块源码验收](experiment/agent_new_holdout_source_validation_2026-10-05.md)：2033通过/2跳过/0失败错误、mypy88、535指纹无变；首次全仓2017通过/10失败/2跳过原件保留。历史v8为1858/2，历史v7 r1全量1716/2但runner/test中途补漏，r2仅定向34与全mypy85、207指纹无变，不称冻结后全套回归；旧留出批次1570/2另存。原资产12项严格RTL样式问题保留；WaveDrom固定依赖与两A规格图已于2026-10-07另存验收，仍不能称全部门禁通过；浏览器引用各版本原件。
 1073项通过/2跳过对应28be1ed源码与291项指纹；914/1及更早记录均为历史快照，不相加。文档改动后的索引数量另核，不改写原验收日志。
 
 | 门禁 | 命令 | 结果 |
@@ -301,6 +304,8 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 | 项 | 状态 | 卡在哪 |
 |---|---|---|
 | 正式v3 PDF/PPT同步最新实测 | 已完成 | 技术方案10页、合并佐证6页、答辩12页；新108与旧432分列，机器复核非真人/H02；历史v2原样保留 |
+| WaveDrom与两A规格图 | 本机已完成 | 3.6.1实际smoke、登记write-spec、两图浏览器查看、6文件逐字节重建；原12项样式问题及其他版本验证另列 |
+| 独立RTL维护版 | 本机公开布局重放完成 | 6源静态0/0，36首次+36同组重放，5115比较/轮一致、18规格文件字节相同；原12问题保留，非形式/异机/H02或模型新成绩 |
 | `CITATION.cff` 真实地址 | 待补 | 当前先完成本地 Git；公开仓库地址尚未确定，保留占位，不捏造链接 |
 | 真人试用与复测记录 | 待补 | 建议安排 3–5 名不同角色试用者；材料就绪，尚待实际收集；不是官方人数硬要求 |
 | 3–5 分钟演示视频 | 待补，可选佐证 | 实际录制后再登记；脚本 `docs/demo/demo_script.md` |

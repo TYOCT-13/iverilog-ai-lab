@@ -1,0 +1,879 @@
+{
+  "schema": "official-transitive-operation-cone-evidence-v1",
+  "owner": "readable-verilog-generator build_vg_facts_from_reports + build_comb_target_cones",
+  "rule_limit": 3,
+  "records": [
+    {
+      "side": "original",
+      "path": "event_accumulator/A/event_accumulator.v",
+      "module": "event_accumulator",
+      "target": "count_o",
+      "line": 75,
+      "operation_count": 7,
+      "operation_ids": [
+        "m0:always0:node0:alternate:node0:alternate:node0:condition:op1@9",
+        "m0:always0:node0:alternate:node0:alternate:node0:condition:op2@28",
+        "m0:always0:node0:alternate:node0:alternate:node0:condition:op3@17",
+        "m0:always0:node0:alternate:node0:alternate:node0:condition:op3@17:selector",
+        "m0:always0:node0:alternate:node0:condition:op1@8",
+        "m0:always0:node0:alternate:node0:condition:op1@8:selector",
+        "m0:assign0:op1@16"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "event_accumulator/A/event_accumulator.v",
+      "module": "event_accumulator",
+      "target": "o_count",
+      "line": 70,
+      "operation_count": 0,
+      "operation_ids": [],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "event_accumulator/A/event_accumulator.v",
+      "module": "event_accumulator",
+      "target": "wire_event_sum",
+      "line": 66,
+      "operation_count": 1,
+      "operation_ids": [
+        "m0:assign0:op1@16"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "event_accumulator/B/event_accumulator.v",
+      "module": "event_accumulator",
+      "target": "count_o",
+      "line": 75,
+      "operation_count": 5,
+      "operation_ids": [
+        "m0:always0:node0:alternate:node0:alternate:node0:condition:op1@8",
+        "m0:always0:node0:alternate:node0:alternate:node0:condition:op1@8:selector",
+        "m0:always0:node0:alternate:node0:condition:op1@8",
+        "m0:always0:node0:alternate:node0:condition:op1@8:selector",
+        "m0:assign0:op1@16"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "event_accumulator/B/event_accumulator.v",
+      "module": "event_accumulator",
+      "target": "o_count",
+      "line": 70,
+      "operation_count": 0,
+      "operation_ids": [],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "event_accumulator/B/event_accumulator.v",
+      "module": "event_accumulator",
+      "target": "wire_event_sum",
+      "line": 66,
+      "operation_count": 1,
+      "operation_ids": [
+        "m0:assign0:op1@16"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "event_accumulator/C/event_accumulator.v",
+      "module": "event_accumulator",
+      "target": "count_o",
+      "line": 75,
+      "operation_count": 9,
+      "operation_ids": [
+        "m0:always0:node0:alternate:node0:alternate:node0:condition:op1@9",
+        "m0:always0:node0:alternate:node0:alternate:node0:condition:op2@28",
+        "m0:always0:node0:alternate:node0:alternate:node0:condition:op3@17",
+        "m0:always0:node0:alternate:node0:alternate:node0:condition:op3@17:selector",
+        "m0:always0:node0:alternate:node0:condition:op1@8",
+        "m0:always0:node0:alternate:node0:condition:op2@28",
+        "m0:always0:node0:alternate:node0:condition:op3@16",
+        "m0:always0:node0:alternate:node0:condition:op3@16:selector",
+        "m0:assign0:op1@16"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "event_accumulator/C/event_accumulator.v",
+      "module": "event_accumulator",
+      "target": "o_count",
+      "line": 70,
+      "operation_count": 0,
+      "operation_ids": [],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "event_accumulator/C/event_accumulator.v",
+      "module": "event_accumulator",
+      "target": "wire_event_sum",
+      "line": 66,
+      "operation_count": 1,
+      "operation_ids": [
+        "m0:assign0:op1@16"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "valid_data_pipeline/A/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "data_o",
+      "line": 89,
+      "operation_count": 4,
+      "operation_ids": [
+        "m0:always1:node0:alternate:node0:alternate:node0:condition:op1@19",
+        "m0:always1:node0:alternate:node0:alternate:node0:condition:op1@19:selector",
+        "m0:always1:node0:alternate:node0:condition:op1@8",
+        "m0:always1:node0:alternate:node0:condition:op1@8:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "valid_data_pipeline/A/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "flag_capture_valid",
+      "line": 118,
+      "operation_count": 2,
+      "operation_ids": [
+        "m0:always3:node0:alternate:node0:condition:op1@8",
+        "m0:always3:node0:alternate:node0:condition:op1@8:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "valid_data_pipeline/A/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "o_data",
+      "line": 72,
+      "operation_count": 0,
+      "operation_ids": [],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "valid_data_pipeline/A/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "o_valid",
+      "line": 71,
+      "operation_count": 0,
+      "operation_ids": [],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "valid_data_pipeline/A/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "reg_capture_data",
+      "line": 104,
+      "operation_count": 4,
+      "operation_ids": [
+        "m0:always2:node0:alternate:node0:alternate:node0:condition:op1@8",
+        "m0:always2:node0:alternate:node0:alternate:node0:condition:op1@8:selector",
+        "m0:always2:node0:alternate:node0:condition:op1@8",
+        "m0:always2:node0:alternate:node0:condition:op1@8:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "valid_data_pipeline/A/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "valid_o",
+      "line": 77,
+      "operation_count": 2,
+      "operation_ids": [
+        "m0:always0:node0:alternate:node0:condition:op1@8",
+        "m0:always0:node0:alternate:node0:condition:op1@8:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "valid_data_pipeline/B/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "data_o",
+      "line": 89,
+      "operation_count": 4,
+      "operation_ids": [
+        "m0:always1:node0:alternate:node0:alternate:node0:condition:op1@19",
+        "m0:always1:node0:alternate:node0:alternate:node0:condition:op1@19:selector",
+        "m0:always1:node0:alternate:node0:condition:op1@8",
+        "m0:always1:node0:alternate:node0:condition:op1@8:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "valid_data_pipeline/B/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "flag_capture_valid",
+      "line": 118,
+      "operation_count": 2,
+      "operation_ids": [
+        "m0:always3:node0:alternate:node0:condition:op1@8",
+        "m0:always3:node0:alternate:node0:condition:op1@8:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "valid_data_pipeline/B/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "o_data",
+      "line": 72,
+      "operation_count": 0,
+      "operation_ids": [],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "valid_data_pipeline/B/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "o_valid",
+      "line": 71,
+      "operation_count": 0,
+      "operation_ids": [],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "valid_data_pipeline/B/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "reg_capture_data",
+      "line": 104,
+      "operation_count": 4,
+      "operation_ids": [
+        "m0:always2:node0:alternate:node0:alternate:node0:condition:op1@8",
+        "m0:always2:node0:alternate:node0:alternate:node0:condition:op1@8:selector",
+        "m0:always2:node0:alternate:node0:condition:op1@8",
+        "m0:always2:node0:alternate:node0:condition:op1@8:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "valid_data_pipeline/B/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "valid_o",
+      "line": 77,
+      "operation_count": 2,
+      "operation_ids": [
+        "m0:always0:node0:alternate:node0:condition:op1@8",
+        "m0:always0:node0:alternate:node0:condition:op1@8:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "valid_data_pipeline/C/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "data_o",
+      "line": 89,
+      "operation_count": 4,
+      "operation_ids": [
+        "m0:always1:node0:alternate:node0:alternate:node0:condition:op1@19",
+        "m0:always1:node0:alternate:node0:alternate:node0:condition:op1@19:selector",
+        "m0:always1:node0:alternate:node0:condition:op1@8",
+        "m0:always1:node0:alternate:node0:condition:op1@8:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "valid_data_pipeline/C/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "flag_capture_valid",
+      "line": 118,
+      "operation_count": 2,
+      "operation_ids": [
+        "m0:always3:node0:alternate:node0:condition:op1@8",
+        "m0:always3:node0:alternate:node0:condition:op1@8:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "valid_data_pipeline/C/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "o_data",
+      "line": 72,
+      "operation_count": 0,
+      "operation_ids": [],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "valid_data_pipeline/C/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "o_valid",
+      "line": 71,
+      "operation_count": 0,
+      "operation_ids": [],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "valid_data_pipeline/C/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "reg_capture_data",
+      "line": 104,
+      "operation_count": 4,
+      "operation_ids": [
+        "m0:always2:node0:alternate:node0:alternate:node0:condition:op1@8",
+        "m0:always2:node0:alternate:node0:alternate:node0:condition:op1@8:selector",
+        "m0:always2:node0:alternate:node0:condition:op1@8",
+        "m0:always2:node0:alternate:node0:condition:op1@8:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "original",
+      "path": "valid_data_pipeline/C/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "valid_o",
+      "line": 77,
+      "operation_count": 1,
+      "operation_ids": [
+        "m0:always0:node0:alternate:node0:condition:op1@5:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "event_accumulator/A/event_accumulator.v",
+      "module": "event_accumulator",
+      "target": "cnt_event_o",
+      "line": 77,
+      "operation_count": 3,
+      "operation_ids": [
+        "m0:always0:node0:alternate:node0:node0:item0:selector",
+        "m0:always0:node0:alternate:node0:node0:item1:node0:item0:selector",
+        "m0:assign1:op1@20"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "event_accumulator/A/event_accumulator.v",
+      "module": "event_accumulator",
+      "target": "o_count",
+      "line": 72,
+      "operation_count": 0,
+      "operation_ids": [],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "event_accumulator/A/event_accumulator.v",
+      "module": "event_accumulator",
+      "target": "wire_event_sum",
+      "line": 68,
+      "operation_count": 1,
+      "operation_ids": [
+        "m0:assign1:op1@20"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "event_accumulator/A/event_accumulator.v",
+      "module": "event_accumulator",
+      "target": "wire_increment_select",
+      "line": 67,
+      "operation_count": 0,
+      "operation_ids": [],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "event_accumulator/B/event_accumulator.v",
+      "module": "event_accumulator",
+      "target": "cnt_event_o",
+      "line": 75,
+      "operation_count": 3,
+      "operation_ids": [
+        "m0:always0:node0:alternate:node0:node0:item0:selector",
+        "m0:always0:node0:alternate:node0:node0:item1:node0:item0:selector",
+        "m0:assign0:op1@20"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "event_accumulator/B/event_accumulator.v",
+      "module": "event_accumulator",
+      "target": "o_count",
+      "line": 70,
+      "operation_count": 0,
+      "operation_ids": [],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "event_accumulator/B/event_accumulator.v",
+      "module": "event_accumulator",
+      "target": "wire_event_sum",
+      "line": 66,
+      "operation_count": 1,
+      "operation_ids": [
+        "m0:assign0:op1@20"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "event_accumulator/C/event_accumulator.v",
+      "module": "event_accumulator",
+      "target": "cnt_event_o",
+      "line": 79,
+      "operation_count": 3,
+      "operation_ids": [
+        "m0:always0:node0:alternate:node0:node0:item0:selector",
+        "m0:always0:node0:alternate:node0:node0:item1:node0:item0:selector",
+        "m0:assign2:op1@20"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "event_accumulator/C/event_accumulator.v",
+      "module": "event_accumulator",
+      "target": "o_count",
+      "line": 74,
+      "operation_count": 0,
+      "operation_ids": [],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "event_accumulator/C/event_accumulator.v",
+      "module": "event_accumulator",
+      "target": "wire_event_sum",
+      "line": 70,
+      "operation_count": 1,
+      "operation_ids": [
+        "m0:assign2:op1@20"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "event_accumulator/C/event_accumulator.v",
+      "module": "event_accumulator",
+      "target": "wire_increment_select",
+      "line": 69,
+      "operation_count": 0,
+      "operation_ids": [],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "event_accumulator/C/event_accumulator.v",
+      "module": "event_accumulator",
+      "target": "wire_priority_select",
+      "line": 68,
+      "operation_count": 0,
+      "operation_ids": [],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "valid_data_pipeline/A/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "data_o",
+      "line": 89,
+      "operation_count": 2,
+      "operation_ids": [
+        "m0:always1:node0:alternate:node0:node0:item0:selector",
+        "m0:always1:node0:alternate:node0:node0:item1:node0:item0:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "valid_data_pipeline/A/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "flag_capture_valid",
+      "line": 138,
+      "operation_count": 2,
+      "operation_ids": [
+        "m0:always3:node0:alternate:node0:condition:op1@8",
+        "m0:always3:node0:alternate:node0:condition:op1@8:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "valid_data_pipeline/A/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "o_data",
+      "line": 72,
+      "operation_count": 0,
+      "operation_ids": [],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "valid_data_pipeline/A/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "o_valid",
+      "line": 71,
+      "operation_count": 0,
+      "operation_ids": [],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "valid_data_pipeline/A/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "reg_capture_data",
+      "line": 114,
+      "operation_count": 2,
+      "operation_ids": [
+        "m0:always2:node0:alternate:node0:node0:item0:selector",
+        "m0:always2:node0:alternate:node0:node0:item1:node0:item0:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "valid_data_pipeline/A/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "valid_o",
+      "line": 77,
+      "operation_count": 2,
+      "operation_ids": [
+        "m0:always0:node0:alternate:node0:condition:op1@8",
+        "m0:always0:node0:alternate:node0:condition:op1@8:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "valid_data_pipeline/B/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "data_o",
+      "line": 89,
+      "operation_count": 2,
+      "operation_ids": [
+        "m0:always1:node0:alternate:node0:node0:item0:selector",
+        "m0:always1:node0:alternate:node0:node0:item1:node0:item0:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "valid_data_pipeline/B/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "flag_capture_valid",
+      "line": 138,
+      "operation_count": 2,
+      "operation_ids": [
+        "m0:always3:node0:alternate:node0:condition:op1@8",
+        "m0:always3:node0:alternate:node0:condition:op1@8:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "valid_data_pipeline/B/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "o_data",
+      "line": 72,
+      "operation_count": 0,
+      "operation_ids": [],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "valid_data_pipeline/B/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "o_valid",
+      "line": 71,
+      "operation_count": 0,
+      "operation_ids": [],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "valid_data_pipeline/B/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "reg_capture_data",
+      "line": 114,
+      "operation_count": 2,
+      "operation_ids": [
+        "m0:always2:node0:alternate:node0:node0:item0:selector",
+        "m0:always2:node0:alternate:node0:node0:item1:node0:item0:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "valid_data_pipeline/B/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "valid_o",
+      "line": 77,
+      "operation_count": 2,
+      "operation_ids": [
+        "m0:always0:node0:alternate:node0:condition:op1@8",
+        "m0:always0:node0:alternate:node0:condition:op1@8:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "valid_data_pipeline/C/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "data_o",
+      "line": 89,
+      "operation_count": 2,
+      "operation_ids": [
+        "m0:always1:node0:alternate:node0:node0:item0:selector",
+        "m0:always1:node0:alternate:node0:node0:item1:node0:item0:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "valid_data_pipeline/C/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "flag_capture_valid",
+      "line": 138,
+      "operation_count": 2,
+      "operation_ids": [
+        "m0:always3:node0:alternate:node0:condition:op1@8",
+        "m0:always3:node0:alternate:node0:condition:op1@8:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "valid_data_pipeline/C/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "o_data",
+      "line": 72,
+      "operation_count": 0,
+      "operation_ids": [],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "valid_data_pipeline/C/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "o_valid",
+      "line": 71,
+      "operation_count": 0,
+      "operation_ids": [],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "valid_data_pipeline/C/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "reg_capture_data",
+      "line": 114,
+      "operation_count": 2,
+      "operation_ids": [
+        "m0:always2:node0:alternate:node0:node0:item0:selector",
+        "m0:always2:node0:alternate:node0:node0:item1:node0:item0:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    },
+    {
+      "side": "candidate",
+      "path": "valid_data_pipeline/C/valid_data_pipeline.v",
+      "module": "valid_data_pipeline",
+      "target": "valid_o",
+      "line": 77,
+      "operation_count": 1,
+      "operation_ids": [
+        "m0:always0:node0:alternate:node0:condition:op1@5:selector"
+      ],
+      "inconclusive_reasons": [],
+      "instance_path": [],
+      "specialization": "",
+      "loop_presence": "absent"
+    }
+  ],
+  "boundary": "Control buses are simple typed concatenations of original inputs. Their producers remain in the formatter AST and transitive cone; no operation, source, or rule is suppressed."
+}

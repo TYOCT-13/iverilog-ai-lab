@@ -1,0 +1,83 @@
+{
+  "argv": [
+    "D:\\Users\\TYOCT\\anaconda3\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "scripts.python.workflow.cli",
+    "write-spec",
+    "--spec",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\spec-input-r1\\spec_document.json",
+    "--out-dir",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\spec-render-r3\\bundle",
+    "--source",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\targets\\valid_data_pipeline\\A\\valid_data_pipeline.v",
+    "--source",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\targets\\event_accumulator\\A\\event_accumulator.v",
+    "--language",
+    "zh",
+    "--no-state"
+  ],
+  "cwd": "E:\\FPGA_WORK\\iverilog-ai-lab",
+  "pythonpath": "C:\\Users\\TYOCT\\.codex\\skills\\readable-verilog-generator",
+  "returncode": 0,
+  "started_at_utc": "2026-10-07T10:44:32.544990+00:00",
+  "completed_at_utc": "2026-10-07T10:44:33.408186+00:00",
+  "duration_seconds": 0.86,
+  "spec": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\spec-input-r1\\spec_document.json",
+  "spec_sha256": "79280af213a62c1b0172658bedb930c112f4b54cffce3ede5a06a871d79c7417",
+  "sources": [
+    {
+      "module": "valid_data_pipeline",
+      "source": "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\targets\\valid_data_pipeline\\A\\valid_data_pipeline.v",
+      "frozen_source": "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\valid_data_pipeline\\A\\valid_data_pipeline.v",
+      "sha256": "b3fc81d4fdf3a23cb38c710af7c6d278cfba9d3f52978492594263464e44d9bb",
+      "byte_identical": true
+    },
+    {
+      "module": "event_accumulator",
+      "source": "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\targets\\event_accumulator\\A\\event_accumulator.v",
+      "frozen_source": "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\event_accumulator\\A\\event_accumulator.v",
+      "sha256": "4f8137509bc2116624f8c444f5e6d0bca319f6b2993371610dd2c2432c44d071",
+      "byte_identical": true
+    }
+  ],
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "model_api_calls": 0,
+  "dut_runs": 0,
+  "diagram_kind": "declared specification; not a measured simulation trace",
+  "files": [
+    {
+      "path": "bundle\\spec\\targets\\event_accumulator\\A\\event_accumulator_spec.md",
+      "bytes": 5637,
+      "sha256": "3c378d8ecff32f6f4f3502a2f4a8dc94356fb802fd91e58c24054621c04bf34a"
+    },
+    {
+      "path": "bundle\\spec\\targets\\event_accumulator\\A\\waveforms\\event_accumulator_normal-operation.json5",
+      "bytes": 627,
+      "sha256": "2290eaef673f8baeae63dddb0ccc77ed3dc981e12dfa4ab1c6de884acd025b3d"
+    },
+    {
+      "path": "bundle\\spec\\targets\\event_accumulator\\A\\waveforms\\event_accumulator_normal-operation.svg",
+      "bytes": 59926,
+      "sha256": "33fb58ed4252d24557dd460dc382d84e9fad2c0dbedfac17ef9ffeacf864e027"
+    },
+    {
+      "path": "bundle\\spec\\targets\\valid_data_pipeline\\A\\valid_data_pipeline_spec.md",
+      "bytes": 6143,
+      "sha256": "6c0f6ba2ed7ab67c9e689d7bf1a96dc62747e325d89709e94ebbf0a4cddd78b2"
+    },
+    {
+      "path": "bundle\\spec\\targets\\valid_data_pipeline\\A\\waveforms\\valid_data_pipeline_normal-operation.json5",
+      "bytes": 864,
+      "sha256": "6e85848979aae0ea0b8e9662b7fc1f30694c08820e407b131afd57a9099ea7b1"
+    },
+    {
+      "path": "bundle\\spec\\targets\\valid_data_pipeline\\A\\waveforms\\valid_data_pipeline_normal-operation.svg",
+      "bytes": 62302,
+      "sha256": "194662bc532b97695a6a06fe9ada59d8a7c35e1b9d877937148909995c7dca5e"
+    }
+  ]
+}

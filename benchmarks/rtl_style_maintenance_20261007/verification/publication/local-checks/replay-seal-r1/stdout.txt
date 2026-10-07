@@ -1,0 +1,1 @@
+{"status": "public_replay_sealed", "copied_files": 36, "archive_members": 473, "spec_files_byte_identical": 18, "paired_comparisons_per_run": 5115, "new_DUT_executions": 36, "maintenance_phase_total_DUT": 72, "API_requests": 0}

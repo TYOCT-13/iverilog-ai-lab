@@ -1,0 +1,70 @@
+{
+  "copies": [
+    {
+      "source": ".tmp-codex/rtl-style-independent-review-r1/closure_receipt.json",
+      "published_path": "benchmarks/rtl_style_maintenance_20261007/verification/independent-review/closure_receipt.json",
+      "bytes": 3096,
+      "sha256": "7beabb38385cff4ad6b7cd0e9b2ef2fcc83ea5c9adf236034194b509c849023d"
+    },
+    {
+      "source": ".tmp-codex/rtl-style-independent-review-r1/closure_receipt.md",
+      "published_path": "benchmarks/rtl_style_maintenance_20261007/verification/independent-review/closure_receipt.md",
+      "bytes": 663,
+      "sha256": "bacc4be04cc6a9477e916a686e78a5a5f23f288199d474a06849863d0972a598"
+    },
+    {
+      "source": ".tmp-codex/rtl-style-independent-review-r1/review-r2-attempt1.failure.json",
+      "published_path": "benchmarks/rtl_style_maintenance_20261007/verification/independent-review/review-r2-attempt1.failure.json",
+      "bytes": 698,
+      "sha256": "aba1321621e6bfd91d6983ac8d4776d7642e5010e1be55bffa5c8d4027b4f6a9"
+    },
+    {
+      "source": ".tmp-codex/rtl-style-independent-review-r1/review-r2-attempt1.failure.md",
+      "published_path": "benchmarks/rtl_style_maintenance_20261007/verification/independent-review/review-r2-attempt1.failure.md",
+      "bytes": 327,
+      "sha256": "c399341dae5ff97839b67a87dc22903ea6b45789dfb5cc5c97038d68044f06f4"
+    },
+    {
+      "source": ".tmp-codex/rtl-style-independent-review-r1/review-r2-attempt2.failure.json",
+      "published_path": "benchmarks/rtl_style_maintenance_20261007/verification/independent-review/review-r2-attempt2.failure.json",
+      "bytes": 674,
+      "sha256": "75f4297593ae1dd6973be878a1933ef0b98014b8377f04b8d8217e857f377b70"
+    },
+    {
+      "source": ".tmp-codex/rtl-style-independent-review-r1/review-r2-attempt2.failure.md",
+      "published_path": "benchmarks/rtl_style_maintenance_20261007/verification/independent-review/review-r2-attempt2.failure.md",
+      "bytes": 290,
+      "sha256": "09474a691a699dcc763a3ff69002c475c75770af0642da72fde81320536246f5"
+    },
+    {
+      "source": ".tmp-codex/rtl-style-independent-review-r1/review-r2.json",
+      "published_path": "benchmarks/rtl_style_maintenance_20261007/verification/independent-review/review-r2.json",
+      "bytes": 553496,
+      "sha256": "005ee0373625c06cef3d4eaca07701f4ef6ae4d5ecacb93fb531684f348ac604"
+    },
+    {
+      "source": ".tmp-codex/rtl-style-independent-review-r1/review-r2.md",
+      "published_path": "benchmarks/rtl_style_maintenance_20261007/verification/independent-review/review-r2.md",
+      "bytes": 3965,
+      "sha256": "67269facb47c7bd636a85a00d34614c7ec09d04b29d3e1239ddc5f78fff83730"
+    },
+    {
+      "source": ".tmp-codex/rtl-style-independent-review-r1/review.json",
+      "published_path": "benchmarks/rtl_style_maintenance_20261007/verification/independent-review/review.json",
+      "bytes": 310840,
+      "sha256": "09a667d13620b39e5ad2ea409307ea48ecf9468f5f8851e0f55c263f1b93a0a4"
+    },
+    {
+      "source": ".tmp-codex/rtl-style-independent-review-r1/review.md",
+      "published_path": "benchmarks/rtl_style_maintenance_20261007/verification/independent-review/review.md",
+      "bytes": 3664,
+      "sha256": "bd2f03e0874a2a26d74a4b667522f3f6e55a83f8a542acfee43fb2862ab3df01"
+    }
+  ],
+  "all_byte_identical": true,
+  "independent_AI_review_checks": 1511,
+  "initial_and_final_checks_not_added": true,
+  "is_H02_human_review": false,
+  "API_requests": 0,
+  "new_DUT_executions": 0
+}

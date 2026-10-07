@@ -1,0 +1,11 @@
+{
+  "command": [
+    "D:\\Users\\TYOCT\\anaconda3\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\publish_rtl_style_maintenance_20261007.py"
+  ],
+  "cwd": "E:\\FPGA_WORK\\iverilog-ai-lab",
+  "exit_code": 0
+}

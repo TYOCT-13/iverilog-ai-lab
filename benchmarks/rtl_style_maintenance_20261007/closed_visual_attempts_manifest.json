@@ -1,0 +1,174 @@
+{
+  "archive": "closed_visual_attempts.zip",
+  "archive_bytes": 176739,
+  "archive_sha256": "7dd476555512c8e0f1752ad31018d4af6cc9355a914cf706711f092f216d9148",
+  "member_count": 33,
+  "members": [
+    {
+      "path": "style-visual-r1/event_accumulator_A.geometry.json",
+      "bytes": 2305,
+      "sha256": "9d9a436b70e180cc66dd9671372f0f37e3d5339cfffe08b9d21c62664ae295f8"
+    },
+    {
+      "path": "style-visual-r1/event_accumulator_A.png",
+      "bytes": 14762,
+      "sha256": "317e5699b91e5520bf68c238bdcd801914c5b02ab918a5475c2ef9c48b31ab29"
+    },
+    {
+      "path": "style-visual-r1/event_accumulator_B.geometry.json",
+      "bytes": 2307,
+      "sha256": "f97b25b7f78c68496357f408e7456d9e2a060b61c9067a86323f7c2270f9a6da"
+    },
+    {
+      "path": "style-visual-r1/event_accumulator_B.png",
+      "bytes": 14843,
+      "sha256": "906706d842aaee76460551e30a2c382edb38dfb2991ee9d42827ed3eb1c90a47"
+    },
+    {
+      "path": "style-visual-r1/event_accumulator_C.geometry.json",
+      "bytes": 2307,
+      "sha256": "0a8c1fc9d90b45c3d4eab566475e2628e1c759381ce065e42678b5a4ef29901b"
+    },
+    {
+      "path": "style-visual-r1/event_accumulator_C.png",
+      "bytes": 14741,
+      "sha256": "8a12c1a0ee03098af28feacc4b66d9c3689b3f29ca2fee00107d47892e560691"
+    },
+    {
+      "path": "style-visual-r1/server-stop.json",
+      "bytes": 125,
+      "sha256": "72516e5800a34272a5ec23f98a9fe72afcfb305b6ee37ead1ec53fff77a34c71"
+    },
+    {
+      "path": "style-visual-r1/server.json",
+      "bytes": 406,
+      "sha256": "4817f1839099d509a5df6cee906a70ef313f5141e3277067be63064c4abd5ea9"
+    },
+    {
+      "path": "style-visual-r1/server.stderr.txt",
+      "bytes": 977,
+      "sha256": "9ab41424838efd3fa2f428369590abcaf14eaedbf97434531324924fdf0d2ee0"
+    },
+    {
+      "path": "style-visual-r1/server.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "style-visual-r1/valid_data_pipeline_A.geometry.json",
+      "bytes": 3775,
+      "sha256": "905e94d3750534a3d192f418a5d38958f69ff2813460a947dbbd69079f49564e"
+    },
+    {
+      "path": "style-visual-r1/valid_data_pipeline_A.png",
+      "bytes": 20891,
+      "sha256": "703995b4c0c93f6b9ac58eec6185471b4a1dfe806e89546c1808d3631afbf34b"
+    },
+    {
+      "path": "style-visual-r1/valid_data_pipeline_B.geometry.json",
+      "bytes": 3769,
+      "sha256": "ffae04a0d4e4aec8492470629ecb93474ffed0a1f76b2b45af4568a43f5397c7"
+    },
+    {
+      "path": "style-visual-r1/valid_data_pipeline_B.png",
+      "bytes": 20887,
+      "sha256": "bce6aa95de60a09f741b6ab276b162c3bfd643e3fb3a055ed06e3a8524a8e749"
+    },
+    {
+      "path": "style-visual-r1/valid_data_pipeline_C.geometry.json",
+      "bytes": 3771,
+      "sha256": "8dcd551282262a190c981b162c45576f8d651c5111f8cfa9cc6ef902ef4af711"
+    },
+    {
+      "path": "style-visual-r1/valid_data_pipeline_C.png",
+      "bytes": 20954,
+      "sha256": "b4a1fec2aed64a2e8927270d0f92a13862aef1218f1218ea3d9cd1d55ce61d81"
+    },
+    {
+      "path": "style-visual-r2/event_accumulator_A.geometry.json",
+      "bytes": 2305,
+      "sha256": "c9f8c36e324c1cf49809baf9d143f1ac22f42dfdb1c9c2aad6181f090f09b1f4"
+    },
+    {
+      "path": "style-visual-r2/event_accumulator_A.png",
+      "bytes": 14762,
+      "sha256": "317e5699b91e5520bf68c238bdcd801914c5b02ab918a5475c2ef9c48b31ab29"
+    },
+    {
+      "path": "style-visual-r2/event_accumulator_B.geometry.json",
+      "bytes": 2307,
+      "sha256": "867618c0650657062e5093b19f1f955b12a67c1a807ef88396baa31d7b0167dd"
+    },
+    {
+      "path": "style-visual-r2/event_accumulator_B.png",
+      "bytes": 14843,
+      "sha256": "906706d842aaee76460551e30a2c382edb38dfb2991ee9d42827ed3eb1c90a47"
+    },
+    {
+      "path": "style-visual-r2/event_accumulator_C.geometry.json",
+      "bytes": 2307,
+      "sha256": "99e759ce9a956622210f283cf7de69d2bdf9c328c28e9cb692c6d702006b0f7f"
+    },
+    {
+      "path": "style-visual-r2/event_accumulator_C.png",
+      "bytes": 14741,
+      "sha256": "8a12c1a0ee03098af28feacc4b66d9c3689b3f29ca2fee00107d47892e560691"
+    },
+    {
+      "path": "style-visual-r2/root_visual_receipt.json",
+      "bytes": 5649,
+      "sha256": "8584d1e79e59cd53b5ee8cb2cab30c6310133c32ebe9a8f48c13af79a26c8ca9"
+    },
+    {
+      "path": "style-visual-r2/server-stop.json",
+      "bytes": 125,
+      "sha256": "2552562b6c9c311d208c52d3c4da30e0ef760f148ac9dc1491e5aaa17e303dd7"
+    },
+    {
+      "path": "style-visual-r2/server.json",
+      "bytes": 423,
+      "sha256": "56beed246659ac6efb84ac23b9f831f2d70ac0f397cc4339fd305e8c200ebbb6"
+    },
+    {
+      "path": "style-visual-r2/server.stderr.txt",
+      "bytes": 977,
+      "sha256": "c6a8a9689067feddd39a04de29058c1054330d6d752d96cd25c584e883013720"
+    },
+    {
+      "path": "style-visual-r2/server.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "style-visual-r2/valid_data_pipeline_A.geometry.json",
+      "bytes": 3775,
+      "sha256": "23a754f81eb8dee0f7abfe4bc4782503de725c1487c51ac4ef11edc3da2adaa7"
+    },
+    {
+      "path": "style-visual-r2/valid_data_pipeline_A.png",
+      "bytes": 20292,
+      "sha256": "f69bf302c8c35146f8ddc1c64e9828b558664ea28bdc1833fadef108ea06c295"
+    },
+    {
+      "path": "style-visual-r2/valid_data_pipeline_B.geometry.json",
+      "bytes": 3769,
+      "sha256": "325a678e3e60c196d7c6b7a74f1f8075f77c338d21e8c3487b8394978b10cf0a"
+    },
+    {
+      "path": "style-visual-r2/valid_data_pipeline_B.png",
+      "bytes": 20373,
+      "sha256": "051c4aa7b2f318aa2f324fd46494db6abc6c5b6633c53a2cc2111c27a14bf556"
+    },
+    {
+      "path": "style-visual-r2/valid_data_pipeline_C.geometry.json",
+      "bytes": 3771,
+      "sha256": "0851043f4bd64ed59d99489757cfb9e73150acf73704211a9a3ccc5b23bdc0a4"
+    },
+    {
+      "path": "style-visual-r2/valid_data_pipeline_C.png",
+      "bytes": 20470,
+      "sha256": "2695775c157b1666ad66d4854296c5b952bf4431b8a3c8467274548a203f09ef"
+    }
+  ],
+  "all_members_verified_after_write": true
+}

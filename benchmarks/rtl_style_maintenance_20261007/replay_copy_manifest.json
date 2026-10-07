@@ -1,0 +1,222 @@
+{
+  "copied_file_count": 36,
+  "copied_files": [
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/replay_receipt.json",
+      "public_path": "verification/replay/replay_receipt.json",
+      "bytes": 1212,
+      "sha256": "dc113bb170086ce4c2b29bc8a3c427bbf457d20f4902eb4b186b068f26acccc3"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/gate/deliverable_gate.json",
+      "public_path": "verification/replay/gate/deliverable_gate.json",
+      "bytes": 828579,
+      "sha256": "fa1f490f69c6df842808274f1b3b7d26643a365051a9a73bb94b2d3d72cf6b9e"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/gate/deliverable_gate.md",
+      "public_path": "verification/replay/gate/deliverable_gate.md",
+      "bytes": 225,
+      "sha256": "a0658c623caf32d460375fae98b54c34e6dd69d527ef0308a5af122310d1101b"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/gate/official-gate.stdout.txt",
+      "public_path": "verification/replay/gate/official-gate.stdout.txt",
+      "bytes": 429,
+      "sha256": "c4e605a5587060b6230bf49c1a0fc36285f5c97d793e39627a167fcb7d8f01f3"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/gate/official-gate.stderr.txt",
+      "public_path": "verification/replay/gate/official-gate.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/gate/official-gate.exit.json",
+      "public_path": "verification/replay/gate/official-gate.exit.json",
+      "bytes": 636,
+      "sha256": "b3162fe0f176ee0542148304f3271df56c1d7e7732a6f725f6e3fca00aa89912"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/validation/public-oracle/summary.json",
+      "public_path": "verification/replay/public-oracle/summary.json",
+      "bytes": 9907,
+      "sha256": "b5bfe976eab8e60d0742cd02a4b7d582386833b89d18d1afc9a3f940977f0109"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/validation/public-oracle/progress.json",
+      "public_path": "verification/replay/public-oracle/progress.json",
+      "bytes": 7581,
+      "sha256": "2f3f04a025bef36600c06646e8efe7e6e9c3e85ba44262960e67cfb7cceabdb5"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/validation/public-oracle/exit.json",
+      "public_path": "verification/replay/public-oracle/exit.json",
+      "bytes": 322,
+      "sha256": "067c66aa358ae541adea2379d6d77022f7008e01efe241ff1df2683c631106ac"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/validation/public-oracle/path_replacements.json",
+      "public_path": "verification/replay/public-oracle/path_replacements.json",
+      "bytes": 1741,
+      "sha256": "583d3f5d69b9790c76371e9f10f5e3e70475999e9fddfd0f381e4c0ba7434e34"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/validation/public-oracle/replayed-job.py",
+      "public_path": "verification/replay/public-oracle/replayed-job.py",
+      "bytes": 5183,
+      "sha256": "2db432fcd3d5e378d3c973015cf7d329644d0e08680de282b6bb9880f3a63800"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/validation/public-oracle/stdout.txt",
+      "public_path": "verification/replay/public-oracle/stdout.txt",
+      "bytes": 1195,
+      "sha256": "594a45a3299b04e53ea98d5ac2e3da86feb7e96fac5282e1309761474d93b38f"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/validation/public-oracle/stderr.txt",
+      "public_path": "verification/replay/public-oracle/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/validation/four-state/summary.json",
+      "public_path": "verification/replay/four-state/summary.json",
+      "bytes": 23545,
+      "sha256": "b87d30a36bce66a0d1957e049ee35e25ff5286b2bcc067a318ddf8727b11835a"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/validation/four-state/progress.json",
+      "public_path": "verification/replay/four-state/progress.json",
+      "bytes": 18457,
+      "sha256": "dd5609bd9e2ad7cfc5af13c41f18a2ee2bd3863bbc75a54f7f5dcac7d76c4ae0"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/validation/four-state/exit.json",
+      "public_path": "verification/replay/four-state/exit.json",
+      "bytes": 319,
+      "sha256": "edf426fa2ef4fa62a746a48fdc667905f10207b7c34524cbffb7d909000adc70"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/validation/four-state/path_replacements.json",
+      "public_path": "verification/replay/four-state/path_replacements.json",
+      "bytes": 1723,
+      "sha256": "1acefc9362807cf99506f1a41338e5065b8d2e15e94c0f42c01d9fe87d903bff"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/validation/four-state/replayed-job.py",
+      "public_path": "verification/replay/four-state/replayed-job.py",
+      "bytes": 7222,
+      "sha256": "ad1127fded4175fad4355901d04cee3448fd094f612816c62cca18ba184d0616"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/validation/four-state/stdout.txt",
+      "public_path": "verification/replay/four-state/stdout.txt",
+      "bytes": 2737,
+      "sha256": "ed44b9b1cfae81a40ba7010e6c52e0c46c87f1471c3026a7e05a9e693e0f47f7"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/validation/four-state/stderr.txt",
+      "public_path": "verification/replay/four-state/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/spec-logs/A.exit.json",
+      "public_path": "verification/replay/spec-logs/A.exit.json",
+      "bytes": 862,
+      "sha256": "58b8ace7b1a1e5023e6b80c3f677d67238e4139014e39958220e4776d623a071"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/spec-logs/A.stderr.txt",
+      "public_path": "verification/replay/spec-logs/A.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/spec-logs/A.stdout.txt",
+      "public_path": "verification/replay/spec-logs/A.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/spec-logs/B.exit.json",
+      "public_path": "verification/replay/spec-logs/B.exit.json",
+      "bytes": 862,
+      "sha256": "0cef695af958d27ebdb239b0cebb0db2db511ccd4f1f0ff5d3ee948f3b6ac1a6"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/spec-logs/B.stderr.txt",
+      "public_path": "verification/replay/spec-logs/B.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/spec-logs/B.stdout.txt",
+      "public_path": "verification/replay/spec-logs/B.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/spec-logs/C.exit.json",
+      "public_path": "verification/replay/spec-logs/C.exit.json",
+      "bytes": 862,
+      "sha256": "d5207568408efdcfe7538006252e43b957ea4e17a9d76fb7283190cb7041c20e"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/spec-logs/C.stderr.txt",
+      "public_path": "verification/replay/spec-logs/C.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".iverilog-ai/ic-engineering-preflight-20261007/public-replay-r1/spec-logs/C.stdout.txt",
+      "public_path": "verification/replay/spec-logs/C.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".tmp-codex/rtl-style-replay-command-r1/exit.json",
+      "public_path": "verification/replay/command/exit.json",
+      "bytes": 481,
+      "sha256": "f164b9951b1e4eeec4f46d9e85c4cbc3b63e588edd6704c63db687bd4b91cb32"
+    },
+    {
+      "source": ".tmp-codex/rtl-style-replay-command-r1/stderr.txt",
+      "public_path": "verification/replay/command/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".tmp-codex/rtl-style-replay-command-r1/stdout.txt",
+      "public_path": "verification/replay/command/stdout.txt",
+      "bytes": 1132,
+      "sha256": "0e3b13a85d16cf588ccb283972c0d14484d6ee1ee7e30cacf611bf52b3a77ce5"
+    },
+    {
+      "source": ".tmp-codex/rtl-style-publication-r1/exit.json",
+      "public_path": "verification/replay/publication-command/exit.json",
+      "bytes": 264,
+      "sha256": "46d56312c3d91c9ce4f95fed31e6e321198ff30305f12c7617a5e4ad9876a115"
+    },
+    {
+      "source": ".tmp-codex/rtl-style-publication-r1/stderr.txt",
+      "public_path": "verification/replay/publication-command/stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": ".tmp-codex/rtl-style-publication-r1/stdout.txt",
+      "public_path": "verification/replay/publication-command/stdout.txt",
+      "bytes": 215,
+      "sha256": "a339b31a4f0f0a84bd2cc70e73cf0b736e5b4662bff626c4cf669a11ea6ad8b4"
+    },
+    {
+      "source": ".tmp-codex/complete_rtl_style_public_replay_20261007.py",
+      "public_path": "verification/publication/complete_public_replay.py",
+      "bytes": 9977,
+      "sha256": "56b5a0dcf46fc999693cc341629a06b00939a791098fe60d6c209d01ef01d384"
+    }
+  ],
+  "all_copies_byte_identical": true
+}

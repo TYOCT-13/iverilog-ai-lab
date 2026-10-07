@@ -1,0 +1,78 @@
+{
+  "schema": "rtl-maintenance-independent-review-closure-v1",
+  "created_at_utc": "2026-10-07T12:19:06.764708+00:00",
+  "status": "passed_with_limits",
+  "author_role": "AI independent read-only reviewer; not H02 human",
+  "initial_review": {
+    "mechanical_checks": 975,
+    "passed": 973,
+    "failed": 2,
+    "reason": "Auditor compared raw Windows CRLF output against LF input instead of wrapper universal-newline text semantics."
+  },
+  "corrected_final_review": {
+    "total_mechanical_checks": 1511,
+    "passed": 1511,
+    "failed": 0,
+    "corrected_existing_checks": 975,
+    "additional_checks": 536,
+    "do_not_add_initial_and_final_counts": true,
+    "do_not_report_2486_checks": true,
+    "count_explanation": "Final review includes the earlier975 checks with2 auditor-boundary corrections plus536 added archive/copy/release/document checks. It is one final checkset, not975+1511."
+  },
+  "auditor_attempt_failures_retained": 2,
+  "failures_are_auditor_assumption_errors": true,
+  "source_or_run_artifacts_modified": false,
+  "new_auditor_DUT_or_API_executions": 0,
+  "public_DUT_runs_read": 36,
+  "same_vector_author_plus_public_repeat_DUT_count": 72,
+  "new_independent_samples_created": 0,
+  "formal_or_human_or_second_host_claim": false,
+  "report_bindings": [
+    {
+      "file": "review.json",
+      "bytes": 310840,
+      "sha256": "09a667d13620b39e5ad2ea409307ea48ecf9468f5f8851e0f55c263f1b93a0a4"
+    },
+    {
+      "file": "review.md",
+      "bytes": 3664,
+      "sha256": "bd2f03e0874a2a26d74a4b667522f3f6e55a83f8a542acfee43fb2862ab3df01"
+    },
+    {
+      "file": "review-r2-attempt1.failure.json",
+      "bytes": 698,
+      "sha256": "aba1321621e6bfd91d6983ac8d4776d7642e5010e1be55bffa5c8d4027b4f6a9"
+    },
+    {
+      "file": "review-r2-attempt1.failure.md",
+      "bytes": 327,
+      "sha256": "c399341dae5ff97839b67a87dc22903ea6b45789dfb5cc5c97038d68044f06f4"
+    },
+    {
+      "file": "review-r2-attempt2.failure.json",
+      "bytes": 674,
+      "sha256": "75f4297593ae1dd6973be878a1933ef0b98014b8377f04b8d8217e857f377b70"
+    },
+    {
+      "file": "review-r2-attempt2.failure.md",
+      "bytes": 290,
+      "sha256": "09474a691a699dcc763a3ff69002c475c75770af0642da72fde81320536246f5"
+    },
+    {
+      "file": "review-r2.json",
+      "bytes": 553496,
+      "sha256": "005ee0373625c06cef3d4eaca07701f4ef6ae4d5ecacb93fb531684f348ac604"
+    },
+    {
+      "file": "review-r2.md",
+      "bytes": 3965,
+      "sha256": "67269facb47c7bd636a85a00d34614c7ec09d04b29d3e1239ddc5f78fff83730"
+    }
+  ],
+  "notes": [
+    "All initial findings, two archive-path review failures, and corrected final reports remain separate.",
+    "Six static gates passed; testbench and toolchain remain not_requested in official gate originals.",
+    "Four-state driver inconclusive with zero built-in checks; explicit outer original/candidate comparison decides equality.",
+    "1511 mechanical checks include overlapping file-boundary checks; they are not DUT, pytest or independent sample counts."
+  ]
+}

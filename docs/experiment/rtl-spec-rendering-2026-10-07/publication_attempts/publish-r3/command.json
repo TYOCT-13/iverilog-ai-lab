@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "D:\\Users\\TYOCT\\anaconda3\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\complete_rtl_spec_rendering_20261007_r3.py"
+  ],
+  "cwd": "E:\\FPGA_WORK\\iverilog-ai-lab",
+  "returncode": 0,
+  "duration_seconds": 1.063,
+  "completed_at_utc": "2026-10-07T10:59:14.747236+00:00",
+  "model_api_calls": 0,
+  "dut_runs": 0
+}

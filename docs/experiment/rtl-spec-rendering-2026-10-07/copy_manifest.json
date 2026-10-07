@@ -1,0 +1,179 @@
+{
+  "copies": [
+    {
+      "path": "inputs/original_spec_document.json",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\spec_document.json",
+      "bytes": 15082,
+      "sha256": "78a9b5bb52b25df2958b0f5a34739a6c4f32708a415d86bc558239c2739a64be",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "inputs/render_spec_document.json",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\spec-input-r1\\spec_document.json",
+      "bytes": 15289,
+      "sha256": "79280af213a62c1b0172658bedb930c112f4b54cffce3ede5a06a871d79c7417",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "inputs/layout_changes.json",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\spec-input-r1\\layout_changes.json",
+      "bytes": 1059,
+      "sha256": "c95090f170f8176a5c586789faf919396865896f70fadb4d6a22abdbca97eaf0",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "inputs/targets/event_accumulator/A/event_accumulator.v",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\event_accumulator\\A\\event_accumulator.v",
+      "bytes": 3287,
+      "sha256": "4f8137509bc2116624f8c444f5e6d0bca319f6b2993371610dd2c2432c44d071",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "inputs/targets/valid_data_pipeline/A/valid_data_pipeline.v",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\valid_data_pipeline\\A\\valid_data_pipeline.v",
+      "bytes": 5045,
+      "sha256": "b3fc81d4fdf3a23cb38c710af7c6d278cfba9d3f52978492594263464e44d9bb",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "bundle/spec/targets/event_accumulator/A/event_accumulator_spec.md",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\spec-render-r3\\bundle\\spec\\targets\\event_accumulator\\A\\event_accumulator_spec.md",
+      "bytes": 5637,
+      "sha256": "3c378d8ecff32f6f4f3502a2f4a8dc94356fb802fd91e58c24054621c04bf34a",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "bundle/spec/targets/event_accumulator/A/waveforms/event_accumulator_normal-operation.json5",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\spec-render-r3\\bundle\\spec\\targets\\event_accumulator\\A\\waveforms\\event_accumulator_normal-operation.json5",
+      "bytes": 627,
+      "sha256": "2290eaef673f8baeae63dddb0ccc77ed3dc981e12dfa4ab1c6de884acd025b3d",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "bundle/spec/targets/event_accumulator/A/waveforms/event_accumulator_normal-operation.svg",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\spec-render-r3\\bundle\\spec\\targets\\event_accumulator\\A\\waveforms\\event_accumulator_normal-operation.svg",
+      "bytes": 59926,
+      "sha256": "33fb58ed4252d24557dd460dc382d84e9fad2c0dbedfac17ef9ffeacf864e027",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "bundle/spec/targets/valid_data_pipeline/A/valid_data_pipeline_spec.md",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\spec-render-r3\\bundle\\spec\\targets\\valid_data_pipeline\\A\\valid_data_pipeline_spec.md",
+      "bytes": 6143,
+      "sha256": "6c0f6ba2ed7ab67c9e689d7bf1a96dc62747e325d89709e94ebbf0a4cddd78b2",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "bundle/spec/targets/valid_data_pipeline/A/waveforms/valid_data_pipeline_normal-operation.json5",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\spec-render-r3\\bundle\\spec\\targets\\valid_data_pipeline\\A\\waveforms\\valid_data_pipeline_normal-operation.json5",
+      "bytes": 864,
+      "sha256": "6e85848979aae0ea0b8e9662b7fc1f30694c08820e407b131afd57a9099ea7b1",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "bundle/spec/targets/valid_data_pipeline/A/waveforms/valid_data_pipeline_normal-operation.svg",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\spec-render-r3\\bundle\\spec\\targets\\valid_data_pipeline\\A\\waveforms\\valid_data_pipeline_normal-operation.svg",
+      "bytes": 62302,
+      "sha256": "194662bc532b97695a6a06fe9ada59d8a7c35e1b9d877937148909995c7dca5e",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "visual/event_accumulator.geometry.json",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\spec-render-r3\\visual-check-r1\\event_accumulator.geometry.json",
+      "bytes": 2785,
+      "sha256": "c16b4abbc934ebafa6ff98286c1ba927f97717e85c2eab5dafe90d434ba067ec",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "visual/event_accumulator_normal-operation.png",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\spec-render-r3\\visual-check-r1\\event_accumulator_normal-operation.png",
+      "bytes": 15903,
+      "sha256": "3d6ff30fdc095e1af4d5980c935ef181aa0422a4d1c03d418013ea68efd3aca2",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "visual/valid_data_pipeline.geometry.json",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\spec-render-r3\\visual-check-r1\\valid_data_pipeline.geometry.json",
+      "bytes": 4595,
+      "sha256": "fb9181ce046d811faa641305f51ad8f1c0a0dfac3fe38aa0c1f07a37e14862d8",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "visual/valid_data_pipeline_normal-operation.png",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\spec-render-r3\\visual-check-r1\\valid_data_pipeline_normal-operation.png",
+      "bytes": 22162,
+      "sha256": "6e4d3560f12a96632ce2ffb74d1486d501a93c339003a0424590f1fc5ac6a28d",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "commands/install-r1/install.stdout.json",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\install-r1\\install.stdout.json",
+      "bytes": 556,
+      "sha256": "b46c0adfc73870050333a56a640d839ac437be9331835561d42b19a08cbc28c9",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "commands/install-r1/install.stderr.txt",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\install-r1\\install.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "commands/install-r1/install.exitcode.txt",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\install-r1\\install.exitcode.txt",
+      "bytes": 3,
+      "sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "commands/postinstall-check-r1/check.stdout.json",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\postinstall-check-r1\\check.stdout.json",
+      "bytes": 456,
+      "sha256": "3906d6a6035877e1178c217d72c3592c96dbdd44b266b897cbec75b301b937f4",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "commands/postinstall-check-r1/check.stderr.txt",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\postinstall-check-r1\\check.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "commands/postinstall-check-r1/check.exitcode.txt",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\postinstall-check-r1\\check.exitcode.txt",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "commands/spec-render-r3/registered-write-spec.json",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\spec-render-r3\\registered-write-spec.json",
+      "bytes": 3983,
+      "sha256": "a6e92aca968032c4b685bbe34b466946da0cb22d0eaadfedb587498ddf261500",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "commands/spec-render-r3/workflow.stdout.txt",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\spec-render-r3\\workflow.stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "commands/spec-render-r3/workflow.stderr.txt",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\spec-render-r3\\workflow.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_identical_copy": true
+    },
+    {
+      "path": "commands/spec-render-r3/workflow.exitcode.txt",
+      "original_path": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\spec-render-r3\\workflow.exitcode.txt",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "byte_identical_copy": true
+    }
+  ]
+}

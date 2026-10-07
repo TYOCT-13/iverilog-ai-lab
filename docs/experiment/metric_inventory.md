@@ -396,6 +396,30 @@ prior全108任务、54 Agent任务均纳入；反馈18轨迹47请求，28个后�
 
 历史v2 PDF/PPT及v5 ZIP仍保持原内容，3.19及更早章节的历史未同步状态不回写。真实队号、系统转赛道及上传、原生Office、真人/H02、异机完整复现、外部Actions、视频和账单仍待真实证据。
 
+### 3.21 固定规格渲染依赖与两A波形（2026-10-07）
+
+来源：[补充报告](rtl_spec_rendering_2026-10-07.md)、[渲染回执](rtl-spec-rendering-2026-10-07/rendering_receipt.json)、[本地重建回执](rtl-spec-rendering-2026-10-07/reproduction/reproduction_receipt.json)。经用户授权安装WaveDrom3.6.1，实际smoke通过，Node24.21.0/npm11.19.0。
+
+- 两个正确A源码与原实验逐字节相同。登记write-spec最终exit0，产出2规格MD、2WaveJSON、2SVG。只缩短输入的两处标题，其他JSON字段不变；两张实际浏览器截图逐张查看。
+- 本机重新经登记入口生成，6个文件与交付版逐字节相同。没有做异机、干净克隆、真实用户或H02验证；图片是声明规格，不是实测仿真波形，正常八拍之外的复位脉冲、计数回绕未由图片验证。
+- 本轮规格渲染0新增模型API请求、0新增DUT执行，不加到3.19的87请求/339624tokens或108任务、3.18的306请求/973149tokens、2033工程测试等统计。
+- 25份原产物复制逐字节核验，77项关闭尝试原件入包。缺依赖、错误工作目录、裁切标题、不适合的MuPDF预览以及先前失败的样式候选均保留，不选最好一次替代完整记录。
+- v3冻结来源157绑定：124项按原路径匹配材料提交`77d0c2f9d009696def1da895a50b4a69c6345f3d`，12张公开答辩PNG副本逐字节一致，其余21份本地原件另存[快照包](rtl-spec-rendering-2026-10-07/v3_retained_sources.zip)并绑定；不是157项全来自Git，也不是新模型成绩。旧回执、正式PDF/PPTX不覆盖。
+- 原实验六源r3风格门禁的12项问题仍保留；本次解决WaveDrom依赖和正确A的伴随规格图，不据此宣称全门禁通过。后续独立候选及其真实语义检查另列。
+
+### 3.22 独立RTL维护版与公开布局重放（2026-10-07）
+
+来源：[维护报告](rtl_style_maintenance_2026-10-07.md)、[公开源码与工具](../../benchmarks/rtl_style_maintenance_20261007/README.md)、[发布回执](../../benchmarks/rtl_style_maintenance_20261007/release_receipt.json)、[实际公开重放](../../benchmarks/rtl_style_maintenance_20261007/verification/replay/replay_receipt.json)。原实验六源和12项风格问题不回写，新6源在独立目录验收。
+
+- 官方严格静态门禁0错误/0警告：compile/ast/readability/comment/naming/profile六项passed，testbench/toolchain两项not_requested；真实Icarus证据另存，未改门禁JSON。
+- 首次私有36次DUT，公开版实际all重放36次，合计72执行。每轮公开判据171项加四态4944项，共5115输出值比较一致；第二轮是同组向量复测，不是新独立样本。
+- 原/新正确A公开判据均0失败；事件B/C各1失败，流水B为5/C为1，各侧相同。B/C故意缺陷保留，不称其功能正确。
+- 四态驱动内置checks为0、executor verdict为inconclusive，外层逐行比较判定一致；有限初态、复位与负载交叉不是穷举或形式等价。
+- 最终6MD/6WaveJSON/6SVG实际经登记入口重建，18文件与公开版逐字节相同；六张最终SVG在浏览器实际逐张查看。仅6处流水valid保持编码改变，24二值信号解码相同，旧坏图保留。
+- 623原绑定文件保持哈希，连同原清单与16后续文件入640成员ZIP；浏览器33成员和公开重放473成员另存，复制原件/输入及退出码均可核验。
+- 独立AI只读复核1511项全部通过、未发现实质问题，见[最终报告](../../benchmarks/rtl_style_maintenance_20261007/verification/independent-review/review-r2.md)及[收尾](../../benchmarks/rtl_style_maintenance_20261007/verification/independent-review/closure_receipt.json)。初审换行误报与两次审核者路径错误原件保留；1511含原检查，不与初审975、作者1891字节/链接检查或2033测试相加，非H02。
+- 0新模型API，不加到旧108/268、87请求/339624tokens、432或2033工程测试。源码文本已变，旧模型成绩不自动适用于维护版；未重新跑全仓pytest/mypy或API实验，未做异机、形式/综合/物理时序、硬件、外部Actions或真人/H02。
+
 ## 4. 在线模型实验（历史，探索性口径）
 
 来源：`.iverilog-ai/model-compare-r10-*`（2026-09-11 生成，`deepseek-flash` / `deepseek-v4-pro`）。
@@ -418,7 +442,7 @@ prior全108任务、54 Agent任务均纳入；反馈18轨迹47请求，28个后�
 
 | 指标 | 数值 | 来源 / 复现 | 时间 | 备注 |
 |---|---|---|---|---|
-| 最新两模块源码完整回归 | **2033 passed / 2 skipped / 0 failed / 0 errors；mypy88文件零问题** | [源码验收](agent_new_holdout_source_validation_2026-10-05.md)、[r2回执](agent-new-holdout-validation-2026-10-05/r2/receipt.json)及原命令/日志/JUnit | 2026-10-05，API实际源码20400fa，535源码/配置指纹无变 | 首轮2017通过/10失败/2跳过原件保留；与资产104、入口55、审查202等重叠，不相加；12样式问题与WaveDrom缺依赖未解决，不是外部Actions或真人 |
+| 最新两模块源码完整回归 | **2033 passed / 2 skipped / 0 failed / 0 errors；mypy88文件零问题** | [源码验收](agent_new_holdout_source_validation_2026-10-05.md)、[r2回执](agent-new-holdout-validation-2026-10-05/r2/receipt.json)及原命令/日志/JUnit | 2026-10-05，API实际源码20400fa，535源码/配置指纹无变 | 首轮2017通过/10失败/2跳过原件保留；与资产104、入口55、审查202等重叠，不相加；原12样式问题保留，WaveDrom依赖已另存解决（3.21），不是外部Actions或真人 |
 | 历史全仓自动化测试 | **914 passed / 1 skipped / 0 failed，227.34 秒** | `.iverilog-ai/ic-validation-pdf-final-20261004/pytest.log`、`pytest.xml`、`metadata.json`；持久记录 `docs/experiment/ic_validation_2026-10-04.md` §6 / `ic-validation-pdf-final-2026-10-04/` | 2026-10-04，源码 `867b8bd564c881954c98cc18813884a4074d1ed5`，148 个源码/配置指纹 | 含采样保护及 PDF 混排/列表修复；mypy 72、未可达扫描163、BOM0；1 跳过为推荐断言表为空，不是模型成绩 |
 | 历史v5全仓自动化测试 | **1170 passed / 2 skipped / 0 failed / 0 errors，245.01秒** | [冻结验收](ic_agent_v5_validation_2026-10-05.md)、`docs/experiment/ic-agent-v5-validation-2026-10-05/validation.json`及JUnit/日志 | 2026-10-05，生产实现 `4d8eafb`，296源码/测试/配置指纹 | mypy76源码0错、未可达200文件0、BOM0；两测试尾空行后续变化与45项复测单列；不声称最终全部测试字节与清单相同 |
 | 历史v5浏览器工作流 | **三尺寸0横溢出；UART58/58；非默认补测/采样设置与结果切页保持；0API** | `docs/experiment/ic-agent-v5-validation-2026-10-05/browser/results.json` | 2026-10-05，重启冻结源码服务 | 手机为视口模拟，r1/r2自动化失败保留；同会话rerun保持不是进程重启保持；非真人或真实浏览器API请求 |

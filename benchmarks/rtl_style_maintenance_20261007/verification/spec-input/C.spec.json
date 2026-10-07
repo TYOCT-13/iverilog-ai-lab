@@ -1,0 +1,285 @@
+{
+  "modules": [
+    {
+      "name": "event_accumulator",
+      "rtl_path": "targets/event_accumulator/C/event_accumulator.v",
+      "parameters": {},
+      "interfaces": {
+        "ports": [
+          {
+            "name": "i_clk",
+            "direction": "input",
+            "width": 1,
+            "description": "i_clk",
+            "role": "clock"
+          },
+          {
+            "name": "i_rstn",
+            "direction": "input",
+            "width": 1,
+            "description": "i_rstn",
+            "role": "reset"
+          },
+          {
+            "name": "i_enable",
+            "direction": "input",
+            "width": 1,
+            "description": "i_enable",
+            "role": "input_data_or_control"
+          },
+          {
+            "name": "i_event",
+            "direction": "input",
+            "width": 1,
+            "description": "i_event",
+            "role": "input_data_or_control"
+          },
+          {
+            "name": "i_clear",
+            "direction": "input",
+            "width": 1,
+            "description": "i_clear",
+            "role": "input_data_or_control"
+          },
+          {
+            "name": "o_count",
+            "direction": "output",
+            "width": 4,
+            "description": "o_count",
+            "role": "output_data_or_control"
+          }
+        ]
+      },
+      "clock": {
+        "signal": "i_clk",
+        "period_ns": 10,
+        "edge": "posedge"
+      },
+      "reset": {
+        "signal": "i_rstn",
+        "active_level": 0,
+        "synchronous": false,
+        "assert_cycles": 2
+      },
+      "behavior": [
+        "C 原 RTL 的故意错误实现的等语义样式候选；此文档描述实际错误行为，不代表正确功能合同。",
+        "异步 i_rstn=0 立即归零；同步清除仅在 i_clear=1 且 i_enable=1 时生效；否则 i_enable=1 且 i_event=1 时加一。i_clear=1、i_enable=0 时不清除，这是必须保留的原故意错误。",
+        "许可下清除优先于同拍事件；计数按模十六环回。相对于 A，E3 的无许可清除被忽略。"
+      ],
+      "constraints": [
+        "固定公开接口、时钟边沿、复位极性及原有寄存器初始化值；不新增状态或可见流水延迟。",
+        "仅嵌套 plain case，显式匹配已知 1，其余值进入 default，保持原 if 对 X/Z 条件的非真分支语义。清除 X/Z 时仍继续检查后续有效事件或有效数据。",
+        "四态输入只用于此次候选的差分维护验证；公开正确行为合同的合法输入仍为已知、合法位宽数据。",
+        "此图是明确声明的行为时序，输出为对应上升沿 after 值；不是实测仿真轨迹。B/C 文件必须保留与正确 A 不同的原语义。"
+      ],
+      "corner_cases": [
+        "异步复位，清除与事件同时出现，许可关闭，计数从 15 回绕到 0。",
+        "i_clear 为 X/Z 且许可和事件为 1 时沿后仍加一；enable/event 未知时原条件不为真。"
+      ],
+      "verification_cases": [
+        "六个原变体与其候选逐一进行同刺激、全部真实输出差分；记录编译和执行退出码、stdout/stderr。",
+        "A 使用项目原公开逐拍语义判据通过；B/C 在公开判据仍呈现各原故意错误，而且双侧观察与失败位置完全一致。"
+      ],
+      "timing_diagrams": [
+        {
+          "id": "variant-behavior",
+          "title": "C 原错误时序",
+          "scenario": "variant-behavior",
+          "description": "描述 C 原变体及等语义候选的实际逐拍行为；B/C 与 A 的区别是原故意错误，需要在维护中保留。",
+          "wavejson": {
+            "signal": [
+              {
+                "name": "i_clk",
+                "wave": "p......."
+              },
+              {
+                "name": "i_rstn",
+                "wave": "1......."
+              },
+              {
+                "name": "i_enable",
+                "wave": "1.0.1..0"
+              },
+              {
+                "name": "i_event",
+                "wave": "10101..0"
+              },
+              {
+                "name": "i_clear",
+                "wave": "0..1.0.."
+              },
+              {
+                "name": "o_count after",
+                "wave": "========",
+                "data": [
+                  "1",
+                  "1",
+                  "1",
+                  "1",
+                  "0",
+                  "1",
+                  "2",
+                  "2"
+                ]
+              }
+            ],
+            "head": {
+              "text": "event C"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "valid_data_pipeline",
+      "rtl_path": "targets/valid_data_pipeline/C/valid_data_pipeline.v",
+      "parameters": {},
+      "interfaces": {
+        "ports": [
+          {
+            "name": "i_clk",
+            "direction": "input",
+            "width": 1,
+            "description": "i_clk",
+            "role": "clock"
+          },
+          {
+            "name": "i_rstn",
+            "direction": "input",
+            "width": 1,
+            "description": "i_rstn",
+            "role": "reset"
+          },
+          {
+            "name": "i_flush",
+            "direction": "input",
+            "width": 1,
+            "description": "i_flush",
+            "role": "input_data_or_control"
+          },
+          {
+            "name": "i_valid",
+            "direction": "input",
+            "width": 1,
+            "description": "i_valid",
+            "role": "input_data_or_control"
+          },
+          {
+            "name": "i_data",
+            "direction": "input",
+            "width": 8,
+            "description": "i_data",
+            "role": "input_data_or_control"
+          },
+          {
+            "name": "o_valid",
+            "direction": "output",
+            "width": 1,
+            "description": "o_valid",
+            "role": "output_data_or_control"
+          },
+          {
+            "name": "o_data",
+            "direction": "output",
+            "width": 8,
+            "description": "o_data",
+            "role": "output_data_or_control"
+          }
+        ]
+      },
+      "clock": {
+        "signal": "i_clk",
+        "period_ns": 10,
+        "edge": "posedge"
+      },
+      "reset": {
+        "signal": "i_rstn",
+        "active_level": 0,
+        "synchronous": false,
+        "assert_cycles": 2
+      },
+      "behavior": [
+        "C 原 RTL 的故意错误实现的等语义样式候选；此文档描述实际错误行为，不代表正确功能合同。",
+        "数据捕获、捕获资格和输出字仍在同步 flush 时清零；输出有效寄存器只在异步复位时清零，正常上升沿直接复制沿前 flag_capture_valid，忽略 i_flush。",
+        "因此 flush 恰逢第一级存在有效字时，仍可输出 o_valid=1、o_data=0；E1 展示此错误。该失配是必须保留的原故意错误。其余数据路径保留 E0 捕获、E1 输出。"
+      ],
+      "constraints": [
+        "固定公开接口、时钟边沿、复位极性及原有寄存器初始化值；不新增状态或可见流水延迟。",
+        "仅嵌套 plain case，显式匹配已知 1，其余值进入 default，保持原 if 对 X/Z 条件的非真分支语义。清除 X/Z 时仍继续检查后续有效事件或有效数据。",
+        "四态输入只用于此次候选的差分维护验证；公开正确行为合同的合法输入仍为已知、合法位宽数据。",
+        "此图是明确声明的行为时序，输出为对应上升沿 after 值；不是实测仿真轨迹。B/C 文件必须保留与正确 A 不同的原语义。"
+      ],
+      "corner_cases": [
+        "异步复位、flush 与有效输入同拍、连续接受、空泡清零、重新开始。",
+        "输入和捕获资格为 X/Z 时数据条件采用 default 清零；原直接复制有效标记仍能传播 X/Z。"
+      ],
+      "verification_cases": [
+        "六个原变体与其候选逐一进行同刺激、全部真实输出差分；记录编译和执行退出码、stdout/stderr。",
+        "A 使用项目原公开逐拍语义判据通过；B/C 在公开判据仍呈现各原故意错误，而且双侧观察与失败位置完全一致。"
+      ],
+      "timing_diagrams": [
+        {
+          "id": "variant-behavior",
+          "title": "C 原错误时序",
+          "scenario": "variant-behavior",
+          "description": "描述 C 原变体及等语义候选的实际逐拍行为；B/C 与 A 的区别是原故意错误，需要在维护中保留。",
+          "wavejson": {
+            "signal": [
+              {
+                "name": "i_clk",
+                "wave": "p......."
+              },
+              {
+                "name": "i_rstn",
+                "wave": "1......."
+              },
+              {
+                "name": "i_flush",
+                "wave": "010....1"
+              },
+              {
+                "name": "i_valid",
+                "wave": "10.1.0.1"
+              },
+              {
+                "name": "i_data",
+                "wave": "========",
+                "data": [
+                  "A5",
+                  "00",
+                  "00",
+                  "3C",
+                  "81",
+                  "00",
+                  "00",
+                  "FF"
+                ]
+              },
+              {
+                "name": "o_valid after",
+                "wave": "010.1.0."
+              },
+              {
+                "name": "o_data after",
+                "wave": "========",
+                "data": [
+                  "00",
+                  "00",
+                  "00",
+                  "00",
+                  "3C",
+                  "81",
+                  "00",
+                  "00"
+                ]
+              }
+            ],
+            "head": {
+              "text": "pipeline C"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

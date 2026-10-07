@@ -1,0 +1,8 @@
+{
+  "exit_code": 1,
+  "capture_kind": "transcribed tool result; not reconstructed original stderr",
+  "error": "NameError: name final_attempt is not defined",
+  "line": 20,
+  "traceback": "Traceback (most recent call last):\n  File \"E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\complete_rtl_spec_rendering_20261007_r2.py\", line 20, in <module>\n    command = json.loads((final_attempt / 'registered-write-spec.json').read_text(encoding='utf-8'))\n                          ^^^^^^^^^^^^^\nNameError: name 'final_attempt' is not defined\n",
+  "new_output_writes": 0
+}

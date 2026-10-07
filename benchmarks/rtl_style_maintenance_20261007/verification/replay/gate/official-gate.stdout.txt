@@ -1,0 +1,3 @@
+> INFO: [Python] Verilog deliverable gate finished; delivery_ready=True errors=0 strict_warnings=0.
+> INFO: [Python] deliverable JSON report: E:\FPGA_WORK\iverilog-ai-lab\.iverilog-ai\ic-engineering-preflight-20261007\public-replay-r1\gate\deliverable_gate.json
+> INFO: [Python] deliverable Markdown report: E:\FPGA_WORK\iverilog-ai-lab\.iverilog-ai\ic-engineering-preflight-20261007\public-replay-r1\gate\deliverable_gate.md

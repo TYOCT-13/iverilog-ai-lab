@@ -1,0 +1,6 @@
+{
+  "exit_code": 0,
+  "preserved_source": "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\rtl_style_maintenance_20261007\\verification\\public-oracle\\job-source.txt",
+  "preserved_source_sha256": "4a783e9a102f09c2d420ba4cfe7e6706b550ab93254a6364e09a6ea3c52a64c9",
+  "vectors_predicates_and_comparisons_changed": false
+}

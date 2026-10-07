@@ -1,0 +1,24 @@
+{
+  "original": "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\spec_document.json",
+  "original_sha256": "78a9b5bb52b25df2958b0f5a34739a6c4f32708a415d86bc558239c2739a64be",
+  "render_input": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\spec-input-r1\\spec_document.json",
+  "render_input_sha256": "79280af213a62c1b0172658bedb930c112f4b54cffce3ede5a06a871d79c7417",
+  "changes": [
+    {
+      "module": "valid_data_pipeline",
+      "path": "timing_diagrams[0].wavejson.head.text",
+      "before": "E0 accepted → after E1 emitted; flush clears on its own edge",
+      "after": "E0 capture → E1 output; flush wins"
+    },
+    {
+      "module": "event_accumulator",
+      "path": "timing_diagrams[0].wavejson.head.text",
+      "before": "clear independent of enable; accepted edges counted modulo 16",
+      "after": "Clear wins; 4-bit count"
+    }
+  ],
+  "other_json_fields_unchanged": true,
+  "rtl_unchanged": true,
+  "model_api_calls": 0,
+  "dut_runs": 0
+}

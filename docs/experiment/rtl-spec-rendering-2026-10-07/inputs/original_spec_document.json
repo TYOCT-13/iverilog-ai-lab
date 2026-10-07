@@ -1,0 +1,271 @@
+{
+  "modules": [
+    {
+      "name": "valid_data_pipeline",
+      "rtl_path": "targets/valid_data_pipeline/A/valid_data_pipeline.v",
+      "parameters": {},
+      "interfaces": {
+        "ports": [
+          {
+            "name": "i_clk",
+            "direction": "input",
+            "width": 1,
+            "description": "i_clk",
+            "role": "clock"
+          },
+          {
+            "name": "i_rstn",
+            "direction": "input",
+            "width": 1,
+            "description": "i_rstn",
+            "role": "reset"
+          },
+          {
+            "name": "i_flush",
+            "direction": "input",
+            "width": 1,
+            "description": "i_flush",
+            "role": "input_data_or_control"
+          },
+          {
+            "name": "i_valid",
+            "direction": "input",
+            "width": 1,
+            "description": "i_valid",
+            "role": "input_data_or_control"
+          },
+          {
+            "name": "i_data",
+            "direction": "input",
+            "width": 8,
+            "description": "i_data",
+            "role": "input_data_or_control"
+          },
+          {
+            "name": "o_valid",
+            "direction": "output",
+            "width": 1,
+            "description": "o_valid",
+            "role": "output_data_or_control"
+          },
+          {
+            "name": "o_data",
+            "direction": "output",
+            "width": 8,
+            "description": "o_data",
+            "role": "output_data_or_control"
+          }
+        ]
+      },
+      "clock": {
+        "signal": "i_clk",
+        "period_ns": 10,
+        "edge": "posedge"
+      },
+      "reset": {
+        "signal": "i_rstn",
+        "active_level": 0,
+        "synchronous": false,
+        "assert_cycles": 2
+      },
+      "behavior": [
+        "# valid_data_pipeline 正确行为规格 / Two-stage valid/data pipeline\n\n固定 8 位两级寄存流水，连续输入可每拍接受一个数据，无 ready 和反压。\n\n| 端口 | 方向 | 位宽 | 含义 |\n| --- | --- | --- | --- |\n| i_clk | input | 1 | 上升沿采样时钟 |\n| i_rstn | input | 1 | 异步低有效复位 |\n| i_flush | input | 1 | 当拍同步清空流水 |\n| i_valid | input | 1 | 当拍输入数据有效 |\n| i_data | input | 8 | 无符号输入数据，0–255 |\n| o_valid | output | 1 | 当拍输出数据有效 |\n| o_data | output | 8 | 有效输出数据；无效时固定为 0 |\n\n## 逐拍规则 / Edge semantics\n\n优先级依次为异步复位、同步 flush、正常流水。\n\n1. 未复位且 `i_flush=0` 时，某数据在 E0 的上升沿以 `i_valid=1` 被第一级接受，在 **下一上升沿 E1** 经过第二级后输出，`o_valid=1` 且 `o_data` 等于 E0 的 `i_data`。这里“两级”指 E0 捕获和 E1 输出两个寄存采样沿；不是再等待两个额外周期。\n2. E0 的 `i_valid=0` 表示空拍，E1 对应输出 `o_valid=0, o_data=0`。无效拍数据清零，不保持之前有效数据。\n3. 连续有效输入连续输出，顺序不变；输出当拍的有效标志与数据必须来自同一输入拍。\n4. `i_flush=1` 的上升沿，输出当拍即 `o_valid=0, o_data=0`，所有未交付数据被丢弃。当拍即使 `i_valid=1` 也不接受；解除 flush 后没有旧数据重新出现。\n5. 异步复位同样立即清空两级与全部输出。释放复位后按新的输入重新开始；未接受新数据前输出仍为零。\n\nA word accepted at E0 is emitted after E1. Invalid output cycles always carry zero data. Synchronous flush takes precedence over a valid input, clears both stages and the current outputs, and drops the input on that same edge. Reset is asynchronous and active low.\n\n## 正常时序例 / Correct timing example\n\n复位已释放；下表全部输出均为该沿 after 值。\n\n| 沿 | i_flush | i_valid | i_data | o_valid | o_data |\n| --- | --- | --- | --- | --- | --- |\n| E0 | 0 | 1 | A5 | 0 | 00 |\n| E1 | 0 | 1 | 3C | 1 | A5 |\n| E2 | 0 | 0 | 00 | 1 | 3C |\n| E3 | 0 | 0 | 00 | 0 | 00 |\n| E4 | 1 | 1 | 7E | 0 | 00 |\n| E5 | 0 | 0 | 00 | 0 | 00 |\n| E6 | 0 | 1 | 81 | 0 | 00 |\n| E7 | 0 | 0 | 00 | 1 | 81 |\n\n## 协议操作 / Protocol operations\n\n合理覆盖连续接受、有效/空拍交替、等待流水排空、清空时有/无在途数据、复位后的重新开始，以及 00/FF 和混合位数据。输入计划自主选择，不固定为某一组向量。\n"
+      ],
+      "constraints": [
+        "## 时钟、复位与采样 / Clock, reset and sampling\n\n- 无可配置参数；固定接口位宽。`i_clk` 周期 10 ns，所有同步操作在上升沿发生。\n- `i_rstn` 为异步低有效复位。拉低后无需等待时钟，所有状态与输出归零。\n- 每个独立 episode 开始时自动拉低复位并经过 2 个上升沿，再释放复位；前一 episode 的电路状态不延续。\n- 新 episode 中 `i_rstn` 默认为 1，其余非时钟输入均为 0。一个 episode 内未重新指定的输入保持之前的值，不能把省略输入理解为自动归零。不得驱动自动时钟 `i_clk`。\n- 输入在上升沿前稳定；每一刺激拍在该上升沿的非阻塞更新完成后采集 **全部真实输出**（after）。不使用 before 采样，不把多拍向量只采最后一拍。\n- 每任务实际执行的所有 episode 共用 **24 个刺激拍**上限，每次提案最多 **12 个输入向量/段**。自动起始复位不计刺激拍；计划内显式复位拍计入。剩余预算以当前状态为准，不能依靠重新复位刷新任务预算。\n- 输入均为已知、合法位宽的整数或等价已知二进制值。输出是被测模块真实端口，不要求提案自行给出 expected。\n\nEach episode starts from a fresh asynchronous reset, followed by two asserted rising edges. Inputs omitted within an episode retain their previous values; fresh business defaults are zero. Sample all outputs after every rising edge. The entire task shares 24 stimulus cycles, with at most 12 input segments per proposal. Automatic reset does not replenish that shared stimulus budget.\n"
+      ],
+      "corner_cases": [
+        "低有效异步复位；控制优先级；未指定输入保持；已知合法位宽。"
+      ],
+      "verification_cases": [
+        "独立语义模型的逐拍机械对照、控制组合、数据或环回边界、复位。"
+      ],
+      "timing_diagrams": [
+        {
+          "id": "normal-operation",
+          "title": "正确逐拍时序",
+          "scenario": "normal-operation",
+          "description": "after 值与规格时序表一致。",
+          "wavejson": {
+            "signal": [
+              {
+                "name": "i_clk",
+                "wave": "p......."
+              },
+              {
+                "name": "i_rstn",
+                "wave": "1......."
+              },
+              {
+                "name": "i_flush",
+                "wave": "0...10.."
+              },
+              {
+                "name": "i_valid",
+                "wave": "1.0.1010"
+              },
+              {
+                "name": "i_data",
+                "wave": "========",
+                "data": [
+                  "A5",
+                  "3C",
+                  "00",
+                  "00",
+                  "7E",
+                  "00",
+                  "81",
+                  "00"
+                ]
+              },
+              {
+                "name": "o_valid after",
+                "wave": "01.0...1"
+              },
+              {
+                "name": "o_data after",
+                "wave": "========",
+                "data": [
+                  "00",
+                  "A5",
+                  "3C",
+                  "00",
+                  "00",
+                  "00",
+                  "00",
+                  "81"
+                ]
+              }
+            ],
+            "head": {
+              "text": "E0 accepted → after E1 emitted; flush clears on its own edge"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "event_accumulator",
+      "rtl_path": "targets/event_accumulator/A/event_accumulator.v",
+      "parameters": {},
+      "interfaces": {
+        "ports": [
+          {
+            "name": "i_clk",
+            "direction": "input",
+            "width": 1,
+            "description": "i_clk",
+            "role": "clock"
+          },
+          {
+            "name": "i_rstn",
+            "direction": "input",
+            "width": 1,
+            "description": "i_rstn",
+            "role": "reset"
+          },
+          {
+            "name": "i_enable",
+            "direction": "input",
+            "width": 1,
+            "description": "i_enable",
+            "role": "input_data_or_control"
+          },
+          {
+            "name": "i_event",
+            "direction": "input",
+            "width": 1,
+            "description": "i_event",
+            "role": "input_data_or_control"
+          },
+          {
+            "name": "i_clear",
+            "direction": "input",
+            "width": 1,
+            "description": "i_clear",
+            "role": "input_data_or_control"
+          },
+          {
+            "name": "o_count",
+            "direction": "output",
+            "width": 4,
+            "description": "o_count",
+            "role": "output_data_or_control"
+          }
+        ]
+      },
+      "clock": {
+        "signal": "i_clk",
+        "period_ns": 10,
+        "edge": "posedge"
+      },
+      "reset": {
+        "signal": "i_rstn",
+        "active_level": 0,
+        "synchronous": false,
+        "assert_cycles": 2
+      },
+      "behavior": [
+        "# event_accumulator 正确行为规格 / Enabled event accumulator\n\n固定 4 位事件累计器，适合本地事件统计；结果为自最近复位或清除以来被接受事件数的模 16 值。\n\n| 端口 | 方向 | 位宽 | 含义 |\n| --- | --- | --- | --- |\n| i_clk | input | 1 | 上升沿采样时钟 |\n| i_rstn | input | 1 | 异步低有效复位 |\n| i_enable | input | 1 | 当拍事件累计许可 |\n| i_event | input | 1 | 当拍存在一个事件 |\n| i_clear | input | 1 | 同步清除计数，独立于 enable |\n| o_count | output | 4 | 无符号累计结果，0–15 |\n\n## 逐拍规则 / Edge semantics\n\n优先级依次为异步复位、同步 clear、接受事件、保持。\n\n1. 异步复位立即使 `o_count=0`。\n2. 未复位且 `i_clear=1` 的上升沿，`o_count=0`，不论 `i_enable` 是 0 还是 1；当拍即使同时有事件也不累计。\n3. 未复位、`i_clear=0` 且 `i_enable=1, i_event=1` 时，接受当拍一个事件。after 输出等于以前累计数加 1 模 16，即 15 的后继是 0。\n4. 其他输入组合保持计数。事件高电平持续 N 拍且每拍均获许可，就计入 N 个事件；不做只在上升变化时计数的边沿检测。\n5. 清除解除后从 0 继续累计，不保留清除前数量。\n\nThe counter records accepted event edges modulo 16. Clear is synchronous, independent of enable, and takes priority over an event. A sustained enabled event counts once on each rising clock edge; this module is not an event-edge detector.\n\n## 正常时序例 / Correct timing example\n\n复位已释放，从 0 开始。输出均为该沿 after 值。\n\n| 沿 | i_enable | i_event | i_clear | o_count |\n| --- | --- | --- | --- | --- |\n| E0 | 1 | 1 | 0 | 1 |\n| E1 | 1 | 0 | 0 | 1 |\n| E2 | 0 | 1 | 0 | 1 |\n| E3 | 0 | 0 | 1 | 0 |\n| E4 | 1 | 1 | 1 | 0 |\n| E5 | 1 | 1 | 0 | 1 |\n| E6 | 1 | 1 | 0 | 2 |\n| E7 | 0 | 0 | 0 | 2 |\n\n## 协议操作 / Protocol operations\n\n合理覆盖许可/事件的四种组合、连续累计、暂停保持、清除与其他控制同时出现、复位后重新累计及模 16 环回。输入计划自主选择，正常语义不预设任何缺陷名称或目标。\n"
+      ],
+      "constraints": [
+        "## 时钟、复位与采样 / Clock, reset and sampling\n\n- 无可配置参数；固定接口位宽。`i_clk` 周期 10 ns，所有同步操作在上升沿发生。\n- `i_rstn` 为异步低有效复位。拉低后无需等待时钟，所有状态与输出归零。\n- 每个独立 episode 开始时自动拉低复位并经过 2 个上升沿，再释放复位；前一 episode 的电路状态不延续。\n- 新 episode 中 `i_rstn` 默认为 1，其余非时钟输入均为 0。一个 episode 内未重新指定的输入保持之前的值，不能把省略输入理解为自动归零。不得驱动自动时钟 `i_clk`。\n- 输入在上升沿前稳定；每一刺激拍在该上升沿的非阻塞更新完成后采集 **全部真实输出**（after）。不使用 before 采样，不把多拍向量只采最后一拍。\n- 每任务实际执行的所有 episode 共用 **24 个刺激拍**上限，每次提案最多 **12 个输入向量/段**。自动起始复位不计刺激拍；计划内显式复位拍计入。剩余预算以当前状态为准，不能依靠重新复位刷新任务预算。\n- 输入均为已知、合法位宽的整数或等价已知二进制值。输出是被测模块真实端口，不要求提案自行给出 expected。\n\nEach episode starts from a fresh asynchronous reset, followed by two asserted rising edges. Inputs omitted within an episode retain their previous values; fresh business defaults are zero. Sample all outputs after every rising edge. The entire task shares 24 stimulus cycles, with at most 12 input segments per proposal. Automatic reset does not replenish that shared stimulus budget.\n"
+      ],
+      "corner_cases": [
+        "低有效异步复位；控制优先级；未指定输入保持；已知合法位宽。"
+      ],
+      "verification_cases": [
+        "独立语义模型的逐拍机械对照、控制组合、数据或环回边界、复位。"
+      ],
+      "timing_diagrams": [
+        {
+          "id": "normal-operation",
+          "title": "正确逐拍时序",
+          "scenario": "normal-operation",
+          "description": "after 值与规格时序表一致。",
+          "wavejson": {
+            "signal": [
+              {
+                "name": "i_clk",
+                "wave": "p......."
+              },
+              {
+                "name": "i_rstn",
+                "wave": "1......."
+              },
+              {
+                "name": "i_enable",
+                "wave": "1.0.1..0"
+              },
+              {
+                "name": "i_event",
+                "wave": "10101..0"
+              },
+              {
+                "name": "i_clear",
+                "wave": "0..1.0.."
+              },
+              {
+                "name": "o_count after",
+                "wave": "========",
+                "data": [
+                  "1",
+                  "1",
+                  "1",
+                  "0",
+                  "0",
+                  "1",
+                  "2",
+                  "2"
+                ]
+              }
+            ],
+            "head": {
+              "text": "clear independent of enable; accepted edges counted modulo 16"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "authoring-tool-failure-transcription-v1",
+  "client_date": "2026-10-07",
+  "source": "Transcription of the functions.exec/apply_patch tool response; not a recovered original subprocess stream.",
+  "action": "Append independent review links and delivery manifest links to four current documents.",
+  "result": "apply_patch verification failed: Failed to find expected lines in docs/experiment/rtl-spec-rendering-2026-10-07/README.md: # 两模块规格与波形补充",
+  "cause": "The author used an incorrect heading as the final patch context.",
+  "post_failure_read": "The following rg/read showed none of the new review-link markers in the first three documents; the actual rendering heading was # 两模块规格波形与渲染原件.",
+  "recovery": "A new patch used the actual existing final paragraph; it completed successfully without editing frozen raw receipts or data.",
+  "API_requests": 0,
+  "new_DUT_executions": 0,
+  "is_model_or_DUT_failure": false
+}

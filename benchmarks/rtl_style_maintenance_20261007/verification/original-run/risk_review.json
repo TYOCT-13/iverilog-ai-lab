@@ -1,0 +1,114 @@
+{
+  "schema": "icarus-latency-preserving-style-candidate-v1",
+  "task_class": [
+    "modify",
+    "validate"
+  ],
+  "source_commit": "77d0c2f9d009696def1da895a50b4a69c6345f3d",
+  "bindings": [
+    {
+      "case": "event_accumulator",
+      "variant": "A",
+      "source": "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\event_accumulator\\A\\event_accumulator.v",
+      "source_sha256": "4f8137509bc2116624f8c444f5e6d0bca319f6b2993371610dd2c2432c44d071",
+      "prior_ast_input": "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\targets\\event_accumulator\\A\\event_accumulator.v",
+      "byte_equal_prior_ast_input": true,
+      "ast_report": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\binding\\event_accumulator-A.original_ast.json",
+      "module": "event_accumulator",
+      "port_count": 6,
+      "sequential_blocks": 1,
+      "original_gate_errors": 2
+    },
+    {
+      "case": "event_accumulator",
+      "variant": "B",
+      "source": "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\event_accumulator\\B\\event_accumulator.v",
+      "source_sha256": "65bb2c35aa123348348766232b48f2499556395f88a8015cb97713324a08b9f1",
+      "prior_ast_input": "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\targets\\event_accumulator\\B\\event_accumulator.v",
+      "byte_equal_prior_ast_input": true,
+      "ast_report": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\binding\\event_accumulator-B.original_ast.json",
+      "module": "event_accumulator",
+      "port_count": 6,
+      "sequential_blocks": 1,
+      "original_gate_errors": 2
+    },
+    {
+      "case": "event_accumulator",
+      "variant": "C",
+      "source": "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\event_accumulator\\C\\event_accumulator.v",
+      "source_sha256": "d07a85d4e8a27e5b04a54666f1fb504ea69d4c8136f5eb1c715688d6075cb0d4",
+      "prior_ast_input": "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\targets\\event_accumulator\\C\\event_accumulator.v",
+      "byte_equal_prior_ast_input": true,
+      "ast_report": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\binding\\event_accumulator-C.original_ast.json",
+      "module": "event_accumulator",
+      "port_count": 6,
+      "sequential_blocks": 1,
+      "original_gate_errors": 2
+    },
+    {
+      "case": "valid_data_pipeline",
+      "variant": "A",
+      "source": "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\valid_data_pipeline\\A\\valid_data_pipeline.v",
+      "source_sha256": "b3fc81d4fdf3a23cb38c710af7c6d278cfba9d3f52978492594263464e44d9bb",
+      "prior_ast_input": "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\targets\\valid_data_pipeline\\A\\valid_data_pipeline.v",
+      "byte_equal_prior_ast_input": true,
+      "ast_report": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\binding\\valid_data_pipeline-A.original_ast.json",
+      "module": "valid_data_pipeline",
+      "port_count": 7,
+      "sequential_blocks": 4,
+      "original_gate_errors": 2
+    },
+    {
+      "case": "valid_data_pipeline",
+      "variant": "B",
+      "source": "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\valid_data_pipeline\\B\\valid_data_pipeline.v",
+      "source_sha256": "ff53d3f422e174a8758b8e6f1a8ff1d3c729ee694c9fd392330a3af7798fc3b0",
+      "prior_ast_input": "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\targets\\valid_data_pipeline\\B\\valid_data_pipeline.v",
+      "byte_equal_prior_ast_input": true,
+      "ast_report": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\binding\\valid_data_pipeline-B.original_ast.json",
+      "module": "valid_data_pipeline",
+      "port_count": 7,
+      "sequential_blocks": 4,
+      "original_gate_errors": 2
+    },
+    {
+      "case": "valid_data_pipeline",
+      "variant": "C",
+      "source": "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\targets\\valid_data_pipeline\\C\\valid_data_pipeline.v",
+      "source_sha256": "49b4e5832a7c001e16a0bac8dbc3c7c90d2a03eb9ec6b2f6ab26731343604713",
+      "prior_ast_input": "E:\\FPGA_WORK\\iverilog-ai-lab\\.tmp-codex\\agent-new-holdout-preparation-20261005\\targets\\valid_data_pipeline\\C\\valid_data_pipeline.v",
+      "byte_equal_prior_ast_input": true,
+      "ast_report": "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\candidate-r3\\binding\\valid_data_pipeline-C.original_ast.json",
+      "module": "valid_data_pipeline",
+      "port_count": 7,
+      "sequential_blocks": 4,
+      "original_gate_errors": 2
+    }
+  ],
+  "prior_gate_json": "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\agent_new_holdout_20261005\\validation\\style\\r3\\deliverable_gate.json",
+  "prior_gate_sha256": "990f2d6e4f62e44cc33acd4317d2638c68eac17df1c6207e28e76ef9678c798c",
+  "original_gate_counts": {
+    "VG013": 3,
+    "VG146": 9
+  },
+  "public_matrix": [
+    "compile",
+    "ast",
+    "readability",
+    "comment",
+    "naming",
+    "profile",
+    "testbench",
+    "toolchain"
+  ],
+  "changes_planned": [
+    "Rename internal count_o to cnt_event_o with unchanged public o_count port and bridge.",
+    "Retain reset if and original always blocks; replace normal control chains with nested plain case and complete defaults.",
+    "Preserve event B ignoring enable, event C requiring enable for clear, pipeline B output-valid using current i_valid, and pipeline C output-valid ignoring flush."
+  ],
+  "risk": "Behavioral refactor pending actual gate and four-state differential simulation. No new state, latency, ports, alias nets, rules, or dependencies.",
+  "four_state_review": "Case match succeeds only for exactly known 1; default descends into the next original condition. Clear X/Z must still allow event increment. Unknown valid controls select original else assignments; B current valid and C capture valid direct copies remain unchanged.",
+  "DUT_executions": 0,
+  "API_requests": 0,
+  "original_RTL_modified": false
+}

@@ -1,0 +1,10 @@
+{
+  "command": [
+    "git",
+    "diff",
+    "--cached",
+    "--check"
+  ],
+  "cwd": "E:\\FPGA_WORK\\iverilog-ai-lab",
+  "exit_code": 0
+}

@@ -1,0 +1,24 @@
+{
+  "command": [
+    "D:\\Users\\TYOCT\\anaconda3\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "scripts.python.workflow.cli",
+    "write-spec",
+    "--spec",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\rtl_style_maintenance_20261007\\verification\\spec-input\\B.spec.json",
+    "--out-dir",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\public-replay-r1\\bundle",
+    "--source",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\rtl_style_maintenance_20261007\\targets\\event_accumulator\\B\\event_accumulator.v",
+    "--source",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\rtl_style_maintenance_20261007\\targets\\valid_data_pipeline\\B\\valid_data_pipeline.v",
+    "--language",
+    "zh",
+    "--no-state"
+  ],
+  "cwd": "E:\\FPGA_WORK\\iverilog-ai-lab",
+  "exit_code": 0
+}

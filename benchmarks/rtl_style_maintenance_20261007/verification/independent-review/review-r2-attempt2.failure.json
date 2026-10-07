@@ -1,0 +1,11 @@
+{
+  "schema": "rtl-maintenance-independent-review-attempt-failure-v1",
+  "audit_attempt": "review-r2 attempt2",
+  "status": "failed_before_report_publication",
+  "reason": "Auditor assumed command-log archive roots map to preflight base. Their actual recorded sources are .tmp-codex/rtl-style-replay-command-r1 and .tmp-codex/rtl-style-publication-r1.",
+  "exception": "FileNotFoundError: preflight/replay-command-r1/exit.json",
+  "source_or_experiment_changes": false,
+  "new_DUT_executions": 0,
+  "API_requests": 0,
+  "resolution": "Use explicit actual command-directory sources recorded by replay_copy_manifest.json; keep the 473 archive members unchanged."
+}

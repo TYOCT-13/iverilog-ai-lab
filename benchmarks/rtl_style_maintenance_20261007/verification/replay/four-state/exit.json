@@ -1,0 +1,6 @@
+{
+  "exit_code": 0,
+  "preserved_source": "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\rtl_style_maintenance_20261007\\verification\\four-state\\job-source.txt",
+  "preserved_source_sha256": "19455ebc4bc3503def8a8b137796fff106578423e2d89690588b5eb178e1d652",
+  "vectors_predicates_and_comparisons_changed": false
+}

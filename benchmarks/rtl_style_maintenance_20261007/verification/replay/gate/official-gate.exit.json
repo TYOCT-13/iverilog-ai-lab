@@ -1,0 +1,17 @@
+{
+  "command": [
+    "D:\\Users\\TYOCT\\anaconda3\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "scripts.python.validation.generated_deliverable_gate",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\benchmarks\\rtl_style_maintenance_20261007\\targets",
+    "--json",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\public-replay-r1\\gate\\deliverable_gate.json",
+    "--markdown",
+    "E:\\FPGA_WORK\\iverilog-ai-lab\\.iverilog-ai\\ic-engineering-preflight-20261007\\public-replay-r1\\gate\\deliverable_gate.md"
+  ],
+  "cwd": "E:\\FPGA_WORK\\iverilog-ai-lab",
+  "exit_code": 0
+}

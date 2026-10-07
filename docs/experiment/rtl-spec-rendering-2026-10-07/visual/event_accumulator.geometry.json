@@ -1,0 +1,149 @@
+{
+  "potential_bbox_outside": [
+    {
+      "font": "Helvetica",
+      "height": 16,
+      "text": "o_count after",
+      "width": 167.0625,
+      "x": -24.5625,
+      "y": 203.5
+    },
+    {
+      "font": "Helvetica",
+      "height": 16,
+      "text": "2",
+      "width": 105.921875,
+      "x": 405.5390625,
+      "y": 203.5
+    }
+  ],
+  "svg": {
+    "height": 226,
+    "width": 492,
+    "x": 0,
+    "y": 0
+  },
+  "text": [
+    {
+      "font": "Helvetica",
+      "height": 16,
+      "text": "Clear wins; 4-bit count",
+      "width": 226.53125,
+      "x": 199.234375,
+      "y": 20.5
+    },
+    {
+      "font": "Helvetica",
+      "height": 16,
+      "text": "i_clk",
+      "width": 110.8125,
+      "x": 31.6875,
+      "y": 53.5
+    },
+    {
+      "font": "Helvetica",
+      "height": 16,
+      "text": "i_rstn",
+      "width": 117.34375,
+      "x": 25.15625,
+      "y": 83.5
+    },
+    {
+      "font": "Helvetica",
+      "height": 16,
+      "text": "i_enable",
+      "width": 136.921875,
+      "x": 5.578125,
+      "y": 113.5
+    },
+    {
+      "font": "Helvetica",
+      "height": 16,
+      "text": "i_event",
+      "width": 128.765625,
+      "x": 13.734375,
+      "y": 143.5
+    },
+    {
+      "font": "Helvetica",
+      "height": 16,
+      "text": "i_clear",
+      "width": 124.671875,
+      "x": 17.828125,
+      "y": 173.5
+    },
+    {
+      "font": "Helvetica",
+      "height": 16,
+      "text": "o_count after",
+      "width": 167.0625,
+      "x": -24.5625,
+      "y": 203.5
+    },
+    {
+      "font": "Helvetica",
+      "height": 16,
+      "text": "1",
+      "width": 105.921875,
+      "x": 115.5390625,
+      "y": 203.5
+    },
+    {
+      "font": "Helvetica",
+      "height": 16,
+      "text": "1",
+      "width": 105.921875,
+      "x": 165.5390625,
+      "y": 203.5
+    },
+    {
+      "font": "Helvetica",
+      "height": 16,
+      "text": "1",
+      "width": 105.921875,
+      "x": 205.5390625,
+      "y": 203.5
+    },
+    {
+      "font": "Helvetica",
+      "height": 16,
+      "text": "0",
+      "width": 105.921875,
+      "x": 245.5390625,
+      "y": 203.5
+    },
+    {
+      "font": "Helvetica",
+      "height": 16,
+      "text": "0",
+      "width": 105.921875,
+      "x": 285.5390625,
+      "y": 203.5
+    },
+    {
+      "font": "Helvetica",
+      "height": 16,
+      "text": "1",
+      "width": 105.921875,
+      "x": 325.5390625,
+      "y": 203.5
+    },
+    {
+      "font": "Helvetica",
+      "height": 16,
+      "text": "2",
+      "width": 105.921875,
+      "x": 365.5390625,
+      "y": 203.5
+    },
+    {
+      "font": "Helvetica",
+      "height": 16,
+      "text": "2",
+      "width": 105.921875,
+      "x": 405.5390625,
+      "y": 203.5
+    }
+  ],
+  "url": "http://127.0.0.1:8777/spec/targets/event_accumulator/A/waveforms/event_accumulator_normal-operation.svg"
+}
