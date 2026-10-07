@@ -11,6 +11,8 @@
 
 ---
 
+- 2026-10-08复现补充：`docs/experiment/clean_checkout_2026-10-08.md`、`docs/experiment/clean-checkout-2026-10-08/README.md`、`docs/experiment/clean-checkout-2026-10-08/receipt.json`、`docs/experiment/clean-checkout-2026-10-08/raw_evidence.zip`、`docs/experiment/clean-checkout-2026-10-08/raw_manifest.json`。源提交1c29a8f同机新克隆/venv，2020通过/16跳过，mypy88；历史私有输入14项跳过明确保留，非异机、真人或新API成绩。
+
 ## 0. 最快的阅读路径
 
 | 你想干什么 | 按顺序读 |

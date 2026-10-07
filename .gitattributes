@@ -144,3 +144,6 @@ rtl/spi_master_bug_sclk_polarity.v -text -eol whitespace=blank-at-eol,blank-at-e
 rtl/uart_tx.v -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 rtl/uart_tx_bug_busy_never_clears.v -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 rtl/uart_tx_bug_msb_first.v -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# 同机干净克隆验收原件：保持日志和JUnit的原字节。
+docs/experiment/clean-checkout-2026-10-08/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

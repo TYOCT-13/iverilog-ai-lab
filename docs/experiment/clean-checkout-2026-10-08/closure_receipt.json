@@ -1,0 +1,1157 @@
+{
+  "schema": "icarus-clean-checkout-document-closure-v1",
+  "validated_source_commit": "1c29a8f0bffccf1dc373ac4f3c670ff212141f0a",
+  "new_docs_only_after_source_validation": true,
+  "new_DUT_executions": 0,
+  "new_API_requests": 0,
+  "local_link_occurrences": 282,
+  "local_links_all_exist": true,
+  "links": [
+    {
+      "document": "README.md",
+      "target": "docs/experiment/rtl_style_maintenance_2026-10-07.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/rtl_spec_rendering_2026-10-07.md"
+    },
+    {
+      "document": "README.md",
+      "target": ".github/workflows/ci.yml"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/vcd_analysis.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/static_rules.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/reference_model_alignment.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/layered_evidence.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/behavior_compare.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/coverage.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/model_comparison_2026-09-11.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/opensource_conventions.md"
+    },
+    {
+      "document": "README.md",
+      "target": "CHANGELOG.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/demo/ic_agent_v2_walkthrough.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent_new_holdout_study_live_2026-10-05.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent_new_holdout_study_budget_2026-10-05.json"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent_new_holdout_source_validation_2026-10-05.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent_new_holdout_study_plan_2026-10-05.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/review/agent_new_holdout_prereg_review_2026-10-05.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/review/agent_new_holdout_study_review_2026-10-05.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent_v7_diagnosis_2026-10-05.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent_feedback_study_live_2026-10-05.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent_feedback_study_budget_2026-10-05.json"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent_feedback_source_validation_2026-10-05.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/review/agent_feedback_prereg_review_2026-10-05.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/review/agent_feedback_study_review_2026-10-05.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent_budget_study_live_2026-10-05.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent-budget-study-live-2026-10-05/receipt.json"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent_budget_source_validation_2026-10-05.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/review/agent_budget_prereg_review_2026-10-05.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent_holdout_study_live_2026-10-05.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent-holdout-study-live-2026-10-05/receipt.json"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent-holdout-validation-2026-10-05/receipt.json"
+    },
+    {
+      "document": "README.md",
+      "target": "benchmarks/agent_holdout_20261005/README.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent_recovery_study_live_2026-10-05.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent-recovery-study-live-2026-10-05/receipt.json"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent-recovery-validation-2026-10-05/receipt.json"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent_study_1m_live_2026-10-05.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent_study_1m_budget_2026-10-05.json"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent_smoke_live_2026-10-05.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent_smoke_diagnostic_2026-10-05.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent_smoke_diagnostic_api_budget_2026-10-05.json"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/protocol_oracle_improvements_2026-10-04.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent_comparison_v2_live_2026-10-04.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent_comparison_v4_smoke_2026-10-04.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent_comparison_v5_live_2026-10-05.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/ic_agent_v5_validation_2026-10-05.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/agent_v5_optimization_2026-10-05.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/competition/ic/evidence_pack_v5_2026-10-05.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/deepseek_decision_v4_2026-10-04.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/competition/ic/v3/README.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/INDEX.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/experiment/clean_checkout_2026-10-08.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/reproduce_current.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/debug_interface.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/behavior_compare.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/project_overview.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/delivery_review.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/trial/task_card.md"
+    },
+    {
+      "document": "README.md",
+      "target": "CONTRIBUTING.md"
+    },
+    {
+      "document": "README.md",
+      "target": "CHANGELOG.md"
+    },
+    {
+      "document": "README.md",
+      "target": "SECURITY.md"
+    },
+    {
+      "document": "README.md",
+      "target": "CODE_OF_CONDUCT.md"
+    },
+    {
+      "document": "README.md",
+      "target": "CITATION.cff"
+    },
+    {
+      "document": "README.md",
+      "target": "PROJECT_SCOPE.md"
+    },
+    {
+      "document": "README.md",
+      "target": "docs/verification_report.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "experiment/rtl_style_maintenance_2026-10-07.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "experiment/rtl_spec_rendering_2026-10-07.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "experiment/rtl-spec-rendering-2026-10-07/README.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "experiment/rtl-spec-rendering-2026-10-07/rendering_receipt.json"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "experiment/rtl-spec-rendering-2026-10-07/reproduction/reproduction_receipt.json"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "experiment/rtl_style_maintenance_2026-10-07.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "../benchmarks/rtl_style_maintenance_20261007/README.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "../benchmarks/rtl_style_maintenance_20261007/release_receipt.json"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "../benchmarks/rtl_style_maintenance_20261007/verification/replay/replay_receipt.json"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "experiment/agent_new_holdout_study_live_2026-10-05.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "experiment/agent-new-holdout-study-live-2026-10-05/receipt.json"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "experiment/agent-new-holdout-study-live-2026-10-05/strict_summary.json"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "experiment/agent_new_holdout_study_budget_2026-10-05.json"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "experiment/agent-new-holdout-study-live-2026-10-05/source_byte_binding.json"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "experiment/agent_new_holdout_study_plan_2026-10-05.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "experiment/agent-new-holdout-study-live-2026-10-05/preregistration.json"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "experiment/agent_new_holdout_source_validation_2026-10-05.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "review/agent_new_holdout_prereg_review_2026-10-05.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "review/agent_new_holdout_study_review_2026-10-05.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "review/agent-new-holdout-study-review-2026-10-05/receipt.json"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "local_artifacts.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "local_artifacts.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "local_artifacts.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "local_artifacts.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "local_artifacts.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "local_artifacts.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "local_artifacts.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "local_artifacts.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "local_artifacts.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "local_artifacts.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "local_artifacts.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "local_artifacts.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "local_artifacts.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "local_artifacts.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "local_artifacts.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "local_artifacts.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "experiment/agent_new_holdout_source_validation_2026-10-05.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "experiment/agent-new-holdout-validation-2026-10-05/r2/receipt.json"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "experiment/agent_new_holdout_source_validation_2026-10-05.md"
+    },
+    {
+      "document": "docs/INDEX.md",
+      "target": "local_artifacts.md"
+    },
+    {
+      "document": "docs/reproduce_current.md",
+      "target": "trial/participant_start.md"
+    },
+    {
+      "document": "docs/reproduce_current.md",
+      "target": "local_artifacts.md"
+    },
+    {
+      "document": "docs/reproduce_current.md",
+      "target": "review/independent_review_guide.md"
+    },
+    {
+      "document": "docs/local_artifacts.md",
+      "target": "INDEX.md"
+    },
+    {
+      "document": "docs/experiment/clean_checkout_2026-10-08.md",
+      "target": "clean-checkout-2026-10-08/receipt.json"
+    },
+    {
+      "document": "docs/experiment/clean_checkout_2026-10-08.md",
+      "target": "clean-checkout-2026-10-08/README.md"
+    },
+    {
+      "document": "docs/experiment/clean_checkout_2026-10-08.md",
+      "target": "../reproduce_current.md"
+    },
+    {
+      "document": "docs/experiment/clean_checkout_2026-10-08.md",
+      "target": "../local_artifacts.md"
+    },
+    {
+      "document": "docs/experiment/clean-checkout-2026-10-08/README.md",
+      "target": "../clean_checkout_2026-10-08.md"
+    },
+    {
+      "document": "docs/experiment/clean-checkout-2026-10-08/README.md",
+      "target": "../../reproduce_current.md"
+    },
+    {
+      "document": "docs/experiment/clean-checkout-2026-10-08/README.md",
+      "target": "receipt.json"
+    },
+    {
+      "document": "docs/experiment/clean-checkout-2026-10-08/README.md",
+      "target": "pytest.xml"
+    },
+    {
+      "document": "docs/experiment/clean-checkout-2026-10-08/README.md",
+      "target": "mypy.stdout.txt"
+    },
+    {
+      "document": "docs/experiment/clean-checkout-2026-10-08/README.md",
+      "target": "dead-code.stdout.txt"
+    },
+    {
+      "document": "docs/experiment/clean-checkout-2026-10-08/README.md",
+      "target": "doc-index.stdout.txt"
+    },
+    {
+      "document": "docs/experiment/clean-checkout-2026-10-08/README.md",
+      "target": "raw_evidence.zip"
+    },
+    {
+      "document": "docs/experiment/clean-checkout-2026-10-08/README.md",
+      "target": "raw_manifest.json"
+    },
+    {
+      "document": "docs/experiment/clean-checkout-2026-10-08/README.md",
+      "target": "closure_receipt.json"
+    },
+    {
+      "document": "docs/experiment/clean-checkout-2026-10-08/README.md",
+      "target": "delivery_manifest.json"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "../../experiment/clean_checkout_2026-10-08.md"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "../../experiment/clean-checkout-2026-10-08/receipt.json"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "../../experiment/agent_new_holdout_study_live_2026-10-05.md"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "../../experiment/agent-new-holdout-study-live-2026-10-05/receipt.json"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "../../experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "../../experiment/agent_new_holdout_study_budget_2026-10-05.json"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "../../experiment/agent_new_holdout_source_validation_2026-10-05.md"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "../../experiment/agent_new_holdout_study_plan_2026-10-05.md"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "../../review/agent_new_holdout_prereg_review_2026-10-05.md"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "../../review/agent_new_holdout_study_review_2026-10-05.md"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "../../review/agent-new-holdout-study-review-2026-10-05/receipt.json"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "../../experiment/agent_feedback_study_live_2026-10-05.md"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "../../review/agent_feedback_study_review_2026-10-05.md"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "../../experiment/agent_budget_study_live_2026-10-05.md"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "../../experiment/agent_v7_diagnosis_2026-10-05.md"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "../../experiment/agent_holdout_study_live_2026-10-05.md"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "../../experiment/agent_recovery_study_live_2026-10-05.md"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "../../experiment/agent_study_1m_live_2026-10-05.md"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "../../experiment/rtl_spec_rendering_2026-10-07.md"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "../../experiment/rtl_style_maintenance_2026-10-07.md"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "../../trial/participant_start.md"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "../../review/independent_review_guide.md"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "v3/rules_validation.json"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "v3/submission_copy.md"
+    },
+    {
+      "document": "docs/competition/ic/gap_checklist.md",
+      "target": "v3/README.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_comparison_live_2026-10-04.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-comparison-chat-2026-10-04/summary.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "external_agent_readiness.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "external_agent_live_2026-10-04.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "external-agent-live-2026-10-04/summary.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_comparison_v2_live_2026-10-04.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-comparison-v2-2026-10-04/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_comparison_v4_smoke_2026-10-04.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-comparison-v4-smoke-2026-10-04/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "protocol_oracle_improvements_2026-10-04.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "functional_coverage_2026-10-04.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../demo/ic_agent_v2_walkthrough.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "application-uart-v2-2026-10-04/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "ic_agent_v4_api_budget_2026-10-04.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_comparison_v5_live_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-comparison-v5-live-2026-10-05/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-comparison-v5-live-2026-10-05/rows.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "ic_agent_v5_api_budget_2026-10-05.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_v5_optimization_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_smoke_live_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-smoke-live-2026-10-05/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-smoke-live-2026-10-05/rows.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../review/agent_smoke_review_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_smoke_api_budget_2026-10-05.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_smoke_diagnostic_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-smoke-diagnostic-2026-10-05/rows.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-smoke-diagnostic-2026-10-05/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_smoke_diagnostic_api_budget_2026-10-05.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-smoke-validation-2026-10-05/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../review/agent_smoke_diagnostic_review_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_study_1m_live_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-study-1m-live-2026-10-05/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-study-1m-live-2026-10-05/rows.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-study-1m-live-2026-10-05/preregistration.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-study-1m-live-2026-10-05/run_settings.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_study_1m_budget_2026-10-05.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-study-1m-live-2026-10-05/token_budget.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-study-1m-validation-2026-10-05/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../review/agent_study_1m_review_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_recovery_study_live_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-recovery-study-live-2026-10-05/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-recovery-study-live-2026-10-05/strict_summary.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-recovery-study-live-2026-10-05/trace_manifest.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_recovery_study_budget_2026-10-05.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-recovery-validation-2026-10-05/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../review/agent_recovery_code_review_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../review/agent_recovery_study_review_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_holdout_study_live_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-holdout-study-live-2026-10-05/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-holdout-study-live-2026-10-05/strict_summary.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_holdout_study_budget_2026-10-05.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-holdout-study-live-2026-10-05/full_raw_manifest.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-holdout-validation-2026-10-05/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../../benchmarks/agent_holdout_20261005/README.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../review/agent_holdout_prereg_review_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../review/agent_holdout_study_review_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../review/agent-holdout-study-review-2026-10-05/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_budget_study_live_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-budget-study-live-2026-10-05/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-budget-study-live-2026-10-05/strict_summary.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-budget-study-live-2026-10-05/cohort_summaries.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-budget-study-live-2026-10-05/source_byte_binding.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-budget-study-live-2026-10-05/token_budget.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-budget-study-live-2026-10-05/full_raw_evidence.zip"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-budget-study-live-2026-10-05/full_raw_manifest.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-budget-study-live-2026-10-05/trace_manifest.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_budget_source_validation_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-budget-validation-2026-10-05/postfix/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../review/agent_budget_prereg_review_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../review/agent_budget_study_review_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../review/agent-budget-study-review-2026-10-05/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_v7_diagnosis_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-v7-diagnosis-2026-10-05/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_feedback_study_plan_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_feedback_source_validation_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../review/agent_feedback_prereg_review_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_feedback_study_live_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-feedback-study-live-2026-10-05/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-feedback-study-live-2026-10-05/strict_summary.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_feedback_study_budget_2026-10-05.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../review/agent_feedback_study_review_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../review/agent-feedback-study-review-2026-10-05/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_new_holdout_study_live_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-new-holdout-study-live-2026-10-05/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-new-holdout-study-live-2026-10-05/strict_summary.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_new_holdout_study_plan_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-new-holdout-study-live-2026-10-05/preregistration.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_new_holdout_study_budget_2026-10-05.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-new-holdout-study-live-2026-10-05/registered_inputs_manifest.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-new-holdout-study-live-2026-10-05/source_byte_binding.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-new-holdout-study-live-2026-10-05/trace_manifest.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_new_holdout_source_validation_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../review/agent_new_holdout_prereg_review_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../review/agent_new_holdout_study_review_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../review/agent-new-holdout-study-review-2026-10-05/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../competition/ic/v3/README.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../competition/ic/v3/material_data.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../review/ic_materials_v3_review_2026-10-07.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../competition/ic/ICARUS_技术方案_v3.pdf"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../competition/ic/ICARUS_佐证材料_v3.pdf"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../competition/ic/ICARUS_答辩材料_v3.pdf"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../competition/ic/ICARUS_答辩材料_v3.pptx"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../competition/ic/v3/submission_copy.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../competition/ic/v3/review/final_receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "rtl_spec_rendering_2026-10-07.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "rtl-spec-rendering-2026-10-07/rendering_receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "rtl-spec-rendering-2026-10-07/reproduction/reproduction_receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "rtl-spec-rendering-2026-10-07/v3_retained_sources.zip"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "rtl_style_maintenance_2026-10-07.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../../benchmarks/rtl_style_maintenance_20261007/README.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../../benchmarks/rtl_style_maintenance_20261007/release_receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../../benchmarks/rtl_style_maintenance_20261007/verification/replay/replay_receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../../benchmarks/rtl_style_maintenance_20261007/verification/independent-review/review-r2.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../../benchmarks/rtl_style_maintenance_20261007/verification/independent-review/closure_receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent_new_holdout_source_validation_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-new-holdout-validation-2026-10-05/r2/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "ic_agent_v5_validation_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "ic_agent_v4_validation_2026-10-04.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-new-holdout-study-live-2026-10-05/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../review/agent_new_holdout_study_review_2026-10-05.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../competition/ic/v3/README.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "../competition/ic/v3/submission_copy.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "clean_checkout_2026-10-08.md"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "clean-checkout-2026-10-08/receipt.json"
+    },
+    {
+      "document": "docs/experiment/metric_inventory.md",
+      "target": "clean-checkout-2026-10-08/raw_manifest.json"
+    }
+  ],
+  "closure_index": {
+    "count": 291,
+    "present": 291,
+    "source_validation_index_286_unchanged": true,
+    "command": [
+      "python",
+      "-B",
+      "-X",
+      "utf8",
+      "scripts/check_doc_index.py"
+    ],
+    "exit_code": 0
+  },
+  "archive_members_rechecked": 1242,
+  "old_sealed_material_files_rechecked": 6,
+  "frozen_Agent_pipeline_helper_rechecked": true,
+  "no_second_host_or_human_claim": true,
+  "new_artifact_byte_preservation_rule_only_after_validation": true
+}

@@ -1,0 +1,660 @@
+{
+  "schema": "icarus-clean-checkout-final-receipt-v1",
+  "status": "passed_same_host_clean_checkout",
+  "source_commit": "1c29a8f0bffccf1dc373ac4f3c670ff212141f0a",
+  "base_commit": "4a7804e577e3da6effa17bacd9111e9f6714dcf2",
+  "started_local_date": "2026-10-07",
+  "closed_local_date": "2026-10-08",
+  "timezone": "Asia/Shanghai",
+  "role": "same-host local clone plus new isolated venv; not second-host, clean OS, H01 or H02",
+  "full_regression": {
+    "passed": 2020,
+    "tests": 2036,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 16,
+    "seconds": 405.459,
+    "skips": [
+      {
+        "class": "tests.ai.test_agent_decision_v4",
+        "test": "test_symlinked_diagnostic_directory_cannot_write_outside_run",
+        "reason": "directory symlinks unavailable: 1314"
+      },
+      {
+        "class": "tests.core.test_external_agent",
+        "test": "test_real_icarus_existing_sources[uart_rx-baseline-no_observed_difference]",
+        "reason": "requires separately frozen historical inputs and local Icarus"
+      },
+      {
+        "class": "tests.core.test_external_agent",
+        "test": "test_real_icarus_existing_sources[uart_rx-equivalent_rewrite-no_observed_difference]",
+        "reason": "requires separately frozen historical inputs and local Icarus"
+      },
+      {
+        "class": "tests.core.test_external_agent",
+        "test": "test_real_icarus_existing_sources[uart_rx-mut_bit_order-behavior_difference]",
+        "reason": "requires separately frozen historical inputs and local Icarus"
+      },
+      {
+        "class": "tests.core.test_external_agent",
+        "test": "test_real_icarus_existing_sources[uart_rx-broken_compile-inconclusive]",
+        "reason": "requires separately frozen historical inputs and local Icarus"
+      },
+      {
+        "class": "tests.core.test_external_agent",
+        "test": "test_real_icarus_existing_sources[uart_tx-baseline-no_observed_difference]",
+        "reason": "requires separately frozen historical inputs and local Icarus"
+      },
+      {
+        "class": "tests.core.test_external_agent",
+        "test": "test_real_icarus_existing_sources[priority_encoder-baseline-no_observed_difference]",
+        "reason": "requires separately frozen historical inputs and local Icarus"
+      },
+      {
+        "class": "tests.core.test_external_agent",
+        "test": "test_shared_agent_loop_with_mock_http_real_icarus[364-0-cycle_budget]",
+        "reason": "requires frozen historical inputs and local Icarus"
+      },
+      {
+        "class": "tests.core.test_external_agent",
+        "test": "test_shared_agent_loop_with_mock_http_real_icarus[1200-1-round_budget]",
+        "reason": "requires frozen historical inputs and local Icarus"
+      },
+      {
+        "class": "tests.core.test_external_agent",
+        "test": "test_changed_frozen_evidence_is_rejected_before_execution[candidate]",
+        "reason": "requires frozen historical inputs and local Icarus"
+      },
+      {
+        "class": "tests.core.test_external_agent",
+        "test": "test_changed_frozen_evidence_is_rejected_before_execution[qualification]",
+        "reason": "requires frozen historical inputs and local Icarus"
+      },
+      {
+        "class": "tests.core.test_external_agent",
+        "test": "test_missing_qualification_summary_is_not_qualified",
+        "reason": "requires frozen historical inputs"
+      },
+      {
+        "class": "tests.core.test_external_agent",
+        "test": "test_real_snapshot_phase_and_consecutive_combination_inputs[priority_encoder-after]",
+        "reason": "requires frozen historical inputs and local Icarus"
+      },
+      {
+        "class": "tests.core.test_external_agent",
+        "test": "test_real_snapshot_phase_and_consecutive_combination_inputs[priority_encoder-before]",
+        "reason": "requires frozen historical inputs and local Icarus"
+      },
+      {
+        "class": "tests.core.test_external_agent",
+        "test": "test_real_snapshot_phase_and_consecutive_combination_inputs[uart_rx-before]",
+        "reason": "requires frozen historical inputs and local Icarus"
+      },
+      {
+        "class": "tests.core.test_rule_assertions",
+        "test": "test_every_suggestion_holds_on_the_reference_design",
+        "reason": "推荐断言表当前为空：没有可验证的条目（见 core/rule_assertions.py 的说明）"
+      }
+    ],
+    "historical_input_skips": 14,
+    "source_before_status": "empty status precondition passed in the shell; raw file was not created by the empty pipeline; failure retained",
+    "source_during_status_clean": true,
+    "source_after_status_clean": true
+  },
+  "type_check": {
+    "version": "1.11.2",
+    "source_files": 88,
+    "errors": 0,
+    "new_mypy_2_4_compatibility": false
+  },
+  "dead_code": {
+    "source_files": 236,
+    "findings": 0,
+    "scope": "project Python files; excludes third-party venv and temporary outputs"
+  },
+  "doc_index": {
+    "material_paths": 286,
+    "present": 286,
+    "local_unprovided_outputs_separate": true,
+    "not_an_all_Markdown_link_checker": true
+  },
+  "environment": {
+    "python": "3.12.7 | packaged by Anaconda, Inc. | (main, Oct  4 2024, 13:17:27) [MSC v.1929 64 bit (AMD64)]",
+    "prefix": "E:\\FPGA_WORK\\icarus-cleancheck-20261007-r2\\clean checkout\\.venv",
+    "base_prefix": "D:\\Users\\TYOCT\\anaconda3",
+    "user_site": false,
+    "source": "E:\\FPGA_WORK\\icarus-cleancheck-20261007-r2\\clean checkout\\src\\iverilog_ai\\__init__.py",
+    "packages": {
+      "pydantic": "2.8.2",
+      "pytest": "7.4.4",
+      "mypy": "1.11.2",
+      "PyMuPDF": "1.26.6",
+      "Pillow": "10.4.0",
+      "PyYAML": "6.0.1",
+      "streamlit": "1.37.1",
+      "numpy": "1.26.4",
+      "pandas": "2.2.2"
+    },
+    "all_installed": [
+      [
+        "GitPython",
+        "3.2.0"
+      ],
+      [
+        "Jinja2",
+        "3.1.6"
+      ],
+      [
+        "MarkupSafe",
+        "3.0.3"
+      ],
+      [
+        "PyMuPDF",
+        "1.26.6"
+      ],
+      [
+        "PyYAML",
+        "6.0.1"
+      ],
+      [
+        "Pygments",
+        "2.21.0"
+      ],
+      [
+        "altair",
+        "5.5.0"
+      ],
+      [
+        "annotated-types",
+        "0.8.0"
+      ],
+      [
+        "attrs",
+        "26.1.0"
+      ],
+      [
+        "blinker",
+        "1.9.0"
+      ],
+      [
+        "cachetools",
+        "5.5.2"
+      ],
+      [
+        "certifi",
+        "2026.7.22"
+      ],
+      [
+        "charset-normalizer",
+        "3.5.1"
+      ],
+      [
+        "click",
+        "8.5.0"
+      ],
+      [
+        "colorama",
+        "0.4.6"
+      ],
+      [
+        "gitdb",
+        "4.0.12"
+      ],
+      [
+        "idna",
+        "3.19"
+      ],
+      [
+        "iniconfig",
+        "2.3.1"
+      ],
+      [
+        "iverilog-ai-lab",
+        "0.1.0"
+      ],
+      [
+        "jsonschema",
+        "4.26.0"
+      ],
+      [
+        "jsonschema-specifications",
+        "2025.9.1"
+      ],
+      [
+        "markdown-it-py",
+        "4.2.0"
+      ],
+      [
+        "mdurl",
+        "0.1.2"
+      ],
+      [
+        "mypy",
+        "1.11.2"
+      ],
+      [
+        "mypy_extensions",
+        "1.1.0"
+      ],
+      [
+        "narwhals",
+        "2.25.0"
+      ],
+      [
+        "numpy",
+        "1.26.4"
+      ],
+      [
+        "packaging",
+        "24.2"
+      ],
+      [
+        "pandas",
+        "2.2.2"
+      ],
+      [
+        "pillow",
+        "10.4.0"
+      ],
+      [
+        "pluggy",
+        "1.6.0"
+      ],
+      [
+        "protobuf",
+        "5.29.6"
+      ],
+      [
+        "pyarrow",
+        "25.0.1"
+      ],
+      [
+        "pydantic",
+        "2.8.2"
+      ],
+      [
+        "pydantic_core",
+        "2.20.1"
+      ],
+      [
+        "pydeck",
+        "0.9.3"
+      ],
+      [
+        "pytest",
+        "7.4.4"
+      ],
+      [
+        "python-dateutil",
+        "2.9.0.post0"
+      ],
+      [
+        "pytz",
+        "2026.5"
+      ],
+      [
+        "referencing",
+        "0.37.0"
+      ],
+      [
+        "requests",
+        "2.34.2"
+      ],
+      [
+        "rich",
+        "13.9.4"
+      ],
+      [
+        "rpds-py",
+        "2026.6.3"
+      ],
+      [
+        "six",
+        "1.17.0"
+      ],
+      [
+        "smmap",
+        "5.0.3"
+      ],
+      [
+        "streamlit",
+        "1.37.1"
+      ],
+      [
+        "tenacity",
+        "8.5.0"
+      ],
+      [
+        "toml",
+        "0.10.2"
+      ],
+      [
+        "tornado",
+        "6.5.10"
+      ],
+      [
+        "typing_extensions",
+        "4.16.0"
+      ],
+      [
+        "tzdata",
+        "2026.3"
+      ],
+      [
+        "urllib3",
+        "2.7.0"
+      ],
+      [
+        "watchdog",
+        "4.0.2"
+      ]
+    ]
+  },
+  "commands": {
+    "clone": {
+      "command": [
+        "git",
+        "-c",
+        "core.longpaths=true",
+        "clone",
+        "--no-local",
+        "--",
+        "E:/FPGA_WORK/iverilog-ai-lab",
+        "E:/FPGA_WORK/icarus-cleancheck-20261007-r2/clean checkout"
+      ],
+      "exit_code": 0
+    },
+    "sync": {
+      "command": [
+        "uv",
+        "sync",
+        "--locked",
+        "--extra",
+        "dev",
+        "--extra",
+        "ui",
+        "--offline",
+        "--no-config",
+        "--cache-dir",
+        "E:/FPGA_WORK/icarus-cleancheck-20261007-r1/uv-cache",
+        "--python",
+        "D:/Users/TYOCT/anaconda3/python.exe",
+        "--no-python-downloads",
+        "--no-managed-python",
+        "--link-mode",
+        "copy"
+      ],
+      "cwd": "E:/FPGA_WORK/icarus-cleancheck-20261007-r2/clean checkout",
+      "exit_code": 0,
+      "started_utc": "2026-10-07T15:51:58.0362783Z",
+      "ended_utc": "2026-10-07T15:52:03.2330276Z",
+      "using_retained_package_cache": true,
+      "internet_requests": 0,
+      "model_API_requests": 0
+    },
+    "pytest": {
+      "command": [
+        "E:/FPGA_WORK/icarus-cleancheck-20261007-r2/clean checkout/.venv/Scripts/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "-q",
+        "--basetemp",
+        "E:/FPGA_WORK/icarus-cleancheck-20261007-r2/pytest-tmp",
+        "--junitxml",
+        "E:/FPGA_WORK/icarus-cleancheck-20261007-r2/evidence/pytest.xml"
+      ],
+      "cwd": "E:/FPGA_WORK/icarus-cleancheck-20261007-r2/clean checkout",
+      "exit_code": 0,
+      "started_utc": "2026-10-07T15:52:04.2762379Z",
+      "ended_utc": "2026-10-07T15:58:51.1990482Z",
+      "plugin_autoload_disabled": true,
+      "source_commit": "1c29a8f0bffccf1dc373ac4f3c670ff212141f0a",
+      "local_api_profile_copied": false,
+      "network_default": false
+    },
+    "mypy": {
+      "command": [
+        "E:/FPGA_WORK/icarus-cleancheck-20261007-r2/clean checkout/.venv/Scripts/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "mypy"
+      ],
+      "cwd": "E:/FPGA_WORK/icarus-cleancheck-20261007-r2/clean checkout",
+      "exit_code": 0,
+      "started_utc": "2026-10-07T15:58:51.2051538Z",
+      "ended_utc": "2026-10-07T15:58:53.3686679Z"
+    },
+    "dead-code": {
+      "command": [
+        "E:/FPGA_WORK/icarus-cleancheck-20261007-r2/clean checkout/.venv/Scripts/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "scripts/check_dead_code.py"
+      ],
+      "cwd": "E:/FPGA_WORK/icarus-cleancheck-20261007-r2/clean checkout",
+      "exit_code": 0,
+      "started_utc": "2026-10-07T15:58:53.3705532Z",
+      "ended_utc": "2026-10-07T15:58:55.3314353Z"
+    },
+    "doc-index": {
+      "command": [
+        "E:/FPGA_WORK/icarus-cleancheck-20261007-r2/clean checkout/.venv/Scripts/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "scripts/check_doc_index.py"
+      ],
+      "cwd": "E:/FPGA_WORK/icarus-cleancheck-20261007-r2/clean checkout",
+      "exit_code": 0,
+      "started_utc": "2026-10-07T15:58:55.3336338Z",
+      "ended_utc": "2026-10-07T15:58:55.4433129Z"
+    }
+  },
+  "registered_input_raw_integrity": {
+    "schema": "icarus-clean-checkout-integrity-v1",
+    "source_commit": "1c29a8f0bffccf1dc373ac4f3c670ff212141f0a",
+    "same_host": true,
+    "restored_original_inputs": [
+      {
+        "path": "benchmarks/manifest.json",
+        "sha256": "338f6a4f29f84dbe34e14223114d54f6e809b5dd9cd625e081a07f27c396d3f1",
+        "matches_registered_original": true
+      },
+      {
+        "path": "rtl/edge_detector.v",
+        "sha256": "4c47149c3ae55110cd33fc085ff0005019392217c91e4a93a85f057157ef9f70",
+        "matches_registered_original": true
+      },
+      {
+        "path": "rtl/pulse_stretcher.v",
+        "sha256": "f490e4015f446e712fd7bfa75747568582ea310098af6dd6a43234e2a8fb00e9",
+        "matches_registered_original": true
+      },
+      {
+        "path": "rtl/sync_fifo_bug_full_off_by_one.v",
+        "sha256": "d4488c931444acf82d57c2fd9d16981b5692829a432fe9775ab83dfb5d3616ef",
+        "matches_registered_original": true
+      },
+      {
+        "path": "rtl/sync_fifo_bug_write_when_full.v",
+        "sha256": "b579005f8af33f20a6abea7a695ae634850228831da1f5e15fecc43e55253e71",
+        "matches_registered_original": true
+      },
+      {
+        "path": "rtl/handshake_stage.v",
+        "sha256": "40128340f967f8143bdb55ddfac689a94b7639ac8f175b7b9a4164fb8b531791",
+        "matches_registered_original": true
+      },
+      {
+        "path": "rtl/handshake_stage_bug_ready_ignores_out_ready.v",
+        "sha256": "e52ec6619bcc2b049daff7973c85460482b8ae6bb4b806208a6840442cd9f1d1",
+        "matches_registered_original": true
+      },
+      {
+        "path": "rtl/handshake_stage_bug_valid_not_cleared.v",
+        "sha256": "3f9519c49b4fcb196f4bdee1021d84b922af252be3580d0093b30fef3da68502",
+        "matches_registered_original": true
+      },
+      {
+        "path": "rtl/spi_master.v",
+        "sha256": "8cacdb94472eb7446f0df05ac201f88e1c7e5c46dd01a484b4996b099835c9dd",
+        "matches_registered_original": true
+      },
+      {
+        "path": "rtl/spi_master_bug_done_missing.v",
+        "sha256": "eb194c5f8a88c41111f5cdfb6bb8c67057182448c040691d196ed9bf8376fedf",
+        "matches_registered_original": true
+      },
+      {
+        "path": "rtl/spi_master_bug_sclk_polarity.v",
+        "sha256": "b3c7cb08949d062faaf20811d7d4693ab7a6bf65ce878dbe1a0df15e69fc57f8",
+        "matches_registered_original": true
+      },
+      {
+        "path": "rtl/uart_tx.v",
+        "sha256": "2b6d636a399169bcaa4fdabd9661daedbfde28c42c3bc9f76104db2c371e1193",
+        "matches_registered_original": true
+      },
+      {
+        "path": "rtl/uart_tx_bug_busy_never_clears.v",
+        "sha256": "24b4caa23ac9b7dd2db45401acf781b1641e7eb800c55f32b78cbd6b65c7ffed",
+        "matches_registered_original": true
+      },
+      {
+        "path": "rtl/uart_tx_bug_msb_first.v",
+        "sha256": "93b638a980c2ecf591163f954fd72f5210088c1bf2dda5ab9dbef65c479bd334",
+        "matches_registered_original": true
+      }
+    ],
+    "frozen_runtime": [
+      {
+        "path": "src/iverilog_ai/ai/agent.py",
+        "sha256": "bf8422840a97ed3360f0dac0ee0621fd605970d658521ce7bec0d57f3c8016ff",
+        "exact_baseline_4a7804e": true
+      },
+      {
+        "path": "src/iverilog_ai/core/pipeline.py",
+        "sha256": "3cf278b7df84f8d1e8d57786bc3b2485afab14ad5f1a1ce43b5eed657a9b9446",
+        "exact_baseline_4a7804e": true
+      },
+      {
+        "path": "src/iverilog_ai/core/observation_feedback.py",
+        "sha256": "3586fa13bd2ab82668188dac48b1a3055a935ff87d66d6accd600938e1b621d6",
+        "exact_baseline_4a7804e": true
+      }
+    ],
+    "sealed_old_experiment_and_material_subtrees_unchanged": true,
+    "API_requests": 0,
+    "current_lock_sha256": "b82b59483762443dda8652fc5a42fbb84dd5665f787b302443214978c75e7de4",
+    "initial_status_raw_file": "not created by the empty PowerShell pipeline; its shell precondition passed before install",
+    "actual_during_status": "source-during.status.txt",
+    "actual_during_status_clean": true
+  },
+  "sealed_material_integrity": [
+    {
+      "path": "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+      "sha256": "4bb214297d189ccbf446dd12e9bc848bffd216601c1c315241f6cb3bcc87f6a3",
+      "exact_baseline_4a7804e": true
+    },
+    {
+      "path": "docs/competition/ic/ICARUS_佐证材料_v3.pdf",
+      "sha256": "7fe5fe5aa78d654dc4e212cd25e2f2b202418d1d7a32d96ce755d8361a8e0dda",
+      "exact_baseline_4a7804e": true
+    },
+    {
+      "path": "docs/competition/ic/ICARUS_答辩材料_v3.pdf",
+      "sha256": "80f2fadd2304fdb7d0d7695520242239e9e31c0dbaac9db2f96e5e108fddf580",
+      "exact_baseline_4a7804e": true
+    },
+    {
+      "path": "docs/competition/ic/ICARUS_答辩材料_v3.pptx",
+      "sha256": "03a1cf9a47bb95576054725baf34b73a041d953983ba31ca3f8ad4c5ac8db76c",
+      "exact_baseline_4a7804e": true
+    },
+    {
+      "path": "docs/competition/ic/v3/material_data.json",
+      "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+      "exact_baseline_4a7804e": true
+    },
+    {
+      "path": "docs/competition/ic/v3/review/final_receipt.json",
+      "sha256": "b2acd33125cb9005ebaf46d8a21bbc92c6ca88753194b1eef46a46ae2a6cb428",
+      "exact_baseline_4a7804e": true
+    }
+  ],
+  "relocated_RTL_replay": {
+    "source_run": "initial-r1 relocated checkout/new venv",
+    "DUT_executions": 36,
+    "public_oracle": 12,
+    "four_state": 24,
+    "compared_output_values": 5115,
+    "all_equal": true,
+    "spec_files_exact": 18,
+    "same_preserved_vectors": true,
+    "not_new_API_or_independent_samples": true,
+    "original_official_gate": {
+      "compile": "passed",
+      "ast": "passed",
+      "readability": "passed",
+      "comment": "passed",
+      "naming": "passed",
+      "profile": "passed",
+      "testbench": "not_requested",
+      "toolchain": "not_requested"
+    },
+    "old_published_72_receipt_unchanged": true
+  },
+  "native_matrix": {
+    "references": 15,
+    "reference_false_positives": 0,
+    "defects_found": 83,
+    "defects_total": 83,
+    "inconclusive": 0,
+    "role": "existing hand-written testbench repeat; not Agent score"
+  },
+  "CLI_controls": {
+    "same_exit": 0,
+    "defect_exit": 1,
+    "missing_input_exit": 2,
+    "missing_input_DUT_executions": 0,
+    "missing_is_preflight_not_compile_control": true
+  },
+  "model_API_requests": 0,
+  "new_API_score": false,
+  "independent_human_review": false,
+  "second_device": false,
+  "new_browser_screenshots": false,
+  "browser_failure_preserved": true,
+  "shared_external_tools": true,
+  "first_dependency_install_used_registry_network": true,
+  "final_install_offline_with_cached_packages": true,
+  "independent_rtl_skill_overall_preflight_passed": false,
+  "frozen_Agent_pipeline_helper_unchanged": true,
+  "historical_results_and_bound_v3_materials_unchanged": true,
+  "scope_includes_failures": true,
+  "raw_archive": {
+    "file": "raw_evidence.zip",
+    "bytes": 2500794,
+    "sha256": "66d497808e17297302b48838c8c4d6fe65766beade54ea82a408f2ef6979c654",
+    "member_count": 1242,
+    "all_member_SHA256_and_CRC_checked": true
+  },
+  "not_additive_tests": [
+    "initial full 2001 passed/12 failures/6 errors/16 skipped",
+    "initial targeted 178 passed/5 failures",
+    "remaining targeted 23 passed",
+    "final full 2020 passed/16 skipped"
+  ],
+  "pending_external": [
+    "real participants and H02",
+    "second-device full reproduction",
+    "real repository/remote Actions",
+    "actual video and formal account submission"
+  ]
+}

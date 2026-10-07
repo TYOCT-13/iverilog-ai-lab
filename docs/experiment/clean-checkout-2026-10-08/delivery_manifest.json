@@ -1,0 +1,101 @@
+{
+  "schema": "icarus-clean-checkout-delivery-manifest-v1",
+  "manifest_self_excluded": true,
+  "validated_source_commit": "1c29a8f0bffccf1dc373ac4f3c670ff212141f0a",
+  "source_baseline": "4a7804e577e3da6effa17bacd9111e9f6714dcf2",
+  "internal_files": [
+    {
+      "path": "closure-index.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "closure-index.stdout.txt",
+      "bytes": 135,
+      "sha256": "759ec4b05345f349713719859c7db8e583a3c95a663b1ca02dc8527f2babaa14"
+    },
+    {
+      "path": "closure_receipt.json",
+      "bytes": 37149,
+      "sha256": "b6360ea1acfafd5ae9525354ec259069caa428896244aa5de3d37e238cd9f9ad"
+    },
+    {
+      "path": "dead-code.stdout.txt",
+      "bytes": 51,
+      "sha256": "a2704392ed79b302b82636e50af1932948ef61044fbc5976d51f3e43527d48e5"
+    },
+    {
+      "path": "doc-index.stdout.txt",
+      "bytes": 167,
+      "sha256": "8dbb691bfb5effc0881f88e3f96db594e057eb556d2d727947e9d1f14401316f"
+    },
+    {
+      "path": "mypy.stdout.txt",
+      "bytes": 45,
+      "sha256": "2d6b7f9cae097fc3f2c1c10271e54a3a798b57b405db1a0d5dde32a9a17b4ec7"
+    },
+    {
+      "path": "pytest.xml",
+      "bytes": 314722,
+      "sha256": "a8034b1ac4d8d2fb0258453e06dd58928c92108385a0aa17b795c90fc6a6182f"
+    },
+    {
+      "path": "raw_evidence.zip",
+      "bytes": 2500794,
+      "sha256": "66d497808e17297302b48838c8c4d6fe65766beade54ea82a408f2ef6979c654"
+    },
+    {
+      "path": "raw_manifest.json",
+      "bytes": 280855,
+      "sha256": "a637f635809cf464fb6982cd7007bdf05c5ddd82d15a2fa57b4b46382455fbc8"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2199,
+      "sha256": "d3713f2081983eb97f0fefadb1b18ea9de7c49c0a7f1cf73ec33a95c5a99a88b"
+    },
+    {
+      "path": "receipt.json",
+      "bytes": 19888,
+      "sha256": "46048ff522fd4194100aba6d9dc611ffb4f7ac82a11fa46999df8f6eb3ad20e0"
+    }
+  ],
+  "external_document_snapshots": [
+    {
+      "path": "README.md",
+      "sha256": "d0df2ce742d688864287e3ec2976491b393ab408746951084be1d2d46de5a49f",
+      "binding": "working-tree document snapshot at publication commit, not validated source commit 1c29a8f"
+    },
+    {
+      "path": "docs/INDEX.md",
+      "sha256": "3302a1ec2ec0bd74dbc3ef8c80e3381c9438b8562edc353eb3891622387ad0a8",
+      "binding": "working-tree document snapshot at publication commit, not validated source commit 1c29a8f"
+    },
+    {
+      "path": "docs/reproduce_current.md",
+      "sha256": "56edafa1ca587ccc19cbb6c010d8d81cb016dad782c47634b11b4b41db14acaf",
+      "binding": "working-tree document snapshot at publication commit, not validated source commit 1c29a8f"
+    },
+    {
+      "path": "docs/local_artifacts.md",
+      "sha256": "94a9ddccc89bcd1ef42980e05fcab00fe4867cb12080209b01978b04617c0daa",
+      "binding": "working-tree document snapshot at publication commit, not validated source commit 1c29a8f"
+    },
+    {
+      "path": "docs/experiment/clean_checkout_2026-10-08.md",
+      "sha256": "cd3411df0a7bb181452966691f5141db8a2ee542bb420635d0f1fe17f30cec60",
+      "binding": "working-tree document snapshot at publication commit, not validated source commit 1c29a8f"
+    },
+    {
+      "path": "docs/competition/ic/gap_checklist.md",
+      "sha256": "b44fd93f0b3a3086d766a176ecc631b80150cc967ad46af1362b7617732967aa",
+      "binding": "working-tree document snapshot at publication commit, not validated source commit 1c29a8f"
+    },
+    {
+      "path": "docs/experiment/metric_inventory.md",
+      "sha256": "36438363354ab202109a1a1147c231282db60ed6653fd3c64bf095135a1ad688",
+      "binding": "working-tree document snapshot at publication commit, not validated source commit 1c29a8f"
+    }
+  ],
+  "old_manifests_unchanged": true
+}

@@ -1,8 +1,10 @@
 # AI＋集成电路：当前交付与剩余证据
 
-更新：2026-10-07；实测与v3产物日期为2026-10-05。最新两模块批次实际源码`20400fa`，Agent/helper/系统提示保持`a969337`：108任务全部实际执行、134episode/268侧；六组各12缺陷检出12/10/8/8/11/10，分母为4不同人工缺陷×3重复。36/36正确控制无误报，严格比较资格true，但仍有1终态格式失败。87请求/339624tokens，本批100万剩660376，未知/pending均0。源码验收2033通过/2跳过、mypy88、535指纹无变；结果双机器审计已完成，核心2192不同非DUT检查与作者轨迹核验均通过，不与全仓测试相加，均非H02。
+更新：2026-10-08；实测与v3产物日期为2026-10-05。最新两模块批次实际源码`20400fa`，Agent/helper/系统提示保持`a969337`：108任务全部实际执行、134episode/268侧；六组各12缺陷检出12/10/8/8/11/10，分母为4不同人工缺陷×3重复。36/36正确控制无误报，严格比较资格true，但仍有1终态格式失败。87请求/339624tokens，本批100万剩660376，未知/pending均0。源码验收2033通过/2跳过、mypy88、535指纹无变；结果双机器审计已完成，核心2192不同非DUT检查与作者轨迹核验均通过，不与全仓测试相加，均非H02。
 
 历史v8八模块432任务保持原数：六组各48缺陷检出48/32/48/29/37/37；306实际收费请求/973149tokens、余26851，0未知/待结算。414执行/484轮/968侧、18零DUT、严格资格false；反馈与历史v7及该轮无反馈均37，未证明整体改善。该版源码1858通过/2跳过、mypy87、263指纹无变，事前及结果双代理审计完成；旧版结果与正式材料分别保留。
+
+2026-10-08同机干净克隆补充：[报告](../../experiment/clean_checkout_2026-10-08.md)、[回执](../../experiment/clean-checkout-2026-10-08/receipt.json)；源提交1c29a8f，2020通过/16跳过、mypy88、14份登记原字节匹配。锁依赖、Windows长路径、Yosys含空格路径和venv扫描已处理；14项旧外部输入不随Git提供，仍跳过。与历史2033项验收及模型检出分母分列，未做另一台机器或真人/H02。
 
 ## 1. 按评分方向核对
 
@@ -23,7 +25,7 @@
 | P1 | 应用演示 | 历史v5 UART小包在仓库外重放108检查/16失败，结构stdout一致；离线512周期和338/48另存；v5三尺寸UI58/58、非默认设置保持 | 组织真人任务，录制3–5分钟视频；旧浏览器验收不写成v6复测，解包重放不计新的API请求或真人结果 |
 | P1 | 工程门禁 | 最新2033通过/2跳过/0失败错误、mypy88、535指纹无变，事前非实现者202不同非DUT检查；历史1858/2、1716/2及34定向分别保留。2026-10-07独立维护版6源静态0/0，36首次+36公开同组重放，5115比较/轮一致；18规格文件逐字节重建 | 原资产12样式问题保留；正式gate6项passed/2项not_requested，不相加测试数，不称全门禁、形式等价、异机或真人结果；旧模型成绩不自动归到维护版 |
 | P1 | 提交材料 | v3方案10页、合并佐证6页、答辩12页及可编辑PPTX已同步新108与旧432，全部实际查看；旧v2与v5ZIP保留 | 核对真实队号、赛题与上传回执；视频可选，真人/H01/H02作为证据补强仍需真实验证 |
-| P1 | 冻结交接 | 最新原件ZIP/full_raw_manifest包含268执行侧和API轨迹；结果双机器审计完成，职责与原工具记录分别保留；历史v5包与c7/v4缺项边界不改写 | 异机完整复现仍未验证；本地机械核验不是H02或干净克隆复现 |
+| P1 | 冻结交接 | 最新原件ZIP/full_raw_manifest包含268执行侧和API轨迹；结果双机器审计完成，职责与原工具记录分别保留；历史v5包与c7/v4缺项边界不改写 | 异机完整复现仍未验证；同机干净克隆已完成；14项历史输入跳过，仍不是H02或另一台设备 |
 
 最新入口：[两模块完整报告](../../experiment/agent_new_holdout_study_live_2026-10-05.md)、[原件回执](../../experiment/agent-new-holdout-study-live-2026-10-05/receipt.json)、[完整原件包](../../experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip)、[预算](../../experiment/agent_new_holdout_study_budget_2026-10-05.json)、[源码验收](../../experiment/agent_new_holdout_source_validation_2026-10-05.md)、[方案](../../experiment/agent_new_holdout_study_plan_2026-10-05.md)、[事前审查](../../review/agent_new_holdout_prereg_review_2026-10-05.md)及[已完成双机器审计](../../review/agent_new_holdout_study_review_2026-10-05.md)/[审计回执](../../review/agent-new-holdout-study-review-2026-10-05/receipt.json)。历史：[v8八模块报告](../../experiment/agent_feedback_study_live_2026-10-05.md)/[已封存审计](../../review/agent_feedback_study_review_2026-10-05.md)、[v7完整报告](../../experiment/agent_budget_study_live_2026-10-05.md)、[v7只读诊断](../../experiment/agent_v7_diagnosis_2026-10-05.md)、[c077留出](../../experiment/agent_holdout_study_live_2026-10-05.md)、[v6恢复](../../experiment/agent_recovery_study_live_2026-10-05.md)、[旧1M](../../experiment/agent_study_1m_live_2026-10-05.md)。
 
