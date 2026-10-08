@@ -1,0 +1,142 @@
+{
+  "schema_version": "1.0",
+  "kind": "participant_documentation_packet",
+  "revision": "r2",
+  "date": "2026-10-08",
+  "date_timezone": "Asia/Shanghai",
+  "reproduction_code_commit": "f7867db67cde354e8664205b0470ade8ba18dc17",
+  "packet": {
+    "path": "docs/trial/reproduction_guide_2026-10-08-r2.zip",
+    "bytes": 78316,
+    "sha256": "739678ee629c3d88cb6274a358551263d3482d12d2babfbd480c393429b5199a",
+    "members": 20,
+    "files": [
+      {
+        "path": "LICENSE",
+        "bytes": 10106,
+        "sha256": "f2f629ced07742bd1ff86142345011d03a5bfe2409a1783a5616d2fc9fab5684"
+      },
+      {
+        "path": "SHA256SUMS.txt",
+        "bytes": 1938,
+        "sha256": "94cdf7563908518886a9611d214004df5a207249af97a2c4995498f305716246"
+      },
+      {
+        "path": "START_HERE.txt",
+        "bytes": 1536,
+        "sha256": "a7ae5fb3717870eb52501e16f38608d29f7865d6d0dabf41d55409014c736599"
+      },
+      {
+        "path": "docs/reproduce_current.md",
+        "bytes": 19319,
+        "sha256": "f1093743e5e17ba164b6cc9de27df8a4e483961defc00c4516b0d3e3746836b5"
+      },
+      {
+        "path": "docs/trial/forms/participant_feedback.docx",
+        "bytes": 39121,
+        "sha256": "07654fb2e23b52f37cf5468ee9821293d666694574928ca1e4a5842d379d850e"
+      },
+      {
+        "path": "docs/trial/forms/participant_feedback.md",
+        "bytes": 2084,
+        "sha256": "c59aac3ee9f726d32c3cd564bdfa7783f90c8889ef082e6880c54a86088a5c8a"
+      },
+      {
+        "path": "docs/trial/forms/reproduction_record.md",
+        "bytes": 4316,
+        "sha256": "ce64bdbc3161c8ed67901d57c104acbb3788e28b06c620446e8de4ccf0867bfd"
+      },
+      {
+        "path": "docs/trial/participant_start.md",
+        "bytes": 2938,
+        "sha256": "347e528d98742433a1946def193e7b29d427e448e1e14057c8d0bee66a8b6283"
+      },
+      {
+        "path": "docs/trial/tasks/T01_install.md",
+        "bytes": 3408,
+        "sha256": "643853022c7dcf4aad707c6d1de73579d31ba58fed2c81964048a743029d5de0"
+      },
+      {
+        "path": "docs/trial/tasks/T02_builtin_offline.md",
+        "bytes": 2190,
+        "sha256": "79fffeeec1a7e3762b1b6c9c8ee205a495667198830cd87380bc31c435206c27"
+      },
+      {
+        "path": "docs/trial/tasks/T03_variant_review.md",
+        "bytes": 2364,
+        "sha256": "61d95f07522964cede26343cc7caa9d8dbe272c2f7dc69221785643a19d04a0d"
+      },
+      {
+        "path": "docs/trial/tasks/T04_custom_contract.md",
+        "bytes": 2553,
+        "sha256": "05eee1fad97bfdc67612977c15d7378b5c0a73bbd67fee7af17721b678cc5f44"
+      },
+      {
+        "path": "docs/trial/tasks/T05_compare_versions.md",
+        "bytes": 2387,
+        "sha256": "90f87b1ca5b43b9070048c499ca0d22d5018fbd980a7c1934cc3fa02b1fbfd32"
+      },
+      {
+        "path": "docs/trial/tasks/T06_static_review.md",
+        "bytes": 1878,
+        "sha256": "b40beb3c7f463b28963dc15d28f303f49000ae3604360dff54b830b7a5668e52"
+      },
+      {
+        "path": "docs/trial/tasks/T07_state_and_input_change.md",
+        "bytes": 2307,
+        "sha256": "2aff654449ee92a337a1b67b14bdf035f6509f450fa593fa8418e17f604e69bd"
+      },
+      {
+        "path": "docs/trial/tasks/T08_archive_export.md",
+        "bytes": 2205,
+        "sha256": "9f9d0146769bdd5aa92e463d3fc6088d56c1e6ec8ad293798cdc957700be5c4a"
+      },
+      {
+        "path": "docs/trial/tasks/T09_cli_reproduction.md",
+        "bytes": 2900,
+        "sha256": "0787e4dca75b75cf6aa16b76cecea7051cede3804d3b0f8f80b56ec8e92e40c0"
+      },
+      {
+        "path": "docs/trial/tasks/T10_optional_api.md",
+        "bytes": 4190,
+        "sha256": "24c8d02d699904459a7b4def2ca7d1566fc38a5f248c5ada383b3b5a569d12af"
+      },
+      {
+        "path": "docs/trial/tasks/T11_narrow_keyboard.md",
+        "bytes": 2612,
+        "sha256": "22139b3660102c23445e408b9fa180cbf5d5aab94eb6c73d929252a51bfd93ac"
+      },
+      {
+        "path": "docs/trial/tasks/T12_environment_recovery.md",
+        "bytes": 2898,
+        "sha256": "bc13e7b556f95792fa91847d1a139f750bdaba9a862a68fa67ef2c5fc781cee6"
+      }
+    ]
+  },
+  "source_byte_basis": "worktree bytes at build; ZIP SHA validates distributed files independently of Git newline normalization",
+  "previous_packet": {
+    "path": "docs/trial/reproduction_guide_2026-10-08.zip",
+    "sha256": "a825e906b2bceb44dd17ba66417041e574bc3bc91efff4a0874577cff32d364e",
+    "unchanged": true
+  },
+  "validation": {
+    "crc_passed": true,
+    "sha_manifest_files_verified": 19,
+    "guide_matches_current_file": true,
+    "guide_powershell_parse_blocks": 16,
+    "guide_powershell_parse_errors": 0,
+    "commands_executed_on_reproducer": false,
+    "doc_index": {
+      "exit_code": 0,
+      "stdout": "索引：E:\\FPGA_WORK\\iverilog-ai-lab\\docs\\INDEX.md\n抽出的材料路径：299 条\n结论：299/299 条路径存在，索引未过期\n"
+    },
+    "changed_relative_links_checked": 136,
+    "missing_relative_links": 0,
+    "production_and_previous_raw_records_unchanged": true
+  },
+  "new_api_requests": 0,
+  "new_dut_executions": 0,
+  "new_human_sessions": 0,
+  "pushed": false,
+  "scope": "first-install instructions integrated into guide section 2; code, experiments and original results unchanged"
+}

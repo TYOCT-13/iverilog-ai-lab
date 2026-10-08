@@ -100,7 +100,7 @@
 - [ ] 创建提交前版本标签，例如 `v0.1.0` 或正式提交版本号。
 - [ ] 从一台不依赖本机路径的环境访问仓库并完成最小复现。
 
-发给复现人：[新版操作指南](../reproduce_current.md)、[空白记录表](../trial/forms/reproduction_record.md)和[资料包](../trial/reproduction_guide_2026-10-08.zip)。实际原件、本人确认、协助和首次失败收回后再登记完成。
+发给复现人：[含首次安装的指南](../reproduce_current.md)、[空白记录表](../trial/forms/reproduction_record.md)和[r2资料包](../trial/reproduction_guide_2026-10-08-r2.zip)。实际原件、本人确认、协助和首次失败收回后再登记完成。
 
 ## 三、P1：强烈建议完成
 

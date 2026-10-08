@@ -2,7 +2,7 @@
 
 这是一个围绕 Icarus Verilog 开源生态构建的非官方 AI 辅助 RTL 验证工具。AI 负责提出测试场景和解释失败，Icarus Verilog 与自检 testbench 负责裁决功能是否正确。
 
-代码仓库：[TYOCT-13/iverilog-ai-lab](https://github.com/TYOCT-13/iverilog-ai-lab)。已上传f7867db，实际远程核对见[上传确认](docs/competition/repository_publication_2026-10-08.md)。真人复现使用[指南](docs/reproduce_current.md)、[空白记录表](docs/trial/forms/reproduction_record.md)和[可发送资料包](docs/trial/reproduction_guide_2026-10-08.zip)；基础流程不需要API。上传前的[建仓记录](docs/competition/repository_readiness_2026-10-08.md)保留原状态。
+代码仓库：[TYOCT-13/iverilog-ai-lab](https://github.com/TYOCT-13/iverilog-ai-lab)。已上传f7867db，实际远程核对见[上传确认](docs/competition/repository_publication_2026-10-08.md)。真人复现使用[含首次安装的指南](docs/reproduce_current.md)、[空白记录表](docs/trial/forms/reproduction_record.md)和[r2资料包](docs/trial/reproduction_guide_2026-10-08-r2.zip)；基础流程不需要API。上传前的[建仓记录](docs/competition/repository_readiness_2026-10-08.md)保留原状态。
 
 ## 当前进度
 

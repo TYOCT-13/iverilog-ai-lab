@@ -1,8 +1,10 @@
-# 真人复现指南（2026-10-08）
+# 真人复现指南（2026-10-08，r2）
 
 这份说明用于在另一台电脑运行公开代码，并保存安装、操作和结果证据。代码统一固定到已上传的 **f7867db67cde354e8664205b0470ade8ba18dc17**，不要在一次会话中途改用新的 main。
 
 仓库：[TYOCT-13/iverilog-ai-lab](https://github.com/TYOCT-13/iverilog-ai-lab)。远程提交核对见[上传确认记录](competition/repository_publication_2026-10-08.md)。本指南和[空白复现记录表](trial/forms/reproduction_record.md)可单独发给参与者；它们是执行材料，尚不代表有真人复现结果。
+
+首次安装已并入第2节：先记录环境，缺工具时安装并检查PATH，工具可用后再克隆。已有P01-R1日志的参与者从尚未完成的小节继续，不重新创建目录。发给参与者使用[r2资料包](trial/reproduction_guide_2026-10-08-r2.zip)，旧包及其校验记录保留。
 
 ## 1. 先确定本次范围
 
@@ -18,6 +20,8 @@
 组织者先分配匿名代号和任务。真正用自己的另一台电脑记 independent_machine；共享作者电脑记 shared_host。预装工具、获得提示、接受代操作分别记录，不能据此自动写成“独立安装成功”。
 
 ## 2. 开始记录，再检查工具
+
+### 2.1 开启记录与检查现有环境
 
 下面以Windows PowerShell为例。把P01-R1换成本人的会话编号；复测另用R2，保留首次文件。
 
@@ -41,7 +45,88 @@ Get-Command git,uv,python,iverilog,vvp -ErrorAction SilentlyContinue | Select-Ob
 
 需要Git、Python、uv及配套的iverilog/vvp。本示例使用Python3.12；作者本机证据为Windows/Python3.12.7/Icarus12.0。其他系统、Python小版本或Icarus版本记录实际值，不沿用作者环境声明。
 
-缺工具时先保存现象，再按官方说明安装：[Git for Windows](https://git-scm.com/downloads/win)、[Python](https://www.python.org/downloads/windows/)、[uv](https://docs.astral.sh/uv/getting-started/installation/)、[Icarus](https://steveicarus.github.io/iverilog/usage/installation.html)。选择Python3.12的Windows安装器；不要直接换成下载页上的最新大版本。Windows可以使用适合本机的Icarus预编译包；由组织者提供包时，记录来源、版本和安装协助。
+如果Git、uv、iverilog或vvp无法识别，说明命令尚不可用，可能未安装或未加入PATH；保存首次输出后做2.2。Python只指向WindowsApps且不输出版本时，尚未确认真实解释器可用，可能是商店快捷入口，见[Microsoft说明](https://learn.microsoft.com/zh-cn/windows/python/faqs)。查询版本用python -V或--version，小写-v是详细输出。
+
+### 2.2 首次安装Git、Python、uv与Icarus
+
+已有五个工具且版本能读取时可跳过安装；记录哪些预装。缺工具时，在原终端安装，输出继续留在当前日志，不删除P01-R1目录。下面适用于Windows x64：
+
+```powershell
+winget --version
+$env:PROCESSOR_ARCHITECTURE
+```
+
+AMD64表示本节的x64环境。没有winget时先看2.4；其他架构选择对应工具并记录，不直接使用x64安装器。Windows PowerShell5.1可以执行这些步骤，无需为此另装PowerShell7。
+
+缺哪项安装哪项。逐条执行，前一项完成后再做下一项；安装失败时保留原文，先处理该项，不连续重跑全部命令：
+
+```powershell
+winget install --id Git.Git -e --source winget
+"git_install_exit=$LASTEXITCODE"
+```
+
+```powershell
+winget install --id Python.Python.3.12 -e --source winget --version 3.12.10 --scope user --architecture x64
+"python_install_exit=$LASTEXITCODE"
+```
+
+```powershell
+winget install --id astral-sh.uv -e --source winget --version 0.9.9
+"uv_install_exit=$LASTEXITCODE"
+```
+
+```powershell
+winget install --id Icarus.Verilog -e --source winget --version 12.2022.06.11
+"icarus_install_exit=$LASTEXITCODE"
+```
+
+2026-10-08已只读核对以上包ID及固定版本可获取，没有替参与者执行安装。uv0.9.9对应作者工具；这里Python3.12.10与作者3.12.7不同，记录本机实际版本。Icarus包同时提供iverilog和vvp，不需要下载两套工具。包管理器或安装器的确认由实际操作人处理；参数见[WinGet文档](https://learn.microsoft.com/en-us/windows/package-manager/winget/install)。
+
+### 2.3 刷新PATH并确认工具可用
+
+安装完成后，在同一个终端重新读取已保存的PATH。这里只刷新当前进程，不改写永久PATH，原会话变量和终端记录继续保留：
+
+```powershell
+$env:Path = [Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [Environment]::GetEnvironmentVariable('Path','User')
+Get-Command git,uv,python,iverilog,vvp -ErrorAction SilentlyContinue | Select-Object Name,Source
+git --version
+uv --version
+python --version
+iverilog -V
+vvp -V
+```
+
+应能看到五个命令的实际来源与版本。安装命令返回成功不替代这里的检查。
+
+如果Python仍指向WindowsApps且不输出版本，在开始菜单搜索“管理应用执行别名”，关闭“应用安装程序”下的python.exe/python3.exe快捷入口，再检查。关闭快捷入口不等于安装Python；使用安装器时勾选Add Python to PATH，也可使用实际解释器的完整路径。
+
+如果仅Icarus找不到，确认自己的实际安装目录。默认C:/iverilog下确实有两个可执行文件时，可为当前终端加入bin目录：
+
+```powershell
+$reproIcarusBin = 'C:/iverilog/bin'
+if (-not (Test-Path -LiteralPath (Join-Path $reproIcarusBin 'iverilog.exe'))) { throw '这里不是实际Icarus安装目录，请核对安装位置。' }
+if (-not (Test-Path -LiteralPath (Join-Path $reproIcarusBin 'vvp.exe'))) { throw '安装目录缺少vvp，请保留现象并检查安装。' }
+$env:Path = $reproIcarusBin + ';' + $env:Path
+iverilog -V
+vvp -V
+```
+
+安装在其他位置时只把reproIcarusBin改为自己的实际bin目录，不照抄作者D:盘路径。临时设置随终端关闭失效；本次在同一终端启动项目，后续新终端重新确认路径。
+
+### 2.4 WinGet不可用或下载失败时
+
+可在Microsoft Store安装或更新“应用安装程序”（Microsoft），再检查winget；见[获取WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/)。也可按发布者说明手动安装并记录实际选择：
+
+| 工具 | 来源与选择 |
+|---|---|
+| Git | [Git for Windows](https://git-scm.com/install/windows)，x64安装器，允许从命令行使用 |
+| Python | [Python3.12.10](https://www.python.org/downloads/release/python-31210/)，Windows installer (64-bit)，勾选Add Python to PATH |
+| uv | [Astral安装说明](https://docs.astral.sh/uv/getting-started/installation/)，0.9.9 Windows发布包或固定版本安装器 |
+| Icarus | [Windows打包者页面](https://bleyer.org/icarus/)，iverilog-v12-20220611-x64_setup.exe；[项目安装说明](https://steveicarus.github.io/iverilog/usage/installation.html)可参考 |
+
+网络失败或安装需管理员权限时，保留输出并记录等待、协助及失败。不要改成已安装或绕过下载哈希检查。安装后回2.3检查实际版本，工具未齐时不继续克隆或仿真。
+
+### 2.5 重开终端与接续会话
 
 安装后需要重开终端时，先执行Stop-Transcript。新终端用相同会话编号恢复变量，并记录到新的续记文件；安装前的terminal.txt不覆盖：
 
@@ -62,6 +147,8 @@ $reproOut = Join-Path '.iverilog-ai/reproduction' $reproSession
 ```
 
 恢复后重新输出本节的工具版本，接着做上次尚未完成的步骤；不要重新创建已有运行目录或覆盖原结果。
+
+五个工具均可读取版本后继续第3节。已有P01-R1目录不重跑2.1的创建代码。安装指导、他人代操作和下载等待都记录；未知次数和用时不填0，工具安装完成不代表测试或独立人审完成。
 
 版本命令不存在、需要管理员权限或网络下载失败，都如实记录。不要把未安装或预装写成参与者自行安装成功。没有GPU信息也不影响基础复现；只做操作复现时不需要收集显卡、设备序列号、MAC或IP地址。
 
