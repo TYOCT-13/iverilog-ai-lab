@@ -71,6 +71,39 @@ except (OSError, ValueError) as _profile_exception:
     _local_api_error = type(_profile_exception).__name__
 _api_default_base = os.getenv("IVERILOG_AI_BASE_URL") or (_local_api_profile.endpoint if _local_api_profile else "https://api.deepseek.com")
 _api_default_model = os.getenv("IVERILOG_AI_MODEL") or (_local_api_profile.model if _local_api_profile else "deepseek-flash")
+_PLANNER_MODES = (
+    "离线确定性规划器（无需密钥、进程内）",
+    "本地调试模型（HTTP 回环、无需密钥）",
+    "在线 API（手动输入或本机密钥文件）",
+)
+_PROVIDER_FIELD_KEYS = (
+    "provider_api_base", "provider_api_model", "provider_api_key",
+    "provider_api_timeout", "provider_api_output_tokens", "provider_wire_api",
+    "provider_thinking_mode", "provider_reasoning", "picked_model_from_list",
+    "provider_debug_endpoint",
+)
+
+
+def _initialize_planner_state() -> None:
+    """Keep config values in session memory when mode-specific widgets unmount."""
+    saved = st.session_state.setdefault("provider_field_values", {})
+    for key in _PROVIDER_FIELD_KEYS:
+        if key in st.session_state:
+            saved[key] = st.session_state[key]
+        elif key in saved:
+            st.session_state[key] = saved[key]
+    st.session_state.setdefault("planner_mode", _PLANNER_MODES[2])
+
+
+def _planner_mode_label(value: str) -> str:
+    return "在线模型" if value.startswith("在线") else "本地调试" if value.startswith("本地调试") else "离线模式"
+
+
+def _complete_planner_setup() -> None:
+    st.session_state.planner_mode = st.session_state.startup_planner_mode
+    st.session_state.planner_setup_complete = True
+    st.session_state.workspace_page = "工具设置"
+    st.session_state.workspace_mobile_page = "工具设置"
 
 
 def _configured_api_key(endpoint: str, entered_key: str) -> str:
@@ -296,7 +329,7 @@ _SCENARIOS = (_SINGLE_SCENARIO, _DIFF_SCENARIO, _LEARN_SCENARIO)
 def _ui_scenario() -> str:
     """当前场景；未选过时按"验证一份 RTL"处理。"""
 
-    value = str(st.session_state.get("ui_scenario") or _SINGLE_SCENARIO)
+    value = str(st.session_state.get("ui_scenario") or st.session_state.get("saved_ui_scenario") or _SINGLE_SCENARIO)
     return value if value in _SCENARIOS else _SINGLE_SCENARIO
 
 
@@ -1781,6 +1814,7 @@ def _lane(number: str, title: str, description: str) -> None:
 
 
 def _open_task_workspace() -> None:
+    st.session_state.saved_ui_scenario = _ui_scenario()
     st.session_state.workspace_page = "工作台"
     st.session_state.workspace_mobile_page = "工作台"
 
@@ -1916,6 +1950,20 @@ def _render_workspace_results() -> None:
 
 st.set_page_config(page_title="Icarus 智测", page_icon="⬢", layout="wide", initial_sidebar_state="collapsed")
 _inject_theme()
+_initialize_planner_state()
+if not st.session_state.get("planner_setup_complete", False):
+    _brandbar()
+    _section_header("00", "PLAN GENERATION", "选择测试计划生成方式", "选好后进入对应配置，再开始验证。")
+    _startup_mode = str(st.radio("生成方式", list(_PLANNER_MODES), index=2,
+                                 key="startup_planner_mode", format_func=_planner_mode_label))
+    if _startup_mode.startswith("在线"):
+        st.caption("由在线模型生成测试计划，本机执行仿真。下一步填写 API 配置。")
+    elif _startup_mode.startswith("本地调试"):
+        st.caption("使用本机规则服务调试接口，只需确认本地服务地址。")
+    else:
+        st.caption("按内置规则生成计划，无需联网或填写模型配置。")
+    st.button("进入配置", type="primary", key="complete_planner_setup", on_click=_complete_planner_setup)
+    st.stop()
 _NAV_LABELS = {
     "工作台": "WORKSPACE\n工作台", "规则审查": "REVIEW\n规则审查",
     "运行档案": "ARCHIVE\n运行档案", "工具设置": "SETTINGS\n工具设置",
@@ -1937,11 +1985,15 @@ with st.container():
                 st.session_state.workspace_mobile_page = st.session_state.workspace_page
             st.selectbox("页面导航", list(_NAV_LABELS), key="workspace_mobile_page", label_visibility="collapsed",
                          format_func=lambda value: _NAV_LABELS[value].replace("\n", " / "), on_change=_mobile_page_changed)
-with st.container():
-    st.markdown('<span class="ui-anchor workflow-navigation"></span>', unsafe_allow_html=True)
-    st.radio("工作方式", list(_SCENARIOS), key="ui_scenario", label_visibility="collapsed", on_change=_open_task_workspace,
-             horizontal=True,
-             format_func=lambda value: {_SINGLE_SCENARIO: "验证一份 RTL", _DIFF_SCENARIO: "对比两份 RTL", _LEARN_SCENARIO: "学习模式"}[value])
+if _page == "工作台":
+    if "ui_scenario" not in st.session_state:
+        st.session_state.ui_scenario = _ui_scenario()
+    with st.container():
+        st.markdown('<span class="ui-anchor workflow-navigation"></span>', unsafe_allow_html=True)
+        st.radio("工作方式", list(_SCENARIOS), key="ui_scenario", label_visibility="collapsed", on_change=_open_task_workspace,
+                 horizontal=True,
+                 format_func=lambda value: {_SINGLE_SCENARIO: "验证一份 RTL", _DIFF_SCENARIO: "对比两份 RTL", _LEARN_SCENARIO: "学习模式"}[value])
+    st.session_state.saved_ui_scenario = _ui_scenario()
 _ev = _project_evidence()
 
 _active_route = {"工作台": "compare" if _ui_scenario() == _DIFF_SCENARIO else "workbench", "规则审查": "quality", "运行档案": "history", "工具设置": "settings", "使用手册": "manual", "项目概览": "overview"}[str(_page)]
@@ -2343,92 +2395,92 @@ with _PLAN:
 
 with _SETTINGS:
     _section_header("04", "SETTINGS", "工具设置", "")
-    with st.expander("测试计划与模型"):
+    with st.expander("测试计划与模型", expanded=_page == "工具设置"):
         provider_mode = st.radio(
             "生成方式",
-            ["离线确定性规划器（无需密钥、进程内）", "本地调试模型（HTTP 回环、无需密钥）", "在线 API（手动输入或本机密钥文件）"],
+            list(_PLANNER_MODES),
+            index=2,
             horizontal=True,
             key="planner_mode",
-            format_func=lambda value: "在线模型" if value.startswith("在线") else "本地调试" if value.startswith("本地调试") else "离线模式",
+            format_func=_planner_mode_label,
         )
         use_online = str(provider_mode).startswith("在线")
         use_debug_local = str(provider_mode).startswith("本地调试")
         use_offline = str(provider_mode).startswith("离线")
         # 页面里"质量与对比"页签的代码在源文件里**先于**设置页运行，因此它不能直接读这两个
         # 变量（早先就踩过：mypy 报 used-before-def，运行时也可能读到上一轮的旧值）。
-        # 统一把结论放进 session_state，任何位置都能安全读取，默认即离线。
+        # 统一把结论放进 session_state，任何位置都能安全读取，新会话默认选择在线模型。
         st.session_state["planner_is_online"] = use_online
         st.session_state["planner_is_debug_local"] = use_debug_local
-        debug_endpoint = st.text_input(
-            "本地服务地址",
-            value=os.getenv("IVERILOG_AI_DEBUG_ENDPOINT", "http://127.0.0.1:11434/v1"),
-            key="provider_debug_endpoint",
-            help="启动仓库自带服务：python -m iverilog_ai.ai.debug_server",
-        )
         if use_debug_local:
-            st.caption(
-                "使用本地规则服务调试接口，不调用 AI 模型。"
+            st.text_input(
+                "本地服务地址",
+                value=os.getenv("IVERILOG_AI_DEBUG_ENDPOINT", "http://127.0.0.1:11434/v1"),
+                key="provider_debug_endpoint",
+                help="启动仓库自带服务：python -m iverilog_ai.ai.debug_server",
             )
+            st.caption("使用本地规则服务调试接口，不调用 AI 模型，无需 API Key 或模型名称。")
         elif use_offline:
-            st.caption(
-                "按接口定义生成测试，不联网，也不需要密钥；这不是 AI 模型生成的结果。"
-            )
-        api_base = st.text_input("API 地址", value=_api_default_base, key="provider_api_base", help="填写服务商的 Base URL。")
-        api_model = st.text_input("模型名称", value=_api_default_model, key="provider_api_model", help="填写服务商提供的模型名称，也可以从模型列表中选择。")
-        api_key = st.text_input("API Key", value="", type="password", key="provider_api_key", help="不会写入项目文件或报告")
-        if _local_api_profile:
-            st.caption("已配置本机密钥文件。API Key 留空即可；更换 API 地址后需要另行提供密钥。")
-        elif _local_api_error:
-            st.warning(f"本机 API 配置无法读取（{_local_api_error}），可在此手动填写。")
-        api_timeout = st.slider("请求超时（秒）", min_value=30, max_value=300, value=120, step=10, key="provider_api_timeout", help="模型响应较慢时可适当调高。")
-        api_output_tokens = st.slider("输出长度上限（token）", min_value=2048, max_value=8192, value=_local_api_profile.max_output_tokens if _local_api_profile else 4096, step=512, key="provider_api_output_tokens", help="设置过小可能导致测试计划生成不完整。")
-        wire_api_label = st.selectbox("接口格式", ["Chat Completions API", "Responses API"], key="provider_wire_api", help="按服务商文档选择；不确定时使用 Chat Completions。")
-        thinking_label = st.selectbox("思考模式", ["自动", "服务默认", "关闭", "开启"], key="provider_thinking_mode",
-            disabled=wire_api_label == "Responses API", help="自动会关闭官方 DeepSeek Flash 的思考，便于生成工具计划；其他服务沿用默认。手动开启或关闭只适用于支持 thinking 参数的 Chat 服务。")
-        reasoning_label = st.selectbox("推理强度", ["不发送（兼容性最高）", "minimal", "low", "medium", "high", "xhigh"], key="provider_reasoning", help="仅 Responses 接口使用。服务商不支持时选择「不发送」。")
-        if st.button("检查配置", help="仅检查参数，不请求模型。"):
-            try:
-                _diag_wire = _wire_api_for(str(wire_api_label))
-                _diag_reasoning = None if str(reasoning_label).startswith("不发送") or _diag_wire != "responses" else reasoning_label
-                _diag_provider = OpenAICompatibleProvider(endpoint=api_base, model=api_model, api_key=_configured_api_key(api_base, api_key) or " ",
-                    wire_api=_diag_wire, reasoning_effort=_diag_reasoning,
-                    thinking_mode=_thinking_mode_for(str(thinking_label), api_base, api_model, _diag_wire),
-                    allow_network=True, store=False, timeout=api_timeout, max_output_tokens=api_output_tokens)
-                st.json(_diag_provider.request_diagnostics())
-            except Exception as exc:
-                st.error(f"配置无效：{exc}")
-        if st.button("读取模型列表", help="向当前服务商获取可用模型，需要 API Key。"):
-            try:
-                _models_wire = _wire_api_for(str(wire_api_label))
-                if "deepseek" in (api_base + " " + api_model).lower():
-                    _models_wire = "chat_completions"
-                _models_key = _configured_api_key(api_base, api_key)
-                if not _models_key:
-                    raise ValueError("读取模型列表需要当前 API 地址对应的密钥")
-                _models_provider = OpenAICompatibleProvider(
-                    endpoint=api_base, model=api_model, api_key=_models_key,
-                    wire_api=_models_wire, reasoning_effort=None, allow_network=True, store=False, timeout=api_timeout, max_output_tokens=api_output_tokens,
+            st.caption("无需配置。按接口定义生成测试，不联网，也不需要密钥；这不是 AI 模型生成的结果。")
+        if use_online:
+            api_base = st.text_input("API 地址", value=_api_default_base, key="provider_api_base", help="填写服务商的 Base URL。")
+            api_model = st.text_input("模型名称", value=_api_default_model, key="provider_api_model", help="填写服务商提供的模型名称，也可以从模型列表中选择。")
+            api_key = st.text_input("API Key", value="", type="password", key="provider_api_key", help="不会写入项目文件或报告")
+            if _local_api_profile:
+                st.caption("已配置本机密钥文件。API Key 留空即可；更换 API 地址后需要另行提供密钥。")
+            elif _local_api_error:
+                st.warning(f"本机 API 配置无法读取（{_local_api_error}），可在此手动填写。")
+            api_timeout = st.slider("请求超时（秒）", min_value=30, max_value=300, value=120, step=10, key="provider_api_timeout", help="模型响应较慢时可适当调高。")
+            api_output_tokens = st.slider("输出长度上限（token）", min_value=2048, max_value=8192, value=_local_api_profile.max_output_tokens if _local_api_profile else 4096, step=512, key="provider_api_output_tokens", help="设置过小可能导致测试计划生成不完整。")
+            wire_api_label = st.selectbox("接口格式", ["Chat Completions API", "Responses API"], key="provider_wire_api", help="按服务商文档选择；不确定时使用 Chat Completions。")
+            thinking_label = st.selectbox("思考模式", ["自动", "服务默认", "关闭", "开启"], key="provider_thinking_mode",
+                disabled=wire_api_label == "Responses API", help="自动会关闭官方 DeepSeek Flash 的思考，便于生成工具计划；其他服务沿用默认。手动开启或关闭只适用于支持 thinking 参数的 Chat 服务。")
+            reasoning_label = st.selectbox("推理强度", ["不发送（兼容性最高）", "minimal", "low", "medium", "high", "xhigh"], key="provider_reasoning", help="仅 Responses 接口使用。服务商不支持时选择「不发送」。")
+            if st.button("检查配置", help="仅检查参数，不请求模型。"):
+                try:
+                    _diag_wire = _wire_api_for(str(wire_api_label))
+                    _diag_reasoning = None if str(reasoning_label).startswith("不发送") or _diag_wire != "responses" else reasoning_label
+                    _diag_provider = OpenAICompatibleProvider(endpoint=api_base, model=api_model, api_key=_configured_api_key(api_base, api_key) or " ",
+                        wire_api=_diag_wire, reasoning_effort=_diag_reasoning,
+                        thinking_mode=_thinking_mode_for(str(thinking_label), api_base, api_model, _diag_wire),
+                        allow_network=True, store=False, timeout=api_timeout, max_output_tokens=api_output_tokens)
+                    st.json(_diag_provider.request_diagnostics())
+                except Exception as exc:
+                    st.error(f"配置无效：{exc}")
+            if st.button("读取模型列表", help="向当前服务商获取可用模型，需要 API Key。"):
+                try:
+                    _models_wire = _wire_api_for(str(wire_api_label))
+                    if "deepseek" in (api_base + " " + api_model).lower():
+                        _models_wire = "chat_completions"
+                    _models_key = _configured_api_key(api_base, api_key)
+                    if not _models_key:
+                        raise ValueError("读取模型列表需要当前 API 地址对应的密钥")
+                    _models_provider = OpenAICompatibleProvider(
+                        endpoint=api_base, model=api_model, api_key=_models_key,
+                        wire_api=_models_wire, reasoning_effort=None, allow_network=True, store=False, timeout=api_timeout, max_output_tokens=api_output_tokens,
+                    )
+                    with _busy("正在向服务商请求模型列表"):
+                        st.session_state.available_models = _models_provider.list_models()
+                    st.success(f"已读取 {len(st.session_state.available_models)} 个模型")
+                except Exception as exc:
+                    st.error(f"读取模型列表失败：{exc}")
+            if st.session_state.get("available_models"):
+                _listed_models = list(st.session_state.available_models)
+                # 读到列表就要能用：选中即覆盖上面的「模型」输入，避免用户手抄 ID。
+                _picked_model = st.selectbox(
+                    "选择可用模型",
+                    ["（不覆盖，使用上面的输入）"] + _listed_models,
+                    key="picked_model_from_list",
+                    help="选中后优先使用列表中的模型。",
                 )
-                with _busy("正在向服务商请求模型列表"):
-                    st.session_state.available_models = _models_provider.list_models()
-                st.success(f"已读取 {len(st.session_state.available_models)} 个模型")
-            except Exception as exc:
-                st.error(f"读取模型列表失败：{exc}")
-        if st.session_state.get("available_models"):
-            _listed_models = list(st.session_state.available_models)
-            # 读到列表就要能用：选中即覆盖上面的「模型」输入，避免用户手抄 ID。
-            _picked_model = st.selectbox(
-                "选择可用模型",
-                ["（不覆盖，使用上面的输入）"] + _listed_models,
-                key="picked_model_from_list",
-                help="选中后优先使用列表中的模型。",
-            )
-            if _picked_model != "（不覆盖，使用上面的输入）":
-                # st.selectbox 的返回值在类型标注上是宽泛的，显式转成 str：
-                # 下游用它拼提示词与构造 provider，必须是字符串。
-                api_model = str(_picked_model)
-        if "deepseek" in (api_base + " " + api_model).lower() and str(wire_api_label).startswith("Responses"):
-            st.info("当前 DeepSeek 配置会自动使用 Chat Completions 接口。")
+                if _picked_model != "（不覆盖，使用上面的输入）":
+                    # st.selectbox 的返回值在类型标注上是宽泛的，显式转成 str：
+                    # 下游用它拼提示词与构造 provider，必须是字符串。
+                    api_model = str(_picked_model)
+            if "deepseek" in (api_base + " " + api_model).lower() and str(wire_api_label).startswith("Responses"):
+                st.info("当前 DeepSeek 配置会自动使用 Chat Completions 接口。")
+
+    st.button("前往工作台", key="planner_settings_to_workspace", on_click=_open_task_workspace)
 
     with st.expander("波形查看器（GTKWave）"):
         # 真实反馈："用 GTKWave 自动打开没反应，不知道是不是找不到路径"。

@@ -144,6 +144,8 @@ def test_vcd_window_survives_navigation_but_clears_for_the_next_run():
     if not locate_tools().can_simulate:
         pytest.skip("需要本机 Icarus/vvp")
     app = AppTest.from_file(str(APP), default_timeout=120)
+    app.session_state["planner_setup_complete"] = True
+    app.session_state["planner_mode"] = "离线确定性规划器（无需密钥、进程内）"
     app.session_state["case_name"] = "简单 ALU"
     app.run()
     app.button(key="generate_plan").click().run()
@@ -186,6 +188,8 @@ def _custom_app():
     from streamlit.testing.v1 import AppTest
 
     app = AppTest.from_file(str(APP), default_timeout=120)
+    app.session_state["planner_setup_complete"] = True
+    app.session_state["planner_mode"] = "离线确定性规划器（无需密钥、进程内）"
     draft = _contract()
     app.session_state["case_name"] = "自定义 RTL"
     app.session_state["custom_rtl_path"] = ""
@@ -268,6 +272,8 @@ def test_fresh_upload_can_be_validated_and_planned_without_preseeded_contract(mo
 
     monkeypatch.setattr(st, "file_uploader", upload)
     app = AppTest.from_file(str(APP), default_timeout=120)
+    app.session_state["planner_setup_complete"] = True
+    app.session_state["planner_mode"] = "离线确定性规划器（无需密钥、进程内）"
     app.session_state["case_name"] = "自定义 RTL"
     app.run()
     assert not app.exception, [str(item.value) for item in app.exception]

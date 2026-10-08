@@ -52,13 +52,16 @@ def test_static_advice_uses_current_provider_settings_before_settings_render(
     monkeypatch.setattr(ai, "OpenAICompatibleProvider", provider_factory)
     monkeypatch.setattr(ai, "advise_on_static_review", review_advice)
     app = AppTest.from_file(str(APP), default_timeout=120)
+    app.session_state["planner_setup_complete"] = True
+    app.session_state["planner_mode"] = "离线确定性规划器（无需密钥、进程内）"
     app.session_state["case_name"] = "模十计数器"
     if picked_model:
         app.session_state["available_models"] = [picked_model]
     app.run()
     app.radio(key="workspace_page").set_value("工具设置").run()
-    app.radio(key="planner_mode").set_value(app.radio(key="planner_mode").options[mode_index])
-    app.text_input(key="provider_debug_endpoint").set_value("http://127.0.0.1:19191/v1")
+    # Configure online values first, then verify that hiding these widgets does
+    # not discard them when offline/debug mode is selected.
+    app.radio(key="planner_mode").set_value(app.radio(key="planner_mode").options[2]).run()
     app.text_input(key="provider_api_base").set_value(endpoint)
     app.text_input(key="provider_api_model").set_value("typed-audit-model")
     app.text_input(key="provider_api_key").set_value("audit-placeholder-not-a-real-secret")
@@ -69,6 +72,9 @@ def test_static_advice_uses_current_provider_settings_before_settings_render(
     if picked_model:
         app.selectbox(key="picked_model_from_list").set_value(picked_model)
     app.run()
+    app.radio(key="planner_mode").set_value(app.radio(key="planner_mode").options[mode_index]).run()
+    if mode_index == 1:
+        app.text_input(key="provider_debug_endpoint").set_value("http://127.0.0.1:19191/v1").run()
     app.radio(key="workspace_page").set_value("规则审查").run()
     app.button(key="run_static_rtl_review").click().run()
     app.button(key="run_static_review_advice").click().run()
@@ -100,5 +106,9 @@ def test_static_advice_uses_current_provider_settings_before_settings_render(
         assert configuration["allow_network"] is True
 
     app.radio(key="workspace_page").set_value("工具设置").run()
-    assert app.text_input(key="provider_api_base").value == endpoint
-    assert app.selectbox(key="provider_wire_api").value == wire_label
+    if mode_index == 2:
+        assert app.text_input(key="provider_api_base").value == endpoint
+        assert app.selectbox(key="provider_wire_api").value == wire_label
+    else:
+        assert not any(item.key == "provider_api_base" for item in app.text_input)
+        assert app.session_state["provider_field_values"]["provider_api_base"] == endpoint

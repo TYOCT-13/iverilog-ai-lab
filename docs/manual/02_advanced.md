@@ -202,7 +202,7 @@ python scripts/run_pipeline_matrix.py
 
 CI 需要 Icarus：Linux `apt-get install iverilog`，Windows `choco install iverilog`，
 或设 `IVERILOG_PATH` / `VVP_PATH`。项目自带的
-[`.github/workflows/ci.yml`](../.github/workflows/ci.yml) 就是照这个写的。
+[`.github/workflows/ci.yml`](../../.github/workflows/ci.yml) 就是照这个写的。
 
 ---
 
@@ -213,7 +213,7 @@ $env:IVERILOG_AI_API_KEY = "sk-..."        # 只走环境变量，不写入任�
 $env:IVERILOG_AI_ALLOW_NETWORK = "1"       # 网络请求需要显式允许
 ```
 
-网页 → **工具设置 → 测试计划与模型** → **生成方式**选"在线模型" → 填**API 地址 / 模型名称 / API Key** → 可先点"检查配置"（不调用模型）。
+新网页会话默认选中**在线模型**，点**进入配置**后填写**API 地址 / 模型名称 / API Key**；已有会话从**工具设置 → 测试计划与模型**切换。可先点"检查配置"（不调用模型），再点**前往工作台**。离线和本地调试模式不显示在线API配置；切换回来时保留当前会话中已填的配置。
 
 **三条纪律**：密钥不进仓库、不进报告、不进日志；超时/限流不自动重试（避免放大费用）；
 AI 写的期望值只作诊断，判决永远由 Icarus + 参考模型给出。

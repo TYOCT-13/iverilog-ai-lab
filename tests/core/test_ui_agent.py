@@ -49,11 +49,13 @@ def test_api_agent_survives_navigation_and_invalidates_on_input_change(monkeypat
     monkeypatch.setattr(agent, "run_verification_agent", isolated_run)
     monkeypatch.setattr("iverilog_ai.ai.provider.build_opener", lambda *args: SimpleNamespace(open=request))
     app = AppTest.from_file(str(ROOT / "ui/app.py"), default_timeout=120)
+    app.session_state["planner_setup_complete"] = True
+    app.session_state["planner_mode"] = "离线确定性规划器（无需密钥、进程内）"
     app.session_state["case_name"] = "模十计数器"
     app.run()
     assert app.button(key="run_verification_agent").disabled
     app.radio(key="workspace_page").set_value("工具设置").run()
-    app.radio(key="planner_mode").set_value(app.radio(key="planner_mode").options[2])
+    app.radio(key="planner_mode").set_value(app.radio(key="planner_mode").options[2]).run()
     app.text_input(key="provider_api_base").set_value("https://api.example/v1")
     app.text_input(key="provider_api_model").set_value("ui-agent-test-fixture")
     app.selectbox(key="provider_thinking_mode").set_value("关闭")
@@ -142,10 +144,12 @@ def test_uart_coverage_is_measured_visible_and_feedback_can_be_disabled(monkeypa
     monkeypatch.setattr(agent, "run_verification_agent", isolated_run)
     monkeypatch.setattr("iverilog_ai.ai.provider.build_opener", lambda *args: SimpleNamespace(open=request))
     app = AppTest.from_file(str(ROOT / "ui/app.py"), default_timeout=120)
+    app.session_state["planner_setup_complete"] = True
+    app.session_state["planner_mode"] = "离线确定性规划器（无需密钥、进程内）"
     app.session_state["case_name"] = "UART 发送器"
     app.run()
     app.radio(key="workspace_page").set_value("工具设置").run()
-    app.radio(key="planner_mode").set_value(app.radio(key="planner_mode").options[2])
+    app.radio(key="planner_mode").set_value(app.radio(key="planner_mode").options[2]).run()
     app.text_input(key="provider_api_base").set_value("https://api.example/v1")
     app.text_input(key="provider_api_model").set_value("ui-uart-fixture")
     app.text_input(key="provider_api_key").set_value("fixture-not-a-real-key")

@@ -67,6 +67,8 @@ def comparison_app(monkeypatch):
     monkeypatch.setattr(st, "file_uploader", upload_widget)
     monkeypatch.setattr(import_module("iverilog_ai.core.verify_diff"), "verify_diff", compare)
     app = AppTest.from_file(str(APP), default_timeout=120)
+    app.session_state["planner_setup_complete"] = True
+    app.session_state["planner_mode"] = "离线确定性规划器（无需密钥、进程内）"
     app.session_state["case_name"] = "简单 ALU"
     app.run()
     app.radio(key="ui_scenario").set_value("对比两份 RTL（AI 改写验收 / 开源行为回归）").run()

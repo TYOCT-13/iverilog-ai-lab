@@ -32,6 +32,8 @@ APP = ROOT / "ui" / "app.py"
 
 def _run_app() -> AppTest:
     app = AppTest.from_file(str(APP), default_timeout=120)
+    app.session_state["planner_setup_complete"] = True
+    app.session_state["planner_mode"] = "离线确定性规划器（无需密钥、进程内）"
     app.run()
     return app
 
@@ -72,6 +74,7 @@ def test_workspace_navigation_covers_every_section():
         target.set_value(expected).run()
         assert_page(expected)
 
+    app.radio(key="workspace_page").set_value("工作台").run()
     app.radio(key="ui_scenario").set_value("对比两份 RTL（AI 改写验收 / 开源行为回归）").run()
     assert_page("工作台")
     app.radio(key="workspace_page").set_value("工具设置").run()
@@ -120,7 +123,9 @@ def test_evidence_panel_shows_measured_numbers(rendered: AppTest):
 def test_provider_settings_expander_contains_model_list_controls(rendered: AppTest):
     """AI 接口设置里必须真的有这两个按钮（它们曾被写在 return 之后而从未渲染）。"""
 
-    labels = [item.label for item in rendered.button]
+    app = _run_app()
+    app.radio(key="planner_mode").set_value(app.radio(key="planner_mode").options[2]).run()
+    labels = [item.label for item in app.button]
     assert any("检查配置" in label for label in labels), labels
     assert any("读取模型列表" in label for label in labels), labels
 
@@ -137,6 +142,8 @@ def test_page_survives_a_generated_plan():
     from iverilog_ai.ai.schema import TestPlan
 
     app = AppTest.from_file(str(APP), default_timeout=120)
+    app.session_state["planner_setup_complete"] = True
+    app.session_state["planner_mode"] = "离线确定性规划器（无需密钥、进程内）"
     app.run()
     app.session_state["ai_plan"] = TestPlan.model_validate(
         {
@@ -164,6 +171,8 @@ def test_offline_mode_generates_a_plan_that_matches_the_selected_case():
     """
 
     app = AppTest.from_file(str(APP), default_timeout=180)
+    app.session_state["planner_setup_complete"] = True
+    app.session_state["planner_mode"] = "离线确定性规划器（无需密钥、进程内）"
     app.session_state["case_name"] = "简单 ALU"
     app.run()
     assert not app.exception, [str(item.value) for item in app.exception]
@@ -202,6 +211,8 @@ def test_workspace_evidence_survives_navigation_and_export_clicks():
     if not locate_tools().can_simulate:
         pytest.skip("需要本机 Icarus/vvp")
     app = AppTest.from_file(str(APP), default_timeout=120)
+    app.session_state["planner_setup_complete"] = True
+    app.session_state["planner_mode"] = "离线确定性规划器（无需密钥、进程内）"
     app.session_state["case_name"] = "简单 ALU"
     app.run()
     app.button(key="generate_plan").click().run()
@@ -333,6 +344,8 @@ def test_contract_editor_is_a_fragment_and_survives_render():
     assert not full_page_reruns, f"contract 编辑区里不应再有整页重跑：{full_page_reruns}"
 
     app = AppTest.from_file(str(APP), default_timeout=120)
+    app.session_state["planner_setup_complete"] = True
+    app.session_state["planner_mode"] = "离线确定性规划器（无需密钥、进程内）"
     app.session_state["case_name"] = "自定义 RTL"
     # 该分支在 `custom_rtl_path` 缺席时会初始化并清空 contract 文本，因此必须先占位
     app.session_state["custom_rtl_path"] = ""
@@ -354,6 +367,8 @@ def test_contract_editor_survives_stale_widget_state():
     """
 
     app = AppTest.from_file(str(APP), default_timeout=120)
+    app.session_state["planner_setup_complete"] = True
+    app.session_state["planner_mode"] = "离线确定性规划器（无需密钥、进程内）"
     app.session_state["case_name"] = "自定义 RTL"
     # 该分支在 `custom_rtl_path` 缺席时会初始化并清空 contract 文本，因此必须先占位
     app.session_state["custom_rtl_path"] = ""
@@ -372,6 +387,8 @@ def _custom_rtl_app(*, json_text: str = "") -> AppTest:
     """渲染"自定义 RTL"分支（contract 编辑区就在这里），可按需预置 JSON 文本框内容。"""
 
     app = AppTest.from_file(str(APP), default_timeout=180)
+    app.session_state["planner_setup_complete"] = True
+    app.session_state["planner_mode"] = "离线确定性规划器（无需密钥、进程内）"
     app.session_state["case_name"] = "自定义 RTL"
     # 该分支在 `custom_rtl_path` 缺席时会初始化并清空 contract 文本，因此必须先占位
     app.session_state["custom_rtl_path"] = ""
@@ -560,6 +577,8 @@ def test_static_review_table_is_chinese_and_explains_itself():
     """
 
     app = AppTest.from_file(str(APP), default_timeout=180)
+    app.session_state["planner_setup_complete"] = True
+    app.session_state["planner_mode"] = "离线确定性规划器（无需密钥、进程内）"
     app.session_state["case_name"] = "模十计数器"
     app.run()
     _click(app, "run_static_rtl_review")
@@ -609,6 +628,8 @@ def test_gtkwave_path_can_be_set_manually_and_is_detected_automatically():
     """设置页必须能自动检测 GTKWave，也能手填路径（用户明确要求的功能）。"""
 
     app = AppTest.from_file(str(APP), default_timeout=180)
+    app.session_state["planner_setup_complete"] = True
+    app.session_state["planner_mode"] = "离线确定性规划器（无需密钥、进程内）"
     app.run()
     assert not app.exception, [str(item.value) for item in app.exception]
     labels = [item.label for item in app.text_input]
@@ -711,6 +732,8 @@ def test_page_rerun_is_fast_enough_to_be_usable():
     import time
 
     app = AppTest.from_file(str(APP), default_timeout=180)
+    app.session_state["planner_setup_complete"] = True
+    app.session_state["planner_mode"] = "离线确定性规划器（无需密钥、进程内）"
     app.run()  # 首次渲染含解释器/模块导入，不计入
     started = time.perf_counter()
     app.session_state["case_name"] = "简单 ALU"
@@ -876,6 +899,8 @@ def test_static_review_separates_fact_layer_from_ai_advice_layer():
     """
 
     app = AppTest.from_file(str(APP), default_timeout=180)
+    app.session_state["planner_setup_complete"] = True
+    app.session_state["planner_mode"] = "离线确定性规划器（无需密钥、进程内）"
     app.session_state["case_name"] = "模十计数器"
     app.run()
     _click(app, "run_static_rtl_review")

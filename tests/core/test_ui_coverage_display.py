@@ -17,6 +17,8 @@ def test_oracle_checks_are_distinct_from_empty_explicit_plan_coverage():
     if not locate_tools().can_simulate:
         pytest.skip("需要本机 Icarus/vvp")
     app = AppTest.from_file(str(APP), default_timeout=120)
+    app.session_state["planner_setup_complete"] = True
+    app.session_state["planner_mode"] = "离线确定性规划器（无需密钥、进程内）"
     app.session_state["case_name"] = "简单 ALU"
     app.run()
     app.button(key="generate_plan").click().run()

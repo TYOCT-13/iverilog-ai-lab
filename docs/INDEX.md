@@ -26,6 +26,7 @@
 | 组织真人试用与反馈 | `docs/trial/README.md` → `docs/trial/organizer_workflow.md`；发给参与者从 `docs/trial/participant_start.md` 开始 |
 | 发给另一台电脑的复现人 | `docs/reproduce_current.md`（第2节含首次安装）→ `docs/trial/forms/reproduction_record.md`；直接发送 `docs/trial/reproduction_guide_2026-10-08-r3.zip` |
 | 网页找到工具却仍报D:盘路径 | `docs/reproduce_tool_paths.md`；冻结f7867db先设置实际工具环境变量并重启，本地修复尚未推送 |
+| 新网页入口与生成方式设置 | `docs/experiment/ui_planner_setup_2026-10-08.md`；默认在线、按方式配置、工作台限定入口；84项通过，浏览器截图受环境阻碍未完成 |
 
 ---
 

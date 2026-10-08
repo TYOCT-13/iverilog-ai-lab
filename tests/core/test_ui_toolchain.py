@@ -27,6 +27,8 @@ def tool_ui(monkeypatch, tmp_path):
     monkeypatch.setattr("iverilog_ai.core.toolchain.locate_tools", lambda: detected["tools"])
     st.cache_data.clear()
     app = AppTest.from_file(str(ROOT / "ui/app.py"), default_timeout=120)
+    app.session_state["planner_setup_complete"] = True
+    app.session_state["planner_mode"] = "离线确定性规划器（无需密钥、进程内）"
     app.session_state["case_name"] = "模十计数器"
     yield app, detected
     st.cache_data.clear()
