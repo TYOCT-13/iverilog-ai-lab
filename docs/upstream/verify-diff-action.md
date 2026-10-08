@@ -52,6 +52,8 @@ iverilog-ai verify-diff --baseline rtl/old.v --candidate rtl/new.v --print-markd
 
 ## 3. GitHub Action 用法
 
+以下使用真实仓库地址。2026-10-08建仓时远程仍为空，须先上传代码再调用；外部调用尚未实际验证，见[建仓记录](../competition/repository_readiness_2026-10-08.md)。
+
 在仓库里新建 `.github/workflows/behavior-diff.yml`：
 
 ```yaml
@@ -75,7 +77,7 @@ jobs:
         run: |
           git show origin/${{ github.base_ref }}:rtl/module.v > /tmp/baseline.v
 
-      - uses: <你的账号>/iverilog-ai-lab@main
+      - uses: TYOCT-13/iverilog-ai-lab@main
         with:
           baseline: /tmp/baseline.v
           candidate: rtl/module.v
@@ -99,7 +101,7 @@ jobs:
       contents: read
       pull-requests: write        # 只有开了这个开关才需要
     steps:
-      - uses: <你的账号>/iverilog-ai-lab@main
+      - uses: TYOCT-13/iverilog-ai-lab@main
         with:
           baseline: /tmp/baseline.v
           candidate: rtl/module.v

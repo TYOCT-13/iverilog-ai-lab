@@ -1,0 +1,192 @@
+{
+  "client_date": "2026-10-08",
+  "scope": "Repository metadata and current documentation; no publication",
+  "base_revision": "7ee7231d19eba13f8d9336b32898b1ab360a055c",
+  "repository_url": "https://github.com/TYOCT-13/iverilog-ai-lab",
+  "remote_url": "https://github.com/TYOCT-13/iverilog-ai-lab.git",
+  "anonymous_web_check": {
+    "url": "https://github.com/TYOCT-13/iverilog-ai-lab",
+    "observed": "This repository is empty.",
+    "method": "web tool; page accessible without signing in",
+    "source_available": true
+  },
+  "anonymous_rest_metadata_check": {
+    "available": false,
+    "reason": "GitHub anonymous REST API rate limit exceeded",
+    "not_used_to_prove_visibility": true
+  },
+  "model_api_requests": 0,
+  "dut_executions": 0,
+  "git_push_executed_by_this_turn": false,
+  "remote_clone_tested": false,
+  "external_actions_tested": false,
+  "checks": {
+    "remote_read": {
+      "command": [
+        "git",
+        "ls-remote",
+        "https://github.com/TYOCT-13/iverilog-ai-lab.git"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "origin_fetch": {
+      "command": [
+        "git",
+        "remote",
+        "get-url",
+        "origin"
+      ],
+      "exit_code": 0,
+      "stdout": "https://github.com/TYOCT-13/iverilog-ai-lab.git\n",
+      "stderr": ""
+    },
+    "origin_push": {
+      "command": [
+        "git",
+        "remote",
+        "get-url",
+        "--push",
+        "origin"
+      ],
+      "exit_code": 0,
+      "stdout": "https://github.com/TYOCT-13/iverilog-ai-lab.git\n",
+      "stderr": ""
+    },
+    "submission_gate": {
+      "command": [
+        "E:\\FPGA_WORK\\icarus-cleancheck-20261007-r2\\clean checkout\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/check_submission.py",
+        "--repo",
+        ".",
+        "--json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"findings\": [\n    {\n      \"level\": \"info\",\n      \"code\": \"placeholder/scanned\",\n      \"message\": \"占位符扫描：59 个交付面文本文件，命中 0 处\"\n    }\n  ],\n  \"checked\": [\n    {\n      \"repo\": \".\",\n      \"files_scanned\": 59,\n      \"placeholders\": 0\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    "doc_index": {
+      "command": [
+        "E:\\FPGA_WORK\\icarus-cleancheck-20261007-r2\\clean checkout\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/check_doc_index.py"
+      ],
+      "exit_code": 0,
+      "stdout": "索引：E:\\FPGA_WORK\\iverilog-ai-lab\\docs\\INDEX.md\n抽出的材料路径：292 条\n结论：292/292 条路径存在，索引未过期\n",
+      "stderr": ""
+    },
+    "frozen_source_and_materials": {
+      "command": [
+        "git",
+        "diff",
+        "--exit-code",
+        "7ee7231",
+        "--",
+        "src",
+        "ui",
+        "tests",
+        "rtl",
+        "benchmarks",
+        "pyproject.toml",
+        "uv.lock",
+        ".gitattributes",
+        "docs/review",
+        "docs/competition/ic/v3",
+        "docs/competition/ic/defense_v3",
+        "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+        "docs/competition/ic/ICARUS_佐证材料_v3.pdf",
+        "docs/competition/ic/ICARUS_答辩材料_v3.pdf",
+        "docs/competition/ic/ICARUS_答辩材料_v3.pptx"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "previous_attempt": {
+    "file": "attempt-1-incomplete.json",
+    "completed": false,
+    "reason": "Parent stdout used GBK; printing Unicode JSON raised UnicodeEncodeError before doc-index and frozen-source checks",
+    "text_capture_limit": "First subprocess output was decoded as UTF-8 with replacement without enforcing child stdout encoding; use the new UTF-8 captures for text conclusions",
+    "checks_not_additive": true
+  },
+  "citation_repository_code_matches": true,
+  "checked_at_utc": "2026-10-08T01:58:10.297933+00:00",
+  "all_checks_passed": true,
+  "remote_is_empty_at_check": true,
+  "closure_checks": {
+    "submission_gate": {
+      "command": [
+        "E:\\FPGA_WORK\\icarus-cleancheck-20261007-r2\\clean checkout\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/check_submission.py",
+        "--repo",
+        ".",
+        "--json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"findings\": [\n    {\n      \"level\": \"info\",\n      \"code\": \"placeholder/scanned\",\n      \"message\": \"占位符扫描：59 个交付面文本文件，命中 0 处\"\n    }\n  ],\n  \"checked\": [\n    {\n      \"repo\": \".\",\n      \"files_scanned\": 59,\n      \"placeholders\": 0\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    "doc_index": {
+      "command": [
+        "E:\\FPGA_WORK\\icarus-cleancheck-20261007-r2\\clean checkout\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/check_doc_index.py"
+      ],
+      "exit_code": 0,
+      "stdout": "索引：E:\\FPGA_WORK\\iverilog-ai-lab\\docs\\INDEX.md\n抽出的材料路径：293 条\n结论：293/293 条路径存在，索引未过期\n",
+      "stderr": ""
+    },
+    "diff_whitespace": {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "remote_read": {
+      "command": [
+        "git",
+        "ls-remote",
+        "https://github.com/TYOCT-13/iverilog-ai-lab.git"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "closure_checked_at_utc": "2026-10-08T02:00:46.174044+00:00",
+  "sealed_v3_sha256": {
+    "docs/competition/ic/ICARUS_技术方案_v3.pdf": "4bb214297d189ccbf446dd12e9bc848bffd216601c1c315241f6cb3bcc87f6a3",
+    "docs/competition/ic/ICARUS_佐证材料_v3.pdf": "7fe5fe5aa78d654dc4e212cd25e2f2b202418d1d7a32d96ce755d8361a8e0dda",
+    "docs/competition/ic/ICARUS_答辩材料_v3.pdf": "80f2fadd2304fdb7d0d7695520242239e9e31c0dbaac9db2f96e5e108fddf580",
+    "docs/competition/ic/ICARUS_答辩材料_v3.pptx": "03a1cf9a47bb95576054725baf34b73a041d953983ba31ca3f8ad4c5ac8db76c",
+    "docs/competition/ic/v3/material_data.json": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+    "docs/competition/ic/v3/review/final_receipt.json": "b2acd33125cb9005ebaf46d8a21bbc92c6ca88753194b1eef46a46ae2a6cb428"
+  },
+  "sealed_v3_unchanged": true,
+  "metadata_binding_representation": "Git index blob bytes, before this metadata commit; receipt excludes itself",
+  "metadata_bindings": {
+    "CITATION.cff": "f6a3b533b19e8547d8f909ab67f2eb9d1e335eb699ca269610d8c795a2b292d2",
+    "README.md": "7300eb80195a202d8b87f41cd88b8a7d923699d970732d0b76fb2090f7daf509",
+    "docs/INDEX.md": "992500b38fe231bb4744dfd28f35ad240eb49f16676ea3bfd83640b5b24981c9",
+    "docs/competition/competition_compliance_action_plan.md": "d8956a269df48e0a206685ae7d2faa59bf75c7e96d3db415bae6160e020502cb",
+    "docs/competition/ic/gap_checklist.md": "96c97dc71c21d87a86624520a69d3994ff104f4fb5585e3d4a55b6040705712e",
+    "docs/competition/submission_gate_checklist.md": "8fa6e1584c1b8c994baf8c8b57bf97f037475af4cd92203e28826a73ff76e41c",
+    "docs/experiment/metric_inventory.md": "f081f0b3fb6943d1458cfbb97153d19233f91db833d572e186db92457346fefd",
+    "docs/reproduce_current.md": "ac064a2e7381d64a4f3918b599c946be89ca9db6556c27566a8c844bf07a68d0",
+    "docs/upstream/verify-diff-action.md": "84a7e2504b4230553ae8055fa523e86b95add89c477cfcfbe2a75ff1a41855e1",
+    "docs/competition/repository_readiness_2026-10-08.md": "648407780853d50619d44792eca75cb4f08296b3061268edb315178ef78eb935",
+    "docs/competition/repository-readiness-2026-10-08/attempt-1-incomplete.json": "c1f03f9288b99aaf73c720bab43ae9b41b2092bf8d0b8666456b1c00840e995f"
+  }
+}

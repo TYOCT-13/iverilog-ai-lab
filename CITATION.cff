@@ -10,12 +10,9 @@ abstract: >-
 type: software
 license: Apache-2.0
 license-url: "https://www.apache.org/licenses/LICENSE-2.0"
-# 仓库公开地址：当前仅使用本地 Git（2026-10-04），尚未配置远程地址。
-# 确定真实公开仓库后填入地址，并另行验证访问权限。
-# 下面这行刻意保留一个不会被误当成真链接的占位符（RFC 2606 保留域），并由
-# `scripts/check_submission.py --repo .` 在提交前把它拦下来——避免"忘了替换"被静默带走。
-# 也就是说：这条 error 是**故意的**，替换成真实地址后它才会消失。
-repository-code: "https://example.invalid/iverilog-ai-lab"
+# 真实地址由提交者于2026-10-08提供，公开页面已核验可访问。
+# 代码推送、远程克隆与外部Actions执行分别登记，不由地址存在推定完成。
+repository-code: "https://github.com/TYOCT-13/iverilog-ai-lab"
 keywords:
   - Verilog
   - RTL verification

@@ -2,6 +2,8 @@
 
 这是一个围绕 Icarus Verilog 开源生态构建的非官方 AI 辅助 RTL 验证工具。AI 负责提出测试场景和解释失败，Icarus Verilog 与自检 testbench 负责裁决功能是否正确。
 
+代码仓库：[TYOCT-13/iverilog-ai-lab](https://github.com/TYOCT-13/iverilog-ai-lab)。完整克隆与运行步骤见[当前复核指南](docs/reproduce_current.md)，建仓与上传状态见[2026-10-08核对记录](docs/competition/repository_readiness_2026-10-08.md)。
+
 ## 当前进度
 
 - 2026-10-07 RTL维护版：[六份源码与公开复现](docs/experiment/rtl_style_maintenance_2026-10-07.md)已完成，严格静态门禁0错误/0警告；首次与公开版重放各36次DUT，每次5115输出值比较一致，18份规格文件逐字节重建。B/C故意缺陷保留，0新增模型API，不改变旧实验分母或v3材料。

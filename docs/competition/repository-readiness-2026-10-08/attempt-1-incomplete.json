@@ -1,0 +1,70 @@
+{
+  "client_date": "2026-10-08",
+  "scope": "Repository metadata and current documentation; no publication",
+  "base_revision": "7ee7231d19eba13f8d9336b32898b1ab360a055c",
+  "repository_url": "https://github.com/TYOCT-13/iverilog-ai-lab",
+  "remote_url": "https://github.com/TYOCT-13/iverilog-ai-lab.git",
+  "anonymous_web_check": {
+    "url": "https://github.com/TYOCT-13/iverilog-ai-lab",
+    "observed": "This repository is empty.",
+    "method": "web tool; page accessible without signing in",
+    "source_available": true
+  },
+  "anonymous_rest_metadata_check": {
+    "available": false,
+    "reason": "GitHub anonymous REST API rate limit exceeded",
+    "not_used_to_prove_visibility": true
+  },
+  "model_api_requests": 0,
+  "dut_executions": 0,
+  "git_push_executed_by_this_turn": false,
+  "remote_clone_tested": false,
+  "external_actions_tested": false,
+  "checks": {
+    "remote_read": {
+      "command": [
+        "git",
+        "ls-remote",
+        "https://github.com/TYOCT-13/iverilog-ai-lab.git"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "origin_fetch": {
+      "command": [
+        "git",
+        "remote",
+        "get-url",
+        "origin"
+      ],
+      "exit_code": 0,
+      "stdout": "https://github.com/TYOCT-13/iverilog-ai-lab.git\n",
+      "stderr": ""
+    },
+    "origin_push": {
+      "command": [
+        "git",
+        "remote",
+        "get-url",
+        "--push",
+        "origin"
+      ],
+      "exit_code": 0,
+      "stdout": "https://github.com/TYOCT-13/iverilog-ai-lab.git\n",
+      "stderr": ""
+    },
+    "submission_gate": {
+      "command": [
+        "E:\\FPGA_WORK\\icarus-cleancheck-20261007-r2\\clean checkout\\.venv\\Scripts\\python.exe",
+        "scripts/check_submission.py",
+        "--repo",
+        ".",
+        "--json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"findings\": [\n    {\n      \"level\": \"info\",\n      \"code\": \"placeholder/scanned\",\n      \"message\": \"ռλ��ɨ�裺59 ���������ı��ļ������� 0 ��\"\n    }\n  ],\n  \"checked\": [\n    {\n      \"repo\": \".\",\n      \"files_scanned\": 59,\n      \"placeholders\": 0\n    }\n  ]\n}\n",
+      "stderr": ""
+    }
+  }
+}

@@ -6,7 +6,7 @@
 
 ## 1. 取得完整的已提交仓库
 
-Windows 克隆前给本次 Git 命令启用长路径，避免深层归档日志缺失。当前仍只保存本地 Git；下面的本地路径请换成你实际收到的完整仓库，不能把它填写成公开仓库 URL。
+Windows 克隆前给本次 Git 命令启用长路径，避免深层归档日志缺失。真实仓库为[TYOCT-13/iverilog-ai-lab](https://github.com/TYOCT-13/iverilog-ai-lab)；2026-10-08建仓核对时远程尚无提交，见[核对记录](competition/repository_readiness_2026-10-08.md)。代码推送完成前，仍使用收到的完整本地仓库执行下列步骤。
 
 ```powershell
 git -c core.longpaths=true clone --no-local E:/FPGA_WORK/iverilog-ai-lab E:/icarus-review
@@ -15,6 +15,14 @@ git config --local core.longpaths true
 git status --short
 git rev-parse HEAD
 ```
+
+确认GitHub上已有代码后，第一条克隆命令可改为：
+
+```powershell
+git -c core.longpaths=true clone https://github.com/TYOCT-13/iverilog-ai-lab.git E:/icarus-review
+```
+
+远程克隆与另一台设备运行须另记实际结果，不沿用本机克隆的验收声明。
 
 未修改的副本应为空状态。若已经遇到 `Filename too long`，保留首次 stderr 和状态记录；只在确认副本没有自己修改的文件后恢复其缺失文件，或者用新目录重新克隆。不要直接在有改动的工作目录里执行恢复。
 
