@@ -45,64 +45,83 @@ jobs:
 
       - name: 安装 Icarus Verilog（Windows）
         if: runner.os == 'Windows'
+        timeout-minutes: 5
         shell: pwsh
         run: |
-          choco install --no-progress -y iverilog
-          $exe = Get-ChildItem -Path 'C:\iverilog*' -Recurse -Filter iverilog.exe -ErrorAction SilentlyContinue |
-                 Select-Object -First 1
-          if (-not $exe) { throw '未找到 iverilog.exe' }
-          "IVERILOG_PATH=$($exe.FullName)" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
-          $vvp = Join-Path $exe.DirectoryName 'vvp.exe'
-          "VVP_PATH=$vvp"                | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          # 版本和 SHA256 来自 microsoft/winget-pkgs 的 Icarus.Verilog 12.2022.06.11。
+          $ciIcarusRoot = Join-Path $env:RUNNER_TEMP 'icarus-12-20220611'
+          New-Item -ItemType Directory -Path $ciIcarusRoot -ErrorAction Stop | Out-Null
+          $ciIcarusInstaller = Join-Path $ciIcarusRoot 'setup.exe'
+          $ciIcarusInstall = Join-Path $ciIcarusRoot 'installed'
+          Invoke-WebRequest -Uri 'https://bleyer.org/icarus/iverilog-v12-20220611-x64_setup.exe' -OutFile $ciIcarusInstaller -TimeoutSec 120
+          $ciIcarusDigest = (Get-FileHash -LiteralPath $ciIcarusInstaller -Algorithm SHA256).Hash
+          if ($ciIcarusDigest -ne 'A614057374DFAED5DA0FE454CDEB410E54981FD85DBD28BD472F4CCB765DEB84') {
+            throw 'Icarus 安装包 SHA256 不匹配'
+          }
+          $ciInstallerArgs = @('/VERYSILENT', '/SUPPRESSMSGBOXES', '/NORESTART', '/SP-', ('/DIR="' + $ciIcarusInstall + '"'))
+          $ciInstallResult = Start-Process -FilePath $ciIcarusInstaller -ArgumentList $ciInstallerArgs -WindowStyle Hidden -Wait -PassThru
+          if ($ciInstallResult.ExitCode -notin @(0, 3010)) { throw "Icarus 安装失败：$($ciInstallResult.ExitCode)" }
+          $ciIcarusExe = Join-Path $ciIcarusInstall 'bin\iverilog.exe'
+          $ciVvpExe = Join-Path $ciIcarusInstall 'bin\vvp.exe'
+          if (-not (Test-Path -LiteralPath $ciIcarusExe) -or -not (Test-Path -LiteralPath $ciVvpExe)) {
+            throw '安装后未找到 iverilog.exe 或 vvp.exe'
+          }
+          "IVERILOG_PATH=$ciIcarusExe" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          "VVP_PATH=$ciVvpExe" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          (Split-Path -Parent $ciIcarusExe) | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
+          & $ciIcarusExe -V
+          if ($LASTEXITCODE -ne 0) { throw 'Icarus 版本检查失败' }
+          & $ciVvpExe -V
+          if ($LASTEXITCODE -ne 0) { throw 'vvp 版本检查失败' }
 
       - name: 安装 Python 依赖
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install -e .
-          python -m pip install pytest mypy yowasp-yosys
+          python -m pip install uv==0.9.9
+          uv sync --locked --extra dev --extra ui --python ${{ matrix.python }}
+          uv pip install yowasp-yosys==0.69.0.0.post1233 yowasp-runtime==1.96 wasmtime==47.0.1
 
       - name: 环境自检（打印工具探测结果，找不到 Icarus 直接失败）
-        run: python -c "from iverilog_ai.core.toolchain import locate_tools, describe_tools; t = locate_tools(); print(describe_tools(t)); raise SystemExit(0 if t.can_simulate else 1)"
+        run: uv run --no-sync python -c "from iverilog_ai.core.toolchain import locate_tools, describe_tools; t = locate_tools(); print(describe_tools(t)); raise SystemExit(0 if t.can_simulate else 1)"
 
       - name: 编码卫生检查（UTF-8 BOM 与编码损坏）
-        run: python scripts/strip_bom.py --check
+        run: uv run --no-sync python scripts/strip_bom.py --check
 
       - name: 未可达代码检查（AST）
-        run: python scripts/check_dead_code.py
+        run: uv run --no-sync python scripts/check_dead_code.py
 
       # 索引门禁：docs/INDEX.md 是全部材料的入口，最容易悄悄变成过期路标
       # （文件改名后索引照旧，读者按图索骥却找不到，而且没有任何报错）。
       - name: 资料索引路径检查
-        run: python scripts/check_doc_index.py
+        run: uv run --no-sync python scripts/check_doc_index.py
 
       # 类型门禁：src / ui / scripts 当前是 0 error（配置见 pyproject.toml 的 [tool.mypy]）。
       # 它抓到过三类真问题：同名函数定义两次（死代码）、线性脚本里"先用后定义"的
       # NameError、以及把 None 当字符串用的隐患。
       - name: 类型检查（mypy）
-        run: python -m mypy
+        run: uv run --no-sync python -m mypy
 
       - name: 实测开源约定的产物自洽性
-        run: python -m pytest tests/core/test_conventions.py -q
+        run: uv run --no-sync python -m pytest tests/core/test_conventions.py -q
 
       - name: 全量测试
-        run: python -m pytest -q
+        run: uv run --no-sync python -m pytest -q
 
       - name: 基准矩阵（Linux）
         if: runner.os == 'Linux'
-        run: python scripts/run_benchmark_matrix.py --iverilog iverilog --vvp vvp
+        run: uv run --no-sync python scripts/run_benchmark_matrix.py --iverilog iverilog --vvp vvp
 
       - name: 基准矩阵（Windows）
         if: runner.os == 'Windows'
         shell: pwsh
-        run: python scripts/run_benchmark_matrix.py --iverilog $env:IVERILOG_PATH --vvp $env:VVP_PATH
+        run: uv run --no-sync python scripts/run_benchmark_matrix.py --iverilog $env:IVERILOG_PATH --vvp $env:VVP_PATH
 
       # 综合矩阵：让 docs/layered_evidence.md 里"98 个变体全部可综合"这句话
       # 每次提交都被重算一遍。判据是"有没有拿到统计"，unavailable 也会判失败，
       # 因为"没查成"不是证据。
       - name: 综合矩阵（Yosys 通用门级）
-        run: python scripts/run_synthesis_matrix.py
+        run: uv run --no-sync python scripts/run_synthesis_matrix.py
 
       # 离线 AI 路径矩阵：每个案例都走"确定性规划 → 生成 testbench → Icarus →
       # 权威期望值 → 覆盖率证据"。基准矩阵用手写 testbench，覆盖不到这条路径。
       - name: 离线 AI 路径矩阵（无需密钥）
-        run: python scripts/run_pipeline_matrix.py
+        run: uv run --no-sync python scripts/run_pipeline_matrix.py

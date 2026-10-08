@@ -13,6 +13,7 @@
 """
 from __future__ import annotations
 
+import hashlib
 import sys
 from pathlib import Path
 
@@ -118,6 +119,42 @@ def test_clean_utf8_chinese_is_not_flagged(tmp_path: Path) -> None:
     target = tmp_path / "good.v"
     target.write_bytes("// 复位信号低有效，同步释放\n".encode("utf-8"))
     assert strip_bom.scan_mojibake(target) == []
+
+
+@pytest.mark.parametrize("line_ending", [b"\n", b"\r\n"])
+def test_frozen_failed_output_is_verified_without_rewriting(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, line_ending: bytes,
+) -> None:
+    original = ('{"failed_output": "' + "\ufffd" + '"}\n').encode("utf-8")
+    target = tmp_path / "failed.json"
+    raw = original.replace(b"\n", line_ending)
+    target.write_bytes(raw)
+    monkeypatch.setattr(strip_bom, "ROOT", tmp_path)
+    monkeypatch.setattr(strip_bom, "FROZEN_ENCODING_EVIDENCE", {
+        "failed.json": hashlib.sha256(original).hexdigest(),
+    })
+
+    assert strip_bom.main([]) == 0
+    assert target.read_bytes() == raw
+    target.write_text('{"failed_output": "changed"}\n', encoding="utf-8")
+    changed = target.read_bytes()
+    assert strip_bom.main([]) == 1
+    assert target.read_bytes() == changed
+    target.unlink()
+    assert strip_bom.main(["--check"]) == 1
+
+
+def test_unregistered_damaged_output_still_fails(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    target = tmp_path / "other.json"
+    raw = ('{"output": "' + "\ufffd" + '"}\n').encode("utf-8")
+    target.write_bytes(raw)
+    monkeypatch.setattr(strip_bom, "ROOT", tmp_path)
+    monkeypatch.setattr(strip_bom, "FROZEN_ENCODING_EVIDENCE", {})
+
+    assert strip_bom.main(["--check"]) == 1
+    assert target.read_bytes() == raw
 
 
 # ------------------------------------------------------------------ 真实仓库

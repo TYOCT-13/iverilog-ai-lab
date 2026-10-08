@@ -26,6 +26,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import os
 import re
 import sys
@@ -50,6 +51,13 @@ SKIP_PARTS = {
 }
 #: 本文件自身会引用损坏样本作为例子，扫自己必然自报，因此显式排除。
 SELF = Path(__file__).resolve()
+
+# 历史失败响应必须保留原文。只承认这个文件的原有乱码，并核验 Git LF 字节；
+# Windows checkout 的 CRLF 可规范化用于计算，但绝不写回、重编码或放宽其他文件。
+FROZEN_ENCODING_EVIDENCE = {
+    "docs/competition/repository-readiness-2026-10-08/attempt-1-incomplete.json":
+        "c1f03f9288b99aaf73c720bab43ae9b41b2092bf8d0b8666456b1c00840e995f",
+}
 
 #: 注释里成串的问号：中文被写坏时的典型残留。Verilog 注释里不会出现这种东西。
 _QMARK_RUN = re.compile(r"(?://|/\*)[^\n]*\?{3,}")
@@ -159,10 +167,23 @@ def main(argv: list[str] | None = None) -> int:
     problems: dict[str, list[str]] = {}
     stripped: list[Path] = []
     added: list[Path] = []
+    frozen_verified: list[str] = []
 
     for path in _targets():
         relative = path.relative_to(ROOT).as_posix()
         raw = path.read_bytes()
+
+        if relative in FROZEN_ENCODING_EVIDENCE:
+            digest = hashlib.sha256(raw.replace(b"\r\n", b"\n")).hexdigest()
+            if digest != FROZEN_ENCODING_EVIDENCE[relative]:
+                problems[relative] = ["历史失败原件的 Git LF SHA256 不匹配，不能改写已冻结证据"]
+            else:
+                issues = scan_encoding_conventions(path)
+                if issues:
+                    problems[relative] = issues
+                else:
+                    frozen_verified.append(relative)
+            continue
 
         # 第 1 条是唯一可以自动修的：只在"该没有 BOM 却带了"时清掉。
         # 第 3 条里，`.ps1` 补 BOM 也是**确定性**的（有非 ASCII 就该有 BOM），所以一并自动修；
@@ -185,6 +206,10 @@ def main(argv: list[str] | None = None) -> int:
         if issues:
             problems[relative] = issues
 
+    for relative in FROZEN_ENCODING_EVIDENCE:
+        if not (ROOT / relative).is_file():
+            problems[relative] = ["缺少已冻结的历史失败原件"]
+
     if stripped:
         for path in stripped:
             print(f"已清理 BOM: {path.relative_to(ROOT).as_posix()}")
@@ -195,6 +220,9 @@ def main(argv: list[str] | None = None) -> int:
         print(f"已补 UTF-8 BOM: {path.relative_to(ROOT).as_posix()}")
     if added:
         print(f"共补 {len(added)} 个 .ps1 的 BOM（Windows PowerShell 5.1 需要它才能正确读中文）")
+
+    for relative in sorted(frozen_verified):
+        print(f"已核验历史失败原件（Git LF SHA256 匹配，仅保留原有乱码）: {relative}")
 
     for relative, issues in sorted(problems.items()):
         for issue in issues:
