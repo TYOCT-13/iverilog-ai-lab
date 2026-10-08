@@ -49,9 +49,20 @@ def no_network(monkeypatch):
 
 
 @pytest.fixture
-def icarus():
+def icarus(monkeypatch):
     if not TEST_TOOLS.can_simulate:
         pytest.skip("required local Icarus unavailable; no actual toolchain pass may be claimed")
+
+    class LocatedToolPipeline(VALIDATION.VerificationPipeline):
+        """只适配冻结辅助器的工具位置，仍由真实 pipeline 编译和逐拍判定。"""
+
+        def run(self, *args, **options):
+            options["iverilog_path"] = TEST_TOOLS.iverilog
+            options["vvp_path"] = TEST_TOOLS.vvp
+            return super().run(*args, **options)
+
+    # 不改写已冻结的 validation.py；只在本项回归的运行期配置本机工具。
+    monkeypatch.setattr(VALIDATION, "VerificationPipeline", LocatedToolPipeline)
 
 
 def contract(case):

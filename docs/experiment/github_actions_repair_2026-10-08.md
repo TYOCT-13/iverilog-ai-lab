@@ -65,3 +65,20 @@
 - 旧报告是使用作者 Windows 字体生成的材料，Linux 内置字体的字形映射与分页文本位置不能充当 PDF 过期判据。新增[源与 PDF 字节绑定](report_pdf_source_bindings_2026-10-08.json)，来源是本次首轮作者完整回归中实际通过的两组逐页重渲染比较。每个平台都必须验证源 LF SHA256 与 PDF 原件 SHA256；相同字体时继续重渲染逐页比较，字体不同时只声明字节绑定与 PDF 可读取，不声明布局相同。新增负向回归确认字体差异不能掩盖源或 PDF 的改变。原 PDF 和源文件不改写。
 
 第二轮作者全量检查保留为 `local-validation-v3/pytest.log`：2049 passed / 2 skipped / 2 failed，331.12 秒。两项失败来自新增测试夹具把 CRLF 原文哈希误填为 LF 哈希，绑定检查正常拒绝；修正该夹具的 LF 计算后，PDF、UI Agent 和外部适配器三文件定向检查共 39 passed，31.72 秒，原失败记录不覆盖。mypy 88 文件无错误、编码门禁 0 问题、AST 294 文件无问题、两份工作流解析和配置核对通过。两次测试不相加作完整回归成绩，第二轮完整外部结果仍需以新提交的 GitHub 任务为准。
+
+## 第三轮：冻结辅助器的运行期工具路径
+
+第二轮提交 `df9eba05f0b2b85e3914b6e0243312cdba08d11c` 的完整外部测试已越过依赖、历史、编码、路径安全和 PDF 绑定检查，但仍有 24 项真实仿真回归失败：
+
+| 任务 | 实际完整结果 | 原始任务 |
+|---|---|---|
+| CI / Linux Python 3.12 | 24 failed / 2011 passed / 18 skipped，140.31 秒 | [任务](https://github.com/TYOCT-13/iverilog-ai-lab/actions/runs/37751223117/job/113224648105) |
+| CI / Windows Python 3.12 | 24 failed / 2014 passed / 15 skipped，264.78 秒 | [任务](https://github.com/TYOCT-13/iverilog-ai-lab/actions/runs/37751223117/job/113224648479) |
+
+两份原始日志保存在本机 `fix-df9eba0/`，SHA256 分别为 Linux `e6fd9d7796ab57414f7e14459dd051bc3e8a1f22d3002c459403c80ab8f88e92`、Windows `7720c5795c35823f399bcf77f5d11a270a7faf2b22c85e5f803a9476e70e68c8`。
+
+24 项失败均来自 `benchmarks/agent_module_holdout_20261005_v7/validation.py` 的历史 D 盘工具路径。该辅助器属于冻结资产，本轮不修改其源码、规格、RTL、判据或既有结果；作者原件 SHA256 仍为 `163e66394d20bd5117fd4d9c2f189848ec8808f5d245152e8d21d89eca2a6989`。
+
+本轮只修改维护中的回归夹具：为该辅助器注入调用真实 `VerificationPipeline.run` 的子类，将编译器和 vvp 路径换为现有 `locate_tools()` 检测结果。每项测试结束后撤销该运行期配置；所有编译、执行、逐拍输出、正确版本通过、四个原始缺陷检出及异步复位断言继续真实运行。网络禁用夹具保留，不伪造仿真结果，也不通过跳过这些项目来获得绿色检查。这是运行期路径适配后的资产回归，不声称原冻结执行器无需任何配置即可在其他平台运行，更不更新旧批次模型成绩。
+
+作者定向检查 `tests/core/test_agent_module_holdout_assets.py`：81 passed / 0 skipped / 0 failed，3.86 秒，真实使用自动发现的 Icarus 与 vvp。原始日志与 JUnit 保存在本机 `local-validation-v4/`。这是单文件回归；完整 Linux/Windows 成绩须由该修复推送后的 GitHub 工作流实际产生。
