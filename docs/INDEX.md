@@ -215,6 +215,7 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 | 深入原理 | `docs/manual/03_deep.md` | 有效 |
 | 按目标查手册 | `docs/manual/04_by_goal.md` | 有效 |
 | 当前真人复现与离线复核 | `docs/reproduce_current.md` | 固定已上传f7867db；锁依赖、CLI/UI、原始证据与同机/异机边界 |
+| Windows首次安装补充 | `docs/reproduce_windows_setup.md` | 缺Git/uv/Icarus与Python商店入口的处理；固定工具安装、PATH检查和P01续记；尚无另一台安装结果 |
 | 2026-09-29 的 10 分钟复核快照 | `docs/reproduce_in_10_minutes.md` | 历史；当时测试和索引数量，不代表当前版本 |
 | 服务对象与专门适配 | `docs/target_users.md` | 有效 |
 | 四层结论词表（运行/比对/结论/对比） | `src/iverilog_ai/core/labels.py` | 有效 |
