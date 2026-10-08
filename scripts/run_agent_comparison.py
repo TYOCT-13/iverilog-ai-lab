@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 import hashlib
 import json
 import os
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 import random
 import sys
 import time
@@ -46,7 +46,8 @@ def write(path: Path, data: Any) -> None:
 def registered_source_path(relative: str) -> Path:
     """Validate a registered path before opening it, including Windows drives."""
     path = Path(relative)
-    if path.is_absolute() or path.drive or ".." in path.parts:
+    windows = PureWindowsPath(relative)
+    if path.is_absolute() or path.drive or windows.drive or windows.root or ".." in path.parts or ".." in windows.parts:
         raise ValueError("registered input escapes repository")
     source = (ROOT / path).resolve(strict=True)
     if not source.is_relative_to(ROOT.resolve()) or not source.is_file():

@@ -6,6 +6,9 @@ from types import SimpleNamespace
 
 import pytest
 
+from iverilog_ai.core.toolchain import locate_tools as _locate_test_tools
+TEST_TOOLS = _locate_test_tools()
+
 from scripts.run_agent_comparison import ROOT, execute, main, preregister
 from scripts.summarize_agent_comparison import build_summary, freeze_pipeline_evidence, verify_frozen_inputs
 
@@ -46,7 +49,7 @@ def test_v3_zero_budget_keeps_original_bytes_and_all_denominators(tmp_path):
     assert not verify_frozen_inputs(report, reg, output)
 
 
-@pytest.mark.parametrize("relative", ["../outside.txt", "C:/outside.txt", "C:outside.txt"])
+@pytest.mark.parametrize("relative", ["../outside.txt", "C:/outside.txt", "C:outside.txt", "\\outside.txt", "dir\\..\\outside.txt"])
 def test_invalid_registered_path_is_rejected_before_hashing(monkeypatch, tmp_path, relative):
     reg = preregister(cases=["handshake_stage"], strategies=["fixed"], profile="v3")
     reg["code_and_input_sha256"] = {relative: "0" * 64}
@@ -75,12 +78,12 @@ def test_v3_api_strategies_forward_independent_per_cycle(monkeypatch, tmp_path):
     assert [(c["include_feedback"], c["include_functional_coverage"]) for c in calls[:2]] == [(True, True), (False, False)]
 
 
-@pytest.mark.skipif(not Path("D:/iverilog/bin/iverilog.exe").exists(), reason="Icarus unavailable")
+@pytest.mark.skipif(not TEST_TOOLS.can_simulate, reason="Icarus unavailable")
 def test_v3_real_baselines_use_equal_per_cycle_checks_and_verified_bindings(tmp_path):
     reg = preregister(cases=["handshake_stage"], strategies=["fixed", "random", "protocol_random"],
                      defects_per_case=1, profile="v3")
     output = tmp_path / "real"
-    report = execute(reg, output, iverilog="D:/iverilog/bin/iverilog.exe", vvp="D:/iverilog/bin/vvp.exe")
+    report = execute(reg, output, iverilog=TEST_TOOLS.iverilog, vvp=TEST_TOOLS.vvp)
     summary = build_summary(report, reg, evidence_root=output)
     assert summary["eligible_for_frozen_comparison"], [(r["status"], r.get("evidence_error")) for r in summary["rows"]]
     assert report["requests_attempted"] == 0

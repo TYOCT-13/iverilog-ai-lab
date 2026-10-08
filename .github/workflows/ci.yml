@@ -16,6 +16,7 @@ permissions:
   contents: read
 
 env:
+  PYTHONUTF8: "1"
   PYTHONPATH: src
   PYTHONIOENCODING: utf-8
 
@@ -31,6 +32,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -40,7 +43,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends iverilog
+          sudo apt-get install -y --no-install-recommends iverilog yosys
           iverilog -V | head -n 1
 
       - name: 安装 Icarus Verilog（Windows）

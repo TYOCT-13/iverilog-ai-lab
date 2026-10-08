@@ -5,6 +5,9 @@ from types import SimpleNamespace
 
 import pytest
 
+from iverilog_ai.core.toolchain import locate_tools as _locate_test_tools
+TEST_TOOLS = _locate_test_tools()
+
 from iverilog_ai.ai.agent import AgentDecision, AgentLimits, AgentObservation, run_verification_agent
 from iverilog_ai.ai.debug_provider import offline_provider
 from iverilog_ai.ai.planner import plan_tests
@@ -177,8 +180,8 @@ def test_http_transport_budget_and_output_cap_are_enforced(tmp_path, monkeypatch
 
 @pytest.mark.parametrize("rtl,expected", [("mod10_counter.v", "round_budget"), ("mod10_counter_bug_wrap9.v", "counterexample_found")])
 def test_real_icarus_existing_rtl(tmp_path, rtl, expected):
-    compiler = Path(r"D:\iverilog\bin\iverilog.exe")
-    runtime = Path(r"D:\iverilog\bin\vvp.exe")
+    compiler = Path(TEST_TOOLS.iverilog or "")
+    runtime = Path(TEST_TOOLS.vvp or "")
     if not compiler.is_file():
         pytest.skip("Icarus unavailable in this test environment")
     contract = DutContract.from_dict(json.loads((ROOT / "examples/mod10_counter_contract.json").read_text()))
@@ -283,8 +286,8 @@ def test_differential_observation_cannot_relabel_samples_as_assertions():
 
 
 def test_unsupported_clocked_sampling_is_reported_as_missing_evidence(tmp_path):
-    compiler = Path(r"D:\iverilog\bin\iverilog.exe")
-    runtime = Path(r"D:\iverilog\bin\vvp.exe")
+    compiler = Path(TEST_TOOLS.iverilog or "")
+    runtime = Path(TEST_TOOLS.vvp or "")
     if not compiler.is_file():
         pytest.skip("Icarus unavailable in this test environment")
     contract = DutContract.from_dict(json.loads((ROOT / "examples/mod10_counter_contract.json").read_text()))
@@ -302,8 +305,8 @@ def test_unsupported_clocked_sampling_is_reported_as_missing_evidence(tmp_path):
 
 @pytest.mark.parametrize("sampling,expected_counts", [("vector_end", [1, 3]), ("per_cycle", [1, 2, 3])])
 def test_real_counter_holds_omitted_enable_input(tmp_path, sampling, expected_counts):
-    compiler = Path(r"D:\iverilog\bin\iverilog.exe")
-    runtime = Path(r"D:\iverilog\bin\vvp.exe")
+    compiler = Path(TEST_TOOLS.iverilog or "")
+    runtime = Path(TEST_TOOLS.vvp or "")
     if not compiler.is_file():
         pytest.skip("Icarus unavailable in this test environment")
     contract = DutContract.from_dict(json.loads((ROOT / "examples/mod10_counter_contract.json").read_text()))
@@ -324,8 +327,8 @@ def test_real_counter_holds_omitted_enable_input(tmp_path, sampling, expected_co
 
 
 def test_real_functional_feedback_ablation_keeps_sampling_and_trace_without_leaks(tmp_path):
-    compiler = Path("D:/iverilog/bin/iverilog.exe")
-    runtime = Path("D:/iverilog/bin/vvp.exe")
+    compiler = Path(TEST_TOOLS.iverilog or "")
+    runtime = Path(TEST_TOOLS.vvp or "")
     if not compiler.is_file() or not runtime.is_file():
         pytest.skip("Icarus unavailable")
     contract = DutContract.from_dict(json.loads((ROOT / "examples/uart_tx_contract.json").read_text()))

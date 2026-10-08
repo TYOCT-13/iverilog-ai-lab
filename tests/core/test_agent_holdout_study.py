@@ -8,6 +8,9 @@ import subprocess
 
 import pytest
 
+from iverilog_ai.core.toolchain import locate_tools as _locate_test_tools
+TEST_TOOLS = _locate_test_tools()
+
 from iverilog_ai.core.contracts import DutContract
 from scripts import run_agent_holdout_study as study
 from scripts.run_agent_comparison import execute
@@ -206,13 +209,13 @@ def test_custom_baseline_budget_violations_never_reach_dut(monkeypatch, tmp_path
     assert report["rows"][0]["status"] == "execution_error" and not report["rows"][0]["rounds"]
 
 
-@pytest.mark.skipif(not Path("D:/iverilog/bin/iverilog.exe").exists(), reason="Icarus unavailable")
+@pytest.mark.skipif(not TEST_TOOLS.can_simulate, reason="Icarus unavailable")
 def test_new_resource_paths_and_baseline_factory_have_real_verified_evidence(tmp_path, isolated_registration):
     reg = isolated_registration
     reg["rows"] = [row for row in reg["rows"] if row["seed"] == 0 and row["strategy"] == "fixed"]
     destination = tmp_path / "all_fixed"
     report = execute(reg, destination, baseline_factory=study.holdout_baseline, provider_factory=forbidden_provider,
-                     iverilog="D:/iverilog/bin/iverilog.exe", vvp="D:/iverilog/bin/vvp.exe")
+                     iverilog=TEST_TOOLS.iverilog, vvp=TEST_TOOLS.vvp)
     summary = build_summary(report, reg, evidence_root=destination)
     assert len(summary["rows"]) == 6 and report["requests_attempted"] == 0
     assert report["record_kind"] == "test_provider"

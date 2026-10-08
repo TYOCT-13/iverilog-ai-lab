@@ -9,13 +9,16 @@ pytest.importorskip("streamlit")
 from streamlit.testing.v1 import AppTest
 import iverilog_ai.ai.agent as agent
 from iverilog_ai.ai.local_api_profile import LocalApiProfile
+from iverilog_ai.core.toolchain import locate_tools
+
+TEST_TOOLS = locate_tools()
 
 ROOT = Path(__file__).resolve().parents[2]
 
 
 @pytest.mark.parametrize("file_credential", [False, True])
 def test_api_agent_survives_navigation_and_invalidates_on_input_change(monkeypatch, tmp_path, file_credential):
-    if not Path(r"D:\iverilog\bin\iverilog.exe").is_file():
+    if not TEST_TOOLS.can_simulate:
         pytest.skip("local Icarus unavailable")
     actual_run = agent.run_verification_agent
     calls = []
@@ -106,7 +109,7 @@ def test_api_agent_survives_navigation_and_invalidates_on_input_change(monkeypat
 
 @pytest.mark.parametrize("coverage_feedback", [True, False])
 def test_uart_coverage_is_measured_visible_and_feedback_can_be_disabled(monkeypatch, tmp_path, coverage_feedback):
-    if not Path(r"D:\iverilog\bin\iverilog.exe").is_file():
+    if not TEST_TOOLS.can_simulate:
         pytest.skip("local Icarus unavailable")
     monkeypatch.setattr("iverilog_ai.ai.local_api_profile.load_local_api_profile", lambda _: None)
     actual_run = agent.run_verification_agent

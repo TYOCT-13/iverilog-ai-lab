@@ -6,9 +6,9 @@ from __future__ import annotations
 import importlib.util
 from pathlib import Path
 import json
-import shutil
 import pytest
 from iverilog_ai.ai.schema import TestPlan
+from iverilog_ai.core.toolchain import locate_tools
 
 ROOT = Path(__file__).resolve().parents[2]
 SPEC = importlib.util.spec_from_file_location("external_agent", ROOT / "scripts/run_external_verification_agent.py")
@@ -17,8 +17,9 @@ adapter = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(adapter)
 MANIFEST = ROOT / ".iverilog-ai/external/frozen-20261004-ic/manifest.json"
 HISTORY = ROOT / ".iverilog-ai/external/uart_rx_check"
-IVERILOG = shutil.which("iverilog") or ("D:/iverilog/bin/iverilog.exe" if Path("D:/iverilog/bin/iverilog.exe").exists() else None)
-VVP = shutil.which("vvp") or ("D:/iverilog/bin/vvp.exe" if Path("D:/iverilog/bin/vvp.exe").exists() else None)
+TEST_TOOLS = locate_tools()
+IVERILOG = TEST_TOOLS.iverilog
+VVP = TEST_TOOLS.vvp
 
 
 def row(outputs, cycle=0, time=10):

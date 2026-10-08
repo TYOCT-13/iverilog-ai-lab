@@ -8,6 +8,9 @@ import socket
 
 import pytest
 
+from iverilog_ai.core.toolchain import locate_tools as _locate_test_tools
+TEST_TOOLS = _locate_test_tools()
+
 from iverilog_ai.ai.schema import TestPlan as Plan
 from iverilog_ai.core.contracts import DutContract
 from iverilog_ai.core.models import ProcessResult, ProcessStatus, ResultStatus, SimulationResult
@@ -242,7 +245,7 @@ def test_semantic_mismatch_cannot_be_hidden_by_updating_artifact_sha(tmp_path, a
 
 @pytest.mark.parametrize("case", ("credit_guard", "rotating_arbiter"))
 def test_actual_icarus_bound_sampling_supports_prior_modules_without_protocol_bins(tmp_path, case):
-    compiler, runtime = Path("D:/iverilog/bin/iverilog.exe"), Path("D:/iverilog/bin/vvp.exe")
+    compiler, runtime = Path(TEST_TOOLS.iverilog or ""), Path(TEST_TOOLS.vvp or "")
     if not compiler.is_file() or not runtime.is_file():
         pytest.skip("local Icarus unavailable; no real simulator pass claimed")
     contract = DutContract.from_dict(json.loads((ROOT / "examples" / f"{case}_contract.json").read_text(encoding="utf-8")))

@@ -41,3 +41,27 @@
 本文随修复提交，修复后的 Actions 需在推送后由 GitHub 实际执行。本机通过不预先写成 GitHub 全部通过；后续以该修复提交对应的工作流结果为准，原始 e14e7ed 失败记录继续保留。
 
 本轮未运行新的 DeepSeek 模型实验，不更改已冻结的对照结果、API 账本或 v3 参赛材料。真人异机完整复现、独立 H02 和外部仓库调用 composite Action 仍各自需要真实证据；本仓库自身的 CI 不等于外部 Action 调用。
+
+## 第二轮：实际 runner 中继续发现的问题
+
+首轮修复 `8a2997e` 已推送，两套工作流真实执行，并已越过安装与编码门禁。随后全量测试暴露出旧的跨平台和环境假设，原始结果按该提交保留：
+
+| 任务 | 实际完整结果 | 原始任务 |
+|---|---|---|
+| verify / Linux Python 3.12 | 9 failed / 1911 passed / 105 skipped / 24 errors，109.40 秒 | [任务](https://github.com/TYOCT-13/iverilog-ai-lab/actions/runs/37746979871/job/113210676484) |
+| CI / Linux Python 3.12 | 10 failed / 1914 passed / 101 skipped / 24 errors，127.78 秒 | [任务](https://github.com/TYOCT-13/iverilog-ai-lab/actions/runs/37746979928/job/113210676924) |
+| CI / Windows Python 3.12 | 10 failed / 1917 passed / 98 skipped / 24 errors，158.82 秒 | [任务](https://github.com/TYOCT-13/iverilog-ai-lab/actions/runs/37746979928/job/113210677043) |
+
+对应下载原件位于本机 `.iverilog-ai/ci-audit-20261008/fix-8a2997e/`，SHA256 分别为 verify `2872aa74e6704669d9eb36886f14ff5d47eb7ec053d6bbee3c06f1d929415f62`、Linux `f6fd68b385192c042e89e4928cbd26d1b1d1ec48d020e7abaa01606977a591cf`、Windows `3eb65b58f4af7320dd360e6056c4c67f2060cefbe6f5ac830791cdd724abf1ac`。
+
+第二轮修复内容：
+
+- Checkout 获取完整历史，供测试读取 b9f7a6e、f664d85、a969337 的原始 Git blob；不改写那些冻结源码，也不跳过历史完整性校验。
+- 两份工作流显式开启 Python UTF-8 模式，避免 Windows 默认 cp1252 把 UTF-8 轨迹读坏。
+- 注册路径使用 PureWindowsPath 识别 Windows 盘符、根路径和回退路径，在 Linux 上也必须先拒绝再读文件。辅助执行器是向前维护的新版，旧批次原件和旧 Git 提交保持不变，不把旧模型效果成绩归到新版。
+- CLI 越界测试使用 pytest 的仓库外临时目录，避免 Linux 未设置 TEMP 时错误地把“越界”文件写入仓库内。
+- 真实仿真测试统一调用现有工具探测，移除作者 D 盘作为实际工具可用性的判断，不因盘符不同静默少测。
+- Linux CI 使用系统原生 Yosys，Windows 保留已固定的 yowasp 版本；工具实际路径继续打印并核验。
+- 旧报告是使用作者 Windows 字体生成的材料，Linux 内置字体的字形映射与分页文本位置不能充当 PDF 过期判据。新增[源与 PDF 字节绑定](report_pdf_source_bindings_2026-10-08.json)，来源是本次首轮作者完整回归中实际通过的两组逐页重渲染比较。每个平台都必须验证源 LF SHA256 与 PDF 原件 SHA256；相同字体时继续重渲染逐页比较，字体不同时只声明字节绑定与 PDF 可读取，不声明布局相同。新增负向回归确认字体差异不能掩盖源或 PDF 的改变。原 PDF 和源文件不改写。
+
+第二轮作者全量检查保留为 `local-validation-v3/pytest.log`：2049 passed / 2 skipped / 2 failed，331.12 秒。两项失败来自新增测试夹具把 CRLF 原文哈希误填为 LF 哈希，绑定检查正常拒绝；修正该夹具的 LF 计算后，PDF、UI Agent 和外部适配器三文件定向检查共 39 passed，31.72 秒，原失败记录不覆盖。mypy 88 文件无错误、编码门禁 0 问题、AST 294 文件无问题、两份工作流解析和配置核对通过。两次测试不相加作完整回归成绩，第二轮完整外部结果仍需以新提交的 GitHub 任务为准。

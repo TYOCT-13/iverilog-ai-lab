@@ -5,6 +5,9 @@ from types import SimpleNamespace
 
 import pytest
 
+from iverilog_ai.core.toolchain import locate_tools as _locate_test_tools
+TEST_TOOLS = _locate_test_tools()
+
 from scripts.run_agent_comparison import (ROOT, baseline_plan, classify, decision_records, execute, main, preregister, summarize)
 from iverilog_ai.core.contracts import DutContract
 from iverilog_ai.core.strategy_scoring import plan_cycles
@@ -170,7 +173,7 @@ def test_zero_global_budget_preserves_missing_without_provider(tmp_path):
     assert (tmp_path / "zero/preregistration.json").exists()
 
 
-@pytest.mark.skipif(not Path("D:/iverilog/bin/iverilog.exe").exists(), reason="Icarus unavailable")
+@pytest.mark.skipif(not TEST_TOOLS.can_simulate, reason="Icarus unavailable")
 def test_scripted_agent_cap_and_no_feedback_are_recorded(tmp_path):
     class Scripted:
         request_count = 0
@@ -180,7 +183,7 @@ def test_scripted_agent_cap_and_no_feedback_are_recorded(tmp_path):
                 {"name": "one", "inputs": {"in_valid": 0, "out_ready": 0, "in_data": 0}, "cycles": 1}]})
     reg = preregister(cases=["handshake_stage"], strategies=["no_feedback"], defects_per_case=1)
     report = execute(reg, tmp_path / "mock", request_cap=1, provider_factory=lambda count: Scripted(),
-                     iverilog="D:/iverilog/bin/iverilog.exe", vvp="D:/iverilog/bin/vvp.exe")
+                     iverilog=TEST_TOOLS.iverilog, vvp=TEST_TOOLS.vvp)
     assert report["requests_attempted"] == 1
     assert report["record_kind"] == "test_provider"
     assert report["rows"][1]["status"] == "global_request_budget"
@@ -189,10 +192,10 @@ def test_scripted_agent_cap_and_no_feedback_are_recorded(tmp_path):
     assert report["changed_inputs_at_finish"] == []
 
 
-@pytest.mark.skipif(not Path("D:/iverilog/bin/iverilog.exe").exists(), reason="Icarus unavailable")
+@pytest.mark.skipif(not TEST_TOOLS.can_simulate, reason="Icarus unavailable")
 def test_actual_icarus_baseline_audit_and_artifacts(tmp_path):
     reg = preregister(cases=["handshake_stage"], strategies=["fixed", "random"], defects_per_case=1)
-    report = execute(reg, tmp_path / "real", iverilog="D:/iverilog/bin/iverilog.exe", vvp="D:/iverilog/bin/vvp.exe")
+    report = execute(reg, tmp_path / "real", iverilog=TEST_TOOLS.iverilog, vvp=TEST_TOOLS.vvp)
     assert report["requests_attempted"] == 0
     assert all(r["status"] in {"detected", "not_detected"} for r in report["rows"])
     assert all(r["search_cycles"] == 24 and r["reference_audit_cycles"] == 24 for r in report["rows"])
@@ -291,12 +294,12 @@ def test_v2_missing_profile_never_silently_uses_legacy(monkeypatch):
         preregister(profile="v2")
     assert len(preregister()["rows"]) == 60
 
-@pytest.mark.skipif(not Path("D:/iverilog/bin/iverilog.exe").exists(), reason="Icarus unavailable")
+@pytest.mark.skipif(not TEST_TOOLS.can_simulate, reason="Icarus unavailable")
 @pytest.mark.parametrize("case", ["sync_fifo", "uart_tx", "spi_master", "handshake_stage"])
 def test_v2_real_protocol_baseline_has_measured_coverage(tmp_path, case):
     from scripts.summarize_agent_comparison import build_summary
     reg = preregister(cases=[case], strategies=["protocol_random"], repeats=1, defects_per_case=1, profile="v2")
-    report = execute(reg, tmp_path / case, iverilog="D:/iverilog/bin/iverilog.exe", vvp="D:/iverilog/bin/vvp.exe")
+    report = execute(reg, tmp_path / case, iverilog=TEST_TOOLS.iverilog, vvp=TEST_TOOLS.vvp)
     assert report["requests_attempted"] == 0
     assert report["changed_inputs_at_finish"] == []
     summary = build_summary(report, reg)

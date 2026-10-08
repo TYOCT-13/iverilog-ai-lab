@@ -7,6 +7,9 @@ from types import SimpleNamespace
 
 import pytest
 
+from iverilog_ai.core.toolchain import locate_tools as _locate_test_tools
+TEST_TOOLS = _locate_test_tools()
+
 from iverilog_ai.ai.agent import AgentLimits, AgentObservation, PROMPT_VERSION, run_verification_agent
 from iverilog_ai.ai.schema import TestPlan as Plan
 from iverilog_ai.core.contracts import DutContract
@@ -250,8 +253,8 @@ def test_execution_errors_after_preflight_do_not_trigger_plan_recovery(tmp_path)
 
 
 def icarus_options(tmp_path):
-    compiler = Path("D:/iverilog/bin/iverilog.exe")
-    runtime = Path("D:/iverilog/bin/vvp.exe")
+    compiler = Path(TEST_TOOLS.iverilog or "")
+    runtime = Path(TEST_TOOLS.vvp or "")
     if not compiler.is_file() or not runtime.is_file():
         pytest.skip("Icarus unavailable")
     return {"allowed_roots": (ROOT, tmp_path), "iverilog_path": compiler,

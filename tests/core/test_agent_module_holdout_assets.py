@@ -13,6 +13,9 @@ import subprocess
 
 import pytest
 
+from iverilog_ai.core.toolchain import locate_tools as _locate_test_tools
+TEST_TOOLS = _locate_test_tools()
+
 from iverilog_ai.ai.schema import TestPlan as Plan
 from iverilog_ai.core.contracts import DutContract
 from iverilog_ai.core.reference_model import reference_cycle_expectations, reference_sampling_profile
@@ -47,7 +50,7 @@ def no_network(monkeypatch):
 
 @pytest.fixture
 def icarus():
-    if not all(Path(f"D:/iverilog/bin/{name}.exe").is_file() for name in ("iverilog", "vvp")):
+    if not TEST_TOOLS.can_simulate:
         pytest.skip("required local Icarus unavailable; no actual toolchain pass may be claimed")
 
 
@@ -278,11 +281,11 @@ endmodule
 ''', encoding="utf-8")
     rtl = ROOT / MANIFEST["cases"][case]["targets"][0]["rtl"]
     binary = tmp_path / "reset.vvp"
-    command = ["D:/iverilog/bin/iverilog.exe", "-g2001", "-s", f"tb_{case}_async_reset", "-o", str(binary), str(rtl), str(testbench)]
+    command = [TEST_TOOLS.iverilog, "-g2001", "-s", f"tb_{case}_async_reset", "-o", str(binary), str(rtl), str(testbench)]
     compiled = subprocess.run(command, capture_output=True, text=True, timeout=30, check=False)
     record = {"case": case, "rtl": str(rtl), "api_calls": 0, "command": command, "compile_returncode": compiled.returncode, "compile_stdout": compiled.stdout, "compile_stderr": compiled.stderr}
     if compiled.returncode == 0:
-        executed = subprocess.run(["D:/iverilog/bin/vvp.exe", str(binary)], capture_output=True, text=True, timeout=30, check=False)
+        executed = subprocess.run([TEST_TOOLS.vvp, str(binary)], capture_output=True, text=True, timeout=30, check=False)
         record.update(execution_returncode=executed.returncode, stdout=executed.stdout, stderr=executed.stderr)
     (tmp_path / "asynchronous_reset_validation.json").write_text(json.dumps(record, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     assert record["compile_returncode"] == 0 and record["execution_returncode"] == 0

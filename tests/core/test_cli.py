@@ -363,10 +363,11 @@ def test_grade_with_a_missing_golden_exits_2(tmp_path):
     assert completed.returncode == 2
 
 
-def test_plan_run_rejects_foreign_path_outside_allowed_root():
+def test_plan_run_rejects_foreign_path_outside_allowed_root(tmp_path):
     """路径策略必须生效：受控目录之外的输入直接拒绝（退出码 2）。"""
 
-    outside = Path(os.environ.get("TEMP", str(ROOT))) / "iverilog-ai-outside-plan.json"
+    assert not tmp_path.resolve().is_relative_to(ROOT.resolve()), "本测试需要仓库外的临时目录"
+    outside = tmp_path / "iverilog-ai-outside-plan.json"
     outside.write_text(
         json.dumps({"design": "pwm", "objective": "x", "vectors": [{"name": "v1", "inputs": {"duty": 1}, "cycles": 1}]}),
         encoding="utf-8",

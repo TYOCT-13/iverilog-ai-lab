@@ -7,6 +7,9 @@ from pathlib import Path
 
 import pytest
 
+from iverilog_ai.core.toolchain import locate_tools as _locate_test_tools
+TEST_TOOLS = _locate_test_tools()
+
 from iverilog_ai.ai.schema import TestPlan as Plan
 from iverilog_ai.core.contracts import DutContract
 from iverilog_ai.core.functional_coverage import analyze_functional_coverage, functional_coverage_profile
@@ -14,8 +17,8 @@ from iverilog_ai.core.pipeline import VerificationPipeline
 from iverilog_ai.core.models import ProcessStatus
 
 ROOT = Path(__file__).resolve().parents[2]
-COMPILER = Path("D:/iverilog/bin/iverilog.exe")
-RUNTIME = Path("D:/iverilog/bin/vvp.exe")
+COMPILER = Path(TEST_TOOLS.iverilog or "")
+RUNTIME = Path(TEST_TOOLS.vvp or "")
 
 
 def _contract(module):

@@ -8,7 +8,10 @@
 from __future__ import annotations
 
 import importlib.util
+import hashlib
+import json
 from pathlib import Path
+import sys
 
 import fitz
 import pytest
@@ -99,6 +102,29 @@ TRACKED_REPORTS = [
 ]
 
 
+@pytest.mark.parametrize("changed", ["source", "pdf"])
+def test_font_difference_never_masks_changed_report_bytes(tmp_path: Path, monkeypatch, changed: str) -> None:
+    output = _render(tmp_path, "# 一份报告\n\n原始内容。\n")
+    source = tmp_path / "doc.md"
+    binding_path = tmp_path / "docs/experiment/report_pdf_source_bindings_2026-10-08.json"
+    binding_path.parent.mkdir(parents=True)
+    binding = {"renderer_font_sha256": ["different-font", "different-mono"], "reports": {
+        "doc.md": {"pdf": "doc.pdf", "source_sha256_lf": hashlib.sha256(source.read_bytes().replace(b"\r\n", b"\n")).hexdigest(),
+                   "pdf_sha256": hashlib.sha256(output.read_bytes()).hexdigest()},
+    }}
+    binding_path.write_text(json.dumps(binding), encoding="utf-8")
+    monkeypatch.setattr(sys.modules[__name__], "ROOT", tmp_path)
+    test_tracked_report_pdf_matches_its_markdown(tmp_path, "doc.md", "doc.pdf")
+    if changed == "source":
+        source.write_text("# 一份报告\n\n已改变的内容。\n", encoding="utf-8")
+        expected = "源绑定"
+    else:
+        output.write_bytes(output.read_bytes() + b"\n% modified\n")
+        expected = "产物绑定"
+    with pytest.raises(AssertionError, match=expected):
+        test_tracked_report_pdf_matches_its_markdown(tmp_path, "doc.md", "doc.pdf")
+
+
 @pytest.mark.parametrize(("markdown", "pdf"), TRACKED_REPORTS)
 def test_tracked_report_pdf_matches_its_markdown(tmp_path: Path, markdown: str, pdf: str) -> None:
     """交付 PDF 必须与它当前的 Markdown 源对得上——源改了就得重渲染。
@@ -111,6 +137,33 @@ def test_tracked_report_pdf_matches_its_markdown(tmp_path: Path, markdown: str, 
     13 页版本——缺页眉、缺新增的「作品服务谁」「四层结论」「量化成果指标」。
     测试全绿，而读者拿到的是旧报告。
     """
+
+    binding = json.loads((ROOT / "docs/experiment/report_pdf_source_bindings_2026-10-08.json").read_text(encoding="utf-8"))
+    pair = binding["reports"][markdown]
+    assert pair["pdf"] == pdf
+    assert hashlib.sha256((ROOT / markdown).read_bytes().replace(b"\r\n", b"\n")).hexdigest() == pair["source_sha256_lf"], (
+        f"{markdown} 与已验收 PDF 的源绑定不一致，必须重新渲染并核验新材料"
+    )
+    assert hashlib.sha256((ROOT / pdf).read_bytes()).hexdigest() == pair["pdf_sha256"], (
+        f"{pdf} 与已验收源的产物绑定不一致，必须重新核验"
+    )
+
+    def font_digest(candidates):
+        for candidate in candidates:
+            path = Path(candidate)
+            if path.is_file():
+                return hashlib.sha256(path.read_bytes()).hexdigest()
+        return None
+
+    current_fonts = [font_digest(md2pdf.FONT_CANDIDATES), font_digest(md2pdf.MONO_CANDIDATES)]
+    if current_fonts != binding["renderer_font_sha256"]:
+        # Git clone 的字节绑定仍严格校验；缺少相同字体时不能把换行/字形映射差异
+        # 判成材料过期。页眉与分页渲染行为由上方独立样本测试继续检查。
+        with fitz.open(ROOT / pdf) as document:
+            assert document.page_count > 0
+            assert all(page.get_text("text").strip() for page in document)
+        print(f"{pdf}: 源与PDF字节绑定通过；字体不同，未进行逐页重渲染等同性检查")
+        return
 
     fresh = tmp_path / "fresh.pdf"
     md2pdf.render_markdown(ROOT / markdown, fresh)

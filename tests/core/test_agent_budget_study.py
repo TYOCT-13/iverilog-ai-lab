@@ -8,6 +8,9 @@ import subprocess
 
 import pytest
 
+from iverilog_ai.core.toolchain import locate_tools as _locate_test_tools
+TEST_TOOLS = _locate_test_tools()
+
 from iverilog_ai.core.contracts import DutContract
 from scripts import run_agent_budget_study as study
 from scripts.run_agent_comparison import execute
@@ -136,13 +139,13 @@ def test_changed_target_and_unregistered_resource_refused_before_any_output(tmp_
     assert not (tmp_path / "drift").exists()
 
 
-@pytest.mark.skipif(not Path("D:/iverilog/bin/iverilog.exe").exists(), reason="Icarus unavailable")
+@pytest.mark.skipif(not TEST_TOOLS.can_simulate, reason="Icarus unavailable")
 def test_all_public_baselines_have_real_per_cycle_reference_evidence(tmp_path, isolated_registration):
     reg = isolated_registration
     reg["rows"] = [r for r in reg["rows"] if r["variant"] == "reference" and r["strategy"] in ("fixed", "random", "protocol_random")]
     destination = tmp_path / "correct_controls"
     result = execute(reg, destination, request_cap=0, provider_factory=lambda _: pytest.fail("baseline opened API"),
-        baseline_factory=study.budget_baseline, iverilog="D:/iverilog/bin/iverilog.exe", vvp="D:/iverilog/bin/vvp.exe")
+        baseline_factory=study.budget_baseline, iverilog=TEST_TOOLS.iverilog, vvp=TEST_TOOLS.vvp)
     summary = build_summary(result, reg, evidence_root=destination)
     assert result["requests_attempted"] == 0 and len(summary["rows"]) == 72
     assert summary["eligible_for_frozen_comparison"], [(r["case"], r["strategy"], r.get("evidence_error")) for r in summary["rows"] if not r["evidence_verified"]]

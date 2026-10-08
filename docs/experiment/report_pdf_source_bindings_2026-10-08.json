@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "bound_on": "2026-10-08",
+  "scope": "Existing historical report pairs; not an updated competition submission or human audit",
+  "source_normalization": "CRLF to LF only",
+  "binding_basis": "Both pairs passed fresh per-page rendering comparison in the author full regression (2047 passed / 2 skipped) before this binding was created",
+  "renderer_font_sha256": [
+    "d79c55e68b1131eea0cc1c47be4f572d964f28c682e143db2ad09c1e4cb07a3f",
+    "c6e6ce8119fdd47ec6a5449a08e2d2ad7f41ea03143aae193068ed9fa58eaebc"
+  ],
+  "reports": {
+    "docs/competition/technical_report_draft.md": {
+      "pdf": "docs/competition/technical_report_draft.pdf",
+      "source_sha256_lf": "5bf1521d826bf882ffdb185ab8331294dd7dac4e871e3fd0e5f200cedd622fda",
+      "pdf_sha256": "38abbaece00773531d7f773bb24f69878f58980d860065da994896fe31970f8c"
+    },
+    "docs/project_overview.md": {
+      "pdf": "docs/project_overview.pdf",
+      "source_sha256_lf": "9ea5fd9fcad8b5a6f6c161a5874f2bd05cba374f51b769f8decd851996114c2f",
+      "pdf_sha256": "10ad8043d07f321c1de3538e339420810ab477b2c48f31ca142da2fbd9ba139e"
+    }
+  }
+}
