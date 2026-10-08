@@ -1,7 +1,7 @@
 """安全的单页演示：案例来自代码内白名单，仿真交给 IcarusExecutor。"""
 from contextlib import contextmanager, nullcontext
 from pathlib import Path
-from typing import Any, Literal
+from typing import Any, Literal, TypedDict
 import json
 import sys
 import streamlit as st
@@ -142,6 +142,19 @@ def _tools():
     """
 
     return locate_tools()
+
+
+class _SimulationToolOptions(TypedDict):
+    iverilog_path: str
+    vvp_path: str
+
+
+def _simulation_tool_options() -> _SimulationToolOptions:
+    """Use the same detected tools for the status display and every simulation."""
+    tools = _tools()
+    if tools.iverilog is None or tools.vvp is None:
+        raise ValueError("未检测到 Icarus 编译器或 vvp。请确认安装与 PATH，再在「工具设置」点击「重新检测工具」。")
+    return {"iverilog_path": tools.iverilog, "vvp_path": tools.vvp}
 
 
 @st.cache_data(ttl=300, show_spinner=False)
@@ -465,8 +478,7 @@ def _render_verify_diff_panel() -> None:
                         imported.path,
                         ROOT / ".iverilog-ai" / "ui-verify-diff" / f"workspace-{uuid.uuid4().hex[:12]}",
                         allowed_roots=(ROOT,),
-                        iverilog_path=_tools().iverilog,
-                        vvp_path=_tools().vvp,
+                        **_simulation_tool_options(),
                     )
                 st.session_state.last_verify_diff = outcome
             except Exception as exc:
@@ -1060,8 +1072,7 @@ def _show_candidate_verify(before_result, rtl_path, contract, plan, key):
             candidate = import_rtl_bytes(uploaded.name, uploaded.getvalue(), ROOT).path
             output = ROOT / ".iverilog-ai" / "repair-candidates" / candidate.stem
             after = VerificationPipeline().run(plan, contract.to_dict(), candidate, output, allowed_roots=(ROOT,),
-                iverilog_path=os.getenv("IVERILOG_PATH") or r"D:\iverilog\bin\iverilog.exe",
-                vvp_path=os.getenv("VVP_PATH") or r"D:\iverilog\bin\vvp.exe", emit_vcd=True)
+                **_simulation_tool_options(), emit_vcd=True)
             comparison = compare_simulation_results(before_result, after.simulation)
             st.subheader("修复前后对比")
             st.json(comparison.__dict__)
@@ -2114,8 +2125,7 @@ with _COMPARE:
                                 reference_choice,
                                 ROOT / ".iverilog-ai" / "behavior-compare-ui" / reference_choice.stem,
                                 allowed_roots=(ROOT,),
-                                iverilog_path=os.getenv("IVERILOG_PATH") or r"D:\iverilog\bin\iverilog.exe",
-                                vvp_path=os.getenv("VVP_PATH") or r"D:\iverilog\bin\vvp.exe",
+                                **_simulation_tool_options(),
                             )
                             st.session_state.behavior_comparison = outcome.to_dict()
                         except Exception as exc:
@@ -2447,6 +2457,10 @@ with _SETTINGS:
                 "未找到 GTKWave，请填写安装路径。页面内的波形分析仍可使用。"
             )
         from iverilog_ai.core.toolchain import describe_tools
+        if st.button("重新检测工具", key="detect_toolchain"):
+            getattr(_tools, "clear")()
+            getattr(_project_evidence, "clear")()
+            st.rerun()
         st.caption("工具探测结果：" + describe_tools(_tools()))
 
 
@@ -2582,7 +2596,7 @@ with _PLAN:
     if _run_tb:
         try:
             _defines, _includes = _compile_options()
-            config = ExecutionConfig(rtl_path=ROOT / str(case["rtl"]), testbench_path=ROOT / str(case["tb"]), top_module=str(case["top"]), output_dir=ROOT / ".iverilog-ai" / "runs", allowed_roots=(ROOT,), defines=_defines, include_dirs=_includes)
+            config = ExecutionConfig(rtl_path=ROOT / str(case["rtl"]), testbench_path=ROOT / str(case["tb"]), top_module=str(case["top"]), output_dir=ROOT / ".iverilog-ai" / "runs", allowed_roots=(ROOT,), defines=_defines, include_dirs=_includes, **_simulation_tool_options())
             with _busy("正在运行示例测试"):
                 simulation_result = IcarusExecutor(config).run()
             report = write_report(simulation_result, Path(simulation_result.artifacts["run_dir"]) / "report.md")
@@ -2599,7 +2613,7 @@ with _PLAN:
             with _busy("正在运行测试计划"):
                 result = VerificationPipeline(run_synthesis=st.session_state.get("run_synthesis", False), yosys_path=os.getenv("YOSYS_PATH") or None).run(
                     st.session_state.ai_plan, contract.to_dict(), ROOT / str(case["rtl"]), ROOT / ".iverilog-ai" / "pipeline-ui" / f"workspace-{uuid.uuid4().hex[:12]}", allowed_roots=(ROOT,),
-                    iverilog_path=os.getenv("IVERILOG_PATH") or r"D:\iverilog\bin\iverilog.exe", vvp_path=os.getenv("VVP_PATH") or r"D:\iverilog\bin\vvp.exe", defines=_defines, include_dirs=_includes, emit_vcd=True,
+                    **_simulation_tool_options(), defines=_defines, include_dirs=_includes, emit_vcd=True,
                 )
             st.session_state.last_pipeline_result = result
             st.session_state.last_pipeline_case = name
@@ -2678,8 +2692,7 @@ with _PLAN:
                                            max_output_tokens=min(_agent_provider.max_output_tokens, 8192),
                                            request_timeout_seconds=min(int(_agent_provider.timeout), 180)),
                         execution_options={"allowed_roots": (ROOT,), "defines": _agent_defines, "include_dirs": _agent_includes,
-                                           "iverilog_path": os.getenv("IVERILOG_PATH") or r"D:\iverilog\bin\iverilog.exe",
-                                           "vvp_path": os.getenv("VVP_PATH") or r"D:\iverilog\bin\vvp.exe",
+                                           **_simulation_tool_options(),
                                            "reference_sampling": "per_cycle" if _agent_per_cycle else "vector_end"},
                     )
                 st.session_state.workspace_agent_result = _agent_result

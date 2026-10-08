@@ -25,6 +25,7 @@
 | IC提交当天照着做 | `docs/competition/ic/v3/README.md` → `docs/competition/ic/v3/submission_copy.md` → `docs/competition/ic/gap_checklist.md`；核对所选赛道、真实队号、匿名要求及上传回执，真人/H02不是官方额外必交项 |
 | 组织真人试用与反馈 | `docs/trial/README.md` → `docs/trial/organizer_workflow.md`；发给参与者从 `docs/trial/participant_start.md` 开始 |
 | 发给另一台电脑的复现人 | `docs/reproduce_current.md`（第2节含首次安装）→ `docs/trial/forms/reproduction_record.md`；直接发送 `docs/trial/reproduction_guide_2026-10-08-r3.zip` |
+| 网页找到工具却仍报D:盘路径 | `docs/reproduce_tool_paths.md`；冻结f7867db先设置实际工具环境变量并重启，本地修复尚未推送 |
 
 ---
 
