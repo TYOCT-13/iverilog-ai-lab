@@ -17,7 +17,9 @@
 | 操作系统版本、CPU架构；性能对比时再补CPU型号/RAM | |
 | PowerShell或其他终端版本 | |
 | Git / uv / Python / Icarus / vvp实际版本 | |
-| Yosys / Node / WaveDrom / 技能：实际版本或未使用 | |
+| Yosys：开始检查的实际版本、命令路径或未安装 | |
+| Yosys安装（如做）：OSS CAD发行日期、下载包SHA、解压/启动退出码；是否另做综合 | |
+| Node / WaveDrom / 技能：实际版本或未使用 | |
 | 浏览器版本、桌面/实体手机、实际窗口尺寸 | |
 | 安装是否联网、等待用时；不填写IP/MAC | |
 | 实际Git commit、Git状态是否干净；有改动附差异 | |

@@ -24,7 +24,7 @@
 | 复核数字是否可信 | `docs/experiment/metric_inventory.md`（每个数字一行：口径/来源/时间/复现命令）→ `docs/competition/submission_gate_checklist.md` → 产物目录 |
 | IC提交当天照着做 | `docs/competition/ic/v3/README.md` → `docs/competition/ic/v3/submission_copy.md` → `docs/competition/ic/gap_checklist.md`；核对所选赛道、真实队号、匿名要求及上传回执，真人/H02不是官方额外必交项 |
 | 组织真人试用与反馈 | `docs/trial/README.md` → `docs/trial/organizer_workflow.md`；发给参与者从 `docs/trial/participant_start.md` 开始 |
-| 发给另一台电脑的复现人 | `docs/reproduce_current.md`（第2节含首次安装）→ `docs/trial/forms/reproduction_record.md`；直接发送 `docs/trial/reproduction_guide_2026-10-08-r2.zip` |
+| 发给另一台电脑的复现人 | `docs/reproduce_current.md`（第2节含首次安装）→ `docs/trial/forms/reproduction_record.md`；直接发送 `docs/trial/reproduction_guide_2026-10-08-r3.zip` |
 
 ---
 
@@ -240,8 +240,9 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 | 组织者流程 | `docs/trial/organizer_workflow.md` | 有效；邀请、分配任务、观察、反馈与复测 |
 | 参与者入口 | `docs/trial/participant_start.md` | 有效；只做分配的任务卡 |
 | 真人工程复现空白表 | `docs/trial/forms/reproduction_record.md` | 环境、源版本、实际任务、失败、协助与本人确认；尚无真人结果 |
-| 可发送的复现说明包r2 | `docs/trial/reproduction_guide_2026-10-08-r2.zip`、`docs/trial/reproduction_guide_2026-10-08-r2.manifest.json` | 首次安装已并入；说明、空白表、参与者任务与SHA清单；无源码、安装器或凭据 |
-| 首版复现说明包 | `docs/trial/reproduction_guide_2026-10-08.zip` | 历史，保留原字节及原校验记录；新发放使用r2 |
+| 可发送的复现说明包r3 | `docs/trial/reproduction_guide_2026-10-08-r3.zip`、`docs/trial/reproduction_guide_2026-10-08-r3.manifest.json` | 首次安装与可选Yosys命令；说明、空白表、参与者任务与SHA清单；无源码、安装器或凭据 |
+| 复现说明包r2 | `docs/trial/reproduction_guide_2026-10-08-r2.zip`、`docs/trial/reproduction_guide_2026-10-08-r2.manifest.json` | 历史首次安装资料包，保留原字节与校验记录；新发放使用r3 |
+| 首版复现说明包 | `docs/trial/reproduction_guide_2026-10-08.zip` | 历史，保留原字节及原校验记录；新发放使用r3 |
 | 角色与任务覆盖安排 | `docs/trial/personas_and_coverage.md` | 有效；独立机器与共享主机分别记录 |
 | 12 张任务卡与组织者核对要点 | `docs/trial/tasks/` | 有效；核对要点不放入参与者包 |
 | 可填写反馈表与观察模板 | `docs/trial/forms/` | 有效；匿名引用和录屏分别征求同意 |

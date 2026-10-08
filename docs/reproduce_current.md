@@ -1,10 +1,10 @@
-# 真人复现指南（2026-10-08，r2）
+# 真人复现指南（2026-10-08，r3）
 
 这份说明用于在另一台电脑运行公开代码，并保存安装、操作和结果证据。代码统一固定到已上传的 **f7867db67cde354e8664205b0470ade8ba18dc17**，不要在一次会话中途改用新的 main。
 
 仓库：[TYOCT-13/iverilog-ai-lab](https://github.com/TYOCT-13/iverilog-ai-lab)。远程提交核对见[上传确认记录](competition/repository_publication_2026-10-08.md)。本指南和[空白复现记录表](trial/forms/reproduction_record.md)可单独发给参与者；它们是执行材料，尚不代表有真人复现结果。
 
-首次安装已并入第2节：先记录环境，缺工具时安装并检查PATH，工具可用后再克隆。已有P01-R1日志的参与者从尚未完成的小节继续，不重新创建目录。发给参与者使用[r2资料包](trial/reproduction_guide_2026-10-08-r2.zip)，旧包及其校验记录保留。
+首次安装已并入第2节：先记录环境，缺工具时安装并检查PATH，工具可用后再克隆。r3加入Yosys检查与可选安装命令。已有P01-R1日志的参与者从尚未完成的小节继续，不重新创建目录。发给参与者使用[r3资料包](trial/reproduction_guide_2026-10-08-r3.zip)，旧包及其校验记录保留。
 
 ## 1. 先确定本次范围
 
@@ -40,10 +40,16 @@ uv --version
 python --version
 iverilog -V
 vvp -V
-Get-Command git,uv,python,iverilog,vvp -ErrorAction SilentlyContinue | Select-Object Name,Source
+if (Get-Command yosys -ErrorAction SilentlyContinue) {
+    yosys -V
+    "yosys_version_exit=$LASTEXITCODE"
+} else {
+    'yosys=未安装（基础复现可继续；综合检查未执行）'
+}
+Get-Command git,uv,python,iverilog,vvp,yosys -ErrorAction SilentlyContinue | Select-Object Name,Source
 ```
 
-需要Git、Python、uv及配套的iverilog/vvp。本示例使用Python3.12；作者本机证据为Windows/Python3.12.7/Icarus12.0。其他系统、Python小版本或Icarus版本记录实际值，不沿用作者环境声明。
+需要Git、Python、uv及配套的iverilog/vvp；Yosys也在开始时检查，缺少时记录为未安装，需要综合检查时按2.3安装。本示例使用Python3.12；作者本机证据为Windows/Python3.12.7/Icarus12.0。其他系统、Python小版本或Icarus版本记录实际值，不沿用作者环境声明。
 
 如果Git、uv、iverilog或vvp无法识别，说明命令尚不可用，可能未安装或未加入PATH；保存首次输出后做2.2。Python只指向WindowsApps且不输出版本时，尚未确认真实解释器可用，可能是商店快捷入口，见[Microsoft说明](https://learn.microsoft.com/zh-cn/windows/python/faqs)。查询版本用python -V或--version，小写-v是详细输出。
 
@@ -94,9 +100,16 @@ uv --version
 python --version
 iverilog -V
 vvp -V
+if (Get-Command yosys -ErrorAction SilentlyContinue) {
+    yosys -V
+    "yosys_version_exit=$LASTEXITCODE"
+} else {
+    'yosys=未安装（基础复现可继续；综合检查未执行）'
+}
+Get-Command yosys -ErrorAction SilentlyContinue | Select-Object Name,Source
 ```
 
-应能看到五个命令的实际来源与版本。安装命令返回成功不替代这里的检查。
+应能看到五个必需命令的实际来源与版本，另记录Yosys的实际状态。安装命令返回成功不替代这里的检查。
 
 如果Python仍指向WindowsApps且不输出版本，在开始菜单搜索“管理应用执行别名”，关闭“应用安装程序”下的python.exe/python3.exe快捷入口，再检查。关闭快捷入口不等于安装Python；使用安装器时勾选Add Python to PATH，也可使用实际解释器的完整路径。
 
@@ -113,6 +126,56 @@ vvp -V
 
 安装在其他位置时只把reproIcarusBin改为自己的实际bin目录，不照抄作者D:盘路径。临时设置随终端关闭失效；本次在同一终端启动项目，后续新终端重新确认路径。
 
+#### 可选：安装Yosys（Windows x64）
+
+先确认Git、uv、Python与Icarus/vvp这五项可用。需要复现综合检查时安装Yosys；基础仿真无需等待这一步。使用[YosysHQ官方OSS CAD Suite](https://github.com/YosysHQ/oss-cad-suite-build#installation)，这里固定[2026-10-07发布版](https://github.com/YosysHQ/oss-cad-suite-build/releases/tag/2026-10-07)，不使用随时变化的latest。该套件包含Yosys及依赖，也带有Python和Icarus，因此加载环境后要复查工具来源。
+
+下面下载Windows x64的tgz包，核对发布页提供的SHA-256后再解压。会占用下载与解压空间；下载失败保留原文件和日志，新尝试另取根目录，不覆盖首次记录。路径尽量不含空格；需要时修改第一行的安装目录。不会修改系统永久PATH。
+
+```powershell
+$reproYosysRoot = Join-Path $env:USERPROFILE 'icarus-tools/oss-cad-suite-20261007'
+if ($env:PROCESSOR_ARCHITECTURE -ne 'AMD64') { throw '此安装包仅适用于Windows x64。' }
+Get-Command tar.exe -ErrorAction Stop | Out-Null
+if (Test-Path -LiteralPath $reproYosysRoot) { throw '安装目录已存在，请保留它并核对；不要覆盖。新尝试另取根目录。' }
+New-Item -ItemType Directory -Path $reproYosysRoot -ErrorAction Stop | Out-Null
+$reproYosysArchive = Join-Path $reproYosysRoot 'oss-cad-suite-windows-x64-20261007.tgz'
+$reproYosysUrl = 'https://github.com/YosysHQ/oss-cad-suite-build/releases/download/2026-10-07/oss-cad-suite-windows-x64-20261007.tgz'
+[Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+Invoke-WebRequest -UseBasicParsing -Uri $reproYosysUrl -OutFile $reproYosysArchive -ErrorAction Stop
+$reproYosysHash = (Get-FileHash -Algorithm SHA256 -LiteralPath $reproYosysArchive).Hash.ToLowerInvariant()
+"yosys_archive_sha256=$reproYosysHash"
+if ($reproYosysHash -ne '69331032c3c42df34a0aac774cd64b4dfa6651de4e3418144407773e03fcc6b2') { throw '下载包SHA-256不匹配，停止，不解压或运行。' }
+tar.exe -xzf $reproYosysArchive -C $reproYosysRoot
+$reproYosysExtractExit = $LASTEXITCODE
+"yosys_extract_exit=$reproYosysExtractExit"
+if ($reproYosysExtractExit -ne 0) { throw '解压失败，保留原文。' }
+```
+
+解压成功后，在同一个PowerShell加载官方环境脚本。先保存基础工具的目录，再放回PATH前面，保留原来的Python与Icarus/vvp选择；项目仍用自己的`.venv/Scripts/python.exe`运行：
+
+```powershell
+$reproYosysRoot = Join-Path $env:USERPROFILE 'icarus-tools/oss-cad-suite-20261007'
+$reproYosysHome = Join-Path $reproYosysRoot 'oss-cad-suite'
+$reproYosysEnv = Join-Path $reproYosysHome 'environment.ps1'
+if (-not (Test-Path -LiteralPath $reproYosysEnv)) { throw '未找到官方environment.ps1，请核对解压位置。' }
+if (-not (Test-Path -LiteralPath (Join-Path $reproYosysHome 'bin/yosys.exe'))) { throw '解压目录缺少yosys.exe。' }
+$reproBaseToolDirs = @(Get-Command git,uv,python,iverilog,vvp -ErrorAction Stop | ForEach-Object { Split-Path -Parent $_.Source } | Select-Object -Unique)
+. $reproYosysEnv
+$env:Path = ($reproBaseToolDirs -join ';') + ';' + $env:Path
+Get-Command git,uv,python,iverilog,vvp,yosys -ErrorAction Stop | Select-Object Name,Source
+python --version
+iverilog -V
+vvp -V
+yosys -V
+$reproYosysVersionExit = $LASTEXITCODE
+"yosys_version_exit=$reproYosysVersionExit"
+if ($reproYosysVersionExit -ne 0) { throw 'Yosys无法正常启动，保留错误并检查环境。' }
+```
+
+如果安装根目录另取了名称，两段代码中的reproYosysRoot必须一致。2026-10-08只读核对了发布文件名和官方摘要，未在参与者电脑执行下载、安装或综合。将发行日期、包SHA、实际`yosys -V`、命令来源、等待与协助记入记录表。版本可读仅说明工具能启动，不能登记成综合或形式验证通过。
+
+新终端或重新读取注册表PATH后，临时套件路径可能丢失：先恢复实际Icarus目录，再只重复上面的环境加载代码，不重复下载。若执行策略阻止官方脚本，保留原错误，按电脑管理策略处理，不在本指南中永久修改执行策略。tar不存在或网络下载失败时，可从同一官方发布页手动下载同名文件，用支持tgz的解压工具处理；仍须核对SHA、记录解压工具与实际路径。已经开始的P01-R1继续原日志即可，不重建会话。
+
 ### 2.4 WinGet不可用或下载失败时
 
 可在Microsoft Store安装或更新“应用安装程序”（Microsoft），再检查winget；见[获取WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/)。也可按发布者说明手动安装并记录实际选择：
@@ -124,7 +187,7 @@ vvp -V
 | uv | [Astral安装说明](https://docs.astral.sh/uv/getting-started/installation/)，0.9.9 Windows发布包或固定版本安装器 |
 | Icarus | [Windows打包者页面](https://bleyer.org/icarus/)，iverilog-v12-20220611-x64_setup.exe；[项目安装说明](https://steveicarus.github.io/iverilog/usage/installation.html)可参考 |
 
-网络失败或安装需管理员权限时，保留输出并记录等待、协助及失败。不要改成已安装或绕过下载哈希检查。安装后回2.3检查实际版本，工具未齐时不继续克隆或仿真。
+网络失败或安装需管理员权限时，保留输出并记录等待、协助及失败。不要改成已安装或绕过下载哈希检查。安装后回2.3检查实际版本，五个必需工具未齐时不继续克隆或仿真；缺Yosys只影响需要它的进阶检查。
 
 ### 2.5 重开终端与接续会话
 
@@ -148,7 +211,7 @@ $reproOut = Join-Path '.iverilog-ai/reproduction' $reproSession
 
 恢复后重新输出本节的工具版本，接着做上次尚未完成的步骤；不要重新创建已有运行目录或覆盖原结果。
 
-五个工具均可读取版本后继续第3节。已有P01-R1目录不重跑2.1的创建代码。安装指导、他人代操作和下载等待都记录；未知次数和用时不填0，工具安装完成不代表测试或独立人审完成。
+五个必需工具均可读取版本后继续第3节，Yosys记录已安装/未安装及是否需要；已有P01-R1目录不重跑2.1的创建代码。安装指导、他人代操作和下载等待都记录；未知次数和用时不填0，工具安装完成不代表测试或独立人审完成。
 
 版本命令不存在、需要管理员权限或网络下载失败，都如实记录。不要把未安装或预装写成参与者自行安装成功。没有GPU信息也不影响基础复现；只做操作复现时不需要收集显卡、设备序列号、MAC或IP地址。
 

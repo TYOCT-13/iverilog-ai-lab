@@ -1,0 +1,165 @@
+{
+  "schema_version": "1.0",
+  "kind": "participant_documentation_packet",
+  "revision": "r3",
+  "date": "2026-10-08",
+  "date_timezone": "Asia/Shanghai",
+  "reproduction_code_commit": "f7867db67cde354e8664205b0470ade8ba18dc17",
+  "packet": {
+    "path": "docs/trial/reproduction_guide_2026-10-08-r3.zip",
+    "bytes": 80359,
+    "sha256": "8b76ce271b7ad029e29660b48f4204043b6c86da153682f9e72a80b72dbff2b5",
+    "members": 20,
+    "files": [
+      {
+        "path": "LICENSE",
+        "bytes": 10106,
+        "sha256": "f2f629ced07742bd1ff86142345011d03a5bfe2409a1783a5616d2fc9fab5684"
+      },
+      {
+        "path": "SHA256SUMS.txt",
+        "bytes": 1938,
+        "sha256": "15a55c050b65ae28cea2bed9f03f5d1c630f5a8a1224a3c39c314f0b761e46dc"
+      },
+      {
+        "path": "START_HERE.txt",
+        "bytes": 1747,
+        "sha256": "95325424a28cd37d97b26048a38c1a46ca9be3511785a88a3131813c25111d7b"
+      },
+      {
+        "path": "docs/reproduce_current.md",
+        "bytes": 24881,
+        "sha256": "e39ea9c32fe6c93a3ac50979ac64ce554af17161caa504d5038a2efd475a9c99"
+      },
+      {
+        "path": "docs/trial/forms/participant_feedback.docx",
+        "bytes": 39121,
+        "sha256": "07654fb2e23b52f37cf5468ee9821293d666694574928ca1e4a5842d379d850e"
+      },
+      {
+        "path": "docs/trial/forms/participant_feedback.md",
+        "bytes": 2084,
+        "sha256": "c59aac3ee9f726d32c3cd564bdfa7783f90c8889ef082e6880c54a86088a5c8a"
+      },
+      {
+        "path": "docs/trial/forms/reproduction_record.md",
+        "bytes": 4573,
+        "sha256": "bcfbd7311255f74b56f076dd7418910bd8405b972ef5bb567d033e02c5cab767"
+      },
+      {
+        "path": "docs/trial/participant_start.md",
+        "bytes": 3054,
+        "sha256": "7d34ea5ffd6c9f13962a1d6d553c7fef2e4934da45d5ee07677e8b5edddc2b95"
+      },
+      {
+        "path": "docs/trial/tasks/T01_install.md",
+        "bytes": 3577,
+        "sha256": "9be72303dc5003feb3af5fc766931c7d850a246a05c6f39641fcde701ca12c26"
+      },
+      {
+        "path": "docs/trial/tasks/T02_builtin_offline.md",
+        "bytes": 2190,
+        "sha256": "79fffeeec1a7e3762b1b6c9c8ee205a495667198830cd87380bc31c435206c27"
+      },
+      {
+        "path": "docs/trial/tasks/T03_variant_review.md",
+        "bytes": 2364,
+        "sha256": "61d95f07522964cede26343cc7caa9d8dbe272c2f7dc69221785643a19d04a0d"
+      },
+      {
+        "path": "docs/trial/tasks/T04_custom_contract.md",
+        "bytes": 2553,
+        "sha256": "05eee1fad97bfdc67612977c15d7378b5c0a73bbd67fee7af17721b678cc5f44"
+      },
+      {
+        "path": "docs/trial/tasks/T05_compare_versions.md",
+        "bytes": 2387,
+        "sha256": "90f87b1ca5b43b9070048c499ca0d22d5018fbd980a7c1934cc3fa02b1fbfd32"
+      },
+      {
+        "path": "docs/trial/tasks/T06_static_review.md",
+        "bytes": 1878,
+        "sha256": "b40beb3c7f463b28963dc15d28f303f49000ae3604360dff54b830b7a5668e52"
+      },
+      {
+        "path": "docs/trial/tasks/T07_state_and_input_change.md",
+        "bytes": 2307,
+        "sha256": "2aff654449ee92a337a1b67b14bdf035f6509f450fa593fa8418e17f604e69bd"
+      },
+      {
+        "path": "docs/trial/tasks/T08_archive_export.md",
+        "bytes": 2205,
+        "sha256": "9f9d0146769bdd5aa92e463d3fc6088d56c1e6ec8ad293798cdc957700be5c4a"
+      },
+      {
+        "path": "docs/trial/tasks/T09_cli_reproduction.md",
+        "bytes": 2900,
+        "sha256": "0787e4dca75b75cf6aa16b76cecea7051cede3804d3b0f8f80b56ec8e92e40c0"
+      },
+      {
+        "path": "docs/trial/tasks/T10_optional_api.md",
+        "bytes": 4190,
+        "sha256": "24c8d02d699904459a7b4def2ca7d1566fc38a5f248c5ada383b3b5a569d12af"
+      },
+      {
+        "path": "docs/trial/tasks/T11_narrow_keyboard.md",
+        "bytes": 2612,
+        "sha256": "22139b3660102c23445e408b9fa180cbf5d5aab94eb6c73d929252a51bfd93ac"
+      },
+      {
+        "path": "docs/trial/tasks/T12_environment_recovery.md",
+        "bytes": 2898,
+        "sha256": "bc13e7b556f95792fa91847d1a139f750bdaba9a862a68fa67ef2c5fc781cee6"
+      }
+    ]
+  },
+  "previous_packets": [
+    {
+      "path": "docs/trial/reproduction_guide_2026-10-08.zip",
+      "sha256": "a825e906b2bceb44dd17ba66417041e574bc3bc91efff4a0874577cff32d364e",
+      "unchanged": true
+    },
+    {
+      "path": "docs/trial/reproduction_guide_2026-10-08-r2.zip",
+      "sha256": "739678ee629c3d88cb6274a358551263d3482d12d2babfbd480c393429b5199a",
+      "unchanged": true
+    }
+  ],
+  "yosys_installation": {
+    "distribution": "YosysHQ OSS CAD Suite",
+    "release": "2026-10-07",
+    "asset": "oss-cad-suite-windows-x64-20261007.tgz",
+    "asset_sha256": "69331032c3c42df34a0aac774cd64b4dfa6651de4e3418144407773e03fcc6b2",
+    "primary_installation_source": "https://github.com/YosysHQ/oss-cad-suite-build#installation",
+    "primary_asset_digest_source": "https://github.com/YosysHQ/oss-cad-suite-build/releases/expanded_assets/2026-10-07",
+    "metadata_read_only_verified": true,
+    "asset_downloaded_here": false,
+    "installer_executed_here": false,
+    "participant_installation_verified": false,
+    "optional_for_basic_reproduction": true,
+    "preserves_existing_base_tool_path_priority": true
+  },
+  "validation": {
+    "crc_passed": true,
+    "sha_manifest_files_verified": 19,
+    "guide_matches_current_file": true,
+    "commands_executed_on_reproducer": false,
+    "powershell_parse_blocks": 30,
+    "powershell_blocks_with_errors": 0,
+    "guide_powershell_blocks": 18,
+    "windows_supplement_powershell_blocks": 10,
+    "task_powershell_blocks": 2,
+    "changed_relative_links_checked": 137,
+    "missing_relative_links": 0,
+    "doc_index_paths_checked": 301,
+    "doc_index_missing": 0,
+    "git_diff_check_exit": 0,
+    "validation_runtime": "author PowerShell parser and Python; installation commands parsed, not executed"
+  },
+  "new_api_requests": 0,
+  "new_dut_executions": 0,
+  "new_human_sessions": 0,
+  "pushed": false,
+  "scope": "Yosys startup probe and pinned Windows install commands; existing code, experiment results, original packets and participant copy unchanged",
+  "source_byte_basis": "Worktree bytes at build; ZIP SHA validates distributed files independently of Git newline normalization"
+}
