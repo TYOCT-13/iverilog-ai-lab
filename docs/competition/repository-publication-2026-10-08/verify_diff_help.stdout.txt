@@ -1,0 +1,31 @@
+usage: iverilog-ai verify-diff [-h] --baseline BASELINE --candidate CANDIDATE
+                               [--contract CONTRACT] [--plan PLAN]
+                               [--module MODULE] [--output-dir OUTPUT_DIR]
+                               [--iverilog IVERILOG_PATH] [--vvp VVP_PATH]
+                               [--timeout TIMEOUT_SECONDS]
+                               [--language LANGUAGE] [--print-json]
+                               [--print-markdown] [--no-vcd] [--quiet]
+                               [--allowed-root ALLOWED_ROOT]
+
+options:
+  -h, --help            show this help message and exit
+  --baseline BASELINE   基线 RTL .v/.sv（合约草稿也从它提取）
+  --candidate CANDIDATE
+                        候选 RTL .v/.sv（例如 AI 重写后的版本）
+  --contract CONTRACT   DUT 合约 JSON；省略则从基线 RTL 提取草稿
+  --plan PLAN           测试计划 JSON；省略则用离线确定性规划器生成
+  --module MODULE       模块名；省略则用合约里的 module
+  --output-dir OUTPUT_DIR, --output OUTPUT_DIR
+                        工件目录
+  --iverilog IVERILOG_PATH
+                        iverilog 可执行文件路径
+  --vvp VVP_PATH        vvp 可执行文件路径
+  --timeout TIMEOUT_SECONDS
+                        单个进程超时秒数
+  --language LANGUAGE   Icarus generation，默认 2012
+  --print-json          将完整结果 JSON 打印到标准输出
+  --print-markdown      打印可贴进 PR 的 Markdown 报告
+  --no-vcd              不生成 VCD（更快，但失去逐拍比对）
+  --quiet               不输出摘要，只输出退出码
+  --allowed-root ALLOWED_ROOT
+                        允许 RTL、testbench 和报告路径所在的根目录，可重复指定

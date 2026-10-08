@@ -5,6 +5,7 @@
 
 - 仓库：`iverilog-ai-lab`，Apache-2.0；第三方资源保留各自许可；判定权威是 Icarus Verilog 12.0（`s20150603`）
 - 2026-10-08建仓补充：[真实GitHub地址与上传核对](competition/repository_readiness_2026-10-08.md)、`docs/competition/repository-readiness-2026-10-08/receipt.json`、`docs/competition/repository-readiness-2026-10-08/attempt-1-incomplete.json`。公开页面可访问，origin已配置、引用地址已填写；核对时远程为空，代码推送和线上克隆尚待完成。
+- 2026-10-08上传后补充：[上传确认与复现交接](competition/repository_publication_2026-10-08.md)、`docs/competition/repository-publication-2026-10-08/receipt.json`及[文档检查原件](competition/repository-publication-2026-10-08/)。实时Git远程main已为f7867db；上条保留上传前的历史状态。另一个人实际下载和运行仍待实证，本轮指南固定已上传代码。
 - 2026-10-07维护补充：[独立RTL版本与公开重放](experiment/rtl_style_maintenance_2026-10-07.md)已完成；6源严格静态门禁0/0，首次与公开重放各36次DUT、每次5115输出比较一致，18规格文件逐字节重建。0新API，原模型成绩与v3材料不变；两项官方门禁仍not_requested。
 - 本次交付整理：**2026-10-07**；实验及v3产物日期为2026-10-05；最新两模块批次实际源码`20400fa`，Agent/helper/系统提示仍冻结`a969337`；108任务全部执行，六组各12缺陷检出12/10/8/8/11/10，87请求/339624tokens，严格资格true但保留1终态格式失败；双机器审计完成，非H02。历史v8八模块432任务六组48/32/48/29/37/37，306请求/973149tokens、18零DUT、严格资格false，双代理审计完成但非H02；历史v7八模块432任务已结束：六组各48缺陷为48/32/48/34/37/37，334请求/833216tokens，严格资格false，预算补提真实收益未证；历史`c07756f`内部合成模块互斥留出108任务/86请求/190387tokens、全仓1570/2；历史Agent v6恢复源码`9c3bd3c`，恢复轮216任务/138请求/378204tokens，独立每轮100万额度；上一轮`75f9baa`的216任务/145请求/399083tokens保持历史，历史短预算三重复144任务（入口`f54ae63`）与六项选样诊断（入口`bdc9e20`），不改旧v5一次重复60任务。当前v3提交PDF/答辩已同步最新两模块，历史v2仍为 `28be1ed`，旧三重复 `c7bb280`、pilot `e9b7b8a`分别归档。最新实测与旧版正式材料不能混作同一版本（已查阅通知的提交截止2026-10-15 20:00北京时间）。
 - 状态记号：**有效** = 当前口径，可直接对外引用；**历史** = 反映当时状态，只读归档，
@@ -23,6 +24,7 @@
 | 复核数字是否可信 | `docs/experiment/metric_inventory.md`（每个数字一行：口径/来源/时间/复现命令）→ `docs/competition/submission_gate_checklist.md` → 产物目录 |
 | IC提交当天照着做 | `docs/competition/ic/v3/README.md` → `docs/competition/ic/v3/submission_copy.md` → `docs/competition/ic/gap_checklist.md`；核对所选赛道、真实队号、匿名要求及上传回执，真人/H02不是官方额外必交项 |
 | 组织真人试用与反馈 | `docs/trial/README.md` → `docs/trial/organizer_workflow.md`；发给参与者从 `docs/trial/participant_start.md` 开始 |
+| 发给另一台电脑的复现人 | `docs/reproduce_current.md` → `docs/trial/forms/reproduction_record.md`；直接发送 `docs/trial/reproduction_guide_2026-10-08.zip` |
 
 ---
 
@@ -134,7 +136,7 @@
 | 证据包（正式，历史快照） | [本机产物，未随 Git 提供](local_artifacts.md) | 历史 | 2026-10-01 核验为 8 文件 / 11.1 KB，sha256 已复核；本轮未重新生成，不能视为当前代码的完整复现包 |
 | 证据包（演练） | [本机产物，未随 Git 提供](local_artifacts.md) | 历史 | 9 文件 / 25.7 KB，含 `waveform.vcd` 样例 |
 | 证据包结构说明 | `docs/demo/evidence_pack_guide.md` | 部分历史 | 包结构可参考；旧按钮描述以当前 T08 任务卡与录制指南为准 |
-| 引用信息 | `CITATION.cff` | **待补** | `repository-code` 仍是 `example.invalid`，是提交体检里唯一的 error |
+| 引用信息 | `CITATION.cff` | 已填写 | 真实GitHub地址已登记，f7867db已上传；历史占位错误原件保留，不改旧回执 |
 | 开源与合规清单 | `docs/competition/opensource_resource_list.md` | 有效 | 第三方来源与许可 |
 | 上游贡献说明 | `docs/competition/upstream_contribution.md` | 有效 | Issue/PR 尚未提交 |
 
@@ -212,7 +214,7 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 | 进阶 | `docs/manual/02_advanced.md` | 有效 |
 | 深入原理 | `docs/manual/03_deep.md` | 有效 |
 | 按目标查手册 | `docs/manual/04_by_goal.md` | 有效 |
-| 当前干净克隆与离线复核 | `docs/reproduce_current.md` | 当前指南；长路径、锁依赖、核心流程及同机/异机边界 |
+| 当前真人复现与离线复核 | `docs/reproduce_current.md` | 固定已上传f7867db；锁依赖、CLI/UI、原始证据与同机/异机边界 |
 | 2026-09-29 的 10 分钟复核快照 | `docs/reproduce_in_10_minutes.md` | 历史；当时测试和索引数量，不代表当前版本 |
 | 服务对象与专门适配 | `docs/target_users.md` | 有效 |
 | 四层结论词表（运行/比对/结论/对比） | `src/iverilog_ai/core/labels.py` | 有效 |
@@ -236,6 +238,8 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 | 真人试用总入口 | `docs/trial/README.md` | 有效；区分参与者、组织者、复核者 |
 | 组织者流程 | `docs/trial/organizer_workflow.md` | 有效；邀请、分配任务、观察、反馈与复测 |
 | 参与者入口 | `docs/trial/participant_start.md` | 有效；只做分配的任务卡 |
+| 真人工程复现空白表 | `docs/trial/forms/reproduction_record.md` | 环境、源版本、实际任务、失败、协助与本人确认；尚无真人结果 |
+| 可发送的复现说明包 | `docs/trial/reproduction_guide_2026-10-08.zip` | 说明、空白表与参与者任务，SHA清单；无源码、安装器、凭据或组织者答案 |
 | 角色与任务覆盖安排 | `docs/trial/personas_and_coverage.md` | 有效；独立机器与共享主机分别记录 |
 | 12 张任务卡与组织者核对要点 | `docs/trial/tasks/` | 有效；核对要点不放入参与者包 |
 | 可填写反馈表与观察模板 | `docs/trial/forms/` | 有效；匿名引用和录屏分别征求同意 |
@@ -305,7 +309,7 @@ random/Mock 各 5 轮，fixed 仅 1 轮，因此原始并集不是同总预算�
 | 正式v3 PDF/PPT同步最新实测 | 已完成 | 技术方案10页、合并佐证6页、答辩12页；新108与旧432分列，机器复核非真人/H02；历史v2原样保留 |
 | WaveDrom与两A规格图 | 本机已完成 | 3.6.1实际smoke、登记write-spec、两图浏览器查看、6文件逐字节重建；原12项样式问题及其他版本验证另列 |
 | 独立RTL维护版 | 本机公开布局重放完成 | 6源静态0/0，36首次+36同组重放，5115比较/轮一致、18规格文件字节相同；原12问题保留，非形式/异机/H02或模型新成绩 |
-| `CITATION.cff` 真实地址 | 已填写 | [真实仓库](https://github.com/TYOCT-13/iverilog-ai-lab)公开可访问、origin已配置；核对时为空仓库，代码推送、线上克隆与外部Actions仍待实际验证 |
+| 源码上传与引用地址 | f7867db已上传 | [真实仓库](https://github.com/TYOCT-13/iverilog-ai-lab)远程Git提交已核对；当前新指南另发附件，线上克隆、真人独立运行与外部Actions仍待实证 |
 | 真人试用与复测记录 | 待补 | 建议安排 3–5 名不同角色试用者；材料就绪，尚待实际收集；不是官方人数硬要求 |
 | 3–5 分钟演示视频 | 待补，可选佐证 | 实际录制后再登记；脚本 `docs/demo/demo_script.md` |
 | 外部独立复核 | 待补 | 3 个基线与 21 个候选待真人逐条复核；记录关系、协助、分歧与不可判定 |

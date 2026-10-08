@@ -2,7 +2,7 @@
 
 这是一个围绕 Icarus Verilog 开源生态构建的非官方 AI 辅助 RTL 验证工具。AI 负责提出测试场景和解释失败，Icarus Verilog 与自检 testbench 负责裁决功能是否正确。
 
-代码仓库：[TYOCT-13/iverilog-ai-lab](https://github.com/TYOCT-13/iverilog-ai-lab)。完整克隆与运行步骤见[当前复核指南](docs/reproduce_current.md)，建仓与上传状态见[2026-10-08核对记录](docs/competition/repository_readiness_2026-10-08.md)。
+代码仓库：[TYOCT-13/iverilog-ai-lab](https://github.com/TYOCT-13/iverilog-ai-lab)。已上传f7867db，实际远程核对见[上传确认](docs/competition/repository_publication_2026-10-08.md)。真人复现使用[指南](docs/reproduce_current.md)、[空白记录表](docs/trial/forms/reproduction_record.md)和[可发送资料包](docs/trial/reproduction_guide_2026-10-08.zip)；基础流程不需要API。上传前的[建仓记录](docs/competition/repository_readiness_2026-10-08.md)保留原状态。
 
 ## 当前进度
 
@@ -224,7 +224,7 @@ python -m iverilog_ai compare-rtl `
 
 - 想先看项目能做什么：[docs/project_overview.md](docs/project_overview.md)（含 10 页 PDF）
 - 想审一遍"要求 / 计划 / 尝试 / 现状"：[docs/delivery_review.md](docs/delivery_review.md)（交付审核文档，含需要拍板的 7 个点）
-- 想动手试一遍：`docs/trial/` 的[试用任务卡](docs/trial/task_card.md)，约 40 分钟、无需密钥
+- 想在另一台电脑复现：[公开代码复现指南](docs/reproduce_current.md)，安装、CLI、网页和证据回收；普通试用从[参与者入口](docs/trial/participant_start.md)做分配的任务，均可无需密钥
 - 贡献流程、案例成套提交要求与提交前必须通过的命令：[CONTRIBUTING.md](CONTRIBUTING.md)
 - 变更记录（含各阶段的误报校准与修复原因）：[CHANGELOG.md](CHANGELOG.md)
 - 安全问题报告渠道（**请勿开公开 Issue**）：[SECURITY.md](SECURITY.md)

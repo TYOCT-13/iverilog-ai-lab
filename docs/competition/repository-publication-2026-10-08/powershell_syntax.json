@@ -1,0 +1,61 @@
+{
+  "scope": "parse only, commands not executed",
+  "blocks": 9,
+  "errors": 0.0,
+  "details": [
+    {
+      "file": "docs/reproduce_current.md",
+      "block": 1,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/reproduce_current.md",
+      "block": 2,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/reproduce_current.md",
+      "block": 3,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/reproduce_current.md",
+      "block": 4,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/reproduce_current.md",
+      "block": 5,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/reproduce_current.md",
+      "block": 6,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/reproduce_current.md",
+      "block": 7,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/reproduce_current.md",
+      "block": 8,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/reproduce_current.md",
+      "block": 9,
+      "error_count": 0,
+      "errors": []
+    }
+  ]
+}

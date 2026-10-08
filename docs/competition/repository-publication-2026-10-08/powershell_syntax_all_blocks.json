@@ -1,0 +1,133 @@
+{
+  "scope": "all PowerShell fenced blocks including indented task-card fences; parse only, commands not executed",
+  "blocks": 21,
+  "errors": 0.0,
+  "details": [
+    {
+      "file": "docs/reproduce_current.md",
+      "block": 1,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/reproduce_current.md",
+      "block": 2,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/reproduce_current.md",
+      "block": 3,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/reproduce_current.md",
+      "block": 4,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/reproduce_current.md",
+      "block": 5,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/reproduce_current.md",
+      "block": 6,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/reproduce_current.md",
+      "block": 7,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/reproduce_current.md",
+      "block": 8,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/reproduce_current.md",
+      "block": 9,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/trial/tasks/T01_install.md",
+      "block": 1,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/trial/tasks/T01_install.md",
+      "block": 2,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/trial/tasks/T09_cli_reproduction.md",
+      "block": 1,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/trial/tasks/T09_cli_reproduction.md",
+      "block": 2,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/trial/tasks/T09_cli_reproduction.md",
+      "block": 3,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/trial/tasks/T10_optional_api.md",
+      "block": 1,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/trial/tasks/T10_optional_api.md",
+      "block": 2,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/trial/tasks/T10_optional_api.md",
+      "block": 3,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/trial/tasks/T10_optional_api.md",
+      "block": 4,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/trial/tasks/T12_environment_recovery.md",
+      "block": 1,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/trial/tasks/T12_environment_recovery.md",
+      "block": 2,
+      "error_count": 0,
+      "errors": []
+    },
+    {
+      "file": "docs/trial/tasks/T12_environment_recovery.md",
+      "block": 3,
+      "error_count": 0,
+      "errors": []
+    }
+  ]
+}

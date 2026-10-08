@@ -1,0 +1,17 @@
+{
+  "ok": true,
+  "findings": [
+    {
+      "level": "info",
+      "code": "placeholder/scanned",
+      "message": "占位符扫描：60 个交付面文本文件，命中 0 处"
+    }
+  ],
+  "checked": [
+    {
+      "repo": ".",
+      "files_scanned": 60,
+      "placeholders": 0
+    }
+  ]
+}

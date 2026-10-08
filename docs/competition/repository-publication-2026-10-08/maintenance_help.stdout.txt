@@ -1,0 +1,24 @@
+usage: publishable_reproduce.py [-h] --out-dir OUT_DIR
+                                [--mode {gate,spec,semantics,all}]
+                                --skill-root SKILL_ROOT
+                                [--project-root PROJECT_ROOT]
+                                [--package-root PACKAGE_ROOT]
+
+Reproduce the published RTL maintenance package without changing its inputs.
+
+options:
+  -h, --help            show this help message and exit
+  --out-dir OUT_DIR     New output directory inside the project; relative
+                        paths are relative to the project root.
+  --mode {gate,spec,semantics,all}
+                        semantics includes the prerequisite official source
+                        gate.
+  --skill-root SKILL_ROOT
+                        Installed readable-verilog-generator skill root; no
+                        installation is performed.
+  --project-root PROJECT_ROOT
+                        Optional explicit project root; otherwise inferred
+                        from package ancestors.
+  --package-root PACKAGE_ROOT
+                        Optional published package directory; otherwise this
+                        script directory.

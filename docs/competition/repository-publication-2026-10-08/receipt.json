@@ -1,0 +1,3800 @@
+{
+  "schema_version": "1.0",
+  "record_kind": "documentation_and_remote_ref_check",
+  "created_at_utc": "2026-10-08T04:55:25.405234+00:00",
+  "repo": "https://github.com/TYOCT-13/iverilog-ai-lab",
+  "baseline_local_head": "f7867db67cde354e8664205b0470ade8ba18dc17",
+  "reproduction_source_commit": "f7867db67cde354e8664205b0470ade8ba18dc17",
+  "remote_main_observed": "f7867db67cde354e8664205b0470ade8ba18dc17",
+  "user_push_confirmed_by_live_remote_ref": true,
+  "pushed_by_this_turn": false,
+  "new_guides_uploaded_by_this_turn": false,
+  "new_model_api_requests": 0,
+  "new_dut_executions": 0,
+  "new_human_sessions": 0,
+  "new_remote_clone_runs": 0,
+  "new_ui_screenshots": 0,
+  "checks": {
+    "local_head": {
+      "argv": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "f7867db67cde354e8664205b0470ade8ba18dc17\n",
+      "stderr": ""
+    },
+    "remote_url": {
+      "argv": [
+        "git",
+        "remote",
+        "get-url",
+        "origin"
+      ],
+      "exit_code": 0,
+      "stdout": "https://github.com/TYOCT-13/iverilog-ai-lab.git\n",
+      "stderr": ""
+    },
+    "live_remote_main": {
+      "argv": [
+        "git",
+        "ls-remote",
+        "--heads",
+        "origin",
+        "main"
+      ],
+      "exit_code": 0,
+      "stdout": "f7867db67cde354e8664205b0470ade8ba18dc17\trefs/heads/main\n",
+      "stderr": ""
+    },
+    "production_unchanged": {
+      "argv": [
+        "git",
+        "diff",
+        "--exit-code",
+        "f7867db67cde354e8664205b0470ade8ba18dc17",
+        "--",
+        "src",
+        "ui",
+        "tests",
+        "rtl",
+        "benchmarks",
+        "scripts",
+        "pyproject.toml",
+        "uv.lock",
+        ".gitattributes",
+        "docs/review",
+        "docs/competition/ic/v3"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    "whitespace": {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "v3_sealed_files": [
+    {
+      "path": "docs/competition/ic/ICARUS_技术方案_v3.pdf",
+      "sha256": "4bb214297d189ccbf446dd12e9bc848bffd216601c1c315241f6cb3bcc87f6a3",
+      "matches": true
+    },
+    {
+      "path": "docs/competition/ic/ICARUS_佐证材料_v3.pdf",
+      "sha256": "7fe5fe5aa78d654dc4e212cd25e2f2b202418d1d7a32d96ce755d8361a8e0dda",
+      "matches": true
+    },
+    {
+      "path": "docs/competition/ic/ICARUS_答辩材料_v3.pdf",
+      "sha256": "80f2fadd2304fdb7d0d7695520242239e9e31c0dbaac9db2f96e5e108fddf580",
+      "matches": true
+    },
+    {
+      "path": "docs/competition/ic/ICARUS_答辩材料_v3.pptx",
+      "sha256": "03a1cf9a47bb95576054725baf34b73a041d953983ba31ca3f8ad4c5ac8db76c",
+      "matches": true
+    },
+    {
+      "path": "docs/competition/ic/v3/material_data.json",
+      "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+      "matches": true
+    },
+    {
+      "path": "docs/competition/ic/v3/review/final_receipt.json",
+      "sha256": "b2acd33125cb9005ebaf46d8a21bbc92c6ca88753194b1eef46a46ae2a6cb428",
+      "matches": true
+    }
+  ],
+  "packet": {
+    "path": "docs/trial/reproduction_guide_2026-10-08.zip",
+    "bytes": 76303,
+    "sha256": "a825e906b2bceb44dd17ba66417041e574bc3bc91efff4a0874577cff32d364e",
+    "members": 20,
+    "crc_passed": true,
+    "sha_manifest_files_verified": 19,
+    "files": [
+      {
+        "path": "LICENSE",
+        "bytes": 10106,
+        "sha256": "f2f629ced07742bd1ff86142345011d03a5bfe2409a1783a5616d2fc9fab5684"
+      },
+      {
+        "path": "SHA256SUMS.txt",
+        "bytes": 1938,
+        "sha256": "84b669db292e21cba5f7deb3b35b92b2552e3d2a8bee75e6c42ea4da41b21770"
+      },
+      {
+        "path": "START_HERE.txt",
+        "bytes": 1454,
+        "sha256": "061d57aecd8da1cf2e80080c8dd375f4606bb2205c82ac3a79319f0fa1e3f422"
+      },
+      {
+        "path": "docs/reproduce_current.md",
+        "bytes": 14305,
+        "sha256": "a61cf69ba6d90d98f1113c08d3bd725a3e3c14b525e0806e87b27c3043733811"
+      },
+      {
+        "path": "docs/trial/forms/participant_feedback.docx",
+        "bytes": 39121,
+        "sha256": "07654fb2e23b52f37cf5468ee9821293d666694574928ca1e4a5842d379d850e"
+      },
+      {
+        "path": "docs/trial/forms/participant_feedback.md",
+        "bytes": 2084,
+        "sha256": "c59aac3ee9f726d32c3cd564bdfa7783f90c8889ef082e6880c54a86088a5c8a"
+      },
+      {
+        "path": "docs/trial/forms/reproduction_record.md",
+        "bytes": 4316,
+        "sha256": "ce64bdbc3161c8ed67901d57c104acbb3788e28b06c620446e8de4ccf0867bfd"
+      },
+      {
+        "path": "docs/trial/participant_start.md",
+        "bytes": 2880,
+        "sha256": "8b6e8005a91d0fb05e0c4d56bc6427e2d3b3b42f1aa333c5408cb0dd568db2bb"
+      },
+      {
+        "path": "docs/trial/tasks/T01_install.md",
+        "bytes": 3317,
+        "sha256": "676fc08798551d3f5949bdec984366a7ba26bebe9efd03daa603b962517db00a"
+      },
+      {
+        "path": "docs/trial/tasks/T02_builtin_offline.md",
+        "bytes": 2190,
+        "sha256": "79fffeeec1a7e3762b1b6c9c8ee205a495667198830cd87380bc31c435206c27"
+      },
+      {
+        "path": "docs/trial/tasks/T03_variant_review.md",
+        "bytes": 2364,
+        "sha256": "61d95f07522964cede26343cc7caa9d8dbe272c2f7dc69221785643a19d04a0d"
+      },
+      {
+        "path": "docs/trial/tasks/T04_custom_contract.md",
+        "bytes": 2553,
+        "sha256": "05eee1fad97bfdc67612977c15d7378b5c0a73bbd67fee7af17721b678cc5f44"
+      },
+      {
+        "path": "docs/trial/tasks/T05_compare_versions.md",
+        "bytes": 2387,
+        "sha256": "90f87b1ca5b43b9070048c499ca0d22d5018fbd980a7c1934cc3fa02b1fbfd32"
+      },
+      {
+        "path": "docs/trial/tasks/T06_static_review.md",
+        "bytes": 1878,
+        "sha256": "b40beb3c7f463b28963dc15d28f303f49000ae3604360dff54b830b7a5668e52"
+      },
+      {
+        "path": "docs/trial/tasks/T07_state_and_input_change.md",
+        "bytes": 2307,
+        "sha256": "2aff654449ee92a337a1b67b14bdf035f6509f450fa593fa8418e17f604e69bd"
+      },
+      {
+        "path": "docs/trial/tasks/T08_archive_export.md",
+        "bytes": 2205,
+        "sha256": "9f9d0146769bdd5aa92e463d3fc6088d56c1e6ec8ad293798cdc957700be5c4a"
+      },
+      {
+        "path": "docs/trial/tasks/T09_cli_reproduction.md",
+        "bytes": 2900,
+        "sha256": "0787e4dca75b75cf6aa16b76cecea7051cede3804d3b0f8f80b56ec8e92e40c0"
+      },
+      {
+        "path": "docs/trial/tasks/T10_optional_api.md",
+        "bytes": 4190,
+        "sha256": "24c8d02d699904459a7b4def2ca7d1566fc38a5f248c5ada383b3b5a569d12af"
+      },
+      {
+        "path": "docs/trial/tasks/T11_narrow_keyboard.md",
+        "bytes": 2612,
+        "sha256": "22139b3660102c23445e408b9fa180cbf5d5aab94eb6c73d929252a51bfd93ac"
+      },
+      {
+        "path": "docs/trial/tasks/T12_environment_recovery.md",
+        "bytes": 2898,
+        "sha256": "bc13e7b556f95792fa91847d1a139f750bdaba9a862a68fa67ef2c5fc781cee6"
+      }
+    ],
+    "source_byte_basis": "worktree bytes at build; ZIP SHA validates distributed bytes independently of Git newline normalization",
+    "source_files_still_match_worktree": true
+  },
+  "editing_attempts": [
+    {
+      "status": "rejected_before_write",
+      "error": "apply_patch verification failed: invalid patch: multiple operations target T01_install.md",
+      "resolution": "applied nonconflicting updates sequentially; no rejected patch content was written"
+    }
+  ],
+  "limitations": [
+    "Git ref check confirms uploaded commit; not an actual participant clone or second-machine run.",
+    "Web tool returned cached pre-push empty repository; no new browser screenshot claimed.",
+    "Guide syntax/help/link checks do not replace executing the commands on the participant machine.",
+    "All existing API results, first failures, v3 receipts and raw experiments retained.",
+    "Participant originals, consent and H02 still require real people."
+  ],
+  "closure_checks": {
+    "submission_check": {
+      "argv": [
+        "E:\\FPGA_WORK\\icarus-cleancheck-20261007-r2\\clean checkout\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/check_submission.py",
+        "--repo",
+        ".",
+        "--json"
+      ],
+      "exit_code": 0,
+      "stdout_path": "docs/competition/repository-publication-2026-10-08/submission_check.stdout.txt",
+      "stderr_path": "docs/competition/repository-publication-2026-10-08/submission_check.stderr.txt"
+    },
+    "doc_index": {
+      "argv": [
+        "E:\\FPGA_WORK\\icarus-cleancheck-20261007-r2\\clean checkout\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/check_doc_index.py"
+      ],
+      "exit_code": 0,
+      "stdout_path": "docs/competition/repository-publication-2026-10-08/doc_index.stdout.txt",
+      "stderr_path": "docs/competition/repository-publication-2026-10-08/doc_index.stderr.txt"
+    },
+    "verify_diff_help": {
+      "argv": [
+        "E:\\FPGA_WORK\\icarus-cleancheck-20261007-r2\\clean checkout\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "iverilog_ai",
+        "verify-diff",
+        "--help"
+      ],
+      "exit_code": 0,
+      "stdout_path": "docs/competition/repository-publication-2026-10-08/verify_diff_help.stdout.txt",
+      "stderr_path": "docs/competition/repository-publication-2026-10-08/verify_diff_help.stderr.txt"
+    },
+    "matrix_help": {
+      "argv": [
+        "E:\\FPGA_WORK\\icarus-cleancheck-20261007-r2\\clean checkout\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/run_benchmark_matrix.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "stdout_path": "docs/competition/repository-publication-2026-10-08/matrix_help.stdout.txt",
+      "stderr_path": "docs/competition/repository-publication-2026-10-08/matrix_help.stderr.txt"
+    },
+    "maintenance_help": {
+      "argv": [
+        "E:\\FPGA_WORK\\icarus-cleancheck-20261007-r2\\clean checkout\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "benchmarks/rtl_style_maintenance_20261007/publishable_reproduce.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "stdout_path": "docs/competition/repository-publication-2026-10-08/maintenance_help.stdout.txt",
+      "stderr_path": "docs/competition/repository-publication-2026-10-08/maintenance_help.stderr.txt"
+    },
+    "uv_sync_help": {
+      "argv": [
+        "uv",
+        "sync",
+        "--help"
+      ],
+      "exit_code": 0,
+      "stdout_path": "docs/competition/repository-publication-2026-10-08/uv_sync_help.stdout.txt",
+      "stderr_path": "docs/competition/repository-publication-2026-10-08/uv_sync_help.stderr.txt"
+    },
+    "changed_markdown_links": {
+      "files": 15,
+      "relative_links_checked": 305,
+      "missing": 0,
+      "details": [
+        {
+          "source": "README.md",
+          "target": "docs/competition/repository_publication_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/reproduce_current.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/trial/forms/reproduction_record.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/trial/reproduction_guide_2026-10-08.zip",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/competition/repository_readiness_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/rtl_style_maintenance_2026-10-07.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/rtl_spec_rendering_2026-10-07.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": ".github/workflows/ci.yml",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/vcd_analysis.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/static_rules.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/reference_model_alignment.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/layered_evidence.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/behavior_compare.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/coverage.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/model_comparison_2026-09-11.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/opensource_conventions.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "CHANGELOG.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/demo/ic_agent_v2_walkthrough.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_new_holdout_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_new_holdout_study_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_new_holdout_source_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_new_holdout_study_plan_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/review/agent_new_holdout_prereg_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/review/agent_new_holdout_study_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_v7_diagnosis_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_feedback_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_feedback_study_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_feedback_source_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/review/agent_feedback_prereg_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/review/agent_feedback_study_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_budget_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent-budget-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_budget_source_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/review/agent_budget_prereg_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_holdout_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent-holdout-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent-holdout-validation-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "benchmarks/agent_holdout_20261005/README.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_recovery_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent-recovery-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent-recovery-validation-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_study_1m_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_study_1m_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_smoke_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_smoke_diagnostic_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_smoke_diagnostic_api_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/protocol_oracle_improvements_2026-10-04.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_comparison_v2_live_2026-10-04.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_comparison_v4_smoke_2026-10-04.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_comparison_v5_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/ic_agent_v5_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_v5_optimization_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/competition/ic/evidence_pack_v5_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/deepseek_decision_v4_2026-10-04.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/competition/ic/v3/README.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/INDEX.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/clean_checkout_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/reproduce_current.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/debug_interface.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/behavior_compare.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/project_overview.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/delivery_review.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/reproduce_current.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/trial/participant_start.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "CONTRIBUTING.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "CHANGELOG.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "SECURITY.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "CODE_OF_CONDUCT.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "CITATION.cff",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "PROJECT_SCOPE.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/verification_report.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "competition/repository_readiness_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "competition/repository_publication_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/rtl_style_maintenance_2026-10-07.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/rtl_spec_rendering_2026-10-07.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/rtl-spec-rendering-2026-10-07/README.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/rtl-spec-rendering-2026-10-07/rendering_receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/rtl-spec-rendering-2026-10-07/reproduction/reproduction_receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/rtl_style_maintenance_2026-10-07.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "../benchmarks/rtl_style_maintenance_20261007/README.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "../benchmarks/rtl_style_maintenance_20261007/release_receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "../benchmarks/rtl_style_maintenance_20261007/verification/replay/replay_receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent_new_holdout_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent-new-holdout-study-live-2026-10-05/strict_summary.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent_new_holdout_study_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent-new-holdout-study-live-2026-10-05/source_byte_binding.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent_new_holdout_study_plan_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent-new-holdout-study-live-2026-10-05/preregistration.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent_new_holdout_source_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "review/agent_new_holdout_prereg_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "review/agent_new_holdout_study_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "review/agent-new-holdout-study-review-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent_new_holdout_source_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent-new-holdout-validation-2026-10-05/r2/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent_new_holdout_source_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "competition/repository_readiness_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/competition_compliance_action_plan.md",
+          "target": "repository_readiness_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/competition_compliance_action_plan.md",
+          "target": "repository_publication_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/competition_compliance_action_plan.md",
+          "target": "../reproduce_current.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/competition_compliance_action_plan.md",
+          "target": "../trial/forms/reproduction_record.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/competition_compliance_action_plan.md",
+          "target": "../trial/reproduction_guide_2026-10-08.zip",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/clean_checkout_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/clean-checkout-2026-10-08/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent_new_holdout_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent_new_holdout_study_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent_new_holdout_source_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent_new_holdout_study_plan_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../review/agent_new_holdout_prereg_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../review/agent_new_holdout_study_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../review/agent-new-holdout-study-review-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent_feedback_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../review/agent_feedback_study_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent_budget_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent_v7_diagnosis_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent_holdout_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent_recovery_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent_study_1m_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/rtl_spec_rendering_2026-10-07.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/rtl_style_maintenance_2026-10-07.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../trial/participant_start.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../review/independent_review_guide.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "v3/rules_validation.json",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "v3/submission_copy.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "v3/README.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../repository_publication_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../repository_readiness_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../reproduce_current.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/repository_publication_2026-10-08.md",
+          "target": "repository-publication-2026-10-08/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/repository_publication_2026-10-08.md",
+          "target": "repository_readiness_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/repository_publication_2026-10-08.md",
+          "target": "../reproduce_current.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/repository_publication_2026-10-08.md",
+          "target": "../trial/forms/reproduction_record.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/repository_publication_2026-10-08.md",
+          "target": "../trial/reproduction_guide_2026-10-08.zip",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/submission_gate_checklist.md",
+          "target": "repository_publication_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/submission_gate_checklist.md",
+          "target": "repository_readiness_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/submission_gate_checklist.md",
+          "target": "../reproduce_current.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_comparison_live_2026-10-04.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-comparison-chat-2026-10-04/summary.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "external_agent_readiness.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "external_agent_live_2026-10-04.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "external-agent-live-2026-10-04/summary.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_comparison_v2_live_2026-10-04.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-comparison-v2-2026-10-04/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_comparison_v4_smoke_2026-10-04.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-comparison-v4-smoke-2026-10-04/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "protocol_oracle_improvements_2026-10-04.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "functional_coverage_2026-10-04.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../demo/ic_agent_v2_walkthrough.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "application-uart-v2-2026-10-04/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "ic_agent_v4_api_budget_2026-10-04.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_comparison_v5_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-comparison-v5-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-comparison-v5-live-2026-10-05/rows.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "ic_agent_v5_api_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_v5_optimization_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_smoke_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-smoke-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-smoke-live-2026-10-05/rows.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_smoke_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_smoke_api_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_smoke_diagnostic_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-smoke-diagnostic-2026-10-05/rows.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-smoke-diagnostic-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_smoke_diagnostic_api_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-smoke-validation-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_smoke_diagnostic_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_study_1m_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-study-1m-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-study-1m-live-2026-10-05/rows.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-study-1m-live-2026-10-05/preregistration.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-study-1m-live-2026-10-05/run_settings.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_study_1m_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-study-1m-live-2026-10-05/token_budget.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-study-1m-validation-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_study_1m_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_recovery_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-recovery-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-recovery-study-live-2026-10-05/strict_summary.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-recovery-study-live-2026-10-05/trace_manifest.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_recovery_study_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-recovery-validation-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_recovery_code_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_recovery_study_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_holdout_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-holdout-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-holdout-study-live-2026-10-05/strict_summary.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_holdout_study_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-holdout-study-live-2026-10-05/full_raw_manifest.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-holdout-validation-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../../benchmarks/agent_holdout_20261005/README.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_holdout_prereg_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_holdout_study_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent-holdout-study-review-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_budget_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-budget-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-budget-study-live-2026-10-05/strict_summary.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-budget-study-live-2026-10-05/cohort_summaries.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-budget-study-live-2026-10-05/source_byte_binding.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-budget-study-live-2026-10-05/token_budget.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-budget-study-live-2026-10-05/full_raw_evidence.zip",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-budget-study-live-2026-10-05/full_raw_manifest.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-budget-study-live-2026-10-05/trace_manifest.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_budget_source_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-budget-validation-2026-10-05/postfix/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_budget_prereg_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_budget_study_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent-budget-study-review-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_v7_diagnosis_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-v7-diagnosis-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_feedback_study_plan_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_feedback_source_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_feedback_prereg_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_feedback_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-feedback-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-feedback-study-live-2026-10-05/strict_summary.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_feedback_study_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_feedback_study_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent-feedback-study-review-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_new_holdout_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-new-holdout-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-new-holdout-study-live-2026-10-05/strict_summary.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_new_holdout_study_plan_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-new-holdout-study-live-2026-10-05/preregistration.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_new_holdout_study_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-new-holdout-study-live-2026-10-05/registered_inputs_manifest.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-new-holdout-study-live-2026-10-05/source_byte_binding.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-new-holdout-study-live-2026-10-05/trace_manifest.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_new_holdout_source_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_new_holdout_prereg_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_new_holdout_study_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent-new-holdout-study-review-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/ic/v3/README.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/ic/v3/material_data.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/ic_materials_v3_review_2026-10-07.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/ic/ICARUS_技术方案_v3.pdf",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/ic/ICARUS_佐证材料_v3.pdf",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/ic/ICARUS_答辩材料_v3.pdf",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/ic/ICARUS_答辩材料_v3.pptx",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/ic/v3/submission_copy.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/ic/v3/review/final_receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "rtl_spec_rendering_2026-10-07.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "rtl-spec-rendering-2026-10-07/rendering_receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "rtl-spec-rendering-2026-10-07/reproduction/reproduction_receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "rtl-spec-rendering-2026-10-07/v3_retained_sources.zip",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "rtl_style_maintenance_2026-10-07.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../../benchmarks/rtl_style_maintenance_20261007/README.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../../benchmarks/rtl_style_maintenance_20261007/release_receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../../benchmarks/rtl_style_maintenance_20261007/verification/replay/replay_receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../../benchmarks/rtl_style_maintenance_20261007/verification/independent-review/review-r2.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../../benchmarks/rtl_style_maintenance_20261007/verification/independent-review/closure_receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_new_holdout_source_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-new-holdout-validation-2026-10-05/r2/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "ic_agent_v5_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "ic_agent_v4_validation_2026-10-04.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-new-holdout-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_new_holdout_study_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/ic/v3/README.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/ic/v3/submission_copy.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "clean_checkout_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "clean-checkout-2026-10-08/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "clean-checkout-2026-10-08/raw_manifest.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/repository_readiness_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/repository-readiness-2026-10-08/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/repository_publication_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/repository-publication-2026-10-08/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../reproduce_current.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../trial/forms/reproduction_record.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../trial/reproduction_guide_2026-10-08.zip",
+          "exists": true
+        },
+        {
+          "source": "docs/reproduce_current.md",
+          "target": "competition/repository_publication_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/reproduce_current.md",
+          "target": "trial/forms/reproduction_record.md",
+          "exists": true
+        },
+        {
+          "source": "docs/reproduce_current.md",
+          "target": "review/independent_review_guide.md",
+          "exists": true
+        },
+        {
+          "source": "docs/reproduce_current.md",
+          "target": "trial/organizer_workflow.md",
+          "exists": true
+        },
+        {
+          "source": "docs/trial/README.md",
+          "target": "../reproduce_current.md",
+          "exists": true
+        },
+        {
+          "source": "docs/trial/README.md",
+          "target": "forms/reproduction_record.md",
+          "exists": true
+        },
+        {
+          "source": "docs/trial/README.md",
+          "target": "reproduction_guide_2026-10-08.zip",
+          "exists": true
+        },
+        {
+          "source": "docs/trial/participant_start.md",
+          "target": "../reproduce_current.md",
+          "exists": true
+        },
+        {
+          "source": "docs/trial/participant_start.md",
+          "target": "forms/reproduction_record.md",
+          "exists": true
+        },
+        {
+          "source": "docs/trial/tasks/T01_install.md",
+          "target": "../../reproduce_current.md",
+          "exists": true
+        }
+      ]
+    },
+    "guide_control_inputs": {
+      "missing_control_absent": true,
+      "existing_inputs": {
+        "uv.lock": true,
+        "benchmarks/manifest.json": true,
+        "rtl/mod10_counter.v": true,
+        "rtl/mod10_counter_bug_wrap9.v": true
+      }
+    },
+    "doc_index_final": {
+      "argv": [
+        "E:\\FPGA_WORK\\icarus-cleancheck-20261007-r2\\clean checkout\\.venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/check_doc_index.py"
+      ],
+      "exit_code": 0,
+      "stdout_path": "docs/competition/repository-publication-2026-10-08/doc_index_final.stdout.txt",
+      "stderr_path": "docs/competition/repository-publication-2026-10-08/doc_index_final.stderr.txt"
+    },
+    "final_changed_markdown_links": {
+      "files": 15,
+      "relative_links_checked": 306,
+      "missing": 0,
+      "details": [
+        {
+          "source": "README.md",
+          "target": "docs/competition/repository_publication_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/reproduce_current.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/trial/forms/reproduction_record.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/trial/reproduction_guide_2026-10-08.zip",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/competition/repository_readiness_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/rtl_style_maintenance_2026-10-07.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/rtl_spec_rendering_2026-10-07.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": ".github/workflows/ci.yml",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/vcd_analysis.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/static_rules.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/reference_model_alignment.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/layered_evidence.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/behavior_compare.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/coverage.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/model_comparison_2026-09-11.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/opensource_conventions.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "CHANGELOG.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/demo/ic_agent_v2_walkthrough.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_new_holdout_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_new_holdout_study_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_new_holdout_source_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_new_holdout_study_plan_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/review/agent_new_holdout_prereg_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/review/agent_new_holdout_study_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_v7_diagnosis_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_feedback_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_feedback_study_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_feedback_source_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/review/agent_feedback_prereg_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/review/agent_feedback_study_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_budget_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent-budget-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_budget_source_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/review/agent_budget_prereg_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_holdout_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent-holdout-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent-holdout-validation-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "benchmarks/agent_holdout_20261005/README.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_recovery_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent-recovery-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent-recovery-validation-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_study_1m_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_study_1m_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_smoke_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_smoke_diagnostic_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_smoke_diagnostic_api_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/protocol_oracle_improvements_2026-10-04.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_comparison_v2_live_2026-10-04.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_comparison_v4_smoke_2026-10-04.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_comparison_v5_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/ic_agent_v5_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/agent_v5_optimization_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/competition/ic/evidence_pack_v5_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/deepseek_decision_v4_2026-10-04.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/competition/ic/v3/README.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/INDEX.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/experiment/clean_checkout_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/reproduce_current.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/debug_interface.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/behavior_compare.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/project_overview.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/delivery_review.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/reproduce_current.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/trial/participant_start.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "CONTRIBUTING.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "CHANGELOG.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "SECURITY.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "CODE_OF_CONDUCT.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "CITATION.cff",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "PROJECT_SCOPE.md",
+          "exists": true
+        },
+        {
+          "source": "README.md",
+          "target": "docs/verification_report.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "competition/repository_readiness_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "competition/repository_publication_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "competition/repository-publication-2026-10-08/",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/rtl_style_maintenance_2026-10-07.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/rtl_spec_rendering_2026-10-07.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/rtl-spec-rendering-2026-10-07/README.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/rtl-spec-rendering-2026-10-07/rendering_receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/rtl-spec-rendering-2026-10-07/reproduction/reproduction_receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/rtl_style_maintenance_2026-10-07.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "../benchmarks/rtl_style_maintenance_20261007/README.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "../benchmarks/rtl_style_maintenance_20261007/release_receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "../benchmarks/rtl_style_maintenance_20261007/verification/replay/replay_receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent_new_holdout_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent-new-holdout-study-live-2026-10-05/strict_summary.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent_new_holdout_study_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent-new-holdout-study-live-2026-10-05/source_byte_binding.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent_new_holdout_study_plan_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent-new-holdout-study-live-2026-10-05/preregistration.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent_new_holdout_source_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "review/agent_new_holdout_prereg_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "review/agent_new_holdout_study_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "review/agent-new-holdout-study-review-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent_new_holdout_source_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent-new-holdout-validation-2026-10-05/r2/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "experiment/agent_new_holdout_source_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "competition/repository_readiness_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/INDEX.md",
+          "target": "local_artifacts.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/competition_compliance_action_plan.md",
+          "target": "repository_readiness_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/competition_compliance_action_plan.md",
+          "target": "repository_publication_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/competition_compliance_action_plan.md",
+          "target": "../reproduce_current.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/competition_compliance_action_plan.md",
+          "target": "../trial/forms/reproduction_record.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/competition_compliance_action_plan.md",
+          "target": "../trial/reproduction_guide_2026-10-08.zip",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/clean_checkout_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/clean-checkout-2026-10-08/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent_new_holdout_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent_new_holdout_study_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent_new_holdout_source_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent_new_holdout_study_plan_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../review/agent_new_holdout_prereg_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../review/agent_new_holdout_study_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../review/agent-new-holdout-study-review-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent_feedback_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../review/agent_feedback_study_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent_budget_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent_v7_diagnosis_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent_holdout_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent_recovery_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/agent_study_1m_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/rtl_spec_rendering_2026-10-07.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../experiment/rtl_style_maintenance_2026-10-07.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../trial/participant_start.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../review/independent_review_guide.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "v3/rules_validation.json",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "v3/submission_copy.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "v3/README.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../repository_publication_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../repository_readiness_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/ic/gap_checklist.md",
+          "target": "../../reproduce_current.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/repository_publication_2026-10-08.md",
+          "target": "repository-publication-2026-10-08/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/repository_publication_2026-10-08.md",
+          "target": "repository_readiness_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/repository_publication_2026-10-08.md",
+          "target": "../reproduce_current.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/repository_publication_2026-10-08.md",
+          "target": "../trial/forms/reproduction_record.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/repository_publication_2026-10-08.md",
+          "target": "../trial/reproduction_guide_2026-10-08.zip",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/submission_gate_checklist.md",
+          "target": "repository_publication_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/submission_gate_checklist.md",
+          "target": "repository_readiness_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/competition/submission_gate_checklist.md",
+          "target": "../reproduce_current.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_comparison_live_2026-10-04.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-comparison-chat-2026-10-04/summary.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "external_agent_readiness.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "external_agent_live_2026-10-04.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "external-agent-live-2026-10-04/summary.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_comparison_v2_live_2026-10-04.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-comparison-v2-2026-10-04/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_comparison_v4_smoke_2026-10-04.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-comparison-v4-smoke-2026-10-04/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "protocol_oracle_improvements_2026-10-04.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "functional_coverage_2026-10-04.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../demo/ic_agent_v2_walkthrough.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "application-uart-v2-2026-10-04/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "ic_agent_v4_api_budget_2026-10-04.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_comparison_v5_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-comparison-v5-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-comparison-v5-live-2026-10-05/rows.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "ic_agent_v5_api_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_v5_optimization_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_smoke_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-smoke-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-smoke-live-2026-10-05/rows.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_smoke_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_smoke_api_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_smoke_diagnostic_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-smoke-diagnostic-2026-10-05/rows.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-smoke-diagnostic-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_smoke_diagnostic_api_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-smoke-validation-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_smoke_diagnostic_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_study_1m_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-study-1m-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-study-1m-live-2026-10-05/rows.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-study-1m-live-2026-10-05/preregistration.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-study-1m-live-2026-10-05/run_settings.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_study_1m_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-study-1m-live-2026-10-05/token_budget.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-study-1m-validation-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_study_1m_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_recovery_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-recovery-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-recovery-study-live-2026-10-05/strict_summary.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-recovery-study-live-2026-10-05/trace_manifest.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_recovery_study_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-recovery-validation-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_recovery_code_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_recovery_study_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_holdout_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-holdout-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-holdout-study-live-2026-10-05/strict_summary.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_holdout_study_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-holdout-study-live-2026-10-05/full_raw_manifest.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-holdout-validation-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../../benchmarks/agent_holdout_20261005/README.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_holdout_prereg_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_holdout_study_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent-holdout-study-review-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_budget_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-budget-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-budget-study-live-2026-10-05/strict_summary.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-budget-study-live-2026-10-05/cohort_summaries.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-budget-study-live-2026-10-05/source_byte_binding.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-budget-study-live-2026-10-05/token_budget.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-budget-study-live-2026-10-05/full_raw_evidence.zip",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-budget-study-live-2026-10-05/full_raw_manifest.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-budget-study-live-2026-10-05/trace_manifest.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_budget_source_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-budget-validation-2026-10-05/postfix/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_budget_prereg_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_budget_study_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent-budget-study-review-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_v7_diagnosis_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-v7-diagnosis-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_feedback_study_plan_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_feedback_source_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_feedback_prereg_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_feedback_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-feedback-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-feedback-study-live-2026-10-05/strict_summary.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_feedback_study_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_feedback_study_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent-feedback-study-review-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_new_holdout_study_live_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-new-holdout-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-new-holdout-study-live-2026-10-05/strict_summary.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_new_holdout_study_plan_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-new-holdout-study-live-2026-10-05/preregistration.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_new_holdout_study_budget_2026-10-05.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-new-holdout-study-live-2026-10-05/registered_inputs_manifest.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-new-holdout-study-live-2026-10-05/source_byte_binding.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-new-holdout-study-live-2026-10-05/full_raw_manifest.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-new-holdout-study-live-2026-10-05/trace_manifest.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_new_holdout_source_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_new_holdout_prereg_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_new_holdout_study_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent-new-holdout-study-review-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/ic/v3/README.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/ic/v3/material_data.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/ic_materials_v3_review_2026-10-07.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/ic/ICARUS_技术方案_v3.pdf",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/ic/ICARUS_佐证材料_v3.pdf",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/ic/ICARUS_答辩材料_v3.pdf",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/ic/ICARUS_答辩材料_v3.pptx",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/ic/v3/submission_copy.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/ic/v3/review/final_receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "rtl_spec_rendering_2026-10-07.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "rtl-spec-rendering-2026-10-07/rendering_receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "rtl-spec-rendering-2026-10-07/reproduction/reproduction_receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "rtl-spec-rendering-2026-10-07/v3_retained_sources.zip",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "rtl_style_maintenance_2026-10-07.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../../benchmarks/rtl_style_maintenance_20261007/README.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../../benchmarks/rtl_style_maintenance_20261007/release_receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../../benchmarks/rtl_style_maintenance_20261007/verification/replay/replay_receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../../benchmarks/rtl_style_maintenance_20261007/verification/independent-review/review-r2.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../../benchmarks/rtl_style_maintenance_20261007/verification/independent-review/closure_receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent_new_holdout_source_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-new-holdout-validation-2026-10-05/r2/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "ic_agent_v5_validation_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "ic_agent_v4_validation_2026-10-04.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-new-holdout-study-live-2026-10-05/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "agent-new-holdout-study-live-2026-10-05/full_raw_evidence.zip",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../review/agent_new_holdout_study_review_2026-10-05.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/ic/v3/README.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/ic/v3/submission_copy.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "clean_checkout_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "clean-checkout-2026-10-08/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "clean-checkout-2026-10-08/raw_manifest.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/repository_readiness_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/repository-readiness-2026-10-08/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/repository_publication_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../competition/repository-publication-2026-10-08/receipt.json",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../reproduce_current.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../trial/forms/reproduction_record.md",
+          "exists": true
+        },
+        {
+          "source": "docs/experiment/metric_inventory.md",
+          "target": "../trial/reproduction_guide_2026-10-08.zip",
+          "exists": true
+        },
+        {
+          "source": "docs/reproduce_current.md",
+          "target": "competition/repository_publication_2026-10-08.md",
+          "exists": true
+        },
+        {
+          "source": "docs/reproduce_current.md",
+          "target": "trial/forms/reproduction_record.md",
+          "exists": true
+        },
+        {
+          "source": "docs/reproduce_current.md",
+          "target": "review/independent_review_guide.md",
+          "exists": true
+        },
+        {
+          "source": "docs/reproduce_current.md",
+          "target": "trial/organizer_workflow.md",
+          "exists": true
+        },
+        {
+          "source": "docs/trial/README.md",
+          "target": "../reproduce_current.md",
+          "exists": true
+        },
+        {
+          "source": "docs/trial/README.md",
+          "target": "forms/reproduction_record.md",
+          "exists": true
+        },
+        {
+          "source": "docs/trial/README.md",
+          "target": "reproduction_guide_2026-10-08.zip",
+          "exists": true
+        },
+        {
+          "source": "docs/trial/participant_start.md",
+          "target": "../reproduce_current.md",
+          "exists": true
+        },
+        {
+          "source": "docs/trial/participant_start.md",
+          "target": "forms/reproduction_record.md",
+          "exists": true
+        },
+        {
+          "source": "docs/trial/tasks/T01_install.md",
+          "target": "../../reproduce_current.md",
+          "exists": true
+        }
+      ]
+    },
+    "powershell_syntax": {
+      "primary_report": "docs/competition/repository-publication-2026-10-08/powershell_syntax_all_blocks.json",
+      "blocks": 21,
+      "errors": 0.0,
+      "commands_executed": false,
+      "first_unindented_only_report": "docs/competition/repository-publication-2026-10-08/powershell_syntax.json",
+      "first_report_limitation": "9 unindented blocks only; superseded by 21-block complete fence parsing; counts not added"
+    },
+    "human_results_not_created": {
+      "public_results_byte_identical_to_baseline": true
+    },
+    "final_source_guard": {
+      "staged_production_unchanged": true,
+      "staged_whitespace_errors": 0,
+      "v3_sealed_files": 6
+    }
+  },
+  "artifact_files": [
+    {
+      "path": "docs/competition/repository-publication-2026-10-08/closure_checks.json",
+      "bytes": 51820,
+      "sha256": "7a3e6aee2ff028ad36f30b06a1315fa6d6edad773258c6a5e66e0f96d4300427",
+      "git_blob_sha256": "c282967b218694736e1f1112f556ba2182cc3319ab5c88147f83461a895a0dd6"
+    },
+    {
+      "path": "docs/competition/repository-publication-2026-10-08/doc_index.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/competition/repository-publication-2026-10-08/doc_index.stdout.txt",
+      "bytes": 138,
+      "sha256": "0cd3b754ac928a844345c67b69a420210efb76eb764546eca13af2a422b49769",
+      "git_blob_sha256": "411bbfb00fa2fcbd0de9337669a7bcedceee4f794dd8771d9dad3113ec1983d8"
+    },
+    {
+      "path": "docs/competition/repository-publication-2026-10-08/doc_index_final.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/competition/repository-publication-2026-10-08/doc_index_final.stdout.txt",
+      "bytes": 138,
+      "sha256": "0cd3b754ac928a844345c67b69a420210efb76eb764546eca13af2a422b49769",
+      "git_blob_sha256": "411bbfb00fa2fcbd0de9337669a7bcedceee4f794dd8771d9dad3113ec1983d8"
+    },
+    {
+      "path": "docs/competition/repository-publication-2026-10-08/maintenance_help.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/competition/repository-publication-2026-10-08/maintenance_help.stdout.txt",
+      "bytes": 1204,
+      "sha256": "7042a452588a09562445e59bb8e22a194d0cf16a1429229d1cdf85de0d570cee",
+      "git_blob_sha256": "e2e8277810d03a65b18f94ae0c7852e78c4e0537885780eaaaf6623fcc7ebc84"
+    },
+    {
+      "path": "docs/competition/repository-publication-2026-10-08/matrix_help.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/competition/repository-publication-2026-10-08/matrix_help.stdout.txt",
+      "bytes": 895,
+      "sha256": "c5547c8824fb9398114572e37bf3f66ee27221af02c04bd5ec30cee8ea317caa",
+      "git_blob_sha256": "da496bb00b23c9a55c40481068f049eba8958e38dad0d0401d5ec21c40c5c5a7"
+    },
+    {
+      "path": "docs/competition/repository-publication-2026-10-08/powershell_syntax.json",
+      "bytes": 1214,
+      "sha256": "5f95ee6ea84226d5b5e6947f2ab819551bcf55fd10efd4a74a6163c17821317a",
+      "git_blob_sha256": "c99866eef6970c3ae3cde9161a7a3824de2efd8764924440da6eabe2b3cde3f5"
+    },
+    {
+      "path": "docs/competition/repository-publication-2026-10-08/powershell_syntax_all_blocks.json",
+      "bytes": 2915,
+      "sha256": "7676bb3cece9658b25e506cc55bffb563a187b84dd697c5c3e6304c51a09b7da",
+      "git_blob_sha256": "77f5d0675ad9a864ba5e48ab49b0d3c01ba4ad700799132f631b4431f69c5efa"
+    },
+    {
+      "path": "docs/competition/repository-publication-2026-10-08/submission_check.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/competition/repository-publication-2026-10-08/submission_check.stdout.txt",
+      "bytes": 309,
+      "sha256": "e736b5d21a5c91ce6718677aba7370750697765be3deb48dbfcc710361097fe9",
+      "git_blob_sha256": "80967e00efab91e89a86a22ca9595e150ccf5230b28b2d43d7ab023d9a7ad240"
+    },
+    {
+      "path": "docs/competition/repository-publication-2026-10-08/uv_sync_help.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/competition/repository-publication-2026-10-08/uv_sync_help.stdout.txt",
+      "bytes": 10715,
+      "sha256": "d8398498d647c154ec6d092e7c13fe29d261eeeea4d5f2339f909ff7314217a6",
+      "git_blob_sha256": "62c47f372b32ba55b72cfde58c2859c7e74932125860f11088322cfce00d3a90"
+    },
+    {
+      "path": "docs/competition/repository-publication-2026-10-08/verify_diff_help.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "git_blob_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/competition/repository-publication-2026-10-08/verify_diff_help.stdout.txt",
+      "bytes": 1802,
+      "sha256": "79cc1eb936f3b771e7ee231cbaf0e1d15bfa5f1e04013c5b2a829ccb7ce724d8",
+      "git_blob_sha256": "03382e7e9e1e14abdf54c9e9a777c7991d795b48284c9c23c5009a80460594de"
+    }
+  ],
+  "artifact_files_byte_basis": "worktree bytes when captured; canonical Git blob bindings below also record LF-normalized text for portable verification",
+  "git_staged_file_bindings": {
+    "self_excluded": "docs/competition/repository-publication-2026-10-08/receipt.json",
+    "verification_basis": "git show HEAD:path after local commit; worktree hashes separately retain distributed/captured bytes",
+    "file_count": 33,
+    "files": [
+      {
+        "path": "README.md",
+        "git_blob_bytes": 27804,
+        "git_blob_sha256": "84be3240a4463410695aecaf769dcf8326b38c92c48ec6e2f6f270faf62339ab",
+        "worktree_bytes": 27804,
+        "worktree_sha256": "84be3240a4463410695aecaf769dcf8326b38c92c48ec6e2f6f270faf62339ab",
+        "git_and_worktree_byte_identical": true
+      },
+      {
+        "path": "docs/INDEX.md",
+        "git_blob_bytes": 48543,
+        "git_blob_sha256": "b3edf45c3d4e2279c7f73317b06a33379e007600ba99f4b30d742c389970bd98",
+        "worktree_bytes": 48543,
+        "worktree_sha256": "b3edf45c3d4e2279c7f73317b06a33379e007600ba99f4b30d742c389970bd98",
+        "git_and_worktree_byte_identical": true
+      },
+      {
+        "path": "docs/competition/competition_compliance_action_plan.md",
+        "git_blob_bytes": 8862,
+        "git_blob_sha256": "26e8a096a6f17aa26a96e2d7242642ef7d3be1b858487e7a1c9cf84091d9bc0a",
+        "worktree_bytes": 8862,
+        "worktree_sha256": "26e8a096a6f17aa26a96e2d7242642ef7d3be1b858487e7a1c9cf84091d9bc0a",
+        "git_and_worktree_byte_identical": true
+      },
+      {
+        "path": "docs/competition/ic/gap_checklist.md",
+        "git_blob_bytes": 12404,
+        "git_blob_sha256": "17cba5a43fd91b35004ebf26db4f76c444a741d1d6c5ee6aa0634a23f9fdf053",
+        "worktree_bytes": 12404,
+        "worktree_sha256": "17cba5a43fd91b35004ebf26db4f76c444a741d1d6c5ee6aa0634a23f9fdf053",
+        "git_and_worktree_byte_identical": true
+      },
+      {
+        "path": "docs/competition/repository-publication-2026-10-08/closure_checks.json",
+        "git_blob_bytes": 50204,
+        "git_blob_sha256": "c282967b218694736e1f1112f556ba2182cc3319ab5c88147f83461a895a0dd6",
+        "worktree_bytes": 51820,
+        "worktree_sha256": "7a3e6aee2ff028ad36f30b06a1315fa6d6edad773258c6a5e66e0f96d4300427",
+        "git_and_worktree_byte_identical": false
+      },
+      {
+        "path": "docs/competition/repository-publication-2026-10-08/doc_index.stderr.txt",
+        "git_blob_bytes": 0,
+        "git_blob_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "worktree_bytes": 0,
+        "worktree_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_and_worktree_byte_identical": true
+      },
+      {
+        "path": "docs/competition/repository-publication-2026-10-08/doc_index.stdout.txt",
+        "git_blob_bytes": 135,
+        "git_blob_sha256": "411bbfb00fa2fcbd0de9337669a7bcedceee4f794dd8771d9dad3113ec1983d8",
+        "worktree_bytes": 138,
+        "worktree_sha256": "0cd3b754ac928a844345c67b69a420210efb76eb764546eca13af2a422b49769",
+        "git_and_worktree_byte_identical": false
+      },
+      {
+        "path": "docs/competition/repository-publication-2026-10-08/doc_index_final.stderr.txt",
+        "git_blob_bytes": 0,
+        "git_blob_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "worktree_bytes": 0,
+        "worktree_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_and_worktree_byte_identical": true
+      },
+      {
+        "path": "docs/competition/repository-publication-2026-10-08/doc_index_final.stdout.txt",
+        "git_blob_bytes": 135,
+        "git_blob_sha256": "411bbfb00fa2fcbd0de9337669a7bcedceee4f794dd8771d9dad3113ec1983d8",
+        "worktree_bytes": 138,
+        "worktree_sha256": "0cd3b754ac928a844345c67b69a420210efb76eb764546eca13af2a422b49769",
+        "git_and_worktree_byte_identical": false
+      },
+      {
+        "path": "docs/competition/repository-publication-2026-10-08/maintenance_help.stderr.txt",
+        "git_blob_bytes": 0,
+        "git_blob_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "worktree_bytes": 0,
+        "worktree_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_and_worktree_byte_identical": true
+      },
+      {
+        "path": "docs/competition/repository-publication-2026-10-08/maintenance_help.stdout.txt",
+        "git_blob_bytes": 1180,
+        "git_blob_sha256": "e2e8277810d03a65b18f94ae0c7852e78c4e0537885780eaaaf6623fcc7ebc84",
+        "worktree_bytes": 1204,
+        "worktree_sha256": "7042a452588a09562445e59bb8e22a194d0cf16a1429229d1cdf85de0d570cee",
+        "git_and_worktree_byte_identical": false
+      },
+      {
+        "path": "docs/competition/repository-publication-2026-10-08/matrix_help.stderr.txt",
+        "git_blob_bytes": 0,
+        "git_blob_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "worktree_bytes": 0,
+        "worktree_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_and_worktree_byte_identical": true
+      },
+      {
+        "path": "docs/competition/repository-publication-2026-10-08/matrix_help.stdout.txt",
+        "git_blob_bytes": 876,
+        "git_blob_sha256": "da496bb00b23c9a55c40481068f049eba8958e38dad0d0401d5ec21c40c5c5a7",
+        "worktree_bytes": 895,
+        "worktree_sha256": "c5547c8824fb9398114572e37bf3f66ee27221af02c04bd5ec30cee8ea317caa",
+        "git_and_worktree_byte_identical": false
+      },
+      {
+        "path": "docs/competition/repository-publication-2026-10-08/powershell_syntax.json",
+        "git_blob_bytes": 1154,
+        "git_blob_sha256": "c99866eef6970c3ae3cde9161a7a3824de2efd8764924440da6eabe2b3cde3f5",
+        "worktree_bytes": 1214,
+        "worktree_sha256": "5f95ee6ea84226d5b5e6947f2ab819551bcf55fd10efd4a74a6163c17821317a",
+        "git_and_worktree_byte_identical": false
+      },
+      {
+        "path": "docs/competition/repository-publication-2026-10-08/powershell_syntax_all_blocks.json",
+        "git_blob_bytes": 2783,
+        "git_blob_sha256": "77f5d0675ad9a864ba5e48ab49b0d3c01ba4ad700799132f631b4431f69c5efa",
+        "worktree_bytes": 2915,
+        "worktree_sha256": "7676bb3cece9658b25e506cc55bffb563a187b84dd697c5c3e6304c51a09b7da",
+        "git_and_worktree_byte_identical": false
+      },
+      {
+        "path": "docs/competition/repository-publication-2026-10-08/submission_check.stderr.txt",
+        "git_blob_bytes": 0,
+        "git_blob_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "worktree_bytes": 0,
+        "worktree_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_and_worktree_byte_identical": true
+      },
+      {
+        "path": "docs/competition/repository-publication-2026-10-08/submission_check.stdout.txt",
+        "git_blob_bytes": 292,
+        "git_blob_sha256": "80967e00efab91e89a86a22ca9595e150ccf5230b28b2d43d7ab023d9a7ad240",
+        "worktree_bytes": 309,
+        "worktree_sha256": "e736b5d21a5c91ce6718677aba7370750697765be3deb48dbfcc710361097fe9",
+        "git_and_worktree_byte_identical": false
+      },
+      {
+        "path": "docs/competition/repository-publication-2026-10-08/uv_sync_help.stderr.txt",
+        "git_blob_bytes": 0,
+        "git_blob_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "worktree_bytes": 0,
+        "worktree_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_and_worktree_byte_identical": true
+      },
+      {
+        "path": "docs/competition/repository-publication-2026-10-08/uv_sync_help.stdout.txt",
+        "git_blob_bytes": 10509,
+        "git_blob_sha256": "62c47f372b32ba55b72cfde58c2859c7e74932125860f11088322cfce00d3a90",
+        "worktree_bytes": 10715,
+        "worktree_sha256": "d8398498d647c154ec6d092e7c13fe29d261eeeea4d5f2339f909ff7314217a6",
+        "git_and_worktree_byte_identical": false
+      },
+      {
+        "path": "docs/competition/repository-publication-2026-10-08/verify_diff_help.stderr.txt",
+        "git_blob_bytes": 0,
+        "git_blob_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "worktree_bytes": 0,
+        "worktree_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "git_and_worktree_byte_identical": true
+      },
+      {
+        "path": "docs/competition/repository-publication-2026-10-08/verify_diff_help.stdout.txt",
+        "git_blob_bytes": 1771,
+        "git_blob_sha256": "03382e7e9e1e14abdf54c9e9a777c7991d795b48284c9c23c5009a80460594de",
+        "worktree_bytes": 1802,
+        "worktree_sha256": "79cc1eb936f3b771e7ee231cbaf0e1d15bfa5f1e04013c5b2a829ccb7ce724d8",
+        "git_and_worktree_byte_identical": false
+      },
+      {
+        "path": "docs/competition/repository_publication_2026-10-08.md",
+        "git_blob_bytes": 1882,
+        "git_blob_sha256": "eab682d1f619529a5dce88d340da9b2034855f39e1bbd613205a234ecd8c79b5",
+        "worktree_bytes": 1882,
+        "worktree_sha256": "eab682d1f619529a5dce88d340da9b2034855f39e1bbd613205a234ecd8c79b5",
+        "git_and_worktree_byte_identical": true
+      },
+      {
+        "path": "docs/competition/submission_gate_checklist.md",
+        "git_blob_bytes": 5543,
+        "git_blob_sha256": "473c79b9422b7aa4ea3299efee5cf5fe2c9f478c3132913d495c57d50fdd8434",
+        "worktree_bytes": 5543,
+        "worktree_sha256": "473c79b9422b7aa4ea3299efee5cf5fe2c9f478c3132913d495c57d50fdd8434",
+        "git_and_worktree_byte_identical": true
+      },
+      {
+        "path": "docs/experiment/metric_inventory.md",
+        "git_blob_bytes": 70997,
+        "git_blob_sha256": "73804840cfa6838a049a0592f8113f7057fa44e1b8abbbb75408737b72fe5f6d",
+        "worktree_bytes": 70997,
+        "worktree_sha256": "73804840cfa6838a049a0592f8113f7057fa44e1b8abbbb75408737b72fe5f6d",
+        "git_and_worktree_byte_identical": true
+      },
+      {
+        "path": "docs/reproduce_current.md",
+        "git_blob_bytes": 14305,
+        "git_blob_sha256": "a61cf69ba6d90d98f1113c08d3bd725a3e3c14b525e0806e87b27c3043733811",
+        "worktree_bytes": 14305,
+        "worktree_sha256": "a61cf69ba6d90d98f1113c08d3bd725a3e3c14b525e0806e87b27c3043733811",
+        "git_and_worktree_byte_identical": true
+      },
+      {
+        "path": "docs/trial/README.md",
+        "git_blob_bytes": 5011,
+        "git_blob_sha256": "ad3e60a9581000cf7ea844053033af110edc35b81d41d74139bdd5df264270bd",
+        "worktree_bytes": 5011,
+        "worktree_sha256": "ad3e60a9581000cf7ea844053033af110edc35b81d41d74139bdd5df264270bd",
+        "git_and_worktree_byte_identical": true
+      },
+      {
+        "path": "docs/trial/forms/reproduction_record.md",
+        "git_blob_bytes": 4316,
+        "git_blob_sha256": "ce64bdbc3161c8ed67901d57c104acbb3788e28b06c620446e8de4ccf0867bfd",
+        "worktree_bytes": 4316,
+        "worktree_sha256": "ce64bdbc3161c8ed67901d57c104acbb3788e28b06c620446e8de4ccf0867bfd",
+        "git_and_worktree_byte_identical": true
+      },
+      {
+        "path": "docs/trial/participant_start.md",
+        "git_blob_bytes": 2880,
+        "git_blob_sha256": "8b6e8005a91d0fb05e0c4d56bc6427e2d3b3b42f1aa333c5408cb0dd568db2bb",
+        "worktree_bytes": 2880,
+        "worktree_sha256": "8b6e8005a91d0fb05e0c4d56bc6427e2d3b3b42f1aa333c5408cb0dd568db2bb",
+        "git_and_worktree_byte_identical": true
+      },
+      {
+        "path": "docs/trial/reproduction_guide_2026-10-08.zip",
+        "git_blob_bytes": 76303,
+        "git_blob_sha256": "a825e906b2bceb44dd17ba66417041e574bc3bc91efff4a0874577cff32d364e",
+        "worktree_bytes": 76303,
+        "worktree_sha256": "a825e906b2bceb44dd17ba66417041e574bc3bc91efff4a0874577cff32d364e",
+        "git_and_worktree_byte_identical": true
+      },
+      {
+        "path": "docs/trial/tasks/T01_install.md",
+        "git_blob_bytes": 3317,
+        "git_blob_sha256": "676fc08798551d3f5949bdec984366a7ba26bebe9efd03daa603b962517db00a",
+        "worktree_bytes": 3317,
+        "worktree_sha256": "676fc08798551d3f5949bdec984366a7ba26bebe9efd03daa603b962517db00a",
+        "git_and_worktree_byte_identical": true
+      },
+      {
+        "path": "docs/trial/tasks/T09_cli_reproduction.md",
+        "git_blob_bytes": 2900,
+        "git_blob_sha256": "0787e4dca75b75cf6aa16b76cecea7051cede3804d3b0f8f80b56ec8e92e40c0",
+        "worktree_bytes": 2900,
+        "worktree_sha256": "0787e4dca75b75cf6aa16b76cecea7051cede3804d3b0f8f80b56ec8e92e40c0",
+        "git_and_worktree_byte_identical": true
+      },
+      {
+        "path": "docs/trial/tasks/T10_optional_api.md",
+        "git_blob_bytes": 4190,
+        "git_blob_sha256": "24c8d02d699904459a7b4def2ca7d1566fc38a5f248c5ada383b3b5a569d12af",
+        "worktree_bytes": 4190,
+        "worktree_sha256": "24c8d02d699904459a7b4def2ca7d1566fc38a5f248c5ada383b3b5a569d12af",
+        "git_and_worktree_byte_identical": true
+      },
+      {
+        "path": "docs/trial/tasks/organizer_checks.md",
+        "git_blob_bytes": 11130,
+        "git_blob_sha256": "22faef358d9283e052d88166a6fb82af95d90afcdf5a3b1e9b6f2fe1e3f6187c",
+        "worktree_bytes": 11130,
+        "worktree_sha256": "22faef358d9283e052d88166a6fb82af95d90afcdf5a3b1e9b6f2fe1e3f6187c",
+        "git_and_worktree_byte_identical": true
+      }
+    ]
+  },
+  "finalized_at_utc": "2026-10-08T05:01:19.225381+00:00"
+}

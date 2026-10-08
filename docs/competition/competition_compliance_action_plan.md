@@ -92,12 +92,15 @@
 
 ### 6. 建立公开成果链接
 
-- [x] 创建公开仓库：[TYOCT-13/iverilog-ai-lab](https://github.com/TYOCT-13/iverilog-ai-lab)；2026-10-08未登录页面可访问，核对时仍为空仓库。
+- [x] 创建公开仓库：[TYOCT-13/iverilog-ai-lab](https://github.com/TYOCT-13/iverilog-ai-lab)；上传前的空仓库核对保留历史记录。
 - [x] 配置 Git remote：origin已指向上述真实仓库。
 - [x] 更新 `CITATION.cff` 中的真实链接；检查记录见[2026-10-08建仓核对](repository_readiness_2026-10-08.md)。
+- [x] 源码f7867db已上传，实时Git远程main核对一致；见[上传确认](repository_publication_2026-10-08.md)。
 - [ ] 验证推送后的远程克隆、运行命令和文件链接；README及当前复现指南已填写真实地址。
 - [ ] 创建提交前版本标签，例如 `v0.1.0` 或正式提交版本号。
 - [ ] 从一台不依赖本机路径的环境访问仓库并完成最小复现。
+
+发给复现人：[新版操作指南](../reproduce_current.md)、[空白记录表](../trial/forms/reproduction_record.md)和[资料包](../trial/reproduction_guide_2026-10-08.zip)。实际原件、本人确认、协助和首次失败收回后再登记完成。
 
 ## 三、P1：强烈建议完成
 

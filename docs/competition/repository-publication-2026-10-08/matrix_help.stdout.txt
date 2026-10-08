@@ -1,0 +1,19 @@
+usage: run_benchmark_matrix.py [-h] [--project-root PROJECT_ROOT]
+                               [--output-dir OUTPUT_DIR] [--iverilog IVERILOG]
+                               [--vvp VVP] [--timeout TIMEOUT]
+
+Run the reproducible fixed-vector benchmark matrix. The benchmark runner
+deliberately delegates every compile and simulation to ``IcarusExecutor``. It
+records the raw result artifact for each reference and defect variant, then
+writes a compact JSON/Markdown summary suitable for the experiment log. A
+defect is counted only when a successful simulation emits at least one
+structured ``ok=false`` record; compile errors and inconclusive runs stay
+visible but are never treated as detections.
+
+options:
+  -h, --help            show this help message and exit
+  --project-root PROJECT_ROOT
+  --output-dir OUTPUT_DIR
+  --iverilog IVERILOG
+  --vvp VVP
+  --timeout TIMEOUT

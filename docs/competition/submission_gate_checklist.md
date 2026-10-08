@@ -37,9 +37,9 @@
 
 ## 6. 本地 Git、公开仓库和证据包
 
-2026-10-08补充：真实仓库为[TYOCT-13/iverilog-ai-lab](https://github.com/TYOCT-13/iverilog-ai-lab)，origin已配置，`CITATION.cff`已填写真实地址。公开页面可访问，但核对时远程无提交，代码推送及线上克隆尚未完成。[建仓记录](repository_readiness_2026-10-08.md)保留实际检查与边界；2026-10-04仅有本地Git和占位错误的原记录不覆盖。
+2026-10-08上传后补充：源码f7867db已上传[TYOCT-13/iverilog-ai-lab](https://github.com/TYOCT-13/iverilog-ai-lab)，实时Git远程main已核对，见[上传确认](repository_publication_2026-10-08.md)。origin与引用地址已填写；[建仓记录](repository_readiness_2026-10-08.md)保留当时空仓库状态。第三方线上克隆和异机运行尚未收集，按[当前复现指南](../reproduce_current.md)执行。
 
-- 公开空仓库页面访问：已完成；代码推送、远程下载及独立运行验证：待完成。
+- 源码f7867db推送与远程Git提交核对：已完成；第三方远程下载及独立运行：待完成。本轮新增文档可另发附件，未自动推送。
 - `action.yml` 在另一个调用仓库的真实 GitHub Actions 执行：待完成；本地测试不等同于外部执行。
 - 2026-10-01 的证据包历史核验记录见 `final_delivery_snapshot.md`。本机仍存在 `G:/iai-evidence-pack-final.zip`；本轮未重新生成该包，不把它当作当前全部修改的交付包。
 

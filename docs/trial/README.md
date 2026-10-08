@@ -4,11 +4,14 @@
 
 材料日期：2026-10-04。每次试用另记实际 Git commit、环境和未提交改动。人数、任务组合和时间安排是项目建议，不是赛事规定的最低人数，也不能据此保证获奖。
 
+2026-10-08补充：真人工程复现从[新版指南](../reproduce_current.md)开始，使用已上传的f7867db代码及[空白复现记录表](forms/reproduction_record.md)。可直接发送[复现资料包](reproduction_guide_2026-10-08.zip)。基础复现无需API；另一台电脑、共享主机、预装和协助分别记录，真实结果仍待收集。
+
 ## 文件怎么发
 
 | 对象 | 文件 | 用途 |
 |---|---|---|
 | 参与者 | `participant_start.md`、分配的 `tasks/T*.md`、`forms/participant_feedback.docx` 或 `.md` | 按任务操作并留原话，不要求会写 JSON |
+| 工程复现人 | 新版复现指南、`forms/reproduction_record.md`、复现资料包 | 固定代码、安装、CLI与网页流程，收回原始输出；知道预期结果，不当作盲测 |
 | 组织者 | `organizer_workflow.md`、`personas_and_coverage.md`、`tasks/organizer_checks.md` | 分配任务、预检、观察、收集和复测，检查答案不提前给参与者 |
 | 记录人员 | `forms/observer_log.md`、`forms/issue_log.md`、`forms/session_feedback_template.json` | 留下协助与证据，将原件转录为可汇总记录 |
 | 视频制作人员 | `docs/demo/recording_workflow.md`、`docs/demo/demo_script.md` | 保存原始录屏，再剪辑比赛视频 |
