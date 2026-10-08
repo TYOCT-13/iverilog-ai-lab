@@ -4,6 +4,7 @@ from __future__ import annotations
 import ast
 import hashlib
 import json
+import uuid
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
@@ -201,6 +202,10 @@ def _custom_app():
         "module alpha(input a, output y); assign y=a; endmodule\n"
         "module beta(input [31:0] b, output y); assign y=b[0]; endmodule\n"
     )
+    rtl = ROOT / ".iverilog-ai" / "ui-input-tests" / f"{uuid.uuid4().hex}.sv"
+    rtl.parent.mkdir(parents=True, exist_ok=True)
+    rtl.write_text(app.session_state["custom_rtl_source"], encoding="utf-8")
+    app.session_state["custom_rtl_path"] = str(rtl)
     app.run()
     assert not app.exception, [str(item.value) for item in app.exception]
     app.button(key="generate_plan").click().run()
@@ -239,7 +244,8 @@ def test_confirmed_custom_input_and_plan_survive_navigation():
         assert app.session_state["ai_plan"].model_dump(mode="json") == original_plan
 
     assert app.text_area(key="custom_contract_json_text").value == original_editor
-    assert not app.button(key="run_generated_plan").disabled
+    from iverilog_ai.core.toolchain import locate_tools
+    assert app.button(key="run_generated_plan").disabled == (locate_tools().iverilog is None)
 
 
 def test_editing_contract_clears_prior_result_before_the_page_can_display_it():

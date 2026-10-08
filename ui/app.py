@@ -42,6 +42,7 @@ from iverilog_ai.core.functional_coverage import functional_coverage_profile
 from iverilog_ai.core.reference_model import reference_sampling_profile
 from iverilog_ai.core.report import write_report
 from iverilog_ai.core.toolchain import locate_tools
+from iverilog_ai.core.rtl_preflight import check_rtl_syntax
 from iverilog_ai.core.rtl_import import import_rtl_bytes, extract_contract_draft, available_modules, RTLImportError
 from iverilog_ai.core.repair_compare import safe_candidate_copy, compare_simulation_results
 from iverilog_ai.core.rtl_compare import compare_rtl_sources
@@ -2128,6 +2129,28 @@ with _PREPARE:
 # actual DUT and confirmed contract, not just the display label "自定义 RTL".
 _sync_workspace_input(str(name), case, is_custom)
 
+# 每次 rerun 检查当前文件及 include 依赖，不复用旧版本的通过状态。
+_rtl_syntax_ready = not is_custom
+if is_custom and case.get("rtl"):
+    with _PREPARE:
+        try:
+            _syntax_defines, _syntax_includes = _compile_options()
+            _syntax_result = check_rtl_syntax(
+                ROOT / str(case["rtl"]), project_root=ROOT,
+                top_module=str(st.session_state.get("custom_selected_module", "")),
+                defines=_syntax_defines, include_dirs=_syntax_includes,
+                iverilog_path=_tools().iverilog,
+            )
+            _rtl_syntax_ready = _syntax_result.returncode == 0 and not _syntax_result.timed_out and _syntax_result.error is None
+            if _rtl_syntax_ready:
+                st.success("RTL 编译预检查通过。功能与协议行为仍需仿真验证。")
+            else:
+                st.error("RTL 编译预检查未通过，已暂停运行测试计划和自动验证。")
+                with st.expander("查看编译错误", expanded=True):
+                    st.code(_syntax_result.stderr or _syntax_result.stdout or _syntax_result.error or "检查超时，请确认工具和输入文件。", language="text")
+        except (ValueError, OSError) as exc:
+            st.error(f"无法完成 RTL 编译预检查，已暂停测试：{exc}")
+
 with _COMPARE:
     if is_custom:
         reference_options = [p for p in sorted((ROOT / "rtl").glob("*.v")) if "_bug_" not in p.name and "bug_" not in p.name]
@@ -2641,7 +2664,7 @@ with _SETTINGS:
 
 with _PLAN:
     _run_plan_col, _run_tb_col = st.columns(2)
-    _run_plan = _run_plan_col.button("运行测试计划", type="primary", key="run_generated_plan", disabled=st.session_state.ai_plan is None)
+    _run_plan = _run_plan_col.button("运行测试计划", type="primary", key="run_generated_plan", disabled=st.session_state.ai_plan is None or not _rtl_syntax_ready)
     _run_tb = _run_tb_col.button("运行示例测试", key="run_handwritten_tb", disabled=is_custom or not case.get("rtl"), help="使用内置案例自带的 testbench，无需生成计划。")
     if st.session_state.ai_plan is None:
         st.caption("先生成计划，或直接运行内置案例的示例测试。")
@@ -2658,7 +2681,7 @@ with _PLAN:
             st.session_state.last_run_kind = "handwritten"
         except Exception as exc:
             st.error(f"测试未完成：{exc}")
-    if _run_plan and st.session_state.ai_plan is not None:
+    if _run_plan and _rtl_syntax_ready and st.session_state.ai_plan is not None:
         try:
             contract = _contract()
             _defines, _includes = _compile_options()
@@ -2722,10 +2745,10 @@ with _PLAN:
         _scene_profile = functional_coverage_profile(_contract()) if not is_custom else None
         _agent_coverage = st.checkbox("根据场景覆盖缺口补测", value=True, key="agent_coverage_feedback", disabled=_scene_profile is None)
         st.caption("会发送接口定义、规格、当前计划和仿真摘要。已有计划会先执行；请求可能计费，次数上限不等于金额上限。")
-        _agent_run = st.button("启动自动验证", key="run_verification_agent", disabled=not use_online)
+        _agent_run = st.button("启动自动验证", key="run_verification_agent", disabled=not use_online or not _rtl_syntax_ready)
         if not use_online:
             st.caption("先在「工具设置」选择在线模型并填写 API 配置。")
-        if _agent_run:
+        if _agent_run and _rtl_syntax_ready:
             try:
                 _agent_contract = _contract()
                 _agent_defines, _agent_includes = _compile_options()
