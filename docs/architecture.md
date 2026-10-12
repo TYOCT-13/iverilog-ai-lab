@@ -161,7 +161,7 @@ D:\iverilog\bin\iverilog.exe 和 D:\iverilog\bin\vvp.exe。每个进程的 timeo
 判"这次算不算过"永远看 `verdict`。此外还有与这三层**正交**的一层：期望值证据等级
 （`reference_model` → 参考模型复算 / `ai_generated` → AI 生成 / `none_given` → 未给出期望值），
 它不改变设计结论，只说明结论凭什么可信；详见
-[深度手册](manual/03_deep.md#4-期望值证据等级结论有多可信)。
+[深度手册](manual/03_deep.md#4-期望值来源与证据等级)。
 
 
 ## 证据与复现
