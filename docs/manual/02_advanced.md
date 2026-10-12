@@ -1,6 +1,6 @@
 # 进阶手册 · 自定义验证与工具配置
 
-面向：**已经跑通入门手册**，现在想用自己的 RTL、自己的目标，或者想在脚本/CI 里用它的人。
+适用对象：已完成基本运行流程，需要验证自定义 RTL，或将工具接入脚本与 CI 的用户。
 
 ---
 
@@ -9,7 +9,7 @@
 1. **上传 RTL**：网页顶部进入**工作台**，工作方式选"验证一份 RTL" → **选择设计**，案例选"自定义 RTL"。同时选择顶层和子模块的源码；只上传顶层文件会缺少依赖。文件名可以与模块名不同，顶层选择框按 `module` 声明选择。不要同时上传两个定义相同模块的版本，也不要把含替身模块的 testbench 当作设计文件。
 2. **校验合约（DUT contract）**：合约声明端口方向、位宽、时钟与复位。
    - 网页：上传后可以直接点蓝色的"从表格生成 JSON"和"校验接口"。**端口与时钟**、**接口 JSON 与导出**默认收起；需要修改时再展开。表格改完生成 JSON，直接修改 JSON 后可点"用 JSON 刷新表格"。两者需要手动同步，接口校验通过后才开放计划生成；修改后需重新校验。
-   - 命令行：`examples/<case>_contract.json` 就是模板，字段含义见下。
+   - 命令行：可参考 `examples/<case>_contract.json`，字段示例如下。
 3. **生成计划并执行**：在**运行测试**中点"生成测试计划"，再点"运行测试计划"，与内置案例使用相同流程。
 
 接口校验检查端口信息、时钟和复位定义；RTL 编译预检查调用 Icarus 检查实际源码及依赖。两项都需要确认。编译失败、工具缺失或超时会阻止运行测试计划和自动验证，展开编译错误查看具体位置。编译通过后仍需仿真检查功能。
@@ -48,12 +48,12 @@ iverilog-ai run --rtl dut.v --testbench tb_dut.v --top tb_dut `
 
 | 操作目标 | 入口 | 命令 |
 |---|---|---|
-| 只想跑一份已有的 testbench | `run` | `iverilog-ai run --rtl ... --testbench ... --top ...` |
-| 有测试计划 JSON，想生成 testbench 并裁决 | `plan-run` | `iverilog-ai plan-run --plan ... --contract ... --rtl ...` |
-| 有两份 RTL（自己写的 vs 标准实现），想知道行为是否一致 | `compare-rtl` | `iverilog-ai compare-rtl --plan ... --contract ... --user-rtl ... --reference-rtl ...` |
-| 只想看代码质量（不仿真） | `scripts/review_rtl.py` | `python scripts/review_rtl.py rtl/pwm.v` |
+| 执行已有 testbench | `run` | `iverilog-ai run --rtl ... --testbench ... --top ...` |
+| 根据 TestPlan JSON 生成 testbench 并判定结果 | `plan-run` | `iverilog-ai plan-run --plan ... --contract ... --rtl ...` |
+| 比较候选 RTL 与参考 RTL 的行为 | `compare-rtl` | `iverilog-ai compare-rtl --plan ... --contract ... --user-rtl ... --reference-rtl ...` |
+| 执行 RTL 静态审查（不执行仿真） | `scripts/review_rtl.py` | `python scripts/review_rtl.py rtl/pwm.v` |
 
-退出码是给脚本用的契约：`run` → 0 通过 / 1 有失败；`plan-run` → 0/1，输入问题 2；
+退出码供脚本判断执行结果：`run` → 0 通过 / 1 有失败；`plan-run` → 0/1，输入问题 2；
 `compare-rtl` → **0 一致 / 1 不同 / 2 无法判定**。
 
 ---
@@ -72,30 +72,23 @@ iverilog-ai run --rtl dut.v --testbench tb_dut.v --top tb_dut `
 | `signal_sequence` | 采样序列正好等于给定的取值序列 | `signal`, `values`（`cycles` 可省略，省略时等于 `values` 长度） |
 | `signal_implies` | when 条件成立后，within N 拍内 then 成立 | `when_signal`, `when_value`, `then_signal`, `then_value`, `within_cycles` |
 
-> ⚠️ **`signal_implies` 没有 `signal` 字段**。它只有 when/then 两个信号名，多写 `signal`
-> 会被严格校验拒绝。2026-09 复核发现：这条"常见错误"其实是**提示词自己写错了**
-> （提示词里列出 `signal_implies{kind,signal,...}`，而校验器不接受 `signal`）——模型只是
-> 照着提示词写。现在提示词由 `ai/schema.py` 的字段表直接渲染，
-> `tests/ai/test_planner.py` 断言"提示词允许的字段 == 校验器接受的字段"，两边不可能再漂移。
-> 同一个复核还发现 `signal_implies` 当时**根本无法通过校验**（写 `signal` 报不支持字段，
-> 不写又报 `signal` 必须是合法标识符），已一并修好。
+> `signal_implies` 使用 when/then 两个信号名，不接受额外的 `signal` 字段。2026-09 复核发现，旧提示词列出了 `signal_implies{kind,signal,...}`，与校验器要求不一致，导致模型按提示生成的内容被拒绝。当前提示词由 `ai/schema.py` 的字段表生成，`tests/ai/test_planner.py` 检查提示字段与校验字段是否一致。该次复核还发现，旧校验器在填写 `signal` 时拒绝该字段，在省略它时又要求合法标识符；这两项问题均已修复。
 
-> ⚠️ **`signal_implies` 缺 `when_value`/`then_value` 时永远匹配不上**（缺省值是 `None`，
-> 而采样值不会是 `None`），断言会静默变成"空检查"。要真的检查就写全取值。
+> `signal_implies` 应明确填写 `when_value` 与 `then_value`。省略时默认值为 `None`，无法与正常采样值匹配，可能造成无有效检查的断言。
 
-> 采样值是 Verilog 位串（`'0000'`），断言里的 `value` 写整数（`0`）即可——比较按**值**
-> 进行，`'0000'` 与 `0` 相等；`x`/`z` 是不定值，只与同形的不定值相等，不会折算成 0 蒙混过关。
+> 采样值是 Verilog 位串（`'0000'`），断言中的 `value` 可填写整数（`0`），比较按值
+> 进行，`'0000'` 与 `0` 相等；`x`/`z` 是不定值，只与同形的不定值相等，不会作为 0 参与比较。
 
 **断言按该信号的整个采样序列判定**，没有作用域概念，因此只有全局不变量
-（"永不为高"、"始终等于某值"、"req 之后必有 ack"）才适合写成断言。写之前先想清楚它在
-**整个仿真过程**里是否都成立。本仓库曾经自动推荐过 5 条断言，复核时发现全部不成立
+（"永不为高"、"始终等于某值"、"req 之后必有 ack"）才适合写成断言。配置前需确认该性质在
+整个采样序列中均应成立。本仓库曾经自动推荐过 5 条断言，复核时发现全部不成立
 （详见 `src/iverilog_ai/core/rule_assertions.py` 的说明），因此推荐表已清空。
 
 ---
 
 ## 4. 波形分析与 GTKWave 配置
 
-页面**不依赖 GTKWave**：`core/vcd.py` 自带 VCD 解析，能给出时间范围、信号数、变化次数、
+页面**不依赖 GTKWave**：`core/vcd.py` 自带 VCD 解析，可提供时间范围、信号数和变化次数，
 边沿统计、毛刺型不稳定、晚/早一拍相位检查，以及"失败周期对应的波形时间窗"。
 
 在**工作台 → 测试结果 → 波形**中，可以进行以下操作：
@@ -103,15 +96,15 @@ iverilog-ai run --rtl dut.v --testbench tb_dut.v --top tb_dut `
 | 操作 | 功能 | 说明 |
 |---|---|---|
 | **选择时间范围** | 按当前 VCD 的时间范围展开两个输入框 | 纯 Python 解析，不调用任何外部程序 |
-| **读取波形** | 解析该时间窗内的变化，给出"多少次变化、覆盖多少信号"与变化列表 | 页面和下载的 JSON 均最多保留 2000 条变化记录；完整波形请下载 VCD |
-| **用 GTKWave 打开** | 以独立进程启动 GTKWave 并打开这份 VCD | 可选人工复核；启动失败会告诉你**找过哪些位置** |
+| **读取波形** | 解析该时间窗内的变化，显示变化次数、涉及信号数量和变化列表 | 页面和下载的 JSON 均最多保留 2000 条变化记录；完整波形请下载 VCD |
+| **用 GTKWave 打开** | 以独立进程启动 GTKWave 并打开这份 VCD | 可选人工复核；启动失败时显示已检查的路径 |
 
 这三个按钮都在同一个 `@st.fragment` 里，点击**只重跑波形这一段**，不会整页刷新
-（早期版本每次点击都重跑整个脚本，页面跳回顶部、结果落在视口外，看起来像"点了没反应"）。
+（早期版本每次点击都重跑整个脚本，页面跳回顶部、结果落在视口外，导致用户难以定位操作结果）。
 
 GTKWave 的路径按"**工具设置页手填 → 环境变量 `GTKWAVE_PATH` → PATH → 常见安装目录 →
-从 iverilog 安装位置推断**"的顺序解析。最后一条对 Windows 特别有用：Icarus 官方安装包
-把 GTKWave 放在同级 `gtkwave\bin\` 下，因此只要 `iverilog` 找得到，GTKWave 通常也能推出来。
+从 iverilog 安装位置推断**"的顺序解析。Windows 环境还可通过最后一种方式定位：Icarus 官方安装包
+把 GTKWave 放在同级 `gtkwave\bin\` 下，因此，已定位 Icarus 时通常也可推断 GTKWave 路径。
 
 ```powershell
 # 方式一：工具设置 → 「波形查看器（GTKWave）」→ 填完整路径 → 点「自动检测」清空并重新探测
@@ -119,27 +112,26 @@ GTKWave 的路径按"**工具设置页手填 → 环境变量 `GTKWAVE_PATH` →
 $env:GTKWAVE_PATH = "D:\iverilog\gtkwave\bin\gtkwave.exe"
 ```
 
-> 找不到 GTKWave **不影响任何判决**：仿真结论来自 Icarus/vvp 与结构化记录，
-> 波形只是给人复核用的。
+> GTKWave 缺失不影响 Icarus/vvp 的仿真检查。独立波形查看用于人工复核，页面内仍可解析 VCD。
 
 ---
 
 ## 5. RTL 静态审查的输出与限制
 
-「规则审查」页的静态审查**只读 RTL 文本**，不跑仿真、不做综合与时序分析。它回答的是
+「规则审查」页的静态审查**只读 RTL 文本**，不跑仿真、不做综合与时序分析。审查结果记录
 代码是否命中已知规则；功能是否正确需要仿真检查。审查表有六列。
 
 | 列 | 含义 |
 |---|---|
-| 规则ID | 英文稳定标识（如 `blocking-in-sequential`），可写进反馈、可 grep 规则表；规则表在 `core/static_review.py` 的 `_RULE_REGISTRY` |
+| 规则ID | 英文稳定标识（如 `blocking-in-sequential`），可用于问题反馈及规则检索；规则表在 `core/static_review.py` 的 `_RULE_REGISTRY` |
 | 严重度 | 错误 / 警告 / 提示（机器值仍是 `error` / `warn` / `info`） |
 | 行号 | 命中的行（文件级提示固定为第 1 行） |
 | 问题 | 中文问题描述 |
 | 建议 | 中文修改建议 |
 | 代码片段 | 命中的那一行原文 |
 
-评分是**按严重度加权扣分**后的 100 分制参考值（error 20 分、warn 5 分、info 1 分），
-不是功能正确性结论；同一节还给出命中条数分布、文件 sha256（证明审查的是这一版源码）、
+评分为按严重度加权扣分的 100 分制参考值（error 20 分、warn 5 分、info 1 分），
+不是功能正确性结论；同一节还给出命中条数分布、文件 sha256（用于标识被审查的源码版本）、
 44 条规则的完整清单与出处，以及 Markdown/JSON 导出。
 
 ### 5.1 规则结果与 AI 修复建议
@@ -149,7 +141,7 @@ $env:GTKWAVE_PATH = "D:\iverilog\gtkwave\bin\gtkwave.exe"
 | 层 | 生成方式 | 性质 |
 |---|---|---|
 | **事实层**（命中表、评分、sha256） | 44 条**确定性规则** | 可复现、参与评分、逐条配正反例；**AI 无权修改** |
-| **建议层**（AI 复核与修复建议） | AI（或离线时的规则表） | 排优先级、指认疑似误报、对照全部规则指出"规则没报但可疑"的条目；**不改命中、不参与评分** |
+| **建议层**（AI 复核与修复建议） | AI（或离线时的规则表） | 排优先级、标注疑似误报，并提出未被规则命中的可疑问题；**不改命中、不参与评分** |
 
 在「规则审查」中点「生成修复建议」后，依据**工具设置 → 测试计划与模型 → 生成方式**的选择：
 
@@ -159,8 +151,8 @@ $env:GTKWAVE_PATH = "D:\iverilog\gtkwave\bin\gtkwave.exe"
   否则该条被丢弃并在元信息里记录（幻觉防护）。
 - **离线模式**：不调用任何模型，直接按严重度排序并复用规则表自带的建议文本，
   提示语明确写着"**非 AI**"。
-- **本地调试**：请求会打到回环地址上的 `debug_server`，它用确定性规则回答同一套
-  Schema（自报"非 AI 输出"）；用途是无凭据环境下把**含 HTTP 交互在内的整条链路**跑通，
+- **本地调试**：请求发送至回环地址上的 `debug_server`，它用确定性规则回答同一套
+  Schema（自报"非 AI 输出"）；用于在无凭据环境中验证含 HTTP 交互的完整流程，
   不代表任何模型能力。
 
 **发送内容**与《开源及第三方资源使用清单》一致。
@@ -170,7 +162,7 @@ $env:GTKWAVE_PATH = "D:\iverilog\gtkwave\bin\gtkwave.exe"
 - 勾选「同时发送相关代码片段」后，额外发送**命中行的单行片段**（≤200 字符）。
   这个选项默认关闭，页面上有独立说明。
 
-建议层会记住它对应哪一版源码（sha256）：代码一改，页面会提示"这份建议是针对上一版的"，
+建议层记录对应源码的 SHA256；源码发生变化时，页面提示建议对应上一版本，
 导出的 JSON 里 `ai_advice` 与事实层也分开存放，不会互相覆盖。
 
 ---
@@ -191,7 +183,7 @@ python scripts/run_synthesis_matrix.py
 python scripts/run_pipeline_matrix.py
 ```
 
-产物都在 `.iverilog-ai/<矩阵名>/` 下，`matrix.json` 是给脚本读的，`matrix.md` 是给人看的。
+产物都在 `.iverilog-ai/<矩阵名>/` 下，`matrix.json` 用于程序处理，`matrix.md` 用于人工阅读。
 
 ---
 
@@ -207,7 +199,7 @@ python scripts/run_pipeline_matrix.py
 
 CI 需要 Icarus：Linux `apt-get install iverilog`，Windows `choco install iverilog`，
 或设 `IVERILOG_PATH` / `VVP_PATH`。项目自带的
-[`.github/workflows/ci.yml`](../../.github/workflows/ci.yml) 就是照这个写的。
+[`.github/workflows/ci.yml`](../../.github/workflows/ci.yml) 提供了现有 CI 配置。
 
 ---
 
@@ -239,7 +231,7 @@ $env:IVERILOG_AI_ALLOW_NETWORK = "1"       # 网络请求需要显式允许
 
 ## 9. 验证结果的复核要求
 
-1. 用**边界 testbench**（仓库里 `tb/tb_<case>_boundary.v` 就是范例），别只测"正常流程"；
-2. 期望值尽量来自**参考模型**或人工确认的合约，而不是模型自己写；
-3. 看**信号活动覆盖率**：取值覆盖低说明激励太弱（实测弱激励下同一个计数器取值覆盖只有 6%）；
+1. 使用边界 testbench，覆盖正常流程之外的行为；仓库中的 `tb/tb_<case>_boundary.v` 可作为参考；
+2. 优先使用参考模型或人工确认的判据提供期望值；AI 生成的期望值需独立核对；
+3. 检查信号活动覆盖率：取值覆盖较低时，应评估激励是否充分（实测弱激励下同一个计数器取值覆盖只有 6%）；
 4. 把 `report.md`、`result.json`、`waveform.vcd` 一起归档，核对三者是否对应同一次运行。
