@@ -1211,6 +1211,12 @@ def _contract_editor_notice(level: str, message: str) -> None:
     st.session_state["contract_editor_notice"] = (str(level), str(message))
 
 
+def _invalidate_contract_editor_on_change() -> None:
+    """接口编辑后撤销确认，并刷新片段外的计划入口。"""
+    st.session_state.custom_contract_text = st.session_state.get("custom_contract_json_text", "")
+    _invalidate_custom_contract()
+
+
 def _validate_contract_on_click() -> None:
     """「校验 contract」按钮的回调：校验 + 规范化 + 回写文本框。
 
@@ -1226,6 +1232,11 @@ def _validate_contract_on_click() -> None:
 
     try:
         contract = DutContract.from_json(st.session_state.get("custom_contract_json_text", ""))
+        if not contract.ports:
+            raise ValueError("接口没有端口，请先从表格生成 JSON。")
+        selected_module = st.session_state.get("custom_selected_module")
+        if selected_module and contract.module != selected_module:
+            raise ValueError(f"接口模块名应为 {selected_module}，请重新生成 JSON。")
     except Exception as exc:
         _invalidate_custom_contract()
         _contract_editor_notice("error", f"接口定义有误：{exc}")
@@ -1310,32 +1321,11 @@ def _contract_module_hint() -> str:
     return ""
 
 
-@st.fragment
 def _contract_editor() -> None:
-    """DUT contract 编辑区（**整段跑在 fragment 里**）。
+    """接口操作常驻，详细配置默认折叠。
 
-    为什么要 fragment：Streamlit 默认"控件一变就重跑整个脚本"，编辑表格或点按钮都会让
-    整页重新渲染——滚动位置丢失、其它区域闪烁，体验上就像刷新了整个页面。
-    `@st.fragment` 让这一段的交互只重跑这一段。
-
-    另外两处修正：
-    - 表格 ↔ JSON 的同步原来是**自动双向**的（JSON 一变回写表格、表格一变又靠
-      `st.rerun()` 回写），既容易互相覆盖，也必须多跑一遍脚本才生效。现在改成两个显式
-      动作：表格 → JSON（表单提交）、JSON → 表格（按钮），不再有隐式重跑。
-    - 原来"从表格生成 JSON"先 `st.success(...)` 再 `st.rerun()`，那条成功提示会被立刻
-      丢掉（用户只看到页面一闪）。现在不重跑，提示留在原地。
-
-    还有一条 Streamlit 硬规则必须绕开：**本**次运行里已经创建过 `key=X` 的控件之后，
-    再写 `st.session_state.X` 会直接抛
-    `StreamlitAPIException: ... cannot be modified after the widget with key ... is instantiated`。
-    这里的对策是**按动作选位置**，而不是到处搬代码：
-    - 「表格 → JSON」需要 data_editor 的返回值，只能在主体里做——它写的是文本框 key，
-      但位置在文本框**之前**，合法；
-    - 「校验 contract」不需要任何控件返回值（JSON 文本就在 session state 里），因此整个
-      搬到 `on_click` 回调里，在主体之前执行，回写文本框 key 合法且当次立即生效；
-    - 「JSON → 表格」要在渲染前换成新数据（换 data_editor 的 key、并回写时钟/复位控件），
-      同样放在回调里，因此**整条交互链里没有 `st.rerun`**：不需要整页重跑，也不需要
-      `scope="fragment"` 重跑（后者在整页运行时会被 Streamlit 直接拒绝）。
+    表格通过表单一次提交；JSON 编辑与校验使用回调，以免修改已创建的控件。
+    表单编辑先留在本地，提交或校验时更新整页，让计划入口同步状态。
     """
 
     _refresh_workspace_if_needed()
@@ -1362,8 +1352,14 @@ def _contract_editor() -> None:
     _editor_generation = int(st.session_state.get("contract_editor_gen", 0))
     _editor_key = f"custom_ports_editor_{_editor_generation}"
 
-    with st.expander("端口与时钟", expanded=True):
-        with st.form("contract_form", clear_on_submit=False):
+    st.button(
+        "校验接口", type="primary", key="validate_custom_contract",
+        on_click=_validate_contract_on_click,
+        help="校验通过后才能生成测试计划；修改接口后需要重新校验。",
+    )
+    with st.form("contract_form", clear_on_submit=False):
+        _submitted = st.form_submit_button("从表格生成 JSON", type="primary")
+        with st.expander("端口与时钟", expanded=False):
             rows = st.data_editor(
                 _ports_shadow,
                 num_rows="dynamic",
@@ -1392,75 +1388,68 @@ def _contract_editor() -> None:
             with c3:
                 reset_cycles = st.number_input("复位持续周期", min_value=1, max_value=10000, value=int(reset.get("assert_cycles", 2)), step=1, key="contract_reset_cycles")
                 st.caption("没有复位信号时留空。")
-            _submitted = st.form_submit_button("从表格生成 JSON", type="primary")
-        if _submitted:
-            try:
-                payload = _contract_payload(
-                    # 模块名的优先级：用户显式选的顶层 module → 当前 JSON 里写的 module →
-                    # 兜底 "dut"。早先只写 `get("custom_selected_module", "dut")`：从没上传过
-                    # RTL（例如直接手写 JSON 进编辑区）时会静默生成一份 `module="dut"` 的
-                    # 合约——它自己校验得过，但和真实 RTL 的模块名对不上。
-                    module=str(
-                        st.session_state.get("custom_selected_module") or _contract_module_hint() or "dut"
-                    ),
-                    ports=list(rows),
-                    parameters=st.session_state.get("custom_contract_editor_parameters"),
-                    clock_signal=clock_signal,
-                    clock_period=clock_period,
-                    clock_edge=str(clock_edge or "posedge"),
-                    reset_signal=reset_signal,
-                    reset_active=reset_active,
-                    reset_sync=reset_sync,
-                    reset_cycles=reset_cycles,
-                )
-                _contract = DutContract.from_dict(payload)
-                st.session_state.custom_contract_text = _contract.to_json()
-                st.session_state.custom_contract_editor_ports = list(_contract.to_dict()["ports"])
-                # 文本框在下方创建，本行在它之前执行，因此回写它的 key 合法。
-                st.session_state.custom_contract_json_text = _contract.to_json()
-                # 表格改过就必须重新校验，避免用旧合约继续跑
-                _invalidate_custom_contract()
-                st.success("JSON 已更新，请校验接口。")
-            except Exception as exc:
-                st.error(f"表格内容无效：{exc}")
+    if _submitted:
+        try:
+            payload = _contract_payload(
+                # 模块名的优先级：用户显式选的顶层 module → 当前 JSON 里写的 module →
+                # 兜底 "dut"。早先只写 `get("custom_selected_module", "dut")`：从没上传过
+                # RTL（例如直接手写 JSON 进编辑区）时会静默生成一份 `module="dut"` 的
+                # 合约——它自己校验得过，但和真实 RTL 的模块名对不上。
+                module=str(
+                    st.session_state.get("custom_selected_module") or _contract_module_hint() or "dut"
+                ),
+                ports=list(rows),
+                parameters=st.session_state.get("custom_contract_editor_parameters"),
+                clock_signal=clock_signal,
+                clock_period=clock_period,
+                clock_edge=str(clock_edge or "posedge"),
+                reset_signal=reset_signal,
+                reset_active=reset_active,
+                reset_sync=reset_sync,
+                reset_cycles=reset_cycles,
+            )
+            _contract = DutContract.from_dict(payload)
+            st.session_state.custom_contract_text = _contract.to_json()
+            st.session_state.custom_contract_editor_ports = list(_contract.to_dict()["ports"])
+            # 文本框在下方创建，本行在它之前执行，因此回写它的 key 合法。
+            st.session_state.custom_contract_json_text = _contract.to_json()
+            # 表格改过就必须重新校验，避免用旧合约继续跑
+            _invalidate_custom_contract()
+            st.success("JSON 已更新，请校验接口。")
+        except Exception as exc:
+            st.error(f"表格内容无效：{exc}")
 
     # 文本框带 `key`，值由 Streamlit 自己管；首帧用一个种子，避免出现空框。
     if "custom_contract_json_text" not in st.session_state:
         st.session_state.custom_contract_json_text = st.session_state.get("custom_contract_text", "")
-    st.text_area(
-        "接口定义 JSON",
-        height=190,
-        key="custom_contract_json_text",
-        on_change=_invalidate_custom_contract,
-        help="修改表格后点「从表格生成 JSON」；修改 JSON 后可点「用 JSON 刷新表格」。运行前请校验接口。",
-    )
-    _sync_col, _validate_col, _export_col = st.columns([1.8, 1.3, 1])
-    with _sync_col:
-        # 两个按钮的逻辑都放在 `on_click` 回调里：回调在本次运行**创建任何控件之前**执行，
-        # 因此可以合法地回写控件 key、也可以在渲染前换掉 data_editor 的数据，
-        # 既不需要整页重跑，也不需要 fragment 级重跑（见两个回调函数的说明）。
-        st.button(
-            "用 JSON 刷新表格",
-            key="contract_json_to_editor",
-            on_click=_apply_json_to_table_on_click,
+    with st.expander("接口 JSON 与导出", expanded=False):
+        st.text_area(
+            "接口定义 JSON",
+            height=190,
+            key="custom_contract_json_text",
+            on_change=_invalidate_contract_editor_on_change,
+            help="修改表格后点「从表格生成 JSON」；修改 JSON 后可点「用 JSON 刷新表格」。运行前请校验接口。",
         )
-    with _validate_col:
-        st.button(
-            "校验接口",
-            type="primary",
-            key="validate_custom_contract",
-            on_click=_validate_contract_on_click,
-        )
-    with _export_col:
-        if st.session_state.get("custom_contract") is not None:
-            with st.popover("导出"):
-                st.download_button(
-                    "接口定义 JSON",
-                    st.session_state.custom_contract.to_json(),
-                    file_name="dut_contract.json",
-                    mime="application/json",
-                    key="download_custom_contract",
-                )
+        _sync_col, _export_col = st.columns([2, 1])
+        with _sync_col:
+            # 两个按钮的逻辑都放在 `on_click` 回调里：回调在本次运行**创建任何控件之前**执行，
+            # 因此可以合法地回写控件 key、也可以在渲染前换掉 data_editor 的数据，
+            # 既不需要整页重跑，也不需要 fragment 级重跑（见两个回调函数的说明）。
+            st.button(
+                "用 JSON 刷新表格",
+                key="contract_json_to_editor",
+                on_click=_apply_json_to_table_on_click,
+            )
+        with _export_col:
+            if st.session_state.get("custom_contract") is not None:
+                with st.popover("导出"):
+                    st.download_button(
+                        "接口定义 JSON",
+                        st.session_state.custom_contract.to_json(),
+                        file_name="dut_contract.json",
+                        mime="application/json",
+                        key="download_custom_contract",
+                    )
     _refresh_workspace_if_needed()
 
 
@@ -2109,16 +2098,19 @@ with _PREPARE:
                     st.rerun()
                 except RTLImportError as exc:
                     st.error(f"模块解析失败：{exc}")
-        for warning in st.session_state.get("custom_warnings", ()):
-            if not warning.startswith("draft only"):
-                st.warning(warning)
         if st.session_state.get("custom_contract_text") and st.session_state.get("custom_contract") is None:
             st.caption("接口定义是自动提取的草稿。请确认端口、时钟和复位后，点击「校验接口」。")
         _contract_editor()
+        _import_warnings = [warning for warning in st.session_state.get("custom_warnings", ())
+                            if not warning.startswith("draft only")]
+        if _import_warnings:
+            with st.expander("导入提示", expanded=False):
+                for warning in _import_warnings:
+                    st.warning(warning)
         case = {"rtl": st.session_state.get("custom_rtl_path"), "tb": None, "top": None, "spec": "自定义 RTL", "contract": None}
     else:
         st.caption(f"规格：{case['spec']}")
-        with st.expander("查看 RTL 源码", expanded=True):
+        with st.expander("查看 RTL 源码", expanded=False):
             with st.container(height=210):
                 st.code((ROOT / str(case["rtl"])).read_text(encoding="utf-8"), language="verilog")
         with st.expander("接口定义"):
@@ -2572,12 +2564,15 @@ with _PLAN:
         st.session_state.ai_error = None
         st.session_state.ai_plan_case = None
 
+    if is_custom and st.session_state.get("custom_contract") is None:
+        st.caption("请先在上传区校验接口，再生成测试计划。")
     _plan_missing = st.session_state.get("ai_plan") is None
     if st.button(
         "生成测试计划",
         type="primary" if _plan_missing else "secondary",
         help="使用「工具设置」中选定的方式生成计划。在线模式会请求模型，格式校验失败时最多重试一次。",
         key="generate_plan",
+        disabled=is_custom and st.session_state.get("custom_contract") is None,
     ):
         provider = None
         try:

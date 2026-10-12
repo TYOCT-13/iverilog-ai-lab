@@ -142,6 +142,7 @@ def test_page_survives_a_generated_plan():
     from iverilog_ai.ai.schema import TestPlan
 
     app = AppTest.from_file(str(APP), default_timeout=120)
+    app.session_state["case_name"] = "PWM"
     app.session_state["planner_setup_complete"] = True
     app.session_state["planner_mode"] = "离线确定性规划器（无需密钥、进程内）"
     app.run()
@@ -318,13 +319,8 @@ def test_contract_payload_builder_matches_the_contract_schema():
     assert "clock" not in bare and "reset" not in bare
 
 
-def test_contract_editor_is_a_fragment_and_survives_render():
-    """自定义 RTL 的 contract 编辑区必须独立重跑（而不是刷新整页）。
-
-    这条用例对应真实反馈："点『从表格生成 JSON』整个页面刷新了"。修法是把这一段装进
-    `@st.fragment`，并把原来靠 `st.rerun()` 生效的隐式双向同步改成两个显式动作。
-    这里钉住：源码里确实是 fragment、里面不再有整页重跑、且自定义 RTL 分支能渲染。
-    """
+def test_contract_editor_batches_fields_and_survives_render():
+    """详细字段通过表单批量提交，校验操作同步更新计划入口。"""
 
     source = APP.read_text(encoding="utf-8")
     tree = ast.parse(source)
@@ -335,7 +331,8 @@ def test_contract_editor_is_a_fragment_and_survives_render():
     ]
     assert editors, "未找到 _contract_editor"
     decorators = [ast.unparse(item) for item in editors[0].decorator_list]
-    assert any("fragment" in item for item in decorators), decorators
+    assert not decorators, "接口确认必须同步刷新片段外的计划入口"
+    assert 'with st.form("contract_form"' in source
 
     region = source.split("def _contract_editor")[1].split("def _build_provider")[0]
     full_page_reruns = [
@@ -445,11 +442,28 @@ def test_contract_editor_buttons_walk_through_the_documented_flow():
     """
 
     app = _custom_rtl_app()
+    assert app.button(key="generate_plan").disabled
+    details = next(item for item in app.expander if item.label == "端口与时钟")
+    assert not details.proto.expanded
+    assert not any(item.label == "从表格生成 JSON" for item in details.button)
+    json_details = next(item for item in app.expander if item.label == "接口 JSON 与导出")
+    assert not json_details.proto.expanded
+    assert not any(item.key == "validate_custom_contract" for item in json_details.button)
     _click(app, "FormSubmitter:contract_form-从表格生成 JSON")
     assert not app.exception, [str(item.value) for item in app.exception]
     assert not [item.value for item in app.error], [item.value for item in app.error]
     generated = json.loads(app.session_state["custom_contract_json_text"])
     assert generated["module"] == "pwm", generated  # 模块名取自所选顶层 module，而不是字面量 dut
+    assert app.button(key="generate_plan").disabled
+    # AppTest 会保留已点击表单提交按钮的值；用新实例单独检查 JSON 编辑。
+    app = _custom_rtl_app(json_text=json.dumps(generated))
+    _click(app, "validate_custom_contract")
+    assert not app.button(key="generate_plan").disabled
+    app = _custom_rtl_app(json_text="{}")
+    _click(app, "validate_custom_contract")
+    assert app.button(key="generate_plan").disabled
+    assert app.error
+    app = _custom_rtl_app(json_text=json.dumps(generated))
 
     _click(app, "contract_json_to_editor")
     assert not app.exception, [str(item.value) for item in app.exception]

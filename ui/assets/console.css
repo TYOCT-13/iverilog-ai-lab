@@ -527,6 +527,7 @@ button[data-testid^="baseButton"] {
 }
 
 .stButton button[kind="primary"],
+button[data-testid="baseButton-primaryFormSubmit"],
 button[data-testid="baseButton-primary"] {
   background: var(--rl-cyan);
   border: 1px solid var(--rl-cyan);
