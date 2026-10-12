@@ -16,8 +16,8 @@ TEST_TOOLS = locate_tools()
 ROOT = Path(__file__).resolve().parents[2]
 
 
-@pytest.mark.parametrize("file_credential", [False, True])
-def test_api_agent_survives_navigation_and_invalidates_on_input_change(monkeypatch, tmp_path, file_credential):
+@pytest.mark.parametrize("file_credential,server_default", [(False, False), (True, False), (False, True)])
+def test_api_agent_survives_navigation_and_invalidates_on_input_change(monkeypatch, tmp_path, file_credential, server_default):
     if not TEST_TOOLS.can_simulate:
         pytest.skip("local Icarus unavailable")
     actual_run = agent.run_verification_agent
@@ -62,6 +62,7 @@ def test_api_agent_survives_navigation_and_invalidates_on_input_change(monkeypat
     app.text_input(key="provider_api_base").set_value("https://api.example/v1")
     app.text_input(key="provider_api_model").set_value("ui-agent-test-fixture")
     app.selectbox(key="provider_thinking_mode").set_value("关闭")
+    app.checkbox(key="provider_output_unlimited").set_value(server_default)
     if not file_credential:
         app.text_input(key="provider_api_key").set_value("fixture-not-a-real-key")
     else:
@@ -84,7 +85,11 @@ def test_api_agent_survives_navigation_and_invalidates_on_input_change(monkeypat
     assert [sum(v["cycles"] for v in row["plan"]["vectors"]) for row in result.trajectory["rounds"]] == [2, 13]
     assert result.trajectory["stimulus_cycles_executed"] == 15
     assert result.trajectory["limits"]["max_output_tokens"] == (8192 if file_credential else 4096)
-    assert all(request["max_tokens"] == (8192 if file_credential else 4096) for request in calls)
+    assert result.trajectory["limits"]["use_server_output_limit"] is server_default
+    if server_default:
+        assert all("max_tokens" not in request and "max_output_tokens" not in request for request in calls)
+    else:
+        assert all(request["max_tokens"] == (8192 if file_credential else 4096) for request in calls)
     assert all(request["thinking"] == {"type": "disabled"} for request in calls)
     assert result.trajectory["thinking_mode"] == "disabled"
     original_id = app.session_state["last_pipeline_result"].simulation.run_id

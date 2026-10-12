@@ -160,7 +160,8 @@ def test_interruption_preserves_completed_rounds(tmp_path):
     assert trace["stop_reason"] == "interrupted"
 
 
-def test_http_transport_budget_and_output_cap_are_enforced(tmp_path, monkeypatch):
+@pytest.mark.parametrize("server_default", [False, True])
+def test_http_transport_budget_and_output_cap_are_enforced(tmp_path, monkeypatch, server_default):
     calls = []
     class Response:
         def __enter__(self): return self
@@ -171,10 +172,15 @@ def test_http_transport_budget_and_output_cap_are_enforced(tmp_path, monkeypatch
         return Response()
     monkeypatch.setattr("iverilog_ai.ai.provider.build_opener", lambda *args: SimpleNamespace(open=request))
     provider = OpenAICompatibleProvider(endpoint="https://api.example/v1", model="test", api_key="secret", allow_network=True, wire_api="chat_completions")
-    result = run(tmp_path, provider, limits=AgentLimits(max_requests=1, max_output_tokens=256))
+    result = run(tmp_path, provider, limits=AgentLimits(max_requests=1, max_output_tokens=256,
+                                                     use_server_output_limit=server_default))
     assert result.stop_reason == "request_budget"
     assert len(calls) == 1
-    assert calls[0].get("max_tokens", calls[0].get("max_completion_tokens")) == 256
+    if server_default:
+        assert "max_tokens" not in calls[0] and "max_output_tokens" not in calls[0]
+    else:
+        assert calls[0].get("max_tokens", calls[0].get("max_completion_tokens")) == 256
+    assert result.trajectory["limits"]["use_server_output_limit"] is server_default
     assert "secret" not in result.trajectory_path.read_text()
 
 

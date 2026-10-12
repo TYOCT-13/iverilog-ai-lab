@@ -79,7 +79,7 @@ _PLANNER_MODES = (
 )
 _PROVIDER_FIELD_KEYS = (
     "provider_api_base", "provider_api_model", "provider_api_key",
-    "provider_api_timeout", "provider_api_output_tokens", "provider_wire_api",
+    "provider_api_timeout", "provider_api_output_tokens", "provider_output_unlimited", "provider_wire_api",
     "provider_thinking_mode", "provider_reasoning", "picked_model_from_list",
     "provider_debug_endpoint",
 )
@@ -1510,6 +1510,8 @@ def _build_provider(target: str):
         store=False,
         timeout=int(settings.get("provider_api_timeout", 120)),
         max_output_tokens=int(settings.get("provider_api_output_tokens", 4096)),
+        omit_output_limit=bool(settings.get("provider_output_unlimited", False)),
+        force_output_limit=not bool(settings.get("provider_output_unlimited", False)),
     )
 
 
@@ -2446,7 +2448,9 @@ with _SETTINGS:
             elif _local_api_error:
                 st.warning(f"本机 API 配置无法读取（{_local_api_error}），可在此手动填写。")
             api_timeout = st.slider("请求超时（秒）", min_value=30, max_value=300, value=120, step=10, key="provider_api_timeout", help="模型响应较慢时可适当调高。")
-            api_output_tokens = st.slider("输出长度上限（token）", min_value=2048, max_value=8192, value=_local_api_profile.max_output_tokens if _local_api_profile else 4096, step=512, key="provider_api_output_tokens", help="设置过小可能导致测试计划生成不完整。")
+            api_output_unlimited = st.checkbox("不设置输出 token 上限（使用服务端默认）", key="provider_output_unlimited",
+                help="不发送 max_tokens / max_output_tokens；服务商仍可能限制输出长度。适用于计划生成和自动验证 Agent。")
+            api_output_tokens = st.slider("输出长度上限（token）", min_value=2048, max_value=8192, value=_local_api_profile.max_output_tokens if _local_api_profile else 4096, step=512, key="provider_api_output_tokens", disabled=api_output_unlimited, help="单次回复的输出上限，不是输入或累计用量限制。")
             wire_api_label = st.selectbox("接口格式", ["Chat Completions API", "Responses API"], key="provider_wire_api", help="按服务商文档选择；不确定时使用 Chat Completions。")
             thinking_label = st.selectbox("思考模式", ["自动", "服务默认", "关闭", "开启"], key="provider_thinking_mode",
                 disabled=wire_api_label == "Responses API", help="自动会关闭官方 DeepSeek Flash 的思考，便于生成工具计划；其他服务沿用默认。手动开启或关闭只适用于支持 thinking 参数的 Chat 服务。")
@@ -2458,7 +2462,8 @@ with _SETTINGS:
                     _diag_provider = OpenAICompatibleProvider(endpoint=api_base, model=api_model, api_key=_configured_api_key(api_base, api_key) or " ",
                         wire_api=_diag_wire, reasoning_effort=_diag_reasoning,
                         thinking_mode=_thinking_mode_for(str(thinking_label), api_base, api_model, _diag_wire),
-                        allow_network=True, store=False, timeout=api_timeout, max_output_tokens=api_output_tokens)
+                        allow_network=True, store=False, timeout=api_timeout, max_output_tokens=api_output_tokens,
+                        omit_output_limit=api_output_unlimited, force_output_limit=not api_output_unlimited)
                     st.json(_diag_provider.request_diagnostics())
                 except Exception as exc:
                     st.error(f"配置无效：{exc}")
@@ -2760,6 +2765,7 @@ with _PLAN:
                         include_functional_coverage=bool(_agent_coverage and _scene_profile),
                         limits=AgentLimits(max_rounds=_agent_rounds, max_requests=_agent_requests, max_total_cycles=_agent_cycles,
                                            max_output_tokens=min(_agent_provider.max_output_tokens, 8192),
+                                           use_server_output_limit=_agent_provider.omit_output_limit,
                                            request_timeout_seconds=min(int(_agent_provider.timeout), 180)),
                         execution_options={"allowed_roots": (ROOT,), "defines": _agent_defines, "include_dirs": _agent_includes,
                                            **_simulation_tool_options(),

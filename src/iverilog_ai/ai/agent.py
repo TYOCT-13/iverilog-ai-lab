@@ -133,6 +133,7 @@ class AgentLimits(BaseModel):
     max_vectors: int = Field(default=64, ge=1, le=200)
     max_total_cycles: int = Field(default=1000, ge=1, le=100000)
     max_output_tokens: int = Field(default=2048, ge=128, le=8192)
+    use_server_output_limit: bool = False
     request_timeout_seconds: int = Field(default=60, ge=1, le=180)
     simulation_timeout_seconds: int = Field(default=30, ge=1, le=120)
     wall_time_seconds: int = Field(default=240, ge=1, le=1800)
@@ -572,8 +573,10 @@ def run_verification_agent(
     if isinstance(provider, OpenAICompatibleProvider):
         cap = request_start + limits.max_requests
         provider.request_limit = min(cap, provider.request_limit) if provider.request_limit is not None else cap
-        provider.max_output_tokens = min(provider.max_output_tokens, limits.max_output_tokens)
-        provider.force_output_limit = True
+        provider.omit_output_limit = limits.use_server_output_limit
+        if not limits.use_server_output_limit:
+            provider.max_output_tokens = min(provider.max_output_tokens, limits.max_output_tokens)
+        provider.force_output_limit = not limits.use_server_output_limit
         provider.store = False
         provider.timeout = min(provider.timeout, limits.request_timeout_seconds)
     trace: dict[str, Any] = {

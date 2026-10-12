@@ -73,6 +73,20 @@ def test_budgeted_provider_sends_even_the_default_output_cap(wire_api, field):
     assert field in provider.request_diagnostics()["request_fields"]
 
 
+@pytest.mark.parametrize("wire_api", ["responses", "chat_completions"])
+@pytest.mark.parametrize("streaming", [False, True])
+def test_server_default_omits_output_limit(wire_api, streaming):
+    provider = OpenAICompatibleProvider(wire_api=wire_api, max_output_tokens=8192, omit_output_limit=True)
+    body = provider._build_body("test", streaming=streaming)
+    assert "max_tokens" not in body and "max_output_tokens" not in body
+    assert not {"max_tokens", "max_output_tokens"}.intersection(provider.request_diagnostics()["request_fields"])
+
+
+def test_cannot_omit_an_explicitly_forced_budget_limit():
+    with pytest.raises(ValueError, match="force and omit"):
+        OpenAICompatibleProvider(force_output_limit=True, omit_output_limit=True)
+
+
 def test_actual_transport_stops_at_request_limit(local_server):
     provider = OpenAICompatibleProvider(endpoint=local_server, model="debug-local", request_limit=1)
     assert provider.list_models()

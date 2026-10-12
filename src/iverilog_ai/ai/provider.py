@@ -334,6 +334,7 @@ class OpenAICompatibleProvider:
         store: bool = False,
         stream: bool | Literal["auto"] = False,
         force_output_limit: bool = False,
+        omit_output_limit: bool = False,
         request_limit: int | None = None,
     ) -> None:
         raw_url = endpoint or os.getenv("IVERILOG_AI_BASE_URL") or os.getenv("IVERILOG_AI_ENDPOINT", "")
@@ -353,6 +354,9 @@ class OpenAICompatibleProvider:
         # Budgeted experiment entrypoints must send the cap even when it equals
         # the compatibility default (4096). Existing callers retain their shape.
         self.force_output_limit = bool(force_output_limit)
+        self.omit_output_limit = bool(omit_output_limit)
+        if self.force_output_limit and self.omit_output_limit:
+            raise ValueError("cannot force and omit the output limit together")
         if request_limit is not None and (isinstance(request_limit, bool) or not isinstance(request_limit, int) or request_limit < 1):
             raise ValueError("request_limit must be a positive integer")
         self.request_limit = request_limit
@@ -389,11 +393,11 @@ class OpenAICompatibleProvider:
         if self.wire_api == "responses":
             if self.store:
                 fields.append("store")
-            if self.force_output_limit or self.max_output_tokens != 4096:
+            if not self.omit_output_limit and (self.force_output_limit or self.max_output_tokens != 4096):
                 fields.append("max_output_tokens")
             if self.reasoning_effort is not None:
                 fields.append("reasoning")
-        elif self.force_output_limit or self.max_output_tokens != 4096:
+        elif not self.omit_output_limit and (self.force_output_limit or self.max_output_tokens != 4096):
             fields.append("max_tokens")
         if self.thinking_mode is not None:
             fields.append("thinking")
@@ -523,7 +527,7 @@ class OpenAICompatibleProvider:
             # 仅在调用方明确选择时发送可选字段；默认最小请求兼容更多网关。
             if self.store:
                 body["store"] = True
-            if self.force_output_limit or self.max_output_tokens != 4096:
+            if not self.omit_output_limit and (self.force_output_limit or self.max_output_tokens != 4096):
                 body["max_output_tokens"] = self.max_output_tokens
             if self.reasoning_effort is not None:
                 body["reasoning"] = {"effort": self.reasoning_effort}
@@ -540,7 +544,7 @@ class OpenAICompatibleProvider:
         if self.thinking_mode is not None:
             body["thinking"] = {"type": self.thinking_mode}
         # DeepSeek 兼容网关可能拒绝空值/不支持参数；仅在非默认时发送 max_tokens。
-        if self.force_output_limit or self.max_output_tokens != 4096:
+        if not self.omit_output_limit and (self.force_output_limit or self.max_output_tokens != 4096):
             body["max_tokens"] = self.max_output_tokens
         return body
 
