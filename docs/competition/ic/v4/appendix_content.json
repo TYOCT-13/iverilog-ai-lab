@@ -1,0 +1,54 @@
+{
+  "pages": [
+    {
+      "number": 17,
+      "title": "附录A　规格波形：把文字行为转成时序关系",
+      "lead": "两模块已有规格图的真实浏览器渲染，帮助检查优先级、延迟和采样含义。",
+      "paragraphs": [
+        "波形图对应正确A版本的公开规格，使用固定WaveDrom 3.6.1依赖生成SVG，再经浏览器实际显示取得截图。图中的八拍示例假定复位已完成，数值来自既有规格；它们用于解释应有行为，与真实仿真VCD分别归档。",
+        "有效数据流水图表达有效输入和空泡交错、数据延迟以及flush优先；事件累计器图表达许可事件增加、clear优先和输出累计值。将文字与图并列，便于复核者发现规格歧义，再回到逐拍参考和执行日志核对。"
+      ],
+      "figure": null,
+      "caption": "规格图是判据解释材料，不能单独证明被测RTL通过。",
+      "figure_blocks": [
+        {
+          "path": "docs/experiment/rtl-spec-rendering-2026-10-07/visual/valid_data_pipeline_normal-operation.png",
+          "width_pt": 355,
+          "caption": "图15　有效数据流水规格：E0采集、E1输出，flush具有优先级。截图保留完整信号名与示例数值。"
+        },
+        {
+          "path": "docs/experiment/rtl-spec-rendering-2026-10-07/visual/event_accumulator_normal-operation.png",
+          "width_pt": 365,
+          "caption": "图16　许可事件累计器规格：只有被许可事件累计，clear优先。此图没有展示完整回绕与复位激励。"
+        }
+      ],
+      "table": null,
+      "source_note": "来源：docs/experiment/rtl_spec_rendering_2026-10-07.md；docs/experiment/rtl-spec-rendering-2026-10-07/rendering_receipt.json。既有渲染工作0新增API、0新增DUT，本次报告仅引用原图。两A源码与2026-10-05实验原件逐字节一致。"
+    },
+    {
+      "number": 18,
+      "title": "附录B　实际界面：默认入口与导入后的关卡",
+      "lead": "2026-10-13本机浏览器观察，展示已实施流程；不代替异机用户复测。",
+      "paragraphs": [
+        "首次进入页面时默认选择在线模型，进入对应配置；导入公开有效数据流水A版后，主要操作显示蓝色按钮，端口与时钟等详细内容默认收起。接口尚未确认时，生成计划按钮保持禁用，并给出下一步提示。",
+        "本次仅打开页面、导入公开RTL并观察界面，工具进行了不执行DUT的编译预检查。未点击模型计划生成或正式仿真，未新增API请求和功能检出；现场截图用于核对实现状态，不能说明操作耗时、满意度或真人复测完成。"
+      ],
+      "figure": null,
+      "caption": "界面状态与功能成绩分开归档。",
+      "figure_blocks": [
+        {
+          "path": "docs/competition/ic/v4/screenshots/onboarding-2026-10-13.jpg",
+          "width_pt": 430,
+          "caption": "图17　实际首次进入界面：在线模型为默认项，使用者先进入相应配置。"
+        },
+        {
+          "path": "docs/competition/ic/v4/screenshots/upload-workspace-2026-10-13.jpg",
+          "width_pt": 490,
+          "caption": "图18　实际导入后的工作区局部视口：校验接口、从表格生成JSON为蓝色；接口确认前，生成计划禁用。"
+        }
+      ],
+      "table": null,
+      "source_note": "来源：本版screenshots目录两张实际浏览器截图；源码状态df7ccfa。导入文件benchmarks/agent_new_holdout_20261005/targets/valid_data_pipeline/A/valid_data_pipeline.v。仅用于界面观察，非新的实验批次、异机复现或人工H02。"
+    }
+  ]
+}

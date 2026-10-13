@@ -1,0 +1,4 @@
+__pycache__/
+presentation/.chart-data-*/
+presentation/build/
+presentation/output/r*/

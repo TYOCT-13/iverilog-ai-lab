@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="660" viewBox="0 0 1800 660">
+<rect width="1800" height="660" fill="#F7F9FB"/>
+<text x="55" y="79" fill="#17212B" font-family="Microsoft YaHei" font-size="54" font-weight="700">赛题主题与项目落点</text>
+<text x="55" y="135" fill="#566575" font-family="Microsoft YaHei" font-size="30" font-weight="400">定位于数字 IP 设计阶段的功能验证和教学实训</text>
+<line x1="55" y1="170" x2="1745" y2="170" stroke="#D8E0E6" stroke-width="2"/>
+<rect x="55.0" y="220" width="394.0" height="230" fill="white" stroke="#D8E0E6" stroke-width="2"/>
+<text x="75.0" y="269" fill="#009FBA" font-family="Microsoft YaHei" font-size="31" font-weight="700">01</text>
+<text x="75.0" y="323" fill="#17212B" font-family="Microsoft YaHei" font-size="38" font-weight="700">AI 技术</text>
+<text x="75.0" y="373" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">自然语言规划</text>
+<text x="75.0" y="414" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">反馈驱动探索</text>
+<line x1="454.0" y1="330" x2="481.0" y2="330" stroke="#009FBA" stroke-width="4"/>
+<line x1="481.0" y1="330" x2="465.0" y2="320" stroke="#009FBA" stroke-width="4"/>
+<line x1="481.0" y1="330" x2="465.0" y2="340" stroke="#009FBA" stroke-width="4"/>
+<rect x="487.0" y="220" width="394.0" height="230" fill="white" stroke="#D8E0E6" stroke-width="2"/>
+<text x="507.0" y="269" fill="#009FBA" font-family="Microsoft YaHei" font-size="31" font-weight="700">02</text>
+<text x="507.0" y="323" fill="#17212B" font-family="Microsoft YaHei" font-size="38" font-weight="700">集成电路设计</text>
+<text x="507.0" y="373" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">RTL 与协议行为</text>
+<text x="507.0" y="414" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">边界及状态验证</text>
+<line x1="886.0" y1="330" x2="913.0" y2="330" stroke="#009FBA" stroke-width="4"/>
+<line x1="913.0" y1="330" x2="897.0" y2="320" stroke="#009FBA" stroke-width="4"/>
+<line x1="913.0" y1="330" x2="897.0" y2="340" stroke="#009FBA" stroke-width="4"/>
+<rect x="919.0" y="220" width="394.0" height="230" fill="white" stroke="#D8E0E6" stroke-width="2"/>
+<text x="939.0" y="269" fill="#009FBA" font-family="Microsoft YaHei" font-size="31" font-weight="700">03</text>
+<text x="939.0" y="323" fill="#17212B" font-family="Microsoft YaHei" font-size="38" font-weight="700">工程实现</text>
+<text x="939.0" y="373" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">Icarus 仿真</text>
+<text x="939.0" y="414" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">独立参考判据</text>
+<line x1="1318.0" y1="330" x2="1345.0" y2="330" stroke="#009FBA" stroke-width="4"/>
+<line x1="1345.0" y1="330" x2="1329.0" y2="320" stroke="#009FBA" stroke-width="4"/>
+<line x1="1345.0" y1="330" x2="1329.0" y2="340" stroke="#009FBA" stroke-width="4"/>
+<rect x="1351.0" y="220" width="394.0" height="230" fill="#E8F5F8" stroke="#D8E0E6" stroke-width="2"/>
+<text x="1371.0" y="269" fill="#009FBA" font-family="Microsoft YaHei" font-size="31" font-weight="700">04</text>
+<text x="1371.0" y="323" fill="#17212B" font-family="Microsoft YaHei" font-size="38" font-weight="700">应用场景</text>
+<text x="1371.0" y="373" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">模块调试</text>
+<text x="1371.0" y="414" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">教学与轻量工具链</text>
+<text x="55" y="558" fill="#566575" font-family="Microsoft YaHei" font-size="33" font-weight="400">关联智能设计与综合创新方向；不外推为芯片制造或流片成果</text>
+</svg>

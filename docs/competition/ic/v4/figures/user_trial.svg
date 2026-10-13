@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="660" viewBox="0 0 1800 660">
+<rect width="1800" height="660" fill="#F7F9FB"/>
+<text x="55" y="79" fill="#17212B" font-family="Microsoft YaHei" font-size="54" font-weight="700">异机真人试用发现的问题</text>
+<text x="55" y="135" fill="#566575" font-family="Microsoft YaHei" font-size="30" font-weight="400">有 AI 协助的真实操作反馈，完整复测尚待补充</text>
+<line x1="55" y1="170" x2="1745" y2="170" stroke="#D8E0E6" stroke-width="2"/>
+<rect x="55.0" y="220" width="394.0" height="230" fill="white" stroke="#D8E0E6" stroke-width="2"/>
+<text x="75.0" y="269" fill="#009FBA" font-family="Microsoft YaHei" font-size="31" font-weight="700">01</text>
+<text x="75.0" y="323" fill="#17212B" font-family="Microsoft YaHei" font-size="38" font-weight="700">安装与环境</text>
+<text x="75.0" y="373" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">命令缺失和下载</text>
+<text x="75.0" y="414" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">PATH 与路径差异</text>
+<line x1="454.0" y1="330" x2="481.0" y2="330" stroke="#009FBA" stroke-width="4"/>
+<line x1="481.0" y1="330" x2="465.0" y2="320" stroke="#009FBA" stroke-width="4"/>
+<line x1="481.0" y1="330" x2="465.0" y2="340" stroke="#009FBA" stroke-width="4"/>
+<rect x="487.0" y="220" width="394.0" height="230" fill="white" stroke="#D8E0E6" stroke-width="2"/>
+<text x="507.0" y="269" fill="#009FBA" font-family="Microsoft YaHei" font-size="31" font-weight="700">02</text>
+<text x="507.0" y="323" fill="#17212B" font-family="Microsoft YaHei" font-size="38" font-weight="700">输入与判据</text>
+<text x="507.0" y="373" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">缺少 bit 子模块</text>
+<text x="507.0" y="414" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">空 expected 与断言</text>
+<line x1="886.0" y1="330" x2="913.0" y2="330" stroke="#009FBA" stroke-width="4"/>
+<line x1="913.0" y1="330" x2="897.0" y2="320" stroke="#009FBA" stroke-width="4"/>
+<line x1="913.0" y1="330" x2="897.0" y2="340" stroke="#009FBA" stroke-width="4"/>
+<rect x="919.0" y="220" width="394.0" height="230" fill="white" stroke="#D8E0E6" stroke-width="2"/>
+<text x="939.0" y="269" fill="#009FBA" font-family="Microsoft YaHei" font-size="31" font-weight="700">03</text>
+<text x="939.0" y="323" fill="#17212B" font-family="Microsoft YaHei" font-size="38" font-weight="700">界面定位</text>
+<text x="939.0" y="373" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">表单默认展开</text>
+<text x="939.0" y="414" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">校验入口过深</text>
+<line x1="1318.0" y1="330" x2="1345.0" y2="330" stroke="#009FBA" stroke-width="4"/>
+<line x1="1345.0" y1="330" x2="1329.0" y2="320" stroke="#009FBA" stroke-width="4"/>
+<line x1="1345.0" y1="330" x2="1329.0" y2="340" stroke="#009FBA" stroke-width="4"/>
+<rect x="1351.0" y="220" width="394.0" height="230" fill="#E8F5F8" stroke="#D8E0E6" stroke-width="2"/>
+<text x="1371.0" y="269" fill="#009FBA" font-family="Microsoft YaHei" font-size="31" font-weight="700">04</text>
+<text x="1371.0" y="323" fill="#17212B" font-family="Microsoft YaHei" font-size="38" font-weight="700">处理与复测</text>
+<text x="1371.0" y="373" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">11 项问题登记</text>
+<text x="1371.0" y="414" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">修复状态分别标注</text>
+<text x="55" y="558" fill="#566575" font-family="Microsoft YaHei" font-size="33" font-weight="400">两次编译失败，0 次输出比较；不计为协议通过或独立 H02 完成</text>
+</svg>

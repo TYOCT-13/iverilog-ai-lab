@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="660" viewBox="0 0 1800 660">
+<rect width="1800" height="660" fill="#F7F9FB"/>
+<text x="55" y="79" fill="#17212B" font-family="Microsoft YaHei" font-size="54" font-weight="700">应用落地与后续验证</text>
+<text x="55" y="135" fill="#566575" font-family="Microsoft YaHei" font-size="30" font-weight="400">按可检查的阶段交付，不把规划写成已实现成果</text>
+<line x1="55" y1="170" x2="1745" y2="170" stroke="#D8E0E6" stroke-width="2"/>
+<rect x="55.0" y="220" width="394.0" height="230" fill="white" stroke="#D8E0E6" stroke-width="2"/>
+<text x="75.0" y="269" fill="#009FBA" font-family="Microsoft YaHei" font-size="31" font-weight="700">01</text>
+<text x="75.0" y="323" fill="#17212B" font-family="Microsoft YaHei" font-size="38" font-weight="700">当前范围</text>
+<text x="75.0" y="373" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">教学数字 IP</text>
+<text x="75.0" y="414" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">模块级验证</text>
+<line x1="454.0" y1="330" x2="481.0" y2="330" stroke="#009FBA" stroke-width="4"/>
+<line x1="481.0" y1="330" x2="465.0" y2="320" stroke="#009FBA" stroke-width="4"/>
+<line x1="481.0" y1="330" x2="465.0" y2="340" stroke="#009FBA" stroke-width="4"/>
+<rect x="487.0" y="220" width="394.0" height="230" fill="white" stroke="#D8E0E6" stroke-width="2"/>
+<text x="507.0" y="269" fill="#009FBA" font-family="Microsoft YaHei" font-size="31" font-weight="700">02</text>
+<text x="507.0" y="323" fill="#17212B" font-family="Microsoft YaHei" font-size="38" font-weight="700">近期验收</text>
+<text x="507.0" y="373" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">冻结夹具修复</text>
+<text x="507.0" y="414" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">异机与 H02 复核</text>
+<line x1="886.0" y1="330" x2="913.0" y2="330" stroke="#009FBA" stroke-width="4"/>
+<line x1="913.0" y1="330" x2="897.0" y2="320" stroke="#009FBA" stroke-width="4"/>
+<line x1="913.0" y1="330" x2="897.0" y2="340" stroke="#009FBA" stroke-width="4"/>
+<rect x="919.0" y="220" width="394.0" height="230" fill="white" stroke="#D8E0E6" stroke-width="2"/>
+<text x="939.0" y="269" fill="#009FBA" font-family="Microsoft YaHei" font-size="31" font-weight="700">03</text>
+<text x="939.0" y="323" fill="#17212B" font-family="Microsoft YaHei" font-size="38" font-weight="700">扩展方向</text>
+<text x="939.0" y="373" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">更多规格及参考</text>
+<text x="939.0" y="414" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">协议从设备环境</text>
+<line x1="1318.0" y1="330" x2="1345.0" y2="330" stroke="#009FBA" stroke-width="4"/>
+<line x1="1345.0" y1="330" x2="1329.0" y2="320" stroke="#009FBA" stroke-width="4"/>
+<line x1="1345.0" y1="330" x2="1329.0" y2="340" stroke="#009FBA" stroke-width="4"/>
+<rect x="1351.0" y="220" width="394.0" height="230" fill="#E8F5F8" stroke="#D8E0E6" stroke-width="2"/>
+<text x="1371.0" y="269" fill="#009FBA" font-family="Microsoft YaHei" font-size="31" font-weight="700">04</text>
+<text x="1371.0" y="323" fill="#17212B" font-family="Microsoft YaHei" font-size="38" font-weight="700">推广验证</text>
+<text x="1371.0" y="373" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">课程或小组试点</text>
+<text x="1371.0" y="414" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">记录用时与效果</text>
+<text x="55" y="558" fill="#566575" font-family="Microsoft YaHei" font-size="33" font-weight="400">不声明芯片流片、时序签核、工业协议认证或已测得经济收益</text>
+</svg>

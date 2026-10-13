@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="660" viewBox="0 0 1800 660">
+<rect width="1800" height="660" fill="#F7F9FB"/>
+<text x="55" y="79" fill="#17212B" font-family="Microsoft YaHei" font-size="54" font-weight="700">用户反馈驱动的产品调整</text>
+<text x="55" y="135" fill="#566575" font-family="Microsoft YaHei" font-size="30" font-weight="400">对比结构与行为变化，不使用未经实测的节时比例</text>
+<line x1="55" y1="170" x2="1745" y2="170" stroke="#D8E0E6" stroke-width="2"/>
+<rect x="55.0" y="220" width="394.0" height="230" fill="white" stroke="#D8E0E6" stroke-width="2"/>
+<text x="75.0" y="269" fill="#009FBA" font-family="Microsoft YaHei" font-size="31" font-weight="700">01</text>
+<text x="75.0" y="323" fill="#17212B" font-family="Microsoft YaHei" font-size="38" font-weight="700">入口调整</text>
+<text x="75.0" y="373" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">操作常驻上传区</text>
+<text x="75.0" y="414" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">蓝色主按钮</text>
+<line x1="454.0" y1="330" x2="481.0" y2="330" stroke="#009FBA" stroke-width="4"/>
+<line x1="481.0" y1="330" x2="465.0" y2="320" stroke="#009FBA" stroke-width="4"/>
+<line x1="481.0" y1="330" x2="465.0" y2="340" stroke="#009FBA" stroke-width="4"/>
+<rect x="487.0" y="220" width="394.0" height="230" fill="white" stroke="#D8E0E6" stroke-width="2"/>
+<text x="507.0" y="269" fill="#009FBA" font-family="Microsoft YaHei" font-size="31" font-weight="700">02</text>
+<text x="507.0" y="323" fill="#17212B" font-family="Microsoft YaHei" font-size="38" font-weight="700">默认折叠</text>
+<text x="507.0" y="373" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">端口 时钟 JSON</text>
+<text x="507.0" y="414" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">减少首屏展开</text>
+<line x1="886.0" y1="330" x2="913.0" y2="330" stroke="#009FBA" stroke-width="4"/>
+<line x1="913.0" y1="330" x2="897.0" y2="320" stroke="#009FBA" stroke-width="4"/>
+<line x1="913.0" y1="330" x2="897.0" y2="340" stroke="#009FBA" stroke-width="4"/>
+<rect x="919.0" y="220" width="394.0" height="230" fill="white" stroke="#D8E0E6" stroke-width="2"/>
+<text x="939.0" y="269" fill="#009FBA" font-family="Microsoft YaHei" font-size="31" font-weight="700">03</text>
+<text x="939.0" y="323" fill="#17212B" font-family="Microsoft YaHei" font-size="38" font-weight="700">校验前置</text>
+<text x="939.0" y="373" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">确认接口后规划</text>
+<text x="939.0" y="414" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">编译失败阻断执行</text>
+<line x1="1318.0" y1="330" x2="1345.0" y2="330" stroke="#009FBA" stroke-width="4"/>
+<line x1="1345.0" y1="330" x2="1329.0" y2="320" stroke="#009FBA" stroke-width="4"/>
+<line x1="1345.0" y1="330" x2="1329.0" y2="340" stroke="#009FBA" stroke-width="4"/>
+<rect x="1351.0" y="220" width="394.0" height="230" fill="#E8F5F8" stroke="#D8E0E6" stroke-width="2"/>
+<text x="1371.0" y="269" fill="#009FBA" font-family="Microsoft YaHei" font-size="31" font-weight="700">04</text>
+<text x="1371.0" y="323" fill="#17212B" font-family="Microsoft YaHei" font-size="38" font-weight="700">说明一致</text>
+<text x="1371.0" y="373" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">模型模式与用量</text>
+<text x="1371.0" y="414" fill="#566575" font-family="Microsoft YaHei" font-size="29" font-weight="400">结果字段和手册</text>
+<text x="55" y="558" fill="#566575" font-family="Microsoft YaHei" font-size="33" font-weight="400">改动已实现与发布；异机用户对新版操作体验的复测待确认</text>
+</svg>

@@ -1,0 +1,44 @@
+{
+  "schema": "icarus-v4-material-delivery-validation-v1",
+  "date": "2026-10-13",
+  "report_pages": 18,
+  "defense_slides": 20,
+  "report_illustrations": 18,
+  "report_body_chinese_chars": 9704,
+  "report_fonts_embedded": {
+    "/AAAAAA+MicrosoftYaHei-Bold-0": true,
+    "/AAAAAB+MicrosoftYaHei-Bold-0": true,
+    "/AAAAAA+MicrosoftYaHei-0": true,
+    "/AAAAAB+MicrosoftYaHei-0": true,
+    "/AAAAAC+MicrosoftYaHei-0": true,
+    "/AAAAAD+MicrosoftYaHei-0": true
+  },
+  "all_report_pages_individually_viewed": true,
+  "all_deck_slides_individually_viewed": true,
+  "native_PowerPoint_verified": false,
+  "defense_pdf": "Image-only PDF from validated final slide rendering",
+  "new_model_API_requests": 0,
+  "new_functional_simulations": 0,
+  "local_UI_compile_preflight": "Icarus -tnull only; not a functional simulation",
+  "source_commit_before_materials": "df7ccfa89115cfff532a73e03d447a2fc22af804",
+  "current_source_Actions": "verify and CI failed; not changed by material generation",
+  "source_markdown_links_checked": true,
+  "scope": "Artifact checks and AI-assisted visual review, not human H02 or user retest",
+  "outputs": [
+    {
+      "path": "docs/competition/ic/v4/ICARUS_AI_IC_technical_report_v4.pdf",
+      "bytes": 2220378,
+      "sha256": "6565a49c93455e998b6e31ea9294392eaeaf2c8eea99430e9dbc9aa9a33037f0"
+    },
+    {
+      "path": "docs/competition/ic/v4/presentation/output/ICARUS_AI_IC_defense_v4.pptx",
+      "bytes": 1534060,
+      "sha256": "7db4fdeb240326872d1bbdcc35221db71b57aa2568da15ca621e5e193f3d299c"
+    },
+    {
+      "path": "docs/competition/ic/v4/presentation/output/ICARUS_AI_IC_defense_v4.pdf",
+      "bytes": 6050595,
+      "sha256": "80145c10c90640f65f61cf9c342e2f03c8585c3f95f528b7f1b408dec6f363b1"
+    }
+  ]
+}

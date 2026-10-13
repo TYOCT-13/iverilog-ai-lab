@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-13",
+  "source_commit": "df7ccfa89115cfff532a73e03d447a2fc22af804",
+  "capture": "Actual CUA in-app browser JPEG viewport; not a mockup",
+  "viewport": [
+    1280,
+    720
+  ],
+  "files": [
+    {
+      "path": "onboarding-2026-10-13.jpg",
+      "bytes": 46927,
+      "sha256": "9282aac08ff358999546386bee04acbeb7c0e46b447014c0de2de612bea6df1f"
+    },
+    {
+      "path": "upload-workspace-2026-10-13.jpg",
+      "bytes": 78828,
+      "sha256": "3e213ca6d090e16664826b0cd1f31799f51d23d349a523f79c2d021f0fd9238f"
+    }
+  ],
+  "uploaded_source": "benchmarks/agent_new_holdout_20261005/targets/valid_data_pipeline/A/valid_data_pipeline.v",
+  "uploaded_source_sha256": "b3fc81d4fdf3a23cb38c710af7c6d278cfba9d3f52978492594263464e44d9bb",
+  "observed": "Default online onboarding; blue interface/JSON actions; collapsed detail panels; plan disabled before interface validation; actual -tnull compile preflight passed",
+  "new_model_API_requests": 0,
+  "new_functional_simulations": 0,
+  "scope": "Local UI observation only; not independent device, human trial, H02 or functional protocol pass",
+  "runtime": "Existing D:/Users/TYOCT/anaconda3/python.exe Streamlit; this observation does not verify locked dependency installation"
+}

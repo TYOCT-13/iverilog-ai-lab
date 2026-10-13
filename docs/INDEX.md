@@ -38,6 +38,7 @@
 
 | 材料 | 路径 | 状态 |
 |---|---|---|
+| v4详细技术报告与答辩 | [材料入口](competition/ic/v4/README.md)、[18页报告](competition/ic/v4/ICARUS_AI_IC_technical_report_v4.pdf)、[完整文字稿](competition/ic/v4/technical_report_full.md)、[可编辑PPT](competition/ic/v4/presentation/output/ICARUS_AI_IC_defense_v4.pptx)、[答辩PDF](competition/ic/v4/presentation/output/ICARUS_AI_IC_defense_v4.pdf) | 2026-10-13重写，约9700正文中文字、18幅图；迭代、实测与实际界面分别说明。当前CI失败、异机复测/H02待补；旧v3保留 |
 | v3技术方案源稿与PDF | `docs/competition/ic/v3/technical_report.md`、`docs/competition/ic/ICARUS_技术方案_v3.pdf` | 最新两模块108与历史432单列；10页/正文8页，470762字节；文字可选择、字体嵌入、身份元数据空 |
 | v3合并佐证源稿与PDF | `docs/competition/ic/v3/supporting_evidence.md`、`docs/competition/ic/ICARUS_佐证材料_v3.pdf` | 6页、260009字节；原件、预算、失败与限制分别列证据入口 |
 | v3材料入口、报名文本与PDF回执 | `docs/competition/ic/v3/README.md`、`docs/competition/ic/v3/submission_copy.md`、`docs/competition/ic/v3/validation.json` | 名称15字符、简介201字符；两份PDF共16页实际查看通过，尚未上传 |

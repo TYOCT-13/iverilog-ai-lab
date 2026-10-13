@@ -1,0 +1,86 @@
+[
+  {
+    "id": "theme_map",
+    "source": "official notice 4756; project v3 report and current application",
+    "kind": "original schematic or descriptive data chart",
+    "png_sha256": "040d4bc424d9bd2fe19a7e2db6c0cb9cc14b3a8166226163df5cf09385ce8043"
+  },
+  {
+    "id": "timeline",
+    "source": "v3/material_data.json; git f75f619 7059d25 d9ffded; human trial record",
+    "kind": "original schematic or descriptive data chart",
+    "png_sha256": "943858e8ad9c00c49e0980a7de764e955c080976feb1cdefce90ca4c79509a86"
+  },
+  {
+    "id": "architecture",
+    "source": "src/iverilog_ai/ai/agent.py; core/pipeline.py; ui/app.py",
+    "kind": "original schematic or descriptive data chart",
+    "png_sha256": "05d74975b8d5750d019be9d4c52ce9f5e050af845dbb5a111fb2dd9e1354b342"
+  },
+  {
+    "id": "preflight",
+    "source": "git f75f619 and 7059d25; ui/app.py; human trial PC-07",
+    "kind": "original schematic or descriptive data chart",
+    "png_sha256": "3cb0d6c62115c8e79d3c412b4cf0ecf153de8a6ba3970a20daece496b21ce7c2"
+  },
+  {
+    "id": "planner",
+    "source": "ai/planner.py; ai/schema.py; ui/app.py",
+    "kind": "original schematic or descriptive data chart",
+    "png_sha256": "e8cf9c4412bf12925b39ab8c25b4296d8d5ed7a001cf76c0645f6c51b993299a"
+  },
+  {
+    "id": "agent_loop",
+    "source": "ai/agent.py; core/observations.py; core/functional_coverage.py",
+    "kind": "original schematic or descriptive data chart",
+    "png_sha256": "46ba61d0b470964fee3ed833610cb6b586bcdef952091666bca7256c8dc814e7"
+  },
+  {
+    "id": "oracle_fifo",
+    "source": "spec/sync_fifo_spec.md; rtl/sync_fifo.v; reference_model_alignment tests",
+    "kind": "original schematic or descriptive data chart",
+    "png_sha256": "e6075e03b18dcdeab65abc676124861d1470a96b2afd87a750ffa388d06a6336"
+  },
+  {
+    "id": "token_ledger",
+    "source": "v3/material_data.json latest_new108 tokens; latest budget receipt",
+    "kind": "original schematic or descriptive data chart",
+    "png_sha256": "fd4f843678764ac76ef90e8925e5d054c6657c369ebbd6cf50a64a29363686c9"
+  },
+  {
+    "id": "latest_results",
+    "source": "v3/material_data.json latest_new108",
+    "kind": "original schematic or descriptive data chart",
+    "png_sha256": "1ba943fa1b9b9a90e0f31be15973b03f5e4b25e6890b365bc8537d2ff5e80653"
+  },
+  {
+    "id": "historical_results",
+    "source": "v3/material_data.json historical_v8_432",
+    "kind": "original schematic or descriptive data chart",
+    "png_sha256": "6f4af78d61d5c3243b3fece7c7d3e6790d3a45af64483ab0d5e34969f7d674c0"
+  },
+  {
+    "id": "engineering",
+    "source": "github_actions_repair_2026-10-08.md; evidence_audit.json",
+    "kind": "original schematic or descriptive data chart",
+    "png_sha256": "a76d65352ab0c8c8fae30174b3aac298343bb17a99f9f3600d70facbc8c30ace"
+  },
+  {
+    "id": "user_trial",
+    "source": "docs/trial/other_pc_user_trial_2026-10-13.md",
+    "kind": "original schematic or descriptive data chart",
+    "png_sha256": "f9c46373bb865e6e642c95b09836b9a57d24aee989e6e4b9e78bc627abb80cc6"
+  },
+  {
+    "id": "product_changes",
+    "source": "git7059d25 d9ffded 2c6a4d9 671512e d763530",
+    "kind": "original schematic or descriptive data chart",
+    "png_sha256": "2c4d822696f33b76fe4fb57422f4e36ad2a63e0d49bd6c1016b098f3a6a48990"
+  },
+  {
+    "id": "roadmap",
+    "source": "report scope; human trial record; competition IC gap checklist",
+    "kind": "original schematic or descriptive data chart",
+    "png_sha256": "a92d8b888a399bb2ec30996fd8af69f753d91e589e2d6d74f44e5d0a4bc6a58c"
+  }
+]

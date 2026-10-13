@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="660" viewBox="0 0 1800 660">
+<rect width="1800" height="660" fill="#F7F9FB"/>
+<text x="55" y="79" fill="#17212B" font-family="Microsoft YaHei" font-size="54" font-weight="700">缺陷检出任务的完整策略对照</text>
+<text x="55" y="135" fill="#566575" font-family="Microsoft YaHei" font-size="30" font-weight="400">4 个不同缺陷 × 3 次重复；仅作描述性统计</text>
+<line x1="55" y1="170" x2="1745" y2="170" stroke="#D8E0E6" stroke-width="2"/>
+<line x1="80" y1="500.0" x2="1720" y2="500.0" stroke="#D8E0E6" stroke-width="2"/>
+<text x="30" y="508.0" fill="#566575" font-family="Microsoft YaHei" font-size="26" font-weight="400">0</text>
+<line x1="80" y1="410.0" x2="1720" y2="410.0" stroke="#D8E0E6" stroke-width="2"/>
+<text x="30" y="418.0" fill="#566575" font-family="Microsoft YaHei" font-size="26" font-weight="400">4</text>
+<line x1="80" y1="320.0" x2="1720" y2="320.0" stroke="#D8E0E6" stroke-width="2"/>
+<text x="30" y="328.0" fill="#566575" font-family="Microsoft YaHei" font-size="26" font-weight="400">8</text>
+<line x1="80" y1="230.0" x2="1720" y2="230.0" stroke="#D8E0E6" stroke-width="2"/>
+<text x="30" y="238.0" fill="#566575" font-family="Microsoft YaHei" font-size="26" font-weight="400">12</text>
+<rect x="135" y="230.0" width="155" height="270.0" fill="#8493A0" stroke="#8493A0" stroke-width="2"/>
+<text x="130" y="216.0" fill="#17212B" font-family="Microsoft YaHei" font-size="40" font-weight="700">12/12</text>
+<text x="117" y="562" fill="#17212B" font-family="Microsoft YaHei" font-size="32" font-weight="400">固定模板</text>
+<rect x="397" y="275.0" width="155" height="225.0" fill="#8493A0" stroke="#8493A0" stroke-width="2"/>
+<text x="392" y="261.0" fill="#17212B" font-family="Microsoft YaHei" font-size="40" font-weight="700">10/12</text>
+<text x="379" y="562" fill="#17212B" font-family="Microsoft YaHei" font-size="32" font-weight="400">随机策略</text>
+<rect x="659" y="320.0" width="155" height="180.0" fill="#8493A0" stroke="#8493A0" stroke-width="2"/>
+<text x="654" y="306.0" fill="#17212B" font-family="Microsoft YaHei" font-size="40" font-weight="700">8/12</text>
+<text x="641" y="562" fill="#17212B" font-family="Microsoft YaHei" font-size="32" font-weight="400">协议随机</text>
+<rect x="921" y="320.0" width="155" height="180.0" fill="#8493A0" stroke="#8493A0" stroke-width="2"/>
+<text x="916" y="306.0" fill="#17212B" font-family="Microsoft YaHei" font-size="40" font-weight="700">8/12</text>
+<text x="903" y="562" fill="#17212B" font-family="Microsoft YaHei" font-size="32" font-weight="400">单次 API</text>
+<rect x="1183" y="252.5" width="155" height="247.5" fill="#009FBA" stroke="#009FBA" stroke-width="2"/>
+<text x="1178" y="238.5" fill="#17212B" font-family="Microsoft YaHei" font-size="40" font-weight="700">11/12</text>
+<text x="1165" y="562" fill="#17212B" font-family="Microsoft YaHei" font-size="32" font-weight="400">反馈 Agent</text>
+<rect x="1445" y="275.0" width="155" height="225.0" fill="#8493A0" stroke="#8493A0" stroke-width="2"/>
+<text x="1440" y="261.0" fill="#17212B" font-family="Microsoft YaHei" font-size="40" font-weight="700">10/12</text>
+<text x="1427" y="562" fill="#17212B" font-family="Microsoft YaHei" font-size="32" font-weight="400">无反馈 Agent</text>
+<text x="55" y="628" fill="#566575" font-family="Microsoft YaHei" font-size="28" font-weight="400">反馈相对基线的差异不构成显著性、因果性或工业泛化证明</text>
+</svg>

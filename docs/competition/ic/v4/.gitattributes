@@ -1,0 +1,2 @@
+# Preserve the exact bytes used by artifact source and delivery receipts.
+* -text whitespace=cr-at-eol

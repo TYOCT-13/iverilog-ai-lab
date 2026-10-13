@@ -1,0 +1,2103 @@
+{
+  "schema": "icarus-evidence-audit-v4",
+  "generated_at_utc": "2026-10-13T03:09:07.271847+00:00",
+  "audit_scope": "只读现有证据与官方页面；仅新写本JSON，不修改历史实验、v3材料或真人原始表；无模型API、DUT执行、提交或推送",
+  "new_model_API_requests": 0,
+  "new_DUT_runs": 0,
+  "strategy_order": [
+    "fixed",
+    "random",
+    "protocol_random",
+    "single",
+    "feedback",
+    "no_feedback"
+  ],
+  "strategy_labels": [
+    "固定测试",
+    "均匀随机",
+    "协议随机",
+    "单次 API",
+    "反馈 Agent",
+    "无反馈 Agent"
+  ],
+  "charts": {
+    "latest_new108": {
+      "label": "最新内部新模块留出：108 登记任务",
+      "strategy_ids": [
+        "fixed",
+        "random",
+        "protocol_random",
+        "single",
+        "feedback",
+        "no_feedback"
+      ],
+      "strategy_labels": [
+        "固定测试",
+        "均匀随机",
+        "协议随机",
+        "单次 API",
+        "反馈 Agent",
+        "无反馈 Agent"
+      ],
+      "detected": [
+        12,
+        10,
+        8,
+        8,
+        11,
+        10
+      ],
+      "defect_denominators": [
+        12,
+        12,
+        12,
+        12,
+        12,
+        12
+      ],
+      "repeat_detections": [
+        [
+          4,
+          4,
+          4
+        ],
+        [
+          4,
+          3,
+          3
+        ],
+        [
+          4,
+          2,
+          2
+        ],
+        [
+          2,
+          2,
+          4
+        ],
+        [
+          4,
+          4,
+          3
+        ],
+        [
+          3,
+          3,
+          4
+        ]
+      ],
+      "requests": [
+        0,
+        0,
+        0,
+        18,
+        38,
+        31
+      ],
+      "tokens": [
+        0,
+        0,
+        0,
+        61529,
+        166073,
+        112022
+      ],
+      "search_cycles": [
+        432,
+        432,
+        432,
+        236,
+        300,
+        290
+      ],
+      "strict_comparison_eligible": true,
+      "registered_tasks": 108,
+      "executed_tasks": 108,
+      "unexecuted_tasks": 0,
+      "round_token_cap": 1000000,
+      "conservative_total_tokens": 339624
+    },
+    "historical_v8_432": {
+      "label": "历史端口反馈对照：432 登记任务",
+      "strategy_ids": [
+        "fixed",
+        "random",
+        "protocol_random",
+        "single",
+        "feedback",
+        "no_feedback"
+      ],
+      "strategy_labels": [
+        "固定测试",
+        "均匀随机",
+        "协议随机",
+        "单次 API",
+        "反馈 Agent",
+        "无反馈 Agent"
+      ],
+      "detected": [
+        48,
+        32,
+        48,
+        29,
+        37,
+        37
+      ],
+      "defect_denominators": [
+        48,
+        48,
+        48,
+        48,
+        48,
+        48
+      ],
+      "repeat_detections": [
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          11,
+          11,
+          10
+        ],
+        [
+          16,
+          16,
+          16
+        ],
+        [
+          12,
+          10,
+          7
+        ],
+        [
+          11,
+          16,
+          10
+        ],
+        [
+          12,
+          14,
+          11
+        ]
+      ],
+      "requests": [
+        0,
+        0,
+        0,
+        70,
+        122,
+        114
+      ],
+      "tokens": [
+        0,
+        0,
+        0,
+        205503,
+        426581,
+        341065
+      ],
+      "search_cycles": [
+        1404,
+        1404,
+        1404,
+        888,
+        1177,
+        1179
+      ],
+      "strict_comparison_eligible": false,
+      "registered_tasks": 432,
+      "executed_tasks": 414,
+      "unexecuted_tasks": 18,
+      "round_token_cap": 1000000,
+      "conservative_total_tokens": 973149
+    },
+    "format_recovery_v6_216": {
+      "label": "v6 普通格式恢复：216 登记任务",
+      "strategy_ids": [
+        "fixed",
+        "random",
+        "protocol_random",
+        "single",
+        "feedback",
+        "no_feedback"
+      ],
+      "strategy_labels": [
+        "固定测试",
+        "均匀随机",
+        "协议随机",
+        "单次 API",
+        "反馈 Agent",
+        "无反馈 Agent"
+      ],
+      "detected": [
+        21,
+        16,
+        21,
+        20,
+        23,
+        22
+      ],
+      "defect_denominators": [
+        24,
+        24,
+        24,
+        24,
+        24,
+        24
+      ],
+      "repeat_detections": [
+        [
+          7,
+          7,
+          7
+        ],
+        [
+          5,
+          5,
+          6
+        ],
+        [
+          7,
+          7,
+          7
+        ],
+        [
+          6,
+          8,
+          6
+        ],
+        [
+          8,
+          7,
+          8
+        ],
+        [
+          7,
+          7,
+          8
+        ]
+      ],
+      "requests": [
+        0,
+        0,
+        0,
+        36,
+        51,
+        51
+      ],
+      "tokens": [
+        0,
+        0,
+        0,
+        95612,
+        145050,
+        137542
+      ],
+      "search_cycles": [
+        828,
+        828,
+        828,
+        621,
+        688,
+        687
+      ],
+      "strict_comparison_eligible": false,
+      "registered_tasks": 216,
+      "executed_tasks": 212,
+      "unexecuted_tasks": 4,
+      "round_token_cap": 1000000,
+      "conservative_total_tokens": 378204
+    },
+    "unified_spec_v5_216": {
+      "label": "统一规格与每轮 1M 预算：216 登记任务",
+      "strategy_ids": [
+        "fixed",
+        "random",
+        "protocol_random",
+        "single",
+        "feedback",
+        "no_feedback"
+      ],
+      "strategy_labels": [
+        "固定测试",
+        "均匀随机",
+        "协议随机",
+        "单次 API",
+        "反馈 Agent",
+        "无反馈 Agent"
+      ],
+      "detected": [
+        21,
+        16,
+        21,
+        21,
+        18,
+        22
+      ],
+      "defect_denominators": [
+        24,
+        24,
+        24,
+        24,
+        24,
+        24
+      ],
+      "repeat_detections": [
+        [
+          7,
+          7,
+          7
+        ],
+        [
+          5,
+          5,
+          6
+        ],
+        [
+          7,
+          7,
+          7
+        ],
+        [
+          7,
+          8,
+          6
+        ],
+        [
+          7,
+          4,
+          7
+        ],
+        [
+          7,
+          7,
+          8
+        ]
+      ],
+      "requests": [
+        0,
+        0,
+        0,
+        36,
+        57,
+        52
+      ],
+      "tokens": [
+        0,
+        0,
+        0,
+        94140,
+        165443,
+        139500
+      ],
+      "search_cycles": [
+        828,
+        828,
+        828,
+        651,
+        681,
+        716
+      ],
+      "strict_comparison_eligible": false,
+      "registered_tasks": 216,
+      "executed_tasks": 212,
+      "unexecuted_tasks": 4,
+      "round_token_cap": 1000000,
+      "conservative_total_tokens": 399083
+    }
+  },
+  "experiments": {
+    "latest_new108": {
+      "source_revision": "20400fa7dca0c9804a96b1eb9842956782a9e81f",
+      "registered_tasks": 108,
+      "executed_tasks": 108,
+      "audited_rounds": 134,
+      "pipeline_sides": 268,
+      "repeats": 3,
+      "strict_comparison_eligible": true,
+      "snapshot_verified": true,
+      "frozen_inputs": 458,
+      "requests": 87,
+      "tokens": {
+        "reported_tokens": 339624,
+        "unknown_reserved_tokens": 0,
+        "conservative_total": 339624,
+        "remaining_tokens": 660376,
+        "requests_known_usage": 87,
+        "requests_unknown_usage": 0
+      },
+      "round_token_cap": 1000000,
+      "schema_counts": {
+        "passed": 85,
+        "rejected": 2
+      },
+      "started_at_utc": "2026-10-05T05:59:49.415938+00:00",
+      "finished_at_utc": "2026-10-05T06:04:02.593875+00:00",
+      "wall_seconds": 253.177937,
+      "id": "latest_new108",
+      "label": "最新内部新模块留出：108 登记任务",
+      "receipt_source": "docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+      "raw_results_source": "docs/experiment/agent-new-holdout-study-live-2026-10-05/results.zip",
+      "distinct_defects": 4,
+      "unexecuted_tasks_count": 0,
+      "ordinary_format_rejections": 2,
+      "plan_budget_rejections": 5,
+      "plan_preflight_rejections": 0,
+      "raw_row_counts_recomputed": true,
+      "raw_results_sha_verified": true,
+      "zip_crc_verified": true,
+      "strategies": [
+        {
+          "id": "fixed",
+          "label": "固定测试",
+          "registered_tasks": 18,
+          "defect_denominator": 12,
+          "detected": 12,
+          "detection_rate_percent": 100.0,
+          "repeat_detections": [
+            4,
+            4,
+            4
+          ],
+          "repeat_defect_denominator": 4,
+          "unique_defects": 4,
+          "unique_detected": 4,
+          "correct_denominator": 6,
+          "correct_executed": 6,
+          "actual_correct_false_alarms": 0,
+          "requests": 0,
+          "tokens": 0,
+          "search_cycles_recorded": 432,
+          "terminal_status_counts": {
+            "not_detected": 6,
+            "detected": 12
+          }
+        },
+        {
+          "id": "random",
+          "label": "均匀随机",
+          "registered_tasks": 18,
+          "defect_denominator": 12,
+          "detected": 10,
+          "detection_rate_percent": 83.333333,
+          "repeat_detections": [
+            4,
+            3,
+            3
+          ],
+          "repeat_defect_denominator": 4,
+          "unique_defects": 4,
+          "unique_detected": 4,
+          "correct_denominator": 6,
+          "correct_executed": 6,
+          "actual_correct_false_alarms": 0,
+          "requests": 0,
+          "tokens": 0,
+          "search_cycles_recorded": 432,
+          "terminal_status_counts": {
+            "not_detected": 8,
+            "detected": 10
+          }
+        },
+        {
+          "id": "protocol_random",
+          "label": "协议随机",
+          "registered_tasks": 18,
+          "defect_denominator": 12,
+          "detected": 8,
+          "detection_rate_percent": 66.666667,
+          "repeat_detections": [
+            4,
+            2,
+            2
+          ],
+          "repeat_defect_denominator": 4,
+          "unique_defects": 4,
+          "unique_detected": 4,
+          "correct_denominator": 6,
+          "correct_executed": 6,
+          "actual_correct_false_alarms": 0,
+          "requests": 0,
+          "tokens": 0,
+          "search_cycles_recorded": 432,
+          "terminal_status_counts": {
+            "not_detected": 10,
+            "detected": 8
+          }
+        },
+        {
+          "id": "single",
+          "label": "单次 API",
+          "registered_tasks": 18,
+          "defect_denominator": 12,
+          "detected": 8,
+          "detection_rate_percent": 66.666667,
+          "repeat_detections": [
+            2,
+            2,
+            4
+          ],
+          "repeat_defect_denominator": 4,
+          "unique_defects": 4,
+          "unique_detected": 4,
+          "correct_denominator": 6,
+          "correct_executed": 6,
+          "actual_correct_false_alarms": 0,
+          "requests": 18,
+          "tokens": 61529,
+          "search_cycles_recorded": 236,
+          "terminal_status_counts": {
+            "not_detected": 10,
+            "detected": 8
+          }
+        },
+        {
+          "id": "feedback",
+          "label": "反馈 Agent",
+          "registered_tasks": 18,
+          "defect_denominator": 12,
+          "detected": 11,
+          "detection_rate_percent": 91.666667,
+          "repeat_detections": [
+            4,
+            4,
+            3
+          ],
+          "repeat_defect_denominator": 4,
+          "unique_defects": 4,
+          "unique_detected": 4,
+          "correct_denominator": 6,
+          "correct_executed": 6,
+          "actual_correct_false_alarms": 0,
+          "requests": 38,
+          "tokens": 166073,
+          "search_cycles_recorded": 300,
+          "terminal_status_counts": {
+            "not_detected": 6,
+            "detected": 11,
+            "decision_format_error": 1
+          }
+        },
+        {
+          "id": "no_feedback",
+          "label": "无反馈 Agent",
+          "registered_tasks": 18,
+          "defect_denominator": 12,
+          "detected": 10,
+          "detection_rate_percent": 83.333333,
+          "repeat_detections": [
+            3,
+            3,
+            4
+          ],
+          "repeat_defect_denominator": 4,
+          "unique_defects": 4,
+          "unique_detected": 4,
+          "correct_denominator": 6,
+          "correct_executed": 6,
+          "actual_correct_false_alarms": 0,
+          "requests": 31,
+          "tokens": 112022,
+          "search_cycles_recorded": 290,
+          "terminal_status_counts": {
+            "not_detected": 8,
+            "detected": 10
+          }
+        }
+      ],
+      "external_independent_holdout": false,
+      "human_trial": false,
+      "H02_human_review": false,
+      "public_copy_contains_all_execution_side_logs": true,
+      "correct_false_alarm_scope": "仅已执行正确目标及保存的参考审核；不等于所有正确任务完整成功",
+      "unexecuted_tasks": [],
+      "module_names": [
+        "valid_data_pipeline",
+        "event_accumulator"
+      ],
+      "holdout_scope": "五个既往受控 API 批次之外的模块成员；同团队合成设计与变异，非外部盲测",
+      "agent_frozen_from": "a96933786c17986a739fc2da515db3294d6e8044",
+      "independent_holdout_label_requires_internal_qualification": true,
+      "training_data_unseen_claim": false,
+      "functional_coverage": "unsupported/unknown",
+      "strict_complete_does_not_mean_all_actions_succeeded": true,
+      "terminal_format_failure": {
+        "task_index_zero_based": 107,
+        "prior_real_episodes": 1,
+        "prior_stimulus_cycles": 14,
+        "included_in_denominator": true
+      },
+      "format_rejection_followed_by_execution": {
+        "tasks": 1,
+        "episodes": 2,
+        "detected_tasks": 0
+      },
+      "plan_budget_rejection_followed_by_execution": {
+        "tasks": 2,
+        "detected_tasks": 1
+      },
+      "no_feedback_states_all_hidden": 31,
+      "paid_feedback_states_with_ports": 20,
+      "port_observation_documents": 80,
+      "port_returned_samples": 701,
+      "port_omitted_samples": 125,
+      "interpretation": "反馈11/12高于单次8/12、无反馈10/12，低于固定12/12；仅本批观察，未证明稳定胜出、显著性、因果或工业效益。"
+    },
+    "historical_v8_432": {
+      "source_revision": "a96933786c17986a739fc2da515db3294d6e8044",
+      "registered_tasks": 432,
+      "executed_tasks": 414,
+      "audited_rounds": 484,
+      "pipeline_sides": 968,
+      "repeats": 3,
+      "strict_comparison_eligible": false,
+      "snapshot_verified": true,
+      "frozen_inputs": 131,
+      "requests": 306,
+      "tokens": {
+        "reported_tokens": 973149,
+        "unknown_reserved_tokens": 0,
+        "conservative_total": 973149,
+        "remaining_tokens": 26851,
+        "requests_known_usage": 306,
+        "requests_unknown_usage": 0
+      },
+      "round_token_cap": 1000000,
+      "schema_counts": {
+        "passed": 287,
+        "rejected": 18,
+        "not_reached": 9
+      },
+      "started_at_utc": "2026-10-05T04:08:20.125171+00:00",
+      "finished_at_utc": "2026-10-05T04:28:29.066686+00:00",
+      "wall_seconds": 1208.941515,
+      "id": "historical_v8_432",
+      "label": "历史端口反馈对照：432 登记任务",
+      "receipt_source": "docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json",
+      "raw_results_source": "docs/experiment/agent-feedback-study-live-2026-10-05/results.zip",
+      "distinct_defects": 16,
+      "unexecuted_tasks_count": 18,
+      "ordinary_format_rejections": 18,
+      "plan_budget_rejections": 16,
+      "plan_preflight_rejections": 0,
+      "raw_row_counts_recomputed": true,
+      "raw_results_sha_verified": true,
+      "zip_crc_verified": true,
+      "strategies": [
+        {
+          "id": "fixed",
+          "label": "固定测试",
+          "registered_tasks": 72,
+          "defect_denominator": 48,
+          "detected": 48,
+          "detection_rate_percent": 100.0,
+          "repeat_detections": [
+            16,
+            16,
+            16
+          ],
+          "repeat_defect_denominator": 16,
+          "unique_defects": 16,
+          "unique_detected": 16,
+          "correct_denominator": 24,
+          "correct_executed": 24,
+          "actual_correct_false_alarms": 0,
+          "requests": 0,
+          "tokens": 0,
+          "search_cycles_recorded": 1404,
+          "terminal_status_counts": {
+            "not_detected": 24,
+            "detected": 48
+          }
+        },
+        {
+          "id": "random",
+          "label": "均匀随机",
+          "registered_tasks": 72,
+          "defect_denominator": 48,
+          "detected": 32,
+          "detection_rate_percent": 66.666667,
+          "repeat_detections": [
+            11,
+            11,
+            10
+          ],
+          "repeat_defect_denominator": 16,
+          "unique_defects": 16,
+          "unique_detected": 14,
+          "correct_denominator": 24,
+          "correct_executed": 24,
+          "actual_correct_false_alarms": 0,
+          "requests": 0,
+          "tokens": 0,
+          "search_cycles_recorded": 1404,
+          "terminal_status_counts": {
+            "not_detected": 40,
+            "detected": 32
+          }
+        },
+        {
+          "id": "protocol_random",
+          "label": "协议随机",
+          "registered_tasks": 72,
+          "defect_denominator": 48,
+          "detected": 48,
+          "detection_rate_percent": 100.0,
+          "repeat_detections": [
+            16,
+            16,
+            16
+          ],
+          "repeat_defect_denominator": 16,
+          "unique_defects": 16,
+          "unique_detected": 16,
+          "correct_denominator": 24,
+          "correct_executed": 24,
+          "actual_correct_false_alarms": 0,
+          "requests": 0,
+          "tokens": 0,
+          "search_cycles_recorded": 1404,
+          "terminal_status_counts": {
+            "not_detected": 24,
+            "detected": 48
+          }
+        },
+        {
+          "id": "single",
+          "label": "单次 API",
+          "registered_tasks": 72,
+          "defect_denominator": 48,
+          "detected": 29,
+          "detection_rate_percent": 60.416667,
+          "repeat_detections": [
+            12,
+            10,
+            7
+          ],
+          "repeat_defect_denominator": 16,
+          "unique_defects": 16,
+          "unique_detected": 14,
+          "correct_denominator": 24,
+          "correct_executed": 23,
+          "actual_correct_false_alarms": 0,
+          "requests": 70,
+          "tokens": 205503,
+          "search_cycles_recorded": 888,
+          "terminal_status_counts": {
+            "not_detected": 32,
+            "request_budget": 3,
+            "detected": 29,
+            "decision_format_error": 6,
+            "token_budget": 2
+          }
+        },
+        {
+          "id": "feedback",
+          "label": "反馈 Agent",
+          "registered_tasks": 72,
+          "defect_denominator": 48,
+          "detected": 37,
+          "detection_rate_percent": 77.083333,
+          "repeat_detections": [
+            11,
+            16,
+            10
+          ],
+          "repeat_defect_denominator": 16,
+          "unique_defects": 16,
+          "unique_detected": 16,
+          "correct_denominator": 24,
+          "correct_executed": 24,
+          "actual_correct_false_alarms": 0,
+          "requests": 122,
+          "tokens": 426581,
+          "search_cycles_recorded": 1177,
+          "terminal_status_counts": {
+            "not_detected": 32,
+            "detected": 37,
+            "token_budget": 3
+          }
+        },
+        {
+          "id": "no_feedback",
+          "label": "无反馈 Agent",
+          "registered_tasks": 72,
+          "defect_denominator": 48,
+          "detected": 37,
+          "detection_rate_percent": 77.083333,
+          "repeat_detections": [
+            12,
+            14,
+            11
+          ],
+          "repeat_defect_denominator": 16,
+          "unique_defects": 16,
+          "unique_detected": 15,
+          "correct_denominator": 24,
+          "correct_executed": 24,
+          "actual_correct_false_alarms": 0,
+          "requests": 114,
+          "tokens": 341065,
+          "search_cycles_recorded": 1179,
+          "terminal_status_counts": {
+            "not_detected": 31,
+            "detected": 37,
+            "policy_error": 1,
+            "token_budget": 3
+          }
+        }
+      ],
+      "external_independent_holdout": false,
+      "human_trial": false,
+      "H02_human_review": false,
+      "public_copy_contains_all_execution_side_logs": true,
+      "correct_false_alarm_scope": "仅已执行正确目标及保存的参考审核；不等于所有正确任务完整成功",
+      "unexecuted_tasks": [
+        {
+          "row_index": 29,
+          "case": "credit_guard",
+          "variant": "reference",
+          "strategy": "single",
+          "seed": 0,
+          "status": "request_budget"
+        },
+        {
+          "row_index": 55,
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "strategy": "single",
+          "seed": 0,
+          "status": "decision_format_error"
+        },
+        {
+          "row_index": 113,
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "strategy": "single",
+          "seed": 0,
+          "status": "request_budget"
+        },
+        {
+          "row_index": 209,
+          "case": "spi_master",
+          "variant": "spi_bug_sclk_polarity",
+          "strategy": "single",
+          "seed": 1,
+          "status": "decision_format_error"
+        },
+        {
+          "row_index": 236,
+          "case": "pulse_stretcher",
+          "variant": "mutation_b",
+          "strategy": "no_feedback",
+          "seed": 1,
+          "status": "policy_error"
+        },
+        {
+          "row_index": 240,
+          "case": "sync_fifo",
+          "variant": "fifo_bug_write_when_full",
+          "strategy": "single",
+          "seed": 1,
+          "status": "decision_format_error"
+        },
+        {
+          "row_index": 336,
+          "case": "sync_fifo",
+          "variant": "fifo_bug_full_off_by_one",
+          "strategy": "single",
+          "seed": 2,
+          "status": "decision_format_error"
+        },
+        {
+          "row_index": 347,
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "strategy": "single",
+          "seed": 2,
+          "status": "decision_format_error"
+        },
+        {
+          "row_index": 383,
+          "case": "pulse_stretcher",
+          "variant": "mutation_b",
+          "strategy": "single",
+          "seed": 2,
+          "status": "request_budget"
+        },
+        {
+          "row_index": 404,
+          "case": "handshake_stage",
+          "variant": "hs_bug_valid_not_cleared",
+          "strategy": "single",
+          "seed": 2,
+          "status": "decision_format_error"
+        },
+        {
+          "row_index": 415,
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "strategy": "feedback",
+          "seed": 2,
+          "status": "token_budget"
+        },
+        {
+          "row_index": 416,
+          "case": "rotating_arbiter",
+          "variant": "mutation_c",
+          "strategy": "no_feedback",
+          "seed": 2,
+          "status": "token_budget"
+        },
+        {
+          "row_index": 420,
+          "case": "edge_detector",
+          "variant": "mutation_c",
+          "strategy": "feedback",
+          "seed": 2,
+          "status": "token_budget"
+        },
+        {
+          "row_index": 421,
+          "case": "edge_detector",
+          "variant": "mutation_c",
+          "strategy": "no_feedback",
+          "seed": 2,
+          "status": "token_budget"
+        },
+        {
+          "row_index": 425,
+          "case": "edge_detector",
+          "variant": "mutation_c",
+          "strategy": "single",
+          "seed": 2,
+          "status": "token_budget"
+        },
+        {
+          "row_index": 426,
+          "case": "pulse_stretcher",
+          "variant": "mutation_c",
+          "strategy": "no_feedback",
+          "seed": 2,
+          "status": "token_budget"
+        },
+        {
+          "row_index": 430,
+          "case": "pulse_stretcher",
+          "variant": "mutation_c",
+          "strategy": "single",
+          "seed": 2,
+          "status": "token_budget"
+        },
+        {
+          "row_index": 431,
+          "case": "pulse_stretcher",
+          "variant": "mutation_c",
+          "strategy": "feedback",
+          "seed": 2,
+          "status": "token_budget"
+        }
+      ],
+      "all_modules_previously_agent_exposed": true,
+      "not_an_independent_new_module_holdout": true,
+      "interpretation": "反馈与无反馈均37/48，低于固定和协议随机48/48；18项未执行，不能称完整严格对照，也不能与最新108合并。"
+    },
+    "format_recovery_v6_216": {
+      "source_revision": "9c3bd3c0cf9caa0fb95e6bbdee6147ae447e58cc",
+      "registered_tasks": 216,
+      "executed_tasks": 212,
+      "audited_rounds": 229,
+      "pipeline_sides": 458,
+      "repeats": 3,
+      "strict_comparison_eligible": false,
+      "snapshot_verified": true,
+      "frozen_inputs": 89,
+      "requests": 138,
+      "tokens": {
+        "reported_tokens": 378204,
+        "unknown_reserved_tokens": 0,
+        "conservative_total": 378204,
+        "remaining_tokens": 621796,
+        "requests_known_usage": 138,
+        "requests_unknown_usage": 0
+      },
+      "round_token_cap": 1000000,
+      "schema_counts": {
+        "accepted": 125,
+        "rejected": 13
+      },
+      "started_at_utc": "2026-10-04T22:21:50.092549+00:00",
+      "finished_at_utc": "2026-10-04T22:28:23.107371+00:00",
+      "wall_seconds": 393.014822,
+      "id": "format_recovery_v6_216",
+      "label": "v6 普通格式恢复：216 登记任务",
+      "receipt_source": "docs/experiment/agent-recovery-study-live-2026-10-05/receipt.json",
+      "raw_results_source": "docs/experiment/agent-recovery-study-live-2026-10-05/results.zip",
+      "distinct_defects": 8,
+      "unexecuted_tasks_count": 4,
+      "ordinary_format_rejections": 10,
+      "plan_budget_rejections": null,
+      "plan_preflight_rejections": null,
+      "raw_row_counts_recomputed": true,
+      "raw_results_sha_verified": true,
+      "zip_crc_verified": true,
+      "strategies": [
+        {
+          "id": "fixed",
+          "label": "固定测试",
+          "registered_tasks": 36,
+          "defect_denominator": 24,
+          "detected": 21,
+          "detection_rate_percent": 87.5,
+          "repeat_detections": [
+            7,
+            7,
+            7
+          ],
+          "repeat_defect_denominator": 8,
+          "unique_defects": 8,
+          "unique_detected": 7,
+          "correct_denominator": 12,
+          "correct_executed": 12,
+          "actual_correct_false_alarms": 0,
+          "requests": 0,
+          "tokens": 0,
+          "search_cycles_recorded": 828,
+          "terminal_status_counts": {
+            "not_detected": 15,
+            "detected": 21
+          }
+        },
+        {
+          "id": "random",
+          "label": "均匀随机",
+          "registered_tasks": 36,
+          "defect_denominator": 24,
+          "detected": 16,
+          "detection_rate_percent": 66.666667,
+          "repeat_detections": [
+            5,
+            5,
+            6
+          ],
+          "repeat_defect_denominator": 8,
+          "unique_defects": 8,
+          "unique_detected": 7,
+          "correct_denominator": 12,
+          "correct_executed": 12,
+          "actual_correct_false_alarms": 0,
+          "requests": 0,
+          "tokens": 0,
+          "search_cycles_recorded": 828,
+          "terminal_status_counts": {
+            "not_detected": 20,
+            "detected": 16
+          }
+        },
+        {
+          "id": "protocol_random",
+          "label": "协议随机",
+          "registered_tasks": 36,
+          "defect_denominator": 24,
+          "detected": 21,
+          "detection_rate_percent": 87.5,
+          "repeat_detections": [
+            7,
+            7,
+            7
+          ],
+          "repeat_defect_denominator": 8,
+          "unique_defects": 8,
+          "unique_detected": 7,
+          "correct_denominator": 12,
+          "correct_executed": 12,
+          "actual_correct_false_alarms": 0,
+          "requests": 0,
+          "tokens": 0,
+          "search_cycles_recorded": 828,
+          "terminal_status_counts": {
+            "not_detected": 15,
+            "detected": 21
+          }
+        },
+        {
+          "id": "single",
+          "label": "单次 API",
+          "registered_tasks": 36,
+          "defect_denominator": 24,
+          "detected": 20,
+          "detection_rate_percent": 83.333333,
+          "repeat_detections": [
+            6,
+            8,
+            6
+          ],
+          "repeat_defect_denominator": 8,
+          "unique_defects": 8,
+          "unique_detected": 8,
+          "correct_denominator": 12,
+          "correct_executed": 12,
+          "actual_correct_false_alarms": 0,
+          "requests": 36,
+          "tokens": 95612,
+          "search_cycles_recorded": 621,
+          "terminal_status_counts": {
+            "not_detected": 14,
+            "detected": 20,
+            "decision_format_error": 2
+          }
+        },
+        {
+          "id": "feedback",
+          "label": "反馈 Agent",
+          "registered_tasks": 36,
+          "defect_denominator": 24,
+          "detected": 23,
+          "detection_rate_percent": 95.833333,
+          "repeat_detections": [
+            8,
+            7,
+            8
+          ],
+          "repeat_defect_denominator": 8,
+          "unique_defects": 8,
+          "unique_detected": 8,
+          "correct_denominator": 12,
+          "correct_executed": 11,
+          "actual_correct_false_alarms": 0,
+          "requests": 51,
+          "tokens": 145050,
+          "search_cycles_recorded": 688,
+          "terminal_status_counts": {
+            "not_detected": 10,
+            "policy_error": 1,
+            "detected": 23,
+            "decision_format_error": 2
+          }
+        },
+        {
+          "id": "no_feedback",
+          "label": "无反馈 Agent",
+          "registered_tasks": 36,
+          "defect_denominator": 24,
+          "detected": 22,
+          "detection_rate_percent": 91.666667,
+          "repeat_detections": [
+            7,
+            7,
+            8
+          ],
+          "repeat_defect_denominator": 8,
+          "unique_defects": 8,
+          "unique_detected": 8,
+          "correct_denominator": 12,
+          "correct_executed": 12,
+          "actual_correct_false_alarms": 0,
+          "requests": 51,
+          "tokens": 137542,
+          "search_cycles_recorded": 687,
+          "terminal_status_counts": {
+            "not_detected": 11,
+            "detected": 22,
+            "cycle_budget": 1,
+            "policy_error": 2
+          }
+        }
+      ],
+      "external_independent_holdout": false,
+      "human_trial": false,
+      "H02_human_review": false,
+      "public_copy_contains_all_execution_side_logs": false,
+      "correct_false_alarm_scope": "仅已执行正确目标及保存的参考审核；不等于所有正确任务完整成功",
+      "unexecuted_tasks": [
+        {
+          "row_index": 9,
+          "case": "uart_tx",
+          "variant": "reference",
+          "strategy": "feedback",
+          "seed": 0,
+          "status": "policy_error"
+        },
+        {
+          "row_index": 31,
+          "case": "uart_tx",
+          "variant": "uart_bug_msb_first",
+          "strategy": "single",
+          "seed": 0,
+          "status": "decision_format_error"
+        },
+        {
+          "row_index": 56,
+          "case": "uart_tx",
+          "variant": "uart_bug_busy_never_clears",
+          "strategy": "no_feedback",
+          "seed": 0,
+          "status": "cycle_budget"
+        },
+        {
+          "row_index": 207,
+          "case": "spi_master",
+          "variant": "spi_bug_done_missing",
+          "strategy": "single",
+          "seed": 2,
+          "status": "decision_format_error"
+        }
+      ],
+      "all_rejected_responses": 13,
+      "ordinary_schema_rejections": 10,
+      "duplicate_key_safety_rejections": 3,
+      "schema_recovery_legal_actions": 5,
+      "actual_recovered_execution_tasks": 4,
+      "recovered_detected_defect_tasks": 3,
+      "recovered_correct_task_without_false_alarm": 1,
+      "recovered_stop_only_tasks": 1,
+      "retained_safe_response_files": 135,
+      "blocked_response_originals_saved": false,
+      "ordinary_rejection_tokens": 28277,
+      "all_rejection_tokens": 36320,
+      "all_tokens_include_rejected_requests": true,
+      "ordinary_rejections_all_schema_invalid": true,
+      "observed_json_invalid_count": 0,
+      "format_recovery_rows": [
+        86,
+        156,
+        174,
+        180,
+        198
+      ],
+      "actually_executed_recovery_rows": [
+        156,
+        174,
+        180,
+        198
+      ],
+      "feedback_detection_first_real_simulation_counts": 23,
+      "feedback_detection_first_request_counts": 21,
+      "feedback_actual_repeated_simulation_added_detections": 0,
+      "interpretation": "反馈23/24比上批18/24多5项，仅为整体配置变化的观察；23次检出都在首实际仿真，恢复和提示同时变化，不能声称仿真反馈产生增益。",
+      "output_acceptance_comparison": {
+        "previous_v5_accepted": 136,
+        "previous_v5_requests": 145,
+        "current_v6_accepted": 125,
+        "current_v6_requests": 138,
+        "output_format_failure_rate_improvement_claim_supported": false
+      }
+    },
+    "unified_spec_v5_216": {
+      "source_revision": "75f9baa87987ef9ed7f660600db5818b9394afb7",
+      "registered_tasks": 216,
+      "executed_tasks": 212,
+      "audited_rounds": 240,
+      "pipeline_sides": 480,
+      "repeats": 3,
+      "strict_comparison_eligible": false,
+      "snapshot_verified": true,
+      "frozen_inputs": 85,
+      "requests": 145,
+      "tokens": {
+        "reported_tokens": 399083,
+        "unknown_reserved_tokens": 0,
+        "conservative_total": 399083,
+        "remaining_tokens": 600917,
+        "requests_known_usage": 145,
+        "requests_unknown_usage": 0
+      },
+      "round_token_cap": 1000000,
+      "schema_counts": {
+        "validated": 136,
+        "rejected": 9
+      },
+      "started_at_utc": "2026-10-04T20:37:51.758165+00:00",
+      "finished_at_utc": "2026-10-04T20:45:15.255582+00:00",
+      "wall_seconds": 443.497417,
+      "id": "unified_spec_v5_216",
+      "label": "统一规格与每轮 1M 预算：216 登记任务",
+      "receipt_source": "docs/experiment/agent-study-1m-live-2026-10-05/receipt.json",
+      "raw_results_source": "docs/experiment/agent-study-1m-live-2026-10-05/results.json",
+      "distinct_defects": 8,
+      "unexecuted_tasks_count": 4,
+      "ordinary_format_rejections": 9,
+      "plan_budget_rejections": null,
+      "plan_preflight_rejections": null,
+      "raw_row_counts_recomputed": true,
+      "raw_results_sha_verified": true,
+      "zip_crc_verified": null,
+      "strategies": [
+        {
+          "id": "fixed",
+          "label": "固定测试",
+          "registered_tasks": 36,
+          "defect_denominator": 24,
+          "detected": 21,
+          "detection_rate_percent": 87.5,
+          "repeat_detections": [
+            7,
+            7,
+            7
+          ],
+          "repeat_defect_denominator": 8,
+          "unique_defects": 8,
+          "unique_detected": 7,
+          "correct_denominator": 12,
+          "correct_executed": 12,
+          "actual_correct_false_alarms": 0,
+          "requests": 0,
+          "tokens": 0,
+          "search_cycles_recorded": 828,
+          "terminal_status_counts": {
+            "not_detected": 15,
+            "detected": 21
+          }
+        },
+        {
+          "id": "random",
+          "label": "均匀随机",
+          "registered_tasks": 36,
+          "defect_denominator": 24,
+          "detected": 16,
+          "detection_rate_percent": 66.666667,
+          "repeat_detections": [
+            5,
+            5,
+            6
+          ],
+          "repeat_defect_denominator": 8,
+          "unique_defects": 8,
+          "unique_detected": 7,
+          "correct_denominator": 12,
+          "correct_executed": 12,
+          "actual_correct_false_alarms": 0,
+          "requests": 0,
+          "tokens": 0,
+          "search_cycles_recorded": 828,
+          "terminal_status_counts": {
+            "not_detected": 20,
+            "detected": 16
+          }
+        },
+        {
+          "id": "protocol_random",
+          "label": "协议随机",
+          "registered_tasks": 36,
+          "defect_denominator": 24,
+          "detected": 21,
+          "detection_rate_percent": 87.5,
+          "repeat_detections": [
+            7,
+            7,
+            7
+          ],
+          "repeat_defect_denominator": 8,
+          "unique_defects": 8,
+          "unique_detected": 7,
+          "correct_denominator": 12,
+          "correct_executed": 12,
+          "actual_correct_false_alarms": 0,
+          "requests": 0,
+          "tokens": 0,
+          "search_cycles_recorded": 828,
+          "terminal_status_counts": {
+            "not_detected": 15,
+            "detected": 21
+          }
+        },
+        {
+          "id": "single",
+          "label": "单次 API",
+          "registered_tasks": 36,
+          "defect_denominator": 24,
+          "detected": 21,
+          "detection_rate_percent": 87.5,
+          "repeat_detections": [
+            7,
+            8,
+            6
+          ],
+          "repeat_defect_denominator": 8,
+          "unique_defects": 8,
+          "unique_detected": 8,
+          "correct_denominator": 12,
+          "correct_executed": 12,
+          "actual_correct_false_alarms": 0,
+          "requests": 36,
+          "tokens": 94140,
+          "search_cycles_recorded": 651,
+          "terminal_status_counts": {
+            "not_detected": 14,
+            "detected": 21,
+            "policy_error": 1
+          }
+        },
+        {
+          "id": "feedback",
+          "label": "反馈 Agent",
+          "registered_tasks": 36,
+          "defect_denominator": 24,
+          "detected": 18,
+          "detection_rate_percent": 75.0,
+          "repeat_detections": [
+            7,
+            4,
+            7
+          ],
+          "repeat_defect_denominator": 8,
+          "unique_defects": 8,
+          "unique_detected": 8,
+          "correct_denominator": 12,
+          "correct_executed": 12,
+          "actual_correct_false_alarms": 0,
+          "requests": 57,
+          "tokens": 165443,
+          "search_cycles_recorded": 681,
+          "terminal_status_counts": {
+            "not_detected": 14,
+            "detected": 18,
+            "policy_error": 4
+          }
+        },
+        {
+          "id": "no_feedback",
+          "label": "无反馈 Agent",
+          "registered_tasks": 36,
+          "defect_denominator": 24,
+          "detected": 22,
+          "detection_rate_percent": 91.666667,
+          "repeat_detections": [
+            7,
+            7,
+            8
+          ],
+          "repeat_defect_denominator": 8,
+          "unique_defects": 8,
+          "unique_detected": 8,
+          "correct_denominator": 12,
+          "correct_executed": 11,
+          "actual_correct_false_alarms": 0,
+          "requests": 52,
+          "tokens": 139500,
+          "search_cycles_recorded": 716,
+          "terminal_status_counts": {
+            "not_detected": 10,
+            "detected": 22,
+            "policy_error": 4
+          }
+        }
+      ],
+      "external_independent_holdout": false,
+      "human_trial": false,
+      "H02_human_review": false,
+      "public_copy_contains_all_execution_side_logs": false,
+      "correct_false_alarm_scope": "仅已执行正确目标及保存的参考审核；不等于所有正确任务完整成功"
+    }
+  },
+  "historical_v3_source_consistency": {
+    "all_listed_sources_sha_and_bytes_match": true,
+    "sources_checked": [
+      {
+        "id": "new108_receipt",
+        "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+        "sha_matches_v3": true,
+        "bytes_match_v3": true
+      },
+      {
+        "id": "old432_receipt",
+        "path": "docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json",
+        "sha_matches_v3": true,
+        "bytes_match_v3": true
+      },
+      {
+        "id": "new108_budget",
+        "path": "docs/experiment/agent_new_holdout_study_budget_2026-10-05.json",
+        "sha_matches_v3": true,
+        "bytes_match_v3": true
+      },
+      {
+        "id": "new108_review",
+        "path": "docs/review/agent-new-holdout-study-review-2026-10-05/receipt.json",
+        "sha_matches_v3": true,
+        "bytes_match_v3": true
+      },
+      {
+        "id": "historical_v2_material_data",
+        "path": "docs/competition/ic/defense_v2/data.json",
+        "sha_matches_v3": true,
+        "bytes_match_v3": true
+      },
+      {
+        "id": "core_audit",
+        "path": "docs/review/agent-new-holdout-study-review-2026-10-05/core-audit.json",
+        "sha_matches_v3": true,
+        "bytes_match_v3": true
+      },
+      {
+        "id": "trace_audit",
+        "path": "docs/review/agent-new-holdout-study-review-2026-10-05/trace-audit.json",
+        "sha_matches_v3": true,
+        "bytes_match_v3": true
+      }
+    ],
+    "raw_latest_and_historical_strategy_counts_match_v3": true
+  },
+  "human_trial": {
+    "record_date": "2026-10-13",
+    "source": "docs/trial/other_pc_user_trial_2026-10-13.md",
+    "record_type": "assisted_real_user_operation_on_another_computer",
+    "actual_user_operation_evidence": true,
+    "problem_count": 11,
+    "problem_ids": [
+      "PC-01",
+      "PC-02",
+      "PC-03",
+      "PC-04",
+      "PC-05",
+      "PC-06",
+      "PC-07",
+      "PC-08",
+      "PC-09",
+      "PC-10",
+      "PC-11"
+    ],
+    "formal_H01_complete": false,
+    "H02_independent_human_review_complete": false,
+    "independent_third_party_reproduction_complete": false,
+    "unaided_task_completion_proven": false,
+    "latest_fixes_user_retested": false,
+    "user_code_commit": "unknown",
+    "participant_relationship_to_team": "unknown",
+    "duration": "unknown",
+    "formal_questionnaire_original": "not_provided",
+    "completion_rate": "not_computable",
+    "satisfaction_rate": "not_computable",
+    "raw_artifact_audit_status": "本次复核去标识记录与所列SHA；16/16 manifest核验是该开发侧记录的既有结果，本次未重复读取私有ZIP",
+    "runs": [
+      {
+        "run_id": "3f7043e4bf57",
+        "status": "compile_failed",
+        "compile_exit_code": 2,
+        "simulation_run": null,
+        "result_records": 0,
+        "executed_functional_checks": 0,
+        "vcd_present": false,
+        "plan_vectors": 7,
+        "expected_fields": 37,
+        "assertions": 0,
+        "zip_bytes": 16256,
+        "zip_sha256": "63de32a89cba46aa9139de27e0978deba2fbc375f8d01f81815cbe5b454f2286"
+      },
+      {
+        "run_id": "db450deedf6a",
+        "status": "compile_failed",
+        "compile_exit_code": 2,
+        "simulation_run": null,
+        "result_records": 0,
+        "executed_functional_checks": 0,
+        "vcd_present": false,
+        "plan_vectors": 4,
+        "expected_fields": 0,
+        "assertions": 0,
+        "generated_fixed_ok_true_observation_statements": 12,
+        "those_statements_executed": false,
+        "zip_bytes": 13920,
+        "zip_sha256": "15cb3bf869cd88b27123fbc5142bc1d9d394b7577a63b2be1ee0e7759c3ecd10"
+      }
+    ],
+    "shared_rtl_sha256": "fb1bcc9f50a94b6249d2a9f15c5918e4408af318cdfa813d1be22c5c6dfa306c",
+    "uploaded_file": "onewire_byte_controller.v",
+    "declared_top_module": "one_wire_master_byte",
+    "missing_dependency_module": "one_wire_master_bit",
+    "compiler_error_line": 144,
+    "functional_defect_detection_claim_supported": false,
+    "two_runs_are_not_two_participants": true,
+    "diagnosis": "两次相同RTL均因依赖缺失未进入仿真；文件名与顶层声明不同本身不是本次错误原因。"
+  },
+  "publication": {
+    "checked_at_utc": "2026-10-13T03:09:07.271847+00:00",
+    "remote": "https://github.com/TYOCT-13/iverilog-ai-lab",
+    "remote_ref": "refs/heads/main",
+    "local_HEAD": "df7ccfa89115cfff532a73e03d447a2fc22af804",
+    "remote_main_sha": "df7ccfa89115cfff532a73e03d447a2fc22af804",
+    "pushed_verified": true,
+    "verification_method": "git -c http.proxy= -c https.proxy= ls-remote origin refs/heads/main; configured local proxy unavailable, ordinary direct HTTPS used",
+    "current_actions": [
+      {
+        "name": "verify",
+        "run_id": 38338658309,
+        "status": "completed",
+        "conclusion": "failure",
+        "url": "https://github.com/TYOCT-13/iverilog-ai-lab/actions/runs/38338658309",
+        "head_sha": "df7ccfa89115cfff532a73e03d447a2fc22af804",
+        "job_ids": [
+          115104444608
+        ]
+      },
+      {
+        "name": "CI",
+        "run_id": 38338659290,
+        "status": "completed",
+        "conclusion": "failure",
+        "url": "https://github.com/TYOCT-13/iverilog-ai-lab/actions/runs/38338659290",
+        "head_sha": "df7ccfa89115cfff532a73e03d447a2fc22af804",
+        "job_ids": [
+          115104448038,
+          115104448327,
+          115104448359,
+          115104448449
+        ]
+      }
+    ],
+    "current_actions_all_green": false,
+    "current_CI_matrix_failed_jobs": 4,
+    "read_only_job_log_examples": [
+      {
+        "job_id": 115104444608,
+        "failed": 8,
+        "passed": 2030,
+        "skipped": 22,
+        "errors": 11,
+        "seconds": 215.8
+      },
+      {
+        "job_id": 115104448327,
+        "failed": 8,
+        "passed": 2034,
+        "skipped": 18,
+        "errors": 11,
+        "seconds": 138.35
+      }
+    ],
+    "observed_failure_messages": [
+      "frozen v8 Agent or observation helper changed",
+      "frozen v8 Agent or system prompt changed"
+    ],
+    "failure_interpretation_scope": "读取日志显示历史冻结实验回归守门与当前代码字节不一致；本审计未修复或重跑测试",
+    "historical_green_actions": {
+      "source_revision": "216438d9a434702ec0fcf41bdaac68aea8c2e5c8",
+      "verified_read_only": true,
+      "runs": [
+        {
+          "name": "verify",
+          "run_id": 37754301009,
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/TYOCT-13/iverilog-ai-lab/actions/runs/37754301009"
+        },
+        {
+          "name": "CI",
+          "run_id": 37754301011,
+          "status": "completed",
+          "conclusion": "success",
+          "url": "https://github.com/TYOCT-13/iverilog-ai-lab/actions/runs/37754301011"
+        }
+      ],
+      "is_current_commit": false
+    },
+    "github_read_method": ".iverilog-ai/ci-audit-20261008/read_github.py read-only GET; credentials never printed",
+    "formal_competition_submission_proven": false
+  },
+  "official_rules": {
+    "checked_date": "2026-10-13",
+    "official_notice_checks": [
+      {
+        "url": "https://www.aicomp.cn/notice/4756.html",
+        "http_status": 200,
+        "retrieval": "ordinary requests GET; no safety-warning bypass",
+        "response_bytes": 27417,
+        "response_sha256": "e15efad2ac9b0324b820f1a89197e8483352eaac79a29867b293b654389b0d3c",
+        "deadline_10_30_20_00_present": true,
+        "updated_notice_link_present": true
+      },
+      {
+        "url": "https://www.aicomp.cn/notice/notice-3/5435.html",
+        "http_status": 200,
+        "retrieval": "ordinary requests GET; no safety-warning bypass",
+        "response_bytes": 21542,
+        "response_sha256": "d79fdd9dfe06f90f6abf025ccf1988d5fa17fccd2b242acc48e852c65ce09f8b",
+        "deadline_10_30_20_00_present": true,
+        "ic_row_fields": [
+          "7",
+          "AI+集成电路",
+          "10月30日20:00",
+          "10月30日20:00"
+        ],
+        "notice_published_date": "2026-10-10"
+      }
+    ],
+    "official_PDF_checks": [
+      {
+        "url": "https://www.aicomp.cn/wp-content/uploads/2026/07/%E9%99%84%E4%BB%B61AIC%C2%B7AI%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E7%AB%9E%E8%B5%9B%E8%A7%84%E5%88%99%E5%8F%8A%E4%BD%9C%E5%93%81%E6%8F%90%E4%BA%A4%E8%A6%81%E6%B1%82.pdf",
+        "http_status": 200,
+        "bytes": 224745,
+        "sha256": "af33abb3da8178ca3e1c60ea2041ea60244b58e917d8adb92a856439afa09e3d",
+        "same_as_frozen_2026_10_05": true,
+        "path": ".iverilog-ai/ic-materials-v3-rule-check/ic_rules.pdf",
+        "pages": 2
+      },
+      {
+        "url": "https://www.aicomp.cn/wp-content/uploads/2026/07/%E9%99%84%E4%BB%B62AIC%C2%B7AI%E9%9B%86%E6%88%90%E7%94%B5%E8%B7%AF%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A%E5%8F%82%E8%80%83%E5%A4%A7%E7%BA%B2.pdf",
+        "http_status": 200,
+        "bytes": 152425,
+        "sha256": "6a4db4e3ffb016c83b4cf020139ed6a98069aea938c2dfa524f4ea1d33884354",
+        "same_as_frozen_2026_10_05": true,
+        "path": ".iverilog-ai/ic-materials-v3-rule-check/ic_outline.pdf",
+        "pages": 2
+      }
+    ],
+    "submission_deadline": "2026-10-30 20:00",
+    "timezone": "Asia/Shanghai",
+    "old_v3_recorded_deadline": "2026-10-15 20:00",
+    "old_v3_files_modified": false,
+    "latest_update_notice": "https://www.aicomp.cn/notice/notice-3/5435.html",
+    "name_max_characters": 20,
+    "introduction_max_characters": 300,
+    "technical_report_format": "PDF",
+    "technical_report_max_size_official_text": "10M",
+    "defense_delivery_format": "PDF",
+    "editable_pptx_is_supplemental": true,
+    "supporting_evidence_delivery": "one consolidated PDF",
+    "video": {
+      "optional": true,
+      "format": "MP4",
+      "minimum_minutes": 3,
+      "maximum_minutes": 5,
+      "maximum_megabytes": 300
+    },
+    "anonymous_materials_requirements": [
+      "不得出现参赛团队学校名称",
+      "不得出现学校LOGO",
+      "不得出现指导教师信息"
+    ],
+    "outline_sections": [
+      "作品概述",
+      "需求分析",
+      "AI技术工具选择与运用",
+      "项目实施",
+      "应用成效",
+      "总结与展望",
+      "附录"
+    ],
+    "minimum_report_pages_officially_stated": null,
+    "user_requested_minimum_report_pages": 10,
+    "human_trial_and_H02_official_mandatory": false,
+    "economic_benefit_required": false,
+    "scoring": [
+      {
+        "id": "needs",
+        "label": "需求分析",
+        "points": 30
+      },
+      {
+        "id": "innovation",
+        "label": "创新性",
+        "points": 30
+      },
+      {
+        "id": "effect",
+        "label": "应用成效",
+        "points": 30
+      },
+      {
+        "id": "summary",
+        "label": "总结与展望",
+        "points": 10
+      }
+    ],
+    "clause_evidence": [
+      {
+        "pdf": "ic_rules.pdf",
+        "page": 1,
+        "section": "二（一）",
+        "paraphrase": "成果和相关案例数据应真实；引用技术算法数据需标明来源及合法授权。"
+      },
+      {
+        "pdf": "ic_rules.pdf",
+        "page": 1,
+        "section": "二（三）",
+        "paraphrase": "实际应用案例与数据或转化潜力和可行性方案可说明实用性。"
+      },
+      {
+        "pdf": "ic_rules.pdf",
+        "page": 1,
+        "section": "二（五）",
+        "paraphrase": "方案、视频及答辩材料遵守学校与导师信息的匿名限制。"
+      },
+      {
+        "pdf": "ic_rules.pdf",
+        "page": 1,
+        "section": "三1–3",
+        "paraphrase": "名称20字以内，简介300字以内，技术方案按模板大纲阐述，以不超过10M的PDF交付。"
+      },
+      {
+        "pdf": "ic_rules.pdf",
+        "page": 2,
+        "section": "三4–7",
+        "paraphrase": "视频可选；答辩以PDF提交；佐证合为单PDF；大文件可用有效网盘链接并按赛事命名规则组织。"
+      },
+      {
+        "pdf": "ic_rules.pdf",
+        "page": 2,
+        "section": "四",
+        "paraphrase": "评分由需求分析30、创新性30、应用成效30、总结展望10组成。"
+      },
+      {
+        "pdf": "ic_outline.pdf",
+        "page": 1,
+        "section": "一2、三",
+        "paraphrase": "没有经济效益可以不写；第三方AI工具应说明名称、选择理由和运用方式。"
+      },
+      {
+        "pdf": "ic_outline.pdf",
+        "page": 1,
+        "section": "四、五",
+        "paraphrase": "实施应说明步骤与关键技术；成效展示实际功能、指标和案例。"
+      },
+      {
+        "pdf": "ic_outline.pdf",
+        "page": 2,
+        "section": "七",
+        "paraphrase": "附录说明原始及处理数据来源、关键代码和文献；其他证明另作佐证上传。"
+      }
+    ]
+  },
+  "AI_implementation_boundary": {
+    "third_party_API_only": true,
+    "provider": "DeepSeek",
+    "actual_reported_model": "deepseek-flash",
+    "user_model_nickname": "4.1f",
+    "thinking": "disabled",
+    "trained_or_finetuned_weights": false,
+    "local_model_inference_proven": false,
+    "production_AI_role": "受约束的测试提案与解释；真实编译仿真、参考判据和结论由执行流水线形成。"
+  },
+  "historical_engineering_snapshot_v3": {
+    "pytest_passed": 2033,
+    "pytest_skipped": 2,
+    "pytest_failed": 0,
+    "mypy_files": 88,
+    "mypy_errors": 0,
+    "frozen_fingerprinted_files": 535,
+    "changed_fingerprints": 0,
+    "strict_rtl_style_issues_pending": 12,
+    "wavedrom_3_6_1_available": false,
+    "scope": "2026-10-05封存源码开发侧检查，不是2026-10-13当前提交全仓通过证明"
+  },
+  "evidence_levels": [
+    {
+      "id": "saved_raw_results",
+      "meaning": "本次从保存的results或ZIP重数任务与检出、核对原结果SHA，不重跑DUT。"
+    },
+    {
+      "id": "saved_experiment_receipt",
+      "meaning": "已有逐侧验证回执，属于开发与代理核验，不是人审。"
+    },
+    {
+      "id": "historical_material_snapshot",
+      "meaning": "v3封存快照，仅用于一致性与历史对照。"
+    },
+    {
+      "id": "assisted_user_record",
+      "meaning": "真实用户终端、截图与包的去标识开发侧整理，未证明独立无协助或完整复现。"
+    },
+    {
+      "id": "live_GitHub_read",
+      "meaning": "本次只读远程ref、Actions与部分job日志，结论限所列commit与run。"
+    },
+    {
+      "id": "official_reference",
+      "meaning": "本次常规GET官方通知与PDF；PDF字节与冻结官方PDF相同。"
+    }
+  ],
+  "prohibited_extrapolations": [
+    "登记任务数不能写成全部实际仿真数；不剔除未执行或异常任务再算检出率。",
+    "重复任务分母不是独立缺陷数；并集率不能替代主分母。",
+    "108、432、216不同配置与样本不合并成增长曲线或总体胜率。",
+    "内部新模块留出不是外部盲测、预训练未见或工业泛化。",
+    "schema通过、格式恢复、导出包、固定ok:true观察语句或0次检查不表示功能通过。",
+    "v6反馈23次首实际仿真检出不等于23次反馈追加检出或因果增益。",
+    "小样本观察不支持统计显著、效率提升比例、成本下降、工业收益或稳定超越基线。",
+    "tokens用量不是人民币实付费用，没有服务商账单。",
+    "代理审核或SHA核验不是独立真人H02通过。",
+    "有协助异机操作记录不等于完整H01、独立第三方复现、无协助完成率或满意度。",
+    "已推送不等于本轮Actions通过；216438d历史绿色不能归给df7ccfa。",
+    "发布修复不等于用户新版本复测成功，当前两次编译失败均保留。",
+    "2026-10-15是旧截止日；新材料使用最新2026-10-30 20:00，旧件不回改。"
+  ],
+  "source_files": [
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/receipt.json",
+      "bytes": 63381,
+      "sha256": "4751fe084711d6ed4f0d02212e715079803671a7b3605b6150679a8ee9096a65",
+      "evidence_level": "saved_evidence_source"
+    },
+    {
+      "path": "docs/experiment/agent-new-holdout-study-live-2026-10-05/results.zip",
+      "bytes": 186636,
+      "sha256": "e90ff84d5dd32f97b624484148860bcb9d65a2b429230fdf2d9c70f04ed80a7c",
+      "evidence_level": "saved_raw_result_archive"
+    },
+    {
+      "path": "docs/experiment/agent-feedback-study-live-2026-10-05/receipt.json",
+      "bytes": 182267,
+      "sha256": "2640b137f35f1a206a47136516ebd1f9db7c3a5832ce1deadf2a8f374ac02937",
+      "evidence_level": "saved_evidence_source"
+    },
+    {
+      "path": "docs/experiment/agent-feedback-study-live-2026-10-05/results.zip",
+      "bytes": 1041378,
+      "sha256": "e4c8156a181ec511ea766d36097e33f5da288737a5cccdd6c33893db477281f1",
+      "evidence_level": "saved_raw_result_archive"
+    },
+    {
+      "path": "docs/experiment/agent-recovery-study-live-2026-10-05/receipt.json",
+      "bytes": 50529,
+      "sha256": "5ca78a18c8ef9046dd378cf473c849e868239e3df7ba25a121ac25565befa4c2",
+      "evidence_level": "saved_experiment_receipt"
+    },
+    {
+      "path": "docs/experiment/agent-recovery-study-live-2026-10-05/results.zip",
+      "bytes": 605992,
+      "sha256": "288acf69d4809dd3888ee89a36b80dc521dd719f5ca23ef7bfbd85358dd72151",
+      "evidence_level": "saved_raw_result_archive"
+    },
+    {
+      "path": "docs/experiment/agent-study-1m-live-2026-10-05/receipt.json",
+      "bytes": 50972,
+      "sha256": "5780bc3cb987a1cb100d4b7a56631545ecd70433bb240505011e0d7cd33f7a62",
+      "evidence_level": "saved_experiment_receipt"
+    },
+    {
+      "path": "docs/experiment/agent-study-1m-live-2026-10-05/results.json",
+      "bytes": 10287591,
+      "sha256": "a71ebafc2b56638ce0d6694c455306f1eff9250eee27f63446e3120b56c98a38",
+      "evidence_level": "saved_raw_results"
+    },
+    {
+      "path": "docs/competition/ic/v3/material_data.json",
+      "bytes": 30806,
+      "sha256": "33a11bcce08331a5ccf18ee1c7da05059a8978a4a233a87661ff409d2d1dc8b4",
+      "evidence_level": "historical_material_snapshot"
+    },
+    {
+      "path": "docs/experiment/agent_recovery_study_live_2026-10-05.md",
+      "bytes": 11989,
+      "sha256": "ed7cfead9961f3302f29d6e6eeffec06f590f78a039269287be8158e92056868",
+      "evidence_level": "developer_document_or_agent_audit"
+    },
+    {
+      "path": "docs/review/agent_recovery_study_review_2026-10-05.md",
+      "bytes": 9496,
+      "sha256": "ad4fd32ca632687d8d692f1da88fa976f942851b719ac7139f20c91fd7bfc4e4",
+      "evidence_level": "developer_document_or_agent_audit"
+    },
+    {
+      "path": "docs/experiment/agent_study_1m_live_2026-10-05.md",
+      "bytes": 9358,
+      "sha256": "c4efafd8135f88ee4ac352ac09e5c14619cf7a5fc539848bfdf1c415c1bdb8a2",
+      "evidence_level": "developer_document_or_agent_audit"
+    },
+    {
+      "path": "docs/experiment/agent_new_holdout_study_live_2026-10-05.md",
+      "bytes": 9383,
+      "sha256": "b678c31d1697393f37caa6138eab29a3007a899ae6b8989ac5b258153cceaad4",
+      "evidence_level": "developer_document_or_agent_audit"
+    },
+    {
+      "path": "docs/experiment/agent_feedback_study_live_2026-10-05.md",
+      "bytes": 11833,
+      "sha256": "27156b90341d1f699d715eacf06834b85db1b5df5403401294a433deb6c9f31c",
+      "evidence_level": "developer_document_or_agent_audit"
+    },
+    {
+      "path": "docs/trial/other_pc_user_trial_2026-10-13.md",
+      "bytes": 12554,
+      "sha256": "7347d0e8e0abea6c8b5120af54cadf9c86bc6d25382bbca977f23da7a8e6fbf6",
+      "evidence_level": "developer_document_or_agent_audit"
+    },
+    {
+      "path": "docs/competition/ic/v3/rules_validation.json",
+      "bytes": 1483,
+      "sha256": "ec44e293b16ef871f25bec8a6b527c1cfe07f612ccc389ac8a39a13d2516b95d",
+      "evidence_level": "developer_document_or_agent_audit"
+    },
+    {
+      "path": "docs/experiment/github_actions_repair_2026-10-08.md",
+      "bytes": 10393,
+      "sha256": "25c1f5e23450aa5486f50ca8011210d623b25438a592250baa669f77e9621cc4",
+      "evidence_level": "developer_document_or_agent_audit"
+    },
+    {
+      "path": "docs/experiment/agent_new_holdout_study_budget_2026-10-05.json",
+      "bytes": 1310,
+      "sha256": "4f4bd6d305057c277b716825e69befe5895a69027ca1770d3a22c33f776cdf6b",
+      "evidence_level": "saved_evidence_source"
+    },
+    {
+      "path": "docs/review/agent-new-holdout-study-review-2026-10-05/receipt.json",
+      "bytes": 126464,
+      "sha256": "9377514673af710917a62ca219949c13c5794195360b76b6d76d4e43b330abdf",
+      "evidence_level": "saved_evidence_source"
+    },
+    {
+      "path": "docs/competition/ic/defense_v2/data.json",
+      "bytes": 9974,
+      "sha256": "a2b0f3133d210921be7eda8a4a5573f80b2a90f03a8bb8053bd5e4409819cb59",
+      "evidence_level": "saved_evidence_source"
+    },
+    {
+      "path": "docs/review/agent-new-holdout-study-review-2026-10-05/core-audit.json",
+      "bytes": 1100354,
+      "sha256": "8ebd9ec792bf6a909155adb54a9647abab0f387aefde0f94c089cd7d870e24c4",
+      "evidence_level": "saved_evidence_source"
+    },
+    {
+      "path": "docs/review/agent-new-holdout-study-review-2026-10-05/trace-audit.json",
+      "bytes": 1393100,
+      "sha256": "bf2c5294d10a507f09e0630c09d4a7f922dd08e559efe668d857ffbb94f6ca9b",
+      "evidence_level": "saved_evidence_source"
+    },
+    {
+      "path": ".iverilog-ai/ic-materials-v3-rule-check/ic_rules.pdf",
+      "bytes": 224745,
+      "sha256": "af33abb3da8178ca3e1c60ea2041ea60244b58e917d8adb92a856439afa09e3d",
+      "evidence_level": "frozen_official_pdf"
+    },
+    {
+      "path": ".iverilog-ai/ic-materials-v3-rule-check/ic_outline.pdf",
+      "bytes": 152425,
+      "sha256": "6a4db4e3ffb016c83b4cf020139ed6a98069aea938c2dfa524f4ea1d33884354",
+      "evidence_level": "frozen_official_pdf"
+    }
+  ],
+  "character_validation": {
+    "checked_at_utc": "2026-10-13T03:25:56.893663+00:00",
+    "operation": "Read existing UTF-8 bytes and all decoded JSON keys/string values; append this receipt only",
+    "audit_sha256_before_receipt": "6605d71613942c1a6325b92c06480fb86dedba2ce1a3b436a028ae7799f55a7e",
+    "recursive_replacement_char_fields_before": 0,
+    "recursive_replacement_char_fields_after": 0,
+    "utf8_EF_BF_BD_sequences_before": 0,
+    "utf8_EF_BF_BD_sequences_after": 0,
+    "canonical_official_strings_verified": true,
+    "rule_field_corrections_required": 0,
+    "existing_rule_fields_unchanged": true,
+    "official_response_hashes_preserved": true,
+    "official_PDF_bytes_preserved": [
+      {
+        "path": ".iverilog-ai/ic-materials-v3-rule-check/ic_rules.pdf",
+        "sha256": "af33abb3da8178ca3e1c60ea2041ea60244b58e917d8adb92a856439afa09e3d",
+        "unchanged": true
+      },
+      {
+        "path": ".iverilog-ai/ic-materials-v3-rule-check/ic_outline.pdf",
+        "sha256": "6a4db4e3ffb016c83b4cf020139ed6a98069aea938c2dfa524f4ea1d33884354",
+        "unchanged": true
+      }
+    ],
+    "encoding_note": "The saved UTF-8 JSON contains correct Chinese. Earlier garbled terminal output is consistent with Windows Python cp936 stdout being read as UTF-8; use python -X utf8 or ensure_ascii=True. Official requests retrieval used explicit UTF-8 decoding and the recorded response hashes remain unchanged. No evidence establishes a decoding error in the saved official-page fields.",
+    "new_network_requests": 0,
+    "new_model_API_requests": 0,
+    "new_DUT_runs": 0
+  }
+}
