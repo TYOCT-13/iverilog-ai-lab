@@ -1,0 +1,225 @@
+{
+  "output": "docs\\competition\\ic\\technical_report\\ICARUS_技术报告.pdf",
+  "pages": 22,
+  "bytes": 865151,
+  "sha256": "8014cfc1806bb4e81e192359ba1081a7d3a3d238d77c6317fcbd0f9b69613836",
+  "source_sha256": "7d21ac26efaf18cf19c40006b97c12debcb5283ccd387a4e4174c09d01545b9c",
+  "chinese_characters": 9984,
+  "figures": 10,
+  "headings": [
+    {
+      "level": 0,
+      "title": "摘要",
+      "page": 2
+    },
+    {
+      "level": 0,
+      "title": "目录",
+      "page": 3
+    },
+    {
+      "level": 0,
+      "title": "一、作品概述",
+      "page": 5
+    },
+    {
+      "level": 1,
+      "title": "1.1 项目背景",
+      "page": 5
+    },
+    {
+      "level": 1,
+      "title": "1.2 设计目标",
+      "page": 5
+    },
+    {
+      "level": 1,
+      "title": "1.3 开发环境",
+      "page": 6
+    },
+    {
+      "level": 0,
+      "title": "二、需求分析",
+      "page": 6
+    },
+    {
+      "level": 1,
+      "title": "2.1 多拍行为的测试需求",
+      "page": 6
+    },
+    {
+      "level": 1,
+      "title": "2.2 输出判据的需求",
+      "page": 6
+    },
+    {
+      "level": 1,
+      "title": "2.3 实际导入中的问题",
+      "page": 7
+    },
+    {
+      "level": 1,
+      "title": "2.4 功能要求与实现约束",
+      "page": 7
+    },
+    {
+      "level": 0,
+      "title": "三、AI技术工具选择与运用",
+      "page": 7
+    },
+    {
+      "level": 1,
+      "title": "3.1 在线模型的选用",
+      "page": 7
+    },
+    {
+      "level": 1,
+      "title": "3.2 验证目标与提示内容",
+      "page": 8
+    },
+    {
+      "level": 1,
+      "title": "3.3 结构化测试计划",
+      "page": 8
+    },
+    {
+      "level": 1,
+      "title": "3.4 自动验证Agent",
+      "page": 9
+    },
+    {
+      "level": 1,
+      "title": "3.5 错误修正与请求限制",
+      "page": 9
+    },
+    {
+      "level": 0,
+      "title": "四、项目实施",
+      "page": 10
+    },
+    {
+      "level": 1,
+      "title": "4.1 系统总体结构",
+      "page": 10
+    },
+    {
+      "level": 1,
+      "title": "4.2 接口合约与编译预检",
+      "page": 10
+    },
+    {
+      "level": 1,
+      "title": "4.3 输入驱动与逐拍采样",
+      "page": 11
+    },
+    {
+      "level": 1,
+      "title": "4.4 FIFO参考模型与同拍读写",
+      "page": 12
+    },
+    {
+      "level": 1,
+      "title": "4.5 UART位时序与完成条件检查",
+      "page": 14
+    },
+    {
+      "level": 1,
+      "title": "4.6 功能场景统计",
+      "page": 14
+    },
+    {
+      "level": 1,
+      "title": "4.7 Agent执行状态与反馈",
+      "page": 15
+    },
+    {
+      "level": 1,
+      "title": "4.8 实施过程与运行资料",
+      "page": 15
+    },
+    {
+      "level": 0,
+      "title": "五、应用成效",
+      "page": 16
+    },
+    {
+      "level": 1,
+      "title": "5.1 完整对照的实验设置",
+      "page": 16
+    },
+    {
+      "level": 1,
+      "title": "5.2 检出结果与实际资源",
+      "page": 16
+    },
+    {
+      "level": 1,
+      "title": "5.3 失败动作与资源统计",
+      "page": 18
+    },
+    {
+      "level": 1,
+      "title": "5.4 较大模块集合的结果",
+      "page": 18
+    },
+    {
+      "level": 1,
+      "title": "5.5 判据改进带来的变化",
+      "page": 18
+    },
+    {
+      "level": 1,
+      "title": "5.6 实际使用与应用价值",
+      "page": 19
+    },
+    {
+      "level": 0,
+      "title": "六、总结与展望",
+      "page": 20
+    },
+    {
+      "level": 1,
+      "title": "6.1 设计总结",
+      "page": 20
+    },
+    {
+      "level": 1,
+      "title": "6.2 当前不足",
+      "page": 20
+    },
+    {
+      "level": 1,
+      "title": "6.3 后续改进方向",
+      "page": 20
+    },
+    {
+      "level": 0,
+      "title": "七、附录",
+      "page": 21
+    },
+    {
+      "level": 1,
+      "title": "7.1 数据资料与结果来源",
+      "page": 21
+    },
+    {
+      "level": 1,
+      "title": "7.2 关键代码与规格",
+      "page": 22
+    },
+    {
+      "level": 1,
+      "title": "7.3 复现与使用资料",
+      "page": 22
+    },
+    {
+      "level": 1,
+      "title": "7.4 参考资料",
+      "page": 22
+    }
+  ],
+  "visual_review": "passed",
+  "new_api_requests": 0,
+  "new_dut_runs": 0,
+  "visual_review_record": "visual_review.json"
+}
