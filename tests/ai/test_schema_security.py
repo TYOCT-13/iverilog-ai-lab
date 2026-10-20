@@ -49,3 +49,15 @@ def test_ai_schema_accepts_explicit_sampling_phase_only():
     assert plan.vectors[0].sample_phase == "before"
     with pytest.raises(ValidationError):
         Plan.model_validate(_plan(vectors=[{"name": "bad", "inputs": {"a": 0}, "sample_phase": "during"}]))
+
+
+def test_plan_preserves_fractional_clock_period_through_json():
+    plan = Plan.model_validate(_plan(clock_period_ns=62.5))
+    assert Plan.model_validate_json(plan.model_dump_json()).clock_period_ns == 62.5
+    assert isinstance(Plan.model_validate(_plan(clock_period_ns=10)).clock_period_ns, int)
+
+
+@pytest.mark.parametrize("period", [True, "62.5", None, float("nan"), float("inf"), -1, 0, 10001])
+def test_plan_rejects_invalid_clock_periods(period):
+    with pytest.raises(ValidationError):
+        Plan.model_validate(_plan(clock_period_ns=period))

@@ -75,3 +75,17 @@ def test_generator_has_deterministic_source(tmp_path):
     source = first.read_text(encoding="utf-8")
     second = Generator().generate(plan, _comb_contract(), tmp_path, filename="tb_second.v")
     assert source == second.read_text(encoding="utf-8")
+
+
+def test_generator_preserves_sixteen_mhz_clock(tmp_path):
+    contract = DutContract.from_dict({
+        "module": "clocked_probe",
+        "ports": [{"name": "clk", "direction": "input"}, {"name": "y", "direction": "output"}],
+        "clock": {"signal": "clk", "period_ns": 62.5, "edge": "posedge"},
+    })
+    plan = Plan.model_validate({
+        "design": "clocked_probe", "objective": "preserve physical clock period",
+        "clock_period_ns": 62.5, "vectors": [{"name": "observe", "cycles": 2}],
+    })
+    target = Generator().generate(plan, contract, tmp_path)
+    assert "always #31.25 clk = ~clk;" in target.read_text(encoding="utf-8")

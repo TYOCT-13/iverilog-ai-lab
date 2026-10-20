@@ -106,7 +106,7 @@ class TestPlan(BaseModel):
     schema_version: Literal["1.0"] = "1.0"
     design: str = Field(min_length=1, max_length=120)
     objective: str = Field(min_length=1, max_length=1000)
-    clock_period_ns: int = Field(default=10, ge=1, le=10000)
+    clock_period_ns: int | float = Field(default=10, ge=1, le=10000)
     reset: dict[str, bool | int | str] = Field(default_factory=dict)
     # 复位前观测：为真时，testbench 在任何复位和激励之前先采样一次输出。
     # 这是唯一能看到"上电初值"的时刻；初值本身不符合规格的缺陷只有在这里
@@ -146,9 +146,9 @@ class TestPlan(BaseModel):
 
     @field_validator("clock_period_ns", mode="before")
     @classmethod
-    def strict_period(cls, value: Any) -> int:
-        if isinstance(value, bool) or not isinstance(value, int):
-            raise ValueError("clock_period_ns must be an integer")
+    def strict_period(cls, value: Any) -> int | float:
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
+            raise ValueError("clock_period_ns must be a finite number")
         return value
 
     @field_validator("reset", mode="before")
