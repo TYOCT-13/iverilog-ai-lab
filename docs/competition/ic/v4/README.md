@@ -1,5 +1,7 @@
 # AI＋集成电路 v4 报告与答辩材料
 
+2026-10-21说明：本目录18页报告和结构化输入保留历史内容；答辩PPT/PDF稳定入口已同步[当前23页技术报告与20页答辩材料](../technical_report/README.md)。当前讲稿在PPT内部，以下旧讲稿及事实审计仍反映2026-10-13，不用于判断最新实现或CI状态。
+
 更新：2026-10-13。报告重写需求、AI工具与方案、项目实施、应用成效、总结和附录，突出各次迭代的触发问题、实现变化和可核对结果。旧v3材料、冻结实验与原始失败均保留。
 
 ## 交付文件
@@ -10,8 +12,8 @@
 | [完整文字源稿](technical_report_full.md) | 包含正文及两页附录，便于修改措辞与内容 |
 | [正文排版数据](report_content.json)、[图证附录](appendix_content.json) | PDF的结构化输入 |
 | [答辩PPTX](presentation/output/ICARUS_AI_IC_defense_v4.pptx) | 20页可编辑答辩稿；含原生标题、表格和数值图表 |
-| [答辩PDF](presentation/output/ICARUS_AI_IC_defense_v4.pdf) | 20页，与PPT最终渲染对应的图像式PDF，约6.05MB |
-| [讲稿](presentation/speaker_notes.md) | 按页说明数据、迭代和证据边界 |
+| [答辩PDF](presentation/output/ICARUS_AI_IC_defense_v4.pdf) | 20页，与当前PPT最终渲染对应的图像式PDF，约2.35MB |
+| [历史讲稿](presentation/speaker_notes.md) | 旧稿保留；当前按页说明见PPT内讲稿 |
 | [事实审计](evidence_audit.json) | 原始实验、GitHub任务、真实用户反馈及官方规则核对 |
 | [报告构建回执](report_build_receipt.json)、[PPT交付回执](presentation/delivery_receipt.json)、[最终核验](delivery_validation.json) | 页数、大小、SHA、字体与视觉检查范围 |
 

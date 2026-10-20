@@ -1,0 +1,133 @@
+{
+  "schema": "icarus-report-synchronized-presentation-v1",
+  "date": "2026-10-21",
+  "report_source": "docs/competition/ic/technical_report/technical_report.md",
+  "report_source_sha256": "f108fcf001dbd7c40278822151d4ed785065b96eb8ea7209443e34afb5787792",
+  "source_pptx_revision": "9b39751748b5739459c0f06bc69fcf344c7b94b7",
+  "source_pptx_path": "docs/competition/ic/v4/presentation/output/ICARUS_AI_IC_defense_v4.pptx",
+  "source_pptx_sha256": "7db4fdeb240326872d1bbdcc35221db71b57aa2568da15ca621e5e193f3d299c",
+  "slides": 20,
+  "outputs": [
+    {
+      "path": "docs/competition/ic/technical_report/presentation/ICARUS_答辩材料.pptx",
+      "bytes": 867258,
+      "sha256": "75e51011a4aec7b2978ed14c66177a053dfda86e5df5d4ce91a2e65b0ec4d957"
+    },
+    {
+      "path": "docs/competition/ic/technical_report/presentation/ICARUS_答辩材料.pdf",
+      "bytes": 2351782,
+      "sha256": "40381478efeb5d8f72d0973b9af9ad14e715cc474ddfcd4dfb2462fe11c709ef"
+    }
+  ],
+  "native_table_slides": [
+    4,
+    5,
+    10,
+    13,
+    14,
+    16,
+    17,
+    18
+  ],
+  "native_chart_slides": [
+    7,
+    11,
+    12
+  ],
+  "original_chart_workbooks_retained_byte_for_byte": [
+    11,
+    12
+  ],
+  "new_chart_literal_workbook_slide": 7,
+  "validation": "Package integrity, native tables/charts, workbook links, fonts, layout and artifact-tool reimport passed.",
+  "visual_review": "All 20 final slide renders individually inspected with view_image; final source-note update renders are SHA-identical to those reviewed.",
+  "reviewer": "Codex; not independent human H02",
+  "pdf_mode": "image_only_from_final_pptx_render",
+  "all_pdf_pages_embed_reviewed_pixels": true,
+  "all_pdf_pages_rendered_by_poppler": true,
+  "native_powerpoint_validation": false,
+  "rendered_slides": [
+    {
+      "slide": 1,
+      "sha256": "7120d5100759477e0160f51b0c21ebe39dc68babe9db387767dc656d5333d0e4"
+    },
+    {
+      "slide": 2,
+      "sha256": "64b8af0761757db866b1f19b36b616d5a5f7b314e607ad039a56066d8fe384f5"
+    },
+    {
+      "slide": 3,
+      "sha256": "d1743d1b202a72c58bb0e94566d28917611c08e75cb850029ab217c599c66ed3"
+    },
+    {
+      "slide": 4,
+      "sha256": "1503d25f55ca6204900c4d1092dbba546f729a730acc43b123a3afa3e4b084bc"
+    },
+    {
+      "slide": 5,
+      "sha256": "48c9a1de22d3fb3b9529a95968e139f5b4caec2aa79f44a6568921208472ea9b"
+    },
+    {
+      "slide": 6,
+      "sha256": "fa3eb71b3eb52761b746fc17e71fc418051e9743cc7df46551a80a8a8b2df2a7"
+    },
+    {
+      "slide": 7,
+      "sha256": "8908f73b462d8093b081e63a641ad64fb90d66fb73c6439048f4030fbdb11f62"
+    },
+    {
+      "slide": 8,
+      "sha256": "3db7b4aec2c5244044a5c807eb5785857d8650dacd858aed8730e21248cf2f0b"
+    },
+    {
+      "slide": 9,
+      "sha256": "72e16d256b5467011d745c6e1206c9685b9c76756c269d867906dbc7960fb5e7"
+    },
+    {
+      "slide": 10,
+      "sha256": "ecf3a3fa57abf72ea4af4e31e7ce8652fbc0992d32b3def749abd44d7651169c"
+    },
+    {
+      "slide": 11,
+      "sha256": "ce9999c091a1c60e20c76ffbcb323fb403b0fe612743f97e5e640f8568e47ebe"
+    },
+    {
+      "slide": 12,
+      "sha256": "156fa52891ec32c80cb816fcc255a17fb488d350ce6cf5e80b99ee5e0dba1f56"
+    },
+    {
+      "slide": 13,
+      "sha256": "42add31ddb8e664d41c4d12e987112543b5c06020ebf354b6cb0a208a09702b5"
+    },
+    {
+      "slide": 14,
+      "sha256": "efa796ad2f97446c4cd41e1af40909d2313032bcb4bff588a447f25b6269be16"
+    },
+    {
+      "slide": 15,
+      "sha256": "ace7bfc43578410fb165bcf80595a0dcb997b0aa6a1e44630db23ea7c12787e9"
+    },
+    {
+      "slide": 16,
+      "sha256": "d0c2183648923a81d594ee7f17f00a0a8f6b1c088fae94b0297c3602a27cca34"
+    },
+    {
+      "slide": 17,
+      "sha256": "1c4deda0914196082bdb84beda7da9332d430a972ad4fdc841f64311c06646ae"
+    },
+    {
+      "slide": 18,
+      "sha256": "ddc29911148451420bc06cdc20be8140c7524f3691648efc93948ea9001ae47e"
+    },
+    {
+      "slide": 19,
+      "sha256": "dbfff6136ee1ca677ac25e0868982b06881d7ff073046b7d167d9ad6cf4a6944"
+    },
+    {
+      "slide": 20,
+      "sha256": "1e56e919d9ca5e29b6d68184da5a2d0c8878ad20aad7f5c1da82aaabef41ada2"
+    }
+  ],
+  "new_model_api_requests": 0,
+  "new_experimental_dut_runs": 0
+}

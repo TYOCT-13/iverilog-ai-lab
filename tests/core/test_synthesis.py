@@ -218,3 +218,21 @@ def test_rtl_path_with_spaces_and_semicolon_is_one_filename(tmp_path):
     assert result.status == "passed", result.to_dict()
     assert result.synthesizable is True
     assert result.cell_count is not None and result.cell_count > 0
+
+
+def test_synthesis_uses_source_directory_instead_of_tool_drive(tmp_path, monkeypatch):
+    from types import SimpleNamespace
+    import iverilog_ai.core.synthesis as synthesis
+
+    source_dir = tmp_path / "rtl"
+    source_dir.mkdir()
+    source = source_dir / "dut.v"
+    source.write_text("module dut; endmodule", encoding="ascii")
+    monkeypatch.setattr(synthesis, "find_yosys", lambda _: str(tmp_path / "another-drive-tools/yosys.exe"))
+    seen = []
+    def fake_run(command, **kwargs):
+        seen.append(kwargs["cwd"])
+        return SimpleNamespace(returncode=0, stdout='{"design":{"num_cells":0,"num_wires":0}}', stderr="")
+    monkeypatch.setattr(synthesis.subprocess, "run", fake_run)
+    synthesis.YosysSynthRunner(synthesis.SynthConfig(source, "dut", tmp_path / "out")).run()
+    assert seen == [str(source_dir.resolve())]

@@ -10,8 +10,12 @@ import random
 import pytest
 
 from scripts import run_agent_new_holdout_study as study
+
+
 from scripts.run_agent_comparison import execute, freeze_registered_inputs
 from scripts.summarize_agent_comparison import build_summary, verify_frozen_inputs
+
+pytestmark = pytest.mark.usefixtures("frozen_v8_test_inputs")
 
 
 def forbidden(*args, **kwargs):
@@ -115,13 +119,35 @@ def test_full_geometry_and_truthful_new_internal_scope(registration):
     assert reg["prompt_profile_sha256"] == hashlib.sha256(json.dumps(prompt, sort_keys=True).encode()).hexdigest()
 
 
-def test_frozen_agent_uses_actual_import_and_both_original_git_blobs():
+def test_frozen_agent_uses_archived_import_and_both_original_git_blobs():
     study.validate_frozen_agent()
     assert study.PROMPT_VERSION == "verification-agent-v8-bounded-port-feedback"
     assert hashlib.sha256(study.SYSTEM_PROMPT.encode()).hexdigest() == study.SYSTEM_PROMPT_SHA256
     for relative, digest in study.FROZEN_SOURCES.items():
-        assert study.sha(study.ROOT / relative) == digest
+        assert study.sha(study.registered_source_path(relative)) == digest
         assert hashlib.sha256(study._git("show", study.FROZEN_REVISION + ":" + relative)).hexdigest() == digest
+
+
+def test_production_guard_still_rejects_current_source_drift(monkeypatch, frozen_v8_test_inputs):
+    live_source = frozen_v8_test_inputs["live_source"]
+    monkeypatch.setattr(study, "registered_source_path", live_source)
+    monkeypatch.setattr(study, "sha", frozen_v8_test_inputs["live_sha"])
+    changed = any(study.sha(live_source(path)) != digest for path, digest in study.FROZEN_SOURCES.items())
+    if changed:
+        with pytest.raises(ValueError, match="frozen v8 Agent"):
+            study.validate_frozen_agent()
+    else:
+        study.validate_frozen_agent()
+
+
+def test_historical_fixture_refuses_changed_snapshot(monkeypatch, tmp_path):
+    path = tmp_path / "changed-agent.py"
+    path.write_bytes(study.registered_source_path("src/iverilog_ai/ai/agent.py").read_bytes() + b"\n")
+    prior = study.registered_source_path
+    monkeypatch.setattr(study, "registered_source_path", lambda relative:
+        path if relative == "src/iverilog_ai/ai/agent.py" else prior(relative))
+    with pytest.raises(ValueError, match="frozen v8 Agent"):
+        study.validate_frozen_agent()
 
 
 def test_all_original_assets_sources_and_executor_dependencies_registered(registration):
@@ -144,7 +170,7 @@ def test_snapshot_preserves_exact_original_bytes_and_rejects_copy_drift(registra
     assert verify_frozen_inputs(report, registration, tmp_path)
     saved = json.loads((tmp_path / entry["path"]).read_text(encoding="utf-8"))
     for item in saved["files"]:
-        assert (tmp_path / item["copy"]).read_bytes() == (study.ROOT / item["path"]).read_bytes()
+        assert (tmp_path / item["copy"]).read_bytes() == study.registered_source_path(item["path"]).read_bytes()
     target = tmp_path / saved["files"][0]["copy"]
     target.write_bytes(target.read_bytes() + b"\n")
     assert not verify_frozen_inputs(report, registration, tmp_path)

@@ -25,6 +25,7 @@
 from __future__ import annotations
 from dataclasses import dataclass
 import hashlib
+import json
 import re
 from pathlib import Path
 from typing import Any, Mapping, Sequence
@@ -68,6 +69,7 @@ class ImportedRTLProject:
     include_dirs: tuple[Path, ...]
     modules: tuple[str, ...]
     warnings: tuple[str, ...] = ()
+    entry_path: Path | None = None
 
 
 def _safe_filename(name: str) -> str:
@@ -395,6 +397,9 @@ def import_rtl_project(
     if not srcs:
         raise RTLImportError("at least one RTL source file is required")
     incs = _normalise_files(include_files or {})
+    names = [name.casefold() for name, _ in srcs + incs]
+    if len(names) != len(set(names)):
+        raise RTLImportError("uploaded project contains duplicate filenames")
     for name, _ in incs:
         if not re.search(r"\.(?:vh|svh|v|sv)$", name, re.I):
             raise RTLImportError("include files must use .vh/.svh/.v/.sv extension")
@@ -428,6 +433,8 @@ def import_rtl_project(
         modules.extend(available_modules(data.decode("utf-8")))
     include_dir = project_dir / "include"
     if incs:
+        if include_dir.is_symlink():
+            raise RTLImportError("include directory cannot be symlink")
         include_dir.mkdir(exist_ok=True)
         for name, data in incs:
             target = (include_dir / name).resolve()
@@ -436,7 +443,28 @@ def import_rtl_project(
             target.write_bytes(data)
     if not modules:
         warnings.append("no parseable module declarations found")
-    return ImportedRTLProject(project_dir, tuple(source_paths), (include_dir,) if incs else (), tuple(dict.fromkeys(modules)), tuple(warnings))
+    has_source_includes = any(re.search(r"^\s*`include\b", data.decode("utf-8"), re.M) for _, data in srcs)
+    entry_path = source_paths[0]
+    if len(source_paths) > 1:
+        # Preserve the real files and their include directives. The controlled
+        # entry lets existing single-entry pipeline consumers use this same
+        # compilation unit without inserting header text between RTL modules.
+        entry_name = "__icarus_project__.sv"
+        while entry_name.casefold() in names:
+            entry_name = "_" + entry_name
+        entry_path = project_dir / entry_name
+        if entry_path.is_symlink():
+            raise RTLImportError("project entry cannot be symlink")
+        if incs or has_source_includes:
+            entry = "\n".join('`include ' + json.dumps(path.name) for path in source_paths) + "\n"
+        else:
+            # Source-only projects remain a self-contained execution snapshot,
+            # so their evidence pack can still be replayed without dependencies.
+            # Headers are never inserted between design files this way.
+            entry = "\n\n".join("// source: " + name + "\n" + data.decode("utf-8") for name, data in srcs)
+        entry_path.write_text(entry, encoding="utf-8")
+    includes = (project_dir, include_dir) if incs else (project_dir,) if has_source_includes else ()
+    return ImportedRTLProject(project_dir, tuple(source_paths), includes, tuple(dict.fromkeys(modules)), tuple(warnings), entry_path)
 
 
 __all__ = [

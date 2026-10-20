@@ -43,7 +43,7 @@ from iverilog_ai.core.reference_model import reference_sampling_profile
 from iverilog_ai.core.report import write_report
 from iverilog_ai.core.toolchain import locate_tools
 from iverilog_ai.core.rtl_preflight import check_rtl_syntax
-from iverilog_ai.core.rtl_import import import_rtl_bytes, extract_contract_draft, available_modules, RTLImportError
+from iverilog_ai.core.rtl_import import import_rtl_bytes, import_rtl_project, extract_contract_draft, available_modules, RTLImportError
 from iverilog_ai.core.repair_compare import safe_candidate_copy, compare_simulation_results
 from iverilog_ai.core.rtl_compare import compare_rtl_sources
 from iverilog_ai.core.behavior_compare import compare_rtl_behavior
@@ -404,6 +404,7 @@ def _sync_workspace_input(case_name: str, selected_case: dict, custom: bool) -> 
             else _content_fingerprint(selected_case.get("contract"))
         ),
         _compile_options(),
+        tuple(_content_fingerprint(path) for path in st.session_state.get("custom_project_files", ())) if custom else (),
     )
     previous = st.session_state.get("workspace_input_identity")
     if previous is not None and previous != identity:
@@ -841,6 +842,8 @@ def _compile_options() -> tuple[tuple[str, ...], tuple[str, ...]]:
     raw_includes = str(st.session_state.get("compile_includes", "") or "")
     defines = tuple(item.strip() for item in raw_defines.replace(";", ",").split(",") if item.strip())
     includes = tuple(item.strip() for item in raw_includes.replace(";", ",").split(",") if item.strip())
+    if st.session_state.get("case_name") == "自定义 RTL":
+        includes = tuple(dict.fromkeys((*includes, *st.session_state.get("custom_include_dirs", ()))))
     return defines, includes
 
 
@@ -1161,6 +1164,7 @@ def _clear_custom_upload() -> None:
     for key in (
         "custom_uploaded_key", "custom_uploaded_files", "custom_rtl_source",
         "custom_modules", "custom_selected_module", "custom_warnings",
+        "custom_source_files", "custom_project_files", "custom_include_dirs",
     ):
         st.session_state.pop(key, None)
     st.session_state.custom_rtl_path = ""
@@ -2050,8 +2054,8 @@ with _PREPARE:
             st.session_state.custom_contract_text = ""
         uploaded = st.file_uploader(
             "上传 RTL 文件",
-            type=["v", "sv", "vh"], accept_multiple_files=True,
-            help="可同时上传 .v、.sv、.vh 文件，每个文件不超过 2 MB。换版本时请先移除旧文件。",
+            type=["v", "sv", "vh", "svh"], accept_multiple_files=True,
+            help="可同时上传 RTL 和 .vh/.svh 头文件，每个文件不超过 2 MB。头文件目录自动加入编译搜索路径。换版本时请先移除旧文件。",
         )
         upload_key = _uploaded_files_key(uploaded) if uploaded else ()
         if uploaded and st.session_state.get("custom_uploaded_key") != upload_key:
@@ -2059,26 +2063,24 @@ with _PREPARE:
             # new upload cannot be parsed. Never fall back to the previous DUT.
             _clear_custom_upload()
             try:
-                imported_files = []
-                sources = []
-                for item in uploaded:
-                    with _busy("正在导入并解析上传的 RTL"):
-                        imported = import_rtl_bytes(item.name, item.getvalue(), ROOT)
-                    imported_files.append(imported)
-                    sources.append(f"// ---- {item.name} ----\n" + item.getvalue().decode("utf-8"))
-                source = "\n\n".join(sources)
-                digest = __import__("hashlib").sha256(source.encode("utf-8")).hexdigest()[:12]
-                aggregate = ROOT / ".iverilog-ai" / "custom_rtl" / f"project-{digest}.sv"
-                aggregate.write_text(source, encoding="utf-8")
-                imported = imported_files[0]
+                source_inputs = [(item.name, item.getvalue()) for item in uploaded if Path(item.name).suffix.lower() in {".v", ".sv"}]
+                header_inputs = [(item.name, item.getvalue()) for item in uploaded if Path(item.name).suffix.lower() in {".vh", ".svh"}]
+                with _busy("正在导入并解析上传的 RTL"):
+                    project = import_rtl_project(source_inputs, ROOT, include_files=header_inputs)
+                # Combined text is only a parser/display input, never compiled.
+                source = "\n\n".join(path.read_text(encoding="utf-8") for path in project.source_files)
+                module, draft, warnings = extract_contract_draft(source)
                 st.session_state.custom_uploaded_key = upload_key
                 st.session_state.custom_uploaded_files = tuple(i.name for i in uploaded)
-                st.session_state.custom_rtl_path = str(aggregate)
-                _replace_custom_contract_draft(json.dumps(imported.contract, ensure_ascii=False, indent=2))
+                st.session_state.custom_rtl_path = str(project.entry_path)
+                st.session_state.custom_source_files = tuple(str(path) for path in project.source_files)
+                st.session_state.custom_project_files = tuple(str(path) for path in project.project_dir.rglob("*") if path.is_file())
+                st.session_state.custom_include_dirs = tuple(str(path) for path in project.include_dirs)
+                _replace_custom_contract_draft(json.dumps(draft, ensure_ascii=False, indent=2))
                 st.session_state.custom_rtl_source = source
                 st.session_state.custom_modules = available_modules(st.session_state.custom_rtl_source)
-                st.session_state.custom_selected_module = imported.module
-                st.session_state.custom_warnings = tuple(w for i in imported_files for w in i.warnings)
+                st.session_state.custom_selected_module = module
+                st.session_state.custom_warnings = tuple(warnings) + project.warnings
                 st.success(f"已导入 {len(uploaded)} 个文件，模块：{', '.join(st.session_state.custom_modules) or '未识别'}")
             except RTLImportError as exc:
                 st.error(str(exc))
@@ -2133,6 +2135,7 @@ if is_custom and case.get("rtl"):
                 ROOT / str(case["rtl"]), project_root=ROOT,
                 top_module=str(st.session_state.get("custom_selected_module", "")),
                 defines=_syntax_defines, include_dirs=_syntax_includes,
+                source_files=tuple(st.session_state.get("custom_source_files", ())),
                 iverilog_path=_tools().iverilog,
             )
             _rtl_syntax_ready = _syntax_result.returncode == 0 and not _syntax_result.timed_out and _syntax_result.error is None
@@ -2141,6 +2144,8 @@ if is_custom and case.get("rtl"):
             else:
                 st.error("RTL 编译预检查未通过，已暂停运行测试计划和自动验证。")
                 with st.expander("查看编译错误", expanded=True):
+                    if _syntax_result.error:
+                        st.write(_syntax_result.error)
                     st.code(_syntax_result.stderr or _syntax_result.stdout or _syntax_result.error or "检查超时，请确认工具和输入文件。", language="text")
         except (ValueError, OSError) as exc:
             st.error(f"无法完成 RTL 编译预检查，已暂停测试：{exc}")

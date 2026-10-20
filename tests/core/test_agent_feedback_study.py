@@ -9,6 +9,19 @@ from scripts import run_agent_feedback_study as study
 from scripts.run_agent_comparison import execute
 from scripts.summarize_agent_comparison import build_summary
 
+pytestmark = pytest.mark.usefixtures("frozen_v8_test_inputs")
+
+
+def test_current_feedback_runner_still_rejects_changed_agent(monkeypatch, frozen_v8_test_inputs):
+    real_sha = frozen_v8_test_inputs["live_sha"]
+    monkeypatch.setattr(study, "sha", real_sha)
+    config = json.loads(study.CONFIG.read_text(encoding="utf-8"))
+    if real_sha(study.ROOT / "src/iverilog_ai/ai/agent.py") != config["agent_sha256"]:
+        with pytest.raises(ValueError, match="frozen v8 Agent"):
+            study.preregister_feedback_study()
+    else:
+        study.preregister_feedback_study()
+
 
 def forbidden(*args, **kwargs):
     pytest.fail("unit test initialized a credential or API provider")

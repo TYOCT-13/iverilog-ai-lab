@@ -305,9 +305,10 @@ class YosysSynthRunner:
         command = (yosys, "-p", self._script())
         self.command = command
         started = time.perf_counter()
-        # cwd 固定为可执行文件所在目录：WASI 版只映射这一处，换目录会让
-        # Yosys 找不到自己的运行时资源。RTL 用绝对路径传入，因此不受影响。
-        run_cwd = str(Path(yosys).resolve().parent)
+        # yowasp on Windows maps the current drive. Running beside a tool on D:
+        # cannot read an RTL on C: even with an absolute path. Use the source
+        # directory; runtime resources are resolved by the installed wrapper.
+        run_cwd = str(rtl.resolve().parent)
         try:
             completed = subprocess.run(
                 list(command),
