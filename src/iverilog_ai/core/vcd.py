@@ -34,22 +34,29 @@ def _parse_timescale(text: str) -> float:
     return float(match.group("num")) * _UNIT_TO_NS[unit]
 
 
-def analyze_vcd_file(path: str | Path, *, start_ns: float | None = None, end_ns: float | None = None, max_changes: int = 5000) -> dict[str, Any]:
+@dataclass(frozen=True)
+class _VCDSource:
+    path: Path
+    body: str
+    sha256: str
+    timescale_ns: float
+    names: dict[str, str]
+    scopes: dict[str, str]
+    widths: dict[str, int]
+
+
+def _read_vcd(path: str | Path) -> _VCDSource:
     source = Path(path).expanduser().resolve()
     if not source.is_file() or source.is_symlink():
         raise FileNotFoundError(source)
-    if start_ns is not None and end_ns is not None and start_ns > end_ns:
-        raise ValueError("start_ns must not exceed end_ns")
-    if not isinstance(max_changes, int) or max_changes < 1:
-        raise ValueError("max_changes must be positive")
-    text = source.read_text(encoding="utf-8", errors="replace")
-    timescale_ns = _parse_timescale(text)
+    raw = source.read_bytes()
+    text = raw.decode("utf-8", errors="replace")
     header_end = text.find("$enddefinitions")
     if header_end < 0:
         raise ValueError("VCD is missing $enddefinitions")
     header = text[:header_end]
-    id_to_name: dict[str, str] = {}
-    id_to_scope: dict[str, str] = {}
+    names: dict[str, str] = {}
+    scopes_by_id: dict[str, str] = {}
     widths: dict[str, int] = {}
     scopes: list[str] = []
     for token in re.finditer(r"\$scope\s+\S+\s+(\S+)\s+\$end|\$upscope\s+\$end|\$var\s+\S+\s+(\d+)\s+(\S+)\s+(\S+)(?:\s+\S+)?\s+\$end", header):
@@ -60,30 +67,25 @@ def analyze_vcd_file(path: str | Path, *, start_ns: float | None = None, end_ns:
                 scopes.pop()
         else:
             width, ident, name = int(token.group(2)), token.group(3), token.group(4)
-            id_to_name[ident] = ".".join(scopes + [name]) if scopes else name
-            # 记录声明所在层次：下游据此区分「DUT 内部信号」与「testbench 记账信号」，
-            # 后者的跳变节奏由激励脚本决定，不构成电路毛刺。
-            id_to_scope[ident] = ".".join(scopes)
+            names[ident] = ".".join(scopes + [name]) if scopes else name
+            scopes_by_id[ident] = ".".join(scopes)
             widths[ident] = width
-    body = text[header_end:]
-    current_time = 0
-    changes: list[VCDChange] = []
-    transition_counts: dict[str, int] = {name: 0 for name in id_to_name.values()}
-    known_values: dict[str, set[int]] = {}
-    first_time: float | None = None
-    last_time: float | None = None
-    selected_ids = set(id_to_name)
+    return _VCDSource(source, text[header_end:], hashlib.sha256(raw).hexdigest(),
+                      _parse_timescale(text), names, scopes_by_id, widths)
+
+
+def _vcd_events(source: _VCDSource):
+    """Scan one source once; callers share parsing rather than rescan per window."""
     pending_time_ns = 0.0
-    for raw_line in body.splitlines():
+    for raw_line in source.body.splitlines():
         line = raw_line.strip()
         if not line:
             continue
         if line.startswith("#"):
             try:
-                current_time = int(line[1:])
-                pending_time_ns = current_time * timescale_ns
+                pending_time_ns = int(line[1:]) * source.timescale_ns
             except ValueError:
-                continue
+                pass
             continue
         ident, value = None, None
         if line[0] in "01xXzZ":
@@ -92,63 +94,94 @@ def analyze_vcd_file(path: str | Path, *, start_ns: float | None = None, end_ns:
             pieces = line[1:].split()
             if len(pieces) == 2:
                 value, ident = pieces[0].lower(), pieces[1]
-        if ident not in selected_ids or value is None:
-            continue
-        time_ns = pending_time_ns
+        if ident in source.names and value is not None:
+            yield pending_time_ns, ident, value
+
+
+class _VCDStats:
+    def __init__(self, source: _VCDSource, max_changes: int):
+        self.source = source
+        self.max_changes = max_changes
+        self.counts = {name: 0 for name in source.names.values()}
+        self.known: dict[str, set[int]] = {}
+        self.changes: list[VCDChange] = []
+        self.first: float | None = None
+        self.last: float | None = None
+
+    def add(self, time_ns: float, ident: str, value: str) -> None:
+        name = self.source.names[ident]
+        self.counts[name] += 1
+        numeric = _to_int(value)
+        if numeric is not None:
+            self.known.setdefault(name, set()).add(numeric)
+        self.first = time_ns if self.first is None else min(self.first, time_ns)
+        self.last = time_ns if self.last is None else max(self.last, time_ns)
+        if len(self.changes) < self.max_changes:
+            self.changes.append(VCDChange(time_ns, name, value))
+
+    def report(self) -> dict[str, Any]:
+        signals = [{"name": name, "scope": self.source.scopes.get(ident, ""),
+                    "width": self.source.widths.get(ident, 1), "changes": self.counts[name],
+                    "distinct_values": len(self.known.get(name, ())) }
+                   for ident, name in sorted(self.source.names.items(), key=lambda item: item[1])]
+        total = sum(self.counts.values())
+        return {"schema_version": "1.0", "file": str(self.source.path),
+                "sha256": self.source.sha256, "timescale_ns": self.source.timescale_ns,
+                "signal_count": len(signals), "signals": signals,
+                "start_ns": self.first, "end_ns": self.last, "total_changes": total,
+                "changes": [item.to_dict() for item in self.changes],
+                "truncated": total > len(self.changes)}
+
+
+def analyze_vcd_file(path: str | Path, *, start_ns: float | None = None, end_ns: float | None = None, max_changes: int = 5000) -> dict[str, Any]:
+    if start_ns is not None and end_ns is not None and start_ns > end_ns:
+        raise ValueError("start_ns must not exceed end_ns")
+    if not isinstance(max_changes, int) or max_changes < 1:
+        raise ValueError("max_changes must be positive")
+    source = _read_vcd(path)
+    stats = _VCDStats(source, max_changes)
+    for time_ns, ident, value in _vcd_events(source):
         if start_ns is not None and time_ns < start_ns:
             continue
         if end_ns is not None and time_ns > end_ns:
             continue
-        name = id_to_name[ident]
-        transition_counts[name] = transition_counts.get(name, 0) + 1
-        # 记录取值集合：仅用于「取值覆盖」这类下游统计，不参与判决。
-        # 用 longint（而不是字符串）比较，避免 x/z 与不同位宽的写法被算成不同值。
-        numeric = _to_int(value)
-        if numeric is not None:
-            known_values.setdefault(name, set()).add(numeric)
-        first_time = time_ns if first_time is None else min(first_time, time_ns)
-        last_time = time_ns if last_time is None else max(last_time, time_ns)
-        if len(changes) < max_changes:
-            changes.append(VCDChange(time_ns, name, value))
-    signals = [
-        {
-            "name": name,
-            "scope": id_to_scope.get(ident, ""),
-            "width": widths.get(ident, 1),
-            "changes": transition_counts.get(name, 0),
-            "distinct_values": len(known_values.get(name, ())),
-        }
-        for ident, name in sorted(id_to_name.items(), key=lambda item: item[1])
-    ]
-    total_changes = sum(transition_counts.values())
-    return {
-        "schema_version": "1.0",
-        "file": str(source),
-        "sha256": hashlib.sha256(source.read_bytes()).hexdigest(),
-        "timescale_ns": timescale_ns,
-        "signal_count": len(signals),
-        "signals": signals,
-        "start_ns": first_time,
-        "end_ns": last_time,
-        "total_changes": total_changes,
-        "changes": [item.to_dict() for item in changes],
-        "truncated": total_changes > len(changes),
-    }
+        stats.add(time_ns, ident, value)
+    return stats.report()
 
 
-def analyze_failure_windows(path: str | Path, failure_cycles: list[int] | tuple[int, ...], *, clock_period_ns: float = 10.0, radius: int = 1, max_changes: int = 2000) -> dict[str, Any]:
-    """Map cycle numbers to conservative VCD windows and parse each window."""
+def analyze_failure_windows(path: str | Path, failure_cycles: list[int] | tuple[int, ...], *, clock_period_ns: float = 10.0, radius: int = 1, max_changes: int = 2000, max_windows: int = 64) -> dict[str, Any]:
+    """Collect bounded failure windows in one VCD scan, retaining full failure records elsewhere."""
+    from bisect import bisect_left, bisect_right
     if not isinstance(clock_period_ns, (int, float)) or clock_period_ns <= 0:
         raise ValueError("clock_period_ns must be positive")
     if not isinstance(radius, int) or radius < 0:
         raise ValueError("radius must be non-negative")
+    if not isinstance(max_changes, int) or max_changes < 1:
+        raise ValueError("max_changes must be positive")
+    if isinstance(max_windows, bool) or not isinstance(max_windows, int) or max_windows < 1:
+        raise ValueError("max_windows must be positive")
     cycles = sorted({int(item) for item in failure_cycles if isinstance(item, int) and item >= 0})
+    selected = cycles[:max_windows]
+    starts = [max(0.0, (cycle-radius)*float(clock_period_ns)) for cycle in selected]
+    ends = [(cycle+radius+1)*float(clock_period_ns) for cycle in selected]
     windows = []
-    for cycle in cycles:
-        start = max(0.0, (cycle - radius) * float(clock_period_ns))
-        end = (cycle + radius + 1) * float(clock_period_ns)
-        windows.append({"cycle": cycle, "start_ns": start, "end_ns": end, "analysis": analyze_vcd_file(path, start_ns=start, end_ns=end, max_changes=max_changes)})
-    return {"status": "parsed", "clock_period_ns": float(clock_period_ns), "radius": radius, "windows": windows, "disclaimer": "周期到 VCD 时间为基于 contract 时钟周期的估算窗口。"}
+    if selected:
+        source = _read_vcd(path)
+        stats = [_VCDStats(source, max_changes) for _ in selected]
+        previous_time = None
+        left = right = 0
+        for time_ns, ident, value in _vcd_events(source):
+            if time_ns != previous_time:
+                left, right = bisect_left(ends, time_ns), bisect_right(starts, time_ns)
+                previous_time = time_ns
+            for index in range(left, right):
+                stats[index].add(time_ns, ident, value)
+        windows = [{"cycle": cycle, "start_ns": start, "end_ns": end, "analysis": item.report()}
+                   for cycle, start, end, item in zip(selected, starts, ends, stats)]
+    return {"status": "parsed", "clock_period_ns": float(clock_period_ns), "radius": radius,
+            "windows": windows, "requested_windows": len(cycles), "returned_windows": len(windows),
+            "omitted_cycles": cycles[max_windows:], "truncated": len(cycles) > max_windows,
+            "disclaimer": "周期到 VCD 时间为基于 contract 时钟周期的估算窗口；窗口预览有数量上限，全部失败仍保存在原始结果与VCD中。"}
 
 
 # --------------------------------------------------------------------------

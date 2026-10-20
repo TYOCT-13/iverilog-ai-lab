@@ -2629,6 +2629,8 @@ with _PLAN:
         st.error(st.session_state.ai_error)
     if st.session_state.ai_plan is not None:
         st.success(f"计划已生成，共 {len(st.session_state.ai_plan.vectors)} 组测试。")
+        _plan_cycles = sum(vector.cycles for vector in st.session_state.ai_plan.vectors)
+        st.caption(f"累计激励 {_plan_cycles:,} 周期；测试组数不等于仿真周期数。")
         with st.expander("测试计划与规则"):
             try:
                 # 注意函数名：core.rules 里叫 `rule_manifest(root, case)`，
@@ -2685,11 +2687,13 @@ with _PLAN:
         try:
             contract = _contract()
             _defines, _includes = _compile_options()
-            with _busy("正在运行测试计划"):
+            with st.status("正在运行测试计划", expanded=True) as _plan_status:
                 result = VerificationPipeline(run_synthesis=st.session_state.get("run_synthesis", False), yosys_path=os.getenv("YOSYS_PATH") or None).run(
                     st.session_state.ai_plan, contract.to_dict(), ROOT / str(case["rtl"]), ROOT / ".iverilog-ai" / "pipeline-ui" / f"workspace-{uuid.uuid4().hex[:12]}", allowed_roots=(ROOT,),
                     **_simulation_tool_options(), defines=_defines, include_dirs=_includes, emit_vcd=True,
+                    on_progress=_plan_status.write,
                 )
+                _plan_status.update(label="仿真与分析结束", state="complete", expanded=False)
             st.session_state.last_pipeline_result = result
             st.session_state.last_pipeline_case = name
             st.session_state.last_run_kind = "pipeline"

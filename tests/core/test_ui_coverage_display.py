@@ -22,6 +22,8 @@ def test_oracle_checks_are_distinct_from_empty_explicit_plan_coverage():
     app.session_state["case_name"] = "简单 ALU"
     app.run()
     app.button(key="generate_plan").click().run()
+    cycles = sum(vector.cycles for vector in app.session_state["ai_plan"].vectors)
+    assert any(f"累计激励 {cycles:,} 周期" in item.value for item in app.caption)
     app.button(key="run_generated_plan").click().run()
 
     assert not app.exception, [str(item.value) for item in app.exception]

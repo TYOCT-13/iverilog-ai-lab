@@ -36,3 +36,15 @@ def test_reports_include_failure_and_escape_html():
     html = render_html(result)
     assert "abc" in markdown and "unexpected" in markdown
     assert "&lt;unexpected&gt;" in html
+
+
+def test_report_discloses_bounded_window_preview_without_hiding_failure():
+    from dataclasses import replace
+
+    result = replace(_result(), config={"vcd_analysis": {"status": "parsed", "failure_windows": {
+        "status": "parsed", "truncated": True, "returned_windows": 64, "requested_windows": 80,
+        "windows": [{"cycle": 3, "start_ns": 20, "end_ns": 50, "analysis": {}}]}}})
+    markdown = render_markdown(result)
+    assert "失败窗口预览 64/80" in markdown
+    assert "完整失败列表和原始VCD保留" in markdown
+    assert "unexpected" in markdown

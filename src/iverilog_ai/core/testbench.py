@@ -357,6 +357,7 @@ class TestbenchGenerator:
     __test__ = False
 
     max_total_cycles: int = 100_000
+    compact_repeated_vectors: bool = True
 
     def _prepare(
         self,
@@ -375,6 +376,8 @@ class TestbenchGenerator:
         vectors = _validate_vectors(ai_plan, dut_contract)
         if self.max_total_cycles < 1 or self.max_total_cycles > 1_000_000:
             raise TestbenchGenerationError("max_total_cycles must be in [1, 1000000]")
+        if not isinstance(self.compact_repeated_vectors, bool):
+            raise TestbenchGenerationError("compact_repeated_vectors must be a boolean")
         if sum(vector.cycles for vector, _, _ in vectors) > self.max_total_cycles:
             raise TestbenchGenerationError(
                 f"test plan exceeds generator max_total_cycles={self.max_total_cycles}"
@@ -448,7 +451,11 @@ class TestbenchGenerator:
         ]
         for port in contract.ports:
             lines.extend(_declaration(port))
-        lines.extend(["  integer failures;", "  integer checks;", "  integer cycle;", ""])
+        repeat_index = "__icarus_repeat_index"
+        while repeat_index in contract.port_map:
+            repeat_index += "_"
+        lines.extend(["  integer failures;", "  integer checks;", "  integer cycle;",
+                      f"  integer {repeat_index};", ""])
         connections = ", ".join(f".{port.name}({port.name})" for port in contract.ports)
         parameter_override = ""
         if contract.parameters:
@@ -526,7 +533,10 @@ class TestbenchGenerator:
         for vector, encoded_inputs, encoded_expected in vectors:
             # 默认仍只在末拍检查计划 expected。逐拍模式的每拍期望值来自
             # 独立状态演进表；不能重复使用向量结束时的一份期望值。
-            for index in range(vector.cycles):
+            compact = self.compact_repeated_vectors and cycle_expectations is None and vector.cycles >= 32
+            if compact:
+                lines.append(f"    for ({repeat_index} = 0; {repeat_index} < {vector.cycles}; {repeat_index} = {repeat_index} + 1) begin")
+            for index in range(1 if compact else vector.cycles):
                 is_final_cycle = index == vector.cycles - 1
                 for signal, encoded in encoded_inputs.items():
                     lines.append(f"    {_target(contract.port_map[signal])} = {encoded.literal};")
@@ -538,9 +548,12 @@ class TestbenchGenerator:
                         lines.append("    #1;")
                 else:
                     lines.append("    #1;")
-                expected_at_sample = (cycle_expectations[vector.name][index] if cycle_expectations is not None
+                expected_at_sample = (encoded_expected if compact else
+                                      cycle_expectations[vector.name][index] if cycle_expectations is not None
                                       else encoded_expected if is_final_cycle else {})
                 if expected_at_sample:
+                    if compact:
+                        lines.append(f"    if ({repeat_index} == {vector.cycles - 1}) begin")
                     for signal, encoded in expected_at_sample.items():
                         lines.extend(
                             [
@@ -567,6 +580,8 @@ class TestbenchGenerator:
                                 "    end",
                             ]
                         )
+                    if compact:
+                        lines.append("    end")
                 elif cycle_expectations is None and not encoded_expected:
                     lines.append("    " + _result_display(ok=True, test_id=vector.name, has_signal=False))
                 if capture_observations:
@@ -575,6 +590,8 @@ class TestbenchGenerator:
                 if contract.clock is not None and vector.sample_phase == "before":
                     lines.append(f"    @( {contract.clock.edge} {contract.clock.signal} );")
                     lines.append("    #1;")
+            if compact:
+                lines.append("    end")
         lines.extend(
             [
                 # 运行结束时报一次计数器。**没有这一行，"零检查项"就无法与"检查全过"区分**：

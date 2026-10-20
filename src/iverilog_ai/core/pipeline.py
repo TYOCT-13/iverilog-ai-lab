@@ -12,7 +12,7 @@ from datetime import datetime, timezone
 import hashlib
 import json
 from pathlib import Path
-from typing import Any, Literal, Mapping, Sequence
+from typing import Any, Callable, Literal, Mapping, Sequence
 
 from ..ai.schema import TestPlan
 from .config import ExecutionConfig, SafePathPolicy
@@ -337,7 +337,14 @@ class VerificationPipeline:
         vcd_filename: str = "waveform.vcd",
         capture_observations: bool = False,
         reference_sampling: Literal["vector_end", "per_cycle"] = "vector_end",
+        on_progress: Callable[[str], None] | None = None,
     ) -> PipelineResult:
+        if on_progress is not None and not callable(on_progress):
+            raise PipelineValidationError("on_progress must be callable")
+        def progress(message: str) -> None:
+            if on_progress is not None:
+                on_progress(message)
+        progress("校验接口与测试计划")
         if not isinstance(capture_observations, bool):
             raise PipelineValidationError("capture_observations must be a boolean")
         if reference_sampling not in ("vector_end", "per_cycle"):
@@ -400,6 +407,7 @@ class VerificationPipeline:
         # 仿真裁决权仍然只属于 Icarus。AI 原始计划保留在 testplan.json 中，
         # 差异在 oracle 诊断里单独记录。
         try:
+            progress("生成测试台")
             testbench_path = self.generator.generate(
                 generation_plan,
                 dut_contract,
@@ -483,6 +491,7 @@ class VerificationPipeline:
             language=language,
             keep_artifacts=True,
         )
+        progress("编译RTL并执行仿真")
         simulation = self.executor_factory(config).run()
         observations_path: Path | None = None
         if capture_observations:
@@ -511,11 +520,13 @@ class VerificationPipeline:
         vcd_path_for_analysis = simulation.artifacts.get("vcd", "")
         if vcd_path_for_analysis:
             try:
+                progress("解析波形与信号活动")
                 vcd_analysis = analyze_vcd_file(vcd_path_for_analysis, max_changes=5000)
                 vcd_analysis["status"] = "parsed"
                 period = dut_contract.clock.period_ns if dut_contract.clock is not None else 10.0
                 failure_cycles = [item.cycle for item in simulation.failures if isinstance(item.cycle, int)]
                 if failure_cycles:
+                    progress("分析失败波形窗口")
                     vcd_analysis["failure_windows"] = analyze_failure_windows(
                         vcd_path_for_analysis, failure_cycles, clock_period_ns=period
                     )
@@ -559,6 +570,7 @@ class VerificationPipeline:
         # already constrained the generated testbench. This block only records
         # how far the AI's own numbers were from the deterministic model, and it
         # never overrides the real Icarus status as the PASS/FAIL authority.
+        progress("整理输出比较与验证结论")
         consistency = (check_plan_consistency(ai_plan, ai_plan.design, dut_contract,
                             **({"reference_outputs": oracle_expectations} if cycle_expectations is not None else {}))
                        if self.reference_policy == "builtin" else {
@@ -709,6 +721,7 @@ class VerificationPipeline:
             created_at=result.created_at,
             synthesis=synthesis,
         )
+        progress("保存运行结果")
         pipeline_result_path.write_text(result.to_json() + "\n", encoding="utf-8")
         return result
 

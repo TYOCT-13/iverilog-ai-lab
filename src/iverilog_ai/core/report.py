@@ -322,6 +322,8 @@ def render_markdown(
 
         windows = vcd.get("failure_windows") or {}
         if windows.get("status") == "parsed" and windows.get("windows"):
+            if windows.get("truncated"):
+                lines.extend(["", f"失败窗口预览 {windows.get('returned_windows')}/{windows.get('requested_windows')}；完整失败列表和原始VCD保留。", ""])
             lines.extend([
                 "### 失败周期对应的波形时间窗",
                 "",
