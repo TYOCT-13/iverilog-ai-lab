@@ -1,10 +1,10 @@
 {
   "output": "docs\\competition\\ic\\technical_report\\ICARUS_技术报告.pdf",
-  "pages": 22,
-  "bytes": 865151,
-  "sha256": "8014cfc1806bb4e81e192359ba1081a7d3a3d238d77c6317fcbd0f9b69613836",
-  "source_sha256": "7d21ac26efaf18cf19c40006b97c12debcb5283ccd387a4e4174c09d01545b9c",
-  "chinese_characters": 9984,
+  "pages": 23,
+  "bytes": 869367,
+  "sha256": "c3f2dd917cf7fe13bc94e8ea58853b8cdeba2824656bff2a92624586f330ff19",
+  "source_sha256": "a9832d15b00e7ddccf009e4da8d19f9024c7fbe9382f986210990ac8eb6a5a40",
+  "chinese_characters": 10656,
   "figures": 10,
   "headings": [
     {
@@ -115,7 +115,7 @@
     {
       "level": 1,
       "title": "4.4 FIFO参考模型与同拍读写",
-      "page": 12
+      "page": 13
     },
     {
       "level": 1,
@@ -135,7 +135,7 @@
     {
       "level": 1,
       "title": "4.8 实施过程与运行资料",
-      "page": 15
+      "page": 16
     },
     {
       "level": 0,
@@ -165,7 +165,7 @@
     {
       "level": 1,
       "title": "5.5 判据改进带来的变化",
-      "page": 18
+      "page": 19
     },
     {
       "level": 1,
@@ -190,7 +190,7 @@
     {
       "level": 1,
       "title": "6.3 后续改进方向",
-      "page": 20
+      "page": 21
     },
     {
       "level": 0,
@@ -215,7 +215,7 @@
     {
       "level": 1,
       "title": "7.4 参考资料",
-      "page": 22
+      "page": 23
     }
   ],
   "visual_review": "passed",

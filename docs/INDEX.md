@@ -1,5 +1,11 @@
 # 资料索引（Icarus 智测 / iverilog-ai-lab）
 
+## 2026-10-20当前补充
+
+- [OneWire用户操作与结果](trial/other_pc_user_trial_2026-10-20.md)：后续自定义RTL核心运行已成功，15组、22周期、42项比较全部一致，含报告和VCD；实际65ns、AI期望值，不代表完整协议或精确16MHz通过。替换包及两个后续运行包共43个manifest成员核对一致。
+- [教师组织的AI辅助复核](review/teacher_ai_review_response_20261020.md)：五项意见分别处理；多文件预检F-01待修，F-02至F-05报告表述已修订。尚无教师亲自确认原件，不记独立人工审核通过。
+- [当前待办](competition/ic/gap_checklist.md)：已有用户核心成功结果，无需重新完成旧操作。按用户要求暂不复测长计划。剩余重点为多文件预检、最新远端CI核实、PPT同步及正式提交核对；下方保留的历史状态按记录日期阅读。
+
 这一份是**全部材料的入口**。当前准备转入 AI＋集成电路赛道，优先阅读下方 IC 材料；原开源赛道报告继续保留，提交时须核对所选赛道。仓库材料路径相对当前克隆的根目录，
 可用 `python scripts/check_doc_index.py` 校验。本机运行产物、快捷方式和外部目录统一见 `docs/local_artifacts.md`；它们不随 Git 分发，不计为可克隆材料。
 
@@ -38,7 +44,7 @@
 
 | 材料 | 路径 | 状态 |
 |---|---|---|
-| 当前技术报告 | [材料入口](competition/ic/technical_report/README.md)、[22页PDF](competition/ic/technical_report/ICARUS_技术报告.pdf)、[完整文字稿](competition/ic/technical_report/technical_report.md) | 2026-10-17参考既有设计报告文风重写，按官方七章连续排版；约1万中文字、10幅图，重点为当前实现、时序与实测；既有PPT未同步本次重写 |
+| 当前技术报告 | [材料入口](competition/ic/technical_report/README.md)、[23页PDF](competition/ic/technical_report/ICARUS_技术报告.pdf)、[完整文字稿](competition/ic/technical_report/technical_report.md) | 2026-10-20补入42项用户比较一致结果及教师复核披露整改；按官方七章连续排版，10,656个中文字符、10幅图；既有PPT未同步本次报告 |
 | v4详细技术报告与答辩 | [材料入口](competition/ic/v4/README.md)、[18页报告](competition/ic/v4/ICARUS_AI_IC_technical_report_v4.pdf)、[完整文字稿](competition/ic/v4/technical_report_full.md)、[可编辑PPT](competition/ic/v4/presentation/output/ICARUS_AI_IC_defense_v4.pptx)、[答辩PDF](competition/ic/v4/presentation/output/ICARUS_AI_IC_defense_v4.pdf) | 2026-10-13重写，约9700正文中文字、18幅图；迭代、实测与实际界面分别说明。当前CI失败、异机复测/H02待补；旧v3保留 |
 | v3技术方案源稿与PDF | `docs/competition/ic/v3/technical_report.md`、`docs/competition/ic/ICARUS_技术方案_v3.pdf` | 最新两模块108与历史432单列；10页/正文8页，470762字节；文字可选择、字体嵌入、身份元数据空 |
 | v3合并佐证源稿与PDF | `docs/competition/ic/v3/supporting_evidence.md`、`docs/competition/ic/ICARUS_佐证材料_v3.pdf` | 6页、260009字节；原件、预算、失败与限制分别列证据入口 |

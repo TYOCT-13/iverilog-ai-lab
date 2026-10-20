@@ -1,0 +1,143 @@
+{
+  "recorded_on": "2026-10-20",
+  "method": "existing artifact hashes, module text comparison and result recount",
+  "new_api_requests": 0,
+  "new_dut_runs": 0,
+  "replacement": {
+    "file": "OneWire_replacement_20261017.zip",
+    "zip_sha256": "f067ffbf786ec4a6ed41d3e1a30887ede489c233cd796159ddea3b1fdc020209",
+    "manifest_members_checked": 25,
+    "all_match": true,
+    "rtl_members": [
+      {
+        "file": "one_wire_master_bit.v",
+        "sha256": "ff18979e6b2b68b489d31935ff9f766c6cd6a11871febdf4907cd75608a72cdb"
+      },
+      {
+        "file": "onewire_byte_controller.v",
+        "sha256": "d0a057c2ec21eb02dee9ca2d07110c7d31d22d1ae2cc4e3a56c234fe71ccbcd5"
+      }
+    ],
+    "archived_test_results": {
+      "16MHz": {
+        "checks": 595,
+        "errors": 0
+      },
+      "100MHz": {
+        "checks": 595,
+        "errors": 0
+      }
+    },
+    "tests_rerun_in_this_update": false,
+    "hardware_tested": false
+  },
+  "runs": [
+    {
+      "file": "evidence-pack (4).zip",
+      "zip_sha256": "ebc72bbc64804844900ac84e7d5ee29b5baae15e28513a1aaa7d2c3f66d7de46",
+      "run_id": "6f324753c00e",
+      "started_at": "2026-10-20T10:48:44.732544Z",
+      "finished_at": "2026-10-20T10:48:45.335273Z",
+      "manifest_members_checked": 9,
+      "all_match": true,
+      "status": "passed_with_warnings",
+      "verdict": "failed_checks",
+      "summary": {
+        "checks": 30,
+        "cycles": 49,
+        "failures": 7
+      },
+      "recomputed_checks": 30,
+      "recomputed_failures": 7,
+      "vector_count": 12,
+      "plan_cycles": 49,
+      "compile_returncode": 0,
+      "run_returncode": 0,
+      "compile_duration_ms": 104,
+      "run_duration_ms": 476,
+      "rtl_sha256": "5169ff520d7e2b86f7cb67ab9a3be9b967d259f39a0ff9c5ec79a97f9a9b95b2",
+      "module_content_equal_without_comments_whitespace": {
+        "one_wire_master_bit": true,
+        "one_wire_master_byte": true
+      },
+      "clock": {
+        "edge": "posedge",
+        "period_ns": 10.0,
+        "signal": "sys_clk"
+      },
+      "parameters": {
+        "CLOCK_HZ": 16000000
+      },
+      "expectation_source": "ai_generated",
+      "has_vcd": true,
+      "tb_clock_declarations": [
+        "always #5 sys_clk = ~sys_clk;"
+      ],
+      "rerun_in_this_update": false
+    },
+    {
+      "file": "evidence-pack (5).zip",
+      "zip_sha256": "688418b95d42e46f90031601b431541dc30b8fec72cbe0943e0fa2caf218e24f",
+      "run_id": "43d0e570bd0c",
+      "started_at": "2026-10-20T14:28:05.171425Z",
+      "finished_at": "2026-10-20T14:28:05.269489Z",
+      "manifest_members_checked": 9,
+      "all_match": true,
+      "status": "passed",
+      "verdict": "passed",
+      "summary": {
+        "checks": 42,
+        "cycles": 22,
+        "failures": 0
+      },
+      "recomputed_checks": 42,
+      "recomputed_failures": 0,
+      "vector_count": 15,
+      "plan_cycles": 22,
+      "compile_returncode": 0,
+      "run_returncode": 0,
+      "compile_duration_ms": 65,
+      "run_duration_ms": 21,
+      "rtl_sha256": "5169ff520d7e2b86f7cb67ab9a3be9b967d259f39a0ff9c5ec79a97f9a9b95b2",
+      "module_content_equal_without_comments_whitespace": {
+        "one_wire_master_bit": true,
+        "one_wire_master_byte": true
+      },
+      "clock": {
+        "edge": "posedge",
+        "period_ns": 65.0,
+        "signal": "sys_clk"
+      },
+      "parameters": {
+        "CLOCK_HZ": 16000000
+      },
+      "expectation_source": "ai_generated",
+      "has_vcd": true,
+      "tb_clock_declarations": [
+        "always #32.5 sys_clk = ~sys_clk;"
+      ],
+      "rerun_in_this_update": false
+    }
+  ],
+  "teacher_review": {
+    "source_sha256": "0dc4dbe501ea34c8cb3a45cb5c5eafd325395373e2ee3788f2578b7f27bdc165",
+    "provenance": "User states teacher organized the review using AI assistance",
+    "reviewed_commit": "9d54c6f",
+    "teacher_personal_confirmation": "not_provided",
+    "independent_human_review_passed": false
+  },
+  "user_reported_long_plan": {
+    "vector_count_approximately": 60,
+    "raw_plan_received": false,
+    "reported_behavior": "execution appeared stuck",
+    "cause_confirmed": false,
+    "retest": "not_requested_by_user",
+    "excluded_from_success_counts": true
+  },
+  "limits": [
+    "Device identity, source commit, assistance count and user task timing not independently recorded",
+    "Module comparison strips comments and whitespace; it is not formal equivalence",
+    "Replacement-package tests are archival developer tests, not newly performed human trials",
+    "Short successful plan does not validate a full OneWire transaction or precise 16MHz timing"
+  ]
+}
