@@ -1,0 +1,71 @@
+{
+  "schema": "icarus-github-actions-completion-v1",
+  "checked_on": "2026-10-21",
+  "scope": "Published code and synchronized materials at the exact recorded source commit; no new model API experiment.",
+  "head_sha": "e57ba1291ae4c853f2705ffc30c2a8d1cadc4f7a",
+  "runs": [
+    {
+      "id": 39456072311,
+      "name": "CI",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/TYOCT-13/iverilog-ai-lab/actions/runs/39456072311",
+      "jobs": [
+        {
+          "id": 118743163388,
+          "name": "测试与基准（ubuntu-latest / Python 3.11）",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "current_step": null,
+          "check_run_url": "https://api.github.com/repos/TYOCT-13/iverilog-ai-lab/check-runs/118743163388"
+        },
+        {
+          "id": 118743163525,
+          "name": "测试与基准（ubuntu-latest / Python 3.12）",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "current_step": null,
+          "check_run_url": "https://api.github.com/repos/TYOCT-13/iverilog-ai-lab/check-runs/118743163525"
+        },
+        {
+          "id": 118743163820,
+          "name": "测试与基准（windows-latest / Python 3.12）",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "current_step": null,
+          "check_run_url": "https://api.github.com/repos/TYOCT-13/iverilog-ai-lab/check-runs/118743163820"
+        },
+        {
+          "id": 118743164065,
+          "name": "测试与基准（windows-latest / Python 3.11）",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "current_step": null,
+          "check_run_url": "https://api.github.com/repos/TYOCT-13/iverilog-ai-lab/check-runs/118743164065"
+        }
+      ]
+    },
+    {
+      "id": 39456072271,
+      "name": "verify",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/TYOCT-13/iverilog-ai-lab/actions/runs/39456072271",
+      "jobs": [
+        {
+          "id": 118743163139,
+          "name": "test",
+          "status": "completed",
+          "conclusion": "success",
+          "failed_steps": [],
+          "current_step": null,
+          "check_run_url": "https://api.github.com/repos/TYOCT-13/iverilog-ai-lab/check-runs/118743163139"
+        }
+      ]
+    }
+  ]
+}
