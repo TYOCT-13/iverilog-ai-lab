@@ -83,7 +83,7 @@ class Renderer:
     def _flush_writer(self) -> None:
         """把当前页累积的文字一次性写入。
 
-        两个必须注意的点（都踩过）：
+        文字写入约束：
 
         1. ``TextWriter`` **没有** ``text_objects`` 属性（可用属性见 PyMuPDF 的
            ``dir()``）。早期版本用 ``getattr(writer, "text_objects", None)`` 做判空

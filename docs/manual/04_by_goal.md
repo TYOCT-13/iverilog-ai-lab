@@ -40,7 +40,7 @@ echo $LASTEXITCODE      # 0 一致 / 1 不同 / 2 无法判定
 **适用场景**：验证模块的复位、状态转换与边界时序，并保存可复核的运行证据。
 
 ```powershell
-# 1) 合约（端口/时钟/复位）—— 决定后面一切
+# 1) 定义端口、时钟和复位
 notepad examples\my_dut_contract.json
 
 # 2) 有计划后执行（内联计划文件，由网页或 API 生成）
@@ -114,7 +114,7 @@ python scripts/compare_models.py .iverilog-ai/model-A .iverilog-ai/model-B `
 **适用场景**：在10分钟演示中说明测试计划生成、仿真执行及结果判定流程。
 
 ```powershell
-python -m iverilog_ai.ai.debug_server        # 终端 A：离线模型，无密钥
+python -m iverilog_ai.ai.debug_server        # 终端 A：本地规则调试服务，无密钥
 streamlit run ui/app.py                      # 终端 B：网页
 ```
 

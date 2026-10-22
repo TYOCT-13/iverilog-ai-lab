@@ -1,8 +1,8 @@
 {
   "schema": "icarus-report-synchronized-presentation-v1",
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "report_source": "docs/competition/ic/technical_report/technical_report.md",
-  "report_source_sha256": "f108fcf001dbd7c40278822151d4ed785065b96eb8ea7209443e34afb5787792",
+  "report_source_sha256": "516d745799a82998d874813a968d9df036b342924485b4128bf3bd5ac0d7fdd2",
   "source_pptx_revision": "9b39751748b5739459c0f06bc69fcf344c7b94b7",
   "source_pptx_path": "docs/competition/ic/v4/presentation/output/ICARUS_AI_IC_defense_v4.pptx",
   "source_pptx_sha256": "7db4fdeb240326872d1bbdcc35221db71b57aa2568da15ca621e5e193f3d299c",
@@ -10,8 +10,8 @@
   "outputs": [
     {
       "path": "docs/competition/ic/technical_report/presentation/ICARUS_答辩材料.pptx",
-      "bytes": 867258,
-      "sha256": "75e51011a4aec7b2978ed14c66177a053dfda86e5df5d4ce91a2e65b0ec4d957"
+      "bytes": 867329,
+      "sha256": "fcf46dffc5b98ec922753762e335121da35476f437e712c731b813f4a5998122"
     },
     {
       "path": "docs/competition/ic/technical_report/presentation/ICARUS_答辩材料.pdf",
@@ -39,8 +39,8 @@
     12
   ],
   "new_chart_literal_workbook_slide": 7,
-  "validation": "Package integrity, native tables/charts, workbook links, fonts, layout and artifact-tool reimport passed.",
-  "visual_review": "All 20 final slide renders individually inspected with view_image; final source-note update renders are SHA-identical to those reviewed.",
+  "validation": "Package XML parsed; 20 slides and 20 notes; notes bind revised report. All visible slide XML, images, themes, layouts, charts and workbooks are byte-identical to the previously rendered deck.",
+  "visual_review": "Existing 20-page visual review remains applicable to unchanged visible parts; no new native PowerPoint validation performed.",
   "reviewer": "Codex; not independent human H02",
   "pdf_mode": "image_only_from_final_pptx_render",
   "all_pdf_pages_embed_reviewed_pixels": true,
@@ -129,5 +129,40 @@
     }
   ],
   "new_model_api_requests": 0,
-  "new_experimental_dut_runs": 0
+  "new_experimental_dut_runs": 0,
+  "source_and_property_update": {
+    "client_date": "2026-10-22",
+    "report_source_sha256": "516d745799a82998d874813a968d9df036b342924485b4128bf3bd5ac0d7fdd2",
+    "old_pptx_sha256": "75e51011a4aec7b2978ed14c66177a053dfda86e5df5d4ce91a2e65b0ec4d957",
+    "new_pptx_sha256": "fcf46dffc5b98ec922753762e335121da35476f437e712c731b813f4a5998122",
+    "modified_entries": [
+      "docProps/core.xml",
+      "docProps/app.xml",
+      "ppt/notesSlides/notesSlide1.xml",
+      "ppt/notesSlides/notesSlide2.xml",
+      "ppt/notesSlides/notesSlide3.xml",
+      "ppt/notesSlides/notesSlide4.xml",
+      "ppt/notesSlides/notesSlide5.xml",
+      "ppt/notesSlides/notesSlide6.xml",
+      "ppt/notesSlides/notesSlide7.xml",
+      "ppt/notesSlides/notesSlide8.xml",
+      "ppt/notesSlides/notesSlide9.xml",
+      "ppt/notesSlides/notesSlide10.xml",
+      "ppt/notesSlides/notesSlide11.xml",
+      "ppt/notesSlides/notesSlide12.xml",
+      "ppt/notesSlides/notesSlide13.xml",
+      "ppt/notesSlides/notesSlide14.xml",
+      "ppt/notesSlides/notesSlide15.xml",
+      "ppt/notesSlides/notesSlide16.xml",
+      "ppt/notesSlides/notesSlide17.xml",
+      "ppt/notesSlides/notesSlide18.xml",
+      "ppt/notesSlides/notesSlide19.xml",
+      "ppt/notesSlides/notesSlide20.xml"
+    ],
+    "slide_content_and_all_assets_byte_identical": true,
+    "notes_report_sha_updated": 20,
+    "creator_and_application_preserved": true,
+    "visible_pdf_regeneration_needed": false,
+    "reason": "Only report-source references in speaker notes and document properties changed; all visible slide parts and assets unchanged."
+  }
 }

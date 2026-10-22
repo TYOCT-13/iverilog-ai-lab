@@ -22,6 +22,7 @@ from __future__ import annotations
 import ast
 from collections import Counter
 import sys
+import tokenize
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -123,7 +124,8 @@ def _definition_findings(tree: ast.AST, path: Path) -> list[str]:
 
 def scan_file(path: Path) -> list[str]:
     try:
-        tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+        with tokenize.open(path) as source:
+            tree = ast.parse(source.read(), filename=str(path))
     except SyntaxError as exc:
         return [f"{path}:{exc.lineno}: 语法错误：{exc.msg}"]
     findings: list[str] = []

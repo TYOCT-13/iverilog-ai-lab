@@ -42,6 +42,7 @@ def test_fresh_session_defaults_online_and_prompts_once():
     assert not app.exception
     assert app.radio(key="workspace_page").value == "工具设置"
     assert app.radio(key="planner_mode").value.startswith("在线")
+    assert not any("was created with a default value" in str(item.value) for item in app.warning)
     app.run()
     assert not any(item.key == "startup_planner_mode" for item in app.radio)
     other = fresh_app()

@@ -1,4 +1,4 @@
-"""安全的单页演示：案例来自代码内白名单，仿真交给 IcarusExecutor。"""
+"""ICARUS 网页入口：接口配置、测试计划、仿真执行与结果查看。"""
 from contextlib import contextmanager, nullcontext
 from pathlib import Path
 from typing import Any, Literal, TypedDict
@@ -56,6 +56,7 @@ _ROOT_HINT = Path(__file__).resolve().parents[1]
 if str(_ROOT_HINT) not in sys.path:
     sys.path.insert(0, str(_ROOT_HINT))
 from scripts.create_evidence_pack import create_evidence_pack
+from ui.manual_links import manual_web_links
 # 注意：core.rules 与 core.static_review 各有一个 rule_manifest，签名不同
 # （前者按案例返回规则文本，后者返回静态规则注册表）。必须用别名区分，否则
 # 后导入的会覆盖先导入的：实证面板会静默退化成一排 "—"，而案例规则文本会报错。
@@ -236,7 +237,7 @@ def _project_evidence() -> dict:
 
 
 def _render_evidence_header() -> None:
-    """先讲清"证据从哪来"，再讲功能——这是本项目与其他 AI 工具最主要的差别。"""
+    """显示本地项目统计及工具可用性。"""
 
     evidence = _project_evidence()
     st.caption(
@@ -1346,13 +1347,8 @@ def _contract_editor() -> None:
         if not isinstance(st.session_state.get("custom_contract_editor_ports"), list):
             st.session_state.custom_contract_editor_ports = []
     _ports_shadow = st.session_state["custom_contract_editor_ports"]
-    # data_editor 的数据**始终**来自影子列表（`custom_contract_editor_ports`），
-    # `key` 只用来标识控件。踩过的坑：`session_state[key]` 里存的是 Streamlit 自己的
-    # **编辑状态**（`{edited_rows, added_rows, deleted_rows}`），不是端口数据；把它当数据
-    # 喂回 data_editor，pandas 会抛 "Mixing dicts with non-Series…" 直接把整页打成 500
-    # （真实事故，见 job 日志）。所以：数据只从一个地方来，编辑结果只看返回值。
-    #
-    # 需要"换一批数据"时（JSON → 表格），靠换 key 让编辑器重新初始化：
+    # 端口数据来自独立列表；控件键对应 Streamlit 的编辑状态，不能作为表格数据复用。
+    # JSON 刷新表格时更新控件键，使编辑器按新数据初始化。
     _editor_generation = int(st.session_state.get("contract_editor_gen", 0))
     _editor_key = f"custom_ports_editor_{_editor_generation}"
 
@@ -1556,7 +1552,7 @@ def _console_hero() -> None:
         '<div class="hero-eyebrow">ICARUS / RTL VERIFICATION SYSTEM</div>'
         '<div class="hero-english">VERIFICATION</div>'
         '<h1>验证工作台</h1><div class="hero-accent"></div>'
-        '<p>从设计到证据。<br>生成测试计划，执行仿真，追踪每一次信号变化。</p>'
+        '<p>生成测试计划，执行仿真，查看采样结果与波形。</p>'
         '<div class="hero-rule"><span>DESIGN → PLAN → SIMULATION</span></div>'
         '</div><div class="hero-visual">'
         f'<img src="data:image/svg+xml;base64,{graphic}" '
@@ -1610,7 +1606,7 @@ def _manual_text(filename: str) -> str:
     """
 
     path = _MANUAL_DIR / filename
-    return path.read_text(encoding="utf-8") if path.is_file() else ""
+    return manual_web_links(path.read_text(encoding="utf-8"), path, ROOT) if path.is_file() else ""
 
 
 #: AI 建议里的等级/置信度词（模型输出英文枚举，页面展示中文）。
@@ -1981,15 +1977,16 @@ with st.container():
                 st.session_state.workspace_mobile_page = st.session_state.workspace_page
             st.selectbox("页面导航", list(_NAV_LABELS), key="workspace_mobile_page", label_visibility="collapsed",
                          format_func=lambda value: _NAV_LABELS[value].replace("\n", " / "), on_change=_mobile_page_changed)
-if _page == "工作台":
-    if "ui_scenario" not in st.session_state:
-        st.session_state.ui_scenario = _ui_scenario()
-    with st.container():
+# Keep the root block positions stable when the workbench controls mount or unmount.
+with st.container():
+    if _page == "工作台":
+        if "ui_scenario" not in st.session_state:
+            st.session_state.ui_scenario = _ui_scenario()
         st.markdown('<span class="ui-anchor workflow-navigation"></span>', unsafe_allow_html=True)
         st.radio("工作方式", list(_SCENARIOS), key="ui_scenario", label_visibility="collapsed", on_change=_open_task_workspace,
                  horizontal=True,
                  format_func=lambda value: {_SINGLE_SCENARIO: "验证一份 RTL", _DIFF_SCENARIO: "对比两份 RTL", _LEARN_SCENARIO: "学习模式"}[value])
-    st.session_state.saved_ui_scenario = _ui_scenario()
+        st.session_state.saved_ui_scenario = _ui_scenario()
 _ev = _project_evidence()
 
 _active_route = {"工作台": "compare" if _ui_scenario() == _DIFF_SCENARIO else "workbench", "规则审查": "quality", "运行档案": "history", "工具设置": "settings", "使用手册": "manual", "项目概览": "overview"}[str(_page)]
@@ -2421,7 +2418,7 @@ with _SETTINGS:
         provider_mode = st.radio(
             "生成方式",
             list(_PLANNER_MODES),
-            index=2,
+            index=None,
             horizontal=True,
             key="planner_mode",
             format_func=_planner_mode_label,
@@ -2429,9 +2426,7 @@ with _SETTINGS:
         use_online = str(provider_mode).startswith("在线")
         use_debug_local = str(provider_mode).startswith("本地调试")
         use_offline = str(provider_mode).startswith("离线")
-        # 页面里"质量与对比"页签的代码在源文件里**先于**设置页运行，因此它不能直接读这两个
-        # 变量（早先就踩过：mypy 报 used-before-def，运行时也可能读到上一轮的旧值）。
-        # 统一把结论放进 session_state，任何位置都能安全读取，新会话默认选择在线模型。
+        # 对比区域先于设置区域执行，通过会话状态读取已确认的生成方式。
         st.session_state["planner_is_online"] = use_online
         st.session_state["planner_is_debug_local"] = use_debug_local
         if use_debug_local:

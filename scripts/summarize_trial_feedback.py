@@ -35,7 +35,7 @@ def _require(condition: bool, path: Path, message: str) -> None:
 
 
 def validate(payload: dict, path: Path) -> None:
-    """结构校验。宁可吵，也不要让半成品反馈混进汇总。"""
+    """校验反馈字段，拒绝不完整记录参与汇总。"""
 
     _require(payload.get("schema_version") == "1.0", path, "schema_version 必须为 '1.0'")
     trial = payload.get("trial") or {}

@@ -23,10 +23,12 @@ AI 的自评、解释和置信度不参与判决。模型可以提出更合适�
 
 ### 参考模型的实现与作用
 
-**参考模型是独立手写的确定性状态机，与 AI、RTL 和 testbench 分开实现。**
+**参考模型是与规划模型输出分离的确定性实现。**
 代码在 `src/iverilog_ai/core/reference_model.py`：每个内置案例对应 `step()` 里的一段
 分支（形如 `if design == "pulse_stretcher": ...`），按 Verilog 的**非阻塞赋值**语义
 逐步推进寄存器状态，计算当前周期的预期输出。
+
+FIFO 运行时模型使用指针与计数状态，独立 deque 用于规格对照与回归。不同实现的输出一致性仍需结合规格核对，不能仅凭代码分离认定判据正确。
 
 **参考模型依据下表复算输出**，不使用 AI 写的期望值。
 
@@ -152,6 +154,8 @@ verdict  = failed_checks         → 设计结果：检出设计问题
 未提供向量期望值时，有效断言仍可在采样记录上检查对应性质。
 字段清单与判定语义见 `src/iverilog_ai/ai/schema.py` 的 `ASSERTION_FIELDS`
 （**单一事实来源**，校验器、执行器与提示词共用它）。
+
+结构化断言结果单独保存在 `simulation.config.structured_assertions`。断言失败时该层为 `warn`，综合检查标记 `verification_status=assertion_failed`；原始仿真与向量比对字段仍保留各自结果。因此向量全部一致时，也需要检查报告中的“结构化断言”，不能据此忽略断言告警。
 
 ---
 

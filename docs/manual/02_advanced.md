@@ -72,7 +72,7 @@ iverilog-ai run --rtl dut.v --testbench tb_dut.v --top tb_dut `
 | `signal_sequence` | 采样序列正好等于给定的取值序列 | `signal`, `values`（`cycles` 可省略，省略时等于 `values` 长度） |
 | `signal_implies` | when 条件成立后，within N 拍内 then 成立 | `when_signal`, `when_value`, `then_signal`, `then_value`, `within_cycles` |
 
-> `signal_implies` 使用 when/then 两个信号名，不接受额外的 `signal` 字段。2026-09 复核发现，旧提示词列出了 `signal_implies{kind,signal,...}`，与校验器要求不一致，导致模型按提示生成的内容被拒绝。当前提示词由 `ai/schema.py` 的字段表生成，`tests/ai/test_planner.py` 检查提示字段与校验字段是否一致。该次复核还发现，旧校验器在填写 `signal` 时拒绝该字段，在省略它时又要求合法标识符；这两项问题均已修复。
+> `signal_implies` 使用 when/then 两个信号名，不接受额外的 `signal` 字段。字段定义见 `ai/schema.py`，提示内容与解析校验共用该定义。
 
 > `signal_implies` 应明确填写 `when_value` 与 `then_value`。省略时默认值为 `None`，无法与正常采样值匹配，可能造成无有效检查的断言。
 
@@ -81,8 +81,8 @@ iverilog-ai run --rtl dut.v --testbench tb_dut.v --top tb_dut `
 
 **断言按该信号的整个采样序列判定**，没有作用域概念，因此只有全局不变量
 （"永不为高"、"始终等于某值"、"req 之后必有 ack"）才适合写成断言。配置前需确认该性质在
-整个采样序列中均应成立。本仓库曾经自动推荐过 5 条断言，复核时发现全部不成立
-（详见 `src/iverilog_ai/core/rule_assertions.py` 的说明），因此推荐表已清空。
+整个采样序列中均应成立。当前没有通过参考设计检查的默认推荐项，新增条件见
+`src/iverilog_ai/core/rule_assertions.py`。
 
 ---
 
@@ -99,8 +99,7 @@ iverilog-ai run --rtl dut.v --testbench tb_dut.v --top tb_dut `
 | **读取波形** | 解析该时间窗内的变化，显示变化次数、涉及信号数量和变化列表 | 页面和下载的 JSON 均最多保留 2000 条变化记录；完整波形请下载 VCD |
 | **用 GTKWave 打开** | 以独立进程启动 GTKWave 并打开这份 VCD | 可选人工复核；启动失败时显示已检查的路径 |
 
-这三个按钮都在同一个 `@st.fragment` 里，点击**只重跑波形这一段**，不会整页刷新
-（早期版本每次点击都重跑整个脚本，页面跳回顶部、结果落在视口外，导致用户难以定位操作结果）。
+这三个按钮位于同一个 `@st.fragment`，点击时只重跑波形区域。
 
 GTKWave 的路径按"**工具设置页手填 → 环境变量 `GTKWAVE_PATH` → PATH → 常见安装目录 →
 从 iverilog 安装位置推断**"的顺序解析。Windows 环境还可通过最后一种方式定位：Icarus 官方安装包
@@ -217,7 +216,7 @@ $env:IVERILOG_AI_ALLOW_NETWORK = "1"       # 网络请求需要显式允许
 
 ### 输出长度与用量
 
-**输出长度上限（token）**限制单次回复的生成长度，不限制输入上下文，也不代表整个 Agent 的累计用量。默认设置为 4096，可按计划大小调整。勾选**不设置输出 token 上限（使用服务端默认）**后，普通计划生成和 Agent 都省略 API 请求中的输出长度参数；服务商仍可能限制长度。取消勾选后恢复滑块设定的上限。
+**输出长度上限（token）**限制单次回复的生成长度，不限制输入上下文，也不代表整个 Agent 的累计用量。未配置本机预设时默认为 4096；已配置预设时使用预设值，可按计划大小调整。勾选**不设置输出 token 上限（使用服务端默认）**后，普通计划生成和 Agent 都省略 API 请求中的输出长度参数；服务商仍可能限制长度。取消勾选后恢复滑块设定的上限。
 
 累计用量应查看每次请求的输入和输出，并保留未知用量。Agent 的请求次数、轮数和仿真周期是不同的预算。事前登记的实验批次如有 token 总预算，需按实验账本控制，不能靠输出长度滑块保证。
 

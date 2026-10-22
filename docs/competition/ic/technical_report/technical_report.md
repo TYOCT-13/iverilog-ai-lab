@@ -388,7 +388,7 @@ save_first_difference_and_full_records()
 
 使用入口见docs/reproduce_current.md，首次安装、工具检查及另一台电脑的操作记录表均由该指南链接。复现应记录操作系统、Python与Icarus版本、实际工具路径、源码标识、执行命令和最终结果；失败记录同样保留。API密钥不应写入共享报告或录屏。
 
-项目源码仓库为https://github.com/TYOCT-13/iverilog-ai-lab。精确重放历史实验应读取对应目录的输入快照与清单，不能用当前源码重新生成后覆盖原记录。历史云端全仓检查曾失败，最新提交的远端结果需要另行核实。异机自定义RTL核心运行已有后续证据，但全部实验重放和独立人工复核尚未确认；这些状态与运行成功的范围分别记录。
+项目源码仓库为https://github.com/TYOCT-13/iverilog-ai-lab。精确重放历史实验应读取对应目录的输入快照与清单，不能用当前源码重新生成后覆盖原记录。云端检查结果及其对应源码见docs/experiment/multifile-ci-ppt-2026-10-21/actions_receipt.json，历史失败记录另行保留。异机自定义RTL核心运行已有后续证据，但全部实验重放和独立人工复核尚未确认；这些状态与运行成功的范围分别记录。
 
 ### 7.4 参考资料
 
