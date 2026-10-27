@@ -1,112 +1,145 @@
 {
   "reviewed_on": "2026-10-22",
-  "reviewer": "Codex",
+  "reviewer": "deepseek-harness agent",
   "independent_human_review": false,
-  "output_sha256": "632a838447520e61e13d6e1b0edff6c06d5b43031c8a86a43f81604cc652ba58",
-  "source_sha256": "516d745799a82998d874813a968d9df036b342924485b4128bf3bd5ac0d7fdd2",
+  "output_sha256": "0781b08196db48ec908b9cb2d7549289430c304a4ac388596ea8e43d76d6c9b0",
+  "source_sha256": "bc63eced3a5c400db298a7ca761b31d9d02a4739186e3bc3237b591e51439a20",
   "pages": 23,
   "renderer": "PyMuPDF at 100dpi",
   "visual_review": "passed",
-  "coverage": "Pages 1-22 render pixel-identical to the previous report; page 23 and contact sheet viewed after the source-reference correction.",
+  "coverage": "附录7.3新增一句指向《佐证材料 v4》的引用后重新生成；逐页渲染对比：23页中仅第8, 10, 13, 14, 15, 17, 23页变化，其余页面像素哈希与上一版一致；变化页已人工查看，无裁切、无重叠、页码连续。",
   "checks": [
-    "unchanged experimental figures and numbers",
-    "no clipping or overlap on changed final page",
-    "current report source and rendered PDF bound by hashes"
+    "页数保持23页，未改变章节结构",
+    "变化页（末页）无裁切与重叠",
+    "数字与图表未改动：339,624、108任务、13/15→15/15、432批次均在文",
+    "新增引用句与《佐证材料 v4》文件名一致"
+  ],
+  "changed_pages_vs_previous": [
+    8,
+    10,
+    13,
+    14,
+    15,
+    17,
+    23
   ],
   "new_api_requests": 0,
   "new_dut_runs": 0,
   "rendered_pages": [
     {
       "page": 1,
-      "sha256": "4e3e3f5316a916db4bf399412aec6b41793a7190e9a43b999d717625cf1c792c"
+      "sha256": "90be42f7e4e335e1c09bcc35b440a36e89d57537910a7537f4d49a785941a18a",
+      "png": ".iverilog-ai/report-prebake-20261022/render-01.png"
     },
     {
       "page": 2,
-      "sha256": "c814115d1ad839a7c49808803239ed13c2cd177b7f54726829747b8a50536d1e"
+      "sha256": "d710946288a1b21414cb2e18c6679608c6ddc5fb8d8f4420a2a9c44b54b819f1",
+      "png": ".iverilog-ai/report-prebake-20261022/render-02.png"
     },
     {
       "page": 3,
-      "sha256": "61eeb47a6a8fef8899c83a9d570d194a19d7ac65360814ec41d052682b52d40e"
+      "sha256": "f3a04ab66038c584cdc99f06903d0547a6efdd30181fae982a590e687d066139",
+      "png": ".iverilog-ai/report-prebake-20261022/render-03.png"
     },
     {
       "page": 4,
-      "sha256": "a2287916fffb0ae8fb73395795c33f0ed323f6b5e1133864f9504a555074005e"
+      "sha256": "2feddc9fd130af12ff4cd8f782b854c2e35d415e4c6b2d2e71f9cc3fed1be691",
+      "png": ".iverilog-ai/report-prebake-20261022/render-04.png"
     },
     {
       "page": 5,
-      "sha256": "858fe409a9df2aa54f7f9452af30d3db219b92c4c79e64c369c65542acff9e11"
+      "sha256": "5b49b236685ac039c773db717cfea458f3223ef64efbd9100304fd9ac0f21a7a",
+      "png": ".iverilog-ai/report-prebake-20261022/render-05.png"
     },
     {
       "page": 6,
-      "sha256": "7833f5db49507520d840a70c1de23290e020fe0381eecb2674e604ed94838c69"
+      "sha256": "dd3b50d82097689a4211b2d9e4246021f43e548147e27100995ad7d4a86c6986",
+      "png": ".iverilog-ai/report-prebake-20261022/render-06.png"
     },
     {
       "page": 7,
-      "sha256": "4868c81eb12aa896b52b949d7189b000ddca3379d99c1cac63cfb89f47d3c355"
+      "sha256": "c207a11fade52c879f7dc70545f9714162d8041d5c97556c1aaee098fefc4a01",
+      "png": ".iverilog-ai/report-prebake-20261022/render-07.png"
     },
     {
       "page": 8,
-      "sha256": "845bc020dc92470d2c543aa11871250f970ad92e2775c393200bbf01b081d1b3"
+      "sha256": "dc82388a457db22160f77483068f7c0969d9b915add2c25eb807db3eafc2ccf7",
+      "png": ".iverilog-ai/report-prebake-20261022/render-08.png"
     },
     {
       "page": 9,
-      "sha256": "601a3579a76b13ef59dc2ba5ca09a72ceeabf5dad7c0412967a22c37f469b8b6"
+      "sha256": "c6803ff0d49eb7441f675e2ebf4ce087925382864378d04c67308f0445f2a7ec",
+      "png": ".iverilog-ai/report-prebake-20261022/render-09.png"
     },
     {
       "page": 10,
-      "sha256": "609f43d456b0b6c548b53c812d336ba38ee5056448b2c1024dfcd15b8e6c2043"
+      "sha256": "174709f4ff3b78390f69ed5cc0c6b05daa33a32149913c92162f31a5599a08dd",
+      "png": ".iverilog-ai/report-prebake-20261022/render-10.png"
     },
     {
       "page": 11,
-      "sha256": "62b202dc27016278be43695904d3938ad0068a87a03397b7df5259905f3e125d"
+      "sha256": "6193b126f8ca71c97d1262965e751e5f0d57c9cd410ea71e2f5666aa89cd9fb9",
+      "png": ".iverilog-ai/report-prebake-20261022/render-11.png"
     },
     {
       "page": 12,
-      "sha256": "528da11d9b4a91fd595f4dc63ab18b8881bed2f9062745e954507d1e69f283c2"
+      "sha256": "ed9eaf90ba8464db141e66044cd249d240dbe291b8b6f99e0f0ad2ee72eca4cc",
+      "png": ".iverilog-ai/report-prebake-20261022/render-12.png"
     },
     {
       "page": 13,
-      "sha256": "6c057b180ec2928a52cf45c82993534d09a8cfc87f66846fdc76509764558b92"
+      "sha256": "989ed722c6d75de5f05285b3a7c1b7d85835565544e05f470ea6e7bd7179db6b",
+      "png": ".iverilog-ai/report-prebake-20261022/render-13.png"
     },
     {
       "page": 14,
-      "sha256": "a09f83d198349eba0d3ed09038110c281768a105091c7de1e1809d1755fb780f"
+      "sha256": "7bddf361978c1dd0a932938bd05d23f32273d74572458ed745c904ca4fb670f2",
+      "png": ".iverilog-ai/report-prebake-20261022/render-14.png"
     },
     {
       "page": 15,
-      "sha256": "894685cbcbea2d536c666c10cc5ccbda97f8cbff7ad313bc7bf8d99a95765c7c"
+      "sha256": "f52438127d4438be5d28ca67ba6f0c6286440fd5bdc29b77315874c45c8b7275",
+      "png": ".iverilog-ai/report-prebake-20261022/render-15.png"
     },
     {
       "page": 16,
-      "sha256": "c9309c5c6803b24afe4be43720ad51bb703fc9f898a9871675e677598d5f5aa9"
+      "sha256": "84c11469696a1c9cf292cdccfa938d29d13df42c0053f66ff10c3d4ece4685c8",
+      "png": ".iverilog-ai/report-prebake-20261022/render-16.png"
     },
     {
       "page": 17,
-      "sha256": "0b981026cb5f99cef62e605e1c637f6d5f89f1f170618d5d2ce20ca29b5dd9dc"
+      "sha256": "8896ba2720976e9308bd4113a875790d83d6ceafa7113707177e475d57b4c9c1",
+      "png": ".iverilog-ai/report-prebake-20261022/render-17.png"
     },
     {
       "page": 18,
-      "sha256": "5959497359e8e927554341fa7449132c693d873544a40432b9863702a122e8b1"
+      "sha256": "03c8d06c3f8574fac737f2d2864b6390ef073aa88dd96c854f39acf412f822a9",
+      "png": ".iverilog-ai/report-prebake-20261022/render-18.png"
     },
     {
       "page": 19,
-      "sha256": "f252592eaf1fd6cb77934006c4bb85df375dcf7dc7af1c104783bd44e30ef25d"
+      "sha256": "e37cbaa36f0cbf4a62e8700ad89747514ab89607afe2d09ecf511600dd172f6b",
+      "png": ".iverilog-ai/report-prebake-20261022/render-19.png"
     },
     {
       "page": 20,
-      "sha256": "009135957df2cb01202870d49bc98e7b4526bdbcf27852aa575272d932bc3a70"
+      "sha256": "ee3045711c0b4de5e239c0bbbd28688d7a52b125dd17aee56fd59429df7c7d4f",
+      "png": ".iverilog-ai/report-prebake-20261022/render-20.png"
     },
     {
       "page": 21,
-      "sha256": "ab12b3beff1947523e10b42870d4ad34e319ba3b657645f93116eabdbe5c9f4a"
+      "sha256": "32d3734ff7f90b54d823e4f3cebc3f5b62c1a98a4779f822aabc26c9633c69c3",
+      "png": ".iverilog-ai/report-prebake-20261022/render-21.png"
     },
     {
       "page": 22,
-      "sha256": "2fc87f920a16ff3fbb07dd4e2a17c87241a35399bf6f00b750ecac77947deedf"
+      "sha256": "11f8805fc14a78e5cddf1d90938bfe3290a7f743bafc2305bf26c42813223da6",
+      "png": ".iverilog-ai/report-prebake-20261022/render-22.png"
     },
     {
       "page": 23,
-      "sha256": "6875ea278246164035fea9f52b7bb13aefef1f6352d5e11b5f383ee8b1e511ef"
+      "sha256": "ee5b33d24e60df95323bf0fc1075e18536792264005159f2df0e0cdaf9443edc",
+      "png": ".iverilog-ai/report-prebake-20261022/render-23.png"
     }
   ]
 }

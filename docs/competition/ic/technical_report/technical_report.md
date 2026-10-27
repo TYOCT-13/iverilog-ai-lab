@@ -390,6 +390,8 @@ save_first_difference_and_full_records()
 
 项目源码仓库为https://github.com/TYOCT-13/iverilog-ai-lab。精确重放历史实验应读取对应目录的输入快照与清单，不能用当前源码重新生成后覆盖原记录。云端检查结果及其对应源码见docs/experiment/multifile-ci-ppt-2026-10-21/actions_receipt.json，历史失败记录另行保留。异机自定义RTL核心运行已有后续证据，但全部实验重放和独立人工复核尚未确认；这些状态与运行成功的范围分别记录。
 
+与本报告配套单独提交的《佐证材料》（ICARUS_佐证材料_v4_提交版.pdf）按编号V41至V46汇总上述全部实验数字的原始记录出处，并附六策略检出、FIFO判据、UART位时序、八模块批次与异机运行的对图对照。
+
 ### 7.4 参考资料
 
 [7] AIC竞赛组委会．AIC·AI＋集成电路竞赛规则及作品提交要求，附件1．

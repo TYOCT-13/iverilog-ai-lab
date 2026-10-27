@@ -1,0 +1,150 @@
+{
+  "schema": "icarus-evidence-v4-validation",
+  "built_at_utc": "2026-10-27T17:21:20.738595+00:00",
+  "output": "docs/competition/ic/ICARUS_佐证材料_v4_提交版.pdf",
+  "bytes": 568495,
+  "pdf_sha256": "c155bd1e2fc26f0db32a0041d6c03bfd1f4bdff52a7bbc2c1d8d5025d3a26e4b",
+  "source": "docs/competition/ic/v4/supporting_evidence/supporting_evidence.md",
+  "source_sha256": "e97cf3615dc019355501ab0b0c9a225bc86537278a7567a5962d51ffefbb9247",
+  "renderer": {
+    "path": "scripts/markdown_to_pdf.py",
+    "sha256": "69fe32e365e2aae89cfe573f0bcd184268629b8ac87eefbb22d8f65d8735ae1c"
+  },
+  "new_api_requests": 0,
+  "new_dut_runs": 0,
+  "assets": [
+    {
+      "asset": "comparison.png",
+      "kind": "reused",
+      "source": "docs/competition/ic/technical_report/figures/comparison.png",
+      "sha256": "16002d1f54437be5f91a29188bd0f62f0b33e847833180da4254790fdcf1d703",
+      "bytes": 43730
+    },
+    {
+      "asset": "rounds.png",
+      "kind": "reused",
+      "source": "docs/competition/ic/technical_report/figures/rounds.png",
+      "sha256": "a51b5cd9946d0c69bb0bda1b3607de317f8169b4e4318f1b714db7e2c2d34d46",
+      "bytes": 40337
+    },
+    {
+      "asset": "fifo.png",
+      "kind": "reused",
+      "source": "docs/competition/ic/technical_report/figures/fifo.png",
+      "sha256": "165dd3ef7918efc7d02c1c4c5a01329aecbf49241edaf9afb1cea738bfa07979",
+      "bytes": 48843
+    },
+    {
+      "asset": "uart.png",
+      "kind": "reused",
+      "source": "docs/competition/ic/technical_report/figures/uart.png",
+      "sha256": "3564ace5c0050699840071a6b3a24774a8866df73e93f92d57bcf94cc4fdfe58",
+      "bytes": 57334
+    },
+    {
+      "asset": "workspace.jpg",
+      "kind": "reused",
+      "source": "docs/competition/ic/v4/screenshots/upload-workspace-2026-10-13.jpg",
+      "sha256": "3e213ca6d090e16664826b0cd1f31799f51d23d349a523f79c2d021f0fd9238f",
+      "bytes": 78828
+    },
+    {
+      "asset": "chart_432.png",
+      "kind": "generated",
+      "source": "docs/competition/ic/v4/supporting_evidence/build_evidence.py",
+      "sha256": "30a49bf4e3faa69967eb7de2d321a16790dae3fca7aae9da296e6a87b856c3ae",
+      "bytes": 77053
+    }
+  ],
+  "pages": 8,
+  "metadata": {
+    "format": "PDF 1.7",
+    "title": "",
+    "author": "",
+    "subject": "",
+    "keywords": "",
+    "creator": "",
+    "producer": "",
+    "creationDate": "",
+    "modDate": "",
+    "trapped": "",
+    "encryption": ""
+  },
+  "page_records": [
+    {
+      "page": 1,
+      "png": ".iverilog-ai/evidence-v4-build/r1/pages/page-01.png",
+      "characters": 941,
+      "images": 0,
+      "outside_page_text": [],
+      "first_line": "ICARUS数字IP验证智能体"
+    },
+    {
+      "page": 2,
+      "png": ".iverilog-ai/evidence-v4-build/r1/pages/page-02.png",
+      "characters": 752,
+      "images": 1,
+      "outside_page_text": [],
+      "first_line": "V41 两类新模块108任务完整受控实验"
+    },
+    {
+      "page": 3,
+      "png": ".iverilog-ai/evidence-v4-build/r1/pages/page-03.png",
+      "characters": 569,
+      "images": 1,
+      "outside_page_text": [],
+      "first_line": "V42 反馈Agent的检出轮次与API用量账本"
+    },
+    {
+      "page": 4,
+      "png": ".iverilog-ai/evidence-v4-build/r1/pages/page-04.png",
+      "characters": 556,
+      "images": 1,
+      "outside_page_text": [],
+      "first_line": "V43 独立参考判据：FIFO与UART"
+    },
+    {
+      "page": 5,
+      "png": ".iverilog-ai/evidence-v4-build/r1/pages/page-05.png",
+      "characters": 436,
+      "images": 1,
+      "outside_page_text": [],
+      "first_line": "UART端口级逐周期位时序"
+    },
+    {
+      "page": 6,
+      "png": ".iverilog-ai/evidence-v4-build/r1/pages/page-06.png",
+      "characters": 763,
+      "images": 1,
+      "outside_page_text": [],
+      "first_line": "V44 八模块432任务扩展批次"
+    },
+    {
+      "page": 7,
+      "png": ".iverilog-ai/evidence-v4-build/r1/pages/page-07.png",
+      "characters": 681,
+      "images": 1,
+      "outside_page_text": [],
+      "first_line": "V45 异机实机运行与云端检查"
+    },
+    {
+      "page": 8,
+      "png": ".iverilog-ai/evidence-v4-build/r1/pages/page-08.png",
+      "characters": 1005,
+      "images": 0,
+      "outside_page_text": [],
+      "first_line": "V46 验证范围与复查入口"
+    }
+  ],
+  "anonymity_hits": [],
+  "page_limit_check": {
+    "pages": 8,
+    "note": "官方未对佐证单 PDF 设定页数上限；体积上限见尺寸检查"
+  },
+  "size_limit_check": {
+    "bytes": 568495,
+    "within_10MB": true
+  },
+  "selectable_text": true,
+  "visual_review": "pending actual page inspection"
+}

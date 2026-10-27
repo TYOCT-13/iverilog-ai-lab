@@ -1,10 +1,10 @@
 {
   "output": "docs\\competition\\ic\\technical_report\\ICARUS_技术报告.pdf",
   "pages": 23,
-  "bytes": 870080,
-  "sha256": "632a838447520e61e13d6e1b0edff6c06d5b43031c8a86a43f81604cc652ba58",
-  "source_sha256": "516d745799a82998d874813a968d9df036b342924485b4128bf3bd5ac0d7fdd2",
-  "chinese_characters": 10709,
+  "bytes": 871100,
+  "sha256": "0781b08196db48ec908b9cb2d7549289430c304a4ac388596ea8e43d76d6c9b0",
+  "source_sha256": "bc63eced3a5c400db298a7ca761b31d9d02a4739186e3bc3237b591e51439a20",
+  "chinese_characters": 10779,
   "figures": 10,
   "headings": [
     {
@@ -218,7 +218,7 @@
       "page": 23
     }
   ],
-  "visual_review": "passed",
+  "visual_review": "pending",
   "new_api_requests": 0,
   "new_dut_runs": 0
 }
