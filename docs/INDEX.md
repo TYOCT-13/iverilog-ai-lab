@@ -55,7 +55,7 @@
 | 2026-10-07规格渲染补充 | [报告](experiment/rtl_spec_rendering_2026-10-07.md)、[规格与SVG](experiment/rtl-spec-rendering-2026-10-07/README.md)、[回执](experiment/rtl-spec-rendering-2026-10-07/rendering_receipt.json)、[本地复现](experiment/rtl-spec-rendering-2026-10-07/reproduction/reproduction_receipt.json) | WaveDrom3.6.1实际smoke通过；两A规格图浏览器查看，6文件重建逐字节一致；0新增API/DUT，不改变原12项样式问题或v3材料 |
 | 独立RTL维护版与真实重放 | [报告](experiment/rtl_style_maintenance_2026-10-07.md)、[源码/规格/工具](../benchmarks/rtl_style_maintenance_20261007/README.md)、[发布回执](../benchmarks/rtl_style_maintenance_20261007/release_receipt.json)、[公开重放](../benchmarks/rtl_style_maintenance_20261007/verification/replay/replay_receipt.json) | 6源静态gate0错误/0警告，6项passed/2项not_requested；原与新双侧输出相同，72执行为36+同组36，18规格字节相同；B/C故意缺陷保留，0API，不是新模型成绩 |
 | 历史v2技术方案源稿与PDF | `docs/competition/ic/v2/technical_report.md`、`docs/competition/ic/ICARUS_技术方案_v2.pdf` | 28be1ed版本；9页/正文8页，约1.02MB；尚未纳入v5，真人/H02事实待补 |
-| 历史v2佐证源稿与PDF | `docs/competition/ic/v2/supporting_evidence.md`、`docs/competition/ic/ICARUS_佐证材料_v2.pdf` | 28be1ed版本；5页、约0.86MB；V01–V06真实来源，保留失败，尚未纳入v5 |
+| 历史v2佐证源稿与PDF | `docs/competition/ic/v2/supporting_evidence.md`、`docs/competition/ic/archive/ICARUS_佐证材料_v2.pdf` | 28be1ed版本；5页、约0.86MB；V01–V06真实来源，保留失败，尚未纳入v5 |
 | 历史v2材料入口与PDF回执 | `docs/competition/ic/v2/README.md`、`docs/competition/ic/v2/validation.json` | 名称15字符、简介172字符；全部14页渲染查看，文字可选择、身份元数据空 |
 | 历史v2答辩稿与构建来源 | `docs/competition/ic/ICARUS_答辩材料_v2.pptx`、`docs/competition/ic/ICARUS_答辩材料_v2.pdf`、`docs/competition/ic/defense_v2/README.md`、`docs/competition/ic/defense_v2/qa_report.json` | 12页，5原生表格/3原生图表/12页备注；PPTX可编辑，PDF图像式；逐页机器检查，不是独立人审 |
 | 最新两模块内部留出 | [报告](experiment/agent_new_holdout_study_live_2026-10-05.md)、[回执](experiment/agent-new-holdout-study-live-2026-10-05/receipt.json)、[严格汇总](experiment/agent-new-holdout-study-live-2026-10-05/strict_summary.json) | 20400fa；108任务全部执行/134episode/268侧；六组各12缺陷检出12/10/8/8/11/10，分母为4不同缺陷×3重复；36/36正确控制无误报，严格true但1终态格式失败 |
@@ -103,7 +103,7 @@
 | v4非实现者代理复核 | `docs/review/ic_agent_v4_proxy_review_2026-10-04.md` | 复现重复JSON键/转义凭据问题，冻结修复复测；模拟凭据、真实API0，不是H02 |
 | 历史条件稿技术方案源 | `docs/competition/ic/report_submission.md` | 条件稿；按真人、人审均通过的前提起草，H01/H02未核实，实验数字沿用真实记录 |
 | 历史条件稿技术方案PDF | `docs/competition/ic/ICARUS_技术方案.pdf` | 条件稿；11页/正文10页，七节大纲；匿名版式与逐页检查完成 |
-| 历史条件稿佐证源与PDF | `docs/competition/ic/supporting_evidence_submission.md`、`docs/competition/ic/ICARUS_佐证材料.pdf` | 条件稿；5页，E01–E07为真实记录，H01/H02原件待补 |
+| 历史条件稿佐证源与PDF | `docs/competition/ic/supporting_evidence_submission.md`、`docs/competition/ic/archive/ICARUS_佐证材料_v1_条件稿.pdf` | 条件稿；5页，E01–E07为真实记录，H01/H02原件待补 |
 | 历史报名短文本与说明 | `docs/competition/ic/submission_copy.md`、`docs/competition/ic/submission_package_readme.md` | 名称15字、简介199字；提交位置、命名和条件转事实流程 |
 | 旧IC报告配图 | `docs/competition/ic/submission_figures/architecture.png`、`docs/competition/ic/submission_figures/agent_comparison.png` | 原创架构图与真实五策略结果图，不改写实验成绩 |
 | 旧IC报告校验回执 | `docs/competition/ic/submission_validation_2026-10-04.json` | 文档与PDF校验，不是新的全仓回归、真人试用或独立人审 |
